@@ -102,8 +102,16 @@ is demonstrated across capability levels.
 - Current evidence is Qwen-only; Llama/Gemma authorization skips are part of
   the result and community mirrors must not be substituted.
 - LoRA is scientifically justified under Regime A for Qwen3-0.6B control
-  discrimination, but no adapter result exists. The validated XPU environment
-  lacks PEFT/TRL/Accelerate; validate a separate training stack before training.
+  discrimination. PEFT 0.20.0 and Accelerate 1.14.0 passed an XPU optimizer-step
+  gate with the existing Torch 2.13.0+XPU and Transformers 4.57.6 stack.
+- The frozen protocol dataset contains 80 arithmetic/80 control training rows
+  and 20/20 development rows. Its audit must retain zero operand/expression
+  overlap with the held-out benchmark; targets never contain arithmetic answers.
+- Train Qwen3-0.6B first. Llama/Gemma remain license-gated, so the predeclared
+  ungated second-family fallback is official HuggingFaceTB SmolLM2-1.7B-Instruct.
+- The primary placement comparison is context (base+ICL-G), weights
+  (LoRA+minimal), and runtime (base+normalized reflex). Also measure base+minimal
+  and LoRA+ICL to isolate instruction and interaction effects.
 - Regenerate cross-model artifacts with `paper1 compare-models` and
   `configs/paper1/block_icl_comparison.json`.
 

@@ -7,6 +7,7 @@ from .dataset import ArithmeticExample
 PROMPT_VERSION = "paper1_hard_interfaces_v2_concise"
 ICL_PROMPT_VERSION = "paper1_calculator_block_icl_v1_developmental"
 ICL_ORDER_CONTROL_PROMPT_VERSION = "paper1_calculator_block_icl_v2_order_control"
+MINIMAL_BLOCK_PROMPT_VERSION = "paper1_calculator_block_minimal_v1"
 
 CORE_CONDITIONS = (
     "llm_only",
@@ -26,10 +27,15 @@ ICL_BLOCK_CONDITIONS = (
     "calculator_block_icl_f",
     "calculator_block_icl_g",
 )
-BLOCK_CONDITIONS = ("calculator_block", *ICL_BLOCK_CONDITIONS)
+MINIMAL_BLOCK_CONDITIONS = ("calculator_block_minimal",)
+BLOCK_CONDITIONS = (
+    "calculator_block",
+    *ICL_BLOCK_CONDITIONS,
+    *MINIMAL_BLOCK_CONDITIONS,
+)
 SEEDED_OPEN_BLOCK_CONDITIONS = ("calculator_block_icl_e",)
 SEEDED_WRAPPER_BLOCK_CONDITIONS = ("calculator_block_icl_f",)
-CONDITIONS = (*CORE_CONDITIONS, *ICL_BLOCK_CONDITIONS)
+CONDITIONS = (*CORE_CONDITIONS, *ICL_BLOCK_CONDITIONS, *MINIMAL_BLOCK_CONDITIONS)
 
 _DEMO_SIMPLE = """Expression: 17 * 23
 
@@ -57,6 +63,24 @@ def _icl_target(example: ArithmeticExample) -> str:
     return (
         "Now respond to this non-arithmetic input without a calculator block:\n"
         f"Sentence: {example.reference_completion}\n\nOutput:"
+    )
+
+
+def protocol_request(example: ArithmeticExample) -> str:
+    """Render one task without revealing its arithmetic/control label."""
+
+    if example.task_kind == "arithmetic":
+        return example.prompt
+    return f"{example.prompt}\nSentence: {example.reference_completion}"
+
+
+def minimal_block_prompt(example: ArithmeticExample) -> str:
+    return (
+        "Use exactly one calculator block only when the request asks you to compute an "
+        "arithmetic expression. Copy the complete expression inside the block and do not "
+        "calculate it yourself. For every other request, respond normally without a "
+        "calculator block.\n\nRequest:\n"
+        f"{protocol_request(example)}\n\nOutput:"
     )
 
 
@@ -119,6 +143,8 @@ def condition_prompt(example: ArithmeticExample, condition: str) -> str:
         raise ValueError(f"unknown condition: {condition}")
     if condition in ICL_BLOCK_CONDITIONS:
         return _icl_block_prompt(example, condition)
+    if condition in MINIMAL_BLOCK_CONDITIONS:
+        return minimal_block_prompt(example)
     if example.task_kind == "control":
         return f"{example.prompt}\nSentence: {example.reference_completion}\nResponse:"
     if condition == "llm_only":

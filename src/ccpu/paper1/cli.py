@@ -26,6 +26,8 @@ from .dataset import (
 from .evaluate import evaluate, paired_comparisons, rescore_endpoint_predictions
 from .experiment import run_huggingface, run_replay, run_scripted
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
+from .lora_data import LoRAProtocolDataConfig, generate_protocol_data
+from .lora_train import LoRATrainingConfig, train_lora
 from .model_analysis import build_model_comparison
 from .plot import plot_interface_diagnostics, plot_scaling
 from .prompts import (
@@ -33,6 +35,7 @@ from .prompts import (
     CORE_CONDITIONS,
     ICL_ORDER_CONTROL_PROMPT_VERSION,
     ICL_PROMPT_VERSION,
+    MINIMAL_BLOCK_PROMPT_VERSION,
     PROMPT_VERSION,
 )
 
@@ -40,6 +43,7 @@ PROTOCOL_VERSIONS = {
     "prompt": PROMPT_VERSION,
     "calculator_block_icl_prompt": ICL_PROMPT_VERSION,
     "calculator_block_icl_order_control_prompt": ICL_ORDER_CONTROL_PROMPT_VERSION,
+    "calculator_block_minimal_prompt": MINIMAL_BLOCK_PROMPT_VERSION,
     "strict_detector": "strict_arithmetic_v1",
     "normalized_detector": "normalized_arithmetic_v1",
     "surface_normalizer": "surface_normalizer_v1",
@@ -266,6 +270,8 @@ def hf_command(args: argparse.Namespace) -> int:
                 trust_remote_code=bool(entry.get("trust_remote_code", False)),
                 use_chat_template=bool(entry.get("use_chat_template", True)),
                 enable_thinking=bool(entry.get("enable_thinking", False)),
+                adapter_path=entry.get("adapter_path"),
+                adapter_id=entry.get("adapter_id"),
             )
         )
         predictions, traces = run_huggingface(examples, backend, conditions=conditions, seeds=seeds)
@@ -371,6 +377,52 @@ def compare_models_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def generate_lora_data_command(args: argparse.Namespace) -> int:
+    output_dir = Path(args.output_dir)
+    if output_dir.exists() and any(output_dir.iterdir()):
+        raise FileExistsError(f"refusing to overwrite protocol data: {output_dir}")
+    config = LoRAProtocolDataConfig.from_dict(read_json(args.config))
+    splits, audit = generate_protocol_data(config, excluded_dataset=args.excluded_dataset)
+    train_path = write_jsonl(output_dir / "train.jsonl", splits["train"])
+    dev_path = write_jsonl(output_dir / "dev.jsonl", splits["dev"])
+    audit_path = write_json(output_dir / "leakage_audit.json", audit)
+    write_json(
+        output_dir / "manifest.json",
+        {
+            "schema_version": "ccpu.paper1.lora_data_manifest.v1",
+            "config": config.to_dict(),
+            "config_sha256": file_sha256(args.config),
+            "excluded_dataset_sha256": file_sha256(args.excluded_dataset),
+            "train_sha256": file_sha256(train_path),
+            "dev_sha256": file_sha256(dev_path),
+            "leakage_audit_sha256": file_sha256(audit_path),
+            "train_rows": len(splits["train"]),
+            "dev_rows": len(splits["dev"]),
+        },
+    )
+    print(f"generated {len(splits['train'])} train and {len(splits['dev'])} dev rows")
+    return 0
+
+
+def train_lora_command(args: argparse.Namespace) -> int:
+    raw_config = read_json(args.config)
+    entries = [entry for entry in raw_config.get("models", []) if entry["model_id"] == args.model]
+    if len(entries) != 1:
+        raise ValueError(f"expected one pinned training model for {args.model}")
+    report = train_lora(
+        model=entries[0],
+        training=LoRATrainingConfig.from_dict(raw_config),
+        train_path=args.train,
+        dev_path=args.dev,
+        output_dir=args.output_dir,
+    )
+    print(
+        f"trained {report['adapter_id']} with {report['trainable_parameters']} parameters "
+        f"in {report['wall_time_seconds']:.1f}s"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1", help="strict reflex-calculator experiments")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -454,3 +506,19 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     compare_models.add_argument("--config", required=True)
     compare_models.add_argument("--output-dir", required=True)
     compare_models.set_defaults(handler=compare_models_command)
+
+    lora_data = commands.add_parser(
+        "generate-lora-data", help="generate leakage-audited protocol-only SFT data"
+    )
+    lora_data.add_argument("--config", required=True)
+    lora_data.add_argument("--excluded-dataset", required=True)
+    lora_data.add_argument("--output-dir", required=True)
+    lora_data.set_defaults(handler=generate_lora_data_command)
+
+    lora_train = commands.add_parser("train-lora", help="train one pinned protocol adapter")
+    lora_train.add_argument("--config", required=True)
+    lora_train.add_argument("--model", required=True)
+    lora_train.add_argument("--train", required=True)
+    lora_train.add_argument("--dev", required=True)
+    lora_train.add_argument("--output-dir", required=True)
+    lora_train.set_defaults(handler=train_lora_command)

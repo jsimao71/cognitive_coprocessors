@@ -47,6 +47,22 @@ $env:PYTHONPATH = (Resolve-Path src).Path
 For `device: auto`, the adapter selects CUDA, then XPU, then CPU. Replay preserves the original
 backend metadata and records the source prediction hash plus evaluator provenance.
 
+## Paper 1 protocol LoRA
+
+The LoRA experiment teaches calculator-block selection and serialization, never arithmetic
+answers. Generate the balanced data and run one pinned model at a time:
+
+```powershell
+$py = 'C:\Users\j.simao\.venvs\modal-llm-xpu\Scripts\python.exe'
+$env:PYTHONPATH = (Resolve-Path src).Path
+& $py -m ccpu paper1 generate-lora-data --config configs/paper1/lora_protocol_xpu.json --excluded-dataset artifacts/paper1/hard_heldout_xpu/dataset.jsonl --output-dir artifacts/paper1/lora_protocol/data_v1
+& $py -m ccpu paper1 train-lora --config configs/paper1/lora_protocol_xpu.json --model Qwen/Qwen3-0.6B --train artifacts/paper1/lora_protocol/data_v1/train.jsonl --dev artifacts/paper1/lora_protocol/data_v1/dev.jsonl --output-dir artifacts/paper1/lora_protocol/qwen3_0_6b_v1
+```
+
+The generator rejects operand or expression overlap with the untouched held-out benchmark.
+Adapter evaluation keeps `calculator_block_minimal` separate from the frozen ICL-G prompt so
+context, weights, and deterministic runtime placement can be compared directly.
+
 ## Paper 1.5 controlled retrieval pilot
 
 Paper 1.5 measures checkpoint confidence and semantic epistemic risk separately against one

@@ -72,3 +72,13 @@ def test_scripted_icl_conditions_report_complete_block_protocol_metrics():
     assert seeded_open["block_open_rate"] == 1.0
     assert seeded_open["block_open_model_rate"] == 0.0
     assert seeded_wrapper["result_use_rate"] is None
+
+
+def test_minimal_block_prompt_is_versioned_without_demonstrations():
+    arithmetic = next(item for item in _examples() if item.task_kind == "arithmetic")
+    prompt = condition_prompt(arithmetic, "calculator_block_minimal")
+
+    assert str(arithmetic.expression) in prompt
+    assert "Positive example" not in prompt
+    assert "Negative example" not in prompt
+    assert "EXPRESSION" not in prompt

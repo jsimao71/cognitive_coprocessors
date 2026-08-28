@@ -45,6 +45,7 @@ class ScriptedProtocolBackend:
             "calculator_block_icl_c",
             "calculator_block_icl_d",
             "calculator_block_icl_g",
+            "calculator_block_minimal",
         }:
             return f"```calculator\n{example.expression}\n```"
         if condition == "calculator_block_icl_e":
@@ -87,6 +88,8 @@ class HuggingFaceGenerationConfig:
     trust_remote_code: bool = False
     use_chat_template: bool = True
     enable_thinking: bool = False
+    adapter_path: str | None = None
+    adapter_id: str | None = None
 
 
 class HuggingFaceBackend:
@@ -108,7 +111,7 @@ class HuggingFaceBackend:
 
         self._torch = torch
         self.config = config
-        self.model_id = config.model_id
+        self.model_id = config.adapter_id or config.model_id
         self.tokenizer = AutoTokenizer.from_pretrained(
             config.model_id,
             revision=config.revision,
@@ -122,9 +125,14 @@ class HuggingFaceBackend:
         }
         if dtype is not None:
             model_kwargs["dtype"] = dtype
-        self.model = AutoModelForCausalLM.from_pretrained(config.model_id, **model_kwargs).to(
-            device
-        )
+        self.model = AutoModelForCausalLM.from_pretrained(config.model_id, **model_kwargs)
+        if config.adapter_path:
+            try:
+                from peft import PeftModel
+            except ImportError as error:
+                raise RuntimeError("Adapter inference requires the PEFT package") from error
+            self.model = PeftModel.from_pretrained(self.model, config.adapter_path)
+        self.model = self.model.to(device)
         self.model.eval()
         self.device = device
         self.model_memory_bytes = (
@@ -236,7 +244,10 @@ class HuggingFaceBackend:
                 "empirical": True,
                 "backend": "huggingface",
                 "model_id": self.model_id,
+                "base_model_id": self.config.model_id,
                 "revision": self.config.revision,
+                "adapter_path": self.config.adapter_path,
+                "adapter_id": self.config.adapter_id,
                 "device": self.device,
                 "dtype": self.config.dtype,
                 "use_chat_template": self.config.use_chat_template,

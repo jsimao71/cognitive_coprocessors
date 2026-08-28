@@ -13,6 +13,7 @@ dependencies = []
 [project.optional-dependencies]
 hf = ["torch>=2.2", "transformers>=4.46,<5"]
 analysis = ["matplotlib>=3.7"]
+lora = ["peft==0.20.0", "accelerate==1.14.0"]
 test = ["pytest>=8.0"]
 
 [project.scripts]

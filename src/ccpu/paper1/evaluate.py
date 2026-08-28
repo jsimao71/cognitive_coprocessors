@@ -224,6 +224,7 @@ def _group_summary(
         "result_use_rate": safe_mean(use_labels) if use_labels else None,
         "result_override_rate": safe_mean(override_labels) if override_labels else None,
         "mean_generated_tokens": safe_mean(float(row.get("generated_tokens", 0)) for row in rows),
+        "mean_prompt_tokens": safe_mean(float(row.get("prompt_tokens", 0)) for row in rows),
         "mean_reinjected_tokens": safe_mean(float(row.get("reinjected_tokens", 0)) for row in rows),
         "mean_model_calls": safe_mean(float(row.get("model_calls", 0)) for row in rows),
         "mean_wall_time_ms": safe_mean(float(row.get("wall_time_ns", 0)) / 1e6 for row in rows),

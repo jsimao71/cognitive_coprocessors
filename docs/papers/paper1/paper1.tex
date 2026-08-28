@@ -560,14 +560,35 @@ reliable on the 1.7B diagnostic and clean in the 4B smoke. This is sufficient to
 motivate later heterogeneous-interface work, while confirmatory Paper 1 claims
 remain gated on a larger untouched set and additional families. It also places
 the LoRA question in Regime A: can 0.6B retain its perfect arithmetic protocol
-while eliminating false control blocks? A minimal protocol-only Qwen3-0.6B
-adapter is justified as the next experiment, but was not trained here. The
-validated XPU environment lacks PEFT/TRL/Accelerate, and modifying it would mix
-an unvalidated training stack into the completed inference environment. Any
-adapter result must use leakage-audited expression/control seeds, report training
-tokens/time and parameter count, and compare base+ICL, adapter+ICL, and
-adapter+minimal instruction. No present result supports a claim that adaptation
-learned arithmetic.
+while eliminating false control blocks? This asks where interface knowledge
+should live: transiently in context, persistently in weights, or deterministically
+in the runtime.
+
+\paragraph{Frozen adapter protocol.}
+A minimal protocol-only experiment is now configured but remains unrun at this
+checkpoint. The training set has 80 arithmetic and 80 negative-control requests;
+a disjoint development set has 20 of each. Arithmetic targets contain only the
+requested expression inside a calculator fence, never its answer. They cover
+three--six digit operands, nesting, mixed operations, exact division, long
+intermediates, and ASCII, LaTeX, Unicode, and bracket surfaces. Controls cover
+versions, dates, ranges, quoted arithmetic, code, identifiers, and variable-bearing
+equations. A mechanical audit finds no exact expression or operand overlap among
+training, development, and the 16-example held-out benchmark.
+
+The XPU training gate completed a PEFT forward, backward, and AdamW step on
+Qwen3-0.6B. The frozen stack adds PEFT 0.20.0 and Accelerate 1.14.0 to PyTorch
+2.13.0+XPU and Transformers 4.57.6. LoRA rank is 8 over attention projections,
+with two epochs and assistant-target-only loss. Qwen3-0.6B is primary. Since
+official Llama 3.2 and Gemma 3 files remain license-gated without a Hugging Face
+token, the predeclared ungated second family is the official Apache-2.0
+HuggingFaceTB SmolLM2-1.7B-Instruct checkpoint, not a community mirror.
+
+Evaluation compares base+frozen ICL (context), adapter+minimal instruction
+(weights), and base+normalized reflex (runtime), with base+minimal and
+adapter+ICL controls. It reports protocol decomposition, false blocks, answer
+accuracy, prompt/output tokens, training parameters/tokens/time, memory, and
+inference overhead. No present result supports a claim that adaptation learned
+arithmetic.
 
 \section{Preliminary XPU Pilot}
 
@@ -736,10 +757,13 @@ and git revision/dirty status. The replay command permits model generation in a
 separate harness while preserving identical controller and evaluation semantics.
 The \texttt{plot} command renders the machine-readable scaling cells as accuracy
 curves by model, operand width, condition, and operator count.
-The \texttt{compare-models} command consumes
-\path{configs/paper1/block_icl_comparison.json} and regenerates the cross-model
+The \texttt{compare-models} command consumes the frozen comparison configuration
+and regenerates the cross-model
 table plus block-capability, interface-accuracy, token--latency, and failure-mode
 figures without manually entered results.
+The \texttt{generate-lora-data} and \texttt{train-lora} commands implement the
+versioned protocol-only adapter phase; the former must pass its leakage audit
+before the latter can run.
 
 \section{Limitations}
 
