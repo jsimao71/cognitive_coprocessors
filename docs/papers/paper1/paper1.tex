@@ -290,8 +290,8 @@ raw predictions and event traces so component errors can be reclassified.
 
 \section{Frozen Next-Iteration Protocol}
 
-The interface freeze is versioned as
-\path{paper1_hard_interfaces_v1}. It retains
+The current interface freeze is versioned as
+\path{paper1_hard_interfaces_v2_concise}. It retains
 \path{strict_arithmetic_v1} unchanged and adds
 \path{normalized_arithmetic_v1},
 \path{surface_normalizer_v1}, and
@@ -319,6 +319,25 @@ and later override independently. Cost records include prompt, generated, and
 reinjected tokens, model calls, wall and engine time, serialized trace/state
 bytes, and deterministic invocation-delimiter characters. Scripted smoke output
 is marked \texttt{empirical: false} and is plumbing evidence only.
+
+\subsection{Adaptive calibration status}
+
+Two baseline-only XPU calibrations exposed output censoring before any assisted
+condition was run. Both used Qwen3-0.6B, 96 arithmetic examples over 48 cells,
+two nominal generation seeds, and a 48-token ceiling, for 192 generations each.
+Under the original prompt, all 192 generations reached the ceiling and 184 had
+no scorable final answer. A uniformly applied concise-answer prompt reduced cap
+hits to 170 and missing answers to 156, but both versions yielded only 3.125\%
+overall exact match per seed. The concise run had 46 cells at 0\%, one at 50\%,
+and one at 100\%, so it cannot supply the four intended difficulty bands.
+
+These runs are preserved as empirical calibration failures, not treated as the
+hard-arithmetic comparison. Since greedy argmax decoding produced identical text
+for every one of the 96 cross-seed pairs, the revised calibration removes the
+redundant generation seed, broadens the grid downward to one--four operand digits
+and one--four operators, uses two independently generated examples per cell, and
+raises the uniform ceiling to 96 tokens. Cell selection remains baseline-only;
+the held-out dataset and assisted runs remain ungenerated at this point.
 
 \section{Preliminary XPU Pilot}
 

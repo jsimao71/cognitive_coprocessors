@@ -1,0 +1,52 @@
+{
+  "config": {
+    "control_examples": 0,
+    "examples_per_cell": 2,
+    "operand_digits": [
+      2,
+      4,
+      6,
+      8
+    ],
+    "operations": [
+      "+",
+      "-",
+      "*",
+      "/"
+    ],
+    "operator_counts": [
+      1,
+      2,
+      4,
+      6
+    ],
+    "seed": 2718,
+    "selected_cells": [],
+    "split": "adaptive_pilot",
+    "structures": [
+      "left_chain",
+      "nested",
+      "multiplication_tree"
+    ],
+    "surface_variants": [
+      "ascii",
+      "latex",
+      "unicode",
+      "brackets"
+    ]
+  },
+  "config_fingerprint": "0411b817b8de140dd743874b1ab3ad3a9523ccb73b21b1ee9243e1e67255bc89",
+  "dataset_sha256": "0d87e0daaf14e93033f7097694da3f914016a3daebed94a341c156069b69ba14",
+  "paper": "Paper 1",
+  "protocol_versions": {
+    "calculator_block_grammar": "calculator_block_v1",
+    "calculator_ir": "ccpu.arithmetic.postfix.v1",
+    "hard_generator": "hard_arithmetic_v1",
+    "normalized_detector": "normalized_arithmetic_v1",
+    "prompt": "paper1_hard_interfaces_v1",
+    "strict_detector": "strict_arithmetic_v1",
+    "surface_normalizer": "surface_normalizer_v1"
+  },
+  "record_count": 96,
+  "schema_version": "ccpu.paper1.dataset_manifest.v1"
+}

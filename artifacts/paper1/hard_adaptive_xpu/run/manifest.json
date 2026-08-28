@@ -1,0 +1,48 @@
+{
+  "dataset_sha256": "0d87e0daaf14e93033f7097694da3f914016a3daebed94a341c156069b69ba14",
+  "empirical": true,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "1c9f12b5d4992d57624eae416ff575daedf29d88"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 192,
+  "predictions_sha256": "0c977002d27ef045f75bab12276ee46cd38c2d7c84f3e7f92635f6a8c56182af",
+  "run_config": {
+    "backend": "huggingface",
+    "conditions": [
+      "llm_only"
+    ],
+    "limit": null,
+    "models": [
+      {
+        "device": "xpu",
+        "dtype": "float16",
+        "max_new_tokens": 48,
+        "model_id": "Qwen/Qwen3-0.6B",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+      }
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v1",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seeds": [
+      17,
+      29
+    ]
+  },
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "trace_count": 0,
+  "traces_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

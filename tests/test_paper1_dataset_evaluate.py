@@ -8,6 +8,7 @@ from ccpu.paper1.dataset import (
 )
 from ccpu.paper1.evaluate import answers_equal, evaluate, extract_answer
 from ccpu.paper1.experiment import run_replay, run_scripted
+from ccpu.paper1.prompts import condition_prompt
 
 
 def smoke_config() -> ArithmeticDatasetConfig:
@@ -138,3 +139,11 @@ def test_hard_dataset_selected_cells_and_surface_variants_are_frozen():
         "unicode",
         "brackets",
     ]
+
+
+def test_llm_only_hard_prompt_requests_a_concise_scorable_answer():
+    example = next(iter(iter_hard_dataset(HardArithmeticDatasetConfig(control_examples=0))))
+    prompt = condition_prompt(example, "llm_only")
+
+    assert "Return only the exact answer" in prompt
+    assert "No explanation" in prompt
