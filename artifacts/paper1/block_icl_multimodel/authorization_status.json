@@ -1,0 +1,24 @@
+{
+  "schema_version": "ccpu.paper1.model_authorization.v1",
+  "checked_date": "2026-08-28",
+  "huggingface_token_present": false,
+  "policy": "Skip authorization-gated models without substituting community mirrors.",
+  "skipped_models": [
+    {
+      "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+      "reason": "manual Hugging Face license gate; no authenticated token"
+    },
+    {
+      "model_id": "google/gemma-3-1b-it",
+      "reason": "manual Hugging Face license gate; no authenticated token"
+    },
+    {
+      "model_id": "meta-llama/Llama-3.2-3B-Instruct",
+      "reason": "manual Hugging Face license gate; no authenticated token"
+    },
+    {
+      "model_id": "google/gemma-2-2b-it",
+      "reason": "manual Hugging Face license gate; no authenticated token"
+    }
+  ]
+}

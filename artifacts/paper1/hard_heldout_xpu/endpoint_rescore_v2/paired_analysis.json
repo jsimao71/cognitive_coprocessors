@@ -1,0 +1,85 @@
+{
+  "answer_field": "endpoint_predicted_answer",
+  "baseline": "llm_only",
+  "comparisons": [
+    {
+      "baseline": "llm_only",
+      "condition": "calculator_block",
+      "exact_mcnemar_p_two_sided": 1.0,
+      "gains": 2,
+      "losses": 2,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 12
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "explicit_tool",
+      "exact_mcnemar_p_two_sided": 0.25,
+      "gains": 3,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 13
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "llm_only",
+      "exact_mcnemar_p_two_sided": 1.0,
+      "gains": 0,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 16
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "matched_prompt",
+      "exact_mcnemar_p_two_sided": 1.0,
+      "gains": 1,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 15
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "normalized_reflex",
+      "exact_mcnemar_p_two_sided": 0.0625,
+      "gains": 5,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 11
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "oracle",
+      "exact_mcnemar_p_two_sided": 0.015625,
+      "gains": 7,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 9
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "reflex",
+      "exact_mcnemar_p_two_sided": 1.0,
+      "gains": 0,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 16
+    }
+  ],
+  "multiplicity_adjusted": false,
+  "schema_version": "ccpu.paper1.endpoint_rescore_paired.v1"
+}

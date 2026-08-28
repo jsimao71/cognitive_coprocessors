@@ -1,0 +1,115 @@
+{
+  "answer_field": "predicted_answer",
+  "by_run": [
+    {
+      "accuracy": 1.0,
+      "accuracy_ci95": [
+        0.8063923194655636,
+        1.0
+      ],
+      "arithmetic_count": 16,
+      "block_close_rate": 1.0,
+      "block_execution_rate": 1.0,
+      "block_failure_counts": {
+        "execution_failure": 0,
+        "false_block_controls": 2,
+        "missing_close": 0,
+        "missing_open": 0,
+        "missing_payload": 0,
+        "multiple_blocks": 0,
+        "payload_not_exact": 16,
+        "payload_not_semantically_equivalent": 0
+      },
+      "block_multiple_rate": 0.0,
+      "block_open_model_rate": 1.0,
+      "block_open_rate": 1.0,
+      "block_payload_exact_rate": 0.0,
+      "block_payload_present_rate": 1.0,
+      "block_payload_semantically_equivalent_rate": 1.0,
+      "candidate_count": 18,
+      "condition": "calculator_block_icl_g",
+      "count": 28,
+      "engine_correctness": 1.0,
+      "engine_failures": 0,
+      "engine_success_rate": 1.0,
+      "execution_stage_success_rate": 1.0,
+      "expression_exposure_rate": 1.0,
+      "false_block_rate": 0.16666666666666666,
+      "mean_engine_time_ms": 0.035757142857142855,
+      "mean_generated_tokens": 18.928571428571427,
+      "mean_interventions": 0.6428571428571429,
+      "mean_invocation_overhead_chars": 11.571428571428571,
+      "mean_model_calls": 18.928571428571427,
+      "mean_reinjected_tokens": 8.535714285714286,
+      "mean_state_bytes": 819.6428571428571,
+      "mean_state_items": 0.6428571428571429,
+      "mean_trace_bytes": 2945.035714285714,
+      "mean_wall_time_ms": 4232.9452,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "normalization_acceptance_rate": 1.0,
+      "normalization_correctness": 1.0,
+      "normalization_failures": 0,
+      "normalization_stage_success_rate": 1.0,
+      "recognition_rate": 1.0,
+      "reinjection_failures": 0,
+      "reinjection_success_rate": 1.0,
+      "result_override_rate": 0.0,
+      "result_use_rate": 1.0,
+      "seed": 17,
+      "selection_correctness": 1.0,
+      "trigger": {
+        "false_intervention_rate": 0.16666666666666666,
+        "fn": 0,
+        "fp": 2,
+        "precision": 0.8888888888888888,
+        "recall": 1.0,
+        "tn": 10,
+        "tp": 16
+      }
+    }
+  ],
+  "empirical": true,
+  "scaling": [
+    {
+      "accuracy": 1.0,
+      "condition": "calculator_block_icl_g",
+      "count": 4,
+      "mean_wall_time_ms": 3353.2335,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 1,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "calculator_block_icl_g",
+      "count": 4,
+      "mean_wall_time_ms": 5003.422725,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 1,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "calculator_block_icl_g",
+      "count": 4,
+      "mean_wall_time_ms": 4832.753825,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 1,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "calculator_block_icl_g",
+      "count": 4,
+      "mean_wall_time_ms": 5220.46585,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 2,
+      "structure": "nested"
+    }
+  ],
+  "schema_version": "ccpu.paper1.evaluation.v1"
+}

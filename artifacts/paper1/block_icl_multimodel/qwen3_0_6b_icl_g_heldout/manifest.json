@@ -1,0 +1,53 @@
+{
+  "block_failures_sha256": "502b4943e54cf88860751b0287a6b944e3e3a350e984ecc37ad7dd77afa91b32",
+  "dataset_sha256": "0ae373ba71d271e1e1c42b8c877fe506f386398831735f4de6ab12fbfcec96b8",
+  "empirical": true,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "2019abeb5bfbab93a9997f5ed911fad1b25d0c52"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 28,
+  "predictions_sha256": "1d1521a69d4d7774543d18a2c96af5d9c7feab4ee7e3d537751f295f74af1c11",
+  "run_config": {
+    "backend": "huggingface",
+    "conditions": [
+      "calculator_block_icl_g"
+    ],
+    "limit": null,
+    "models": [
+      {
+        "device": "xpu",
+        "dtype": "float16",
+        "max_new_tokens": 96,
+        "model_id": "Qwen/Qwen3-0.6B",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+      }
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_block_icl_order_control_prompt": "paper1_calculator_block_icl_v2_order_control",
+      "calculator_block_icl_prompt": "paper1_calculator_block_icl_v1_developmental",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v2_concise",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seeds": [
+      17
+    ],
+    "smoke_gate": false
+  },
+  "runtime_report_sha256": "b9b59f5d266c17172f48772ac9460bf69e6536b7654daaf1aa1672b4f88be6d5",
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "summary_sha256": "f884485f97a4bfb6e6e9b11e8b525cea72817a61776febdfd26e2028b795b8e9",
+  "trace_count": 108,
+  "traces_sha256": "d9616ce88bd2ca7e3478b0cf2342f85af65cb3b74834dc6114aaeb687efa5ec5"
+}

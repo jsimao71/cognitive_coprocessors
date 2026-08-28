@@ -321,7 +321,7 @@ def rescore_endpoints_command(args: argparse.Namespace) -> int:
         {
             "paper": "Paper 1",
             "schema_version": "ccpu.paper1.endpoint_rescore_manifest.v1",
-            "extractor_version": "paper1_condition_independent_endpoint_v1",
+            "extractor_version": "paper1_condition_independent_endpoint_v2",
             "dataset_sha256": file_sha256(args.dataset),
             "source_predictions_sha256": file_sha256(args.predictions),
             "rescored_predictions_sha256": file_sha256(predictions_path),
@@ -341,11 +341,15 @@ def plot_command(args: argparse.Namespace) -> int:
 
 
 def paired_command(args: argparse.Namespace) -> int:
+    prediction_paths = [Path(path) for path in args.predictions]
+    predictions = [row for path in prediction_paths for row in read_jsonl(path)]
     result = paired_comparisons(
-        _examples(args.dataset), read_jsonl(args.predictions), baseline=args.baseline
+        _examples(args.dataset), predictions, baseline=args.baseline
     )
     result["dataset_sha256"] = file_sha256(args.dataset)
-    result["predictions_sha256"] = file_sha256(args.predictions)
+    result["prediction_sources"] = [
+        {"path": str(path), "sha256": file_sha256(path)} for path in prediction_paths
+    ]
     write_json(args.output, result)
     print(f"wrote paired comparisons -> {args.output}")
     return 0
@@ -422,7 +426,7 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
 
     paired = commands.add_parser("paired", help="compute paired exact condition comparisons")
     paired.add_argument("--dataset", required=True)
-    paired.add_argument("--predictions", required=True)
+    paired.add_argument("--predictions", required=True, action="append")
     paired.add_argument("--baseline", default="llm_only")
     paired.add_argument("--output", required=True)
     paired.set_defaults(handler=paired_command)

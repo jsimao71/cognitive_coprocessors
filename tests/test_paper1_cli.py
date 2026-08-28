@@ -192,6 +192,67 @@ def test_cli_endpoint_rescore_preserves_reported_labels(tmp_path):
     assert read_json(output / "manifest.json")["reported_labels_preserved"] is True
 
 
+def test_cli_paired_accepts_multiple_prediction_sources(tmp_path):
+    config = tmp_path / "config.json"
+    dataset = tmp_path / "dataset.jsonl"
+    baseline = tmp_path / "baseline.jsonl"
+    candidate = tmp_path / "candidate.jsonl"
+    output = tmp_path / "paired.json"
+    config.write_text(
+        json.dumps(
+            {
+                "dataset": {
+                    "examples_per_cell": 1,
+                    "operator_counts": [1],
+                    "operand_digits": [1],
+                    "control_examples": 0,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    main(["paper1", "generate", "--config", str(config), "--output", str(dataset)])
+    example = read_jsonl(dataset)[0]
+    common = {"example_id": example["example_id"], "model_id": "test", "seed": 17}
+    baseline.write_text(
+        json.dumps({**common, "condition": "llm_only", "predicted_answer": None}) + "\n",
+        encoding="utf-8",
+    )
+    candidate.write_text(
+        json.dumps(
+            {
+                **common,
+                "condition": "calculator_block_icl_g",
+                "predicted_answer": example["answer"],
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    assert main(
+        [
+            "paper1",
+            "paired",
+            "--dataset",
+            str(dataset),
+            "--predictions",
+            str(baseline),
+            "--predictions",
+            str(candidate),
+            "--output",
+            str(output),
+        ]
+    ) == 0
+
+    result = read_json(output)
+    assert len(result["prediction_sources"]) == 2
+    comparison = next(
+        row for row in result["comparisons"] if row["condition"] == "calculator_block_icl_g"
+    )
+    assert comparison["gains"] == 1
+
+
 def test_cli_plot_writes_scaling_figure_when_analysis_extra_is_available(tmp_path):
     if importlib.util.find_spec("matplotlib") is None:
         return

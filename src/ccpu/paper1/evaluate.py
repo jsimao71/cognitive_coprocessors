@@ -33,6 +33,17 @@ _ENDPOINT_MARKED_RESULT = re.compile(
 _TRAILING_RESULT = re.compile(r"(-?\d+(?:/\d+)?)\s*[.!]?\s*\Z")
 
 
+def _complete_numeric_match(text: str, match: re.Match[str]) -> bool:
+    start, end = match.span(1)
+    if start > 0 and text[start - 1] in "0123456789/":
+        return False
+    if start > 1 and text[start - 1] == "." and text[start - 2].isdigit():
+        return False
+    if end < len(text) and text[end] in "0123456789/":
+        return False
+    return not (end + 1 < len(text) and text[end] == "." and text[end + 1].isdigit())
+
+
 def extract_answer(text: str) -> str | None:
     # End-task evaluation must prefer what the model ultimately claims over a
     # correct engine value that the model may subsequently ignore or override.
@@ -62,6 +73,11 @@ def extract_endpoint_answer(text: str) -> str | None:
     trailing = _TRAILING_RESULT.search(text)
     if trailing is not None:
         matches.append(trailing)
+    matches = [
+        match
+        for match in matches
+        if _complete_numeric_match(text, match)
+    ]
     if not matches:
         bare = _BARE_RESULT.fullmatch(text)
         return bare.group(1) if bare else None
@@ -85,7 +101,7 @@ def rescore_endpoint_predictions(
                 "reported_predicted_answer": reported,
                 "endpoint_predicted_answer": endpoint,
                 "endpoint_answer_changed": endpoint != reported,
-                "endpoint_extractor_version": "paper1_condition_independent_endpoint_v1",
+                "endpoint_extractor_version": "paper1_condition_independent_endpoint_v2",
             }
         )
         rescored.append(row)

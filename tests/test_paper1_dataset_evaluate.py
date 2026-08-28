@@ -101,6 +101,11 @@ def test_condition_independent_endpoint_extractor_recognizes_response_and_last_c
     assert extract_endpoint_answer("Response: 17") == "17"
     assert extract_endpoint_answer("Result: 18\nResponse: 19") == "19"
     assert extract_endpoint_answer("Work gives 20. Final answer: 21.") == "21"
+    assert extract_endpoint_answer("Response: 90.3") is None
+    assert (
+        extract_endpoint_answer("<calculator_result>903/10</calculator_result>\n90.3")
+        == "903/10"
+    )
 
 
 def test_endpoint_rescore_preserves_reported_prediction():
