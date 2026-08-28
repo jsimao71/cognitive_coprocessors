@@ -118,6 +118,60 @@ def test_cli_replay_applies_reflex_to_saved_completion(tmp_path):
     assert prediction["predicted_answer"] == example["answer"]
 
 
+def test_cli_endpoint_rescore_preserves_reported_labels(tmp_path):
+    config = tmp_path / "config.json"
+    dataset = tmp_path / "dataset.jsonl"
+    source = tmp_path / "source.jsonl"
+    output = tmp_path / "rescore"
+    config.write_text(
+        json.dumps(
+            {
+                "dataset": {
+                    "examples_per_cell": 1,
+                    "operator_counts": [1],
+                    "operand_digits": [1],
+                    "control_examples": 0,
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    main(["paper1", "generate", "--config", str(config), "--output", str(dataset)])
+    example = read_jsonl(dataset)[0]
+    rows = []
+    for condition in ("llm_only", "matched_prompt"):
+        rows.append(
+            {
+                "example_id": example["example_id"],
+                "model_id": "saved-model",
+                "condition": condition,
+                "seed": 17,
+                "generated_text": f"Response: {example['answer']}",
+                "rendered_text": f"Response: {example['answer']}",
+                "predicted_answer": None,
+            }
+        )
+    source.write_text("".join(json.dumps(row) + "\n" for row in rows), encoding="utf-8")
+
+    assert main(
+        [
+            "paper1",
+            "rescore-endpoints",
+            "--dataset",
+            str(dataset),
+            "--predictions",
+            str(source),
+            "--output-dir",
+            str(output),
+        ]
+    ) == 0
+
+    rescored = read_jsonl(output / "predictions.jsonl")
+    assert all(row["predicted_answer"] is None for row in rescored)
+    assert all(row["endpoint_predicted_answer"] == example["answer"] for row in rescored)
+    assert read_json(output / "manifest.json")["reported_labels_preserved"] is True
+
+
 def test_cli_plot_writes_scaling_figure_when_analysis_extra_is_available(tmp_path):
     if importlib.util.find_spec("matplotlib") is None:
         return

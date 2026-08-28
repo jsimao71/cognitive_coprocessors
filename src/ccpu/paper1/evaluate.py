@@ -25,6 +25,12 @@ _FINAL_RESULT = re.compile(
 )
 _BOXED_RESULT = re.compile(r"\\boxed\s*\{\s*(-?\d+(?:/\d+)?)\s*\}")
 _BARE_RESULT = re.compile(r"\s*(-?\d+(?:/\d+)?)\s*")
+_ENDPOINT_MARKED_RESULT = re.compile(
+    r"(?:response|final\s+answer|answer|result|value)(?:\s+is|\s*[:=])\s*\**\s*"
+    r"(-?\d+(?:/\d+)?)\b",
+    re.IGNORECASE,
+)
+_TRAILING_RESULT = re.compile(r"(-?\d+(?:/\d+)?)\s*[.!]?\s*\Z")
 
 
 def extract_answer(text: str) -> str | None:
@@ -43,6 +49,49 @@ def extract_answer(text: str) -> str | None:
     return matches[-1]
 
 
+def extract_endpoint_answer(text: str) -> str | None:
+    """Extract the model's final answer without consulting its experiment condition."""
+
+    matches = [
+        *list(_ENDPOINT_MARKED_RESULT.finditer(text)),
+        *list(_BOXED_RESULT.finditer(text)),
+        *list(_EQUALS_RESULT.finditer(text)),
+        *list(_TOOL_RESULT.finditer(text)),
+        *list(_CALCULATOR_RESULT.finditer(text)),
+    ]
+    trailing = _TRAILING_RESULT.search(text)
+    if trailing is not None:
+        matches.append(trailing)
+    if not matches:
+        bare = _BARE_RESULT.fullmatch(text)
+        return bare.group(1) if bare else None
+    endpoint = max(matches, key=lambda match: (match.end(), match.start()))
+    return endpoint.group(1)
+
+
+def rescore_endpoint_predictions(
+    predictions: Iterable[Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    """Add parallel endpoint labels while preserving every reported label."""
+
+    rescored = []
+    for source in predictions:
+        row = dict(source)
+        reported = row.get("predicted_answer")
+        text = str(row.get("rendered_text", row.get("generated_text", "")))
+        endpoint = extract_endpoint_answer(text)
+        row.update(
+            {
+                "reported_predicted_answer": reported,
+                "endpoint_predicted_answer": endpoint,
+                "endpoint_answer_changed": endpoint != reported,
+                "endpoint_extractor_version": "paper1_condition_independent_endpoint_v1",
+            }
+        )
+        rescored.append(row)
+    return rescored
+
+
 def answers_equal(predicted: str | None, gold: str | None) -> bool:
     if predicted is None or gold is None:
         return False
@@ -55,10 +104,12 @@ def answers_equal(predicted: str | None, gold: str | None) -> bool:
 def _group_summary(
     rows: list[Mapping[str, Any]],
     items: Mapping[str, ArithmeticExample],
+    *,
+    answer_field: str,
 ) -> dict[str, Any]:
     arithmetic = [row for row in rows if items[str(row["example_id"])].task_kind == "arithmetic"]
     answer_correct = [
-        answers_equal(row.get("predicted_answer"), items[str(row["example_id"])].answer)
+        answers_equal(row.get(answer_field), items[str(row["example_id"])].answer)
         for row in arithmetic
     ]
     trigger = binary_classification(
@@ -136,7 +187,10 @@ def _group_summary(
 
 
 def evaluate(
-    examples: Iterable[ArithmeticExample], predictions: Iterable[Mapping[str, Any]]
+    examples: Iterable[ArithmeticExample],
+    predictions: Iterable[Mapping[str, Any]],
+    *,
+    answer_field: str = "predicted_answer",
 ) -> dict[str, Any]:
     items = {example.example_id: example for example in examples}
     rows = list(predictions)
@@ -160,7 +214,7 @@ def evaluate(
                 "model_id": model_id,
                 "condition": condition,
                 "seed": seed,
-                **_group_summary(members, items),
+                **_group_summary(members, items, answer_field=answer_field),
             }
         )
 
@@ -183,7 +237,7 @@ def evaluate(
         scaling_groups.items()
     ):
         correct = sum(
-            answers_equal(row.get("predicted_answer"), items[str(row["example_id"])].answer)
+            answers_equal(row.get(answer_field), items[str(row["example_id"])].answer)
             for row in members
         )
         scaling.append(
@@ -200,7 +254,12 @@ def evaluate(
                 ),
             }
         )
-    return {"schema_version": "ccpu.paper1.evaluation.v1", "by_run": by_run, "scaling": scaling}
+    return {
+        "schema_version": "ccpu.paper1.evaluation.v1",
+        "answer_field": answer_field,
+        "by_run": by_run,
+        "scaling": scaling,
+    }
 
 
 def paired_comparisons(
@@ -208,6 +267,7 @@ def paired_comparisons(
     predictions: Iterable[Mapping[str, Any]],
     *,
     baseline: str = "llm_only",
+    answer_field: str = "predicted_answer",
 ) -> dict[str, Any]:
     """Compute paired exact McNemar tests without changing endpoint labels."""
 
@@ -223,7 +283,7 @@ def paired_comparisons(
             continue
         key = (str(row["model_id"]), int(row["seed"]), str(row["condition"]))
         grouped[key][example_id] = answers_equal(
-            row.get("predicted_answer"), items[example_id].answer
+            row.get(answer_field), items[example_id].answer
         )
 
     comparisons = []
@@ -262,6 +322,7 @@ def paired_comparisons(
     return {
         "schema_version": "ccpu.paper1.paired_analysis.v1",
         "baseline": baseline,
+        "answer_field": answer_field,
         "comparisons": comparisons,
         "multiplicity_adjusted": False,
     }

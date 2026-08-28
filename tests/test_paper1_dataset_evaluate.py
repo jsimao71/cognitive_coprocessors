@@ -6,7 +6,14 @@ from ccpu.paper1.dataset import (
     iter_hard_dataset,
     reference_answer,
 )
-from ccpu.paper1.evaluate import answers_equal, evaluate, extract_answer, paired_comparisons
+from ccpu.paper1.evaluate import (
+    answers_equal,
+    evaluate,
+    extract_answer,
+    extract_endpoint_answer,
+    paired_comparisons,
+    rescore_endpoint_predictions,
+)
 from ccpu.paper1.experiment import run_replay, run_scripted
 from ccpu.paper1.prompts import condition_prompt
 
@@ -88,6 +95,29 @@ def test_answer_extraction_supports_boxed_and_bare_exact_answers():
     assert extract_answer("Exact value of the integer arithmetic expression: 6.") == "6"
     assert extract_answer("The exact value of the expression is **39**.") == "39"
     assert extract_answer("-3/4") == "-3/4"
+
+
+def test_condition_independent_endpoint_extractor_recognizes_response_and_last_claim():
+    assert extract_endpoint_answer("Response: 17") == "17"
+    assert extract_endpoint_answer("Result: 18\nResponse: 19") == "19"
+    assert extract_endpoint_answer("Work gives 20. Final answer: 21.") == "21"
+
+
+def test_endpoint_rescore_preserves_reported_prediction():
+    rows = rescore_endpoint_predictions(
+        [
+            {
+                "generated_text": "Response: 42",
+                "rendered_text": "Response: 42",
+                "predicted_answer": None,
+            }
+        ]
+    )
+
+    assert rows[0]["predicted_answer"] is None
+    assert rows[0]["reported_predicted_answer"] is None
+    assert rows[0]["endpoint_predicted_answer"] == "42"
+    assert rows[0]["endpoint_answer_changed"] is True
 
 
 def test_binary_metrics_and_wilson_interval_boundaries():

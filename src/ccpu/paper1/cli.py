@@ -23,7 +23,7 @@ from .dataset import (
     iter_dataset,
     iter_hard_dataset,
 )
-from .evaluate import evaluate, paired_comparisons
+from .evaluate import evaluate, paired_comparisons, rescore_endpoint_predictions
 from .experiment import run_huggingface, run_replay, run_scripted
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 from .plot import plot_interface_diagnostics, plot_scaling
@@ -211,6 +211,43 @@ def evaluate_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def rescore_endpoints_command(args: argparse.Namespace) -> int:
+    examples = _examples(args.dataset)
+    source = read_jsonl(args.predictions)
+    rescored = rescore_endpoint_predictions(source)
+    output_dir = Path(args.output_dir)
+    predictions_path = write_jsonl(output_dir / "predictions.jsonl", rescored)
+    summary = evaluate(examples, rescored, answer_field="endpoint_predicted_answer")
+    summary["schema_version"] = "ccpu.paper1.endpoint_rescore.v1"
+    summary["preserves_reported_metrics"] = True
+    summary["source_predictions_sha256"] = file_sha256(args.predictions)
+    write_json(output_dir / "summary.json", summary)
+    paired = paired_comparisons(
+        examples,
+        rescored,
+        baseline=args.baseline,
+        answer_field="endpoint_predicted_answer",
+    )
+    paired["schema_version"] = "ccpu.paper1.endpoint_rescore_paired.v1"
+    write_json(output_dir / "paired_analysis.json", paired)
+    write_json(
+        output_dir / "manifest.json",
+        {
+            "paper": "Paper 1",
+            "schema_version": "ccpu.paper1.endpoint_rescore_manifest.v1",
+            "extractor_version": "paper1_condition_independent_endpoint_v1",
+            "dataset_sha256": file_sha256(args.dataset),
+            "source_predictions_sha256": file_sha256(args.predictions),
+            "rescored_predictions_sha256": file_sha256(predictions_path),
+            "prediction_count": len(rescored),
+            "reported_labels_preserved": True,
+        },
+    )
+    changed = sum(bool(row["endpoint_answer_changed"]) for row in rescored)
+    print(f"rescored {len(rescored)} endpoints ({changed} changed labels) -> {output_dir}")
+    return 0
+
+
 def plot_command(args: argparse.Namespace) -> int:
     output = plot_scaling(read_json(args.summary), args.output)
     print(f"wrote scaling figure -> {output}")
@@ -276,6 +313,16 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     evaluation.add_argument("--predictions", required=True)
     evaluation.add_argument("--output", required=True)
     evaluation.set_defaults(handler=evaluate_command)
+
+    rescore = commands.add_parser(
+        "rescore-endpoints",
+        help="write condition-independent endpoint labels without replacing reported labels",
+    )
+    rescore.add_argument("--dataset", required=True)
+    rescore.add_argument("--predictions", required=True)
+    rescore.add_argument("--output-dir", required=True)
+    rescore.add_argument("--baseline", default="llm_only")
+    rescore.set_defaults(handler=rescore_endpoints_command)
 
     plot = commands.add_parser("plot", help="plot accuracy scaling from a summary")
     plot.add_argument("--summary", required=True)
