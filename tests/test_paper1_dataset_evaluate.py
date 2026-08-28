@@ -47,6 +47,8 @@ def test_scripted_run_is_complete_but_explicitly_not_empirical():
     assert reflex["result_use_rate"] == 1.0
     assert reflex["mean_trace_bytes"] > 0
     assert reflex["mean_state_bytes"] > 0
+    oracle = next(row for row in summary["by_run"] if row["condition"] == "oracle")
+    assert oracle["accuracy"] == 1.0
     llm_only = next(row for row in summary["by_run"] if row["condition"] == "llm_only")
     assert llm_only["normalization_correctness"] is None
     assert llm_only["engine_correctness"] is None

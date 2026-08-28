@@ -1,0 +1,535 @@
+{
+  "by_run": [
+    {
+      "accuracy": 0.3020833333333333,
+      "accuracy_ci95": [
+        0.21931158499064574,
+        0.4000850018696842
+      ],
+      "arithmetic_count": 96,
+      "candidate_count": 0,
+      "condition": "llm_only",
+      "count": 96,
+      "engine_correctness": null,
+      "engine_failures": 0,
+      "engine_success_rate": null,
+      "execution_stage_success_rate": 0.0,
+      "expression_exposure_rate": 0.20833333333333334,
+      "mean_engine_time_ms": 0.0,
+      "mean_generated_tokens": 82.125,
+      "mean_interventions": 0.0,
+      "mean_invocation_overhead_chars": 0.0,
+      "mean_model_calls": 82.125,
+      "mean_reinjected_tokens": 0.0,
+      "mean_state_bytes": 0.0,
+      "mean_state_items": 0.0,
+      "mean_trace_bytes": 0.0,
+      "mean_wall_time_ms": 16126.677434375,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "normalization_acceptance_rate": null,
+      "normalization_correctness": null,
+      "normalization_failures": 0,
+      "normalization_stage_success_rate": 0.0,
+      "recognition_rate": 0.0,
+      "reinjection_failures": 0,
+      "reinjection_success_rate": 0.0,
+      "result_override_rate": null,
+      "result_use_rate": null,
+      "seed": 17,
+      "selection_correctness": null,
+      "trigger": {
+        "false_intervention_rate": 0.0,
+        "fn": 96,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "tn": 0,
+        "tp": 0
+      }
+    }
+  ],
+  "empirical": true,
+  "scaling": [
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 7966.8321,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 1,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 5874.488600000001,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 1,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 4594.72485,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 1,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 7701.457050000001,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 1,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 6156.06505,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 1,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 7755.2497,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 1,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 9151.290850000001,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 1,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 6522.4763,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 1,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 8201.198550000001,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 1,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 12841.97955,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 1,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 12283.88395,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 1,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 10358.63845,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 1,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 16039.3006,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 2,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 13981.0739,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 2,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 11990.82915,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 2,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 17986.1696,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 2,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 18479.7629,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 2,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 17082.4267,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 2,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 18960.1473,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 2,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19012.4657,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 2,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19095.0521,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 2,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19571.58505,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 2,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 17344.60415,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 2,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19465.33655,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 2,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 18561.89445,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 3,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 17203.432699999998,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 3,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 17472.48895,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 3,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19195.2884,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 3,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19084.2059,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 3,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19091.605,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 3,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19629.7364,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 3,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19595.5989,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 3,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19574.999900000003,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 3,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 20095.454100000003,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 3,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 17424.06055,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 3,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19967.572,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 3,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.5,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19217.278,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 4,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19084.410649999998,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 4,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19101.009299999998,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 1,
+      "operator_count": 4,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19743.50505,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 4,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19644.455199999997,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 4,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19681.518300000003,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 2,
+      "operator_count": 4,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 20303.17905,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 4,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 20205.2448,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 4,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 20206.57065,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 3,
+      "operator_count": 4,
+      "structure": "nested"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 20854.50305,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 4,
+      "structure": "left_chain"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 20794.7949,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 4,
+      "structure": "multiplication_tree"
+    },
+    {
+      "accuracy": 0.0,
+      "condition": "llm_only",
+      "count": 2,
+      "mean_wall_time_ms": 19930.67195,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "operand_digits": 4,
+      "operator_count": 4,
+      "structure": "nested"
+    }
+  ],
+  "schema_version": "ccpu.paper1.evaluation.v1"
+}

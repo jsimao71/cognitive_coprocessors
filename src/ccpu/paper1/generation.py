@@ -34,7 +34,9 @@ class ScriptedProtocolBackend:
             return example.reference_completion
         if condition == "explicit_tool":
             return f"<tool:calculator>{example.expression}</tool>"
-        if condition in {"reflex", "normalized_reflex", "oracle"}:
+        if condition == "oracle":
+            return f"Calculation: {example.expression} ="
+        if condition in {"reflex", "normalized_reflex"}:
             return example.reference_completion
         if condition == "calculator_block":
             return f"```calculator\n{example.expression}\n```"

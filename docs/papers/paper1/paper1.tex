@@ -336,8 +336,22 @@ hard-arithmetic comparison. Since greedy argmax decoding produced identical text
 for every one of the 96 cross-seed pairs, the revised calibration removes the
 redundant generation seed, broadens the grid downward to one--four operand digits
 and one--four operators, uses two independently generated examples per cell, and
-raises the uniform ceiling to 96 tokens. Cell selection remains baseline-only;
-the held-out dataset and assisted runs remain ungenerated at this point.
+raises the uniform ceiling to 96 tokens.
+
+The revised calibration completed 96 baseline-only generations with 30.2\%
+overall exact match; 78 generations had a scorable final answer. Across 48 cells,
+9 reached 100\% accuracy, 11 reached 50\%, and 28 reached 0\%. We froze four
+whole cells with complete answer coverage and no cap hits: one operator/one digit
+with a left chain (100\%), two operators/two digits with nesting (50\%), one
+operator/three digits with a multiplication tree (50\%), and one operator/four
+digits with a left chain (0\%). The two 50\% cells are explicitly coarse
+approximations to the overlapping moderate and transition targets.
+
+The selection record stores source dataset and prediction hashes and states that
+no assisted outcome was consulted. A separately seeded held-out dataset uses four
+examples per selected cell, cycling ASCII, LaTeX, Unicode, and bracket surfaces,
+plus all 12 adversarial controls. The held-out model run remains ungenerated at
+this protocol-freeze point.
 
 \section{Preliminary XPU Pilot}
 
