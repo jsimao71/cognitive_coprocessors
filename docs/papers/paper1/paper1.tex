@@ -587,8 +587,51 @@ Evaluation compares base+frozen ICL (context), adapter+minimal instruction
 (weights), and base+normalized reflex (runtime), with base+minimal and
 adapter+ICL controls. It reports protocol decomposition, false blocks, answer
 accuracy, prompt/output tokens, training parameters/tokens/time, memory, and
-inference overhead. No present result supports a claim that adaptation learned
-arithmetic.
+inference overhead.
+
+\paragraph{Qwen3-0.6B adapter result.}
+The primary adapter trained in 394.5 seconds on XPU, with 2,293,760 trainable
+parameters (0.383\% of the model), 7,362 assistant target tokens over two epochs,
+and 1.48~GB peak memory. Mean training loss fell from 0.0526 to 0.000032 and
+development loss from 0.000050 to 0.000021. The serialized adapter is 9.2~MB.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Qwen3-0.6B interface-knowledge placement on 16 arithmetic examples and
+12 controls. Execute is valid arithmetic execution; false is the number of
+control interventions. Tokens are means over all 28 examples.}
+\label{tab:qwen-placement}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Placement/condition & Execute & Answer & False & Prompt tok. & Output tok. \\
+\midrule
+Base + minimal              & 0.000 & 0.000 & 0/12 & 86.6  & 17.2 \\
+Context: base + ICL-G       & 1.000 & 1.000 & 2/12 & 113.8 & 18.9 \\
+Weights: LoRA + minimal     & 1.000 & 1.000 & 0/12 & 86.6  & 14.9 \\
+Weights + context: LoRA+ICL & 1.000 & 1.000 & 4/12 & 113.8 & 19.2 \\
+Runtime: normalized reflex  & 0.750 & 0.750 & 0/12 & 61.0  & 22.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Base+minimal emitted no valid arithmetic block, so the instruction alone does
+not explain the adapter result. LoRA+minimal produced 16/16 semantically correct
+and executable payloads, used every result, answered all 16 correctly, and
+opened no block on 12 controls. Payload strings differed harmlessly on 14 cases,
+primarily by removing redundant parentheses. The adapter adds about 9.2~MB of
+resident model memory; measured peak inference memory increased from 1.28 to
+1.42~GB. Its minimal prompt uses 27.1 fewer tokens than ICL-G and generates four
+fewer tokens on average.
+
+Context and weights are not additive here. Base+ICL-G had two false blocks;
+LoRA+ICL-G had four, including quoted arithmetic, quoted fences, pseudocode, and
+quoted code. Thus the primary Qwen result favors storing the learned semantic
+selection/serialization contract in adapter weights with a minimal explicit
+contract, while retaining deterministic execution in the runtime. The normalized
+runtime remains safer without training but has only 75\% expression exposure and
+execution. No result implies that LoRA learned arithmetic: every answer still
+comes from the unchanged bounded calculator.
 
 \section{Preliminary XPU Pilot}
 

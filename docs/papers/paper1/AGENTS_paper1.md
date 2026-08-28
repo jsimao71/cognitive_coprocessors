@@ -112,6 +112,11 @@ is demonstrated across capability levels.
 - The primary placement comparison is context (base+ICL-G), weights
   (LoRA+minimal), and runtime (base+normalized reflex). Also measure base+minimal
   and LoRA+ICL to isolate instruction and interaction effects.
+- Qwen3-0.6B LoRA+minimal achieved 16/16 block execution and answers with 0/12
+  false blocks; base+minimal achieved 0/16. Base+ICL-G had 2/12 false blocks and
+  LoRA+ICL-G had 4/12, so context and weights show negative interaction.
+- The Qwen adapter has 2,293,760 trainable parameters (0.383%), is 9.2 MB, used
+  7,362 target tokens, trained for 394.5 seconds, and peaked at 1.48 GB on XPU.
 - Regenerate cross-model artifacts with `paper1 compare-models` and
   `configs/paper1/block_icl_comparison.json`.
 

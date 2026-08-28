@@ -1,0 +1,62 @@
+{
+  "adapter_files": {
+    "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+    "adapter_config.json": "37d2b793a34cfe48fb242c7ffe084f8c8a4b84def01f81d56e04d2699c4e43b4",
+    "adapter_model.safetensors": "49165efb21646e71a42febed249eea75434049943d5446f78e771bda855721ac"
+  },
+  "adapter_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+  "dev_rows": 40,
+  "dev_sha256": "5bb678c3ea6792de4422e2129dd2a4d3b3570e8632e5a37a9dbd8d774101245d",
+  "device": "xpu",
+  "dtype": "float16",
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dev_loss": 4.96950055776324e-05,
+      "mean_train_loss": 0.05260181842523366
+    },
+    {
+      "epoch": 2,
+      "mean_dev_loss": 2.1457586296946828e-05,
+      "mean_train_loss": 3.221066713479104e-05
+    }
+  ],
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "optimizer_steps": 40,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "peak_memory_bytes": 1483319296,
+  "schema_version": "ccpu.paper1.lora_training.v1",
+  "total_parameters": 598343680,
+  "train_rows": 160,
+  "train_sha256": "d270b1d04af6077b64d8cba9bdb44e073d35c3b4923723ff101521bf159730c4",
+  "train_target_tokens_per_epoch": 3681,
+  "trainable_fraction": 0.0038335158817086527,
+  "trainable_parameters": 2293760,
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 2,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "max_length": 192,
+    "rank": 8,
+    "seed": 99173,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 7362,
+  "wall_time_seconds": 394.52654859999893
+}

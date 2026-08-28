@@ -1,0 +1,27 @@
+{
+  "schema_version": "ccpu.paper1.lora_decision.v2",
+  "decision_date": "2026-08-28",
+  "qwen_status": "complete",
+  "second_family_status": "pending",
+  "primary_qwen_condition": "lora_plus_minimal_instruction",
+  "qwen_result": {
+    "arithmetic_examples": 16,
+    "control_examples": 12,
+    "block_execution_rate": 1.0,
+    "semantic_payload_rate": 1.0,
+    "answer_accuracy": 1.0,
+    "false_blocks": 0,
+    "result_use_rate": 1.0,
+    "trainable_parameters": 2293760,
+    "training_target_tokens": 7362,
+    "training_wall_time_seconds": 394.52654859999893,
+    "training_peak_memory_bytes": 1483319296
+  },
+  "interaction_result": {
+    "base_icl_false_blocks": 2,
+    "lora_icl_false_blocks": 4,
+    "interpretation": "Context and adapter storage are not additive under the frozen ICL-G prompt."
+  },
+  "current_answer": "For Qwen3-0.6B, semantic interface selection and serialization are most reliable in LoRA weights under a minimal contract, while arithmetic execution remains in the deterministic runtime.",
+  "claim_boundary": "One model and one diagnostic do not establish a family-general placement rule."
+}
