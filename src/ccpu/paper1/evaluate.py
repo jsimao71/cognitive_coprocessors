@@ -6,6 +6,7 @@ import re
 from collections import defaultdict
 from collections.abc import Iterable, Mapping
 from fractions import Fraction
+from math import comb
 from typing import Any
 
 from ccpu.common.metrics import binary_classification, safe_mean, wilson_interval
@@ -200,3 +201,67 @@ def evaluate(
             }
         )
     return {"schema_version": "ccpu.paper1.evaluation.v1", "by_run": by_run, "scaling": scaling}
+
+
+def paired_comparisons(
+    examples: Iterable[ArithmeticExample],
+    predictions: Iterable[Mapping[str, Any]],
+    *,
+    baseline: str = "llm_only",
+) -> dict[str, Any]:
+    """Compute paired exact McNemar tests without changing endpoint labels."""
+
+    items = {
+        example.example_id: example
+        for example in examples
+        if example.task_kind == "arithmetic"
+    }
+    grouped: dict[tuple[str, int, str], dict[str, bool]] = defaultdict(dict)
+    for row in predictions:
+        example_id = str(row["example_id"])
+        if example_id not in items:
+            continue
+        key = (str(row["model_id"]), int(row["seed"]), str(row["condition"]))
+        grouped[key][example_id] = answers_equal(
+            row.get("predicted_answer"), items[example_id].answer
+        )
+
+    comparisons = []
+    runs = sorted({(model_id, seed) for model_id, seed, _ in grouped})
+    for model_id, seed in runs:
+        baseline_rows = grouped.get((model_id, seed, baseline))
+        if baseline_rows is None:
+            raise ValueError(f"missing baseline rows for {model_id}, seed {seed}")
+        conditions = sorted(
+            condition
+            for candidate_model, candidate_seed, condition in grouped
+            if candidate_model == model_id and candidate_seed == seed
+        )
+        for condition in conditions:
+            members = grouped[(model_id, seed, condition)]
+            if members.keys() != baseline_rows.keys():
+                raise ValueError("paired comparison conditions have different example IDs")
+            gains = sum(not baseline_rows[key] and members[key] for key in baseline_rows)
+            losses = sum(baseline_rows[key] and not members[key] for key in baseline_rows)
+            discordant = gains + losses
+            tail = sum(comb(discordant, index) for index in range(min(gains, losses) + 1))
+            p_value = min(1.0, 2.0 * tail / (2**discordant)) if discordant else 1.0
+            comparisons.append(
+                {
+                    "model_id": model_id,
+                    "seed": seed,
+                    "condition": condition,
+                    "baseline": baseline,
+                    "paired_count": len(baseline_rows),
+                    "gains": gains,
+                    "losses": losses,
+                    "ties": len(baseline_rows) - discordant,
+                    "exact_mcnemar_p_two_sided": p_value,
+                }
+            )
+    return {
+        "schema_version": "ccpu.paper1.paired_analysis.v1",
+        "baseline": baseline,
+        "comparisons": comparisons,
+        "multiplicity_adjusted": False,
+    }

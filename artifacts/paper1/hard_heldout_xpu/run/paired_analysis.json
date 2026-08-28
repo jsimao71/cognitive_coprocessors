@@ -1,0 +1,86 @@
+{
+  "baseline": "llm_only",
+  "comparisons": [
+    {
+      "baseline": "llm_only",
+      "condition": "calculator_block",
+      "exact_mcnemar_p_two_sided": 0.1796875,
+      "gains": 2,
+      "losses": 7,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 7
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "explicit_tool",
+      "exact_mcnemar_p_two_sided": 0.25,
+      "gains": 3,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 13
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "llm_only",
+      "exact_mcnemar_p_two_sided": 1.0,
+      "gains": 0,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 16
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "matched_prompt",
+      "exact_mcnemar_p_two_sided": 1.0,
+      "gains": 1,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 15
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "normalized_reflex",
+      "exact_mcnemar_p_two_sided": 0.0625,
+      "gains": 5,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 11
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "oracle",
+      "exact_mcnemar_p_two_sided": 0.015625,
+      "gains": 7,
+      "losses": 0,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 9
+    },
+    {
+      "baseline": "llm_only",
+      "condition": "reflex",
+      "exact_mcnemar_p_two_sided": 1.0,
+      "gains": 0,
+      "losses": 1,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "paired_count": 16,
+      "seed": 17,
+      "ties": 15
+    }
+  ],
+  "dataset_sha256": "0ae373ba71d271e1e1c42b8c877fe506f386398831735f4de6ab12fbfcec96b8",
+  "multiplicity_adjusted": false,
+  "predictions_sha256": "d9c903ff3ee771908158c6b635f508a4e67467e8d5945d16ec67510b08181014",
+  "schema_version": "ccpu.paper1.paired_analysis.v1"
+}

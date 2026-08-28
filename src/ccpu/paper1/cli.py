@@ -23,10 +23,10 @@ from .dataset import (
     iter_dataset,
     iter_hard_dataset,
 )
-from .evaluate import evaluate
+from .evaluate import evaluate, paired_comparisons
 from .experiment import run_huggingface, run_replay, run_scripted
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
-from .plot import plot_scaling
+from .plot import plot_interface_diagnostics, plot_scaling
 from .prompts import CONDITIONS, PROMPT_VERSION
 
 PROTOCOL_VERSIONS = {
@@ -217,6 +217,23 @@ def plot_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def paired_command(args: argparse.Namespace) -> int:
+    result = paired_comparisons(
+        _examples(args.dataset), read_jsonl(args.predictions), baseline=args.baseline
+    )
+    result["dataset_sha256"] = file_sha256(args.dataset)
+    result["predictions_sha256"] = file_sha256(args.predictions)
+    write_json(args.output, result)
+    print(f"wrote paired comparisons -> {args.output}")
+    return 0
+
+
+def interface_plot_command(args: argparse.Namespace) -> int:
+    output = plot_interface_diagnostics(read_json(args.summary), args.output)
+    print(f"wrote interface figure -> {output}")
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1", help="strict reflex-calculator experiments")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -264,3 +281,17 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     plot.add_argument("--summary", required=True)
     plot.add_argument("--output", required=True)
     plot.set_defaults(handler=plot_command)
+
+    paired = commands.add_parser("paired", help="compute paired exact condition comparisons")
+    paired.add_argument("--dataset", required=True)
+    paired.add_argument("--predictions", required=True)
+    paired.add_argument("--baseline", default="llm_only")
+    paired.add_argument("--output", required=True)
+    paired.set_defaults(handler=paired_command)
+
+    interface_plot = commands.add_parser(
+        "plot-interfaces", help="plot held-out accuracy and interface diagnostics"
+    )
+    interface_plot.add_argument("--summary", required=True)
+    interface_plot.add_argument("--output", required=True)
+    interface_plot.set_defaults(handler=interface_plot_command)

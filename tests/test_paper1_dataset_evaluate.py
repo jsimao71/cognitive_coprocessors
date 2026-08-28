@@ -6,7 +6,7 @@ from ccpu.paper1.dataset import (
     iter_hard_dataset,
     reference_answer,
 )
-from ccpu.paper1.evaluate import answers_equal, evaluate, extract_answer
+from ccpu.paper1.evaluate import answers_equal, evaluate, extract_answer, paired_comparisons
 from ccpu.paper1.experiment import run_replay, run_scripted
 from ccpu.paper1.prompts import condition_prompt
 
@@ -104,6 +104,30 @@ def test_binary_metrics_and_wilson_interval_boundaries():
     low, high = wilson_interval(8, 8)
     assert 0.67 < low < 0.68
     assert high == 1.0
+
+
+def test_paired_comparison_counts_gains_losses_and_exact_probability():
+    examples = list(iter_dataset(ArithmeticDatasetConfig(
+        examples_per_cell=2,
+        operator_counts=(1,),
+        operand_digits=(1,),
+        control_examples=0,
+    )))
+    predictions = []
+    for condition, answers in (("llm_only", (None, examples[1].answer)), ("assisted", (examples[0].answer, examples[1].answer))):
+        for example, answer in zip(examples, answers, strict=True):
+            predictions.append({
+                "example_id": example.example_id,
+                "model_id": "test",
+                "condition": condition,
+                "seed": 1,
+                "predicted_answer": answer,
+            })
+
+    result = paired_comparisons(examples, predictions)
+    assisted = next(row for row in result["comparisons"] if row["condition"] == "assisted")
+    assert (assisted["gains"], assisted["losses"], assisted["ties"]) == (1, 0, 1)
+    assert assisted["exact_mcnemar_p_two_sided"] == 1.0
 
 
 def test_hard_dataset_covers_factorial_axes_and_is_bounded():

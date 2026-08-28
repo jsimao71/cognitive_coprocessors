@@ -72,3 +72,84 @@ def plot_scaling(summary: Mapping[str, Any], output: str | Path) -> Path:
     figure.savefig(output, dpi=180, bbox_inches="tight")
     plt.close(figure)
     return output
+
+
+def plot_interface_diagnostics(summary: Mapping[str, Any], output: str | Path) -> Path:
+    """Plot held-out accuracy and the decomposed assisted-interface pipeline."""
+
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+    except ImportError as error:
+        raise RuntimeError('Interface plots require: pip install -e ".[analysis]"') from error
+
+    rows = {str(row["condition"]): row for row in summary.get("by_run", [])}
+    order = [
+        "llm_only",
+        "matched_prompt",
+        "explicit_tool",
+        "reflex",
+        "normalized_reflex",
+        "calculator_block",
+        "oracle",
+    ]
+    if any(condition not in rows for condition in order):
+        raise ValueError("summary does not contain all held-out conditions")
+
+    palette = ["#486B57", "#6D8B74", "#D18B47", "#A84A3F", "#247B7B", "#D3B04D", "#353C47"]
+    figure, axes = plt.subplots(1, 2, figsize=(13.2, 4.8))
+    accuracy = [float(rows[condition]["accuracy"]) for condition in order]
+    low = [float(rows[condition]["accuracy_ci95"][0]) for condition in order]
+    high = [float(rows[condition]["accuracy_ci95"][1]) for condition in order]
+    labels = [condition.replace("_", "\n") for condition in order]
+    axes[0].bar(
+        labels,
+        accuracy,
+        color=palette,
+        yerr=[
+            [value - lower for value, lower in zip(accuracy, low, strict=True)],
+            [upper - value for value, upper in zip(accuracy, high, strict=True)],
+        ],
+        capsize=3,
+    )
+    axes[0].set_title("Held-out exact-answer accuracy")
+    axes[0].set_ylabel("accuracy with 95% Wilson interval")
+    axes[0].set_ylim(0, 1.08)
+    axes[0].tick_params(axis="x", labelsize=8)
+    axes[0].grid(axis="y", alpha=0.2)
+
+    assisted = ["explicit_tool", "reflex", "normalized_reflex", "calculator_block", "oracle"]
+    stages = [
+        ("expression_exposure_rate", "exposure"),
+        ("recognition_rate", "recognition"),
+        ("normalization_stage_success_rate", "normalization"),
+        ("execution_stage_success_rate", "execution"),
+        ("reinjection_success_rate", "reinjection"),
+        ("result_use_rate", "use if executed"),
+    ]
+    for condition in assisted:
+        values = [
+            float(rows[condition][key]) if rows[condition].get(key) is not None else 0.0
+            for key, _ in stages
+        ]
+        axes[1].plot(
+            [label for _, label in stages],
+            values,
+            marker="o",
+            linewidth=2,
+            label=condition.replace("_", " "),
+        )
+    axes[1].set_title("Assisted-interface pipeline")
+    axes[1].set_ylabel("stage success rate")
+    axes[1].set_ylim(0, 1.08)
+    axes[1].tick_params(axis="x", rotation=35, labelsize=8)
+    axes[1].grid(alpha=0.2)
+    axes[1].legend(fontsize=8, loc="lower left")
+    figure.tight_layout()
+    output = Path(output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output, dpi=180, bbox_inches="tight")
+    plt.close(figure)
+    return output

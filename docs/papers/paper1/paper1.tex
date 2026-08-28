@@ -31,27 +31,32 @@ delimiter arrives. All assisted conditions share the same typed postfix
 micro-IR, exact-rational engine, resource bounds, and textual reinjection. A
 factorial hard-arithmetic generator crosses four operand widths, four operator
 counts, and three structures, while preserving adversarial non-trigger controls
-and stage-level traces. A one-checkpoint, one-seed XPU pilot produced
-80 generations. On eight arithmetic examples, reflex assistance tied the
-unassisted model at 75.0\% exact match, while explicit-tool and oracle
-conditions reached 87.5\% and 100\%, respectively. The reflex engine was exact
-whenever invoked, but only half of accepted candidates represented the full
-intended expression. This small diagnostic run is not a confirmatory result and
-does not pass the evidence gate for later mechanisms. The expanded interface is
-therefore frozen before an LLM-only adaptive difficulty pilot and a separately
-seeded held-out comparison; no expanded-protocol model outcome is claimed yet.
+and stage-level traces. After baseline-only adaptive selection, a separately
+seeded XPU comparison used 16 arithmetic examples, 12 controls, seven conditions,
+and 196 generations. Exact-match accuracy was 43.8\% for LLM-only, 50.0\% for a
+matched prompt, 62.5\% for explicit tools, 37.5\% for strict reflex, 75.0\% for
+normalized reflex, 12.5\% for calculator blocks, and 87.5\% for oracle selection.
+Normalized reflex gained five paired examples and lost none against LLM-only,
+but the unadjusted two-sided exact McNemar result was $p=0.0625$ over only 16
+pairs. The calculator was exact whenever execution succeeded, and no condition
+falsely intervened on 12 controls. The current result motivates replication of
+surface-normalized reflexes, but it does not establish a general scaling claim
+or pass the evidence gate for later mechanisms.
 \end{abstract}
 
 \section{Status and Scope}
 
-This document is an implemented next-iteration protocol plus the preliminary
-pilot that motivated it, not a completed confirmatory result.
+This document reports an implemented next-iteration protocol, the preliminary
+pilot that motivated it, adaptive calibration, and one held-out comparison.
 The repository contains a dependency-free calculator/runtime path, deterministic
 dataset generation, JSONL traces and summaries, a scripted plumbing check, and
 an optional token-by-token Hugging Face adapter. Scripted checks are marked
 \texttt{empirical: false}; their expected perfect calculator behavior must not
 be cited as model evidence. The XPU pilot reported below is empirical but too
-small for model-family, scaling, or replicated performance claims.
+small for model-family, scaling, or replicated performance claims. The held-out
+run is empirical and protocol-frozen, but it also has one checkpoint and one
+greedy seed; its condition ordering is evidence for replication, not a final
+architecture-level estimate.
 
 Paper 1 asks one question:
 \begin{quote}
@@ -351,7 +356,119 @@ The selection record stores source dataset and prediction hashes and states that
 no assisted outcome was consulted. A separately seeded held-out dataset uses four
 examples per selected cell, cycling ASCII, LaTeX, Unicode, and bracket surfaces,
 plus all 12 adversarial controls. The held-out model run remains ungenerated at
-this protocol-freeze point.
+this protocol-freeze point; the results below were produced only after that
+dataset, selection record, and interface code were committed.
+
+\section{Held-Out XPU Comparison}
+
+\subsection{Setup and end-task result}
+
+The held-out run used Qwen3-0.6B at revision \texttt{c1899de}, PyTorch
+2.13.0+XPU, one greedy generation seed (17), and a uniform 96-token ceiling.
+Four newly generated examples in each of the four frozen cells gave 16
+arithmetic examples; 12 controls were crossed with the same seven conditions.
+All 196 prediction rows report \texttt{empirical: true} and \texttt{device: xpu}.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Held-out exact-match accuracy. Intervals are 95\% Wilson intervals
+over 16 arithmetic examples. Paired gains/losses and unadjusted exact McNemar
+$p$ values compare each condition with LLM-only.}
+\label{tab:heldout-accuracy}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Condition & Accuracy [95\% CI] & Gains--losses & Exact $p$ \\
+\midrule
+LLM only          & 0.438 [0.231, 0.668] & --- & --- \\
+Matched prompt    & 0.500 [0.280, 0.720] & 1--0 & 1.000 \\
+Explicit tool     & 0.625 [0.386, 0.815] & 3--0 & 0.250 \\
+Strict reflex     & 0.375 [0.185, 0.614] & 0--1 & 1.000 \\
+Normalized reflex & 0.750 [0.505, 0.898] & 5--0 & 0.0625 \\
+Calculator block  & 0.125 [0.035, 0.360] & 2--7 & 0.180 \\
+Oracle             & 0.875 [0.640, 0.965] & 7--0 & 0.0156 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Normalized reflex was numerically the strongest non-oracle condition, improving
+by 31.25 percentage points over LLM-only and 12.5 points over explicit tools.
+The five paired gains and zero losses are suggestive but do not reach 0.05 in
+the unadjusted exact test; no multiplicity correction is applied. Strict reflex
+lost one paired example and gained none. The four held-out cells contain only
+four examples each and do not show a stable monotone difficulty interaction:
+normalized-reflex cell accuracies were 1.00, 0.25, 1.00, and 0.75. H1 is
+therefore unsupported for the original strict watcher, while the normalized
+variant is a replication candidate rather than a confirmed claim.
+
+\subsection{Interface decomposition}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Held-out assisted-interface diagnostics over arithmetic examples.
+Selection is correctness conditional on an accepted request; use is conditional
+on successful execution. All conditions had zero false interventions on 12
+controls, and engine correctness was 1.0 whenever executed.}
+\label{tab:heldout-pipeline}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Condition & Exposure & Recognition & Selection & Normalize/execute & Use & Override \\
+\midrule
+Explicit tool      & 0.875 & 1.000 & 1.000 & 0.625 & 1.000 & 0.000 \\
+Strict reflex      & 0.625 & 0.313 & 0.600 & 0.313 & 0.800 & 0.200 \\
+Normalized reflex  & 0.750 & 0.750 & 1.000 & 0.750 & 1.000 & 0.000 \\
+Calculator block   & 0.375 & 1.000 & 1.000 & 0.125 & 1.000 & 0.000 \\
+Oracle             & ---   & 1.000 & 1.000 & 1.000 & 0.875 & 0.125 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Normalized reflex reached and correctly selected the full expression in 12 of
+16 cases; all 12 exact results were reinjected, used, and not overridden. Strict
+reflex executed five candidates, but only three represented the intended full
+expression. Explicit tool calls were recognized in every arithmetic generation,
+but six arguments failed the strict parser, primarily because the model copied
+LaTeX or Unicode notation.
+
+The semantic block result falsifies H3 for the tested zero-shot prompt. All 16
+closing fences were recognized, but 14 blocks contained the literal placeholder
+\texttt{EXPRESSION} or mixed instructions/prose with arithmetic. Only two blocks
+normalized and executed; both engine results were exact and used. Thus the block
+boundary prevented premature execution, but its demonstration-style prompt
+elicited invalid block contents. This is a generation/normalization failure, not
+a calculator or closing-fence detection failure.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{paper1_heldout_interfaces.png}
+\caption{Held-out accuracy (left) and assisted-interface stage decomposition
+(right). Exposure is model-stream exposure and is not applicable to oracle
+priming. Use is conditional on execution, which explains high use despite low
+block normalization.}
+\label{fig:heldout-interfaces}
+\end{figure}
+
+\paragraph{Cost.}
+Mean generated tokens were 43.1 (LLM-only), 46.1 (matched), 19.2 (explicit),
+47.9 (strict), 22.4 (normalized), 32.7 (block), and 15.6 (oracle). Mean wall
+times followed the correctness-first decoder rather than production serving:
+8.0, 8.8, 3.2, 9.6, 4.0, 5.9, and 2.7 seconds, respectively. Normalized reflex
+used fewer delimiter characters than explicit calls, but it did not beat
+explicit tools on every measured cost: explicit generated fewer tokens and was
+faster. H2 is therefore not supported as a quality--cost frontier claim.
+
+\subsection{Evidence-gate decision}
+
+The current decision is \textbf{no-go for Paper 2}. The original strict reflex
+does not improve held-out accuracy, the block interface fails zero-shot content
+elicitation, and the normalized-reflex advantage is unreplicated with
+$p=0.0625$ over 16 pairs. A next Paper 1 replication should hold
+\path{surface_normalizer_v1} fixed, increase examples and generation seeds under
+sampling or add a second checkpoint family, and predeclare normalized reflex
+versus both LLM-only and explicit tool as primary comparisons. Block prompting
+or lightweight training is now eligible for a separate development split, but
+must not be tuned on this held-out set.
 
 \section{Preliminary XPU Pilot}
 
@@ -492,6 +609,23 @@ $env:PYTHONPATH = (Resolve-Path src).Path
   --output-dir artifacts/paper1/xpu_pilot/final
 \end{verbatim}
 
+The held-out comparison and derived analysis use:
+
+\begin{verbatim}
+& $py -m ccpu paper1 run-hf \
+  --dataset artifacts/paper1/hard_heldout_xpu/dataset.jsonl \
+  --config configs/paper1/hard_heldout_xpu.json \
+  --output-dir artifacts/paper1/hard_heldout_xpu/run \
+  --device xpu
+& $py -m ccpu paper1 paired \
+  --dataset artifacts/paper1/hard_heldout_xpu/dataset.jsonl \
+  --predictions artifacts/paper1/hard_heldout_xpu/run/predictions.jsonl \
+  --output artifacts/paper1/hard_heldout_xpu/run/paired_analysis.json
+python -m ccpu paper1 plot-interfaces \
+  --summary artifacts/paper1/hard_heldout_xpu/run/summary.json \
+  --output docs/papers/paper1/paper1_heldout_interfaces.png
+\end{verbatim}
+
 Device selection for \texttt{device: auto} is CUDA, then XPU, then CPU. The
 replay step applies the current frozen evaluator to preserved generations and
 records both the source prediction hash and rescore provenance.
@@ -517,8 +651,13 @@ limited, and code-like or unusual formatting remains an adversarial surface.
 The synthetic task controls arithmetic complexity but not realistic discourse.
 The textual explicit-tool baseline may understate a model's native structured
 function-calling ability. Full-prefix token recomputation overstates runtime
-cost. The preliminary XPU run has one checkpoint, one seed, and eight arithmetic
-examples, so its intervals, cell curves, and condition ordering are unstable.
+cost. The held-out run has one checkpoint, one greedy seed, 16 arithmetic
+examples, and four observations per selected cell. Its intervals remain wide,
+the adaptive bands are coarse, and no architecture or scaling generalization is
+supported. The 12 controls establish no observed false intervention, not a tight
+upper bound on rare false triggers. The zero-shot block prompt included a
+placeholder demonstration that the model often copied literally; changing it
+requires a new development/held-out cycle rather than reinterpretation here.
 Finally, exact calculator output cannot repair an incorrectly copied
 expression, a model that ignores the result, or a task whose premises are wrong.
 
@@ -539,12 +678,16 @@ Paper 1 reduces the cognitive-coprocessor proposal to its smallest credible
 experiment. A character-incremental detector, typed allowlisted micro-IR, exact
 bounded calculator, append-only state, and immediate text reinjection are enough
 to test whether automatic computation can improve an autoregressive stream.
-The implementation is complete at protocol level, and the first XPU pilot
-demonstrates end-to-end generation, intervention, replay, and component scoring.
-It does not show an automatic-assistance gain: reflex accuracy tied LLM only,
-while candidate selection and result use remained imperfect. Model sweeps and
-replicated analysis remain required before any positive or negative architecture
-claim, and the Paper 2 evidence gate remains closed.
+The implementation and one held-out XPU cycle are complete. The original strict
+watcher does not improve accuracy, and the fenced block fails because the model
+usually emits invalid content despite reliable closing-fence recognition.
+Deterministic surface normalization changes the result: normalized reflex is
+numerically strongest among non-oracle interfaces, executes exact full
+expressions in 12 of 16 cases, and improves five paired examples without a loss.
+That result remains just outside an unadjusted 0.05 exact-test threshold and has
+not been replicated across seeds or model families. The appropriate outcome is
+to replicate normalized reflex, redesign the block only on new development data,
+and keep the Paper 2 evidence gate closed.
 
 \begin{thebibliography}{9}
 
