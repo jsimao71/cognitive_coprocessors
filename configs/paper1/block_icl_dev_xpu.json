@@ -1,0 +1,33 @@
+{
+  "schema_version": "ccpu.paper1.config.v2",
+  "dataset": {
+    "mode": "hard_v1",
+    "seed": 424242,
+    "examples_per_cell": 1,
+    "operator_counts": [1, 2, 3, 4],
+    "operand_digits": [1, 2, 3, 4],
+    "structures": ["left_chain", "nested", "multiplication_tree"],
+    "operations": ["+", "-", "*", "/"],
+    "surface_variants": ["ascii", "latex", "unicode", "brackets"],
+    "selected_cells": [
+      {"operator_count": 1, "operand_digits": 1, "structure": "left_chain"},
+      {"operator_count": 2, "operand_digits": 2, "structure": "nested"},
+      {"operator_count": 1, "operand_digits": 3, "structure": "multiplication_tree"},
+      {"operator_count": 1, "operand_digits": 4, "structure": "left_chain"}
+    ],
+    "control_examples": 4,
+    "split": "calculator_block_icl_development"
+  },
+  "seeds": [17],
+  "models": [
+    {
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "max_new_tokens": 72,
+      "dtype": "float16",
+      "device": "xpu",
+      "use_chat_template": true,
+      "enable_thinking": false
+    }
+  ]
+}

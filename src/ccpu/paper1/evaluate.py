@@ -143,6 +143,42 @@ def _group_summary(
     normalization_stage_labels = arithmetic_labels("normalization_succeeded")
     execution_stage_labels = arithmetic_labels("execution_succeeded")
     reinjection_labels = arithmetic_labels("reinjection_succeeded")
+    block_arithmetic = [
+        row for row in arithmetic if bool(row.get("block_protocol_evaluated", False))
+    ]
+    block_controls = [
+        row
+        for row in rows
+        if items[str(row["example_id"])].task_kind == "control"
+        and bool(row.get("block_protocol_evaluated", False))
+    ]
+
+    def block_rate(field: str) -> float | None:
+        if not block_arithmetic:
+            return None
+        return safe_mean(bool(row.get(field, False)) for row in block_arithmetic)
+
+    block_failures = None
+    if block_arithmetic or block_controls:
+        block_failures = {
+            "missing_open": sum(not bool(row.get("block_open")) for row in block_arithmetic),
+            "missing_close": sum(not bool(row.get("block_close")) for row in block_arithmetic),
+            "missing_payload": sum(
+                not bool(row.get("block_payload_present")) for row in block_arithmetic
+            ),
+            "payload_not_exact": sum(
+                not bool(row.get("block_payload_exact")) for row in block_arithmetic
+            ),
+            "payload_not_semantically_equivalent": sum(
+                not bool(row.get("block_payload_semantically_equivalent"))
+                for row in block_arithmetic
+            ),
+            "multiple_blocks": sum(bool(row.get("block_multiple")) for row in block_arithmetic),
+            "execution_failure": sum(
+                not bool(row.get("block_execution")) for row in block_arithmetic
+            ),
+            "false_block_controls": sum(bool(row.get("block_open")) for row in block_controls),
+        }
     return {
         "count": len(rows),
         "arithmetic_count": len(arithmetic),
@@ -183,6 +219,22 @@ def _group_summary(
         "mean_invocation_overhead_chars": safe_mean(
             float(row.get("invocation_overhead_chars", 0)) for row in rows
         ),
+        "block_open_rate": block_rate("block_open"),
+        "block_open_model_rate": block_rate("block_open_model_emitted"),
+        "block_close_rate": block_rate("block_close"),
+        "block_payload_present_rate": block_rate("block_payload_present"),
+        "block_payload_exact_rate": block_rate("block_payload_exact"),
+        "block_payload_semantically_equivalent_rate": block_rate(
+            "block_payload_semantically_equivalent"
+        ),
+        "block_execution_rate": block_rate("block_execution"),
+        "block_multiple_rate": block_rate("block_multiple"),
+        "false_block_rate": (
+            safe_mean(bool(row.get("block_open")) for row in block_controls)
+            if block_controls
+            else None
+        ),
+        "block_failure_counts": block_failures,
     }
 
 

@@ -3,6 +3,8 @@ import json
 
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl
+from ccpu.paper1.cli import _smoke_examples
+from ccpu.paper1.dataset import ArithmeticDatasetConfig, iter_dataset
 
 
 def test_cli_generate_validate_simulate_and_evaluate(tmp_path):
@@ -62,6 +64,24 @@ def test_cli_generate_validate_simulate_and_evaluate(tmp_path):
     assert read_json(run_dir / "summary.json")["empirical"] is False
     assert read_json(run_dir / "manifest.json")["prediction_count"] == 21
     assert read_json(recomputed)["schema_version"] == "ccpu.paper1.evaluation.v1"
+
+
+def test_xpu_smoke_selection_includes_arithmetic_and_controls():
+    examples = list(
+        iter_dataset(
+            ArithmeticDatasetConfig(
+                examples_per_cell=4,
+                operator_counts=(1,),
+                operand_digits=(1,),
+                control_examples=3,
+            )
+        )
+    )
+
+    selected = _smoke_examples(examples)
+
+    assert sum(example.task_kind == "arithmetic" for example in selected) == 4
+    assert sum(example.task_kind == "control" for example in selected) == 2
 
 
 def test_cli_replay_applies_reflex_to_saved_completion(tmp_path):

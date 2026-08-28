@@ -1,0 +1,58 @@
+{
+  "block_failures_sha256": "5a29bd55e3d658d0367a83c2039321981624970bc6381e62ecd067cec341eeec",
+  "dataset_sha256": "01ecb879fef9d525ad549424c83f6784397b71351879a5fea9f482578f5233e6",
+  "empirical": true,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "d3370990c83d7a0f8392e9f06fc9312838c3c582"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 48,
+  "predictions_sha256": "93a2c7e9ca56e53298f56b90cafcf2e43ac53beebb0d70db5e4e44e650cfb5d7",
+  "run_config": {
+    "backend": "huggingface",
+    "conditions": [
+      "calculator_block_icl_a",
+      "calculator_block_icl_b",
+      "calculator_block_icl_c",
+      "calculator_block_icl_d",
+      "calculator_block_icl_e",
+      "calculator_block_icl_f"
+    ],
+    "limit": null,
+    "models": [
+      {
+        "device": "xpu",
+        "dtype": "float16",
+        "enable_thinking": false,
+        "max_new_tokens": 72,
+        "model_id": "Qwen/Qwen3-0.6B",
+        "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "use_chat_template": true
+      }
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_block_icl_prompt": "paper1_calculator_block_icl_v1_developmental",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v2_concise",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seeds": [
+      17
+    ]
+  },
+  "runtime_report_sha256": "63067f18f2bd6c37bd6a18c8edd58769e743cff9699983ad6bef3c93b60267af",
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "summary_sha256": "bbd99c7c209223e749051ced7e6cf6cf620af6a0c5df4d0891af35268aed99f2",
+  "trace_count": 128,
+  "traces_sha256": "971a4f8255979bd97a00a8737a9379dfe3d599db1f7614d84f0501fc64175863"
+}

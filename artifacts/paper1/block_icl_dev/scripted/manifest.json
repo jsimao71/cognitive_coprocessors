@@ -1,0 +1,44 @@
+{
+  "block_failures_sha256": "d4afb389b197a03be3d86b9e5a324805aa6b9c262cac49008b5e4960ffe171ac",
+  "dataset_sha256": "01ecb879fef9d525ad549424c83f6784397b71351879a5fea9f482578f5233e6",
+  "empirical": false,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "d3370990c83d7a0f8392e9f06fc9312838c3c582"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 48,
+  "predictions_sha256": "46fad51d5d8e2ccb7f3c4052d32249584b34b284970a10c1d193ab67a668b3b1",
+  "run_config": {
+    "backend": "scripted_protocol_smoke",
+    "conditions": [
+      "calculator_block_icl_a",
+      "calculator_block_icl_b",
+      "calculator_block_icl_c",
+      "calculator_block_icl_d",
+      "calculator_block_icl_e",
+      "calculator_block_icl_f"
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_block_icl_prompt": "paper1_calculator_block_icl_v1_developmental",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v2_concise",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seed": 17
+  },
+  "runtime_report_sha256": "49d274914f80539eb5c694e685484f031ab71cd7e514f27582ac0a8fcc685a56",
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "summary_sha256": "f5fde16b54c97f3e6b9c954c6a48f684b53cfe18e412786229f49f6a8af61692",
+  "trace_count": 144,
+  "traces_sha256": "56a70ad0cae5345e9da05effb79f198df7335792857f773513c5bd9bbaab6e87"
+}

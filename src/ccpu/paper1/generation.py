@@ -38,8 +38,19 @@ class ScriptedProtocolBackend:
             return f"Calculation: {example.expression} ="
         if condition in {"reflex", "normalized_reflex"}:
             return example.reference_completion
-        if condition == "calculator_block":
+        if condition in {
+            "calculator_block",
+            "calculator_block_icl_a",
+            "calculator_block_icl_b",
+            "calculator_block_icl_c",
+            "calculator_block_icl_d",
+            "calculator_block_icl_g",
+        }:
             return f"```calculator\n{example.expression}\n```"
+        if condition == "calculator_block_icl_e":
+            return f"{example.expression}\n```"
+        if condition == "calculator_block_icl_f":
+            return str(example.expression)
         return f"Calculation withheld for protocol smoke: {example.expression} = [no model answer]"
 
     def generate(
@@ -116,6 +127,9 @@ class HuggingFaceBackend:
         )
         self.model.eval()
         self.device = device
+        self.model_memory_bytes = (
+            int(torch.xpu.memory_allocated()) if device == "xpu" else None
+        )
 
     def generate(
         self,
@@ -159,6 +173,8 @@ class HuggingFaceBackend:
         generated_ids: list[int] = []
         reinjected_tokens = 0
         rendered = ""
+        if self.device == "xpu":
+            torch.xpu.reset_peak_memory_stats()
         started = time.perf_counter_ns()
 
         with torch.no_grad():
@@ -205,6 +221,9 @@ class HuggingFaceBackend:
         rendered_text = self.tokenizer.decode(
             continuation_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False
         )
+        peak_memory_bytes = (
+            int(torch.xpu.max_memory_allocated()) if self.device == "xpu" else None
+        )
         return GenerationResult(
             generated_text=generated_text,
             rendered_text=rendered_text,
@@ -219,5 +238,11 @@ class HuggingFaceBackend:
                 "model_id": self.model_id,
                 "revision": self.config.revision,
                 "device": self.device,
+                "dtype": self.config.dtype,
+                "use_chat_template": self.config.use_chat_template,
+                "used_chat_template": used_chat_template,
+                "enable_thinking": self.config.enable_thinking,
+                "model_memory_bytes": self.model_memory_bytes,
+                "peak_memory_bytes": peak_memory_bytes,
             },
         )

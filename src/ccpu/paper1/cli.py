@@ -27,10 +27,18 @@ from .evaluate import evaluate, paired_comparisons, rescore_endpoint_predictions
 from .experiment import run_huggingface, run_replay, run_scripted
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 from .plot import plot_interface_diagnostics, plot_scaling
-from .prompts import CONDITIONS, PROMPT_VERSION
+from .prompts import (
+    CONDITIONS,
+    CORE_CONDITIONS,
+    ICL_ORDER_CONTROL_PROMPT_VERSION,
+    ICL_PROMPT_VERSION,
+    PROMPT_VERSION,
+)
 
 PROTOCOL_VERSIONS = {
     "prompt": PROMPT_VERSION,
+    "calculator_block_icl_prompt": ICL_PROMPT_VERSION,
+    "calculator_block_icl_order_control_prompt": ICL_ORDER_CONTROL_PROMPT_VERSION,
     "strict_detector": "strict_arithmetic_v1",
     "normalized_detector": "normalized_arithmetic_v1",
     "surface_normalizer": "surface_normalizer_v1",
@@ -42,6 +50,18 @@ PROTOCOL_VERSIONS = {
 
 def _examples(path: str | Path) -> list[ArithmeticExample]:
     return [ArithmeticExample.from_dict(row) for row in read_jsonl(path)]
+
+
+def _smoke_examples(
+    examples: list[ArithmeticExample], *, arithmetic_count: int = 4, control_count: int = 2
+) -> list[ArithmeticExample]:
+    arithmetic = [example for example in examples if example.task_kind == "arithmetic"]
+    controls = [example for example in examples if example.task_kind == "control"]
+    if len(arithmetic) < arithmetic_count or len(controls) < control_count:
+        raise ValueError(
+            f"smoke gate requires {arithmetic_count} arithmetic and {control_count} controls"
+        )
+    return [*arithmetic[:arithmetic_count], *controls[:control_count]]
 
 
 def _write_run(
@@ -60,7 +80,63 @@ def _write_run(
     summary["empirical"] = empirical
     if not empirical:
         summary["warning"] = "Scripted protocol smoke results are not model evidence."
-    write_json(output_dir / "summary.json", summary)
+    summary_path = write_json(output_dir / "summary.json", summary)
+    block_failures_path = write_json(
+        output_dir / "block_failures.json",
+        {
+            "schema_version": "ccpu.paper1.block_failures.v1",
+            "by_run": [
+                {
+                    "model_id": row["model_id"],
+                    "condition": row["condition"],
+                    "seed": row["seed"],
+                    "arithmetic_count": row["arithmetic_count"],
+                    "failure_counts": row["block_failure_counts"],
+                }
+                for row in summary["by_run"]
+                if row.get("block_failure_counts") is not None
+            ],
+        },
+    )
+    runtime_rows = []
+    for model_id in sorted({str(row["model_id"]) for row in predictions}):
+        members = [row for row in predictions if str(row["model_id"]) == model_id]
+        metadata = [dict(row.get("backend_metadata", {})) for row in members]
+        peaks = [int(item["peak_memory_bytes"]) for item in metadata if item.get("peak_memory_bytes")]
+        runtime_rows.append(
+            {
+                "model_id": model_id,
+                "prediction_count": len(members),
+                "devices": sorted({str(item.get("device", "unknown")) for item in metadata}),
+                "dtypes": sorted({str(item.get("dtype", "unknown")) for item in metadata}),
+                "revisions": sorted({str(item.get("revision", "unknown")) for item in metadata}),
+                "chat_template_settings": sorted(
+                    {
+                        (
+                            bool(item.get("use_chat_template", False)),
+                            bool(item.get("used_chat_template", False)),
+                            bool(item.get("enable_thinking", False)),
+                        )
+                        for item in metadata
+                    }
+                ),
+                "wall_time_seconds": sum(int(row.get("wall_time_ns", 0)) for row in members)
+                / 1e9,
+                "model_memory_bytes": next(
+                    (item.get("model_memory_bytes") for item in metadata if item.get("model_memory_bytes")),
+                    None,
+                ),
+                "peak_memory_bytes": max(peaks) if peaks else None,
+            }
+        )
+    runtime_report_path = write_json(
+        output_dir / "runtime_report.json",
+        {
+            "schema_version": "ccpu.paper1.runtime_report.v1",
+            "empirical": empirical,
+            "by_model": runtime_rows,
+        },
+    )
     repository_root = Path(__file__).resolve().parents[3]
     write_json(
         output_dir / "manifest.json",
@@ -71,6 +147,9 @@ def _write_run(
             "dataset_sha256": file_sha256(dataset_path),
             "predictions_sha256": file_sha256(predictions_path),
             "traces_sha256": file_sha256(traces_path),
+            "summary_sha256": file_sha256(summary_path),
+            "block_failures_sha256": file_sha256(block_failures_path),
+            "runtime_report_sha256": file_sha256(runtime_report_path),
             "prediction_count": len(predictions),
             "trace_count": len(traces),
             "run_config": run_config,
@@ -118,7 +197,7 @@ def validate_command(args: argparse.Namespace) -> int:
 
 def simulate_command(args: argparse.Namespace) -> int:
     examples = _examples(args.dataset)
-    conditions = tuple(args.condition or CONDITIONS)
+    conditions = tuple(args.condition or CORE_CONDITIONS)
     predictions, traces = run_scripted(examples, conditions=conditions, seed=args.seed)
     _write_run(
         args.output_dir,
@@ -159,9 +238,13 @@ def hf_command(args: argparse.Namespace) -> int:
     if not model_entries:
         raise ValueError("no matching pinned models in configuration")
     examples = _examples(args.dataset)
-    if args.limit is not None:
+    if args.smoke and args.limit is not None:
+        raise ValueError("--smoke and --limit are mutually exclusive")
+    if args.smoke:
+        examples = _smoke_examples(examples)
+    elif args.limit is not None:
         examples = examples[: args.limit]
-    conditions = tuple(args.condition or CONDITIONS)
+    conditions = tuple(args.condition or CORE_CONDITIONS)
     seeds = tuple(int(seed) for seed in raw_config.get("seeds", (17,)))
     all_predictions: list[dict[str, Any]] = []
     all_traces: list[dict[str, Any]] = []
@@ -180,6 +263,8 @@ def hf_command(args: argparse.Namespace) -> int:
                 device=str(args.device or entry.get("device", "auto")),
                 dtype=str(entry.get("dtype", "auto")),
                 trust_remote_code=bool(entry.get("trust_remote_code", False)),
+                use_chat_template=bool(entry.get("use_chat_template", True)),
+                enable_thinking=bool(entry.get("enable_thinking", False)),
             )
         )
         predictions, traces = run_huggingface(examples, backend, conditions=conditions, seeds=seeds)
@@ -198,6 +283,7 @@ def hf_command(args: argparse.Namespace) -> int:
             "conditions": conditions,
             "seeds": seeds,
             "limit": args.limit,
+            "smoke_gate": args.smoke,
         },
     )
     print(f"completed {len(all_predictions)} Hugging Face generations -> {args.output_dir}")
@@ -306,6 +392,11 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     hf.add_argument("--condition", action="append", choices=CONDITIONS)
     hf.add_argument("--device")
     hf.add_argument("--limit", type=int)
+    hf.add_argument(
+        "--smoke",
+        action="store_true",
+        help="run the XPU smoke gate on four arithmetic examples and two controls",
+    )
     hf.set_defaults(handler=hf_command)
 
     evaluation = commands.add_parser("evaluate", help="recompute summary metrics")

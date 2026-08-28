@@ -67,6 +67,34 @@ Minimal empirical proof: a calculator watches generation for strict arithmetic s
 ## Evidence gate
 Do not import later-paper mechanisms merely because they are attractive. Progress to tighter coupling only after a reproducible regime shows improved reliability, efficiency, or scaling, or after a negative result clearly motivates the next mechanism.
 
+## ICL and adaptation iteration
+
+The current developmental sequence is ICL, then matched multi-model diagnosis,
+then an explicit LoRA decision. Do not train an adapter before the interface gap
+is demonstrated across capability levels.
+
+- Preserve the original seven-condition prompt version and `hard_heldout_xpu`
+  artifacts.
+- Endpoint rescoring uses a parallel condition-independent label and never
+  replaces `predicted_answer` or the reported summary.
+- Calculator-block evaluation decomposes opening, closing, payload presence,
+  exact copying, semantic equivalence, execution, result use, and false blocks.
+- ICL-G (`paper1_calculator_block_icl_v2_order_control`) is the frozen generic
+  multi-model prompt. It places a negative demonstration before a final positive
+  calculator-block demonstration.
+- On the four-arithmetic/four-control Qwen3-0.6B developmental set, ICL-G had
+  100% semantically equivalent payloads, execution, final accuracy, and result
+  use with zero false blocks. Verbatim payload exactness was 0% because redundant
+  parentheses were removed. This passes the developmental gate but is not
+  confirmatory evidence.
+- Use `--smoke` before every larger XPU run; it selects four arithmetic examples
+  and two controls and records device, dtype, revision, chat settings, time, and
+  memory.
+- Authorization-gated Llama and Gemma checkpoints remain skipped until a
+  Hugging Face token with accepted licenses is available.
+- The 196-row phase remains developmental. Freeze a new untouched and powered
+  confirmatory set only after model/interface development ends.
+
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.
 

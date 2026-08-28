@@ -1,0 +1,82 @@
+{
+  "schema_version": "ccpu.paper1.config.v2",
+  "dataset": {
+    "mode": "hard_v1",
+    "seed": 16180,
+    "examples_per_cell": 4,
+    "operator_counts": [1, 2, 3, 4],
+    "operand_digits": [1, 2, 3, 4],
+    "structures": ["left_chain", "nested", "multiplication_tree"],
+    "operations": ["+", "-", "*", "/"],
+    "surface_variants": ["ascii", "latex", "unicode", "brackets"],
+    "selected_cells": [
+      {"operator_count": 1, "operand_digits": 1, "structure": "left_chain"},
+      {"operator_count": 2, "operand_digits": 2, "structure": "nested"},
+      {"operator_count": 1, "operand_digits": 3, "structure": "multiplication_tree"},
+      {"operator_count": 1, "operand_digits": 4, "structure": "left_chain"}
+    ],
+    "control_examples": 12,
+    "split": "heldout_confirmatory"
+  },
+  "seeds": [17],
+  "models": [
+    {
+      "model_id": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "max_new_tokens": 96,
+      "dtype": "float16",
+      "device": "xpu",
+      "use_chat_template": true,
+      "enable_thinking": false
+    },
+    {
+      "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+      "revision": "9213176726f574b556790deb65791e0c5aa438b6",
+      "max_new_tokens": 96,
+      "dtype": "float16",
+      "device": "xpu",
+      "use_chat_template": true,
+      "enable_thinking": false,
+      "authorization": "manual_huggingface_gate"
+    },
+    {
+      "model_id": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "max_new_tokens": 96,
+      "dtype": "float16",
+      "device": "xpu",
+      "use_chat_template": true,
+      "enable_thinking": false,
+      "authorization": "manual_huggingface_gate"
+    },
+    {
+      "model_id": "meta-llama/Llama-3.2-3B-Instruct",
+      "revision": "0cb88a4f764b7a12671c53f0838cd831a0843b95",
+      "max_new_tokens": 96,
+      "dtype": "float16",
+      "device": "xpu",
+      "use_chat_template": true,
+      "enable_thinking": false,
+      "authorization": "manual_huggingface_gate"
+    },
+    {
+      "model_id": "google/gemma-2-2b-it",
+      "revision": "299a8560bedf22ed1c72a8a11e7dce4a7f9f51f8",
+      "max_new_tokens": 96,
+      "dtype": "float16",
+      "device": "xpu",
+      "use_chat_template": true,
+      "enable_thinking": false,
+      "authorization": "manual_huggingface_gate"
+    },
+    {
+      "model_id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "max_new_tokens": 96,
+      "dtype": "float16",
+      "device": "xpu",
+      "use_chat_template": true,
+      "enable_thinking": false
+    }
+  ]
+}
