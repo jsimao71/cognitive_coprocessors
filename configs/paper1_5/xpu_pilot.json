@@ -1,0 +1,60 @@
+{
+  "schema_version": "ccpu.paper1_5.config.v1",
+  "seed": 17,
+  "model": {
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "max_new_tokens": 10,
+    "dtype": "float16",
+    "device": "auto"
+  },
+  "source": {
+    "source_id": "atlas-controlled-registry",
+    "version": "2026.08.1",
+    "records": [
+      {"record_id":"r01","entity":"France","attribute":"capital","value":"Paris","valid_from":"1900-01-01","valid_to":"2025-12-31"},
+      {"record_id":"r02","entity":"France","attribute":"capital","value":"Lyon","valid_from":"2026-01-01"},
+      {"record_id":"r03","entity":"gold","attribute":"symbol","value":"Au","valid_from":"1900-01-01","valid_to":"2025-12-31"},
+      {"record_id":"r04","entity":"gold","attribute":"symbol","value":"Gd","valid_from":"2026-01-01"},
+      {"record_id":"r05","entity":"Japan","attribute":"capital","value":"Tokyo","valid_from":"1900-01-01","valid_to":"2025-12-31"},
+      {"record_id":"r06","entity":"Japan","attribute":"capital","value":"Osaka","valid_from":"2026-01-01"},
+      {"record_id":"r07","entity":"water","attribute":"formula","value":"H2O","valid_from":"1900-01-01","valid_to":"2025-12-31"},
+      {"record_id":"r08","entity":"water","attribute":"formula","value":"H3O","valid_from":"2026-01-01"},
+      {"record_id":"r09","entity":"Zephyr Station","attribute":"hub code","value":"NARU-7","valid_from":"2026-01-01"},
+      {"record_id":"r10","entity":"Orchid Fleet","attribute":"signal color","value":"ochre","valid_from":"2026-01-01"},
+      {"record_id":"r11","entity":"Kestrel Archive","attribute":"door word","value":"VELIN","valid_from":"2026-01-01"},
+      {"record_id":"r12","entity":"Morrow Lab","attribute":"bay number","value":"47-Q","valid_from":"2026-01-01"},
+      {"record_id":"r13","entity":"France standard","attribute":"capital","value":"Paris","valid_from":"1900-01-01"},
+      {"record_id":"r14","entity":"Japan standard","attribute":"capital","value":"Tokyo","valid_from":"1900-01-01"},
+      {"record_id":"r15","entity":"electric current","attribute":"SI unit","value":"ampere","valid_from":"1900-01-01"},
+      {"record_id":"r16","entity":"red planet","attribute":"name","value":"Mars","valid_from":"1900-01-01"},
+      {"record_id":"r17","entity":"Iris Relay","attribute":"channel","value":"blue-9","valid_from":"2026-01-01"},
+      {"record_id":"r18","entity":"Nimbus Vault","attribute":"key word","value":"TAVEN","valid_from":"2026-01-01"},
+      {"record_id":"r19","entity":"Delta Council","attribute":"chair","value":"Mira Sol","valid_from":"2026-01-01"},
+      {"record_id":"r20","entity":"Delta Council","attribute":"chair","value":"Ivo Ren","valid_from":"2026-01-01"},
+      {"record_id":"r21","entity":"Lost Beacon","attribute":"frequency","value":"none","valid_from":"2026-01-01","available":false}
+    ]
+  },
+  "examples": [
+    {"example_id":"dev-stable-france","split":"dev","question":"What is the standard capital of France?","answer":"Paris","entity":"France standard","attribute":"capital","as_of":"2026-08-01","evidence_required":false,"category":"stable_fact"},
+    {"example_id":"dev-copy-nemi","split":"dev","question":"The card explicitly says code QZ-NEMI-41. Repeat only that code.","answer":"QZ-NEMI-41","entity":"prompt card","attribute":"code","as_of":"2026-08-01","evidence_required":false,"category":"prompt_contained"},
+    {"example_id":"dev-stale-france","split":"dev","question":"According to Atlas Registry version 2026, what is France's currently designated capital?","answer":"Lyon","entity":"France","attribute":"capital","as_of":"2026-08-01","evidence_required":true,"category":"confident_stale"},
+    {"example_id":"dev-stale-gold","split":"dev","question":"In the 2026 Atlas Registry, what symbol is currently assigned to gold?","answer":"Gd","entity":"gold","attribute":"symbol","as_of":"2026-08-01","evidence_required":true,"category":"confident_stale"},
+    {"example_id":"dev-zephyr","split":"dev","question":"What is the latest hub code assigned to Zephyr Station in the Atlas Registry?","answer":"NARU-7","entity":"Zephyr Station","attribute":"hub code","as_of":"2026-08-01","evidence_required":true,"category":"source_dependent"},
+    {"example_id":"dev-orchid","split":"dev","question":"As of 2026, which signal color is assigned to the Orchid Fleet?","answer":"ochre","entity":"Orchid Fleet","attribute":"signal color","as_of":"2026-08-01","evidence_required":true,"category":"source_dependent"},
+    {"example_id":"dev-copy-ravu","split":"dev","question":"The label explicitly gives identifier XR-RAVU-903. Return only the identifier.","answer":"XR-RAVU-903","entity":"prompt label","attribute":"identifier","as_of":"2026-08-01","evidence_required":false,"category":"prompt_contained"},
+    {"example_id":"dev-current-unit","split":"dev","question":"What is the SI unit of electric current?","answer":"ampere","entity":"electric current","attribute":"SI unit","as_of":"2026-08-01","evidence_required":false,"category":"semantic_distractor"},
+    {"example_id":"test-stable-japan","split":"test","question":"What is the standard capital of Japan?","answer":"Tokyo","entity":"Japan standard","attribute":"capital","as_of":"2026-08-01","evidence_required":false,"category":"stable_fact"},
+    {"example_id":"test-stable-mars","split":"test","question":"Which planet is commonly called the red planet?","answer":"Mars","entity":"red planet","attribute":"name","as_of":"2026-08-01","evidence_required":false,"category":"stable_fact"},
+    {"example_id":"test-copy-selu","split":"test","question":"The ticket explicitly states access word BK-SELU-582. Repeat only the access word.","answer":"BK-SELU-582","entity":"prompt ticket","attribute":"access word","as_of":"2026-08-01","evidence_required":false,"category":"prompt_contained"},
+    {"example_id":"test-current-unit","split":"test","question":"Name the SI unit used to measure electric current.","answer":"ampere","entity":"electric current","attribute":"SI unit","as_of":"2026-08-01","evidence_required":false,"category":"semantic_distractor"},
+    {"example_id":"test-stale-japan","split":"test","question":"According to Atlas Registry version 2026, what is Japan's currently designated capital?","answer":"Osaka","entity":"Japan","attribute":"capital","as_of":"2026-08-01","evidence_required":true,"category":"confident_stale"},
+    {"example_id":"test-stale-water","split":"test","question":"In the 2026 Atlas Registry, what formula is currently assigned to water?","answer":"H3O","entity":"water","attribute":"formula","as_of":"2026-08-01","evidence_required":true,"category":"confident_stale"},
+    {"example_id":"test-kestrel","split":"test","question":"What is the latest door word for Kestrel Archive in the Atlas Registry?","answer":"VELIN","entity":"Kestrel Archive","attribute":"door word","as_of":"2026-08-01","evidence_required":true,"category":"source_dependent"},
+    {"example_id":"test-morrow","split":"test","question":"As of 2026, which bay number is assigned to Morrow Lab?","answer":"47-Q","entity":"Morrow Lab","attribute":"bay number","as_of":"2026-08-01","evidence_required":true,"category":"source_dependent"},
+    {"example_id":"test-iris","split":"test","question":"In the current Atlas Registry, what channel is assigned to Iris Relay?","answer":"blue-9","entity":"Iris Relay","attribute":"channel","as_of":"2026-08-01","evidence_required":true,"category":"source_dependent"},
+    {"example_id":"test-nimbus","split":"test","question":"What is the 2026 registry key word for Nimbus Vault?","answer":"TAVEN","entity":"Nimbus Vault","attribute":"key word","as_of":"2026-08-01","evidence_required":true,"category":"source_dependent"},
+    {"example_id":"test-conflict","split":"test","question":"Who is the current chair of Delta Council according to the Atlas Registry?","answer":"ABSTAIN","entity":"Delta Council","attribute":"chair","as_of":"2026-08-01","evidence_required":true,"category":"source_conflict"},
+    {"example_id":"test-unavailable","split":"test","question":"What is the latest frequency assigned to Lost Beacon?","answer":"ABSTAIN","entity":"Lost Beacon","attribute":"frequency","as_of":"2026-08-01","evidence_required":true,"category":"unavailable"}
+  ]
+}

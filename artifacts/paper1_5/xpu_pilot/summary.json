@@ -1,0 +1,573 @@
+{
+  "all_four_quadrants_observed": true,
+  "by_condition": [
+    {
+      "accuracy": 0.25,
+      "accuracy_ci95": [
+        0.08894166839405476,
+        0.5323053349335656
+      ],
+      "condition": "anti_hallucination",
+      "confident_hallucination_catch_rate": 0.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 0.0,
+      "mean_generated_tokens": 4.416666666666667,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 4.416666666666667,
+      "mean_wall_time_ms": 687.476675,
+      "retrieval": {
+        "false_intervention_rate": 0.0,
+        "fn": 8,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "tn": 4,
+        "tp": 0
+      },
+      "retrieval_rate": 0.0,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 0.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 0.0,
+        "low_confidence__low_risk": 0.0
+      },
+      "unsupported_claim_rate": 0.75
+    },
+    {
+      "accuracy": 0.5833333333333334,
+      "accuracy_ci95": [
+        0.3195113125495498,
+        0.8067396863412434
+      ],
+      "condition": "confidence_and_semantic",
+      "confident_hallucination_catch_rate": 0.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 0.0,
+      "mean_generated_tokens": 9.666666666666666,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 9.666666666666666,
+      "mean_wall_time_ms": 1509.0104166666667,
+      "retrieval": {
+        "false_intervention_rate": 0.0,
+        "fn": 1,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.875,
+        "tn": 4,
+        "tp": 7
+      },
+      "retrieval_rate": 0.5833333333333334,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 0.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 1.0,
+        "low_confidence__low_risk": 0.0
+      },
+      "unsupported_claim_rate": 0.25
+    },
+    {
+      "accuracy": 0.9166666666666666,
+      "accuracy_ci95": [
+        0.6461200888588832,
+        0.9851349055950829
+      ],
+      "condition": "confidence_or_semantic",
+      "confident_hallucination_catch_rate": 1.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 1.0,
+      "mean_generated_tokens": 10.75,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 10.75,
+      "mean_wall_time_ms": 1691.633625,
+      "retrieval": {
+        "false_intervention_rate": 0.75,
+        "fn": 0,
+        "fp": 3,
+        "precision": 0.7272727272727273,
+        "recall": 1.0,
+        "tn": 1,
+        "tp": 8
+      },
+      "retrieval_rate": 0.9166666666666666,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 1.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 1.0,
+        "low_confidence__low_risk": 1.0
+      },
+      "unsupported_claim_rate": 0.125
+    },
+    {
+      "accuracy": 0.5,
+      "accuracy_ci95": [
+        0.2537815976337061,
+        0.7462184023662939
+      ],
+      "condition": "explicit_retrieval",
+      "confident_hallucination_catch_rate": 1.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 0.6666666666666666,
+      "mean_generated_tokens": 12.666666666666666,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 12.666666666666666,
+      "mean_wall_time_ms": 2010.512975,
+      "retrieval": {
+        "false_intervention_rate": 0.5,
+        "fn": 3,
+        "fp": 2,
+        "precision": 0.7142857142857143,
+        "recall": 0.625,
+        "tn": 2,
+        "tp": 5
+      },
+      "retrieval_rate": 0.5833333333333334,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 1.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 0.5714285714285714,
+        "low_confidence__low_risk": 0.6666666666666666
+      },
+      "unsupported_claim_rate": 0.5
+    },
+    {
+      "accuracy": 0.8333333333333334,
+      "accuracy_ci95": [
+        0.5519691377470267,
+        0.9530348578161462
+      ],
+      "condition": "flare_like",
+      "confident_hallucination_catch_rate": 0.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 1.0,
+      "mean_generated_tokens": 10.416666666666666,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 10.416666666666666,
+      "mean_wall_time_ms": 1634.071225,
+      "retrieval": {
+        "false_intervention_rate": 0.75,
+        "fn": 1,
+        "fp": 3,
+        "precision": 0.7,
+        "recall": 0.875,
+        "tn": 1,
+        "tp": 7
+      },
+      "retrieval_rate": 0.8333333333333334,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 0.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 1.0,
+        "low_confidence__low_risk": 1.0
+      },
+      "unsupported_claim_rate": 0.25
+    },
+    {
+      "accuracy": 0.08333333333333333,
+      "accuracy_ci95": [
+        0.014865094404917123,
+        0.3538799111411169
+      ],
+      "condition": "llm_only",
+      "confident_hallucination_catch_rate": 0.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 0.0,
+      "mean_generated_tokens": 6.916666666666667,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 6.916666666666667,
+      "mean_wall_time_ms": 1030.805425,
+      "retrieval": {
+        "false_intervention_rate": 0.0,
+        "fn": 8,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "tn": 4,
+        "tp": 0
+      },
+      "retrieval_rate": 0.0,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 0.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 0.0,
+        "low_confidence__low_risk": 0.0
+      },
+      "unsupported_claim_rate": 1.0
+    },
+    {
+      "accuracy": 0.6666666666666666,
+      "accuracy_ci95": [
+        0.39062208887279953,
+        0.8618799089087867
+      ],
+      "condition": "oracle",
+      "confident_hallucination_catch_rate": 1.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 0.0,
+      "mean_generated_tokens": 10.0,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 10.0,
+      "mean_wall_time_ms": 1566.5728166666668,
+      "retrieval": {
+        "false_intervention_rate": 0.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 4,
+        "tp": 8
+      },
+      "retrieval_rate": 0.6666666666666666,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 1.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 1.0,
+        "low_confidence__low_risk": 0.0
+      },
+      "unsupported_claim_rate": 0.125
+    },
+    {
+      "accuracy": 0.16666666666666666,
+      "accuracy_ci95": [
+        0.046965142183853836,
+        0.44803086225297334
+      ],
+      "condition": "retrospective",
+      "confident_hallucination_catch_rate": 0.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 0.0,
+      "mean_generated_tokens": 11.75,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 11.75,
+      "mean_wall_time_ms": 1887.7144083333333,
+      "retrieval": {
+        "false_intervention_rate": 0.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 4,
+        "tp": 8
+      },
+      "retrieval_rate": 0.6666666666666666,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 1.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 1.0,
+        "low_confidence__low_risk": 0.0
+      },
+      "unsupported_claim_rate": 0.875
+    },
+    {
+      "accuracy": 0.6666666666666666,
+      "accuracy_ci95": [
+        0.39062208887279953,
+        0.8618799089087867
+      ],
+      "condition": "semantic",
+      "confident_hallucination_catch_rate": 1.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 0.0,
+      "mean_generated_tokens": 10.0,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 10.0,
+      "mean_wall_time_ms": 1566.5728166666668,
+      "retrieval": {
+        "false_intervention_rate": 0.0,
+        "fn": 0,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "tn": 4,
+        "tp": 8
+      },
+      "retrieval_rate": 0.6666666666666666,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 1.0,
+        "high_confidence__low_risk": 0.0,
+        "low_confidence__high_risk": 1.0,
+        "low_confidence__low_risk": 0.0
+      },
+      "unsupported_claim_rate": 0.125
+    },
+    {
+      "accuracy": 0.9166666666666666,
+      "accuracy_ci95": [
+        0.6461200888588832,
+        0.9851349055950829
+      ],
+      "condition": "upfront_rag",
+      "confident_hallucination_catch_rate": 1.0,
+      "confident_hallucination_count": 1,
+      "count": 12,
+      "low_confidence_no_deficit_false_retrieval": 1.0,
+      "mean_generated_tokens": 4.583333333333333,
+      "mean_minimum_token_probability": 0.3803587034344673,
+      "mean_model_calls": 4.583333333333333,
+      "mean_wall_time_ms": 795.4048666666666,
+      "retrieval": {
+        "false_intervention_rate": 1.0,
+        "fn": 0,
+        "fp": 4,
+        "precision": 0.6666666666666666,
+        "recall": 1.0,
+        "tn": 0,
+        "tp": 8
+      },
+      "retrieval_rate": 1.0,
+      "retrieval_rate_by_quadrant": {
+        "high_confidence__high_risk": 1.0,
+        "high_confidence__low_risk": 1.0,
+        "low_confidence__high_risk": 1.0,
+        "low_confidence__low_risk": 1.0
+      },
+      "unsupported_claim_rate": 0.125
+    }
+  ],
+  "conditions": 10,
+  "confidence_threshold": 0.43800610303878784,
+  "empirical": true,
+  "observed_quadrants": [
+    "high_confidence__high_risk",
+    "high_confidence__low_risk",
+    "low_confidence__high_risk",
+    "low_confidence__low_risk"
+  ],
+  "pareto_frontiers": {
+    "confidence_or_semantic": [
+      {
+        "accuracy": 0.6666666666666666,
+        "retrieval_rate": 0.6666666666666666,
+        "threshold": 0.0
+      },
+      {
+        "accuracy": 0.75,
+        "retrieval_rate": 0.75,
+        "threshold": 0.25580978393554693
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.28102770447731024
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 0.9166666666666666,
+        "threshold": 0.38492769002914434
+      }
+    ],
+    "flare_like": [
+      {
+        "accuracy": 0.08333333333333333,
+        "retrieval_rate": 0.0,
+        "threshold": 0.0
+      },
+      {
+        "accuracy": 0.16666666666666666,
+        "retrieval_rate": 0.08333333333333333,
+        "threshold": 0.16891427338123324
+      },
+      {
+        "accuracy": 0.25,
+        "retrieval_rate": 0.16666666666666666,
+        "threshold": 0.18854331970214847
+      },
+      {
+        "accuracy": 0.3333333333333333,
+        "retrieval_rate": 0.25,
+        "threshold": 0.23541586101055148
+      },
+      {
+        "accuracy": 0.4166666666666667,
+        "retrieval_rate": 0.3333333333333333,
+        "threshold": 0.25580978393554693
+      },
+      {
+        "accuracy": 0.5,
+        "retrieval_rate": 0.4166666666666667,
+        "threshold": 0.28102770447731024
+      },
+      {
+        "accuracy": 0.5833333333333334,
+        "retrieval_rate": 0.5833333333333334,
+        "threshold": 0.3266013860702515
+      },
+      {
+        "accuracy": 0.6666666666666666,
+        "retrieval_rate": 0.6666666666666666,
+        "threshold": 0.3594005107879639
+      },
+      {
+        "accuracy": 0.75,
+        "retrieval_rate": 0.75,
+        "threshold": 0.3703231811523438
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.38492769002914434
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 0.9166666666666666,
+        "threshold": 0.6863809823989869
+      }
+    ]
+  },
+  "schema_version": "ccpu.paper1_5.evaluation.v1",
+  "test_count": 12,
+  "threshold_sweeps": {
+    "confidence_or_semantic": [
+      {
+        "accuracy": 0.6666666666666666,
+        "retrieval_rate": 0.6666666666666666,
+        "threshold": 0.0
+      },
+      {
+        "accuracy": 0.6666666666666666,
+        "retrieval_rate": 0.6666666666666666,
+        "threshold": 0.16891427338123324
+      },
+      {
+        "accuracy": 0.6666666666666666,
+        "retrieval_rate": 0.6666666666666666,
+        "threshold": 0.18854331970214847
+      },
+      {
+        "accuracy": 0.6666666666666666,
+        "retrieval_rate": 0.6666666666666666,
+        "threshold": 0.23541586101055148
+      },
+      {
+        "accuracy": 0.75,
+        "retrieval_rate": 0.75,
+        "threshold": 0.25580978393554693
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.28102770447731024
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.3074283599853516
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.3266013860702515
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.3594005107879639
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.3703231811523438
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 0.9166666666666666,
+        "threshold": 0.38492769002914434
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 0.9166666666666666,
+        "threshold": 0.6863809823989869
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 1.0,
+        "threshold": 0.999531388282776
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 1.0,
+        "threshold": 1.0
+      }
+    ],
+    "flare_like": [
+      {
+        "accuracy": 0.08333333333333333,
+        "retrieval_rate": 0.0,
+        "threshold": 0.0
+      },
+      {
+        "accuracy": 0.16666666666666666,
+        "retrieval_rate": 0.08333333333333333,
+        "threshold": 0.16891427338123324
+      },
+      {
+        "accuracy": 0.25,
+        "retrieval_rate": 0.16666666666666666,
+        "threshold": 0.18854331970214847
+      },
+      {
+        "accuracy": 0.3333333333333333,
+        "retrieval_rate": 0.25,
+        "threshold": 0.23541586101055148
+      },
+      {
+        "accuracy": 0.4166666666666667,
+        "retrieval_rate": 0.3333333333333333,
+        "threshold": 0.25580978393554693
+      },
+      {
+        "accuracy": 0.5,
+        "retrieval_rate": 0.4166666666666667,
+        "threshold": 0.28102770447731024
+      },
+      {
+        "accuracy": 0.5,
+        "retrieval_rate": 0.5,
+        "threshold": 0.3074283599853516
+      },
+      {
+        "accuracy": 0.5833333333333334,
+        "retrieval_rate": 0.5833333333333334,
+        "threshold": 0.3266013860702515
+      },
+      {
+        "accuracy": 0.6666666666666666,
+        "retrieval_rate": 0.6666666666666666,
+        "threshold": 0.3594005107879639
+      },
+      {
+        "accuracy": 0.75,
+        "retrieval_rate": 0.75,
+        "threshold": 0.3703231811523438
+      },
+      {
+        "accuracy": 0.8333333333333334,
+        "retrieval_rate": 0.8333333333333334,
+        "threshold": 0.38492769002914434
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 0.9166666666666666,
+        "threshold": 0.6863809823989869
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 1.0,
+        "threshold": 0.999531388282776
+      },
+      {
+        "accuracy": 0.9166666666666666,
+        "retrieval_rate": 1.0,
+        "threshold": 1.0
+      }
+    ]
+  }
+}

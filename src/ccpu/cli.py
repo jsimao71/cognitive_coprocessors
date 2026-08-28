@@ -5,12 +5,14 @@ from __future__ import annotations
 import argparse
 
 from .paper1.cli import add_commands as add_paper1_commands
+from .paper1_5.cli import add_commands as add_paper1_5_commands
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ccpu")
     papers = parser.add_subparsers(dest="paper", required=True)
     add_paper1_commands(papers)
+    add_paper1_5_commands(papers)
     return parser
 
 

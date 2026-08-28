@@ -46,3 +46,20 @@ $env:PYTHONPATH = (Resolve-Path src).Path
 
 For `device: auto`, the adapter selects CUDA, then XPU, then CPU. Replay preserves the original
 backend metadata and records the source prediction hash plus evaluator provenance.
+
+## Paper 1.5 controlled retrieval pilot
+
+Paper 1.5 measures checkpoint confidence and semantic epistemic risk separately against one
+versioned fact store. The current XPU run is a developmental pilot, not held-out evidence:
+
+```powershell
+python -m ccpu paper1.5 validate --config configs/paper1_5/xpu_pilot.json
+$py = 'C:\Users\j.simao\.venvs\modal-llm-xpu\Scripts\python.exe'
+$env:PYTHONPATH = (Resolve-Path src).Path
+& $py -m ccpu paper1.5 run-hf --config configs/paper1_5/xpu_pilot.json --output-dir artifacts/paper1_5/xpu_pilot
+python -m ccpu paper1.5 plot --summary artifacts/paper1_5/xpu_pilot/summary.json --output docs/papers/paper1_5/paper1_5_xpu_pilot.png
+```
+
+The run writes the measured token probabilities, fitted threshold, typed source requests and
+statuses, raw explicit-retrieval forecasts, ten-condition predictions, threshold sweeps, Pareto
+frontiers, hashes, and environment provenance.

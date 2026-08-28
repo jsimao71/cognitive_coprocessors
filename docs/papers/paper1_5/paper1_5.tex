@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,booktabs,hyperref}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,graphicx,hyperref}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \title{Semantic Epistemic Risk versus Confidence-Based Active Retrieval During Generation}
 \author{Working Draft}\date{August 2026}
 \begin{document}\maketitle
@@ -14,7 +15,13 @@ stale, source-dependent, or otherwise unsupported imminent commitments. The
 experiment measures confidence on the actual checkpoint and deliberately
 populates all four confidence--risk regimes. Any contribution is evidence that
 semantic risk catches needs missed by uncertainty at competitive cost, not the
-idea of generation-time retrieval itself.
+idea of generation-time retrieval itself. A developmental Qwen3-0.6B XPU pilot
+populates all four measured quadrants. On 12 nominal test examples, confidence
+OR semantic retrieval reaches 91.7\% accuracy at a 91.7\% retrieval rate,
+versus 83.3\% at 83.3\% for FLARE-like retrieval. The difference is one
+confident stale case. Because trigger and prompt policies were revised after
+inspecting this pilot, it is protocol-development evidence, not a held-out
+performance claim.
 \end{abstract}
 
 \section{Research Question}
@@ -22,6 +29,16 @@ When confidence and epistemic risk are measured separately, does semantic
 risk-triggered retrieval improve the unsupported-claim--cost frontier over
 FLARE-like confidence triggering, model-only generation, upfront RAG, and
 explicit search/tool calling?
+
+\section{Status and Claim Discipline}
+
+The source, benchmark, checkpoint confidence probe, ten conditions, typed
+retrieval path, traces, summaries, threshold sweeps, and XPU pilot are
+implemented. The pilot was used to debug the confidence objective and evidence
+materializer. Consequently its \texttt{test} split is an organizational split,
+not untouched confirmatory data. We report it to expose mechanism behavior and
+failure modes. A claim that semantic risk generally improves retrieval requires
+a frozen replication on new examples, seeds, checkpoints, and source designs.
 
 \section{Mechanism}
 \[
@@ -37,8 +54,31 @@ continues with evidence. We report every simplification relative to canonical
 FLARE. The semantic condition uses only transparent lexical, syntactic, entity,
 temporal, freshness, and source-dependence rules.
 
+\subsection{FLARE-like implementation and simplifications}
+
+Direct FLARE temporarily generates the next sentence, retrieves if any token
+probability is below a threshold, formulates a query from that predicted
+sentence (optionally masking uncertain spans), discards the forecast, and
+regenerates with retrieved documents \cite{flare}. Our controller preserves
+that causal order but replaces each long-form sentence with one short answer
+span. It records every greedy token probability, triggers on the minimum, places
+the question and forecast in a typed request, discards the forecast when
+triggered, and regenerates from compact evidence. The controlled retriever uses
+the request's entity and attribute rather than BM25; there is one retrieval
+opportunity, no low-confidence masking or question-generation model, and no
+iterative paragraph generation. It is therefore a FLARE-like diagnostic, not a
+reproduction of FLARE's long-form system.
+
 \section{Single Controlled Source}
-Use a versioned fact store or relational database as the primary source. It must contain stable facts, changed/recent facts, unavailable facts, contradictory records, plausible distractors, and facts whose relevance becomes apparent only after intermediate reasoning. Web retrieval may be used only as a secondary ecological demonstration.
+The implemented source is \texttt{atlas-controlled-registry@2026.08.1}. Its
+records have stable IDs and validity intervals. It contains stable facts,
+superseded familiar facts, unfamiliar current assignments, an unavailable
+record, and a conflicting pair. A typed request carries entity, attribute,
+as-of date, forecast, candidate answer, source version, and resource bounds.
+Results are \textsc{supported}, \textsc{contradicted}, \textsc{unverified},
+\textsc{stale}, \textsc{ambiguous}, or \textsc{conflict}, with record and source
+provenance. Retrieval never executes generated code and returns at most eight
+records and 512 evidence characters.
 
 \section{Trigger Design}
 Paper 1.5 permits only transparent, non-learned triggers:
@@ -48,6 +88,10 @@ Paper 1.5 permits only transparent, non-learned triggers:
 \item temporal expressions;
 \item narrow sentence-prefix templates indicating an imminent factual value.
 \end{itemize}
+The pilot rules match freshness, registry, assignment, source-dependence, and
+year cues, with an explicit exception for ``electric current.'' They do not
+contain answer values. Their narrow synthetic coverage is a limitation, not a
+claim of general semantic-risk understanding.
 
 \section{Measured Confidence--Risk Design}
 Neural uncertainty is not an evidence-need label. Examples are assigned only
@@ -67,6 +111,14 @@ Low & High & both controllers should retrieve \\
 Thresholds are fit on development data and swept at evaluation; quadrant labels
 must not be assigned from researcher intuition.
 
+For the pilot, confidence is the minimum greedy probability among tokens in the
+forecast span. The development threshold maximizes risk-detection F1 minus
+$0.25$ times retrieval rate; the fitted value is 0.438. The machine-readable
+summary also sweeps every observed test probability. High/low confidence labels
+are computed only after checkpoint inference. This policy was introduced after
+an initial pure-F1 preflight retrieved nearly always, so the present pilot is
+developmental and cannot validate the policy that was tuned on it.
+
 \section{Prospective and Retrospective Modes}
 \paragraph{Prospective retrieval.} Interrupt before a factual value is emitted.
 \paragraph{Retrospective verification.} Allow a candidate claim, then retrieve before treating the claim as supported.
@@ -84,11 +136,12 @@ Return compact typed status alongside evidence:
 All records retain source identity and timestamps where available.
 
 \section{Tasks}
-Include confidently wrong or stale facts, low-confidence completions needing no
-evidence, stable high-confidence facts, and low-confidence externally grounded
-facts. Also include multi-step answers where a need emerges late,
-freshness-sensitive questions, unavailable evidence requiring abstention, and
-hard distractors where neither trigger should fire.
+The 20-example pilot has eight development and 12 nominal test examples. It
+includes familiar facts superseded only in the controlled source, unfamiliar
+registry values, stable facts, values explicitly supplied in the question, an
+``electric current'' lexical distractor, conflict, and unavailable evidence.
+This short-answer pilot does not yet implement a credible late-emerging
+multi-step information need; that required task remains future work.
 
 \section{Baselines}
 \begin{enumerate}
@@ -105,13 +158,90 @@ hard distractors where neither trigger should fire.
 \end{enumerate}
 
 \section{Metrics}
-Report final accuracy, unsupported-claim rate, trigger and retrieval
-precision and recall, confident-hallucination catch rate,
+We report final accuracy, unsupported-claim rate, trigger and retrieval
+precision and recall, confident hallucination catch rate,
 false retrieval for low-confidence cases without evidence deficits, retrieval
-rate in each measured confidence--risk quadrant, uncertainty around thresholds, correction and
-abstention quality, evidence-status calibration, tokens, calls, and latency.
+rate in each measured confidence/risk quadrant, uncertainty around thresholds,
+correction and abstention quality, evidence status calibration, tokens, calls,
+and latency.
 Plot hallucination reduction against retrieval cost with threshold sweeps and
 Pareto frontiers.
+
+\section{Developmental XPU Pilot}
+
+\subsection{Setup}
+
+The checkpoint is Qwen3-0.6B at pinned revision \texttt{c1899de} (full hash in
+the manifest), run greedily with PyTorch 2.13.0+XPU on Intel integrated
+graphics. The source is frozen at \texttt{2026.08.1}; seed 17 is the only seed.
+Five distinct generation paths per example are safely shared across conditions,
+while condition costs account only for calls that path would make. The run
+contains 200 prediction rows and 200 decision traces. On the 12 nominal test
+examples, measured membership is one high-confidence/low-risk, three
+low-confidence/low-risk, one high-confidence/high-risk, and seven
+low-confidence/high-risk examples.
+
+\subsection{Condition results}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Developmental pilot over 12 nominal test examples. Accuracy includes a
+95\% Wilson interval. Unsupported claims are errors among eight high-risk
+examples.}
+\label{tab:paper15-pilot}
+\begin{tabularx}{\linewidth}{@{}Yccc@{}}
+\toprule
+Condition & Accuracy [95\% CI] & Retrieval & Unsupported \\
+\midrule
+LLM only                 & 0.083 [0.015, 0.354] & 0.000 & 1.000 \\
+Anti-hallucination       & 0.250 [0.089, 0.532] & 0.000 & 0.750 \\
+Upfront RAG              & 0.917 [0.646, 0.985] & 1.000 & 0.125 \\
+Explicit retrieval      & 0.500 [0.254, 0.746] & 0.583 & 0.500 \\
+FLARE-like               & 0.833 [0.552, 0.953] & 0.833 & 0.250 \\
+Semantic                 & 0.667 [0.391, 0.862] & 0.667 & 0.125 \\
+Confidence OR semantic   & 0.917 [0.646, 0.985] & 0.917 & 0.125 \\
+Confidence AND semantic  & 0.583 [0.320, 0.807] & 0.583 & 0.250 \\
+Retrospective            & 0.167 [0.047, 0.448] & 0.667 & 0.875 \\
+Oracle                   & 0.667 [0.391, 0.862] & 0.667 & 0.125 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The diagnostic separation appears in individual cases, not a significant
+aggregate comparison. FLARE-like retrieval fires on all three low-confidence
+low-risk examples and misses the one high-confidence high-risk stale fact.
+Semantic rules retrieve all eight high-risk examples and no low-risk example,
+including that confident stale fact. Confidence OR semantic therefore adds one
+retrieval to FLARE-like and corrects that case, raising accuracy from 10/12 to
+11/12. Upfront RAG also reaches 11/12 but retrieves on every example. All
+evidence-aware conditions fail the unavailable-record case because this small
+checkpoint does not reliably follow the required abstention policy.
+
+The explicit baseline emits a parsed and correct entity--attribute request for
+11 of 20 total examples (seven of 12 nominal test examples); malformed or absent
+tags do not retrieve. Retrospective verification performs poorly because the
+model often preserves its draft despite contrary evidence. These are interface
+and evidence-use failures, not retrieval-engine failures.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\linewidth]{paper1_5_xpu_pilot.png}
+\caption{Exact accuracy against retrieval rate. Lines are threshold-sweep
+Pareto frontiers reconstructed from preserved unassisted and grounded spans.
+Tied points are offset only in their labels.}
+\label{fig:paper15-pareto}
+\end{figure}
+
+\subsection{Interpretation}
+
+The pilot demonstrates the hypothesized mismatch: measured uncertainty misses
+one confident source-dependent error and over-retrieves three low-confidence
+cases without evidence deficits. Combining semantic and confidence signals
+improves the observed frontier at the fitted threshold. This is not yet support
+for a general semantic-trigger claim: both effects are represented by very few
+examples, the semantic cues align closely with this synthetic source design,
+and the protocol was tuned during the same pilot.
 
 \section{Falsification}
 Semantic triggering fails to add value if the FLARE-like condition catches the
@@ -119,8 +249,67 @@ same cases at equal or lower cost, the semantic rules duplicate uncertainty,
 high-confidence/high-risk cases are immaterial, false triggers erase reliability
 gains, or the rules effectively encode answers.
 
+The developmental pilot does not falsify the mechanism, because semantic rules
+catch one case missed by FLARE-like confidence and the OR condition improves the
+observed accuracy--retrieval point. It also does not pass a confirmatory evidence
+gate: the difference is one tuned-pilot example, and upfront RAG ties its
+accuracy. A frozen replication that removes the confident stale case, makes
+semantic false positives costly, or places the OR frontier on FLARE's frontier
+would eliminate the proposed added value.
+
 \section{Scope}
-One retrieval source only. No learned trigger, no multi-source router, no symbolic reasoning, no backtracking, no PRA/native KV dependency.
+One retrieval source only. No learned trigger, no multi-source router, no
+symbolic reasoning, no backtracking, and no PRA/native KV dependency. The exact
+entity--attribute retriever intentionally removes ranking noise. The result says
+nothing about web-search quality, multi-source routing, or long-form retrieval.
+
+\section{Limitations}
+
+The sample has one checkpoint, one seed, 12 nominal test examples, one
+high-confidence/high-risk example, and three low-confidence/low-risk examples.
+Protocol changes followed inspection of this same pilot. Synthetic registry
+cues make semantic risk easier to detect than in natural prose, while the weak
+checkpoint makes stable factual baselines unusually poor. The source-value
+materializer is compact and directive; a different evidence interface may
+change use and override rates. Greedy minimum-token probability is sensitive to
+formatting tokens and is not calibrated probability of factual correctness.
+The explicit textual tool baseline is not native function calling. Short answer
+spans omit repeated retrieval, late-emerging needs, ranking errors, and evidence
+synthesis. Latencies reflect full-prefix generation and are not production
+estimates.
+
+\section{Reproduction}
+
+Paper-specific code is under \texttt{src/ccpu/paper1\_5}; artifact, metric, and
+device-selection utilities are reused from \texttt{src/ccpu/common} and Paper
+1's backend support. From the repository root:
+
+\begin{verbatim}
+python -m ccpu paper1.5 validate \
+  --config configs/paper1_5/xpu_pilot.json
+$py = 'C:\Users\j.simao\.venvs\modal-llm-xpu\Scripts\python.exe'
+$env:PYTHONPATH = (Resolve-Path src).Path
+& $py -m ccpu paper1.5 run-hf \
+  --config configs/paper1_5/xpu_pilot.json \
+  --output-dir artifacts/paper1_5/xpu_pilot
+python -m ccpu paper1.5 plot \
+  --summary artifacts/paper1_5/xpu_pilot/summary.json \
+  --output docs/papers/paper1_5/paper1_5_xpu_pilot.png
+\end{verbatim}
+
+The manifest hashes the config, benchmark snapshot, predictions, traces, and
+summary and records the source version, fitted threshold, model revision,
+environment, repository state, and device. All 200 rows record XPU execution.
+
+\section{Conclusion}
+
+This controlled pilot separates confidence from epistemic risk on the actual
+checkpoint and implements a FLARE-like forward forecast alongside transparent
+semantic rules. The observed OR condition catches one confident stale error
+that confidence misses, while confidence alone over-retrieves all three
+low-confidence no-deficit cases. These are useful diagnostics, not a general
+result. Paper 1.5 now supports a frozen, larger replication; it does not yet
+justify a claim of superior active retrieval or progression to multiple sources.
 
 \begin{thebibliography}{9}
 \bibitem{flare}
