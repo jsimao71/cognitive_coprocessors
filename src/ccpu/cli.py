@@ -6,6 +6,7 @@ import argparse
 
 from .paper1.cli import add_commands as add_paper1_commands
 from .paper1_5.cli import add_commands as add_paper1_5_commands
+from .paper2.cli import add_commands as add_paper2_commands
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -13,6 +14,7 @@ def build_parser() -> argparse.ArgumentParser:
     papers = parser.add_subparsers(dest="paper", required=True)
     add_paper1_commands(papers)
     add_paper1_5_commands(papers)
+    add_paper2_commands(papers)
     return parser
 
 

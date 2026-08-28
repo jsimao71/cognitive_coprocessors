@@ -63,3 +63,18 @@ python -m ccpu paper1.5 plot --summary artifacts/paper1_5/xpu_pilot/summary.json
 The run writes the measured token probabilities, fitted threshold, typed source requests and
 statuses, raw explicit-retrieval forecasts, ten-condition predictions, threshold sweeps, Pareto
 frontiers, hashes, and environment provenance.
+
+## Paper 2 heterogeneous protocol smoke
+
+Paper 2 currently validates deterministic calculator, Horn, and ISA/frame routing plus
+persistent typed state. The smoke run is explicitly non-empirical and requires no accelerator:
+
+```powershell
+python -m ccpu paper2 generate --config configs/paper2/smoke.json --output artifacts/paper2/smoke/dataset.jsonl
+python -m ccpu paper2 validate --dataset artifacts/paper2/smoke/dataset.jsonl
+python -m ccpu paper2 simulate --dataset artifacts/paper2/smoke/dataset.jsonl --output-dir artifacts/paper2/smoke/run
+python -m ccpu paper2 plot --summary artifacts/paper2/smoke/run/summary.json --output docs/papers/paper2/paper2_protocol_smoke.png
+```
+
+Do not cite scripted accuracy as model evidence. The Paper 1 evidence gate for a Paper 2 model
+experiment remains closed.

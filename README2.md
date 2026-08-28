@@ -13,7 +13,8 @@
 
 Reusable runtime, trace, artifact, generation, and metric contracts live under
 `src/ccpu/common`. Paper-specific implementations live under `src/ccpu/paper{n}`;
-Paper 1's strict reflex calculator is under `src/ccpu/paper1`. See
+Paper 1's strict calculator, Paper 1.5's controlled retrieval experiment, and Paper 2's
+heterogeneous symbolic protocol are implemented under their corresponding packages. See
 `src/ccpu/README.md` for smoke and pretrained reproduction commands.
 
 ## Paper PDFs
