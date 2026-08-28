@@ -299,3 +299,67 @@ def test_cli_plot_writes_scaling_figure_when_analysis_extra_is_available(tmp_pat
         == 0
     )
     assert figure.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
+
+
+def test_cli_compare_models_writes_table_and_figures(tmp_path):
+    if importlib.util.find_spec("matplotlib") is None:
+        return
+    summary = tmp_path / "summary.json"
+    config = tmp_path / "comparison.json"
+    output = tmp_path / "comparison"
+    summary.write_text(
+        json.dumps(
+            {
+                "by_run": [
+                    {
+                        "model_id": "test/model",
+                        "condition": "calculator_block_icl_g",
+                        "arithmetic_count": 4,
+                        "accuracy": 1.0,
+                        "block_execution_rate": 1.0,
+                        "block_payload_semantically_equivalent_rate": 1.0,
+                        "false_block_rate": 0.0,
+                        "result_use_rate": 1.0,
+                        "mean_generated_tokens": 8.0,
+                        "mean_wall_time_ms": 10.0,
+                        "block_failure_counts": {"multiple_blocks": 0},
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    config.write_text(
+        json.dumps(
+            {
+                "runs": [
+                    {
+                        "model_label": "Test-1B",
+                        "parameter_billions": 1.0,
+                        "evidence_phase": "heldout",
+                        "summary": "summary.json",
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert main(
+        [
+            "paper1",
+            "compare-models",
+            "--config",
+            str(config),
+            "--output-dir",
+            str(output),
+        ]
+    ) == 0
+    assert read_json(output / "model_comparison.json")["rows"][0]["accuracy"] == 1.0
+    for name in (
+        "block_execution_capability.png",
+        "accuracy_interfaces.png",
+        "token_latency_pareto.png",
+        "failure_mode_heatmap.png",
+    ):
+        assert (output / name).read_bytes().startswith(b"\x89PNG\r\n\x1a\n")

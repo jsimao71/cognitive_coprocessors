@@ -26,6 +26,7 @@ from .dataset import (
 from .evaluate import evaluate, paired_comparisons, rescore_endpoint_predictions
 from .experiment import run_huggingface, run_replay, run_scripted
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
+from .model_analysis import build_model_comparison
 from .plot import plot_interface_diagnostics, plot_scaling
 from .prompts import (
     CONDITIONS,
@@ -361,6 +362,15 @@ def interface_plot_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def compare_models_command(args: argparse.Namespace) -> int:
+    config = read_json(args.config)
+    result = build_model_comparison(
+        config, config_path=args.config, output_dir=args.output_dir
+    )
+    print(f"wrote {len(result['rows'])} cross-model rows and figures -> {args.output_dir}")
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1", help="strict reflex-calculator experiments")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -437,3 +447,10 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     interface_plot.add_argument("--summary", required=True)
     interface_plot.add_argument("--output", required=True)
     interface_plot.set_defaults(handler=interface_plot_command)
+
+    compare_models = commands.add_parser(
+        "compare-models", help="merge model summaries and plot interface capability"
+    )
+    compare_models.add_argument("--config", required=True)
+    compare_models.add_argument("--output-dir", required=True)
+    compare_models.set_defaults(handler=compare_models_command)

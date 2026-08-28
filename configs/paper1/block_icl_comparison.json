@@ -1,0 +1,29 @@
+{
+  "schema_version": "ccpu.paper1.model_comparison_config.v1",
+  "runs": [
+    {
+      "model_label": "Qwen3-0.6B",
+      "parameter_billions": 0.6,
+      "evidence_phase": "heldout",
+      "summary": "../../artifacts/paper1/hard_heldout_xpu/run/summary.json"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "parameter_billions": 0.6,
+      "evidence_phase": "heldout",
+      "summary": "../../artifacts/paper1/block_icl_multimodel/qwen3_0_6b_icl_g_heldout/summary.json"
+    },
+    {
+      "model_label": "Qwen3-1.7B",
+      "parameter_billions": 1.7,
+      "evidence_phase": "heldout",
+      "summary": "../../artifacts/paper1/block_icl_multimodel/qwen3_1_7b_run/summary.json"
+    },
+    {
+      "model_label": "Qwen3-4B",
+      "parameter_billions": 4.0,
+      "evidence_phase": "smoke",
+      "summary": "../../artifacts/paper1/block_icl_multimodel/qwen3_4b_smoke/summary.json"
+    }
+  ]
+}
