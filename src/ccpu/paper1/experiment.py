@@ -7,9 +7,10 @@ from collections.abc import Iterable, Mapping
 from typing import Any
 
 from ccpu.common.artifacts import canonical_json
-from ccpu.common.schema import GenerationResult, TraceStage, TraceStatus
+from ccpu.common.schema import DetectionCandidate, GenerationResult, TraceStage, TraceStatus
 
-from .dataset import ArithmeticExample
+from .arithmetic import ArithmeticNormalizer
+from .dataset import ArithmeticExample, reference_answer
 from .evaluate import answers_equal, extract_answer
 from .generation import HuggingFaceBackend, ScriptedProtocolBackend
 from .prompts import CONDITIONS, condition_prompt
@@ -69,7 +70,20 @@ def _prediction(
     normalized_expression = (
         str(state[-1].request.payload.get("canonical_expression")) if state else None
     )
-    gold_expression = "".join((example.expression or "").split()) or None
+    normalized_instructions = state[-1].request.payload.get("instructions") if state else None
+    gold_instructions = None
+    if example.expression is not None:
+        gold_candidate = DetectionCandidate(
+            candidate_id=f"gold:{example.example_id}",
+            family="compute",
+            raw_text=example.expression,
+            start_offset=0,
+            end_offset=len(example.expression),
+            detector="gold",
+        )
+        gold_instructions = ArithmeticNormalizer().normalize(gold_candidate).payload.get(
+            "instructions"
+        )
     return {
         "schema_version": "ccpu.paper1.prediction.v1",
         "example_id": example.example_id,
@@ -92,13 +106,18 @@ def _prediction(
         "normalization_accepts": normalization_accepts,
         "normalization_failures": normalization_failures,
         "normalization_correct": (
-            normalized_expression == gold_expression if normalized_expression is not None else None
+            normalized_instructions == gold_instructions
+            if normalized_instructions is not None
+            else None
         ),
+        "normalized_expression": normalized_expression,
         "executions": executions,
         "engine_successes": engine_successes,
         "engine_failures": engine_failures,
         "engine_correct": (
-            answers_equal(engine_answer, example.answer) if engine_answer is not None else None
+            answers_equal(engine_answer, reference_answer(normalized_expression))
+            if engine_answer is not None and normalized_expression is not None
+            else None
         ),
         "reinjection_failures": reinjection_failures,
         "interventions": len(state),
@@ -186,6 +205,8 @@ def run_replay(
         run_id = f"replay:{model_id}:{example_id}:{condition}:{seed}"
         controller = _controller(example, condition, run_id)
         started = time.perf_counter_ns()
+        if condition == "oracle" and controller is not None and example.expression is not None:
+            controller.feed(f"{example.expression} =")
         rendered = controller.feed(generated_text).rendered_text if controller else generated_text
         controller_time = time.perf_counter_ns() - started
         generation = GenerationResult(
@@ -201,7 +222,11 @@ def run_replay(
             ),
             model_calls=int(row.get("model_calls", 1)),
             wall_time_ns=int(row.get("wall_time_ns", controller_time)),
-            metadata={"empirical": bool(row.get("empirical", True)), "backend": "replay"},
+            metadata={
+                **dict(row.get("backend_metadata", {})),
+                "empirical": bool(row.get("empirical", True)),
+                "rescored_with": "replay",
+            },
         )
         predictions.append(
             _prediction(
@@ -232,7 +257,12 @@ def run_huggingface(
                 run_id = f"hf:{backend.model_id}:{example.example_id}:{condition}:{seed}"
                 controller = _controller(example, condition, run_id)
                 generation = backend.generate(
-                    condition_prompt(example, condition), controller=controller, seed=seed
+                    condition_prompt(example, condition),
+                    controller=controller,
+                    seed=seed,
+                    controller_seed_text=(
+                        f"{example.expression} =" if condition == "oracle" else None
+                    ),
                 )
                 predictions.append(
                     _prediction(

@@ -1,7 +1,7 @@
 from ccpu.common.metrics import binary_classification, wilson_interval
 from ccpu.paper1.dataset import ArithmeticDatasetConfig, iter_dataset
 from ccpu.paper1.evaluate import answers_equal, evaluate, extract_answer
-from ccpu.paper1.experiment import run_scripted
+from ccpu.paper1.experiment import run_replay, run_scripted
 
 
 def smoke_config() -> ArithmeticDatasetConfig:
@@ -45,11 +45,40 @@ def test_scripted_run_is_complete_but_explicitly_not_empirical():
     assert llm_only["engine_correctness"] is None
 
 
+def test_oracle_replay_primes_the_gold_expression():
+    example = next(item for item in iter_dataset(smoke_config()) if item.task_kind == "arithmetic")
+    predictions, traces = run_replay(
+        [example],
+        [
+            {
+                "example_id": example.example_id,
+                "condition": "oracle",
+                "model_id": "saved-model",
+                "seed": 7,
+                "generated_text": f"Exact answer: {example.answer}",
+                "backend_metadata": {"device": "xpu"},
+            }
+        ],
+    )
+
+    assert traces
+    assert predictions[0]["interventions"] == 1
+    assert predictions[0]["engine_correct"] is True
+    assert predictions[0]["backend_metadata"]["device"] == "xpu"
+
+
 def test_answer_extraction_scores_model_override_not_only_engine_output():
     text = "<tool_result>42</tool_result> I ignored it. Final answer: 41"
     assert extract_answer(text) == "41"
     assert not answers_equal(extract_answer(text), "42")
     assert answers_equal("2/4", "1/2")
+
+
+def test_answer_extraction_supports_boxed_and_bare_exact_answers():
+    assert extract_answer(r"The answer is \boxed{6}.") == "6"
+    assert extract_answer("Exact value of the integer arithmetic expression: 6.") == "6"
+    assert extract_answer("The exact value of the expression is **39**.") == "39"
+    assert extract_answer("-3/4") == "-3/4"
 
 
 def test_binary_metrics_and_wilson_interval_boundaries():

@@ -32,7 +32,7 @@ def plot_scaling(summary: Mapping[str, Any], output: str | Path) -> Path:
     figure, axes = plt.subplots(
         len(models),
         len(digit_widths),
-        figsize=(3.4 * len(digit_widths), 2.8 * len(models)),
+        figsize=(3.8 * len(digit_widths), 3.2 * len(models) + 0.7),
         sharex=True,
         sharey=True,
         squeeze=False,
@@ -47,7 +47,7 @@ def plot_scaling(summary: Mapping[str, Any], output: str | Path) -> Path:
                         [point[0] for point in points],
                         [point[1] for point in points],
                         marker="o",
-                        label=condition,
+                        label=condition.replace("_", " "),
                     )
             axis.set_title(f"{model_id}\n{digits}-digit operands", fontsize=9)
             axis.set_ylim(-0.03, 1.03)
@@ -57,10 +57,16 @@ def plot_scaling(summary: Mapping[str, Any], output: str | Path) -> Path:
             if digit_index == 0:
                 axis.set_ylabel("exact accuracy")
     handles, labels = axes[0][0].get_legend_handles_labels()
+    figure.suptitle("Paper 1 arithmetic scaling", y=0.98)
     if handles:
-        figure.legend(handles, labels, loc="upper center", ncol=min(5, len(labels)))
-        figure.subplots_adjust(top=0.84)
-    figure.suptitle("Paper 1 arithmetic scaling", y=0.99)
+        figure.legend(
+            handles,
+            labels,
+            loc="upper center",
+            bbox_to_anchor=(0.5, 0.92),
+            ncol=min(5, len(labels)),
+        )
+    figure.tight_layout(rect=(0, 0, 1, 0.80))
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(output, dpi=180, bbox_inches="tight")

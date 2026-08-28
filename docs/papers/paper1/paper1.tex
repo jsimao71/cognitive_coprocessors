@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,booktabs,tabularx,array,xcolor,hyperref}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,xcolor,graphicx,hyperref}
 
 \hypersetup{
   colorlinks=true,
@@ -35,18 +35,25 @@ model-only, prompted, explicit-tool, reflex, and oracle conditions; a factorial
 sweep over expression depth, operand width, model size, and seed; component and
 end-to-end metrics; adversarial non-trigger controls; and precise falsification
 criteria. The runtime, generator, replay path, optional Hugging Face adapter,
-and test suite are implemented. At this protocol revision no language-model
-experiment has been run, so we report no empirical performance claim.
+and test suite are implemented. A one-checkpoint, one-seed XPU pilot produced
+80 generations. On eight arithmetic examples, reflex assistance tied the
+unassisted model at 75.0\% exact match, while explicit-tool and oracle
+conditions reached 87.5\% and 100\%, respectively. The reflex engine was exact
+whenever invoked, but only half of accepted candidates represented the full
+intended expression. This small diagnostic run is not a confirmatory result and
+does not pass the evidence gate for later mechanisms.
 \end{abstract}
 
 \section{Status and Scope}
 
-This document is an implemented experimental protocol, not a completed result.
+This document is an implemented experimental protocol with a preliminary pilot,
+not a completed confirmatory result.
 The repository contains a dependency-free calculator/runtime path, deterministic
 dataset generation, JSONL traces and summaries, a scripted plumbing check, and
 an optional token-by-token Hugging Face adapter. Scripted checks are marked
 \texttt{empirical: false}; their expected perfect calculator behavior must not
-be cited as model evidence.
+be cited as model evidence. The XPU pilot reported below is empirical but too
+small for model-family, scaling, or replicated performance claims.
 
 Paper 1 asks one question:
 \begin{quote}
@@ -278,6 +285,73 @@ with paired comparisons because all conditions share examples. Predeclare one
 primary endpoint and correct or label exploratory multiple comparisons. Preserve
 raw predictions and event traces so component errors can be reclassified.
 
+\section{Preliminary XPU Pilot}
+
+\subsection{Setup}
+
+We ran a diagnostic pilot with Qwen3-0.6B at pinned revision
+\texttt{c1899de} (the full hash is stored in the manifest), PyTorch
+2.13.0+XPU, and an Intel integrated GPU. The deterministic sample crossed one
+and three operators with one- and two-digit operands, using addition and
+multiplication. It contained two examples per cell (eight arithmetic examples)
+and eight matched non-trigger controls. One generation seed (17) and five
+conditions yielded 80 generations. The 96-token output budget was selected
+after a shorter plumbing run exposed truncation; the shorter run is not included
+in the results. Confidence intervals are Wilson intervals over only eight
+arithmetic observations per condition and are therefore intentionally wide.
+
+\subsection{Results}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Exploratory XPU pilot. Accuracy intervals are 95\% Wilson intervals;
+tokens and latency are means. Latency reflects the correctness-first
+full-prefix adapter and is not a production estimate.}
+\label{tab:xpu-pilot}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Condition & Accuracy & Trigger recall & Output tokens & Latency (ms) \\
+\midrule
+LLM only      & 0.750 [0.409, 0.929] & ---   & 40.56 & 8028 \\
+Matched prompt& 0.625 [0.306, 0.863] & ---   & 45.81 & 9380 \\
+Explicit tool & 0.875 [0.529, 0.978] & 0.625 & 22.50 & 4410 \\
+Reflex        & 0.750 [0.409, 0.929] & 0.750 & 46.06 & 9195 \\
+Oracle        & 1.000 [0.676, 1.000] & 1.000 & 15.31 & 2718 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The reflex condition did not improve exact-match accuracy over LLM only in this
+pilot. Explicit-tool accuracy was numerically higher and oracle intervention was
+perfect, but the sample is too small for either difference to support a general
+claim. No condition falsely intervened on a control. Accepted explicit-tool
+candidates represented the intended expression in every triggered case, whereas
+only 50\% of reflex candidates did. Inspection showed that the strict watcher
+often intercepted a valid intermediate subexpression rather than the full task
+expression. Once a candidate reached the engine, execution correctness was
+100\% in both conditions. Reflex result-use was 66.7\%, and one third of used
+results were later overridden. These component results locate the present
+bottleneck in exposure, selection, and downstream use rather than arithmetic
+execution.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.94\linewidth]{paper1_xpu_pilot.png}
+\caption{Exploratory exact-match accuracy by generated difficulty cell. Each
+point contains only two examples; the figure diagnoses plumbing and candidate
+behavior and must not be read as a scaling estimate.}
+\label{fig:xpu-pilot}
+\end{figure}
+
+At this protocol revision H1 is not supported: the automatic reflex tied the
+unassisted baseline and failed to dominate explicit invocation. H2--H4 remain
+untested because this pilot includes neither a production interface nor the
+required model-size and seed sweeps. Paper 2 therefore remains gated. A
+confirmatory run must increase examples per cell, use all declared seeds and
+model sizes, add a second family, and freeze any detector change before
+examining outcomes.
+
 \section{Falsification and Evidence Gate}
 
 The reflex claim is not supported if any of the following holds under matched
@@ -331,6 +405,29 @@ python -m ccpu paper1 run-hf \
   --output-dir artifacts/paper1/primary/run
 \end{verbatim}
 
+The reported XPU pilot uses the direct interpreter from the validated XPU
+environment and can be reproduced with:
+
+\begin{verbatim}
+$py = 'C:\Users\j.simao\.venvs\modal-llm-xpu\Scripts\python.exe'
+$env:PYTHONPATH = (Resolve-Path src).Path
+& $py -m ccpu paper1 generate \
+  --config configs/paper1/xpu_pilot.json \
+  --output artifacts/paper1/xpu_pilot/dataset.jsonl
+& $py -m ccpu paper1 run-hf \
+  --dataset artifacts/paper1/xpu_pilot/dataset.jsonl \
+  --config configs/paper1/xpu_pilot.json \
+  --output-dir artifacts/paper1/xpu_pilot/run96
+& $py -m ccpu paper1 replay \
+  --dataset artifacts/paper1/xpu_pilot/dataset.jsonl \
+  --completions artifacts/paper1/xpu_pilot/run96/predictions.jsonl \
+  --output-dir artifacts/paper1/xpu_pilot/final
+\end{verbatim}
+
+Device selection for \texttt{device: auto} is CUDA, then XPU, then CPU. The
+replay step applies the current frozen evaluator to preserved generations and
+records both the source prediction hash and rescore provenance.
+
 Use \texttt{--limit}, \texttt{--model}, and repeated \texttt{--condition}
 arguments for resource preflight. Each run writes predictions, full traces,
 summary tables, hashes, configuration, model metadata, environment information,
@@ -352,7 +449,9 @@ limited, and code-like or unusual formatting remains an adversarial surface.
 The synthetic task controls arithmetic complexity but not realistic discourse.
 The textual explicit-tool baseline may understate a model's native structured
 function-calling ability. Full-prefix token recomputation overstates runtime
-cost. Finally, exact calculator output cannot repair an incorrectly copied
+cost. The preliminary XPU run has one checkpoint, one seed, and eight arithmetic
+examples, so its intervals, cell curves, and condition ordering are unstable.
+Finally, exact calculator output cannot repair an incorrectly copied
 expression, a model that ignores the result, or a task whose premises are wrong.
 
 \section{Related Work}
@@ -372,8 +471,12 @@ Paper 1 reduces the cognitive-coprocessor proposal to its smallest credible
 experiment. A character-incremental detector, typed allowlisted micro-IR, exact
 bounded calculator, append-only state, and immediate text reinjection are enough
 to test whether automatic computation can improve an autoregressive stream.
-The implementation is complete at protocol level; model sweeps and replicated
-analysis remain required before any positive or negative architecture claim.
+The implementation is complete at protocol level, and the first XPU pilot
+demonstrates end-to-end generation, intervention, replay, and component scoring.
+It does not show an automatic-assistance gain: reflex accuracy tied LLM only,
+while candidate selection and result use remained imperfect. Model sweeps and
+replicated analysis remain required before any positive or negative architecture
+claim, and the Paper 2 evidence gate remains closed.
 
 \begin{thebibliography}{9}
 

@@ -125,7 +125,7 @@ def _expression(
     return expression
 
 
-def _gold(expression: str) -> str:
+def reference_answer(expression: str) -> str:
     """Independent exact-rational oracle; it does not call the tested engine."""
 
     def evaluate(node: ast.AST) -> Fraction:
@@ -180,7 +180,7 @@ def iter_dataset(config: ArithmeticDatasetConfig) -> Iterable[ArithmeticExample]
                 )
                 rng = random.Random(cell_seed)
                 expression = _expression(rng, operator_count, digits, config.operations)
-                answer = _gold(expression)
+                answer = reference_answer(expression)
                 identity = {
                     "schema": "ccpu.paper1.example.v1",
                     "seed": config.seed,

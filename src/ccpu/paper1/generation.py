@@ -12,6 +12,18 @@ from ccpu.common.schema import GenerationResult
 from .dataset import ArithmeticExample
 
 
+def select_device(torch_module: Any, requested: str) -> str:
+    """Resolve auto devices consistently across supported PyTorch backends."""
+    if requested != "auto":
+        return requested
+    if torch_module.cuda.is_available():
+        return "cuda"
+    xpu = getattr(torch_module, "xpu", None)
+    if xpu is not None and xpu.is_available():
+        return "xpu"
+    return "cpu"
+
+
 class ScriptedProtocolBackend:
     """Deterministic plumbing check; its outputs are never empirical model results."""
 
@@ -87,16 +99,14 @@ class HuggingFaceBackend:
             revision=config.revision,
             trust_remote_code=config.trust_remote_code,
         )
-        device = config.device
-        if device == "auto":
-            device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = select_device(torch, config.device)
         dtype = None if config.dtype == "auto" else getattr(torch, config.dtype)
         model_kwargs: dict[str, Any] = {
             "revision": config.revision,
             "trust_remote_code": config.trust_remote_code,
         }
         if dtype is not None:
-            model_kwargs["torch_dtype"] = dtype
+            model_kwargs["dtype"] = dtype
         self.model = AutoModelForCausalLM.from_pretrained(config.model_id, **model_kwargs).to(
             device
         )
@@ -109,6 +119,7 @@ class HuggingFaceBackend:
         *,
         controller: IncrementalController | None = None,
         seed: int = 0,
+        controller_seed_text: str | None = None,
     ) -> GenerationResult:
         torch = self._torch
         torch.manual_seed(seed)
@@ -131,6 +142,8 @@ class HuggingFaceBackend:
                     [{"role": "user", "content": prompt}], **template_args
                 )
                 used_chat_template = True
+        if controller is not None and controller_seed_text:
+            rendered_prompt = f"{rendered_prompt}{controller.feed(controller_seed_text).rendered_text}"
         encoded = self.tokenizer(
             rendered_prompt,
             return_tensors="pt",

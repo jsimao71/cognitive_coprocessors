@@ -14,16 +14,28 @@ from .dataset import ArithmeticExample
 
 _TOOL_RESULT = re.compile(r"<tool_result>\s*(-?\d+(?:/\d+)?)\s*</tool_result>")
 _EQUALS_RESULT = re.compile(r"=\s*(-?\d+(?:/\d+)?)\b")
-_FINAL_RESULT = re.compile(r"(?:answer|result)\s*[:=]\s*(-?\d+(?:/\d+)?)\b", re.IGNORECASE)
+_FINAL_RESULT = re.compile(
+    r"(?:answer|result|value|expression)(?:\s+is|\s*[:=])\s*\**\s*"
+    r"(-?\d+(?:/\d+)?)\b",
+    re.IGNORECASE,
+)
+_BOXED_RESULT = re.compile(r"\\boxed\s*\{\s*(-?\d+(?:/\d+)?)\s*\}")
+_BARE_RESULT = re.compile(r"\s*(-?\d+(?:/\d+)?)\s*")
 
 
 def extract_answer(text: str) -> str | None:
     # End-task evaluation must prefer what the model ultimately claims over a
     # correct engine value that the model may subsequently ignore or override.
     matches = (
-        _FINAL_RESULT.findall(text) or _EQUALS_RESULT.findall(text) or _TOOL_RESULT.findall(text)
+        _FINAL_RESULT.findall(text)
+        or _BOXED_RESULT.findall(text)
+        or _EQUALS_RESULT.findall(text)
+        or _TOOL_RESULT.findall(text)
     )
-    return matches[-1] if matches else None
+    if not matches:
+        bare = _BARE_RESULT.fullmatch(text)
+        return bare.group(1) if bare else None
+    return matches[-1]
 
 
 def answers_equal(predicted: str | None, gold: str | None) -> bool:
