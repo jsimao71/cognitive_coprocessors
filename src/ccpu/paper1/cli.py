@@ -1,0 +1,243 @@
+"""Command-line workflow for Paper 1 artifacts and model runs."""
+
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+from typing import Any
+
+from ccpu.common.artifacts import (
+    environment_manifest,
+    file_sha256,
+    fingerprint,
+    read_json,
+    read_jsonl,
+    write_json,
+    write_jsonl,
+)
+
+from .dataset import ArithmeticDatasetConfig, ArithmeticExample, iter_dataset
+from .evaluate import evaluate
+from .experiment import run_huggingface, run_replay, run_scripted
+from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
+from .plot import plot_scaling
+from .prompts import CONDITIONS
+
+
+def _examples(path: str | Path) -> list[ArithmeticExample]:
+    return [ArithmeticExample.from_dict(row) for row in read_jsonl(path)]
+
+
+def _write_run(
+    output_dir: str | Path,
+    *,
+    dataset_path: str | Path,
+    predictions: list[dict[str, Any]],
+    traces: list[dict[str, Any]],
+    empirical: bool,
+    run_config: dict[str, Any],
+) -> None:
+    output_dir = Path(output_dir)
+    predictions_path = write_jsonl(output_dir / "predictions.jsonl", predictions)
+    traces_path = write_jsonl(output_dir / "traces.jsonl", traces)
+    summary = evaluate(_examples(dataset_path), predictions)
+    summary["empirical"] = empirical
+    if not empirical:
+        summary["warning"] = "Scripted protocol smoke results are not model evidence."
+    write_json(output_dir / "summary.json", summary)
+    repository_root = Path(__file__).resolve().parents[3]
+    write_json(
+        output_dir / "manifest.json",
+        {
+            "paper": "Paper 1",
+            "schema_version": "ccpu.paper1.run_manifest.v1",
+            "empirical": empirical,
+            "dataset_sha256": file_sha256(dataset_path),
+            "predictions_sha256": file_sha256(predictions_path),
+            "traces_sha256": file_sha256(traces_path),
+            "prediction_count": len(predictions),
+            "trace_count": len(traces),
+            "run_config": run_config,
+            "environment": environment_manifest(repository_root),
+        },
+    )
+
+
+def generate_command(args: argparse.Namespace) -> int:
+    raw_config = read_json(args.config)
+    config = ArithmeticDatasetConfig.from_dict(raw_config)
+    examples = list(iter_dataset(config))
+    output = write_jsonl(args.output, (example.to_dict() for example in examples))
+    write_json(
+        Path(output).with_suffix(".manifest.json"),
+        {
+            "paper": "Paper 1",
+            "schema_version": "ccpu.paper1.dataset_manifest.v1",
+            "config": config.to_dict(),
+            "config_fingerprint": fingerprint(config.to_dict()),
+            "record_count": len(examples),
+            "dataset_sha256": file_sha256(output),
+        },
+    )
+    print(f"generated {len(examples)} Paper 1 examples -> {output}")
+    return 0
+
+
+def validate_command(args: argparse.Namespace) -> int:
+    examples = _examples(args.dataset)
+    identifiers = [example.example_id for example in examples]
+    if len(identifiers) != len(set(identifiers)):
+        raise ValueError("dataset contains duplicate example IDs")
+    if any(example.should_trigger != (example.task_kind == "arithmetic") for example in examples):
+        raise ValueError("task_kind and should_trigger disagree")
+    schema = examples[0].schema_version if examples else "empty"
+    print(f"valid {len(examples)}-item {schema} dataset")
+    return 0
+
+
+def simulate_command(args: argparse.Namespace) -> int:
+    examples = _examples(args.dataset)
+    conditions = tuple(args.condition or CONDITIONS)
+    predictions, traces = run_scripted(examples, conditions=conditions, seed=args.seed)
+    _write_run(
+        args.output_dir,
+        dataset_path=args.dataset,
+        predictions=predictions,
+        traces=traces,
+        empirical=False,
+        run_config={
+            "backend": "scripted_protocol_smoke",
+            "conditions": conditions,
+            "seed": args.seed,
+        },
+    )
+    print(f"completed non-empirical protocol smoke -> {args.output_dir}")
+    return 0
+
+
+def replay_command(args: argparse.Namespace) -> int:
+    predictions, traces = run_replay(_examples(args.dataset), read_jsonl(args.completions))
+    _write_run(
+        args.output_dir,
+        dataset_path=args.dataset,
+        predictions=predictions,
+        traces=traces,
+        empirical=not args.non_empirical,
+        run_config={"backend": "replay", "completions_sha256": file_sha256(args.completions)},
+    )
+    print(f"replayed {len(predictions)} completions -> {args.output_dir}")
+    return 0
+
+
+def hf_command(args: argparse.Namespace) -> int:
+    raw_config = read_json(args.config)
+    model_entries = list(raw_config.get("models", []))
+    if args.model:
+        model_entries = [entry for entry in model_entries if entry["model_id"] in set(args.model)]
+    if not model_entries:
+        raise ValueError("no matching pinned models in configuration")
+    examples = _examples(args.dataset)
+    if args.limit is not None:
+        examples = examples[: args.limit]
+    conditions = tuple(args.condition or CONDITIONS)
+    seeds = tuple(int(seed) for seed in raw_config.get("seeds", (17,)))
+    all_predictions: list[dict[str, Any]] = []
+    all_traces: list[dict[str, Any]] = []
+    for entry in model_entries:
+        revision = str(entry["revision"])
+        invalid_revision = len(revision) != 40 or any(
+            character not in "0123456789abcdef" for character in revision
+        )
+        if invalid_revision:
+            raise ValueError(f"model revision must be a pinned 40-character SHA: {entry}")
+        backend = HuggingFaceBackend(
+            HuggingFaceGenerationConfig(
+                model_id=str(entry["model_id"]),
+                revision=revision,
+                max_new_tokens=int(entry.get("max_new_tokens", 96)),
+                device=str(args.device or entry.get("device", "auto")),
+                dtype=str(entry.get("dtype", "auto")),
+                trust_remote_code=bool(entry.get("trust_remote_code", False)),
+            )
+        )
+        predictions, traces = run_huggingface(examples, backend, conditions=conditions, seeds=seeds)
+        all_predictions.extend(predictions)
+        all_traces.extend(traces)
+    _write_run(
+        args.output_dir,
+        dataset_path=args.dataset,
+        predictions=all_predictions,
+        traces=all_traces,
+        empirical=True,
+        run_config={
+            "backend": "huggingface",
+            "models": model_entries,
+            "conditions": conditions,
+            "seeds": seeds,
+            "limit": args.limit,
+        },
+    )
+    print(f"completed {len(all_predictions)} Hugging Face generations -> {args.output_dir}")
+    return 0
+
+
+def evaluate_command(args: argparse.Namespace) -> int:
+    result = evaluate(_examples(args.dataset), read_jsonl(args.predictions))
+    write_json(args.output, result)
+    print(f"evaluated predictions -> {args.output}")
+    return 0
+
+
+def plot_command(args: argparse.Namespace) -> int:
+    output = plot_scaling(read_json(args.summary), args.output)
+    print(f"wrote scaling figure -> {output}")
+    return 0
+
+
+def add_commands(papers: argparse._SubParsersAction) -> None:
+    paper = papers.add_parser("paper1", help="strict reflex-calculator experiments")
+    commands = paper.add_subparsers(dest="command", required=True)
+
+    generate = commands.add_parser("generate", help="generate the deterministic benchmark")
+    generate.add_argument("--config", required=True)
+    generate.add_argument("--output", required=True)
+    generate.set_defaults(handler=generate_command)
+
+    validate = commands.add_parser("validate", help="validate a benchmark JSONL")
+    validate.add_argument("--dataset", required=True)
+    validate.set_defaults(handler=validate_command)
+
+    simulate = commands.add_parser("simulate", help="run a non-empirical protocol smoke test")
+    simulate.add_argument("--dataset", required=True)
+    simulate.add_argument("--output-dir", required=True)
+    simulate.add_argument("--condition", action="append", choices=CONDITIONS)
+    simulate.add_argument("--seed", type=int, default=0)
+    simulate.set_defaults(handler=simulate_command)
+
+    replay = commands.add_parser("replay", help="apply controllers to saved model completions")
+    replay.add_argument("--dataset", required=True)
+    replay.add_argument("--completions", required=True)
+    replay.add_argument("--output-dir", required=True)
+    replay.add_argument("--non-empirical", action="store_true")
+    replay.set_defaults(handler=replay_command)
+
+    hf = commands.add_parser("run-hf", help="run pinned Hugging Face checkpoints")
+    hf.add_argument("--dataset", required=True)
+    hf.add_argument("--config", required=True)
+    hf.add_argument("--output-dir", required=True)
+    hf.add_argument("--model", action="append")
+    hf.add_argument("--condition", action="append", choices=CONDITIONS)
+    hf.add_argument("--device")
+    hf.add_argument("--limit", type=int)
+    hf.set_defaults(handler=hf_command)
+
+    evaluation = commands.add_parser("evaluate", help="recompute summary metrics")
+    evaluation.add_argument("--dataset", required=True)
+    evaluation.add_argument("--predictions", required=True)
+    evaluation.add_argument("--output", required=True)
+    evaluation.set_defaults(handler=evaluate_command)
+
+    plot = commands.add_parser("plot", help="plot accuracy scaling from a summary")
+    plot.add_argument("--summary", required=True)
+    plot.add_argument("--output", required=True)
+    plot.set_defaults(handler=plot_command)

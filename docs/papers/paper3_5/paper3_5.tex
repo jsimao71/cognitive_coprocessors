@@ -1,0 +1,157 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,hyperref}
+\title{Learned Epistemic Interrupts: Main-Model Control versus Semantic and Hidden-State Sidecars}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+\begin{abstract}
+Self-RAG already establishes learned on-demand retrieval and reflection in the
+main generative LM \cite{selfrag}; learning when to retrieve is therefore not our
+novelty claim. We instead test where epistemic-control competence should live:
+inside the main LM, in a model-independent text sidecar observing ordinary
+generation prefixes, or in a lightweight probe over a frozen LM's hidden state.
+Controllers must choose among NONE, DB, LEXICAL, VECTOR, and WEB rather than
+only retrieve/no-retrieve. We compare quality, unsupported claims, routing,
+transfer, and cost without assuming that any architecture is superior.
+\end{abstract}
+
+\section{Problem Decomposition}
+Separate:
+\[
+P(I_t\mid h_t)
+\]
+for whether retrieval is needed,
+\[
+P(S_t\mid I_t,h_t)
+\]
+for source selection, and
+\[
+P(Q_t\mid S_t,I_t,h_t)
+\]
+for normalized query formation. Detection, routing, and query formation must be evaluated independently.
+
+\section{Candidate Interfaces}
+Compare:
+\begin{enumerate}
+\item FLARE-like confidence control \cite{flare};
+\item Self-RAG-style main-model learned retrieval/reflection control;
+\item a text sidecar performing DETECT/ROUTE/NORMALIZE over ordinary prefixes;
+\item a matched lightweight hidden-state sidecar with the main LM frozen;
+\item oracle trigger, source, and query.
+\end{enumerate}
+If exact Self-RAG training is infeasible, the condition must be called a
+Self-RAG-inspired approximation rather than Self-RAG proper. Main-model training
+is confined to that declared comparison; text and hidden-state sidecars keep the
+generative LM frozen.
+
+\section{Training Data}
+Use realistic generation prefixes, not only original user questions. Label:
+\begin{itemize}
+\item retrieve / do-not-retrieve;
+\item information-need type;
+\item preferred source;
+\item canonical query/IR;
+\item freshness/urgency;
+\item evidence availability;
+\item epistemic role.
+\item miss-risk;
+\item whether the need is computational rather than epistemic.
+\end{itemize}
+
+Hard negatives must include facts already present in context, quotations,
+hypothetical or counterfactual statements, questions, user-given facts,
+computational needs better served by calculators or logic, and fluent
+non-factual prose.
+
+\section{Epistemic Roles}
+Distinguish imminent factual commitment, verification request, uncertainty,
+quotation, hypothesis, counterfactual, user-provided fact, and computed or
+derived fact. This prevents brittle surface matching from turning every
+factual-looking phrase into a hard retrieval event.
+
+\section{Routing}
+Predict among
+\[
+\{\mathrm{NONE},\mathrm{DB},\mathrm{LEXICAL},\mathrm{VECTOR},\mathrm{WEB}\},
+\]
+with optional KG. Support abstention and, when justified, a small top-$k$ source
+set. The DB, lexical, vector, and web actions must retain the distinct query and
+execution semantics established in Paper 2.5.
+
+\section{Sidecar Hypotheses and Ablations}
+Model independence, upgradeability, routing specialization, small-model
+leverage, and lower retraining cost are hypotheses rather than premises. Compare
+confidence-only, semantic-only, and semantic-plus-confidence sidecars at matched
+complexity and runtime cost. The hidden-state probe must also be complexity- and
+cost-matched to the text controller; it earns no native-interface claim merely
+by accessing activations.
+
+For cross-model transfer, train the text sidecar on traces from one or several
+model families and evaluate it on a different frozen family. Repeat across model
+sizes. Successful transfer supports reusable runtime control; architecture- or
+task-dependent winners are equally valid outcomes.
+
+\section{Calibration and Cost}
+False retrievals cost latency/money; missed retrievals cost unsupported claims. Evaluate thresholded policies under
+\[
+C=\lambda_{fp}C_{fp}+\lambda_{fn}C_{fn}+\lambda_{lat}C_{lat}+\lambda_{tok}C_{tok}.
+\]
+Do not optimize only F1.
+
+\section{Experiments}
+Evaluate in-domain detection, paraphrase robustness, unseen entities/relations,
+domain and cross-model transfer, changing freshness windows, multi-factual
+answers, and model-size effects. Measure the high-confidence/high-risk and
+low-confidence/low-risk quadrants explicitly. Include DETECT/ROUTE/NORMALIZE,
+confidence-feature, and action-space ablations.
+
+\section{Baselines}
+\begin{enumerate}
+\item no retrieval;
+\item upfront RAG;
+\item explicit search/tool calls;
+\item Paper 2.5 heuristic reflex routing;
+\item FLARE-like confidence controller;
+\item Self-RAG-style main-model learned controller;
+\item text sidecar DETECT/ROUTE/NORMALIZE;
+\item frozen-LM hidden-state sidecar;
+\item oracle trigger/source/query.
+\end{enumerate}
+
+\section{Metrics}
+Report trigger AUROC/AUPRC and P/R, high-confidence/high-risk recall,
+low-confidence/low-risk false retrieval, calibration overall and by source,
+selective-risk/coverage curves, routing top-$1$/top-$k$ and confusion matrices,
+normalization correctness, unsupported claims, final accuracy, count/fanout,
+latency/cost, model-size interactions, OOD and cross-model degradation, and the
+cost versus unsupported-claim Pareto frontier.
+
+\section{Falsification}
+The sidecar architecture is weakened if main-model Self-RAG-style control
+dominates quality and cost, sidecars do not transfer, heterogeneous routing adds
+no value, confidence explains semantic gains, hidden-state dependence is too
+model-specific, or the detector memorizes surface phrases. A main-model,
+sidecar, hybrid, or task/model-size-dependent winner is a valid result.
+
+\section{Scope}
+No joint base-model training except the declared main-model comparison; no
+transactional or backtracking architecture as the main contribution; and no
+PRA or native KV dependency. Relevance and support labels are prior art, not a novelty
+claim. Paper 4 concerns persistent cross-source provenance, dependency
+propagation, transactional scopes, retraction, and backtracking.
+
+\begin{thebibliography}{9}
+\bibitem{flare}
+Z.~Jiang et al.
+Active retrieval augmented generation.
+\emph{EMNLP}, 2023.
+\url{https://arxiv.org/abs/2305.06983}.
+
+\bibitem{selfrag}
+A.~Asai et al.
+Self-RAG: Learning to retrieve, generate, and critique through self-reflection.
+\emph{ICLR}, 2024.
+\url{https://arxiv.org/abs/2310.11511}.
+\end{thebibliography}
+
+\end{document}

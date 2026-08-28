@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,hyperref}
+\title{Semantic Epistemic Risk versus Confidence-Based Active Retrieval During Generation}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+\begin{abstract}
+Active retrieval during generation is established prior art: FLARE predicts
+upcoming content and retrieves when that prediction contains low-confidence
+tokens \cite{flare}. We ask a narrower question: is model uncertainty equivalent
+to epistemic risk? Using one controlled evidence source, we compare a documented
+FLARE-like confidence controller with transparent semantic rules that detect
+stale, source-dependent, or otherwise unsupported imminent commitments. The
+experiment measures confidence on the actual checkpoint and deliberately
+populates all four confidence--risk regimes. Any contribution is evidence that
+semantic risk catches needs missed by uncertainty at competitive cost, not the
+idea of generation-time retrieval itself.
+\end{abstract}
+
+\section{Research Question}
+When confidence and epistemic risk are measured separately, does semantic
+risk-triggered retrieval improve the unsupported-claim--cost frontier over
+FLARE-like confidence triggering, model-only generation, upfront RAG, and
+explicit search/tool calling?
+
+\section{Mechanism}
+\[
+Q\rightarrow y_{1:t}\rightarrow \widehat{y}_{t+1:t+k}
+\rightarrow \{T_{\mathrm{conf}},T_{\mathrm{sem}}\}
+\rightarrow \text{retrieve}\rightarrow \text{evidence}
+\rightarrow y_{t+1:}.
+\]
+The model need not emit a search API call. The FLARE-like condition predicts or
+inspects upcoming generation, computes token/model uncertainty, retrieves with
+the upcoming content below a fixed confidence threshold, then regenerates or
+continues with evidence. We report every simplification relative to canonical
+FLARE. The semantic condition uses only transparent lexical, syntactic, entity,
+temporal, freshness, and source-dependence rules.
+
+\section{Single Controlled Source}
+Use a versioned fact store or relational database as the primary source. It must contain stable facts, changed/recent facts, unavailable facts, contradictory records, plausible distractors, and facts whose relevance becomes apparent only after intermediate reasoning. Web retrieval may be used only as a secondary ecological demonstration.
+
+\section{Trigger Design}
+Paper 1.5 permits only transparent, non-learned triggers:
+\begin{itemize}
+\item lexical cues such as ``latest'', ``current'', ``in 2026'', ``highest'', ``most sales'';
+\item entity/attribute patterns;
+\item temporal expressions;
+\item narrow sentence-prefix templates indicating an imminent factual value.
+\end{itemize}
+
+\section{Measured Confidence--Risk Design}
+Neural uncertainty is not an evidence-need label. Examples are assigned only
+after measuring confidence on the evaluated checkpoint:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Confidence & Epistemic risk & Expected diagnostic behavior \\
+\midrule
+High & Low & continue without retrieval \\
+Low & Low & expose confidence-driven over-retrieval \\
+High & High & test confident-hallucination catch rate \\
+Low & High & both controllers should retrieve \\
+\bottomrule
+\end{tabular}
+\end{center}
+Thresholds are fit on development data and swept at evaluation; quadrant labels
+must not be assigned from researcher intuition.
+
+\section{Prospective and Retrospective Modes}
+\paragraph{Prospective retrieval.} Interrupt before a factual value is emitted.
+\paragraph{Retrospective verification.} Allow a candidate claim, then retrieve before treating the claim as supported.
+
+\section{Epistemic State}
+Return compact typed status alongside evidence:
+\begin{itemize}
+\item supported;
+\item contradicted;
+\item unverified;
+\item stale;
+\item ambiguous;
+\item source conflict.
+\end{itemize}
+All records retain source identity and timestamps where available.
+
+\section{Tasks}
+Include confidently wrong or stale facts, low-confidence completions needing no
+evidence, stable high-confidence facts, and low-confidence externally grounded
+facts. Also include multi-step answers where a need emerges late,
+freshness-sensitive questions, unavailable evidence requiring abstention, and
+hard distractors where neither trigger should fire.
+
+\section{Baselines}
+\begin{enumerate}
+\item LLM only.
+\item Matched anti-hallucination prompt.
+\item Upfront RAG with identical source access.
+\item Explicit retrieval/tool calling.
+\item FLARE-like confidence trigger.
+\item Semantic heuristic trigger.
+\item Confidence OR semantic trigger.
+\item Confidence AND semantic trigger where meaningful.
+\item Retrospective verification.
+\item Oracle trigger and query.
+\end{enumerate}
+
+\section{Metrics}
+Report final accuracy, unsupported-claim rate, trigger and retrieval
+precision and recall, confident-hallucination catch rate,
+false retrieval for low-confidence cases without evidence deficits, retrieval
+rate in each measured confidence--risk quadrant, uncertainty around thresholds, correction and
+abstention quality, evidence-status calibration, tokens, calls, and latency.
+Plot hallucination reduction against retrieval cost with threshold sweeps and
+Pareto frontiers.
+
+\section{Falsification}
+Semantic triggering fails to add value if the FLARE-like condition catches the
+same cases at equal or lower cost, the semantic rules duplicate uncertainty,
+high-confidence/high-risk cases are immaterial, false triggers erase reliability
+gains, or the rules effectively encode answers.
+
+\section{Scope}
+One retrieval source only. No learned trigger, no multi-source router, no symbolic reasoning, no backtracking, no PRA/native KV dependency.
+
+\begin{thebibliography}{9}
+\bibitem{flare}
+Z.~Jiang et al.
+Active retrieval augmented generation.
+\emph{EMNLP}, 2023.
+\url{https://arxiv.org/abs/2305.06983}.
+\end{thebibliography}
+
+\end{document}

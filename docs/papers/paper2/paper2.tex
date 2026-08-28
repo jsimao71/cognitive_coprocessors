@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,hyperref}
+\title{Heterogeneous Reflex Reasoning: Multiple Symbolic Coprocessors with Typed Micro-State}
+\author{Working Draft}
+\date{August 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Generalize automatic assistance to multiple engines and persistent typed micro-state while retaining strict syntax and transparent heuristic triggers.
+\end{abstract}
+
+\section{Motivation}
+Most LLM systems expose external computation through explicit tool invocation: a model or harness selects a function, serializes arguments, executes it, and serializes the result back into context. This series studies a different architecture in which the Transformer is one subsystem of a heterogeneous cognitive machine. Specialized engines can recognize computational opportunities, maintain structured state, derive consequences, and make useful results available to subsequent neural computation. Conventional tool calling remains a universal fallback.
+
+\section{Core Hypothesis}
+Tightly coupled specialized computation can improve reliability, efficiency, and scaling without abandoning Transformers as general learned semantic machines. The decisive evidence is not isolated benchmark accuracy but improved scaling with problem size under matched model and external-capability budgets.
+
+\section{Paper-Specific Objectives}
+\begin{itemize}
+\item Retain calculator; add Horn/Datalog logic, ISA/frame graph reasoning, and optionally simple constraints.
+\item Define common typed micro-IR and provenance.
+\item Implement bounded persistent state and forward closure.
+\item Create mixed-engine tasks.
+\item Compare no-engine, explicit tools, single engines, multiple engines, and oracle selection.
+\item Measure scaling with depth, entities, rules, distractors, state size, tokens, and latency.
+\end{itemize}
+
+\section{Common Architecture}
+The program studies progressively tighter versions of
+\[
+\begin{aligned}
+\text{Transformer stream}
+&\rightarrow \text{recognizer/semantic event}
+\rightarrow \text{typed micro-IR} \\
+&\rightarrow \text{coprocessor}
+\rightarrow \text{derived micro-state}
+\rightarrow \text{Transformer}.
+\end{aligned}
+\]
+A semantic interrupt is an automatically detected opportunity for specialized computation. A coprocessor is a persistent or reflex computational subsystem rather than merely an API selected through natural-language description.
+
+\section{Evaluation}
+Use matched checkpoints and tasks. Report final-answer accuracy and component-level correctness, generated tokens, model calls, latency, intervention frequency, false interventions, engine work, context/state size, and scaling curves. Include no-coprocessor and conventional explicit-tool baselines whenever applicable. Oracle trigger/selection controls should separate interface failures from engine capability.
+
+\section{Falsification}
+The proposed mechanism is not supported if gains disappear under matched compute and capability controls, if intervention errors offset reliability improvements, or if conventional explicit tool calling provides equivalent quality and cost without tighter coupling.
+
+\section{Scope Guardrails}
+\begin{itemize}
+\item No learned trigger.
+\item Use a controlled FOL/Horn fragment, not unrestricted theorem proving.
+\item No rollback/backtracking.
+\item No PRA dependency.
+\end{itemize}
+
+\section{Series Roadmap}
+\begin{itemize}
+\item Paper 0: Heterogeneous Cognitive Transformers: From Tool Use to Cognitive Coprocessors.
+\item Paper 1: Reflex Computation: Automatic Calculator Assistance During Autoregressive Decoding.
+\item Paper 2: Heterogeneous Reflex Reasoning: Multiple Symbolic Coprocessors with Typed Micro-State.
+\item Paper 3: Learned Semantic Interrupts for Cognitive Coprocessors.
+\item Paper 4: Transactional Cognitive State: Hypotheses, Provenance, Retraction, and Backtracking.
+\item Paper 5: Native Coprocessor Context: From Text Reinjection to Structured and KV-Level Interfaces.
+\item Paper 6: Learning to Offload: Co-Adaptation Between Transformers and Cognitive Coprocessors.
+\item Paper 7: A Heterogeneous Cognitive Runtime for Language Models.
+\end{itemize}
+
+\section{Related Work}
+Toolformer learns to insert API calls into language-model generation. Neuro-symbolic systems such as AlphaGeometry demonstrate complementary neural guidance and symbolic deduction. Dynamic solver-composition work studies selection among formal reasoning paradigms, while recent verifiable neuro-symbolic programming makes reasoning explicit as compositions of primitives. This series focuses specifically on automatic, persistent, decoding-coupled cognitive coprocessors and progressively learned interfaces between neural and structured computation.
+
+
+\begin{thebibliography}{9}
+\bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.
+\bibitem{alphageometry} Trinh et al. Solving Olympiad Geometry without Human Demonstrations. Nature, 2024.
+\bibitem{dynamic} Xu et al. Adaptive LLM-Symbolic Reasoning via Dynamic Logical Solver Composition. EACL, 2026.
+\bibitem{forethought} Bhat et al. Forethought: Verifiable Reasoning from Neurosymbolic Primitive Programming. arXiv:2607.04096, 2026.
+\end{thebibliography}
+
+\end{document}

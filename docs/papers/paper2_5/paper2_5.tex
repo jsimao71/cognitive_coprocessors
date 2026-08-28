@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,hyperref}
+\title{Heterogeneous Active Retrieval Across Structurally Different Evidence Substrates}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+\begin{abstract}
+FLARE and Self-RAG establish important forms of adaptive generation-time
+retrieval \cite{flare,selfrag}. This paper does not claim that mechanism. It
+tests whether structurally different information needs benefit from routing
+among genuinely heterogeneous evidence substrates: relational execution,
+lexical indexing, vector retrieval, web search, and optionally graph traversal.
+The proposed router remains transparent and heuristic. The decisive controls
+are matched-cost universal retrieval, broadcast, explicit model selection, and
+oracle source routing. If oracle heterogeneous routing cannot beat a universal
+retriever, later learned routing is not motivated.
+\end{abstract}
+
+\section{Architecture}
+The runtime forms a typed information-need event
+\[
+h_t\rightarrow e_t=(\text{entity},\text{relation},\text{time},\text{source hints},\text{confidence}),
+\]
+then a transparent router chooses among
+\[
+\{\mathrm{DB},\mathrm{lexical},\mathrm{vector},\mathrm{KG},\mathrm{web}\}.
+\]
+Each event is logged through the factorization
+\[
+\textsc{trigger}\rightarrow\textsc{source}\rightarrow\textsc{query}
+\rightarrow\textsc{retrieve/execute}\rightarrow\textsc{evidence\ use}.
+\]
+Component scores and oracle substitutions prevent routing failures from being
+hidden inside final-answer accuracy.
+
+\section{Minimum Retrieval Suite}
+\begin{itemize}
+\item relational/structured database;
+\item lexical/document index;
+\item vector database or semantic document retriever;
+\item web/search source.
+\end{itemize}
+A knowledge graph is optional if it adds a genuinely distinct access pattern.
+Multiple wrappers over one text retriever do not satisfy this requirement.
+
+\section{Heuristic Routing}
+Examples:
+\begin{itemize}
+\item structured attributes, identifiers, aggregates $\rightarrow$ DB;
+\item explicit document names/exact terms $\rightarrow$ lexical;
+\item semantic document questions $\rightarrow$ vector;
+\item latest/current/recent external facts $\rightarrow$ web;
+\item entity/relation neighborhoods $\rightarrow$ KG.
+\end{itemize}
+The benchmark makes these semantics necessary: an argmax over sales requires DB
+aggregation, an exact policy clause favors lexical lookup, a semantic report
+question favors vector retrieval, a current public fact favors web search, and a
+neighborhood or path query favors a KG.
+No learned router is allowed in the core paper.
+
+\section{Composed Helpers}
+Small deterministic preprocessing may resolve relative dates, normalize entity
+IDs, or form database filters/aggregations. Bounded compositions such as date
+resolver $\rightarrow$ web and entity resolver $\rightarrow$ DB are allowed,
+but their dependency DAG and component costs must be logged. They may not become
+a hidden general planner.
+
+\section{Common Evidence IR}
+All retrievers emit source type/ID, query, content/value, timestamp/freshness, relevance score where meaningful, support/contradiction/ambiguity status, and provenance.
+
+\section{Tasks}
+Use source-diverse workloads: structured business facts, exact document lookup, semantic document QA, recent/current facts, multi-source conflicts, no-retrieval cases, and cases where the best source becomes clear only mid-generation.
+
+\section{Baselines}
+\begin{enumerate}
+\item LLM only.
+\item Single universal retriever.
+\item Upfront RAG across all sources.
+\item FLARE-like confidence trigger plus universal retriever.
+\item FLARE-like confidence trigger plus heuristic heterogeneous router.
+\item Self-RAG-inspired adaptive retrieval, if feasible and clearly labeled as
+an approximation unless canonical training is reproduced.
+\item Explicit LLM tool/source selection.
+\item Broadcast-to-all under matched cost and fanout.
+\item Heuristic semantic reflex routing.
+\item Oracle source router.
+\item Oracle trigger plus source router.
+\end{enumerate}
+
+\section{Metrics}
+Report final accuracy and unsupported claims, plus separate trigger P/R, source
+top-$1$/top-$k$ and confusion matrix, query correctness, retrieval/execution P/R,
+evidence-use rate, source fanout, conflicts, cost, generated/tool-selection
+tokens, latency, dependency-DAG cost, and scaling with source count and factual
+subgoals.
+
+\section{Falsification}
+The heterogeneous claim fails if a universal retriever matches under equal cost,
+oracle routing adds little, matched-cost broadcasting dominates, source-specific
+query semantics do not matter, explicit source selection is equally efficient,
+or routing errors dominate specialization gains.
+
+\section{Scope}
+No learned routing, hidden-state trigger, backtracking, or PRA/native KV integration.
+
+\begin{thebibliography}{9}
+\bibitem{flare}
+Z.~Jiang et al.
+Active retrieval augmented generation.
+\emph{EMNLP}, 2023.
+\url{https://arxiv.org/abs/2305.06983}.
+
+\bibitem{selfrag}
+A.~Asai et al.
+Self-RAG: Learning to retrieve, generate, and critique through self-reflection.
+\emph{ICLR}, 2024.
+\url{https://arxiv.org/abs/2310.11511}.
+\end{thebibliography}
+
+\end{document}

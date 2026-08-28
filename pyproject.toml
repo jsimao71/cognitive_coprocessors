@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cognitive-coprocessors"
+version = "0.1.0"
+description = "Evidence-gated experiments for cognitive coprocessors"
+readme = "README2.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+hf = ["torch>=2.2", "transformers>=4.46,<5"]
+analysis = ["matplotlib>=3.7"]
+test = ["pytest>=8.0"]
+
+[project.scripts]
+ccpu = "ccpu.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

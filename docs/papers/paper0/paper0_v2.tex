@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,hyperref}
+\title{Heterogeneous Cognitive Transformers:\\Computational and Epistemic Coprocessors}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+\begin{abstract}
+We propose a blue-sky architecture in which a Transformer remains the general learned semantic substrate but is tightly coupled to specialized cognitive coprocessors. Two interleaved tracks are studied: \emph{computational coprocessors}, which provide exact or structured operations such as arithmetic, logic, constraints, graph reasoning, algebra and code execution; and \emph{epistemic coprocessors}, which detect emerging information needs and retrieve evidence from databases, vector stores, document indices, knowledge graphs and the web. Both can be activated during autoregressive inference through progressively richer semantic interrupts, from strict syntax and lexical heuristics to learned routing. Outputs become typed cognitive micro-state and may later be selectively materialized through PRA or native interfaces. Conventional tool calling and upfront RAG remain fallback/complementary mechanisms.
+\end{abstract}
+
+\section{Motivation}
+Current LLM systems often collapse two different failures into ``tool use.'' A \emph{competence deficit} occurs when the model has enough information but benefits from exact computation, e.g. multiplication or logical closure. A \emph{knowledge deficit} occurs when the model lacks reliable, fresh, or source-specific evidence. The proposed runtime treats these as distinct cognitive needs.
+
+\section{Twin Tracks}
+\subsection{Computational coprocessors}
+A computational interrupt means: ``this emerging structure can be computed, inferred, checked, or transformed more reliably by a specialized engine.'' Examples include calculators, Horn/Datalog engines, theorem provers, SMT solvers, graph engines, CAS systems, and code/simulation runtimes.
+
+\subsection{Epistemic coprocessors}
+An epistemic interrupt means: ``this emerging factual commitment requires external evidence.'' A phrase such as ``the product with the most sales in 2026 was ...'' can trigger a database lookup before the model commits to a value. A phrase such as ``X posted last week ...'' can compose temporal resolution with web retrieval.
+
+\section{Generation-Time Assistance}
+Upfront RAG follows
+\[
+Q\rightarrow R(Q)\rightarrow C\rightarrow \text{generate}.
+\]
+Generation-time retrieval follows
+\[
+Q\rightarrow y_{1:t}\rightarrow \text{epistemic interrupt}\rightarrow R(h_t)\rightarrow \text{evidence}\rightarrow y_{t+1:}.
+\]
+The developing reasoning trajectory can expose needs that were not obvious from the original question.
+
+\section{Semantic Interrupt Ladder}
+\begin{enumerate}
+\item strict syntax/grammar;
+\item lexical and syntactic heuristics;
+\item heuristic categorization/routing;
+\item learned text-level detection and normalization;
+\item hidden-state routing;
+\item jointly trained neural--coprocessor interfaces.
+\end{enumerate}
+
+\section{Typed Micro-IR and State}
+Natural language is normalized into small typed events such as
+\[
+\texttt{ADD}(10,3),\quad \texttt{ISA}(\texttt{penguin},\texttt{bird}),
+\]
+or
+\[
+\texttt{RETRIEVE}(\texttt{source=DB},\texttt{relation=max\_sales},\texttt{year=2026}).
+\]
+Outputs become facts, results, evidence spans, derivations, contradictions, freshness metadata, provenance and confidence.
+
+\section{Program Hypotheses}
+\begin{itemize}
+\item H1 Reliability: coprocessors reduce exact-computation errors and unsupported factual commitments.
+\item H2 Efficiency: specialized engines reduce token and compute waste relative to neural emulation or verbose explicit tool use.
+\item H3 Scaling: heterogeneous systems degrade more slowly with reasoning depth, state size, and factual freshness.
+\item H4 Small-model leverage: smaller Transformers benefit disproportionately because they need only expose semantic structure and use returned state.
+\end{itemize}
+
+\section{Interleaved Research Program}
+\begin{itemize}
+\item Paper 0: Position: computational + epistemic coprocessors.
+\item Paper 1: Reflex calculator.
+\item Paper 1.5: Reflex retrieval, single source.
+\item Paper 2: Multiple compute/reasoning engines.
+\item Paper 2.5: Multiple retrieval engines.
+\item Paper 3: Learned computational semantic interrupts.
+\item Paper 3.5: Learned epistemic interrupts and routing.
+\item Paper 4: Transactional provenance/backtracking.
+\item Paper 5: Structured/PRA/KV interfaces.
+\item Paper 6: Co-adaptation / learning to offload and acquire.
+\item Paper 7: Integrated heterogeneous cognitive runtime.
+\end{itemize}
+
+\section{Guardrails}
+Do not position symbolic engines as Transformer replacements. Do not assume tighter coupling is always better. Keep explicit tools and upfront RAG as baselines/fallbacks. Do not require PRA before state size makes selective materialization an empirical problem.
+
+\section{Related Work}
+The program is adjacent to tool-using LMs, program-aided reasoning, RAG and self-reflective retrieval, neuro-symbolic reasoning, and interactive theorem proving. Its specific focus is automatic generation-time computational and epistemic interrupts, persistent typed micro-state, and progressive coupling between neural and specialized computation.
+
+
+\begin{thebibliography}{9}
+\bibitem{toolformer} Schick et al. Toolformer. NeurIPS, 2023.
+\bibitem{rag} Lewis et al. Retrieval-Augmented Generation. NeurIPS, 2020.
+\bibitem{selfrag} Asai et al. Self-RAG. ICLR, 2024.
+\bibitem{react} Yao et al. ReAct. ICLR, 2023.
+\bibitem{pal} Gao et al. PAL. ICML, 2023.
+\bibitem{alphageometry} Trinh et al. Solving Olympiad Geometry without Human Demonstrations. Nature, 2024.
+\bibitem{leandojo} Yang et al. LeanDojo. NeurIPS, 2023.
+\end{thebibliography}
+
+\end{document}
