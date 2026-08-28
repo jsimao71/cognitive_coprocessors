@@ -1,0 +1,470 @@
+{
+  "config_sha256": "de2a584992b3ecf7f530bca9f8c4e18133687b7fc7ecc523b6b882c9a7139c39",
+  "interpretation": {
+    "context_role": "development_and_cold_start_with_recurring_token_and_safety_cost",
+    "exact_computation": "deterministic_runtime_with_enforced_result_use",
+    "scope": "three developmental small-model families on one 16-arithmetic/12-control set",
+    "selection_and_serialization": "adapter_weights_with_a_short_explicit_contract"
+  },
+  "question": "Where should interface knowledge live: in context, in weights, or in the runtime?",
+  "rows": [
+    {
+      "answer_accuracy": 0.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.0,
+      "mean_generated_tokens": 17.214285714285715,
+      "mean_prompt_tokens": 86.60714285714286,
+      "mean_wall_time_ms": 3344.537792857143,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "base_minimal",
+      "result_use_rate": null
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.16666666666666666,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 18.928571428571427,
+      "mean_prompt_tokens": 113.75,
+      "mean_wall_time_ms": 4232.9452,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 14.928571428571429,
+      "mean_prompt_tokens": 86.60714285714286,
+      "mean_wall_time_ms": 4112.823325,
+      "model_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+      "model_label": "Qwen3-0.6B",
+      "placement": "weights",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.3333333333333333,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 19.25,
+      "mean_prompt_tokens": 113.75,
+      "mean_wall_time_ms": 5743.9531,
+      "model_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+      "model_label": "Qwen3-0.6B",
+      "placement": "weights_plus_context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.75,
+      "arithmetic_count": 16,
+      "condition": "normalized_reflex",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.75,
+      "mean_generated_tokens": 22.428571428571427,
+      "mean_prompt_tokens": 61.035714285714285,
+      "mean_wall_time_ms": 4043.6157392857144,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "runtime",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.625,
+      "arithmetic_count": 16,
+      "condition": "explicit_tool",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.625,
+      "mean_generated_tokens": 19.178571428571427,
+      "mean_prompt_tokens": 57.035714285714285,
+      "mean_wall_time_ms": 3216.0796642857144,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "explicit_tool",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.875,
+      "arithmetic_count": 16,
+      "condition": "oracle",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 15.642857142857142,
+      "mean_prompt_tokens": 67.85714285714286,
+      "mean_wall_time_ms": 2723.4994607142858,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "oracle",
+      "result_use_rate": 0.875
+    },
+    {
+      "answer_accuracy": 0.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.0,
+      "mean_generated_tokens": 19.428571428571427,
+      "mean_prompt_tokens": 111.42857142857143,
+      "mean_wall_time_ms": 9233.345382142857,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "base_minimal",
+      "result_use_rate": null
+    },
+    {
+      "answer_accuracy": 0.875,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.08333333333333333,
+      "interface_success_rate": 0.9375,
+      "mean_generated_tokens": 34.214285714285715,
+      "mean_prompt_tokens": 150.0,
+      "mean_wall_time_ms": 23234.358957142857,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "context",
+      "result_use_rate": 0.9375
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 16.142857142857142,
+      "mean_prompt_tokens": 111.42857142857143,
+      "mean_wall_time_ms": 7802.146703571429,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct-paper1-protocol-lora-v1",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "weights",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.08333333333333333,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 26.25,
+      "mean_prompt_tokens": 150.0,
+      "mean_wall_time_ms": 19136.765603571428,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct-paper1-protocol-lora-v1",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "weights_plus_context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.8125,
+      "arithmetic_count": 16,
+      "condition": "normalized_reflex",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.9375,
+      "mean_generated_tokens": 14.178571428571429,
+      "mean_prompt_tokens": 82.42857142857143,
+      "mean_wall_time_ms": 5789.008192857143,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "runtime",
+      "result_use_rate": 0.9333333333333333
+    },
+    {
+      "answer_accuracy": 0.375,
+      "arithmetic_count": 16,
+      "condition": "explicit_tool",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.3125,
+      "mean_generated_tokens": 17.178571428571427,
+      "mean_prompt_tokens": 79.57142857142857,
+      "mean_wall_time_ms": 7022.087,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "explicit_tool",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.0,
+      "arithmetic_count": 16,
+      "condition": "oracle",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 7.678571428571429,
+      "mean_prompt_tokens": 89.25,
+      "mean_wall_time_ms": 3001.9880035714286,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "oracle",
+      "result_use_rate": 0.0
+    },
+    {
+      "answer_accuracy": 0.3125,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.0,
+      "mean_generated_tokens": 9.142857142857142,
+      "mean_prompt_tokens": 87.60714285714286,
+      "mean_wall_time_ms": 3103.499960714286,
+      "model_id": "google/gemma-3-1b-it",
+      "model_label": "Gemma3-1B",
+      "placement": "base_minimal",
+      "result_use_rate": null
+    },
+    {
+      "answer_accuracy": 0.375,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.08333333333333333,
+      "interface_success_rate": 0.3125,
+      "mean_generated_tokens": 11.071428571428571,
+      "mean_prompt_tokens": 120.17857142857143,
+      "mean_wall_time_ms": 4342.108928571429,
+      "model_id": "google/gemma-3-1b-it",
+      "model_label": "Gemma3-1B",
+      "placement": "context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.9375,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 14.464285714285714,
+      "mean_prompt_tokens": 87.60714285714286,
+      "mean_wall_time_ms": 4625.098392857143,
+      "model_id": "google/gemma-3-1b-it-paper1-protocol-lora-v1",
+      "model_label": "Gemma3-1B",
+      "placement": "weights",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 13.892857142857142,
+      "mean_prompt_tokens": 120.17857142857143,
+      "mean_wall_time_ms": 5205.9559392857145,
+      "model_id": "google/gemma-3-1b-it-paper1-protocol-lora-v1",
+      "model_label": "Gemma3-1B",
+      "placement": "weights_plus_context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.3125,
+      "arithmetic_count": 16,
+      "condition": "normalized_reflex",
+      "false_intervention_rate": 0.08333333333333333,
+      "interface_success_rate": 0.25,
+      "mean_generated_tokens": 26.178571428571427,
+      "mean_prompt_tokens": 60.607142857142854,
+      "mean_wall_time_ms": 9371.930735714286,
+      "model_id": "google/gemma-3-1b-it",
+      "model_label": "Gemma3-1B",
+      "placement": "runtime",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.25,
+      "arithmetic_count": 16,
+      "condition": "explicit_tool",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.0,
+      "mean_generated_tokens": 9.642857142857142,
+      "mean_prompt_tokens": 57.17857142857143,
+      "mean_wall_time_ms": 2991.4724928571427,
+      "model_id": "google/gemma-3-1b-it",
+      "model_label": "Gemma3-1B",
+      "placement": "explicit_tool",
+      "result_use_rate": null
+    },
+    {
+      "answer_accuracy": 0.0,
+      "arithmetic_count": 16,
+      "condition": "oracle",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 7.714285714285714,
+      "mean_prompt_tokens": 67.42857142857143,
+      "mean_wall_time_ms": 2312.5504857142855,
+      "model_id": "google/gemma-3-1b-it",
+      "model_label": "Gemma3-1B",
+      "placement": "oracle",
+      "result_use_rate": 0.0
+    }
+  ],
+  "schema_version": "ccpu.paper1.placement_comparison.v1",
+  "sources": [
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_base_minimal_v1\\summary.json",
+      "placement": "base_minimal",
+      "sha256": "5265fc178c65736366cb07c3e34b3e8b767c753a8d686129468f111874484165"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\block_icl_multimodel\\qwen3_0_6b_icl_g_heldout\\summary_prompt_metrics_v2.json",
+      "placement": "context",
+      "sha256": "e1fda028afcf43331356007d3ebc7707e91c0a908e57dd3faaf5de5c583c0c56"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_adapter_eval_v1\\summary.json",
+      "placement": "weights",
+      "sha256": "448572e359c06c7b40d8360a6bce745db6b5916381684f3619c874d1444a4657"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_adapter_eval_v1\\summary.json",
+      "placement": "weights_plus_context",
+      "sha256": "448572e359c06c7b40d8360a6bce745db6b5916381684f3619c874d1444a4657"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\hard_heldout_xpu\\run\\summary_prompt_metrics_v2.json",
+      "placement": "runtime",
+      "sha256": "ecd1c4a77ce21f500f8b42122caa87d65e361cc49d67567c08462d322362b230"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\hard_heldout_xpu\\run\\summary_prompt_metrics_v2.json",
+      "placement": "explicit_tool",
+      "sha256": "ecd1c4a77ce21f500f8b42122caa87d65e361cc49d67567c08462d322362b230"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\hard_heldout_xpu\\run\\summary_prompt_metrics_v2.json",
+      "placement": "oracle",
+      "sha256": "ecd1c4a77ce21f500f8b42122caa87d65e361cc49d67567c08462d322362b230"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "base_minimal",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "context",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_adapter_eval_v1\\summary.json",
+      "placement": "weights",
+      "sha256": "1ebed7bb15ec15df32cad938217a43b19cfb8ec824fa6ca0fe26eda209270e33"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_adapter_eval_v1\\summary.json",
+      "placement": "weights_plus_context",
+      "sha256": "1ebed7bb15ec15df32cad938217a43b19cfb8ec824fa6ca0fe26eda209270e33"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "runtime",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "explicit_tool",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "oracle",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_base_eval_v1\\summary.json",
+      "placement": "base_minimal",
+      "sha256": "88db1e3e96265798dbe16ff1d5407cbc9b029acbca7f2fa9a304c69fe2d43ec3"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_base_eval_v1\\summary.json",
+      "placement": "context",
+      "sha256": "88db1e3e96265798dbe16ff1d5407cbc9b029acbca7f2fa9a304c69fe2d43ec3"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_adapter_eval_v2\\summary.json",
+      "placement": "weights",
+      "sha256": "fcda990256eaeaf3f156ffbb4ae66247ab792a2485c20ad80e9b805ce34e5690"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_adapter_eval_v2\\summary.json",
+      "placement": "weights_plus_context",
+      "sha256": "fcda990256eaeaf3f156ffbb4ae66247ab792a2485c20ad80e9b805ce34e5690"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_base_eval_v1\\summary.json",
+      "placement": "runtime",
+      "sha256": "88db1e3e96265798dbe16ff1d5407cbc9b029acbca7f2fa9a304c69fe2d43ec3"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_base_eval_v1\\summary.json",
+      "placement": "explicit_tool",
+      "sha256": "88db1e3e96265798dbe16ff1d5407cbc9b029acbca7f2fa9a304c69fe2d43ec3"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_base_eval_v1\\summary.json",
+      "placement": "oracle",
+      "sha256": "88db1e3e96265798dbe16ff1d5407cbc9b029acbca7f2fa9a304c69fe2d43ec3"
+    }
+  ],
+  "training": [
+    {
+      "adapter_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+      "model_label": "Qwen3-0.6B",
+      "peak_memory_bytes": 1483319296,
+      "report_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_v1\\training_report.json",
+      "report_sha256": "ed495a6b414303d53026fe92ef15a894619a8fae0d580f937d46e82be8ee1199",
+      "trainable_fraction": 0.0038335158817086527,
+      "trainable_parameters": 2293760,
+      "training_target_tokens": 7362,
+      "wall_time_seconds": 394.52654859999893
+    },
+    {
+      "adapter_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct-paper1-protocol-lora-v1",
+      "model_label": "SmolLM2-1.7B",
+      "peak_memory_bytes": 3585238528,
+      "report_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_v1\\training_report.json",
+      "report_sha256": "61ec4dc18413e7655d4a0d78e7c6ac2aaa00ab10105766917385aaf45900f95a",
+      "trainable_fraction": 0.0018347549897332557,
+      "trainable_parameters": 3145728,
+      "training_target_tokens": 7542,
+      "wall_time_seconds": 767.9961364000337
+    },
+    {
+      "adapter_id": "google/gemma-3-1b-it-paper1-protocol-lora-v1",
+      "model_label": "Gemma3-1B",
+      "peak_memory_bytes": 2519721984,
+      "report_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\gemma3_1b_v1\\training_report.json",
+      "report_sha256": "faaf9a21a4a8af77de4afaa7b57250392de70d76c9f3bcf05bae68bd9c785904",
+      "trainable_fraction": 0.0014888939478787415,
+      "trainable_parameters": 1490944,
+      "training_target_tokens": 7362,
+      "wall_time_seconds": 364.9935824999702
+    }
+  ]
+}

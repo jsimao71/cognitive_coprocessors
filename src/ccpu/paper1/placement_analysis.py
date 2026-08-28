@@ -104,10 +104,10 @@ def build_placement_comparison(
         "training": training,
         "rows": rows,
         "interpretation": {
-            "selection_and_serialization": "weights_plus_minimal_contract",
-            "exact_computation": "deterministic_runtime",
+            "selection_and_serialization": "adapter_weights_with_a_short_explicit_contract",
+            "exact_computation": "deterministic_runtime_with_enforced_result_use",
             "context_role": "development_and_cold_start_with_recurring_token_and_safety_cost",
-            "scope": "two developmental small-model families on one 16-arithmetic/12-control set",
+            "scope": "three developmental small-model families on one 16-arithmetic/12-control set",
         },
     }
     write_json(output_dir / "placement_comparison.json", result)

@@ -1,0 +1,86 @@
+{
+  "answer_field": "predicted_answer",
+  "by_run": [
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.4898908364545972
+      ],
+      "arithmetic_count": 4,
+      "block_close_rate": 0.0,
+      "block_execution_rate": 0.0,
+      "block_failure_counts": {
+        "execution_failure": 4,
+        "false_block_controls": 0,
+        "missing_close": 4,
+        "missing_open": 4,
+        "missing_payload": 4,
+        "multiple_blocks": 0,
+        "payload_not_exact": 4,
+        "payload_not_semantically_equivalent": 4
+      },
+      "block_multiple_rate": 0.0,
+      "block_open_model_rate": 0.0,
+      "block_open_rate": 0.0,
+      "block_payload_exact_rate": 0.0,
+      "block_payload_present_rate": 0.0,
+      "block_payload_semantically_equivalent_rate": 0.0,
+      "candidate_count": 0,
+      "condition": "calculator_block_minimal",
+      "count": 6,
+      "engine_correctness": null,
+      "engine_failures": 0,
+      "engine_success_rate": null,
+      "execution_stage_success_rate": 0.0,
+      "expression_exposure_rate": 0.0,
+      "false_block_rate": 0.0,
+      "mean_engine_time_ms": 0.0,
+      "mean_generated_tokens": 96.0,
+      "mean_interventions": 0.0,
+      "mean_invocation_overhead_chars": 0.0,
+      "mean_model_calls": 96.0,
+      "mean_prompt_tokens": 84.5,
+      "mean_reinjected_tokens": 0.0,
+      "mean_state_bytes": 0.0,
+      "mean_state_items": 0.0,
+      "mean_trace_bytes": 0.0,
+      "mean_wall_time_ms": 34953.53336666667,
+      "model_id": "google/gemma-3-1b-it",
+      "normalization_acceptance_rate": null,
+      "normalization_correctness": null,
+      "normalization_failures": 0,
+      "normalization_stage_success_rate": 0.0,
+      "recognition_rate": 0.0,
+      "reinjection_failures": 0,
+      "reinjection_success_rate": 0.0,
+      "result_override_rate": null,
+      "result_use_rate": null,
+      "seed": 17,
+      "selection_correctness": null,
+      "trigger": {
+        "false_intervention_rate": 0.0,
+        "fn": 4,
+        "fp": 0,
+        "precision": 1.0,
+        "recall": 0.0,
+        "tn": 2,
+        "tp": 0
+      }
+    }
+  ],
+  "empirical": true,
+  "scaling": [
+    {
+      "accuracy": 0.0,
+      "condition": "calculator_block_minimal",
+      "count": 4,
+      "mean_wall_time_ms": 35389.921325,
+      "model_id": "google/gemma-3-1b-it",
+      "operand_digits": 1,
+      "operator_count": 1,
+      "structure": "left_chain"
+    }
+  ],
+  "schema_version": "ccpu.paper1.evaluation.v1"
+}

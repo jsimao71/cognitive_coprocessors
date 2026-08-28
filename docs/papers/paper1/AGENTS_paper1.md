@@ -90,8 +90,8 @@ is demonstrated across capability levels.
 - Use `--smoke` before every larger XPU run; it selects four arithmetic examples
   and two controls and records device, dtype, revision, chat settings, time, and
   memory.
-- Authorization-gated Llama and Gemma checkpoints remain skipped until a
-  Hugging Face token with accepted licenses is available.
+- Approved official Gemma3-1B access is now authenticated and pinned at
+  `dcc83ea841ab6100d6b47a070329e1ba4cf78752`; Llama remains unavailable.
 - The 196-row phase remains developmental. Freeze a new untouched and powered
   confirmatory set only after model/interface development ends.
 - On the 16-arithmetic/12-control diagnostic, Qwen3-0.6B ICL-G executed all
@@ -99,17 +99,17 @@ is demonstrated across capability levels.
   blocks with zero false controls and gained 9/lost 1 against LLM-only.
 - Qwen3-4B passed the six-item XPU smoke with perfect block execution and no
   false block at 8.21 GB peak memory. Do not report it as a held-out estimate.
-- Capability-scaling evidence is Qwen-only; the adapter-placement comparison
-  adds official SmolLM2 as an ungated second family. Llama/Gemma authorization
-  skips remain part of the result and community mirrors must not be substituted.
+- Capability-scaling evidence remains Qwen-only because its sweep preceded
+  authentication. The adapter-placement comparison adds official SmolLM2 and
+  approved official Gemma3-1B; community mirrors must not be substituted.
 - LoRA is scientifically justified under Regime A for Qwen3-0.6B control
   discrimination. PEFT 0.20.0 and Accelerate 1.14.0 passed an XPU optimizer-step
   gate with the existing Torch 2.13.0+XPU and Transformers 4.57.6 stack.
 - The frozen protocol dataset contains 80 arithmetic/80 control training rows
   and 20/20 development rows. Its audit must retain zero operand/expression
   overlap with the held-out benchmark; targets never contain arithmetic answers.
-- Train Qwen3-0.6B first. Llama/Gemma remain license-gated, so the predeclared
-  ungated second-family fallback is official HuggingFaceTB SmolLM2-1.7B-Instruct.
+- Train Qwen3-0.6B first and use official HuggingFaceTB SmolLM2-1.7B-Instruct as
+  the ungated replication. Gemma3-1B is the approved targeted-family replication.
 - The primary placement comparison is context (base+ICL-G), weights
   (LoRA+minimal), and runtime (base+normalized reflex). Also measure base+minimal
   and LoRA+ICL to isolate instruction and interaction effects.
@@ -123,13 +123,26 @@ is demonstrated across capability levels.
   answers, and 1/12 false block; LoRA+ICL retained that false block.
 - The SmolLM2 adapter has 3,145,728 trainable parameters (0.183%), is 12.6 MB,
   used 7,542 target tokens, trained for 768.0 seconds, and peaked at 3.59 GB.
+- Gemma3-1B uses BF16 and has 1,490,944 trainable parameters (0.149%), is 6.0 MB,
+  used 7,362 target tokens, trained for 365.0 seconds, and peaked at 2.52 GB.
+- Gemma LoRA+minimal achieved 16/16 execution, 15/16 answers, and 0/12 false
+  blocks; LoRA+ICL-G achieved 16/16 answers and 0/12 false blocks. Base ICL-G
+  executed 5/16 with 1/12 false block; normalized runtime executed 4/16 with
+  1/12 false intervention. Oracle executed 16/16 but the model used 0/16 results.
+- Hugging Face generation must honor every model `generation_config.eos_token_id`,
+  including Gemma `<end_of_turn>` token 106. Access-smoke `v1`, BF16-smoke `v1`,
+  and adapter-eval `v1` are excluded EOS-bug diagnostics; use BF16-smoke `v2`,
+  adapter-eval `v2`, and base-eval `v1`.
 - Current placement conclusion: context is for development/cold start, adapter
   weights store a stable semantic selection/serialization contract, and the
-  runtime retains parsing, bounds, exact execution, reinjection, and enforcement.
+  runtime retains parsing, bounds, exact execution, reinjection, and enforced
+  result use. Residual context is model-specific, not universally additive.
 - Regenerate cross-model artifacts with `paper1 compare-models` and
   `configs/paper1/block_icl_comparison.json`.
 - Regenerate placement artifacts with `paper1 analyze-placement` and
   `configs/paper1/lora_placement_comparison.json`.
+- The current machine-readable placement decision is
+  `artifacts/paper1/lora_protocol/lora_decision_final_v4.json`.
 
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.

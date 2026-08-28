@@ -161,7 +161,8 @@ def train_lora(
     device = select_device(torch, training.device)
     if training.device == "xpu" and device != "xpu":
         raise RuntimeError("the requested XPU training device is unavailable")
-    dtype = getattr(torch, training.dtype)
+    model_dtype = str(model.get("dtype", training.dtype))
+    dtype = getattr(torch, model_dtype)
     torch.manual_seed(training.seed)
     random.seed(training.seed)
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
@@ -245,14 +246,16 @@ def train_lora(
     adapter_files = {
         path.name: file_sha256(path) for path in sorted(adapter_dir.iterdir()) if path.is_file()
     }
+    effective_training = training.to_dict()
+    effective_training["dtype"] = model_dtype
     report = {
         "schema_version": "ccpu.paper1.lora_training.v1",
         "model_id": model_id,
         "model_revision": revision,
         "adapter_id": str(model["adapter_id"]),
         "device": device,
-        "dtype": training.dtype,
-        "training": training.to_dict(),
+        "dtype": model_dtype,
+        "training": effective_training,
         "train_rows": len(train_rows),
         "dev_rows": len(dev_rows),
         "train_target_tokens_per_epoch": sum(row["target_tokens"] for row in train_rows),

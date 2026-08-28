@@ -1,0 +1,17 @@
+{
+  "schema_version": "ccpu.paper1.hf_adapter_run.v1",
+  "seeds": [17],
+  "models": [
+    {
+      "model_id": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "adapter_path": "artifacts/paper1/lora_protocol/gemma3_1b_v1/adapter",
+      "adapter_id": "google/gemma-3-1b-it-paper1-protocol-lora-v1",
+      "max_new_tokens": 96,
+      "device": "xpu",
+      "dtype": "bfloat16",
+      "use_chat_template": true,
+      "enable_thinking": false
+    }
+  ]
+}

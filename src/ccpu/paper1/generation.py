@@ -92,6 +92,18 @@ class HuggingFaceGenerationConfig:
     adapter_id: str | None = None
 
 
+def _eos_token_ids(tokenizer_eos: Any, model_eos: Any) -> frozenset[int]:
+    values: set[int] = set()
+    for candidate in (tokenizer_eos, model_eos):
+        if candidate is None:
+            continue
+        if isinstance(candidate, int):
+            values.add(candidate)
+        else:
+            values.update(int(token_id) for token_id in candidate)
+    return frozenset(values)
+
+
 class HuggingFaceBackend:
     """Correctness-first autoregressive adapter with immediate text reinjection.
 
@@ -134,6 +146,10 @@ class HuggingFaceBackend:
             self.model = PeftModel.from_pretrained(self.model, config.adapter_path)
         self.model = self.model.to(device)
         self.model.eval()
+        self.eos_token_ids = _eos_token_ids(
+            self.tokenizer.eos_token_id,
+            getattr(getattr(self.model, "generation_config", None), "eos_token_id", None),
+        )
         self.device = device
         self.model_memory_bytes = (
             int(torch.xpu.memory_allocated()) if device == "xpu" else None
@@ -217,10 +233,7 @@ class HuggingFaceBackend:
                                 clean_up_tokenization_spaces=False,
                             )
 
-                if (
-                    self.tokenizer.eos_token_id is not None
-                    and token_id == self.tokenizer.eos_token_id
-                ):
+                if token_id in self.eos_token_ids:
                     break
 
         generated_text = self.tokenizer.decode(
@@ -253,6 +266,7 @@ class HuggingFaceBackend:
                 "use_chat_template": self.config.use_chat_template,
                 "used_chat_template": used_chat_template,
                 "enable_thinking": self.config.enable_thinking,
+                "eos_token_ids": sorted(self.eos_token_ids),
                 "model_memory_bytes": self.model_memory_bytes,
                 "peak_memory_bytes": peak_memory_bytes,
             },

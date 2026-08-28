@@ -1,0 +1,56 @@
+{
+  "block_failures_sha256": "2e04dcd2388c362edb81d99db04234e8f0999de98771e5f27c419f3e163d7728",
+  "dataset_sha256": "0ae373ba71d271e1e1c42b8c877fe506f386398831735f4de6ab12fbfcec96b8",
+  "empirical": true,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "2d5dd1fe7ac057ce49321fd5eb52182dced9ff6b"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 6,
+  "predictions_sha256": "9c5bb1f41bbce46f9a4af5952ae3abae54436a365139218e5003fe0931798db0",
+  "run_config": {
+    "backend": "huggingface",
+    "conditions": [
+      "calculator_block_minimal"
+    ],
+    "limit": null,
+    "models": [
+      {
+        "device": "xpu",
+        "dtype": "bfloat16",
+        "enable_thinking": false,
+        "max_new_tokens": 96,
+        "model_id": "google/gemma-3-1b-it",
+        "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+        "use_chat_template": true
+      }
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_block_icl_order_control_prompt": "paper1_calculator_block_icl_v2_order_control",
+      "calculator_block_icl_prompt": "paper1_calculator_block_icl_v1_developmental",
+      "calculator_block_minimal_prompt": "paper1_calculator_block_minimal_v1",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v2_concise",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seeds": [
+      17
+    ],
+    "smoke_gate": true
+  },
+  "runtime_report_sha256": "046e8c364dacf589fb0df9b8a4900c28153846db9c4ddef02c724b43bb05065b",
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "summary_sha256": "785bff20702afcd77020b57e1442bfc8e488fbfc403842c400975d5be5a7c63a",
+  "trace_count": 0,
+  "traces_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

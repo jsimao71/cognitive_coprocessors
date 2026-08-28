@@ -1,0 +1,61 @@
+{
+  "block_failures_sha256": "6c43f8c1b01aa96b650c27663fdec61e439a7d71893584285b081d0238528cea",
+  "dataset_sha256": "0ae373ba71d271e1e1c42b8c877fe506f386398831735f4de6ab12fbfcec96b8",
+  "empirical": true,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "2d5dd1fe7ac057ce49321fd5eb52182dced9ff6b"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 168,
+  "predictions_sha256": "a03e2b8328007f6face99e6c20ef72faee773105fe0a143a4d7037bb008bdb2f",
+  "run_config": {
+    "backend": "huggingface",
+    "conditions": [
+      "llm_only",
+      "calculator_block_minimal",
+      "calculator_block_icl_g",
+      "normalized_reflex",
+      "explicit_tool",
+      "oracle"
+    ],
+    "limit": null,
+    "models": [
+      {
+        "device": "xpu",
+        "dtype": "bfloat16",
+        "enable_thinking": false,
+        "max_new_tokens": 96,
+        "model_id": "google/gemma-3-1b-it",
+        "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+        "use_chat_template": true
+      }
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_block_icl_order_control_prompt": "paper1_calculator_block_icl_v2_order_control",
+      "calculator_block_icl_prompt": "paper1_calculator_block_icl_v1_developmental",
+      "calculator_block_minimal_prompt": "paper1_calculator_block_minimal_v1",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v2_concise",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seeds": [
+      17
+    ],
+    "smoke_gate": false
+  },
+  "runtime_report_sha256": "63cb77cd6670fb53e1dfff233444ce0ddd5c78b1151ccd6401fe742e96f05fe4",
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "summary_sha256": "88db1e3e96265798dbe16ff1d5407cbc9b029acbca7f2fa9a304c69fe2d43ec3",
+  "trace_count": 170,
+  "traces_sha256": "c23638bd1a637b966f6ef9b205aad9f59f1d2379cb8eee5802799e4c5f86c9a3"
+}

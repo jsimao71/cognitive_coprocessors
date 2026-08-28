@@ -1,0 +1,37 @@
+{
+  "by_run": [
+    {
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "failure_counts": {
+        "execution_failure": 0,
+        "false_block_controls": 0,
+        "missing_close": 0,
+        "missing_open": 0,
+        "missing_payload": 0,
+        "multiple_blocks": 0,
+        "payload_not_exact": 16,
+        "payload_not_semantically_equivalent": 0
+      },
+      "model_id": "google/gemma-3-1b-it-paper1-protocol-lora-v1",
+      "seed": 17
+    },
+    {
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "failure_counts": {
+        "execution_failure": 0,
+        "false_block_controls": 0,
+        "missing_close": 0,
+        "missing_open": 0,
+        "missing_payload": 0,
+        "multiple_blocks": 0,
+        "payload_not_exact": 14,
+        "payload_not_semantically_equivalent": 1
+      },
+      "model_id": "google/gemma-3-1b-it-paper1-protocol-lora-v1",
+      "seed": 17
+    }
+  ],
+  "schema_version": "ccpu.paper1.block_failures.v1"
+}

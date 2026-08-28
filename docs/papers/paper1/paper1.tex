@@ -40,14 +40,16 @@ accuracy with Qwen3-0.6B, but falsely blocked 2 of 12 controls. Qwen3-1.7B reach
 93.8\% execution and accuracy with zero false blocks, gaining nine and losing one
 pair against LLM-only ($p=0.0215$). A Qwen3-4B six-item XPU smoke reached 100\%
 execution with no false block, but is not a held-out estimate. Protocol-only
-rank-8 LoRA adapters were then trained for Qwen3-0.6B and an ungated second family,
-SmolLM2-1.7B. With a minimal instruction, both adapters reached 100\% block
-execution and answer accuracy with zero false blocks; both unadapted models under
-that instruction reached 0\% execution. Frozen ICL reached 100\%/93.8\% execution
-but falsely blocked 2/1 controls. These developmental results favor a hybrid:
-store stable semantic selection and serialization in small adapter weights, keep
-exact execution and enforcement in the runtime, and use context for cold-start
-interfaces. The sample remains too small for a general scaling or family claim.
+rank-8 LoRA adapters were then trained for Qwen3-0.6B, SmolLM2-1.7B, and the
+approved official Gemma3-1B checkpoint. With a minimal instruction, all three
+adapters reached 100\% block execution with zero false blocks; answers were
+100\%, 100\%, and 93.8\%, respectively. Gemma reached 100\% answers when ICL was
+added, whereas its base ICL and normalized-runtime conditions executed only
+31.2\% and 25.0\%. These developmental results favor a hybrid: store stable
+semantic selection and serialization in small adapter weights, keep exact
+execution and enforced result use in the runtime, and reserve context for
+cold-start or model-specific residual behavior. The sample remains too small
+for a general scaling or family claim.
 \end{abstract}
 
 \section{Status and Scope}
@@ -551,12 +553,14 @@ control discrimination, whereas the 1.7B model has one arithmetic protocol miss.
 
 \paragraph{Family coverage and runtime.}
 Official Llama 3.2 and Gemma checkpoints require manually accepted Hugging Face
-licenses. No authenticated token was available, so four configured checkpoints
-were skipped and no community mirror was substituted. The current evidence is
-therefore Qwen-only. Qwen3-1.7B peaked at 3.57~GB XPU memory and its full run took
-3074 seconds. Qwen3-4B loaded and completed the smoke at 8.21~GB peak memory in
-494 seconds. The block, accuracy/interface, token--latency, and failure plots are
-generated from one hashed comparison configuration and machine-readable table.
+licenses. No authenticated token was available during this matched-family sweep,
+so four configured checkpoints were skipped and no community mirror was
+substituted; this capability-scaling phase is therefore Qwen-only. Approved
+Gemma access was supplied later for the adapter-placement phase below. Qwen3-1.7B
+peaked at 3.57~GB XPU memory and its full run took 3074 seconds. Qwen3-4B loaded
+and completed the smoke at 8.21~GB peak memory in 494 seconds. The block,
+accuracy/interface, token--latency, and failure plots are generated from one
+hashed comparison configuration and machine-readable table.
 
 \subsection{Current evidence and LoRA gate}
 
@@ -579,13 +583,14 @@ versions, dates, ranges, quoted arithmetic, code, identifiers, and variable-bear
 equations. A mechanical audit finds no exact expression or operand overlap among
 training, development, and the 16-example held-out benchmark.
 
-The XPU training gate completed PEFT forward, backward, and AdamW steps on both
+The XPU training gate completed PEFT forward, backward, and AdamW steps on all three
 models. The frozen stack adds PEFT 0.20.0 and Accelerate 1.14.0 to PyTorch
 2.13.0+XPU and Transformers 4.57.6. LoRA rank is 8 over attention projections,
-with two epochs and assistant-target-only loss. Qwen3-0.6B is primary. Since
-official Llama 3.2 and Gemma 3 files remain license-gated without a Hugging Face
-token, the predeclared ungated second family is the official Apache-2.0
-HuggingFaceTB SmolLM2-1.7B-Instruct checkpoint, not a community mirror.
+with two epochs and assistant-target-only loss. Qwen3-0.6B is primary. The
+predeclared ungated second family is the official Apache-2.0 HuggingFaceTB
+SmolLM2-1.7B-Instruct checkpoint, not a community mirror. A later authenticated
+run uses the approved official Gemma3-1B checkpoint at pinned revision
+\texttt{dcc83ea}; Llama 3.2 access remains unavailable.
 
 Evaluation compares base+frozen ICL (context), adapter+minimal instruction
 (weights), and base+normalized reflex (runtime), with base+minimal and
@@ -637,7 +642,7 @@ runtime remains safer without training but has only 75\% expression exposure and
 execution. No result implies that LoRA learned arithmetic: every answer still
 comes from the unchanged bounded calculator.
 
-\paragraph{Second-family replication and placement answer.}
+\paragraph{Cross-family replication and placement answer.}
 SmolLM2-1.7B used the identical data and optimization schedule. Its adapter has
 3,145,728 trainable parameters (0.183\%), is 12.6~MB, used 7,542 target tokens,
 trained in 768.0 seconds, and peaked at 3.59~GB. Training/development loss changed
@@ -649,6 +654,24 @@ answered 16/16, used every exact result, and had 0/12 false blocks. LoRA+ICL-G
 also answered 16/16 but retained the quoted-fence false block and emitted multiple
 blocks twice. Normalized runtime executed 15/16 with no false intervention but
 answered 13/16 because exact result integration was imperfect.
+
+Gemma3-1B used the same data, schedule, and rank, with its native BF16 dtype.
+Its 1,490,944 trainable parameters (0.149\%) serialize to 6.0~MB; training used
+7,362 target tokens, took 365.0 seconds, and peaked at 2.52~GB. Training/development
+loss changed from 0.1654/0.000094 after epoch one to 0.000069/0.000021 after
+epoch two. Base+minimal emitted 0/16 valid blocks. Base+ICL-G executed 5/16 and
+falsely blocked one control; normalized runtime executed 4/16 and also had one
+false intervention. LoRA+minimal executed 16/16 with 0/12 false blocks but copied
+one expression incorrectly, yielding 15/16 answers. LoRA+ICL-G recovered 16/16
+answers and retained 0/12 false blocks. Oracle detection executed all 16 exact
+calculations, but Gemma used none of the reinjected results, demonstrating that
+runtime enforcement cannot stop at detection, execution, and reinjection.
+
+The manual autoregressive backend originally stopped only on the tokenizer's
+single EOS identifier. Gemma declares both EOS and \texttt{<end\_of\_turn>} in
+its model generation configuration. Corrected generation honors the full set
+\{1,106\}; the corrected base and adapter summaries are the only Gemma sources
+in this analysis. Earlier \texttt{v1} diagnostic runs are retained but excluded.
 
 \begin{table}[t]
 \centering
@@ -666,29 +689,34 @@ Qwen3-0.6B   & Context & 1.000 & 1.000 & 0.167 & 132.7 \\
 SmolLM2-1.7B & Context & 0.938 & 0.875 & 0.083 & 184.2 \\
               & Weights & 1.000 & 1.000 & 0.000 & 127.6 \\
               & Runtime & 0.938 & 0.813 & 0.000 & 96.6 \\
+Gemma3-1B    & Context & 0.312 & 0.375 & 0.083 & 131.2 \\
+              & Weights & 1.000 & 0.938 & 0.000 & 102.1 \\
+              & Runtime & 0.250 & 0.312 & 0.083 & 86.8 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{../../../artifacts/paper1/lora_protocol/placement_comparison_v1/placement_reliability_cost.png}
+\includegraphics[width=\linewidth]{../../../artifacts/paper1/lora_protocol/placement_comparison_v2/placement_reliability_cost.png}
 \caption{Interface success and answer accuracy (left), false interventions
-(center), and recurring prompt-plus-output tokens (right). Adapter+minimal is
-the only learned placement with perfect execution, answers, and control safety
-in both tested families.}
+(center), and recurring prompt-plus-output tokens (right). Adapter+minimal has
+perfect execution and observed control safety in all three families; Gemma needs
+residual ICL to recover its one copied-expression error.}
 \label{fig:placement-comparison}
 \end{figure}
 
 The answer is therefore not one location. Stable semantic selection and block
 serialization are most reliable in weights under a short explicit contract in
-these two models. New or changing interfaces can begin in context without
+all three models. New or changing interfaces can begin in context without
 training, but demonstrations recur on every request and produced more false
-interventions; combining ICL and LoRA did not improve the primary result. Parsing,
-resource bounds, exact arithmetic, reinjection, and enforcement must remain in
-the runtime. This division stores policy in weights and mechanism in the runtime,
-with context serving development and cold-start use. It is a developmental
-design result, not evidence that all interface knowledge should be fine-tuned.
+interventions; residual context repaired Gemma's one adapter copying error but
+was redundant or harmful for Qwen and SmolLM. Parsing, resource bounds, exact
+arithmetic, reinjection, and enforced result use must remain in the runtime.
+This division stores policy in weights and mechanism in the runtime, with context
+serving development, cold start, and measured model-specific residuals. It is a
+developmental design result, not evidence that all interface knowledge should be
+fine-tuned.
 
 \section{Preliminary XPU Pilot}
 
@@ -884,13 +912,13 @@ function-calling ability. Full-prefix token recomputation overstates runtime
 cost. The main comparisons have one greedy seed, 16 arithmetic examples, and
 four observations per selected cell. Their intervals remain wide, the adaptive
 bands are coarse, and no architecture or universal scaling generalization is
-supported. The 4B row is only a six-item smoke. Llama and Gemma were unavailable
-behind manual authorization gates; SmolLM2 supplies one ungated family replication
-but cannot establish effects for the originally targeted families. The adapter
+supported. The 4B row is only a six-item smoke. Llama remains unavailable behind
+manual authorization; approved Gemma3-1B and ungated SmolLM2 provide two
+cross-family adapter replications but cannot establish broad family effects. The adapter
 data are synthetic and small, and near-zero development loss may reflect the
 narrow protocol distribution. Twelve controls do not tightly bound rare false
 triggers, as the ICL failures illustrate. Adapter+minimal was selected by the
-predeclared gate, but the two-family comparison remains developmental rather than
+predeclared gate, but the three-family comparison remains developmental rather than
 confirmatory. The zero-shot block prompt's historical result is not reinterpreted
 by the separately developed ICL prompt, endpoint audit, or LoRA result.
 Finally, exact calculator output cannot repair an incorrectly copied
@@ -930,16 +958,19 @@ frozen two-shot prompt reaches 100\% arithmetic execution on Qwen3-0.6B and
 controls, while 1.7B has no false block and one arithmetic miss. A clean 4B smoke
 supports feasibility but not scaling. Paper 1 therefore establishes a plausible
 few-shot semantic execution interface and a protocol-only adapter result across
-two small-model families. In both, adapter+minimal reaches perfect execution,
-answers, result use, and observed control safety, while base+minimal never opens
-a valid arithmetic block. Context enables cold-start behavior but costs more
-tokens and produces false interventions; adding it after adaptation is redundant
-or harmful. The normalized runtime is safe and training-free but remains limited
-by model expression exposure and result integration. The resulting architecture
-is hybrid: context for rapid development, weights for a stable semantic contract,
-and the runtime for typed parsing, bounds, exact computation, and enforcement.
-Powered confirmatory data and authorized Llama/Gemma runs remain necessary before
-stronger placement or family claims.
+three small-model families. Adapter+minimal reaches perfect execution and observed
+control safety in all three; it reaches perfect answers in Qwen and SmolLM and
+15/16 in Gemma, where residual ICL restores 16/16. Base+minimal never opens a
+valid arithmetic block in any family. Context enables cold-start behavior but
+costs more tokens and can produce false interventions; after adaptation it is
+redundant or harmful except for the measured Gemma residual. The normalized
+runtime is training-free but remains limited by model expression exposure and
+result integration. Gemma and SmolLM oracle runs further show that exact
+reinjection alone does not guarantee result use. The resulting architecture is
+hybrid: context for rapid development and measured residuals, weights for a
+stable semantic contract, and the runtime for typed parsing, bounds, exact
+computation, and enforced use. Powered confirmatory data and an authorized Llama
+run remain necessary before stronger placement or family claims.
 
 \begin{thebibliography}{9}
 
