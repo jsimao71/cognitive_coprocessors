@@ -26,22 +26,23 @@ requiring the model to decide to call a calculator and serialize an invocation.
 We study bounded local calculator interfaces that act during generation. The
 original strict watcher recognizes an arithmetic suffix before an equals sign;
 the next iteration adds deterministic LaTeX/Unicode surface normalization and
-a lightweight fenced calculator block that executes only when its closing
-delimiter arrives. All assisted conditions share the same typed postfix
-micro-IR, exact-rational engine, resource bounds, and textual reinjection. A
-factorial hard-arithmetic generator crosses four operand widths, four operator
-counts, and three structures, while preserving adversarial non-trigger controls
-and stage-level traces. After baseline-only adaptive selection, a separately
-seeded XPU comparison used 16 arithmetic examples, 12 controls, seven conditions,
-and 196 generations. Exact-match accuracy was 43.8\% for LLM-only, 50.0\% for a
-matched prompt, 62.5\% for explicit tools, 37.5\% for strict reflex, 75.0\% for
-normalized reflex, 12.5\% for calculator blocks, and 87.5\% for oracle selection.
-Normalized reflex gained five paired examples and lost none against LLM-only,
-but the unadjusted two-sided exact McNemar result was $p=0.0625$ over only 16
-pairs. The calculator was exact whenever execution succeeded, and no condition
-falsely intervened on 12 controls. The current result motivates replication of
-surface-normalized reflexes, but it does not establish a general scaling claim
-or pass the evidence gate for later mechanisms.
+a fenced calculator block that executes only when its closing delimiter arrives.
+All assisted conditions share the same typed postfix micro-IR, exact-rational
+engine, resource bounds, and textual reinjection. After baseline-only adaptive
+selection, an XPU comparison used 16 arithmetic examples, 12 controls, and seven
+conditions. Exact-match accuracy was 43.8\% for LLM-only, 62.5\% for explicit
+tools, 75.0\% for normalized reflex, and 12.5\% for the original zero-shot block;
+normalized reflex gained five paired examples and lost none ($p=0.0625$,
+unadjusted exact McNemar). We then developed block prompts on a separate split
+and froze a negative-first, positive-last two-shot protocol. On the same
+diagnostic examples, frozen blocks reached 100\% valid execution and arithmetic
+accuracy with Qwen3-0.6B, but falsely blocked 2 of 12 controls. Qwen3-1.7B reached
+93.8\% execution and accuracy with zero false blocks, gaining nine and losing one
+pair against LLM-only ($p=0.0215$). A Qwen3-4B six-item XPU smoke reached 100\%
+execution with no false block, but is not a held-out estimate. These small,
+developmental matched-family results show that semantic execution blocks can be
+an ICL interface skill; they motivate a minimal small-model protocol adapter and
+a powered confirmatory set, not a model-family or general scaling claim.
 \end{abstract}
 
 \section{Status and Scope}
@@ -458,9 +459,9 @@ used fewer delimiter characters than explicit calls, but it did not beat
 explicit tools on every measured cost: explicit generated fewer tokens and was
 faster. H2 is therefore not supported as a quality--cost frontier claim.
 
-\subsection{Evidence-gate decision}
+\subsection{Initial evidence-gate decision}
 
-The current decision is \textbf{no-go for Paper 2}. The original strict reflex
+At that point the decision was \textbf{no-go for Paper 2}. The original strict reflex
 does not improve held-out accuracy, the block interface fails zero-shot content
 elicitation, and the normalized-reflex advantage is unreplicated with
 $p=0.0625$ over 16 pairs. A next Paper 1 replication should hold
@@ -469,6 +470,104 @@ sampling or add a second checkpoint family, and predeclare normalized reflex
 versus both LLM-only and explicit tool as primary comparisons. Block prompting
 or lightweight training is now eligible for a separate development split, but
 must not be tuned on this held-out set.
+
+\section{Few-Shot Blocks and Capability Diagnostic}
+
+\subsection{Endpoint audit and prompt development}
+
+The original exact-match labels are preserved. A parallel, condition-independent
+endpoint extractor recognizes terminal forms such as \texttt{Response: N} without
+using condition identity. Under this audit the original zero-shot block's answer
+accuracy changes from 12.5\% to 43.8\%, while normalized reflex remains 75.0\%.
+This is an extraction correction only: valid zero-shot block execution remains
+12.5\%, so the protocol conclusion is unchanged.
+
+We tested six stronger block prompts on a separate developmental split containing
+four arithmetic examples and four controls. Concrete and verbatim-copy examples
+made arithmetic execution reliable but initially caused false blocks on all four
+controls; a positive/negative variant suppressed false blocks but also suppressed
+arithmetic blocks. A diagnostic with fully seeded fences isolated payload copying.
+The final order control, ICL-G, puts a negative demonstration first and a concrete
+positive block last. It achieved 100\% semantic payload equivalence, execution,
+result use, and answer accuracy with no developmental false block. Exact-string
+payload match was 0\% because the model removed redundant parentheses; the
+bounded parser established semantic equivalence. We froze this prompt as
+\path{paper1_calculator_block_icl_v2_order_control} before cross-model runs.
+
+\subsection{Matched-family XPU results}
+
+Table~\ref{tab:icl-capability} compares the frozen prompt without per-model
+tuning. Qwen3-0.6B used the original held-out arithmetic/control set. The 1.7B
+checkpoint used all seven conditions over the same 28 examples, producing 196
+rows. The 4B result is only the predeclared four-arithmetic/two-control smoke gate.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Frozen ICL-G calculator blocks. The 0.6B and 1.7B rows use 16 arithmetic
+and 12 control examples; the 4B row is a four-arithmetic/two-control smoke only.}
+\label{tab:icl-capability}
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Model & Phase & Execute & Semantic & Answer & False controls & Use \\
+\midrule
+Qwen3-0.6B & held-out diagnostic & 1.000 & 1.000 & 1.000 & 2/12 & 1.000 \\
+Qwen3-1.7B & held-out diagnostic & 0.938 & 0.938 & 0.938 & 0/12 & 1.000 \\
+Qwen3-4B   & smoke               & 1.000 & 1.000 & 1.000 & 0/2  & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For 0.6B, ICL-G gained nine arithmetic examples and lost none against the
+preserved LLM-only run ($p=0.0039$); however, two false blocks fail the safety
+part of the frozen gate. For 1.7B, it gained nine and lost one ($p=0.0215$),
+while normalized reflex gained six and lost one ($p=0.125$). The sole 1.7B block
+failure omitted the wrapper and emitted a bare expression. The endpoint audit
+leaves ICL-G at 93.8\%. The unexpectedly low 1.7B oracle score (12.5\% originally,
+25.0\% under endpoint rescoring) reflects model integration after seeded results,
+not calculator failure; it is retained rather than normalized away.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.72\linewidth]{../../../artifacts/paper1/block_icl_multimodel/model_comparison/block_execution_capability.png}
+\caption{Valid execution under the one frozen ICL prompt. Circles are 16-example
+held-out diagnostics; the square is a four-example smoke and must not be read as
+a comparable estimate. Parameter count is descriptive, not a fitted scaling law.}
+\label{fig:block-capability}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{../../../artifacts/paper1/block_icl_multimodel/model_comparison/failure_mode_heatmap.png}
+\caption{Block failure decomposition. The small model's remaining error is
+control discrimination, whereas the 1.7B model has one arithmetic protocol miss.}
+\label{fig:block-failures}
+\end{figure}
+
+\paragraph{Family coverage and runtime.}
+Official Llama 3.2 and Gemma checkpoints require manually accepted Hugging Face
+licenses. No authenticated token was available, so four configured checkpoints
+were skipped and no community mirror was substituted. The current evidence is
+therefore Qwen-only. Qwen3-1.7B peaked at 3.57~GB XPU memory and its full run took
+3074 seconds. Qwen3-4B loaded and completed the smoke at 8.21~GB peak memory in
+494 seconds. The block, accuracy/interface, token--latency, and failure plots are
+generated from one hashed comparison configuration and machine-readable table.
+
+\subsection{Current evidence and LoRA gate}
+
+The new result reopens the original interface gate: a frozen semantic block is
+reliable on the 1.7B diagnostic and clean in the 4B smoke. This is sufficient to
+motivate later heterogeneous-interface work, while confirmatory Paper 1 claims
+remain gated on a larger untouched set and additional families. It also places
+the LoRA question in Regime A: can 0.6B retain its perfect arithmetic protocol
+while eliminating false control blocks? A minimal protocol-only Qwen3-0.6B
+adapter is justified as the next experiment, but was not trained here. The
+validated XPU environment lacks PEFT/TRL/Accelerate, and modifying it would mix
+an unvalidated training stack into the completed inference environment. Any
+adapter result must use leakage-audited expression/control seeds, report training
+tokens/time and parameter count, and compare base+ICL, adapter+ICL, and
+adapter+minimal instruction. No present result supports a claim that adaptation
+learned arithmetic.
 
 \section{Preliminary XPU Pilot}
 
@@ -637,6 +736,10 @@ and git revision/dirty status. The replay command permits model generation in a
 separate harness while preserving identical controller and evaluation semantics.
 The \texttt{plot} command renders the machine-readable scaling cells as accuracy
 curves by model, operand width, condition, and operator count.
+The \texttt{compare-models} command consumes
+\path{configs/paper1/block_icl_comparison.json} and regenerates the cross-model
+table plus block-capability, interface-accuracy, token--latency, and failure-mode
+figures without manually entered results.
 
 \section{Limitations}
 
@@ -651,13 +754,15 @@ limited, and code-like or unusual formatting remains an adversarial surface.
 The synthetic task controls arithmetic complexity but not realistic discourse.
 The textual explicit-tool baseline may understate a model's native structured
 function-calling ability. Full-prefix token recomputation overstates runtime
-cost. The held-out run has one checkpoint, one greedy seed, 16 arithmetic
-examples, and four observations per selected cell. Its intervals remain wide,
-the adaptive bands are coarse, and no architecture or scaling generalization is
-supported. The 12 controls establish no observed false intervention, not a tight
-upper bound on rare false triggers. The zero-shot block prompt included a
-placeholder demonstration that the model often copied literally; changing it
-requires a new development/held-out cycle rather than reinterpretation here.
+cost. The main comparisons have one greedy seed, 16 arithmetic examples, and
+four observations per selected cell. Their intervals remain wide, the adaptive
+bands are coarse, and no architecture or universal scaling generalization is
+supported. The 4B row is only a six-item smoke. Llama and Gemma were unavailable
+behind manual authorization gates, leaving family effects unresolved. Twelve
+controls do not tightly bound rare false triggers, as the two 0.6B ICL-G failures
+illustrate. The zero-shot block prompt included a placeholder demonstration that
+the model often copied literally; its historical result is not reinterpreted by
+the separately developed ICL prompt or endpoint audit.
 Finally, exact calculator output cannot repair an incorrectly copied
 expression, a model that ignores the result, or a task whose premises are wrong.
 
@@ -678,16 +783,19 @@ Paper 1 reduces the cognitive-coprocessor proposal to its smallest credible
 experiment. A character-incremental detector, typed allowlisted micro-IR, exact
 bounded calculator, append-only state, and immediate text reinjection are enough
 to test whether automatic computation can improve an autoregressive stream.
-The implementation and one held-out XPU cycle are complete. The original strict
-watcher does not improve accuracy, and the fenced block fails because the model
-usually emits invalid content despite reliable closing-fence recognition.
-Deterministic surface normalization changes the result: normalized reflex is
-numerically strongest among non-oracle interfaces, executes exact full
-expressions in 12 of 16 cases, and improves five paired examples without a loss.
-That result remains just outside an unadjusted 0.05 exact-test threshold and has
-not been replicated across seeds or model families. The appropriate outcome is
-to replicate normalized reflex, redesign the block only on new development data,
-and keep the Paper 2 evidence gate closed.
+The original strict watcher does not improve accuracy, and the zero-shot fenced
+block usually emits invalid content. Deterministic surface normalization is
+numerically stronger, executing 12 of 16 full expressions and improving five
+paired examples without a loss, but remains an unreplicated result. Separate
+development shows that the block failure was not intrinsic to the grammar: one
+frozen two-shot prompt reaches 100\% arithmetic execution on Qwen3-0.6B and
+93.8\% on Qwen3-1.7B. Capability changes the error type: 0.6B falsely blocks two
+controls, while 1.7B has no false block and one arithmetic miss. A clean 4B smoke
+supports feasibility but not scaling. Paper 1 therefore establishes a plausible
+few-shot semantic execution interface within one model family, reopens the gate
+for bounded multi-engine work, and motivates a protocol-only small-model adapter.
+Powered confirmatory data, authorized second-family runs, and a separately
+validated LoRA training stack remain necessary before stronger claims.
 
 \begin{thebibliography}{9}
 

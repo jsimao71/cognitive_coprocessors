@@ -94,6 +94,18 @@ is demonstrated across capability levels.
   Hugging Face token with accepted licenses is available.
 - The 196-row phase remains developmental. Freeze a new untouched and powered
   confirmatory set only after model/interface development ends.
+- On the 16-arithmetic/12-control diagnostic, Qwen3-0.6B ICL-G executed all
+  arithmetic blocks but falsely blocked 2 controls. Qwen3-1.7B executed 15/16
+  blocks with zero false controls and gained 9/lost 1 against LLM-only.
+- Qwen3-4B passed the six-item XPU smoke with perfect block execution and no
+  false block at 8.21 GB peak memory. Do not report it as a held-out estimate.
+- Current evidence is Qwen-only; Llama/Gemma authorization skips are part of
+  the result and community mirrors must not be substituted.
+- LoRA is scientifically justified under Regime A for Qwen3-0.6B control
+  discrimination, but no adapter result exists. The validated XPU environment
+  lacks PEFT/TRL/Accelerate; validate a separate training stack before training.
+- Regenerate cross-model artifacts with `paper1 compare-models` and
+  `configs/paper1/block_icl_comparison.json`.
 
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.

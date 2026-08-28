@@ -1,0 +1,52 @@
+{
+  "schema_version": "ccpu.paper1.lora_decision.v1",
+  "decision_date": "2026-08-28",
+  "regime": "A_larger_models_solve_blocks_with_icl",
+  "decision": "justified_next_experiment_not_executed",
+  "target_model": "Qwen/Qwen3-0.6B",
+  "target_behavior": "preserve arithmetic block execution while reducing false blocks on controls",
+  "evidence": [
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "phase": "heldout_diagnostic",
+      "arithmetic_examples": 16,
+      "control_examples": 12,
+      "block_execution_rate": 1.0,
+      "semantic_payload_rate": 1.0,
+      "false_blocks": 2
+    },
+    {
+      "model": "Qwen/Qwen3-1.7B",
+      "phase": "heldout_diagnostic",
+      "arithmetic_examples": 16,
+      "control_examples": 12,
+      "block_execution_rate": 0.9375,
+      "semantic_payload_rate": 0.9375,
+      "false_blocks": 0
+    },
+    {
+      "model": "Qwen/Qwen3-4B",
+      "phase": "xpu_smoke",
+      "arithmetic_examples": 4,
+      "control_examples": 2,
+      "block_execution_rate": 1.0,
+      "semantic_payload_rate": 1.0,
+      "false_blocks": 0
+    }
+  ],
+  "execution_status": "not_started",
+  "reasons_not_executed": [
+    "The validated XPU inference environment does not contain peft, datasets, trl, or accelerate.",
+    "The current diagnostic is small and second-family checkpoints remain authorization-gated.",
+    "Adapter training must use a separately validated stack and leakage-audited protocol data."
+  ],
+  "required_comparisons": [
+    "base_plus_frozen_icl",
+    "lora_plus_frozen_icl",
+    "lora_plus_minimal_instruction",
+    "normalized_reflex",
+    "explicit_tool",
+    "oracle"
+  ],
+  "claim_boundary": "A future adapter may learn interface behavior; arithmetic remains external and exact."
+}
