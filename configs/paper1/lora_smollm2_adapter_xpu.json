@@ -1,0 +1,17 @@
+{
+  "schema_version": "ccpu.paper1.hf_adapter_run.v1",
+  "seeds": [17],
+  "models": [
+    {
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "adapter_path": "artifacts/paper1/lora_protocol/smollm2_1_7b_v1/adapter",
+      "adapter_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct-paper1-protocol-lora-v1",
+      "max_new_tokens": 96,
+      "device": "xpu",
+      "dtype": "float16",
+      "use_chat_template": true,
+      "enable_thinking": false
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": "ccpu.paper1.placement_comparison_config.v1",
+  "rows": [
+    {"model_label": "Qwen3-0.6B", "placement": "base_minimal", "condition": "calculator_block_minimal", "summary": "../../artifacts/paper1/lora_protocol/qwen3_0_6b_base_minimal_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "context", "condition": "calculator_block_icl_g", "summary": "../../artifacts/paper1/block_icl_multimodel/qwen3_0_6b_icl_g_heldout/summary_prompt_metrics_v2.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "weights", "condition": "calculator_block_minimal", "summary": "../../artifacts/paper1/lora_protocol/qwen3_0_6b_adapter_eval_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "weights_plus_context", "condition": "calculator_block_icl_g", "summary": "../../artifacts/paper1/lora_protocol/qwen3_0_6b_adapter_eval_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "runtime", "condition": "normalized_reflex", "summary": "../../artifacts/paper1/hard_heldout_xpu/run/summary_prompt_metrics_v2.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "explicit_tool", "condition": "explicit_tool", "summary": "../../artifacts/paper1/hard_heldout_xpu/run/summary_prompt_metrics_v2.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "oracle", "condition": "oracle", "summary": "../../artifacts/paper1/hard_heldout_xpu/run/summary_prompt_metrics_v2.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "base_minimal", "condition": "calculator_block_minimal", "summary": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_base_eval_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "context", "condition": "calculator_block_icl_g", "summary": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_base_eval_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "weights", "condition": "calculator_block_minimal", "summary": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_adapter_eval_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "weights_plus_context", "condition": "calculator_block_icl_g", "summary": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_adapter_eval_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "runtime", "condition": "normalized_reflex", "summary": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_base_eval_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "explicit_tool", "condition": "explicit_tool", "summary": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_base_eval_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "oracle", "condition": "oracle", "summary": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_base_eval_v1/summary.json"}
+  ],
+  "training_reports": [
+    {"model_label": "Qwen3-0.6B", "report": "../../artifacts/paper1/lora_protocol/qwen3_0_6b_v1/training_report.json"},
+    {"model_label": "SmolLM2-1.7B", "report": "../../artifacts/paper1/lora_protocol/smollm2_1_7b_v1/training_report.json"}
+  ]
+}

@@ -12,7 +12,7 @@
 \newcommand{\microir}{\textsc{micro-ir}}
 
 \title{Reflex Computation:\\
-Hard-Arithmetic Scaling and Semantic Execution Blocks}
+Semantic Execution Blocks and Interface-Knowledge Placement}
 \author{Working Draft}
 \date{August 2026}
 
@@ -39,10 +39,15 @@ diagnostic examples, frozen blocks reached 100\% valid execution and arithmetic
 accuracy with Qwen3-0.6B, but falsely blocked 2 of 12 controls. Qwen3-1.7B reached
 93.8\% execution and accuracy with zero false blocks, gaining nine and losing one
 pair against LLM-only ($p=0.0215$). A Qwen3-4B six-item XPU smoke reached 100\%
-execution with no false block, but is not a held-out estimate. These small,
-developmental matched-family results show that semantic execution blocks can be
-an ICL interface skill; they motivate a minimal small-model protocol adapter and
-a powered confirmatory set, not a model-family or general scaling claim.
+execution with no false block, but is not a held-out estimate. Protocol-only
+rank-8 LoRA adapters were then trained for Qwen3-0.6B and an ungated second family,
+SmolLM2-1.7B. With a minimal instruction, both adapters reached 100\% block
+execution and answer accuracy with zero false blocks; both unadapted models under
+that instruction reached 0\% execution. Frozen ICL reached 100\%/93.8\% execution
+but falsely blocked 2/1 controls. These developmental results favor a hybrid:
+store stable semantic selection and serialization in small adapter weights, keep
+exact execution and enforcement in the runtime, and use context for cold-start
+interfaces. The sample remains too small for a general scaling or family claim.
 \end{abstract}
 
 \section{Status and Scope}
@@ -565,8 +570,7 @@ should live: transiently in context, persistently in weights, or deterministical
 in the runtime.
 
 \paragraph{Frozen adapter protocol.}
-A minimal protocol-only experiment is now configured but remains unrun at this
-checkpoint. The training set has 80 arithmetic and 80 negative-control requests;
+The minimal protocol-only experiment uses 80 arithmetic and 80 negative-control requests;
 a disjoint development set has 20 of each. Arithmetic targets contain only the
 requested expression inside a calculator fence, never its answer. They cover
 three--six digit operands, nesting, mixed operations, exact division, long
@@ -575,8 +579,8 @@ versions, dates, ranges, quoted arithmetic, code, identifiers, and variable-bear
 equations. A mechanical audit finds no exact expression or operand overlap among
 training, development, and the 16-example held-out benchmark.
 
-The XPU training gate completed a PEFT forward, backward, and AdamW step on
-Qwen3-0.6B. The frozen stack adds PEFT 0.20.0 and Accelerate 1.14.0 to PyTorch
+The XPU training gate completed PEFT forward, backward, and AdamW steps on both
+models. The frozen stack adds PEFT 0.20.0 and Accelerate 1.14.0 to PyTorch
 2.13.0+XPU and Transformers 4.57.6. LoRA rank is 8 over attention projections,
 with two epochs and assistant-target-only loss. Qwen3-0.6B is primary. Since
 official Llama 3.2 and Gemma 3 files remain license-gated without a Hugging Face
@@ -632,6 +636,59 @@ contract, while retaining deterministic execution in the runtime. The normalized
 runtime remains safer without training but has only 75\% expression exposure and
 execution. No result implies that LoRA learned arithmetic: every answer still
 comes from the unchanged bounded calculator.
+
+\paragraph{Second-family replication and placement answer.}
+SmolLM2-1.7B used the identical data and optimization schedule. Its adapter has
+3,145,728 trainable parameters (0.183\%), is 12.6~MB, used 7,542 target tokens,
+trained in 768.0 seconds, and peaked at 3.59~GB. Training/development loss changed
+from 0.1287/0.0049 after epoch one to 0.0013/0.00015 after epoch two.
+
+Base+minimal again emitted 0/16 valid blocks. Base+ICL-G executed 15/16, answered
+14/16, and falsely blocked one quoted-fence control. LoRA+minimal executed and
+answered 16/16, used every exact result, and had 0/12 false blocks. LoRA+ICL-G
+also answered 16/16 but retained the quoted-fence false block and emitted multiple
+blocks twice. Normalized runtime executed 15/16 with no false intervention but
+answered 13/16 because exact result integration was imperfect.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Primary placement comparison. Recurring tokens sum mean prompt and
+generated tokens. All rates use 16 arithmetic and 12 control examples.}
+\label{tab:placement-primary}
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+Model & Placement & Interface & Answer & False & Tokens \\
+\midrule
+Qwen3-0.6B   & Context & 1.000 & 1.000 & 0.167 & 132.7 \\
+              & Weights & 1.000 & 1.000 & 0.000 & 101.5 \\
+              & Runtime & 0.750 & 0.750 & 0.000 & 83.5 \\
+SmolLM2-1.7B & Context & 0.938 & 0.875 & 0.083 & 184.2 \\
+              & Weights & 1.000 & 1.000 & 0.000 & 127.6 \\
+              & Runtime & 0.938 & 0.813 & 0.000 & 96.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{../../../artifacts/paper1/lora_protocol/placement_comparison_v1/placement_reliability_cost.png}
+\caption{Interface success and answer accuracy (left), false interventions
+(center), and recurring prompt-plus-output tokens (right). Adapter+minimal is
+the only learned placement with perfect execution, answers, and control safety
+in both tested families.}
+\label{fig:placement-comparison}
+\end{figure}
+
+The answer is therefore not one location. Stable semantic selection and block
+serialization are most reliable in weights under a short explicit contract in
+these two models. New or changing interfaces can begin in context without
+training, but demonstrations recur on every request and produced more false
+interventions; combining ICL and LoRA did not improve the primary result. Parsing,
+resource bounds, exact arithmetic, reinjection, and enforcement must remain in
+the runtime. This division stores policy in weights and mechanism in the runtime,
+with context serving development and cold-start use. It is a developmental
+design result, not evidence that all interface knowledge should be fine-tuned.
 
 \section{Preliminary XPU Pilot}
 
@@ -807,6 +864,9 @@ figures without manually entered results.
 The \texttt{generate-lora-data} and \texttt{train-lora} commands implement the
 versioned protocol-only adapter phase; the former must pass its leakage audit
 before the latter can run.
+The \texttt{analyze-placement} command hashes the source summaries and training
+reports and regenerates Table~\ref{tab:placement-primary} and
+Figure~\ref{fig:placement-comparison} inputs.
 
 \section{Limitations}
 
@@ -825,11 +885,14 @@ cost. The main comparisons have one greedy seed, 16 arithmetic examples, and
 four observations per selected cell. Their intervals remain wide, the adaptive
 bands are coarse, and no architecture or universal scaling generalization is
 supported. The 4B row is only a six-item smoke. Llama and Gemma were unavailable
-behind manual authorization gates, leaving family effects unresolved. Twelve
-controls do not tightly bound rare false triggers, as the two 0.6B ICL-G failures
-illustrate. The zero-shot block prompt included a placeholder demonstration that
-the model often copied literally; its historical result is not reinterpreted by
-the separately developed ICL prompt or endpoint audit.
+behind manual authorization gates; SmolLM2 supplies one ungated family replication
+but cannot establish effects for the originally targeted families. The adapter
+data are synthetic and small, and near-zero development loss may reflect the
+narrow protocol distribution. Twelve controls do not tightly bound rare false
+triggers, as the ICL failures illustrate. Adapter+minimal was selected by the
+predeclared gate, but the two-family comparison remains developmental rather than
+confirmatory. The zero-shot block prompt's historical result is not reinterpreted
+by the separately developed ICL prompt, endpoint audit, or LoRA result.
 Finally, exact calculator output cannot repair an incorrectly copied
 expression, a model that ignores the result, or a task whose premises are wrong.
 
@@ -843,6 +906,13 @@ Paper 1 isolates a different control point: a runtime recognizes ordinary strict
 arithmetic already emerging in the output and invokes a bounded engine without a
 function-name decision. The comparison to explicit invocation is empirical; the
 paper does not assume that the reflex interface is better.
+
+LoRA freezes base weights and injects trainable low-rank matrices
+\cite{lora}; our use of it is conventional, and the empirical question is only
+whether a small adapter can store this interface contract. Self-RAG-like systems
+show that models can learn control or reflection tokens for inference actions
+\cite{selfrag}. Calculator fences are a typed local execution region, not a claim
+to have invented trained action syntax or control tokens.
 
 \section{Conclusion}
 
@@ -859,10 +929,17 @@ frozen two-shot prompt reaches 100\% arithmetic execution on Qwen3-0.6B and
 93.8\% on Qwen3-1.7B. Capability changes the error type: 0.6B falsely blocks two
 controls, while 1.7B has no false block and one arithmetic miss. A clean 4B smoke
 supports feasibility but not scaling. Paper 1 therefore establishes a plausible
-few-shot semantic execution interface within one model family, reopens the gate
-for bounded multi-engine work, and motivates a protocol-only small-model adapter.
-Powered confirmatory data, authorized second-family runs, and a separately
-validated LoRA training stack remain necessary before stronger claims.
+few-shot semantic execution interface and a protocol-only adapter result across
+two small-model families. In both, adapter+minimal reaches perfect execution,
+answers, result use, and observed control safety, while base+minimal never opens
+a valid arithmetic block. Context enables cold-start behavior but costs more
+tokens and produces false interventions; adding it after adaptation is redundant
+or harmful. The normalized runtime is safe and training-free but remains limited
+by model expression exposure and result integration. The resulting architecture
+is hybrid: context for rapid development, weights for a stable semantic contract,
+and the runtime for typed parsing, bounds, exact computation, and enforcement.
+Powered confirmatory data and authorized Llama/Gemma runs remain necessary before
+stronger placement or family claims.
 
 \begin{thebibliography}{9}
 
@@ -884,6 +961,18 @@ S.~Yao, J.~Zhao, D.~Yu, N.~Du, I.~Shafran, K.~Narasimhan, and Y.~Cao.
 ReAct: Synergizing reasoning and acting in language models.
 \emph{ICLR}, 2023.
 \url{https://arxiv.org/abs/2210.03629}.
+
+\bibitem{lora}
+E.~Hu, Y.~Shen, P.~Wallis, Z.~Allen-Zhu, Y.~Li, S.~Wang, L.~Wang, and W.~Chen.
+LoRA: Low-rank adaptation of large language models.
+\emph{ICLR}, 2022.
+\url{https://arxiv.org/abs/2106.09685}.
+
+\bibitem{selfrag}
+A.~Asai, Z.~Wu, Y.~Wang, A.~Sil, and H.~Hajishirzi.
+Self-RAG: Learning to retrieve, generate, and critique through self-reflection.
+\emph{ICLR}, 2024.
+\url{https://arxiv.org/abs/2310.11511}.
 
 \end{thebibliography}
 

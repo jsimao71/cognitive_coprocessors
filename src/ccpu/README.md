@@ -57,6 +57,8 @@ $py = 'C:\Users\j.simao\.venvs\modal-llm-xpu\Scripts\python.exe'
 $env:PYTHONPATH = (Resolve-Path src).Path
 & $py -m ccpu paper1 generate-lora-data --config configs/paper1/lora_protocol_xpu.json --excluded-dataset artifacts/paper1/hard_heldout_xpu/dataset.jsonl --output-dir artifacts/paper1/lora_protocol/data_v1
 & $py -m ccpu paper1 train-lora --config configs/paper1/lora_protocol_xpu.json --model Qwen/Qwen3-0.6B --train artifacts/paper1/lora_protocol/data_v1/train.jsonl --dev artifacts/paper1/lora_protocol/data_v1/dev.jsonl --output-dir artifacts/paper1/lora_protocol/qwen3_0_6b_v1
+& $py -m ccpu paper1 train-lora --config configs/paper1/lora_protocol_xpu.json --model HuggingFaceTB/SmolLM2-1.7B-Instruct --train artifacts/paper1/lora_protocol/data_v1/train.jsonl --dev artifacts/paper1/lora_protocol/data_v1/dev.jsonl --output-dir artifacts/paper1/lora_protocol/smollm2_1_7b_v1
+python -m ccpu paper1 analyze-placement --config configs/paper1/lora_placement_comparison.json --output-dir artifacts/paper1/lora_protocol/placement_comparison_v1
 ```
 
 The generator rejects operand or expression overlap with the untouched held-out benchmark.

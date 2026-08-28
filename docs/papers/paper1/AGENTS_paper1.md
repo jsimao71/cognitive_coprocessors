@@ -99,8 +99,9 @@ is demonstrated across capability levels.
   blocks with zero false controls and gained 9/lost 1 against LLM-only.
 - Qwen3-4B passed the six-item XPU smoke with perfect block execution and no
   false block at 8.21 GB peak memory. Do not report it as a held-out estimate.
-- Current evidence is Qwen-only; Llama/Gemma authorization skips are part of
-  the result and community mirrors must not be substituted.
+- Capability-scaling evidence is Qwen-only; the adapter-placement comparison
+  adds official SmolLM2 as an ungated second family. Llama/Gemma authorization
+  skips remain part of the result and community mirrors must not be substituted.
 - LoRA is scientifically justified under Regime A for Qwen3-0.6B control
   discrimination. PEFT 0.20.0 and Accelerate 1.14.0 passed an XPU optimizer-step
   gate with the existing Torch 2.13.0+XPU and Transformers 4.57.6 stack.
@@ -117,8 +118,18 @@ is demonstrated across capability levels.
   LoRA+ICL-G had 4/12, so context and weights show negative interaction.
 - The Qwen adapter has 2,293,760 trainable parameters (0.383%), is 9.2 MB, used
   7,362 target tokens, trained for 394.5 seconds, and peaked at 1.48 GB on XPU.
+- SmolLM2 LoRA+minimal also achieved 16/16 execution and answers with 0/12 false
+  blocks; base+minimal achieved 0/16. Base+ICL-G reached 15/16 execution, 14/16
+  answers, and 1/12 false block; LoRA+ICL retained that false block.
+- The SmolLM2 adapter has 3,145,728 trainable parameters (0.183%), is 12.6 MB,
+  used 7,542 target tokens, trained for 768.0 seconds, and peaked at 3.59 GB.
+- Current placement conclusion: context is for development/cold start, adapter
+  weights store a stable semantic selection/serialization contract, and the
+  runtime retains parsing, bounds, exact execution, reinjection, and enforcement.
 - Regenerate cross-model artifacts with `paper1 compare-models` and
   `configs/paper1/block_icl_comparison.json`.
+- Regenerate placement artifacts with `paper1 analyze-placement` and
+  `configs/paper1/lora_placement_comparison.json`.
 
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.

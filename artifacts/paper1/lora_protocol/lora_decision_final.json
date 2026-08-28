@@ -1,0 +1,35 @@
+{
+  "schema_version": "ccpu.paper1.lora_decision.v3",
+  "decision_date": "2026-08-28",
+  "status": "two_family_developmental_complete",
+  "question": "Where should interface knowledge live: in context, in weights, or in the runtime?",
+  "answer": {
+    "context": "Use for rapid interface development and cold start before training; it incurs recurring tokens and showed false interventions.",
+    "weights": "Use a small adapter plus minimal explicit contract for stable semantic selection and serialization; this was the only learned placement with perfect execution, answers, and observed control safety in both models.",
+    "runtime": "Keep typed parsing, resource bounds, exact computation, reinjection, provenance, and enforcement deterministic and external."
+  },
+  "models": [
+    {
+      "model": "Qwen/Qwen3-0.6B",
+      "weights_interface_success_rate": 1.0,
+      "weights_answer_accuracy": 1.0,
+      "weights_false_intervention_rate": 0.0,
+      "context_interface_success_rate": 1.0,
+      "context_false_intervention_rate": 0.16666666666666666,
+      "runtime_interface_success_rate": 0.75,
+      "runtime_false_intervention_rate": 0.0
+    },
+    {
+      "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "weights_interface_success_rate": 1.0,
+      "weights_answer_accuracy": 1.0,
+      "weights_false_intervention_rate": 0.0,
+      "context_interface_success_rate": 0.9375,
+      "context_false_intervention_rate": 0.08333333333333333,
+      "runtime_interface_success_rate": 0.9375,
+      "runtime_false_intervention_rate": 0.0
+    }
+  ],
+  "claim_boundary": "The result uses one deterministic seed, 16 arithmetic examples, 12 controls, synthetic protocol data, and two small-model families. It is not a universal placement rule.",
+  "remaining_access_gap": "Official Llama 3.2 and Gemma 3 checkpoints remain unavailable without accepted Hugging Face licenses and authentication."
+}

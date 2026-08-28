@@ -1,0 +1,319 @@
+{
+  "config_sha256": "ee54740da3a2e7544c4fc85ef8b6699b77635e7087019375bc37badb759862ef",
+  "interpretation": {
+    "context_role": "development_and_cold_start_with_recurring_token_and_safety_cost",
+    "exact_computation": "deterministic_runtime",
+    "scope": "two developmental small-model families on one 16-arithmetic/12-control set",
+    "selection_and_serialization": "weights_plus_minimal_contract"
+  },
+  "question": "Where should interface knowledge live: in context, in weights, or in the runtime?",
+  "rows": [
+    {
+      "answer_accuracy": 0.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.0,
+      "mean_generated_tokens": 17.214285714285715,
+      "mean_prompt_tokens": 86.60714285714286,
+      "mean_wall_time_ms": 3344.537792857143,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "base_minimal",
+      "result_use_rate": null
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.16666666666666666,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 18.928571428571427,
+      "mean_prompt_tokens": 113.75,
+      "mean_wall_time_ms": 4232.9452,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 14.928571428571429,
+      "mean_prompt_tokens": 86.60714285714286,
+      "mean_wall_time_ms": 4112.823325,
+      "model_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+      "model_label": "Qwen3-0.6B",
+      "placement": "weights",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.3333333333333333,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 19.25,
+      "mean_prompt_tokens": 113.75,
+      "mean_wall_time_ms": 5743.9531,
+      "model_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+      "model_label": "Qwen3-0.6B",
+      "placement": "weights_plus_context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.75,
+      "arithmetic_count": 16,
+      "condition": "normalized_reflex",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.75,
+      "mean_generated_tokens": 22.428571428571427,
+      "mean_prompt_tokens": 61.035714285714285,
+      "mean_wall_time_ms": 4043.6157392857144,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "runtime",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.625,
+      "arithmetic_count": 16,
+      "condition": "explicit_tool",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.625,
+      "mean_generated_tokens": 19.178571428571427,
+      "mean_prompt_tokens": 57.035714285714285,
+      "mean_wall_time_ms": 3216.0796642857144,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "explicit_tool",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.875,
+      "arithmetic_count": 16,
+      "condition": "oracle",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 15.642857142857142,
+      "mean_prompt_tokens": 67.85714285714286,
+      "mean_wall_time_ms": 2723.4994607142858,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "model_label": "Qwen3-0.6B",
+      "placement": "oracle",
+      "result_use_rate": 0.875
+    },
+    {
+      "answer_accuracy": 0.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.0,
+      "mean_generated_tokens": 19.428571428571427,
+      "mean_prompt_tokens": 111.42857142857143,
+      "mean_wall_time_ms": 9233.345382142857,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "base_minimal",
+      "result_use_rate": null
+    },
+    {
+      "answer_accuracy": 0.875,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.08333333333333333,
+      "interface_success_rate": 0.9375,
+      "mean_generated_tokens": 34.214285714285715,
+      "mean_prompt_tokens": 150.0,
+      "mean_wall_time_ms": 23234.358957142857,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "context",
+      "result_use_rate": 0.9375
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_minimal",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 16.142857142857142,
+      "mean_prompt_tokens": 111.42857142857143,
+      "mean_wall_time_ms": 7802.146703571429,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct-paper1-protocol-lora-v1",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "weights",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "arithmetic_count": 16,
+      "condition": "calculator_block_icl_g",
+      "false_intervention_rate": 0.08333333333333333,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 26.25,
+      "mean_prompt_tokens": 150.0,
+      "mean_wall_time_ms": 19136.765603571428,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct-paper1-protocol-lora-v1",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "weights_plus_context",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.8125,
+      "arithmetic_count": 16,
+      "condition": "normalized_reflex",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.9375,
+      "mean_generated_tokens": 14.178571428571429,
+      "mean_prompt_tokens": 82.42857142857143,
+      "mean_wall_time_ms": 5789.008192857143,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "runtime",
+      "result_use_rate": 0.9333333333333333
+    },
+    {
+      "answer_accuracy": 0.375,
+      "arithmetic_count": 16,
+      "condition": "explicit_tool",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 0.3125,
+      "mean_generated_tokens": 17.178571428571427,
+      "mean_prompt_tokens": 79.57142857142857,
+      "mean_wall_time_ms": 7022.087,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "explicit_tool",
+      "result_use_rate": 1.0
+    },
+    {
+      "answer_accuracy": 0.0,
+      "arithmetic_count": 16,
+      "condition": "oracle",
+      "false_intervention_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 7.678571428571429,
+      "mean_prompt_tokens": 89.25,
+      "mean_wall_time_ms": 3001.9880035714286,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "model_label": "SmolLM2-1.7B",
+      "placement": "oracle",
+      "result_use_rate": 0.0
+    }
+  ],
+  "schema_version": "ccpu.paper1.placement_comparison.v1",
+  "sources": [
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_base_minimal_v1\\summary.json",
+      "placement": "base_minimal",
+      "sha256": "5265fc178c65736366cb07c3e34b3e8b767c753a8d686129468f111874484165"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\block_icl_multimodel\\qwen3_0_6b_icl_g_heldout\\summary_prompt_metrics_v2.json",
+      "placement": "context",
+      "sha256": "e1fda028afcf43331356007d3ebc7707e91c0a908e57dd3faaf5de5c583c0c56"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_adapter_eval_v1\\summary.json",
+      "placement": "weights",
+      "sha256": "448572e359c06c7b40d8360a6bce745db6b5916381684f3619c874d1444a4657"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_adapter_eval_v1\\summary.json",
+      "placement": "weights_plus_context",
+      "sha256": "448572e359c06c7b40d8360a6bce745db6b5916381684f3619c874d1444a4657"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\hard_heldout_xpu\\run\\summary_prompt_metrics_v2.json",
+      "placement": "runtime",
+      "sha256": "ecd1c4a77ce21f500f8b42122caa87d65e361cc49d67567c08462d322362b230"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\hard_heldout_xpu\\run\\summary_prompt_metrics_v2.json",
+      "placement": "explicit_tool",
+      "sha256": "ecd1c4a77ce21f500f8b42122caa87d65e361cc49d67567c08462d322362b230"
+    },
+    {
+      "model_label": "Qwen3-0.6B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\hard_heldout_xpu\\run\\summary_prompt_metrics_v2.json",
+      "placement": "oracle",
+      "sha256": "ecd1c4a77ce21f500f8b42122caa87d65e361cc49d67567c08462d322362b230"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "base_minimal",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "context",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_adapter_eval_v1\\summary.json",
+      "placement": "weights",
+      "sha256": "1ebed7bb15ec15df32cad938217a43b19cfb8ec824fa6ca0fe26eda209270e33"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_adapter_eval_v1\\summary.json",
+      "placement": "weights_plus_context",
+      "sha256": "1ebed7bb15ec15df32cad938217a43b19cfb8ec824fa6ca0fe26eda209270e33"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "runtime",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "explicit_tool",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_base_eval_v1\\summary.json",
+      "placement": "oracle",
+      "sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132"
+    }
+  ],
+  "training": [
+    {
+      "adapter_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+      "model_label": "Qwen3-0.6B",
+      "peak_memory_bytes": 1483319296,
+      "report_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\qwen3_0_6b_v1\\training_report.json",
+      "report_sha256": "ed495a6b414303d53026fe92ef15a894619a8fae0d580f937d46e82be8ee1199",
+      "trainable_fraction": 0.0038335158817086527,
+      "trainable_parameters": 2293760,
+      "training_target_tokens": 7362,
+      "wall_time_seconds": 394.52654859999893
+    },
+    {
+      "adapter_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct-paper1-protocol-lora-v1",
+      "model_label": "SmolLM2-1.7B",
+      "peak_memory_bytes": 3585238528,
+      "report_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\lora_protocol\\smollm2_1_7b_v1\\training_report.json",
+      "report_sha256": "61ec4dc18413e7655d4a0d78e7c6ac2aaa00ab10105766917385aaf45900f95a",
+      "trainable_fraction": 0.0018347549897332557,
+      "trainable_parameters": 3145728,
+      "training_target_tokens": 7542,
+      "wall_time_seconds": 767.9961364000337
+    }
+  ]
+}

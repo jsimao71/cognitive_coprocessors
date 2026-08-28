@@ -29,6 +29,7 @@ from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 from .lora_data import LoRAProtocolDataConfig, generate_protocol_data
 from .lora_train import LoRATrainingConfig, train_lora
 from .model_analysis import build_model_comparison
+from .placement_analysis import build_placement_comparison
 from .plot import plot_interface_diagnostics, plot_scaling
 from .prompts import (
     CONDITIONS,
@@ -423,6 +424,14 @@ def train_lora_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_placement_command(args: argparse.Namespace) -> int:
+    result = build_placement_comparison(
+        read_json(args.config), config_path=args.config, output_dir=args.output_dir
+    )
+    print(f"wrote {len(result['rows'])} interface-placement rows -> {args.output_dir}")
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1", help="strict reflex-calculator experiments")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -522,3 +531,10 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     lora_train.add_argument("--dev", required=True)
     lora_train.add_argument("--output-dir", required=True)
     lora_train.set_defaults(handler=train_lora_command)
+
+    placement = commands.add_parser(
+        "analyze-placement", help="compare interface knowledge in context, weights, and runtime"
+    )
+    placement.add_argument("--config", required=True)
+    placement.add_argument("--output-dir", required=True)
+    placement.set_defaults(handler=analyze_placement_command)

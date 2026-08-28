@@ -1,0 +1,61 @@
+{
+  "block_failures_sha256": "b9fed523195e15b2e19db5fec8c37b2c437baa30cc3964124079bb5ba30bc892",
+  "dataset_sha256": "0ae373ba71d271e1e1c42b8c877fe506f386398831735f4de6ab12fbfcec96b8",
+  "empirical": true,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "7bfac2b410a6650bbc31b70dbe225fa8d410d81d"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 168,
+  "predictions_sha256": "f23418aad562a965845a114e0150dd2d7af3d72e9a49e14ee0cf8f126060829a",
+  "run_config": {
+    "backend": "huggingface",
+    "conditions": [
+      "llm_only",
+      "calculator_block_minimal",
+      "calculator_block_icl_g",
+      "explicit_tool",
+      "normalized_reflex",
+      "oracle"
+    ],
+    "limit": null,
+    "models": [
+      {
+        "device": "xpu",
+        "dtype": "float16",
+        "enable_thinking": false,
+        "max_new_tokens": 96,
+        "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "revision": "31b70e2e869a7173562077fd711b654946d38674",
+        "use_chat_template": true
+      }
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_block_icl_order_control_prompt": "paper1_calculator_block_icl_v2_order_control",
+      "calculator_block_icl_prompt": "paper1_calculator_block_icl_v1_developmental",
+      "calculator_block_minimal_prompt": "paper1_calculator_block_minimal_v1",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v2_concise",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seeds": [
+      17
+    ],
+    "smoke_gate": false
+  },
+  "runtime_report_sha256": "b8c7a68682fc43f78d2801c4270f68c7266dbc1ddee0c3b5c5d1efb49791056b",
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "summary_sha256": "8cfc94ba8de350f967ace3f1fbb6d8521d106b979c2c25f44f8e807b4cdb3132",
+  "trace_count": 332,
+  "traces_sha256": "df0b54a11f2c1141306c111f75ffdf20b4a00a11c8134df4f674f88885da12b3"
+}
