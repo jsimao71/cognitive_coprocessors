@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import time
 from collections.abc import Iterable, Mapping
 from typing import Any
@@ -9,12 +10,23 @@ from typing import Any
 from ccpu.common.artifacts import canonical_json
 from ccpu.common.schema import DetectionCandidate, GenerationResult, TraceStage, TraceStatus
 
-from .arithmetic import ArithmeticNormalizer
+from .arithmetic import ArithmeticNormalizationError, ArithmeticNormalizer
 from .dataset import ArithmeticExample, reference_answer
 from .evaluate import answers_equal, extract_answer
 from .generation import HuggingFaceBackend, ScriptedProtocolBackend
 from .prompts import CONDITIONS, condition_prompt
-from .reflex import build_explicit_tool_runtime, build_oracle_runtime, build_reflex_runtime
+from .recognizer import (
+    CalculatorBlockRecognizer,
+    ExplicitCalculatorToolRecognizer,
+    NormalizedArithmeticRecognizer,
+)
+from .reflex import (
+    build_calculator_block_runtime,
+    build_explicit_tool_runtime,
+    build_normalized_reflex_runtime,
+    build_oracle_runtime,
+    build_reflex_runtime,
+)
 
 
 def _controller(example: ArithmeticExample, condition: str, run_id: str):
@@ -22,9 +34,63 @@ def _controller(example: ArithmeticExample, condition: str, run_id: str):
         return build_explicit_tool_runtime(run_id=run_id)
     if condition == "reflex":
         return build_reflex_runtime(run_id=run_id)
+    if condition == "normalized_reflex":
+        return build_normalized_reflex_runtime(run_id=run_id)
+    if condition == "calculator_block":
+        return build_calculator_block_runtime(run_id=run_id)
     if condition == "oracle" and example.expression is not None:
         return build_oracle_runtime(example.expression, run_id=run_id)
     return None
+
+
+def _gold_instructions(example: ArithmeticExample):
+    if example.expression is None:
+        return None
+    candidate = DetectionCandidate(
+        candidate_id=f"gold:{example.example_id}",
+        family="compute",
+        raw_text=example.expression,
+        start_offset=0,
+        end_offset=len(example.expression),
+        detector="gold",
+    )
+    return ArithmeticNormalizer().normalize(candidate).payload.get("instructions")
+
+
+def _expression_exposed(text: str, example: ArithmeticExample, gold_instructions) -> bool | None:
+    if example.expression is None or gold_instructions is None:
+        return None
+    compact = re.sub(r"\s+", "", text)
+    if re.sub(r"\s+", "", example.expression) in compact:
+        return True
+    detectors = (
+        NormalizedArithmeticRecognizer(),
+        ExplicitCalculatorToolRecognizer(),
+        CalculatorBlockRecognizer(),
+    )
+    candidates = [candidate for detector in detectors for candidate in detector.feed(text)]
+    from .surface import ArithmeticSurfaceNormalizer
+
+    normalizer = ArithmeticSurfaceNormalizer()
+    for candidate in candidates:
+        try:
+            if normalizer.normalize(candidate).payload.get("instructions") == gold_instructions:
+                return True
+        except ArithmeticNormalizationError:
+            continue
+    return False
+
+
+def _invocation_overhead_chars(condition: str, recognized: bool) -> int:
+    if not recognized:
+        return 0
+    if condition == "explicit_tool":
+        return len("<tool:calculator></tool>")
+    if condition == "calculator_block":
+        return len("```calculator\n\n```")
+    if condition in {"reflex", "normalized_reflex", "oracle"}:
+        return 1
+    return 0
 
 
 def _prediction(
@@ -65,27 +131,25 @@ def _prediction(
         event.stage == TraceStage.REINJECTION and event.status == TraceStatus.FAILED
         for event in trace
     )
+    reinjection_successes = sum(
+        event.stage == TraceStage.REINJECTION and event.status == TraceStatus.SUCCEEDED
+        for event in trace
+    )
     predicted_answer = extract_answer(generation.rendered_text)
     engine_answer = state[-1].result.display if state else None
     normalized_expression = (
         str(state[-1].request.payload.get("canonical_expression")) if state else None
     )
     normalized_instructions = state[-1].request.payload.get("instructions") if state else None
-    gold_instructions = None
-    if example.expression is not None:
-        gold_candidate = DetectionCandidate(
-            candidate_id=f"gold:{example.example_id}",
-            family="compute",
-            raw_text=example.expression,
-            start_offset=0,
-            end_offset=len(example.expression),
-            detector="gold",
-        )
-        gold_instructions = ArithmeticNormalizer().normalize(gold_candidate).payload.get(
-            "instructions"
-        )
+    gold_instructions = _gold_instructions(example)
+    recognized = candidates > 0
+    selection_correct = (
+        normalized_instructions == gold_instructions
+        if normalized_instructions is not None and gold_instructions is not None
+        else None
+    )
     return {
-        "schema_version": "ccpu.paper1.prediction.v1",
+        "schema_version": "ccpu.paper1.prediction.v2",
         "example_id": example.example_id,
         "task_kind": example.task_kind,
         "model_id": model_id,
@@ -103,23 +167,29 @@ def _prediction(
         "trace_bytes": trace_bytes,
         "state_bytes": state_bytes,
         "candidates": candidates,
+        "expression_exposed": _expression_exposed(
+            generation.generated_text, example, gold_instructions
+        ),
+        "recognized": recognized,
+        "selection_correct": selection_correct,
         "normalization_accepts": normalization_accepts,
         "normalization_failures": normalization_failures,
         "normalization_correct": (
-            normalized_instructions == gold_instructions
-            if normalized_instructions is not None
-            else None
+            selection_correct
         ),
+        "normalization_succeeded": normalization_accepts > 0,
         "normalized_expression": normalized_expression,
         "executions": executions,
         "engine_successes": engine_successes,
         "engine_failures": engine_failures,
+        "execution_succeeded": engine_successes > 0,
         "engine_correct": (
             answers_equal(engine_answer, reference_answer(normalized_expression))
             if engine_answer is not None and normalized_expression is not None
             else None
         ),
         "reinjection_failures": reinjection_failures,
+        "reinjection_succeeded": reinjection_successes > 0,
         "interventions": len(state),
         "state_items": len(state),
         "engine_answer": engine_answer,
@@ -131,6 +201,7 @@ def _prediction(
             if engine_answer is not None
             else None
         ),
+        "invocation_overhead_chars": _invocation_overhead_chars(condition, recognized),
         "run_id": controller.run_id if controller else None,
         "backend_metadata": dict(generation.metadata),
     }

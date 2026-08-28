@@ -268,3 +268,13 @@ class ArithmeticMaterializer:
 class ExplicitToolMaterializer(ArithmeticMaterializer):
     def __init__(self) -> None:
         super().__init__(prefix="<tool_result>", suffix="</tool_result>")
+
+
+class CalculatorBlockMaterializer(ArithmeticMaterializer):
+    """Compact, typed result returned after a completed calculator fence."""
+
+    def __init__(self) -> None:
+        super().__init__(
+            prefix="\n<calculator_result>",
+            suffix="</calculator_result>\n",
+        )

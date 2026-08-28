@@ -1,0 +1,19 @@
+{
+  "schema_version": "ccpu.paper1.config.v2",
+  "dataset": {
+    "mode": "hard_v1",
+    "seed": 2718,
+    "examples_per_cell": 1,
+    "operator_counts": [1, 2, 4, 6],
+    "operand_digits": [2, 4, 6, 8],
+    "structures": ["left_chain", "nested", "multiplication_tree"],
+    "operations": ["+", "-", "*", "/"],
+    "surface_variants": ["ascii", "latex", "unicode", "brackets"],
+    "selected_cells": [
+      {"operator_count": 2, "operand_digits": 4, "structure": "nested"}
+    ],
+    "control_examples": 4,
+    "split": "protocol_smoke"
+  },
+  "seeds": [17]
+}

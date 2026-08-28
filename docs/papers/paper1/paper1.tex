@@ -12,7 +12,7 @@
 \newcommand{\microir}{\textsc{micro-ir}}
 
 \title{Reflex Computation:\\
-Automatic Calculator Assistance During Autoregressive Decoding}
+Hard-Arithmetic Scaling and Semantic Execution Blocks}
 \author{Working Draft}
 \date{August 2026}
 
@@ -23,31 +23,29 @@ Automatic Calculator Assistance During Autoregressive Decoding}
 Language models can describe arithmetic procedures while still making exact
 execution errors. Conventional tool-use systems address this weakness by
 requiring the model to decide to call a calculator and serialize an invocation.
-We study a narrower alternative: a bounded calculator watches the generated
-character stream for completed strict arithmetic syntax, normalizes the
-expression into typed postfix micro-IR, evaluates it exactly, and inserts the
-result immediately after the completing equals sign. The model need not emit a
-function name or API schema. This first experiment is intentionally small: it
-uses integer literals, an allowlisted operator grammar, append-only trace state,
-and textual reinjection; it includes no learned trigger, general symbolic
-reasoner, backtracking, or native key/value interface. We define matched
-model-only, prompted, explicit-tool, reflex, and oracle conditions; a factorial
-sweep over expression depth, operand width, model size, and seed; component and
-end-to-end metrics; adversarial non-trigger controls; and precise falsification
-criteria. The runtime, generator, replay path, optional Hugging Face adapter,
-and test suite are implemented. A one-checkpoint, one-seed XPU pilot produced
+We study bounded local calculator interfaces that act during generation. The
+original strict watcher recognizes an arithmetic suffix before an equals sign;
+the next iteration adds deterministic LaTeX/Unicode surface normalization and
+a lightweight fenced calculator block that executes only when its closing
+delimiter arrives. All assisted conditions share the same typed postfix
+micro-IR, exact-rational engine, resource bounds, and textual reinjection. A
+factorial hard-arithmetic generator crosses four operand widths, four operator
+counts, and three structures, while preserving adversarial non-trigger controls
+and stage-level traces. A one-checkpoint, one-seed XPU pilot produced
 80 generations. On eight arithmetic examples, reflex assistance tied the
 unassisted model at 75.0\% exact match, while explicit-tool and oracle
 conditions reached 87.5\% and 100\%, respectively. The reflex engine was exact
 whenever invoked, but only half of accepted candidates represented the full
 intended expression. This small diagnostic run is not a confirmatory result and
-does not pass the evidence gate for later mechanisms.
+does not pass the evidence gate for later mechanisms. The expanded interface is
+therefore frozen before an LLM-only adaptive difficulty pilot and a separately
+seeded held-out comparison; no expanded-protocol model outcome is claimed yet.
 \end{abstract}
 
 \section{Status and Scope}
 
-This document is an implemented experimental protocol with a preliminary pilot,
-not a completed confirmatory result.
+This document is an implemented next-iteration protocol plus the preliminary
+pilot that motivated it, not a completed confirmatory result.
 The repository contains a dependency-free calculator/runtime path, deterministic
 dataset generation, JSONL traces and summaries, a scripted plumbing check, and
 an optional token-by-token Hugging Face adapter. Scripted checks are marked
@@ -62,8 +60,8 @@ during generation, does automatic bounded evaluation improve reliability or
 cost relative to model-only generation and explicit calculator calls?
 \end{quote}
 
-The scope is calculator only and strict syntax only. The experiment does not
-test semantic recognition of prose arithmetic, learned routing, persistent
+The scope remains calculator only and deterministic syntax interfaces. The
+experiment does not test semantic recognition of prose arithmetic, learned routing, persistent
 symbolic memory, transactional state, Progressive Retrieval Attention (PRA), or
 native key/value access. Those mechanisms would make a positive result harder
 to attribute and a negative result harder to diagnose.
@@ -76,7 +74,7 @@ normalized, reflex assistance increases exact-match accuracy relative to the
 same model without assistance.
 
 \paragraph{H2: interface efficiency.}
-Reflex assistance reduces model-authored tool-selection and argument tokens
+Reflex or fenced-block assistance reduces model-authored invocation overhead
 relative to an explicit calculator condition while remaining competitive in
 answer quality and wall time.
 
@@ -201,6 +199,8 @@ LLM only & Return the exact answer; no calculator & Unassisted checkpoint baseli
 Matched prompt & Work carefully and check operations; no calculator & Stronger prompting without external capability \\
 Explicit tool & Model writes \texttt{<tool:calculator>EXPR</tool>} and receives the same engine result & Conventional model-authored invocation baseline \\
 Reflex & Model is asked to write the expression followed by one equals sign; runtime detects any valid strict suffix & Proposed automatic condition \\
+Normalized reflex & Reflex syntax plus deterministic LaTeX, Unicode, whitespace, and bracket normalization & Surface-robust automatic condition \\
+Calculator block & Model writes one fenced calculator block; execution waits for the closing fence & Explicit boundary without an API schema \\
 Oracle & Same generation instruction as reflex, but the detector accepts only the gold canonical expression & Detection/selection headroom control \\
 \bottomrule
 \end{tabularx}
@@ -214,21 +214,23 @@ a stable function-calling interface; the textual baseline is the portable minimu
 
 \section{Benchmark}
 
-\subsection{Factorial arithmetic generator}
+\subsection{Factorial arithmetic generators}
 
-The deterministic generator crosses operator count with operand digit width and
-draws operators from addition, subtraction, multiplication, and exact rational
-division. Expressions are parenthesized left-compositions so the gold parse is
-unambiguous. Each cell uses identity-derived random seeds, and gold answers are
+The legacy deterministic generator crosses operator count with operand digit
+width. The separate \texttt{hard\_arithmetic\_v1} generator crosses at least four
+operator-count bands, four digit-width bands, and three structures: left chains,
+nested trees, and multiplication trees. It includes addition, subtraction,
+multiplication, safe exact-rational division, mixed operations, and long
+intermediates. Each cell uses identity-derived random seeds, and gold answers are
 produced by a separate exact-rational reference evaluator rather than the
-calculator implementation under test. The primary
-configuration contains
+calculator implementation under test. The full hard grid contains
 \[
 4\ \text{operator counts}\times
 4\ \text{digit widths}\times
-100\ \text{examples}=1600
+3\ \text{structures}=48\ \text{cells}
 \]
-arithmetic examples plus 200 non-trigger controls.
+before replicate and seed factors. Every generated item is accepted only after
+the independent oracle and bounded calculator agree.
 
 This synthetic benchmark isolates scaling and component correctness; it does not
 establish ecological prevalence. A later extension may add held-out natural
@@ -267,10 +269,11 @@ not merely the correct engine value. Report correction, override, and result-use
 rates separately.
 
 \paragraph{Components.}
-Report candidate count, trigger precision/recall, false-intervention rate,
-normalization acceptance/correctness, engine success/correctness, reinjection
-success, intervention count, and state-item count. Oracle differences localize
-missed or malformed strict events.
+Report intended-expression exposure, candidate recognition, full-expression
+selection, normalization acceptance/correctness, engine success/correctness,
+reinjection success, result use, and later override separately. Also report
+false-intervention rate, intervention count, and state-item count. Oracle
+differences localize missed or malformed interface events.
 
 \paragraph{Cost.}
 Report prompt, model-generated, and reinjected tokens separately; model calls;
@@ -284,6 +287,38 @@ seed. Estimate condition-by-difficulty and condition-by-model-size interactions,
 with paired comparisons because all conditions share examples. Predeclare one
 primary endpoint and correct or label exploratory multiple comparisons. Preserve
 raw predictions and event traces so component errors can be reclassified.
+
+\section{Frozen Next-Iteration Protocol}
+
+The interface freeze is versioned as
+\path{paper1_hard_interfaces_v1}. It retains
+\path{strict_arithmetic_v1} unchanged and adds
+\path{normalized_arithmetic_v1},
+\path{surface_normalizer_v1}, and
+\path{calculator_block_v1}. The normalizer maps allowlisted multiplication,
+division, Unicode-minus, bracket, and spacing aliases before delegating to the
+existing \path{ccpu.arithmetic.postfix.v1} parser. Unknown commands, prose,
+variables, quoted arithmetic, and quoted or inline fence examples remain inert.
+
+The block grammar is a line-anchored Markdown-like fence named
+\texttt{calculator}. Its contents are collected incrementally, but no candidate
+is emitted until the closing fence is complete. Thus a valid intermediate line
+cannot execute prematurely. At close, the same surface normalizer and bounded
+calculator are used, and a compact typed result is inserted.
+
+The adaptive pilot runs only the LLM-only condition over all 48 cells. Cell
+selection uses aggregate exact match to choose regimes near 95\%, 65\%, 30\%,
+and 0\%; it never examines assisted outcomes. Once those cells are selected,
+their definitions, prompts, grammar, normalizer, and diagnostics remain frozen.
+A distinct dataset seed then generates the held-out comparison across all seven
+conditions.
+
+Every arithmetic prediction records expression exposure, candidate recognition,
+full-expression selection, normalization, execution, reinjection, result use,
+and later override independently. Cost records include prompt, generated, and
+reinjected tokens, model calls, wall and engine time, serialized trace/state
+bytes, and deterministic invocation-delimiter characters. Scripted smoke output
+is marked \texttt{empirical: false} and is plumbing evidence only.
 
 \section{Preliminary XPU Pilot}
 

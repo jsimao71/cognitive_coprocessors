@@ -1,5 +1,11 @@
 from ccpu.common.metrics import binary_classification, wilson_interval
-from ccpu.paper1.dataset import ArithmeticDatasetConfig, iter_dataset
+from ccpu.paper1.dataset import (
+    ArithmeticDatasetConfig,
+    HardArithmeticDatasetConfig,
+    iter_dataset,
+    iter_hard_dataset,
+    reference_answer,
+)
 from ccpu.paper1.evaluate import answers_equal, evaluate, extract_answer
 from ccpu.paper1.experiment import run_replay, run_scripted
 
@@ -29,7 +35,7 @@ def test_scripted_run_is_complete_but_explicitly_not_empirical():
     predictions, traces = run_scripted(examples)
     summary = evaluate(examples, predictions)
 
-    assert len(predictions) == len(examples) * 5
+    assert len(predictions) == len(examples) * 7
     assert traces
     assert all(not row["backend_metadata"]["empirical"] for row in predictions)
     reflex = next(row for row in summary["by_run"] if row["condition"] == "reflex")
@@ -95,3 +101,40 @@ def test_binary_metrics_and_wilson_interval_boundaries():
     low, high = wilson_interval(8, 8)
     assert 0.67 < low < 0.68
     assert high == 1.0
+
+
+def test_hard_dataset_covers_factorial_axes_and_is_bounded():
+    config = HardArithmeticDatasetConfig(
+        seed=9,
+        examples_per_cell=1,
+        operator_counts=(1, 2, 3, 4),
+        operand_digits=(1, 2, 3, 4),
+        control_examples=2,
+    )
+    examples = list(iter_hard_dataset(config))
+    arithmetic = [item for item in examples if item.task_kind == "arithmetic"]
+
+    assert len(arithmetic) == 4 * 4 * 3
+    assert {item.difficulty["structure"] for item in arithmetic} == {
+        "left_chain",
+        "nested",
+        "multiplication_tree",
+    }
+    assert all(item.answer == reference_answer(item.expression) for item in arithmetic)
+
+
+def test_hard_dataset_selected_cells_and_surface_variants_are_frozen():
+    config = HardArithmeticDatasetConfig(
+        examples_per_cell=4,
+        selected_cells=((2, 4, "nested"),),
+        control_examples=0,
+    )
+    examples = list(iter_hard_dataset(config))
+
+    assert len(examples) == 4
+    assert [item.difficulty["surface_variant"] for item in examples] == [
+        "ascii",
+        "latex",
+        "unicode",
+        "brackets",
+    ]

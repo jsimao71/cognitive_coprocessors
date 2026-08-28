@@ -8,15 +8,19 @@ from .arithmetic import (
     ArithmeticMaterializer,
     ArithmeticNormalizer,
     BoundedCalculator,
+    CalculatorBlockMaterializer,
     CalculatorLimits,
     ExplicitToolMaterializer,
 )
 from .recognizer import (
+    CalculatorBlockRecognizer,
     ExplicitCalculatorToolRecognizer,
+    NormalizedArithmeticRecognizer,
     OracleArithmeticRecognizer,
     RecognizerLimits,
     StrictArithmeticRecognizer,
 )
+from .surface import ArithmeticSurfaceNormalizer
 
 
 def _runtime(
@@ -25,11 +29,12 @@ def _runtime(
     *,
     run_id: str | None,
     limits: CalculatorLimits,
+    normalizer=None,
 ) -> ReflexRuntime:
     calculator = BoundedCalculator(limits)
     return ReflexRuntime(
         detector=detector,
-        normalizer=ArithmeticNormalizer(limits),
+        normalizer=normalizer or ArithmeticNormalizer(limits),
         engines={calculator.name: calculator},
         materializer=materializer,
         run_id=run_id,
@@ -60,6 +65,38 @@ def build_explicit_tool_runtime(
         ExplicitToolMaterializer(),
         run_id=run_id,
         limits=limits,
+    )
+
+
+def build_normalized_reflex_runtime(
+    *,
+    run_id: str | None = None,
+    calculator_limits: CalculatorLimits | None = None,
+    recognizer_limits: RecognizerLimits | None = None,
+) -> ReflexRuntime:
+    limits = calculator_limits or CalculatorLimits()
+    return _runtime(
+        NormalizedArithmeticRecognizer(recognizer_limits),
+        ArithmeticMaterializer(),
+        run_id=run_id,
+        limits=limits,
+        normalizer=ArithmeticSurfaceNormalizer(limits),
+    )
+
+
+def build_calculator_block_runtime(
+    *, run_id: str | None = None, calculator_limits: CalculatorLimits | None = None
+) -> ReflexRuntime:
+    limits = calculator_limits or CalculatorLimits()
+    return _runtime(
+        CalculatorBlockRecognizer(
+            max_buffer_chars=limits.max_expression_chars * 4,
+            max_expression_chars=limits.max_expression_chars,
+        ),
+        CalculatorBlockMaterializer(),
+        run_id=run_id,
+        limits=limits,
+        normalizer=ArithmeticSurfaceNormalizer(limits),
     )
 
 

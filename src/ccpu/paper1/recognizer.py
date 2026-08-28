@@ -8,6 +8,9 @@ from dataclasses import dataclass
 
 from ccpu.common.schema import DetectionCandidate
 
+from .arithmetic import ArithmeticNormalizationError
+from .surface import normalize_arithmetic_surface
+
 _ARITHMETIC_CHARS = frozenset("0123456789+-*/%() \t")
 _OPERATOR = re.compile(r"\*\*|//|[+\-*/%]")
 
@@ -147,6 +150,99 @@ class ExplicitCalculatorToolRecognizer:
                         metadata={"syntax": "explicit_calculator_tool_v1"},
                     )
                 )
+        return tuple(candidates)
+
+
+class NormalizedArithmeticRecognizer(StrictArithmeticRecognizer):
+    """Detect complete arithmetic suffixes with allowlisted notation aliases."""
+
+    name = "normalized_arithmetic_v1"
+
+    def _candidate_before_equals(self) -> DetectionCandidate | None:
+        if self._buffer.endswith("="):
+            return None
+        line_start = max(self._buffer.rfind("\n"), self._buffer.rfind(":"), -1) + 1
+        line = self._buffer[line_start:]
+        starts = [
+            index
+            for index, character in enumerate(line)
+            if character.isdigit() or character in "+-([{−‐‑‒–﹣－"
+        ]
+        for relative_start in starts:
+            surface = line[relative_start:].strip()
+            if not surface or len(surface) > self.limits.max_expression_chars:
+                continue
+            try:
+                normalized = normalize_arithmetic_surface(surface)
+            except ArithmeticNormalizationError:
+                continue
+            if not _OPERATOR.search(normalized):
+                continue
+            if normalized.count("(") != normalized.count(")"):
+                continue
+            start = self._buffer_start + line_start + relative_start
+            leading = len(line[relative_start:]) - len(line[relative_start:].lstrip())
+            start += leading
+            end = self._offset + 1
+            return DetectionCandidate(
+                candidate_id=_candidate_id(self.name, start, end, surface),
+                family="compute",
+                raw_text=surface,
+                start_offset=start,
+                end_offset=end,
+                detector=self.name,
+                metadata={"terminator": "=", "syntax": self.name},
+            )
+        return None
+
+
+class CalculatorBlockRecognizer:
+    """Emit one candidate only when a line-anchored calculator fence closes."""
+
+    name = "calculator_block_v1"
+    _pattern = re.compile(
+        r"(?:\A|\n)```calculator[ \t]*\r?\n([\s\S]*?)\r?\n```[ \t]*\Z"
+    )
+
+    def __init__(self, max_buffer_chars: int = 1024, max_expression_chars: int = 256) -> None:
+        self.max_buffer_chars = max_buffer_chars
+        self.max_expression_chars = max_expression_chars
+        self.reset()
+
+    def reset(self) -> None:
+        self._buffer = ""
+        self._buffer_start = 0
+        self._offset = 0
+
+    def feed(self, text: str) -> tuple[DetectionCandidate, ...]:
+        candidates: list[DetectionCandidate] = []
+        for character in text:
+            self._buffer += character
+            self._offset += 1
+            excess = len(self._buffer) - self.max_buffer_chars
+            if excess > 0:
+                self._buffer = self._buffer[excess:]
+                self._buffer_start += excess
+            match = self._pattern.search(self._buffer)
+            if match:
+                expression = match.group(1).strip()
+                if expression and len(expression) <= self.max_expression_chars:
+                    start = self._buffer_start + match.start(1)
+                    candidates.append(
+                        DetectionCandidate(
+                            candidate_id=_candidate_id(
+                                self.name, start, self._offset, expression
+                            ),
+                            family="compute",
+                            raw_text=expression,
+                            start_offset=start,
+                            end_offset=self._offset,
+                            detector=self.name,
+                            metadata={"syntax": self.name, "terminator": "closing_fence"},
+                        )
+                    )
+                self._buffer = ""
+                self._buffer_start = self._offset
         return tuple(candidates)
 
 

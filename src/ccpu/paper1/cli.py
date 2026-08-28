@@ -16,12 +16,28 @@ from ccpu.common.artifacts import (
     write_jsonl,
 )
 
-from .dataset import ArithmeticDatasetConfig, ArithmeticExample, iter_dataset
+from .dataset import (
+    ArithmeticDatasetConfig,
+    ArithmeticExample,
+    HardArithmeticDatasetConfig,
+    iter_dataset,
+    iter_hard_dataset,
+)
 from .evaluate import evaluate
 from .experiment import run_huggingface, run_replay, run_scripted
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 from .plot import plot_scaling
-from .prompts import CONDITIONS
+from .prompts import CONDITIONS, PROMPT_VERSION
+
+PROTOCOL_VERSIONS = {
+    "prompt": PROMPT_VERSION,
+    "strict_detector": "strict_arithmetic_v1",
+    "normalized_detector": "normalized_arithmetic_v1",
+    "surface_normalizer": "surface_normalizer_v1",
+    "calculator_block_grammar": "calculator_block_v1",
+    "calculator_ir": "ccpu.arithmetic.postfix.v1",
+    "hard_generator": "hard_arithmetic_v1",
+}
 
 
 def _examples(path: str | Path) -> list[ArithmeticExample]:
@@ -65,8 +81,12 @@ def _write_run(
 
 def generate_command(args: argparse.Namespace) -> int:
     raw_config = read_json(args.config)
-    config = ArithmeticDatasetConfig.from_dict(raw_config)
-    examples = list(iter_dataset(config))
+    if raw_config.get("dataset", raw_config).get("mode") == "hard_v1":
+        config = HardArithmeticDatasetConfig.from_dict(raw_config)
+        examples = list(iter_hard_dataset(config))
+    else:
+        config = ArithmeticDatasetConfig.from_dict(raw_config)
+        examples = list(iter_dataset(config))
     output = write_jsonl(args.output, (example.to_dict() for example in examples))
     write_json(
         Path(output).with_suffix(".manifest.json"),
@@ -75,6 +95,7 @@ def generate_command(args: argparse.Namespace) -> int:
             "schema_version": "ccpu.paper1.dataset_manifest.v1",
             "config": config.to_dict(),
             "config_fingerprint": fingerprint(config.to_dict()),
+            "protocol_versions": PROTOCOL_VERSIONS,
             "record_count": len(examples),
             "dataset_sha256": file_sha256(output),
         },
@@ -107,6 +128,7 @@ def simulate_command(args: argparse.Namespace) -> int:
         empirical=False,
         run_config={
             "backend": "scripted_protocol_smoke",
+            "protocol_versions": PROTOCOL_VERSIONS,
             "conditions": conditions,
             "seed": args.seed,
         },
@@ -171,6 +193,7 @@ def hf_command(args: argparse.Namespace) -> int:
         empirical=True,
         run_config={
             "backend": "huggingface",
+            "protocol_versions": PROTOCOL_VERSIONS,
             "models": model_entries,
             "conditions": conditions,
             "seeds": seeds,

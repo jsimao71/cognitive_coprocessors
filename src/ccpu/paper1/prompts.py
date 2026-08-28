@@ -4,7 +4,17 @@ from __future__ import annotations
 
 from .dataset import ArithmeticExample
 
-CONDITIONS = ("llm_only", "matched_prompt", "explicit_tool", "reflex", "oracle")
+PROMPT_VERSION = "paper1_hard_interfaces_v1"
+
+CONDITIONS = (
+    "llm_only",
+    "matched_prompt",
+    "explicit_tool",
+    "reflex",
+    "normalized_reflex",
+    "calculator_block",
+    "oracle",
+)
 
 
 def condition_prompt(example: ArithmeticExample, condition: str) -> str:
@@ -21,9 +31,20 @@ def condition_prompt(example: ArithmeticExample, condition: str) -> str:
             "Call the calculator by writing <tool:calculator>EXPRESSION</tool>. "
             "After the tool result appears, return the exact answer."
         )
-    else:
+    elif condition in {"reflex", "oracle"}:
         instruction = (
             "Begin the calculation by copying the expression followed by one equals sign. "
             "Continue from any result inserted after that sign."
+        )
+    elif condition == "normalized_reflex":
+        instruction = (
+            "Begin by copying the complete expression in ordinary, LaTeX, or Unicode math "
+            "notation followed by one equals sign. Continue from the inserted result."
+        )
+    else:
+        instruction = (
+            "Write exactly one fenced calculator block containing the complete expression, "
+            "then continue from the inserted calculator result. Use this form:\n"
+            "```calculator\nEXPRESSION\n```"
         )
     return f"{instruction}\n{example.prompt}\nResponse:"

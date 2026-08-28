@@ -58,9 +58,9 @@ def test_cli_generate_validate_simulate_and_evaluate(tmp_path):
     )
 
     assert len(read_jsonl(dataset)) == 3
-    assert len(read_jsonl(run_dir / "predictions.jsonl")) == 15
+    assert len(read_jsonl(run_dir / "predictions.jsonl")) == 21
     assert read_json(run_dir / "summary.json")["empirical"] is False
-    assert read_json(run_dir / "manifest.json")["prediction_count"] == 15
+    assert read_json(run_dir / "manifest.json")["prediction_count"] == 21
     assert read_json(recomputed)["schema_version"] == "ccpu.paper1.evaluation.v1"
 
 

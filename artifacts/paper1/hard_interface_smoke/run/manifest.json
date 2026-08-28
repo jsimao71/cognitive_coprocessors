@@ -1,0 +1,41 @@
+{
+  "dataset_sha256": "4faaced8d86df09dddef09ecff0a47522a5a2cd748c0d7494a29e54115a3e165",
+  "empirical": false,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "66acb424a0597d79148475753362219d88f92f86"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "paper": "Paper 1",
+  "prediction_count": 35,
+  "predictions_sha256": "5e9da66ea9f428d82bdf315fff9d6a22943937b251d29b7c3f8c3da292ab8d03",
+  "run_config": {
+    "backend": "scripted_protocol_smoke",
+    "conditions": [
+      "llm_only",
+      "matched_prompt",
+      "explicit_tool",
+      "reflex",
+      "normalized_reflex",
+      "calculator_block",
+      "oracle"
+    ],
+    "protocol_versions": {
+      "calculator_block_grammar": "calculator_block_v1",
+      "calculator_ir": "ccpu.arithmetic.postfix.v1",
+      "hard_generator": "hard_arithmetic_v1",
+      "normalized_detector": "normalized_arithmetic_v1",
+      "prompt": "paper1_hard_interfaces_v1",
+      "strict_detector": "strict_arithmetic_v1",
+      "surface_normalizer": "surface_normalizer_v1"
+    },
+    "seed": 0
+  },
+  "schema_version": "ccpu.paper1.run_manifest.v1",
+  "trace_count": 34,
+  "traces_sha256": "f5e649ac22828a7fb8130220665fb2e05485588c5889f37a309d3b0ccf60cf73"
+}
