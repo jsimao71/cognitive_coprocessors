@@ -679,6 +679,29 @@ production latency estimates.  The stronger conclusion is operational: engine
 CPU time is negligible relative to neural generation, but selecting and
 preserving the engine result remains unreliable.
 
+\subsection{Four generic tools: transport-equivalence checkpoint}
+
+We add the fixed gateways \texttt{\_\_compute}, \texttt{\_\_retrieve},
+\texttt{\_\_verify}, and \texttt{\_\_help}. Concrete engines remain outside
+the model-facing schemas. The gateway validates coarse intent and enters the
+same R2 parser, engine registry, policy, typed state, provenance, and result path
+as the generic CogCop interface.
+
+As a first invariant, we replay the 100-row five-engine test freeze with oracle
+timing. Eighty rows require assistance and 20 are controls. A generic
+\texttt{\_\_compute} call carrying the same marked payload and a direct CogCop
+block produce identical backend results on all 100 rows; both transports score
+1.000 under deterministic runtime-copy. The four schemas occupy 72 lexical
+tokens and remain exactly constant as the registry grows from one to five
+engines.
+
+This is not a voluntary-tool result. No model chooses whether or when to call,
+tool arguments are oracle payloads, and Automatic Rescue Rate is undefined.
+The result establishes backend parity and registry/schema invariance so later
+model-facing comparisons cannot weaken the skeptical tool baseline. Claims
+about autonomy, malformed arguments, JIT timing, CONTINUE, latency, or rescue
+remain pending.
+
 \section{Hypotheses, falsification, and gate}
 
 \begin{itemize}
@@ -719,6 +742,8 @@ the gate, so it does not reverse that pause.
 The tokenizer-aware hierarchy likewise remains below 0.9 positive selection,
 despite zero FAR and substantial model-call avoidance; it does not reopen the
 Paper 3 gate.
+The oracle-timed four-tool transport audit also leaves the gate unchanged:
+backend equivalence is a required control, not evidence of learned assistance.
 
 \section{Limitations}
 
@@ -727,7 +752,9 @@ a frozen test reduce leakage, but do not establish linguistic robustness.  The
 runtime reflex is anchored to those templates and should not be generalized.
 Only one seed, one rank, one training schedule, and three small checkpoints are
 tested.  The explicit baseline uses textual schemas rather than native function
-calling.  Strict exact matching penalizes semantically correct capitalization or
+calling. The four-tool audit uses fixed native-like schemas but oracle timing
+and arguments; it does not measure voluntary calls, Automatic Rescue Rate,
+malformed arguments, or extra model turns. Strict exact matching penalizes semantically correct capitalization or
 extra prose, appropriately for an execution protocol but more harshly than a
 question-answer benchmark.  We do not add the optional sixth engine, a generic
 code interpreter, an unrestricted planner, larger models, or a model-authored
@@ -809,6 +836,10 @@ python -m ccpu paper2 analyze-public \
   --cache-root /path/to/pinned-hf-parquet \
   --selection artifacts/paper2/public_benchmarks/data_v1/selection.jsonl \
   --output-dir artifacts/paper2/public_benchmarks/coverage_v1
+
+python -m ccpu paper2 compare-generic-tools \
+  --benchmark artifacts/paper2/generic_tools_v1/data/test.jsonl \
+  --output-dir artifacts/paper2/generic_tools_v1/transport
 
 python -m ccpu paper2 generate-diagnostic \
   --config configs/paper2/diagnostic_cpu.json \
@@ -922,6 +953,11 @@ baseline remains the only new production recommendation.
 Tokenizer-aware CPU routing strengthens the cheap baseline and can avoid most
 model calls in a hierarchy, but its graph/engine-identity errors keep that
 architecture diagnostic rather than production-qualified.
+The four generic gateways now provide the skeptical transport baseline: with
+oracle timing they are backend-equivalent to CogCop and their visible schema is
+registry-invariant. A deeper invocation claim therefore requires a future
+matched model-facing gain in recall, safe automatic rescue, JIT timing,
+CONTINUE, or execution cost; transport parity alone supports no such claim.
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.

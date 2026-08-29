@@ -2,6 +2,11 @@ import json
 
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
+from ccpu.common.generic_gateway import (
+    GenericCognitiveGateway,
+    GenericToolCall,
+    generic_tool_schemas,
+)
 from ccpu.common.public_benchmarks import PublicSource, stratified_select
 from ccpu.common.schema import CoprocessorRequest, GenerationResult
 from ccpu.paper2.attention_diagnostic import (
@@ -17,6 +22,7 @@ from ccpu.paper2.diagnostic import (
     generate_diagnostic_benchmark,
     lexical_audit,
 )
+from ccpu.paper2.generic_tools import compare_oracle_transports
 from ccpu.paper2.graph import FrameGraphEngine
 from ccpu.paper2.logic import HornEngine
 from ccpu.paper2.next_experiment import (
@@ -53,6 +59,53 @@ from ccpu.paper2.twil_experiment import (
     run_twil_condition,
     summarize_twil,
 )
+
+
+def test_generic_gateway_has_fixed_four_tool_contract():
+    schemas = generic_tool_schemas()
+    assert [schema["name"] for schema in schemas] == [
+        "__compute",
+        "__retrieve",
+        "__verify",
+        "__help",
+    ]
+    calls = []
+    gateway = GenericCognitiveGateway(
+        lambda intent, payload, task: calls.append((intent, payload, task))
+    )
+    gateway.invoke(GenericToolCall("__compute", {"event": "x"}), active_task="task")
+    assert calls == [("compute", {"event": "x"}, "task")]
+
+
+def test_paper2_generic_tool_transport_uses_identical_runtime(tmp_path):
+    benchmark = tmp_path / "benchmark.jsonl"
+    write_jsonl(
+        benchmark,
+        [
+            {
+                "example_id": "compute",
+                "prompt": "Compute two plus three.",
+                "target": "```calculator\n2 + 3\n```",
+                "answer": "5",
+                "should_trigger": True,
+            },
+            {
+                "example_id": "control",
+                "prompt": "Repeat READY.",
+                "target": "NO_EXECUTION",
+                "answer": "READY",
+                "should_trigger": False,
+            },
+        ],
+    )
+    summary = compare_oracle_transports(benchmark, tmp_path / "output")
+    assert summary["backend_result_agreement"] == 1.0
+    assert summary["block_accuracy"] == 1.0
+    assert summary["tool_accuracy"] == 1.0
+    assert {row["schema_tokens"] for row in summary["registry_scaling"]} == {
+        summary["registry_scaling"][0]["schema_tokens"]
+    }
+    assert summary["claim_boundary"]["automatic_rescue_rate"] is None
 
 
 def _request(engine: str, operation: str, payload: dict) -> CoprocessorRequest:

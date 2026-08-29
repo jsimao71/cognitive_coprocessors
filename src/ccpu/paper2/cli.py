@@ -33,6 +33,7 @@ from .diagnostic import (
 )
 from .evaluate import evaluate
 from .experiment import run_scripted
+from .generic_tools import compare_oracle_transports
 from .next_analysis import analyze_runs
 from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
@@ -533,6 +534,15 @@ def analyze_public_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def compare_generic_tools_command(args: argparse.Namespace) -> int:
+    result = compare_oracle_transports(args.benchmark, args.output_dir)
+    print(
+        f"compared {result['row_count']} Paper 2 generic-tool/block transports; "
+        f"agreement={result['backend_result_agreement']:.3f}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2", help="heterogeneous symbolic protocol")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -766,3 +776,10 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_analysis.add_argument("--selection", required=True)
     public_analysis.add_argument("--output-dir", required=True)
     public_analysis.set_defaults(handler=analyze_public_command)
+
+    generic_tools = commands.add_parser(
+        "compare-generic-tools", help="audit four-tool and CogCop transport equivalence"
+    )
+    generic_tools.add_argument("--benchmark", required=True)
+    generic_tools.add_argument("--output-dir", required=True)
+    generic_tools.set_defaults(handler=compare_generic_tools_command)

@@ -27,6 +27,26 @@ development loss as held-out interface reliability. Further adapter tuning or an
 optional sixth engine requires a new versioned experiment rather than mutating
 these artifacts.
 
+## Four generic tools checkpoint
+
+The skeptical model-facing baseline is exactly `__compute`, `__retrieve`,
+`__verify`, and `__help`. These gateways use the same R2 parser, engine registry,
+policy, typed state, provenance, and result integration as CogCop. Concrete
+engine identities remain outside the four schemas.
+
+The retained oracle-timed transport audit covers the 100-row five-engine test
+freeze: 80 assistance rows and 20 controls. Generic `__compute` and direct
+CogCop blocks have 1.000 backend-result agreement and 1.000 deterministic
+accuracy. The four schemas cost 72 lexical tokens and remain constant from one
+through five registered engines.
+
+This validates transport and schema invariance only. The model does not choose
+the call or arguments, so voluntary assistance recall, malformed arguments,
+timing, CONTINUE, extra turns, and Automatic Rescue Rate are unmeasured. Do not
+use this result to claim either tools or CogCop win. A deeper CogCop claim
+requires matched model-facing rescue, timing, integration, scaling, or cost
+evidence.
+
 ## TwIL comparison pilot (diagnostic only)
 
 The first TwIL/SmolLM3 comparison is frozen under `artifacts/paper2/twil` and

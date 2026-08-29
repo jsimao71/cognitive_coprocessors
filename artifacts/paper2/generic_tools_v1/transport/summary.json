@@ -1,0 +1,57 @@
+{
+  "assistance_required": 80,
+  "backend_result_agreement": 1.0,
+  "benchmark_sha256": "05c6e6af2e8dfe06cbdb121f0231ae2a48e3881995dbf32509e87e5330b84603",
+  "block_accuracy": 1.0,
+  "claim_boundary": {
+    "automatic_rescue_rate": null,
+    "result": "transport and schema invariance only",
+    "timing": "oracle",
+    "voluntary_model_call": false
+  },
+  "predictions_sha256": "1593e5c5c996da9f1a4d38fa7695db20dca2a9bfc250d3ca40e1761fdaa99b25",
+  "registry_scaling": [
+    {
+      "engine_count": 1,
+      "engines": [
+        "calculator"
+      ],
+      "schema_tokens": 72,
+      "tool_count": 4
+    },
+    {
+      "engine_count": 2,
+      "engines": [
+        "calculator",
+        "datalog"
+      ],
+      "schema_tokens": 72,
+      "tool_count": 4
+    },
+    {
+      "engine_count": 3,
+      "engines": [
+        "calculator",
+        "datalog",
+        "graph"
+      ],
+      "schema_tokens": 72,
+      "tool_count": 4
+    },
+    {
+      "engine_count": 5,
+      "engines": [
+        "calculator",
+        "datalog",
+        "graph",
+        "date",
+        "units"
+      ],
+      "schema_tokens": 72,
+      "tool_count": 4
+    }
+  ],
+  "row_count": 100,
+  "schema_version": "ccpu.paper2.generic_tool_transport.v1",
+  "tool_accuracy": 1.0
+}
