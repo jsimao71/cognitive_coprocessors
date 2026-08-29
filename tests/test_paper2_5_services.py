@@ -1,0 +1,81 @@
+import os
+from pathlib import Path
+
+import pytest
+
+from ccpu.common.retrieval import SourceRequest
+from ccpu.paper2_5.service_sources import (
+    PgvectorSource,
+    PostgresSource,
+    controlled_query_embedding,
+    postgres_query,
+)
+
+POSTGRES_DSN = os.environ.get("CCPU_POSTGRES_DSN", "")
+
+
+def test_postgres_compiler_uses_fixed_parameterized_queries():
+    sql, parameters, resource = postgres_query(
+        "db.lookup", {"product": "Aster'; DROP TABLE sales; --", "year": 2026}
+    )
+    assert "%s" in sql
+    assert "DROP TABLE" not in sql
+    assert "DROP TABLE" in parameters[0]
+    assert resource == "sales"
+    schema_sql, schema_parameters, schema_resource = postgres_query("db.schema", {})
+    assert "information_schema.tables" in schema_sql
+    assert schema_parameters == ()
+    assert schema_resource == "information_schema.tables"
+    with pytest.raises(ValueError, match="unsupported"):
+        postgres_query("db.raw_sql", {"sql": "SELECT 1"})
+
+
+def test_pgvector_fixture_embedding_keeps_embedding_separate_from_search():
+    assert controlled_query_embedding("profitability shipping discounts").tolist() == [3, 0, 0]
+    assert controlled_query_embedding("why customer churn improved").tolist() == [0, 1, 0]
+    assert controlled_query_embedding("theme behind lower energy use").tolist() == [0, 0, 1]
+
+
+def test_wsl_sidekick_is_explicit_and_contains_no_real_environment_file():
+    root = Path(__file__).resolve().parents[1] / "sidekick" / "data_stack"
+    required = (
+        "compose.yaml",
+        ".env.example",
+        "README.md",
+        "healthcheck.sh",
+        "init/001_schema.sql",
+        "init/002_read_only.sh",
+    )
+    assert all((root / relative).is_file() for relative in required)
+    assert not (root / ".env").exists()
+    compose = (root / "compose.yaml").read_text(encoding="utf-8")
+    assert "pgvector/pgvector:0.8.6-pg17-bookworm" in compose
+    assert "healthcheck" in compose
+
+
+@pytest.mark.integration
+@pytest.mark.skipif(not POSTGRES_DSN, reason="CCPU_POSTGRES_DSN is not configured")
+def test_postgres_and_pgvector_sidekick_integration():
+    db = PostgresSource(POSTGRES_DSN)
+    db_evidence = db.retrieve(
+        SourceRequest(
+            request_id="integration-db",
+            source_type="db",
+            operation="db.sum_sales",
+            payload={"year": 2026},
+        )
+    )
+    assert db_evidence[0].value == "500"
+    assert db_evidence[0].provenance["transaction_mode"] == "read_only"
+
+    vector = PgvectorSource(POSTGRES_DSN)
+    vector_evidence = vector.retrieve(
+        SourceRequest(
+            request_id="integration-vector",
+            source_type="vector",
+            operation="vector.search",
+            payload={"query": "profitability shipping discounts"},
+        )
+    )
+    assert vector_evidence[0].record_id == "report_margin_q2"
+    assert vector_evidence[0].provenance["backend"] == "pgvector"

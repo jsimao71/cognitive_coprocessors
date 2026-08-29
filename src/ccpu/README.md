@@ -137,3 +137,8 @@ python -m pip install -e ".[data]"
 python -m ccpu paper2.5 run --benchmark artifacts/paper2_5/production_v1/data/benchmark.jsonl --source-count 4 --backend-suite local_production --output-dir artifacts/paper2_5/production_v1/source_n4
 python -m ccpu paper2.5 analyze-production --controlled-predictions artifacts/paper2_5/next_iter/source_n4_v2/predictions.jsonl --production-predictions artifacts/paper2_5/production_v1/source_n4/predictions.jsonl --production-traces artifacts/paper2_5/production_v1/source_n4/traces.jsonl --output-dir artifacts/paper2_5/production_v1/substitution
 ```
+
+The optional `sidekick/data_stack` boundary is for WSL2 only. Its Postgres/pgvector integration
+test requires `CCPU_POSTGRES_DSN` and otherwise skips explicitly; no service-backed result is
+included in the paper. See the sidekick README for startup, health, test, teardown, and volume
+cleanup commands.

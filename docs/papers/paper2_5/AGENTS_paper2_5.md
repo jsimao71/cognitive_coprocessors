@@ -31,6 +31,9 @@ Secondary: can capability count grow outside recurring neural context?
 - This substitution validates the interface, not production data or service
   operation. The corpus, embeddings, and web source remain controlled; Docker
   and remote services were not used.
+- A WSL2-only Postgres/pgvector sidekick and explicit DSN-gated integration tests
+  are present but unexecuted. They must never fall back to controlled adapters,
+  and they are not evidence until a separately retained service run exists.
 
 These are controlled deterministic runtime results, not language-model or live
 web-search evidence. New natural-language routing work requires a separately

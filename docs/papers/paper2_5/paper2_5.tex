@@ -178,6 +178,12 @@ or realistic corpus scale. No Docker service was started. Postgres/pgvector,
 Iceberg catalogs, Qdrant, Weaviate, semantic layers, and ontologies are outside
 this completed local phase.
 
+For the next boundary, the repository includes a WSL2-only Compose definition,
+seed SQL, health check, explicit Postgres and pgvector adapters, and integration
+tests gated by a caller-supplied DSN. Both adapters use parameter binding and
+read-only transactions; unavailable services skip rather than fall back. These
+assets were statically checked only. They contribute no result or latency claim.
+
 \section{Paper 3.5 Gate}
 Learned source routing requires all four pre-registered criteria:
 \begin{enumerate}
