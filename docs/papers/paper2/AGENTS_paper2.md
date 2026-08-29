@@ -167,3 +167,26 @@ shared typed IR, leakage-audited multi-engine LoRA data, context/weights/runtime
 comparison, nested capability sweeps, factorized traces and economics, bounded
 compositions, state-reuse evidence, plots, rebuilt paper, and explicit Paper 3
 gate artifact.
+
+## Tokenizer-aware trigger outcome
+The matched add-on uses the existing 2,250/450/900 diagnostic split and exact
+pinned Qwen/SmolLM2/Gemma tokenizers. It compares word, character, shared
+word/punctuation, raw native, and normalized native representations under
+unigram/token-ngram TF-IDF, BM25 exemplars, and class prototypes. BM25 `k` and
+all thresholds are selected on development only. Token pieces, predictions,
+confusions, per-engine metrics, index sizes, and latency are retained under
+`artifacts/paper2/tokenizer_triggers/diagnostic_v1`.
+
+The development-selected six-way condition is normalized Gemma unigram TF-IDF;
+test accuracy is 0.809, positive engine selection 0.656, FAR 0, and runtime
+exactness 0.656. Qwen normalized BM25 reaches 0.870 selection and 0.970 runtime
+exactness but FAR 0.200. Neither replaces T1 lexical/regex (0.900 selection,
+0.900 runtime exact, FAR 0).
+
+The explicit hierarchy uses CPU graph/Datalog cues, token routing for
+NONE/calculator/date/units, and the row-matched Qwen-L2 router for deferred
+cases. It avoids 77.44% of model calls and has 0 FAR, but selection is only
+0.804, with graph recall 0.500. Runtime exactness of 0.904 includes
+answer-equivalent engine substitutions and does not clear the identity gate.
+TwIL is not merged because its benchmark is not row-aligned. Paper 3 remains
+`no_go`.

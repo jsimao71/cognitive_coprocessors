@@ -5,6 +5,7 @@ from __future__ import annotations
 import random
 import re
 import time
+from collections import defaultdict
 from dataclasses import asdict, dataclass
 from datetime import date, timedelta
 from decimal import Decimal, localcontext
@@ -15,9 +16,15 @@ from ccpu.common.artifacts import (
     environment_manifest,
     file_sha256,
     fingerprint,
+    read_json,
     read_jsonl,
     write_json,
     write_jsonl,
+)
+from ccpu.common.lexical_routing import (
+    NativeTokenizerSpec,
+    run_matched_lexical_comparison,
+    score_labels,
 )
 from ccpu.common.metrics import binary_classification, safe_mean
 
@@ -487,6 +494,232 @@ def analyze_trigger_ladder(
     _plot_ladder(result, output_dir / "trigger_ladder.png")
     _plot_learning_curves(result, output_dir / "classification_learning_curves.png")
     return result
+
+
+def analyze_tokenizer_trigger_ladder(
+    train_path: str | Path,
+    dev_path: str | Path,
+    test_path: str | Path,
+    tokenizer_config_path: str | Path,
+    neural_predictions_path: str | Path,
+    output_dir: str | Path,
+) -> dict[str, Any]:
+    train = read_jsonl(train_path)
+    dev = read_jsonl(dev_path)
+    test = read_jsonl(test_path)
+    config = read_json(tokenizer_config_path)
+    specs = [NativeTokenizerSpec(**model) for model in config["models"]]
+    output_dir = Path(output_dir)
+    result = run_matched_lexical_comparison(
+        train,
+        dev,
+        test,
+        text_key="prompt",
+        label_key="classification_label",
+        negative_label="NONE",
+        tokenizer_specs=specs,
+        output_dir=output_dir,
+        source_hashes={
+            "train": file_sha256(train_path),
+            "dev": file_sha256(dev_path),
+            "test": file_sha256(test_path),
+        },
+        subgroup_key="classification_label",
+        include_prototypes=True,
+    )
+    lexical_predictions = read_jsonl(output_dir / "predictions.jsonl")
+    by_condition_split: dict[tuple[str, str], dict[str, dict[str, Any]]] = defaultdict(dict)
+    for row in lexical_predictions:
+        by_condition_split[(row["condition"], row["split"])][row["example_id"]] = row
+
+    parser_rows = []
+    for condition in result["results"]:
+        predicted = [
+            by_condition_split[(condition["condition"], "test")][row["example_id"]][
+                "predicted_label"
+            ]
+            for row in test
+        ]
+        execution = _score_parser_execution(test, predicted, condition=condition["condition"])
+        condition["test"]["engine_selection_accuracy"] = safe_mean(
+            predicted[index] == row["classification_label"]
+            for index, row in enumerate(test)
+            if row["classification_label"] != "NONE"
+        )
+        condition["test"].update(execution["summary"])
+        parser_rows.extend(execution["rows"])
+
+    neural_rows = read_jsonl(neural_predictions_path)
+    neural = {str(row["example_id"]): str(row["predicted_engine"]) for row in neural_rows}
+    if set(neural) != {str(row["example_id"]) for row in test}:
+        raise ValueError("hierarchical neural fallback must exactly cover the tokenizer test freeze")
+    hierarchy = []
+    hierarchy_predictions = []
+    easy_labels = {"NONE", "CALCULATOR", "DATE", "UNITS"}
+    for condition in result["results"]:
+        name = condition["condition"]
+        dev_rows = by_condition_split[(name, "dev")]
+        threshold, accepted_accuracy, accepted_coverage = _cpu_acceptance_threshold(
+            dev, dev_rows, easy_labels
+        )
+        test_rows = by_condition_split[(name, "test")]
+        labels = []
+        oracle_labels = []
+        fallback_count = 0
+        for row in test:
+            lexical = test_rows[str(row["example_id"])]
+            logic_deferred = _t2(str(row["prompt"])) in {"GRAPH", "DATALOG"}
+            cpu_accepted = (
+                not logic_deferred
+                and
+                lexical["predicted_label"] in easy_labels
+                and float(lexical["confidence"]) >= threshold
+            )
+            if cpu_accepted:
+                final = str(lexical["predicted_label"])
+                oracle_final = final
+            else:
+                fallback_count += 1
+                final = neural[str(row["example_id"])]
+                oracle_final = str(row["classification_label"])
+            labels.append(final)
+            oracle_labels.append(oracle_final)
+            hierarchy_predictions.append(
+                {
+                    "schema_version": "ccpu.paper2.hierarchical_trigger_prediction.v1",
+                    "condition": name,
+                    "example_id": str(row["example_id"]),
+                    "gold_engine": str(row["classification_label"]),
+                    "cpu_engine": str(lexical["predicted_label"]),
+                    "cpu_confidence": float(lexical["confidence"]),
+                    "logic_cue_deferred": logic_deferred,
+                    "cpu_accepted": cpu_accepted,
+                    "final_engine": final,
+                    "fallback": "none" if cpu_accepted else "qwen_l2_router",
+                }
+            )
+        scored = score_labels(
+            [str(row["classification_label"]) for row in test],
+            labels,
+            negative_label="NONE",
+        )
+        engine_selection_accuracy = safe_mean(
+            labels[index] == row["classification_label"]
+            for index, row in enumerate(test)
+            if row["classification_label"] != "NONE"
+        )
+        execution = _score_parser_execution(
+            test, labels, condition=f"hierarchical_{name}_qwen_l2"
+        )
+        oracle_execution = _score_parser_execution(
+            test, oracle_labels, condition=f"hierarchical_{name}_oracle_fallback"
+        )
+        fallback_rate = fallback_count / max(len(test), 1)
+        hierarchy.append(
+            {
+                "condition": f"hierarchical_{name}_qwen_l2",
+                "cpu_condition": name,
+                "cpu_threshold_selected_on_dev": threshold,
+                "dev_cpu_accepted_accuracy": accepted_accuracy,
+                "dev_cpu_coverage": accepted_coverage,
+                "fallback_rate": fallback_rate,
+                "model_calls_avoided_rate": 1.0 - fallback_rate,
+                "context_tokens_added": 0,
+                "fallback_model": "Qwen3-0.6B L2 six-way router",
+                "mean_estimated_route_latency_us": condition["mean_cpu_latency_us"]
+                + fallback_rate * 554_663.2642222223,
+                **scored,
+                "engine_selection_accuracy": engine_selection_accuracy,
+                **execution["summary"],
+                "oracle_fallback_runtime_exact_rate": oracle_execution["summary"][
+                    "runtime_exact_rate"
+                ],
+            }
+        )
+        parser_rows.extend(execution["rows"])
+    eligible_hierarchy = [
+        row for row in hierarchy if row["dev_cpu_accepted_accuracy"] >= 0.95
+    ]
+    selected_hierarchy = min(
+        eligible_hierarchy or hierarchy,
+        key=lambda row: (
+            -row["dev_cpu_coverage"],
+            -row["dev_cpu_accepted_accuracy"],
+            row["cpu_condition"],
+        ),
+    )
+    result["hierarchical_routing"] = hierarchy
+    result["paper2_decision"] = {
+        "selection_is_development_only": True,
+        "selected_hierarchy": selected_hierarchy["condition"],
+        "criterion": "maximize development CPU coverage at >=0.95 accepted accuracy",
+        "status": (
+            "hierarchical_cpu_neural_passes"
+            if selected_hierarchy["engine_selection_accuracy"] >= 0.9
+            and selected_hierarchy["false_activation_rate"] <= 0.1
+            and selected_hierarchy["runtime_exact_rate"] >= 0.9
+            else "retain_diagnostic_no_go"
+        ),
+        "paper3_gate": "no_go",
+    }
+    result["neural_fallback_sha256"] = file_sha256(neural_predictions_path)
+    result["tokenizer_config_sha256"] = file_sha256(tokenizer_config_path)
+    write_json(output_dir / "comparison.json", result)
+    write_jsonl(output_dir / "parser_predictions.jsonl", parser_rows)
+    write_jsonl(output_dir / "hierarchical_predictions.jsonl", hierarchy_predictions)
+    _plot_tokenizer_ladder(result, output_dir / "tokenizer_trigger_ladder.png")
+    return result
+
+
+def _cpu_acceptance_threshold(
+    dev: list[dict[str, Any]],
+    predictions: dict[str, dict[str, Any]],
+    easy_labels: set[str],
+) -> tuple[float, float, float]:
+    candidates = []
+    for threshold_index in range(21):
+        threshold = threshold_index / 20
+        accepted = [
+            row
+            for row in dev
+            if _t2(str(row["prompt"])) not in {"GRAPH", "DATALOG"}
+            and predictions[str(row["example_id"])]["predicted_label"] in easy_labels
+            and float(predictions[str(row["example_id"])]["confidence"]) >= threshold
+        ]
+        correct = sum(
+            predictions[str(row["example_id"])]["predicted_label"]
+            == row["classification_label"]
+            for row in accepted
+        )
+        accuracy = correct / len(accepted) if accepted else 0.0
+        coverage = len(accepted) / max(len(dev), 1)
+        candidates.append((accuracy >= 0.95, coverage, accuracy, threshold))
+    selected = max(candidates)
+    return float(selected[3]), float(selected[2]), float(selected[1])
+
+
+def _plot_tokenizer_ladder(result: dict[str, Any], output: Path) -> None:
+    plt = _pyplot()
+    rows = result["results"]
+    selected = sorted(rows, key=lambda row: (-row["dev"]["accuracy"], row["condition"]))[:12]
+    labels = [row["condition"].replace("native_", "") for row in selected]
+    figure, axes = plt.subplots(1, 2, figsize=(13.5, 5.3))
+    positions = list(range(len(selected)))
+    axes[0].barh(positions, [row["test"]["accuracy"] for row in selected], color="#176b87")
+    axes[1].barh(
+        positions,
+        [row["mean_cpu_latency_us"] for row in selected],
+        color="#c4512d",
+    )
+    for axis, title in zip(axes, ("Six-way test accuracy", "CPU route latency (us)"), strict=True):
+        axis.set_yticks(positions, labels)
+        axis.invert_yaxis()
+        axis.set_title(title)
+        axis.grid(axis="x", alpha=0.22)
+    figure.tight_layout()
+    output.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output, dpi=180, bbox_inches="tight")
+    plt.close(figure)
 
 
 def _fit_classical_models(train: list[dict[str, Any]]) -> dict[str, Any]:

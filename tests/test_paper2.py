@@ -1,7 +1,7 @@
 import json
 
 from ccpu.cli import main
-from ccpu.common.artifacts import read_json, read_jsonl, write_jsonl
+from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
 from ccpu.common.schema import CoprocessorRequest, GenerationResult
 from ccpu.paper2.attention_diagnostic import (
     select_attention_rows,
@@ -10,6 +10,7 @@ from ccpu.paper2.attention_diagnostic import (
 from ccpu.paper2.composition import run_compositions
 from ccpu.paper2.diagnostic import (
     DiagnosticBenchmarkConfig,
+    analyze_tokenizer_trigger_ladder,
     analyze_trigger_ladder,
     deterministic_payload,
     generate_diagnostic_benchmark,
@@ -415,6 +416,30 @@ def test_diagnostic_benchmark_and_cpu_factorization(tmp_path):
         deterministic_payload("Give the integer result for the expression 17 * 19.", "CALCULATOR")
         == "```calculator\n17 * 19\n```"
     )
+
+    write_json(tmp_path / "tokenizers.json", {"models": []})
+    test_rows = read_jsonl(data / "test.jsonl")
+    write_jsonl(
+        tmp_path / "neural.jsonl",
+        (
+            {
+                "example_id": row["example_id"],
+                "predicted_engine": row["classification_label"],
+            }
+            for row in test_rows
+        ),
+    )
+    tokenizers = analyze_tokenizer_trigger_ladder(
+        data / "train.jsonl",
+        data / "dev.jsonl",
+        data / "test.jsonl",
+        tmp_path / "tokenizers.json",
+        tmp_path / "neural.jsonl",
+        tmp_path / "tokenizer_analysis",
+    )
+    assert tokenizers["paper2_decision"]["paper3_gate"] == "no_go"
+    assert tokenizers["hierarchical_routing"]
+    assert all(row["context_tokens_added"] == 0 for row in tokenizers["hierarchical_routing"])
 
 
 def test_factorized_router_data_and_fail_closed_scoring(tmp_path):

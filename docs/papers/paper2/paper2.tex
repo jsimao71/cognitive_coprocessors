@@ -33,7 +33,11 @@ selection and runtime exactness with zero false activation, whereas semantic
 rules select 0.800 but execute 1.000 by substituting graph closure for Datalog,
 and learned CPU routers select only 0.588 with 0.400 false activation.  Thus
 exact execution and parsing belong in the runtime, but broad semantic selection
-and result use remain unresolved.  Factorized Qwen router LoRAs improve selection
+and result use remain unresolved. A tokenizer-aware extension raises the best
+development-selected six-way CPU test accuracy to 0.809; a hierarchical
+logic-cue/token route plus Qwen fallback avoids 77.4\% of model calls and reaches
+0.891 accuracy with zero false activation, but only 0.804 positive engine
+selection. Factorized Qwen router LoRAs improve selection
 to 0.848 (attention only) and 0.900 (attention+MLP), but false activation rises
 to 0.273 and 0.400; neither clears the gate.  On a matched 360-row result-use
 study, Qwen reaches 0.650 COPY, 0.492 INTERPRET, and 0.233 CONTINUE exactness.
@@ -317,6 +321,62 @@ recall from 0.570 to 0.988 but also raises FAR from 0 to 0.400; selection ends a
 repairing it.  The next justified neural experiment is factorized six-way
 routing, not another joint free-form block generator.
 
+\subsection{Token-space triggers and hierarchical CPU routing}
+
+The shallow audit can understate lexical strength because its representation is
+fixed. We compare current words and character $n$-grams, one shared Unicode
+word/punctuation tokenizer, and raw and normalized pieces from the exact pinned
+Qwen, SmolLM2, and Gemma tokenizers. Each token representation receives separate
+unigram and unigram--bigram TF--IDF classifiers, BM25 exemplar routing, and an
+IDF-weighted class prototype. BM25 searches $k\in\{1,3,5,10\}$ and a trigger
+threshold on development only. All conditions add zero context tokens;
+artifacts retain tokenized test rows, confusion matrices, per-engine scores,
+index sizes, and CPU latency.
+
+\begin{table}[ht]
+\centering\scriptsize
+\caption{Tokenizer-aware six-way test results on the same 900 rows. Acc.=all-row
+accuracy, Sel.=positive engine identity, FAR=control activation, Run.=positive
+runtime exactness. Latency includes representation and CPU routing.}
+\label{tab:tokenizer-ladder}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Condition & Acc. & Macro F1 & Sel. & FAR & Run. & CPU $\mu$s\\
+\midrule
+Current word $n$-gram & .593 & .543 & .588 & .400 & .688 & 30.2\\
+Current character $n$-gram & .773 & .673 & .592 & .000 & .592 & 132.7\\
+Shared NLP $n$-gram & .721 & .567 & .498 & .000 & .598 & 45.5\\
+Qwen native $n$-gram & .831 & .706 & .696 & .000 & .764 & 173.4\\
+SmolLM2 native $n$-gram & .803 & .673 & .646 & .000 & .740 & 194.9\\
+Gemma native $n$-gram & .786 & .656 & .614 & .000 & .692 & 113.8\\
+Gemma normalized unigram & .809 & .707 & .656 & .000 & .656 & 106.4\\
+Qwen normalized BM25 & .839 & .817 & .870 & .200 & .970 & 6438.2\\
+T1 lexical/regex & .944 & -- & .900 & .000 & .900 & 4.6\\
+Hierarchical CPU $\rightarrow$ Qwen L2 & .891 & .831 & .804 & .000 & .904 & 125214\\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Native tokenization is stronger than the original learned word baseline, but it
+does not dominate the transparent T1 route or clear the 0.9 selection gate.
+Qwen-piece BM25 reaches 0.870 positive selection and 0.970 answer-equivalent
+runtime exactness, but activates on 20\% of controls and costs 6.3~ms per query.
+This is still far below the 554.7~ms Qwen-L2 route, but it is not safe enough.
+
+We also evaluate the proposed hierarchy without merging unmatched TwIL data.
+Transparent graph/Datalog cues first defer logic-like prompts; a
+development-selected normalized Gemma unigram classifier handles only
+NONE/calculator/date/units above its fitted confidence threshold; all remaining
+rows use the matched Qwen-L2 router. The CPU accepts 79.56\% of development rows
+at 96.65\% accepted accuracy. On test it avoids 77.44\% of model calls and keeps
+FAR at zero, but reaches only 0.804 positive engine selection: graph recall is
+0.500, versus 1.000 Datalog, 0.890 calculator, 0.990 date, and 0.640 units.
+Runtime exactness is 0.904 because some wrong engine identities are
+answer-equivalent. The architecture is economically promising but fails the
+identity/reliability gate; answer-only scoring would conceal that failure.
+
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.78\linewidth]{paper2_diagnostic_learning_curves.png}
@@ -584,6 +644,9 @@ passing baseline for the frozen language, but no T2--T4 semantic route clears th
 selection criterion.  Consequently Paper 3 remains paused while factorized
 result-use controls are tested.  The completed Qwen L1/L2 comparison also fails
 the gate, so it does not reverse that pause.
+The tokenizer-aware hierarchy likewise remains below 0.9 positive selection,
+despite zero FAR and substantial model-call avoidance; it does not reopen the
+Paper 3 gate.
 
 \section{Limitations}
 
@@ -604,6 +667,13 @@ separation, not naturally authored language.  T1 should therefore not be read as
 open-domain robustness.  Graph and Datalog deliberately share a transitive
 closure subproblem; T2's runtime success shows functional substitution but also
 why answer-only scoring would conceal routing errors.
+
+The hierarchy uses the matched Qwen-L2 router rather than TwIL because the TwIL
+reasoning run has no row-aligned train/development/test counterpart on this
+900-row freeze. Combining those scores would be invalid. The logic-cue prefilter
+also misses half of graph cases under the selected hierarchy, so broader
+natural-language graph cues or an independently frozen ambiguity classifier are
+still required.
 
 The factorized neural comparison uses one checkpoint family and one seed.  It
 tests attention-only versus attention+MLP targets, not layer-region or per-engine
@@ -661,6 +731,14 @@ python -m ccpu paper2 analyze-diagnostic \
   --train artifacts/paper2/diagnostic_v1/data/train.jsonl \
   --test artifacts/paper2/diagnostic_v1/data/test.jsonl \
   --output-dir artifacts/paper2/diagnostic_v1/analysis
+
+python -m ccpu paper2 analyze-tokenizer-triggers \
+  --train artifacts/paper2/diagnostic_v1/data/train.jsonl \
+  --dev artifacts/paper2/diagnostic_v1/data/dev.jsonl \
+  --test artifacts/paper2/diagnostic_v1/data/test.jsonl \
+  --tokenizer-config configs/common/tokenizer_triggers.json \
+  --neural-predictions artifacts/paper2/router_v1/qwen_l2_v1/predictions.jsonl \
+  --output-dir artifacts/paper2/tokenizer_triggers/diagnostic_v1
 
 python -m ccpu paper2 prepare-router \
   --source-dir artifacts/paper2/diagnostic_v1/data \
@@ -749,6 +827,9 @@ can help neural copying, but interpretation and continuation still require
 diagnosis before any provenance-aware attention mechanism can be claimed.  The
 bounded diagnosis does not support a fixed attention bias, so the runtime-copy
 baseline remains the only new production recommendation.
+Tokenizer-aware CPU routing strengthens the cheap baseline and can avoid most
+model calls in a hierarchy, but its graph/engine-identity errors keep that
+architecture diagnostic rather than production-qualified.
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.

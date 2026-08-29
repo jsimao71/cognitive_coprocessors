@@ -26,6 +26,7 @@ from .composition import run_compositions
 from .dataset import MixedBenchmarkConfig, MixedExample, iter_benchmark
 from .diagnostic import (
     DiagnosticBenchmarkConfig,
+    analyze_tokenizer_trigger_ladder,
     analyze_trigger_ladder,
     generate_diagnostic_benchmark,
     lexical_audit,
@@ -352,6 +353,22 @@ def analyze_diagnostic_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_tokenizer_triggers_command(args: argparse.Namespace) -> int:
+    result = analyze_tokenizer_trigger_ladder(
+        args.train,
+        args.dev,
+        args.test,
+        args.tokenizer_config,
+        args.neural_predictions,
+        args.output_dir,
+    )
+    print(
+        f"completed Paper 2 tokenizer trigger ladder; "
+        f"decision={result['paper2_decision']['status']}"
+    )
+    return 0
+
+
 def prepare_router_command(args: argparse.Namespace) -> int:
     result = prepare_router_data(args.source_dir, args.output_dir)
     print(f"prepared {result['counts']} Paper 2 router rows -> {args.output_dir}")
@@ -632,6 +649,18 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     diagnostic_analysis.add_argument("--test", required=True)
     diagnostic_analysis.add_argument("--output-dir", required=True)
     diagnostic_analysis.set_defaults(handler=analyze_diagnostic_command)
+
+    tokenizer_analysis = commands.add_parser(
+        "analyze-tokenizer-triggers",
+        help="run matched token-space CPU routers and a hierarchical fallback",
+    )
+    tokenizer_analysis.add_argument("--train", required=True)
+    tokenizer_analysis.add_argument("--dev", required=True)
+    tokenizer_analysis.add_argument("--test", required=True)
+    tokenizer_analysis.add_argument("--tokenizer-config", required=True)
+    tokenizer_analysis.add_argument("--neural-predictions", required=True)
+    tokenizer_analysis.add_argument("--output-dir", required=True)
+    tokenizer_analysis.set_defaults(handler=analyze_tokenizer_triggers_command)
 
     router_data = commands.add_parser(
         "prepare-router", help="prepare six-way classification-only LoRA data"
