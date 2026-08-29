@@ -214,3 +214,17 @@ The retrieval continuation compares word BM25, character BM25, reciprocal-rank
 hybrid, and a structure-aware hybrid at the same top-5 budget. Gold evidence may
 be used only after ranking. Preserve the paired bootstrap seed and report the 12
 non-evaluable questions rather than assigning them zero recall.
+
+The public generic-tool continuation replays registered assistance types only.
+It sends `__retrieve` for all 320 TAT-QA questions and `__compute` for the 129
+arithmetic/count questions: 449/449 calls are accepted, with 191 one-episode and
+129 two-episode paths. Do not report this as voluntary tool use, operation
+selection, source execution, final-answer accuracy, or Automatic Rescue Rate.
+
+`artifacts/paper2_5/public_benchmarks/suite_v1` binds the TAT-QA diagnostics and
+the shared Paper 1.5 CRAG freeze by SHA-256. Its `headline_ready` field remains
+false. TAT-QA lacks the table/text operation adapter; CRAG lacks a frozen
+evidence backend; Spider 2.0 and FRAMES lack frozen local subsets; BIRD-Interact
+is deferred until live Postgres integration is stable. Keep these blockers
+machine-readable and retain the 11-case enterprise fixture as the current
+source-native execution result.

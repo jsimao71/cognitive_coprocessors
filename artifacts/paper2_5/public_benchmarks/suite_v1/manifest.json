@@ -1,0 +1,61 @@
+{
+  "benchmarks": {
+    "bird_interact": {
+      "freeze_status": "deferred_until_postgres_live_integration"
+    },
+    "crag": {
+      "final_answer_status": "pending",
+      "freeze_status": "complete_shared_from_paper1_5",
+      "generic_tool_oracle_agreement": true,
+      "generic_tool_status": "oracle_timed_transport_only",
+      "record_count": 320,
+      "source_native_status": "blocked_missing_frozen_evidence_backend"
+    },
+    "frames": {
+      "freeze_status": "blocked_no_bounded_subset"
+    },
+    "spider2": {
+      "freeze_status": "blocked_no_local_subset"
+    },
+    "tatqa": {
+      "final_answer_status": "pending",
+      "freeze_status": "complete",
+      "generic_tool_accepted_calls": 449,
+      "generic_tool_status": "oracle_timed_transport_only",
+      "record_count": 320,
+      "source_native_status": "blocked_missing_table_text_operation_adapter",
+      "structured_hybrid_recall_at_5": 0.7994588744588744,
+      "universal_text_retrieval_status": "retrieval_only_complete"
+    }
+  },
+  "blocking_requirements": [
+    "tatqa_source_native_table_text_operation_adapter",
+    "spider2_local_subset",
+    "crag_frozen_evidence_backend",
+    "frames_bounded_subset",
+    "matched_model_facing_conditions"
+  ],
+  "claim_boundary": "readiness and transport ledger; not a cross-benchmark end-to-end comparison",
+  "completed_empirical_benchmarks": [
+    "tatqa_retrieval_only"
+  ],
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "ce3b2b4c6b936060bdc847e5261fb65b839e6c29"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "headline_ready": false,
+  "input_sha256": {
+    "crag_analysis": "3bb72e9fbb2942d8b1c6ecfb1a5a8f784f90c405be565f91d488b9154dd996a2",
+    "crag_manifest": "54b93b29710595c9276101cb6eb43cee1462f905b1d85acbf107c42595071967",
+    "tatqa_composition": "e5e89f72f7479ff97b731478b1c51fb29baf3c235dafe0444f44b90bdb147043",
+    "tatqa_manifest": "9a505ae13263f734a2d824d0f88656ee5d3af9e011c1a82d29bd6c6cd06400eb",
+    "tatqa_retrieval": "fb6f0faf8739f035836e6ee0130998dee107983bb768f994c676327f08a9cbf7",
+    "tatqa_tools": "ee746426c2e29242a55e9d7a1ee6df906d681dd0ddf45f0e466bd6e15519141b"
+  },
+  "schema_version": "ccpu.paper2_5.public_suite_readiness.v1"
+}

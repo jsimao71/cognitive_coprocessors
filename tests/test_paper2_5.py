@@ -8,6 +8,10 @@ from ccpu.common.retrieval import SourceRequest
 from ccpu.paper2_5.composition import run_compositions
 from ccpu.paper2_5.production_analysis import analyze_substitution
 from ccpu.paper2_5.public_benchmarks import _decimal_expression, _score_derivation
+from ccpu.paper2_5.public_suite import (
+    audit_tatqa_generic_transport,
+    freeze_public_suite_readiness,
+)
 from ccpu.paper2_5.runtime import RetrievalRegistry
 from ccpu.paper2_5.sources import build_sources
 
@@ -276,6 +280,72 @@ def test_tatqa_arithmetic_uses_exact_decimal_and_percent_scaling():
     )
     assert unsupported["oracle_compute_available"] is False
     assert unsupported["oracle_compute_exact"] is None
+
+
+def test_public_tool_transport_and_suite_readiness_fail_closed(tmp_path):
+    predictions = tmp_path / "predictions.jsonl"
+    from ccpu.common.artifacts import write_jsonl
+
+    write_jsonl(
+        predictions,
+        [
+            {"example_id": "one", "compute_required": False},
+            {"example_id": "two", "compute_required": True},
+        ],
+    )
+    tools = audit_tatqa_generic_transport(predictions, tmp_path / "tools")
+    assert tools["accepted_calls"] == 3
+    assert tools["multiple_episode_questions"] == 1
+    assert tools["claim_boundary"]["automatic_rescue_rate"] is None
+    assert not any(
+        "query" in row or "answer" in row
+        for row in read_jsonl(tmp_path / "tools" / "records.jsonl")
+    )
+
+    selection_sha = "a" * 64
+    tatqa_manifest = write_json(
+        tmp_path / "tatqa_manifest.json",
+        {"selection_sha256": selection_sha, "record_count": 2},
+    )
+    composition = write_json(
+        tmp_path / "composition.json",
+        {
+            "selection_sha256": selection_sha,
+            "predictions_sha256": file_sha256(predictions),
+        },
+    )
+    retrieval = write_json(
+        tmp_path / "retrieval.json",
+        {
+            "selection_sha256": selection_sha,
+            "by_condition": {"structured_hybrid": {"mean_evidence_recall_at_k": 0.75}},
+        },
+    )
+    crag_manifest = write_json(
+        tmp_path / "crag_manifest.json",
+        {"selection_sha256": "b" * 64, "record_count": 2},
+    )
+    crag_analysis = write_json(
+        tmp_path / "crag_analysis.json",
+        {
+            "selection_sha256": "b" * 64,
+            "generic_retrieve_transport": {
+                "backend_agreement_with_registered_oracle": True
+            },
+        },
+    )
+    suite = freeze_public_suite_readiness(
+        tatqa_manifest_path=tatqa_manifest,
+        tatqa_composition_path=composition,
+        tatqa_retrieval_path=retrieval,
+        tatqa_tools_path=tmp_path / "tools" / "summary.json",
+        crag_manifest_path=crag_manifest,
+        crag_analysis_path=crag_analysis,
+        output_dir=tmp_path / "suite",
+    )
+    assert suite["headline_ready"] is False
+    assert suite["benchmarks"]["spider2"]["freeze_status"] == "blocked_no_local_subset"
+    assert suite["benchmarks"]["tatqa"]["generic_tool_accepted_calls"] == 3
 
 
 def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):

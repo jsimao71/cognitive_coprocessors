@@ -26,6 +26,7 @@ from .public_benchmarks import (
     analyze_tatqa_retrieval,
     freeze_tatqa_subset,
 )
+from .public_suite import audit_tatqa_generic_transport, freeze_public_suite_readiness
 
 
 def freeze_command(args: argparse.Namespace) -> int:
@@ -196,6 +197,32 @@ def compare_generic_tools_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def audit_public_tatqa_tools_command(args: argparse.Namespace) -> int:
+    summary = audit_tatqa_generic_transport(args.predictions, args.output_dir)
+    print(
+        f"audited {summary['accepted_calls']} registered TAT-QA generic-tool calls "
+        f"across {summary['record_count']} questions"
+    )
+    return 0
+
+
+def freeze_public_suite_command(args: argparse.Namespace) -> int:
+    manifest = freeze_public_suite_readiness(
+        tatqa_manifest_path=args.tatqa_manifest,
+        tatqa_composition_path=args.tatqa_composition,
+        tatqa_retrieval_path=args.tatqa_retrieval,
+        tatqa_tools_path=args.tatqa_tools,
+        crag_manifest_path=args.crag_manifest,
+        crag_analysis_path=args.crag_analysis,
+        output_dir=args.output_dir,
+    )
+    print(
+        "froze Paper 2.5 public-suite readiness; "
+        f"headline_ready={manifest['headline_ready']}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2.5", aliases=["paper2_5"], help="heterogeneous retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -281,6 +308,26 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_tatqa_retrieval.add_argument("--top-k", type=int, default=5)
     public_tatqa_retrieval.add_argument("--output-dir", required=True)
     public_tatqa_retrieval.set_defaults(handler=analyze_public_tatqa_retrieval_command)
+
+    public_tatqa_tools = commands.add_parser(
+        "audit-public-tatqa-tools",
+        help="replay registered TAT-QA assistance types through generic tools",
+    )
+    public_tatqa_tools.add_argument("--predictions", required=True)
+    public_tatqa_tools.add_argument("--output-dir", required=True)
+    public_tatqa_tools.set_defaults(handler=audit_public_tatqa_tools_command)
+
+    public_suite = commands.add_parser(
+        "freeze-public-suite", help="bind public diagnostics and record readiness blockers"
+    )
+    public_suite.add_argument("--tatqa-manifest", required=True)
+    public_suite.add_argument("--tatqa-composition", required=True)
+    public_suite.add_argument("--tatqa-retrieval", required=True)
+    public_suite.add_argument("--tatqa-tools", required=True)
+    public_suite.add_argument("--crag-manifest", required=True)
+    public_suite.add_argument("--crag-analysis", required=True)
+    public_suite.add_argument("--output-dir", required=True)
+    public_suite.set_defaults(handler=freeze_public_suite_command)
 
     generic_tools = commands.add_parser(
         "compare-generic-tools", help="audit enterprise tool/CogCop result transport"

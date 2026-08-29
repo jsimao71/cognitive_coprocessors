@@ -32,7 +32,9 @@ compute: 129/320 questions require computation, all 106 sampled gold arithmetic
 derivations execute exactly, but the current runtime has no TAT-QA table/text
 operation adapter. At matched top-5 retrieval, adding table headers to a hybrid
 lexical ranker raises evidence recall from 0.751 to 0.799 over 308 evaluable
-questions. This is a retrieval/composition audit, not end-to-end question
+questions. Oracle-timed replay accepts 449 generic-tool calls for the registered
+320 RETRIEVE and 129 COMPUTE episodes, but does not test model initiation or
+source execution. This is a retrieval/composition audit, not end-to-end question
 answering. The
 pre-registered
 learned-router gate is \textsc{no-go}: native heterogeneity has value, context
@@ -331,9 +333,45 @@ joint table--text (0.764 to 0.793) questions, while text-only recall is unchange
 at 0.977. This pattern supports retaining table headers, but it does not
 establish source-native execution: table relevance for arithmetic and spans is
 derived post hoc from gold operands/answers, 12 questions lack defensible labels,
-and operation choice remains oracle. LLM-only, generic-tool, typed operation,
-vector/hybrid semantic, and final-answer conditions remain pending. This
+and operation choice remains oracle. LLM-only, model-initiated generic-tool,
+typed operation, vector/semantic, and final-answer conditions remain pending. This
 diagnostic does not reopen the Paper 3.5 routing gate.
+
+\subsection{Generic transport and public-suite readiness}
+We replay the registered assistance types through the same fixed four-tool
+gateway used by the controlled experiments. Every question receives
+\texttt{\_\_retrieve}; the 129 arithmetic/count questions then receive
+\texttt{\_\_compute}. All 449 calls are accepted, yielding 191 one-episode and
+129 two-episode paths (mean 1.403 episodes per question). Payloads contain only
+the frozen example ID. Timing and assistance type are oracle supplied, so this
+checks schema and handoff only: source execution, operation selection, final
+answers, and Automatic Rescue Rate remain unmeasured.
+
+The hash-bound suite ledger prevents this partial result from being promoted to
+a cross-benchmark claim. It binds the TAT-QA selection, composition, retrieval,
+and tool artifacts to Paper 1.5's CRAG freeze and records every missing adapter.
+
+\begin{table}[t]
+\centering\small
+\caption{Paper 2.5 public-suite readiness. ``Transport'' is oracle timed and is
+not an end-to-end benchmark result.}
+\label{tab:p25-public-readiness}
+\begin{tabular}{llll}
+\toprule
+Benchmark & Freeze & Completed evidence & Main blocker\\
+\midrule
+TAT-QA & 320 & retrieval + transport & native operation adapter\\
+CRAG & 320 shared & trigger + transport & frozen evidence backend\\
+Spider 2.0 & none & none & local reproducible subset\\
+FRAMES & none & none & bounded subset\\
+BIRD-Interact & deferred & none & live Postgres stability\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Accordingly, the ledger is not headline ready. The existing 11-case enterprise
+fixture remains the source-native systems result; the public suite adds external
+retrieval structure, not external end-to-end execution evidence.
 
 \section{Paper 3.5 Gate}
 Learned source routing requires all four pre-registered criteria:
@@ -430,6 +468,25 @@ python -m ccpu paper2.5 analyze-public-tatqa-retrieval \
   --selection artifacts/paper2_5/public_benchmarks/tatqa_v1/selection.jsonl \
   --top-k 5 \
   --output-dir artifacts/paper2_5/public_benchmarks/tatqa_retrieval_v1
+python -m ccpu paper2.5 audit-public-tatqa-tools \
+  --predictions artifacts/paper2_5/public_benchmarks/tatqa_v1/predictions.jsonl \
+  --output-dir artifacts/paper2_5/public_benchmarks/tatqa_tools_v1
+$T=artifacts/paper2_5/public_benchmarks
+$C=artifacts/paper1_5/public_benchmarks/crag_v1
+python -m ccpu paper2.5 freeze-public-suite \
+  --tatqa-manifest \
+  $T/tatqa_v1/manifest.json \
+  --tatqa-composition \
+  $T/tatqa_v1/summary.json \
+  --tatqa-retrieval \
+  $T/tatqa_retrieval_v1/retrieval_summary.json \
+  --tatqa-tools \
+  $T/tatqa_tools_v1/summary.json \
+  --crag-manifest \
+  $C/data/manifest.json \
+  --crag-analysis \
+  $C/analysis/summary.json \
+  --output-dir artifacts/paper2_5/public_benchmarks/suite_v1
 \end{verbatim}
 Run manifests hash benchmark, predictions, traces, and summaries and record the
 repository and environment state. Install the \texttt{data} project extra for
