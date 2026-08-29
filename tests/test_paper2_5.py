@@ -1,10 +1,13 @@
+from decimal import Decimal
+
 import pytest
 
 from ccpu.cli import main
-from ccpu.common.artifacts import read_json, read_jsonl
+from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json
 from ccpu.common.retrieval import SourceRequest
 from ccpu.paper2_5.composition import run_compositions
 from ccpu.paper2_5.production_analysis import analyze_substitution
+from ccpu.paper2_5.public_benchmarks import _decimal_expression, _score_derivation
 from ccpu.paper2_5.runtime import RetrievalRegistry
 from ccpu.paper2_5.sources import build_sources
 
@@ -239,6 +242,144 @@ def test_bounded_source_compositions_log_dependency_dags():
     assert len(rows) == 4
     assert all(row["correct"] and row["dependency_dag"][1]["depends_on"] for row in rows)
     assert all(cell["final_accuracy"] == 1.0 for cell in summary["by_family"])
+
+
+def test_tatqa_arithmetic_uses_exact_decimal_and_percent_scaling():
+    assert _decimal_expression("(14,740 + 1,910) / 2") == 8325
+    assert _decimal_expression("53% * $23,406") == Decimal("12405.18")
+    assert abs(_decimal_expression("1,027 / 11%") - Decimal("9336.363636")) < Decimal(
+        "0.000001"
+    )
+    scored = _score_derivation(
+        {
+            "answer_type": "arithmetic",
+            "derivation": "(104 - 89) / 89",
+            "answer": 16.85,
+            "scale": "percent",
+        }
+    )
+    assert scored["oracle_compute_available"] is True
+    assert scored["oracle_compute_exact"] is True
+    unsupported = _score_derivation(
+        {
+            "answer_type": "arithmetic",
+            "derivation": "104 minus 89",
+            "answer": 15,
+            "scale": "",
+        }
+    )
+    assert unsupported["oracle_compute_available"] is False
+    assert unsupported["oracle_compute_exact"] is None
+
+
+def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):
+    cache_root = tmp_path / "cache"
+    source_path = cache_root / "tatqa" / "tatqa_dataset_dev.json"
+    questions = [
+        {
+            "uid": "arithmetic-average",
+            "question": "What is the average?",
+            "answer": 8325,
+            "derivation": "(14,740 + 1,910) / 2",
+            "answer_type": "arithmetic",
+            "answer_from": "table",
+            "scale": "",
+            "req_comparison": False,
+        },
+        {
+            "uid": "arithmetic-percent",
+            "question": "What is the percentage increase?",
+            "answer": 16.85,
+            "derivation": "(104 - 89) / 89",
+            "answer_type": "arithmetic",
+            "answer_from": "table-text",
+            "scale": "percent",
+            "req_comparison": True,
+        },
+        {
+            "uid": "count",
+            "question": "How many entries?",
+            "answer": 2,
+            "derivation": "",
+            "answer_type": "count",
+            "answer_from": "text",
+            "scale": "",
+            "req_comparison": False,
+        },
+        {
+            "uid": "span",
+            "question": "Which entry?",
+            "answer": ["Aster"],
+            "derivation": "",
+            "answer_type": "span",
+            "answer_from": "text",
+            "scale": "",
+            "req_comparison": False,
+        },
+    ]
+    write_json(
+        source_path,
+        [
+            {
+                "table": {"uid": "table", "table": [["A", "B"], ["1", "2"]]},
+                "paragraphs": [{"uid": "paragraph", "order": 1, "text": "Aster"}],
+                "questions": questions,
+            }
+        ],
+    )
+    config = tmp_path / "config.json"
+    write_json(
+        config,
+        {
+            "schema_version": "ccpu.paper2_5.public_tatqa_config.v1",
+            "selection_seed": 7,
+            "max_rows": 4,
+            "source": {
+                "dataset": "next-tat/TAT-QA",
+                "revision": "test-revision",
+                "file": source_path.name,
+                "file_sha256": file_sha256(source_path),
+                "expected_documents": 1,
+                "expected_questions": 4,
+            },
+        },
+    )
+    frozen = tmp_path / "frozen"
+    assert main(
+        [
+            "paper2.5",
+            "freeze-public-tatqa",
+            "--config",
+            str(config),
+            "--cache-root",
+            str(cache_root),
+            "--output-dir",
+            str(frozen),
+        ]
+    ) == 0
+    assert read_json(frozen / "manifest.json")["record_count"] == 4
+
+    analysis = tmp_path / "analysis"
+    assert main(
+        [
+            "paper2.5",
+            "analyze-public-tatqa",
+            "--config",
+            str(config),
+            "--cache-root",
+            str(cache_root),
+            "--selection",
+            str(frozen / "selection.jsonl"),
+            "--output-dir",
+            str(analysis),
+        ]
+    ) == 0
+    summary = read_json(analysis / "summary.json")
+    assert summary["record_count"] == 4
+    assert summary["compute_required_rate"] == 0.75
+    assert summary["oracle_compute_coverage"] == 0.5
+    assert summary["oracle_compute_exact_rate"] == 1.0
+    assert summary["source_native_adapter_coverage"] == 0.0
 
 
 def test_cli_freezes_runs_scales_and_decides_gate(tmp_path):

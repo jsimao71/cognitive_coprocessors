@@ -27,7 +27,11 @@ small controlled runtime results. A second 11-case enterprise-style fixture uses
 real local Iceberg snapshots, governed metrics, and an Oxigraph ontology: native
 composition reaches 11/11 while a top-5 textualized baseline reaches 2/11. This
 is still deterministic local evidence, not language-model or production-service
-evidence. The pre-registered
+evidence. A pinned 320-question TAT-QA diagnostic then separates retrieval from
+compute: 129/320 questions require computation, all 106 sampled gold arithmetic
+derivations execute exactly, but the current runtime has no TAT-QA table/text
+adapter. This is a composition audit, not end-to-end question answering. The
+pre-registered
 learned-router gate is \textsc{no-go}: native heterogeneity has value, context
 burden grows, and broadcast costs more, but the heuristic leaves no routing gap.
 \end{abstract}
@@ -239,6 +243,52 @@ snapshot, governed metric, multi-member group, or mixed answers. This is a
 source-semantics diagnostic, not a scale benchmark: the fixture has six sales
 rows and the query/compiler paths are deterministic.
 
+\section{Public TAT-QA Composition Audit}
+TAT-QA combines financial tables and text with extraction and arithmetic
+questions \cite{tatqa}. We pin the official development file at repository
+revision \texttt{c96247f5}, verify its SHA-256 digest, and freeze 320 of its
+1,644 questions by deterministic stratified selection over answer type, evidence
+source, scale, and comparison requirement. Retained artifacts redistribute only
+question identifiers, source coordinates, strata, and content hashes; the
+licensed source remains in a local cache.
+
+This first public-data checkpoint factorizes the requested path as
+\[
+\textsc{retrieve}\rightarrow\textsc{extract}\rightarrow
+\textsc{compute}\rightarrow\textsc{answer}.
+\]
+The audit marks table, text, and joint table--text requirements from dataset
+metadata and safely evaluates only gold arithmetic derivations composed of
+decimal literals, percentages, parentheses, and the four basic operators. It
+does not expose gold table cells or derivations to a model.
+
+\begin{table}[t]
+\centering\small
+\caption{Pinned TAT-QA development diagnostic. Compute exactness is conditional
+on the 106 executable arithmetic derivations, not an end-to-end QA score.}
+\label{tab:p25-tatqa}
+\begin{tabular}{lrr}
+\toprule
+Audit quantity & Count & Rate\\
+\midrule
+Compute required (arithmetic or count) & 129/320 & 0.403\\
+Joint table--text evidence & 130/320 & 0.406\\
+Executable gold arithmetic & 106/320 & 0.331\\
+Exact executable arithmetic & 106/106 & 1.000\\
+Current source-native adapter coverage & 0/320 & 0.000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The result localizes the present gap. Arithmetic execution is sufficient for
+the sampled annotated expressions, but the runtime cannot yet retrieve and
+extract evidence from TAT-QA's native table/text representation. Consequently,
+we make no final-answer, evidence-recall, or source-native-versus-universal
+claim. The next registered step is a matched table/text adapter and competent
+BM25/vector/hybrid textual baseline, followed by LLM-only, generic-tool,
+source-native, and oracle conditions. This diagnostic does not reopen the
+Paper 3.5 routing gate.
+
 \section{Paper 3.5 Gate}
 Learned source routing requires all four pre-registered criteria:
 \begin{enumerate}
@@ -271,6 +321,13 @@ business governance. REST-catalog behavior, concurrent commits, failure
 recovery, remote object storage, model-authored SQL, and natural-language metric
 parsing are not tested. Accordingly, 11/11 establishes bounded composition and
 provenance, not production accuracy.
+
+The public TAT-QA sample is one deterministic development split and uses dataset
+metadata plus gold derivations only to audit composition availability. It does
+not measure evidence selection, table/text extraction, operation prediction,
+model answer use, latency, or robustness. A source-native advantage is
+unestablished until the matched conditions and strong universal baseline run on
+the same frozen identifiers.
 
 Heterogeneous routing would be weakened if a stronger matched universal system
 executes aggregates, preserves status/provenance, and closes the 9/22 gap at
@@ -305,6 +362,15 @@ python -m ccpu paper2.5 prepare-enterprise \
 python -m ccpu paper2.5 run-enterprise \
   --fixture-root artifacts/paper2_5/enterprise_repro/fixture \
   --output-dir artifacts/paper2_5/enterprise_repro/evaluation
+python -m ccpu paper2.5 freeze-public-tatqa \
+  --config configs/paper2_5/public_tatqa.json \
+  --cache-root <verified-public-cache> \
+  --output-dir artifacts/paper2_5/public_benchmarks/tatqa_v1
+python -m ccpu paper2.5 analyze-public-tatqa \
+  --config configs/paper2_5/public_tatqa.json \
+  --cache-root <verified-public-cache> \
+  --selection artifacts/paper2_5/public_benchmarks/tatqa_v1/selection.jsonl \
+  --output-dir artifacts/paper2_5/public_benchmarks/tatqa_v1
 \end{verbatim}
 Run manifests hash benchmark, predictions, traces, and summaries and record the
 repository and environment state. Install the \texttt{data} project extra for
@@ -326,6 +392,10 @@ The local Iceberg/semantic/ontology result then demonstrates one bounded
 governed composition with snapshot and definition provenance. Its universal
 gap supports source-native semantics, but the absence of measured routing
 headroom leaves the learned-router decision unchanged.
+The pinned TAT-QA audit adds external task structure and shows that arithmetic
+is not the current bottleneck. It does not establish comparative QA performance;
+the missing native table/text adapter and matched baselines define the next
+Paper 2.5 step.
 
 \begin{thebibliography}{9}
 \bibitem{flare}
@@ -335,5 +405,9 @@ Z.~Jiang et al. Active retrieval augmented generation. \emph{EMNLP}, 2023.
 A.~Asai et al. Self-RAG: Learning to retrieve, generate, and critique through
 self-reflection. \emph{ICLR}, 2024.
 \url{https://arxiv.org/abs/2310.11511}.
+\bibitem{tatqa}
+F.~Zhu et al. TAT-QA: A question answering benchmark on a hybrid of tabular and
+textual content in finance. \emph{ACL-IJCNLP}, 2021.
+\url{https://arxiv.org/abs/2105.07624}.
 \end{thebibliography}
 \end{document}

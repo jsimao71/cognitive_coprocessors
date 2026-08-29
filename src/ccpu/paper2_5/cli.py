@@ -20,6 +20,7 @@ from .enterprise import create_enterprise_fixture, run_enterprise_evaluation
 from .experiment import run_matrix, summarize
 from .plot import decide_gate, plot_scaling
 from .production_analysis import analyze_substitution
+from .public_benchmarks import analyze_tatqa_composition, freeze_tatqa_subset
 
 
 def freeze_command(args: argparse.Namespace) -> int:
@@ -144,6 +145,28 @@ def run_enterprise_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_public_tatqa_command(args: argparse.Namespace) -> int:
+    manifest = freeze_tatqa_subset(args.config, args.cache_root, args.output_dir)
+    print(
+        f"froze {manifest['record_count']} pinned TAT-QA questions -> {args.output_dir}"
+    )
+    return 0
+
+
+def analyze_public_tatqa_command(args: argparse.Namespace) -> int:
+    summary = analyze_tatqa_composition(
+        args.config,
+        args.cache_root,
+        args.selection,
+        args.output_dir,
+    )
+    print(
+        "analyzed TAT-QA retrieval-compute composition "
+        f"for {summary['record_count']} questions -> {args.output_dir}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2.5", aliases=["paper2_5"], help="heterogeneous retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -201,3 +224,20 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     enterprise_run.add_argument("--fixture-root", required=True)
     enterprise_run.add_argument("--output-dir", required=True)
     enterprise_run.set_defaults(handler=run_enterprise_command)
+
+    public_tatqa = commands.add_parser(
+        "freeze-public-tatqa", help="freeze the pinned TAT-QA diagnostic subset"
+    )
+    public_tatqa.add_argument("--config", required=True)
+    public_tatqa.add_argument("--cache-root", required=True)
+    public_tatqa.add_argument("--output-dir", required=True)
+    public_tatqa.set_defaults(handler=freeze_public_tatqa_command)
+
+    public_tatqa_analysis = commands.add_parser(
+        "analyze-public-tatqa", help="audit TAT-QA retrieval-compute composition"
+    )
+    public_tatqa_analysis.add_argument("--config", required=True)
+    public_tatqa_analysis.add_argument("--cache-root", required=True)
+    public_tatqa_analysis.add_argument("--selection", required=True)
+    public_tatqa_analysis.add_argument("--output-dir", required=True)
+    public_tatqa_analysis.set_defaults(handler=analyze_public_tatqa_command)

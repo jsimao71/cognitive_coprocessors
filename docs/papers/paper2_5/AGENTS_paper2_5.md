@@ -45,6 +45,16 @@ Secondary: can capability count grow outside recurring neural context?
   production-scale or language-model result.
 - The enterprise result does not measure a new heuristic routing gap and does
   not reopen the Paper 3.5 gate.
+- A pinned public TAT-QA development diagnostic freezes 320/1,644 questions by
+  answer type, evidence source, scale, and comparison requirement. It retains
+  IDs, source coordinates, strata, and content hashes only.
+- In that sample, 129/320 questions require arithmetic or counting and 130/320
+  require joint table--text evidence. The safe decimal evaluator reproduces all
+  106/106 annotated arithmetic derivations exactly.
+- Current source-native TAT-QA adapter coverage is 0/320. Treat this as an
+  adapter-gap diagnosis, not final-answer accuracy or evidence that source-native
+  execution beats a universal baseline. Matched native, BM25/vector/hybrid,
+  generic-tool, LLM-only, and oracle runs remain required.
 
 These are controlled deterministic runtime results, not language-model or live
 web-search evidence. New natural-language routing work requires a separately
@@ -170,3 +180,15 @@ Paper 2.5 SOURCE/QUERY selection or backend substitution. Do not reuse Paper 2
 engine-token scores as source-routing evidence. No Paper 2.5 rerun is required;
 the measured heuristic-to-oracle source gap remains zero and Paper 3.5 stays
 `no_go`.
+
+## Public benchmark checkpoint
+The TAT-QA source is `next-tat/TAT-QA` at revision
+`c96247f5077eac447f63527fd3dcfdc58bb56d6a`, with the development JSON checksum
+recorded in `configs/paper2_5/public_tatqa.json`. The source file must remain in a
+verified local cache. Never commit question text, tables, paragraphs, answers,
+or derivations.
+
+The current audit separates retrieval requirement, compute requirement,
+composition depth, gold-compute availability, gold-compute exactness, and
+source-native adapter availability. Gold arithmetic validates only the compute
+stage. It must not be reported as model execution or end-to-end QA accuracy.
