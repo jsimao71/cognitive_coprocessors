@@ -14,6 +14,8 @@ def freeze_public_command(args: argparse.Namespace) -> int:
         args.tatqa_selection,
         args.output_dir,
         per_benchmark=args.per_benchmark,
+        crag_diagnostics=args.crag_diagnostics,
+        paper2_5_readiness=args.paper2_5_readiness,
     )
     print(
         f"froze {manifest['record_count']} Paper 3 public control rows; "
@@ -32,5 +34,7 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public.add_argument("--crag-selection", required=True)
     public.add_argument("--tatqa-selection", required=True)
     public.add_argument("--per-benchmark", type=int, default=40)
+    public.add_argument("--crag-diagnostics")
+    public.add_argument("--paper2-5-readiness")
     public.add_argument("--output-dir", required=True)
     public.set_defaults(handler=freeze_public_command)

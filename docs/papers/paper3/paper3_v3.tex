@@ -140,6 +140,11 @@ label-only intent, CPU trigger, final-layer latent, multi-layer latent,
 tools-plus-watchdog, and oracle timing/type, all with identical R2 and backends.
 The oracle-timed Paper 2 and 2.5 gateway audits establish only transport/schema
 parity; they do not substitute for voluntary or latent public runs.
+The registry now also hashes the Paper 1.5 CRAG condition matrix and Paper 2.5
+public-suite readiness ledger. Those upstream artifacts validate oracle-timed
+generic transport but leave model timing, evidence execution, and final answers
+pending. They therefore add provenance, not a completed Paper 3 condition, and
+the manifest adds matched model-facing public results as an explicit blocker.
 
 \section{Training and Registry Invariance}
 The ladder is P0 frozen linear probes, P1 frozen multi-layer ensembles, P2 a
@@ -189,6 +194,8 @@ python -m ccpu paper3 freeze-public \
   --compute-selection artifacts/paper2/public_benchmarks/data_v1/selection.jsonl \
   --crag-selection artifacts/paper1_5/public_benchmarks/crag_v1/data/selection.jsonl \
   --tatqa-selection artifacts/paper2_5/public_benchmarks/tatqa_v1/selection.jsonl \
+  --crag-diagnostics artifacts/paper1_5/public_benchmarks/crag_v1/analysis/summary.json \
+  --paper2-5-readiness artifacts/paper2_5/public_benchmarks/suite_v1/manifest.json \
   --per-benchmark 40 \
   --output-dir artifacts/paper3/public_control_v1
 \end{verbatim}

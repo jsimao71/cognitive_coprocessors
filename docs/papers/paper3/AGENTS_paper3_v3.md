@@ -73,6 +73,11 @@ The mandatory public matrix is four generic tools, paired tags, fenced blocks,
 label-only intent, CPU trigger, final-layer latent, multi-layer latent,
 tools-plus-watchdog, and oracle timing/type with identical R2/backends. Existing
 Paper 2/2.5 oracle transport audits are invariants, not model-facing conditions.
+Bind the latest Paper 1.5 CRAG diagnostic and Paper 2.5 public-suite readiness
+manifests by SHA-256. These add provenance only: both remain gated and neither
+provides model-facing timing, evidence execution, final answers, or causal-span
+labels. Keep `matched_model_facing_public_condition_results` as an explicit
+headline blocker.
 
 Train R1 with a small registry, then add graph/Datalog and later capabilities
 without R1 retraining or prompt changes. Score R1 intent and R2 capability

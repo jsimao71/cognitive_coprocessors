@@ -1,7 +1,8 @@
 {
   "blocking_requirements": [
     "frames_subset",
-    "audited_causal_span_annotations"
+    "audited_causal_span_annotations",
+    "matched_model_facing_public_condition_results"
   ],
   "claim_boundary": "registry freeze only; no control condition has run",
   "counts": {
@@ -27,11 +28,23 @@
     "tools_plus_watchdog",
     "oracle_timing_type"
   ],
-  "schema_version": "ccpu.paper3.public_control_manifest.v1",
+  "schema_version": "ccpu.paper3.public_control_manifest.v2",
   "selection_sha256": "4c50faa338081c05eb9b2db3c5a2d6a0060c23b50fb2c3d155994eaaf83d1be2",
   "source_sha256": {
     "paper1_5_crag": "7dc44139c7cf8c36a0a0df3704839e2e79c74570e2bb4fe05ba0e02c2afa022f",
     "paper2_5_tatqa": "11b4fee497cf7ffde298cab3bf7aabee02bb77d6be5fecc801a93bab28fa444a",
     "paper2_compute": "d5502a9f79752d087a0591b6c16c6b4e94cd6d7a3d8d7aa2f70f32e8239951a8"
+  },
+  "upstream_diagnostics": {
+    "paper1_5_crag": {
+      "generic_tool_status": "oracle_timed_transport_only",
+      "paper3_5_gate": "closed_pending_model_and_evidence_runs",
+      "sha256": "3bb72e9fbb2942d8b1c6ecfb1a5a8f784f90c405be565f91d488b9154dd996a2"
+    },
+    "paper2_5_public_suite": {
+      "claim_boundary": "readiness and transport ledger; not a cross-benchmark end-to-end comparison",
+      "headline_ready": false,
+      "sha256": "c1b403aa32d53b51363084749fee8e5d6ba71454f2372f90837010a60cac1fb0"
+    }
   }
 }

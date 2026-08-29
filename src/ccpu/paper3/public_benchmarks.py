@@ -6,7 +6,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from ccpu.common.artifacts import file_sha256, read_jsonl, write_json, write_jsonl
+from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json, write_jsonl
 
 
 def freeze_public_control_registry(
@@ -16,6 +16,8 @@ def freeze_public_control_registry(
     output_dir: str | Path,
     *,
     per_benchmark: int = 40,
+    crag_diagnostics: str | Path | None = None,
+    paper2_5_readiness: str | Path | None = None,
 ) -> dict[str, Any]:
     sources = {
         "paper2_compute": Path(compute_selection),
@@ -58,12 +60,30 @@ def freeze_public_control_registry(
     output = Path(output_dir)
     selection_path = write_jsonl(output / "selection.jsonl", selected)
     counts = {benchmark: len(rows[:per_benchmark]) for benchmark, rows in sorted(grouped.items())}
+    upstream_diagnostics = {}
+    if crag_diagnostics is not None:
+        crag = read_json(crag_diagnostics)
+        upstream_diagnostics["paper1_5_crag"] = {
+            "sha256": file_sha256(crag_diagnostics),
+            "paper3_5_gate": crag["interpretation"]["paper3_5_gate"],
+            "generic_tool_status": "oracle_timed_transport_only",
+        }
+    if paper2_5_readiness is not None:
+        readiness = read_json(paper2_5_readiness)
+        if readiness["headline_ready"] is not False:
+            raise ValueError("Paper 2.5 public suite must remain fail closed")
+        upstream_diagnostics["paper2_5_public_suite"] = {
+            "sha256": file_sha256(paper2_5_readiness),
+            "headline_ready": readiness["headline_ready"],
+            "claim_boundary": readiness["claim_boundary"],
+        }
     manifest = {
-        "schema_version": "ccpu.paper3.public_control_manifest.v1",
+        "schema_version": "ccpu.paper3.public_control_manifest.v2",
         "record_count": len(selected),
         "per_benchmark": per_benchmark,
         "counts": counts,
         "source_sha256": {name: file_sha256(path) for name, path in sources.items()},
+        "upstream_diagnostics": upstream_diagnostics,
         "selection_sha256": file_sha256(selection_path),
         "required_conditions": [
             "four_generic_tools",
@@ -77,7 +97,11 @@ def freeze_public_control_registry(
             "oracle_timing_type",
         ],
         "headline_ready": False,
-        "blocking_requirements": ["frames_subset", "audited_causal_span_annotations"],
+        "blocking_requirements": [
+            "frames_subset",
+            "audited_causal_span_annotations",
+            "matched_model_facing_public_condition_results",
+        ],
         "claim_boundary": "registry freeze only; no control condition has run",
     }
     write_json(output / "manifest.json", manifest)
