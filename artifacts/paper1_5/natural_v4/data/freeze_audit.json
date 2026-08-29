@@ -1,0 +1,58 @@
+{
+  "control_categories": [
+    "context_sufficient",
+    "quoted_freshness",
+    "hypothetical",
+    "electric_current",
+    "historical_date",
+    "fictional_source",
+    "compute_not_retrieve",
+    "stable_familiar"
+  ],
+  "counts": {
+    "dev": 32,
+    "test": 64,
+    "train": 96
+  },
+  "exact_signature_overlap": {
+    "dev_test": [],
+    "train_dev": [],
+    "train_test": []
+  },
+  "label_balance": {
+    "dev": {
+      "not_required": 16,
+      "required": 16
+    },
+    "test": {
+      "not_required": 32,
+      "required": 32
+    },
+    "train": {
+      "not_required": 48,
+      "required": 48
+    }
+  },
+  "normalized_template_overlap": {
+    "dev_test": [],
+    "train_dev": [],
+    "train_test": []
+  },
+  "required_categories": [
+    "source_release",
+    "private_identifier",
+    "authoritative_attribution",
+    "changed_familiar",
+    "dynamic_assignment",
+    "recorded_field",
+    "opaque_private_field",
+    "post_reorganization"
+  ],
+  "schema_version": "ccpu.paper1_5.natural_audit.v1",
+  "source_key_collisions": 0,
+  "within_split_duplicate_questions": {
+    "dev": 0,
+    "test": 0,
+    "train": 0
+  }
+}

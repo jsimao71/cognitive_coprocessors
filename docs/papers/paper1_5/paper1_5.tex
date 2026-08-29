@@ -9,22 +9,22 @@
 \begin{abstract}
 Active retrieval during generation is established prior art: FLARE retrieves
 when forecast tokens have low model confidence \cite{flare}. We ask whether
-uncertainty is equivalent to epistemic risk. Using one versioned controlled
-source, we freeze 80 untouched Qwen-measured test examples with exactly 20 in
-each confidence--retrieval-requirement quadrant, then evaluate Qwen3-0.6B,
-SmolLM2-1.7B, and Gemma3-1B. A transparent semantic trigger has 100\% retrieval
-recall and 2.5\% false activation on all three families. Confidence-only recall
-is 50\%, 0\%, and 97.5\%, respectively, exposing strong checkpoint calibration
-dependence. A deterministic runtime epistemic gate reduces Unsupported
-Commitment Rate (UCR) from 100\% unassisted to 0\% for every model while
-retrieving less than upfront RAG; accuracy is 97.5\%, 96.25\%, and 77.5\%, so
-enforcement can trade utility for support. A secondary placement experiment is
-negative: three rank-8 LoRA adapters achieve near-zero synthetic development
-loss but collapse to zero held-out retrieval recall. Gemma in-context learning
-reaches full recall but only 36.25\% valid-interface success. Under this freeze,
-stable retrieval policy belongs in the transparent runtime, not the tested
-context or weights. The multi-source Paper 2.5 gate passes, but learned source
-routing is not implied.
+uncertainty is equivalent to epistemic risk. An initial 80-example controlled
+freeze finds that a transparent semantic trigger has 100\% retrieval recall and
+2.5\% false activation across Qwen3-0.6B, SmolLM2-1.7B, and Gemma3-1B, while
+confidence is checkpoint-dependent. We then freeze a 192-example natural-language
+extension after rejecting four candidate freezes for lexical triviality,
+duplicates, source-key collisions, or inconsistent gold answers. On its
+64-example test, shallow lexical
+accuracy is at most 85.94\%. The unchanged semantic policy reaches 100\% recall
+and 12.5\% false activation; confidence recall is 96.88\%, 81.25\%, and 78.12\%
+with false activation of 62.5\%, 0\%, and 9.38\%. Advisory evidence leaves UCR
+of 18.75\%, 12.5\%, and 3.12\%; an explicit support contract leaves 12.5\%,
+12.5\%, and 0\%. Deterministic runtime enforcement reaches zero UCR and full
+authorized coverage for every family. Prior rank-8 LoRAs have zero held-out
+recall, and the consumed natural freeze is not reused for adaptation. The result
+supports transparent runtime enforcement, but the still-easy lexical screen and
+small synthetic source limit the semantic-generalization claim.
 \end{abstract}
 
 \section{Question and Claim Boundary}
@@ -227,6 +227,95 @@ weight-placement benefit under this training design. More diverse training may
 change that result, but adapting after inspecting these held-out failures would
 require a new freeze.
 
+\section{Natural-Language Robustness Iteration}
+We next generate 192 balanced examples: 96 training, 32 development, and 64
+untouched test cases. Eight retrieval-required categories cover release-specific
+facts, private identifiers, authoritative attribution, changed familiar facts,
+dynamic assignments, recorded fields, opaque fields, and post-reorganization
+assignments. Eight controls include supplied context, quoted freshness language,
+hypotheticals, electric current, historical-copy tasks, fictional sources,
+computation, and stable familiar facts. Train, development, and test use distinct
+base paraphrases. The freezer verifies zero exact duplicates, zero normalized
+template overlap, unique source entity--attribute keys, and consistent gold
+answers for split-specific controls.
+
+Four pre-freeze diagnostics are retained but excluded from claims. Version 1
+failed the lexical screen at 93.75\%. Version 2 passed at 87.5\% but contained
+repeated questions. Version 3 removed duplicates but exposed source-key
+collisions between two categories. Version 4 fixed source keys but exposed
+split-template/gold-answer mismatches in several controls. Version 5 fixes these
+defects. Bag-of-words,
+word $n$-gram TF--IDF, and character $n$-gram TF--IDF logistic regressions score
+81.25\%, 85.94\%, and 81.25\% on its test set. This passes the predeclared 90\%
+triviality screen, but 85.94\% remains high and bounds the robustness claim.
+
+\begin{table}[t]
+\centering\scriptsize
+\caption{Natural-v5 test trigger and enforcement results. Rec.=retrieval recall,
+FA=false activation, Adv.=evidence advisory, Contract=explicit support contract.}
+\label{tab:natural}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+Model & Conf. Rec. & Conf. FA & Sem. Rec. & Sem. FA & Adv. UCR & Contract UCR & Runtime UCR & Runtime Cov.\\
+\midrule
+Qwen3-0.6B & .969 & .625 & 1.000 & .125 & .188 & .125 & .000 & 1.000\\
+SmolLM2-1.7B & .813 & .000 & 1.000 & .125 & .125 & .125 & .000 & 1.000\\
+Gemma3-1B & .781 & .094 & 1.000 & .125 & .031 & .000 & .000 & 1.000\\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+Figure~\ref{fig:natural-trigger} shows that confidence calibration changes again:
+Qwen nearly reaches full recall but over-triggers, whereas SmolLM2 and Gemma miss
+required cases. The frozen semantic policy catches every required case but
+falsely retrieves four historical-copy controls containing both private IDs and
+reorganization language. We do not tune this error after inspecting test.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{paper1_5_natural_triggers.png}
+\caption{Checkpoint confidence versus the unchanged transparent semantic policy
+on the 64-example natural-v5 test.}
+\label{fig:natural-trigger}
+\end{figure}
+
+Evidence use is model-dependent. Advisory evidence yields authorized coverage
+of 81.25\%, 87.5\%, and 96.88\%. The explicit support contract lowers UCR but
+Qwen over-abstains, reducing its authorized coverage to 21.88\%; SmolLM2 and
+Gemma retain 87.5\% and 81.25\%. Runtime enforcement copies a unique supported
+value or abstains otherwise, reaching zero UCR and full authorized coverage for
+all three. Its exact accuracy is 81.25\%, 90.62\%, and 68.75\%, versus 37.5\%,
+46.88\%, and 25\% without retrieval and 87.5\%, 96.88\%, and 75\% for the
+source-copy oracle. Retrospective verification detects all wrong required
+forecasts but, without a forced rewrite, leaves UCR at 100\%. Detection is
+therefore not correction. Per-condition token, call, retrieval-time, and wall-time
+totals remain machine-readable in the released summaries and traces.
+
+A deterministic four-document controller stress test has three factual
+opportunities per document: a control, a later emerging evidence need, and reuse
+of the same evidence. It records 100\% early prospective catch, 100\% late
+retrospective detection, 50\% reuse across required opportunities, no repeated
+unnecessary retrieval, and zero runtime UCR. This tests interruption and cache
+mechanics, not free-running long-form generation; it is not evidence that models
+discover all factual opportunities in unconstrained prose.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.99\linewidth]{paper1_5_natural_enforcement.png}
+\caption{Natural-v5 enforcement ladder and deterministic multi-opportunity
+controller stress test. Runtime enforcement is reliable relative to the
+configured source; it is not a truth oracle.}
+\label{fig:natural-enforcement}
+\end{figure}
+
+The learned-policy gate remains \textsc{no-go}. Natural-v5 is now consumed,
+shallow lexical accuracy remains high, semantic rules leave only false-activation
+headroom, and the prior adapters failed held-out retrieval despite near-zero
+development loss. Reopening LoRA requires richer training data and a new test
+freeze created before adaptation.
+
 \section{Paper 2.5 Gate}
 The pre-registered gate asks whether at least two families reduce UCR with the
 runtime gate while retrieving less often than upfront RAG. Qwen, SmolLM2, and
@@ -239,12 +328,14 @@ The primary result would be weakened if a better-calibrated FLARE implementation
 matches semantic routing at equal cost, if natural-language semantic rules lose
 precision, or if the confident-risk quadrants disappear on new data. The present
 result instead finds checkpoint-dependent confidence behavior and stable rule
-recall, but only on one controlled source and synthetic short answers.
+recall, but only on one controlled source and mostly synthetic short answers.
 
 The benchmark is selected using Qwen confidence, so its exact 20-per-quadrant
 balance does not transfer to other checkpoints. SmolLM2 lacks low-confidence test
-examples. There is one seed per model, no long-form repeated retrieval, and no
-ranking noise. The semantic cue distribution is controlled. The runtime gate is
+examples. There is one seed per model and no ranking noise. The natural extension
+passes its lexical screen only narrowly and its long-form component is a
+deterministic controller simulation, not unconstrained generation. The semantic
+cue distribution remains controlled. The runtime gate is
 deterministic and answer-aware relative to source evidence, not a production
 truth system. Full-prefix generation latency is not production latency.
 
@@ -273,6 +364,13 @@ python -m ccpu paper1.5 analyze-next \
 python -m ccpu paper1.5 analyze-policy \
   --config configs/paper1_5/policy_placement.json \
   --output-dir artifacts/paper1_5/next_iter/policy_analysis_v1
+python -m ccpu paper1.5 freeze-natural \
+  --config configs/paper1_5/natural_robustness_xpu.json \
+  --output-dir artifacts/paper1_5/natural_v5/data
+& $py -m ccpu paper1.5 run-natural <natural-v5 paths and model label>
+python -m ccpu paper1.5 analyze-natural \
+  --config configs/paper1_5/natural_analysis.json \
+  --output-dir artifacts/paper1_5/natural_v5/analysis
 \end{verbatim}
 Manifests hash configurations, benchmark/source snapshots, predictions, traces,
 summaries, and adapter files and record checkpoint revisions, device, package,
@@ -280,13 +378,14 @@ repository, and environment provenance.
 
 \section{Conclusion}
 Semantic epistemic risk adds information beyond checkpoint uncertainty in this
-controlled one-source regime. A runtime gate eliminates unsupported commitments
-for three small model families at lower retrieval cost than upfront RAG, although
-Gemma exposes an accuracy cost. The placement extension is negative: context is
-inconsistent and the tested adapters overfit. For the current freeze, exact
-source mechanics and enforcement clearly belong in runtime, and stable semantic
-selection should remain transparent there until independently frozen training
-demonstrates weight-policy generalization.
+controlled one-source regime and retains full recall under a more varied, though
+still lexically easy, natural-language freeze. Advisory and instructed evidence
+use remain checkpoint-dependent; deterministic runtime enforcement eliminates
+unsupported commitments for all three small families. The placement extension
+is negative: context is inconsistent and the tested adapters overfit. Exact
+source mechanics and enforcement belong in runtime under these freezes, and
+semantic selection should remain transparent until richer independently frozen
+training demonstrates learned-policy generalization.
 
 \begin{thebibliography}{9}
 \bibitem{flare}

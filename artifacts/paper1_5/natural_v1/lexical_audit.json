@@ -1,0 +1,31 @@
+{
+  "maximum_accuracy": 0.9375,
+  "results": [
+    {
+      "accuracy": 0.75,
+      "f1": 0.7142857142857143,
+      "model": "bag_of_words",
+      "precision": 0.8333333333333334,
+      "recall": 0.625
+    },
+    {
+      "accuracy": 0.9375,
+      "f1": 0.9411764705882353,
+      "model": "tfidf_word_ngrams",
+      "precision": 0.8888888888888888,
+      "recall": 1.0
+    },
+    {
+      "accuracy": 0.9375,
+      "f1": 0.9333333333333333,
+      "model": "tfidf_character_ngrams",
+      "precision": 1.0,
+      "recall": 0.875
+    }
+  ],
+  "schema_version": "ccpu.paper1_5.lexical_audit.v1",
+  "status": "revise_before_semantic_claim",
+  "test_count": 32,
+  "threshold": 0.9,
+  "train_count": 48
+}

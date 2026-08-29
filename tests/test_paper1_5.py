@@ -1,7 +1,7 @@
 import json
 
 from ccpu.cli import main
-from ccpu.common.artifacts import read_json
+from ccpu.common.artifacts import read_json, read_jsonl
 from ccpu.paper1_5.benchmark_next import (
     NextBenchmarkConfig,
     build_next_candidates,
@@ -9,6 +9,13 @@ from ccpu.paper1_5.benchmark_next import (
 )
 from ccpu.paper1_5.dataset import load_benchmark
 from ccpu.paper1_5.evaluate import evaluate
+from ccpu.paper1_5.natural_robustness import (
+    NaturalRobustnessConfig,
+    generate_natural_benchmark,
+    lexical_audit,
+    run_longform_opportunities,
+    semantic_features,
+)
 from ccpu.paper1_5.policy_lora import (
     PolicyDataConfig,
     generate_policy_data,
@@ -164,3 +171,52 @@ def test_policy_data_excludes_answers_and_parses_typed_request(tmp_path):
         "source": "atlas",
     }
     assert parse_retrieval_block("NO_RETRIEVAL") is None
+
+
+def test_natural_benchmark_audit_features_and_longform(tmp_path):
+    result = generate_natural_benchmark(
+        NaturalRobustnessConfig(
+            train_per_category=2, dev_per_category=1, test_per_category=1
+        ),
+        tmp_path,
+    )
+    assert result["example_count"] == 64
+    audit = read_json(tmp_path / "freeze_audit.json")
+    assert audit["label_balance"]["test"] == {"not_required": 8, "required": 8}
+    assert not any(audit["exact_signature_overlap"].values())
+    assert not any(audit["normalized_template_overlap"].values())
+    assert not any(audit["within_split_duplicate_questions"].values())
+    assert audit["source_key_collisions"] == 0
+    assert audit["answer_consistency_errors"] == 0
+    source = read_json(tmp_path / "source.json")
+    keys = [(row["entity"], row["attribute"]) for row in source["records"]]
+    assert len(keys) == len(set(keys))
+    controls = [
+        row
+        for row in read_jsonl(tmp_path / "benchmark.jsonl")
+        if not row["evidence_required"]
+    ]
+    expected_by_category = {
+        "quoted_freshness": ("latest custodian", "current registry", "updated owner"),
+        "historical_date": ("18th", "yes", "1848"),
+        "compute_not_retrieve": ("42", "120", "2026-08-29"),
+        "stable_familiar": ("Au", "Lisbon", "H2O"),
+    }
+    for row in controls:
+        if row["category"] in expected_by_category:
+            assert row["answer"] == expected_by_category[row["category"]][
+                row["template_index"]
+            ]
+
+    risky = semantic_features("Complete field 7B for CASE-PA200.")
+    supplied = semantic_features(
+        "The active brief states that CASE-PA200's custodian is CTX-200."
+    )
+    assert risky["combined"]
+    assert supplied["active_context"] and not supplied["combined"]
+
+    lexical = lexical_audit(tmp_path / "benchmark.jsonl")
+    assert len(lexical["results"]) == 3
+    longform = run_longform_opportunities(tmp_path / "benchmark.jsonl")
+    assert longform["opportunity_count"] == 12
+    assert longform["runtime_ucr"] <= longform["advisory_ucr"]

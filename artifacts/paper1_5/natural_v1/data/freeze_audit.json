@@ -1,0 +1,47 @@
+{
+  "control_categories": [
+    "context_sufficient",
+    "quoted_freshness",
+    "hypothetical",
+    "electric_current",
+    "historical_date",
+    "fictional_source",
+    "compute_not_retrieve",
+    "stable_familiar"
+  ],
+  "counts": {
+    "dev": 16,
+    "test": 32,
+    "train": 48
+  },
+  "exact_signature_overlap": {
+    "dev_test": [],
+    "train_dev": [],
+    "train_test": []
+  },
+  "label_balance": {
+    "dev": {
+      "not_required": 8,
+      "required": 8
+    },
+    "test": {
+      "not_required": 16,
+      "required": 16
+    },
+    "train": {
+      "not_required": 24,
+      "required": 24
+    }
+  },
+  "required_categories": [
+    "source_release",
+    "private_identifier",
+    "authoritative_attribution",
+    "changed_familiar",
+    "dynamic_assignment",
+    "recorded_field",
+    "opaque_private_field",
+    "post_reorganization"
+  ],
+  "schema_version": "ccpu.paper1_5.natural_audit.v1"
+}

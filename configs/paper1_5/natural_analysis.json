@@ -1,0 +1,45 @@
+{
+  "schema_version": "ccpu.paper1_5.natural_analysis_config.v1",
+  "lexical_audit": "../../artifacts/paper1_5/natural_v5/lexical_audit.json",
+  "longform_summary": "../../artifacts/paper1_5/natural_v5/longform.json",
+  "rejected_freezes": [
+    {
+      "version": "natural_v1",
+      "lexical_audit": "../../artifacts/paper1_5/natural_v1/lexical_audit.json",
+      "dataset": "../../artifacts/paper1_5/natural_v1/data/benchmark.jsonl",
+      "source": "../../artifacts/paper1_5/natural_v1/data/source.json"
+    },
+    {
+      "version": "natural_v2",
+      "lexical_audit": "../../artifacts/paper1_5/natural_v2/lexical_audit.json",
+      "dataset": "../../artifacts/paper1_5/natural_v2/data/benchmark.jsonl",
+      "source": "../../artifacts/paper1_5/natural_v2/data/source.json"
+    },
+    {
+      "version": "natural_v3",
+      "lexical_audit": "../../artifacts/paper1_5/natural_v3/lexical_audit.json",
+      "dataset": "../../artifacts/paper1_5/natural_v3/data/benchmark.jsonl",
+      "source": "../../artifacts/paper1_5/natural_v3/data/source.json"
+    },
+    {
+      "version": "natural_v4",
+      "lexical_audit": "../../artifacts/paper1_5/natural_v4/lexical_audit.json",
+      "dataset": "../../artifacts/paper1_5/natural_v4/data/benchmark.jsonl",
+      "source": "../../artifacts/paper1_5/natural_v4/data/source.json"
+    }
+  ],
+  "models": [
+    {
+      "model_label": "Qwen3-0.6B",
+      "summary": "../../artifacts/paper1_5/natural_v5/qwen3_0_6b/summary.json"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "summary": "../../artifacts/paper1_5/natural_v5/smollm2_1_7b/summary.json"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "summary": "../../artifacts/paper1_5/natural_v5/gemma3_1b/summary.json"
+    }
+  ]
+}

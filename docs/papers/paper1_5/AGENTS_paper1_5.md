@@ -149,3 +149,21 @@ probes, controlled source, all condition traces, UCR/coverage summaries,
 evidence-enforcement ablation, multi-family replication, leakage-audited
 retrieval-policy adapters, context/weights/runtime placement analysis, plots,
 manifests, the rebuilt paper, and an explicit Paper 2.5 gate decision.
+
+## Natural-language iteration outcome
+Natural-v5 contains 96 train, 32 development, and 64 test examples. The freezer
+reports zero duplicate questions, zero normalized-template overlap, and zero
+source-key collisions, plus zero split-template/gold-answer mismatches. Its
+strongest shallow lexical baseline reaches 85.94%,
+so it passes the 90% screen but remains an easy synthetic benchmark.
+
+Across Qwen3-0.6B, SmolLM2-1.7B, and Gemma3-1B, the frozen semantic policy has
+100% retrieval recall and 12.5% false activation. Runtime enforcement has zero
+UCR and full authorized coverage for all three. Advisory and support-contract
+behavior remains checkpoint-dependent. Retrospective verification detects all
+wrong required forecasts but does not correct them without enforcement.
+
+The learned-policy decision is **no-go** on this consumed freeze. Any retry needs
+richer natural data, a new untouched freeze, and must compare a CPU classifier,
+rules, confidence, LoRA, and hybrids. The 12-opportunity long-form result is a
+deterministic controller/cache stress test, not free-running model generation.

@@ -24,6 +24,15 @@ from .dataset import load_benchmark
 from .evaluate import evaluate
 from .experiment import base_prompt, run_huggingface
 from .generation import ConfidenceBackend
+from .natural_analysis import build_natural_analysis
+from .natural_robustness import (
+    NaturalRobustnessConfig,
+    generate_natural_benchmark,
+    lexical_audit,
+    run_longform_opportunities,
+    run_natural_model,
+    summarize_natural,
+)
 from .next_analysis import build_next_analysis
 from .plot import plot_pareto
 from .policy_analysis import build_policy_placement
@@ -289,6 +298,77 @@ def analyze_next_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_natural_command(args: argparse.Namespace) -> int:
+    result = generate_natural_benchmark(
+        NaturalRobustnessConfig.from_dict(read_json(args.config)), args.output_dir
+    )
+    print(f"froze {result['example_count']} natural-language examples -> {args.output_dir}")
+    return 0
+
+
+def audit_natural_command(args: argparse.Namespace) -> int:
+    result = lexical_audit(args.dataset)
+    write_json(args.output, result)
+    print(f"natural lexical audit status={result['status']} -> {args.output}")
+    return 0
+
+
+def run_natural_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    matches = [
+        model
+        for model in raw["models"]
+        if args.model in {model.get("label"), model.get("model_id")}
+    ]
+    if len(matches) != 1:
+        raise ValueError(f"expected one configured natural-robustness model: {args.model}")
+    model = dict(matches[0])
+    backend = ConfidenceBackend(model)
+    rows = run_natural_model(
+        args.dataset,
+        args.source,
+        backend,
+        seed=int(raw.get("seed", 15531)),
+    )
+    output = Path(args.output_dir)
+    predictions = write_jsonl(output / "predictions.jsonl", rows)
+    summary = write_json(output / "summary.json", summarize_natural(rows))
+    root = Path(__file__).resolve().parents[3]
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 1.5",
+            "schema_version": "ccpu.paper1_5.natural_run_manifest.v1",
+            "model": model,
+            "dataset_sha256": file_sha256(args.dataset),
+            "source_sha256": file_sha256(args.source),
+            "predictions_sha256": file_sha256(predictions),
+            "summary_sha256": file_sha256(summary),
+            "environment": environment_manifest(root),
+        },
+    )
+    print(f"completed {len(rows)} natural robustness condition rows -> {output}")
+    return 0
+
+
+def longform_natural_command(args: argparse.Namespace) -> int:
+    result = run_longform_opportunities(args.dataset)
+    write_json(args.output, result)
+    print(
+        f"scored {result['opportunity_count']} long-form factual opportunities -> {args.output}"
+    )
+    return 0
+
+
+def analyze_natural_command(args: argparse.Namespace) -> int:
+    result = build_natural_analysis(args.config, args.output_dir)
+    print(
+        f"wrote {len(result['rows'])} natural robustness analysis rows; "
+        f"learned policy={result['learned_policy_decision']['status']}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1.5", aliases=["paper1_5"], help="epistemic-risk retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -360,3 +440,41 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     next_analysis.add_argument("--config", required=True)
     next_analysis.add_argument("--output-dir", required=True)
     next_analysis.set_defaults(handler=analyze_next_command)
+
+    natural_freeze = commands.add_parser(
+        "freeze-natural", help="freeze the natural-language epistemic benchmark"
+    )
+    natural_freeze.add_argument("--config", required=True)
+    natural_freeze.add_argument("--output-dir", required=True)
+    natural_freeze.set_defaults(handler=freeze_natural_command)
+
+    natural_audit = commands.add_parser(
+        "audit-natural", help="run shallow lexical-triviality baselines"
+    )
+    natural_audit.add_argument("--dataset", required=True)
+    natural_audit.add_argument("--output", required=True)
+    natural_audit.set_defaults(handler=audit_natural_command)
+
+    natural_run = commands.add_parser(
+        "run-natural", help="run one checkpoint on the natural-language benchmark"
+    )
+    natural_run.add_argument("--config", required=True)
+    natural_run.add_argument("--dataset", required=True)
+    natural_run.add_argument("--source", required=True)
+    natural_run.add_argument("--model", required=True)
+    natural_run.add_argument("--output-dir", required=True)
+    natural_run.set_defaults(handler=run_natural_command)
+
+    natural_longform = commands.add_parser(
+        "longform-natural", help="score multi-opportunity long-form runtime behavior"
+    )
+    natural_longform.add_argument("--dataset", required=True)
+    natural_longform.add_argument("--output", required=True)
+    natural_longform.set_defaults(handler=longform_natural_command)
+
+    natural_analysis = commands.add_parser(
+        "analyze-natural", help="combine natural-language cross-family results and plots"
+    )
+    natural_analysis.add_argument("--config", required=True)
+    natural_analysis.add_argument("--output-dir", required=True)
+    natural_analysis.set_defaults(handler=analyze_natural_command)
