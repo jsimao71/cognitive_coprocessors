@@ -18,6 +18,7 @@ from .benchmark import freeze_benchmark
 from .composition import run_compositions
 from .enterprise import create_enterprise_fixture, run_enterprise_evaluation
 from .experiment import run_matrix, summarize
+from .generic_tools import compare_enterprise_result_transports
 from .plot import decide_gate, plot_scaling
 from .production_analysis import analyze_substitution
 from .public_benchmarks import (
@@ -186,6 +187,15 @@ def analyze_public_tatqa_retrieval_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def compare_generic_tools_command(args: argparse.Namespace) -> int:
+    summary = compare_enterprise_result_transports(args.fixture_root, args.output_dir)
+    print(
+        f"compared {summary['row_count']} Paper 2.5 enterprise result transports; "
+        f"agreement={summary['record_agreement']:.3f}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2.5", aliases=["paper2_5"], help="heterogeneous retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -271,3 +281,10 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_tatqa_retrieval.add_argument("--top-k", type=int, default=5)
     public_tatqa_retrieval.add_argument("--output-dir", required=True)
     public_tatqa_retrieval.set_defaults(handler=analyze_public_tatqa_retrieval_command)
+
+    generic_tools = commands.add_parser(
+        "compare-generic-tools", help="audit enterprise tool/CogCop result transport"
+    )
+    generic_tools.add_argument("--fixture-root", required=True)
+    generic_tools.add_argument("--output-dir", required=True)
+    generic_tools.set_defaults(handler=compare_generic_tools_command)

@@ -45,6 +45,14 @@ Secondary: can capability count grow outside recurring neural context?
   production-scale or language-model result.
 - The enterprise result does not measure a new heuristic routing gap and does
   not reopen the Paper 3.5 gate.
+- A fixed four-tool gateway (`__compute`, `__retrieve`, `__verify`, `__help`)
+  transports all 11 native-governed enterprise results with 1.000 equality of
+  answer, provenance, and source-call records. Its 72 lexical schema tokens stay
+  constant across 3-, 6-, and 9-capability registry stages.
+- This is an oracle-timed transport check over the precomputed shared R2 run.
+  It does not measure voluntary model calls, source/query generation, malformed
+  arguments, CONTINUE, evidence timing, or Automatic Rescue Rate. Do not claim
+  a generic-tool or CogCop invocation win from it.
 - A pinned public TAT-QA development diagnostic freezes 320/1,644 questions by
   answer type, evidence source, scale, and comparison requirement. It retains
   IDs, source coordinates, strata, and content hashes only.

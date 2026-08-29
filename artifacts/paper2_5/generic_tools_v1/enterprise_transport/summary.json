@@ -1,0 +1,53 @@
+{
+  "claim_boundary": {
+    "automatic_rescue_rate": null,
+    "r2_execution": "precomputed shared native_governed run",
+    "result": "result transport and schema invariance only",
+    "timing": "oracle",
+    "voluntary_model_call": false
+  },
+  "predictions_sha256": "8d0b46fa6c54a2ec1b0e388cdd16f2f061ebc9fc65f55ee49a21381841a6ab2d",
+  "record_agreement": 1.0,
+  "registry_scaling": [
+    {
+      "capability_count": 3,
+      "schema_tokens": 72,
+      "stage": "duckdb_fts5_faiss",
+      "tool_count": 4
+    },
+    {
+      "capability_count": 6,
+      "schema_tokens": 72,
+      "stage": "iceberg_metrics_oxigraph",
+      "tool_count": 4
+    },
+    {
+      "capability_count": 9,
+      "schema_tokens": 72,
+      "stage": "service_adapters",
+      "tool_count": 4
+    }
+  ],
+  "row_count": 11,
+  "schema_version": "ccpu.paper2_5.generic_tool_transport.v1",
+  "source_summary": {
+    "by_condition": [
+      {
+        "accuracy": 1.0,
+        "condition": "native_governed",
+        "count": 11,
+        "mean_source_calls": 1.0909090909090908
+      },
+      {
+        "accuracy": 0.18181818181818182,
+        "condition": "universal_text_top5",
+        "count": 11,
+        "mean_source_calls": 1.0
+      }
+    ],
+    "claim_boundary": "deterministic local fixture; no model-authored SQL or remote service",
+    "count": 11,
+    "schema_version": "ccpu.paper2_5.enterprise_evaluation.v1"
+  },
+  "tool_result_accuracy": 1.0
+}

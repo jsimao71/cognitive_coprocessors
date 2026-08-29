@@ -170,6 +170,7 @@ def test_enterprise_iceberg_semantic_ontology_composition(tmp_path):
         create_enterprise_fixture,
         run_enterprise_evaluation,
     )
+    from ccpu.paper2_5.generic_tools import compare_enterprise_result_transports
 
     fixture = tmp_path / "enterprise"
     manifest = create_enterprise_fixture(fixture)
@@ -235,6 +236,11 @@ def test_enterprise_iceberg_semantic_ontology_composition(tmp_path):
     assert conditions["universal_text_top5"]["accuracy"] < 0.5
     native = [row for row in rows if row["condition"] == "native_governed"]
     assert all(row["provenance"] for row in native)
+    transport = compare_enterprise_result_transports(fixture, tmp_path / "transport")
+    assert transport["record_agreement"] == 1.0
+    assert transport["tool_result_accuracy"] == 1.0
+    assert {row["schema_tokens"] for row in transport["registry_scaling"]} == {72}
+    assert transport["claim_boundary"]["automatic_rescue_rate"] is None
 
 
 def test_bounded_source_compositions_log_dependency_dags():

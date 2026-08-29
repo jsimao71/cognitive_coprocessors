@@ -246,6 +246,22 @@ snapshot, governed metric, multi-member group, or mixed answers. This is a
 source-semantics diagnostic, not a scale benchmark: the fixture has six sales
 rows and the query/compiler paths are deterministic.
 
+\subsection{Four generic tools: governed result transport}
+The shared model-facing baseline exposes exactly \texttt{\_\_compute},
+\texttt{\_\_retrieve}, \texttt{\_\_verify}, and \texttt{\_\_help}; backend
+descriptors remain in R2. We transport the 11 native-governed enterprise
+outcomes through a generic \texttt{\_\_help} result message and compare them
+with the typed CogCop records. Answers, provenance, and source-call fields agree
+on 11/11, and both retain deterministic final accuracy 1.000. The four schemas
+occupy 72 lexical tokens at registry stages containing 3, 6, and 9 capabilities.
+
+This is an oracle-timed result-transport invariant. It reuses the precomputed
+shared native-governed R2 run; no model chooses intent, source, query, or timing.
+Consequently it does not measure voluntary retrieval recall, malformed
+arguments, extra turns, evidence timing, CONTINUE, or Automatic Rescue Rate.
+It prevents later comparisons from attributing a backend or provenance
+advantage to CogCop merely because the generic-tool condition was weakened.
+
 \section{Public TAT-QA Composition Audit}
 TAT-QA combines financial tables and text with extraction and arithmetic
 questions \cite{tatqa}. We pin the official development file at repository
@@ -359,6 +375,9 @@ arithmetic are induced from gold answers/operands and 12 rows are not evaluable.
 It does not measure value extraction, operation prediction, model answer use,
 latency, semantic-vector retrieval, or robustness. Header-aware lexical recall
 is not equivalent to a source-native execution advantage.
+Likewise, the four-tool enterprise audit demonstrates only equal transport of
+already computed governed records. Model-facing intent and R2 invocation remain
+unmeasured.
 
 Heterogeneous routing would be weakened if a stronger matched universal system
 executes aggregates, preserves status/provenance, and closes the 9/22 gap at
@@ -393,6 +412,9 @@ python -m ccpu paper2.5 prepare-enterprise \
 python -m ccpu paper2.5 run-enterprise \
   --fixture-root artifacts/paper2_5/enterprise_repro/fixture \
   --output-dir artifacts/paper2_5/enterprise_repro/evaluation
+python -m ccpu paper2.5 compare-generic-tools \
+  --fixture-root artifacts/paper2_5/enterprise_v1/fixture \
+  --output-dir artifacts/paper2_5/generic_tools_v1/enterprise_transport
 python -m ccpu paper2.5 freeze-public-tatqa \
   --config configs/paper2_5/public_tatqa.json \
   --cache-root <verified-public-cache> \
@@ -433,6 +455,10 @@ The pinned TAT-QA audit adds external task structure and shows that arithmetic
 is not the current bottleneck. Header-aware lexical retrieval improves matched
 evidence recall, but does not establish comparative QA performance; typed
 operation and model conditions define the next Paper 2.5 step.
+The fixed four-tool gateway also preserves all 11 governed result records with
+constant visible schema size. A novel invocation claim still requires matched
+model-facing evidence of automatic rescue, earlier safe retrieval, CONTINUE, or
+cost beyond schema/PRA savings.
 
 \begin{thebibliography}{9}
 \bibitem{flare}
