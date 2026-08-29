@@ -19,6 +19,11 @@ from ccpu.paper2.next_experiment import (
     run_model_condition,
     summarize_next,
 )
+from ccpu.paper2.result_use import (
+    ResultUseConfig,
+    generate_result_use_benchmark,
+    run_result_use,
+)
 from ccpu.paper2.router import (
     ROUTER_LABELS,
     parse_router_label,
@@ -447,3 +452,32 @@ def test_factorized_router_data_and_fail_closed_scoring(tmp_path):
     assert summary["runtime_exact_rate"] == 1.0
     assert parse_router_label(" GRAPH. ") == "GRAPH"
     assert parse_router_label("GRAPH because it is a hierarchy") is None
+
+
+def test_result_use_freeze_and_runtime_copy(tmp_path):
+    manifest = generate_result_use_benchmark(ResultUseConfig(cases_per_task=5), tmp_path)
+    assert manifest["counts"]["total"] == 90
+    rows = read_jsonl(tmp_path / "test.jsonl")
+    assert {row["task"] for row in rows} == {"COPY", "INTERPRET", "CONTINUE"}
+    assert len({row["format"] for row in rows}) == 6
+    copy_predictions, copy_summary = run_result_use(rows, None, condition="runtime_copy", seed=1)
+    assert len(copy_predictions) == 30
+    assert copy_summary["overall"]["exact_rate"] == 1.0
+
+    class GoldBackend:
+        def generate(self, prompt, *, seed):
+            del prompt
+            expected = rows[seed - 200]["expected"]
+            return GenerationResult(
+                generated_text=expected,
+                rendered_text=expected,
+                prompt_tokens=20,
+                generated_tokens=1,
+                reinjected_tokens=0,
+                model_calls=1,
+                wall_time_ns=100,
+                metadata={"empirical": False},
+            )
+
+    _, neural_summary = run_result_use(rows, GoldBackend(), condition="qwen_base", seed=200)
+    assert neural_summary["overall"]["exact_rate"] == 1.0

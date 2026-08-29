@@ -35,7 +35,11 @@ and learned CPU routers select only 0.588 with 0.400 false activation.  Thus
 exact execution and parsing belong in the runtime, but broad semantic selection
 and result use remain unresolved.  Factorized Qwen router LoRAs improve selection
 to 0.848 (attention only) and 0.900 (attention+MLP), but false activation rises
-to 0.273 and 0.400; neither clears the gate.  The Paper 3 gate remains
+to 0.273 and 0.400; neither clears the gate.  On a matched 360-row result-use
+study, Qwen reaches 0.650 COPY, 0.492 INTERPRET, and 0.233 CONTINUE exactness.
+An explicit authority contract makes COPY 1.000, as does format-independent
+zero-call runtime-copy.  Attention diagnostics are warranted for non-copy use,
+but provenance bias remains unlicensed.  The Paper 3 gate remains
 \texttt{no\_go}.
 \end{abstract}
 
@@ -431,6 +435,52 @@ assessed rows.  Wrong reinterpretation occurs in 11/15 Qwen passes and all 28
 SmolLM2 passes.  Thus execution success is not sufficient: result preservation
 is a separate failure surface that the runtime must eventually enforce.
 
+\subsection{COPY, INTERPRET, and CONTINUE result use}
+
+We next hold semantics fixed while varying the result envelope.  Sixty semantic
+cases span all five engines and provenance types \texttt{EXACT\_COMPUTE} and
+\texttt{LOGIC\_DERIVED}.  Each yields COPY, INTERPRET, and CONTINUE tasks and is
+rendered as plain text, XML, a result fence, an engine-specific tag, a generic
+trusted record, or an explicit ``authoritative exact result; do not recompute''
+contract.  This produces 360 Qwen test rows: 120 per task, 60 per format, and 72
+per engine.  Questions include a wrong draft value to expose override.
+
+\begin{table}[ht]
+\centering
+\caption{Strict Qwen3-0.6B exact result use by task and envelope ($n=20$ per
+cell). Runtime-copy covers COPY only and is 1.000 under every envelope.}
+\label{tab:result-use}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Task & Plain & XML & Fence & Engine tag & Trusted record & Authority \\
+\midrule
+COPY & 0.85 & 0.65 & 0.55 & 0.45 & 0.40 & 1.00 \\
+INTERPRET & 0.50 & 0.60 & 0.45 & 0.50 & 0.30 & 0.60 \\
+CONTINUE & 0.20 & 0.20 & 0.20 & 0.30 & 0.30 & 0.20 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.94\linewidth]{paper2_result_use_formats.png}
+\caption{Matched result-use exactness.  Authority formatting solves COPY on
+these 20 cases but does not solve interpretation or downstream continuation.}
+\label{fig:result-use}
+\end{figure}
+
+Across formats, neural COPY is 0.650, INTERPRET 0.492, and CONTINUE 0.233.
+Overall override is 0.050 and wrong reinterpretation is 0.492; COPY alone has
+0.133 override.  The authority contract removes COPY overrides and reaches
+1.000, but costs about 70 prompt tokens and remains a neural regeneration path.
+Runtime-copy instead returns the typed result directly: 120/120 exact, no model
+calls, independent of textual envelope.  It is therefore the production default
+for COPY.  Because INTERPRET and CONTINUE remain below 0.8, the next step is
+attention-span diagnostics and causal masking.  A fixed provenance-attention
+bias is not yet justified and remains gated on causal evidence.
+
 \subsection{Typed state and bounded composition}
 
 Forty deterministic two-stage compositions validate dependency-linked state:
@@ -469,6 +519,9 @@ preserving the engine result remains unreliable.
       bottleneck, with result use remaining downstream.
 \item H8 (factorized LoRA clears the semantic route gate) is falsified for Qwen:
       L1 misses selection and FAR, while L2 reaches selection but worsens FAR.
+\item H9 (formatting alone solves result use) is supported only for authority-
+      contracted COPY in this sample; INTERPRET and CONTINUE remain unreliable,
+      while deterministic runtime-copy solves COPY independently of format.
 \end{itemize}
 
 The machine-readable gate artifact records \texttt{status: no\_go} and an empty
@@ -573,6 +626,20 @@ python -m ccpu paper2 run-router \
 python -m ccpu paper2 analyze-router \
   --config configs/paper2/router_analysis.json \
   --output-dir artifacts/paper2/router_v1/analysis
+
+python -m ccpu paper2 generate-result-use \
+  --config configs/paper2/result_use_qwen_xpu.json \
+  --output-dir artifacts/paper2/result_use_v1/data
+
+python -m ccpu paper2 run-result-use \
+  --config configs/paper2/result_use_qwen_xpu.json \
+  --dataset artifacts/paper2/result_use_v1/data/test.jsonl \
+  --condition qwen_base --model qwen3_0_6b \
+  --output-dir artifacts/paper2/result_use_v1/qwen_base_v1
+
+python -m ccpu paper2 analyze-result-use \
+  --config configs/paper2/result_use_analysis.json \
+  --output-dir artifacts/paper2/result_use_v1/analysis
 \end{verbatim}
 
 The original model runs store predictions, factorized summaries, dataset and
@@ -610,6 +677,9 @@ semantic selection independently before spending capacity on generation.
 For the tested Qwen router, increasing LoRA target breadth does not solve that
 selection problem safely; runtime result enforcement remains the next cheapest
 factorized intervention.
+For result use, runtime-copy is the reliable home for exact COPY.  Text authority
+can help neural copying, but interpretation and continuation still require
+diagnosis before any provenance-aware attention mechanism can be claimed.
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.

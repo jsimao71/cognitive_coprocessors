@@ -1,0 +1,496 @@
+{
+  "conditions": [
+    {
+      "by_format": [
+        {
+          "count": 60,
+          "exact_rate": 0.5166666666666667,
+          "format": "plain",
+          "mean_generated_tokens": 8.266666666666667,
+          "mean_prompt_tokens": 50.86666666666667,
+          "mean_wall_time_ms": 1668.4073883333333,
+          "override_rate": 0.05,
+          "wrong_reinterpretation_rate": 0.43333333333333335
+        },
+        {
+          "count": 60,
+          "exact_rate": 0.48333333333333334,
+          "format": "xml",
+          "mean_generated_tokens": 8.45,
+          "mean_prompt_tokens": 59.46666666666667,
+          "mean_wall_time_ms": 1646.1725516666668,
+          "override_rate": 0.016666666666666666,
+          "wrong_reinterpretation_rate": 0.5
+        },
+        {
+          "count": 60,
+          "exact_rate": 0.4,
+          "format": "fenced",
+          "mean_generated_tokens": 10.6,
+          "mean_prompt_tokens": 50.266666666666666,
+          "mean_wall_time_ms": 2039.5726833333333,
+          "override_rate": 0.016666666666666666,
+          "wrong_reinterpretation_rate": 0.5833333333333334
+        },
+        {
+          "count": 60,
+          "exact_rate": 0.4166666666666667,
+          "format": "engine_tag",
+          "mean_generated_tokens": 9.716666666666667,
+          "mean_prompt_tokens": 52.06666666666667,
+          "mean_wall_time_ms": 1980.7350733333333,
+          "override_rate": 0.016666666666666666,
+          "wrong_reinterpretation_rate": 0.5666666666666667
+        },
+        {
+          "count": 60,
+          "exact_rate": 0.3333333333333333,
+          "format": "trusted_record",
+          "mean_generated_tokens": 7.5,
+          "mean_prompt_tokens": 63.46666666666667,
+          "mean_wall_time_ms": 1443.5162116666668,
+          "override_rate": 0.2,
+          "wrong_reinterpretation_rate": 0.4666666666666667
+        },
+        {
+          "count": 60,
+          "exact_rate": 0.6,
+          "format": "authority",
+          "mean_generated_tokens": 5.866666666666666,
+          "mean_prompt_tokens": 70.06666666666666,
+          "mean_wall_time_ms": 1213.5052983333333,
+          "override_rate": 0.0,
+          "wrong_reinterpretation_rate": 0.4
+        }
+      ],
+      "by_task": [
+        {
+          "count": 120,
+          "exact_rate": 0.65,
+          "mean_generated_tokens": 7.475,
+          "mean_prompt_tokens": 57.53333333333333,
+          "mean_wall_time_ms": 1431.1904375,
+          "override_rate": 0.13333333333333333,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.21666666666666667
+        },
+        {
+          "count": 120,
+          "exact_rate": 0.49166666666666664,
+          "mean_generated_tokens": 6.975,
+          "mean_prompt_tokens": 55.833333333333336,
+          "mean_wall_time_ms": 1399.6381083333333,
+          "override_rate": 0.0,
+          "task": "INTERPRET",
+          "wrong_reinterpretation_rate": 0.5083333333333333
+        },
+        {
+          "count": 120,
+          "exact_rate": 0.23333333333333334,
+          "mean_generated_tokens": 10.75,
+          "mean_prompt_tokens": 59.733333333333334,
+          "mean_wall_time_ms": 2165.1260575,
+          "override_rate": 0.016666666666666666,
+          "task": "CONTINUE",
+          "wrong_reinterpretation_rate": 0.75
+        }
+      ],
+      "by_task_format": [
+        {
+          "count": 20,
+          "exact_rate": 0.85,
+          "format": "plain",
+          "mean_generated_tokens": 5.75,
+          "mean_prompt_tokens": 50.7,
+          "mean_wall_time_ms": 1107.274165,
+          "override_rate": 0.15,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.65,
+          "format": "xml",
+          "mean_generated_tokens": 10.4,
+          "mean_prompt_tokens": 59.3,
+          "mean_wall_time_ms": 1877.621645,
+          "override_rate": 0.05,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.3
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.55,
+          "format": "fenced",
+          "mean_generated_tokens": 7.9,
+          "mean_prompt_tokens": 50.1,
+          "mean_wall_time_ms": 1601.02897,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.45
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.45,
+          "format": "engine_tag",
+          "mean_generated_tokens": 9.3,
+          "mean_prompt_tokens": 51.9,
+          "mean_wall_time_ms": 1686.746105,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.55
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.4,
+          "format": "trusted_record",
+          "mean_generated_tokens": 5.8,
+          "mean_prompt_tokens": 63.3,
+          "mean_wall_time_ms": 1169.573335,
+          "override_rate": 0.6,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "authority",
+          "mean_generated_tokens": 5.7,
+          "mean_prompt_tokens": 69.9,
+          "mean_wall_time_ms": 1144.898405,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.5,
+          "format": "plain",
+          "mean_generated_tokens": 7.85,
+          "mean_prompt_tokens": 49.0,
+          "mean_wall_time_ms": 1614.78959,
+          "override_rate": 0.0,
+          "task": "INTERPRET",
+          "wrong_reinterpretation_rate": 0.5
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.6,
+          "format": "xml",
+          "mean_generated_tokens": 3.6,
+          "mean_prompt_tokens": 57.6,
+          "mean_wall_time_ms": 653.90242,
+          "override_rate": 0.0,
+          "task": "INTERPRET",
+          "wrong_reinterpretation_rate": 0.4
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.45,
+          "format": "fenced",
+          "mean_generated_tokens": 12.1,
+          "mean_prompt_tokens": 48.4,
+          "mean_wall_time_ms": 2378.59511,
+          "override_rate": 0.0,
+          "task": "INTERPRET",
+          "wrong_reinterpretation_rate": 0.55
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.5,
+          "format": "engine_tag",
+          "mean_generated_tokens": 10.6,
+          "mean_prompt_tokens": 50.2,
+          "mean_wall_time_ms": 2068.075195,
+          "override_rate": 0.0,
+          "task": "INTERPRET",
+          "wrong_reinterpretation_rate": 0.5
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.3,
+          "format": "trusted_record",
+          "mean_generated_tokens": 4.1,
+          "mean_prompt_tokens": 61.6,
+          "mean_wall_time_ms": 814.06824,
+          "override_rate": 0.0,
+          "task": "INTERPRET",
+          "wrong_reinterpretation_rate": 0.7
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.6,
+          "format": "authority",
+          "mean_generated_tokens": 3.6,
+          "mean_prompt_tokens": 68.2,
+          "mean_wall_time_ms": 868.398095,
+          "override_rate": 0.0,
+          "task": "INTERPRET",
+          "wrong_reinterpretation_rate": 0.4
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.2,
+          "format": "plain",
+          "mean_generated_tokens": 11.2,
+          "mean_prompt_tokens": 52.9,
+          "mean_wall_time_ms": 2283.15841,
+          "override_rate": 0.0,
+          "task": "CONTINUE",
+          "wrong_reinterpretation_rate": 0.8
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.2,
+          "format": "xml",
+          "mean_generated_tokens": 11.35,
+          "mean_prompt_tokens": 61.5,
+          "mean_wall_time_ms": 2406.99359,
+          "override_rate": 0.0,
+          "task": "CONTINUE",
+          "wrong_reinterpretation_rate": 0.8
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.2,
+          "format": "fenced",
+          "mean_generated_tokens": 11.8,
+          "mean_prompt_tokens": 52.3,
+          "mean_wall_time_ms": 2139.09397,
+          "override_rate": 0.05,
+          "task": "CONTINUE",
+          "wrong_reinterpretation_rate": 0.75
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.3,
+          "format": "engine_tag",
+          "mean_generated_tokens": 9.25,
+          "mean_prompt_tokens": 54.1,
+          "mean_wall_time_ms": 2187.38392,
+          "override_rate": 0.05,
+          "task": "CONTINUE",
+          "wrong_reinterpretation_rate": 0.65
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.3,
+          "format": "trusted_record",
+          "mean_generated_tokens": 12.6,
+          "mean_prompt_tokens": 65.5,
+          "mean_wall_time_ms": 2346.90706,
+          "override_rate": 0.0,
+          "task": "CONTINUE",
+          "wrong_reinterpretation_rate": 0.7
+        },
+        {
+          "count": 20,
+          "exact_rate": 0.2,
+          "format": "authority",
+          "mean_generated_tokens": 8.3,
+          "mean_prompt_tokens": 72.1,
+          "mean_wall_time_ms": 1627.219395,
+          "override_rate": 0.0,
+          "task": "CONTINUE",
+          "wrong_reinterpretation_rate": 0.8
+        }
+      ],
+      "condition": "qwen_base",
+      "count": 360,
+      "overall": {
+        "count": 360,
+        "exact_rate": 0.4583333333333333,
+        "mean_generated_tokens": 8.4,
+        "mean_prompt_tokens": 57.7,
+        "mean_wall_time_ms": 1665.3182011111112,
+        "override_rate": 0.05,
+        "wrong_reinterpretation_rate": 0.49166666666666664
+      },
+      "schema_version": "ccpu.paper2.result_use_summary.v1"
+    },
+    {
+      "by_format": [
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "plain",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.00025,
+          "override_rate": 0.0,
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "xml",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.000205,
+          "override_rate": 0.0,
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "fenced",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.0002,
+          "override_rate": 0.0,
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "engine_tag",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.000285,
+          "override_rate": 0.0,
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "trusted_record",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.00019,
+          "override_rate": 0.0,
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "authority",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.00018,
+          "override_rate": 0.0,
+          "wrong_reinterpretation_rate": 0.0
+        }
+      ],
+      "by_task": [
+        {
+          "count": 120,
+          "exact_rate": 1.0,
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.00021833333333333335,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        }
+      ],
+      "by_task_format": [
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "plain",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.00025,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "xml",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.000205,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "fenced",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.0002,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "engine_tag",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.000285,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "trusted_record",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.00019,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        },
+        {
+          "count": 20,
+          "exact_rate": 1.0,
+          "format": "authority",
+          "mean_generated_tokens": 0.0,
+          "mean_prompt_tokens": 0.0,
+          "mean_wall_time_ms": 0.00018,
+          "override_rate": 0.0,
+          "task": "COPY",
+          "wrong_reinterpretation_rate": 0.0
+        }
+      ],
+      "condition": "runtime_copy",
+      "count": 120,
+      "overall": {
+        "count": 120,
+        "exact_rate": 1.0,
+        "mean_generated_tokens": 0.0,
+        "mean_prompt_tokens": 0.0,
+        "mean_wall_time_ms": 0.00021833333333333335,
+        "override_rate": 0.0,
+        "wrong_reinterpretation_rate": 0.0
+      },
+      "schema_version": "ccpu.paper2.result_use_summary.v1"
+    }
+  ],
+  "decision": {
+    "attention_diagnostics": "run_attention_and_causal_masking",
+    "best_neural_copy_format": "authority",
+    "best_neural_copy_rate": 1.0,
+    "criterion": "run diagnostics when INTERPRET or CONTINUE is below 0.8; bias requires causal support",
+    "provenance_bias_gate": "pending_causal_evidence",
+    "runtime_copy_default": true
+  },
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "5f965f70014072a848244bc3bcd2798065ccdcef"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "schema_version": "ccpu.paper2.result_use_analysis.v1",
+  "sources": [
+    {
+      "path": "artifacts/paper2/result_use_v1/qwen_base_v1/summary.json",
+      "sha256": "c28d3d7b28b65791b82ff56041058d35536ab8ec4904e736af138193c91373e7"
+    },
+    {
+      "path": "artifacts/paper2/result_use_v1/runtime_copy_v1/summary.json",
+      "sha256": "a9e47e228370199f786f2d14b9d04def4f3039aa30361c9680be1ac0347810d1"
+    }
+  ]
+}

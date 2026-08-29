@@ -1,0 +1,54 @@
+{
+  "config": {
+    "cases_per_task": 20,
+    "seed": 22701
+  },
+  "counts": {
+    "by_engine": {
+      "calculator": 72,
+      "datalog": 72,
+      "date": 72,
+      "graph": 72,
+      "units": 72
+    },
+    "by_format": {
+      "authority": 60,
+      "engine_tag": 60,
+      "fenced": 60,
+      "plain": 60,
+      "trusted_record": 60,
+      "xml": 60
+    },
+    "by_task": {
+      "CONTINUE": 120,
+      "COPY": 120,
+      "INTERPRET": 120
+    },
+    "total": 360
+  },
+  "dataset_sha256": "771ba73bc49cd207e4c90e6d49ceaddc584a24d41c9b25d55b4d64d4d8761821",
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "5f965f70014072a848244bc3bcd2798065ccdcef"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "formats": [
+    "plain",
+    "xml",
+    "fenced",
+    "engine_tag",
+    "trusted_record",
+    "authority"
+  ],
+  "schema_version": "ccpu.paper2.result_use_manifest.v1",
+  "semantic_case_count": 60,
+  "tasks": [
+    "COPY",
+    "INTERPRET",
+    "CONTINUE"
+  ]
+}

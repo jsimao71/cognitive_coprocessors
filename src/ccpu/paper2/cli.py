@@ -31,6 +31,12 @@ from .experiment import run_scripted
 from .next_analysis import analyze_runs
 from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
+from .result_use import (
+    ResultUseConfig,
+    analyze_result_use,
+    generate_result_use_benchmark,
+    write_result_use_run,
+)
 from .router import analyze_router_runs, prepare_router_data, run_and_write_router
 from .twil_analysis import analyze_twil_runs
 from .twil_benchmark import TwILBenchmarkConfig, generate_twil_benchmark
@@ -390,6 +396,52 @@ def analyze_router_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def generate_result_use_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    result = generate_result_use_benchmark(ResultUseConfig.from_dict(raw), args.output_dir)
+    print(f"generated {result['counts']} Paper 2 result-use rows -> {args.output_dir}")
+    return 0
+
+
+def run_result_use_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    if args.condition == "runtime_copy":
+        model = None
+        backend = None
+    else:
+        model = _model(raw, args.model)
+        generation = raw.get("generation", {})
+        backend = HuggingFaceBackend(
+            HuggingFaceGenerationConfig(
+                model_id=str(model["model_id"]),
+                revision=str(model["revision"]),
+                max_new_tokens=int(generation.get("max_new_tokens", 24)),
+                device=str(generation.get("device", "xpu")),
+                dtype=str(model.get("dtype", generation.get("dtype", "float16"))),
+                cached_generation=True,
+            )
+        )
+    result = write_result_use_run(
+        dataset_path=args.dataset,
+        backend=backend,
+        condition=args.condition,
+        seed=int(raw.get("seed", 22701)),
+        output_dir=args.output_dir,
+        model=model,
+    )
+    print(
+        f"completed Paper 2 result use {args.condition}; "
+        f"exact={result['overall']['exact_rate']:.4f}"
+    )
+    return 0
+
+
+def analyze_result_use_command(args: argparse.Namespace) -> int:
+    result = analyze_result_use(args.config, args.output_dir)
+    print(f"analyzed Paper 2 result use; attention={result['decision']['attention_diagnostics']}")
+    return 0
+
+
 def evaluate_twil_command(args: argparse.Namespace) -> int:
     source_rows = read_jsonl(args.predictions)
     rows = rescore_twil_predictions(source_rows, max_new_tokens=args.max_new_tokens)
@@ -575,3 +627,27 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     router_analysis.add_argument("--config", required=True)
     router_analysis.add_argument("--output-dir", required=True)
     router_analysis.set_defaults(handler=analyze_router_command)
+
+    result_data = commands.add_parser(
+        "generate-result-use", help="generate COPY/INTERPRET/CONTINUE result-use rows"
+    )
+    result_data.add_argument("--config", required=True)
+    result_data.add_argument("--output-dir", required=True)
+    result_data.set_defaults(handler=generate_result_use_command)
+
+    result_run = commands.add_parser(
+        "run-result-use", help="run neural or deterministic result-use conditions"
+    )
+    result_run.add_argument("--config", required=True)
+    result_run.add_argument("--dataset", required=True)
+    result_run.add_argument("--condition", required=True, choices=("qwen_base", "runtime_copy"))
+    result_run.add_argument("--model")
+    result_run.add_argument("--output-dir", required=True)
+    result_run.set_defaults(handler=run_result_use_command)
+
+    result_analysis = commands.add_parser(
+        "analyze-result-use", help="compare result-use formats and gate SA experiments"
+    )
+    result_analysis.add_argument("--config", required=True)
+    result_analysis.add_argument("--output-dir", required=True)
+    result_analysis.set_defaults(handler=analyze_result_use_command)
