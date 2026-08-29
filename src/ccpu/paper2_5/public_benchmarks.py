@@ -5,6 +5,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import random
 import re
 from collections import defaultdict
 from decimal import Decimal, InvalidOperation, localcontext
@@ -20,6 +21,11 @@ from ccpu.common.artifacts import (
     read_jsonl,
     write_json,
     write_jsonl,
+)
+from ccpu.common.lexical_routing import (
+    BM25ExemplarRouter,
+    character_word_boundary_ngrams,
+    current_word_tokens,
 )
 from ccpu.common.public_benchmarks import stratified_select
 
@@ -268,4 +274,207 @@ def analyze_tatqa_composition(
         "environment": environment_manifest(Path(__file__).resolve().parents[3]),
     }
     write_json(output / "summary.json", summary)
+    return summary
+
+
+def _table_rows(document: dict[str, Any], *, structured: bool) -> list[tuple[str, str]]:
+    table = document["table"]["table"]
+    width = max((len(row) for row in table), default=0)
+    headers = []
+    for column in range(width):
+        values = [str(row[column]).strip() for row in table[:2] if column < len(row)]
+        headers.append(" ".join(value for value in values if value))
+    rows = []
+    for index, raw_row in enumerate(table):
+        cells = [str(cell).strip() for cell in raw_row]
+        if structured:
+            row_name = cells[0] if cells else ""
+            fields = [f"row {row_name}"]
+            fields.extend(
+                f"column {headers[column]} value {value}"
+                for column, value in enumerate(cells)
+                if value
+            )
+            text = " ; ".join(fields)
+        else:
+            text = " | ".join(cells)
+        rows.append((f"table:{index}", text))
+    return rows
+
+
+def _document_chunks(
+    document: dict[str, Any], *, structured: bool
+) -> list[tuple[str, str]]:
+    rows = _table_rows(document, structured=structured)
+    paragraphs = [
+        (f"paragraph:{paragraph['order']}", str(paragraph["text"]))
+        for paragraph in document["paragraphs"]
+    ]
+    return rows + paragraphs
+
+
+def _normalized_text(value: Any) -> str:
+    return " ".join(
+        re.sub(r"[^a-z0-9.%+-]+", " ", str(value).casefold().replace(",", "")).split()
+    )
+
+
+def _gold_evidence_labels(
+    document: dict[str, Any], question: dict[str, Any]
+) -> set[str]:
+    labels = {
+        f"paragraph:{order}"
+        for order in question.get("rel_paragraphs", [])
+        if question["answer_from"] in {"text", "table-text"}
+    }
+    if question["answer_from"] not in {"table", "table-text"}:
+        return labels
+
+    targets: set[str] = set()
+    if question["answer_type"] in {"span", "multi-span"}:
+        answers = question["answer"] if isinstance(question["answer"], list) else [question["answer"]]
+        targets.update(_normalized_text(answer) for answer in answers)
+    if question["answer_type"] == "arithmetic":
+        targets.update(
+            _normalized_text(value)
+            for value in re.findall(r"-?\$?\d[\d,]*(?:\.\d+)?%?", question["derivation"])
+        )
+    targets.discard("")
+    for label, text in _table_rows(document, structured=False):
+        normalized = _normalized_text(text)
+        padded = f" {normalized} "
+        if any(f" {target} " in padded for target in targets):
+            labels.add(label)
+    return labels
+
+
+def _rank_chunks(chunks: list[tuple[str, str]], query: str, limit: int) -> dict[str, list[str]]:
+    labels = [label for label, _ in chunks]
+    texts = [text for _, text in chunks]
+    word = BM25ExemplarRouter(current_word_tokens).fit(texts, labels)
+    char = BM25ExemplarRouter(character_word_boundary_ngrams).fit(texts, labels)
+    word_rank = [labels[index] for index, _ in word.ranked(query, limit)]
+    char_rank = [labels[index] for index, _ in char.ranked(query, limit)]
+    scores: dict[str, float] = defaultdict(float)
+    for ranking in (word_rank, char_rank):
+        for position, label in enumerate(ranking, start=1):
+            scores[label] += 1.0 / (60 + position)
+    hybrid = sorted(scores, key=lambda label: (-scores[label], label))[:limit]
+    return {"bm25_word": word_rank, "bm25_char": char_rank, "hybrid": hybrid}
+
+
+def analyze_tatqa_retrieval(
+    config_path: str | Path,
+    cache_root: str | Path,
+    selection_path: str | Path,
+    output_dir: str | Path,
+    *,
+    limit: int = 5,
+) -> dict[str, Any]:
+    predictions = []
+    for source in _materialize(config_path, cache_root, selection_path):
+        question = source["question"]
+        gold = _gold_evidence_labels(source["document"], question)
+        universal = _rank_chunks(
+            _document_chunks(source["document"], structured=False),
+            str(question["question"]),
+            limit,
+        )
+        structured = _rank_chunks(
+            _document_chunks(source["document"], structured=True),
+            str(question["question"]),
+            limit,
+        )["hybrid"]
+        conditions = {**universal, "structured_hybrid": structured}
+        predictions.append(
+            {
+                "schema_version": "ccpu.paper2_5.public_tatqa_retrieval.v1",
+                "example_id": source["example_id"],
+                "answer_type": source["answer_type"],
+                "answer_from": source["answer_from"],
+                "gold_evidence_labels": sorted(gold),
+                "evaluable": bool(gold),
+                "retrieved": conditions,
+                "scores": {
+                    condition: {
+                        "recall": len(gold.intersection(labels)) / len(gold) if gold else None,
+                        "complete": gold.issubset(labels) if gold else None,
+                    }
+                    for condition, labels in conditions.items()
+                },
+            }
+        )
+    evaluable = [row for row in predictions if row["evaluable"]]
+    conditions = ("bm25_word", "bm25_char", "hybrid", "structured_hybrid")
+
+    def summarize(members: list[dict[str, Any]]) -> dict[str, Any]:
+        return {
+            condition: {
+                "evaluable_count": len(members),
+                "mean_evidence_recall_at_k": sum(
+                    row["scores"][condition]["recall"] for row in members
+                )
+                / len(members),
+                "complete_evidence_rate_at_k": sum(
+                    row["scores"][condition]["complete"] for row in members
+                )
+                / len(members),
+            }
+            for condition in conditions
+        }
+
+    differences = [
+        row["scores"]["structured_hybrid"]["recall"]
+        - row["scores"]["hybrid"]["recall"]
+        for row in evaluable
+    ]
+    generator = random.Random(22971)
+    bootstrap = sorted(
+        sum(generator.choice(differences) for _ in differences) / len(differences)
+        for _ in range(10_000)
+    )
+    structured_complete = [row["scores"]["structured_hybrid"]["complete"] for row in evaluable]
+    hybrid_complete = [row["scores"]["hybrid"]["complete"] for row in evaluable]
+    output = Path(output_dir)
+    prediction_path = write_jsonl(output / "retrieval_predictions.jsonl", predictions)
+    summary = {
+        "schema_version": "ccpu.paper2_5.public_tatqa_retrieval_summary.v1",
+        "record_count": len(predictions),
+        "evaluable_count": len(evaluable),
+        "top_k": limit,
+        "selection_sha256": file_sha256(selection_path),
+        "predictions_sha256": file_sha256(prediction_path),
+        "by_condition": summarize(evaluable),
+        "by_answer_from": {
+            value: summarize([row for row in evaluable if row["answer_from"] == value])
+            for value in sorted({row["answer_from"] for row in evaluable})
+        },
+        "by_answer_type": {
+            value: summarize([row for row in evaluable if row["answer_type"] == value])
+            for value in sorted({row["answer_type"] for row in evaluable})
+        },
+        "paired_structured_minus_flat_hybrid": {
+            "mean_recall_difference": sum(differences) / len(differences),
+            "bootstrap_95_ci": [bootstrap[249], bootstrap[9749]],
+            "complete_wins": sum(
+                left and not right for left, right in zip(structured_complete, hybrid_complete)
+            ),
+            "complete_losses": sum(
+                right and not left for left, right in zip(structured_complete, hybrid_complete)
+            ),
+            "complete_ties": sum(
+                left == right for left, right in zip(structured_complete, hybrid_complete)
+            ),
+            "bootstrap_samples": 10_000,
+            "bootstrap_seed": 22971,
+        },
+        "claim_boundary": {
+            "ranking_uses_gold": False,
+            "scoring_uses_gold": True,
+            "operation_is_oracle": True,
+            "final_answer_evaluated": False,
+        },
+        "environment": environment_manifest(Path(__file__).resolve().parents[3]),
+    }
+    write_json(output / "retrieval_summary.json", summary)
     return summary

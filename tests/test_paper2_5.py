@@ -285,6 +285,7 @@ def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):
             "answer_from": "table",
             "scale": "",
             "req_comparison": False,
+            "rel_paragraphs": [],
         },
         {
             "uid": "arithmetic-percent",
@@ -295,6 +296,7 @@ def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):
             "answer_from": "table-text",
             "scale": "percent",
             "req_comparison": True,
+            "rel_paragraphs": ["1"],
         },
         {
             "uid": "count",
@@ -305,6 +307,7 @@ def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):
             "answer_from": "text",
             "scale": "",
             "req_comparison": False,
+            "rel_paragraphs": ["1"],
         },
         {
             "uid": "span",
@@ -315,13 +318,20 @@ def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):
             "answer_from": "text",
             "scale": "",
             "req_comparison": False,
+            "rel_paragraphs": ["1"],
         },
     ]
     write_json(
         source_path,
         [
             {
-                "table": {"uid": "table", "table": [["A", "B"], ["1", "2"]]},
+                "table": {
+                    "uid": "table",
+                    "table": [
+                        ["Company", "Value A", "Value B", "Before", "After"],
+                        ["Aster", "14,740", "1,910", "89", "104"],
+                    ],
+                },
                 "paragraphs": [{"uid": "paragraph", "order": 1, "text": "Aster"}],
                 "questions": questions,
             }
@@ -380,6 +390,26 @@ def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):
     assert summary["oracle_compute_coverage"] == 0.5
     assert summary["oracle_compute_exact_rate"] == 1.0
     assert summary["source_native_adapter_coverage"] == 0.0
+
+    retrieval = tmp_path / "retrieval"
+    assert main(
+        [
+            "paper2.5",
+            "analyze-public-tatqa-retrieval",
+            "--config",
+            str(config),
+            "--cache-root",
+            str(cache_root),
+            "--selection",
+            str(frozen / "selection.jsonl"),
+            "--output-dir",
+            str(retrieval),
+        ]
+    ) == 0
+    retrieval_summary = read_json(retrieval / "retrieval_summary.json")
+    assert retrieval_summary["evaluable_count"] == 4
+    assert retrieval_summary["top_k"] == 5
+    assert retrieval_summary["claim_boundary"]["ranking_uses_gold"] is False
 
 
 def test_cli_freezes_runs_scales_and_decides_gate(tmp_path):

@@ -52,9 +52,18 @@ Secondary: can capability count grow outside recurring neural context?
   require joint table--text evidence. The safe decimal evaluator reproduces all
   106/106 annotated arithmetic derivations exactly.
 - Current source-native TAT-QA adapter coverage is 0/320. Treat this as an
-  adapter-gap diagnosis, not final-answer accuracy or evidence that source-native
-  execution beats a universal baseline. Matched native, BM25/vector/hybrid,
-  generic-tool, LLM-only, and oracle runs remain required.
+  end-to-end operation-adapter gap, not final-answer accuracy.
+- At matched top-5 lexical retrieval, flattened word BM25 reaches 0.704 mean
+  evidence recall, character BM25 0.756, and their flattened hybrid 0.751. A
+  row/column-header-aware hybrid reaches 0.799 over 308 evaluable questions.
+- The paired structured-minus-flat recall gain is 0.048 with a deterministic
+  10,000-sample bootstrap 95% interval [0.020, 0.077]. Complete evidence has 24
+  wins, 8 losses, and 276 ties. Text-only recall is unchanged; gains occur on
+  table and table--text questions.
+- Ranking is gold-free, but scoring uses annotated paragraph orders and table
+  labels induced from gold spans/arithmetic operands. Twelve rows lack
+  defensible labels. This is not yet a typed source-native, generic-tool,
+  LLM-only, semantic-vector, or final-answer comparison.
 
 These are controlled deterministic runtime results, not language-model or live
 web-search evidence. New natural-language routing work requires a separately
@@ -192,3 +201,8 @@ The current audit separates retrieval requirement, compute requirement,
 composition depth, gold-compute availability, gold-compute exactness, and
 source-native adapter availability. Gold arithmetic validates only the compute
 stage. It must not be reported as model execution or end-to-end QA accuracy.
+
+The retrieval continuation compares word BM25, character BM25, reciprocal-rank
+hybrid, and a structure-aware hybrid at the same top-5 budget. Gold evidence may
+be used only after ranking. Preserve the paired bootstrap seed and report the 12
+non-evaluable questions rather than assigning them zero recall.

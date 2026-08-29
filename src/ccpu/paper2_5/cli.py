@@ -20,7 +20,11 @@ from .enterprise import create_enterprise_fixture, run_enterprise_evaluation
 from .experiment import run_matrix, summarize
 from .plot import decide_gate, plot_scaling
 from .production_analysis import analyze_substitution
-from .public_benchmarks import analyze_tatqa_composition, freeze_tatqa_subset
+from .public_benchmarks import (
+    analyze_tatqa_composition,
+    analyze_tatqa_retrieval,
+    freeze_tatqa_subset,
+)
 
 
 def freeze_command(args: argparse.Namespace) -> int:
@@ -167,6 +171,21 @@ def analyze_public_tatqa_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_public_tatqa_retrieval_command(args: argparse.Namespace) -> int:
+    summary = analyze_tatqa_retrieval(
+        args.config,
+        args.cache_root,
+        args.selection,
+        args.output_dir,
+        limit=args.top_k,
+    )
+    print(
+        f"analyzed {summary['evaluable_count']} TAT-QA evidence labels "
+        f"at top-{summary['top_k']} -> {args.output_dir}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2.5", aliases=["paper2_5"], help="heterogeneous retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -241,3 +260,14 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_tatqa_analysis.add_argument("--selection", required=True)
     public_tatqa_analysis.add_argument("--output-dir", required=True)
     public_tatqa_analysis.set_defaults(handler=analyze_public_tatqa_command)
+
+    public_tatqa_retrieval = commands.add_parser(
+        "analyze-public-tatqa-retrieval",
+        help="compare matched lexical TAT-QA evidence retrieval",
+    )
+    public_tatqa_retrieval.add_argument("--config", required=True)
+    public_tatqa_retrieval.add_argument("--cache-root", required=True)
+    public_tatqa_retrieval.add_argument("--selection", required=True)
+    public_tatqa_retrieval.add_argument("--top-k", type=int, default=5)
+    public_tatqa_retrieval.add_argument("--output-dir", required=True)
+    public_tatqa_retrieval.set_defaults(handler=analyze_public_tatqa_retrieval_command)
