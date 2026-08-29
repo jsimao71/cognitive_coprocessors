@@ -18,6 +18,7 @@ from ccpu.common.artifacts import (
     write_json,
     write_jsonl,
 )
+from ccpu.common.generic_gateway import GenericCognitiveGateway, GenericToolCall
 from ccpu.common.public_benchmarks import read_verified_bz2_jsonl, stratified_select
 
 from .natural_robustness import semantic_features
@@ -139,11 +140,24 @@ def analyze_crag_triggers(
 ) -> dict[str, Any]:
     source_rows = _materialize(config_path, cache_root, selection_path)
     conditions = (
+        "llm_only_no_retrieval",
+        "upfront_retrieval",
+        "generic_retrieve_oracle_transport",
         "legacy_semantic",
         "natural_semantic",
         "dynamic_metadata_proxy",
         "registered_oracle",
     )
+    transported_calls = 0
+
+    def resolve(intent: str, payload: Any, active_task: str) -> dict[str, Any]:
+        nonlocal transported_calls
+        if intent != "retrieve" or active_task != "crag":
+            raise ValueError("unexpected CRAG generic-tool route")
+        transported_calls += 1
+        return {"accepted": True, "example_id": payload["example_id"]}
+
+    gateway = GenericCognitiveGateway(resolve)
     predictions = []
     latencies: dict[str, int] = defaultdict(int)
     for source in source_rows:
@@ -159,7 +173,20 @@ def analyze_crag_triggers(
             features = semantic_features(text)
             for condition in conditions:
                 started = time.perf_counter_ns()
-                if condition == "legacy_semantic":
+                if condition == "llm_only_no_retrieval":
+                    triggered = False
+                elif condition == "upfront_retrieval":
+                    triggered = True
+                elif condition == "generic_retrieve_oracle_transport":
+                    triggered = required
+                    if triggered:
+                        gateway.invoke(
+                            GenericToolCall(
+                                "__retrieve", {"example_id": source["example_id"]}
+                            ),
+                            active_task="crag",
+                        )
+                elif condition == "legacy_semantic":
                     triggered = semantic_risk(text)[0]
                 elif condition == "natural_semantic":
                     triggered = bool(features["combined"])
@@ -172,7 +199,7 @@ def analyze_crag_triggers(
                 latencies[condition] += time.perf_counter_ns() - started
                 predictions.append(
                     {
-                        "schema_version": "ccpu.paper1_5.public_crag_prediction.v1",
+                        "schema_version": "ccpu.paper1_5.public_crag_prediction.v2",
                         "condition": condition,
                         "example_id": source["example_id"],
                         "availability": availability,
@@ -209,20 +236,59 @@ def analyze_crag_triggers(
                 "mean_cpu_latency_us": latencies[condition] / len(members) / 1000,
                 "by_static_or_dynamic": by_dynamic,
                 "deployment_status": (
-                    "oracle_only" if condition == "registered_oracle" else "diagnostic"
+                    "oracle_timed_transport_only"
+                    if condition == "generic_retrieve_oracle_transport"
+                    else "oracle_only"
+                    if condition == "registered_oracle"
+                    else "diagnostic"
                 ),
             }
         )
     output = Path(output_dir)
     predictions_path = write_jsonl(output / "predictions.jsonl", predictions)
     summary = {
-        "schema_version": "ccpu.paper1_5.public_crag_analysis.v1",
+        "schema_version": "ccpu.paper1_5.public_crag_analysis.v2",
         "base_question_count": len(source_rows),
         "matched_row_count": len(source_rows) * 2,
         "selection_sha256": file_sha256(selection_path),
         "predictions_sha256": file_sha256(predictions_path),
         "results": results,
+        "generic_retrieve_transport": {
+            "tool_name": "__retrieve",
+            "accepted_calls": transported_calls,
+            "expected_calls": len(source_rows),
+            "backend_agreement_with_registered_oracle": all(
+                tool["triggered"] == oracle["triggered"]
+                for tool, oracle in zip(
+                    (
+                        row
+                        for row in predictions
+                        if row["condition"] == "generic_retrieve_oracle_transport"
+                    ),
+                    (
+                        row
+                        for row in predictions
+                        if row["condition"] == "registered_oracle"
+                    ),
+                )
+            ),
+            "timing_policy": "registered evidence-required label; not model initiated",
+        },
         "confidence_condition": "not run; requires matched model token traces",
+        "generation_metrics": {
+            "answer_accuracy": None,
+            "abstention_quality": None,
+            "authorized_commitment_coverage": None,
+            "evidence_override": None,
+            "automatic_rescue_rate": None,
+            "reason": "no model generation or frozen evidence backend in this trigger audit",
+        },
+        "pending_conditions": [
+            "confidence_flare",
+            "voluntary_generic_retrieve",
+            "generic_retrieve_intent_block",
+            "frozen_evidence_rag",
+        ],
         "interpretation": {
             "status": "semantic_policy_does_not_transfer",
             "paper3_5_gate": "closed_pending_model_and_evidence_runs",

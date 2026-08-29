@@ -201,7 +201,15 @@ retrieval. A benchmark-metadata proxy that triggers on every non-static row
 reaches 0.6375 recall and 0 false retrieval; it is diagnostic, not deployable.
 The registered oracle is exact but only validates labels and matched controls.
 
+The matched public condition matrix now also contains no retrieval, upfront
+retrieval, and oracle-timed generic `__retrieve`. No retrieval has recall 0 and
+UCR 1; upfront retrieval has recall 1 and false retrieval 1. The shared gateway
+accepts all 320 registered external calls and agrees with the oracle on all 640
+decisions. This is a transport check, not voluntary model tool use.
+
 This falsifies transfer of the current synthetic semantic policy. Do not claim
 a complete CRAG comparison yet: matched model confidence traces, frozen evidence,
-answer accuracy, abstention, evidence override, and automatic rescue remain to
-be run on the same IDs. The Paper 3.5 gate remains closed pending those runs.
+answer accuracy, abstention, evidence override, Authorized Commitment Coverage,
+generic RETRIEVE-intent generation, voluntary tool use, and automatic rescue
+remain to be run on the same IDs. The Paper 3.5 gate remains closed pending
+those runs.

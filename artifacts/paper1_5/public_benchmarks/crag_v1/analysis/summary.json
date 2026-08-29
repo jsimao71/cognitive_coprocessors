@@ -5,18 +5,177 @@
     "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
     "git": {
       "dirty": true,
-      "revision": "863abd068bd3c3f0c3484a299a6c294d23eff6b4"
+      "revision": "3603a4c33d9b5719f659360db2f25dce3d05b583"
     },
     "platform": "Windows-10-10.0.26100-SP0",
     "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "generation_metrics": {
+    "abstention_quality": null,
+    "answer_accuracy": null,
+    "authorized_commitment_coverage": null,
+    "automatic_rescue_rate": null,
+    "evidence_override": null,
+    "reason": "no model generation or frozen evidence backend in this trigger audit"
+  },
+  "generic_retrieve_transport": {
+    "accepted_calls": 320,
+    "backend_agreement_with_registered_oracle": true,
+    "expected_calls": 320,
+    "timing_policy": "registered evidence-required label; not model initiated",
+    "tool_name": "__retrieve"
   },
   "interpretation": {
     "paper3_5_gate": "closed_pending_model_and_evidence_runs",
     "status": "semantic_policy_does_not_transfer"
   },
   "matched_row_count": 640,
-  "predictions_sha256": "9402990b1f2ab604063392d9dd853779fbca7e3454d56e8b72ff871939bf11a9",
+  "pending_conditions": [
+    "confidence_flare",
+    "voluntary_generic_retrieve",
+    "generic_retrieve_intent_block",
+    "frozen_evidence_rag"
+  ],
+  "predictions_sha256": "3dd704ec9b3ef5efc83a47fa00ea49660d0d649ba45ac7ac9f71493eaa6f3783",
   "results": [
+    {
+      "accuracy": 0.5,
+      "by_static_or_dynamic": {
+        "fast-changing": {
+          "accuracy": 0.5,
+          "count": 158,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.0,
+          "retrieval_rate": 0.0,
+          "ucr": 1.0
+        },
+        "real-time": {
+          "accuracy": 0.5,
+          "count": 46,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.0,
+          "retrieval_rate": 0.0,
+          "ucr": 1.0
+        },
+        "slow-changing": {
+          "accuracy": 0.5,
+          "count": 204,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.0,
+          "retrieval_rate": 0.0,
+          "ucr": 1.0
+        },
+        "static": {
+          "accuracy": 0.5,
+          "count": 232,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.0,
+          "retrieval_rate": 0.0,
+          "ucr": 1.0
+        }
+      },
+      "condition": "llm_only_no_retrieval",
+      "count": 640,
+      "deployment_status": "diagnostic",
+      "false_retrieval_rate": 0.0,
+      "matched_context_suppression": 0.0,
+      "mean_cpu_latency_us": 0.15734375,
+      "retrieval_needed_recall": 0.0,
+      "retrieval_rate": 0.0,
+      "ucr": 1.0
+    },
+    {
+      "accuracy": 0.5,
+      "by_static_or_dynamic": {
+        "fast-changing": {
+          "accuracy": 0.5,
+          "count": 158,
+          "false_retrieval_rate": 1.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 1.0,
+          "ucr": 0.0
+        },
+        "real-time": {
+          "accuracy": 0.5,
+          "count": 46,
+          "false_retrieval_rate": 1.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 1.0,
+          "ucr": 0.0
+        },
+        "slow-changing": {
+          "accuracy": 0.5,
+          "count": 204,
+          "false_retrieval_rate": 1.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 1.0,
+          "ucr": 0.0
+        },
+        "static": {
+          "accuracy": 0.5,
+          "count": 232,
+          "false_retrieval_rate": 1.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 1.0,
+          "ucr": 0.0
+        }
+      },
+      "condition": "upfront_retrieval",
+      "count": 640,
+      "deployment_status": "diagnostic",
+      "false_retrieval_rate": 1.0,
+      "matched_context_suppression": 0.0,
+      "mean_cpu_latency_us": 0.12640625,
+      "retrieval_needed_recall": 1.0,
+      "retrieval_rate": 1.0,
+      "ucr": 0.0
+    },
+    {
+      "accuracy": 1.0,
+      "by_static_or_dynamic": {
+        "fast-changing": {
+          "accuracy": 1.0,
+          "count": 158,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "real-time": {
+          "accuracy": 1.0,
+          "count": 46,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "slow-changing": {
+          "accuracy": 1.0,
+          "count": 204,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "static": {
+          "accuracy": 1.0,
+          "count": 232,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        }
+      },
+      "condition": "generic_retrieve_oracle_transport",
+      "count": 640,
+      "deployment_status": "oracle_timed_transport_only",
+      "false_retrieval_rate": 0.0,
+      "matched_context_suppression": 1.0,
+      "mean_cpu_latency_us": 0.635625,
+      "retrieval_needed_recall": 1.0,
+      "retrieval_rate": 0.5,
+      "ucr": 0.0
+    },
     {
       "accuracy": 0.4671875,
       "by_static_or_dynamic": {
@@ -58,7 +217,7 @@
       "deployment_status": "diagnostic",
       "false_retrieval_rate": 0.20625,
       "matched_context_suppression": 0.0,
-      "mean_cpu_latency_us": 11.86015625,
+      "mean_cpu_latency_us": 11.025,
       "retrieval_needed_recall": 0.140625,
       "retrieval_rate": 0.1734375,
       "ucr": 0.859375
@@ -104,7 +263,7 @@
       "deployment_status": "diagnostic",
       "false_retrieval_rate": 0.0,
       "matched_context_suppression": 0.046875,
-      "mean_cpu_latency_us": 0.171875,
+      "mean_cpu_latency_us": 0.2096875,
       "retrieval_needed_recall": 0.046875,
       "retrieval_rate": 0.0234375,
       "ucr": 0.953125
@@ -150,7 +309,7 @@
       "deployment_status": "diagnostic",
       "false_retrieval_rate": 0.0,
       "matched_context_suppression": 0.6375,
-      "mean_cpu_latency_us": 0.193125,
+      "mean_cpu_latency_us": 0.22359375,
       "retrieval_needed_recall": 0.6375,
       "retrieval_rate": 0.31875,
       "ucr": 0.36250000000000004
@@ -196,12 +355,12 @@
       "deployment_status": "oracle_only",
       "false_retrieval_rate": 0.0,
       "matched_context_suppression": 1.0,
-      "mean_cpu_latency_us": 0.12578125,
+      "mean_cpu_latency_us": 0.166875,
       "retrieval_needed_recall": 1.0,
       "retrieval_rate": 0.5,
       "ucr": 0.0
     }
   ],
-  "schema_version": "ccpu.paper1_5.public_crag_analysis.v1",
+  "schema_version": "ccpu.paper1_5.public_crag_analysis.v2",
   "selection_sha256": "7dc44139c7cf8c36a0a0df3704839e2e79c74570e2bb4fe05ba0e02c2afa022f"
 }

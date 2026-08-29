@@ -32,7 +32,8 @@ structure and requires a harder independently frozen benchmark. A first public
 CRAG transfer audit confirms that requirement: on 320 questions paired with
 context-sufficient controls, the natural semantic rule has only 4.69\% needed
 recall at zero false retrieval, while a dynamic-metadata proxy reaches 63.75\%.
-Model confidence and answer-quality conditions remain pending.
+No-retrieval and upfront-retrieval bounds plus an oracle-timed generic-tool
+transport audit are matched; model timing and answer quality remain pending.
 \end{abstract}
 
 \section{Question and Claim Boundary}
@@ -397,6 +398,9 @@ controls; UCR is unsupported commitment risk under trigger enforcement.}
 \toprule
 Condition & Recall & FA & Accuracy & UCR & Retrieval rate\\
 \midrule
+No retrieval & .000 & .000 & .500 & 1.000 & .000\\
+Upfront retrieval & 1.000 & 1.000 & .500 & .000 & 1.000\\
+Generic \texttt{\_\_retrieve}, oracle timed & 1.000 & .000 & 1.000 & .000 & .500\\
 Legacy semantic rule & .141 & .206 & .467 & .859 & .173\\
 Natural semantic rule & .047 & .000 & .523 & .953 & .023\\
 Dynamic metadata proxy & .638 & .000 & .819 & .363 & .319\\
@@ -422,9 +426,19 @@ static source-backed question.  Therefore semantic policy behavior from the
 synthetic freeze does not transfer, and ``dynamic'' is not equivalent to
 ``needs evidence.''
 
+The all/none conditions expose the paired benchmark's operating bounds.
+Upfront retrieval attains full needed-retrieval recall only by retrieving on
+every context-sufficient control.  Passing the 320 registered external
+decisions through the shared four-tool gateway's \texttt{\_\_retrieve}
+interface produces 320 accepted calls and agrees with the oracle on every row.
+That condition is deliberately oracle timed: it validates a stable tool name
+and runtime handoff, not a model's ability to request retrieval.
+
 This is a trigger audit, not a completed CRAG RAG result.  No model confidence,
 retrieval answer accuracy, abstention, evidence override, automatic rescue, or
-web-corpus condition is reported yet.  The next public checkpoint must run
+generic RETRIEVE-intent generation, voluntary tool use, or web-corpus condition
+is reported yet.  Authorized Commitment Coverage is also undefined without
+generated commitments.  The next public checkpoint must run
 matched model token traces and frozen evidence on these same IDs; the perfect
 registered oracle only validates labels and context-control construction.
 

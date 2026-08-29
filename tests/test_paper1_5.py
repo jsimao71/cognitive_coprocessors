@@ -293,6 +293,12 @@ def test_crag_freeze_and_matched_context_controls(tmp_path):
     assert oracle["retrieval_needed_recall"] == 1.0
     assert oracle["false_retrieval_rate"] == 0.0
     assert oracle["matched_context_suppression"] == 1.0
+    upfront = next(row for row in analysis["results"] if row["condition"] == "upfront_retrieval")
+    assert upfront["retrieval_needed_recall"] == 1.0
+    assert upfront["false_retrieval_rate"] == 1.0
+    assert analysis["generic_retrieve_transport"]["accepted_calls"] == 4
+    assert analysis["generic_retrieve_transport"]["backend_agreement_with_registered_oracle"]
+    assert analysis["generation_metrics"]["automatic_rescue_rate"] is None
     predictions = read_jsonl(tmp_path / "analysis" / "predictions.jsonl")
-    assert len(predictions) == 32
+    assert len(predictions) == 56
     assert not any("query" in row or "answer" in row for row in predictions)
