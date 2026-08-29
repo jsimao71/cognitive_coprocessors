@@ -18,6 +18,7 @@ from .benchmark import freeze_benchmark
 from .composition import run_compositions
 from .experiment import run_matrix, summarize
 from .plot import decide_gate, plot_scaling
+from .production_analysis import analyze_substitution
 
 
 def freeze_command(args: argparse.Namespace) -> int:
@@ -27,7 +28,9 @@ def freeze_command(args: argparse.Namespace) -> int:
 
 
 def run_command(args: argparse.Namespace) -> int:
-    rows, traces = run_matrix(args.benchmark, source_count=args.source_count)
+    rows, traces = run_matrix(
+        args.benchmark, source_count=args.source_count, backend_suite=args.backend_suite
+    )
     output = Path(args.output_dir)
     predictions = write_jsonl(output / "predictions.jsonl", rows)
     trace_path = write_jsonl(output / "traces.jsonl", traces)
@@ -39,6 +42,7 @@ def run_command(args: argparse.Namespace) -> int:
             "paper": "Paper 2.5",
             "schema_version": "ccpu.paper2_5.run_manifest.v1",
             "source_count": args.source_count,
+            "backend_suite": args.backend_suite,
             "benchmark_sha256": file_sha256(args.benchmark),
             "predictions_sha256": file_sha256(predictions),
             "traces_sha256": file_sha256(trace_path),
@@ -86,6 +90,30 @@ def compositions_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_production_command(args: argparse.Namespace) -> int:
+    controlled = read_jsonl(args.controlled_predictions)
+    production = read_jsonl(args.production_predictions)
+    traces = read_jsonl(args.production_traces)
+    output = Path(args.output_dir)
+    summary_path = write_json(
+        output / "substitution_summary.json",
+        analyze_substitution(controlled, production, traces),
+    )
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 2.5",
+            "schema_version": "ccpu.paper2_5.production_analysis_manifest.v1",
+            "controlled_predictions_sha256": file_sha256(args.controlled_predictions),
+            "production_predictions_sha256": file_sha256(args.production_predictions),
+            "production_traces_sha256": file_sha256(args.production_traces),
+            "substitution_summary_sha256": file_sha256(summary_path),
+        },
+    )
+    print(f"analyzed Paper 2.5 backend substitution -> {output}")
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2.5", aliases=["paper2_5"], help="heterogeneous retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -97,6 +125,11 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     run = commands.add_parser("run", help="run one source-count oracle matrix")
     run.add_argument("--benchmark", required=True)
     run.add_argument("--source-count", type=int, required=True, choices=(1, 2, 3, 4))
+    run.add_argument(
+        "--backend-suite",
+        choices=("controlled", "local_production"),
+        default="controlled",
+    )
     run.add_argument("--output-dir", required=True)
     run.set_defaults(handler=run_command)
 
@@ -116,3 +149,12 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     compositions.add_argument("--count-per-family", type=int, default=12)
     compositions.add_argument("--output-dir", required=True)
     compositions.set_defaults(handler=compositions_command)
+
+    production = commands.add_parser(
+        "analyze-production", help="compare controlled and local production backends"
+    )
+    production.add_argument("--controlled-predictions", required=True)
+    production.add_argument("--production-predictions", required=True)
+    production.add_argument("--production-traces", required=True)
+    production.add_argument("--output-dir", required=True)
+    production.set_defaults(handler=analyze_production_command)

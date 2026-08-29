@@ -31,14 +31,24 @@ class RetrievalRegistry:
             raise PermissionError("Paper 2.5 registry accepts read-only sources only")
         if source.policy.credential_scope not in self.credentials:
             raise PermissionError(f"credential scope denied for source: {request.source_type}")
+        descriptor = getattr(source, "descriptor", None)
+        if descriptor is not None:
+            try:
+                descriptor.validate(request)
+            except ValueError:
+                return ()
         return source.retrieve(request)
 
     def public_catalog(self) -> list[dict[str, str]]:
         rows = []
         for source in self.sources.values():
-            policy = source.policy.to_dict()
-            policy.pop("credential_scope")
-            rows.append(policy)
+            descriptor = getattr(source, "descriptor", None)
+            if descriptor is not None:
+                rows.append(descriptor.public_dict())
+            else:
+                policy = source.policy.to_dict()
+                policy.pop("credential_scope")
+                rows.append(policy)
         return sorted(rows, key=lambda row: row["source_type"])
 
 

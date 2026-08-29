@@ -1,0 +1,14 @@
+{
+  "schema_version": "ccpu.paper2_5.production_config.v1",
+  "backend_suite": "local_production",
+  "backends": {
+    "db": "duckdb",
+    "lexical": "sqlite_fts5",
+    "vector": "faiss_index_flat_ip",
+    "web": "controlled_web_analogue"
+  },
+  "embedding": "controlled_concept_bow_v1",
+  "read_only": true,
+  "docker_used": false,
+  "claim_boundary": "backend substitution on the frozen controlled benchmark"
+}

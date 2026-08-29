@@ -127,3 +127,13 @@ The oracle matrix decomposes need, source, query, retrieval, evidence status, an
 registry metadata never exposes credential scopes, and every source is read-only. The retained
 22-example freeze records a Paper 3.5 `no_go`: native sources outperform universal textualization,
 but the transparent heuristic closes the oracle routing gap.
+
+Install `.[data]` to substitute real local in-process engines without changing the frozen IR or
+benchmark. This path uses DuckDB, SQLite FTS5, and FAISS; it does not start Docker or silently
+fall back when a requested backend is missing:
+
+```powershell
+python -m pip install -e ".[data]"
+python -m ccpu paper2.5 run --benchmark artifacts/paper2_5/production_v1/data/benchmark.jsonl --source-count 4 --backend-suite local_production --output-dir artifacts/paper2_5/production_v1/source_n4
+python -m ccpu paper2.5 analyze-production --controlled-predictions artifacts/paper2_5/next_iter/source_n4_v2/predictions.jsonl --production-predictions artifacts/paper2_5/production_v1/source_n4/predictions.jsonl --production-traces artifacts/paper2_5/production_v1/source_n4/traces.jsonl --output-dir artifacts/paper2_5/production_v1/substitution
+```

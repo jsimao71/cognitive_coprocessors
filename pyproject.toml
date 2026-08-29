@@ -14,6 +14,7 @@ dependencies = []
 hf = ["torch>=2.2", "transformers>=4.46,<5"]
 analysis = ["matplotlib>=3.7"]
 lora = ["peft==0.20.0", "accelerate==1.14.0"]
+data = ["duckdb>=1.2,<2", "faiss-cpu>=1.10,<2", "numpy>=1.25"]
 test = ["pytest>=8.0"]
 
 [project.scripts]

@@ -82,7 +82,7 @@ def _schema_tokens(source_count: int) -> int:
 
 
 def run_matrix(
-    benchmark_path: str | Path, *, source_count: int
+    benchmark_path: str | Path, *, source_count: int, backend_suite: str = "controlled"
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     available = SOURCE_CATALOGS[source_count]
     examples = [
@@ -90,7 +90,15 @@ def run_matrix(
         for row in read_jsonl(benchmark_path)
         if row["source"] == "control" or row["source"] in available
     ]
-    sources = {name: source for name, source in build_sources().items() if name in available}
+    if backend_suite == "controlled":
+        source_suite = build_sources()
+    elif backend_suite == "local_production":
+        from .production_sources import build_production_sources
+
+        source_suite = build_production_sources()
+    else:
+        raise ValueError(f"unknown backend suite: {backend_suite}")
+    sources = {name: source for name, source in source_suite.items() if name in available}
     registry = RetrievalRegistry(sources, _credentials(sources))
     router = HeuristicSourceRouter()
     universal = UniversalTextSource(available)
@@ -174,6 +182,7 @@ def run_matrix(
             elapsed = time.perf_counter_ns() - started
             prediction = {
                 "schema_version": "ccpu.paper2_5.prediction.v1",
+                "backend_suite": backend_suite,
                 "example_id": row["example_id"],
                 "condition": condition,
                 "source_count": source_count,
@@ -203,6 +212,7 @@ def run_matrix(
             traces.append(
                 {
                     "schema_version": "ccpu.paper2_5.trace.v1",
+                    "backend_suite": backend_suite,
                     "example_id": row["example_id"],
                     "condition": condition,
                     "source_count": source_count,

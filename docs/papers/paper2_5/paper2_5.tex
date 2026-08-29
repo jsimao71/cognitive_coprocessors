@@ -19,8 +19,11 @@ supports 7/16 retrieval-required answers; it loses relational aggregate/join and
 source-status semantics. Broadcast also reaches 22/22 but averages 2.91 calls per
 example versus 0.73 for routed retrieval. Explicit descriptor burden grows from
 4.0 to 22.5 mean tokens as the available catalog grows from one to four sources,
-while the runtime registry adds no recurring descriptor tokens. These are
-controlled runtime results, not language-model evidence. The pre-registered
+while the runtime registry adds no recurring descriptor tokens. Replacing the
+controlled relational, lexical, and vector implementations with DuckDB, SQLite
+FTS5, and exact-flat FAISS preserves all 154 matched four-source decisions and
+complete required provenance for all three substituted sources. These remain
+small controlled runtime results, not language-model or production-data evidence. The pre-registered
 learned-router gate is \textsc{no-go}: native heterogeneity has value, context
 burden grows, and broadcast costs more, but the heuristic leaves no routing gap.
 \end{abstract}
@@ -63,6 +66,13 @@ variability.
 \end{itemize}
 These are genuinely different access semantics. Multiple wrappers over one text
 index would not satisfy the design.
+
+The backend interface is independently swappable. A local production-shaped
+suite substitutes DuckDB parameterized SQL, SQLite FTS5 ranking, and FAISS
+\texttt{IndexFlatIP} retrieval while retaining the same typed requests and
+evidence records. Each substituted record adds backend/version, resource,
+normalized query, record IDs, and snapshot to provenance. The web source remains
+the controlled analogue in this pass.
 
 \section{Routing and Typed Queries}
 The heuristic routes structured attributes and aggregates to DB, exact
@@ -137,6 +147,37 @@ and date resolver $\to$ web. Both stages and final outputs are 24/24, and every
 request records a dependency DAG. These are plumbing/economics checks, not model
 planning evidence.
 
+\subsection{Local production-backend substitution}
+We rerun the complete four-source matrix after substituting DuckDB 1.5.5 for the
+embedded relational implementation, SQLite 3.49.1 FTS5 for lexical scanning, and
+FAISS 1.15.0 exact-flat inner-product search for the controlled vector search.
+All 154 matched predictions retain the same final and evidence-support decisions.
+Table~\ref{tab:p25-production} isolates oracle-source rows for the three replaced
+backends. Required provenance completeness checks backend/version, resource,
+normalized query, record IDs, and snapshot.
+
+\begin{table}[t]
+\centering\small
+\caption{Local backend substitution on oracle-source rows. Latency is mean
+source execution time on one Windows host, not a backend ranking.}
+\label{tab:p25-production}
+\begin{tabular}{lrrrr}
+\toprule
+Backend & Rows & Final & Provenance & Mean ms\\
+\midrule
+DuckDB & 6 & 1.000 & 1.000 & 0.742\\
+SQLite FTS5 & 3 & 1.000 & 1.000 & 0.036\\
+FAISS flat & 3 & 1.000 & 1.000 & 0.047\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This validates adapter substitution and provenance retention on the frozen data;
+it does not test service deployment, persistence, concurrency, failure recovery,
+or realistic corpus scale. No Docker service was started. Postgres/pgvector,
+Iceberg catalogs, Qdrant, Weaviate, semantic layers, and ontologies are outside
+this completed local phase.
+
 \section{Paper 3.5 Gate}
 Learned source routing requires all four pre-registered criteria:
 \begin{enumerate}
@@ -153,11 +194,12 @@ may reopen the gate; this result does not.
 \section{Limitations and Falsification}
 The corpus is synthetic, tiny, single-seed, and designed so source semantics are
 clear. The heuristic sees controlled lexical cues and therefore should not be
-generalized to natural requests. The vector adapter uses controlled semantic
+generalized to natural requests. FAISS indexes the same controlled semantic
 features rather than a production embedding model. The web adapter is local and
 cannot measure network failures, live ranking, or monetary cost. Final accuracy
-is deterministic evidence acceptance, not LLM evidence use. Latencies are local
-prototype measurements.
+is deterministic evidence acceptance, not LLM evidence use. Backend substitution
+does not establish service reliability or enterprise-data validity, and all
+latencies are local prototype measurements.
 
 Heterogeneous routing would be weakened if a stronger matched universal system
 executes aggregates, preserves status/provenance, and closes the 9/22 gap at
@@ -178,17 +220,29 @@ python -m ccpu paper2.5 analyze --predictions <n1> <n2> <n3> <n4> \
   --output-dir artifacts/paper2_5/next_iter/analysis_v2
 python -m ccpu paper2.5 compositions --count-per-family 12 \
   --output-dir artifacts/paper2_5/next_iter/compositions_v1
+python -m ccpu paper2.5 run \
+  --benchmark artifacts/paper2_5/production_v1/data/benchmark.jsonl \
+  --source-count 4 --backend-suite local_production \
+  --output-dir artifacts/paper2_5/production_v1/source_n4
+python -m ccpu paper2.5 analyze-production \
+  --controlled-predictions <controlled-n4-predictions> \
+  --production-predictions <production-n4-predictions> \
+  --production-traces <production-n4-traces> \
+  --output-dir artifacts/paper2_5/production_v1/substitution
 \end{verbatim}
 Run manifests hash benchmark, predictions, traces, and summaries and record the
-repository and environment state. This controlled matrix needs no network,
-model-token, or container dependency.
+repository and environment state. Install the \texttt{data} project extra for
+DuckDB and FAISS. This matrix uses no network, model-token, or container service.
 
 \section{Conclusion}
 Source-native execution has clear controlled value over universal
 textualization, and routing avoids broadcast fanout while keeping capability
 descriptors outside recurring context. That result justifies heterogeneous
 runtime adapters, not a learned router. Because the transparent heuristic closes
-the oracle routing gap on the present freeze, Paper 3.5 remains gated off.
+the oracle routing gap on the present freeze, Paper 3.5 remains gated off. The
+local substitution result strengthens the interface claim: source-native
+semantics and provenance survive three real in-process backend replacements. It
+does not yet establish the broader production-data-stack claim.
 
 \begin{thebibliography}{9}
 \bibitem{flare}

@@ -1,0 +1,116 @@
+{
+  "by_source_oracle": [
+    {
+      "backend": [
+        "duckdb"
+      ],
+      "backend_version": [
+        "1.5.5"
+      ],
+      "count": 6,
+      "evidence_support_rate": 1.0,
+      "final_accuracy": 1.0,
+      "mean_source_latency_ms": 0.7424166666666667,
+      "p95_source_latency_ms": 1.8181,
+      "provenance_complete_rate": 1.0,
+      "source_type": "db"
+    },
+    {
+      "backend": [
+        "sqlite_fts5"
+      ],
+      "backend_version": [
+        "3.49.1"
+      ],
+      "count": 3,
+      "evidence_support_rate": 1.0,
+      "final_accuracy": 1.0,
+      "mean_source_latency_ms": 0.03593333333333333,
+      "p95_source_latency_ms": 0.0765,
+      "provenance_complete_rate": 1.0,
+      "source_type": "lexical"
+    },
+    {
+      "backend": [
+        "faiss"
+      ],
+      "backend_version": [
+        "1.15.0"
+      ],
+      "count": 3,
+      "evidence_support_rate": 1.0,
+      "final_accuracy": 1.0,
+      "mean_source_latency_ms": 0.04686666666666667,
+      "p95_source_latency_ms": 0.087,
+      "provenance_complete_rate": 1.0,
+      "source_type": "vector"
+    },
+    {
+      "backend": [
+        "controlled"
+      ],
+      "backend_version": [
+        "n/a"
+      ],
+      "count": 4,
+      "evidence_support_rate": 1.0,
+      "final_accuracy": 1.0,
+      "mean_source_latency_ms": 0.005075,
+      "p95_source_latency_ms": 0.013,
+      "provenance_complete_rate": 0.0,
+      "source_type": "web"
+    }
+  ],
+  "claim_boundary": {
+    "docker_used": false,
+    "not_executed": [
+      "postgres",
+      "pgvector",
+      "iceberg_rest",
+      "qdrant",
+      "weaviate"
+    ],
+    "validated": [
+      "duckdb",
+      "sqlite_fts5",
+      "faiss"
+    ]
+  },
+  "final_decision_agreement": 1.0,
+  "local_operations": [
+    {
+      "backend": "duckdb",
+      "backend_version": "1.5.5",
+      "capability_count": 4,
+      "external_service_count": 0,
+      "network_calls": 0,
+      "resource_count": 3,
+      "source_type": "db",
+      "startup_ms": 353.8146
+    },
+    {
+      "backend": "sqlite_fts5",
+      "backend_version": "3.49.1",
+      "capability_count": 3,
+      "external_service_count": 0,
+      "network_calls": 0,
+      "resource_count": 1,
+      "source_type": "lexical",
+      "startup_ms": 0.6162
+    },
+    {
+      "backend": "faiss",
+      "backend_version": "1.15.0",
+      "capability_count": 2,
+      "external_service_count": 0,
+      "network_calls": 0,
+      "resource_count": 1,
+      "source_type": "vector",
+      "startup_ms": 0.1047
+    }
+  ],
+  "matched_prediction_count": 154,
+  "production_final_accuracy": 0.9415584415584416,
+  "schema_version": "ccpu.paper2_5.production_substitution.v1",
+  "support_decision_agreement": 1.0
+}

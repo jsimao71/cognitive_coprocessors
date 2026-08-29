@@ -23,6 +23,14 @@ Secondary: can capability count grow outside recurring neural context?
   one to four sources. Broadcast averages 2.909 calls versus 0.727 for routing.
 - The heuristic closes the oracle routing gap, so the machine-readable Paper 3.5
   gate is `no_go`. Do not train a learned source router on this freeze.
+- A separately versioned local production-backend substitution replaces the DB,
+  lexical, and vector implementations with DuckDB 1.5.5, SQLite 3.49.1 FTS5,
+  and FAISS 1.15.0 exact-flat search. It preserves all 154 matched four-source
+  final/support decisions and complete required provenance for the three
+  substituted sources.
+- This substitution validates the interface, not production data or service
+  operation. The corpus, embeddings, and web source remain controlled; Docker
+  and remote services were not used.
 
 These are controlled deterministic runtime results, not language-model or live
 web-search evidence. New natural-language routing work requires a separately
@@ -134,3 +142,9 @@ adapters, source-optimal benchmark, source-count sweeps, complete oracle matrix,
 universal and broadcast controls, conflict enforcement, bounded compositions,
 factorized traces and economics, plots, rebuilt paper, and explicit Paper 3.5
 go/no-go artifact.
+
+The production-data-stack continuation additionally requires swappable backend
+descriptors, typed validation, normalized-query and snapshot provenance, local
+DuckDB/FTS5/FAISS substitution, and an explicit executed-versus-deferred backend
+boundary. Service, Iceberg, semantic-layer, and ontology results require their
+own versioned artifacts before manuscript claims are expanded.
