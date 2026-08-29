@@ -187,6 +187,10 @@ seed SQL, health check, explicit Postgres and pgvector adapters, and integration
 tests gated by a caller-supplied DSN. Both adapters use parameter binding and
 read-only transactions; unavailable services skip rather than fall back. These
 assets were statically checked only. They contribute no result or latency claim.
+The same boundary now includes a pinned, localhost-bound Qdrant profile and a
+retrieval-only adapter, plus an explicit-endpoint PyIceberg REST-catalog adapter.
+Unit tests use injected clients/catalogs; live tests require caller-supplied URLs
+and otherwise skip. Neither service path was executed for this paper.
 
 \subsection{Iceberg, governed metrics, and ontology composition}
 We next create four local PyIceberg tables---sales, products, inventory, and

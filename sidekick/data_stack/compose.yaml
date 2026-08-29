@@ -20,5 +20,17 @@ services:
     security_opt:
       - no-new-privileges:true
 
+  qdrant:
+    image: qdrant/qdrant:v1.19.0
+    profiles: ["vector"]
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${CCPU_QDRANT_PORT:-6333}:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    security_opt:
+      - no-new-privileges:true
+
 volumes:
   postgres_data:
+  qdrant_data:

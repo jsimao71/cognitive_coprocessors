@@ -34,6 +34,10 @@ Secondary: can capability count grow outside recurring neural context?
 - A WSL2-only Postgres/pgvector sidekick and explicit DSN-gated integration tests
   are present but unexecuted. They must never fall back to controlled adapters,
   and they are not evidence until a separately retained service run exists.
+- Retrieval-only Qdrant and Iceberg REST-catalog adapters are also present with
+  injected-client unit tests and explicit endpoint gates. Qdrant is an optional
+  localhost-bound WSL profile. Neither path was executed and neither contributes
+  a paper result.
 - A local enterprise fixture creates four real PyIceberg tables, two sales
   snapshots, one schema evolution, governed metric definitions, and an Oxigraph
   product ontology. Native governed execution is 11/11 versus 2/11 for top-5

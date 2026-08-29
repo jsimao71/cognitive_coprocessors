@@ -42,5 +42,15 @@ docker compose down --volumes
 ```
 
 The compose file currently starts one Postgres/pgvector service. Iceberg catalog
-and dedicated vector-service profiles will be added only after this boundary is
-validated independently.
+is supplied externally through an explicit REST URI. An optional Qdrant profile
+is defined but was not executed for the retained paper:
+
+```bash
+docker compose --profile vector up -d qdrant
+export CCPU_QDRANT_URL="http://127.0.0.1:${CCPU_QDRANT_PORT}"
+python -m pytest -m integration tests/test_paper2_5_services.py
+docker compose --profile vector down
+```
+
+The Qdrant adapter is retrieval-only and assumes a separately provisioned
+`reports` collection; it never creates collections or upserts points.

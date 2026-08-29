@@ -143,6 +143,10 @@ test requires `CCPU_POSTGRES_DSN` and otherwise skips explicitly; no service-bac
 included in the paper. See the sidekick README for startup, health, test, teardown, and volume
 cleanup commands.
 
+The same optional dependency group provides retrieval-only Qdrant and Iceberg REST adapters.
+They require explicit service URLs, retain credentials outside descriptors/provenance, and never
+fall back to local controlled adapters. Their retained tests use injected clients only.
+
 The local governed-data continuation uses real PyIceberg snapshots, DuckDB direct reads, and
 Oxigraph SPARQL without a service or container. The CLI regenerates workspace-local Iceberg
 locations before evaluation:
