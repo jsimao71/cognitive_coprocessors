@@ -1,0 +1,25 @@
+{
+  "by_model": [
+    {
+      "all_four_quadrants": true,
+      "less_than_upfront_retrieval": true,
+      "model_label": "Qwen3-0.6B",
+      "ucr_improved": true
+    },
+    {
+      "all_four_quadrants": false,
+      "less_than_upfront_retrieval": true,
+      "model_label": "SmolLM2-1.7B",
+      "ucr_improved": true
+    },
+    {
+      "all_four_quadrants": true,
+      "less_than_upfront_retrieval": true,
+      "model_label": "Gemma3-1B",
+      "ucr_improved": true
+    }
+  ],
+  "criterion": "At least two model families reduce UCR with the runtime gate while retrieving less often than upfront RAG.",
+  "passing_models": 3,
+  "status": "go"
+}

@@ -21,6 +21,8 @@ class RetrievalExample:
     as_of: str
     evidence_required: bool
     category: str
+    retrieval_subclass: str | None = None
+    design_group: str | None = None
 
     @classmethod
     def from_dict(cls, row: dict[str, Any]) -> RetrievalExample:

@@ -79,6 +79,10 @@ def evaluate(predictions: list[dict[str, Any]]) -> dict[str, Any]:
         quadrants: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for row in rows:
             quadrants[str(row["quadrant"])].append(row)
+        retrieval_required = [row for row in rows if row["evidence_required"]]
+        authorized_opportunities = [
+            row for row in retrieval_required if str(row["gold_answer"]).casefold() != "abstain"
+        ]
         by_condition.append(
             {
                 "condition": condition,
@@ -90,6 +94,13 @@ def evaluate(predictions: list[dict[str, Any]]) -> dict[str, Any]:
                     if any(row["evidence_required"] for row in rows)
                     else None
                 ),
+                "unsupported_commitment_rate": _rate(
+                    retrieval_required, "unsupported_commitment"
+                ),
+                "authorized_commitment_coverage": _rate(
+                    authorized_opportunities, "authorized_commitment"
+                ),
+                "runtime_enforcement_rate": _rate(rows, "runtime_enforced"),
                 "retrieval": binary_classification(
                     [bool(row["evidence_required"]) for row in rows],
                     [bool(row["retrieved"]) for row in rows],
@@ -118,7 +129,7 @@ def evaluate(predictions: list[dict[str, Any]]) -> dict[str, Any]:
     quadrants = sorted({str(row["quadrant"]) for row in test_rows})
     sweeps = _threshold_sweep(test_rows)
     return {
-        "schema_version": "ccpu.paper1_5.evaluation.v1",
+        "schema_version": "ccpu.paper1_5.evaluation.v2",
         "test_count": len({row["example_id"] for row in test_rows}),
         "conditions": len(grouped),
         "confidence_threshold": test_rows[0]["confidence_threshold"] if test_rows else None,

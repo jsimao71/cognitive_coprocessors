@@ -1,0 +1,22 @@
+{
+  "config": {
+    "dev_controls": 20,
+    "dev_required": 20,
+    "seed": 15191,
+    "train_controls": 80,
+    "train_required": 80
+  },
+  "dev_path": "artifacts\\paper1_5\\next_iter\\policy_data_v2\\dev.jsonl",
+  "dev_rows": 40,
+  "leakage_audit": {
+    "excluded_answer_value_overlap": [],
+    "excluded_entity_overlap": [],
+    "schema_version": "ccpu.paper1_5.policy_leakage_audit.v1",
+    "targets_contain_answer_values": false,
+    "train_dev_entity_overlap": [],
+    "train_dev_value_overlap": []
+  },
+  "schema_version": "ccpu.paper1_5.policy_data.v1",
+  "train_path": "artifacts\\paper1_5\\next_iter\\policy_data_v2\\train.jsonl",
+  "train_rows": 160
+}

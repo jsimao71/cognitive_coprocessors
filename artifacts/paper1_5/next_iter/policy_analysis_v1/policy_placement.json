@@ -1,0 +1,267 @@
+{
+  "config_sha256": "b0a5c28b311c065940c3e47d623c586debe998f669b8db30e413bd63eb34bd5e",
+  "question": "Does semantic epistemic policy add information beyond uncertainty, and can that stable policy be stored efficiently in weights?",
+  "rows": [
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 6.2375,
+      "mean_prompt_tokens": 136.575,
+      "model_label": "Qwen3-0.6B",
+      "placement": "context",
+      "retrieval_recall": 0.0,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 6.0,
+      "mean_prompt_tokens": 67.575,
+      "model_label": "Qwen3-0.6B",
+      "placement": "weights",
+      "retrieval_recall": 0.0,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.5,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 8.8625,
+      "mean_prompt_tokens": 92.775,
+      "model_label": "Qwen3-0.6B",
+      "placement": "confidence",
+      "retrieval_recall": 0.5,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.025,
+      "interface_success_rate": 0.9875,
+      "mean_generated_tokens": 10.2125,
+      "mean_prompt_tokens": 101.3875,
+      "model_label": "Qwen3-0.6B",
+      "placement": "runtime_semantic",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 0.9875
+    },
+    {
+      "false_activation_rate": 0.525,
+      "interface_success_rate": 0.7375,
+      "mean_generated_tokens": 10.975,
+      "mean_prompt_tokens": 121.8125,
+      "model_label": "Qwen3-0.6B",
+      "placement": "confidence_or_semantic",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 0.7375
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 10.15,
+      "mean_prompt_tokens": 100.075,
+      "model_label": "Qwen3-0.6B",
+      "placement": "oracle",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 1.0
+    },
+    {
+      "false_activation_rate": 0.5,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 6.0,
+      "mean_prompt_tokens": 67.575,
+      "model_label": "Qwen3-0.6B",
+      "placement": "weights_plus_confidence",
+      "retrieval_recall": 0.5,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.975,
+      "interface_success_rate": 0.0125,
+      "mean_generated_tokens": 31.375,
+      "mean_prompt_tokens": 172.2125,
+      "model_label": "SmolLM2-1.7B",
+      "placement": "context",
+      "retrieval_recall": 0.07499999999999996,
+      "selection_accuracy": 0.05
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 7.0,
+      "mean_prompt_tokens": 91.2125,
+      "model_label": "SmolLM2-1.7B",
+      "placement": "weights",
+      "retrieval_recall": 0.0,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 5.05,
+      "mean_prompt_tokens": 65.2125,
+      "model_label": "SmolLM2-1.7B",
+      "placement": "confidence",
+      "retrieval_recall": 0.0,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.025,
+      "interface_success_rate": 0.9875,
+      "mean_generated_tokens": 8.1875,
+      "mean_prompt_tokens": 136.9625,
+      "model_label": "SmolLM2-1.7B",
+      "placement": "runtime_semantic",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 0.9875
+    },
+    {
+      "false_activation_rate": 0.025,
+      "interface_success_rate": 0.9875,
+      "mean_generated_tokens": 8.1875,
+      "mean_prompt_tokens": 136.9625,
+      "model_label": "SmolLM2-1.7B",
+      "placement": "confidence_or_semantic",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 0.9875
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 8.1,
+      "mean_prompt_tokens": 135.3,
+      "model_label": "SmolLM2-1.7B",
+      "placement": "oracle",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 1.0
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 7.0,
+      "mean_prompt_tokens": 91.2125,
+      "model_label": "SmolLM2-1.7B",
+      "placement": "weights_plus_confidence",
+      "retrieval_recall": 0.0,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.275,
+      "interface_success_rate": 0.3625,
+      "mean_generated_tokens": 24.375,
+      "mean_prompt_tokens": 138.9625,
+      "model_label": "Gemma3-1B",
+      "placement": "context",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 0.8625
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 0.5,
+      "mean_generated_tokens": 5.7625,
+      "mean_prompt_tokens": 65.9625,
+      "model_label": "Gemma3-1B",
+      "placement": "weights",
+      "retrieval_recall": 0.0,
+      "selection_accuracy": 0.5
+    },
+    {
+      "false_activation_rate": 0.825,
+      "interface_success_rate": 0.575,
+      "mean_generated_tokens": 10.8,
+      "mean_prompt_tokens": 137.85,
+      "model_label": "Gemma3-1B",
+      "placement": "confidence",
+      "retrieval_recall": 0.975,
+      "selection_accuracy": 0.575
+    },
+    {
+      "false_activation_rate": 0.025,
+      "interface_success_rate": 0.9875,
+      "mean_generated_tokens": 8.3,
+      "mean_prompt_tokens": 101.1,
+      "model_label": "Gemma3-1B",
+      "placement": "runtime_semantic",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 0.9875
+    },
+    {
+      "false_activation_rate": 0.825,
+      "interface_success_rate": 0.5875,
+      "mean_generated_tokens": 10.9125,
+      "mean_prompt_tokens": 139.25,
+      "model_label": "Gemma3-1B",
+      "placement": "confidence_or_semantic",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 0.5875
+    },
+    {
+      "false_activation_rate": 0.0,
+      "interface_success_rate": 1.0,
+      "mean_generated_tokens": 8.2625,
+      "mean_prompt_tokens": 99.75,
+      "model_label": "Gemma3-1B",
+      "placement": "oracle",
+      "retrieval_recall": 1.0,
+      "selection_accuracy": 1.0
+    },
+    {
+      "false_activation_rate": 0.825,
+      "interface_success_rate": 0.575,
+      "mean_generated_tokens": 5.7625,
+      "mean_prompt_tokens": 65.9625,
+      "model_label": "Gemma3-1B",
+      "placement": "weights_plus_confidence",
+      "retrieval_recall": 0.975,
+      "selection_accuracy": 0.575
+    }
+  ],
+  "schema_version": "ccpu.paper1_5.policy_placement.v1",
+  "sources": [
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_context_qwen_v1\\summary.json",
+      "sha256": "44b4fca92ce605bf1d2ca8453c631a178a18f116a8cd603958e86f29bf6a48cb"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_weights_qwen_v1\\summary.json",
+      "sha256": "55e334bddc0c4c893a629e9b04b7aca648ec806b0e5d5c8dc2f8a0596f2c9a29"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_weights_qwen_v1\\predictions.jsonl",
+      "sha256": "dd29d8417ad5e77602e76add9d01c85c27ac31b8ac9400bf1009bbeb3dd11918"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\qwen_v2\\predictions.jsonl",
+      "sha256": "39baf0501ef0dce4b642108f8faaf483413124c8d0fa78824cefc73c7ed426e2"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_context_smollm2_v1\\summary.json",
+      "sha256": "177469bb302a655238b2e85a58d98d631bbaf5c92f29da7a1ffc480fd7f3c723"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_weights_smollm2_v1\\summary.json",
+      "sha256": "5485b394ba67d358697d0b957ded49ada0413f54e32f312c6000519cb3f7d249"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_weights_smollm2_v1\\predictions.jsonl",
+      "sha256": "f903e178591647ff6781390528228355f631b2b73643d97d5c5912c8eb78ebf4"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\smollm2_v1\\predictions.jsonl",
+      "sha256": "2f36ed1e9e269da72e02c40eb552aaf3a513f91a2719e5defb42452fc566cdcc"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_context_gemma3_v1\\summary.json",
+      "sha256": "01281ce21ed01b3a5bb11ac78681fe64f69ce5f9a597c0490aae8a932ba9dc2c"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_weights_gemma3_v1\\summary.json",
+      "sha256": "a560d77e971214b84699fc045f5c8b3b8151c4f668c6a033345395e6e9d5ea77"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\policy_weights_gemma3_v1\\predictions.jsonl",
+      "sha256": "0b411674ddf5f6c594bae9e23a8c20260276817380c2a4cc57997ebe6c1f4df6"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\gemma3_v1\\predictions.jsonl",
+      "sha256": "4aaac879477a8590528b20d35b3e0302113605cd0522a3fc66d22c5067ae0ce4"
+    }
+  ]
+}

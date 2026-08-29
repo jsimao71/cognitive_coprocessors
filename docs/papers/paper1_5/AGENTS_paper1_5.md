@@ -1,111 +1,151 @@
-# AGENTS — Paper 1.5
+# AGENTS - Paper 1.5
 
 ## Mission
-Test the smallest credible **epistemic coprocessor** by separating semantic
-epistemic-risk detection from confidence-based active retrieval during
-generation, using one controlled retrieval source.
+Test the smallest credible epistemic coprocessor by separating semantic
+epistemic risk from checkpoint uncertainty during generation, using exactly one
+controlled retrieval source. After that primary experiment is frozen, test where
+stable one-source retrieval policy should live: context, adapter weights, or the
+runtime.
 
-## Core hypothesis
-Model uncertainty and need for evidence are not equivalent. Semantic
-epistemic-risk rules may catch confident stale or source-dependent commitments
-that a FLARE-like uncertainty trigger misses, while confidence may fire on
-low-confidence generations that need no external evidence.
+## Central question
+Is epistemic risk distinct from model uncertainty?
 
-## Required implementation
-- One controlled retrieval source.
-- Incremental generation watcher.
-- Transparent trigger rules.
-- Typed retrieval-request IR.
-- Compact evidence reinjection.
-- Status: SUPPORTED / CONTRADICTED / UNVERIFIED / STALE / AMBIGUOUS / CONFLICT.
-- Full provenance logging.
-- A documented FLARE-like controller that predicts/inspects upcoming generation,
-  triggers below a token/model-confidence threshold, queries with upcoming
-  content, and regenerates or continues with evidence.
+The placement extension is secondary: does semantic epistemic policy add
+information beyond uncertainty, and can that stable policy be stored efficiently
+in weights?
 
-## Controlled source
-Prefer a versioned synthetic or relational fact store with:
-- stable facts;
-- changed facts;
-- unavailable facts;
-- contradictory records;
-- plausible distractors;
-- mid-generation-only information needs.
+## Terminology
+- **High/low epistemic risk** is the conceptual distinction.
+- **Retrieval-required** means a reliable answer depends on an external or
+  source-specific record rather than model weights or supplied active context.
+- **Retrieval-not-required** means the answer is stable, already supplied, or
+  belongs to another coprocessor class.
+- **Unsupported Commitment Rate (UCR)** is the fraction of retrieval-required
+  opportunities that emit unsupported factual commitments.
+- **Authorized Commitment Coverage** is the fraction of retrieval-required cases
+  with sufficient evidence that emit a supported answer.
 
-Web is secondary only.
+## Sequencing
+Phase A confirms semantic risk versus confidence. Phase B begins only after the
+Phase A benchmark, confidence probes, threshold policy, source, and evaluation
+are frozen.
 
-## Baselines
-1. Base LLM.
+## Phase A benchmark
+Oversample candidates, measure confidence on each evaluated checkpoint, and only
+then assign quadrants. The untouched test set must retain at least 20 examples in
+each Qwen-measured quadrant:
+
+| Confidence | Retrieval requirement |
+|---|---|
+| High | Not required |
+| Low | Not required |
+| High | Required |
+| Low | Required |
+
+Retrieval-required subclasses include fresh/current, source-version-specific,
+private source, changed familiar, unavailable, conflicting, exact-attribution,
+and structured one-source values. Retrieval-not-required subclasses include
+stable facts, supplied context, freshness distractors, quotations, hypotheticals,
+non-factual prose, and compute-coprocessor needs.
+
+## Phase A conditions
+1. LLM only.
 2. Anti-hallucination prompt.
 3. Upfront RAG.
-4. Explicit retrieval tool.
+4. Explicit retrieval.
 5. FLARE-like confidence trigger.
 6. Semantic heuristic trigger.
-7. Confidence OR semantic trigger.
-8. Confidence AND semantic trigger where meaningful.
+7. Confidence OR semantic.
+8. Confidence AND semantic.
 9. Retrospective verification.
-10. Oracle trigger and query formulation.
+10. Evidence advisory.
+11. Evidence plus abstention instruction.
+12. Runtime epistemic gate.
+13. Oracle.
 
-## Measured confidence-risk design
-Assign examples to quadrants using confidence from the actual evaluated
-checkpoint, not intuition:
+FLARE remains mandatory. Document its short-span simplifications and calibrate
+confidence thresholds per checkpoint unless cross-checkpoint calibration is the
+explicit experiment.
 
-| Confidence | Epistemic risk | Expected behavior |
-|---|---|---|
-| High | Low | Continue without retrieval |
-| Low | Low | Detect possible FLARE over-retrieval |
-| High | High | Semantic trigger should catch confident hallucination |
-| Low | High | Both controllers should retrieve |
+## Evidence enforcement
+The runtime gate enforces support relative to configured sources; it does not
+claim truth. If retrieval is required and evidence is UNVERIFIED, CONFLICT,
+AMBIGUOUS, stale, or otherwise insufficient, an unsupported factual value must
+not be accepted. Keep statuses and record provenance explicit.
 
-The dataset must include confidently wrong or stale facts, low-confidence cases
-that need no evidence, stable high-confidence facts, and low-confidence facts
-that require external grounding.
+## Phase B placement
+Compare:
 
-## Allowed triggers
-Regex, lexical cues, entity patterns, temporal patterns, deterministic sentence-prefix heuristics.
+- **Context:** few-shot retrieve/not-retrieve demonstrations.
+- **Weights:** a small LoRA adapter emits a typed one-source retrieval request or
+  `NO_RETRIEVAL`; it learns selection and serialization, never answer values.
+- **Runtime:** confidence thresholds, semantic heuristics, request validation,
+  source access, evidence status, bounds, provenance, and enforcement.
+- **Combinations:** confidence OR semantic, adapter plus confidence, and oracle.
 
-## Forbidden in core result
-Learned classifier/router, hidden-state probe, multi-source selection.
+The typed request is:
 
-## Prospective/retrospective ablation
-Compare retrieval before a factual slot with verification after a candidate claim.
+```retrieve
+entity=...
+attribute=...
+as_of=...
+source=atlas
+```
+
+Use Qwen3-0.6B, SmolLM2-1.7B, and Gemma3-1B when checkpoint access and XPU
+execution are stable.
+
+## Leakage controls
+- Disjoint entity namespaces, record IDs, and answer values across train/dev/test.
+- Held-out benchmark entities and values excluded from adapter data.
+- Targets contain protocol requests, not source answers.
+- Machine-readable overlap audit must pass before training.
+
+Memorizing finite registry values invalidates the placement experiment.
 
 ## Metrics
-- final accuracy;
-- unsupported claim rate;
-- trigger P/R;
-- retrieval P/R;
-- false/missed retrieval;
-- correction/abstention;
-- evidence calibration;
-- tokens;
-- retrieval calls;
-- latency/cost.
-- confident-hallucination catch rate;
-- low-confidence/no-deficit false-retrieval rate;
-- retrieval rate by measured confidence/risk quadrant;
-- uncertainty distributions around trigger thresholds;
-- hallucination-reduction versus retrieval-cost Pareto curves.
+- Final exact accuracy and Wilson intervals where appropriate.
+- UCR and Authorized Commitment Coverage.
+- Retrieval precision/recall, false retrieval, and missed retrieval.
+- Confident hallucination catch rate.
+- Low-confidence/no-deficit false retrieval.
+- Retrieval by measured confidence/risk quadrant.
+- Evidence status, abstention, advisory, and runtime-enforcement rates.
+- Selection, serialization, and interface success for Phase B.
+- Prompt, generated, and reinjected tokens; model/source calls; wall time.
+- Hallucination reduction versus retrieval-cost Pareto curves.
 
 ## Failure taxonomy
-Missed interrupt, false interrupt, malformed query, retrieval miss, stale/conflicting evidence, correct evidence ignored, model overrides evidence.
+Missed or false interrupt, malformed request, wrong entity/attribute/time,
+retrieval miss, stale/conflicting evidence, correct evidence ignored, model
+override, unsupported acceptance, adapter answer leakage, and threshold
+miscalibration.
 
-## Hard scope
-No multiple retrievers. No symbolic engine. No backtracking. No PRA/native KV. Do not claim retrieval proves truth.
+## Scope
+Paper 1.5 uses one source. No DB-versus-vector-versus-web routing, learned
+multi-source router, symbolic reasoning, rollback, or PRA/native KV dependency.
+Learned selection is forbidden in the Phase A primary result and allowed only in
+the frozen Phase B one-source placement experiment.
 
-Do not claim active or generation-time retrieval as novel. The narrower claim is
-supported only if semantic epistemic-risk detection catches evidence needs missed
-by uncertainty at a competitive cost.
+Do not claim active retrieval as novel. The primary claim is supported only if
+semantic epistemic-risk policy catches evidence needs missed by uncertainty at a
+competitive cost.
 
 ## Falsification
-Semantic triggering adds no value if the FLARE-like controller catches the same
-cases at equal or lower cost, semantic rules mostly duplicate measured
-uncertainty, or high-confidence/high-risk cases are immaterial.
+Semantic policy adds no value if FLARE catches the same cases at equal or lower
+cost, rules duplicate uncertainty, false triggers erase reliability gains, or
+high-confidence/high-risk cases are immaterial. Weight placement adds no value if
+context or runtime matches its reliability and recurring cost, or if an adapter
+succeeds by answer memorization.
 
-## Evidence gate
-Paper 2.5 is justified only if heterogeneous sources solve a limitation exposed here.
+## Paper 2.5 gate
+Paper 2.5 is justified when at least two model families reduce UCR with the
+runtime gate while retrieving less often than upfront RAG, and/or a source
+heterogeneity oracle shows genuine value. Learned source routing is not implied.
 
 ## Deliverables
-`paper1_5.tex`, trigger tests, controlled-source and quadrant-aware benchmark
-generators, FLARE-like/upfront-RAG/explicit-tool baselines, machine-readable
-confidence and retrieval traces, Pareto curves, result tables, and scaling plots.
+The repository must contain the frozen quadrant-aware benchmark, confidence
+probes, controlled source, all condition traces, UCR/coverage summaries,
+evidence-enforcement ablation, multi-family replication, leakage-audited
+retrieval-policy adapters, context/weights/runtime placement analysis, plots,
+manifests, the rebuilt paper, and an explicit Paper 2.5 gate decision.

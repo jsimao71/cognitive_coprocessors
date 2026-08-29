@@ -2,8 +2,18 @@ import json
 
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json
+from ccpu.paper1_5.benchmark_next import (
+    NextBenchmarkConfig,
+    build_next_candidates,
+    select_measured_quadrants,
+)
 from ccpu.paper1_5.dataset import load_benchmark
 from ccpu.paper1_5.evaluate import evaluate
+from ccpu.paper1_5.policy_lora import (
+    PolicyDataConfig,
+    generate_policy_data,
+    parse_retrieval_block,
+)
 from ccpu.paper1_5.source import ControlledFactStore, EvidenceStatus, FactRecord
 from ccpu.paper1_5.triggers import decide, fit_confidence_threshold, semantic_risk
 
@@ -73,12 +83,35 @@ def test_evaluation_reports_quadrants_and_unsupported_claims():
                 "model_calls": 1,
                 "wall_time_ns": 1,
                 "confidence_threshold": 0.5,
+                "gold_answer": "ok" if not risk else "source",
+                "unsupported_commitment": risk,
+                "authorized_commitment": False,
+                "runtime_enforced": False,
             }
         )
     summary = evaluate(rows)
     condition = summary["by_condition"][0]
     assert summary["all_four_quadrants_observed"] is True
     assert condition["unsupported_claim_rate"] == 1.0
+    assert condition["unsupported_commitment_rate"] == 1.0
+
+
+def test_next_benchmark_covers_subclasses_and_freezes_measured_quadrants():
+    config = NextBenchmarkConfig(dev_per_design=2, test_per_design=4, target_per_quadrant=2)
+    source, examples, audit = build_next_candidates(config)
+    assert audit["unique_record_ids"] is True
+    assert len(audit["retrieval_required_subclasses"]) == 8
+    assert len(audit["retrieval_not_required_subclasses"]) == 7
+    probabilities = {}
+    for example in examples:
+        low_design = "likely_low" in str(example.design_group)
+        probabilities[example.example_id] = 0.1 if low_design else 0.9
+    selected, freeze = select_measured_quadrants(
+        examples, probabilities, threshold=0.5, target_per_quadrant=2
+    )
+    assert len(selected) == 16
+    assert set(freeze["selected_counts"].values()) == {2}
+    assert source["source_id"] == "atlas-controlled-registry"
 
 
 def test_cli_validates_controlled_benchmark(tmp_path):
@@ -107,3 +140,27 @@ def test_cli_validates_controlled_benchmark(tmp_path):
     assert main(["paper1.5", "validate", "--config", str(config)]) == 0
     _, examples = load_benchmark(read_json(config))
     assert len(examples) == 2
+
+
+def test_policy_data_excludes_answers_and_parses_typed_request(tmp_path):
+    _, examples, _ = build_next_candidates(
+        NextBenchmarkConfig(dev_per_design=1, test_per_design=1, target_per_quadrant=1)
+    )
+    result = generate_policy_data(
+        PolicyDataConfig(
+            train_required=2, train_controls=2, dev_required=1, dev_controls=1
+        ),
+        excluded_examples=examples,
+        output_dir=tmp_path,
+    )
+    assert result["leakage_audit"]["targets_contain_answer_values"] is False
+    request = parse_retrieval_block(
+        "```retrieve\nentity=Demo\nattribute=code\nas_of=2026-08-28\nsource=atlas\n```"
+    )
+    assert request == {
+        "entity": "Demo",
+        "attribute": "code",
+        "as_of": "2026-08-28",
+        "source": "atlas",
+    }
+    assert parse_retrieval_block("NO_RETRIEVAL") is None

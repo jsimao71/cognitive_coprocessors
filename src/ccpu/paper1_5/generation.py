@@ -6,7 +6,7 @@ import time
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from ccpu.paper1.generation import select_device
+from ccpu.paper1.generation import _eos_token_ids, select_device
 
 
 @dataclass(frozen=True)
@@ -42,6 +42,10 @@ class ConfidenceBackend:
             kwargs["dtype"] = getattr(torch, dtype_name)
         self.model = AutoModelForCausalLM.from_pretrained(self.model_id, **kwargs).to(self.device)
         self.model.eval()
+        self.eos_token_ids = _eos_token_ids(
+            self.tokenizer.eos_token_id,
+            getattr(self.model.generation_config, "eos_token_id", None),
+        )
 
     def complete(self, prompt: str, *, seed: int) -> ConfidenceSpan:
         torch = self._torch
@@ -49,12 +53,20 @@ class ConfidenceBackend:
         rendered = prompt
         used_template = False
         if getattr(self.tokenizer, "chat_template", None):
-            rendered = self.tokenizer.apply_chat_template(
-                [{"role": "user", "content": prompt}],
-                tokenize=False,
-                add_generation_prompt=True,
-                enable_thinking=False,
-            )
+            arguments = {
+                "tokenize": False,
+                "add_generation_prompt": True,
+                "enable_thinking": False,
+            }
+            try:
+                rendered = self.tokenizer.apply_chat_template(
+                    [{"role": "user", "content": prompt}], **arguments
+                )
+            except TypeError:
+                arguments.pop("enable_thinking")
+                rendered = self.tokenizer.apply_chat_template(
+                    [{"role": "user", "content": prompt}], **arguments
+                )
             used_template = True
         encoded = self.tokenizer(rendered, return_tensors="pt", add_special_tokens=not used_template)
         input_ids = encoded["input_ids"].to(self.device)
@@ -72,7 +84,7 @@ class ConfidenceBackend:
                 input_ids = torch.cat((input_ids, token), dim=-1)
                 token_ids.append(next_token)
                 probabilities.append(probability)
-                if next_token == self.tokenizer.eos_token_id:
+                if next_token in self.eos_token_ids:
                     break
         text = self.tokenizer.decode(token_ids, skip_special_tokens=True).strip()
         return ConfidenceSpan(

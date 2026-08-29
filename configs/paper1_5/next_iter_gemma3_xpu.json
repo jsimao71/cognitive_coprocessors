@@ -1,0 +1,12 @@
+{
+  "schema_version": "ccpu.paper1_5.run_config.v2",
+  "seed": 17,
+  "benchmark_path": "../../artifacts/paper1_5/next_iter/freeze_qwen_v2/benchmark_config.json",
+  "model": {
+    "model_id": "google/gemma-3-1b-it",
+    "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+    "max_new_tokens": 12,
+    "dtype": "bfloat16",
+    "device": "xpu"
+  }
+}

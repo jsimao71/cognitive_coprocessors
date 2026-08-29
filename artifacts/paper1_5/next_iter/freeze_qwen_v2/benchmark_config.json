@@ -1,0 +1,3395 @@
+{
+  "confidence_threshold": 0.8499308824539185,
+  "examples": [
+    {
+      "answer": "Paris",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "stable_familiar",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::France",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-000",
+      "question": "Return only the well-known capital of France.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "dev"
+    },
+    {
+      "answer": "Tokyo",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "answer_in_context",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Japan",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-001",
+      "question": "Return only the well-known capital of Japan.",
+      "retrieval_subclass": "answer_in_context",
+      "split": "dev"
+    },
+    {
+      "answer": "Berlin",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "freshness_distractor",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Germany",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-002",
+      "question": "Return only the well-known capital of Germany.",
+      "retrieval_subclass": "freshness_distractor",
+      "split": "dev"
+    },
+    {
+      "answer": "Rome",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "quotation",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Italy",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-003",
+      "question": "Return only the well-known capital of Italy.",
+      "retrieval_subclass": "quotation",
+      "split": "dev"
+    },
+    {
+      "answer": "Madrid",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "hypothetical",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Spain",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-004",
+      "question": "Return only the well-known capital of Spain.",
+      "retrieval_subclass": "hypothetical",
+      "split": "dev"
+    },
+    {
+      "answer": "Lisbon",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "non_factual_prose",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Portugal",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-005",
+      "question": "Return only the well-known capital of Portugal.",
+      "retrieval_subclass": "non_factual_prose",
+      "split": "dev"
+    },
+    {
+      "answer": "Ottawa",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "computational_need",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Canada",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-006",
+      "question": "Return only the well-known capital of Canada.",
+      "retrieval_subclass": "computational_need",
+      "split": "dev"
+    },
+    {
+      "answer": "Canberra",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "stable_familiar",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Australia",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_high_not_required-007",
+      "question": "Return only the well-known capital of Australia.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-RWTL-000",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "stable_familiar",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-000",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-000",
+      "question": "The active context explicitly supplies value CTX-RWTL-000. Return it only.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-NSQG-001",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "answer_in_context",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-001",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-001",
+      "question": "The active context explicitly supplies value CTX-NSQG-001. Return it only.",
+      "retrieval_subclass": "answer_in_context",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-NYBZ-002",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "freshness_distractor",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-002",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-002",
+      "question": "The word 'latest' is decorative. Repeat the supplied code CTX-NYBZ-002.",
+      "retrieval_subclass": "freshness_distractor",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-SHEK-003",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-003",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-003",
+      "question": "Quote exactly the supplied label 'CTX-SHEK-003' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-KLJP-004",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "hypothetical",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-004",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-004",
+      "question": "The active context explicitly supplies value CTX-KLJP-004. Return it only.",
+      "retrieval_subclass": "hypothetical",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-KJZC-005",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "non_factual_prose",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-005",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-005",
+      "question": "The active context explicitly supplies value CTX-KJZC-005. Return it only.",
+      "retrieval_subclass": "non_factual_prose",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-DSLX-006",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "computational_need",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-006",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-006",
+      "question": "A calculator, not retrieval, produced token CTX-DSLX-006. Repeat it.",
+      "retrieval_subclass": "computational_need",
+      "split": "dev"
+    },
+    {
+      "answer": "CTX-RBJC-007",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "stable_familiar",
+      "design_group": "likely_low_not_required",
+      "entity": "context::dev-likely_low_not_required-007",
+      "evidence_required": false,
+      "example_id": "p15-next-dev-likely_low_not_required-007",
+      "question": "The active context explicitly supplies value CTX-RBJC-007. Return it only.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-GPGZ-000",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "fresh_current",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::France::000",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-000",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for France? Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-AAVH-001",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "source_version_specific",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::Japan::001",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-001",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Japan? Return only the value.",
+      "retrieval_subclass": "source_version_specific",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-YDHS-002",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "private_store",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::Germany::002",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-002",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Germany? Return only the value.",
+      "retrieval_subclass": "private_store",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-HKNW-003",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "changed_familiar",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::Italy::003",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-003",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Italy? Return only the value.",
+      "retrieval_subclass": "changed_familiar",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-FWRV-004",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "unavailable_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::Spain::004",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-004",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Spain? Return only the value.",
+      "retrieval_subclass": "unavailable_evidence",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-NFWK-005",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "conflicting_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::Portugal::005",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-005",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Portugal? Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-HGQY-006",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "exact_source_attribution",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::Canada::006",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-006",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Canada? Return only the value.",
+      "retrieval_subclass": "exact_source_attribution",
+      "split": "dev"
+    },
+    {
+      "answer": "REV-HVJU-007",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "structured_source_value",
+      "design_group": "likely_high_required",
+      "entity": "atlas::dev::Australia::007",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_high_required-007",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Australia? Return only the value.",
+      "retrieval_subclass": "structured_source_value",
+      "split": "dev"
+    },
+    {
+      "answer": "SRC-EEEA-000",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "fresh_current",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 000",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-000",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 000. Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "dev"
+    },
+    {
+      "answer": "SRC-BKCJ-001",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "source_version_specific",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 001",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-001",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 001. Return only the value.",
+      "retrieval_subclass": "source_version_specific",
+      "split": "dev"
+    },
+    {
+      "answer": "SRC-GRUH-002",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "private_store",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 002",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-002",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 002. Return only the value.",
+      "retrieval_subclass": "private_store",
+      "split": "dev"
+    },
+    {
+      "answer": "SRC-ADDD-003",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "changed_familiar",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 003",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-003",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 003. Return only the value.",
+      "retrieval_subclass": "changed_familiar",
+      "split": "dev"
+    },
+    {
+      "answer": "ABSTAIN",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "unavailable_evidence",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 004",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-004",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 004. Return only the value.",
+      "retrieval_subclass": "unavailable_evidence",
+      "split": "dev"
+    },
+    {
+      "answer": "ABSTAIN",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "conflicting_evidence",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 005",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-005",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 005. Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "dev"
+    },
+    {
+      "answer": "SRC-HNVP-006",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "exact_source_attribution",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 006",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-006",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 006. Return only the value.",
+      "retrieval_subclass": "exact_source_attribution",
+      "split": "dev"
+    },
+    {
+      "answer": "SRC-TVDP-007",
+      "as_of": "2026-08-28",
+      "attribute": "assigned code",
+      "category": "structured_source_value",
+      "design_group": "likely_low_required",
+      "entity": "atlas::Private Dev Entity 007",
+      "evidence_required": true,
+      "example_id": "p15-next-dev-likely_low_required-007",
+      "question": "Using the controlled Atlas source as of 2026, give the latest assigned code for Private Dev Entity 007. Return only the value.",
+      "retrieval_subclass": "structured_source_value",
+      "split": "dev"
+    },
+    {
+      "answer": "Ag",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "quotation",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::silver",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-017",
+      "question": "Return only the well-known chemical symbol of silver.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "Ag",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "quotation",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::silver",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-045",
+      "question": "Return only the well-known chemical symbol of silver.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-BHYJ-103",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-003",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-003",
+      "question": "Quote exactly the supplied label 'CTX-BHYJ-103' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-TBDU-106",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "computational_need",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-006",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-006",
+      "question": "A calculator, not retrieval, produced token CTX-TBDU-106. Repeat it.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-BDEV-110",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-010",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-010",
+      "question": "Quote exactly the supplied label 'CTX-BDEV-110' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-AGGW-113",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "computational_need",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-013",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-013",
+      "question": "A calculator, not retrieval, produced token CTX-AGGW-113. Repeat it.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-XXBE-114",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "stable_familiar",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-014",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-014",
+      "question": "The active context explicitly supplies value CTX-XXBE-114. Return it only.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-SERY-116",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "freshness_distractor",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-016",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-016",
+      "question": "The word 'latest' is decorative. Repeat the supplied code CTX-SERY-116.",
+      "retrieval_subclass": "freshness_distractor",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-DJHQ-117",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-017",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-017",
+      "question": "Quote exactly the supplied label 'CTX-DJHQ-117' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-CXRK-119",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "non_factual_prose",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-019",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-019",
+      "question": "The active context explicitly supplies value CTX-CXRK-119. Return it only.",
+      "retrieval_subclass": "non_factual_prose",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-ZPYR-122",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "answer_in_context",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-022",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-022",
+      "question": "The active context explicitly supplies value CTX-ZPYR-122. Return it only.",
+      "retrieval_subclass": "answer_in_context",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-LMAR-124",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-024",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-024",
+      "question": "Quote exactly the supplied label 'CTX-LMAR-124' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-FHAJ-127",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "computational_need",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-027",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-027",
+      "question": "A calculator, not retrieval, produced token CTX-FHAJ-127. Repeat it.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-ZXMU-131",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-031",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-031",
+      "question": "Quote exactly the supplied label 'CTX-ZXMU-131' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-RVZL-134",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "computational_need",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-034",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-034",
+      "question": "A calculator, not retrieval, produced token CTX-RVZL-134. Repeat it.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-EPHV-138",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-038",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-038",
+      "question": "Quote exactly the supplied label 'CTX-EPHV-138' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-CCEA-139",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "hypothetical",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-039",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-039",
+      "question": "The active context explicitly supplies value CTX-CCEA-139. Return it only.",
+      "retrieval_subclass": "hypothetical",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-PUGA-140",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "non_factual_prose",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-040",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-040",
+      "question": "The active context explicitly supplies value CTX-PUGA-140. Return it only.",
+      "retrieval_subclass": "non_factual_prose",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-EBDC-145",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "quotation",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-045",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-045",
+      "question": "Quote exactly the supplied label 'CTX-EBDC-145' and nothing else.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "CTX-CPZY-148",
+      "as_of": "2026-08-28",
+      "attribute": "supplied value",
+      "category": "computational_need",
+      "design_group": "likely_low_not_required",
+      "entity": "context::test-likely_low_not_required-048",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_low_not_required-048",
+      "question": "A calculator, not retrieval, produced token CTX-CPZY-148. Repeat it.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "Brasilia",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "stable_familiar",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Brazil",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-000",
+      "question": "Return only the well-known capital of Brazil.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "Cairo",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "answer_in_context",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Egypt",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-001",
+      "question": "Return only the well-known capital of Egypt.",
+      "retrieval_subclass": "answer_in_context",
+      "split": "test"
+    },
+    {
+      "answer": "New Delhi",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "freshness_distractor",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::India",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-002",
+      "question": "Return only the well-known capital of India.",
+      "retrieval_subclass": "freshness_distractor",
+      "split": "test"
+    },
+    {
+      "answer": "Athens",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "quotation",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Greece",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-003",
+      "question": "Return only the well-known capital of Greece.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "Oslo",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "hypothetical",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Norway",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-004",
+      "question": "Return only the well-known capital of Norway.",
+      "retrieval_subclass": "hypothetical",
+      "split": "test"
+    },
+    {
+      "answer": "Stockholm",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "non_factual_prose",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Sweden",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-005",
+      "question": "Return only the well-known capital of Sweden.",
+      "retrieval_subclass": "non_factual_prose",
+      "split": "test"
+    },
+    {
+      "answer": "Helsinki",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "computational_need",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Finland",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-006",
+      "question": "Return only the well-known capital of Finland.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "Dublin",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "stable_familiar",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Ireland",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-007",
+      "question": "Return only the well-known capital of Ireland.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "Vienna",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "answer_in_context",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Austria",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-008",
+      "question": "Return only the well-known capital of Austria.",
+      "retrieval_subclass": "answer_in_context",
+      "split": "test"
+    },
+    {
+      "answer": "Brussels",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "freshness_distractor",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Belgium",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-009",
+      "question": "Return only the well-known capital of Belgium.",
+      "retrieval_subclass": "freshness_distractor",
+      "split": "test"
+    },
+    {
+      "answer": "Warsaw",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "quotation",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Poland",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-010",
+      "question": "Return only the well-known capital of Poland.",
+      "retrieval_subclass": "quotation",
+      "split": "test"
+    },
+    {
+      "answer": "Mexico City",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "hypothetical",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Mexico",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-011",
+      "question": "Return only the well-known capital of Mexico.",
+      "retrieval_subclass": "hypothetical",
+      "split": "test"
+    },
+    {
+      "answer": "Buenos Aires",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "non_factual_prose",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Argentina",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-012",
+      "question": "Return only the well-known capital of Argentina.",
+      "retrieval_subclass": "non_factual_prose",
+      "split": "test"
+    },
+    {
+      "answer": "Santiago",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "computational_need",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Chile",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-013",
+      "question": "Return only the well-known capital of Chile.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "Bangkok",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "stable_familiar",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Thailand",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-014",
+      "question": "Return only the well-known capital of Thailand.",
+      "retrieval_subclass": "stable_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "Nairobi",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "answer_in_context",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::Kenya",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-015",
+      "question": "Return only the well-known capital of Kenya.",
+      "retrieval_subclass": "answer_in_context",
+      "split": "test"
+    },
+    {
+      "answer": "Au",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "freshness_distractor",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::gold",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-016",
+      "question": "Return only the well-known chemical symbol of gold.",
+      "retrieval_subclass": "freshness_distractor",
+      "split": "test"
+    },
+    {
+      "answer": "O",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "hypothetical",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::oxygen",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-018",
+      "question": "Return only the well-known chemical symbol of oxygen.",
+      "retrieval_subclass": "hypothetical",
+      "split": "test"
+    },
+    {
+      "answer": "H2O",
+      "as_of": "2026-08-28",
+      "attribute": "chemical formula",
+      "category": "non_factual_prose",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::water",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-019",
+      "question": "Return only the well-known chemical formula of water.",
+      "retrieval_subclass": "non_factual_prose",
+      "split": "test"
+    },
+    {
+      "answer": "Paris",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "computational_need",
+      "design_group": "likely_high_not_required",
+      "entity": "standard::France",
+      "evidence_required": false,
+      "example_id": "p15-next-test-likely_high_not_required-020",
+      "question": "Return only the well-known capital of France.",
+      "retrieval_subclass": "computational_need",
+      "split": "test"
+    },
+    {
+      "answer": "REV-HPCT-103",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "changed_familiar",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Greece::003",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-003",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Greece? Return only the value.",
+      "retrieval_subclass": "changed_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "REV-KSAJ-104",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "unavailable_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Norway::004",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-004",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Norway? Return only the value.",
+      "retrieval_subclass": "unavailable_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-UQUA-105",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "conflicting_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Sweden::005",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-005",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Sweden? Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-QNJQ-106",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "exact_source_attribution",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Finland::006",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-006",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Finland? Return only the value.",
+      "retrieval_subclass": "exact_source_attribution",
+      "split": "test"
+    },
+    {
+      "answer": "REV-KEMU-109",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "source_version_specific",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Belgium::009",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-009",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Belgium? Return only the value.",
+      "retrieval_subclass": "source_version_specific",
+      "split": "test"
+    },
+    {
+      "answer": "REV-MFVE-110",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "private_store",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Poland::010",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-010",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Poland? Return only the value.",
+      "retrieval_subclass": "private_store",
+      "split": "test"
+    },
+    {
+      "answer": "REV-AKHU-111",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "changed_familiar",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Mexico::011",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-011",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Mexico? Return only the value.",
+      "retrieval_subclass": "changed_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "REV-SJGF-117",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "source_version_specific",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::silver::017",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-017",
+      "question": "According to Atlas source version 2026, what is the currently designated chemical symbol for silver? Return only the value.",
+      "retrieval_subclass": "source_version_specific",
+      "split": "test"
+    },
+    {
+      "answer": "REV-TZNJ-120",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "unavailable_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::France::020",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-020",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for France? Return only the value.",
+      "retrieval_subclass": "unavailable_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-GGWX-126",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "private_store",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Canada::026",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-026",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Canada? Return only the value.",
+      "retrieval_subclass": "private_store",
+      "split": "test"
+    },
+    {
+      "answer": "REV-SWBQ-131",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "structured_source_value",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Greece::031",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-031",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Greece? Return only the value.",
+      "retrieval_subclass": "structured_source_value",
+      "split": "test"
+    },
+    {
+      "answer": "REV-YEAW-132",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "fresh_current",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Norway::032",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-032",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Norway? Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "test"
+    },
+    {
+      "answer": "REV-WEZR-133",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "source_version_specific",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Sweden::033",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-033",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Sweden? Return only the value.",
+      "retrieval_subclass": "source_version_specific",
+      "split": "test"
+    },
+    {
+      "answer": "REV-DXSX-134",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "private_store",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Finland::034",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-034",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Finland? Return only the value.",
+      "retrieval_subclass": "private_store",
+      "split": "test"
+    },
+    {
+      "answer": "REV-CBGE-137",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "conflicting_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Belgium::037",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-037",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Belgium? Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-JWKP-138",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "exact_source_attribution",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Poland::038",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-038",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Poland? Return only the value.",
+      "retrieval_subclass": "exact_source_attribution",
+      "split": "test"
+    },
+    {
+      "answer": "REV-JUQL-139",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "structured_source_value",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Mexico::039",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-039",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Mexico? Return only the value.",
+      "retrieval_subclass": "structured_source_value",
+      "split": "test"
+    },
+    {
+      "answer": "REV-JRUH-145",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "conflicting_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::silver::045",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-045",
+      "question": "According to Atlas source version 2026, what is the currently designated chemical symbol for silver? Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-VYWG-148",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "fresh_current",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::France::048",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-048",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for France? Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "test"
+    },
+    {
+      "answer": "REV-RYRD-154",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "exact_source_attribution",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Canada::054",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-054",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Canada? Return only the value.",
+      "retrieval_subclass": "exact_source_attribution",
+      "split": "test"
+    },
+    {
+      "answer": "REV-ZDYL-100",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "fresh_current",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Brazil::000",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-000",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Brazil? Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "test"
+    },
+    {
+      "answer": "REV-CPPL-101",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "source_version_specific",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Egypt::001",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-001",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Egypt? Return only the value.",
+      "retrieval_subclass": "source_version_specific",
+      "split": "test"
+    },
+    {
+      "answer": "REV-UCNT-102",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "private_store",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::India::002",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-002",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for India? Return only the value.",
+      "retrieval_subclass": "private_store",
+      "split": "test"
+    },
+    {
+      "answer": "REV-LBCY-107",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "structured_source_value",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Ireland::007",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-007",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Ireland? Return only the value.",
+      "retrieval_subclass": "structured_source_value",
+      "split": "test"
+    },
+    {
+      "answer": "REV-MMTJ-108",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "fresh_current",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Austria::008",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-008",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Austria? Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "test"
+    },
+    {
+      "answer": "REV-LLCN-112",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "unavailable_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Argentina::012",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-012",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Argentina? Return only the value.",
+      "retrieval_subclass": "unavailable_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-PBAX-113",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "conflicting_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Chile::013",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-013",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Chile? Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-LGHY-114",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "exact_source_attribution",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Thailand::014",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-014",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Thailand? Return only the value.",
+      "retrieval_subclass": "exact_source_attribution",
+      "split": "test"
+    },
+    {
+      "answer": "REV-KGCK-115",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "structured_source_value",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Kenya::015",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-015",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Kenya? Return only the value.",
+      "retrieval_subclass": "structured_source_value",
+      "split": "test"
+    },
+    {
+      "answer": "REV-ENMX-116",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "fresh_current",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::gold::016",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-016",
+      "question": "According to Atlas source version 2026, what is the currently designated chemical symbol for gold? Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "test"
+    },
+    {
+      "answer": "REV-TDAA-118",
+      "as_of": "2026-08-28",
+      "attribute": "chemical symbol",
+      "category": "private_store",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::oxygen::018",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-018",
+      "question": "According to Atlas source version 2026, what is the currently designated chemical symbol for oxygen? Return only the value.",
+      "retrieval_subclass": "private_store",
+      "split": "test"
+    },
+    {
+      "answer": "REV-KWTL-119",
+      "as_of": "2026-08-28",
+      "attribute": "chemical formula",
+      "category": "changed_familiar",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::water::019",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-019",
+      "question": "According to Atlas source version 2026, what is the currently designated chemical formula for water? Return only the value.",
+      "retrieval_subclass": "changed_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "REV-ZWJW-121",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "conflicting_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Japan::021",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-021",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Japan? Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-HTKD-122",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "exact_source_attribution",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Germany::022",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-022",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Germany? Return only the value.",
+      "retrieval_subclass": "exact_source_attribution",
+      "split": "test"
+    },
+    {
+      "answer": "REV-JEAU-123",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "structured_source_value",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Italy::023",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-023",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Italy? Return only the value.",
+      "retrieval_subclass": "structured_source_value",
+      "split": "test"
+    },
+    {
+      "answer": "REV-JDMK-124",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "fresh_current",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Spain::024",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-024",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Spain? Return only the value.",
+      "retrieval_subclass": "fresh_current",
+      "split": "test"
+    },
+    {
+      "answer": "REV-DJTX-125",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "source_version_specific",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Portugal::025",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-025",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Portugal? Return only the value.",
+      "retrieval_subclass": "source_version_specific",
+      "split": "test"
+    },
+    {
+      "answer": "REV-VVJP-127",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "changed_familiar",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Australia::027",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-027",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Australia? Return only the value.",
+      "retrieval_subclass": "changed_familiar",
+      "split": "test"
+    },
+    {
+      "answer": "REV-DWBS-128",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "unavailable_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Brazil::028",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-028",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Brazil? Return only the value.",
+      "retrieval_subclass": "unavailable_evidence",
+      "split": "test"
+    },
+    {
+      "answer": "REV-FVGE-129",
+      "as_of": "2026-08-28",
+      "attribute": "capital",
+      "category": "conflicting_evidence",
+      "design_group": "likely_high_required",
+      "entity": "atlas::test::Egypt::029",
+      "evidence_required": true,
+      "example_id": "p15-next-test-likely_high_required-029",
+      "question": "According to Atlas source version 2026, what is the currently designated capital for Egypt? Return only the value.",
+      "retrieval_subclass": "conflicting_evidence",
+      "split": "test"
+    }
+  ],
+  "freeze_model": {
+    "device": "xpu",
+    "dtype": "float16",
+    "max_new_tokens": 12,
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "schema_version": "ccpu.paper1_5.frozen_benchmark.v2",
+  "source": {
+    "records": [
+      {
+        "attribute": "capital",
+        "entity": "standard::France",
+        "record_id": "next-r0001",
+        "valid_from": "1900-01-01",
+        "value": "Paris"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Japan",
+        "record_id": "next-r0002",
+        "valid_from": "1900-01-01",
+        "value": "Tokyo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Germany",
+        "record_id": "next-r0003",
+        "valid_from": "1900-01-01",
+        "value": "Berlin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Italy",
+        "record_id": "next-r0004",
+        "valid_from": "1900-01-01",
+        "value": "Rome"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Spain",
+        "record_id": "next-r0005",
+        "valid_from": "1900-01-01",
+        "value": "Madrid"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Portugal",
+        "record_id": "next-r0006",
+        "valid_from": "1900-01-01",
+        "value": "Lisbon"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Canada",
+        "record_id": "next-r0007",
+        "valid_from": "1900-01-01",
+        "value": "Ottawa"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Australia",
+        "record_id": "next-r0008",
+        "valid_from": "1900-01-01",
+        "value": "Canberra"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::France::000",
+        "record_id": "next-r0009",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Paris"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::France::000",
+        "record_id": "next-r0010",
+        "valid_from": "2026-01-01",
+        "value": "REV-GPGZ-000"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Japan::001",
+        "record_id": "next-r0011",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Tokyo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Japan::001",
+        "record_id": "next-r0012",
+        "valid_from": "2026-01-01",
+        "value": "REV-AAVH-001"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Germany::002",
+        "record_id": "next-r0013",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Berlin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Germany::002",
+        "record_id": "next-r0014",
+        "valid_from": "2026-01-01",
+        "value": "REV-YDHS-002"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Italy::003",
+        "record_id": "next-r0015",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Rome"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Italy::003",
+        "record_id": "next-r0016",
+        "valid_from": "2026-01-01",
+        "value": "REV-HKNW-003"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Spain::004",
+        "record_id": "next-r0017",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Madrid"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Spain::004",
+        "record_id": "next-r0018",
+        "valid_from": "2026-01-01",
+        "value": "REV-FWRV-004"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Portugal::005",
+        "record_id": "next-r0019",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Lisbon"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Portugal::005",
+        "record_id": "next-r0020",
+        "valid_from": "2026-01-01",
+        "value": "REV-NFWK-005"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Canada::006",
+        "record_id": "next-r0021",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Ottawa"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Canada::006",
+        "record_id": "next-r0022",
+        "valid_from": "2026-01-01",
+        "value": "REV-HGQY-006"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Australia::007",
+        "record_id": "next-r0023",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Canberra"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::dev::Australia::007",
+        "record_id": "next-r0024",
+        "valid_from": "2026-01-01",
+        "value": "REV-HVJU-007"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 000",
+        "record_id": "next-r0025",
+        "valid_from": "2026-01-01",
+        "value": "SRC-EEEA-000"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 001",
+        "record_id": "next-r0026",
+        "valid_from": "2026-01-01",
+        "value": "SRC-BKCJ-001"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 002",
+        "record_id": "next-r0027",
+        "valid_from": "2026-01-01",
+        "value": "SRC-GRUH-002"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 003",
+        "record_id": "next-r0028",
+        "valid_from": "2026-01-01",
+        "value": "SRC-ADDD-003"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Dev Entity 004",
+        "record_id": "next-r0029",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-VVBN-004"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 005",
+        "record_id": "next-r0030",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-FEYA-005"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 005",
+        "record_id": "next-r0031",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-WWYN-005"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 006",
+        "record_id": "next-r0032",
+        "valid_from": "2026-01-01",
+        "value": "SRC-HNVP-006"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Dev Entity 007",
+        "record_id": "next-r0033",
+        "valid_from": "2026-01-01",
+        "value": "SRC-TVDP-007"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Brazil",
+        "record_id": "next-r0034",
+        "valid_from": "1900-01-01",
+        "value": "Brasilia"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Egypt",
+        "record_id": "next-r0035",
+        "valid_from": "1900-01-01",
+        "value": "Cairo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::India",
+        "record_id": "next-r0036",
+        "valid_from": "1900-01-01",
+        "value": "New Delhi"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Greece",
+        "record_id": "next-r0037",
+        "valid_from": "1900-01-01",
+        "value": "Athens"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Norway",
+        "record_id": "next-r0038",
+        "valid_from": "1900-01-01",
+        "value": "Oslo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Sweden",
+        "record_id": "next-r0039",
+        "valid_from": "1900-01-01",
+        "value": "Stockholm"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Finland",
+        "record_id": "next-r0040",
+        "valid_from": "1900-01-01",
+        "value": "Helsinki"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Ireland",
+        "record_id": "next-r0041",
+        "valid_from": "1900-01-01",
+        "value": "Dublin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Austria",
+        "record_id": "next-r0042",
+        "valid_from": "1900-01-01",
+        "value": "Vienna"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Belgium",
+        "record_id": "next-r0043",
+        "valid_from": "1900-01-01",
+        "value": "Brussels"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Poland",
+        "record_id": "next-r0044",
+        "valid_from": "1900-01-01",
+        "value": "Warsaw"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Mexico",
+        "record_id": "next-r0045",
+        "valid_from": "1900-01-01",
+        "value": "Mexico City"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Argentina",
+        "record_id": "next-r0046",
+        "valid_from": "1900-01-01",
+        "value": "Buenos Aires"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Chile",
+        "record_id": "next-r0047",
+        "valid_from": "1900-01-01",
+        "value": "Santiago"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Thailand",
+        "record_id": "next-r0048",
+        "valid_from": "1900-01-01",
+        "value": "Bangkok"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Kenya",
+        "record_id": "next-r0049",
+        "valid_from": "1900-01-01",
+        "value": "Nairobi"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "standard::gold",
+        "record_id": "next-r0050",
+        "valid_from": "1900-01-01",
+        "value": "Au"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "standard::silver",
+        "record_id": "next-r0051",
+        "valid_from": "1900-01-01",
+        "value": "Ag"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "standard::oxygen",
+        "record_id": "next-r0052",
+        "valid_from": "1900-01-01",
+        "value": "O"
+      },
+      {
+        "attribute": "chemical formula",
+        "entity": "standard::water",
+        "record_id": "next-r0053",
+        "valid_from": "1900-01-01",
+        "value": "H2O"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::France",
+        "record_id": "next-r0054",
+        "valid_from": "1900-01-01",
+        "value": "Paris"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Japan",
+        "record_id": "next-r0055",
+        "valid_from": "1900-01-01",
+        "value": "Tokyo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Germany",
+        "record_id": "next-r0056",
+        "valid_from": "1900-01-01",
+        "value": "Berlin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Italy",
+        "record_id": "next-r0057",
+        "valid_from": "1900-01-01",
+        "value": "Rome"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Spain",
+        "record_id": "next-r0058",
+        "valid_from": "1900-01-01",
+        "value": "Madrid"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Portugal",
+        "record_id": "next-r0059",
+        "valid_from": "1900-01-01",
+        "value": "Lisbon"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Canada",
+        "record_id": "next-r0060",
+        "valid_from": "1900-01-01",
+        "value": "Ottawa"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Australia",
+        "record_id": "next-r0061",
+        "valid_from": "1900-01-01",
+        "value": "Canberra"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Brazil",
+        "record_id": "next-r0062",
+        "valid_from": "1900-01-01",
+        "value": "Brasilia"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Egypt",
+        "record_id": "next-r0063",
+        "valid_from": "1900-01-01",
+        "value": "Cairo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::India",
+        "record_id": "next-r0064",
+        "valid_from": "1900-01-01",
+        "value": "New Delhi"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Greece",
+        "record_id": "next-r0065",
+        "valid_from": "1900-01-01",
+        "value": "Athens"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Norway",
+        "record_id": "next-r0066",
+        "valid_from": "1900-01-01",
+        "value": "Oslo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Sweden",
+        "record_id": "next-r0067",
+        "valid_from": "1900-01-01",
+        "value": "Stockholm"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Finland",
+        "record_id": "next-r0068",
+        "valid_from": "1900-01-01",
+        "value": "Helsinki"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Ireland",
+        "record_id": "next-r0069",
+        "valid_from": "1900-01-01",
+        "value": "Dublin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Austria",
+        "record_id": "next-r0070",
+        "valid_from": "1900-01-01",
+        "value": "Vienna"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Belgium",
+        "record_id": "next-r0071",
+        "valid_from": "1900-01-01",
+        "value": "Brussels"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Poland",
+        "record_id": "next-r0072",
+        "valid_from": "1900-01-01",
+        "value": "Warsaw"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Mexico",
+        "record_id": "next-r0073",
+        "valid_from": "1900-01-01",
+        "value": "Mexico City"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Argentina",
+        "record_id": "next-r0074",
+        "valid_from": "1900-01-01",
+        "value": "Buenos Aires"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Chile",
+        "record_id": "next-r0075",
+        "valid_from": "1900-01-01",
+        "value": "Santiago"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Thailand",
+        "record_id": "next-r0076",
+        "valid_from": "1900-01-01",
+        "value": "Bangkok"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Kenya",
+        "record_id": "next-r0077",
+        "valid_from": "1900-01-01",
+        "value": "Nairobi"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "standard::gold",
+        "record_id": "next-r0078",
+        "valid_from": "1900-01-01",
+        "value": "Au"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "standard::silver",
+        "record_id": "next-r0079",
+        "valid_from": "1900-01-01",
+        "value": "Ag"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "standard::oxygen",
+        "record_id": "next-r0080",
+        "valid_from": "1900-01-01",
+        "value": "O"
+      },
+      {
+        "attribute": "chemical formula",
+        "entity": "standard::water",
+        "record_id": "next-r0081",
+        "valid_from": "1900-01-01",
+        "value": "H2O"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::France",
+        "record_id": "next-r0082",
+        "valid_from": "1900-01-01",
+        "value": "Paris"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Japan",
+        "record_id": "next-r0083",
+        "valid_from": "1900-01-01",
+        "value": "Tokyo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Germany",
+        "record_id": "next-r0084",
+        "valid_from": "1900-01-01",
+        "value": "Berlin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Italy",
+        "record_id": "next-r0085",
+        "valid_from": "1900-01-01",
+        "value": "Rome"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Spain",
+        "record_id": "next-r0086",
+        "valid_from": "1900-01-01",
+        "value": "Madrid"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Portugal",
+        "record_id": "next-r0087",
+        "valid_from": "1900-01-01",
+        "value": "Lisbon"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Canada",
+        "record_id": "next-r0088",
+        "valid_from": "1900-01-01",
+        "value": "Ottawa"
+      },
+      {
+        "attribute": "capital",
+        "entity": "standard::Australia",
+        "record_id": "next-r0089",
+        "valid_from": "1900-01-01",
+        "value": "Canberra"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Brazil::000",
+        "record_id": "next-r0090",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Brasilia"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Brazil::000",
+        "record_id": "next-r0091",
+        "valid_from": "2026-01-01",
+        "value": "REV-ZDYL-100"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Egypt::001",
+        "record_id": "next-r0092",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Cairo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Egypt::001",
+        "record_id": "next-r0093",
+        "valid_from": "2026-01-01",
+        "value": "REV-CPPL-101"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::India::002",
+        "record_id": "next-r0094",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "New Delhi"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::India::002",
+        "record_id": "next-r0095",
+        "valid_from": "2026-01-01",
+        "value": "REV-UCNT-102"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Greece::003",
+        "record_id": "next-r0096",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Athens"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Greece::003",
+        "record_id": "next-r0097",
+        "valid_from": "2026-01-01",
+        "value": "REV-HPCT-103"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Norway::004",
+        "record_id": "next-r0098",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Oslo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Norway::004",
+        "record_id": "next-r0099",
+        "valid_from": "2026-01-01",
+        "value": "REV-KSAJ-104"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Sweden::005",
+        "record_id": "next-r0100",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Stockholm"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Sweden::005",
+        "record_id": "next-r0101",
+        "valid_from": "2026-01-01",
+        "value": "REV-UQUA-105"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Finland::006",
+        "record_id": "next-r0102",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Helsinki"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Finland::006",
+        "record_id": "next-r0103",
+        "valid_from": "2026-01-01",
+        "value": "REV-QNJQ-106"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Ireland::007",
+        "record_id": "next-r0104",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Dublin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Ireland::007",
+        "record_id": "next-r0105",
+        "valid_from": "2026-01-01",
+        "value": "REV-LBCY-107"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Austria::008",
+        "record_id": "next-r0106",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Vienna"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Austria::008",
+        "record_id": "next-r0107",
+        "valid_from": "2026-01-01",
+        "value": "REV-MMTJ-108"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Belgium::009",
+        "record_id": "next-r0108",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Brussels"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Belgium::009",
+        "record_id": "next-r0109",
+        "valid_from": "2026-01-01",
+        "value": "REV-KEMU-109"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Poland::010",
+        "record_id": "next-r0110",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Warsaw"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Poland::010",
+        "record_id": "next-r0111",
+        "valid_from": "2026-01-01",
+        "value": "REV-MFVE-110"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Mexico::011",
+        "record_id": "next-r0112",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Mexico City"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Mexico::011",
+        "record_id": "next-r0113",
+        "valid_from": "2026-01-01",
+        "value": "REV-AKHU-111"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Argentina::012",
+        "record_id": "next-r0114",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Buenos Aires"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Argentina::012",
+        "record_id": "next-r0115",
+        "valid_from": "2026-01-01",
+        "value": "REV-LLCN-112"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Chile::013",
+        "record_id": "next-r0116",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Santiago"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Chile::013",
+        "record_id": "next-r0117",
+        "valid_from": "2026-01-01",
+        "value": "REV-PBAX-113"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Thailand::014",
+        "record_id": "next-r0118",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Bangkok"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Thailand::014",
+        "record_id": "next-r0119",
+        "valid_from": "2026-01-01",
+        "value": "REV-LGHY-114"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Kenya::015",
+        "record_id": "next-r0120",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Nairobi"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Kenya::015",
+        "record_id": "next-r0121",
+        "valid_from": "2026-01-01",
+        "value": "REV-KGCK-115"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::gold::016",
+        "record_id": "next-r0122",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Au"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::gold::016",
+        "record_id": "next-r0123",
+        "valid_from": "2026-01-01",
+        "value": "REV-ENMX-116"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::silver::017",
+        "record_id": "next-r0124",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Ag"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::silver::017",
+        "record_id": "next-r0125",
+        "valid_from": "2026-01-01",
+        "value": "REV-SJGF-117"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::oxygen::018",
+        "record_id": "next-r0126",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "O"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::oxygen::018",
+        "record_id": "next-r0127",
+        "valid_from": "2026-01-01",
+        "value": "REV-TDAA-118"
+      },
+      {
+        "attribute": "chemical formula",
+        "entity": "atlas::test::water::019",
+        "record_id": "next-r0128",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "H2O"
+      },
+      {
+        "attribute": "chemical formula",
+        "entity": "atlas::test::water::019",
+        "record_id": "next-r0129",
+        "valid_from": "2026-01-01",
+        "value": "REV-KWTL-119"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::France::020",
+        "record_id": "next-r0130",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Paris"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::France::020",
+        "record_id": "next-r0131",
+        "valid_from": "2026-01-01",
+        "value": "REV-TZNJ-120"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Japan::021",
+        "record_id": "next-r0132",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Tokyo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Japan::021",
+        "record_id": "next-r0133",
+        "valid_from": "2026-01-01",
+        "value": "REV-ZWJW-121"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Germany::022",
+        "record_id": "next-r0134",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Berlin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Germany::022",
+        "record_id": "next-r0135",
+        "valid_from": "2026-01-01",
+        "value": "REV-HTKD-122"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Italy::023",
+        "record_id": "next-r0136",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Rome"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Italy::023",
+        "record_id": "next-r0137",
+        "valid_from": "2026-01-01",
+        "value": "REV-JEAU-123"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Spain::024",
+        "record_id": "next-r0138",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Madrid"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Spain::024",
+        "record_id": "next-r0139",
+        "valid_from": "2026-01-01",
+        "value": "REV-JDMK-124"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Portugal::025",
+        "record_id": "next-r0140",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Lisbon"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Portugal::025",
+        "record_id": "next-r0141",
+        "valid_from": "2026-01-01",
+        "value": "REV-DJTX-125"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Canada::026",
+        "record_id": "next-r0142",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Ottawa"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Canada::026",
+        "record_id": "next-r0143",
+        "valid_from": "2026-01-01",
+        "value": "REV-GGWX-126"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Australia::027",
+        "record_id": "next-r0144",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Canberra"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Australia::027",
+        "record_id": "next-r0145",
+        "valid_from": "2026-01-01",
+        "value": "REV-VVJP-127"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Brazil::028",
+        "record_id": "next-r0146",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Brasilia"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Brazil::028",
+        "record_id": "next-r0147",
+        "valid_from": "2026-01-01",
+        "value": "REV-DWBS-128"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Egypt::029",
+        "record_id": "next-r0148",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Cairo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Egypt::029",
+        "record_id": "next-r0149",
+        "valid_from": "2026-01-01",
+        "value": "REV-FVGE-129"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::India::030",
+        "record_id": "next-r0150",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "New Delhi"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::India::030",
+        "record_id": "next-r0151",
+        "valid_from": "2026-01-01",
+        "value": "REV-FYCA-130"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Greece::031",
+        "record_id": "next-r0152",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Athens"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Greece::031",
+        "record_id": "next-r0153",
+        "valid_from": "2026-01-01",
+        "value": "REV-SWBQ-131"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Norway::032",
+        "record_id": "next-r0154",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Oslo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Norway::032",
+        "record_id": "next-r0155",
+        "valid_from": "2026-01-01",
+        "value": "REV-YEAW-132"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Sweden::033",
+        "record_id": "next-r0156",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Stockholm"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Sweden::033",
+        "record_id": "next-r0157",
+        "valid_from": "2026-01-01",
+        "value": "REV-WEZR-133"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Finland::034",
+        "record_id": "next-r0158",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Helsinki"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Finland::034",
+        "record_id": "next-r0159",
+        "valid_from": "2026-01-01",
+        "value": "REV-DXSX-134"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Ireland::035",
+        "record_id": "next-r0160",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Dublin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Ireland::035",
+        "record_id": "next-r0161",
+        "valid_from": "2026-01-01",
+        "value": "REV-HRMG-135"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Austria::036",
+        "record_id": "next-r0162",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Vienna"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Austria::036",
+        "record_id": "next-r0163",
+        "valid_from": "2026-01-01",
+        "value": "REV-ABSM-136"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Belgium::037",
+        "record_id": "next-r0164",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Brussels"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Belgium::037",
+        "record_id": "next-r0165",
+        "valid_from": "2026-01-01",
+        "value": "REV-CBGE-137"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Poland::038",
+        "record_id": "next-r0166",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Warsaw"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Poland::038",
+        "record_id": "next-r0167",
+        "valid_from": "2026-01-01",
+        "value": "REV-JWKP-138"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Mexico::039",
+        "record_id": "next-r0168",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Mexico City"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Mexico::039",
+        "record_id": "next-r0169",
+        "valid_from": "2026-01-01",
+        "value": "REV-JUQL-139"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Argentina::040",
+        "record_id": "next-r0170",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Buenos Aires"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Argentina::040",
+        "record_id": "next-r0171",
+        "valid_from": "2026-01-01",
+        "value": "REV-HJVJ-140"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Chile::041",
+        "record_id": "next-r0172",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Santiago"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Chile::041",
+        "record_id": "next-r0173",
+        "valid_from": "2026-01-01",
+        "value": "REV-XYPM-141"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Thailand::042",
+        "record_id": "next-r0174",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Bangkok"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Thailand::042",
+        "record_id": "next-r0175",
+        "valid_from": "2026-01-01",
+        "value": "REV-EZPK-142"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Kenya::043",
+        "record_id": "next-r0176",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Nairobi"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Kenya::043",
+        "record_id": "next-r0177",
+        "valid_from": "2026-01-01",
+        "value": "REV-UTQL-143"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::gold::044",
+        "record_id": "next-r0178",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Au"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::gold::044",
+        "record_id": "next-r0179",
+        "valid_from": "2026-01-01",
+        "value": "REV-WGLB-144"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::silver::045",
+        "record_id": "next-r0180",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Ag"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::silver::045",
+        "record_id": "next-r0181",
+        "valid_from": "2026-01-01",
+        "value": "REV-JRUH-145"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::oxygen::046",
+        "record_id": "next-r0182",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "O"
+      },
+      {
+        "attribute": "chemical symbol",
+        "entity": "atlas::test::oxygen::046",
+        "record_id": "next-r0183",
+        "valid_from": "2026-01-01",
+        "value": "REV-NCXE-146"
+      },
+      {
+        "attribute": "chemical formula",
+        "entity": "atlas::test::water::047",
+        "record_id": "next-r0184",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "H2O"
+      },
+      {
+        "attribute": "chemical formula",
+        "entity": "atlas::test::water::047",
+        "record_id": "next-r0185",
+        "valid_from": "2026-01-01",
+        "value": "REV-ZRAD-147"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::France::048",
+        "record_id": "next-r0186",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Paris"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::France::048",
+        "record_id": "next-r0187",
+        "valid_from": "2026-01-01",
+        "value": "REV-VYWG-148"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Japan::049",
+        "record_id": "next-r0188",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Tokyo"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Japan::049",
+        "record_id": "next-r0189",
+        "valid_from": "2026-01-01",
+        "value": "REV-GMKB-149"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Germany::050",
+        "record_id": "next-r0190",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Berlin"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Germany::050",
+        "record_id": "next-r0191",
+        "valid_from": "2026-01-01",
+        "value": "REV-ERED-150"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Italy::051",
+        "record_id": "next-r0192",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Rome"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Italy::051",
+        "record_id": "next-r0193",
+        "valid_from": "2026-01-01",
+        "value": "REV-YWCH-151"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Spain::052",
+        "record_id": "next-r0194",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Madrid"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Spain::052",
+        "record_id": "next-r0195",
+        "valid_from": "2026-01-01",
+        "value": "REV-XNCA-152"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Portugal::053",
+        "record_id": "next-r0196",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Lisbon"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Portugal::053",
+        "record_id": "next-r0197",
+        "valid_from": "2026-01-01",
+        "value": "REV-LUUQ-153"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Canada::054",
+        "record_id": "next-r0198",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Ottawa"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Canada::054",
+        "record_id": "next-r0199",
+        "valid_from": "2026-01-01",
+        "value": "REV-RYRD-154"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Australia::055",
+        "record_id": "next-r0200",
+        "valid_from": "1900-01-01",
+        "valid_to": "2025-12-31",
+        "value": "Canberra"
+      },
+      {
+        "attribute": "capital",
+        "entity": "atlas::test::Australia::055",
+        "record_id": "next-r0201",
+        "valid_from": "2026-01-01",
+        "value": "REV-ATBX-155"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 000",
+        "record_id": "next-r0202",
+        "valid_from": "2026-01-01",
+        "value": "SRC-GNXH-100"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 001",
+        "record_id": "next-r0203",
+        "valid_from": "2026-01-01",
+        "value": "SRC-GAKB-101"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 002",
+        "record_id": "next-r0204",
+        "valid_from": "2026-01-01",
+        "value": "SRC-WVUR-102"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 003",
+        "record_id": "next-r0205",
+        "valid_from": "2026-01-01",
+        "value": "SRC-VMUH-103"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Test Entity 004",
+        "record_id": "next-r0206",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-CDHT-004"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 005",
+        "record_id": "next-r0207",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-UFHL-005"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 005",
+        "record_id": "next-r0208",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-MUJG-005"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 006",
+        "record_id": "next-r0209",
+        "valid_from": "2026-01-01",
+        "value": "SRC-WMVP-106"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 007",
+        "record_id": "next-r0210",
+        "valid_from": "2026-01-01",
+        "value": "SRC-FGSE-107"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 008",
+        "record_id": "next-r0211",
+        "valid_from": "2026-01-01",
+        "value": "SRC-ZFHY-108"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 009",
+        "record_id": "next-r0212",
+        "valid_from": "2026-01-01",
+        "value": "SRC-ZDYY-109"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 010",
+        "record_id": "next-r0213",
+        "valid_from": "2026-01-01",
+        "value": "SRC-WJCP-110"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 011",
+        "record_id": "next-r0214",
+        "valid_from": "2026-01-01",
+        "value": "SRC-XZQM-111"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Test Entity 012",
+        "record_id": "next-r0215",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-LXRH-012"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 013",
+        "record_id": "next-r0216",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-BNNK-013"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 013",
+        "record_id": "next-r0217",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-DWCZ-013"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 014",
+        "record_id": "next-r0218",
+        "valid_from": "2026-01-01",
+        "value": "SRC-FBJQ-114"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 015",
+        "record_id": "next-r0219",
+        "valid_from": "2026-01-01",
+        "value": "SRC-AWEA-115"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 016",
+        "record_id": "next-r0220",
+        "valid_from": "2026-01-01",
+        "value": "SRC-DGJY-116"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 017",
+        "record_id": "next-r0221",
+        "valid_from": "2026-01-01",
+        "value": "SRC-TNMC-117"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 018",
+        "record_id": "next-r0222",
+        "valid_from": "2026-01-01",
+        "value": "SRC-VTAM-118"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 019",
+        "record_id": "next-r0223",
+        "valid_from": "2026-01-01",
+        "value": "SRC-UQLM-119"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Test Entity 020",
+        "record_id": "next-r0224",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-JZVN-020"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 021",
+        "record_id": "next-r0225",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-JMWK-021"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 021",
+        "record_id": "next-r0226",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-WALA-021"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 022",
+        "record_id": "next-r0227",
+        "valid_from": "2026-01-01",
+        "value": "SRC-CYDN-122"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 023",
+        "record_id": "next-r0228",
+        "valid_from": "2026-01-01",
+        "value": "SRC-CGRF-123"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 024",
+        "record_id": "next-r0229",
+        "valid_from": "2026-01-01",
+        "value": "SRC-HLKF-124"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 025",
+        "record_id": "next-r0230",
+        "valid_from": "2026-01-01",
+        "value": "SRC-MBBX-125"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 026",
+        "record_id": "next-r0231",
+        "valid_from": "2026-01-01",
+        "value": "SRC-GZXJ-126"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 027",
+        "record_id": "next-r0232",
+        "valid_from": "2026-01-01",
+        "value": "SRC-PFMB-127"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Test Entity 028",
+        "record_id": "next-r0233",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-JNMA-028"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 029",
+        "record_id": "next-r0234",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-EDQE-029"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 029",
+        "record_id": "next-r0235",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-LBXF-029"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 030",
+        "record_id": "next-r0236",
+        "valid_from": "2026-01-01",
+        "value": "SRC-VKFC-130"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 031",
+        "record_id": "next-r0237",
+        "valid_from": "2026-01-01",
+        "value": "SRC-KDDL-131"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 032",
+        "record_id": "next-r0238",
+        "valid_from": "2026-01-01",
+        "value": "SRC-ZWRA-132"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 033",
+        "record_id": "next-r0239",
+        "valid_from": "2026-01-01",
+        "value": "SRC-UTMD-133"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 034",
+        "record_id": "next-r0240",
+        "valid_from": "2026-01-01",
+        "value": "SRC-BSPW-134"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 035",
+        "record_id": "next-r0241",
+        "valid_from": "2026-01-01",
+        "value": "SRC-JWLR-135"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Test Entity 036",
+        "record_id": "next-r0242",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-CVVD-036"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 037",
+        "record_id": "next-r0243",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-LBFV-037"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 037",
+        "record_id": "next-r0244",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-DJEA-037"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 038",
+        "record_id": "next-r0245",
+        "valid_from": "2026-01-01",
+        "value": "SRC-WNVV-138"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 039",
+        "record_id": "next-r0246",
+        "valid_from": "2026-01-01",
+        "value": "SRC-QBXH-139"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 040",
+        "record_id": "next-r0247",
+        "valid_from": "2026-01-01",
+        "value": "SRC-MYWC-140"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 041",
+        "record_id": "next-r0248",
+        "valid_from": "2026-01-01",
+        "value": "SRC-CXLR-141"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 042",
+        "record_id": "next-r0249",
+        "valid_from": "2026-01-01",
+        "value": "SRC-THPE-142"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 043",
+        "record_id": "next-r0250",
+        "valid_from": "2026-01-01",
+        "value": "SRC-YZMK-143"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Test Entity 044",
+        "record_id": "next-r0251",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-TSBB-044"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 045",
+        "record_id": "next-r0252",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-JXHM-045"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 045",
+        "record_id": "next-r0253",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-DTPP-045"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 046",
+        "record_id": "next-r0254",
+        "valid_from": "2026-01-01",
+        "value": "SRC-AYCE-146"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 047",
+        "record_id": "next-r0255",
+        "valid_from": "2026-01-01",
+        "value": "SRC-EHUZ-147"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 048",
+        "record_id": "next-r0256",
+        "valid_from": "2026-01-01",
+        "value": "SRC-QUKT-148"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 049",
+        "record_id": "next-r0257",
+        "valid_from": "2026-01-01",
+        "value": "SRC-QXHV-149"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 050",
+        "record_id": "next-r0258",
+        "valid_from": "2026-01-01",
+        "value": "SRC-DNYT-150"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 051",
+        "record_id": "next-r0259",
+        "valid_from": "2026-01-01",
+        "value": "SRC-BQVT-151"
+      },
+      {
+        "attribute": "assigned code",
+        "available": false,
+        "entity": "atlas::Private Test Entity 052",
+        "record_id": "next-r0260",
+        "valid_from": "2026-01-01",
+        "value": "HIDDEN-QXDR-052"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 053",
+        "record_id": "next-r0261",
+        "valid_from": "2026-01-01",
+        "value": "LEFT-LRUT-053"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 053",
+        "record_id": "next-r0262",
+        "valid_from": "2026-01-01",
+        "value": "RIGHT-HMHW-053"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 054",
+        "record_id": "next-r0263",
+        "valid_from": "2026-01-01",
+        "value": "SRC-BSAK-154"
+      },
+      {
+        "attribute": "assigned code",
+        "entity": "atlas::Private Test Entity 055",
+        "record_id": "next-r0264",
+        "valid_from": "2026-01-01",
+        "value": "SRC-HMXW-155"
+      }
+    ],
+    "source_id": "atlas-controlled-registry",
+    "version": "2026.08.2-frozen-candidates"
+  }
+}

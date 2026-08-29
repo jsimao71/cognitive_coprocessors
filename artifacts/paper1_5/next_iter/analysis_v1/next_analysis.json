@@ -1,0 +1,369 @@
+{
+  "config_sha256": "6af078532caf832242a6ca17df7d1371346be01558fe9fe3011fc3e19ff15276",
+  "paper2_5_gate": {
+    "by_model": [
+      {
+        "all_four_quadrants": true,
+        "less_than_upfront_retrieval": true,
+        "model_label": "Qwen3-0.6B",
+        "ucr_improved": true
+      },
+      {
+        "all_four_quadrants": false,
+        "less_than_upfront_retrieval": true,
+        "model_label": "SmolLM2-1.7B",
+        "ucr_improved": true
+      },
+      {
+        "all_four_quadrants": true,
+        "less_than_upfront_retrieval": true,
+        "model_label": "Gemma3-1B",
+        "ucr_improved": true
+      }
+    ],
+    "criterion": "At least two model families reduce UCR with the runtime gate while retrieving less often than upfront RAG.",
+    "passing_models": 3,
+    "status": "go"
+  },
+  "rows": [
+    {
+      "accuracy": 0.2375,
+      "authorized_commitment_coverage": 0.0,
+      "condition": "llm_only",
+      "mean_generated_tokens": 6.275,
+      "mean_wall_time_ms": 927.91003,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 1.0,
+      "retrieval_rate": 0.0,
+      "retrieval_recall": 0.0,
+      "unsupported_commitment_rate": 1.0
+    },
+    {
+      "accuracy": 0.85,
+      "authorized_commitment_coverage": 0.75,
+      "condition": "upfront_rag",
+      "mean_generated_tokens": 6.9,
+      "mean_wall_time_ms": 1240.06954125,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 0.5,
+      "retrieval_rate": 1.0,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.25
+    },
+    {
+      "accuracy": 0.625,
+      "authorized_commitment_coverage": 0.325,
+      "condition": "flare_like",
+      "mean_generated_tokens": 8.8625,
+      "mean_wall_time_ms": 1397.22405375,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 0.5,
+      "retrieval_rate": 0.5,
+      "retrieval_recall": 0.5,
+      "unsupported_commitment_rate": 0.675
+    },
+    {
+      "accuracy": 0.6125,
+      "authorized_commitment_coverage": 0.75,
+      "condition": "semantic",
+      "mean_generated_tokens": 10.2125,
+      "mean_wall_time_ms": 1654.18524375,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 0.975609756097561,
+      "retrieval_rate": 0.5125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.25
+    },
+    {
+      "accuracy": 0.8375,
+      "authorized_commitment_coverage": 0.75,
+      "condition": "confidence_or_semantic",
+      "mean_generated_tokens": 10.975,
+      "mean_wall_time_ms": 1779.44879125,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 0.6557377049180327,
+      "retrieval_rate": 0.7625,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.25
+    },
+    {
+      "accuracy": 0.95,
+      "authorized_commitment_coverage": 1.0,
+      "condition": "evidence_advisory",
+      "mean_generated_tokens": 11.6875,
+      "mean_wall_time_ms": 1851.19415875,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 0.6557377049180327,
+      "retrieval_rate": 0.7625,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.0
+    },
+    {
+      "accuracy": 0.8375,
+      "authorized_commitment_coverage": 0.75,
+      "condition": "evidence_abstention",
+      "mean_generated_tokens": 10.975,
+      "mean_wall_time_ms": 1779.44879125,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 0.6557377049180327,
+      "retrieval_rate": 0.7625,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.25
+    },
+    {
+      "accuracy": 0.975,
+      "authorized_commitment_coverage": 1.0,
+      "condition": "runtime_epistemic_gate",
+      "mean_generated_tokens": 6.275,
+      "mean_wall_time_ms": 927.91003,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 0.6557377049180327,
+      "retrieval_rate": 0.7625,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.0
+    },
+    {
+      "accuracy": 0.6125,
+      "authorized_commitment_coverage": 0.75,
+      "condition": "oracle",
+      "mean_generated_tokens": 10.15,
+      "mean_wall_time_ms": 1642.80519375,
+      "model_label": "Qwen3-0.6B",
+      "retrieval_precision": 1.0,
+      "retrieval_rate": 0.5,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.25
+    },
+    {
+      "accuracy": 0.4625,
+      "authorized_commitment_coverage": 0.0,
+      "condition": "llm_only",
+      "mean_generated_tokens": 5.05,
+      "mean_wall_time_ms": 2082.14780875,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 1.0,
+      "retrieval_rate": 0.0,
+      "retrieval_recall": 0.0,
+      "unsupported_commitment_rate": 1.0
+    },
+    {
+      "accuracy": 0.4,
+      "authorized_commitment_coverage": 0.225,
+      "condition": "upfront_rag",
+      "mean_generated_tokens": 5.95,
+      "mean_wall_time_ms": 3616.72646375,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 0.5,
+      "retrieval_rate": 1.0,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.775
+    },
+    {
+      "accuracy": 0.4625,
+      "authorized_commitment_coverage": 0.0,
+      "condition": "flare_like",
+      "mean_generated_tokens": 5.05,
+      "mean_wall_time_ms": 2082.14780875,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 1.0,
+      "retrieval_rate": 0.0,
+      "retrieval_recall": 0.0,
+      "unsupported_commitment_rate": 1.0
+    },
+    {
+      "accuracy": 0.575,
+      "authorized_commitment_coverage": 0.225,
+      "condition": "semantic",
+      "mean_generated_tokens": 8.1875,
+      "mean_wall_time_ms": 4038.69062,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 0.975609756097561,
+      "retrieval_rate": 0.5125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.775
+    },
+    {
+      "accuracy": 0.575,
+      "authorized_commitment_coverage": 0.225,
+      "condition": "confidence_or_semantic",
+      "mean_generated_tokens": 8.1875,
+      "mean_wall_time_ms": 4038.69062,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 0.975609756097561,
+      "retrieval_rate": 0.5125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.775
+    },
+    {
+      "accuracy": 0.475,
+      "authorized_commitment_coverage": 0.025,
+      "condition": "evidence_advisory",
+      "mean_generated_tokens": 7.05,
+      "mean_wall_time_ms": 2922.63092625,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 0.975609756097561,
+      "retrieval_rate": 0.5125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.975
+    },
+    {
+      "accuracy": 0.575,
+      "authorized_commitment_coverage": 0.225,
+      "condition": "evidence_abstention",
+      "mean_generated_tokens": 8.1875,
+      "mean_wall_time_ms": 4038.69062,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 0.975609756097561,
+      "retrieval_rate": 0.5125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.775
+    },
+    {
+      "accuracy": 0.9625,
+      "authorized_commitment_coverage": 1.0,
+      "condition": "runtime_epistemic_gate",
+      "mean_generated_tokens": 5.05,
+      "mean_wall_time_ms": 2082.14780875,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 0.975609756097561,
+      "retrieval_rate": 0.5125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.0
+    },
+    {
+      "accuracy": 0.575,
+      "authorized_commitment_coverage": 0.225,
+      "condition": "oracle",
+      "mean_generated_tokens": 8.1,
+      "mean_wall_time_ms": 3985.1381075,
+      "model_label": "SmolLM2-1.7B",
+      "retrieval_precision": 1.0,
+      "retrieval_rate": 0.5,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.775
+    },
+    {
+      "accuracy": 0.4625,
+      "authorized_commitment_coverage": 0.0,
+      "condition": "llm_only",
+      "mean_generated_tokens": 4.325,
+      "mean_wall_time_ms": 1203.7589875,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 1.0,
+      "retrieval_rate": 0.0,
+      "retrieval_recall": 0.0,
+      "unsupported_commitment_rate": 1.0
+    },
+    {
+      "accuracy": 0.825,
+      "authorized_commitment_coverage": 0.7,
+      "condition": "upfront_rag",
+      "mean_generated_tokens": 6.7875,
+      "mean_wall_time_ms": 2143.9086125,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 0.5,
+      "retrieval_rate": 1.0,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.3
+    },
+    {
+      "accuracy": 0.8125,
+      "authorized_commitment_coverage": 0.675,
+      "condition": "flare_like",
+      "mean_generated_tokens": 10.8,
+      "mean_wall_time_ms": 3251.51749625,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 0.5416666666666666,
+      "retrieval_rate": 0.9,
+      "retrieval_recall": 0.975,
+      "unsupported_commitment_rate": 0.325
+    },
+    {
+      "accuracy": 0.8,
+      "authorized_commitment_coverage": 0.7,
+      "condition": "semantic",
+      "mean_generated_tokens": 8.3,
+      "mean_wall_time_ms": 2468.680945,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 0.975609756097561,
+      "retrieval_rate": 0.5125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.3
+    },
+    {
+      "accuracy": 0.825,
+      "authorized_commitment_coverage": 0.7,
+      "condition": "confidence_or_semantic",
+      "mean_generated_tokens": 10.9125,
+      "mean_wall_time_ms": 3287.18673625,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 0.547945205479452,
+      "retrieval_rate": 0.9125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.3
+    },
+    {
+      "accuracy": 0.5125,
+      "authorized_commitment_coverage": 0.05,
+      "condition": "evidence_advisory",
+      "mean_generated_tokens": 9.625,
+      "mean_wall_time_ms": 2788.5014025,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 0.547945205479452,
+      "retrieval_rate": 0.9125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.95
+    },
+    {
+      "accuracy": 0.825,
+      "authorized_commitment_coverage": 0.7,
+      "condition": "evidence_abstention",
+      "mean_generated_tokens": 10.9125,
+      "mean_wall_time_ms": 3287.18673625,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 0.547945205479452,
+      "retrieval_rate": 0.9125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.3
+    },
+    {
+      "accuracy": 0.775,
+      "authorized_commitment_coverage": 1.0,
+      "condition": "runtime_epistemic_gate",
+      "mean_generated_tokens": 4.325,
+      "mean_wall_time_ms": 1203.7589875,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 0.547945205479452,
+      "retrieval_rate": 0.9125,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.0
+    },
+    {
+      "accuracy": 0.8125,
+      "authorized_commitment_coverage": 0.7,
+      "condition": "oracle",
+      "mean_generated_tokens": 8.2625,
+      "mean_wall_time_ms": 2456.960355,
+      "model_label": "Gemma3-1B",
+      "retrieval_precision": 1.0,
+      "retrieval_rate": 0.5,
+      "retrieval_recall": 1.0,
+      "unsupported_commitment_rate": 0.3
+    }
+  ],
+  "schema_version": "ccpu.paper1_5.next_analysis.v1",
+  "sources": [
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\qwen_v2\\summary.json",
+      "sha256": "39dfd5e82d9cdb868481e25f244ecc864f77e7feb54ede8d390137a37c062920"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\smollm2_v1\\summary.json",
+      "sha256": "678cd3d734c7f15567a72440b01fd44f7f8abe73a1d8e8e79ff123bc806c4aca"
+    },
+    {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1_5\\next_iter\\gemma3_v1\\summary.json",
+      "sha256": "031a404c77e5e53eb37c3e9d44f6430b0efe4afddaa2d5916e95ec5c35cd32d3"
+    }
+  ]
+}

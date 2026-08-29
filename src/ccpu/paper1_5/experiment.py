@@ -21,6 +21,9 @@ CONDITIONS = (
     "confidence_or_semantic",
     "confidence_and_semantic",
     "retrospective",
+    "evidence_advisory",
+    "evidence_abstention",
+    "runtime_epistemic_gate",
     "oracle",
 )
 
@@ -38,7 +41,7 @@ def answers_equal(predicted: str, gold: str) -> bool:
     return " ".join(predicted.casefold().split()) == " ".join(gold.casefold().split())
 
 
-def _base_prompt(example: RetrievalExample) -> str:
+def base_prompt(example: RetrievalExample) -> str:
     return f"Answer with only the value and no explanation.\nQuestion: {example.question}\nAnswer:"
 
 
@@ -80,6 +83,21 @@ def _evidence_prompt(
     )
 
 
+def _advisory_prompt(example: RetrievalExample, evidence: dict[str, Any]) -> str:
+    return (
+        "The following controlled-source evidence is advisory. Answer with only a value; "
+        "you may abstain if evidence is insufficient or conflicting."
+        f"\nEvidence status: {evidence['status']}; values: "
+        f"{', '.join(str(value) for value in evidence['values']) or 'none'}."
+        f"\nQuestion: {example.question}\nAnswer:"
+    )
+
+
+def _authorized_answer(evidence: dict[str, Any]) -> str:
+    values = tuple(str(value) for value in evidence["values"])
+    return values[0] if len(values) == 1 else "ABSTAIN"
+
+
 def _cost(*spans: ConfidenceSpan) -> dict[str, int]:
     return {
         "prompt_tokens": sum(span.prompt_tokens for span in spans),
@@ -96,7 +114,7 @@ def run_huggingface(
     *,
     seed: int,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], float]:
-    base = {example.example_id: backend.complete(_base_prompt(example), seed=seed) for example in examples}
+    base = {example.example_id: backend.complete(base_prompt(example), seed=seed) for example in examples}
     development = [
         (base[example.example_id].token_probabilities, example.evidence_required)
         for example in examples
@@ -136,6 +154,7 @@ def run_huggingface(
         result = store.execute(request)
         retrieval_time_ns = time.perf_counter_ns() - retrieval_started
         grounded = backend.complete(_evidence_prompt(example, result.value), seed=seed)
+        advisory = backend.complete(_advisory_prompt(example, result.value), seed=seed)
         retrospective = backend.complete(
             _evidence_prompt(example, result.value, draft=forecast_answer), seed=seed
         )
@@ -150,6 +169,9 @@ def run_huggingface(
             "confidence_or_semantic": decision.for_condition("confidence_or_semantic"),
             "confidence_and_semantic": decision.for_condition("confidence_and_semantic"),
             "retrospective": decision.for_condition("retrospective"),
+            "evidence_advisory": decision.for_condition("confidence_or_semantic"),
+            "evidence_abstention": decision.for_condition("confidence_or_semantic"),
+            "runtime_epistemic_gate": decision.for_condition("confidence_or_semantic"),
             "oracle": example.evidence_required,
         }
 
@@ -166,16 +188,25 @@ def run_huggingface(
                 spans = (tool, grounded) if retrieved else (tool,)
             elif condition == "retrospective" and retrieved:
                 final_span, spans = retrospective, (forecast, retrospective)
+            elif condition == "evidence_advisory" and retrieved:
+                final_span, spans = advisory, (forecast, advisory)
+            elif condition == "evidence_abstention" and retrieved:
+                final_span, spans = grounded, (forecast, grounded)
+            elif condition == "runtime_epistemic_gate" and retrieved:
+                final_span, spans = forecast, (forecast,)
             elif retrieved:
                 final_span, spans = grounded, (forecast, grounded)
             else:
                 final_span, spans = forecast, (forecast,)
 
             final_answer = extract_answer(final_span.text)
+            runtime_enforced = condition == "runtime_epistemic_gate" and retrieved
+            if runtime_enforced:
+                final_answer = _authorized_answer(result.value)
             low_confidence = decision.confidence
             quadrant = f"{'low' if low_confidence else 'high'}_confidence__{'high' if example.evidence_required else 'low'}_risk"
             prediction = {
-                "schema_version": "ccpu.paper1_5.prediction.v1",
+                "schema_version": "ccpu.paper1_5.prediction.v2",
                 "example_id": example.example_id,
                 "split": example.split,
                 "condition": condition,
@@ -204,13 +235,25 @@ def run_huggingface(
                 "request": request.to_dict() if retrieved else None,
                 "evidence": result.value if retrieved else None,
                 "evidence_status": result.value["status"] if retrieved else None,
+                "evidence_sufficient": bool(len(result.value["values"]) == 1),
+                "runtime_enforced": runtime_enforced,
+                "unsupported_commitment": bool(
+                    example.evidence_required
+                    and final_answer.casefold() != "abstain"
+                    and not answers_equal(final_answer, example.answer)
+                ),
+                "authorized_commitment": bool(
+                    example.evidence_required
+                    and example.answer.casefold() != "abstain"
+                    and answers_equal(final_answer, example.answer)
+                ),
                 "retrieval_time_ns": retrieval_time_ns if retrieved else 0,
                 **_cost(*spans),
             }
             predictions.append(prediction)
             traces.append(
                 {
-                    "schema_version": "ccpu.paper1_5.trace.v1",
+                    "schema_version": "ccpu.paper1_5.trace.v2",
                     "example_id": example.example_id,
                     "condition": condition,
                     "forecast": forecast.to_dict(),
@@ -225,6 +268,7 @@ def run_huggingface(
                     "request": request.to_dict() if retrieved else None,
                     "result": result.to_dict() if retrieved else None,
                     "retrospective": condition == "retrospective",
+                    "runtime_enforced": runtime_enforced,
                 }
             )
     return predictions, traces, threshold

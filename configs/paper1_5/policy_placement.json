@@ -1,0 +1,26 @@
+{
+  "schema_version": "ccpu.paper1_5.policy_placement_config.v1",
+  "models": [
+    {
+      "model_label": "Qwen3-0.6B",
+      "context_summary": "../../artifacts/paper1_5/next_iter/policy_context_qwen_v1/summary.json",
+      "weights_summary": "../../artifacts/paper1_5/next_iter/policy_weights_qwen_v1/summary.json",
+      "weights_predictions": "../../artifacts/paper1_5/next_iter/policy_weights_qwen_v1/predictions.jsonl",
+      "phase_a_predictions": "../../artifacts/paper1_5/next_iter/qwen_v2/predictions.jsonl"
+    },
+    {
+      "model_label": "SmolLM2-1.7B",
+      "context_summary": "../../artifacts/paper1_5/next_iter/policy_context_smollm2_v1/summary.json",
+      "weights_summary": "../../artifacts/paper1_5/next_iter/policy_weights_smollm2_v1/summary.json",
+      "weights_predictions": "../../artifacts/paper1_5/next_iter/policy_weights_smollm2_v1/predictions.jsonl",
+      "phase_a_predictions": "../../artifacts/paper1_5/next_iter/smollm2_v1/predictions.jsonl"
+    },
+    {
+      "model_label": "Gemma3-1B",
+      "context_summary": "../../artifacts/paper1_5/next_iter/policy_context_gemma3_v1/summary.json",
+      "weights_summary": "../../artifacts/paper1_5/next_iter/policy_weights_gemma3_v1/summary.json",
+      "weights_predictions": "../../artifacts/paper1_5/next_iter/policy_weights_gemma3_v1/predictions.jsonl",
+      "phase_a_predictions": "../../artifacts/paper1_5/next_iter/gemma3_v1/predictions.jsonl"
+    }
+  ]
+}
