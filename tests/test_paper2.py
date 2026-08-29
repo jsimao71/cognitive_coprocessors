@@ -4,6 +4,13 @@ from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl, write_jsonl
 from ccpu.common.schema import CoprocessorRequest, GenerationResult
 from ccpu.paper2.composition import run_compositions
+from ccpu.paper2.diagnostic import (
+    DiagnosticBenchmarkConfig,
+    analyze_trigger_ladder,
+    deterministic_payload,
+    generate_diagnostic_benchmark,
+    lexical_audit,
+)
 from ccpu.paper2.graph import FrameGraphEngine
 from ccpu.paper2.logic import HornEngine
 from ccpu.paper2.next_experiment import (
@@ -333,3 +340,53 @@ def test_twil_strict_rescore_denies_credit_for_wrong_formalization():
     assert not scored["execution_correct"]
     assert not scored["final_correct"]
     assert scored["failure_type"] == "wrong_engine"
+
+
+def test_diagnostic_benchmark_and_cpu_factorization(tmp_path):
+    data = tmp_path / "data"
+    result = generate_diagnostic_benchmark(
+        DiagnosticBenchmarkConfig(
+            train_per_engine=6,
+            dev_per_engine=2,
+            test_per_engine=4,
+            train_controls=24,
+            dev_controls=8,
+            test_controls=16,
+        ),
+        data,
+    )
+    assert result["config"]["train_per_engine"] == 6
+    assert set(result["dataset_sha256"]) == {"train", "dev", "test"}
+    assert result["environment"]["git"]["revision"]
+    audit = read_json(data / "audit.json")
+    assert audit["duplicate_ids"] == 0
+    assert audit["target_contains_answer"] == []
+    assert audit["balanced_logic_labels"]["test"]["graph"] == {
+        "false": 2,
+        "true": 2,
+    }
+    lexical = lexical_audit(data / "train.jsonl", data / "test.jsonl")
+    assert len(lexical["results"]) == 4
+    assert lexical["train_sha256"] == result["dataset_sha256"]["train"]
+    analysis = analyze_trigger_ladder(
+        data / "train.jsonl", data / "test.jsonl", tmp_path / "analysis"
+    )
+    by_condition = {row["condition"]: row for row in analysis["trigger_ladder"]}
+    assert by_condition["C_oracle_engine_parser"]["runtime_exact_rate"] == 1.0
+    assert analysis["decision"]["status"] in {
+        "prefer_semantic_cpu",
+        "escalate_neural_router",
+    }
+    assert "benchmark_passing_conditions" in analysis["decision"]
+    assert analysis["test_sha256"] == result["dataset_sha256"]["test"]
+    predictions = read_jsonl(tmp_path / "analysis" / "parser_predictions.jsonl")
+    assert {row["condition"] for row in predictions} == {
+        "T0_anchored_parser",
+        "T1_lexical_regex",
+        "T2_semantic_rules",
+        "T3_tfidf_linear",
+        "T4_latent_cpu_classifier",
+    }
+    assert deterministic_payload(
+        "Give the integer result for the expression 17 * 19.", "CALCULATOR"
+    ) == "```calculator\n17 * 19\n```"

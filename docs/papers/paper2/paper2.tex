@@ -26,9 +26,14 @@ at five engines, Qwen, SmolLM2, and Gemma reach engine-selection rates of 0.188,
 the Qwen or SmolLM2 result-use pass is overridden.  In-context demonstrations
 recover some engine families but grow from 39 to 118 static lexical interface
 tokens and reach false-activation rates of 0.9--1.0 at several catalog sizes.
-Textual schemas remain safe but inert.  Thus exact execution belongs in the
-runtime, but this experiment does not establish a reliable home for broad
-semantic selection.  The preregistered Paper 3 gate is therefore \texttt{no\_go}.
+Textual schemas remain safe but inert.  A follow-up factorization adds 2,250
+train, 450 development, and 900 test rows.  Its oracle-engine deterministic
+parser is exact.  A benchmark-specific lexical router reaches 0.900 engine
+selection and runtime exactness with zero false activation, whereas semantic
+rules select 0.800 but execute 1.000 by substituting graph closure for Datalog,
+and learned CPU routers select only 0.588 with 0.400 false activation.  Thus
+exact execution and parsing belong in the runtime, but broad semantic selection
+and result use remain unresolved.  The Paper 3 gate remains \texttt{no\_go}.
 \end{abstract}
 
 \section{Question and decision rule}
@@ -177,6 +182,27 @@ that caveat.  Costs include static lexical interface tokens, model tokenizer
 prompt and generated tokens, reinjection tokens, model and engine calls, CPU
 engine time, XPU wall time, and typed-state bytes/items.
 
+\subsection{Post-gate diagnostic benchmark}
+
+After the confirmatory failure, we freeze a larger diagnosis rather than tune
+against the original test.  It contains 250 training, 50 development, and 100
+test positives per engine, plus 1,000/200/400 controls: 2,250/450/900 rows in
+total.  Split-specific paraphrase frames and entity namespaces are disjoint;
+graph and Datalog truth labels are balanced; audits find no duplicate IDs,
+cross-split prompt overlap, or answer tokens in request targets.  Arithmetic now
+includes three operations, dates include offset and difference, units span
+length/mass/time, and controls contain engine vocabulary without requesting
+execution.
+
+We separate six-way classification from payload construction.  T0 is the old
+anchored parser, T1 lexical/regex routing, T2 per-engine semantic parsing, T3 a
+word-ngram TF--IDF logistic classifier, and T4 a 48-dimensional TF--IDF/SVD
+classifier.  Every selected engine feeds the same deterministic per-engine
+payload parser and bounded runtime.  An oracle engine label with that parser is
+the serialization upper bound.  The semantic gate requires at least 0.9 engine
+selection and runtime exactness with false activation at most 0.1; T1 is retained
+separately as a benchmark-specific deployment baseline.
+
 \section{Results}
 
 \subsection{Five-engine outcome}
@@ -233,6 +259,64 @@ Gemma3-1B & 0 & 0 & 0 & 0 & 0 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{Post-gate factorization: routing, not execution}
+
+Table~\ref{tab:diagnostic} isolates the failure.  With the gold engine, the
+deterministic parser obtains 1.000 payload and runtime exactness and zero control
+activation.  T1 reaches the numerical threshold but depends directly on the
+benchmark lexicon.  T2 identifies four of five positive engine families.  It
+maps Datalog reachability to graph closure, so payload and engine identity score
+0.800 while all positive answers remain runtime-exact.  This is useful engine
+substitutability, not correct protocol selection.
+
+\begin{table}[ht]
+\centering
+\caption{CPU trigger-ladder diagnosis on 500 positives and 400 controls. Payload
+and runtime are positive-row rates; FAR is over controls.}
+\label{tab:diagnostic}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Condition & Select & Payload exact & Runtime exact & FAR & Mean route $\mu$s \\
+\midrule
+T0 anchored parser & 0.000 & 0.000 & 0.000 & 0.000 & 0.7 \\
+T1 lexical/regex & 0.900 & 0.900 & 0.900 & 0.000 & 4.6 \\
+T2 semantic rules & 0.800 & 0.800 & 1.000 & 0.000 & 9.3 \\
+T3 TF--IDF linear & 0.588 & 0.588 & 0.688 & 0.400 & 13.1 \\
+T4 latent CPU & 0.588 & 0.588 & 0.688 & 0.400 & 14.3 \\
+Oracle engine + parser & 1.000 & 1.000 & 1.000 & 0.000 & -- \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.92\linewidth]{paper2_trigger_ladder.png}
+\caption{Six-way routing accuracy and end-to-end runtime exactness.  The oracle
+parser bounds serialization; T1 is lexical and T2 exploits graph/Datalog
+semantic equivalence rather than selecting every engine correctly.}
+\label{fig:trigger-ladder}
+\end{figure}
+
+Shallow lexical audits do not solve the six-way task: bag-of-words, word-ngram,
+character-ngram, and latent classifiers obtain 0.633, 0.593, 0.773, and 0.593
+accuracy, respectively.  Their best positive engine-selection rate is 0.592.
+For word TF--IDF, increasing examples per engine from 25 to 250 raises trigger
+recall from 0.570 to 0.988 but also raises FAR from 0 to 0.400; selection ends at
+0.588.  More rows therefore expose a decision-boundary problem rather than
+repairing it.  The next justified neural experiment is factorized six-way
+routing, not another joint free-form block generator.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.78\linewidth]{paper2_diagnostic_learning_curves.png}
+\caption{Word TF--IDF does not approach reliable six-way selection as the
+training set grows; increasing trigger recall is accompanied by control
+activation.}
+\label{fig:diagnostic-learning}
+\end{figure}
 
 \subsection{Capability-count scaling and interference}
 
@@ -322,12 +406,20 @@ preserving the engine result remains unreliable.
       compositions.
 \item H6 (small-model augmentation closes a large-model gap) is not tested; no
       larger-model comparison is used to rescue a failed small-model gate.
+\item H7 (deterministic serialization is the dominant failure) is falsified by
+      the exact oracle-engine parser; semantic routing is the remaining upstream
+      bottleneck, with result use remaining downstream.
 \end{itemize}
 
 The machine-readable gate artifact records \texttt{status: no\_go} and an empty
 passing-model list.  Paper 3 may still study implicit semantic interrupts as a
 new exploratory question, but this explicit multi-engine result does not justify
 claiming a reliable learned predecessor.
+
+The post-gate diagnostic does not reverse this decision.  T1 is the cheapest
+passing baseline for the frozen language, but no T2--T4 semantic route clears the
+selection criterion.  Consequently Paper 3 remains paused while factorized
+neural routing and result-use controls are tested.
 
 \section{Limitations}
 
@@ -342,6 +434,12 @@ question-answer benchmark.  We do not add the optional sixth engine, a generic
 code interpreter, an unrestricted planner, larger models, or a model-authored
 composition study after the core gate fails.  Finally, measured XPU wall time is
 backend- and machine-specific.
+
+The larger diagnosis is still synthetic and has only split-level template
+separation, not naturally authored language.  T1 should therefore not be read as
+open-domain robustness.  Graph and Datalog deliberately share a transitive
+closure subproblem; T2's runtime success shows functional substitution but also
+why answer-only scoring would conceal routing errors.
 
 A post-study TwIL-LM3/SmolLM3-3B interface pilot is retained in the repository
 but excluded from the headline results.  Its Horn and graph labels were all
@@ -372,11 +470,28 @@ python -m ccpu paper2 run-next \
 python -m ccpu paper2 analyze-next \
   --config configs/paper2/next_analysis.json \
   --output-dir artifacts/paper2/next_iter/analysis_v1
+
+python -m ccpu paper2 generate-diagnostic \
+  --config configs/paper2/diagnostic_cpu.json \
+  --output-dir artifacts/paper2/diagnostic_v1/data
+
+python -m ccpu paper2 audit-diagnostic \
+  --train artifacts/paper2/diagnostic_v1/data/train.jsonl \
+  --test artifacts/paper2/diagnostic_v1/data/test.jsonl \
+  --output artifacts/paper2/diagnostic_v1/lexical_audit.json
+
+python -m ccpu paper2 analyze-diagnostic \
+  --train artifacts/paper2/diagnostic_v1/data/train.jsonl \
+  --test artifacts/paper2/diagnostic_v1/data/test.jsonl \
+  --output-dir artifacts/paper2/diagnostic_v1/analysis
 \end{verbatim}
 
-Every run stores predictions, factorized summaries, dataset and artifact hashes,
-pinned model metadata, package/device provenance, and the dirty Git revision at
-execution time.  The analysis artifact hashes all 22 source summaries.
+The original model runs store predictions, factorized summaries, dataset and
+artifact hashes, pinned model metadata, package/device provenance, and the dirty
+Git revision at execution time.  The earlier analysis artifact hashes all 22
+source summaries.  The CPU diagnostic manifests record split/source hashes,
+configuration, Python/platform/Git environment, predictions, and aggregate
+reports.
 
 \section{Related work}
 
@@ -400,6 +515,9 @@ to preserve exact returned values.  The missing component is therefore not
 another exact engine; it is a reliable, independently validated semantic
 selection and result-use policy.  Until that component clears a multi-family
 held-out gate, heterogeneous learned reflex reasoning remains unconfirmed.
+The larger factorization narrows the next step: keep deterministic per-engine
+serialization, retain lexical routing as a bounded baseline, and train/evaluate
+semantic selection independently before spending capacity on generation.
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.

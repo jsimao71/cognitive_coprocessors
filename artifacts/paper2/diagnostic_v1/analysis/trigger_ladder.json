@@ -1,0 +1,164 @@
+{
+  "decision": {
+    "benchmark_passing_conditions": [
+      "T1_lexical_regex"
+    ],
+    "criterion": ">=0.9 engine selection/runtime exact and <=0.1 false activation; semantic decision considers T2-T4",
+    "deployment_baseline": "T1_lexical_regex",
+    "lora_gate": "run_factorized_lora",
+    "semantic_passing_conditions": [],
+    "status": "escalate_neural_router"
+  },
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "9e06b2d13e6263e73ad3194f3640167629c0b1d4"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "learning_curves": [
+    {
+      "accuracy": 0.7055555555555556,
+      "condition": "n=25",
+      "engine_selection_accuracy": 0.47,
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.6178493764700661,
+      "mean_cpu_latency_us": 0.0,
+      "per_engine_train": 25,
+      "train_count": 225,
+      "trigger_recall": 0.57
+    },
+    {
+      "accuracy": 0.7155555555555555,
+      "condition": "n=50",
+      "engine_selection_accuracy": 0.488,
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.6012186478267828,
+      "mean_cpu_latency_us": 0.0,
+      "per_engine_train": 50,
+      "train_count": 450,
+      "trigger_recall": 0.688
+    },
+    {
+      "accuracy": 0.63,
+      "condition": "n=100",
+      "engine_selection_accuracy": 0.588,
+      "false_activation_rate": 0.3175,
+      "macro_f1": 0.5435010748961818,
+      "mean_cpu_latency_us": 0.0,
+      "per_engine_train": 100,
+      "train_count": 900,
+      "trigger_recall": 0.89
+    },
+    {
+      "accuracy": 0.5933333333333334,
+      "condition": "n=250",
+      "engine_selection_accuracy": 0.588,
+      "false_activation_rate": 0.4,
+      "macro_f1": 0.5429950505751145,
+      "mean_cpu_latency_us": 0.0,
+      "per_engine_train": 250,
+      "train_count": 2250,
+      "trigger_recall": 0.988
+    }
+  ],
+  "schema_version": "ccpu.paper2.trigger_ladder_analysis.v1",
+  "test_count": 900,
+  "test_sha256": "aef0ed745e73a298460c193052aa0ae2ca6a8ed15b4541eaf125def1006ca7fc",
+  "train_count": 2250,
+  "train_sha256": "2da5aa219cc97731d09867a2b5985a3d32543599ceb659fe5b50e206d812145e",
+  "trigger_ladder": [
+    {
+      "accuracy": 0.4444444444444444,
+      "condition": "T0_anchored_parser",
+      "engine_selection_accuracy": 0.0,
+      "engineering_burden": "low; brittle templates",
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.10256410256410257,
+      "mean_cpu_latency_us": 0.7862222222222222,
+      "mean_parse_execute_latency_us": 0.06822222222222223,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.0,
+      "portability": "high",
+      "runtime_exact_rate": 0.0,
+      "trigger_recall": 0.0
+    },
+    {
+      "accuracy": 0.9444444444444444,
+      "condition": "T1_lexical_regex",
+      "engine_selection_accuracy": 0.9,
+      "engineering_burden": "low; cue maintenance",
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.9346405228758171,
+      "mean_cpu_latency_us": 4.687222222222223,
+      "mean_parse_execute_latency_us": 46.76166666666666,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.9,
+      "portability": "high",
+      "runtime_exact_rate": 0.9,
+      "trigger_recall": 0.9
+    },
+    {
+      "accuracy": 0.8888888888888888,
+      "condition": "T2_semantic_rules",
+      "engine_selection_accuracy": 0.8,
+      "engineering_burden": "medium; per-engine grammar",
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.7777777777777777,
+      "mean_cpu_latency_us": 7.148888888888889,
+      "mean_parse_execute_latency_us": 35.064,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.8,
+      "portability": "high",
+      "runtime_exact_rate": 1.0,
+      "trigger_recall": 1.0
+    },
+    {
+      "accuracy": 0.5933333333333334,
+      "condition": "T3_tfidf_linear",
+      "engine_selection_accuracy": 0.588,
+      "engineering_burden": "medium; retraining and audit",
+      "false_activation_rate": 0.4,
+      "macro_f1": 0.5429950505751145,
+      "mean_cpu_latency_us": 11.229555555555555,
+      "mean_parse_execute_latency_us": 42.538444444444444,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.588,
+      "portability": "high",
+      "runtime_exact_rate": 0.688,
+      "trigger_recall": 0.988
+    },
+    {
+      "accuracy": 0.5933333333333334,
+      "condition": "T4_latent_cpu_classifier",
+      "engine_selection_accuracy": 0.588,
+      "engineering_burden": "medium; latent projection",
+      "false_activation_rate": 0.4,
+      "macro_f1": 0.5429950505751145,
+      "mean_cpu_latency_us": 14.144,
+      "mean_parse_execute_latency_us": 42.65188888888889,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.588,
+      "portability": "medium",
+      "runtime_exact_rate": 0.688,
+      "trigger_recall": 0.988
+    },
+    {
+      "accuracy": 1.0,
+      "condition": "C_oracle_engine_parser",
+      "engine_selection_accuracy": 1.0,
+      "engineering_burden": "per-engine grammar",
+      "false_activation_rate": 0.0,
+      "macro_f1": 1.0,
+      "mean_cpu_latency_us": 0.0,
+      "mean_parse_execute_latency_us": 48.226888888888894,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 1.0,
+      "portability": "high",
+      "runtime_exact_rate": 1.0,
+      "trigger_recall": 1.0
+    }
+  ]
+}

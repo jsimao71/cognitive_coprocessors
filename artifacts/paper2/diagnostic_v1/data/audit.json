@@ -1,0 +1,71 @@
+{
+  "balanced_logic_labels": {
+    "dev": {
+      "datalog": {
+        "false": 25,
+        "true": 25
+      },
+      "graph": {
+        "false": 25,
+        "true": 25
+      }
+    },
+    "test": {
+      "datalog": {
+        "false": 50,
+        "true": 50
+      },
+      "graph": {
+        "false": 50,
+        "true": 50
+      }
+    },
+    "train": {
+      "datalog": {
+        "false": 125,
+        "true": 125
+      },
+      "graph": {
+        "false": 125,
+        "true": 125
+      }
+    }
+  },
+  "class_counts": {
+    "dev": {
+      "CALCULATOR": 50,
+      "DATALOG": 50,
+      "DATE": 50,
+      "GRAPH": 50,
+      "NONE": 200,
+      "UNITS": 50
+    },
+    "test": {
+      "CALCULATOR": 100,
+      "DATALOG": 100,
+      "DATE": 100,
+      "GRAPH": 100,
+      "NONE": 400,
+      "UNITS": 100
+    },
+    "train": {
+      "CALCULATOR": 250,
+      "DATALOG": 250,
+      "DATE": 250,
+      "GRAPH": 250,
+      "NONE": 1000,
+      "UNITS": 250
+    }
+  },
+  "counts": {
+    "dev": 450,
+    "test": 900,
+    "train": 2250
+  },
+  "dev_test_overlap": [],
+  "duplicate_ids": 0,
+  "schema_version": "ccpu.paper2.diagnostic_audit.v1",
+  "target_contains_answer": [],
+  "train_dev_overlap": [],
+  "train_test_overlap": []
+}

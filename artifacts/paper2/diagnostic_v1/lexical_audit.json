@@ -1,0 +1,55 @@
+{
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "9e06b2d13e6263e73ad3194f3640167629c0b1d4"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "maximum_accuracy": 0.7733333333333333,
+  "results": [
+    {
+      "accuracy": 0.6333333333333333,
+      "condition": "bag_of_words",
+      "engine_selection_accuracy": 0.5,
+      "false_activation_rate": 0.2,
+      "macro_f1": 0.5358784022622834,
+      "mean_cpu_latency_us": 6.4463333333333335,
+      "trigger_recall": 0.8
+    },
+    {
+      "accuracy": 0.5933333333333334,
+      "condition": "tfidf_word_ngrams",
+      "engine_selection_accuracy": 0.588,
+      "false_activation_rate": 0.4,
+      "macro_f1": 0.5429950505751145,
+      "mean_cpu_latency_us": 12.040666666666667,
+      "trigger_recall": 0.988
+    },
+    {
+      "accuracy": 0.7733333333333333,
+      "condition": "tfidf_character_ngrams",
+      "engine_selection_accuracy": 0.592,
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.6725031920101108,
+      "mean_cpu_latency_us": 55.273,
+      "trigger_recall": 0.792
+    },
+    {
+      "accuracy": 0.5933333333333334,
+      "condition": "latent_tfidf_svd",
+      "engine_selection_accuracy": 0.588,
+      "false_activation_rate": 0.4,
+      "macro_f1": 0.5429950505751145,
+      "mean_cpu_latency_us": 13.478222222222223,
+      "trigger_recall": 0.988
+    }
+  ],
+  "schema_version": "ccpu.paper2.diagnostic_lexical_audit.v1",
+  "test_count": 900,
+  "test_sha256": "aef0ed745e73a298460c193052aa0ae2ca6a8ed15b4541eaf125def1006ca7fc",
+  "train_count": 2250,
+  "train_sha256": "2da5aa219cc97731d09867a2b5985a3d32543599ceb659fe5b50e206d812145e"
+}

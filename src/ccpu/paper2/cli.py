@@ -20,6 +20,12 @@ from ccpu.paper1.lora_train import LoRATrainingConfig, train_lora
 from .benchmark_next import NextBenchmarkConfig, generate_next_benchmark
 from .composition import run_compositions
 from .dataset import MixedBenchmarkConfig, MixedExample, iter_benchmark
+from .diagnostic import (
+    DiagnosticBenchmarkConfig,
+    analyze_trigger_ladder,
+    generate_diagnostic_benchmark,
+    lexical_audit,
+)
 from .evaluate import evaluate
 from .experiment import run_scripted
 from .next_analysis import analyze_runs
@@ -311,6 +317,32 @@ def analyze_twil_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def generate_diagnostic_command(args: argparse.Namespace) -> int:
+    result = generate_diagnostic_benchmark(
+        DiagnosticBenchmarkConfig.from_dict(read_json(args.config)), args.output_dir
+    )
+    print(f"generated Paper 2 diagnostic benchmark {result['config']} -> {args.output_dir}")
+    return 0
+
+
+def audit_diagnostic_command(args: argparse.Namespace) -> int:
+    result = lexical_audit(args.train, args.test)
+    write_json(args.output, result)
+    print(
+        f"completed Paper 2 lexical audit; maximum accuracy={result['maximum_accuracy']:.4f}"
+    )
+    return 0
+
+
+def analyze_diagnostic_command(args: argparse.Namespace) -> int:
+    result = analyze_trigger_ladder(args.train, args.test, args.output_dir)
+    print(
+        f"completed {len(result['trigger_ladder'])}-condition trigger ladder; "
+        f"decision={result['decision']['status']}"
+    )
+    return 0
+
+
 def evaluate_twil_command(args: argparse.Namespace) -> int:
     source_rows = read_jsonl(args.predictions)
     rows = rescore_twil_predictions(source_rows, max_new_tokens=args.max_new_tokens)
@@ -448,3 +480,26 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     twil_evaluate.add_argument("--max-new-tokens", type=int, default=160)
     twil_evaluate.add_argument("--output-dir", required=True)
     twil_evaluate.set_defaults(handler=evaluate_twil_command)
+
+    diagnostic_data = commands.add_parser(
+        "generate-diagnostic", help="generate the richer six-way diagnostic benchmark"
+    )
+    diagnostic_data.add_argument("--config", required=True)
+    diagnostic_data.add_argument("--output-dir", required=True)
+    diagnostic_data.set_defaults(handler=generate_diagnostic_command)
+
+    diagnostic_audit = commands.add_parser(
+        "audit-diagnostic", help="run shallow six-way lexical baselines"
+    )
+    diagnostic_audit.add_argument("--train", required=True)
+    diagnostic_audit.add_argument("--test", required=True)
+    diagnostic_audit.add_argument("--output", required=True)
+    diagnostic_audit.set_defaults(handler=audit_diagnostic_command)
+
+    diagnostic_analysis = commands.add_parser(
+        "analyze-diagnostic", help="run the CPU trigger and parser factorization ladder"
+    )
+    diagnostic_analysis.add_argument("--train", required=True)
+    diagnostic_analysis.add_argument("--test", required=True)
+    diagnostic_analysis.add_argument("--output-dir", required=True)
+    diagnostic_analysis.set_defaults(handler=analyze_diagnostic_command)
