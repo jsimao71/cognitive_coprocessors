@@ -17,6 +17,10 @@ from ccpu.common.artifacts import (
 from ccpu.paper1.generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 from ccpu.paper1.lora_train import LoRATrainingConfig, train_lora
 
+from .attention_diagnostic import (
+    plot_attention_diagnostic,
+    run_and_write_attention_diagnostic,
+)
 from .benchmark_next import NextBenchmarkConfig, generate_next_benchmark
 from .composition import run_compositions
 from .dataset import MixedBenchmarkConfig, MixedExample, iter_benchmark
@@ -442,6 +446,32 @@ def analyze_result_use_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_attention_diagnostic_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    model = _model(raw, args.model)
+    attention = raw.get("attention", {})
+    result = run_and_write_attention_diagnostic(
+        dataset_path=args.dataset,
+        baseline_predictions_path=args.baseline_predictions,
+        model=model,
+        device=str(attention.get("device", "xpu")),
+        max_new_tokens=int(attention.get("max_new_tokens", 24)),
+        per_task=int(attention.get("per_task", 12)),
+        output_dir=args.output_dir,
+    )
+    print(
+        "completed Paper 2 attention diagnostic; "
+        f"fixed_bias_gate={result['decision']['fixed_bias_gate']}"
+    )
+    return 0
+
+
+def plot_attention_diagnostic_command(args: argparse.Namespace) -> int:
+    output = plot_attention_diagnostic(args.summary, args.output)
+    print(f"plotted Paper 2 attention diagnostic -> {output}")
+    return 0
+
+
 def evaluate_twil_command(args: argparse.Namespace) -> int:
     source_rows = read_jsonl(args.predictions)
     rows = rescore_twil_predictions(source_rows, max_new_tokens=args.max_new_tokens)
@@ -651,3 +681,21 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     result_analysis.add_argument("--config", required=True)
     result_analysis.add_argument("--output-dir", required=True)
     result_analysis.set_defaults(handler=analyze_result_use_command)
+
+    attention_run = commands.add_parser(
+        "run-attention-diagnostic",
+        help="measure result/question attention and causal content ablations",
+    )
+    attention_run.add_argument("--config", required=True)
+    attention_run.add_argument("--model", required=True)
+    attention_run.add_argument("--dataset", required=True)
+    attention_run.add_argument("--baseline-predictions", required=True)
+    attention_run.add_argument("--output-dir", required=True)
+    attention_run.set_defaults(handler=run_attention_diagnostic_command)
+
+    attention_plot = commands.add_parser(
+        "plot-attention-diagnostic", help="plot and finalize an attention diagnostic"
+    )
+    attention_plot.add_argument("--summary", required=True)
+    attention_plot.add_argument("--output", required=True)
+    attention_plot.set_defaults(handler=plot_attention_diagnostic_command)

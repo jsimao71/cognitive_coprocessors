@@ -3,6 +3,10 @@ import json
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl, write_jsonl
 from ccpu.common.schema import CoprocessorRequest, GenerationResult
+from ccpu.paper2.attention_diagnostic import (
+    select_attention_rows,
+    summarize_attention_diagnostic,
+)
 from ccpu.paper2.composition import run_compositions
 from ccpu.paper2.diagnostic import (
     DiagnosticBenchmarkConfig,
@@ -481,3 +485,39 @@ def test_result_use_freeze_and_runtime_copy(tmp_path):
 
     _, neural_summary = run_result_use(rows, GoldBackend(), condition="qwen_base", seed=200)
     assert neural_summary["overall"]["exact_rate"] == 1.0
+
+
+def test_attention_subset_and_causal_gate(tmp_path):
+    generate_result_use_benchmark(ResultUseConfig(cases_per_task=10), tmp_path)
+    rows = read_jsonl(tmp_path / "test.jsonl")
+    baseline = [
+        {
+            "example_id": row["example_id"],
+            "exact": index % 2 == 0,
+        }
+        for index, row in enumerate(rows)
+    ]
+    predictions_path = tmp_path / "baseline.jsonl"
+    write_jsonl(predictions_path, baseline)
+    selected = select_attention_rows(tmp_path / "test.jsonl", predictions_path, per_task=6)
+    assert len(selected) == 12
+    assert {row["task"] for row in selected} == {"INTERPRET", "CONTINUE"}
+    assert all(row["format"] == "authority" for row in selected)
+
+    diagnostic_rows = []
+    rates = {"full": 5, "result_masked": 2, "distractor_removed": 6}
+    for condition, correct_count in rates.items():
+        for index in range(6):
+            diagnostic_rows.append(
+                {
+                    "condition": condition,
+                    "exact": index < correct_count,
+                    "wall_time_ns": 100,
+                    "attention": (
+                        {"question_mass": 0.4, "result_mass": 0.2} if condition == "full" else None
+                    ),
+                }
+            )
+    summary = summarize_attention_diagnostic(diagnostic_rows)
+    assert summary["decision"]["question_result_competition_supported"]
+    assert summary["decision"]["fixed_bias_gate"] == "run_beta_sweep"

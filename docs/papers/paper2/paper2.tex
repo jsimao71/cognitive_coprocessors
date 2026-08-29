@@ -39,8 +39,9 @@ to 0.273 and 0.400; neither clears the gate.  On a matched 360-row result-use
 study, Qwen reaches 0.650 COPY, 0.492 INTERPRET, and 0.233 CONTINUE exactness.
 An explicit authority contract makes COPY 1.000, as does format-independent
 zero-call runtime-copy.  Attention diagnostics are warranted for non-copy use,
-but provenance bias remains unlicensed.  The Paper 3 gate remains
-\texttt{no\_go}.
+but a 24-row authority subset finds only 0.042 effects from masking the result or
+removing the distractor and no question/result-competition support.  Provenance
+bias remains unlicensed.  The Paper 3 gate remains \texttt{no\_go}.
 \end{abstract}
 
 \section{Question and decision rule}
@@ -481,6 +482,52 @@ for COPY.  Because INTERPRET and CONTINUE remain below 0.8, the next step is
 attention-span diagnostics and causal masking.  A fixed provenance-attention
 bias is not yet justified and remains gated on causal evidence.
 
+\subsection{Attention and causal-content diagnostic}
+
+We select 12 authority-formatted INTERPRET and 12 CONTINUE rows, stratified by
+prior correctness where available.  Eager Qwen inference retains attention mass
+to QUESTION and RESULT spans for every generated token, layer, and head (28
+layers, 16 heads), then aggregates only for reporting.  Raw attention is treated
+as diagnostic, never causal proof.  Two matched content ablations replace the
+exact result with \texttt{[MASKED RESULT]} or remove the planted draft
+distractor.  These are causal input ablations, not direct attention-logit masks.
+
+\begin{table}[ht]
+\centering
+\caption{Bounded authority-format diagnostic ($n=24$). Effects are relative to
+full context; the preregistered competition threshold is 0.10 in both directions.}
+\label{tab:attention-diagnostic}
+\begin{tabular}{lrr}
+\toprule
+Condition & Exact & Effect versus full \\
+\midrule
+Full context & 0.417 & -- \\
+Result masked & 0.375 & $-0.042$ \\
+Draft distractor removed & 0.458 & $+0.042$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.94\linewidth]{paper2_attention_causal_diagnostic.png}
+\caption{Left: strict causal-content ablations. Right: generated-token attention
+mass by outcome. Span lengths differ, so question-versus-result heights are not
+directly comparable; correct-versus-incorrect differences within a span are the
+relevant diagnostic.}
+\label{fig:attention-diagnostic}
+\end{figure}
+
+Ten full-context rows are correct and 14 incorrect.  Correct rows allocate mean
+attention mass 0.1483 to the question span and 0.0080 to the result; incorrect
+rows allocate 0.1218 and 0.0326.  Thus errors do not exhibit a simple lack of
+result attention: result mass is higher in incorrect generations.  Result
+masking and distractor removal each change exactness by only one row.  The joint
+question/result-competition criterion is not met, so fixed provenance bias,
+layer-specific beta, and learned provenance/KV embeddings are deferred.  This
+negative gate prevents an attention mechanism from being inferred merely from
+poor result use.
+
 \subsection{Typed state and bounded composition}
 
 Forty deterministic two-stage compositions validate dependency-linked state:
@@ -522,6 +569,9 @@ preserving the engine result remains unreliable.
 \item H9 (formatting alone solves result use) is supported only for authority-
       contracted COPY in this sample; INTERPRET and CONTINUE remain unreliable,
       while deterministic runtime-copy solves COPY independently of format.
+\item H10 (question/result attention competition explains non-copy failure) is
+      not supported by the bounded diagnostic; both causal-content effects are
+      0.042 and incorrect rows have higher result-span attention mass.
 \end{itemize}
 
 The machine-readable gate artifact records \texttt{status: no\_go} and an empty
@@ -561,6 +611,12 @@ adapter selection.  These results diagnose Qwen3-0.6B at this scale; they do not
 establish that every neural router must fail.  Conversely, the 0.5-second XPU
 route cost is machine-specific and should not be generalized as production
 latency.
+
+The attention study is a 24-row, one-model diagnostic.  Attention mass is
+averaged for reporting and is not a causal explanation.  Result replacement and
+distractor removal alter content; they do not implement a query-specific
+attention-logit mask.  These bounds justify deferring a beta sweep, not claiming
+that provenance-aware attention can never help.
 
 A post-study TwIL-LM3/SmolLM3-3B interface pilot is retained in the repository
 but excluded from the headline results.  Its Horn and graph labels were all
@@ -640,6 +696,17 @@ python -m ccpu paper2 run-result-use \
 python -m ccpu paper2 analyze-result-use \
   --config configs/paper2/result_use_analysis.json \
   --output-dir artifacts/paper2/result_use_v1/analysis
+
+python -m ccpu paper2 run-attention-diagnostic \
+  --config configs/paper2/result_use_qwen_xpu.json --model qwen3_0_6b \
+  --dataset artifacts/paper2/result_use_v1/data/test.jsonl \
+  --baseline-predictions \
+    artifacts/paper2/result_use_v1/qwen_base_v1/predictions.jsonl \
+  --output-dir artifacts/paper2/attention_v1/qwen_authority_v1
+
+python -m ccpu paper2 plot-attention-diagnostic \
+  --summary artifacts/paper2/attention_v1/qwen_authority_v1/summary.json \
+  --output artifacts/paper2/attention_v1/qwen_authority_v1/attention_causal_diagnostic.png
 \end{verbatim}
 
 The original model runs store predictions, factorized summaries, dataset and
@@ -679,7 +746,9 @@ selection problem safely; runtime result enforcement remains the next cheapest
 factorized intervention.
 For result use, runtime-copy is the reliable home for exact COPY.  Text authority
 can help neural copying, but interpretation and continuation still require
-diagnosis before any provenance-aware attention mechanism can be claimed.
+diagnosis before any provenance-aware attention mechanism can be claimed.  The
+bounded diagnosis does not support a fixed attention bias, so the runtime-copy
+baseline remains the only new production recommendation.
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.

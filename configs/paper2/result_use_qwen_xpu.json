@@ -9,6 +9,11 @@
     "max_new_tokens": 24,
     "device": "xpu"
   },
+  "attention": {
+    "max_new_tokens": 24,
+    "per_task": 12,
+    "device": "xpu"
+  },
   "models": [
     {
       "label": "qwen3_0_6b",

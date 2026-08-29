@@ -1,0 +1,41 @@
+{
+  "attention": {
+    "correct_count": 10,
+    "correct_question_mass": 0.1483323422238408,
+    "correct_result_mass": 0.007969387569686487,
+    "incorrect_count": 14,
+    "incorrect_question_mass": 0.12176372220392605,
+    "incorrect_result_mass": 0.032590481024170184
+  },
+  "by_condition": [
+    {
+      "condition": "full",
+      "count": 24,
+      "exact_rate": 0.4166666666666667,
+      "mean_wall_time_ms": 1760.5173291666667
+    },
+    {
+      "condition": "result_masked",
+      "count": 24,
+      "exact_rate": 0.375,
+      "mean_wall_time_ms": 1300.6592666666668
+    },
+    {
+      "condition": "distractor_removed",
+      "count": 24,
+      "exact_rate": 0.4583333333333333,
+      "mean_wall_time_ms": 1280.6507958333332
+    }
+  ],
+  "causal_effects": {
+    "distractor_removal_gain": 0.04166666666666663,
+    "result_mask_drop": 0.041666666666666685
+  },
+  "count": 72,
+  "decision": {
+    "attention_is_causal_proof": false,
+    "fixed_bias_gate": "defer_beta_sweep",
+    "question_result_competition_supported": false
+  },
+  "schema_version": "ccpu.paper2.attention_diagnostic_summary.v1"
+}
