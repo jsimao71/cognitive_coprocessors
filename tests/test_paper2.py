@@ -29,6 +29,7 @@ from ccpu.paper2.public_benchmarks import (
     _clutrr,
     _date_understanding,
     _gsm8k,
+    _gsm_execution,
     _proofwriter,
     _unit_conversion,
 )
@@ -629,3 +630,29 @@ def test_public_selection_is_deterministic_and_stratified():
     second = stratified_select(list(reversed(records)), max_rows=12, seed=7)
     assert first == second
     assert {row["difficulty_stratum"] for row in first} == {"0", "1", "2"}
+
+
+def test_public_gsm_gold_trace_checks_actual_bounded_execution():
+    exact = _gsm_execution(
+        {
+            "example_id": "gsm:test",
+            "raw": {"answer": "First <<16-3-4=9>>. Then <<9*2=18>>.\n#### 18"},
+        }
+    )
+    assert exact == {
+        "formalization_oracle": True,
+        "backend_compatible": True,
+        "execution_exact": True,
+        "operation_count": 2,
+        "failure": None,
+    }
+
+    unsupported = _gsm_execution(
+        {
+            "example_id": "gsm:test",
+            "raw": {"answer": "Compute <<0.5*8=4>>.\n#### 4"},
+        }
+    )
+    assert unsupported["formalization_oracle"]
+    assert not unsupported["backend_compatible"]
+    assert unsupported["execution_exact"] is None

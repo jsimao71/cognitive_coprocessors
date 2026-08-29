@@ -45,7 +45,10 @@ An explicit authority contract makes COPY 1.000, as does format-independent
 zero-call runtime-copy.  Attention diagnostics are warranted for non-copy use,
 but a 24-row authority subset finds only 0.042 effects from masking the result or
 removing the distractor and no question/result-competition support.  Provenance
-bias remains unlicensed.  The Paper 3 gate remains \texttt{no\_go}.
+bias remains unlicensed.  A registered 2,253-row public suite then exposes a
+formalization/backend gap: transferred T1/T2 engine recall is 0.139/0.016 and
+the current exact contracts cover 0.163 of rows, although all 368 compatible
+GSM8K traces execute exactly.  The Paper 3 gate remains \texttt{no\_go}.
 \end{abstract}
 
 \section{Question and decision rule}
@@ -397,6 +400,55 @@ Runtime exactness is 0.904 because some wrong engine identities are
 answer-equivalent. The architecture is economically promising but fails the
 identity/reliability gate; answer-only scoring would conceal that failure.
 
+\subsection{Public routing and backend-coverage diagnostic}
+
+Table~\ref{tab:public-coverage} applies the frozen T1/T2 rules without tuning
+and audits whether each public row supplies executable formalization for the
+current backend.  This is deliberately not an LLM accuracy table.  T1/T2 pooled
+engine recall falls to 0.139/0.016.  CLUTRR supplies machine-readable relation
+paths, but ISA/frame closure is the wrong algebra.  BIG-bench and ProofWriter
+provide answers or controlled English rather than our typed IR.  GSM8K is the
+only immediately executable bridge: 493/500 selected rows have annotated
+arithmetic traces, 368 fit the bounded integer-expression contract, and every
+compatible trace executes exactly.  The remaining rows primarily contain
+decimal literals (100), annotation-only values without a binary operation (25),
+or no annotated trace (7).
+
+\begin{table}[ht]
+\centering\scriptsize
+\caption{Public-suite transfer audit. Formal is machine-readable oracle
+formalization coverage; Backend is compatibility with the current exact
+contract; Exec. is exactness conditional on compatible execution.}
+\label{tab:public-coverage}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Task & $n$ & T1 recall & T2 recall & Formal & Backend & Exec.\\
+\midrule
+GSM8K & 500 & .170 & .034 & .986 & .736 & 1.000 (368)\\
+BIG-bench units & 600 & .235 & .030 & .000 & .000 & --\\
+BIG-bench dates & 73 & .000 & .000 & .000 & .000 & --\\
+ProofWriter & 360 & .000 & .000 & .000 & .000 & --\\
+CLUTRR & 720 & .122 & .000 & 1.000 & .000 & --\\
+\midrule
+All & 2253 & .139 & .016 & .538 & .163 & 1.000 (368)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.82\linewidth]{paper2_public_coverage.png}
+\caption{A correct assistance intent is not enough: transferred routing and
+exact-backend coverage remain distinct bottlenecks on public tasks.}
+\label{fig:public-coverage}
+\end{figure}
+
+This audit changes the next step.  Training a public six-way router before
+building matched task adapters would optimize engine labels against backends
+that cannot consume four of the five public task representations.  The correct
+order is to freeze adapters and backend coverage first, then compare generic
+tools, CPU routing, TwIL, hybrids, and oracle formalization on identical rows.
+
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.78\linewidth]{paper2_diagnostic_learning_curves.png}
@@ -695,13 +747,14 @@ also misses half of graph cases under the selected hierarchy, so broader
 natural-language graph cues or an independently frozen ambiguity classifier are
 still required.
 
-The public suite is frozen but not yet a model-result table.  In particular,
-the current units engine covers only a bounded simple-unit vocabulary, the date
-engine consumes typed ISO operations rather than natural questions, the Horn
-engine does not yet parse ProofWriter English, and the graph engine implements
-ISA closure rather than CLUTRR kinship algebra.  Reporting oracle intent alone
-would hide these formalization/backend gaps, so public accuracy is deferred
-until matched adapters and explicit coverage accounting are implemented.
+The public suite now has a routing/formalization/backend coverage diagnostic,
+but not yet a matched model-result table.  In particular, the current units
+engine covers only a bounded simple-unit vocabulary, the date engine consumes
+typed ISO operations rather than natural questions, the Horn engine does not
+yet parse ProofWriter English, and the graph engine implements ISA closure
+rather than CLUTRR kinship algebra.  Reporting oracle intent alone would hide
+these measured gaps, so public model accuracy is deferred until matched
+adapters are implemented.
 
 The factorized neural comparison uses one checkpoint family and one seed.  It
 tests attention-only versus attention+MLP targets, not layer-region or per-engine
@@ -750,6 +803,12 @@ python -m ccpu paper2 freeze-public \
   --config configs/common/public_benchmarks.json \
   --cache-root /path/to/pinned-hf-parquet \
   --output-dir artifacts/paper2/public_benchmarks/data_v1
+
+python -m ccpu paper2 analyze-public \
+  --config configs/common/public_benchmarks.json \
+  --cache-root /path/to/pinned-hf-parquet \
+  --selection artifacts/paper2/public_benchmarks/data_v1/selection.jsonl \
+  --output-dir artifacts/paper2/public_benchmarks/coverage_v1
 
 python -m ccpu paper2 generate-diagnostic \
   --config configs/paper2/diagnostic_cpu.json \

@@ -206,3 +206,18 @@ accuracy until task adapters account separately for formalization and backend
 coverage. The current typed engines are not silently treated as compatible with
 compound BIG-bench units, natural-language dates, ProofWriter English, or CLUTRR
 kinship algebra. Paper 3 remains `no_go` while this diagnostic proceeds.
+
+The first factorized coverage audit is frozen under
+`artifacts/paper2/public_benchmarks/coverage_v1`. Untuned T1 and T2 transfer at
+only 0.139 and 0.016 pooled engine recall. Machine-readable oracle
+formalization is present for 0.538 of rows, but the current exact backend
+contracts cover only 0.163. GSM8K is the sole executable bridge: 493/500 rows
+have annotated traces, 368 fit the bounded integer contract, and all 368 execute
+exactly. Decimal literals account for 100 incompatibilities, non-binary
+annotation steps for 25, and absent traces for 7.
+
+Do not train or score a public six-way router as if this were end-to-end task
+coverage. Implement and freeze matched units/date/ProofWriter/CLUTRR adapters
+first, then run generic tools, CPU routing, TwIL, hybrid, and oracle conditions
+on identical selected IDs. The measured status is `backend_gap`; Paper 3 remains
+`no_go`.

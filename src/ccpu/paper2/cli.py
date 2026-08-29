@@ -36,7 +36,7 @@ from .experiment import run_scripted
 from .next_analysis import analyze_runs
 from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
-from .public_benchmarks import freeze_public_suite
+from .public_benchmarks import analyze_public_coverage, freeze_public_suite
 from .result_use import (
     ResultUseConfig,
     analyze_result_use,
@@ -522,6 +522,17 @@ def freeze_public_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_public_command(args: argparse.Namespace) -> int:
+    result = analyze_public_coverage(
+        args.config, args.cache_root, args.selection, args.output_dir
+    )
+    print(
+        f"analyzed {result['record_count']} public Paper 2 examples; "
+        f"status={result['interpretation']['status']}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2", help="heterogeneous symbolic protocol")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -746,3 +757,12 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_freeze.add_argument("--cache-root", required=True)
     public_freeze.add_argument("--output-dir", required=True)
     public_freeze.set_defaults(handler=freeze_public_command)
+
+    public_analysis = commands.add_parser(
+        "analyze-public", help="factor public routing, formalization, and backend coverage"
+    )
+    public_analysis.add_argument("--config", required=True)
+    public_analysis.add_argument("--cache-root", required=True)
+    public_analysis.add_argument("--selection", required=True)
+    public_analysis.add_argument("--output-dir", required=True)
+    public_analysis.set_defaults(handler=analyze_public_command)
