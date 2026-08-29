@@ -33,7 +33,10 @@ selection and runtime exactness with zero false activation, whereas semantic
 rules select 0.800 but execute 1.000 by substituting graph closure for Datalog,
 and learned CPU routers select only 0.588 with 0.400 false activation.  Thus
 exact execution and parsing belong in the runtime, but broad semantic selection
-and result use remain unresolved.  The Paper 3 gate remains \texttt{no\_go}.
+and result use remain unresolved.  Factorized Qwen router LoRAs improve selection
+to 0.848 (attention only) and 0.900 (attention+MLP), but false activation rises
+to 0.273 and 0.400; neither clears the gate.  The Paper 3 gate remains
+\texttt{no\_go}.
 \end{abstract}
 
 \section{Question and decision rule}
@@ -318,6 +321,61 @@ activation.}
 \label{fig:diagnostic-learning}
 \end{figure}
 
+\subsection{Factorized neural routing and LoRA targets}
+
+The CPU diagnosis justifies one T5 experiment: train Qwen3-0.6B to emit only one
+of the six engine labels, then pass that label to the same deterministic
+per-engine parser.  The prompt, data hashes, rank 8, alpha 16, dropout 0.05,
+two-epoch schedule, seed, and pinned base revision are fixed.  L1 adapts
+\texttt{q/k/v/o}; L2 also adapts \texttt{gate/up/down}.  The unadapted base emits
+\texttt{NONE} on all 900 rows.  Table~\ref{tab:router-lora} shows that
+factorization helps substantially but does not clear the safety gate.
+
+\begin{table}[ht]
+\centering
+\caption{Factorized router comparison on the same 500 positives and 400
+controls. Route latency is per row; training is XPU wall time.}
+\label{tab:router-lora}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Select & Runtime exact & FAR & Route ms & Train min & Trainable \\
+\midrule
+T1 lexical/regex & 0.900 & 0.900 & 0.000 & 0.0047 & 0 & 0 \\
+T2 semantic rules & 0.800 & 1.000 & 0.000 & 0.0071 & 0 & 0 \\
+Qwen base & 0.000 & 0.000 & 0.000 & 344.5 & 0 & 0 \\
+Qwen L1 attention & 0.848 & 0.948 & 0.273 & 514.2 & 67.4 & 2.29M \\
+Qwen L2 attention+MLP & 0.900 & 1.000 & 0.400 & 554.7 & 82.7 & 5.05M \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+L1 is exact on all calculator and graph rows and 99/100 dates; it routes 75/100
+units correctly and splits Datalog 50/50 between Datalog and the
+answer-equivalent graph closure.  It activates on 109/400 controls.  L2 fixes
+calculator, date, units, and Datalog, but splits graph 50/50 into Datalog and
+activates on 160/400 controls.  Of its 900 outputs, 80 control completions are
+malformed and fail closed; hence parse-valid rate is 0.911.  Functional engine
+substitution explains why L2 runtime exactness reaches 1.000 despite 0.900 engine
+identity.  It does not excuse the control failures.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.94\linewidth]{paper2_router_comparison.png}
+\caption{Factorized routing improves positive selection, but neither neural
+adapter meets the joint selection/runtime/FAR gate.  The dashed line marks the
+0.9 positive-rate threshold; FAR must independently remain at most 0.1.}
+\label{fig:router-comparison}
+\end{figure}
+
+L2 trains 5.05M parameters (0.840\%) and peaks at 1.42~GiB XPU allocation,
+versus 2.29M (0.383\%) and 1.38~GiB for L1.  Its development loss is slightly
+lower (0.0851 versus 0.0897--0.0917), but held-out FAR is worse.  Thus lower
+teacher-forced loss and more adapter capacity do not imply safer routing.  The
+machine-readable decision retains T1 for this frozen language and advances to
+result-use factorization rather than another joint block generator.
+
 \subsection{Capability-count scaling and interference}
 
 Figure~\ref{fig:scaling} and Table~\ref{tab:scaling} show that recurring context
@@ -409,6 +467,8 @@ preserving the engine result remains unreliable.
 \item H7 (deterministic serialization is the dominant failure) is falsified by
       the exact oracle-engine parser; semantic routing is the remaining upstream
       bottleneck, with result use remaining downstream.
+\item H8 (factorized LoRA clears the semantic route gate) is falsified for Qwen:
+      L1 misses selection and FAR, while L2 reaches selection but worsens FAR.
 \end{itemize}
 
 The machine-readable gate artifact records \texttt{status: no\_go} and an empty
@@ -419,7 +479,8 @@ claiming a reliable learned predecessor.
 The post-gate diagnostic does not reverse this decision.  T1 is the cheapest
 passing baseline for the frozen language, but no T2--T4 semantic route clears the
 selection criterion.  Consequently Paper 3 remains paused while factorized
-neural routing and result-use controls are tested.
+result-use controls are tested.  The completed Qwen L1/L2 comparison also fails
+the gate, so it does not reverse that pause.
 
 \section{Limitations}
 
@@ -440,6 +501,13 @@ separation, not naturally authored language.  T1 should therefore not be read as
 open-domain robustness.  Graph and Datalog deliberately share a transitive
 closure subproblem; T2's runtime success shows functional substitution but also
 why answer-only scoring would conceal routing errors.
+
+The factorized neural comparison uses one checkpoint family and one seed.  It
+tests attention-only versus attention+MLP targets, not layer-region or per-engine
+adapter selection.  These results diagnose Qwen3-0.6B at this scale; they do not
+establish that every neural router must fail.  Conversely, the 0.5-second XPU
+route cost is machine-specific and should not be generalized as production
+latency.
 
 A post-study TwIL-LM3/SmolLM3-3B interface pilot is retained in the repository
 but excluded from the headline results.  Its Horn and graph labels were all
@@ -484,6 +552,27 @@ python -m ccpu paper2 analyze-diagnostic \
   --train artifacts/paper2/diagnostic_v1/data/train.jsonl \
   --test artifacts/paper2/diagnostic_v1/data/test.jsonl \
   --output-dir artifacts/paper2/diagnostic_v1/analysis
+
+python -m ccpu paper2 prepare-router \
+  --source-dir artifacts/paper2/diagnostic_v1/data \
+  --output-dir artifacts/paper2/router_v1/data
+
+python -m ccpu paper2 train-next-lora \
+  --config configs/paper2/router_qwen_l1_xpu.json \
+  --model qwen3_0_6b --train artifacts/paper2/router_v1/data/train.jsonl \
+  --dev artifacts/paper2/router_v1/data/dev.jsonl \
+  --output-dir artifacts/paper2/router_v1/lora_qwen_l1_v1
+
+python -m ccpu paper2 run-router \
+  --config configs/paper2/router_qwen_l1_xpu.json --model qwen3_0_6b \
+  --dataset artifacts/paper2/router_v1/data/test.jsonl \
+  --condition T5_qwen_router_l1 \
+  --adapter-path artifacts/paper2/router_v1/lora_qwen_l1_v1/adapter \
+  --output-dir artifacts/paper2/router_v1/qwen_l1_v1
+
+python -m ccpu paper2 analyze-router \
+  --config configs/paper2/router_analysis.json \
+  --output-dir artifacts/paper2/router_v1/analysis
 \end{verbatim}
 
 The original model runs store predictions, factorized summaries, dataset and
@@ -518,6 +607,9 @@ held-out gate, heterogeneous learned reflex reasoning remains unconfirmed.
 The larger factorization narrows the next step: keep deterministic per-engine
 serialization, retain lexical routing as a bounded baseline, and train/evaluate
 semantic selection independently before spending capacity on generation.
+For the tested Qwen router, increasing LoRA target breadth does not solve that
+selection problem safely; runtime result enforcement remains the next cheapest
+factorized intervention.
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.

@@ -19,6 +19,12 @@ from ccpu.paper2.next_experiment import (
     run_model_condition,
     summarize_next,
 )
+from ccpu.paper2.router import (
+    ROUTER_LABELS,
+    parse_router_label,
+    prepare_router_data,
+    run_router_condition,
+)
 from ccpu.paper2.runtime import HeterogeneousRuntime, StrictEventRouter
 from ccpu.paper2.state import TypedMicroState
 from ccpu.paper2.twil_benchmark import TwILBenchmarkConfig, generate_twil_benchmark
@@ -103,18 +109,25 @@ def test_frame_graph_supports_isa_closure_and_inherited_slots():
     state = TypedMicroState()
     engine = FrameGraphEngine(state)
     isa = [["robin", "bird"], ["bird", "animal"]]
-    assert engine.execute(
-        _request(
-            "frame_graph",
-            "graph.isa",
-            {"isa": isa, "frames": [], "query": ["robin", "animal"]},
-        )
-    ).display == "true"
+    assert (
+        engine.execute(
+            _request(
+                "frame_graph",
+                "graph.isa",
+                {"isa": isa, "frames": [], "query": ["robin", "animal"]},
+            )
+        ).display
+        == "true"
+    )
     result = engine.execute(
         _request(
             "frame_graph",
             "graph.frame",
-            {"isa": [], "frames": [["bird", "covering", "feathers"]], "query": ["robin", "covering"]},
+            {
+                "isa": [],
+                "frames": [["bird", "covering", "feathers"]],
+                "query": ["robin", "covering"],
+            },
         )
     )
     assert result.ok and result.display == "feathers"
@@ -153,9 +166,10 @@ def test_five_typed_block_families_execute_fail_closed():
         assert result is not None and result.ok and result.display == expected
 
     assert runtime.execute_event("```date\nadd 2026-08-28 P90D", event_id="open") is None
-    assert runtime.execute_event(
-        "```units\nconvert 1 kilogram -> meter\n```", event_id="dimension"
-    ) is None
+    assert (
+        runtime.execute_event("```units\nconvert 1 kilogram -> meter\n```", event_id="dimension")
+        is None
+    )
 
 
 def test_registry_rejects_unknown_engine_catalog():
@@ -266,27 +280,30 @@ def test_next_benchmark_is_disjoint_and_oracle_scoring_is_factorized(tmp_path):
         ),
         encoding="utf-8",
     )
-    assert main(
-        ["paper2", "generate-next", "--config", str(config), "--output-dir", str(data)]
-    ) == 0
+    assert (
+        main(["paper2", "generate-next", "--config", str(config), "--output-dir", str(data)]) == 0
+    )
     audit = read_json(data / "leakage_audit.json")
     assert not any(audit[key] for key in audit if key != "schema_version")
-    assert main(
-        [
-            "paper2",
-            "run-next",
-            "--config",
-            str(config),
-            "--dataset",
-            str(data / "test.jsonl"),
-            "--condition",
-            "oracle",
-            "--catalog-size",
-            "5",
-            "--output-dir",
-            str(run),
-        ]
-    ) == 0
+    assert (
+        main(
+            [
+                "paper2",
+                "run-next",
+                "--config",
+                str(config),
+                "--dataset",
+                str(data / "test.jsonl"),
+                "--condition",
+                "oracle",
+                "--catalog-size",
+                "5",
+                "--output-dir",
+                str(run),
+            ]
+        )
+        == 0
+    )
     cell = read_json(run / "summary.json")["by_condition_catalog"][0]
     assert cell["engine_selection_accuracy"] == 1.0
     assert cell["payload_normalization_rate"] == 1.0
@@ -328,9 +345,7 @@ def test_twil_strict_rescore_denies_credit_for_wrong_formalization():
         "answer": "true",
         "should_trigger": True,
         "condition": "hybrid",
-        "generated_text": (
-            "```datalog\nfact link(a,b)\nfact link(b,c)\nquery reachable(a,c)\n```"
-        ),
+        "generated_text": ("```datalog\nfact link(a,b)\nfact link(b,c)\nquery reachable(a,c)\n```"),
         "generated_tokens": 20,
         "accelerator_time_ns": 1,
     }
@@ -387,6 +402,48 @@ def test_diagnostic_benchmark_and_cpu_factorization(tmp_path):
         "T3_tfidf_linear",
         "T4_latent_cpu_classifier",
     }
-    assert deterministic_payload(
-        "Give the integer result for the expression 17 * 19.", "CALCULATOR"
-    ) == "```calculator\n17 * 19\n```"
+    assert (
+        deterministic_payload("Give the integer result for the expression 17 * 19.", "CALCULATOR")
+        == "```calculator\n17 * 19\n```"
+    )
+
+
+def test_factorized_router_data_and_fail_closed_scoring(tmp_path):
+    source = tmp_path / "source"
+    generate_diagnostic_benchmark(
+        DiagnosticBenchmarkConfig(
+            train_per_engine=2,
+            dev_per_engine=2,
+            test_per_engine=2,
+            train_controls=4,
+            dev_controls=4,
+            test_controls=4,
+        ),
+        source,
+    )
+    router = tmp_path / "router"
+    manifest = prepare_router_data(source, router)
+    assert manifest["counts"] == {"train": 14, "dev": 14, "test": 14}
+    rows = read_jsonl(router / "test.jsonl")
+    assert all(row["target"] in set(ROUTER_LABELS) for row in rows)
+
+    class GoldBackend:
+        def generate(self, prompt, *, seed):
+            del prompt
+            label = rows[seed - 100]["target"]
+            return GenerationResult(
+                generated_text=label,
+                rendered_text=label,
+                prompt_tokens=10,
+                generated_tokens=1,
+                reinjected_tokens=0,
+                model_calls=1,
+                wall_time_ns=100,
+                metadata={"empirical": False},
+            )
+
+    _, summary = run_router_condition(rows, GoldBackend(), condition="test_router", seed=100)
+    assert summary["engine_selection_accuracy"] == 1.0
+    assert summary["runtime_exact_rate"] == 1.0
+    assert parse_router_label(" GRAPH. ") == "GRAPH"
+    assert parse_router_label("GRAPH because it is a hierarchy") is None

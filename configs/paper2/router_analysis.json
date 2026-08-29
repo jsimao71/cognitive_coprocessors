@@ -1,0 +1,21 @@
+{
+  "schema_version": "ccpu.paper2.router_analysis_config.v1",
+  "cpu_trigger_ladder": "artifacts/paper2/diagnostic_v1/analysis/trigger_ladder.json",
+  "cpu_conditions": ["T1_lexical_regex", "T2_semantic_rules"],
+  "neural_runs": [
+    {
+      "summary": "artifacts/paper2/router_v1/qwen_base_v1/summary.json",
+      "manifest": "artifacts/paper2/router_v1/qwen_base_v1/manifest.json"
+    },
+    {
+      "summary": "artifacts/paper2/router_v1/qwen_l1_v1/summary.json",
+      "manifest": "artifacts/paper2/router_v1/qwen_l1_v1/manifest.json",
+      "training_report": "artifacts/paper2/router_v1/lora_qwen_l1_v1/training_report.json"
+    },
+    {
+      "summary": "artifacts/paper2/router_v1/qwen_l2_v1/summary.json",
+      "manifest": "artifacts/paper2/router_v1/qwen_l2_v1/manifest.json",
+      "training_report": "artifacts/paper2/router_v1/lora_qwen_l2_v1/training_report.json"
+    }
+  ]
+}

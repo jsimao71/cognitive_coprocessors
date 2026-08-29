@@ -31,6 +31,7 @@ from .experiment import run_scripted
 from .next_analysis import analyze_runs
 from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
+from .router import analyze_router_runs, prepare_router_data, run_and_write_router
 from .twil_analysis import analyze_twil_runs
 from .twil_benchmark import TwILBenchmarkConfig, generate_twil_benchmark
 from .twil_experiment import (
@@ -134,9 +135,7 @@ def train_next_command(args: argparse.Namespace) -> int:
         dev_path=args.dev,
         output_dir=args.output_dir,
     )
-    print(
-        f"trained {report['adapter_id']} on {report['train_rows']} rows -> {args.output_dir}"
-    )
+    print(f"trained {report['adapter_id']} on {report['train_rows']} rows -> {args.output_dir}")
     return 0
 
 
@@ -235,7 +234,9 @@ def generate_twil_command(args: argparse.Namespace) -> int:
     result = generate_twil_benchmark(
         TwILBenchmarkConfig.from_dict(read_json(args.config)), args.output_dir
     )
-    print(f"generated {result['record_count']} frozen TwIL comparison examples -> {args.output_dir}")
+    print(
+        f"generated {result['record_count']} frozen TwIL comparison examples -> {args.output_dir}"
+    )
     return 0
 
 
@@ -328,9 +329,7 @@ def generate_diagnostic_command(args: argparse.Namespace) -> int:
 def audit_diagnostic_command(args: argparse.Namespace) -> int:
     result = lexical_audit(args.train, args.test)
     write_json(args.output, result)
-    print(
-        f"completed Paper 2 lexical audit; maximum accuracy={result['maximum_accuracy']:.4f}"
-    )
+    print(f"completed Paper 2 lexical audit; maximum accuracy={result['maximum_accuracy']:.4f}")
     return 0
 
 
@@ -338,6 +337,54 @@ def analyze_diagnostic_command(args: argparse.Namespace) -> int:
     result = analyze_trigger_ladder(args.train, args.test, args.output_dir)
     print(
         f"completed {len(result['trigger_ladder'])}-condition trigger ladder; "
+        f"decision={result['decision']['status']}"
+    )
+    return 0
+
+
+def prepare_router_command(args: argparse.Namespace) -> int:
+    result = prepare_router_data(args.source_dir, args.output_dir)
+    print(f"prepared {result['counts']} Paper 2 router rows -> {args.output_dir}")
+    return 0
+
+
+def run_router_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    model = _model(raw, args.model)
+    generation = raw.get("generation", {})
+    backend = HuggingFaceBackend(
+        HuggingFaceGenerationConfig(
+            model_id=str(model["model_id"]),
+            revision=str(model["revision"]),
+            max_new_tokens=int(generation.get("max_new_tokens", 6)),
+            device=str(generation.get("device", "xpu")),
+            dtype=str(model.get("dtype", generation.get("dtype", "float16"))),
+            adapter_path=args.adapter_path,
+            adapter_id=str(model["adapter_id"]) if args.adapter_path else None,
+            cached_generation=True,
+        )
+    )
+    summary = run_and_write_router(
+        dataset_path=args.dataset,
+        backend=backend,
+        condition=args.condition,
+        seed=int(raw.get("seed", 22631)),
+        output_dir=args.output_dir,
+        model=model,
+        adapter_path=args.adapter_path,
+    )
+    print(
+        f"completed Paper 2 router {args.condition}; "
+        f"select={summary['engine_selection_accuracy']:.4f} "
+        f"FAR={summary['false_activation_rate']:.4f}"
+    )
+    return 0
+
+
+def analyze_router_command(args: argparse.Namespace) -> int:
+    result = analyze_router_runs(args.config, args.output_dir)
+    print(
+        f"analyzed {len(result['rows'])} Paper 2 router conditions; "
         f"decision={result['decision']['status']}"
     )
     return 0
@@ -503,3 +550,28 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     diagnostic_analysis.add_argument("--test", required=True)
     diagnostic_analysis.add_argument("--output-dir", required=True)
     diagnostic_analysis.set_defaults(handler=analyze_diagnostic_command)
+
+    router_data = commands.add_parser(
+        "prepare-router", help="prepare six-way classification-only LoRA data"
+    )
+    router_data.add_argument("--source-dir", required=True)
+    router_data.add_argument("--output-dir", required=True)
+    router_data.set_defaults(handler=prepare_router_command)
+
+    router_run = commands.add_parser(
+        "run-router", help="evaluate a base or adapted six-way neural router"
+    )
+    router_run.add_argument("--config", required=True)
+    router_run.add_argument("--model", required=True)
+    router_run.add_argument("--dataset", required=True)
+    router_run.add_argument("--condition", required=True)
+    router_run.add_argument("--adapter-path")
+    router_run.add_argument("--output-dir", required=True)
+    router_run.set_defaults(handler=run_router_command)
+
+    router_analysis = commands.add_parser(
+        "analyze-router", help="compare CPU and neural six-way router conditions"
+    )
+    router_analysis.add_argument("--config", required=True)
+    router_analysis.add_argument("--output-dir", required=True)
+    router_analysis.set_defaults(handler=analyze_router_command)

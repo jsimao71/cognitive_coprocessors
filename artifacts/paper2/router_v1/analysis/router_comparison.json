@@ -1,0 +1,164 @@
+{
+  "decision": {
+    "criterion": ">=0.9 engine selection/runtime exact and <=0.1 FAR",
+    "next_experiment": "result_use_factorization",
+    "passing_neural_conditions": [],
+    "preferred_deployment": "T1_lexical_regex",
+    "status": "retain_cpu_baseline"
+  },
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "f5ee09af1b86e0d7069d389289eb40ddd95cbcbe"
+    },
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "rows": [
+    {
+      "accuracy": 0.9444444444444444,
+      "condition": "T1_lexical_regex",
+      "engine_selection_accuracy": 0.9,
+      "engineering_burden": "low; cue maintenance",
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.9346405228758171,
+      "mean_cpu_latency_us": 4.687222222222223,
+      "mean_parse_execute_latency_us": 46.76166666666666,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.9,
+      "peak_memory_bytes": null,
+      "portability": "high",
+      "runtime_exact_rate": 0.9,
+      "source": "cpu",
+      "trainable_parameters": 0,
+      "training_minutes": 0.0,
+      "trigger_recall": 0.9
+    },
+    {
+      "accuracy": 0.8888888888888888,
+      "condition": "T2_semantic_rules",
+      "engine_selection_accuracy": 0.8,
+      "engineering_burden": "medium; per-engine grammar",
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.7777777777777777,
+      "mean_cpu_latency_us": 7.148888888888889,
+      "mean_parse_execute_latency_us": 35.064,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.8,
+      "peak_memory_bytes": null,
+      "portability": "high",
+      "runtime_exact_rate": 1.0,
+      "source": "cpu",
+      "trainable_parameters": 0,
+      "training_minutes": 0.0,
+      "trigger_recall": 1.0
+    },
+    {
+      "accuracy": 0.4444444444444444,
+      "condition": "T5_qwen_base",
+      "engine_selection_accuracy": 0.0,
+      "false_activation_rate": 0.0,
+      "macro_f1": 0.10256410256410257,
+      "mean_generated_tokens": 2.0,
+      "mean_parse_execute_latency_us": 0.22,
+      "mean_prompt_tokens": 98.07555555555555,
+      "mean_route_latency_us": 344520.1441111111,
+      "parse_valid_rate": 1.0,
+      "parser_false_activation_rate": 0.0,
+      "payload_exact_rate": 0.0,
+      "peak_memory_bytes": null,
+      "raw_exact_rate": 0.4444444444444444,
+      "runtime_exact_rate": 0.0,
+      "source": "xpu",
+      "total_wall_time_seconds": 310.0681297,
+      "trainable_parameters": 0,
+      "training_minutes": 0.0,
+      "trigger_recall": 0.0
+    },
+    {
+      "accuracy": 0.7944444444444444,
+      "condition": "T5_qwen_router_l1",
+      "engine_selection_accuracy": 0.848,
+      "false_activation_rate": 0.2725,
+      "macro_f1": 0.782322677198213,
+      "mean_generated_tokens": 2.5077777777777777,
+      "mean_parse_execute_latency_us": 175.11755555555555,
+      "mean_prompt_tokens": 98.07555555555555,
+      "mean_route_latency_us": 514151.40233333333,
+      "parse_valid_rate": 1.0,
+      "parser_false_activation_rate": 0.2,
+      "payload_exact_rate": 0.848,
+      "peak_memory_bytes": 1482487296,
+      "raw_exact_rate": 0.7944444444444444,
+      "runtime_exact_rate": 0.948,
+      "source": "xpu",
+      "total_wall_time_seconds": 462.7362621,
+      "trainable_parameters": 2293760,
+      "training_minutes": 67.36318361166632,
+      "trigger_recall": 1.0
+    },
+    {
+      "accuracy": 0.7666666666666667,
+      "condition": "T5_qwen_router_l2",
+      "engine_selection_accuracy": 0.9,
+      "false_activation_rate": 0.4,
+      "macro_f1": 0.7831780538302278,
+      "mean_generated_tokens": 2.588888888888889,
+      "mean_parse_execute_latency_us": 247.26133333333334,
+      "mean_prompt_tokens": 98.07555555555555,
+      "mean_route_latency_us": 554663.2642222223,
+      "parse_valid_rate": 0.9111111111111111,
+      "parser_false_activation_rate": 0.2,
+      "payload_exact_rate": 0.9,
+      "peak_memory_bytes": 1526527488,
+      "raw_exact_rate": 0.6777777777777778,
+      "runtime_exact_rate": 1.0,
+      "source": "xpu",
+      "total_wall_time_seconds": 499.1969378,
+      "trainable_parameters": 5046272,
+      "training_minutes": 82.67232368166636,
+      "trigger_recall": 1.0
+    }
+  ],
+  "schema_version": "ccpu.paper2.router_analysis.v1",
+  "sources": [
+    {
+      "path": "artifacts/paper2/diagnostic_v1/analysis/trigger_ladder.json",
+      "sha256": "b83d40da8b3021b72124c245693210e6b75379519a25fd809ef3bd423ceff618"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/qwen_base_v1/summary.json",
+      "sha256": "c7fb9f96abff41761da5cc86f8aa2df006c8411f4eef7d78ced084bd065f42e6"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/qwen_base_v1/manifest.json",
+      "sha256": "79ee0ce27c2ab06633be74447df9f6930705c2532c182578d2ef8e364a11da5f"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/qwen_l1_v1/summary.json",
+      "sha256": "02e09de2edf371b8c0a7410db6b23411d5d275591c8ca7296b2d2d053cffa660"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/qwen_l1_v1/manifest.json",
+      "sha256": "9b2f26f66a52b2cddb9b090f40fb449cae3346e5b8fa6699d0a2215e16766293"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/lora_qwen_l1_v1/training_report.json",
+      "sha256": "6b44bdc644a9420588940f2c649e16b4aebf990c8ffc4c67a7fd4f97dd10c0b6"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/qwen_l2_v1/summary.json",
+      "sha256": "692a5a7fd655c86a29a85d2bb5435599f30dd78dcf5d1e442efb59a46fa85f73"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/qwen_l2_v1/manifest.json",
+      "sha256": "ba6815b3f0940fbed28d25e3aca3afd7936571f8ad3d6663342ea071b2d08345"
+    },
+    {
+      "path": "artifacts/paper2/router_v1/lora_qwen_l2_v1/training_report.json",
+      "sha256": "dcda3ff7b231899a7515532e263d083d2de28b89bcbe1c1f255b260d2d1dc226"
+    }
+  ],
+  "test_dataset_sha256": "4ea5fa9f129eb50262c97fde9c0d88dff461015446942104392a1ad0f0b2845f"
+}
