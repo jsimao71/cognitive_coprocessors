@@ -43,6 +43,7 @@ from .policy_lora import (
     run_policy_hf,
     summarize_policy,
 )
+from .public_benchmarks import analyze_crag_triggers, freeze_crag_subset
 from .source import ControlledFactStore
 from .triggers import fit_confidence_threshold
 
@@ -385,6 +386,26 @@ def analyze_natural_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_public_crag_command(args: argparse.Namespace) -> int:
+    result = freeze_crag_subset(args.config, args.cache_root, args.output_dir)
+    print(
+        f"froze {result['record_count']} CRAG questions and "
+        f"{result['matched_evaluation_rows']} matched rows"
+    )
+    return 0
+
+
+def analyze_public_crag_command(args: argparse.Namespace) -> int:
+    result = analyze_crag_triggers(
+        args.config, args.cache_root, args.selection, args.output_dir
+    )
+    print(
+        f"analyzed {result['matched_row_count']} matched CRAG rows; "
+        f"status={result['interpretation']['status']}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1.5", aliases=["paper1_5"], help="epistemic-risk retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -505,3 +526,20 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     natural_analysis.add_argument("--config", required=True)
     natural_analysis.add_argument("--output-dir", required=True)
     natural_analysis.set_defaults(handler=analyze_natural_command)
+
+    crag_freeze = commands.add_parser(
+        "freeze-public-crag", help="freeze a pinned, stratified CRAG subset"
+    )
+    crag_freeze.add_argument("--config", required=True)
+    crag_freeze.add_argument("--cache-root", required=True)
+    crag_freeze.add_argument("--output-dir", required=True)
+    crag_freeze.set_defaults(handler=freeze_public_crag_command)
+
+    crag_analysis = commands.add_parser(
+        "analyze-public-crag", help="audit CRAG triggers with matched context controls"
+    )
+    crag_analysis.add_argument("--config", required=True)
+    crag_analysis.add_argument("--cache-root", required=True)
+    crag_analysis.add_argument("--selection", required=True)
+    crag_analysis.add_argument("--output-dir", required=True)
+    crag_analysis.set_defaults(handler=analyze_public_crag_command)

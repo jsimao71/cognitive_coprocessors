@@ -1,0 +1,51 @@
+{
+  "config_fingerprint": "52aab60dc7306a73ab96d31bccd216c91040eac8d59ba1b76312826685aa8902",
+  "control_construction": "same question with gold answer supplied in active context",
+  "counts": {
+    "answer_type": {
+      "invalid": 32,
+      "no_answer": 4,
+      "valid": 284
+    },
+    "domain": {
+      "finance": 88,
+      "movie": 50,
+      "music": 56,
+      "open": 58,
+      "sports": 68
+    },
+    "question_type": {
+      "aggregation": 41,
+      "comparison": 40,
+      "false_premise": 33,
+      "multi-hop": 40,
+      "post-processing": 43,
+      "set": 41,
+      "simple": 43,
+      "simple_w_condition": 39
+    },
+    "split": {
+      "0": 158,
+      "1": 162
+    },
+    "static_or_dynamic": {
+      "fast-changing": 79,
+      "real-time": 23,
+      "slow-changing": 102,
+      "static": 116
+    }
+  },
+  "matched_evaluation_rows": 640,
+  "record_count": 320,
+  "redistribution": "IDs, strata, split, and content hashes only",
+  "schema_version": "ccpu.paper1_5.public_crag_manifest.v1",
+  "selection_sha256": "7dc44139c7cf8c36a0a0df3704839e2e79c74570e2bb4fe05ba0e02c2afa022f",
+  "source": {
+    "expected_rows": 2700,
+    "file": "crag_task_1_and_2_dev_v4_index.jsonl.bz2",
+    "file_sha256": "15687dff9a8942d883cf12a15e816ce6ccfd55c8299bbb0478534de81b0818a4",
+    "license": "CC-BY-NC-4.0",
+    "repo_id": "Quivr/CRAG",
+    "revision": "956928e797d8a685a2b5a9008effbc565a8d9881"
+  }
+}

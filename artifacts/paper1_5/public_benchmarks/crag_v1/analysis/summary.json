@@ -1,0 +1,207 @@
+{
+  "base_question_count": 320,
+  "confidence_condition": "not run; requires matched model token traces",
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "863abd068bd3c3f0c3484a299a6c294d23eff6b4"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "interpretation": {
+    "paper3_5_gate": "closed_pending_model_and_evidence_runs",
+    "status": "semantic_policy_does_not_transfer"
+  },
+  "matched_row_count": 640,
+  "predictions_sha256": "9402990b1f2ab604063392d9dd853779fbca7e3454d56e8b72ff871939bf11a9",
+  "results": [
+    {
+      "accuracy": 0.4671875,
+      "by_static_or_dynamic": {
+        "fast-changing": {
+          "accuracy": 0.4430379746835443,
+          "count": 158,
+          "false_retrieval_rate": 0.21518987341772153,
+          "retrieval_needed_recall": 0.10126582278481013,
+          "retrieval_rate": 0.15822784810126583,
+          "ucr": 0.8987341772151899
+        },
+        "real-time": {
+          "accuracy": 0.41304347826086957,
+          "count": 46,
+          "false_retrieval_rate": 0.21739130434782608,
+          "retrieval_needed_recall": 0.043478260869565216,
+          "retrieval_rate": 0.13043478260869565,
+          "ucr": 0.9565217391304348
+        },
+        "slow-changing": {
+          "accuracy": 0.47058823529411764,
+          "count": 204,
+          "false_retrieval_rate": 0.13725490196078433,
+          "retrieval_needed_recall": 0.0784313725490196,
+          "retrieval_rate": 0.10784313725490197,
+          "ucr": 0.9215686274509804
+        },
+        "static": {
+          "accuracy": 0.49137931034482757,
+          "count": 232,
+          "false_retrieval_rate": 0.25862068965517243,
+          "retrieval_needed_recall": 0.2413793103448276,
+          "retrieval_rate": 0.25,
+          "ucr": 0.7586206896551724
+        }
+      },
+      "condition": "legacy_semantic",
+      "count": 640,
+      "deployment_status": "diagnostic",
+      "false_retrieval_rate": 0.20625,
+      "matched_context_suppression": 0.0,
+      "mean_cpu_latency_us": 11.86015625,
+      "retrieval_needed_recall": 0.140625,
+      "retrieval_rate": 0.1734375,
+      "ucr": 0.859375
+    },
+    {
+      "accuracy": 0.5234375,
+      "by_static_or_dynamic": {
+        "fast-changing": {
+          "accuracy": 0.5189873417721519,
+          "count": 158,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.0379746835443038,
+          "retrieval_rate": 0.0189873417721519,
+          "ucr": 0.9620253164556962
+        },
+        "real-time": {
+          "accuracy": 0.5217391304347826,
+          "count": 46,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.043478260869565216,
+          "retrieval_rate": 0.021739130434782608,
+          "ucr": 0.9565217391304348
+        },
+        "slow-changing": {
+          "accuracy": 0.5245098039215687,
+          "count": 204,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.049019607843137254,
+          "retrieval_rate": 0.024509803921568627,
+          "ucr": 0.9509803921568627
+        },
+        "static": {
+          "accuracy": 0.5258620689655172,
+          "count": 232,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.05172413793103448,
+          "retrieval_rate": 0.02586206896551724,
+          "ucr": 0.9482758620689655
+        }
+      },
+      "condition": "natural_semantic",
+      "count": 640,
+      "deployment_status": "diagnostic",
+      "false_retrieval_rate": 0.0,
+      "matched_context_suppression": 0.046875,
+      "mean_cpu_latency_us": 0.171875,
+      "retrieval_needed_recall": 0.046875,
+      "retrieval_rate": 0.0234375,
+      "ucr": 0.953125
+    },
+    {
+      "accuracy": 0.81875,
+      "by_static_or_dynamic": {
+        "fast-changing": {
+          "accuracy": 1.0,
+          "count": 158,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "real-time": {
+          "accuracy": 1.0,
+          "count": 46,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "slow-changing": {
+          "accuracy": 1.0,
+          "count": 204,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "static": {
+          "accuracy": 0.5,
+          "count": 232,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 0.0,
+          "retrieval_rate": 0.0,
+          "ucr": 1.0
+        }
+      },
+      "condition": "dynamic_metadata_proxy",
+      "count": 640,
+      "deployment_status": "diagnostic",
+      "false_retrieval_rate": 0.0,
+      "matched_context_suppression": 0.6375,
+      "mean_cpu_latency_us": 0.193125,
+      "retrieval_needed_recall": 0.6375,
+      "retrieval_rate": 0.31875,
+      "ucr": 0.36250000000000004
+    },
+    {
+      "accuracy": 1.0,
+      "by_static_or_dynamic": {
+        "fast-changing": {
+          "accuracy": 1.0,
+          "count": 158,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "real-time": {
+          "accuracy": 1.0,
+          "count": 46,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "slow-changing": {
+          "accuracy": 1.0,
+          "count": 204,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        },
+        "static": {
+          "accuracy": 1.0,
+          "count": 232,
+          "false_retrieval_rate": 0.0,
+          "retrieval_needed_recall": 1.0,
+          "retrieval_rate": 0.5,
+          "ucr": 0.0
+        }
+      },
+      "condition": "registered_oracle",
+      "count": 640,
+      "deployment_status": "oracle_only",
+      "false_retrieval_rate": 0.0,
+      "matched_context_suppression": 1.0,
+      "mean_cpu_latency_us": 0.12578125,
+      "retrieval_needed_recall": 1.0,
+      "retrieval_rate": 0.5,
+      "ucr": 0.0
+    }
+  ],
+  "schema_version": "ccpu.paper1_5.public_crag_analysis.v1",
+  "selection_sha256": "7dc44139c7cf8c36a0a0df3704839e2e79c74570e2bb4fe05ba0e02c2afa022f"
+}

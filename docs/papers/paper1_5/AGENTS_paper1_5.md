@@ -185,3 +185,23 @@ semantic policy beats strengthened lexical engineering. Treat the perfect
 native-token result as evidence that both freezes retain tokenizer-visible
 template structure, not as general BPE semantic understanding. Do not reopen
 LoRA; create a harder untouched freeze with matched tokenizer audits first.
+
+## Public CRAG transfer outcome
+
+A pinned 320-question CRAG subset is frozen under
+`artifacts/paper1_5/public_benchmarks/crag_v1`. It is stratified over domain,
+question type, static/dynamic class, answerability, and source split. Each base
+question is evaluated externally and as a matched control with its gold answer
+already supplied in active context, producing 640 rows. Only IDs, strata,
+source rows, and content hashes are redistributed.
+
+The current natural semantic rule transfers at 0.0469 retrieval-needed recall
+and 0 false retrieval. The legacy rule reaches 0.1406 recall but 0.2063 false
+retrieval. A benchmark-metadata proxy that triggers on every non-static row
+reaches 0.6375 recall and 0 false retrieval; it is diagnostic, not deployable.
+The registered oracle is exact but only validates labels and matched controls.
+
+This falsifies transfer of the current synthetic semantic policy. Do not claim
+a complete CRAG comparison yet: matched model confidence traces, frozen evidence,
+answer accuracy, abstention, evidence override, and automatic rescue remain to
+be run on the same IDs. The Paper 3.5 gate remains closed pending those runs.

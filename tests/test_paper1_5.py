@@ -1,7 +1,8 @@
+import bz2
 import json
 
 from ccpu.cli import main
-from ccpu.common.artifacts import read_json, read_jsonl, write_json
+from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json
 from ccpu.paper1_5.benchmark_next import (
     NextBenchmarkConfig,
     build_next_candidates,
@@ -22,6 +23,7 @@ from ccpu.paper1_5.policy_lora import (
     generate_policy_data,
     parse_retrieval_block,
 )
+from ccpu.paper1_5.public_benchmarks import analyze_crag_triggers, freeze_crag_subset
 from ccpu.paper1_5.source import ControlledFactStore, EvidenceStatus, FactRecord
 from ccpu.paper1_5.triggers import decide, fit_confidence_threshold, semantic_risk
 
@@ -232,3 +234,65 @@ def test_natural_benchmark_audit_features_and_longform(tmp_path):
     longform = run_longform_opportunities(tmp_path / "benchmark.jsonl")
     assert longform["opportunity_count"] == 12
     assert longform["runtime_ucr"] <= longform["advisory_ucr"]
+
+
+def test_crag_freeze_and_matched_context_controls(tmp_path):
+    rows = [
+        {
+            "interaction_id": f"crag-{index}",
+            "query_time": "03/10/2024, 23:19:21 PT",
+            "domain": domain,
+            "question_type": question_type,
+            "static_or_dynamic": dynamic,
+            "query": query,
+            "answer": answer,
+            "split": index % 2,
+            "answer_type": "valid",
+        }
+        for index, (domain, question_type, dynamic, query, answer) in enumerate(
+            (
+                ("sports", "simple", "real-time", "Who is currently first?", "A"),
+                ("open", "simple", "static", "What is the capital of France?", "Paris"),
+                ("finance", "comparison", "fast-changing", "Which stock is higher now?", "B"),
+                ("music", "set", "slow-changing", "List the active members.", "C"),
+            )
+        )
+    ]
+    cache = tmp_path / "cache" / "quivr_crag"
+    cache.mkdir(parents=True)
+    source = cache / "source.jsonl.bz2"
+    with bz2.open(source, "wt", encoding="utf-8") as stream:
+        for row in rows:
+            stream.write(json.dumps(row) + "\n")
+    config = tmp_path / "config.json"
+    write_json(
+        config,
+        {
+            "schema_version": "ccpu.paper1_5.public_crag_config.v1",
+            "selection_seed": 1,
+            "max_rows": 4,
+            "source": {
+                "repo_id": "test/crag",
+                "revision": "a" * 40,
+                "file": source.name,
+                "file_sha256": file_sha256(source),
+                "expected_rows": 4,
+                "license": "test",
+            },
+        },
+    )
+    frozen = tmp_path / "frozen"
+    manifest = freeze_crag_subset(config, tmp_path / "cache", frozen)
+    assert manifest["record_count"] == 4
+    assert manifest["matched_evaluation_rows"] == 8
+
+    analysis = analyze_crag_triggers(
+        config, tmp_path / "cache", frozen / "selection.jsonl", tmp_path / "analysis"
+    )
+    oracle = next(row for row in analysis["results"] if row["condition"] == "registered_oracle")
+    assert oracle["retrieval_needed_recall"] == 1.0
+    assert oracle["false_retrieval_rate"] == 0.0
+    assert oracle["matched_context_suppression"] == 1.0
+    predictions = read_jsonl(tmp_path / "analysis" / "predictions.jsonl")
+    assert len(predictions) == 32
+    assert not any("query" in row or "answer" in row for row in predictions)

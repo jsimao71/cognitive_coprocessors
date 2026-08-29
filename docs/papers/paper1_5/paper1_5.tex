@@ -28,7 +28,11 @@ authorized coverage for every family. Prior rank-8 LoRAs have zero held-out
 recall, and the consumed natural freeze is not reused for adaptation. The result
 supports transparent runtime enforcement, but not superiority over stronger
 model-token lexical triggers. The tokenizer result exposes residual template
-structure and requires a harder independently frozen benchmark.
+structure and requires a harder independently frozen benchmark. A first public
+CRAG transfer audit confirms that requirement: on 320 questions paired with
+context-sufficient controls, the natural semantic rule has only 4.69\% needed
+recall at zero false retrieval, while a dynamic-metadata proxy reaches 63.75\%.
+Model confidence and answer-quality conditions remain pending.
 \end{abstract}
 
 \section{Question and Claim Boundary}
@@ -370,6 +374,60 @@ headroom, and the prior adapters failed held-out retrieval despite near-zero
 development loss. Reopening LoRA requires richer training data and a new test
 freeze created before adaptation.
 
+\section{Public CRAG Transfer Audit}
+
+We freeze 320 questions from a pinned 2,700-row CRAG index, stratified jointly
+over domain, question type, static/dynamic class, answerability, and source
+split.  The subset contains all five domains, all eight question types, 116
+static, 102 slow-changing, 79 fast-changing, and 23 real-time questions.  Each
+question yields two matched rows: an external condition labeled retrieval
+required and a control that supplies the gold answer in active context.  This
+tests the operational equation ``evidence requirement minus available evidence
+equals retrieval action'' without learning source choice.  Artifacts retain
+IDs, strata, source rows, and content hashes but do not redistribute questions
+or answers.
+
+\begin{table}[t]
+\centering\small
+\caption{CPU-only CRAG trigger transfer on 320 external questions and 320
+matched context controls. Recall is on external rows; FA is false retrieval on
+controls; UCR is unsupported commitment risk under trigger enforcement.}
+\label{tab:crag-trigger}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Condition & Recall & FA & Accuracy & UCR & Retrieval rate\\
+\midrule
+Legacy semantic rule & .141 & .206 & .467 & .859 & .173\\
+Natural semantic rule & .047 & .000 & .523 & .953 & .023\\
+Dynamic metadata proxy & .638 & .000 & .819 & .363 & .319\\
+Registered oracle & 1.000 & .000 & 1.000 & .000 & .500\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\linewidth]{paper1_5_crag_triggers.png}
+\caption{The synthetic semantic rules do not transfer to CRAG. The metadata
+proxy is diagnostic, and the registered oracle is not deployable.}
+\label{fig:crag-trigger}
+\end{figure}
+
+The natural rule correctly suppresses every matched context control, but it
+recognizes only 15 external questions.  The legacy rule also reacts to temporal
+content injected with some supplied answers, so its control false-retrieval rate
+exceeds its external recall.  Treating every non-static row as risky improves
+recall to 0.638 and perfectly suppresses matched controls, yet misses every
+static source-backed question.  Therefore semantic policy behavior from the
+synthetic freeze does not transfer, and ``dynamic'' is not equivalent to
+``needs evidence.''
+
+This is a trigger audit, not a completed CRAG RAG result.  No model confidence,
+retrieval answer accuracy, abstention, evidence override, automatic rescue, or
+web-corpus condition is reported yet.  The next public checkpoint must run
+matched model token traces and frozen evidence on these same IDs; the perfect
+registered oracle only validates labels and context-control construction.
+
 \section{Paper 2.5 Gate}
 The pre-registered gate asks whether at least two families reduce UCR with the
 runtime gate while retrieving less often than upfront RAG. Qwen, SmolLM2, and
@@ -400,6 +458,12 @@ its failure may be covariate shift rather than a general limitation of LoRA.
 Conversely, development loss is clearly not evidence of interface
 generalization. The ICL baseline uses textual examples rather than native tool
 schemas. No condition trains or tests multi-source selection.
+
+The CRAG checkpoint uses index metadata and matched gold-answer context controls,
+not retrieved passages.  Its dynamic proxy relies on benchmark metadata that a
+deployment may not possess.  It supports a transfer failure for the current
+rules, not a ranking of complete retrieval systems or a universal claim about
+epistemic detection.
 
 \section{Reproduction}
 Paper-specific code is under \texttt{src/ccpu/paper1\_5}. From the repository
@@ -437,6 +501,15 @@ python -m ccpu paper1.5 analyze-natural \
   --dev artifacts/paper1_5/next_iter/policy_data_v2/dev.jsonl \
   --tokenizer-config configs/common/tokenizer_triggers.json \
   --output-dir artifacts/paper1_5/tokenizer_triggers/original80
+& $py -m ccpu paper1.5 freeze-public-crag \
+  --config configs/paper1_5/public_crag.json \
+  --cache-root C:\path\to\pinned-hf-cache \
+  --output-dir artifacts/paper1_5/public_benchmarks/crag_v1/data
+& $py -m ccpu paper1.5 analyze-public-crag \
+  --config configs/paper1_5/public_crag.json \
+  --cache-root C:\path\to\pinned-hf-cache \
+  --selection artifacts/paper1_5/public_benchmarks/crag_v1/data/selection.jsonl \
+  --output-dir artifacts/paper1_5/public_benchmarks/crag_v1/analysis
 \end{verbatim}
 Manifests hash configurations, benchmark/source snapshots, predictions, traces,
 summaries, and adapter files and record checkpoint revisions, device, package,

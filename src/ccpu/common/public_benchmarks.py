@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import bz2
 import hashlib
+import json
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -79,6 +81,27 @@ def read_verified_parquet(source: PublicSource, cache_root: str | Path) -> list[
         raise ValueError(
             f"row-count mismatch for {source.benchmark}: {len(rows)} != {source.expected_rows}"
         )
+    return rows
+
+
+def read_verified_bz2_jsonl(
+    path: str | Path, *, expected_sha256: str, expected_rows: int
+) -> list[dict[str, Any]]:
+    path = Path(path)
+    if not path.exists():
+        raise FileNotFoundError(f"missing pinned public benchmark source: {path}")
+    observed_sha = file_sha256(path)
+    if observed_sha != expected_sha256:
+        raise ValueError(f"checksum mismatch for {path}: {observed_sha} != {expected_sha256}")
+    rows = []
+    with bz2.open(path, "rt", encoding="utf-8") as stream:
+        for line_number, line in enumerate(stream, 1):
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError as error:
+                raise ValueError(f"invalid compressed JSONL at {path}:{line_number}") from error
+    if len(rows) != expected_rows:
+        raise ValueError(f"row-count mismatch for {path}: {len(rows)} != {expected_rows}")
     return rows
 
 
