@@ -190,3 +190,19 @@ cases. It avoids 77.44% of model calls and has 0 FAR, but selection is only
 answer-equivalent engine substitutions and does not clear the identity gate.
 TwIL is not merged because its benchmark is not row-aligned. Paper 3 remains
 `no_go`.
+
+## Public benchmark registration
+
+The first external-validity checkpoint is frozen under
+`artifacts/paper2/public_benchmarks/data_v1`. It contains 2,253 selected IDs:
+500 GSM8K, 600 BIG-bench unit conversion, all 73 BIG-bench date understanding,
+all 360 balanced ProofWriter, and 720 CLUTRR examples. Source repositories,
+converted-Parquet revisions and checksums, source rows, labels, content hashes,
+and difficulty strata are pinned. Benchmark text is loaded locally and is not
+redistributed in the artifacts.
+
+This is a registered suite, not a completed comparison. Do not report public
+accuracy until task adapters account separately for formalization and backend
+coverage. The current typed engines are not silently treated as compatible with
+compound BIG-bench units, natural-language dates, ProofWriter English, or CLUTRR
+kinship algebra. Paper 3 remains `no_go` while this diagnostic proceeds.

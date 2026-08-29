@@ -36,6 +36,7 @@ from .experiment import run_scripted
 from .next_analysis import analyze_runs
 from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
+from .public_benchmarks import freeze_public_suite
 from .result_use import (
     ResultUseConfig,
     analyze_result_use,
@@ -512,6 +513,15 @@ def evaluate_twil_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_public_command(args: argparse.Namespace) -> int:
+    result = freeze_public_suite(args.config, args.cache_root, args.output_dir)
+    print(
+        f"froze {result['record_count']} public Paper 2 examples; "
+        f"counts={result['counts']}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2", help="heterogeneous symbolic protocol")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -728,3 +738,11 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     attention_plot.add_argument("--summary", required=True)
     attention_plot.add_argument("--output", required=True)
     attention_plot.set_defaults(handler=plot_attention_diagnostic_command)
+
+    public_freeze = commands.add_parser(
+        "freeze-public", help="verify and freeze the public heterogeneous benchmark suite"
+    )
+    public_freeze.add_argument("--config", required=True)
+    public_freeze.add_argument("--cache-root", required=True)
+    public_freeze.add_argument("--output-dir", required=True)
+    public_freeze.set_defaults(handler=freeze_public_command)

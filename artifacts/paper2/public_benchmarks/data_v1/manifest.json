@@ -1,0 +1,112 @@
+{
+  "config_fingerprint": "1b33b3b080dfd33014767dce6a63f1fd446e201cfef26be45b720a58b72e7f94",
+  "counts": {
+    "bigbench_date_understanding": 73,
+    "bigbench_unit_conversion": 600,
+    "clutrr": 720,
+    "gsm8k": 500,
+    "proofwriter_balanced": 360
+  },
+  "difficulty_strata": {
+    "bigbench_date_understanding": {
+      "multi_step": 2,
+      "single_step": 41,
+      "two_step": 30
+    },
+    "bigbench_unit_conversion": {
+      "compound_rate": 200,
+      "linear": 200,
+      "powered": 200
+    },
+    "clutrr": {
+      "depth_10": 85,
+      "depth_2": 38,
+      "depth_3": 85,
+      "depth_4": 85,
+      "depth_5": 85,
+      "depth_6": 85,
+      "depth_7": 86,
+      "depth_8": 85,
+      "depth_9": 86
+    },
+    "gsm8k": {
+      "2_steps": 167,
+      "3_4_steps": 167,
+      "5plus_steps": 166
+    },
+    "proofwriter_balanced": {
+      "depth_0": 60,
+      "depth_1": 60,
+      "depth_2": 60,
+      "depth_3": 60,
+      "depth_4": 60,
+      "depth_5": 60
+    }
+  },
+  "record_count": 2253,
+  "redistribution": "IDs, labels, difficulty metadata, and content hashes only",
+  "schema_version": "ccpu.paper2.public_selection_manifest.v1",
+  "selection_sha256": "d5502a9f79752d087a0591b6c16c6b4e94cd6d7a3d8d7aa2f70f32e8239951a8",
+  "sources": [
+    {
+      "benchmark": "gsm8k",
+      "engine": "calculator",
+      "expected_rows": 1319,
+      "file": "main/test/0000.parquet",
+      "file_sha256": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59",
+      "license": "MIT",
+      "repo_id": "openai/gsm8k",
+      "revision": "a05f38c23a0e9ab0b71de8a2b4947e20f74f68f7",
+      "split": "test",
+      "subset": "main"
+    },
+    {
+      "benchmark": "bigbench_unit_conversion",
+      "engine": "units",
+      "expected_rows": 4785,
+      "file": "unit_conversion/validation/0000.parquet",
+      "file_sha256": "544e0836b7464bf8edc2a76972073f758f2c973b9bb7d84152194d4814379296",
+      "license": "Apache-2.0",
+      "repo_id": "tasksource/bigbench",
+      "revision": "a104c7e981d585893872e3bed1d0d91a543503be",
+      "split": "validation",
+      "subset": "unit_conversion"
+    },
+    {
+      "benchmark": "bigbench_date_understanding",
+      "engine": "date_time",
+      "expected_rows": 73,
+      "file": "date_understanding/validation/0000.parquet",
+      "file_sha256": "060cb4cb1cb78713b85413d6b8d092638e1e2b04684e8ba9287b626b650f4a17",
+      "license": "Apache-2.0",
+      "repo_id": "tasksource/bigbench",
+      "revision": "a104c7e981d585893872e3bed1d0d91a543503be",
+      "split": "validation",
+      "subset": "date_understanding"
+    },
+    {
+      "benchmark": "proofwriter_balanced",
+      "engine": "datalog",
+      "expected_rows": 360,
+      "file": "default/test/0000.parquet",
+      "file_sha256": "b3b048900086b8412a4247ca9733b56f7c3fc23bbab19e8c0d66de716240c5a2",
+      "license": "CC-BY-4.0",
+      "repo_id": "theoxo/proofwriter-deduction-balanced",
+      "revision": "9fca93434910b3e09ad6f1c9af54d2038da985d0",
+      "split": "test",
+      "subset": "default"
+    },
+    {
+      "benchmark": "clutrr",
+      "engine": "graph",
+      "expected_rows": 1146,
+      "file": "gen_train23_test2to10/test/0000.parquet",
+      "file_sha256": "6ef8a4b3e49a8cc6ecdf2d5a8f2bf4dbb6e7145123d4aae07da8f9947e3e3adc",
+      "license": "unknown; retain IDs/hashes only",
+      "repo_id": "CLUTRR/v1",
+      "revision": "6e5a7ac1425b8009b81ebc78c4f2b4d8ccd77722",
+      "split": "test",
+      "subset": "gen_train23_test2to10"
+    }
+  ]
+}

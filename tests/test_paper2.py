@@ -2,6 +2,7 @@ import json
 
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
+from ccpu.common.public_benchmarks import PublicSource, stratified_select
 from ccpu.common.schema import CoprocessorRequest, GenerationResult
 from ccpu.paper2.attention_diagnostic import (
     select_attention_rows,
@@ -23,6 +24,13 @@ from ccpu.paper2.next_experiment import (
     interface_lexical_tokens,
     run_model_condition,
     summarize_next,
+)
+from ccpu.paper2.public_benchmarks import (
+    _clutrr,
+    _date_understanding,
+    _gsm8k,
+    _proofwriter,
+    _unit_conversion,
 )
 from ccpu.paper2.result_use import (
     ResultUseConfig,
@@ -54,6 +62,23 @@ def _request(engine: str, operation: str, payload: dict) -> CoprocessorRequest:
         operation=operation,
         engine=engine,
         payload=payload,
+    )
+
+
+def _public_source(benchmark: str, engine: str) -> PublicSource:
+    return PublicSource(
+        benchmark=benchmark,
+        engine=engine,
+        repo_id="test/repo",
+        revision="a" * 40,
+        subset="default",
+        split="test",
+        local_dir="test",
+        file="test.parquet",
+        file_sha256="b" * 64,
+        expected_rows=1,
+        max_rows=1,
+        license="test",
     )
 
 
@@ -546,3 +571,61 @@ def test_attention_subset_and_causal_gate(tmp_path):
     summary = summarize_attention_diagnostic(diagnostic_rows)
     assert summary["decision"]["question_result_competition_supported"]
     assert summary["decision"]["fixed_bias_gate"] == "run_beta_sweep"
+
+
+def test_public_benchmark_normalizers_preserve_difficulty_and_labels():
+    gsm = _gsm8k(
+        _public_source("gsm8k", "calculator"),
+        7,
+        {"question": "How many?", "answer": "x <<1+2=3>> y <<3*2=6>>\n#### 6"},
+        1,
+    )
+    assert (gsm["difficulty"], gsm["target_label"]) == (2, "6")
+
+    units = _unit_conversion(
+        _public_source("bigbench_unit_conversion", "units"),
+        3,
+        {"inputs": "1 meter per second^2 is", "targets": ["x"], "idx": 9},
+        1,
+    )
+    assert units["difficulty_stratum"] == "powered"
+
+    date = _date_understanding(
+        _public_source("bigbench_date_understanding", "date_time"),
+        2,
+        {"inputs": "One day after March 2, 2020?", "targets": ["03/03/2020"], "idx": 2},
+        1,
+    )
+    assert date["difficulty"] >= 2
+
+    proof = _proofwriter(
+        _public_source("proofwriter_balanced", "datalog"),
+        1,
+        {"id": "p", "theory": "t", "question": "q", "answer": "Uncertain", "QDep": 5},
+        1,
+    )
+    assert (proof["difficulty_stratum"], proof["target_label"]) == ("depth_5", "UNCERTAIN")
+
+    graph = _clutrr(
+        _public_source("clutrr", "graph"),
+        1,
+        {"id": "c", "edge_types": "['mother', 'brother']", "target_text": "uncle"},
+        1,
+    )
+    assert (graph["difficulty"], graph["target_label"]) == (2, "uncle")
+
+
+def test_public_selection_is_deterministic_and_stratified():
+    records = [
+        {
+            "benchmark": "test",
+            "difficulty_stratum": str(index % 3),
+            "selection_key": f"{index:03d}",
+            "source_row": index,
+        }
+        for index in range(30)
+    ]
+    first = stratified_select(records, max_rows=12, seed=7)
+    second = stratified_select(list(reversed(records)), max_rows=12, seed=7)
+    assert first == second
+    assert {row["difficulty_stratum"] for row in first} == {"0", "1", "2"}

@@ -215,6 +215,26 @@ the serialization upper bound.  The semantic gate requires at least 0.9 engine
 selection and runtime exactness with false activation at most 0.1; T1 is retained
 separately as a benchmark-specific deployment baseline.
 
+\subsection{Registered public-validation freeze}
+
+To separate synthetic-interface diagnosis from external validity, we register a
+public suite before running any new model condition.  It retains 500 GSM8K test
+items, 600 BIG-bench unit-conversion validation items, all 73 BIG-bench
+date-understanding validation items, all 360 items from a balanced ProofWriter
+test freeze, and 720 CLUTRR test items: 2,253 items in total.  Sampling is
+deterministic and stratified by arithmetic-step count, linear/rate/powered unit
+form, temporal-cue count, ProofWriter proof depth 0--5, and CLUTRR relation depth
+2--10.  Repository revisions, converted-Parquet checksums, source row numbers,
+labels, difficulty metadata, and content hashes are immutable.  Benchmark text
+is not redistributed.
+
+This registration is an evaluation protocol, not a result.  Every later
+condition must use the same selected IDs and the same backend within each task.
+It must factor assistance need, intent, engine choice, formalization, execution,
+result integration, and final answer; report depth curves rather than a pooled
+average; and compare generic tools, CPU routing plus exact execution, TwIL, and
+oracle formalization where meaningful.
+
 \section{Results}
 
 \subsection{Five-engine outcome}
@@ -675,6 +695,14 @@ also misses half of graph cases under the selected hierarchy, so broader
 natural-language graph cues or an independently frozen ambiguity classifier are
 still required.
 
+The public suite is frozen but not yet a model-result table.  In particular,
+the current units engine covers only a bounded simple-unit vocabulary, the date
+engine consumes typed ISO operations rather than natural questions, the Horn
+engine does not yet parse ProofWriter English, and the graph engine implements
+ISA closure rather than CLUTRR kinship algebra.  Reporting oracle intent alone
+would hide these formalization/backend gaps, so public accuracy is deferred
+until matched adapters and explicit coverage accounting are implemented.
+
 The factorized neural comparison uses one checkpoint family and one seed.  It
 tests attention-only versus attention+MLP targets, not layer-region or per-engine
 adapter selection.  These results diagnose Qwen3-0.6B at this scale; they do not
@@ -717,6 +745,11 @@ python -m ccpu paper2 run-next \
 python -m ccpu paper2 analyze-next \
   --config configs/paper2/next_analysis.json \
   --output-dir artifacts/paper2/next_iter/analysis_v1
+
+python -m ccpu paper2 freeze-public \
+  --config configs/common/public_benchmarks.json \
+  --cache-root /path/to/pinned-hf-parquet \
+  --output-dir artifacts/paper2/public_benchmarks/data_v1
 
 python -m ccpu paper2 generate-diagnostic \
   --config configs/paper2/diagnostic_cpu.json \
