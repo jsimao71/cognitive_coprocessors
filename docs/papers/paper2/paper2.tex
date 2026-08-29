@@ -1,260 +1,398 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,booktabs,tabularx,array,graphicx,xcolor,hyperref}
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-\title{Heterogeneous Reflex Reasoning: Multiple Symbolic Coprocessors with Typed Micro-State}
+\documentclass[10pt]{article}
+\usepackage[margin=0.82in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\title{Heterogeneous Reflex Reasoning:\\Where Multi-Engine Interface Knowledge Breaks}
 \author{Working Draft}
 \date{August 2026}
+
 \begin{document}
 \maketitle
+
 \begin{abstract}
-Paper 2 asks whether strict automatic assistance should extend from one
-calculator to heterogeneous symbolic engines and persistent typed micro-state.
-We implement the gated substrate: Paper 1's bounded calculator, a finite Horn
-forward-chaining engine, an ISA/frame graph engine, a strict typed-event router,
-append-only deduplicated state, derivation dependencies, deterministic mixed
-tasks, and machine-readable traces. A 42-example scripted smoke test produces
-294 condition rows and 1,180 trace records. Heterogeneous, explicit, and oracle
-routes are perfect by construction; each single engine solves its own third;
-six controls cause no intervention. These results validate plumbing only and
-are marked \texttt{empirical: false}. Paper 1 did not pass its evidence gate,
-so no language-model experiment or heterogeneous-engine benefit is claimed.
+Where should knowledge of a deterministic execution interface live: in context,
+in model weights, or in the runtime?  We test one bounded protocol spanning five
+local engines---calculator, Datalog, ISA graph, date arithmetic, and dimensional
+unit conversion---on Qwen3-0.6B, SmolLM2-1.7B, and Gemma3-1B.  A frozen benchmark
+contains 200 training, 50 development, and 100 test rows, with 16 test tasks per
+engine and 20 no-execution controls.  A prompt-derived deterministic reflex and
+an oracle both execute the frozen forms exactly.  The learned policy does not:
+at five engines, Qwen, SmolLM2, and Gemma reach engine-selection rates of 0.188,
+0.350, and 0.000, respectively, and runtime-exact rates of 0.188, 0.313, and
+0.000.  All preserve zero false activations, but every exact result sent through
+the Qwen or SmolLM2 result-use pass is overridden.  In-context demonstrations
+recover some engine families but grow from 39 to 118 static lexical interface
+tokens and reach false-activation rates of 0.9--1.0 at several catalog sizes.
+Textual schemas remain safe but inert.  Thus exact execution belongs in the
+runtime, but this experiment does not establish a reliable home for broad
+semantic selection.  The preregistered Paper 3 gate is therefore \texttt{no\_go}.
 \end{abstract}
 
-\section{Status and Evidence Gate}
+\section{Question and decision rule}
 
-This paper is an implemented protocol, not an empirical result. Paper 1's
-one-checkpoint pilot found that reflex calculator assistance tied the unassisted
-model and did not dominate explicit invocation. Its required multi-seed,
-multi-size replication has not run. The series gate for heterogeneous compute
-is therefore closed. We implement and test the deterministic substrate now so a
-future experiment can be frozen before model outcomes are observed; the smoke
-summary cannot be cited as language-model evidence.
+Paper 1 established a narrow placement rule for one calculator interface:
+stable selection and serialization may live in adapter weights, while parsing,
+bounds, execution, provenance, reinjection, and enforcement remain deterministic.
+This paper asks whether that rule survives heterogeneous interfaces.  The central
+question is:
 
-\section{Hypotheses for a Future Empirical Run}
+\begin{quote}
+Can one small model learn when to offload, select among five local engines,
+serialize a bounded typed request, and preserve the exact result without prompt
+cost growing with the engine catalog?
+\end{quote}
 
-\paragraph{H1: heterogeneous reliability.}
-On tasks requiring arithmetic, Horn closure, and graph inheritance, correctly
-routed heterogeneous assistance improves final accuracy over the same model,
-matched prompting, every single-engine condition, and explicit tools.
+The confirmatory gate is intentionally stronger than demonstrating that the
+engines work.  At five engines, at least two model families must reach both
+engine-selection and runtime-exact rates of at least 0.8, with false activation
+at most 0.1.  Deterministic or oracle success cannot open this gate.
 
-\paragraph{H2: scaling.}
-As derivation depth and distractor count grow, heterogeneous assistance degrades
-more slowly than model-only and homogeneous baselines under matched engine,
-token, call, and latency accounting.
+\section{Bounded heterogeneous runtime}
 
-\paragraph{H3: typed-state reuse.}
-Persistent derived facts reduce repeated generation or execution when later
-queries reuse prior premises, without stale or irrelevant state offsetting the
-gain.
+\subsection{Common envelope and registry}
 
-Oracle selection estimates engine headroom. None of these hypotheses is tested
-by the scripted smoke run.
+All engines use one fail-closed registry and normalize into shared typed request,
+result, and append-only state records.  The runtime
+accepts exactly one complete fenced block from an enabled family.  Open fences,
+multiple blocks, unknown engines, invalid dimensions, malformed payloads, and
+over-budget state fail without execution.
 
-\section{Implemented Architecture}
+The five block families are:
 
-The shared request envelope from \texttt{ccpu.common} carries request and
-candidate IDs, family, operation, target engine, typed payload, confidence,
-budget, and metadata. Strict events use one of three anchored forms:
 \begin{verbatim}
-[calculator] 1 + 2 + 3
-[horn] { ... typed facts, rules, and query ... }
-[graph] { ... typed ISA/frame data and query ... }
+```calculator                 ```date
+15246377 * 746647383          add 2026-08-28 P90D
+```                           ```
+
+```datalog                    ```units
+fact link(a,b)                convert 7.3 mile -> kilometer
+fact link(b,c)                ```
+query reachable(a,c)
+```
+
+```graph
+isa penguin bird
+isa bird animal
+query isa penguin animal
+```
 \end{verbatim}
-Tags embedded in prose, quoted tags, unknown families, malformed JSON, and
-events beyond 4,096 characters do not execute. The routing path is
-\[
-\textsc{detect}\rightarrow\textsc{normalize}\rightarrow\textsc{route}
-\rightarrow\textsc{execute}\rightarrow\textsc{persist}\rightarrow\textsc{trace}.
-\]
 
-\subsection{Bounded calculator}
+The calculator is bounded and exact; Datalog uses finite forward chaining; the
+graph engine computes bounded ISA closure and frame inheritance; date arithmetic
+uses ISO dates and integer day durations; unit conversion rejects dimensional
+mismatch.  No generated code, shell command, network action, general planner, or
+unbounded theorem proving is permitted.
 
-The calculator is retained unchanged from Paper 1. Its allowlisted integer AST
-normalizes to postfix micro-IR and executes with limits on characters, nodes,
-depth, literal digits, exponent, value bits, stack size, and wall time. Generated
-code is never executed.
+\subsection{Runtime reflex versus oracle}
 
-\subsection{Finite Horn engine}
+The \emph{runtime reflex} recognizes only the five anchored natural-language
+templates frozen by the benchmark and translates their captured fields into a
+typed block.  Unknown or modified input returns no execution.  It does not read
+the gold target.  The separate \emph{oracle} condition replays the gold typed
+envelope.  Both are deterministic protocol validations, not model evidence and
+not claims of open-ended semantic routing.
 
-An atom is a predicate with one to four identifier terms; variables begin with
-\texttt{?}. A rule has one head and one to eight body atoms. Facts and queries
-must be ground. The engine performs monotone forward chaining with defaults of
-256 facts, 64 rules, and 16 closure rounds. New facts are deduplicated and
-persisted. Every derived fact records the state IDs of the premises used in its
-derivation. This is a finite Datalog-like Horn fragment, not unrestricted FOL or
-theorem proving.
+\section{Experimental design}
 
-\subsection{ISA/frame graph}
+\subsection{Frozen data and leakage audit}
 
-The graph engine stores child--parent ISA edges and entity--slot--value frames.
-It computes bounded transitive ISA closure and resolves a frame first on the
-entity, then on ancestors. Multiple values at the selected specificity are
-\texttt{ambiguous}; missing values are \texttt{unknown}. Defaults bound closure
-to 512 edges and depth 16.
+Table~\ref{tab:data} summarizes the benchmark.  Train, development, and test use
+disjoint operand ranges, entity prefixes, dates, values, and control labels.  A
+machine-readable audit finds no train/development/test signature overlap and no
+answer string in a typed training target.  Targets teach requests, never engine
+answers.
 
-\subsection{Persistent typed state}
-
-State is append-only and deduplicated by a canonical content fingerprint. Each
-item stores an ID, kind, typed payload, dependency IDs, and provenance, with a
-default 512-item budget. Calculator results, graph assertions, Horn facts,
-derived facts, and engine outcomes coexist under this contract. Paper 2 has no
-mutation, rollback, branch scope, or retraction; those remain Paper 4 concerns.
-
-\section{Mixed Benchmark and Conditions}
-
-The deterministic smoke generator crosses three engines with derivation depths
-1, 2, and 4; distractor counts 0 and 4; and two examples per cell. Arithmetic
-uses addition chains. Horn tasks ask reachability over link chains using base
-and recursive rules. Graph tasks ask transitive ISA membership. Six controls
-contain embedded, quoted, unknown, or non-event forms. This yields 36 engine
-tasks and six controls.
-
-\begin{table}[t]
+\begin{table}[ht]
 \centering
-\small
-\caption{Protocol conditions. Scripted conditions validate compatibility only.}
-\label{tab:paper2-conditions}
-\begin{tabularx}{\linewidth}{@{}p{0.22\linewidth}YY@{}}
+\caption{Frozen benchmark composition.}
+\label{tab:data}
+\begin{tabular}{lrrr}
 \toprule
-Condition & Available capability & Future empirical role \\
+Family & Train & Dev & Test \\
 \midrule
-No engine & None & Unassisted model baseline \\
-Explicit tools & All three, explicitly selected & Conventional invocation baseline \\
-Single calculator & Calculator only & Homogeneous capability control \\
-Single Horn & Horn only & Homogeneous capability control \\
-Single graph & ISA/frame only & Homogeneous capability control \\
-Heterogeneous & Strict automatic router, all engines & Proposed condition \\
-Oracle selection & Gold family, all engines & Routing headroom \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-The smoke harness supplies canonical events rather than model generations.
-Thus explicit, heterogeneous, and oracle conditions receive equivalent correct
-requests. A future empirical run must use matched prompts and separately score
-event exposure, engine selection, argument correctness, result use, and final
-claims.
-
-\section{Non-Empirical Protocol Smoke}
-
-The run emits 294 predictions and 1,180 trace records: 216 routing, 144
-execution, 784 state-update, and 36 no-event records. Of the state updates, 224
-carry non-empty derivation dependencies. Table~\ref{tab:paper2-smoke} reports
-expected plumbing behavior, not experimental support.
-
-\begin{table}[t]
-\centering
-\small
-\caption{Scripted smoke results over 36 tasks and six controls per condition.
-Every row is marked \texttt{empirical: false}.}
-\label{tab:paper2-smoke}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-Condition & Task accuracy & Trigger recall & Control false rate \\
+Calculator & 32 & 8 & 16 \\
+Datalog & 32 & 8 & 16 \\
+ISA graph & 32 & 8 & 16 \\
+Date/time & 32 & 8 & 16 \\
+Units & 32 & 8 & 16 \\
+No-execution control & 40 & 10 & 20 \\
 \midrule
-No engine          & 0.000 & 0.000 & 0.000 \\
-Explicit tools     & 1.000 & 1.000 & 0.000 \\
-Single calculator & 0.333 & 0.333 & 0.000 \\
-Single Horn       & 0.333 & 0.333 & 0.000 \\
-Single graph      & 0.333 & 0.333 & 0.000 \\
-Heterogeneous     & 1.000 & 1.000 & 0.000 \\
-Oracle selection  & 1.000 & 1.000 & 0.000 \\
+Total & 200 & 50 & 100 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The perfect heterogeneous line proves only that a canonical request reaches the
-correct deterministic engine. Single engines solve exactly their own 12 tasks.
-At depth four with four distractors, mean scripted Horn runtime is about 5.0 ms,
-versus 0.085 ms at depth one without distractors. This comparison is confounded
-by append-only state accumulation and benchmark order and is not a fitted
-scaling estimate.
+Nested catalogs contain 1, 2, 3, and 5 engines in the order calculator,
+Datalog, graph, date, and units.  Each catalog includes all 20 controls.  This
+changes the positive-task denominator (16, 32, 48, and 80) while holding the
+control set fixed.
 
-\begin{figure}[t]
+\subsection{Placement conditions}
+
+We compare seven roles:
+
+\begin{enumerate}
+\item unassisted base-model exact answers;
+\item context/ICL with one demonstration per enabled engine;
+\item explicit textual schemas, because these checkpoints do not provide one
+      uniform reliable native-tool interface;
+\item one five-family rank-8 LoRA adapter plus a 26-token stable contract;
+\item the anchored deterministic runtime reflex;
+\item learned-policy plus deterministic validation/execution;
+\item oracle typed-envelope replay.
+\end{enumerate}
+
+ICL and explicit-schema generation are tested on Qwen across all four catalog
+sizes.  Learned-weight scaling uses the same five-family Qwen adapter while the
+runtime enables nested catalogs.  Five-engine learned replication includes all
+three model families.  Result use is assessed in the full five-engine adapter
+runs; scaling sweeps stop after execution to avoid conflating selection with a
+second generation pass.
+
+\subsection{Adapters and XPU execution}
+
+Each adapter trains for two epochs on the same 200 request-policy rows, with 50
+development rows, rank 8, alpha 16, dropout 0.05, batch size 1, gradient
+accumulation 8, learning rate $2\times10^{-4}$, and projections
+\texttt{q/k/v/o}.  Final development losses are 0.00380 (Qwen), 0.00564
+(SmolLM2), and 0.01122 (Gemma).  Low teacher-forced loss is therefore not treated
+as evidence of held-out generation reliability.
+
+All checkpoint revisions are pinned: Qwen \texttt{c1899de}, SmolLM2
+\texttt{31b70e2}, and Gemma \texttt{dcc83ea}.  Training and generation use
+PyTorch 2.13.0+XPU on Intel Graphics.  Interface generations have a 72-token cap;
+the uniformly short unassisted exact-answer controls use a 24-token cap.
+
+\subsection{Factorized scoring}
+
+For positive rows we score DETECT, ENGINE SELECT, PAYLOAD NORMALIZE, EXECUTE,
+runtime exactness, REINJECT, USE, and FINAL independently.  False activation is
+defined only on controls.  USE, ignored-result, override, and wrong-
+reinterpretation rates are conditioned on rows for which result use was actually
+assessed.  Aggregate final accuracy includes controls and is reported only with
+that caveat.  Costs include static lexical interface tokens, model tokenizer
+prompt and generated tokens, reinjection tokens, model and engine calls, CPU
+engine time, XPU wall time, and typed-state bytes/items.
+
+\section{Results}
+
+\subsection{Five-engine outcome}
+
+Table~\ref{tab:five} gives the central result.  The bounded reflex and oracle are
+exact, but no learned model approaches the gate.  Unassisted positive accuracy
+is zero for every family/model cell under strict exact matching.  The apparent
+unassisted final scores of 0.10--0.20 come only from controls.
+
+\begin{table}[ht]
 \centering
-\includegraphics[width=0.98\linewidth]{paper2_protocol_smoke.png}
-\caption{Non-empirical compatibility diagnostic at four distractors. Curves
-show expected engine availability, not neural reliability or scaling evidence.}
-\label{fig:paper2-smoke}
+\caption{Five-engine results. Selection, exactness, and use are positive-row
+rates; FAR is over controls; final includes controls. A dash means use was not
+assessed.}
+\label{tab:five}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{llrrrrr}
+\toprule
+Placement & Model & Select & Runtime exact & FAR & Use & Final \\
+\midrule
+Runtime reflex & Deterministic & 1.000 & 1.000 & 0.000 & 1.000 & 1.000 \\
+Oracle & Deterministic & 1.000 & 1.000 & 0.000 & 1.000 & 1.000 \\
+Unassisted & Qwen3-0.6B & 0.000 & 0.000 & 0.000 & -- & 0.100 \\
+Unassisted & SmolLM2-1.7B & 0.000 & 0.000 & 0.000 & -- & 0.200 \\
+Unassisted & Gemma3-1B & 0.000 & 0.000 & 0.000 & -- & 0.200 \\
+ICL & Qwen3-0.6B & 0.475 & 0.475 & 1.000 & -- & 0.380 \\
+Textual schemas & Qwen3-0.6B & 0.000 & 0.000 & 0.000 & -- & 0.200 \\
+Weights + runtime & Qwen3-0.6B & 0.188 & 0.188 & 0.000 & 0.000 & 0.200 \\
+Weights + runtime & SmolLM2-1.7B & 0.350 & 0.313 & 0.000 & 0.000 & 0.200 \\
+Weights + runtime & Gemma3-1B & 0.000 & 0.000 & 0.000 & -- & 0.200 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+The adapters fail differently.  Qwen detects every positive and every control,
+but collapses calculator, Datalog, graph, and units toward malformed Datalog-like
+blocks.  Its only exact family is date (15/16).  SmolLM2 normalizes units at
+16/16 and date at 9/16, with all other families at zero.  Gemma produces no exact
+typed request.  Table~\ref{tab:family} makes the concentration visible.
+
+\begin{table}[ht]
+\centering
+\caption{Exact executions out of 16 held-out rows per family for five-engine
+learned adapters.}
+\label{tab:family}
+\begin{tabular}{lrrrrr}
+\toprule
+Model & Calculator & Datalog & Graph & Date & Units \\
+\midrule
+Qwen3-0.6B & 0 & 0 & 0 & 15 & 0 \\
+SmolLM2-1.7B & 0 & 0 & 0 & 9 & 16 \\
+Gemma3-1B & 0 & 0 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Capability-count scaling and interference}
+
+Figure~\ref{fig:scaling} and Table~\ref{tab:scaling} show that recurring context
+grows with the catalog, but quality is not monotonic.  ICL is exact on all
+calculator positives at one engine and all calculator/Datalog positives at two,
+yet its false-activation rates are 1.0 and 0.9.  Adding graph drops positive
+exactness to 0.396; at five engines exactness is 0.475 and FAR returns to 1.0.
+Textual schemas always emit no execution: safe, increasingly expensive, and
+inert.  Qwen weights keep a constant 26-token contract and FAR 0, but exactness
+is zero at 1--3 engines and 0.188 at five because date rows enter the test mix.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]{paper2_capability_scaling.png}
+\caption{Engine selection and mean tokenizer prompt cost versus enabled engine
+count. Deterministic and oracle lines are protocol bounds, not learned evidence.}
+\label{fig:scaling}
 \end{figure}
 
-\section{Future Empirical Protocol}
+\begin{table}[ht]
+\centering
+\caption{Qwen capability scaling. Static is lexical interface burden; prompt is
+the measured mean model-token count.}
+\label{tab:scaling}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Engines & Static & Prompt & Select/exact & FAR & Mean wall ms \\
+\midrule
+ICL & 1 & 39 & 93.3 & 1.000 & 1.000 & 2709 \\
+ICL & 2 & 62 & 163.2 & 1.000 & 0.900 & 9846 \\
+ICL & 3 & 92 & 209.5 & 0.396 & 0.200 & 4383 \\
+ICL & 5 & 118 & 271.7 & 0.475 & 1.000 & 10033 \\
+Text schemas & 1 & 43 & 86.3 & 0.000 & 0.000 & 705 \\
+Text schemas & 2 & 56 & 115.2 & 0.000 & 0.000 & 819 \\
+Text schemas & 3 & 69 & 136.5 & 0.000 & 0.000 & 957 \\
+Text schemas & 5 & 95 & 160.7 & 0.000 & 0.000 & 1130 \\
+Weights & 1 & 26 & 66.3 & 0.000 & 0.000 & 2479 \\
+Weights & 2 & 26 & 78.2 & 0.000 & 0.000 & 6696 \\
+Weights & 3 & 26 & 84.5 & 0.000 & 0.000 & 8689 \\
+Weights & 5 & 26 & 78.7 & 0.188 & 0.000 & 7843 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
 
-A gate-passing run must use pinned matched checkpoints and multiple seeds. It
-must cross engine family, derivation depth, entity/fact count, rule count,
-distractors, state reuse, and model size. Required baselines are no engine,
-matched prompting, explicit tools, each single engine, heterogeneous automatic
-routing, and oracle selection. Report final exact accuracy with intervals;
-detection, normalization, route, engine, persistence, reinjection, and result-use
-errors; generated and reinjected tokens; model and engine calls; engine work;
-latency; state bytes/items; reuse rate; and condition-by-depth/model-size
-interactions. Preserve raw generations and every state transition.
+\subsection{Exact execution is not exact result use}
 
-\section{Falsification and Gate}
+The second model pass receives the original question and the deterministic
+result, then must answer with that result only.  Qwen receives 15 such passes and
+SmolLM2 receives 28.  Both have use accuracy 0.0 and override rate 1.0 among
+assessed rows.  Wrong reinterpretation occurs in 11/15 Qwen passes and all 28
+SmolLM2 passes.  Thus execution success is not sufficient: result preservation
+is a separate failure surface that the runtime must eventually enforce.
 
-Heterogeneous assistance is unsupported if explicit tools match or dominate its
-quality--cost frontier, routing errors erase engine gains, mixed tasks do not
-benefit beyond their corresponding single engines, persistent state is not
-reused, state growth costs exceed saved work, or scaling slopes are
-indistinguishable. The current smoke test cannot satisfy or falsify these
-criteria. Model experiments remain blocked until Paper 1 identifies a
-reproducible automatic-assistance regime or a negative result specifically
-motivates heterogeneous compute.
+\subsection{Typed state and bounded composition}
+
+Forty deterministic two-stage compositions validate dependency-linked state:
+20 date $\rightarrow$ calculator and 20 graph $\rightarrow$ Datalog rows.  Both
+families achieve 1.0 at stage 1, stage 2, final exactness, dependency recording,
+and state reuse.  Mean state sizes are 3 and 7 items, respectively.  This shows
+that the typed runtime can reuse derived values without repeated model calls; it
+does not show that a model can plan those compositions.
+
+\subsection{Prototype economics}
+
+Mean deterministic reflex wall time is below 1 ms at every catalog size on this
+machine.  Model conditions range from about 0.7 s per row for an inert one-engine
+schema prompt to 13.4 s for the five-engine SmolLM2 adapter.  These are
+correctness-first, full-prefix prototype measurements on one Intel GPU, not
+production latency estimates.  The stronger conclusion is operational: engine
+CPU time is negligible relative to neural generation, but selecting and
+preserving the engine result remains unreliable.
+
+\section{Hypotheses, falsification, and gate}
+
+\begin{itemize}
+\item H1 (reliable heterogeneous learned interface) is falsified at this scale.
+\item H2 (context burden grows with engine count) is supported for recurring
+      tokens, but constant adapter context does not yield reliable quality.
+\item H3 (assistance degrades more slowly with task difficulty) is not
+      adjudicated; the frozen test varies values, not formal depth.
+\item H4 (robustness to added engines) is falsified by non-monotonic ICL
+      interference and learned family collapse.
+\item H5 (typed-state reuse) is supported only in deterministic bounded
+      compositions.
+\item H6 (small-model augmentation closes a large-model gap) is not tested; no
+      larger-model comparison is used to rescue a failed small-model gate.
+\end{itemize}
+
+The machine-readable gate artifact records \texttt{status: no\_go} and an empty
+passing-model list.  Paper 3 may still study implicit semantic interrupts as a
+new exploratory question, but this explicit multi-engine result does not justify
+claiming a reliable learned predecessor.
 
 \section{Limitations}
 
-The synthetic events reveal the target engine explicitly, eliminating semantic
-routing. Canonical typed payloads eliminate model formalization errors. The
-logic and graph tasks are positive queries with simple chains, and the plot
-cannot estimate generalization. Persistent state grows across a fixed task
-order, has no eviction, and may create latency confounds. Graph closure is
-recomputed, not incrementally materialized. There is no constraint engine,
-natural-language parser, model generation, explicit textual-tool parser,
-reinjection/use test, XPU experiment, multi-seed variance, or second model.
+The benchmark is synthetic and deliberately templated.  Disjoint namespaces and
+a frozen test reduce leakage, but do not establish linguistic robustness.  The
+runtime reflex is anchored to those templates and should not be generalized.
+Only one seed, one rank, one training schedule, and three small checkpoints are
+tested.  The explicit baseline uses textual schemas rather than native function
+calling.  Strict exact matching penalizes semantically correct capitalization or
+extra prose, appropriately for an execution protocol but more harshly than a
+question-answer benchmark.  We do not add the optional sixth engine, a generic
+code interpreter, an unrestricted planner, larger models, or a model-authored
+composition study after the core gate fails.  Finally, measured XPU wall time is
+backend- and machine-specific.
 
-\section{Reproduction}
+\section{Reproducibility}
 
-From the repository root, no Docker or accelerator is required:
+The retained workflow is:
+
 \begin{verbatim}
-python -m ccpu paper2 generate \
-  --config configs/paper2/smoke.json \
-  --output artifacts/paper2/smoke/dataset.jsonl
-python -m ccpu paper2 validate \
-  --dataset artifacts/paper2/smoke/dataset.jsonl
-python -m ccpu paper2 simulate \
-  --dataset artifacts/paper2/smoke/dataset.jsonl \
-  --output-dir artifacts/paper2/smoke/run
-python -m ccpu paper2 plot \
-  --summary artifacts/paper2/smoke/run/summary.json \
-  --output docs/papers/paper2/paper2_protocol_smoke.png
+python -m ccpu paper2 generate-next \
+  --config configs/paper2/next_iter_xpu.json \
+  --output-dir artifacts/paper2/next_iter/data_v1
+
+python -m ccpu paper2 run-next \
+  --config configs/paper2/next_iter_xpu.json \
+  --dataset artifacts/paper2/next_iter/data_v1/test.jsonl \
+  --condition runtime --catalog-size 5 \
+  --output-dir artifacts/paper2/next_iter/runtime_n5_v4
+
+python -m ccpu paper2 analyze-next \
+  --config configs/paper2/next_analysis.json \
+  --output-dir artifacts/paper2/next_iter/analysis_v1
 \end{verbatim}
-The dataset and run manifests hash their inputs and outputs and record repository
-and environment provenance. Paper-specific code lives under
-\texttt{src/ccpu/paper2}; shared contracts and artifact utilities remain under
-\texttt{src/ccpu/common}.
 
-\section{Related Work}
+Every run stores predictions, factorized summaries, dataset and artifact hashes,
+pinned model metadata, package/device provenance, and the dirty Git revision at
+execution time.  The analysis artifact hashes all 22 source summaries.
 
-Toolformer learns model-authored API use \cite{toolformer}. AlphaGeometry
-combines neural guidance with symbolic deduction \cite{alphageometry}. Dynamic
-solver composition and verifiable primitive programs study complementary ways
-to select or compose formal reasoning systems \cite{dynamic,forethought}.
-Paper 2 does not claim heterogeneous tools or neuro-symbolic reasoning as new;
-it isolates strict automatic routing plus bounded persistent typed state as a
-falsifiable systems experiment.
+\section{Related work}
+
+Toolformer learns model-authored API use \cite{toolformer}; this study instead
+holds execution local, typed, and fail-closed.  LoRA supplies the compact weight
+placement mechanism \cite{lora}, but low adapter loss does not guarantee exact
+interface generation.  AlphaGeometry combines neural guidance and symbolic
+deduction in a domain-specific system \cite{alphageometry}.  Dynamic solver
+composition and neurosymbolic primitive programming study richer solver
+selection and composition \cite{dynamic,forethought}; our negative result is
+narrower and focuses on factorized interface reliability in small models.
 
 \section{Conclusion}
 
-Paper 2 now has a tested calculator/Horn/graph runtime, bounded persistent state,
-derivation provenance, mixed benchmark, condition matrix, artifacts, and
-reproduction path. The implementation is ready for a future preregistered model
-experiment. It is not evidence that heterogeneous reflex reasoning helps a
-language model, and the series gate remains closed.
-
+The answer to ``where should interface knowledge live?'' is asymmetric.  Exact
+parsing, execution, provenance, state, and enforcement belong in the runtime.
+Context can expose heterogeneous interfaces but scales in recurring tokens and
+can activate when it should not.  Adapter weights keep the contract compact and
+controls safe, but the tested adapters collapse across engine families and fail
+to preserve exact returned values.  The missing component is therefore not
+another exact engine; it is a reliable, independently validated semantic
+selection and result-use policy.  Until that component clears a multi-family
+held-out gate, heterogeneous learned reflex reasoning remains unconfirmed.
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} Schick et al. Toolformer: Language Models Can Teach Themselves to Use Tools. NeurIPS, 2023.
+\bibitem{lora} Hu et al. LoRA: Low-Rank Adaptation of Large Language Models. ICLR, 2022.
 \bibitem{alphageometry} Trinh et al. Solving Olympiad Geometry without Human Demonstrations. Nature, 2024.
 \bibitem{dynamic} Xu et al. Adaptive LLM-Symbolic Reasoning via Dynamic Logical Solver Composition. EACL, 2026.
 \bibitem{forethought} Bhat et al. Forethought: Verifiable Reasoning from Neurosymbolic Primitive Programming. arXiv:2607.04096, 2026.

@@ -1,0 +1,62 @@
+{
+  "adapter_files": {
+    "README.md": "6ad882fcf91a6ddc940e31d7891972061f348960e97e15f1441cbab2321640d5",
+    "adapter_config.json": "65a6cba965ee77da2b67f31d58d8091285fabc6ff429f24387b6a4af8e219cf9",
+    "adapter_model.safetensors": "9f96c9e689537d9c6fc0c12efa2280744f370438ff6f5d48d14fb0e7b2babc2f"
+  },
+  "adapter_id": "ccpu-paper2-gemma3-1b-multiengine-lora-r8",
+  "dev_rows": 50,
+  "dev_sha256": "f38c0aa749448e78478d89a4aa5ce8b04a5ead36f07a6b9bf287bb0a6396f072",
+  "device": "xpu",
+  "dtype": "bfloat16",
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dev_loss": 0.08980205317260698,
+      "mean_train_loss": 1.3085070031341457
+    },
+    {
+      "epoch": 2,
+      "mean_dev_loss": 0.011215917500048817,
+      "mean_train_loss": 0.00692890862906097
+    }
+  ],
+  "model_id": "google/gemma-3-1b-it",
+  "model_revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+  "optimizer_steps": 50,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "peak_memory_bytes": 2500508160,
+  "schema_version": "ccpu.paper1.lora_training.v1",
+  "total_parameters": 1001376896,
+  "train_rows": 200,
+  "train_sha256": "348c2fc1ff9bb95577ccfd211906264d531a6ccf647abd26d10dbc22d1e8d1e3",
+  "train_target_tokens_per_epoch": 6206,
+  "trainable_fraction": 0.0014888939478787415,
+  "trainable_parameters": 1490944,
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "bfloat16",
+    "epochs": 2,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "max_length": 256,
+    "rank": 8,
+    "seed": 22053,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 12412,
+  "wall_time_seconds": 419.3597510000109
+}

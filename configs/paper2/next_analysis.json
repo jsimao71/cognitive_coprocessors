@@ -1,0 +1,27 @@
+{
+  "schema_version": "ccpu.paper2.next_analysis_config.v1",
+  "runs": [
+    {"model_label": "deterministic", "placement": "runtime", "summary": "../../artifacts/paper2/next_iter/runtime_n1_v4/summary.json"},
+    {"model_label": "deterministic", "placement": "runtime", "summary": "../../artifacts/paper2/next_iter/runtime_n2_v4/summary.json"},
+    {"model_label": "deterministic", "placement": "runtime", "summary": "../../artifacts/paper2/next_iter/runtime_n3_v4/summary.json"},
+    {"model_label": "deterministic", "placement": "runtime", "summary": "../../artifacts/paper2/next_iter/runtime_n5_v4/summary.json"},
+    {"model_label": "deterministic", "placement": "oracle", "summary": "../../artifacts/paper2/next_iter/oracle_n5_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "unassisted", "summary": "../../artifacts/paper2/next_iter/unassisted_qwen_n5_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "unassisted", "summary": "../../artifacts/paper2/next_iter/unassisted_smollm2_n5_v1/summary.json"},
+    {"model_label": "Gemma3-1B", "placement": "unassisted", "summary": "../../artifacts/paper2/next_iter/unassisted_gemma3_n5_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "context", "summary": "../../artifacts/paper2/next_iter/context_qwen_n1_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "context", "summary": "../../artifacts/paper2/next_iter/context_qwen_n2_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "context", "summary": "../../artifacts/paper2/next_iter/context_qwen_n3_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "context", "summary": "../../artifacts/paper2/next_iter/context_qwen_n5_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "explicit", "summary": "../../artifacts/paper2/next_iter/explicit_qwen_n1_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "explicit", "summary": "../../artifacts/paper2/next_iter/explicit_qwen_n2_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "explicit", "summary": "../../artifacts/paper2/next_iter/explicit_qwen_n3_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "explicit", "summary": "../../artifacts/paper2/next_iter/explicit_qwen_n5_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "weights", "summary": "../../artifacts/paper2/next_iter/weights_qwen_n1_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "weights", "summary": "../../artifacts/paper2/next_iter/weights_qwen_n2_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "weights", "summary": "../../artifacts/paper2/next_iter/weights_qwen_n3_v1/summary.json"},
+    {"model_label": "Qwen3-0.6B", "placement": "weights", "summary": "../../artifacts/paper2/next_iter/weights_qwen_n5_v1/summary.json"},
+    {"model_label": "SmolLM2-1.7B", "placement": "weights", "summary": "../../artifacts/paper2/next_iter/weights_smollm2_n5_v1/summary.json"},
+    {"model_label": "Gemma3-1B", "placement": "weights", "summary": "../../artifacts/paper2/next_iter/weights_gemma3_n5_v1/summary.json"}
+  ]
+}

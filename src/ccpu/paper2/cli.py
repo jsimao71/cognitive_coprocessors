@@ -14,10 +14,16 @@ from ccpu.common.artifacts import (
     write_json,
     write_jsonl,
 )
+from ccpu.paper1.generation import HuggingFaceBackend, HuggingFaceGenerationConfig
+from ccpu.paper1.lora_train import LoRATrainingConfig, train_lora
 
+from .benchmark_next import NextBenchmarkConfig, generate_next_benchmark
+from .composition import run_compositions
 from .dataset import MixedBenchmarkConfig, MixedExample, iter_benchmark
 from .evaluate import evaluate
 from .experiment import run_scripted
+from .next_analysis import analyze_runs
+from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
 
 
@@ -86,6 +92,130 @@ def plot_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def generate_next_command(args: argparse.Namespace) -> int:
+    result = generate_next_benchmark(
+        NextBenchmarkConfig.from_dict(read_json(args.config)), args.output_dir
+    )
+    print(f"generated Paper 2 five-engine benchmark {result['counts']} -> {args.output_dir}")
+    return 0
+
+
+def _model(raw: dict, label: str) -> dict:
+    for model in raw["models"]:
+        if label in {model.get("label"), model.get("model_id")}:
+            return model
+    raise ValueError(f"unknown configured model: {label}")
+
+
+def train_next_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    model = _model(raw, args.model)
+    report = train_lora(
+        model=model,
+        training=LoRATrainingConfig.from_dict(
+            {"training": {**raw["training"], "dtype": model.get("dtype", "float16")}}
+        ),
+        train_path=args.train,
+        dev_path=args.dev,
+        output_dir=args.output_dir,
+    )
+    print(
+        f"trained {report['adapter_id']} on {report['train_rows']} rows -> {args.output_dir}"
+    )
+    return 0
+
+
+def run_next_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    if args.condition in {"runtime", "oracle"}:
+        rows = run_oracle_condition(
+            args.dataset, condition=args.condition, catalog_size=args.catalog_size
+        )
+        model = None
+    else:
+        model = _model(raw, args.model)
+        generation = raw.get("generation", {})
+        backend = HuggingFaceBackend(
+            HuggingFaceGenerationConfig(
+                model_id=str(model["model_id"]),
+                revision=str(model["revision"]),
+                max_new_tokens=int(generation.get("max_new_tokens", 72)),
+                device=str(generation.get("device", "xpu")),
+                dtype=str(model.get("dtype", generation.get("dtype", "float16"))),
+                adapter_path=args.adapter_path,
+                adapter_id=str(model["adapter_id"]) if args.adapter_path else None,
+            )
+        )
+        rows = run_model_condition(
+            dataset_path=args.dataset,
+            backend=backend,
+            condition=args.condition,
+            catalog_size=args.catalog_size,
+            seed=int(raw.get("seed", 22051)),
+            assess_use=not args.skip_use,
+        )
+    output = Path(args.output_dir)
+    predictions = write_jsonl(output / "predictions.jsonl", rows)
+    summary = write_json(output / "summary.json", summarize_next(rows))
+    root = Path(__file__).resolve().parents[3]
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 2",
+            "schema_version": "ccpu.paper2.next_run_manifest.v1",
+            "condition": args.condition,
+            "catalog_size": args.catalog_size,
+            "model": model,
+            "dataset_sha256": file_sha256(args.dataset),
+            "predictions_sha256": file_sha256(predictions),
+            "summary_sha256": file_sha256(summary),
+            "adapter_path": args.adapter_path,
+            "environment": environment_manifest(root),
+        },
+    )
+    print(f"completed {len(rows)} Paper 2 next-iteration rows -> {output}")
+    return 0
+
+
+def evaluate_next_command(args: argparse.Namespace) -> int:
+    rows = read_jsonl(args.predictions)
+    output = write_json(args.output, summarize_next(rows))
+    manifest_path = Path(output).parent / "manifest.json"
+    if manifest_path.exists():
+        manifest = read_json(manifest_path)
+        manifest["summary_sha256"] = file_sha256(output)
+        write_json(manifest_path, manifest)
+    print(f"evaluated {len(rows)} Paper 2 next-iteration rows -> {args.output}")
+    return 0
+
+
+def compositions_command(args: argparse.Namespace) -> int:
+    rows, summary = run_compositions(args.count_per_family)
+    output = Path(args.output_dir)
+    predictions = write_jsonl(output / "predictions.jsonl", rows)
+    summary_path = write_json(output / "summary.json", summary)
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 2",
+            "schema_version": "ccpu.paper2.composition_manifest.v1",
+            "predictions_sha256": file_sha256(predictions),
+            "summary_sha256": file_sha256(summary_path),
+        },
+    )
+    print(f"completed {len(rows)} bounded Paper 2 compositions -> {output}")
+    return 0
+
+
+def analyze_next_command(args: argparse.Namespace) -> int:
+    result = analyze_runs(args.config, args.output_dir)
+    print(
+        f"merged {len(result['rows'])} Paper 2 scaling cells; "
+        f"Paper 3 gate={result['paper3_gate']['status']}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2", help="heterogeneous symbolic protocol")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -108,3 +238,56 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     plot.add_argument("--summary", required=True)
     plot.add_argument("--output", required=True)
     plot.set_defaults(handler=plot_command)
+
+    next_data = commands.add_parser(
+        "generate-next", help="generate leakage-audited five-engine adapter data"
+    )
+    next_data.add_argument("--config", required=True)
+    next_data.add_argument("--output-dir", required=True)
+    next_data.set_defaults(handler=generate_next_command)
+
+    next_train = commands.add_parser("train-next-lora", help="train a multi-engine adapter")
+    next_train.add_argument("--config", required=True)
+    next_train.add_argument("--model", required=True)
+    next_train.add_argument("--train", required=True)
+    next_train.add_argument("--dev", required=True)
+    next_train.add_argument("--output-dir", required=True)
+    next_train.set_defaults(handler=train_next_command)
+
+    next_run = commands.add_parser(
+        "run-next", help="run a model or deterministic capability-count condition"
+    )
+    next_run.add_argument("--config", required=True)
+    next_run.add_argument("--dataset", required=True)
+    next_run.add_argument(
+        "--condition",
+        required=True,
+        choices=("no_engine", "context", "weights", "explicit_tools", "runtime", "oracle"),
+    )
+    next_run.add_argument("--catalog-size", required=True, type=int, choices=(1, 2, 3, 5))
+    next_run.add_argument("--model")
+    next_run.add_argument("--adapter-path")
+    next_run.add_argument("--skip-use", action="store_true")
+    next_run.add_argument("--output-dir", required=True)
+    next_run.set_defaults(handler=run_next_command)
+
+    next_evaluate = commands.add_parser(
+        "evaluate-next", help="recompute factorized multi-engine metrics"
+    )
+    next_evaluate.add_argument("--predictions", required=True)
+    next_evaluate.add_argument("--output", required=True)
+    next_evaluate.set_defaults(handler=evaluate_next_command)
+
+    compositions = commands.add_parser(
+        "compositions", help="run bounded date-calculator and graph-Datalog compositions"
+    )
+    compositions.add_argument("--count-per-family", type=int, default=20)
+    compositions.add_argument("--output-dir", required=True)
+    compositions.set_defaults(handler=compositions_command)
+
+    next_analysis = commands.add_parser(
+        "analyze-next", help="merge capability runs and decide the Paper 3 gate"
+    )
+    next_analysis.add_argument("--config", required=True)
+    next_analysis.add_argument("--output-dir", required=True)
+    next_analysis.set_defaults(handler=analyze_next_command)

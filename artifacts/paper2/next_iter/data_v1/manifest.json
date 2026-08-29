@@ -1,0 +1,51 @@
+{
+  "config": {
+    "dev_controls": 10,
+    "dev_per_engine": 8,
+    "seed": 22051,
+    "test_controls": 20,
+    "test_per_engine": 16,
+    "train_controls": 40,
+    "train_per_engine": 32
+  },
+  "counts": {
+    "dev": 50,
+    "test": 100,
+    "train": 200
+  },
+  "engine_catalogs": {
+    "1": [
+      "calculator"
+    ],
+    "2": [
+      "calculator",
+      "datalog"
+    ],
+    "3": [
+      "calculator",
+      "datalog",
+      "graph"
+    ],
+    "5": [
+      "calculator",
+      "datalog",
+      "graph",
+      "date",
+      "units"
+    ]
+  },
+  "fingerprint": "58223ffa35ac3f7e2a438071c39d1bed2de215f1961e81c02c568d9472e31188",
+  "leakage_audit": {
+    "dev_test_overlap": [],
+    "schema_version": "ccpu.paper2.leakage_audit.v1",
+    "target_contains_answer": [],
+    "train_dev_overlap": [],
+    "train_test_overlap": []
+  },
+  "paths": {
+    "dev": "artifacts\\paper2\\next_iter\\data_v1\\dev.jsonl",
+    "test": "artifacts\\paper2\\next_iter\\data_v1\\test.jsonl",
+    "train": "artifacts\\paper2\\next_iter\\data_v1\\train.jsonl"
+  },
+  "schema_version": "ccpu.paper2.next_benchmark.v1"
+}

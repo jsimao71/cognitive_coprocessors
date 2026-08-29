@@ -1,0 +1,71 @@
+{
+  "by_condition_catalog": [
+    {
+      "catalog_size": 1,
+      "condition": "explicit_tools",
+      "count": 36,
+      "detect_accuracy": 0.5555555555555556,
+      "engine_selection_accuracy": 0.0,
+      "execution_rate": 0.0,
+      "false_activation_rate": 0.0,
+      "final_accuracy": 0.5555555555555556,
+      "ignored_result_rate": 0.0,
+      "interface_lexical_tokens": 43,
+      "mean_engine_time_ms": 0.00023611111111111112,
+      "mean_generated_tokens": 4.0,
+      "mean_model_calls": 1.0,
+      "mean_prompt_tokens": 86.25,
+      "mean_reinjected_tokens": 0.0,
+      "mean_state_bytes": 2.0,
+      "mean_state_items": 0.0,
+      "mean_wall_time_ms": 704.8321138888888,
+      "overridden_result_rate": 0.0,
+      "payload_normalization_rate": 0.0,
+      "runtime_exact_rate": 0.0,
+      "use_assessment_coverage": 0.0,
+      "use_rate": 0.0,
+      "wrong_engine_rate": 0.0,
+      "wrong_reinterpretation_rate": 0.0
+    }
+  ],
+  "by_engine": [
+    {
+      "catalog_size": 1,
+      "condition": "explicit_tools",
+      "count": 16,
+      "detect_accuracy": 0.0,
+      "engine": "calculator",
+      "engine_selection_accuracy": 0.0,
+      "final_accuracy": 0.0,
+      "mean_engine_time_ms": 0.000225,
+      "mean_generated_tokens": 4.0,
+      "mean_model_calls": 1.0,
+      "mean_prompt_tokens": 87.8125,
+      "mean_reinjected_tokens": 0.0,
+      "mean_state_bytes": 2.0,
+      "mean_state_items": 0.0,
+      "mean_wall_time_ms": 666.75609375,
+      "runtime_exact_rate": 0.0
+    },
+    {
+      "catalog_size": 1,
+      "condition": "explicit_tools",
+      "count": 20,
+      "detect_accuracy": 1.0,
+      "engine": "control",
+      "engine_selection_accuracy": 1.0,
+      "final_accuracy": 1.0,
+      "mean_engine_time_ms": 0.000245,
+      "mean_generated_tokens": 4.0,
+      "mean_model_calls": 1.0,
+      "mean_prompt_tokens": 85.0,
+      "mean_reinjected_tokens": 0.0,
+      "mean_state_bytes": 2.0,
+      "mean_state_items": 0.0,
+      "mean_wall_time_ms": 735.29293,
+      "runtime_exact_rate": 1.0
+    }
+  ],
+  "prediction_count": 36,
+  "schema_version": "ccpu.paper2.next_evaluation.v1"
+}

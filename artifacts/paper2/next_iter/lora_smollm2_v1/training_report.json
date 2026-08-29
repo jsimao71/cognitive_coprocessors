@@ -1,0 +1,62 @@
+{
+  "adapter_files": {
+    "README.md": "0a489201808f9856cd0f0c33d1a846df56a9e3ecd1a9a185a3b00aa6729818c6",
+    "adapter_config.json": "9fcd03722c292e1a2453e49426683ec5fe71129ce6f7793c93783815e6769eba",
+    "adapter_model.safetensors": "65e7f0289420d5df2a2e6c47507f9dd5223046be44d3bbcc7ecf68bf122619a7"
+  },
+  "adapter_id": "ccpu-paper2-smollm2-1.7b-multiengine-lora-r8",
+  "dev_rows": 50,
+  "dev_sha256": "f38c0aa749448e78478d89a4aa5ce8b04a5ead36f07a6b9bf287bb0a6396f072",
+  "device": "xpu",
+  "dtype": "float16",
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dev_loss": 0.15698168186470865,
+      "mean_train_loss": 0.9644169946247712
+    },
+    {
+      "epoch": 2,
+      "mean_dev_loss": 0.005637378009269014,
+      "mean_train_loss": 0.034805224499141335
+    }
+  ],
+  "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "model_revision": "31b70e2e869a7173562077fd711b654946d38674",
+  "optimizer_steps": 50,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "peak_memory_bytes": 3584007680,
+  "schema_version": "ccpu.paper1.lora_training.v1",
+  "total_parameters": 1714522112,
+  "train_rows": 200,
+  "train_sha256": "348c2fc1ff9bb95577ccfd211906264d531a6ccf647abd26d10dbc22d1e8d1e3",
+  "train_target_tokens_per_epoch": 6342,
+  "trainable_fraction": 0.0018347549897332557,
+  "trainable_parameters": 3145728,
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 2,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "max_length": 256,
+    "rank": 8,
+    "seed": 22053,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 12684,
+  "wall_time_seconds": 672.4134104000404
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "ccpu.paper2.next_config.v1",
+  "seed": 22051,
+  "benchmark": {
+    "seed": 22051,
+    "train_per_engine": 32,
+    "dev_per_engine": 8,
+    "test_per_engine": 16,
+    "train_controls": 40,
+    "dev_controls": 10,
+    "test_controls": 20
+  },
+  "training": {
+    "epochs": 2,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "max_length": 256,
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
+    "seed": 22053,
+    "device": "xpu"
+  },
+  "generation": {
+    "max_new_tokens": 72,
+    "device": "xpu"
+  },
+  "models": [
+    {
+      "label": "qwen3_0_6b",
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "dtype": "float16",
+      "adapter_id": "ccpu-paper2-qwen3-0.6b-multiengine-lora-r8"
+    },
+    {
+      "label": "smollm2_1_7b",
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "dtype": "float16",
+      "adapter_id": "ccpu-paper2-smollm2-1.7b-multiengine-lora-r8"
+    },
+    {
+      "label": "gemma3_1b",
+      "model_id": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "dtype": "bfloat16",
+      "adapter_id": "ccpu-paper2-gemma3-1b-multiengine-lora-r8"
+    }
+  ]
+}
