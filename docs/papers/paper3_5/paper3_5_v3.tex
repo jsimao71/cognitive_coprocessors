@@ -1,0 +1,188 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,hyperref}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\title{Latent Epistemic Blocks:\\Parallel Claim-Level Control for Retrieval and Verification}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+
+\begin{abstract}
+Retrieval need is not equivalent to model uncertainty, and a learned source
+classifier is unnecessary when transparent runtime routing closes its oracle
+gap. We pre-register a different experiment: can a parallel causal controller
+mark \textsc{retrieve}, \textsc{verify}, or \textsc{help} spans early enough to
+obtain or validate evidence before unsupported factual commitment? The latent
+head never predicts DB, lexical, vector, web, Iceberg, or another backend.
+Runtime owns evidence sufficiency, source resolution, credentials, provenance,
+status, and enforcement. We compare confidence, semantic rules, voluntary
+generic control, text and hidden-state sidecars, an independent watchdog, and
+oracle timing. This manuscript is a protocol, not a positive watchdog result;
+the Paper 2.5 source-router gate remains \texttt{no\_go}.
+\end{abstract}
+
+\section{Inherited Evidence and New Question}
+Self-RAG establishes learned on-demand retrieval and reflection in the main
+model \cite{selfrag}; learning whether to retrieve is not our novelty claim.
+FLARE provides a confidence-driven active-retrieval comparator \cite{flare}.
+Paper 1.5 indicates that epistemic requirement can differ from confidence and
+that runtime enforcement matters, but its public CRAG audit also shows that
+simple semantic rules can miss natural retrieval needs. Paper 2.5 finds no
+controlled heuristic-to-oracle source-routing gap. Therefore source-specific
+learning stays paused while claim timing and controller independence remain
+open.
+
+The central question is: can a causal parallel controller mark the START, type,
+and END of an epistemic-risk span before commitment, without emitting control
+tokens, and does an independent watchdog rescue needs the generator's voluntary
+control misses?
+
+\section{Requirement, Availability, and Action}
+For candidate claim $c_t$, let $E(c_t)$ denote required evidence and
+$A_t$ authoritative evidence already active in context, task state, or optional
+PRA-managed state. Retrieval action is not requirement alone:
+\[
+\operatorname{action}(c_t)=E(c_t)\setminus A_t.
+\]
+After a \textsc{retrieve}, \textsc{verify}, or \textsc{help} block, the runtime
+(1) infers the evidence type; (2) checks active state; (3) reuses or materializes
+sufficient authoritative evidence; and (4) invokes Paper 2.5 R2 source routing
+only when evidence remains missing. The controller requests assistance; it does
+not assert truth.
+
+\section{Causal Claim-Level Controller}
+Paper 3's constrained state machine is reused. OUTSIDE predicts \textsc{none}
+or \textsc{start}$_{\{\rm retrieve,verify,help\}}$; \textsc{compute} is a shared
+hard-negative/control type. INSIDE(type) predicts \textsc{continue} or
+\textsc{end}. Nesting and source identity are forbidden. On END, runtime checks
+evidence sufficiency, resolves a capability/source if needed, records typed
+evidence state, applies support policy, and resumes generation.
+
+Every trajectory annotates earliest safe START $s_e$, latest acceptable START
+$s_l$, canonical END $e$, and first unsupported-value token $u$. A trigger is
+early when $s_e\leq s\leq s_l$, late when $s_l<s<u$, and missed-before-
+commitment when no valid trigger occurs before $u$. Lead time is $u-s$ tokens.
+
+\section{Trajectory Benchmark}
+Use generation trajectories, not only user questions. Include current,
+source-specific, private, or changed facts; attribution; unavailable,
+conflicting, and stale evidence; context/PRA-sufficient cases; quotations;
+hypotheticals and counterfactuals; user-given and computed facts;
+\textsc{compute} needs; and non-factual prose. Split paraphrase families,
+entities, relations, domains, and model families.
+
+Each opportunity records intent, epistemic role, evidence-required and
+evidence-available flags, $s_e$, $s_l$, $e$, $u$, and authorized response
+policy. Roles include pending assertion, claim verification, uncertainty,
+quotation, hypothesis, counterfactual, user-given fact, computed/derived fact,
+and no retrieval. Source and query annotations support R2 diagnostics only and
+must not become R1 targets.
+
+\section{Matched Controllers}
+\begin{table}[t]
+\centering\small
+\caption{The comparison separates voluntary control, independent observation,
+and source resolution.}
+\begin{tabularx}{\linewidth}{@{}p{0.29\linewidth}Y@{}}
+\toprule
+Condition & Role \\
+\midrule
+Paper 1.5 semantic runtime & Transparent epistemic-risk baseline \\
+FLARE-like confidence & Confidence-only active retrieval \\
+Paired/fenced/label-only intent & Voluntary generic language-bus control \\
+Text-prefix sidecar & Model-independent learned observer \\
+Final-layer latent controller & Frozen-LM hidden-state baseline \\
+Multi-layer latent controller & Parallel depth-aggregated observer \\
+Voluntary + watchdog hybrid & Tests independent rescue of voluntary misses \\
+Self-RAG-style main model & Prior-art main-model comparator, faithfully labeled \\
+Oracle timing/type & Upper bound before evidence and R2 errors \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+If exact Self-RAG training is infeasible, call the condition Self-RAG-inspired.
+Main-model training is confined to that declared comparator. Text and latent
+sidecars keep the generator frozen. Match controller complexity and runtime cost
+where possible; activation access alone earns no native-interface claim.
+
+\section{Independent Watchdog and Multi-Layer Control}
+Voluntary control may share the generator's blind spots. Compare voluntary-only,
+watchdog-only, and hybrid operation. Report error overlap and
+\[
+\operatorname{WRR}=\frac{\text{voluntary misses caught safely by watchdog}}
+{\text{voluntary misses requiring intervention}}.
+\]
+Watchdog Rescue Rate matters only alongside false activation, unnecessary
+retrieval, abstention cost, and lead time.
+
+Reuse Paper 3's layer sweep and aggregation ladder: final layer, best
+development-selected layer, fixed logit averaging, voting, learned scalar
+weights, and a tiny MLP over logits. START and END may use different frozen
+mixtures. Plot decodability by depth and test whether \textsc{retrieve} emerges
+earlier than \textsc{verify}; probe accuracy alone is descriptive, not causal
+benefit.
+
+\section{R2 Resolution and Runtime Enforcement}
+R2 compares the existing Paper 2.5 heuristic, token-aware BM25, capability or
+source-native rules, broadcast, and oracle source. Learned source routing
+remains gated on a real heuristic-to-oracle gap. Registry/backend changes must
+not retrain R1.
+
+Evidence statuses include supported, contradicted, unverified, stale,
+ambiguous, conflict, and unavailable. When required evidence is not authorized
+or sufficient, policy may force abstention, qualification, conflict reporting,
+or further retrieval. Measure evidence override when generation contradicts
+authoritative active state. An optional evidence-integration LoRA may be trained
+only after trigger quality is established and must remain factorized from the
+watchdog.
+
+\section{Metrics and Cost Frontier}
+Report START/END/type metrics and FAR; Early and Late Catch rates;
+missed-before-commitment; lead tokens; WRR and error correlation; unsupported
+commitment rate (UCR); Authorized Commitment Coverage; unnecessary retrieval;
+evidence override; abstention precision/recall; source/R2 correctness; calls,
+fanout, latency, and cost; calibration; and OOD/cross-model transfer. For
+controller threshold $\tau$, report frontiers under
+\[
+C(\tau)=\lambda_{fp}C_{fp}+\lambda_{fn}C_{fn}
++\lambda_{lat}C_{lat}+\lambda_{tok}C_{tok},
+\]
+not F1 alone. Mandatory slices include high-confidence/high-risk and
+low-confidence/low-risk trajectories, cases with evidence already available,
+conflicts, and each epistemic role.
+
+\section{Gates, Falsification, and Scope}
+The source-specific learned router is \texttt{no\_go} while Paper 2.5's
+heuristic closes the oracle gap. The generic latent watchdog is an exploratory
+protocol because it tests timing and independent rescue, not source identity.
+It advances only if it improves the UCR--cost frontier over semantic rules and
+voluntary generic control with acceptable FAR and transfer.
+
+Latent control is not justified if semantic rules match the frontier,
+voluntary intent catches nearly all needs, watchdog errors correlate with
+generator misses, false retrieval/abstention costs dominate rescues, or hidden
+states do not transfer. Main-model, text-sidecar, latent, hybrid, and
+task-dependent winners are all valid outcomes.
+
+There is no transactional/backtracking contribution, learned source identity in
+R1, silent promotion of uncertain interpretation, or PRA/native-KV dependency.
+PRA may optionally search active task state before remote retrieval while
+leaving unrelated old records unmaterialized. Paper 4 proceeds only if retained
+Paper 3/3.5 state makes provenance, dependency, retraction, or transactional
+scope failures concrete.
+
+\section{Execution Order}
+Build the claim-level timing freeze from Paper 1.5 trajectories; reuse Paper 3
+control code; run semantic and FLARE baselines; train the final-layer probe;
+sweep and aggregate layers; compare voluntary, watchdog, and hybrid control;
+add active-evidence sufficiency and enforcement; test cross-model/OOD transfer;
+and only then consider integration LoRA. Until those artifacts exist, this is a
+registered plan rather than evidence of an epistemic watchdog advantage.
+
+\begin{thebibliography}{9}
+\bibitem{flare} Z. Jiang et al. Active Retrieval Augmented Generation.
+\emph{EMNLP}, 2023. \url{https://arxiv.org/abs/2305.06983}.
+\bibitem{selfrag} A. Asai et al. Self-RAG: Learning to Retrieve, Generate, and
+Critique through Self-Reflection. \emph{ICLR}, 2024.
+\url{https://arxiv.org/abs/2310.11511}.
+\end{thebibliography}
+\end{document}
