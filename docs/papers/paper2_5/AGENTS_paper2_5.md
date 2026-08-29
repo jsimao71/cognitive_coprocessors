@@ -162,3 +162,11 @@ descriptors, typed validation, normalized-query and snapshot provenance, local
 DuckDB/FTS5/FAISS substitution, and an explicit executed-versus-deferred backend
 boundary. Service, Iceberg, semantic-layer, and ontology results require their
 own versioned artifacts before manuscript claims are expanded.
+
+## Tokenizer add-on scope review
+The Paper 1.5/Paper 2 tokenizer-aware trigger add-on was reviewed against the
+production-data-stack v2 roadmap. It changes NEED/engine trigger evidence, not
+Paper 2.5 SOURCE/QUERY selection or backend substitution. Do not reuse Paper 2
+engine-token scores as source-routing evidence. No Paper 2.5 rerun is required;
+the measured heuristic-to-oracle source gap remains zero and Paper 3.5 stays
+`no_go`.
