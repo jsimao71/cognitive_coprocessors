@@ -1,81 +1,136 @@
-# AGENTS — Paper 2.5
+# AGENTS - Paper 2.5
 
 ## Mission
-Test heterogeneous active retrieval across structurally different epistemic
-substrates while keeping the proposed trigger and routing policies transparent
-and heuristic. Adaptive generation-time retrieval itself is prior art.
+Test whether structurally different evidence needs benefit from distinct
+read-only epistemic coprocessors rather than one generic retriever. Keep need and
+source routing transparent and heuristic until source-native oracle value and a
+measurable routing gap justify learning.
 
-## Minimum source suite
-- relational/structured DB;
-- lexical/document index;
-- vector DB / semantic retrieval;
-- web/search.
-Optional: knowledge graph.
+## Central question
+Do heterogeneous evidence substrates provide enough source-specific value that
+the runtime should treat relational, lexical, vector, and fresh web evidence as
+distinct coprocessors?
 
-These must be genuine source types, not wrappers around the same text retriever.
-Source-specific semantics must matter: DB aggregation for structured argmax,
-lexical retrieval for exact clauses, vector retrieval for semantic report
-questions, web search for current public facts, and KG traversal for graph paths.
+Secondary: can capability count grow outside recurring neural context?
 
-## Common evidence IR
-Every source must normalize to:
-source type, source ID, query, value/content, time/freshness, relevance score if applicable, support/contradict/ambiguous/unverified status, provenance.
+## Frozen next-iteration outcome
+- The retained benchmark has 22 examples: six DB, three lexical, three vector,
+  four controlled-web, and six supplied-context controls.
+- Source-native oracle, heuristic routing, explicit selection, and broadcast all
+  reach final accuracy 1.0. The universal textual retriever reaches 0.5909,
+  evidence support 0.4375, and UCR 0.5625 on retrieval-required rows.
+- Explicit descriptor burden grows from 4.0 to 22.545 mean lexical tokens from
+  one to four sources. Broadcast averages 2.909 calls versus 0.727 for routing.
+- The heuristic closes the oracle routing gap, so the machine-readable Paper 3.5
+  gate is `no_go`. Do not train a learned source router on this freeze.
 
-## Heuristic routing only
-Examples:
-- structured attribute/aggregate -> DB
-- exact phrase/document -> lexical
-- semantic doc request -> vector
-- current/latest/recent -> web
-- relation neighborhood -> KG
+These are controlled deterministic runtime results, not language-model or live
+web-search evidence. New natural-language routing work requires a separately
+versioned benchmark and gate.
 
-## Small helper operations allowed
-Relative-date resolution, entity normalization, deterministic query rewrite, filter/aggregation construction. Do not let this become a hidden planner.
+## Source suite
+1. Embedded relational DB with typed lookup, SUM, COUNT, AVG, argmax, and join.
+2. Lexical document index for exact document/phrase retrieval.
+3. Dense semantic report retriever for paraphrased topical questions.
+4. Controlled fresh-web analogue for current public values and conflict.
+5. Knowledge graph is optional only if it adds a distinct access pattern.
 
-Bounded deterministic compositions such as date resolver -> web and entity
-resolver -> DB are allowed. Log their dependency DAG and component cost.
+These must differ semantically, not merely wrap one text index.
 
-## Baselines
-1. Base LLM
-2. Upfront RAG
-3. Single universal retriever
-4. FLARE-like confidence + universal retriever
-5. FLARE-like confidence + heuristic heterogeneous router
-6. Self-RAG-inspired adaptive retrieval, where feasible and clearly labeled
-7. Explicit LLM source/tool selection
-8. Broadcast to all sources under matched cost
-9. Heuristic semantic reflex routing
-10. Oracle source router
-11. Oracle trigger + source
+## Common source and evidence IR
+Every source request contains request ID, source type, operation, typed payload,
+and bounds. Every evidence record contains source type/ID, record ID, value,
+content, observation time, relevance, evidence status, provenance, latency, and
+retrieved bytes.
 
-## Tasks
-Structured business/data questions; exact and semantic document retrieval; current facts; conflicts; no-retrieval; mid-generation source needs.
+Evidence status is one of SUPPORTED, CONTRADICTED, UNVERIFIED, STALE, AMBIGUOUS,
+or CONFLICT. The runtime must not silently resolve conflicts.
 
-## Metrics
-Answer accuracy, unsupported claims, trigger P/R, routing accuracy, query correctness, retrieval P/R, fanout, conflicts, source cost, tokens, tool-selection tokens, wall clock, scaling with source count and factual subgoals.
+## Registry and policy
+The source registry owns credentials, validation, source invocation, provenance,
+and enforcement. Public source descriptors exclude raw credential scopes. Paper
+2.5 is strictly read-only. Log locality, latency/cost class, privacy, freshness,
+and side-effect class for each adapter.
 
-Report the factorized pipeline separately:
-TRIGGER -> SOURCE -> QUERY -> RETRIEVE/EXECUTE -> EVIDENCE USE. Do not hide a
-routing failure inside final-answer accuracy.
+## Primary router
+Use transparent source semantics:
+
+- structured attributes and aggregates -> DB;
+- exact document or clause -> lexical;
+- semantic report question -> vector;
+- latest/current/public fact -> web.
+
+Paper 1.5 may supply a typed retrieval-required event, but Paper 2.5 studies
+SOURCE and source-specific QUERY. Do not make a learned router primary.
+
+## Source-count scaling
+Use nested catalogs of 1, 2, 3, and 4 sources. Compare explicit source schemas in
+context with a runtime registry outside context. Measure descriptor tokens,
+source selection, query correctness, fanout, answer support, UCR, calls, bytes,
+evidence tokens, source latency, and total wall time.
+
+## Oracle matrix
+1. Oracle need + oracle source + oracle query.
+2. Real typed need + oracle source.
+3. Real typed need + heuristic source.
+4. Heuristic need + heuristic source.
+5. Explicit source/tool selection with all descriptors.
+6. Universal textual retriever.
+7. Broadcast to every available source.
+
+The universal baseline textualizes all available records into one matched index.
+The source-native DB oracle quantifies aggregate/join information lost by
+textualization. Broadcast is mandatory and must report fanout and source cost.
+
+## Factorized evaluation
+Always report:
+
+NEED -> SOURCE -> QUERY -> RETRIEVE -> EVIDENCE STATUS -> USE
+
+Do not hide routing or query errors inside final answer accuracy. Report
+unsupported commitments when evidence is absent or insufficient.
+
+## Bounded composition
+Allow deterministic two-stage helpers such as entity resolver -> DB and date
+resolver -> web. Preserve a dependency DAG and component cost. Do not implement a
+general planner.
+
+## Economics
+Track CPU/source time, network-analogue time, source calls, fanout, bytes,
+evidence tokens, descriptor tokens, query tokens, and total wall time. Separate
+prototype latency from recurring neural-context burden and external-source cost.
 
 ## Failure taxonomy
-Wrong trigger, wrong source, over-broadcast, malformed query, unavailable/stale source, evidence conflict, provenance error, correct evidence ignored.
+Missed/false retrieval need, wrong source, unnecessary fanout, unavailable
+source, malformed or wrong query, stale evidence, ranking miss, conflict,
+credential denial, timeout, budget violation, ignored evidence, unsupported
+answer, and wrong source treated as authoritative.
 
-## Hard scope
-No learned router/trigger, hidden-state probe, transactional state, backtracking, PRA/native KV.
+## Scope
+No learned source router, hidden-state trigger, write operation, general planner,
+transactional rollback, or PRA/native KV integration. The controlled web source
+is a freshness-aware analogue, not a claim about live search quality.
 
-## Evidence gate
-Oracle source routing is mandatory. Paper 3.5 is justified only if oracle
-heterogeneous routing beats a universal retriever under matched cost and brittle
-source selection or excessive fanout remains a measured limitation.
+## Paper 3.5 gate
+Learned source routing is justified only if all are measured:
+
+1. Source-native oracle value over a universal retriever.
+2. A non-zero heuristic routing gap.
+3. Source descriptor/context burden grows with source count.
+4. Broadcast does not dominate quality and cost.
+
+If the heuristic closes the oracle gap, record `no_go`; do not manufacture hard
+examples or train a router merely to progress the series. The frozen next
+iteration records `no_go` because the heuristic gap criterion fails.
 
 ## Falsification
-Evidence for heterogeneous routing is weak if universal retrieval matches it,
-oracle routing adds little, matched-cost broadcast dominates, source-specific
-query semantics do not matter, or explicit model source selection is equally
-efficient.
+Heterogeneous routing is weak if universal retrieval matches native execution,
+oracle routing adds little, broadcast dominates at matched cost, source-specific
+query semantics do not matter, or explicit selection is equally efficient.
 
 ## Deliverables
-`paper2_5.tex`, common retrieval interface, genuinely distinct source adapters,
-heuristic router, mixed-source benchmark, FLARE-like and Self-RAG-inspired
-controls, factorized traces, oracle-routing gate, and result tables/plots.
+The repository must contain the common retrieval IR, source registry, four
+adapters, source-optimal benchmark, source-count sweeps, complete oracle matrix,
+universal and broadcast controls, conflict enforcement, bounded compositions,
+factorized traces and economics, plots, rebuilt paper, and explicit Paper 3.5
+go/no-go artifact.

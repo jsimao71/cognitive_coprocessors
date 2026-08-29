@@ -70,34 +70,60 @@ context, weights, and deterministic runtime placement can be compared directly.
 Manual generation honors the complete model EOS set; this includes Gemma's
 `<end_of_turn>` token 106 in addition to tokenizer EOS.
 
-## Paper 1.5 controlled retrieval pilot
+## Paper 1.5 epistemic-risk replication and placement
 
-Paper 1.5 measures checkpoint confidence and semantic epistemic risk separately against one
-versioned fact store. The current XPU run is a developmental pilot, not held-out evidence:
+The next iteration freezes a larger Qwen-measured four-quadrant benchmark before evaluation,
+adds UCR/authorized-coverage and evidence-enforcement conditions, and replicates Phase A on
+three model families. The secondary adapter learns one-source request policy, never answers:
 
 ```powershell
-python -m ccpu paper1.5 validate --config configs/paper1_5/xpu_pilot.json
 $py = 'C:\Users\j.simao\.venvs\modal-llm-xpu\Scripts\python.exe'
 $env:PYTHONPATH = (Resolve-Path src).Path
-& $py -m ccpu paper1.5 run-hf --config configs/paper1_5/xpu_pilot.json --output-dir artifacts/paper1_5/xpu_pilot
-python -m ccpu paper1.5 plot --summary artifacts/paper1_5/xpu_pilot/summary.json --output docs/papers/paper1_5/paper1_5_xpu_pilot.png
+& $py -m ccpu paper1.5 freeze-next --config configs/paper1_5/next_iter_freeze_qwen_xpu.json --output-dir artifacts/paper1_5/next_iter/freeze_qwen_v2
+& $py -m ccpu paper1.5 run-hf --config configs/paper1_5/next_iter_qwen_xpu.json --output-dir artifacts/paper1_5/next_iter/qwen_v2
+& $py -m ccpu paper1.5 run-hf --config configs/paper1_5/next_iter_smollm2_xpu.json --output-dir artifacts/paper1_5/next_iter/smollm2_v1
+& $py -m ccpu paper1.5 run-hf --config configs/paper1_5/next_iter_gemma3_xpu.json --output-dir artifacts/paper1_5/next_iter/gemma3_v1
+python -m ccpu paper1.5 analyze-next --config configs/paper1_5/next_iter_analysis.json --output-dir artifacts/paper1_5/next_iter/analysis_v1
+
+& $py -m ccpu paper1.5 generate-policy-data --config configs/paper1_5/policy_lora_xpu.json --output-dir artifacts/paper1_5/next_iter/policy_data_v2
+& $py -m ccpu paper1.5 train-policy-lora --config configs/paper1_5/policy_lora_xpu.json --model Qwen/Qwen3-0.6B --train artifacts/paper1_5/next_iter/policy_data_v2/train.jsonl --dev artifacts/paper1_5/next_iter/policy_data_v2/dev.jsonl --output-dir artifacts/paper1_5/next_iter/policy_qwen_v1
+python -m ccpu paper1.5 analyze-policy --config configs/paper1_5/policy_placement.json --output-dir artifacts/paper1_5/next_iter/policy_analysis_v1
 ```
 
-The run writes the measured token probabilities, fitted threshold, typed source requests and
-statuses, raw explicit-retrieval forecasts, ten-condition predictions, threshold sweeps, Pareto
-frontiers, hashes, and environment provenance.
+Each checkpoint fits its confidence threshold on development rows. Phase A has 13 conditions;
+the policy-data audit rejects held-out entity/value overlap or answer-bearing targets.
 
-## Paper 2 heterogeneous protocol smoke
+## Paper 2 heterogeneous engines
 
-Paper 2 currently validates deterministic calculator, Horn, and ISA/frame routing plus
-persistent typed state. The smoke run is explicitly non-empirical and requires no accelerator:
+The developmental run is complete and the confirmatory Paper 3 gate is `no_go`. The runtime
+supports calculator, Datalog, graph, date, and dimension-checked units blocks through a reusable
+registry. Generate the disjoint adapter data, run deterministic scaling/compositions, then train
+one multi-engine adapter at a time:
 
 ```powershell
-python -m ccpu paper2 generate --config configs/paper2/smoke.json --output artifacts/paper2/smoke/dataset.jsonl
-python -m ccpu paper2 validate --dataset artifacts/paper2/smoke/dataset.jsonl
-python -m ccpu paper2 simulate --dataset artifacts/paper2/smoke/dataset.jsonl --output-dir artifacts/paper2/smoke/run
-python -m ccpu paper2 plot --summary artifacts/paper2/smoke/run/summary.json --output docs/papers/paper2/paper2_protocol_smoke.png
+python -m ccpu paper2 generate-next --config configs/paper2/next_iter_xpu.json --output-dir artifacts/paper2/next_iter/data_v1
+python -m ccpu paper2 run-next --config configs/paper2/next_iter_xpu.json --dataset artifacts/paper2/next_iter/data_v1/test.jsonl --condition runtime --catalog-size 5 --output-dir artifacts/paper2/next_iter/runtime_n5_v4
+python -m ccpu paper2 compositions --count-per-family 20 --output-dir artifacts/paper2/next_iter/compositions_v1
+& $py -m ccpu paper2 train-next-lora --config configs/paper2/next_iter_xpu.json --model qwen3_0_6b --train artifacts/paper2/next_iter/data_v1/train.jsonl --dev artifacts/paper2/next_iter/data_v1/dev.jsonl --output-dir artifacts/paper2/next_iter/lora_qwen_v1
 ```
 
-Do not cite scripted accuracy as model evidence. The Paper 1 evidence gate for a Paper 2 model
-experiment remains closed.
+Runtime-only and composition rows remain explicitly non-empirical. Model runs preserve
+factorized detect/select/normalize/execute/reinject/use metrics and token/latency accounting.
+The retained three-family adapters do not clear the five-engine selection or result-use gate.
+
+## Paper 2.5 heterogeneous retrieval
+
+Paper 2.5 uses a read-only source registry with embedded relational, lexical, vector, and
+controlled fresh-web adapters. Run all source counts before deciding the learned-router gate:
+
+```powershell
+python -m ccpu paper2.5 freeze --output-dir artifacts/paper2_5/next_iter/data_v2
+python -m ccpu paper2.5 run --benchmark artifacts/paper2_5/next_iter/data_v2/benchmark.jsonl --source-count 4 --output-dir artifacts/paper2_5/next_iter/source_n4_v2
+python -m ccpu paper2.5 analyze --predictions artifacts/paper2_5/next_iter/source_n1_v2/predictions.jsonl artifacts/paper2_5/next_iter/source_n2_v2/predictions.jsonl artifacts/paper2_5/next_iter/source_n3_v2/predictions.jsonl artifacts/paper2_5/next_iter/source_n4_v2/predictions.jsonl --output-dir artifacts/paper2_5/next_iter/analysis_v2
+python -m ccpu paper2.5 compositions --count-per-family 12 --output-dir artifacts/paper2_5/next_iter/compositions_v1
+```
+
+The oracle matrix decomposes need, source, query, retrieval, evidence status, and use. Public
+registry metadata never exposes credential scopes, and every source is read-only. The retained
+22-example freeze records a Paper 3.5 `no_go`: native sources outperform universal textualization,
+but the transparent heuristic closes the oracle routing gap.

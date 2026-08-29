@@ -1,120 +1,202 @@
 \documentclass[11pt]{article}
 \usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,booktabs,hyperref}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,graphicx,hyperref}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \title{Heterogeneous Active Retrieval Across Structurally Different Evidence Substrates}
 \author{Working Draft}\date{August 2026}
 \begin{document}\maketitle
+
 \begin{abstract}
-FLARE and Self-RAG establish important forms of adaptive generation-time
-retrieval \cite{flare,selfrag}. This paper does not claim that mechanism. It
-tests whether structurally different information needs benefit from routing
-among genuinely heterogeneous evidence substrates: relational execution,
-lexical indexing, vector retrieval, web search, and optionally graph traversal.
-The proposed router remains transparent and heuristic. The decisive controls
-are matched-cost universal retrieval, broadcast, explicit model selection, and
-oracle source routing. If oracle heterogeneous routing cannot beat a universal
-retriever, later learned routing is not motivated.
+Adaptive generation-time retrieval is established prior art. We test a narrower
+systems question: do structurally different information needs benefit from
+distinct read-only evidence coprocessors rather than one universal text
+retriever? We implement typed relational, lexical, semantic-vector, and
+freshness-aware controlled-web adapters behind a credential-isolating registry.
+On a 22-item source-optimal controlled benchmark, source-native oracle and
+transparent heuristic routing both reach 22/22, including safe abstention on a
+conflicting fresh source. A matched universal textual index reaches 13/22 and
+supports 7/16 retrieval-required answers; it loses relational aggregate/join and
+source-status semantics. Broadcast also reaches 22/22 but averages 2.91 calls per
+example versus 0.73 for routed retrieval. Explicit descriptor burden grows from
+4.0 to 22.5 mean tokens as the available catalog grows from one to four sources,
+while the runtime registry adds no recurring descriptor tokens. These are
+controlled runtime results, not language-model evidence. The pre-registered
+learned-router gate is \textsc{no-go}: native heterogeneity has value, context
+burden grows, and broadcast costs more, but the heuristic leaves no routing gap.
 \end{abstract}
 
-\section{Architecture}
-The runtime forms a typed information-need event
-\[
-h_t\rightarrow e_t=(\text{entity},\text{relation},\text{time},\text{source hints},\text{confidence}),
-\]
-then a transparent router chooses among
-\[
-\{\mathrm{DB},\mathrm{lexical},\mathrm{vector},\mathrm{KG},\mathrm{web}\}.
-\]
-Each event is logged through the factorization
-\[
-\textsc{trigger}\rightarrow\textsc{source}\rightarrow\textsc{query}
-\rightarrow\textsc{retrieve/execute}\rightarrow\textsc{evidence\ use}.
-\]
-Component scores and oracle substitutions prevent routing failures from being
-hidden inside final-answer accuracy.
+\section{Question and Claim Boundary}
+FLARE and Self-RAG establish important forms of adaptive retrieval
+\cite{flare,selfrag}. Our question is whether source-native semantics matter
+after retrieval need has been identified. The core paper therefore keeps need
+and source routing transparent. It does not claim a learned router, production
+web-search quality, or neural answer use.
 
-\section{Minimum Retrieval Suite}
+The factorized pipeline is
+\[
+\textsc{need}\rightarrow\textsc{source}\rightarrow\textsc{query}
+\rightarrow\textsc{retrieve}\rightarrow\textsc{evidence\ status}
+\rightarrow\textsc{use}.
+\]
+Paper 1.5 can provide a typed retrieval-required event. Paper 2.5 studies the
+source and query stages without importing a learned multi-source policy.
+
+\section{Read-Only Source Runtime}
+Every request contains a request identifier, source type, operation, typed
+payload, and bounds. Every evidence record contains source type and version,
+record identifier, value/content, observation time, relevance, support status,
+provenance, latency, and retrieved bytes. The runtime accepts only sources whose
+side-effect class is read-only. Credential scopes remain in the registry and are
+removed from public catalog descriptors.
+
+\subsection{Source-native adapters}
 \begin{itemize}
-\item relational/structured database;
-\item lexical/document index;
-\item vector database or semantic document retriever;
-\item web/search source.
+\item \textbf{Relational DB:} an embedded SQLite database with parameterized,
+typed templates for lookup, sum, count, average, argmax, and join.
+\item \textbf{Lexical index:} exact document/phrase retrieval over versioned
+policy and handbook records.
+\item \textbf{Vector index:} deterministic semantic-vector matching over reports,
+including controlled synonym normalization.
+\item \textbf{Fresh web analogue:} dated public-feed records with one explicit
+two-record conflict. It exercises freshness and conflict policy without network
+variability.
 \end{itemize}
-A knowledge graph is optional if it adds a genuinely distinct access pattern.
-Multiple wrappers over one text retriever do not satisfy this requirement.
+These are genuinely different access semantics. Multiple wrappers over one text
+index would not satisfy the design.
 
-\section{Heuristic Routing}
-Examples:
-\begin{itemize}
-\item structured attributes, identifiers, aggregates $\rightarrow$ DB;
-\item explicit document names/exact terms $\rightarrow$ lexical;
-\item semantic document questions $\rightarrow$ vector;
-\item latest/current/recent external facts $\rightarrow$ web;
-\item entity/relation neighborhoods $\rightarrow$ KG.
-\end{itemize}
-The benchmark makes these semantics necessary: an argmax over sales requires DB
-aggregation, an exact policy clause favors lexical lookup, a semantic report
-question favors vector retrieval, a current public fact favors web search, and a
-neighborhood or path query favors a KG.
-No learned router is allowed in the core paper.
+\section{Routing and Typed Queries}
+The heuristic routes structured attributes and aggregates to DB, exact
+documents/clauses to lexical retrieval, paraphrased report questions to vector
+retrieval, and current/public requests to the fresh source. After source
+selection, source-specific fields compile to bounded requests such as
+\texttt{db.max\_sales(year=2026)} or
+\texttt{web.lookup(entity,relation,time\_window)}. Generated SQL and arbitrary
+code execution are forbidden.
 
-\section{Composed Helpers}
-Small deterministic preprocessing may resolve relative dates, normalize entity
-IDs, or form database filters/aggregations. Bounded compositions such as date
-resolver $\rightarrow$ web and entity resolver $\rightarrow$ DB are allowed,
-but their dependency DAG and component costs must be logged. They may not become
-a hidden general planner.
+\section{Benchmark and Conditions}
+The frozen benchmark contains six DB tasks, three lexical tasks, three vector
+tasks, four web tasks, and six supplied-context controls. DB tasks cover every
+implemented operation. The web set contains a conflict whose authorized answer
+is abstention. Nested catalogs expose 1, 2, 3, and 4 source types.
 
-\section{Common Evidence IR}
-All retrievers emit source type/ID, query, content/value, timestamp/freshness, relevance score where meaningful, support/contradiction/ambiguity status, and provenance.
-
-\section{Tasks}
-Use source-diverse workloads: structured business facts, exact document lookup, semantic document QA, recent/current facts, multi-source conflicts, no-retrieval cases, and cases where the best source becomes clear only mid-generation.
-
-\section{Baselines}
+For every catalog we run seven conditions:
 \begin{enumerate}
-\item LLM only.
-\item Single universal retriever.
-\item Upfront RAG across all sources.
-\item FLARE-like confidence trigger plus universal retriever.
-\item FLARE-like confidence trigger plus heuristic heterogeneous router.
-\item Self-RAG-inspired adaptive retrieval, if feasible and clearly labeled as
-an approximation unless canonical training is reproduced.
-\item Explicit LLM tool/source selection.
-\item Broadcast-to-all under matched cost and fanout.
-\item Heuristic semantic reflex routing.
-\item Oracle source router.
-\item Oracle trigger plus source router.
+\item oracle need, source, and query;
+\item real typed need with oracle source;
+\item real typed need with heuristic source;
+\item heuristic need and source;
+\item explicit source selection with all descriptors;
+\item one universal textual retriever;
+\item broadcast to every available native source.
 \end{enumerate}
+This yields 469 predictions and matching factorized traces. The universal index
+contains textual snapshots of every available source record and returns the
+top lexical match. It is intentionally strong on direct textual facts, but it
+cannot execute relational aggregates or preserve native conflict semantics.
 
-\section{Metrics}
-Report final accuracy and unsupported claims, plus separate trigger P/R, source
-top-$1$/top-$k$ and confusion matrix, query correctness, retrieval/execution P/R,
-evidence-use rate, source fanout, conflicts, cost, generated/tool-selection
-tokens, latency, dependency-DAG cost, and scaling with source count and factual
-subgoals.
+\section{Controlled Results}
+\begin{table}[t]
+\centering\small
+\caption{Four-source catalog over 22 examples. Support and UCR use the 16
+retrieval-required tasks. Calls and fanout average over all examples.}
+\label{tab:p25-results}
+\begin{tabularx}{\linewidth}{@{}Yccccc@{}}
+\toprule
+Condition & Final & Support & UCR & Calls & Descriptor tok.\\
+\midrule
+Native oracle       & 1.000 & 1.000 & 0.000 & 0.73 & 0.0\\
+Heuristic routing   & 1.000 & 1.000 & 0.000 & 0.73 & 0.0\\
+Explicit schemas    & 1.000 & 1.000 & 0.000 & 0.73 & 22.5\\
+Universal text      & 0.591 & 0.438 & 0.562 & 0.73 & 3.6\\
+Broadcast           & 1.000 & 1.000 & 0.000 & 2.91 & 0.0\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-\section{Falsification}
-The heterogeneous claim fails if a universal retriever matches under equal cost,
-oracle routing adds little, matched-cost broadcasting dominates, source-specific
-query semantics do not matter, explicit source selection is equally efficient,
-or routing errors dominate specialization gains.
+Native execution and routing are perfect by construction on this small
+source-optimal diagnostic, so the result is not a claim of broad routing
+accuracy. The useful comparison is semantic headroom: universal textualization
+misses nine examples that native source operations resolve. Broadcasting removes
+routing risk but performs four calls per retrieval-required example. The routed
+conditions call exactly one source on each of 16 needs and none on six controls.
 
-\section{Scope}
-No learned routing, hidden-state trigger, backtracking, or PRA/native KV integration.
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\linewidth]{paper2_5_source_scaling.png}
+\caption{Final accuracy and recurring source-description tokens as source count
+grows. Registry capabilities remain outside neural context; explicit schemas
+grow with the catalog.}
+\label{fig:p25-scaling}
+\end{figure}
+
+\subsection{Conflict and composition}
+The fresh-source conflict returns two provenance-bearing \textsc{conflict}
+records. Native conditions accept abstention rather than selecting a value.
+Twenty-four additional deterministic compositions test entity resolver $\to$ DB
+and date resolver $\to$ web. Both stages and final outputs are 24/24, and every
+request records a dependency DAG. These are plumbing/economics checks, not model
+planning evidence.
+
+\section{Paper 3.5 Gate}
+Learned source routing requires all four pre-registered criteria:
+\begin{enumerate}
+\item source-native oracle value over universal retrieval: \textbf{pass};
+\item a measurable heuristic-to-oracle gap: \textbf{fail};
+\item source descriptor burden grows with catalog size: \textbf{pass};
+\item broadcast does not dominate quality and cost: \textbf{pass}.
+\end{enumerate}
+The decision is therefore \textsc{no-go}. The negative gate is substantive: a
+learned router would add training and failure surface without measured routing
+headroom on this benchmark. A later, independently frozen natural-language set
+may reopen the gate; this result does not.
+
+\section{Limitations and Falsification}
+The corpus is synthetic, tiny, single-seed, and designed so source semantics are
+clear. The heuristic sees controlled lexical cues and therefore should not be
+generalized to natural requests. The vector adapter uses controlled semantic
+features rather than a production embedding model. The web adapter is local and
+cannot measure network failures, live ranking, or monetary cost. Final accuracy
+is deterministic evidence acceptance, not LLM evidence use. Latencies are local
+prototype measurements.
+
+Heterogeneous routing would be weakened if a stronger matched universal system
+executes aggregates, preserves status/provenance, and closes the 9/22 gap at
+comparable cost; if broadcast is cheap enough to dominate; or if natural
+source-selection errors erase native source value.
+
+\section{Reproduction}
+Code is under \texttt{src/ccpu/paper2\_5}; reusable evidence contracts are under
+\texttt{src/ccpu/common}. From the repository root:
+\begin{verbatim}
+python -m ccpu paper2.5 freeze \
+  --output-dir artifacts/paper2_5/next_iter/data_v2
+python -m ccpu paper2.5 run \
+  --benchmark artifacts/paper2_5/next_iter/data_v2/benchmark.jsonl \
+  --source-count 4 \
+  --output-dir artifacts/paper2_5/next_iter/source_n4_v2
+python -m ccpu paper2.5 analyze --predictions <n1> <n2> <n3> <n4> \
+  --output-dir artifacts/paper2_5/next_iter/analysis_v2
+python -m ccpu paper2.5 compositions --count-per-family 12 \
+  --output-dir artifacts/paper2_5/next_iter/compositions_v1
+\end{verbatim}
+Run manifests hash benchmark, predictions, traces, and summaries and record the
+repository and environment state. This controlled matrix needs no network,
+model-token, or container dependency.
+
+\section{Conclusion}
+Source-native execution has clear controlled value over universal
+textualization, and routing avoids broadcast fanout while keeping capability
+descriptors outside recurring context. That result justifies heterogeneous
+runtime adapters, not a learned router. Because the transparent heuristic closes
+the oracle routing gap on the present freeze, Paper 3.5 remains gated off.
 
 \begin{thebibliography}{9}
 \bibitem{flare}
-Z.~Jiang et al.
-Active retrieval augmented generation.
-\emph{EMNLP}, 2023.
+Z.~Jiang et al. Active retrieval augmented generation. \emph{EMNLP}, 2023.
 \url{https://arxiv.org/abs/2305.06983}.
-
 \bibitem{selfrag}
-A.~Asai et al.
-Self-RAG: Learning to retrieve, generate, and critique through self-reflection.
-\emph{ICLR}, 2024.
+A.~Asai et al. Self-RAG: Learning to retrieve, generate, and critique through
+self-reflection. \emph{ICLR}, 2024.
 \url{https://arxiv.org/abs/2310.11511}.
 \end{thebibliography}
-
 \end{document}

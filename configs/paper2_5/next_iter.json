@@ -1,0 +1,30 @@
+{
+  "schema_version": "ccpu.paper2_5.config.v1",
+  "seed": 25051,
+  "source_catalogs": {
+    "1": ["db"],
+    "2": ["db", "lexical"],
+    "3": ["db", "lexical", "vector"],
+    "4": ["db", "lexical", "vector", "web"]
+  },
+  "conditions": [
+    "oracle_need_source_query",
+    "real_need_oracle_source",
+    "real_need_heuristic_source",
+    "heuristic_need_heuristic_source",
+    "explicit_source_selection",
+    "universal_retriever",
+    "broadcast"
+  ],
+  "limits": {
+    "max_records": 4,
+    "max_bytes": 4096,
+    "read_only": true
+  },
+  "paper3_5_gate": {
+    "require_source_native_oracle_value": true,
+    "require_heuristic_gap": true,
+    "require_context_burden_growth": true,
+    "require_broadcast_not_dominant": true
+  }
+}
