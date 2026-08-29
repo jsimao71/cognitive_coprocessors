@@ -1,0 +1,34 @@
+{
+  "schema_version": "ccpu.paper2.twil_config.v1",
+  "seed": 22501,
+  "benchmark": {
+    "seed": 22501,
+    "depths": [1, 2, 4, 8],
+    "distractors": [0, 4],
+    "examples_per_cell": 1,
+    "nonlogic_per_engine": 2
+  },
+  "generation": {
+    "max_new_tokens": 160,
+    "device": "xpu",
+    "dtype": "bfloat16",
+    "use_chat_template": true,
+    "enable_thinking": false,
+    "decoding": "greedy",
+    "use_cache": true
+  },
+  "models": [
+    {
+      "label": "smollm3_3b",
+      "model_id": "HuggingFaceTB/SmolLM3-3B",
+      "revision": "a07cc9a04f16550a088caea529712d1d335b0ac1",
+      "dtype": "bfloat16"
+    },
+    {
+      "label": "twil_lm3",
+      "model_id": "webAI-Official/TwIL-LM3",
+      "revision": "715bde26ca65dc386eb7a035635182d8f361c096",
+      "dtype": "bfloat16"
+    }
+  ]
+}

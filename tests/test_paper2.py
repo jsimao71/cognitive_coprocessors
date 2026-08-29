@@ -14,6 +14,13 @@ from ccpu.paper2.next_experiment import (
 )
 from ccpu.paper2.runtime import HeterogeneousRuntime, StrictEventRouter
 from ccpu.paper2.state import TypedMicroState
+from ccpu.paper2.twil_benchmark import TwILBenchmarkConfig, generate_twil_benchmark
+from ccpu.paper2.twil_experiment import (
+    rescore_twil_predictions,
+    run_reuse_workload,
+    run_twil_condition,
+    summarize_twil,
+)
 
 
 def _request(engine: str, operation: str, payload: dict) -> CoprocessorRequest:
@@ -279,3 +286,50 @@ def test_next_benchmark_is_disjoint_and_oracle_scoring_is_factorized(tmp_path):
     assert cell["execution_rate"] == 1.0
     assert cell["runtime_exact_rate"] == 1.0
     assert cell["false_activation_rate"] == 0.0
+
+
+def test_twil_benchmark_oracle_decomposition_and_reuse(tmp_path):
+    manifest = generate_twil_benchmark(TwILBenchmarkConfig(), tmp_path)
+    rows = read_jsonl(tmp_path / "test.jsonl")
+    assert manifest["record_count"] == 26
+    assert {row["family"] for row in rows} == {
+        "calculator",
+        "datalog",
+        "date",
+        "graph",
+        "semantic",
+        "units",
+    }
+    predictions = run_twil_condition(rows, backend=None, condition="oracle", seed=1)
+    summary = summarize_twil(predictions)
+    assert all(cell["final_accuracy"] == 1.0 for cell in summary["by_family"])
+    exact = [row for row in predictions if row["should_trigger"]]
+    assert all(row["formalization_correct"] and row["execution_correct"] for row in exact)
+
+    reuse = run_reuse_workload((1, 5))
+    assert len(reuse) == 4
+    assert all(row["build_correct"] and row["reuse_accuracy"] == 1.0 for row in reuse)
+
+
+def test_twil_strict_rescore_denies_credit_for_wrong_formalization():
+    row = {
+        "example_id": "wrong-substrate",
+        "family": "graph",
+        "engine": "graph",
+        "prompt": "Is a a c?",
+        "target": "```graph\nisa a b\nisa b c\nquery isa a c\n```",
+        "answer": "true",
+        "should_trigger": True,
+        "condition": "hybrid",
+        "generated_text": (
+            "```datalog\nfact link(a,b)\nfact link(b,c)\nquery reachable(a,c)\n```"
+        ),
+        "generated_tokens": 20,
+        "accelerator_time_ns": 1,
+    }
+    scored = rescore_twil_predictions([row])[0]
+    assert scored["engine_executed"]
+    assert not scored["formalization_correct"]
+    assert not scored["execution_correct"]
+    assert not scored["final_correct"]
+    assert scored["failure_type"] == "wrong_engine"

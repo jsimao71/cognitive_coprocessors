@@ -90,6 +90,7 @@ class HuggingFaceGenerationConfig:
     enable_thinking: bool = False
     adapter_path: str | None = None
     adapter_id: str | None = None
+    cached_generation: bool = False
 
 
 def _eos_token_ids(tokenizer_eos: Any, model_eos: Any) -> frozenset[int]:
@@ -163,6 +164,8 @@ class HuggingFaceBackend:
         seed: int = 0,
         controller_seed_text: str | None = None,
     ) -> GenerationResult:
+        if self.config.cached_generation and controller is None:
+            return self._generate_cached(prompt, seed=seed)
         torch = self._torch
         torch.manual_seed(seed)
         rendered_prompt = prompt
@@ -267,6 +270,87 @@ class HuggingFaceBackend:
                 "used_chat_template": used_chat_template,
                 "enable_thinking": self.config.enable_thinking,
                 "eos_token_ids": sorted(self.eos_token_ids),
+                "model_memory_bytes": self.model_memory_bytes,
+                "peak_memory_bytes": peak_memory_bytes,
+            },
+        )
+
+    def _generate_cached(self, prompt: str, *, seed: int) -> GenerationResult:
+        """Run standard KV-cached greedy decoding for non-interrupt comparisons."""
+        torch = self._torch
+        torch.manual_seed(seed)
+        rendered_prompt = prompt
+        used_chat_template = False
+        if self.config.use_chat_template and getattr(self.tokenizer, "chat_template", None):
+            template_args = {
+                "tokenize": False,
+                "add_generation_prompt": True,
+                "enable_thinking": self.config.enable_thinking,
+            }
+            try:
+                rendered_prompt = self.tokenizer.apply_chat_template(
+                    [{"role": "user", "content": prompt}], **template_args
+                )
+                used_chat_template = True
+            except TypeError:
+                template_args.pop("enable_thinking")
+                rendered_prompt = self.tokenizer.apply_chat_template(
+                    [{"role": "user", "content": prompt}], **template_args
+                )
+                used_chat_template = True
+        encoded = self.tokenizer(
+            rendered_prompt,
+            return_tensors="pt",
+            add_special_tokens=not used_chat_template,
+        )
+        input_ids = encoded["input_ids"].to(self.device)
+        attention_mask = encoded.get("attention_mask")
+        if attention_mask is not None:
+            attention_mask = attention_mask.to(self.device)
+        if self.device == "xpu":
+            torch.xpu.reset_peak_memory_stats()
+            torch.xpu.synchronize()
+        started = time.perf_counter_ns()
+        with torch.no_grad():
+            output_ids = self.model.generate(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                do_sample=False,
+                max_new_tokens=self.config.max_new_tokens,
+                pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
+                use_cache=True,
+            )
+        if self.device == "xpu":
+            torch.xpu.synchronize()
+        wall_time_ns = time.perf_counter_ns() - started
+        continuation = output_ids[0, input_ids.shape[-1] :]
+        generated_text = self.tokenizer.decode(
+            continuation, skip_special_tokens=True, clean_up_tokenization_spaces=False
+        )
+        peak_memory_bytes = (
+            int(torch.xpu.max_memory_allocated()) if self.device == "xpu" else None
+        )
+        return GenerationResult(
+            generated_text=generated_text,
+            rendered_text=generated_text,
+            prompt_tokens=int(input_ids.shape[-1]),
+            generated_tokens=int(continuation.shape[-1]),
+            reinjected_tokens=0,
+            model_calls=1,
+            wall_time_ns=wall_time_ns,
+            metadata={
+                "empirical": True,
+                "backend": "huggingface_cached",
+                "model_id": self.model_id,
+                "base_model_id": self.config.model_id,
+                "revision": self.config.revision,
+                "adapter_path": self.config.adapter_path,
+                "adapter_id": self.config.adapter_id,
+                "device": self.device,
+                "dtype": self.config.dtype,
+                "use_chat_template": self.config.use_chat_template,
+                "used_chat_template": used_chat_template,
+                "enable_thinking": self.config.enable_thinking,
                 "model_memory_bytes": self.model_memory_bytes,
                 "peak_memory_bytes": peak_memory_bytes,
             },

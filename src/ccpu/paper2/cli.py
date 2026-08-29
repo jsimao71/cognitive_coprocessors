@@ -25,6 +25,15 @@ from .experiment import run_scripted
 from .next_analysis import analyze_runs
 from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
+from .twil_analysis import analyze_twil_runs
+from .twil_benchmark import TwILBenchmarkConfig, generate_twil_benchmark
+from .twil_experiment import (
+    load_twil_dataset,
+    rescore_twil_predictions,
+    run_reuse_workload,
+    run_twil_condition,
+    summarize_twil,
+)
 
 
 def _examples(path: str | Path) -> list[MixedExample]:
@@ -216,6 +225,115 @@ def analyze_next_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def generate_twil_command(args: argparse.Namespace) -> int:
+    result = generate_twil_benchmark(
+        TwILBenchmarkConfig.from_dict(read_json(args.config)), args.output_dir
+    )
+    print(f"generated {result['record_count']} frozen TwIL comparison examples -> {args.output_dir}")
+    return 0
+
+
+def run_twil_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.config)
+    model = None
+    backend = None
+    if args.condition != "oracle":
+        model = _model(raw, args.model)
+        generation = raw.get("generation", {})
+        backend = HuggingFaceBackend(
+            HuggingFaceGenerationConfig(
+                model_id=str(model["model_id"]),
+                revision=str(model["revision"]),
+                max_new_tokens=int(generation.get("max_new_tokens", 160)),
+                device=str(generation.get("device", "xpu")),
+                dtype=str(model.get("dtype", generation.get("dtype", "bfloat16"))),
+                use_chat_template=bool(generation.get("use_chat_template", True)),
+                enable_thinking=bool(generation.get("enable_thinking", False)),
+                cached_generation=True,
+            )
+        )
+    rows = run_twil_condition(
+        load_twil_dataset(args.dataset),
+        backend=backend,
+        condition=args.condition,
+        seed=int(raw.get("seed", 22501)),
+    )
+    output = Path(args.output_dir)
+    predictions = write_jsonl(output / "predictions.jsonl", rows)
+    summary = write_json(output / "summary.json", summarize_twil(rows))
+    root = Path(__file__).resolve().parents[3]
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 2",
+            "schema_version": "ccpu.paper2.twil_run_manifest.v1",
+            "condition": args.condition,
+            "model": model,
+            "dataset_sha256": file_sha256(args.dataset),
+            "predictions_sha256": file_sha256(predictions),
+            "summary_sha256": file_sha256(summary),
+            "generation": raw.get("generation", {}),
+            "environment": environment_manifest(root),
+        },
+    )
+    print(f"completed {len(rows)} TwIL comparison rows -> {output}")
+    return 0
+
+
+def reuse_twil_command(args: argparse.Namespace) -> int:
+    rows = run_reuse_workload(tuple(args.query_counts))
+    output = Path(args.output_dir)
+    predictions = write_jsonl(output / "predictions.jsonl", rows)
+    summary = write_json(
+        output / "summary.json",
+        {
+            "schema_version": "ccpu.paper2.twil_reuse_summary.v1",
+            "rows": rows,
+        },
+    )
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 2",
+            "schema_version": "ccpu.paper2.twil_reuse_manifest.v1",
+            "query_counts": args.query_counts,
+            "predictions_sha256": file_sha256(predictions),
+            "summary_sha256": file_sha256(summary),
+        },
+    )
+    print(f"completed {len(rows)} persistent-state TwIL workload cells -> {output}")
+    return 0
+
+
+def analyze_twil_command(args: argparse.Namespace) -> int:
+    result = analyze_twil_runs(args.config, args.output_dir)
+    print(f"merged {result['prediction_count']} TwIL comparison rows -> {args.output_dir}")
+    return 0
+
+
+def evaluate_twil_command(args: argparse.Namespace) -> int:
+    source_rows = read_jsonl(args.predictions)
+    rows = rescore_twil_predictions(source_rows, max_new_tokens=args.max_new_tokens)
+    output = Path(args.output_dir)
+    predictions = write_jsonl(output / "predictions.jsonl", rows)
+    summary = write_json(output / "summary.json", summarize_twil(rows))
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 2",
+            "schema_version": "ccpu.paper2.twil_rescore_manifest.v2",
+            "source_predictions": str(Path(args.predictions).resolve()),
+            "source_predictions_sha256": file_sha256(args.predictions),
+            "predictions_sha256": file_sha256(predictions),
+            "summary_sha256": file_sha256(summary),
+            "max_new_tokens": args.max_new_tokens,
+            "credit_rule": "exact formalization AND exact engine execution",
+        },
+    )
+    print(f"strictly rescored {len(rows)} TwIL comparison rows -> {output}")
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2", help="heterogeneous symbolic protocol")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -291,3 +409,42 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     next_analysis.add_argument("--config", required=True)
     next_analysis.add_argument("--output-dir", required=True)
     next_analysis.set_defaults(handler=analyze_next_command)
+
+    twil_data = commands.add_parser(
+        "generate-twil", help="generate the frozen TwIL/SmolLM3 comparison benchmark"
+    )
+    twil_data.add_argument("--config", required=True)
+    twil_data.add_argument("--output-dir", required=True)
+    twil_data.set_defaults(handler=generate_twil_command)
+
+    twil_run = commands.add_parser(
+        "run-twil", help="run neural, hybrid, or oracle TwIL comparison conditions"
+    )
+    twil_run.add_argument("--config", required=True)
+    twil_run.add_argument("--dataset", required=True)
+    twil_run.add_argument("--condition", required=True, choices=("neural", "hybrid", "oracle"))
+    twil_run.add_argument("--model")
+    twil_run.add_argument("--output-dir", required=True)
+    twil_run.set_defaults(handler=run_twil_command)
+
+    twil_reuse = commands.add_parser(
+        "reuse-twil", help="measure persistent exact-state amortization"
+    )
+    twil_reuse.add_argument("--query-counts", nargs="+", type=int, default=[1, 5, 20, 100])
+    twil_reuse.add_argument("--output-dir", required=True)
+    twil_reuse.set_defaults(handler=reuse_twil_command)
+
+    twil_analysis = commands.add_parser(
+        "analyze-twil", help="merge TwIL comparison runs and render cost/frontier plots"
+    )
+    twil_analysis.add_argument("--config", required=True)
+    twil_analysis.add_argument("--output-dir", required=True)
+    twil_analysis.set_defaults(handler=analyze_twil_command)
+
+    twil_evaluate = commands.add_parser(
+        "evaluate-twil", help="strictly rescore preserved TwIL generations"
+    )
+    twil_evaluate.add_argument("--predictions", required=True)
+    twil_evaluate.add_argument("--max-new-tokens", type=int, default=160)
+    twil_evaluate.add_argument("--output-dir", required=True)
+    twil_evaluate.set_defaults(handler=evaluate_twil_command)

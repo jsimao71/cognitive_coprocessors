@@ -343,6 +343,17 @@ code interpreter, an unrestricted planner, larger models, or a model-authored
 composition study after the core gate fails.  Finally, measured XPU wall time is
 backend- and machine-specific.
 
+A post-study TwIL-LM3/SmolLM3-3B interface pilot is retained in the repository
+but excluded from the headline results.  Its Horn and graph labels were all
+positive, admitting a constant-\texttt{true} neural baseline, and its
+\texttt{/no\_think} 160-token budget does not match TwIL's documented
+thinking-mode evaluation.  Strict rescoring does establish one useful boundary:
+every exact IR executed correctly, while only 6/22 SmolLM3 and 7/22 TwIL hybrid
+exact tasks had both the right formalization and result.  These are interface
+diagnostics, not a ranking of internal reasoning.  A balanced, TwIL-aligned
+revision is required before adding ``reasoning in weights versus coprocessors''
+as a main result.
+
 \section{Reproducibility}
 
 The retained workflow is:

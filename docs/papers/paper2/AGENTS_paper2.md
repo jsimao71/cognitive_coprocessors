@@ -27,6 +27,18 @@ development loss as held-out interface reliability. Further adapter tuning or an
 optional sixth engine requires a new versioned experiment rather than mutating
 these artifacts.
 
+## TwIL comparison pilot (diagnostic only)
+
+The first TwIL/SmolLM3 comparison is frozen under `artifacts/paper2/twil` and
+documented in `TWIL_DIAGNOSTIC.md`. Do not use it to rank internal reasoning.
+The all-positive Horn/graph labels admit a constant-true solution, and the
+`/no_think`, 160-token protocol is not aligned with TwIL's documented
+thinking-mode 2048-token evaluation. It remains valid evidence that the tested
+ICL typed interface is unreliable: strict end-to-end exactness is 6/22 for
+SmolLM3 hybrid and 7/22 for TwIL hybrid, with 100% execution conditional on an
+exact IR. Paper 3 and Paper 3.5 remain paused until a corrected balanced and
+TwIL-aligned Paper 2 comparison is diagnosed.
+
 ## Placement rule
 - **Weights:** stable semantic selection and typed serialization policy.
 - **Runtime:** parsing, validation, bounds, execution, provenance, reinjection,
