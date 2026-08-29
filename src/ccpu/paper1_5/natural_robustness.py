@@ -10,13 +10,25 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-from ccpu.common.artifacts import fingerprint, read_json, write_json, write_jsonl
+from ccpu.common.artifacts import (
+    file_sha256,
+    fingerprint,
+    read_json,
+    read_jsonl,
+    write_json,
+    write_jsonl,
+)
+from ccpu.common.lexical_routing import (
+    NativeTokenizerSpec,
+    run_matched_lexical_comparison,
+    score_labels,
+)
 from ccpu.common.metrics import binary_classification, safe_mean
 
 from .experiment import answers_equal, extract_answer
 from .generation import ConfidenceBackend
 from .source import ControlledFactStore
-from .triggers import fit_confidence_threshold
+from .triggers import fit_confidence_threshold, semantic_risk
 
 
 @dataclass(frozen=True)
@@ -414,6 +426,178 @@ def lexical_audit(dataset_path: str | Path) -> dict[str, Any]:
         "maximum_accuracy": maximum,
         "status": "revise_before_semantic_claim" if maximum >= 0.9 else "passes_triviality_screen",
         "threshold": 0.9,
+    }
+
+
+def tokenizer_trigger_comparison(
+    benchmark_path: str | Path,
+    tokenizer_config_path: str | Path,
+    output_dir: str | Path,
+    *,
+    train_path: str | Path | None = None,
+    dev_path: str | Path | None = None,
+) -> dict[str, Any]:
+    benchmark = read_jsonl(benchmark_path)
+    if train_path and dev_path:
+        train = _policy_trigger_rows(read_jsonl(train_path))
+        dev = _policy_trigger_rows(read_jsonl(dev_path))
+        test = _benchmark_trigger_rows(row for row in benchmark if row["split"] == "test")
+        source_hashes = {
+            "train": file_sha256(train_path),
+            "dev": file_sha256(dev_path),
+            "test": file_sha256(benchmark_path),
+        }
+    elif train_path or dev_path:
+        raise ValueError("Paper 1.5 tokenizer comparison requires both train and dev paths")
+    else:
+        normalized = _benchmark_trigger_rows(benchmark)
+        train = [row for row in normalized if row["split"] == "train"]
+        dev = [row for row in normalized if row["split"] == "dev"]
+        test = [row for row in normalized if row["split"] == "test"]
+        source_hashes = {"benchmark": file_sha256(benchmark_path)}
+    if not train or not dev or not test:
+        raise ValueError("Paper 1.5 tokenizer comparison requires non-empty train/dev/test data")
+
+    config = read_json(tokenizer_config_path)
+    specs = [NativeTokenizerSpec(**model) for model in config["models"]]
+    result = run_matched_lexical_comparison(
+        train,
+        dev,
+        test,
+        text_key="text",
+        label_key="label",
+        negative_label="NONE",
+        tokenizer_specs=specs,
+        output_dir=output_dir,
+        source_hashes=source_hashes,
+        subgroup_key="subgroup",
+    )
+    semantic_started = time.perf_counter_ns()
+    semantic_policy = "legacy_semantic_risk" if train_path else "natural_combined_semantic"
+    semantic_labels = []
+    for row in test:
+        triggered = (
+            semantic_risk(row["text"])[0]
+            if semantic_policy == "legacy_semantic_risk"
+            else semantic_features(row["text"])["combined"]
+        )
+        semantic_labels.append("RETRIEVE" if triggered else "NONE")
+    semantic_ns = time.perf_counter_ns() - semantic_started
+    semantic = {
+        "condition": "transparent_semantic_runtime",
+        "classifier": "fixed_semantic_features",
+        "representation": "interpretable_runtime_policy",
+        "semantic_policy": semantic_policy,
+        "fit_time_ms": 0.0,
+        "mean_cpu_latency_us": semantic_ns / max(len(test), 1) / 1000,
+        "dev": None,
+        "test": {
+            **score_labels(
+                [row["label"] for row in test], semantic_labels, negative_label="NONE"
+            ),
+            "by_subgroup": _trigger_subgroups(test, semantic_labels),
+        },
+    }
+    result["results"].append(semantic)
+    for row in result["results"]:
+        if row["condition"] != "transparent_semantic_runtime":
+            row["test"]["runtime_enforced_ucr"] = 1.0 - row["test"]["trigger_recall"]
+    semantic["test"]["runtime_enforced_ucr"] = 1.0 - semantic["test"]["trigger_recall"]
+    selected = next(
+        row for row in result["results"] if row["condition"] == result["selected_condition"]
+    )
+    lexical_results = [
+        row for row in result["results"] if row["condition"] != "transparent_semantic_runtime"
+    ]
+    best_dev = max(row["dev"]["accuracy"] for row in lexical_results)
+    dev_tied = [row for row in lexical_results if row["dev"]["accuracy"] == best_dev]
+    aligned = [
+        row
+        for row in lexical_results
+        if row["condition"].startswith("tfidf_token_ngrams_native_")
+        and row["condition"].endswith("_raw")
+    ]
+    aligned_rows = [
+        {
+            "condition": row["condition"],
+            "dev_accuracy": row["dev"]["accuracy"],
+            "test_accuracy": row["test"]["accuracy"],
+            "trigger_recall": row["test"]["trigger_recall"],
+            "false_activation_rate": row["test"]["false_activation_rate"],
+        }
+        for row in aligned
+    ]
+    aligned_best = max(
+        (row["test_accuracy"] for row in aligned_rows),
+        default=selected["test"]["accuracy"],
+    )
+    descriptive_best = max(row["test"]["accuracy"] for row in lexical_results)
+    result["paper1_5_decision"] = {
+        "selection_is_development_only": True,
+        "selected_lexical_condition": selected["condition"],
+        "selected_lexical_test_accuracy": selected["test"]["accuracy"],
+        "development_best_accuracy": best_dev,
+        "development_tie_count": len(dev_tied),
+        "model_aligned_native_ngram_conditions": aligned_rows,
+        "best_model_aligned_test_accuracy": aligned_best,
+        "best_lexical_test_accuracy_descriptive_only": descriptive_best,
+        "semantic_test_accuracy": semantic["test"]["accuracy"],
+        "semantic_accuracy_advantage": semantic["test"]["accuracy"]
+        - selected["test"]["accuracy"],
+        "semantic_trigger_recall_advantage": semantic["test"]["trigger_recall"]
+        - selected["test"]["trigger_recall"],
+        "semantic_false_activation_advantage": selected["test"]["false_activation_rate"]
+        - semantic["test"]["false_activation_rate"],
+        "status": (
+            "model_aligned_lexical_matches_or_wins"
+            if aligned_best >= semantic["test"]["accuracy"]
+            else "semantic_runtime_retains_advantage"
+        ),
+    }
+    result["tokenizer_config_sha256"] = file_sha256(tokenizer_config_path)
+    write_json(Path(output_dir) / "comparison.json", result)
+    return result
+
+
+def _benchmark_trigger_rows(rows: Any) -> list[dict[str, Any]]:
+    return [
+        {
+            "example_id": str(row["example_id"]),
+            "split": str(row["split"]),
+            "text": str(row["question"]),
+            "label": "RETRIEVE" if row["evidence_required"] else "NONE",
+            "subgroup": str(row.get("retrieval_subclass", row.get("category", "unknown"))),
+        }
+        for row in rows
+    ]
+
+
+def _policy_trigger_rows(rows: Any) -> list[dict[str, Any]]:
+    return [
+        {
+            "example_id": str(row["example_id"]),
+            "split": str(row["split"]),
+            "text": str(row["prompt"]),
+            "label": "NONE" if row["target"] == "NO_RETRIEVAL" else "RETRIEVE",
+            "subgroup": str(row["kind"]),
+        }
+        for row in rows
+    ]
+
+
+def _trigger_subgroups(
+    rows: list[dict[str, Any]], predicted: list[str]
+) -> dict[str, dict[str, Any]]:
+    grouped: dict[str, list[int]] = defaultdict(list)
+    for index, row in enumerate(rows):
+        grouped[row["subgroup"]].append(index)
+    return {
+        subgroup: score_labels(
+            [rows[index]["label"] for index in indices],
+            [predicted[index] for index in indices],
+            negative_label="NONE",
+        )
+        for subgroup, indices in sorted(grouped.items())
     }
 
 

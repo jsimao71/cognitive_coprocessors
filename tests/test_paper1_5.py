@@ -1,7 +1,7 @@
 import json
 
 from ccpu.cli import main
-from ccpu.common.artifacts import read_json, read_jsonl
+from ccpu.common.artifacts import read_json, read_jsonl, write_json
 from ccpu.paper1_5.benchmark_next import (
     NextBenchmarkConfig,
     build_next_candidates,
@@ -15,6 +15,7 @@ from ccpu.paper1_5.natural_robustness import (
     lexical_audit,
     run_longform_opportunities,
     semantic_features,
+    tokenizer_trigger_comparison,
 )
 from ccpu.paper1_5.policy_lora import (
     PolicyDataConfig,
@@ -217,6 +218,17 @@ def test_natural_benchmark_audit_features_and_longform(tmp_path):
 
     lexical = lexical_audit(tmp_path / "benchmark.jsonl")
     assert len(lexical["results"]) == 3
+    write_json(tmp_path / "tokenizers.json", {"models": []})
+    tokenizer_result = tokenizer_trigger_comparison(
+        tmp_path / "benchmark.jsonl",
+        tmp_path / "tokenizers.json",
+        tmp_path / "tokenizers",
+    )
+    assert tokenizer_result["paper1_5_decision"]["selection_is_development_only"]
+    assert any(
+        row["condition"] == "transparent_semantic_runtime"
+        for row in tokenizer_result["results"]
+    )
     longform = run_longform_opportunities(tmp_path / "benchmark.jsonl")
     assert longform["opportunity_count"] == 12
     assert longform["runtime_ucr"] <= longform["advisory_ucr"]

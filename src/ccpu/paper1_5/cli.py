@@ -32,6 +32,7 @@ from .natural_robustness import (
     run_longform_opportunities,
     run_natural_model,
     summarize_natural,
+    tokenizer_trigger_comparison,
 )
 from .next_analysis import build_next_analysis
 from .plot import plot_pareto
@@ -313,6 +314,21 @@ def audit_natural_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def compare_natural_tokenizers_command(args: argparse.Namespace) -> int:
+    result = tokenizer_trigger_comparison(
+        args.benchmark,
+        args.tokenizer_config,
+        args.output_dir,
+        train_path=args.train,
+        dev_path=args.dev,
+    )
+    print(
+        f"Paper 1.5 tokenizer comparison selected={result['selected_condition']}; "
+        f"decision={result['paper1_5_decision']['status']}"
+    )
+    return 0
+
+
 def run_natural_command(args: argparse.Namespace) -> int:
     raw = read_json(args.config)
     matches = [
@@ -454,6 +470,17 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     natural_audit.add_argument("--dataset", required=True)
     natural_audit.add_argument("--output", required=True)
     natural_audit.set_defaults(handler=audit_natural_command)
+
+    natural_tokenizers = commands.add_parser(
+        "compare-natural-tokenizers",
+        help="compare matched lexical token spaces with the semantic runtime policy",
+    )
+    natural_tokenizers.add_argument("--benchmark", required=True)
+    natural_tokenizers.add_argument("--tokenizer-config", required=True)
+    natural_tokenizers.add_argument("--train")
+    natural_tokenizers.add_argument("--dev")
+    natural_tokenizers.add_argument("--output-dir", required=True)
+    natural_tokenizers.set_defaults(handler=compare_natural_tokenizers_command)
 
     natural_run = commands.add_parser(
         "run-natural", help="run one checkpoint on the natural-language benchmark"

@@ -15,16 +15,20 @@ freeze finds that a transparent semantic trigger has 100\% retrieval recall and
 confidence is checkpoint-dependent. We then freeze a 192-example natural-language
 extension after rejecting four candidate freezes for lexical triviality,
 duplicates, source-key collisions, or inconsistent gold answers. On its
-64-example test, shallow lexical
-accuracy is at most 85.94\%. The unchanged semantic policy reaches 100\% recall
+64-example test, the original shallow lexical
+accuracy is at most 85.94\%. A matched tokenizer-aware audit changes that
+boundary: native Qwen, SmolLM2, and Gemma token-bigram TF--IDF classifiers each
+reach 100\%, while a shared word/punctuation tokenizer reaches 87.5\%. The
+unchanged semantic policy reaches 100\% recall
 and 12.5\% false activation; confidence recall is 96.88\%, 81.25\%, and 78.12\%
 with false activation of 62.5\%, 0\%, and 9.38\%. Advisory evidence leaves UCR
 of 18.75\%, 12.5\%, and 3.12\%; an explicit support contract leaves 12.5\%,
 12.5\%, and 0\%. Deterministic runtime enforcement reaches zero UCR and full
 authorized coverage for every family. Prior rank-8 LoRAs have zero held-out
 recall, and the consumed natural freeze is not reused for adaptation. The result
-supports transparent runtime enforcement, but the still-easy lexical screen and
-small synthetic source limit the semantic-generalization claim.
+supports transparent runtime enforcement, but not superiority over stronger
+model-token lexical triggers. The tokenizer result exposes residual template
+structure and requires a harder independently frozen benchmark.
 \end{abstract}
 
 \section{Question and Claim Boundary}
@@ -249,6 +253,56 @@ word $n$-gram TF--IDF, and character $n$-gram TF--IDF logistic regressions score
 81.25\%, 85.94\%, and 81.25\% on its test set. This passes the predeclared 90\%
 triviality screen, but 85.94\% remains high and bounds the robustness claim.
 
+\subsection{Tokenization and lexical trigger strength}
+
+We compare the current word and character representations with a small Unicode
+tokenizer that splits words and punctuation. Separate conditions use the exact
+pinned tokenizer of each checkpoint. Token methods receive unigram and
+unigram--bigram TF--IDF logistic classifiers. We also build BM25 exemplar
+indexes with unigram and bigram terms; $k\in\{1,3,5,10\}$ and the retrieval
+threshold are selected on development only. Raw and normalized native pieces
+are retained separately. No LLM call or recurring context token is used.
+Per-example pieces, predictions, vocabulary and index sizes, unknown-piece
+rates, latency, confusion matrices, and subclass scores are machine-readable.
+
+\begin{table}[t]
+\centering\scriptsize
+\caption{Matched trigger classification. Acc.=binary accuracy, Rec.=retrieval
+recall, FA=false activation. Native rows use raw model pieces and token
+unigrams+bigrams. The 80-example freeze uses its disjoint 160/40 policy
+train/development sets; natural-v5 uses its own 96/32 split.}
+\label{tab:tokenizer-trigger}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}llrrrrrr@{}}
+\toprule
+& & \multicolumn{3}{c}{Original 80} & \multicolumn{3}{c}{Natural-v5}\\
+Representation & Method & Acc. & Rec. & FA & Acc. & Rec. & FA\\
+\midrule
+Current word & TF--IDF $n$-gram & .725 & 1.000 & .550 & .859 & .969 & .250\\
+Current char & TF--IDF $n$-gram & .988 & 1.000 & .025 & .813 & .875 & .250\\
+Shared NLP & TF--IDF $n$-gram & .725 & 1.000 & .550 & .875 & 1.000 & .250\\
+Qwen native & TF--IDF $n$-gram & 1.000 & 1.000 & .000 & 1.000 & 1.000 & .000\\
+SmolLM2 native & TF--IDF $n$-gram & 1.000 & 1.000 & .000 & 1.000 & 1.000 & .000\\
+Gemma native & TF--IDF $n$-gram & 1.000 & 1.000 & .000 & 1.000 & 1.000 & .000\\
+Semantic runtime & Fixed rules & .988 & 1.000 & .025 & .938 & 1.000 & .125\\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+This falsifies a broad reading of semantic-rule superiority on both freezes.
+All three pre-specified model-aligned $n$-gram conditions are perfect, including
+on historical-copy controls. Natural-v5 BM25 is also competitive: normalized
+Qwen and SmolLM2 pieces reach 1.000, but native-piece BM25 falls to .725 with
+.550 false activation on the original freeze. Thus native tokenization can
+expose highly discriminative surface structure, while the BM25 transfer result
+shows that model pieces are not uniformly better. Eighteen natural-v5 and 26
+original-freeze conditions tie at perfect development accuracy, so an arbitrary
+development tie winner is not evidence of a unique production choice. The
+proper conclusion is benchmark lexical leakage/headroom, not general semantic
+content in BPE tokens. Runtime enforcement still determines what happens after
+a trigger and still yields zero UCR when recall is one.
+
 \begin{table}[t]
 \centering\scriptsize
 \caption{Natural-v5 test trigger and enforcement results. Rec.=retrieval recall,
@@ -332,10 +386,12 @@ recall, but only on one controlled source and mostly synthetic short answers.
 
 The benchmark is selected using Qwen confidence, so its exact 20-per-quadrant
 balance does not transfer to other checkpoints. SmolLM2 lacks low-confidence test
-examples. There is one seed per model and no ranking noise. The natural extension
-passes its lexical screen only narrowly and its long-form component is a
-deterministic controller simulation, not unconstrained generation. The semantic
-cue distribution remains controlled. The runtime gate is
+examples. There is one seed per model and no ranking noise. The natural
+extension passed its limited lexical screen only narrowly; the tokenizer-aware
+audit subsequently finds perfect model-token classifiers, so that screen was
+insufficient. Its long-form component is a deterministic controller simulation,
+not unconstrained generation. The semantic cue distribution remains controlled.
+The runtime gate is
 deterministic and answer-aware relative to source evidence, not a production
 truth system. Full-prefix generation latency is not production latency.
 
@@ -371,6 +427,16 @@ python -m ccpu paper1.5 freeze-natural \
 python -m ccpu paper1.5 analyze-natural \
   --config configs/paper1_5/natural_analysis.json \
   --output-dir artifacts/paper1_5/natural_v5/analysis
+& $py -m ccpu paper1.5 compare-natural-tokenizers \
+  --benchmark artifacts/paper1_5/natural_v5/data/benchmark.jsonl \
+  --tokenizer-config configs/common/tokenizer_triggers.json \
+  --output-dir artifacts/paper1_5/tokenizer_triggers/natural_v5
+& $py -m ccpu paper1.5 compare-natural-tokenizers \
+  --benchmark artifacts/paper1_5/next_iter/qwen_v2/benchmark.jsonl \
+  --train artifacts/paper1_5/next_iter/policy_data_v2/train.jsonl \
+  --dev artifacts/paper1_5/next_iter/policy_data_v2/dev.jsonl \
+  --tokenizer-config configs/common/tokenizer_triggers.json \
+  --output-dir artifacts/paper1_5/tokenizer_triggers/original80
 \end{verbatim}
 Manifests hash configurations, benchmark/source snapshots, predictions, traces,
 summaries, and adapter files and record checkpoint revisions, device, package,
@@ -378,14 +444,16 @@ repository, and environment provenance.
 
 \section{Conclusion}
 Semantic epistemic risk adds information beyond checkpoint uncertainty in this
-controlled one-source regime and retains full recall under a more varied, though
-still lexically easy, natural-language freeze. Advisory and instructed evidence
+controlled one-source regime and retains full recall under a more varied
+natural-language freeze. It does not beat model-aligned token $n$-gram triggers:
+their perfect scores reveal that the present freezes remain lexically
+separable under stronger representations. Advisory and instructed evidence
 use remain checkpoint-dependent; deterministic runtime enforcement eliminates
 unsupported commitments for all three small families. The placement extension
 is negative: context is inconsistent and the tested adapters overfit. Exact
 source mechanics and enforcement belong in runtime under these freezes, and
-semantic selection should remain transparent until richer independently frozen
-training demonstrates learned-policy generalization.
+trigger selection should remain CPU-side and auditable until a richer
+independently frozen benchmark separates lexical cues from epistemic semantics.
 
 \begin{thebibliography}{9}
 \bibitem{flare}

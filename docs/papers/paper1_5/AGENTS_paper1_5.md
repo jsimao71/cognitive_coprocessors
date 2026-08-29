@@ -167,3 +167,21 @@ The learned-policy decision is **no-go** on this consumed freeze. Any retry need
 richer natural data, a new untouched freeze, and must compare a CPU classifier,
 rules, confidence, LoRA, and hybrids. The 12-opportunity long-form result is a
 deterministic controller/cache stress test, not free-running model generation.
+
+## Tokenizer-aware trigger outcome
+The matched add-on evaluates current word/character features, a shared Unicode
+word/punctuation tokenizer, exact pinned Qwen/SmolLM2/Gemma tokenizers, separate
+unigram and token-ngram TF-IDF classifiers, and development-tuned BM25 exemplar
+routing. Raw and normalized native pieces, per-example predictions, index size,
+latency, confusion, and subgroup metrics are retained under
+`artifacts/paper1_5/tokenizer_triggers`.
+
+On natural-v5, current word, character, and shared-token n-grams reach 85.94%,
+81.25%, and 87.5%; the fixed semantic policy reaches 93.75%. All three
+model-aligned native token-ngram conditions reach 100% with zero false
+activation. They also reach 100% on the original 80-example freeze, versus
+98.75% for its legacy semantic rule. This invalidates any claim that the current
+semantic policy beats strengthened lexical engineering. Treat the perfect
+native-token result as evidence that both freezes retain tokenizer-visible
+template structure, not as general BPE semantic understanding. Do not reopen
+LoRA; create a harder untouched freeze with matched tokenizer audits first.
