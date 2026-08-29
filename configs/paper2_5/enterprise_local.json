@@ -1,0 +1,12 @@
+{
+  "schema_version": "ccpu.paper2_5.enterprise_config.v1",
+  "storage": "apache_iceberg_local",
+  "catalog": "pyiceberg_sqlite_development",
+  "query_engine": "duckdb_direct_iceberg",
+  "semantic_layer": "governed_metric_compiler_v1",
+  "ontology": "oxigraph_sparql_v1",
+  "conditions": ["native_governed", "universal_text_top5"],
+  "read_only_evaluation": true,
+  "docker_used": false,
+  "claim_boundary": "deterministic local enterprise-style fixture"
+}

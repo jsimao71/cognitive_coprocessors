@@ -16,6 +16,10 @@ analysis = ["matplotlib>=3.7"]
 lora = ["peft==0.20.0", "accelerate==1.14.0"]
 data = ["duckdb>=1.2,<2", "faiss-cpu>=1.10,<2", "numpy>=1.25"]
 data-services = ["psycopg[binary]>=3.2,<4", "pgvector>=0.4,<1"]
+data-governance = [
+  "pyiceberg[sql-sqlite,pyarrow]>=0.10,<1",
+  "pyoxigraph>=0.5,<1",
+]
 test = ["pytest>=8.0"]
 
 [project.scripts]

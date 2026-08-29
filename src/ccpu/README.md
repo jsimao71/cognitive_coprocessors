@@ -142,3 +142,16 @@ The optional `sidekick/data_stack` boundary is for WSL2 only. Its Postgres/pgvec
 test requires `CCPU_POSTGRES_DSN` and otherwise skips explicitly; no service-backed result is
 included in the paper. See the sidekick README for startup, health, test, teardown, and volume
 cleanup commands.
+
+The local governed-data continuation uses real PyIceberg snapshots, DuckDB direct reads, and
+Oxigraph SPARQL without a service or container. The CLI regenerates workspace-local Iceberg
+locations before evaluation:
+
+```powershell
+python -m pip install -e ".[data,data-governance]"
+python -m ccpu paper2.5 prepare-enterprise --output-dir artifacts/paper2_5/enterprise_repro/fixture
+python -m ccpu paper2.5 run-enterprise --fixture-root artifacts/paper2_5/enterprise_repro/fixture --output-dir artifacts/paper2_5/enterprise_repro/evaluation
+```
+
+The retained 11-case diagnostic compares native governed composition with a top-5 textualized
+baseline. It does not exercise a REST catalog, model-authored SQL, or remote services.

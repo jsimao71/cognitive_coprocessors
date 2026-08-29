@@ -16,6 +16,7 @@ from ccpu.common.artifacts import (
 
 from .benchmark import freeze_benchmark
 from .composition import run_compositions
+from .enterprise import create_enterprise_fixture, run_enterprise_evaluation
 from .experiment import run_matrix, summarize
 from .plot import decide_gate, plot_scaling
 from .production_analysis import analyze_substitution
@@ -114,6 +115,35 @@ def analyze_production_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def prepare_enterprise_command(args: argparse.Namespace) -> int:
+    manifest = create_enterprise_fixture(args.output_dir)
+    print(
+        "created Paper 2.5 enterprise Iceberg fixture "
+        f"at snapshot {manifest['sales']['current_snapshot_id']} -> {args.output_dir}"
+    )
+    return 0
+
+
+def run_enterprise_command(args: argparse.Namespace) -> int:
+    rows, summary = run_enterprise_evaluation(args.fixture_root)
+    output = Path(args.output_dir)
+    predictions = write_jsonl(output / "predictions.jsonl", rows)
+    summary_path = write_json(output / "summary.json", summary)
+    fixture_manifest = Path(args.fixture_root) / "manifest.json"
+    write_json(
+        output / "manifest.json",
+        {
+            "paper": "Paper 2.5",
+            "schema_version": "ccpu.paper2_5.enterprise_run_manifest.v1",
+            "fixture_manifest_sha256": file_sha256(fixture_manifest),
+            "predictions_sha256": file_sha256(predictions),
+            "summary_sha256": file_sha256(summary_path),
+        },
+    )
+    print(f"completed {summary['count']} Paper 2.5 enterprise cases -> {output}")
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2.5", aliases=["paper2_5"], help="heterogeneous retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -158,3 +188,16 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     production.add_argument("--production-traces", required=True)
     production.add_argument("--output-dir", required=True)
     production.set_defaults(handler=analyze_production_command)
+
+    enterprise = commands.add_parser(
+        "prepare-enterprise", help="create the local Iceberg and governed-semantics fixture"
+    )
+    enterprise.add_argument("--output-dir", required=True)
+    enterprise.set_defaults(handler=prepare_enterprise_command)
+
+    enterprise_run = commands.add_parser(
+        "run-enterprise", help="run native governed composition and universal baseline"
+    )
+    enterprise_run.add_argument("--fixture-root", required=True)
+    enterprise_run.add_argument("--output-dir", required=True)
+    enterprise_run.set_defaults(handler=run_enterprise_command)

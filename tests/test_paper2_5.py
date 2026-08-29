@@ -157,6 +157,83 @@ def test_production_substitution_analysis_is_matched_and_fail_closed(tmp_path):
     assert summary["claim_boundary"]["docker_used"] is False
 
 
+def test_enterprise_iceberg_semantic_ontology_composition(tmp_path):
+    pytest.importorskip("pyiceberg")
+    pytest.importorskip("pyoxigraph")
+    from ccpu.paper2_5.enterprise import (
+        IcebergDuckDBSource,
+        OntologySource,
+        SemanticMetricSource,
+        create_enterprise_fixture,
+        run_enterprise_evaluation,
+    )
+
+    fixture = tmp_path / "enterprise"
+    manifest = create_enterprise_fixture(fixture)
+    assert manifest["sales"]["snapshots"]["sales_v1"] != manifest["sales"]["snapshots"][
+        "sales_v2"
+    ]
+    assert manifest["sales"]["schema_id"] == 1
+
+    iceberg = IcebergDuckDBSource(fixture)
+    current = iceberg.retrieve(
+        SourceRequest(
+            request_id="current",
+            source_type="iceberg",
+            operation="iceberg.sum_revenue",
+            payload={"year": 2026},
+        )
+    )
+    historical = iceberg.retrieve(
+        SourceRequest(
+            request_id="historical",
+            source_type="iceberg",
+            operation="iceberg.snapshot_revenue",
+            payload={
+                "year": 2026,
+                "snapshot_id": manifest["sales"]["snapshots"]["sales_v1"],
+            },
+        )
+    )
+    assert current[0].value == "1050.0"
+    assert historical[0].value == "500.0"
+    assert current[0].provenance["iceberg_snapshot_id"] == manifest["sales"][
+        "current_snapshot_id"
+    ]
+
+    ontology = OntologySource(fixture)
+    members = ontology.retrieve(
+        SourceRequest(
+            request_id="members",
+            source_type="ontology",
+            operation="ontology.members",
+            payload={"concept": "hardware-products"},
+        )
+    )
+    assert members[0].value == "Aster,Cedar"
+    metric = SemanticMetricSource(fixture).retrieve(
+        SourceRequest(
+            request_id="metric",
+            source_type="semantic",
+            operation="semantic.metric",
+            payload={
+                "metric": "gross_margin",
+                "year": 2026,
+                "products": members[0].value.split(","),
+            },
+        )
+    )
+    assert metric[0].value == "39.20%"
+    assert metric[0].provenance["semantic_metric_version"] == "1.0.0"
+
+    rows, summary = run_enterprise_evaluation(fixture)
+    conditions = {row["condition"]: row for row in summary["by_condition"]}
+    assert conditions["native_governed"]["accuracy"] == 1.0
+    assert conditions["universal_text_top5"]["accuracy"] < 0.5
+    native = [row for row in rows if row["condition"] == "native_governed"]
+    assert all(row["provenance"] for row in native)
+
+
 def test_bounded_source_compositions_log_dependency_dags():
     rows, summary = run_compositions(2)
     assert len(rows) == 4

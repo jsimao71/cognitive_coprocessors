@@ -34,6 +34,13 @@ Secondary: can capability count grow outside recurring neural context?
 - A WSL2-only Postgres/pgvector sidekick and explicit DSN-gated integration tests
   are present but unexecuted. They must never fall back to controlled adapters,
   and they are not evidence until a separately retained service run exists.
+- A local enterprise fixture creates four real PyIceberg tables, two sales
+  snapshots, one schema evolution, governed metric definitions, and an Oxigraph
+  product ontology. Native governed execution is 11/11 versus 2/11 for top-5
+  textualized retrieval. This is a deterministic six-sale diagnostic, not a
+  production-scale or language-model result.
+- The enterprise result does not measure a new heuristic routing gap and does
+  not reopen the Paper 3.5 gate.
 
 These are controlled deterministic runtime results, not language-model or live
 web-search evidence. New natural-language routing work requires a separately

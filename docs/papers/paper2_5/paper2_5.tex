@@ -23,7 +23,11 @@ while the runtime registry adds no recurring descriptor tokens. Replacing the
 controlled relational, lexical, and vector implementations with DuckDB, SQLite
 FTS5, and exact-flat FAISS preserves all 154 matched four-source decisions and
 complete required provenance for all three substituted sources. These remain
-small controlled runtime results, not language-model or production-data evidence. The pre-registered
+small controlled runtime results. A second 11-case enterprise-style fixture uses
+real local Iceberg snapshots, governed metrics, and an Oxigraph ontology: native
+composition reaches 11/11 while a top-5 textualized baseline reaches 2/11. This
+is still deterministic local evidence, not language-model or production-service
+evidence. The pre-registered
 learned-router gate is \textsc{no-go}: native heterogeneity has value, context
 burden grows, and broadcast costs more, but the heuristic leaves no routing gap.
 \end{abstract}
@@ -175,14 +179,61 @@ FAISS flat & 3 & 1.000 & 1.000 & 0.047\\
 This validates adapter substitution and provenance retention on the frozen data;
 it does not test service deployment, persistence, concurrency, failure recovery,
 or realistic corpus scale. No Docker service was started. Postgres/pgvector,
-Iceberg catalogs, Qdrant, Weaviate, semantic layers, and ontologies are outside
-this completed local phase.
+Iceberg REST catalogs, Qdrant, and Weaviate are outside this completed local
+phase.
 
 For the next boundary, the repository includes a WSL2-only Compose definition,
 seed SQL, health check, explicit Postgres and pgvector adapters, and integration
 tests gated by a caller-supplied DSN. Both adapters use parameter binding and
 read-only transactions; unavailable services skip rather than fall back. These
 assets were statically checked only. They contribute no result or latency claim.
+
+\subsection{Iceberg, governed metrics, and ontology composition}
+We next create four local PyIceberg tables---sales, products, inventory, and
+customers---through a SQLite development catalog. Sales has two committed
+snapshots: the first totals 500.0 revenue; after adding an optional
+\texttt{channel} field and appending three rows, the current snapshot totals
+1050.0. DuckDB reads the explicit Iceberg metadata directly. The catalog creates
+the fixture but is not the query engine.
+
+A versioned semantic layer compiles \texttt{gross\_margin} and
+\texttt{net\_revenue} requests to bounded, parameterized DuckDB/Iceberg SQL.
+An in-process Oxigraph store resolves product-family membership through SPARQL.
+The mixed path is
+\[
+\text{ontology concept}\rightarrow\text{product IDs}\rightarrow
+\text{metric definition}\rightarrow\text{Iceberg snapshot}\rightarrow
+\text{typed evidence}.
+\]
+For example, \texttt{hardware-products} resolves to Aster and Cedar, whose
+governed 2026 gross margin is 39.20\%. Provenance retains backend/version,
+normalized query, record IDs, snapshot ID, metric definition/version, and
+ontology concept/relation IDs.
+
+\begin{table}[t]
+\centering\small
+\caption{Enterprise-style local fixture. The universal condition retrieves the
+five highest-overlap textualized rows, metric descriptions, ontology triples,
+and policies; it performs no hidden native aggregate.}
+\label{tab:p25-enterprise}
+\begin{tabular}{lrrr}
+\toprule
+Condition & Correct & Total & Mean calls\\
+\midrule
+Native governed composition & 11 & 11 & 1.09\\
+Universal text top-5 & 2 & 11 & 1.00\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The native condition is exact on two direct lookups, one cross-table join, one
+aggregate, one historical snapshot, one governed metric, two ontology queries,
+one ontology--metric composition, one document query, and one mixed
+document--metric query. Universal text supports only the exact policy and one
+single-member ontology answer. It does not reconstruct the aggregate, join,
+snapshot, governed metric, multi-member group, or mixed answers. This is a
+source-semantics diagnostic, not a scale benchmark: the fixture has six sales
+rows and the query/compiler paths are deterministic.
 
 \section{Paper 3.5 Gate}
 Learned source routing requires all four pre-registered criteria:
@@ -195,7 +246,9 @@ Learned source routing requires all four pre-registered criteria:
 The decision is therefore \textsc{no-go}. The negative gate is substantive: a
 learned router would add training and failure surface without measured routing
 headroom on this benchmark. A later, independently frozen natural-language set
-may reopen the gate; this result does not.
+may reopen the gate; this result does not. The enterprise fixture adds native
+semantic value but does not measure a new source-routing gap, so it does not
+reverse the gate.
 
 \section{Limitations and Falsification}
 The corpus is synthetic, tiny, single-seed, and designed so source semantics are
@@ -206,6 +259,14 @@ cannot measure network failures, live ranking, or monetary cost. Final accuracy
 is deterministic evidence acceptance, not LLM evidence use. Backend substitution
 does not establish service reliability or enterprise-data validity, and all
 latencies are local prototype measurements.
+
+The enterprise fixture is deliberately tiny and locally generated. Its absolute
+Iceberg file locations are regenerated by the CLI for each workspace. The
+semantic definitions and ontology are authored fixtures rather than imported
+business governance. REST-catalog behavior, concurrent commits, failure
+recovery, remote object storage, model-authored SQL, and natural-language metric
+parsing are not tested. Accordingly, 11/11 establishes bounded composition and
+provenance, not production accuracy.
 
 Heterogeneous routing would be weakened if a stronger matched universal system
 executes aggregates, preserves status/provenance, and closes the 9/22 gap at
@@ -235,6 +296,11 @@ python -m ccpu paper2.5 analyze-production \
   --production-predictions <production-n4-predictions> \
   --production-traces <production-n4-traces> \
   --output-dir artifacts/paper2_5/production_v1/substitution
+python -m ccpu paper2.5 prepare-enterprise \
+  --output-dir artifacts/paper2_5/enterprise_repro/fixture
+python -m ccpu paper2.5 run-enterprise \
+  --fixture-root artifacts/paper2_5/enterprise_repro/fixture \
+  --output-dir artifacts/paper2_5/enterprise_repro/evaluation
 \end{verbatim}
 Run manifests hash benchmark, predictions, traces, and summaries and record the
 repository and environment state. Install the \texttt{data} project extra for
@@ -249,6 +315,10 @@ the oracle routing gap on the present freeze, Paper 3.5 remains gated off. The
 local substitution result strengthens the interface claim: source-native
 semantics and provenance survive three real in-process backend replacements. It
 does not yet establish the broader production-data-stack claim.
+The local Iceberg/semantic/ontology result then demonstrates one bounded
+governed composition with snapshot and definition provenance. Its universal
+gap supports source-native semantics, but the absence of measured routing
+headroom leaves the learned-router decision unchanged.
 
 \begin{thebibliography}{9}
 \bibitem{flare}
