@@ -32,6 +32,12 @@ coprocessors address knowledge deficits.  A common runtime can recognize an
 emerging need, normalize it into a typed operation, invoke a bounded engine,
 preserve provenance-bearing state, and selectively materialize the result.
 Explicit tools and upfront retrieval remain general baselines and fallbacks.
+The stable model-facing contract is deliberately coarse:
+\textsc{none}, \textsc{compute}, \textsc{retrieve}, \textsc{verify}, or
+\textsc{help}. A deployment-specific runtime resolves that intent to a
+capability and implementation. Engine-specific tokens, adapters, fixed
+registries, and Progressive Retrieval Attention (PRA) are optional deployment
+choices rather than defining requirements.
 Developmental pilots expose the central challenge: calculator execution and
 controlled retrieval were reliable, while exposure, selection, normalization,
 timing, and result use determined end-to-end behavior.  We therefore replace a
@@ -189,7 +195,8 @@ Let $y_{1:t}$ denote the generated prefix and $h_t$ an optional decoding state.
 A controller detects a pending need and may abstain:
 \[
  d_t=D(y_{1:t},h_t,\cstate_t), \qquad
- d_t\in\{\textsc{none},\textsc{compute},\textsc{retrieve}\}.
+ d_t\in\{\textsc{none},\textsc{compute},\textsc{retrieve},
+ \textsc{verify},\textsc{help}\}.
 \]
 Normalization produces a typed event $e_t=N(y_{1:t},h_t,\cstate_t)$ containing
 the family, operation or information need, arguments, scope, confidence, and
@@ -230,6 +237,86 @@ $\rightarrow$ selective materialization $\rightarrow$ continued decoding
 contracts while retaining family-specific semantics and trust policies.}
 \label{fig:twin-architecture}
 \end{figure}
+
+\subsection{Stable cognitive intent and dynamic capability resolution}
+
+The model need not identify an engine. We factor routing into
+\[
+R_1:(y_{1:t},h_t,\cstate_t)\rightarrow
+\{\textsc{none},\textsc{compute},\textsc{retrieve},\textsc{verify},\textsc{help}\}
+\]
+and
+\[
+R_2:(d_t,\text{task},\text{registry},\text{policy},\cstate_t)
+\rightarrow \text{capability or shortlist}.
+\]
+\textsc{Compute} requests deterministic or structured work such as arithmetic,
+dates, units, graph closure, logic, algebra, or analytics. \textsc{Retrieve}
+requests external evidence or data. \textsc{Verify} asks the runtime to check
+an existing candidate using evidence, recomputation, logic, provenance, or
+active state. \textsc{Help} is a fail-safe cognitive page fault: assistance is
+needed, but the model cannot reliably choose a family. \textsc{None} preserves
+ordinary generation.
+
+$R_1$ is small and intended to remain stable across deployments. $R_2$ may use
+deterministic rules, lexical or token-aware BM25, CPU classifiers, capability
+retrieval, optional learned routing, or conventional tools. It selects semantic
+capabilities---for example arithmetic, Horn entailment, structured aggregate,
+or current factual lookup---rather than treating one backend name as the task.
+The runtime then chooses an implementation using exactness, available state,
+latency, cost, policy, credentials, and provenance requirements. Adding an
+engine should therefore not require retraining $R_1$.
+
+Three surface syntaxes remain empirical alternatives. Paired tags such as
+\texttt{<COMPUTE>} payload \texttt{</COMPUTE>} provide explicit incremental
+boundaries. A fenced \texttt{COMPUTE} block is familiar and potentially
+shorter but can collide with ordinary Markdown. A label-only form emits only
+the intent and lets the runtime reuse the active task as payload. Papers 2 and
+2.5 measure tokenizer cost, parse reliability, and accidental activation rather
+than declaring a universal winner here.
+
+\subsection{Interoperable deployment modes}
+
+The architecture admits the modes in Table~\ref{tab:deployment-modes}. They can
+be composed; they are not incompatible product editions.
+
+\begin{table}[t]
+\centering\small
+\caption{Deployment modes share the coarse intent and typed-state contracts.}
+\label{tab:deployment-modes}
+\begin{tabularx}{\linewidth}{@{}p{0.28\linewidth}Y@{}}
+\toprule
+Mode & Model/runtime boundary \\
+\midrule
+Runtime-trigger coprocessor & No model modification; transparent detector emits intent. \\
+In-context coprocessor & A short prompt teaches the generic-intent contract. \\
+Generic adapter & Optional LoRA/SFT accelerates intent and result consumption. \\
+PRA + in-context & PRA materializes only relevant capability or skill interfaces. \\
+PRA + adapter & Learned coarse intent combines with dynamic discovery and state. \\
+PRA only & Progressive materialization without a learned intent adapter. \\
+Coprocessor only & Conventional registry insertion without PRA. \\
+Conventional tools & Universal explicit fallback and matched baseline. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Three knowledge layers and optional PRA}
+
+The design separates (1) stable cognitive intent, which may live in a prompt,
+adapter, or native model; (2) dynamic capability knowledge, which belongs to the
+runtime registry, skill system, or PRA resources; and (3) cognitive state,
+including typed results, evidence, provenance, dependencies, and task scope.
+Conflating these layers would bake a changing product registry into model
+weights.
+
+PRA is optional and orthogonal. Without PRA, the registry remains outside the
+prompt and the runtime inserts selected capability metadata conventionally.
+With PRA, capability descriptions and prior cognitive records can remain
+persistent but unmaterialized; task-aware retrieval exposes only a relevant
+shortlist and suppresses unrelated historical state. Thus a large registry
+need not imply a large active context. An adapter is likewise an optional
+accelerator for coarse intent, not the registry itself; engine-specific adapters
+remain possible optimizations, never a prerequisite for adding a coprocessor.
 
 \subsection{Operational cognitive state}
 
@@ -364,6 +451,9 @@ Coupling is a set of alternatives to compare, not a one-way definition of
 progress.  Self-RAG-style special tokens provide a precedent for learned
 control signals; semantic execution blocks generalize explicit typed control
 across computational families without requiring learned tokens.
+Neither those blocks nor capability-specific tokens define a cognitive
+coprocessor: they are candidate surfaces beneath the stable $R_1/R_2$
+factorization.
 
 \begin{figure}[t]
 \centering
@@ -523,8 +613,8 @@ Paper & Scope & Evidence question & Decision enabled \\
 0 & Position and architecture & Are deficits, interfaces, failures, and falsifiers operational? & Freeze a testable program, not an empirical conclusion. \\
 1 & Calculator/interface & Which strict, normalized, block, or explicit interface survives selection and use failures? & Choose a bounded compute interface or narrow automaticity. \\
 1.5 & Single-source epistemic retrieval & Does generation-time retrieval help in any regime; does semantic risk add signal beyond confidence? & Freeze trigger questions and quantify source-heterogeneity headroom. \\
-2 & Heterogeneous compute & Do multiple computational substrates add value under the characterized interface? & Keep transparent routing or identify a measured routing gap. \\
-2.5 & Heterogeneous retrieval & Does source selection matter, and how large is the heuristic-to-oracle gap? & Justify or reject learned epistemic routing. \\
+2 & Heterogeneous compute & Does generic \textsc{compute}/\textsc{verify}/\textsc{help} survive registry expansion while runtime capability routing remains exact? & Prefer registry-independent intent; learn engine identity only for measured residual value. \\
+2.5 & Heterogeneous retrieval & Does generic \textsc{retrieve}/\textsc{verify}/\textsc{help} survive backend changes while source-native semantics beat matched universal retrieval? & Decouple model intent from the evolving data registry. \\
 3 & Learned compute interrupts & Can learned detection/selection beat transparent compute policies under shift? & Justify hidden-state or joint compute coupling. \\
 3.5 & Learned epistemic interrupts & Can learned trigger/source routing beat calibrated confidence and semantic heuristics? & Justify learned epistemic control. \\
 4 & Transactions, provenance, retraction & Does persistent multi-family state create concrete dependency, rollback, or conflict failures? & Add only the state machinery needed by observed failures. \\
@@ -648,6 +738,13 @@ fallback-preserving, and evidence-gated.  It succeeds only where heterogeneous
 coupling yields reproducible reliability, efficiency, scaling, or small-model
 benefit over simpler alternatives; elsewhere, the correct architecture is the
 simpler one.
+
+The preferred scalable boundary is therefore a coarse cognitive interrupt,
+deployment-specific runtime or PRA capability resolution, specialized
+execution, typed cognitive state, and selective continuation. LoRA may make
+that interrupt cheaper or more reliable, but it should not become a catalog of
+engines. Conventional tools remain the fallback when automatic intent or
+runtime resolution is uncertain.
 
 \begin{thebibliography}{99}
 

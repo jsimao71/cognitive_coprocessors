@@ -42,6 +42,45 @@ belongs under the relevant later paper tree.
 - Later claims about persistent state, learned routing, native materialization,
   and co-adaptation remain hypotheses.
 - PRA is not central before Paper 5.
+- Cognitive coprocessors do not require PRA, a fixed registry, engine-specific
+  tokens, or engine-specific LoRA/SFT.
+
+## Stable generic-intent contract
+
+The model-facing R1 label space is `NONE`, `COMPUTE`, `RETRIEVE`, `VERIFY`, and
+`HELP`. `HELP` is a fail-safe cognitive page fault when assistance is needed but
+the family is uncertain. R1 must not name calculator, Datalog, DuckDB, Iceberg,
+or another implementation in the primary scalable condition.
+
+R2 resolves `intent + active task + registry + policy + state` to a semantic
+capability or shortlist. It may use deterministic rules, token-aware BM25, CPU
+classifiers, optional learned routing, PRA capability retrieval, or conventional
+tools. Runtime policy chooses the concrete implementation by exactness, state,
+latency, cost, credentials, and deployment preference.
+
+Measure three syntax candidates rather than declaring a Paper 0 winner:
+
+- paired tags with explicit close delimiters;
+- fenced cognitive blocks;
+- label only, with the active prompt reused as payload.
+
+## Knowledge layers and deployment
+
+Keep stable cognitive intent in a prompt/adapter/native model, dynamic
+capability knowledge in runtime/PRA/skills, and typed cognitive state in
+separate layers. State includes results, evidence, provenance, dependencies,
+and task scope.
+
+Supported interoperable modes include runtime-only triggers, generic ICL,
+generic LoRA/SFT adapters, PRA plus ICL or adapter, PRA-only, coprocessor-only,
+and conventional tools. A generic adapter accelerates coarse intent and result
+consumption; it is not a capability registry. Adding a coprocessor should not
+require retraining it.
+
+PRA is optional. Without it, registry metadata stays outside recurring context
+and selected descriptors are inserted conventionally. With it, capabilities,
+skills, and old cognitive records remain persistent resources while only a
+task-relevant shortlist is materialized.
 
 ## Developmental evidence
 
