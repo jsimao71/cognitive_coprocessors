@@ -1,0 +1,171 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,hyperref}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\title{Latent Cognitive Blocks:\\Parallel Causal Span Control for Just-in-Time Coprocessor Invocation}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+
+\begin{abstract}
+Explicit cognitive blocks serialize control through language tokens. We
+pre-register a parallel causal channel that marks the start, coarse type, and
+end of a cognitive-assistance span while ordinary autoregressive generation
+continues. The stable controller vocabulary is \textsc{none}, \textsc{compute},
+\textsc{retrieve}, \textsc{verify}, and \textsc{help}; a second-stage runtime
+resolves deployment-specific capabilities. This is a protocol paper, not a
+positive latent-control result. Paper 2's engine-specific learned-routing gate
+remains \texttt{no\_go}. The independent latent experiment may proceed only as
+a matched comparison against generic paired tags, fenced blocks, label-only
+intent, transparent CPU triggers, and oracle spans. We separate causal span
+control from payload normalization, deterministic execution, result
+integration, and optional PRA materialization.
+\end{abstract}
+
+\section{Status and Motivation}
+Paper 2 shows that deterministic parsing and execution are reliable once a
+capability is known, but learned engine identity is unsafe under held-out
+controls and registry growth. Its machine-readable Paper 3 gate is
+\texttt{no\_go}; that decision is not overwritten here. The new question is
+narrower and registry-independent: can a frozen Transformer expose when a span
+needs cognitive assistance, what coarse assistance family it needs, and when
+the span is complete, without serializing control syntax into generated text?
+
+The hypothesis concerns transport across the neural--runtime boundary, not a
+larger engine classifier. Conventional explicit tools remain the universal
+fallback. Runtime-copy remains the default for authoritative exact outputs.
+
+\section{Factorized Architecture}
+At token $t$ and selected layer $l$, a frozen representation $h_t^{(l)}$ feeds a
+small causal controller. Outside a block,
+\[
+p_{\rm start}^{(l)}=\operatorname{softmax}(W_{\rm start}^{(l)}h_t^{(l)})
+\]
+ranges over \textsc{none}, \textsc{compute}, \textsc{retrieve},
+\textsc{verify}, and \textsc{help}. Inside a block, a separate head predicts
+\textsc{continue} or \textsc{end}. No future token may inform a headline
+decision.
+
+The two routing stages are
+\[
+R_1:\text{generation}\rightarrow
+\{\textsc{none},\textsc{compute},\textsc{retrieve},\textsc{verify},\textsc{help}\},
+\]
+\[
+R_2:(\text{intent},\text{span},\text{registry},\text{policy},\text{state})
+\rightarrow\text{capability or shortlist}.
+\]
+$R_1$ never predicts calculator, graph, Datalog, DuckDB, or another registry
+identity. $R_2$ may use deterministic rules, token-aware BM25, a CPU classifier,
+capability retrieval, optional PRA, or an explicit tool fallback.
+
+\subsection{Constrained state machine}
+The preferred minimal machine has two states:
+\begin{itemize}
+\item \textbf{OUTSIDE}: emit \textsc{none} or
+\textsc{start}$_{\{\rm compute,retrieve,verify,help\}}$;
+\item \textbf{INSIDE(type)}: emit \textsc{continue} or \textsc{end}.
+\end{itemize}
+Nesting and type switching are invalid. On \textsc{end}, generation pauses;
+the runtime extracts the naturally generated span, resolves and executes a
+capability, records provenance-bearing typed state, materializes a bounded
+result, and resumes OUTSIDE. BIO/BIES labels are retained as a matched
+alternative, not assumed superior.
+
+\section{Payload and Completion Ladders}
+The payload ladder starts with the marked ordinary-language span. If it is not
+directly executable, the runtime tries a deterministic parser, then a selected
+PRA/ICL capability skill, then short capability-specific normalization. A
+learned structured-argument head is justified only after those fail. This keeps
+span control distinct from normalization quality.
+
+For \textsc{end}, compare neural prediction, deterministic parser completeness,
+their conservative AND, and a safe OR that fires only when either signal is
+high-confidence and policy permits. Arithmetic, date, and units may rely more
+on deterministic closure than \textsc{retrieve} or \textsc{help}. Report
+premature and late termination separately.
+
+\section{Multi-Layer Control}
+Probe approximately $0.25L$, $0.40L$, $0.55L$, $0.70L$, $0.85L$, and $L$.
+Final-layer control is only the baseline. The registered aggregation ladder is:
+best development-selected layer, fixed mean of layer logits, majority or
+threshold vote, learned scalar layer weights, and a tiny MLP over layer logits.
+Hidden-state fusion is deferred unless logit aggregation fails. START and END
+may select different fixed mixtures, but every choice is frozen on development
+data before test evaluation.
+
+\section{Matched Benchmark and Baselines}
+Create one new causal-span freeze spanning calculator, date, units, graph,
+Datalog, retrieval, verification, ambiguous \textsc{help}, and \textsc{none}.
+Controls include quoted tags/fences, discussion of tools without a current need,
+ordinary prose, and long generations with multiple opportunities. Split by
+paraphrase family and namespace, not random surface form. Derive explicit and
+latent labels from the same examples.
+
+\begin{table}[t]
+\centering\small
+\caption{All interfaces use the same examples and runtime capabilities.}
+\begin{tabularx}{\linewidth}{@{}p{0.25\linewidth}Y@{}}
+\toprule
+Condition & Question isolated \\
+\midrule
+Paired generic tags & Explicit bounded language-bus control \\
+Fenced generic block & Familiar delimiter with Markdown collision risk \\
+Label-only generic intent & Minimum generated control tokens; active task is payload \\
+Transparent CPU trigger & Non-neural causal control baseline \\
+Latent span controller & Parallel START/type/END control bus \\
+Oracle span and type & Upper bound before R2/normalization/execution \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Training and Registry Invariance}
+The ladder is P0 frozen linear probes, P1 frozen multi-layer ensembles, P2 a
+small control-only LoRA if necessary, and P3 optional multitask LM/control
+training only after a positive gate. Train with calculator, date, and units in
+the registry; test $R_1$ unchanged after adding graph and Datalog, then later
+SMT, algebra, or retrieval backends. Score $R_1$ intent and $R_2$ capability
+selection separately. Adding an implementation must not silently alter test
+prompts or retrain the generic controller.
+
+Result assimilation is a separate factorial axis: token versus latent control,
+crossed where feasible with base versus integration LoRA. A control gain must
+not be inferred from runtime-copy, and an integration gain must not be called a
+better interrupt.
+
+\section{Metrics and Gate}
+Report START/END precision, recall, and F1; exact span and token IoU; coarse type
+accuracy; NONE false-activation rate; premature/late END; payload parseability;
+R2 capability success; runtime and final exactness; controller parameters,
+FLOPs, and latency; explicit control tokens avoided; earliest reliable layer;
+cross-layer agreement and calibration; and registry-expansion deltas. Preserve
+raw causal traces and multi-seed uncertainty for headline comparisons.
+
+Latent control advances only if it improves reliability or matched cost over
+generic explicit blocks and transparent CPU triggers without unsafe FAR or
+brittle END behavior. It is falsified as a needed mechanism if explicit generic
+blocks are equally reliable and cheap, aggregation adds no value, coupling is
+model-specific, or CPU triggers dominate. Early exit is exploratory only after
+strong multi-layer evidence and receives no headline claim in this version.
+
+\section{Scope, PRA, and Execution Order}
+There are no nested latent blocks, general planner, learned engine registry,
+joint base-model training, backtracking contribution, or silent promotion of
+uncertain language to fact. PRA is optional: intent may retrieve and materialize
+one to $k$ capability skills, but the generic controller must work without it.
+
+The execution order is dataset freeze; shared explicit/latent labels;
+final-layer probe; layer sweep; aggregation; BIO versus START/END;
+parser-assisted END; matched syntax and CPU comparisons; registry expansion;
+control LoRA only if needed; separate integration LoRA; and only then an
+early-exit study. Until retained artifacts complete these steps, this manuscript
+states hypotheses and protocol rather than empirical superiority.
+
+\begin{thebibliography}{9}
+\bibitem{toolformer} T. Schick et al. Toolformer: Language Models Can Teach
+Themselves to Use Tools. \emph{NeurIPS}, 2023.
+\bibitem{selfrag} A. Asai et al. Self-RAG: Learning to Retrieve, Generate, and
+Critique through Self-Reflection. \emph{ICLR}, 2024.
+\bibitem{logiclm} L. Pan et al. Logic-LM: Empowering Large Language Models with
+Symbolic Solvers for Faithful Logical Reasoning. \emph{EMNLP}, 2023.
+\end{thebibliography}
+\end{document}
