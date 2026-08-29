@@ -58,6 +58,22 @@ retrieval, verification, HELP, NONE, quoted syntax, tool discussion without
 need, and longer multi-opportunity generations. Split paraphrase families and
 namespaces.
 
+The retained public control registry contains 280 safe references: 40 each from
+GSM8K, BIG-bench Date Understanding, BIG-bench Unit Conversion, balanced
+ProofWriter, CLUTRR, CRAG, and TAT-QA. It stores IDs/hashes and assistance types,
+not benchmark content. TAT-QA compute-after-retrieve rows retain a secondary
+`COMPUTE` label.
+
+The registry manifest is `headline_ready: false`. FRAMES is absent and every
+row still needs audited earliest START, latest safe START, canonical END,
+payload span, assistance type, and first wrong/unsupported token. Never infer
+these annotations automatically from answers for headline evaluation.
+
+The mandatory public matrix is four generic tools, paired tags, fenced blocks,
+label-only intent, CPU trigger, final-layer latent, multi-layer latent,
+tools-plus-watchdog, and oracle timing/type with identical R2/backends. Existing
+Paper 2/2.5 oracle transport audits are invariants, not model-facing conditions.
+
 Train R1 with a small registry, then add graph/Datalog and later capabilities
 without R1 retraining or prompt changes. Score R1 intent and R2 capability
 selection separately.

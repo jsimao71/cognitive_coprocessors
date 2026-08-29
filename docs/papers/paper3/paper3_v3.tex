@@ -118,6 +118,29 @@ Oracle span and type & Upper bound before R2/normalization/execution \\
 \end{tabularx}
 \end{table}
 
+\subsection{Cross-paper public control registry}
+To avoid inventing a new task distribution, we freeze 280 redistribution-safe
+references from retained Papers 1.5, 2, and 2.5 selections: 40 each from GSM8K,
+BIG-bench Date Understanding, BIG-bench Unit Conversion, balanced ProofWriter,
+CLUTRR, CRAG, and TAT-QA. The artifact stores only source identifiers, benchmark
+IDs, content hashes, deterministic selection keys, coarse assistance type, and
+span-audit status. TAT-QA arithmetic/count rows record \textsc{compute} as a
+secondary action after primary \textsc{retrieve}.
+
+This registry is not yet a latent-control benchmark. Every row is marked
+\texttt{pending\_audit}; a bounded FRAMES subset is also absent. Before any
+headline run, auditors must add earliest useful START, latest safe START,
+canonical END, payload span, assistance type, and first wrong or unsupported
+token where applicable. The manifest therefore records
+\texttt{headline\_ready: false} and blocks result generation rather than
+synthesizing span labels from answers.
+
+The required public matrix is four generic tools, paired tags, fenced blocks,
+label-only intent, CPU trigger, final-layer latent, multi-layer latent,
+tools-plus-watchdog, and oracle timing/type, all with identical R2 and backends.
+The oracle-timed Paper 2 and 2.5 gateway audits establish only transport/schema
+parity; they do not substitute for voluntary or latent public runs.
+
 \section{Training and Registry Invariance}
 The ladder is P0 frozen linear probes, P1 frozen multi-layer ensembles, P2 a
 small control-only LoRA if necessary, and P3 optional multitask LM/control
@@ -159,6 +182,16 @@ parser-assisted END; matched syntax and CPU comparisons; registry expansion;
 control LoRA only if needed; separate integration LoRA; and only then an
 early-exit study. Until retained artifacts complete these steps, this manuscript
 states hypotheses and protocol rather than empirical superiority.
+
+The public registry can be reproduced from retained selections with:
+\begin{verbatim}
+python -m ccpu paper3 freeze-public \
+  --compute-selection artifacts/paper2/public_benchmarks/data_v1/selection.jsonl \
+  --crag-selection artifacts/paper1_5/public_benchmarks/crag_v1/data/selection.jsonl \
+  --tatqa-selection artifacts/paper2_5/public_benchmarks/tatqa_v1/selection.jsonl \
+  --per-benchmark 40 \
+  --output-dir artifacts/paper3/public_control_v1
+\end{verbatim}
 
 \begin{thebibliography}{9}
 \bibitem{toolformer} T. Schick et al. Toolformer: Language Models Can Teach

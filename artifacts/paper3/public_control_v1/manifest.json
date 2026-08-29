@@ -1,0 +1,37 @@
+{
+  "blocking_requirements": [
+    "frames_subset",
+    "audited_causal_span_annotations"
+  ],
+  "claim_boundary": "registry freeze only; no control condition has run",
+  "counts": {
+    "bigbench_date_understanding": 40,
+    "bigbench_unit_conversion": 40,
+    "clutrr": 40,
+    "crag": 40,
+    "gsm8k": 40,
+    "proofwriter_balanced": 40,
+    "tatqa": 40
+  },
+  "headline_ready": false,
+  "per_benchmark": 40,
+  "record_count": 280,
+  "required_conditions": [
+    "four_generic_tools",
+    "paired_tags",
+    "fenced_blocks",
+    "label_only",
+    "cpu_trigger",
+    "final_layer_latent",
+    "multi_layer_latent",
+    "tools_plus_watchdog",
+    "oracle_timing_type"
+  ],
+  "schema_version": "ccpu.paper3.public_control_manifest.v1",
+  "selection_sha256": "4c50faa338081c05eb9b2db3c5a2d6a0060c23b50fb2c3d155994eaaf83d1be2",
+  "source_sha256": {
+    "paper1_5_crag": "7dc44139c7cf8c36a0a0df3704839e2e79c74570e2bb4fe05ba0e02c2afa022f",
+    "paper2_5_tatqa": "11b4fee497cf7ffde298cab3bf7aabee02bb77d6be5fecc801a93bab28fa444a",
+    "paper2_compute": "d5502a9f79752d087a0591b6c16c6b4e94cd6d7a3d8d7aa2f70f32e8239951a8"
+  }
+}
