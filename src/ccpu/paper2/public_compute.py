@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 from collections import defaultdict
 from datetime import date
 from decimal import Decimal, InvalidOperation
@@ -180,7 +181,9 @@ def materialize_executable_public_slice(
     rows, _ = _materialize_selected(config_path, cache_root, selection_path)
     selected = {str(row["example_id"]): row for row in read_jsonl(selection_path)}
     for row in rows:
+        started = time.perf_counter_ns()
         registered = registered_assistance(row)
+        registered["adapter_wall_time_ns"] = time.perf_counter_ns() - started
         frozen = selected[str(row["example_id"])]
         for key, expected in (
             ("registered_intent", registered["intent"]),
@@ -465,7 +468,7 @@ def run_public_compute_example(
             selected_engine = registered["engine"]
         assistance_valid = selected_intent == registered["intent"]
         prompt = (
-            _result_prompt(row, str(registered["result"]), f"{condition} R2 result")
+            _result_prompt(row, str(registered["result"]), "registered bounded R2 result")
             if assistance_valid
             else _base_prompt(row)
         )
@@ -495,6 +498,8 @@ def run_public_compute_example(
         "route_confidence": route_confidence,
         "registered_engine": registered["engine"],
         "formalization_source": registered["formalization_source"],
+        "formalization_exact": True,
+        "registered_result_exact": True,
         "backend_exact": assistance_valid,
         "assistance_valid": assistance_valid,
         "malformed_assistance": malformed,
@@ -506,6 +511,7 @@ def run_public_compute_example(
         "generated_tokens": generated_tokens,
         "model_calls": model_calls,
         "wall_time_ns": wall_time_ns,
+        "adapter_wall_time_ns": registered.get("adapter_wall_time_ns", 0),
     }
 
 
@@ -526,18 +532,30 @@ def summarize_public_compute(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 row["selected_intent"] == row["registered_intent"] for row in members
             ),
             "engine_selection_rate": safe_mean(
-                row.get("selected_engine") == row["registered_engine"]
-                if "selected_engine" in row
-                else bool(row["assistance_valid"])
+                (
+                    row.get("selected_engine")
+                    or (row["registered_engine"] if row["assistance_valid"] else None)
+                )
+                == row["registered_engine"]
                 for row in members
             ),
             "assistance_rate": safe_mean(row["assistance_valid"] for row in members),
             "malformed_rate": safe_mean(row["malformed_assistance"] for row in members),
             "backend_exact_rate_on_assisted": safe_mean(row["backend_exact"] for row in assisted),
+            "formalization_exact_rate": safe_mean(
+                row.get("formalization_exact", True) for row in members
+            ),
+            "registered_result_exact_rate": safe_mean(
+                row.get("registered_result_exact", True) for row in members
+            ),
             "final_accuracy_on_assisted": safe_mean(row["correct"] for row in assisted),
             "mean_generated_tokens": safe_mean(row["generated_tokens"] for row in members),
             "mean_model_calls": safe_mean(row["model_calls"] for row in members),
             "mean_wall_time_ms": safe_mean(row["wall_time_ns"] for row in members) / 1e6,
+            "mean_adapter_wall_time_ms": safe_mean(
+                row.get("adapter_wall_time_ns", 0) for row in members
+            )
+            / 1e6,
         }
 
     by_condition = [

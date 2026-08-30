@@ -241,3 +241,29 @@ coverage. Implement and freeze matched units/date/ProofWriter/CLUTRR adapters
 first, then run generic tools, CPU routing, TwIL, hybrid, and oracle conditions
 on identical selected IDs. The measured status is `backend_gap`; Paper 3 remains
 `no_go`.
+
+## Executable public checkpoint
+
+The adapter prerequisite is now partially satisfied by a frozen 60-row
+developmental slice under `artifacts/paper2/public_compute_v1`: 12 rows each
+from GSM8K, BIG-bench units, BIG-bench dates, balanced ProofWriter, and CLUTRR.
+Eligibility is target-validated before selection. GSM8K uses calculator-executed
+gold traces; units/date/ProofWriter use bounded prompt parsers and exact local
+execution; CLUTRR uses annotated proof replay and must not be described as the
+ISA/frame engine or end-to-end graph parsing.
+
+The pinned Qwen3-0.6B matched matrix has seven conditions. LLM-only is 0.183,
+four generic tools 0.150 with 0/60 valid calls, generic CogCop 0.150 with 1/60
+valid controls, transferred T1 0.200 with 3/60 exact routes, disjoint shared-NLP
+BM25 plus exact result 0.683, oracle route plus the same exact result 0.683, and
+zero-call runtime-copy 1.000. BM25 and oracle use identical prompts and produce
+identical generations. Their 19 failures are result-integration overrides, not
+routing or backend failures.
+
+BM25 is fitted on 2,184 other registered rows after excluding every source row
+sharing an evaluation ID, including nine duplicate-ID collisions. It routes
+60/60 correctly, but this is within-suite benchmark-family separation with no
+negative controls. Do not generalize it to open-domain semantic routing or use
+it to reopen the Paper 3 gate. Automatic Rescue Rate is 2/60 for T1 and 41/60
+for BM25 relative to voluntary four-tool misses. Runtime-copy remains the
+production upper bound for exact COPY tasks.
