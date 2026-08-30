@@ -1,0 +1,194 @@
+{
+  "automatic_rescue": [
+    {
+      "automatic_rescue_rate": 0.0,
+      "condition": "semantic_runtime",
+      "eligible_voluntary_misses": 40,
+      "rescued_correctly": 0
+    },
+    {
+      "automatic_rescue_rate": 0.55,
+      "condition": "confidence_flare",
+      "eligible_voluntary_misses": 40,
+      "rescued_correctly": 22
+    },
+    {
+      "automatic_rescue_rate": 0.7,
+      "condition": "oracle_retrieval",
+      "eligible_voluntary_misses": 40,
+      "rescued_correctly": 28
+    }
+  ],
+  "base_question_count": 40,
+  "claim_boundary": {
+    "evidence_backend": "frozen CRAG reference answer",
+    "source_routing": "registered single source",
+    "status": "developmental model-facing slice"
+  },
+  "confidence_threshold": 0.811111330986023,
+  "matched_evaluation_rows": 80,
+  "prediction_count": 640,
+  "results": [
+    {
+      "answer_accuracy": 0.4125,
+      "answer_accuracy_ci95": [
+        0.31105857612761884,
+        0.5219595965410985
+      ],
+      "authorized_commitment_coverage": 0.55,
+      "condition": "confidence_flare",
+      "context_answer_accuracy": 0.275,
+      "count": 80,
+      "evidence_override_rate": 0.37254901960784315,
+      "external_answer_accuracy": 0.55,
+      "false_retrieval_rate": 0.45,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 11.25,
+      "mean_model_calls": 11.25,
+      "mean_wall_time_ms": 2279.22732375,
+      "retrieval_needed_recall": 0.825,
+      "ucr": 0.175
+    },
+    {
+      "answer_accuracy": 0.125,
+      "answer_accuracy_ci95": [
+        0.06933557616004864,
+        0.21502802099159668
+      ],
+      "authorized_commitment_coverage": 0.025,
+      "condition": "generic_retrieve_block",
+      "context_answer_accuracy": 0.2,
+      "count": 80,
+      "evidence_override_rate": 0.5294117647058824,
+      "external_answer_accuracy": 0.05,
+      "false_retrieval_rate": 0.4,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 8.2875,
+      "mean_model_calls": 8.2875,
+      "mean_wall_time_ms": 1753.5478,
+      "retrieval_needed_recall": 0.025,
+      "ucr": 0.95
+    },
+    {
+      "answer_accuracy": 0.025,
+      "answer_accuracy_ci95": [
+        0.006882893202970655,
+        0.08664432985578009
+      ],
+      "authorized_commitment_coverage": 0.0,
+      "condition": "llm_only",
+      "context_answer_accuracy": 0.025,
+      "count": 80,
+      "evidence_override_rate": 0.0,
+      "external_answer_accuracy": 0.025,
+      "false_retrieval_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 4.6625,
+      "mean_model_calls": 4.6625,
+      "mean_wall_time_ms": 885.17377375,
+      "retrieval_needed_recall": 0.0,
+      "ucr": 1.0
+    },
+    {
+      "answer_accuracy": 0.3625,
+      "answer_accuracy_ci95": [
+        0.2657079306444916,
+        0.4718920549777784
+      ],
+      "authorized_commitment_coverage": 0.7,
+      "condition": "oracle_retrieval",
+      "context_answer_accuracy": 0.025,
+      "count": 80,
+      "evidence_override_rate": 0.3,
+      "external_answer_accuracy": 0.7,
+      "false_retrieval_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 9.825,
+      "mean_model_calls": 9.825,
+      "mean_wall_time_ms": 1936.8402475,
+      "retrieval_needed_recall": 1.0,
+      "ucr": 0.0
+    },
+    {
+      "answer_accuracy": 1.0,
+      "answer_accuracy_ci95": [
+        0.954181870464473,
+        1.0
+      ],
+      "authorized_commitment_coverage": 1.0,
+      "condition": "runtime_copy",
+      "context_answer_accuracy": 1.0,
+      "count": 80,
+      "evidence_override_rate": 0.0,
+      "external_answer_accuracy": 1.0,
+      "false_retrieval_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 0.0,
+      "mean_model_calls": 0.0,
+      "mean_wall_time_ms": 0.0,
+      "retrieval_needed_recall": 1.0,
+      "ucr": 0.0
+    },
+    {
+      "answer_accuracy": 0.025,
+      "answer_accuracy_ci95": [
+        0.006882893202970655,
+        0.08664432985578009
+      ],
+      "authorized_commitment_coverage": 0.0,
+      "condition": "semantic_runtime",
+      "context_answer_accuracy": 0.025,
+      "count": 80,
+      "evidence_override_rate": 0.0,
+      "external_answer_accuracy": 0.025,
+      "false_retrieval_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 4.6625,
+      "mean_model_calls": 4.6625,
+      "mean_wall_time_ms": 885.17377375,
+      "retrieval_needed_recall": 0.0,
+      "ucr": 1.0
+    },
+    {
+      "answer_accuracy": 0.7,
+      "answer_accuracy_ci95": [
+        0.5923184607866026,
+        0.7893542873991866
+      ],
+      "authorized_commitment_coverage": 0.7,
+      "condition": "upfront_retrieval",
+      "context_answer_accuracy": 0.7,
+      "count": 80,
+      "evidence_override_rate": 0.3,
+      "external_answer_accuracy": 0.7,
+      "false_retrieval_rate": 1.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 14.9875,
+      "mean_model_calls": 14.9875,
+      "mean_wall_time_ms": 2988.50672125,
+      "retrieval_needed_recall": 1.0,
+      "ucr": 0.0
+    },
+    {
+      "answer_accuracy": 0.0625,
+      "answer_accuracy_ci95": [
+        0.02698937567084199,
+        0.13810148767274422
+      ],
+      "authorized_commitment_coverage": 0.0,
+      "condition": "voluntary_retrieve_tool",
+      "context_answer_accuracy": 0.075,
+      "count": 80,
+      "evidence_override_rate": 0.5,
+      "external_answer_accuracy": 0.05,
+      "false_retrieval_rate": 0.05,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 5.725,
+      "mean_model_calls": 5.725,
+      "mean_wall_time_ms": 1256.1159575,
+      "retrieval_needed_recall": 0.0,
+      "ucr": 0.8
+    }
+  ],
+  "schema_version": "ccpu.paper1_5.crag_model_summary.v1"
+}

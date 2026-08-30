@@ -207,9 +207,27 @@ UCR 1; upfront retrieval has recall 1 and false retrieval 1. The shared gateway
 accepts all 320 registered external calls and agrees with the oracle on all 640
 decisions. This is a transport check, not voluntary model tool use.
 
-This falsifies transfer of the current synthetic semantic policy. Do not claim
-a complete CRAG comparison yet: matched model confidence traces, frozen evidence,
-answer accuracy, abstention, evidence override, Authorized Commitment Coverage,
-generic RETRIEVE-intent generation, voluntary tool use, and automatic rescue
-remain to be run on the same IDs. The Paper 3.5 gate remains closed pending
-those runs.
+This falsifies transfer of the current synthetic semantic policy. A subsequent
+developmental model-facing slice now freezes 20 disjoint calibration questions
+and 40 evaluation questions, balanced across CRAG's four static/dynamic labels.
+The evaluation questions are paired under external and supplied-context
+availability and run through eight conditions with Qwen3-0.6B, producing 640
+predictions. The evidence backend is the frozen CRAG reference answer, not live
+web retrieval.
+
+Voluntary `__retrieve` has 0/40 external retrieval recall and 2/40 false
+retrievals on controls. The unchanged semantic runtime also has 0/40 recall.
+Confidence retrieves on 33/40 external rows and 18/40 controls; it answers 22 of
+the 40 voluntary external misses correctly, yielding 0.55 Automatic Rescue
+Rate. Registered oracle routing retrieves all 40 and answers 28 correctly,
+yielding a 0.70 upper bound under the grounded generation prompt. Upfront
+retrieval has 0.70 answer accuracy but retrieves on all controls. Runtime answer
+copy is exact and is only a transport/scoring control.
+
+Do not claim semantic-runtime transfer or a production CRAG policy. The run is
+one checkpoint, one seed, a small developmental slice, and bounded reference
+evidence. It does establish model-facing answer, confidence, generic-intent,
+evidence-override, Authorized Commitment Coverage, UCR, and Automatic Rescue
+measurements. The next CRAG iteration must change the policy using development
+data and freeze a new untouched confirmation set before evaluation. Paper 3.5's
+public gate remains closed pending that confirmation.
