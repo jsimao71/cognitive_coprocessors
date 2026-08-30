@@ -120,7 +120,43 @@ def _gold_operations(example: dict[str, Any]) -> list[str]:
     return operations
 
 
-def _prompt(example: dict[str, Any], condition: str) -> str:
+def _oracle_calls(example: dict[str, Any]) -> list[dict[str, str]]:
+    calculator = BoundedCalculator()
+    normalizer = ArithmeticSurfaceNormalizer()
+    calls = []
+    for index, item in enumerate(example["opportunities"]):
+        expression = str(item["expression"])
+        candidate = DetectionCandidate(
+            candidate_id=f"{example['example_id']}:oracle:{index}",
+            family="compute",
+            raw_text=expression,
+            start_offset=0,
+            end_offset=len(expression),
+            detector="gsm8k_oracle",
+        )
+        try:
+            request = normalizer.normalize(candidate)
+        except ArithmeticNormalizationError:
+            continue
+        result = calculator.execute(request)
+        if not result.ok:
+            continue
+        calls.append(
+            {
+                "expression": expression,
+                "canonical_expression": str(request.payload["canonical_expression"]),
+                "result": str(result.display),
+            }
+        )
+    return calls
+
+
+def _prompt(
+    example: dict[str, Any],
+    condition: str,
+    *,
+    oracle_calls: list[dict[str, str]] | None = None,
+) -> str:
     question = str(example["question"])
     endpoint = (
         "Use compact equations rather than prose and at most six calculation lines. "
@@ -156,10 +192,11 @@ def _prompt(example: dict[str, Any], condition: str) -> str:
         )
     elif condition == "oracle_calculator":
         ledger = "; ".join(
-            f"{item['expression']} = {item['result']}" for item in example["opportunities"]
+            f"{item['canonical_expression']} = {item['result']}"
+            for item in (oracle_calls or [])
         )
         instruction = (
-            "Solve the problem using this registered calculator ledger. Do not change its "
+            "Solve the problem using this bounded-calculator ledger. Do not change its "
             f"arithmetic results: {ledger}. {endpoint}"
         )
     else:
@@ -278,6 +315,7 @@ def run_gsm8k_example(
         run = _generic_run(example, backend, seed, max_assistance_episodes)
     else:
         controller = None
+        oracle_calls = _oracle_calls(example) if condition == "oracle_calculator" else []
         if condition in {"calculator_block", "lora_calculator_block"}:
             controller = build_calculator_block_runtime(
                 run_id=f"gsm8k:{backend.model_id}:{example['example_id']}:{condition}:{seed}"
@@ -287,9 +325,11 @@ def run_gsm8k_example(
                 run_id=f"gsm8k:{backend.model_id}:{example['example_id']}:{condition}:{seed}"
             )
         generation = backend.generate(
-            _prompt(example, condition), controller=controller, seed=seed
+            _prompt(example, condition, oracle_calls=oracle_calls),
+            controller=controller,
+            seed=seed,
         )
-        calls = []
+        calls = oracle_calls
         runtime_trace = []
         first_assistance_char = None
         malformed = 0

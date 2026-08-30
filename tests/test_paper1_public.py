@@ -80,6 +80,20 @@ def test_runtime_block_records_trace_and_automatic_rescue():
     assert summary["automatic_rescue"]["rate"] == 1.0
 
 
+def test_oracle_ledger_is_executed_by_the_bounded_calculator():
+    example = _example()
+    example["opportunities"][0]["result"] = "999"
+    backend = FakeBackend(["Answer: 12"])
+    row = run_gsm8k_example(example, backend, condition="oracle_calculator", seed=1)
+
+    assert row["correct"] is True
+    assert row["assistance_valid"] is True
+    assert row["matched_gold_operations"] == 1
+    assert row["calls"] == [
+        {"expression": "3 * 4", "canonical_expression": "3*4", "result": "12"}
+    ]
+
+
 def test_materializer_verifies_frozen_content(monkeypatch, tmp_path):
     import hashlib
 
