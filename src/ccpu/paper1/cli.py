@@ -18,7 +18,12 @@ from ccpu.common.artifacts import (
 from ccpu.common.gsm8k import materialize_gsm8k
 
 from .asl_pilot_analysis import build_asl_checkpoint_report
-from .asl_pilot_data import build_asl_expansion_data, build_asl_pilot_data, freeze_asl_pilot
+from .asl_pilot_data import (
+    build_asl_expansion_data,
+    build_asl_incremental_data,
+    build_asl_pilot_data,
+    freeze_asl_pilot,
+)
 from .asl_pilot_eval import analyze_asl_predictions, run_asl_pilot
 from .dataset import (
     ArithmeticDatasetConfig,
@@ -473,6 +478,20 @@ def build_asl_expansion_data_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def build_asl_incremental_data_command(args: argparse.Namespace) -> int:
+    manifest = build_asl_incremental_data(
+        args.freeze_dir,
+        args.expansion_train,
+        args.output_dir,
+        seed=args.seed,
+    )
+    print(
+        f"built {manifest['train_transitions']} incremental transitions from "
+        f"{manifest['train_programs']} programs -> {args.output_dir}"
+    )
+    return 0
+
+
 def run_asl_pilot_command(args: argparse.Namespace) -> int:
     model_config = read_json(args.config)
     if args.adapter_path:
@@ -749,6 +768,16 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_expansion_data.add_argument("--output-dir", required=True)
     asl_expansion_data.add_argument("--seed", type=int, default=912734)
     asl_expansion_data.set_defaults(handler=build_asl_expansion_data_command)
+
+    asl_incremental_data = commands.add_parser(
+        "build-asl-incremental-data",
+        help="derive causal clause-local NL+executed-state ASL transitions",
+    )
+    asl_incremental_data.add_argument("--freeze-dir", required=True)
+    asl_incremental_data.add_argument("--expansion-train", required=True)
+    asl_incremental_data.add_argument("--output-dir", required=True)
+    asl_incremental_data.add_argument("--seed", type=int, default=912735)
+    asl_incremental_data.set_defaults(handler=build_asl_incremental_data_command)
 
     asl_run = commands.add_parser(
         "run-asl-pilot", help="run one base, ICL, or LoRA semantic ASL condition"

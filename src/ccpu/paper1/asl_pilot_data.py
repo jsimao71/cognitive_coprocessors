@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from ccpu.common.artifacts import (
+    canonical_json,
     file_sha256,
     fingerprint,
     read_jsonl,
@@ -765,6 +766,106 @@ def build_asl_expansion_data(
             "train_450": file_sha256(train_path),
             "dev": file_sha256(dev_path),
             "leakage_audit": file_sha256(audit_path),
+        },
+    }
+    write_json(output / "data_manifest.json", manifest)
+    return manifest
+
+
+def _incremental_records(row: dict[str, Any]) -> list[dict[str, Any]]:
+    parts = {int(part["part_id"]): part for part in row["parts"]}
+    statements: list[str] = []
+    state: dict[str, Any] = {"values": {}, "unresolved": []}
+    records = []
+    context = _compact_context(row)
+    for mapping in sorted(row["part_mappings"], key=lambda item: int(item["part_id"])):
+        part_id = int(mapping["part_id"])
+        target = "\n".join(mapping["asl"])
+        prompt_parts = [
+            "Compile only the next quantitative clause into a grounded ASL-Arith delta.",
+            "Use the current runtime state; preserve entities, quantities, and dependencies.",
+            "Return only new ASL statements, one per line; do not repeat prior statements.",
+            f"Scope: {row['effective_scope']['id']}",
+        ]
+        if context:
+            prompt_parts.append(context)
+        prompt_parts.extend(
+            [
+                f"Current runtime state: {canonical_json(state)}",
+                f"Next clause: {parts[part_id]['text']}",
+                "ASL delta:",
+            ]
+        )
+        identity = f"{row['dataset']}:{row['source_id']}:{part_id}:incremental"
+        records.append(
+            {
+                "schema_version": "ccpu.paper1.asl_incremental_sft.v1",
+                "example_id": f"asl-inc-{fingerprint(identity, 16)}",
+                "parent_source_id": row["source_id"],
+                "semantic_pattern_id": row["semantic_pattern_id"],
+                "dataset": row["dataset"],
+                "part_id": part_id,
+                "prompt": "\n\n".join(prompt_parts),
+                "target": target,
+                "prior_statement_count": len(statements),
+            }
+        )
+        statements.extend(mapping["asl"])
+        validation = validate_asl("\n".join(statements), effective_scope=row["effective_scope"])
+        if not all(
+            validation[key] for key in ("syntax_verified", "lower_verified", "type_verified")
+        ):
+            raise ValueError(
+                f"incremental prefix failed for {row['source_id']} part {part_id}: "
+                + "; ".join(validation["errors"])
+            )
+        workspace = validation["execution"]["workspace"][str(row["effective_scope"]["id"])]
+        state = {
+            "values": workspace["values"],
+            "returned": workspace["returned"],
+            "unresolved": validation["execution"]["unresolved"],
+        }
+    return records
+
+
+def build_asl_incremental_data(
+    freeze_dir: str | Path,
+    expansion_train_path: str | Path,
+    output_dir: str | Path,
+    *,
+    seed: int = 912735,
+) -> dict[str, Any]:
+    """Derive clause-local NL+executed-state transitions without new supervision."""
+
+    freeze = Path(freeze_dir)
+    original_train = read_jsonl(freeze / "splits" / "train.jsonl")
+    dev = read_jsonl(freeze / "splits" / "dev.jsonl")
+    expansion = read_jsonl(expansion_train_path)
+    train_programs = _diverse_order([*original_train, *expansion], seed=seed)
+    train_records = [record for row in train_programs for record in _incremental_records(row)]
+    dev_records = [record for row in dev for record in _incremental_records(row)]
+    output = Path(output_dir)
+    train_path = write_jsonl(output / "sft" / "train_incremental.jsonl", train_records)
+    dev_path = write_jsonl(output / "sft" / "dev_incremental.jsonl", dev_records)
+    manifest = {
+        "schema_version": "ccpu.paper1.asl_incremental_data.v1",
+        "seed": seed,
+        "train_programs": len(train_programs),
+        "train_transitions": len(train_records),
+        "dev_programs": len(dev),
+        "dev_transitions": len(dev_records),
+        "mean_train_transitions_per_program": len(train_records) / len(train_programs),
+        "causal_prompt_boundary": (
+            "current clause plus compact evidence, scope, prior executed values, and unresolved prior dependencies"
+        ),
+        "answer_and_future_clauses_hidden": True,
+        "input_sha256": {
+            "freeze_manifest": file_sha256(freeze / "freeze_manifest.json"),
+            "expansion_train": file_sha256(expansion_train_path),
+        },
+        "output_sha256": {
+            "train_incremental": file_sha256(train_path),
+            "dev_incremental": file_sha256(dev_path),
         },
     }
     write_json(output / "data_manifest.json", manifest)

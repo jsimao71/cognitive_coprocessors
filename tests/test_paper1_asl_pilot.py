@@ -3,6 +3,7 @@ from ccpu.dsl import validate_asl
 from ccpu.paper1.asl_pilot_data import (
     _choose_grouped_splits,
     build_asl_expansion_data,
+    build_asl_incremental_data,
     pattern_id,
     perturb_row,
 )
@@ -158,3 +159,41 @@ def test_expansion_data_preserves_frozen_pattern_boundary(tmp_path):
     assert manifest["train_rows"] == 2
     assert manifest["train_pattern_count"] == 2
     assert len(read_jsonl(tmp_path / "output" / "sft" / "train_450.jsonl")) == 2
+
+
+def test_incremental_data_exposes_only_prior_executed_state(tmp_path):
+    def incremental_row(source_id, target):
+        row = _row(
+            source_id,
+            f"{target} = 2\nRETURN {target}",
+            f"There are 2 {target}. How many are there?",
+        )
+        row.update(
+            {
+                "split": "train",
+                "semantic_pattern_id": pattern_id(row),
+                "parts": [
+                    {"part_id": 0, "text": f"There are 2 {target}."},
+                    {"part_id": 1, "text": "How many are there?"},
+                ],
+                "part_mappings": [
+                    {"part_id": 0, "asl": [f"{target} = 2"]},
+                    {"part_id": 1, "asl": [f"RETURN {target}"]},
+                ],
+            }
+        )
+        return row
+
+    freeze = tmp_path / "freeze"
+    train = incremental_row("train-inc", "box.count")
+    dev = incremental_row("dev-inc", "person.age")
+    expansion = incremental_row("exp-inc", "trip.distance")
+    write_jsonl(freeze / "splits" / "train.jsonl", [train])
+    write_jsonl(freeze / "splits" / "dev.jsonl", [dev])
+    write_json(freeze / "freeze_manifest.json", {"frozen": True})
+    expansion_path = write_jsonl(tmp_path / "expansion.jsonl", [expansion])
+    manifest = build_asl_incremental_data(freeze, expansion_path, tmp_path / "incremental")
+    records = read_jsonl(tmp_path / "incremental" / "sft" / "train_incremental.jsonl")
+    assert manifest["train_transitions"] == 4
+    assert '"values":{}' in records[0]["prompt"]
+    assert "box.count" in records[1]["prompt"] or "trip.distance" in records[1]["prompt"]
