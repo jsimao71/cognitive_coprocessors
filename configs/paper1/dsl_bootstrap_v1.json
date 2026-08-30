@@ -1,0 +1,35 @@
+{
+  "schema_version": "ccpu.paper1.dsl_bootstrap_config.v1",
+  "asl_version": "asl-core-v0",
+  "profile": "asl-arith-v0",
+  "selection_seed": 23003,
+  "sources": {
+    "clutrr": {
+      "file": "gen_train23_test2to10/test/0000.parquet",
+      "revision": "6e5a7ac1425b8009b81ebc78c4f2b4d8ccd77722",
+      "use": "ingestion_only"
+    },
+    "gsm8k": {
+      "file": "main/train/0000.parquet",
+      "repo_id": "openai/gsm8k",
+      "revision": "a05f38c23a0e9ab0b71de8a2b4947e20f74f68f7",
+      "seed_count": 100,
+      "use": "arithmetic_bootstrap"
+    },
+    "proofwriter": {
+      "file": "default/test/0000.parquet",
+      "revision": "9fca93434910b3e09ad6f1c9af54d2038da985d0",
+      "use": "ingestion_only"
+    },
+    "tatqa": {
+      "file": "tatqa_dataset_dev.json",
+      "repo_id": "next-tat/TAT-QA",
+      "revision": "c96247f5077eac447f63527fd3dcfdc58bb56d6a",
+      "seed_count": 50,
+      "use": "arithmetic_bootstrap"
+    }
+  },
+  "skill": "skills/ccir-arith-compiler/SKILL.md",
+  "teacher_status": "not_run_pending_credentials_and_local_review",
+  "training_status": "blocked_until_verified_semantic_mappings"
+}

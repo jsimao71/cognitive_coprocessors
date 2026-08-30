@@ -184,6 +184,44 @@ is demonstrated across capability levels.
   public oracle headroom, but not public calculator-assistance transfer. Public
   semantic decomposition must be solved and replicated before a stronger claim.
 
+## ASL/CCIR dataset bootstrap checkpoint
+
+- The new target is `NL -> ASL-Arith -> generic AST -> typed CCIR -> scoped
+  workspace -> operator registry`. ASL is model-facing; JSON/Python dictionaries
+  remain canonical storage.
+- `src/ccpu/dsl` implements an open-vocabulary Pratt parser, canonical lowering,
+  hierarchical scope workspace, arithmetic registry, deterministic execution,
+  and fail-closed validation. Extensibility tests parse `:-`, variables, calls,
+  queries, `<-`, and explicit `SCOPE/END` without claiming those semantics.
+- `src/ccpu/dsl_dataset` provides a Click CLI for mining, chop audits,
+  deterministic selection, annotation bootstrap, remote LiteLLM generation, and
+  local/remote teacher request preparation. Tokens are environment-owned and
+  `.env.example` contains names only.
+- The pinned raw checkpoint mines 7,473 GSM8K train, 1,644 TAT-QA development,
+  1,146 CLUTRR test, and 360 ProofWriter test records. CLUTRR and ProofWriter are
+  ingestion-only for Paper 2; never force them into ASL-Arith.
+- One public item equals one external root scope. The audit has zero scope/ID
+  collisions and zero teacher-facing chop failures. Remaining 6 GSM8K, 10
+  CLUTRR, and 3 ProofWriter warnings occur only in non-teacher rationale or
+  ingestion fragments and remain visible.
+- The semantic-teacher seed is 100 stratified GSM8K plus 50 arithmetic TAT-QA
+  rows. They produce 343 and 50 potential clause requests under the current
+  skill hash. No remote teacher has been called.
+- The annotation-derived Q0 corpus accepts 95/100 GSM8K and 50/50 TAT-QA
+  programs after parser, scope, execution, and final-answer verification. Four
+  GSM8K chains mismatch the final answer and one has no equation; do not repair
+  them semantically or hide the rejection.
+- Q0 rows are operation plans derived from dataset annotations with generic step
+  names. They are not semantic teacher gold and cannot support an NL-to-ASL,
+  ICL, LoRA, or placement claim.
+- The local skill is `skills/ccir-arith-compiler/SKILL.md`. Grammar or semantic
+  changes require a version bump and new artifacts; never overwrite prior raw or
+  teacher outputs.
+- ICL and LoRA remain blocked until local Codex/remote teacher mappings are
+  reviewed, semantically validated, execution verified, and split by program
+  lineage. Remote configuration will be added only after credentials are
+  provided.
+
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.
 

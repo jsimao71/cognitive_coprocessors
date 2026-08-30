@@ -55,6 +55,13 @@ both reached 10.8\% accuracy, generic compute 2.5\%, automatic runtime 3.3\%, an
 LoRA block 0.8\%, while an oracle bounded-calculator ledger reached 75.8\%.
 Automatic Rescue Rate was 0/6. Thus interface syntax learned on synthetic data
 did not supply the natural-language decomposition needed for public transfer.
+This motivates an additional NL-to-ASL approach. We implement a scope-capable
+Pratt parser, canonical CCIR lowering, deterministic arithmetic workspace, public
+dataset miner, local Codex skill, and provider-neutral teacher interface. Four
+public sources yield 10,623 normalized records with zero scope collisions and
+zero teacher-facing chop failures. Before any ICL or LoRA, an explicitly
+low-grade annotation-derived seed verifies 145/150 ASL programs end to end; it
+is dataset infrastructure, not model compilation evidence.
 \end{abstract}
 
 \section{Status and Scope}
@@ -820,6 +827,73 @@ bounded exact execution, but none supplies the missing semantic decomposition on
 public word problems. Paper 1 therefore demonstrates synthetic interface
 feasibility and oracle public headroom, not calculator-assistance transfer.
 
+\section{ASL-Arith Dataset Bootstrap}
+
+The public transfer failure localizes the next problem before calculator
+execution: compile linguistic relations into an executable representation. We
+therefore add the pipeline
+\[
+\text{NL clause}\rightarrow\text{ASL-Arith}\rightarrow
+\text{generic AST}\rightarrow\text{typed CCIR}\rightarrow
+\text{scoped workspace}\rightarrow\text{operator registry}.
+\]
+ASL is the compact model-facing surface, for example
+\texttt{month2.downloads = month1.downloads * 3}; JSON/Python dictionaries are
+the canonical parsed representation. The parser knows syntax and precedence but
+not a closed function vocabulary. Semantic lowering and the active profile
+registry determine types and executors. Consequently future calls, predicates,
+variables, rules using \texttt{:-}, queries, and \texttt{SCOPE}/\texttt{END}
+already parse without claiming Paper 2 semantics in Paper 1.
+
+Every dataset record owns one external root scope, such as
+\texttt{gsm8k:train:123}. Explicit ASL scopes augment that owner; they do not
+replace it. Unqualified reads search the current scope and permitted ancestors,
+while sibling reads require qualification. Unit tests cover arithmetic
+precedence, state updates, explicit nested scopes, qualified sibling references,
+future rule/retrieval syntax, and fail-closed dangling references.
+
+\begin{table}[t]
+\centering\small
+\caption{Initial public DSL mining checkpoint. CLUTRR and ProofWriter are
+ingestion/extensibility records only and are not forced into ASL-Arith.}
+\label{tab:dsl-mining}
+\begin{tabular}{lrrr}
+\toprule
+Dataset & Records & Arithmetic-compatible & Chopped parts\\
+\midrule
+GSM8K train & 7,473 & 7,473 & 52,705\\
+TAT-QA development & 1,644 & 706 & 2,477\\
+CLUTRR test & 1,146 & 0 & 7,761\\
+ProofWriter test & 360 & 0 & 7,056\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The offset-preserving chop audit finds zero record/scope collisions and zero
+teacher-facing failures in arithmetic-compatible question clauses. Six GSM8K,
+ten CLUTRR, and three ProofWriter warnings remain in non-teacher rationale or
+ingestion fragments and stay in the review artifact. The audit therefore opens
+teacher bootstrap, not model training. Deterministic stratification freezes 100
+GSM8K and 50 arithmetic TAT-QA examples, producing 343 and 50 potential
+clause-level teacher envelopes. Each envelope carries effective scope, current
+state, allowed operators, source identity, and the compiler-skill hash.
+
+Before remote teaching, a deliberately lower-quality baseline converts only
+dataset-provided arithmetic annotations into ASL and verifies parse, scope,
+execution, and final answer. It accepts 95/100 GSM8K and 50/50 TAT-QA programs.
+Four GSM8K annotation chains do not terminate at the benchmark answer and one
+has no machine-readable equation; all five are quarantined. Accepted rows are
+graded \texttt{Q0\_DATASET\_DERIVATION\_EXEC\_VERIFIED}: numeric execution is
+gold-derived, variable names are generic steps, and the programs do not prove
+semantic NL-to-ASL compilation.
+
+The Click CLI can mine, audit, select, prepare local/remote requests, create this
+annotation baseline, and call a configured LiteLLM teacher. Credentials are read
+only by providers from environment variables; dry-run and all current artifacts
+make zero remote calls. A versioned repo-local Codex skill implements the same
+ASL response contract. No ICL or LoRA starts until semantic mappings are reviewed,
+execution verified, and split by program lineage.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -1026,6 +1100,36 @@ foreach ($condition in @('llm_only','matched_icl','generic_compute', \
 & $py -m ccpu @analysis
 \end{verbatim}
 
+The ASL dataset bootstrap uses verified local public-source files:
+
+\begin{verbatim}
+python -m ccpu.dsl_dataset mine \
+  --source gsm8k=<pinned-gsm8k-train.parquet> \
+  --source tatqa=<pinned-tatqa-development.json> \
+  --source clutrr=<pinned-clutrr.parquet> \
+  --source proofwriter=<pinned-proofwriter.parquet> \
+  --source-split tatqa=development \
+  --source-split clutrr=test \
+  --source-split proofwriter=test \
+  --output-dir artifacts/paper1/dsl/raw_v1
+python -m ccpu.dsl_dataset audit-chops \
+  --input-dir artifacts/paper1/dsl/raw_v1 \
+  --output artifacts/paper1/dsl/raw_v1/chop_audit.json
+python -m ccpu.dsl_dataset select \
+  --input artifacts/paper1/dsl/raw_v1/gsm8k.jsonl \
+  --max-examples 100 \
+  --output artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl
+python -m ccpu.dsl_dataset bootstrap-annotated \
+  --input artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl \
+  --input artifacts/paper1/dsl/bootstrap_v1/tatqa_seed.jsonl \
+  --output-dir artifacts/paper1/dsl/annotated_v1
+python -m ccpu.dsl_dataset generate --dry-run \
+  --input artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl \
+  --config configs/paper1/dsl_teacher.example.json \
+  --skill skills/ccir-arith-compiler/SKILL.md \
+  --output-dir artifacts/paper1/dsl/teacher_dry_run
+\end{verbatim}
+
 \section{Limitations}
 
 The elicitation instruction asks reflex models to expose an expression followed
@@ -1060,6 +1164,11 @@ difficulty model. Source rationales provide noisy opportunity annotations, and
 The concrete syntax example causes strong anchoring in generic and automatic
 conditions; because it was frozen before the full outcome, this is valid evidence
 for that protocol but not evidence that all tool or trigger prompts must fail.
+The ASL checkpoint adds no model-facing result. Its 145 accepted programs use
+gold dataset equations/derivations, generic step names, and selected development
+records. They establish parser/runtime and data-pipeline viability only. Teacher
+quality, semantic equivalence, reference naming, lineage-safe splits, ICL, LoRA,
+and untouched robustness remain unmeasured.
 
 \section{Related Work}
 
@@ -1114,6 +1223,12 @@ at most 3.3\% accuracy, while the bounded-calculator oracle reaches 75.8\%.
 Where interface knowledge should live is therefore conditional: syntax can live
 in context or weights and exactness in the runtime, but natural-language
 decomposition is not solved by any of the three in this experiment.
+The ASL bootstrap turns that negative result into a testable next stage without
+claiming success: public records and scopes are mined, a compact extensible
+surface parses to typed state, and 145 annotation-derived programs execute
+exactly. The next evidence gate is reviewed semantic NL-to-ASL data; only after
+that gate may ICL and LoRA compare whether interface knowledge belongs in
+context, weights, or the runtime representation.
 
 \begin{thebibliography}{9}
 

@@ -70,6 +70,25 @@ context, weights, and deterministic runtime placement can be compared directly.
 Manual generation honors the complete model EOS set; this includes Gemma's
 `<end_of_turn>` token 106 in addition to tokenizer EOS.
 
+## Paper 1 ASL-Arith dataset bootstrap
+
+Paper 1 now includes a separate Click CLI for mining public records into
+scope-owned NL-to-ASL compiler datasets. JSON is the API/storage envelope; ASL is
+the model target. Mine and audit before any teacher or training run:
+
+```powershell
+python -m ccpu.dsl_dataset mine --source gsm8k=<train.parquet> --source tatqa=<dev.json> --source-split tatqa=development --output-dir artifacts/paper1/dsl/raw_v1
+python -m ccpu.dsl_dataset audit-chops --input-dir artifacts/paper1/dsl/raw_v1 --output artifacts/paper1/dsl/raw_v1/chop_audit.json
+python -m ccpu.dsl_dataset select --input artifacts/paper1/dsl/raw_v1/gsm8k.jsonl --max-examples 100 --output artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl
+python -m ccpu.dsl_dataset prepare-teacher --input artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl --skill skills/ccir-arith-compiler/SKILL.md --output artifacts/paper1/dsl/bootstrap_v1/gsm8k_teacher_requests.jsonl
+```
+
+`generate --dry-run` never imports LiteLLM or makes a remote call. Install the
+`teacher` extra and configure a model in JSON only after a provider credential is
+available through `OPENROUTER_API_KEY`, `OPENAI_API_KEY`, or `HF_TOKEN`. Never
+commit tokens. Annotation-derived Q0 programs are execution checks, not semantic
+teacher gold, and do not open the ICL/LoRA gate.
+
 ## Paper 1.5 epistemic-risk replication and placement
 
 The next iteration freezes a larger Qwen-measured four-quadrant benchmark before evaluation,

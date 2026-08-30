@@ -1,0 +1,67 @@
+{
+  "datasets": {
+    "clutrr": {
+      "failure_count": 10,
+      "heuristics": {
+        "clutrr_story_sentence": 7761
+      },
+      "nested_scope_count": 0,
+      "part_count": 7761,
+      "record_count": 1146,
+      "root_scope_count": 1146,
+      "scope_source_distribution": {
+        "dataset": 1146
+      },
+      "teacher_failure_count": 0
+    },
+    "gsm8k": {
+      "failure_count": 6,
+      "heuristics": {
+        "dataset_rationale_step": 27066,
+        "sentence_punctuation": 25639
+      },
+      "nested_scope_count": 0,
+      "part_count": 52705,
+      "record_count": 7473,
+      "root_scope_count": 7473,
+      "scope_source_distribution": {
+        "dataset": 7473
+      },
+      "teacher_failure_count": 0
+    },
+    "proofwriter": {
+      "failure_count": 3,
+      "heuristics": {
+        "sentence_punctuation": 7056
+      },
+      "nested_scope_count": 0,
+      "part_count": 7056,
+      "record_count": 360,
+      "root_scope_count": 360,
+      "scope_source_distribution": {
+        "dataset": 360
+      },
+      "teacher_failure_count": 0
+    },
+    "tatqa": {
+      "failure_count": 0,
+      "heuristics": {
+        "dataset_rationale_step": 828,
+        "tatqa_question_sentence": 1649
+      },
+      "nested_scope_count": 0,
+      "part_count": 2477,
+      "record_count": 1644,
+      "root_scope_count": 1644,
+      "scope_source_distribution": {
+        "dataset": 1644
+      },
+      "teacher_failure_count": 0
+    }
+  },
+  "hard_errors": [],
+  "sample_per_dataset": 50,
+  "scale_teacher_generation": true,
+  "schema_version": "ccpu.dsl_dataset.chop_audit.v1",
+  "seed": 23001
+}

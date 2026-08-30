@@ -227,3 +227,13 @@ results/
 *.fdb_latexmk
 *.fls
 *.out
+
+# Cache-owned public text and unreviewed Paper 1 DSL supervision artifacts
+artifacts/paper1/dsl/raw_v1/*.jsonl
+artifacts/paper1/dsl/raw_v1/chop_audit.json
+artifacts/paper1/dsl/bootstrap_v1/*_seed.jsonl
+artifacts/paper1/dsl/bootstrap_v1/*_teacher_requests.jsonl
+artifacts/paper1/dsl/annotated_v1/accepted.jsonl
+artifacts/paper1/dsl/teacher_*/raw.jsonl
+artifacts/paper1/dsl/teacher_*/accepted.jsonl
+artifacts/paper1/dsl/teacher_*/requests.jsonl
