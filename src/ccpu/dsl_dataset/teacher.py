@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import time
@@ -35,9 +36,14 @@ def _teacher_parts(row: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def teacher_request(
-    row: dict[str, Any], part: dict[str, Any], *, skill_sha256: str, state_before: dict[str, Any]
+    row: dict[str, Any],
+    part: dict[str, Any],
+    *,
+    skill_sha256: str,
+    state_before: dict[str, Any],
+    asl_before: list[str] | None = None,
 ) -> dict[str, Any]:
-    return {
+    request = {
         "schema_version": "ccpu.dsl_dataset.teacher_request.v1",
         "asl_version": "asl-core-v0",
         "profile": "asl-arith-v0",
@@ -45,13 +51,35 @@ def teacher_request(
         "source_id": row["source_id"],
         "effective_scope": row["effective_scope"],
         "question": row["question"],
-        "correct_answer": row["answer"],
         "parts": _teacher_parts(row),
         "current_part": part,
         "state_before": state_before,
+        "asl_before": list(asl_before or []),
         "operator_registry": ALLOWED_OPERATORS,
         "skill_sha256": skill_sha256,
     }
+    if row.get("source_context"):
+        request["source_context"] = row["source_context"]
+    return request
+
+
+def _skill_bundle_sha256(skill_path: str | Path) -> str:
+    return hashlib.sha256(_skill_bundle_text(skill_path).encode("utf-8")).hexdigest()
+
+
+def _skill_bundle_text(skill_path: str | Path) -> str:
+    skill_path = Path(skill_path)
+    members = [skill_path]
+    references = skill_path.parent / "references"
+    if references.exists():
+        members.extend(sorted(references.glob("*.md")))
+    sections = []
+    for member in members:
+        relative = member.relative_to(skill_path.parent).as_posix()
+        sections.append(f"\n<!-- BEGIN {relative} -->\n")
+        sections.append(member.read_text(encoding="utf-8"))
+        sections.append(f"\n<!-- END {relative} -->\n")
+    return "".join(sections)
 
 
 def prepare_teacher_requests(
@@ -64,9 +92,9 @@ def prepare_teacher_requests(
     rows = read_jsonl(input_path)
     if max_examples is not None:
         rows = rows[:max_examples]
-    skill_sha = file_sha256(skill_path)
+    skill_sha = _skill_bundle_sha256(skill_path)
     requests = [
-        teacher_request(row, part, skill_sha256=skill_sha, state_before={})
+        teacher_request(row, part, skill_sha256=skill_sha, state_before={}, asl_before=[])
         for row in rows
         for part in _teacher_parts(row)
     ]
@@ -114,7 +142,8 @@ def _completion(config: dict[str, Any], skill: str, request: dict[str, Any]) -> 
             {"role": "system", "content": skill},
             {
                 "role": "user",
-                "content": "Compile only current_part. Return the required JSON response.\n"
+                "content": "Compile only current_part. The answer and gold rationale are hidden. "
+                "Return the required JSON response.\n"
                 + json.dumps(request, ensure_ascii=False),
             },
         ],
@@ -132,6 +161,15 @@ def _root_values(execution: dict[str, Any], scope_id: str) -> dict[str, Any]:
     return dict(execution["workspace"].get(scope_id, {}).get("values", {}))
 
 
+def _candidate_asl(candidate: dict[str, Any]) -> str:
+    value = candidate.get("asl", [])
+    if isinstance(value, str):
+        return value.strip()
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        raise TypeError("teacher 'asl' must be a list of statement strings")
+    return "\n".join(item.strip() for item in value if item.strip())
+
+
 def generate_teacher_mappings(
     input_path: str | Path,
     skill_path: str | Path,
@@ -145,8 +183,8 @@ def generate_teacher_mappings(
     if max_examples is not None:
         rows = rows[:max_examples]
     skill_path = Path(skill_path)
-    skill = skill_path.read_text(encoding="utf-8")
-    skill_sha = file_sha256(skill_path)
+    skill = _skill_bundle_text(skill_path)
+    skill_sha = _skill_bundle_sha256(skill_path)
     raw_records = []
     accepted = []
     review: dict[str, list[dict[str, Any]]] = {
@@ -160,7 +198,13 @@ def generate_teacher_mappings(
         cumulative_asl: list[str] = []
         state_before: dict[str, Any] = {}
         for part in _teacher_parts(row):
-            request = teacher_request(row, part, skill_sha256=skill_sha, state_before=state_before)
+            request = teacher_request(
+                row,
+                part,
+                skill_sha256=skill_sha,
+                state_before=state_before,
+                asl_before=cumulative_asl,
+            )
             candidate = None
             raw_text = ""
             error_text = ""
@@ -192,10 +236,16 @@ def generate_teacher_mappings(
             if status != "ok":
                 review["ambiguous"].append({**raw_record, "teacher_response": candidate})
                 continue
-            asl = str(candidate.get("asl", "")).strip()
+            try:
+                asl = _candidate_asl(candidate)
+            except TypeError as error:
+                review["invalid_syntax"].append(
+                    {**raw_record, "teacher_response": candidate, "validation_error": str(error)}
+                )
+                continue
             full_asl = "\n".join([*cumulative_asl, asl])
             validation = validate_asl(full_asl, effective_scope=row["effective_scope"])
-            if not validation["execution_verified"]:
+            if not validation["execution_verified"] and not validation["deferred_verified"]:
                 bucket = (
                     "dangling_refs"
                     if any("unresolved reference" in error for error in validation["errors"])
@@ -226,9 +276,14 @@ def generate_teacher_mappings(
                             "type_verified",
                             "scope_verified",
                             "execution_verified",
+                            "deferred_verified",
                         )
                     },
-                    "quality_grade": "Q1_SINGLE_TEACHER_EXEC_VERIFIED",
+                    "quality_grade": (
+                        "Q1_SINGLE_TEACHER_EXEC_VERIFIED"
+                        if validation["execution_verified"]
+                        else "Q1_SINGLE_TEACHER_SEMANTIC_PENDING"
+                    ),
                     "teacher": {
                         "provider": config.get("provider"),
                         "model": config["model"],

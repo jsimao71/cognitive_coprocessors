@@ -22,7 +22,7 @@ _BINARY = {
 
 def _expression(node: dict[str, Any]) -> dict[str, Any]:
     node_type = node["type"]
-    if node_type == "number":
+    if node_type in {"number", "string", "boolean", "null"}:
         return {"op": "CONST", "value": node["value"]}
     if node_type in {"identifier", "path"}:
         path = node["name"] if node_type == "identifier" else ".".join(node["parts"])

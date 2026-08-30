@@ -12,6 +12,11 @@ from .annotated import bootstrap_annotated
 from .audit import audit_chops
 from .mine import mine_datasets
 from .select import select_seed
+from .semantic import (
+    prepare_local_annotation_batches,
+    prepare_repair_batches,
+    validate_semantic_annotations,
+)
 from .teacher import generate_teacher_mappings, prepare_teacher_requests
 
 
@@ -105,6 +110,90 @@ def bootstrap_annotated_command(input_paths: tuple[Path, ...], output_dir: Path)
     click.echo(
         f"accepted {summary['accepted_count']} annotation-derived ASL programs; "
         f"rejected {summary['rejected_count']} -> {output_dir}"
+    )
+
+
+@main.command("validate-semantic")
+@click.option(
+    "--seed",
+    "seed_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option(
+    "--annotations",
+    "annotation_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+def validate_semantic_command(
+    seed_paths: tuple[Path, ...], annotation_paths: tuple[Path, ...], output_dir: Path
+) -> None:
+    summary = validate_semantic_annotations(
+        list(seed_paths), list(annotation_paths), output_dir
+    )
+    click.echo(
+        f"accepted {summary['accepted_count']} semantic ASL programs; "
+        f"rejected {summary['rejected_count']} -> {output_dir}"
+    )
+
+
+@main.command("prepare-local")
+@click.option(
+    "--seed",
+    "seed_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+@click.option("--batch-size", default=5, type=click.IntRange(min=1, max=25), show_default=True)
+def prepare_local_command(
+    seed_paths: tuple[Path, ...], output_dir: Path, batch_size: int
+) -> None:
+    manifest = prepare_local_annotation_batches(
+        list(seed_paths), output_dir, batch_size=batch_size
+    )
+    click.echo(
+        f"prepared {manifest['example_count']} answer-free examples in "
+        f"{manifest['batch_count']} local batches -> {output_dir}"
+    )
+
+
+@main.command("prepare-repair")
+@click.option(
+    "--seed",
+    "seed_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option(
+    "--rejected", "rejected_path", type=click.Path(exists=True, path_type=Path), required=True
+)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+@click.option("--batch-size", default=5, type=click.IntRange(min=1, max=25), show_default=True)
+@click.option("--repair-round", default=1, type=click.IntRange(min=1, max=5), show_default=True)
+def prepare_repair_command(
+    seed_paths: tuple[Path, ...],
+    rejected_path: Path,
+    output_dir: Path,
+    batch_size: int,
+    repair_round: int,
+) -> None:
+    manifest = prepare_repair_batches(
+        list(seed_paths),
+        rejected_path,
+        output_dir,
+        batch_size=batch_size,
+        repair_round=repair_round,
+    )
+    click.echo(
+        f"prepared {manifest['example_count']} rationale-assisted repairs in "
+        f"{manifest['batch_count']} batches -> {output_dir}"
     )
 
 

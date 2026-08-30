@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["annotations"],
+  "properties": {
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset",
+          "source_id",
+          "annotator",
+          "answer_hidden",
+          "rationale_hidden",
+          "rationale_assisted",
+          "repair_round",
+          "manually_reviewed",
+          "part_mappings"
+        ],
+        "properties": {
+          "dataset": {"type": "string"},
+          "source_id": {"type": "string"},
+          "annotator": {"type": "string"},
+          "answer_hidden": {"type": "boolean"},
+          "rationale_hidden": {"type": "boolean"},
+          "rationale_assisted": {"type": "boolean"},
+          "repair_round": {"type": "integer", "minimum": 0},
+          "manually_reviewed": {"type": "boolean"},
+          "part_mappings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "part_id",
+                "status",
+                "asl",
+                "semantic_notes",
+                "assumptions",
+                "confidence"
+              ],
+              "properties": {
+                "part_id": {"type": "integer", "minimum": 0},
+                "status": {"type": "string", "enum": ["ok", "ambiguous", "unsupported"]},
+                "asl": {"type": "array", "items": {"type": "string"}},
+                "semantic_notes": {"type": "array", "items": {"type": "string"}},
+                "assumptions": {"type": "array", "items": {"type": "string"}},
+                "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

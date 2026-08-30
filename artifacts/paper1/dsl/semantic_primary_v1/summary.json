@@ -1,0 +1,27 @@
+{
+  "acceptance_rate": 0.6533333333333333,
+  "accepted_count": 98,
+  "accepted_sha256": "78f63b5d29ce59bb4de192e167514a367de3fcc51eb474ccf39abb24750e875b",
+  "annotation_sha256": {
+    "artifacts\\paper1\\dsl\\local_codex_v1\\annotations_primary.jsonl": "1edcf6114bd4d526f0308765db961abc2acca108f16927a89d09ea6cacc3cf54"
+  },
+  "by_dataset": {
+    "gsm8k": {
+      "accepted": 85,
+      "rejected": 15
+    },
+    "tatqa": {
+      "accepted": 13,
+      "rejected": 37
+    }
+  },
+  "quality_grade": "Q1_LOCAL_CODEX_EXEC_VERIFIED",
+  "rejected_count": 52,
+  "rejected_sha256": "5ebd7d8f376b826816888dcbadcf339d1bad964c5bef37329002102faa8eba2f",
+  "schema_version": "ccpu.dsl_dataset.semantic_summary.v1",
+  "seed_sha256": {
+    "artifacts\\paper1\\dsl\\bootstrap_v1\\gsm8k_seed.jsonl": "7ecf6e5693ab14a2296caff2acf96ed8947cd18640e43ec3c2105a67e6e53fad",
+    "artifacts\\paper1\\dsl\\bootstrap_v1\\tatqa_seed.jsonl": "8b0994ea397f91221d4b3868bb5b69a1209e872510e5323b37e6f311396a64a1"
+  },
+  "semantic_lint": "anonymous targets and expression/literal returns rejected"
+}

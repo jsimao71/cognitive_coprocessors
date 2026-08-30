@@ -194,9 +194,9 @@ is demonstrated across capability levels.
   and fail-closed validation. Extensibility tests parse `:-`, variables, calls,
   queries, `<-`, and explicit `SCOPE/END` without claiming those semantics.
 - `src/ccpu/dsl_dataset` provides a Click CLI for mining, chop audits,
-  deterministic selection, annotation bootstrap, remote LiteLLM generation, and
-  local/remote teacher request preparation. Tokens are environment-owned and
-  `.env.example` contains names only.
+  deterministic selection, answer-free local batches, labeled repair batches,
+  semantic validation, annotation bootstrap, and remote LiteLLM generation.
+  Tokens are environment-owned and `.env.example` contains names only.
 - The pinned raw checkpoint mines 7,473 GSM8K train, 1,644 TAT-QA development,
   1,146 CLUTRR test, and 360 ProofWriter test records. CLUTRR and ProofWriter are
   ingestion-only for Paper 2; never force them into ASL-Arith.
@@ -207,20 +207,30 @@ is demonstrated across capability levels.
 - The semantic-teacher seed is 100 stratified GSM8K plus 50 arithmetic TAT-QA
   rows. They produce 343 and 50 potential clause requests under the current
   skill hash. No remote teacher has been called.
-- The annotation-derived Q0 corpus accepts 95/100 GSM8K and 50/50 TAT-QA
+- TAT-QA rows include source table and paragraph context; question-only requests
+  are insufficient for grounded metric/year names. Primary teacher requests hide
+  answers, rationales, equations, and existing programs.
+- The preserved annotation-derived Q0 operation ledger accepts 95/100 GSM8K and 50/50 TAT-QA
   programs after parser, scope, execution, and final-answer verification. Four
   GSM8K chains mismatch the final answer and one has no equation; do not repair
   them semantically or hide the rejection.
 - Q0 rows are operation plans derived from dataset annotations with generic step
   names. They are not semantic teacher gold and cannot support an NL-to-ASL,
   ICL, LoRA, or placement claim.
-- The local skill is `skills/ccir-arith-compiler/SKILL.md`. Grammar or semantic
+- The revised local skill is `skills/ccir-arith-compiler/SKILL.md`, with detailed
+  semantic rules in `references/semantic-annotation.md`. It requires entities,
+  measured quantities, source/derived and temporal state, forward dependencies,
+  named returns, and legal identifiers such as `y2019` rather than `.2019`.
+  Grammar or semantic
   changes require a version bump and new artifacts; never overwrite prior raw or
   teacher outputs.
-- ICL and LoRA remain blocked until local Codex/remote teacher mappings are
-  reviewed, semantically validated, execution verified, and split by program
-  lineage. Remote configuration will be added only after credentials are
-  provided.
+- The semantic corpus accepts 150/150 programs: 98 answer-blind primary Codex
+  mappings, 45 rationale-assisted round-one repairs, and seven round-two repairs.
+  Deterministic checks cover syntax, CCIR, scope, grounded execution, final answer,
+  named semantic state, and named return. Grade is Q1, not Q4; no row is marked
+  manually reviewed. Current runs used Codex CLI and zero LiteLLM calls.
+- ICL and LoRA remain blocked until a manual semantic audit and lineage-safe split,
+  unless an explicitly labeled Q1 pilot is authorized.
 
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.

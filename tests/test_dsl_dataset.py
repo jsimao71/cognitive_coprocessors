@@ -76,6 +76,8 @@ def test_click_pipeline_mines_audits_selects_and_prepares_teacher_requests(tmp_p
     gsm_rows = read_jsonl(raw / "gsm8k.jsonl")
     assert len({row["effective_scope"]["id"] for row in gsm_rows}) == 2
     assert any(not part["teacher_input_default"] for part in gsm_rows[0]["parts"])
+    tatqa_rows = read_jsonl(raw / "tatqa.jsonl")
+    assert tatqa_rows[0]["source_context"]["table"][1] == ["Sales", "50"]
 
     audit = raw / "chop_audit.json"
     audited = runner.invoke(
@@ -123,6 +125,7 @@ def test_click_pipeline_mines_audits_selects_and_prepares_teacher_requests(tmp_p
     request_rows = read_jsonl(requests)
     assert request_rows
     assert all(row["profile"] == "asl-arith-v0" for row in request_rows)
+    assert all("correct_answer" not in row for row in request_rows)
     assert all("API_KEY" not in str(row) for row in request_rows)
 
 
@@ -166,3 +169,91 @@ def test_annotation_bootstrap_creates_execution_verified_low_grade_asl(tmp_path)
     assert accepted[0]["asl"] == "step_1 = 6*2\nRETURN step_1"
     assert accepted[0]["validation"]["final_answer_verified"] is True
     assert accepted[0]["quality_grade"].startswith("Q0_")
+
+
+def test_semantic_validator_accepts_forward_state_and_rejects_operation_ledgers(tmp_path):
+    seeds = write_jsonl(
+        tmp_path / "seed.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "split": "train",
+                "source_id": source_id,
+                "record_sha256": source_id * 64,
+                "question": "Jessica is six years older than Claire. Claire is 18. How old is Jessica?",
+                "answer": "24",
+                "gold_reasoning": "",
+                "metadata": {"arithmetic_compatible": True},
+                "effective_scope": {
+                    "id": f"gsm8k:train:{source_id}",
+                    "parent": None,
+                    "kind": "benchmark_case",
+                    "source": "dataset",
+                },
+                "parts": [
+                    {
+                        "part_id": 0,
+                        "text": "Jessica is six years older than Claire.",
+                        "teacher_input_default": True,
+                    },
+                    {
+                        "part_id": 1,
+                        "text": "Claire is 18.",
+                        "teacher_input_default": True,
+                    },
+                    {
+                        "part_id": 2,
+                        "text": "How old is Jessica?",
+                        "teacher_input_default": True,
+                    },
+                ],
+            }
+            for source_id in ("a", "b")
+        ],
+    )
+    annotations = write_jsonl(
+        tmp_path / "annotations.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "source_id": "a",
+                "part_mappings": [
+                    {
+                        "part_id": 0,
+                        "status": "ok",
+                        "asl": ["jessica.age_now = claire.age_now + 6"],
+                    },
+                    {"part_id": 1, "status": "ok", "asl": ["claire.age_now = 18"]},
+                    {"part_id": 2, "status": "ok", "asl": ["RETURN jessica.age_now"]},
+                ],
+            },
+            {
+                "dataset": "gsm8k",
+                "source_id": "b",
+                "part_mappings": [
+                    {"part_id": 0, "status": "ok", "asl": ["step_1 = 18"]},
+                    {"part_id": 1, "status": "ok", "asl": ["step_2 = step_1 + 6"]},
+                    {"part_id": 2, "status": "ok", "asl": ["RETURN step_2"]},
+                ],
+            },
+        ],
+    )
+    output = tmp_path / "semantic"
+    runner = CliRunner()
+    result = runner.invoke(
+        main,
+        [
+            "validate-semantic",
+            "--seed",
+            str(seeds),
+            "--annotations",
+            str(annotations),
+            "--output-dir",
+            str(output),
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    assert read_json(output / "summary.json")["accepted_count"] == 1
+    assert "anonymous operation-ledger target" in read_jsonl(output / "rejected.jsonl")[0][
+        "reason"
+    ]

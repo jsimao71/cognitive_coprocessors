@@ -59,9 +59,11 @@ This motivates an additional NL-to-ASL approach. We implement a scope-capable
 Pratt parser, canonical CCIR lowering, deterministic arithmetic workspace, public
 dataset miner, local Codex skill, and provider-neutral teacher interface. Four
 public sources yield 10,623 normalized records with zero scope collisions and
-zero teacher-facing chop failures. Before any ICL or LoRA, an explicitly
-low-grade annotation-derived seed verifies 145/150 ASL programs end to end; it
-is dataset infrastructure, not model compilation evidence.
+zero teacher-facing chop failures. A revised semantic skill and answer-blind
+Codex pass produce 98/150 execution-verified semantic programs; two explicitly
+rationale-assisted repair rounds raise coverage to 150/150 (100 GSM8K and 50
+TAT-QA). These are Q1 compiler-data candidates with deterministic semantic lint,
+not manually reviewed gold or model-compilation evidence.
 \end{abstract}
 
 \section{Status and Scope}
@@ -850,7 +852,9 @@ Every dataset record owns one external root scope, such as
 replace it. Unqualified reads search the current scope and permitted ancestors,
 while sibling reads require qualification. Unit tests cover arithmetic
 precedence, state updates, explicit nested scopes, qualified sibling references,
-future rule/retrieval syntax, and fail-closed dangling references.
+future rule/retrieval syntax, and fail-closed dangling references. Arithmetic
+execution also supports causal forward dependencies: a relation may be deferred
+until a later clause grounds its inputs, after which dependents are reevaluated.
 
 \begin{table}[t]
 \centering\small
@@ -869,14 +873,18 @@ ProofWriter test & 360 & 0 & 7,056\\
 \end{tabular}
 \end{table}
 
-The offset-preserving chop audit finds zero record/scope collisions and zero
+The TAT-QA adapter now carries table and paragraph evidence into each local
+teacher request; without this context, metric/year names and source values cannot
+be grounded from the question alone. The offset-preserving chop audit finds zero record/scope collisions and zero
 teacher-facing failures in arithmetic-compatible question clauses. Six GSM8K,
 ten CLUTRR, and three ProofWriter warnings remain in non-teacher rationale or
 ingestion fragments and stay in the review artifact. The audit therefore opens
 teacher bootstrap, not model training. Deterministic stratification freezes 100
 GSM8K and 50 arithmetic TAT-QA examples, producing 343 and 50 potential
 clause-level teacher envelopes. Each envelope carries effective scope, current
-state, allowed operators, source identity, and the compiler-skill hash.
+state, allowed operators, source identity, source evidence when available, and
+the compiler-skill bundle hash. Primary requests exclude benchmark answers,
+gold rationales, equations, and existing programs.
 
 Before remote teaching, a deliberately lower-quality baseline converts only
 dataset-provided arithmetic annotations into ASL and verifies parse, scope,
@@ -887,12 +895,24 @@ graded \texttt{Q0\_DATASET\_DERIVATION\_EXEC\_VERIFIED}: numeric execution is
 gold-derived, variable names are generic steps, and the programs do not prove
 semantic NL-to-ASL compilation.
 
-The Click CLI can mine, audit, select, prepare local/remote requests, create this
-annotation baseline, and call a configured LiteLLM teacher. Credentials are read
-only by providers from environment variables; dry-run and all current artifacts
-make zero remote calls. A versioned repo-local Codex skill implements the same
-ASL response contract. No ICL or LoRA starts until semantic mappings are reviewed,
-execution verified, and split by program lineage.
+A stricter Codex skill then requires semantic paths, measured quantities,
+source-versus-derived state, temporal distinctions, unresolved dependencies, and
+named returns. Deterministic lint rejects anonymous operation-ledger targets and
+literal/expression-only returns. Thirty schema-constrained answer-blind Codex CLI
+batches yield 98/150 programs that pass syntax, CCIR lowering, scope, grounded
+execution, and hidden final-answer validation. The 52 rejects receive a labeled
+adjudication pass that exposes the dataset derivation as an arithmetic constraint:
+45 pass after round one and seven after a second bounded repair, yielding 150/150.
+The final provenance split is therefore 98 primary, 45 repair-round one, and
+seven repair-round two. All rows remain
+\texttt{Q1\_LOCAL\_CODEX\_EXEC\_VERIFIED}; none is marked manual semantic gold.
+
+The Click CLI can mine, audit, select, prepare answer-free Codex batches, prepare
+labeled repairs, validate semantic annotations, create the Q0 operation ledger,
+and call a configured LiteLLM teacher. Credentials remain provider-owned
+environment variables. The current semantic corpus used Codex CLI batches and
+made zero LiteLLM calls. No ICL or LoRA starts until the Q1 mappings receive a
+manual semantic audit and a lineage-safe split.
 
 \section{Preliminary XPU Pilot}
 
@@ -1103,6 +1123,7 @@ foreach ($condition in @('llm_only','matched_icl','generic_compute', \
 The ASL dataset bootstrap uses verified local public-source files:
 
 \begin{verbatim}
+DSL=artifacts/paper1/dsl
 python -m ccpu.dsl_dataset mine \
   --source gsm8k=<pinned-gsm8k-train.parquet> \
   --source tatqa=<pinned-tatqa-development.json> \
@@ -1122,6 +1143,17 @@ python -m ccpu.dsl_dataset select \
 python -m ccpu.dsl_dataset bootstrap-annotated \
   --input artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl \
   --input artifacts/paper1/dsl/bootstrap_v1/tatqa_seed.jsonl \
+  --output-dir artifacts/paper1/dsl/operation_ledger_v1
+python -m ccpu.dsl_dataset prepare-local \
+  --seed artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl \
+  --seed artifacts/paper1/dsl/bootstrap_v1/tatqa_seed.jsonl \
+  --output-dir artifacts/paper1/dsl/local_codex_v1
+python -m ccpu.dsl_dataset validate-semantic \
+  --seed artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl \
+  --seed artifacts/paper1/dsl/bootstrap_v1/tatqa_seed.jsonl \
+  --annotations ${DSL}/local_codex_v1/annotations_primary.jsonl \
+  --annotations ${DSL}/local_codex_repair_v1/annotations_repair1.jsonl \
+  --annotations ${DSL}/local_codex_repair_v2/annotations_repair2.jsonl \
   --output-dir artifacts/paper1/dsl/annotated_v1
 python -m ccpu.dsl_dataset generate --dry-run \
   --input artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl \
@@ -1164,11 +1196,13 @@ difficulty model. Source rationales provide noisy opportunity annotations, and
 The concrete syntax example causes strong anchoring in generic and automatic
 conditions; because it was frozen before the full outcome, this is valid evidence
 for that protocol but not evidence that all tool or trigger prompts must fail.
-The ASL checkpoint adds no model-facing result. Its 145 accepted programs use
-gold dataset equations/derivations, generic step names, and selected development
-records. They establish parser/runtime and data-pipeline viability only. Teacher
-quality, semantic equivalence, reference naming, lineage-safe splits, ICL, LoRA,
-and untouched robustness remain unmeasured.
+The ASL checkpoint adds no trained-model result. Although all 150 semantic
+programs execute to the benchmark answer, 52 required rationale-assisted repair,
+and deterministic lint cannot establish that every entity, quantity, or temporal
+field is the best semantic representation. No row is Q4 manual gold. The selected
+TAT-QA development records are not an untouched test set. Independent-teacher
+agreement, manual semantic equivalence, lineage-safe splits, ICL, LoRA, and
+untouched robustness remain unmeasured.
 
 \section{Related Work}
 

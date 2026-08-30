@@ -6,7 +6,7 @@ from decimal import Decimal, localcontext
 from typing import Any
 
 from .registry import ARITHMETIC_FUNCTIONS
-from .state import Workspace
+from .state import ScopeError, Workspace
 
 
 def _path(node: dict[str, Any]) -> str:
@@ -102,35 +102,85 @@ def execute_program(program: dict[str, Any]) -> dict[str, Any]:
     for scope in program["scopes"][1:]:
         scope_lookup[str(scope["id"])] = workspace.add_scope(scope)
     trace = []
+    pending: list[dict[str, Any]] = []
+
+    def run_statement(record: dict[str, Any], scope: str) -> Any:
+        statement = record["statement"]
+        statement_type = statement["type"]
+        if statement_type in {"scope_start", "scope_end"}:
+            return None
+        if statement_type == "statement":
+            if statement["operator"] not in {"=", "<-"}:
+                raise ValueError(
+                    f"statement operator is not executable in ASL-Arith: {statement['operator']}"
+                )
+            value = _evaluate(statement["right"], workspace, scope)
+            workspace.set(scope, _path(statement["left"]), value)
+            return value
+        if statement_type == "return":
+            value = _evaluate(statement["expression"], workspace, scope)
+            workspace.return_value(scope, value)
+            return value
+        if statement_type in {"query", "expression_statement"}:
+            return _evaluate(statement["expression"], workspace, scope)
+        raise ValueError(f"unsupported statement node: {statement_type}")
+
+    def resolve_pending() -> None:
+        progressed = True
+        while pending and progressed:
+            progressed = False
+            for item in list(pending):
+                try:
+                    value = run_statement(item["record"], item["scope"])
+                except ScopeError as error:
+                    item["error"] = str(error)
+                    continue
+                pending.remove(item)
+                progressed = True
+                trace.append(
+                    {
+                        "source_line": item["record"]["source_line"],
+                        "scope": item["scope"],
+                        "statement_type": item["record"]["statement"]["type"],
+                        "status": "resolved",
+                        "value": _json_value(value),
+                    }
+                )
+
     with localcontext() as context:
         context.prec = 40
         for record in program["records"]:
             statement = record["statement"]
             statement_type = statement["type"]
             scope = scope_lookup[str(record["scope"]["id"])]
-            value = None
-            if statement_type in {"scope_start", "scope_end"}:
-                pass
-            elif statement_type == "statement":
-                if statement["operator"] not in {"=", "<-"}:
-                    raise ValueError(
-                        f"statement operator is not executable in ASL-Arith: {statement['operator']}"
-                    )
-                value = _evaluate(statement["right"], workspace, scope)
-                workspace.set(scope, _path(statement["left"]), value)
-            elif statement_type == "return":
-                value = _evaluate(statement["expression"], workspace, scope)
-                workspace.return_value(scope, value)
-            elif statement_type in {"query", "expression_statement"}:
-                value = _evaluate(statement["expression"], workspace, scope)
-            else:
-                raise ValueError(f"unsupported statement node: {statement_type}")
+            status = "executed"
+            try:
+                value = run_statement(record, scope)
+            except ScopeError as error:
+                value = None
+                status = "deferred"
+                pending.append({"record": record, "scope": scope, "error": str(error)})
             trace.append(
                 {
                     "source_line": record["source_line"],
                     "scope": scope,
                     "statement_type": statement_type,
+                    "status": status,
                     "value": _json_value(value),
                 }
             )
-    return {"workspace": _json_value(workspace.snapshot()), "trace": trace}
+            if status == "executed":
+                resolve_pending()
+    return {
+        "workspace": _json_value(workspace.snapshot()),
+        "trace": trace,
+        "unresolved": [
+            {
+                "source_line": item["record"]["source_line"],
+                "scope": item["scope"],
+                "statement_type": item["record"]["statement"]["type"],
+                "reason": item["error"],
+            }
+            for item in pending
+        ],
+    }

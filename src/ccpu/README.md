@@ -80,14 +80,17 @@ the model target. Mine and audit before any teacher or training run:
 python -m ccpu.dsl_dataset mine --source gsm8k=<train.parquet> --source tatqa=<dev.json> --source-split tatqa=development --output-dir artifacts/paper1/dsl/raw_v1
 python -m ccpu.dsl_dataset audit-chops --input-dir artifacts/paper1/dsl/raw_v1 --output artifacts/paper1/dsl/raw_v1/chop_audit.json
 python -m ccpu.dsl_dataset select --input artifacts/paper1/dsl/raw_v1/gsm8k.jsonl --max-examples 100 --output artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl
+python -m ccpu.dsl_dataset prepare-local --seed artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl --seed artifacts/paper1/dsl/bootstrap_v1/tatqa_seed.jsonl --output-dir artifacts/paper1/dsl/local_codex_v1
+python -m ccpu.dsl_dataset validate-semantic --seed artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl --seed artifacts/paper1/dsl/bootstrap_v1/tatqa_seed.jsonl --annotations artifacts/paper1/dsl/local_codex_v1/annotations_primary.jsonl --output-dir artifacts/paper1/dsl/annotated_v1
 python -m ccpu.dsl_dataset prepare-teacher --input artifacts/paper1/dsl/bootstrap_v1/gsm8k_seed.jsonl --skill skills/ccir-arith-compiler/SKILL.md --output artifacts/paper1/dsl/bootstrap_v1/gsm8k_teacher_requests.jsonl
 ```
 
 `generate --dry-run` never imports LiteLLM or makes a remote call. Install the
 `teacher` extra and configure a model in JSON only after a provider credential is
 available through `OPENROUTER_API_KEY`, `OPENAI_API_KEY`, or `HF_TOKEN`. Never
-commit tokens. Annotation-derived Q0 programs are execution checks, not semantic
-teacher gold, and do not open the ICL/LoRA gate.
+commit tokens. Primary Codex batches hide answers and rationales; repair batches
+must label rationale access. The 150-row semantic corpus is Q1 execution-verified,
+not manual semantic gold, and does not open the final ICL/LoRA gate without audit.
 
 ## Paper 1.5 epistemic-risk replication and placement
 

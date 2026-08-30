@@ -63,3 +63,24 @@ def test_asl_validation_rejects_dangling_references():
     assert result["syntax_verified"] is True
     assert result["execution_verified"] is False
     assert "unresolved reference" in result["errors"][0]
+
+
+def test_asl_deferred_dependency_resolves_when_later_state_is_grounded():
+    source = """
+jessica.age_now = claire.age_now + 6
+claire.age_in_2y = 20
+claire.age_now = claire.age_in_2y - 2
+RETURN jessica.age_now
+"""
+    result = validate_asl(source)
+    assert result["execution_verified"] is True
+    assert result["execution"]["workspace"]["root"]["returned"] == 24
+    assert any(event["status"] == "deferred" for event in result["execution"]["trace"])
+    assert any(event["status"] == "resolved" for event in result["execution"]["trace"])
+
+
+def test_asl_preserves_typed_source_metadata_in_ccir():
+    result = validate_asl('invoice.currency = "USD"\ninvoice.total = 12\nRETURN invoice.total')
+    assert result["execution_verified"] is True
+    first = result["ccir"]["operations"][0]["operation"]["expr"]
+    assert first == {"op": "CONST", "value": "USD"}

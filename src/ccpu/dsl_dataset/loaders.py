@@ -42,8 +42,9 @@ def _normalized(
     answer: Any,
     reasoning: Any,
     metadata: dict[str, Any],
+    source_context: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    return {
+    row = {
         "dataset": dataset,
         "split": split,
         "source_id": str(source_id),
@@ -54,6 +55,9 @@ def _normalized(
         "effective_scope": _scope(dataset, split, str(source_id)),
         "parts": [],
     }
+    if source_context:
+        row["source_context"] = source_context
+    return row
 
 
 def load_gsm8k(path: Path, split: str) -> Iterable[dict[str, Any]]:
@@ -94,6 +98,16 @@ def load_tatqa(path: Path, split: str) -> Iterable[dict[str, Any]]:
                 question.get("answer"),
                 question.get("derivation", ""),
                 metadata,
+                {
+                    "table": document.get("table", {}).get("table", []),
+                    "paragraphs": [
+                        {
+                            "order": paragraph.get("order"),
+                            "text": paragraph.get("text", ""),
+                        }
+                        for paragraph in document.get("paragraphs", [])
+                    ],
+                },
             )
 
 

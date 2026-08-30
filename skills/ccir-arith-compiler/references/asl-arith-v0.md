@@ -29,9 +29,11 @@ operators listed in the request's active registry.
 ## State And References
 
 Assignments create or replace a value in the current effective scope. A read
-path must already be present in `state_before` or be established earlier in the
-same response. Use stable semantic names based on the clause, not temporary
-reasoning labels such as `tmp1` when a meaningful name is available.
+path should be present in `state_before`, established in the same response, or
+be a legitimate forward semantic dependency introduced elsewhere in the source
+record. The runtime stores forward dependencies symbolically and reevaluates
+them when their inputs become grounded. Use stable semantic names based on the
+clause, never temporary reasoning labels when a meaningful name is available.
 
 The dataset supplies one root scope per example. Do not emit `SCOPE/END` merely
 because a problem has multiple sentences. Explicit scopes are reserved for
@@ -70,8 +72,10 @@ This erases the semantic relation and may leak a solved value.
 Bad: `calculator(month1.downloads * 3)`. ASL names semantics; the runtime chooses
 the concrete coprocessor.
 
-Bad: reading `month1.downloads` when it is absent from `state_before`. Return
-`ambiguous` instead of inventing the missing fact.
+Bad: reading `month1.downloads` when neither the current clause nor the wider
+source record establishes that quantity. A forward reference is valid only when
+the natural language establishes the dependency; it is not permission to invent
+missing facts.
 
 ## Ambiguity
 
