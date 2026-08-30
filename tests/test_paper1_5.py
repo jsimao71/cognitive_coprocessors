@@ -2,7 +2,7 @@ import bz2
 import json
 
 from ccpu.cli import main
-from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json
+from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json, write_jsonl
 from ccpu.paper1_5.benchmark_next import (
     NextBenchmarkConfig,
     build_next_candidates,
@@ -24,6 +24,11 @@ from ccpu.paper1_5.policy_lora import (
     parse_retrieval_block,
 )
 from ccpu.paper1_5.public_benchmarks import analyze_crag_triggers, freeze_crag_subset
+from ccpu.paper1_5.public_crag_model import (
+    _answer_equal,
+    _tool_attempt,
+    freeze_crag_model_slice,
+)
 from ccpu.paper1_5.source import ControlledFactStore, EvidenceStatus, FactRecord
 from ccpu.paper1_5.triggers import decide, fit_confidence_threshold, semantic_risk
 
@@ -302,3 +307,42 @@ def test_crag_freeze_and_matched_context_controls(tmp_path):
     predictions = read_jsonl(tmp_path / "analysis" / "predictions.jsonl")
     assert len(predictions) == 56
     assert not any("query" in row or "answer" in row for row in predictions)
+
+
+def test_crag_model_slice_and_tool_contract_are_deterministic(tmp_path):
+    source = tmp_path / "selection.jsonl"
+    dynamics = ("static", "slow-changing", "fast-changing", "real-time")
+    write_jsonl(
+        source,
+        [
+            {
+                "example_id": f"crag-{index}",
+                "source_row": index,
+                "selection_key": f"{index:04d}",
+                "content_sha256": "a" * 64,
+                "static_or_dynamic": dynamics[index % 4],
+                "answer_type": "valid",
+            }
+            for index in range(16)
+        ],
+    )
+    result = freeze_crag_model_slice(
+        source,
+        tmp_path / "model",
+        calibration_count=4,
+        evaluation_count=8,
+    )
+    assert result["calibration_evaluation_id_overlap"] == 0
+    assert result["matched_evaluation_rows"] == 16
+    assert all(value == 1 for value in result["counts"]["calibration"].values())
+    assert all(value == 2 for value in result["counts"]["evaluation"].values())
+
+    assert _tool_attempt('__retrieve({"payload":{"request":"search"}})') == (
+        True,
+        False,
+    )
+    assert _tool_attempt('__retrieve({"payload":{"request":"delete"}})') == (
+        False,
+        True,
+    )
+    assert _answer_equal("Answer: Mayon Volcano.", "mayon volcano")

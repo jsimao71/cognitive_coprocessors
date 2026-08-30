@@ -44,6 +44,12 @@ from .policy_lora import (
     summarize_policy,
 )
 from .public_benchmarks import analyze_crag_triggers, freeze_crag_subset
+from .public_crag_model import (
+    freeze_crag_model_slice,
+    plot_crag_model,
+    run_crag_model_matrix,
+    write_crag_model_run,
+)
 from .source import ControlledFactStore
 from .triggers import fit_confidence_threshold
 
@@ -406,6 +412,57 @@ def analyze_public_crag_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_public_crag_model_command(args: argparse.Namespace) -> int:
+    result = freeze_crag_model_slice(
+        args.source_selection,
+        args.output_dir,
+        calibration_count=args.calibration_count,
+        evaluation_count=args.evaluation_count,
+    )
+    print(
+        f"froze {result['calibration_count']} calibration and "
+        f"{result['evaluation_count']} evaluation CRAG questions"
+    )
+    return 0
+
+
+def run_public_crag_model_command(args: argparse.Namespace) -> int:
+    raw = read_json(args.model_config)
+    if raw.get("schema_version") != "ccpu.paper1_5.crag_model_config.v1":
+        raise ValueError("unsupported Paper 1.5 CRAG model config schema")
+    model = dict(raw["model"])
+    revision = str(model["revision"])
+    invalid_revision = len(revision) != 40 or any(
+        character not in "0123456789abcdef" for character in revision
+    )
+    if invalid_revision:
+        raise ValueError("CRAG model revision must be a pinned SHA")
+    if args.device:
+        model["device"] = args.device
+    backend = ConfidenceBackend(model)
+    output = Path(args.output_dir)
+    rows, threshold = run_crag_model_matrix(
+        args.public_config,
+        args.cache_root,
+        args.selection,
+        backend,
+        seed=int(raw["seed"]),
+        checkpoint_path=output / "predictions.checkpoint.jsonl",
+    )
+    summary = write_crag_model_run(
+        output,
+        rows,
+        model_config=args.model_config,
+        selection_path=args.selection,
+    )
+    plot_crag_model(summary, output / "crag_model_comparison.png")
+    print(
+        f"completed {summary['matched_evaluation_rows']} matched CRAG model rows; "
+        f"confidence threshold={threshold:.4f} -> {output}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1.5", aliases=["paper1_5"], help="epistemic-risk retrieval")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -543,3 +600,25 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     crag_analysis.add_argument("--selection", required=True)
     crag_analysis.add_argument("--output-dir", required=True)
     crag_analysis.set_defaults(handler=analyze_public_crag_command)
+
+    crag_model_freeze = commands.add_parser(
+        "freeze-public-crag-model",
+        help="freeze disjoint calibration and evaluation CRAG model slices",
+    )
+    crag_model_freeze.add_argument("--source-selection", required=True)
+    crag_model_freeze.add_argument("--calibration-count", type=int, default=20)
+    crag_model_freeze.add_argument("--evaluation-count", type=int, default=40)
+    crag_model_freeze.add_argument("--output-dir", required=True)
+    crag_model_freeze.set_defaults(handler=freeze_public_crag_model_command)
+
+    crag_model_run = commands.add_parser(
+        "run-public-crag-model",
+        help="run the matched model-facing CRAG retrieval matrix",
+    )
+    crag_model_run.add_argument("--public-config", required=True)
+    crag_model_run.add_argument("--cache-root", required=True)
+    crag_model_run.add_argument("--selection", required=True)
+    crag_model_run.add_argument("--model-config", required=True)
+    crag_model_run.add_argument("--device")
+    crag_model_run.add_argument("--output-dir", required=True)
+    crag_model_run.set_defaults(handler=run_public_crag_model_command)
