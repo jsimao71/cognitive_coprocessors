@@ -17,6 +17,8 @@ from ccpu.common.artifacts import (
 )
 from ccpu.common.gsm8k import materialize_gsm8k
 
+from .asl_pilot_data import build_asl_pilot_data, freeze_asl_pilot
+from .asl_pilot_eval import analyze_asl_predictions, run_asl_pilot
 from .dataset import (
     ArithmeticDatasetConfig,
     ArithmeticExample,
@@ -432,6 +434,58 @@ def train_lora_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_asl_pilot_command(args: argparse.Namespace) -> int:
+    manifest = freeze_asl_pilot(args.accepted, args.output_dir, seed=args.seed)
+    print(
+        f"froze grouped ASL split {manifest['counts']} with zero pattern overlap "
+        f"-> {args.output_dir}"
+    )
+    return 0
+
+
+def build_asl_pilot_data_command(args: argparse.Namespace) -> int:
+    manifest = build_asl_pilot_data(
+        args.freeze_dir,
+        args.output_dir,
+        augmentation_variants=args.augmentation_variants,
+        seed=args.seed,
+    )
+    print(
+        f"built ASL pilot data with {manifest['files']['train_augmented']['rows']} "
+        f"augmented train rows -> {args.output_dir}"
+    )
+    return 0
+
+
+def run_asl_pilot_command(args: argparse.Namespace) -> int:
+    model_config = read_json(args.config)
+    if args.adapter_path:
+        model_config["adapter_path"] = args.adapter_path
+        model_config["adapter_id"] = args.adapter_id or Path(args.adapter_path).name
+    report = run_asl_pilot(
+        eval_path=args.eval,
+        train_split_path=args.train_split,
+        model_config=model_config,
+        condition=args.condition,
+        shots=args.shots,
+        output_dir=args.output_dir,
+        seed=args.seed,
+        checkpoint_every=args.checkpoint_every,
+    )
+    print(
+        f"completed {report['prediction_count']} ASL generations; "
+        f"execution={report['rates']['executable']:.3f} -> {args.output_dir}"
+    )
+    return 0
+
+
+def evaluate_asl_pilot_command(args: argparse.Namespace) -> int:
+    report = analyze_asl_predictions(args.eval, args.predictions, args.output_dir)
+    write_json(Path(args.output_dir) / "summary.json", report)
+    print(f"evaluated {report['prediction_count']} ASL predictions -> {args.output_dir}")
+    return 0
+
+
 def analyze_placement_command(args: argparse.Namespace) -> int:
     result = build_placement_comparison(
         read_json(args.config), config_path=args.config, output_dir=args.output_dir
@@ -639,6 +693,46 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     lora_train.add_argument("--dev", required=True)
     lora_train.add_argument("--output-dir", required=True)
     lora_train.set_defaults(handler=train_lora_command)
+
+    asl_freeze = commands.add_parser(
+        "freeze-asl-pilot", help="freeze grouped 100/25/25 semantic ASL splits"
+    )
+    asl_freeze.add_argument("--accepted", required=True)
+    asl_freeze.add_argument("--output-dir", required=True)
+    asl_freeze.add_argument("--seed", type=int, default=731993)
+    asl_freeze.set_defaults(handler=freeze_asl_pilot_command)
+
+    asl_data = commands.add_parser(
+        "build-asl-pilot-data", help="build original, augmented, and perturbation ASL data"
+    )
+    asl_data.add_argument("--freeze-dir", required=True)
+    asl_data.add_argument("--output-dir", required=True)
+    asl_data.add_argument("--augmentation-variants", type=int, default=9)
+    asl_data.add_argument("--seed", type=int, default=912733)
+    asl_data.set_defaults(handler=build_asl_pilot_data_command)
+
+    asl_run = commands.add_parser(
+        "run-asl-pilot", help="run one base, ICL, or LoRA semantic ASL condition"
+    )
+    asl_run.add_argument("--eval", required=True)
+    asl_run.add_argument("--train-split", required=True)
+    asl_run.add_argument("--config", required=True)
+    asl_run.add_argument("--adapter-path")
+    asl_run.add_argument("--adapter-id")
+    asl_run.add_argument("--condition", choices=("base", "icl", "lora", "lora_icl"), required=True)
+    asl_run.add_argument("--shots", type=int, default=0)
+    asl_run.add_argument("--output-dir", required=True)
+    asl_run.add_argument("--seed", type=int, default=44017)
+    asl_run.add_argument("--checkpoint-every", type=int, default=5)
+    asl_run.set_defaults(handler=run_asl_pilot_command)
+
+    asl_evaluate = commands.add_parser(
+        "evaluate-asl-pilot", help="score saved ASL predictions with semantic components"
+    )
+    asl_evaluate.add_argument("--eval", required=True)
+    asl_evaluate.add_argument("--predictions", required=True)
+    asl_evaluate.add_argument("--output-dir", required=True)
+    asl_evaluate.set_defaults(handler=evaluate_asl_pilot_command)
 
     placement = commands.add_parser(
         "analyze-placement", help="compare interface knowledge in context, weights, and runtime"

@@ -1,0 +1,60 @@
+{
+  "by_split": {
+    "dev": {
+      "datasets": {
+        "gsm8k": 17,
+        "tatqa": 8
+      },
+      "pattern_count": 24,
+      "repair_rounds": {
+        "0": 16,
+        "1": 9
+      }
+    },
+    "test": {
+      "datasets": {
+        "gsm8k": 17,
+        "tatqa": 8
+      },
+      "pattern_count": 23,
+      "repair_rounds": {
+        "0": 16,
+        "1": 7,
+        "2": 2
+      }
+    },
+    "train": {
+      "datasets": {
+        "gsm8k": 66,
+        "tatqa": 34
+      },
+      "pattern_count": 92,
+      "repair_rounds": {
+        "0": 66,
+        "1": 29,
+        "2": 5
+      }
+    }
+  },
+  "counts": {
+    "dev": 25,
+    "test": 25,
+    "train": 100
+  },
+  "grouping_policy": "renaming-invariant CCIR topology plus semantic quantity family and clause layout",
+  "ledger_sha256": "e31c41e22a5d3fab821e19e862447cf8d4d5252aecad5d053d4e26ddd833026e",
+  "schema_version": "ccpu.paper1.asl_pilot_freeze.v1",
+  "seed": 731993,
+  "semantic_pattern_overlap": {
+    "dev_test": [],
+    "train_dev": [],
+    "train_test": []
+  },
+  "source_sha256": "afc841dd2d7824717521a69c9186575fd0e64ce5717e3d0d4ce32075faf5b0dc",
+  "split_sha256": {
+    "dev": "2ed4c6fdbfa6a52ff123ee7eb520ce8c9334b351180eef0f5dc33bf73d579f5e",
+    "test": "52c091876de79362a2a286e0e9df2d60c0e46b4cc0bbd5c7423d6d6b3299cb4f",
+    "train": "021289e157ed34b2d6ffb2177b3bcd9d0d1daa0d1695cac20940ae83b6a5b2bd"
+  },
+  "test_frozen_before_model_runs": true
+}

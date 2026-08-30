@@ -229,8 +229,20 @@ is demonstrated across capability levels.
   Deterministic checks cover syntax, CCIR, scope, grounded execution, final answer,
   named semantic state, and named return. Grade is Q1, not Q4; no row is marked
   manually reviewed. Current runs used Codex CLI and zero LiteLLM calls.
-- ICL and LoRA remain blocked until a manual semantic audit and lineage-safe split,
-  unless an explicitly labeled Q1 pilot is authorized.
+- The explicitly authorized Q1 pilot uses a frozen, semantic-pattern-grouped
+  100/25/25 train/dev/test split. Pattern IDs canonicalize CCIR topology across
+  entity renaming and numeric values; overlap is zero across all three splits.
+  The 25- and 50-row learning-curve subsets are nested inside the 100-row train
+  split. This is diagnostic evidence, not a Q4 corpus or robust-compiler claim.
+- Compare base, 5-shot ICL, 10-shot ICL, LoRA-25/50/100, LoRA-100 plus 3-shot
+  ICL, and LoRA-B trained on 100 originals plus 900 controlled train-only
+  perturbations. Evaluate untouched test programs separately from numeric
+  remapping, very-large-number remapping, and paraphrase suites.
+- Report exact ASL only as a strict auxiliary metric. Primary diagnostics include
+  parse/lint validity, path grounding, source facts, operators, references and
+  dependency edges, execution, canonical semantic state/return equivalence, and
+  final executed answer. Q1 provenance and the 25-item test denominator remain
+  explicit in every interpretation.
 
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.

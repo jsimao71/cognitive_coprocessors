@@ -911,8 +911,38 @@ The Click CLI can mine, audit, select, prepare answer-free Codex batches, prepar
 labeled repairs, validate semantic annotations, create the Q0 operation ledger,
 and call a configured LiteLLM teacher. Credentials remain provider-owned
 environment variables. The current semantic corpus used Codex CLI batches and
-made zero LiteLLM calls. No ICL or LoRA starts until the Q1 mappings receive a
-manual semantic audit and a lineage-safe split.
+made zero LiteLLM calls.
+
+\subsection{Frozen Q1 compiler pilot}
+
+We authorize the execution-verified Q1 corpus for a diagnostic pilot while
+retaining its non-manual quality label. A deterministic grouped split assigns
+100 programs to training, 25 to development, and 25 to an untouched test set.
+Groups use renaming-invariant CCIR topology, semantic quantity family, and clause
+layout, so programs that differ only in entity names or constants cannot cross
+partitions. The frozen ledger has 92, 24, and 23 distinct pattern groups in
+train, development, and test, respectively, with zero pairwise overlap. Dataset
+counts are 66/34 GSM8K/TAT-QA in training and 17/8 in each held-out partition.
+The split was frozen before any model-facing run.
+
+The experiment compares base Qwen3-0.6B, five- and ten-shot ASL prompting,
+rank-8 LoRA learning curves with nested 25-, 50-, and 100-program subsets,
+LoRA-100 plus three-shot prompting, and an augmentation adapter. The latter sees
+the 100 originals plus 900 deterministic, execution-verified train-only variants
+that rename grounded entities, remap safe numbers, and paraphrase question
+surfaces. Percentage parameters and calendar-year-like values are not inflated.
+No augmented descendant of a test or development parent enters training.
+
+Evaluation separates the 25 untouched semantic programs from numeric remapping,
+very-large-number remapping, and paraphrase suites. Twenty of 25 test programs
+contain a safely surface-matched number eligible for each numeric suite; all 25
+are eligible for paraphrase. Exact ASL is retained but is not the primary outcome:
+we also score parse and semantic-lint validity, entity/path grounding, source
+facts, operators, references and dependency edges, execution, canonical return
+and state equivalence under harmless path renaming, and final executed answer.
+With only 25 untouched programs, this pilot can reveal a learning signal and the
+kind of invariance learned by augmentation; it cannot establish a robust general
+semantic compiler.
 
 \section{Preliminary XPU Pilot}
 
@@ -1196,13 +1226,14 @@ difficulty model. Source rationales provide noisy opportunity annotations, and
 The concrete syntax example causes strong anchoring in generic and automatic
 conditions; because it was frozen before the full outcome, this is valid evidence
 for that protocol but not evidence that all tool or trigger prompts must fail.
-The ASL checkpoint adds no trained-model result. Although all 150 semantic
-programs execute to the benchmark answer, 52 required rationale-assisted repair,
-and deterministic lint cannot establish that every entity, quantity, or temporal
-field is the best semantic representation. No row is Q4 manual gold. The selected
-TAT-QA development records are not an untouched test set. Independent-teacher
-agreement, manual semantic equivalence, lineage-safe splits, ICL, LoRA, and
-untouched robustness remain unmeasured.
+The ASL corpus is suitable only for the explicitly labeled Q1 pilot. Although all
+150 semantic programs execute to the benchmark answer, 52 required
+rationale-assisted repair, and deterministic lint cannot establish that every
+entity, quantity, or temporal field is the best semantic representation. No row
+is Q4 manual gold. The grouped split prevents measured topology leakage but does
+not replace independent-teacher agreement or manual semantic adjudication.
+Twenty-five untouched test programs also give imprecise whole-program estimates;
+the richer component metrics are diagnostic rather than extra independent trials.
 
 \section{Related Work}
 
@@ -1259,10 +1290,11 @@ in context or weights and exactness in the runtime, but natural-language
 decomposition is not solved by any of the three in this experiment.
 The ASL bootstrap turns that negative result into a testable next stage without
 claiming success: public records and scopes are mined, a compact extensible
-surface parses to typed state, and 145 annotation-derived programs execute
-exactly. The next evidence gate is reviewed semantic NL-to-ASL data; only after
-that gate may ICL and LoRA compare whether interface knowledge belongs in
-context, weights, or the runtime representation.
+surface parses to typed state, and all 150 Q1 semantic programs execute exactly.
+A frozen grouped pilot now tests whether context, weights, or controlled
+augmentation produce a measurable compilation signal. Its untouched 25-program
+test and non-manual Q1 labels deliberately bound the conclusion; reviewed and
+larger independently generated semantic data remain the next evidence gate.
 
 \begin{thebibliography}{9}
 
