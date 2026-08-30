@@ -1,0 +1,25 @@
+{
+  "schema_version": "ccpu.paper1.public_gsm8k_config.v1",
+  "seed": 23011,
+  "max_assistance_episodes": 4,
+  "base_model": {
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "max_new_tokens": 160,
+    "device": "xpu",
+    "dtype": "float16",
+    "use_chat_template": true,
+    "enable_thinking": false
+  },
+  "lora_model": {
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "adapter_path": "artifacts/paper1/lora_protocol/qwen3_0_6b_v1/adapter",
+    "adapter_id": "Qwen/Qwen3-0.6B-paper1-protocol-lora-v1",
+    "max_new_tokens": 160,
+    "device": "xpu",
+    "dtype": "float16",
+    "use_chat_template": true,
+    "enable_thinking": false
+  }
+}

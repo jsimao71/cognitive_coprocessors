@@ -15,6 +15,7 @@ from ccpu.common.artifacts import (
     write_json,
     write_jsonl,
 )
+from ccpu.common.gsm8k import materialize_gsm8k
 
 from .dataset import (
     ArithmeticDatasetConfig,
@@ -38,6 +39,13 @@ from .prompts import (
     ICL_PROMPT_VERSION,
     MINIMAL_BLOCK_PROMPT_VERSION,
     PROMPT_VERSION,
+)
+from .public_gsm8k import (
+    PUBLIC_GSM8K_CONDITIONS,
+    analyze_gsm8k_runs,
+    freeze_gsm8k_slice,
+    run_gsm8k_example,
+    write_gsm8k_run,
 )
 
 PROTOCOL_VERSIONS = {
@@ -432,6 +440,106 @@ def analyze_placement_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_public_gsm8k_command(args: argparse.Namespace) -> int:
+    config = read_json(args.model_config)
+    if config.get("schema_version") != "ccpu.paper1.public_gsm8k_config.v1":
+        raise ValueError("unsupported Paper 1 public GSM8K config schema")
+    model_key = "lora_model" if args.condition == "lora_calculator_block" else "base_model"
+    model = dict(config[model_key])
+    revision = str(model["revision"])
+    if len(revision) != 40 or any(character not in "0123456789abcdef" for character in revision):
+        raise ValueError("public GSM8K model revision must be a pinned SHA")
+    backend = HuggingFaceBackend(
+        HuggingFaceGenerationConfig(
+            model_id=str(model["model_id"]),
+            revision=revision,
+            max_new_tokens=int(model.get("max_new_tokens", 160)),
+            device=str(args.device or model.get("device", "auto")),
+            dtype=str(model.get("dtype", "auto")),
+            use_chat_template=bool(model.get("use_chat_template", True)),
+            enable_thinking=bool(model.get("enable_thinking", False)),
+            adapter_path=model.get("adapter_path"),
+            adapter_id=model.get("adapter_id"),
+            cached_generation=args.condition
+            in {"llm_only", "matched_icl", "generic_compute", "oracle_calculator"},
+        )
+    )
+    examples = materialize_gsm8k(args.public_config, args.cache_root, args.selection)
+    if args.per_stratum is not None:
+        selected = []
+        for stratum in ("2_steps", "3_4_steps", "5plus_steps"):
+            members = sorted(
+                [row for row in examples if row["difficulty_stratum"] == stratum],
+                key=lambda row: row["selection_key"],
+            )
+            if len(members) < args.per_stratum:
+                raise ValueError(f"not enough GSM8K rows in {stratum}")
+            selected.extend(members[: args.per_stratum])
+        examples = sorted(selected, key=lambda row: row["selection_key"])
+    examples = examples[args.offset :]
+    if args.limit is not None:
+        examples = examples[: args.limit]
+    output = Path(args.output_dir)
+    prediction_path = output / "predictions.jsonl"
+    rows = read_jsonl(prediction_path) if prediction_path.exists() and not args.no_resume else []
+    if any(row["condition"] != args.condition for row in rows):
+        raise ValueError("resume output contains a different GSM8K condition")
+    completed = {str(row["example_id"]) for row in rows}
+    seed = int(config["seed"])
+    checkpoint_every = max(1, int(args.checkpoint_every))
+    pending = [example for example in examples if example["example_id"] not in completed]
+    for index, example in enumerate(pending, 1):
+        rows.append(
+            run_gsm8k_example(
+                example,
+                backend,
+                condition=args.condition,
+                seed=seed,
+                max_assistance_episodes=int(config.get("max_assistance_episodes", 4)),
+            )
+        )
+        if index % checkpoint_every == 0:
+            write_gsm8k_run(
+                output,
+                rows,
+                config_path=args.model_config,
+                selection_path=args.selection,
+                condition=args.condition,
+            )
+            print(f"checkpoint {args.condition}: {len(rows)}/{len(examples)}")
+    summary = write_gsm8k_run(
+        output,
+        rows,
+        config_path=args.model_config,
+        selection_path=args.selection,
+        condition=args.condition,
+    )
+    print(
+        f"completed {args.condition} on {summary['base_question_count']} GSM8K questions "
+        f"-> {output}"
+    )
+    return 0
+
+
+def freeze_public_gsm8k_command(args: argparse.Namespace) -> int:
+    manifest = freeze_gsm8k_slice(
+        args.source_selection, args.output_dir, per_stratum=args.per_stratum
+    )
+    print(
+        f"froze {manifest['record_count']} balanced GSM8K questions -> {args.output_dir}"
+    )
+    return 0
+
+
+def analyze_public_gsm8k_command(args: argparse.Namespace) -> int:
+    summary = analyze_gsm8k_runs(args.predictions, args.output_dir)
+    print(
+        f"analyzed {summary['base_question_count']} matched GSM8K questions; "
+        f"automatic_rescue={summary['automatic_rescue']['rate']}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper1", help="strict reflex-calculator experiments")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -538,3 +646,35 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     placement.add_argument("--config", required=True)
     placement.add_argument("--output-dir", required=True)
     placement.set_defaults(handler=analyze_placement_command)
+
+    public_gsm8k = commands.add_parser(
+        "run-public-gsm8k", help="run one checkpointed model-facing GSM8K condition"
+    )
+    public_gsm8k.add_argument("--public-config", required=True)
+    public_gsm8k.add_argument("--cache-root", required=True)
+    public_gsm8k.add_argument("--selection", required=True)
+    public_gsm8k.add_argument("--model-config", required=True)
+    public_gsm8k.add_argument("--condition", required=True, choices=PUBLIC_GSM8K_CONDITIONS)
+    public_gsm8k.add_argument("--output-dir", required=True)
+    public_gsm8k.add_argument("--device")
+    public_gsm8k.add_argument("--offset", type=int, default=0)
+    public_gsm8k.add_argument("--limit", type=int)
+    public_gsm8k.add_argument("--per-stratum", type=int)
+    public_gsm8k.add_argument("--checkpoint-every", type=int, default=10)
+    public_gsm8k.add_argument("--no-resume", action="store_true")
+    public_gsm8k.set_defaults(handler=run_public_gsm8k_command)
+
+    public_gsm8k_freeze = commands.add_parser(
+        "freeze-public-gsm8k", help="freeze a balanced developmental GSM8K slice"
+    )
+    public_gsm8k_freeze.add_argument("--source-selection", required=True)
+    public_gsm8k_freeze.add_argument("--per-stratum", type=int, default=40)
+    public_gsm8k_freeze.add_argument("--output-dir", required=True)
+    public_gsm8k_freeze.set_defaults(handler=freeze_public_gsm8k_command)
+
+    public_gsm8k_analysis = commands.add_parser(
+        "analyze-public-gsm8k", help="analyze matched public GSM8K condition runs"
+    )
+    public_gsm8k_analysis.add_argument("--predictions", required=True, action="append")
+    public_gsm8k_analysis.add_argument("--output-dir", required=True)
+    public_gsm8k_analysis.set_defaults(handler=analyze_public_gsm8k_command)
