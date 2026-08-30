@@ -78,6 +78,7 @@ def test_runtime_block_records_trace_and_automatic_rescue():
     assert summary["automatic_rescue"]["eligible_voluntary_misses"] == 1
     assert summary["automatic_rescue"]["rescued_correctly"] == 1
     assert summary["automatic_rescue"]["rate"] == 1.0
+    assert summary["paired_vs_llm_only"] == {}
 
 
 def test_oracle_ledger_is_executed_by_the_bounded_calculator():

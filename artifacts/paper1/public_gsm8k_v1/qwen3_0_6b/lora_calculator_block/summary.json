@@ -1,0 +1,53 @@
+{
+  "automatic_rescue": {
+    "definition": "runtime valid intervention plus correct answer among paired rows where voluntary __compute made no valid call",
+    "eligible_voluntary_misses": 0,
+    "rate": null,
+    "rescued_correctly": 0
+  },
+  "base_question_count": 120,
+  "by_condition": [
+    {
+      "accuracy": 0.008333333333333333,
+      "accuracy_ci95": [
+        0.0014725557333420923,
+        0.04569629124504966
+      ],
+      "assistance_rate": 0.6583333333333333,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 0.025,
+          "assistance_rate": 0.65,
+          "count": 40
+        },
+        "3_4_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.65,
+          "count": 40
+        },
+        "5plus_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.675,
+          "count": 40
+        }
+      },
+      "condition": "lora_calculator_block",
+      "count": 120,
+      "duplicate_assistance_rate": 0.0,
+      "malformed_assistance_rate": 0.9083333333333333,
+      "mean_assistance_calls": 2.3333333333333335,
+      "mean_generated_tokens": 55.90833333333333,
+      "mean_model_calls": 55.90833333333333,
+      "mean_wall_time_ms": 20456.626363333333,
+      "registered_operation_backend_coverage": 0.8988235294117647,
+      "registered_operation_recall": 0.06544502617801047
+    }
+  ],
+  "claim_boundary": {
+    "false_activation_rate": null,
+    "first_wrong_token_prevention": null,
+    "reason": "GSM8K selection has no matched no-compute controls or token alignment"
+  },
+  "record_count": 120,
+  "schema_version": "ccpu.paper1.public_gsm8k_summary.v1"
+}

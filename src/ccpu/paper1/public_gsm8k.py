@@ -427,6 +427,9 @@ def summarize_gsm8k(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "count": len(members),
                 "accuracy": correct / len(members),
                 "accuracy_ci95": wilson_interval(correct, len(members)),
+                "scorable_answer_rate": safe_mean(
+                    row["predicted_answer"] is not None for row in members
+                ),
                 "assistance_rate": safe_mean(row["assistance_valid"] for row in members),
                 "malformed_assistance_rate": safe_mean(
                     row["malformed_assistance"] > 0 for row in members
@@ -486,6 +489,24 @@ def summarize_gsm8k(rows: list[dict[str, Any]]) -> dict[str, Any]:
         if values["runtime_trigger"]["assistance_valid"]
         and values["runtime_trigger"]["correct"]
     ]
+    paired_vs_llm_only = {}
+    for condition in sorted(grouped):
+        if condition == "llm_only":
+            continue
+        comparisons = [
+            (values["llm_only"], values[condition])
+            for values in paired.values()
+            if {"llm_only", condition} <= values.keys()
+        ]
+        if not comparisons:
+            continue
+        paired_vs_llm_only[condition] = {
+            "count": len(comparisons),
+            "gains": sum(not base["correct"] and candidate["correct"] for base, candidate in comparisons),
+            "losses": sum(base["correct"] and not candidate["correct"] for base, candidate in comparisons),
+            "both_correct": sum(base["correct"] and candidate["correct"] for base, candidate in comparisons),
+            "both_wrong": sum(not base["correct"] and not candidate["correct"] for base, candidate in comparisons),
+        }
     return {
         "schema_version": "ccpu.paper1.public_gsm8k_summary.v1",
         "record_count": len(rows),
@@ -500,6 +521,7 @@ def summarize_gsm8k(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "voluntary __compute made no valid call"
             ),
         },
+        "paired_vs_llm_only": paired_vs_llm_only,
         "claim_boundary": {
             "false_activation_rate": None,
             "first_wrong_token_prevention": None,
@@ -584,6 +606,11 @@ def _plot_gsm8k(summary: dict[str, Any], output_path: str | Path) -> None:
     by_condition = {row["condition"]: row for row in summary["by_condition"]}
     order = [condition for condition in PUBLIC_GSM8K_CONDITIONS if condition in by_condition]
     strata = ("2_steps", "3_4_steps", "5plus_steps")
+    stratum_labels = {
+        "2_steps": "2 steps",
+        "3_4_steps": "3-4 steps",
+        "5plus_steps": "5+ steps",
+    }
     figure, axis = plt.subplots(figsize=(9.5, 4.8))
     x = list(range(len(order)))
     width = 0.24
@@ -593,7 +620,7 @@ def _plot_gsm8k(summary: dict[str, Any], output_path: str | Path) -> None:
             [position + (index - 1) * width for position in x],
             values,
             width=width,
-            label=stratum.replace("_", " "),
+            label=stratum_labels[stratum],
         )
     axis.set_xticks(x, [labels[item] for item in order], rotation=22, ha="right")
     axis.set_ylabel("Exact final-answer accuracy")

@@ -49,7 +49,12 @@ added, whereas its base ICL and normalized-runtime conditions executed only
 semantic selection and serialization in small adapter weights, keep exact
 execution and enforced result use in the runtime, and reserve context for
 cold-start or model-specific residual behavior. The sample remains too small
-for a general scaling or family claim.
+for a general scaling or family claim. A frozen 120-item GSM8K transfer stress
+test then reversed the synthetic result: LLM-only and an unexecuted block prompt
+both reached 10.8\% accuracy, generic compute 2.5\%, automatic runtime 3.3\%, and
+LoRA block 0.8\%, while an oracle bounded-calculator ledger reached 75.8\%.
+Automatic Rescue Rate was 0/6. Thus interface syntax learned on synthetic data
+did not supply the natural-language decomposition needed for public transfer.
 \end{abstract}
 
 \section{Status and Scope}
@@ -64,7 +69,8 @@ be cited as model evidence. The XPU pilot reported below is empirical but too
 small for model-family, scaling, or replicated performance claims. The held-out
 run is empirical and protocol-frozen, but it also has one checkpoint and one
 greedy seed; its condition ordering is evidence for replication, not a final
-architecture-level estimate.
+architecture-level estimate. The public GSM8K slice is likewise a
+single-checkpoint developmental transfer test, not a benchmark-wide estimate.
 
 Paper 1 asks one question:
 \begin{quote}
@@ -718,6 +724,102 @@ serving development, cold start, and measured model-specific residuals. It is a
 developmental design result, not evidence that all interface knowledge should be
 fine-tuned.
 
+\section{Public GSM8K Transfer Stress Test}
+
+\subsection{Frozen protocol}
+
+GSM8K contains linguistically diverse grade-school word problems with annotated
+multi-step arithmetic rationales \cite{gsm8k}. We selected 120 test examples by
+the lowest precomputed selection key within three registered strata: 40 with at
+most two annotated operations, 40 with three or four, and 40 with five or more.
+The selection artifact redistributes only identifiers, labels, difficulty
+metadata, and content hashes. Questions are materialized from the pinned source
+at run time and rejected if their hashes change.
+
+Qwen3-0.6B at revision \texttt{c1899de} was evaluated once with greedy seed
+23011, FP16 XPU, thinking disabled, and a 160-token ceiling. Seven conditions
+share the same selected IDs: LLM-only, matched ICL, voluntary generic
+\texttt{\_\_compute}, base calculator block, normalized automatic runtime,
+oracle calculator ledger, and the retained rank-8 calculator-block LoRA. Generic
+compute and automatic runtime use the same bounded calculator. The oracle path
+does not trust source-side arithmetic values: it normalizes and re-executes every
+supported annotated expression through that calculator before constructing the
+ledger. Of 425 annotated operations, 382 (89.9\%) are supported; 113/120 rows
+have at least one supported operation and 87/120 have full trace coverage.
+
+The primary endpoint is exact final-answer accuracy. Scorable rate records
+whether the model emits a parseable endpoint. Assistance rate requires at least
+one accepted execution, and registered-operation recall is multiset overlap with
+supported gold operations. The prompts were frozen after a three-item plumbing
+check. In particular, the generic and automatic instructions retain a concrete
+\(7\times8\) syntax example; demonstration anchoring observed in the full run was
+not tuned away. GSM8K has no matched no-compute controls or token-level alignment,
+so false-activation rate and first-wrong-token prevention are undefined.
+
+\subsection{Results}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Frozen Qwen3-0.6B GSM8K transfer test (120 examples). Op. recall is
+over calculator-supported annotated operations. Latency is the mean model wall
+time; interrupt conditions use correctness-first full-prefix decoding and are
+not production serving estimates.}
+\label{tab:gsm8k-transfer}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Condition & Accuracy & Scorable & Assist & Op. recall & Tokens & ms \\
+\midrule
+LLM only          & 0.108 & 1.000 & 0.000 & 0.000 & 18.7  & 2,776 \\
+Matched ICL       & 0.033 & 1.000 & 0.000 & 0.000 & 10.7  & 1,679 \\
+Generic compute   & 0.025 & 1.000 & 0.950 & 0.000 & 39.8  & 5,963 \\
+Base block prompt & 0.108 & 0.383 & 0.000 & 0.000 & 141.1 & 42,396 \\
+Automatic runtime & 0.033 & 0.992 & 0.950 & 0.060 & 43.9  & 13,148 \\
+Oracle ledger     & 0.758 & 0.983 & 0.942 & 1.000 & 39.9  & 5,907 \\
+LoRA block        & 0.008 & 0.075 & 0.658 & 0.065 & 55.9  & 20,457 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The deployable interfaces do not improve over LLM-only. Voluntary generic
+compute accepts calls on 114/120 rows, but 168 of 225 calls repeat the
+demonstration expression \texttt{7*8}; its duplicate-call and malformed-row rates
+are 92.5\% and 5.0\%, respectively, and registered-operation recall is zero.
+Automatic runtime accepts assistance on 114/120 rows but recalls only 6.0\% of
+supported operations. It gains two and loses eleven pairs versus LLM-only.
+Among six rows where voluntary compute emits no valid call, automatic runtime
+rescues none, so the preregistered Automatic Rescue Rate is 0/6.
+
+The base block prompt exactly ties LLM-only at 13/120 but swaps twelve gains for
+twelve losses and never opens a valid block. Its row is therefore a verbose
+elicitation baseline, not calculator evidence. LoRA opens a valid block on
+79/120 rows, but 109/120 rows contain malformed block activity, operation recall
+is 6.5\%, and only nine rows emit a scorable endpoint. It answers one row
+correctly. The same adapter's 16/16 synthetic held-out result therefore learned a
+narrow selection/serialization distribution rather than GSM8K decomposition.
+
+The oracle ledger reaches 91/120 (75.8\%, 95\% Wilson interval 67.4--82.6\%),
+with 79 paired gains and one loss versus LLM-only. This establishes large
+arithmetic-and-integration headroom when formalization is supplied, not a
+deployable routing result. Accuracy is not monotone in operation-count strata:
+oracle scores 60.0\%, 87.5\%, and 80.0\%, so annotated operation count alone is
+not semantic difficulty.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{paper1_gsm8k_accuracy.png}
+\caption{Exact GSM8K accuracy by registered operation-count stratum. Each bar
+contains 40 examples. Only the oracle ledger transfers strongly; deployable
+interfaces remain near zero across strata.}
+\label{fig:gsm8k-transfer}
+\end{figure}
+
+This stress test changes the placement conclusion. Context or small adapter
+weights can store a stable local syntax contract, and the runtime can guarantee
+bounded exact execution, but none supplies the missing semantic decomposition on
+public word problems. Paper 1 therefore demonstrates synthetic interface
+feasibility and oracle public headroom, not calculator-assistance transfer.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -896,6 +998,34 @@ The \texttt{analyze-placement} command hashes the source summaries and training
 reports and regenerates Table~\ref{tab:placement-primary} and
 Figure~\ref{fig:placement-comparison} inputs.
 
+The public transfer run is resumable by condition and is reproduced with:
+
+\begin{verbatim}
+& $py -m ccpu paper1 freeze-public-gsm8k \
+  --source-selection artifacts/paper2/public_benchmarks/data_v1/selection.jsonl \
+  --output-dir artifacts/paper1/public_gsm8k_v1/data
+foreach ($condition in @('llm_only','matched_icl','generic_compute', \
+  'calculator_block','runtime_trigger','oracle_calculator', \
+  'lora_calculator_block')) {
+  & $py -m ccpu paper1 run-public-gsm8k \
+    --public-config configs/common/public_benchmarks.json \
+    --cache-root C:\Users\j.simao\.cache\ccpu-public-v1 \
+    --selection artifacts/paper1/public_gsm8k_v1/data/selection.jsonl \
+    --model-config configs/paper1/public_gsm8k_qwen_xpu.json \
+    --condition $condition --checkpoint-every 10 \
+    --output-dir artifacts/paper1/public_gsm8k_v1/qwen3_0_6b/$condition
+}
+$analysis = @('paper1','analyze-public-gsm8k','--output-dir', \
+  'artifacts/paper1/public_gsm8k_v1/analysis')
+foreach ($condition in @('llm_only','matched_icl','generic_compute', \
+  'calculator_block','runtime_trigger','oracle_calculator', \
+  'lora_calculator_block')) {
+  $analysis += @('--predictions', \
+    "artifacts/paper1/public_gsm8k_v1/qwen3_0_6b/$condition/predictions.jsonl")
+}
+& $py -m ccpu @analysis
+\end{verbatim}
+
 \section{Limitations}
 
 The elicitation instruction asks reflex models to expose an expression followed
@@ -923,6 +1053,13 @@ confirmatory. The zero-shot block prompt's historical result is not reinterprete
 by the separately developed ICL prompt, endpoint audit, or LoRA result.
 Finally, exact calculator output cannot repair an incorrectly copied
 expression, a model that ignores the result, or a task whose premises are wrong.
+The public transfer slice adds further limits: it has one small checkpoint, one
+greedy seed, and no no-compute controls. Operation-count strata are not a complete
+difficulty model. Source rationales provide noisy opportunity annotations, and
+10.1\% of annotated operations fall outside the registered calculator surface.
+The concrete syntax example causes strong anchoring in generic and automatic
+conditions; because it was frozen before the full outcome, this is valid evidence
+for that protocol but not evidence that all tool or trigger prompts must fail.
 
 \section{Related Work}
 
@@ -970,7 +1107,13 @@ reinjection alone does not guarantee result use. The resulting architecture is
 hybrid: context for rapid development and measured residuals, weights for a
 stable semantic contract, and the runtime for typed parsing, bounds, exact
 computation, and enforced use. Powered confirmatory data and an authorized Llama
-run remain necessary before stronger placement or family claims.
+run remain necessary before stronger placement or family claims. On public
+GSM8K, however, this narrow adapter and the training-free automatic interface do
+not transfer: high activation coexists with 6.5\% or lower operation recall and
+at most 3.3\% accuracy, while the bounded-calculator oracle reaches 75.8\%.
+Where interface knowledge should live is therefore conditional: syntax can live
+in context or weights and exactness in the runtime, but natural-language
+decomposition is not solved by any of the three in this experiment.
 
 \begin{thebibliography}{9}
 
@@ -1004,6 +1147,13 @@ A.~Asai, Z.~Wu, Y.~Wang, A.~Sil, and H.~Hajishirzi.
 Self-RAG: Learning to retrieve, generate, and critique through self-reflection.
 \emph{ICLR}, 2024.
 \url{https://arxiv.org/abs/2310.11511}.
+
+\bibitem{gsm8k}
+K.~Cobbe, V.~Kosaraju, M.~Bavarian, M.~Chen, H.~Jun, L.~Kaiser,
+M.~Plappert, J.~Tworek, J.~Hilton, R.~Nakano, C.~Hesse, and J.~Schulman.
+Training verifiers to solve math word problems.
+\emph{arXiv:2110.14168}, 2021.
+\url{https://arxiv.org/abs/2110.14168}.
 
 \end{thebibliography}
 
