@@ -826,3 +826,12 @@ def test_public_four_tool_run_invokes_gateway_and_separates_wrong_route():
     assert not wrong["assistance_valid"]
     assert not wrong["malformed_assistance"]
     assert wrong["selected_intent"] == "verify"
+
+    runtime_copy = run_public_compute_example(
+        row,
+        Backend([]),
+        condition="runtime_copy",
+        seed=1,
+    )
+    assert runtime_copy["correct"] and runtime_copy["assistance_valid"]
+    assert runtime_copy["model_calls"] == 0

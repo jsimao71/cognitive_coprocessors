@@ -1,0 +1,20 @@
+{
+  "condition": "shared_nlp_unigram_bigram_bm25",
+  "excluded_duplicate_id_rows": 9,
+  "executable_selection_sha256": "26c9b56b84f4219b9f250416d41d39fed087c805dd6f7ae9ef4a8af216dbabe2",
+  "index_size_bytes": 3382448,
+  "k": 3,
+  "predictions_sha256": "93177ff9e4ed91672319476c593d70a3562db42adec5a2051bf9df54ac89c211",
+  "redistribution": "evaluation IDs, labels, routes, confidence, and neighbor IDs only",
+  "route_accuracy": 1.0,
+  "route_accuracy_ci95": [
+    0.93982814785791,
+    0.9999999999999998
+  ],
+  "schema_version": "ccpu.paper2.public_bm25_manifest.v1",
+  "source_selection_sha256": "d5502a9f79752d087a0591b6c16c6b4e94cd6d7a3d8d7aa2f70f32e8239951a8",
+  "test_count": 60,
+  "train_count": 2184,
+  "train_test_id_overlap": 0,
+  "training_exclusion_rule": "exclude every source row sharing any evaluation ID"
+}

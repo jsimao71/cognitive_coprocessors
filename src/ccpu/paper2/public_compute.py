@@ -23,7 +23,12 @@ from ccpu.common.generic_gateway import (
     GenericToolCall,
     generic_tool_schemas,
 )
-from ccpu.common.lexical_routing import current_word_tokens
+from ccpu.common.lexical_routing import (
+    BM25ExemplarRouter,
+    current_word_tokens,
+    shared_nlp_tokens,
+    token_ngrams,
+)
 from ccpu.common.metrics import safe_mean, wilson_interval
 from ccpu.paper1.generation import HuggingFaceBackend
 
@@ -36,7 +41,9 @@ PUBLIC_COMPUTE_CONDITIONS = (
     "four_tools",
     "generic_cogcop",
     "cpu_t1",
+    "cpu_bm25",
     "oracle_route",
+    "runtime_copy",
 )
 PUBLIC_COMPUTE_BENCHMARKS = (
     "gsm8k",
@@ -165,7 +172,10 @@ def freeze_executable_public_slice(
 
 
 def materialize_executable_public_slice(
-    config_path: str | Path, cache_root: str | Path, selection_path: str | Path
+    config_path: str | Path,
+    cache_root: str | Path,
+    selection_path: str | Path,
+    route_predictions: str | Path | None = None,
 ) -> list[dict[str, Any]]:
     rows, _ = _materialize_selected(config_path, cache_root, selection_path)
     selected = {str(row["example_id"]): row for row in read_jsonl(selection_path)}
@@ -180,7 +190,94 @@ def materialize_executable_public_slice(
             if frozen[key] != expected:
                 raise ValueError(f"public executable adapter changed at {row['example_id']}:{key}")
         row["registered"] = registered
+    if route_predictions is not None:
+        routes = {str(row["example_id"]): row for row in read_jsonl(route_predictions)}
+        if set(routes) != set(selected):
+            raise ValueError("public BM25 routes do not exactly cover executable IDs")
+        for row in rows:
+            route = routes[str(row["example_id"])]
+            if route["content_sha256"] != row["content_sha256"]:
+                raise ValueError(f"public BM25 route content changed at {row['example_id']}")
+            row["bm25_route"] = route
     return sorted(rows, key=lambda row: str(row["selection_key"]))
+
+
+def freeze_public_bm25_routes(
+    config_path: str | Path,
+    cache_root: str | Path,
+    source_selection: str | Path,
+    executable_selection: str | Path,
+    output_dir: str | Path,
+    *,
+    k: int = 3,
+) -> dict[str, Any]:
+    source_rows, _ = _materialize_selected(config_path, cache_root, source_selection)
+    executable_rows = read_jsonl(executable_selection)
+    test_ids = {str(row["example_id"]) for row in executable_rows}
+    test_keys = {
+        (str(row["benchmark"]), int(row["source_row"])) for row in executable_rows
+    }
+    train = [row for row in source_rows if str(row["example_id"]) not in test_ids]
+    test = [
+        row
+        for row in source_rows
+        if (str(row["benchmark"]), int(row["source_row"])) in test_keys
+    ]
+    if len(test) != len(test_keys):
+        raise ValueError("not every executable public ID was found in the routing source")
+    tokenize = lambda text: token_ngrams(shared_nlp_tokens(text))
+    router = BM25ExemplarRouter(tokenize).fit(
+        [str(row["prompt"]) for row in train],
+        [str(row["engine"]) for row in train],
+    )
+    predictions = []
+    for row in sorted(test, key=lambda item: str(item["selection_key"])):
+        ranked = router.ranked(str(row["prompt"]), k)
+        if not ranked:
+            selected_engine = router.default_label
+            confidence = 0.0
+            neighbors = []
+        else:
+            scores = router.class_scores(str(row["prompt"]), k)
+            selected_engine, top_score = min(
+                scores.items(), key=lambda item: (-item[1], item[0])
+            )
+            confidence = top_score / max(sum(scores.values()), 1e-12)
+            neighbors = [str(train[index]["example_id"]) for index, _ in ranked]
+        predictions.append(
+            {
+                "schema_version": "ccpu.paper2.public_bm25_route.v1",
+                "example_id": row["example_id"],
+                "content_sha256": row["content_sha256"],
+                "gold_engine": row["engine"],
+                "selected_engine": selected_engine,
+                "correct": selected_engine == row["engine"],
+                "confidence": confidence,
+                "neighbor_ids": neighbors,
+            }
+        )
+    output = Path(output_dir)
+    prediction_path = write_jsonl(output / "predictions.jsonl", predictions)
+    correct = sum(bool(row["correct"]) for row in predictions)
+    manifest = {
+        "schema_version": "ccpu.paper2.public_bm25_manifest.v1",
+        "condition": "shared_nlp_unigram_bigram_bm25",
+        "k": k,
+        "train_count": len(train),
+        "test_count": len(test),
+        "train_test_id_overlap": 0,
+        "excluded_duplicate_id_rows": len(source_rows) - len(train) - len(test),
+        "training_exclusion_rule": "exclude every source row sharing any evaluation ID",
+        "route_accuracy": correct / len(predictions),
+        "route_accuracy_ci95": wilson_interval(correct, len(predictions)),
+        "index_size_bytes": router.index_size_bytes(),
+        "source_selection_sha256": file_sha256(source_selection),
+        "executable_selection_sha256": file_sha256(executable_selection),
+        "predictions_sha256": file_sha256(prediction_path),
+        "redistribution": "evaluation IDs, labels, routes, confidence, and neighbor IDs only",
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest
 
 
 def _endpoint(benchmark: str) -> str:
@@ -301,8 +398,10 @@ def run_public_compute_example(
     first_text = ""
     second_text = ""
     selected_intent = None
+    selected_engine = None
     malformed = False
     assistance_valid = False
+    route_confidence = None
     prompt_tokens = generated_tokens = model_calls = wall_time_ns = 0
 
     def generate(prompt: str, generation_seed: int) -> str:
@@ -346,13 +445,24 @@ def run_public_compute_example(
                     _result_prompt(row, str(registered["result"]), "generic CogCop R2 result"),
                     seed + 1,
                 )
-    else:
+    elif condition != "runtime_copy":
         if condition == "cpu_t1":
             route = _t1(str(row["prompt"]))
             if route == _T1_LABEL[str(row["engine"])]:
                 selected_intent = registered["intent"]
+                selected_engine = registered["engine"]
+        elif condition == "cpu_bm25":
+            route = dict(row.get("bm25_route", {}))
+            if not route:
+                raise ValueError("cpu_bm25 requires frozen route predictions")
+            selected_engine = str(route["selected_engine"])
+            route_confidence = float(route["confidence"])
+            if route["selected_engine"] == row["engine"]:
+                selected_intent = registered["intent"]
+                selected_engine = registered["engine"]
         else:
             selected_intent = registered["intent"]
+            selected_engine = registered["engine"]
         assistance_valid = selected_intent == registered["intent"]
         prompt = (
             _result_prompt(row, str(registered["result"]), f"{condition} R2 result")
@@ -360,6 +470,11 @@ def run_public_compute_example(
             else _base_prompt(row)
         )
         second_text = generate(prompt, seed)
+    else:
+        selected_intent = registered["intent"]
+        selected_engine = registered["engine"]
+        assistance_valid = True
+        second_text = f"Answer: {registered['result']}"
 
     rendered = "\n".join(value for value in (first_text, second_text) if value)
     predicted = _extract_answer(rendered)
@@ -376,6 +491,8 @@ def run_public_compute_example(
         "seed": seed,
         "registered_intent": registered["intent"],
         "selected_intent": selected_intent,
+        "selected_engine": selected_engine,
+        "route_confidence": route_confidence,
         "registered_engine": registered["engine"],
         "formalization_source": registered["formalization_source"],
         "backend_exact": assistance_valid,
@@ -408,6 +525,12 @@ def summarize_public_compute(rows: list[dict[str, Any]]) -> dict[str, Any]:
             "intent_selection_rate": safe_mean(
                 row["selected_intent"] == row["registered_intent"] for row in members
             ),
+            "engine_selection_rate": safe_mean(
+                row.get("selected_engine") == row["registered_engine"]
+                if "selected_engine" in row
+                else bool(row["assistance_valid"])
+                for row in members
+            ),
             "assistance_rate": safe_mean(row["assistance_valid"] for row in members),
             "malformed_rate": safe_mean(row["malformed_assistance"] for row in members),
             "backend_exact_rate_on_assisted": safe_mean(row["backend_exact"] for row in assisted),
@@ -433,29 +556,37 @@ def summarize_public_compute(rows: list[dict[str, Any]]) -> dict[str, Any]:
     paired: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
     for row in rows:
         paired[str(row["example_id"])][str(row["condition"])] = row
-    eligible = [
-        values
-        for values in paired.values()
-        if {"four_tools", "cpu_t1"} <= values.keys()
-        and not values["four_tools"]["assistance_valid"]
-    ]
-    rescued = [
-        values
-        for values in eligible
-        if values["cpu_t1"]["assistance_valid"] and values["cpu_t1"]["correct"]
-    ]
+    automatic_rescue = []
+    for condition in ("cpu_t1", "cpu_bm25"):
+        eligible = [
+            values
+            for values in paired.values()
+            if {"four_tools", condition} <= values.keys()
+            and not values["four_tools"]["assistance_valid"]
+        ]
+        rescued = [
+            values
+            for values in eligible
+            if values[condition]["assistance_valid"] and values[condition]["correct"]
+        ]
+        automatic_rescue.append(
+            {
+                "condition": condition,
+                "eligible_voluntary_misses": len(eligible),
+                "rescued_correctly": len(rescued),
+                "rate": len(rescued) / len(eligible) if eligible else None,
+            }
+        )
     return {
         "schema_version": "ccpu.paper2.public_compute_summary.v1",
         "record_count": len(rows),
         "base_question_count": len(paired),
         "by_condition": by_condition,
         "by_benchmark": by_benchmark,
-        "automatic_rescue": {
-            "eligible_voluntary_misses": len(eligible),
-            "rescued_correctly": len(rescued),
-            "rate": len(rescued) / len(eligible) if eligible else None,
-            "definition": "correct T1 CPU assistance among rows where four tools made no valid call",
-        },
+        "automatic_rescue": automatic_rescue,
+        "automatic_rescue_definition": (
+            "correct automatic assistance among rows where four tools made no valid call"
+        ),
         "four_tool_schema": {
             "tool_count": len(generic_tool_schemas()),
             "names": [schema["name"] for schema in generic_tool_schemas()],
@@ -479,6 +610,7 @@ def write_public_compute_run(
     model_config: str | Path,
     selection_path: str | Path,
     condition: str,
+    route_predictions: str | Path | None = None,
 ) -> dict[str, Any]:
     output = Path(output_dir)
     predictions = write_jsonl(output / "predictions.jsonl", rows)
@@ -492,6 +624,9 @@ def write_public_compute_run(
             "record_count": len(rows),
             "model_config_sha256": file_sha256(model_config),
             "selection_sha256": file_sha256(selection_path),
+            "route_predictions_sha256": (
+                file_sha256(route_predictions) if route_predictions is not None else None
+            ),
             "predictions_sha256": file_sha256(predictions),
             "summary_sha256": file_sha256(summary_path),
             "environment": environment_manifest(Path(__file__).resolve().parents[3]),
@@ -545,11 +680,12 @@ def _plot_public_compute(summary: dict[str, Any], output_path: str | Path) -> No
     }
     figure, axis = plt.subplots(figsize=(10, 4.8))
     x = list(range(len(PUBLIC_COMPUTE_BENCHMARKS)))
-    width = 0.16
+    width = 0.115
+    center = (len(conditions) - 1) / 2
     for index, condition in enumerate(conditions):
         values = [lookup[(condition, benchmark)]["accuracy"] for benchmark in PUBLIC_COMPUTE_BENCHMARKS]
         axis.bar(
-            [value + (index - 2) * width for value in x],
+            [value + (index - center) * width for value in x],
             values,
             width,
             label=condition.replace("_", " "),

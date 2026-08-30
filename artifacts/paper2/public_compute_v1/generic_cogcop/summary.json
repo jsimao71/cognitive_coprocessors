@@ -1,0 +1,143 @@
+{
+  "automatic_rescue": {
+    "definition": "correct T1 CPU assistance among rows where four tools made no valid call",
+    "eligible_voluntary_misses": 0,
+    "rate": null,
+    "rescued_correctly": 0
+  },
+  "base_question_count": 60,
+  "by_benchmark": [
+    {
+      "accuracy": 0.08333333333333333,
+      "accuracy_ci95": [
+        0.014865094404917123,
+        0.3538799111411169
+      ],
+      "assistance_rate": 0.08333333333333333,
+      "backend_exact_rate_on_assisted": 1.0,
+      "benchmark": "gsm8k",
+      "condition": "generic_cogcop",
+      "count": 12,
+      "final_accuracy_on_assisted": 1.0,
+      "intent_selection_rate": 0.08333333333333333,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 72.41666666666667,
+      "mean_model_calls": 1.0833333333333333,
+      "mean_wall_time_ms": 10467.315966666665,
+      "scorable_answer_rate": 0.8333333333333334
+    },
+    {
+      "accuracy": 0.08333333333333333,
+      "accuracy_ci95": [
+        0.014865094404917123,
+        0.3538799111411169
+      ],
+      "assistance_rate": 0.0,
+      "backend_exact_rate_on_assisted": 0.0,
+      "benchmark": "bigbench_unit_conversion",
+      "condition": "generic_cogcop",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.0,
+      "intent_selection_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 19.75,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 2815.7081583333334,
+      "scorable_answer_rate": 1.0
+    },
+    {
+      "accuracy": 0.16666666666666666,
+      "accuracy_ci95": [
+        0.046965142183853836,
+        0.44803086225297334
+      ],
+      "assistance_rate": 0.0,
+      "backend_exact_rate_on_assisted": 0.0,
+      "benchmark": "bigbench_date_understanding",
+      "condition": "generic_cogcop",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.0,
+      "intent_selection_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 28.416666666666668,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 4032.641825,
+      "scorable_answer_rate": 1.0
+    },
+    {
+      "accuracy": 0.4166666666666667,
+      "accuracy_ci95": [
+        0.19326031365875668,
+        0.6804886874504503
+      ],
+      "assistance_rate": 0.0,
+      "backend_exact_rate_on_assisted": 0.0,
+      "benchmark": "proofwriter_balanced",
+      "condition": "generic_cogcop",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.0,
+      "intent_selection_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 46.083333333333336,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 6830.868008333333,
+      "scorable_answer_rate": 1.0
+    },
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.2424940066552408
+      ],
+      "assistance_rate": 0.0,
+      "backend_exact_rate_on_assisted": 0.0,
+      "benchmark": "clutrr",
+      "condition": "generic_cogcop",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.0,
+      "intent_selection_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 5.916666666666667,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 999.3731666666666,
+      "scorable_answer_rate": 1.0
+    }
+  ],
+  "by_condition": [
+    {
+      "accuracy": 0.15,
+      "accuracy_ci95": [
+        0.08097440580167743,
+        0.26114589069778543
+      ],
+      "assistance_rate": 0.016666666666666666,
+      "backend_exact_rate_on_assisted": 1.0,
+      "condition": "generic_cogcop",
+      "count": 60,
+      "final_accuracy_on_assisted": 1.0,
+      "intent_selection_rate": 0.016666666666666666,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 34.516666666666666,
+      "mean_model_calls": 1.0166666666666666,
+      "mean_wall_time_ms": 5029.181425,
+      "scorable_answer_rate": 0.9666666666666667
+    }
+  ],
+  "claim_boundary": {
+    "clutrr_formalization": "annotated proof replay",
+    "gsm8k_formalization": "annotated arithmetic trace",
+    "status": "developmental executable slice, not full-suite end-to-end coverage"
+  },
+  "four_tool_schema": {
+    "names": [
+      "__compute",
+      "__retrieve",
+      "__verify",
+      "__help"
+    ],
+    "tool_count": 4,
+    "word_tokens": 72
+  },
+  "record_count": 60,
+  "schema_version": "ccpu.paper2.public_compute_summary.v1"
+}

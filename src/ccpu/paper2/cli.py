@@ -42,6 +42,7 @@ from .public_compute import (
     PUBLIC_COMPUTE_CONDITIONS,
     analyze_public_compute_runs,
     freeze_executable_public_slice,
+    freeze_public_bm25_routes,
     materialize_executable_public_slice,
     run_public_compute_example,
     write_public_compute_run,
@@ -566,6 +567,22 @@ def freeze_public_executable_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_public_bm25_command(args: argparse.Namespace) -> int:
+    result = freeze_public_bm25_routes(
+        args.config,
+        args.cache_root,
+        args.source_selection,
+        args.executable_selection,
+        args.output_dir,
+        k=args.k,
+    )
+    print(
+        f"froze {result['test_count']} public BM25 routes from "
+        f"{result['train_count']} disjoint examples; accuracy={result['route_accuracy']:.3f}"
+    )
+    return 0
+
+
 def run_public_compute_command(args: argparse.Namespace) -> int:
     config = read_json(args.model_config)
     if config.get("schema_version") != "ccpu.paper2.public_compute_config.v1":
@@ -577,6 +594,8 @@ def run_public_compute_command(args: argparse.Namespace) -> int:
     )
     if invalid_revision:
         raise ValueError("public compute model revision must be a pinned SHA")
+    if args.condition == "cpu_bm25" and not args.route_predictions:
+        raise ValueError("cpu_bm25 requires --route-predictions")
     backend = HuggingFaceBackend(
         HuggingFaceGenerationConfig(
             model_id=str(model["model_id"]),
@@ -590,7 +609,10 @@ def run_public_compute_command(args: argparse.Namespace) -> int:
         )
     )
     examples = materialize_executable_public_slice(
-        args.public_config, args.cache_root, args.selection
+        args.public_config,
+        args.cache_root,
+        args.selection,
+        args.route_predictions,
     )
     examples = examples[args.offset :]
     if args.limit is not None:
@@ -620,6 +642,7 @@ def run_public_compute_command(args: argparse.Namespace) -> int:
                 model_config=args.model_config,
                 selection_path=args.selection,
                 condition=args.condition,
+                route_predictions=args.route_predictions,
             )
             print(f"checkpoint {args.condition}: {len(rows)}/{len(examples)}")
     summary = write_public_compute_run(
@@ -628,6 +651,7 @@ def run_public_compute_command(args: argparse.Namespace) -> int:
         model_config=args.model_config,
         selection_path=args.selection,
         condition=args.condition,
+        route_predictions=args.route_predictions,
     )
     print(
         f"completed {args.condition} on {summary['base_question_count']} public questions "
@@ -897,6 +921,18 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_executable.add_argument("--output-dir", required=True)
     public_executable.set_defaults(handler=freeze_public_executable_command)
 
+    public_bm25 = commands.add_parser(
+        "freeze-public-bm25",
+        help="fit and freeze disjoint shared-token BM25 public routes",
+    )
+    public_bm25.add_argument("--config", required=True)
+    public_bm25.add_argument("--cache-root", required=True)
+    public_bm25.add_argument("--source-selection", required=True)
+    public_bm25.add_argument("--executable-selection", required=True)
+    public_bm25.add_argument("--k", type=int, default=3)
+    public_bm25.add_argument("--output-dir", required=True)
+    public_bm25.set_defaults(handler=freeze_public_bm25_command)
+
     public_run = commands.add_parser(
         "run-public-compute",
         help="run one matched model-facing public compute condition",
@@ -905,6 +941,7 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_run.add_argument("--cache-root", required=True)
     public_run.add_argument("--selection", required=True)
     public_run.add_argument("--model-config", required=True)
+    public_run.add_argument("--route-predictions")
     public_run.add_argument("--condition", required=True, choices=PUBLIC_COMPUTE_CONDITIONS)
     public_run.add_argument("--device")
     public_run.add_argument("--checkpoint-every", type=int, default=10)

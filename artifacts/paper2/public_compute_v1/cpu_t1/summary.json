@@ -1,0 +1,143 @@
+{
+  "automatic_rescue": {
+    "definition": "correct T1 CPU assistance among rows where four tools made no valid call",
+    "eligible_voluntary_misses": 0,
+    "rate": null,
+    "rescued_correctly": 0
+  },
+  "base_question_count": 60,
+  "by_benchmark": [
+    {
+      "accuracy": 0.08333333333333333,
+      "accuracy_ci95": [
+        0.014865094404917123,
+        0.3538799111411169
+      ],
+      "assistance_rate": 0.08333333333333333,
+      "backend_exact_rate_on_assisted": 1.0,
+      "benchmark": "gsm8k",
+      "condition": "cpu_t1",
+      "count": 12,
+      "final_accuracy_on_assisted": 1.0,
+      "intent_selection_rate": 0.08333333333333333,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 17.0,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 2578.1808916666664,
+      "scorable_answer_rate": 0.9166666666666666
+    },
+    {
+      "accuracy": 0.16666666666666666,
+      "accuracy_ci95": [
+        0.046965142183853836,
+        0.44803086225297334
+      ],
+      "assistance_rate": 0.0,
+      "backend_exact_rate_on_assisted": 0.0,
+      "benchmark": "bigbench_unit_conversion",
+      "condition": "cpu_t1",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.0,
+      "intent_selection_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 8.166666666666666,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 1132.9471416666668,
+      "scorable_answer_rate": 1.0
+    },
+    {
+      "accuracy": 0.08333333333333333,
+      "accuracy_ci95": [
+        0.014865094404917123,
+        0.3538799111411169
+      ],
+      "assistance_rate": 0.0,
+      "backend_exact_rate_on_assisted": 0.0,
+      "benchmark": "bigbench_date_understanding",
+      "condition": "cpu_t1",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.0,
+      "intent_selection_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 13.5,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 1878.1026916666667,
+      "scorable_answer_rate": 1.0
+    },
+    {
+      "accuracy": 0.5833333333333334,
+      "accuracy_ci95": [
+        0.3195113125495498,
+        0.8067396863412434
+      ],
+      "assistance_rate": 0.0,
+      "backend_exact_rate_on_assisted": 0.0,
+      "benchmark": "proofwriter_balanced",
+      "condition": "cpu_t1",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.0,
+      "intent_selection_rate": 0.0,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 4.0,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 662.3053833333333,
+      "scorable_answer_rate": 1.0
+    },
+    {
+      "accuracy": 0.08333333333333333,
+      "accuracy_ci95": [
+        0.014865094404917123,
+        0.3538799111411169
+      ],
+      "assistance_rate": 0.16666666666666666,
+      "backend_exact_rate_on_assisted": 1.0,
+      "benchmark": "clutrr",
+      "condition": "cpu_t1",
+      "count": 12,
+      "final_accuracy_on_assisted": 0.5,
+      "intent_selection_rate": 0.16666666666666666,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 4.083333333333333,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 691.4063916666667,
+      "scorable_answer_rate": 1.0
+    }
+  ],
+  "by_condition": [
+    {
+      "accuracy": 0.2,
+      "accuracy_ci95": [
+        0.11828505322897497,
+        0.31781805805627894
+      ],
+      "assistance_rate": 0.05,
+      "backend_exact_rate_on_assisted": 1.0,
+      "condition": "cpu_t1",
+      "count": 60,
+      "final_accuracy_on_assisted": 0.6666666666666666,
+      "intent_selection_rate": 0.05,
+      "malformed_rate": 0.0,
+      "mean_generated_tokens": 9.35,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 1388.5885,
+      "scorable_answer_rate": 0.9833333333333333
+    }
+  ],
+  "claim_boundary": {
+    "clutrr_formalization": "annotated proof replay",
+    "gsm8k_formalization": "annotated arithmetic trace",
+    "status": "developmental executable slice, not full-suite end-to-end coverage"
+  },
+  "four_tool_schema": {
+    "names": [
+      "__compute",
+      "__retrieve",
+      "__verify",
+      "__help"
+    ],
+    "tool_count": 4,
+    "word_tokens": 72
+  },
+  "record_count": 60,
+  "schema_version": "ccpu.paper2.public_compute_summary.v1"
+}
