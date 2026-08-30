@@ -1,0 +1,77 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "dependency_correct": 0.058823529411764705,
+        "exact_asl": 0.0,
+        "executable": 0.6470588235294118,
+        "final_answer_correct": 0.29411764705882354,
+        "lowerable_to_ccir": 0.8823529411764706,
+        "parse_valid": 0.9411764705882353,
+        "semantic_lint_valid": 0.7647058823529411,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.8823529411764706
+      }
+    },
+    "tatqa": {
+      "count": 3,
+      "rates": {
+        "dependency_correct": 0.0,
+        "exact_asl": 0.0,
+        "executable": 0.6666666666666666,
+        "final_answer_correct": 0.0,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 0.0,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 1.0
+      }
+    }
+  },
+  "component_mean_f1": {
+    "edges": 0.235833695290217,
+    "operators": 0.6359505772005771,
+    "paths": 0.37936063936063935,
+    "semantic_state": 0.3353954378954379,
+    "source_facts": 0.5396374458874459
+  },
+  "eval_sha256": "22b30d0bc089baca3dd31aebbd016419bd620138618201e05c3db5f0e6b8c26b",
+  "prediction_count": 20,
+  "predictions_sha256": "6c0847c454db6df0ba3c9f11c39281e945d231aec6dd9c1b5aacc2f48084fa17",
+  "rates": {
+    "dependency_correct": 0.05,
+    "exact_asl": 0.0,
+    "executable": 0.65,
+    "final_answer_correct": 0.25,
+    "lowerable_to_ccir": 0.9,
+    "parse_valid": 0.95,
+    "semantic_lint_valid": 0.65,
+    "semantic_return_equivalent": 0.0,
+    "semantic_state_equivalent": 0.0,
+    "type_valid": 0.9
+  },
+  "run": {
+    "condition": "lora",
+    "demo_source_ids": [],
+    "eval_sha256": "22b30d0bc089baca3dd31aebbd016419bd620138618201e05c3db5f0e6b8c26b",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-ASL-LoRA-augmented-1000-v1",
+      "adapter_path": "artifacts\\paper1\\asl_pilot_v1\\adapters\\qwen_augmented_1000\\adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "seed": 44017,
+    "shots": 0,
+    "train_split_sha256": "021289e157ed34b2d6ffb2177b3bcd9d0d1daa0d1695cac20940ae83b6a5b2bd"
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v1",
+  "scored_predictions_sha256": "da95d5d103d9e0184a669e0ae78e4ba4bc6d4d6206ce6c53fe30f2ad77fd3483"
+}

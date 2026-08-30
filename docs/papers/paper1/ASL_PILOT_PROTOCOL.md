@@ -58,3 +58,17 @@ Set `PYTHONPATH=src`, then use `python -m ccpu paper1 freeze-asl-pilot` and
 condition with `run-asl-pilot`; score an existing prediction file with
 `evaluate-asl-pilot`. Generated corpora, predictions, and adapter weights are
 ignored, while manifests, split IDs, summaries, and training reports are tracked.
+
+## Frozen results
+
+On the untouched 25 programs, final executed answers are `0/25` for base,
+`3/25` for 5-shot ICL, `4/25` for 10-shot ICL, `5/25` for LoRA-25, `7/25` for
+LoRA-50, `7/25` for LoRA-100, `10/25` for LoRA-100 plus 3-shot ICL, and `6/25`
+for LoRA-B augmented. The 100 training rows contain 92 normalized semantic
+patterns. LoRA-B improves lowerability and very-large-number robustness but not
+untouched semantic-program accuracy.
+
+The next gate expands to 500 originals by deliberately filling relation-class
+deficits while excluding all current source IDs and frozen-test semantic-pattern
+families. After the 500-original QKVO-r8 checkpoint, evaluate incremental
+NL+executed-state transitions before any rank-16 or QKVO+MLP sweep.

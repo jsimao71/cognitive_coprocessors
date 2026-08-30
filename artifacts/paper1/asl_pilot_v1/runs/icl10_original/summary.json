@@ -1,0 +1,86 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "dependency_correct": 0.0,
+        "exact_asl": 0.0,
+        "executable": 0.7647058823529411,
+        "final_answer_correct": 0.11764705882352941,
+        "lowerable_to_ccir": 0.8235294117647058,
+        "parse_valid": 0.8235294117647058,
+        "semantic_lint_valid": 0.7058823529411765,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.8235294117647058
+      }
+    },
+    "tatqa": {
+      "count": 8,
+      "rates": {
+        "dependency_correct": 0.375,
+        "exact_asl": 0.0,
+        "executable": 0.75,
+        "final_answer_correct": 0.25,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 0.625,
+        "semantic_return_equivalent": 0.25,
+        "semantic_state_equivalent": 0.25,
+        "type_valid": 1.0
+      }
+    }
+  },
+  "component_mean_f1": {
+    "edges": 0.268,
+    "operators": 0.531948051948052,
+    "paths": 0.25425204425204423,
+    "semantic_state": 0.26935257335257334,
+    "source_facts": 0.38899159663865546
+  },
+  "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+  "prediction_count": 25,
+  "predictions_sha256": "9a2c5542a1be2f1e5df45399b14759333210a7049db7b6a9d128bc8885ec770d",
+  "rates": {
+    "dependency_correct": 0.12,
+    "exact_asl": 0.0,
+    "executable": 0.76,
+    "final_answer_correct": 0.16,
+    "lowerable_to_ccir": 0.88,
+    "parse_valid": 0.88,
+    "semantic_lint_valid": 0.68,
+    "semantic_return_equivalent": 0.08,
+    "semantic_state_equivalent": 0.08,
+    "type_valid": 0.88
+  },
+  "run": {
+    "condition": "icl",
+    "demo_source_ids": [
+      "4706",
+      "0ff01bdb4791c552504a3d8c7c544c6f",
+      "a464102bb3af22ba4d1d3c22c90a98b9",
+      "1718ef546491803452777d8549372d32",
+      "ec816af84c7013f4ad30c6928ab67e35",
+      "5292",
+      "3a0ac39f735b46b56e1263d66437874e",
+      "7241",
+      "289",
+      "5536"
+    ],
+    "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+    "model": {
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "seed": 44017,
+    "shots": 10,
+    "train_split_sha256": "021289e157ed34b2d6ffb2177b3bcd9d0d1daa0d1695cac20940ae83b6a5b2bd"
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v1",
+  "scored_predictions_sha256": "bdaf399e3afee961b5750bfdf820f3ba3b3d2a3bbc87447d34257b2a3a909d2b"
+}

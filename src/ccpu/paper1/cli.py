@@ -17,6 +17,7 @@ from ccpu.common.artifacts import (
 )
 from ccpu.common.gsm8k import materialize_gsm8k
 
+from .asl_pilot_analysis import build_asl_checkpoint_report
 from .asl_pilot_data import build_asl_pilot_data, freeze_asl_pilot
 from .asl_pilot_eval import analyze_asl_predictions, run_asl_pilot
 from .dataset import (
@@ -118,7 +119,9 @@ def _write_run(
     for model_id in sorted({str(row["model_id"]) for row in predictions}):
         members = [row for row in predictions if str(row["model_id"]) == model_id]
         metadata = [dict(row.get("backend_metadata", {})) for row in members]
-        peaks = [int(item["peak_memory_bytes"]) for item in metadata if item.get("peak_memory_bytes")]
+        peaks = [
+            int(item["peak_memory_bytes"]) for item in metadata if item.get("peak_memory_bytes")
+        ]
         runtime_rows.append(
             {
                 "model_id": model_id,
@@ -136,10 +139,13 @@ def _write_run(
                         for item in metadata
                     }
                 ),
-                "wall_time_seconds": sum(int(row.get("wall_time_ns", 0)) for row in members)
-                / 1e9,
+                "wall_time_seconds": sum(int(row.get("wall_time_ns", 0)) for row in members) / 1e9,
                 "model_memory_bytes": next(
-                    (item.get("model_memory_bytes") for item in metadata if item.get("model_memory_bytes")),
+                    (
+                        item.get("model_memory_bytes")
+                        for item in metadata
+                        if item.get("model_memory_bytes")
+                    ),
                     None,
                 ),
                 "peak_memory_bytes": max(peaks) if peaks else None,
@@ -361,9 +367,7 @@ def plot_command(args: argparse.Namespace) -> int:
 def paired_command(args: argparse.Namespace) -> int:
     prediction_paths = [Path(path) for path in args.predictions]
     predictions = [row for path in prediction_paths for row in read_jsonl(path)]
-    result = paired_comparisons(
-        _examples(args.dataset), predictions, baseline=args.baseline
-    )
+    result = paired_comparisons(_examples(args.dataset), predictions, baseline=args.baseline)
     result["dataset_sha256"] = file_sha256(args.dataset)
     result["prediction_sources"] = [
         {"path": str(path), "sha256": file_sha256(path)} for path in prediction_paths
@@ -381,9 +385,7 @@ def interface_plot_command(args: argparse.Namespace) -> int:
 
 def compare_models_command(args: argparse.Namespace) -> int:
     config = read_json(args.config)
-    result = build_model_comparison(
-        config, config_path=args.config, output_dir=args.output_dir
-    )
+    result = build_model_comparison(config, config_path=args.config, output_dir=args.output_dir)
     print(f"wrote {len(result['rows'])} cross-model rows and figures -> {args.output_dir}")
     return 0
 
@@ -486,6 +488,21 @@ def evaluate_asl_pilot_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_asl_checkpoint_command(args: argparse.Namespace) -> int:
+    report = build_asl_checkpoint_report(
+        freeze_dir=args.freeze_dir,
+        data_dir=args.data_dir,
+        runs_dir=args.runs_dir,
+        output=args.output,
+    )
+    print(
+        f"analyzed {len(report['conditions'])} ASL conditions; "
+        f"patterns={report['training_structure_coverage']['unique_normalized_semantic_patterns']} "
+        f"-> {args.output}"
+    )
+    return 0
+
+
 def analyze_placement_command(args: argparse.Namespace) -> int:
     result = build_placement_comparison(
         read_json(args.config), config_path=args.config, output_dir=args.output_dir
@@ -579,9 +596,7 @@ def freeze_public_gsm8k_command(args: argparse.Namespace) -> int:
     manifest = freeze_gsm8k_slice(
         args.source_selection, args.output_dir, per_stratum=args.per_stratum
     )
-    print(
-        f"froze {manifest['record_count']} balanced GSM8K questions -> {args.output_dir}"
-    )
+    print(f"froze {manifest['record_count']} balanced GSM8K questions -> {args.output_dir}")
     return 0
 
 
@@ -733,6 +748,15 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_evaluate.add_argument("--predictions", required=True)
     asl_evaluate.add_argument("--output-dir", required=True)
     asl_evaluate.set_defaults(handler=evaluate_asl_pilot_command)
+
+    asl_checkpoint = commands.add_parser(
+        "analyze-asl-checkpoint", help="aggregate and pair the frozen ASL pilot results"
+    )
+    asl_checkpoint.add_argument("--freeze-dir", required=True)
+    asl_checkpoint.add_argument("--data-dir", required=True)
+    asl_checkpoint.add_argument("--runs-dir", required=True)
+    asl_checkpoint.add_argument("--output", required=True)
+    asl_checkpoint.set_defaults(handler=analyze_asl_checkpoint_command)
 
     placement = commands.add_parser(
         "analyze-placement", help="compare interface knowledge in context, weights, and runtime"

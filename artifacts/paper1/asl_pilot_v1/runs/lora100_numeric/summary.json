@@ -1,0 +1,58 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "dependency_correct": 0.0,
+        "exact_asl": 0.0,
+        "executable": 0.5294117647058824,
+        "final_answer_correct": 0.17647058823529413,
+        "lowerable_to_ccir": 0.7647058823529411,
+        "parse_valid": 0.8235294117647058,
+        "semantic_lint_valid": 0.7647058823529411,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.7647058823529411
+      }
+    },
+    "tatqa": {
+      "count": 3,
+      "rates": {
+        "dependency_correct": 0.3333333333333333,
+        "exact_asl": 0.0,
+        "executable": 0.6666666666666666,
+        "final_answer_correct": 0.6666666666666666,
+        "lowerable_to_ccir": 0.6666666666666666,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 0.6666666666666666,
+        "semantic_return_equivalent": 0.3333333333333333,
+        "semantic_state_equivalent": 0.3333333333333333,
+        "type_valid": 0.6666666666666666
+      }
+    }
+  },
+  "component_mean_f1": {
+    "edges": 0.2711478652066887,
+    "operators": 0.6008193277310924,
+    "paths": 0.24146658896658896,
+    "semantic_state": 0.22414594664594664,
+    "source_facts": 0.3744047619047619
+  },
+  "eval_sha256": "22b30d0bc089baca3dd31aebbd016419bd620138618201e05c3db5f0e6b8c26b",
+  "prediction_count": 20,
+  "predictions_sha256": "2eb3fe59ee5749604ff32bac6de69fb73a78fd7c36170cb19f1bf17dc40988b1",
+  "rates": {
+    "dependency_correct": 0.05,
+    "exact_asl": 0.0,
+    "executable": 0.55,
+    "final_answer_correct": 0.25,
+    "lowerable_to_ccir": 0.75,
+    "parse_valid": 0.85,
+    "semantic_lint_valid": 0.75,
+    "semantic_return_equivalent": 0.05,
+    "semantic_state_equivalent": 0.05,
+    "type_valid": 0.75
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v1",
+  "scored_predictions_sha256": "8db1257fc1adb2c10131d1437a2f75430c607803f0cc6730e5864cce49d0a411"
+}

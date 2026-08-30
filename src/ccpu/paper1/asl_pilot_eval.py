@@ -175,6 +175,8 @@ def score_asl(reference: str, predicted: str, scope: dict[str, Any]) -> dict[str
     result: dict[str, Any] = {
         "exact_asl": "\n".join(reference.split()) == "\n".join(predicted.split()),
         "parse_valid": False,
+        "lowerable_to_ccir": False,
+        "type_valid": False,
         "semantic_lint_valid": False,
         "executable": False,
         "dependency_correct": False,
@@ -212,7 +214,9 @@ def score_asl(reference: str, predicted: str, scope: dict[str, Any]) -> dict[str
         return result
     predicted_validation = validate_asl(predicted, effective_scope=scope)
     result["errors"].extend(predicted_validation["errors"])
-    if not predicted_validation["type_verified"]:
+    result["lowerable_to_ccir"] = bool(predicted_validation["lower_verified"])
+    result["type_valid"] = bool(predicted_validation["type_verified"])
+    if not result["lowerable_to_ccir"]:
         return result
     reference_components = _components(reference_validation)
     predicted_components = _components(predicted_validation)
@@ -224,6 +228,8 @@ def score_asl(reference: str, predicted: str, scope: dict[str, Any]) -> dict[str
     result["dependency_correct"] = (
         result["executable"] and result["edges_metrics"]["f1"] == 1.0
     )
+    if not result["type_valid"]:
+        return result
     reference_states, reference_return = _state_signatures(reference_validation)
     predicted_states, predicted_return = _state_signatures(predicted_validation)
     state_metrics = _multiset_f1(reference_states, predicted_states)
@@ -381,6 +387,8 @@ def analyze_asl_predictions(
     metric_names = (
         "exact_asl",
         "parse_valid",
+        "lowerable_to_ccir",
+        "type_valid",
         "semantic_lint_valid",
         "executable",
         "dependency_correct",

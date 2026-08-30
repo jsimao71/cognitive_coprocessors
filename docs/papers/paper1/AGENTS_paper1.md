@@ -243,6 +243,20 @@ is demonstrated across capability levels.
   dependency edges, execution, canonical semantic state/return equivalence, and
   final executed answer. Q1 provenance and the 25-item test denominator remain
   explicit in every interpretation.
+- Frozen Q1 results: base 0/25 answers; ICL-5 3/25; ICL-10 4/25;
+  LoRA-25 5/25; LoRA-50 7/25; LoRA-100 7/25; LoRA-100+ICL-3 10/25;
+  LoRA-B augmented 6/25. Exact ASL is zero throughout. LoRA-B improves
+  lowerability on numeric/large/paraphrase suites and large-number answers from
+  3/20 to 4/20, but does not improve untouched semantic generalization.
+- The 100 training rows contain 92 normalized semantic signatures. Next select
+  350 genuinely new originals by relation-class deficits, excluding all existing
+  source IDs and frozen-test pattern families. Freeze the 500-original QKVO-r8
+  result before incremental executed-state training; only then consider r16 or
+  QKVO+MLP if the data expansion plateaus.
+- Evaluator stages are separate: parseable ASL, lowerable CCIR, semantically
+  type-valid operations, and executable runtime state. Type-invalid Boolean
+  arithmetic is retained as a regression case and receives no state/execution
+  correctness.
 
 ## Series dependency
 Paper 0 defines the position. Paper 1 tests strict automatic calculator assistance. Paper 2 adds heterogeneous engines and persistent micro-state. Paper 3 learns semantic interrupts. Paper 4 adds transactional/backtracking state. Paper 5 studies structured/PRA/KV interfaces. Paper 6 studies co-adaptation. Paper 7 integrates validated mechanisms.

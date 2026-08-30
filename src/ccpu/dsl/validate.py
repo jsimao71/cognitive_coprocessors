@@ -12,6 +12,7 @@ from .parser import parse_asl
 def validate_asl(text: str, *, effective_scope: dict[str, Any] | None = None) -> dict[str, Any]:
     result: dict[str, Any] = {
         "syntax_verified": False,
+        "lower_verified": False,
         "type_verified": False,
         "scope_verified": False,
         "execution_verified": False,
@@ -21,15 +22,18 @@ def validate_asl(text: str, *, effective_scope: dict[str, Any] | None = None) ->
     try:
         ast = parse_asl(text, effective_scope=effective_scope)
         result["syntax_verified"] = True
+        result["ast"] = ast
         ccir = lower_program(ast)
-        result["type_verified"] = True
+        result["lower_verified"] = True
+        result["ccir"] = ccir
         execution = execute_program(ast)
+        result["type_verified"] = True
         result["scope_verified"] = True
         result["deferred_verified"] = bool(execution["unresolved"])
         result["execution_verified"] = not execution["unresolved"]
         if execution["unresolved"]:
             result["errors"].extend(item["reason"] for item in execution["unresolved"])
-        result.update({"ast": ast, "ccir": ccir, "execution": execution})
+        result["execution"] = execution
     except (KeyError, TypeError, ValueError, ZeroDivisionError) as error:
         result["errors"].append(str(error))
     return result

@@ -63,7 +63,13 @@ zero teacher-facing chop failures. A revised semantic skill and answer-blind
 Codex pass produce 98/150 execution-verified semantic programs; two explicitly
 rationale-assisted repair rounds raise coverage to 150/150 (100 GSM8K and 50
 TAT-QA). These are Q1 compiler-data candidates with deterministic semantic lint,
-not manually reviewed gold or model-compilation evidence.
+not manually reviewed gold. A semantic-pattern-grouped Q1 pilot then gives
+0/25 final executed answers without examples, 3/25 with five-shot ICL, 4/25 with
+ten-shot ICL, and 5/25, 7/25, and 7/25 for rank-8 LoRA trained on nested 25-,
+50-, and 100-program subsets. LoRA-100 plus three-shot ICL reaches 10/25
+(40\%; 95\% Wilson 23.4--59.3\%). Training on 100 originals plus 900 controlled
+variants improves lowerability and large-number robustness but reaches only 6/25
+untouched answers. This is a learning signal, not a robust semantic compiler.
 \end{abstract}
 
 \section{Status and Scope}
@@ -80,6 +86,8 @@ run is empirical and protocol-frozen, but it also has one checkpoint and one
 greedy seed; its condition ordering is evidence for replication, not a final
 architecture-level estimate. The public GSM8K slice is likewise a
 single-checkpoint developmental transfer test, not a benchmark-wide estimate.
+The ASL compiler pilot is also single-checkpoint and has only 25 untouched test
+programs; its component and robustness results are diagnostic Q1 evidence.
 
 Paper 1 asks one question:
 \begin{quote}
@@ -944,6 +952,84 @@ With only 25 untouched programs, this pilot can reveal a learning signal and the
 kind of invariance learned by augmentation; it cannot establish a robust general
 semantic compiler.
 
+\subsection{Q1 compiler-pilot results}
+
+The 100 training programs contain 92 normalized semantic-pattern signatures:
+87 occur once, three twice, one three times, and one four times. Thus the corpus
+is structurally diverse under the registered signature, although that signature
+cannot prove complete semantic diversity. Relation tags expose remaining thin
+classes, including only six percentage and 16 relative-quantity programs,
+compared with 45 ratio/fraction and 55 remaining/difference programs. Future
+selection therefore targets relation-class deficits rather than uniform rows.
+
+\begin{table}[t]
+\centering\small
+\caption{Untouched 25-program Q1 test. Parse and lower are validity rates; Exec.
+is deterministic ASL execution; Answer is final executed-answer accuracy. Exact
+ASL is 0 in every condition. Tokens are mean prompt tokens.}
+\label{tab:asl-pilot}
+\begin{tabular}{lrrrrr}
+\toprule
+Condition & Parse & Lower & Exec. & Answer & Tokens\\
+\midrule
+Base                  & .00 & .00 & .00 & .00 & 234\\
+Five-shot ICL         & .76 & .76 & .64 & .12 & 2,225\\
+Ten-shot ICL          & .88 & .88 & .76 & .16 & 3,758\\
+LoRA-25               & .88 & .72 & .48 & .20 & 234\\
+LoRA-50               & .92 & .88 & .68 & .28 & 234\\
+LoRA-100              & .92 & .84 & .68 & .28 & 234\\
+LoRA-100 + 3-shot ICL & .88 & .84 & .72 & .40 & 1,497\\
+LoRA-B augmented      & .96 & .92 & .64 & .24 & 234\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Zero-shot Qwen3-0.6B emits natural-language summaries and no parseable ASL.
+Demonstrations establish the surface contract immediately but cost 9.5--16 times
+the base prompt tokens. LoRA-25 already reaches 5/25 answers without this prompt
+overhead; LoRA-50 rises to 7/25 and improves path, source-fact, operator, and
+state-component F1. LoRA-100 remains at 7/25 and regresses on several component
+scores despite a lower development loss. The curve therefore plateaus within
+this small test rather than supporting monotonic scaling. Three residual
+demonstrations complement LoRA-100, reaching 10/25; the wide Wilson interval
+(.234, .593) and single seed preclude a strong placement claim.
+
+All adapters modify 2,293,760 QKVO parameters (0.383\% of the model). LoRA-25,
+-50, and -100 consume 29,550, 59,640, and 112,950 target tokens and finish in
+427, 836, and 1,462 seconds on XPU. Their final development losses are .682,
+.642, and .579. LoRA-B consumes 235,470 target tokens in 3,176 seconds and reaches
+.535 development loss, so its comparison is not compute matched.
+
+\begin{table}[t]
+\centering\small
+\caption{LoRA-A (100 originals) versus LoRA-B (100 originals plus 900
+train-only perturbations). Numeric suites contain the 20 eligible test parents;
+original and paraphrase contain all 25.}
+\label{tab:asl-robustness}
+\begin{tabular}{lrrrrrr}
+\toprule
+Suite & \multicolumn{3}{c}{LoRA-A} & \multicolumn{3}{c}{LoRA-B}\\
+ & Lower & Exec. & Answer & Lower & Exec. & Answer\\
+\midrule
+Original    & .84 & .68 & .28 & .92 & .64 & .24\\
+Numeric     & .75 & .55 & .25 & .90 & .65 & .25\\
+Very large  & .80 & .50 & .15 & .90 & .60 & .20\\
+Paraphrase  & .80 & .64 & .28 & .92 & .64 & .32\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Augmentation does not improve untouched semantic-program answers (6/25 versus
+7/25), but it consistently improves lowerability and improves very-large-number
+answers from 3/20 to 4/20. Relative to its own original outputs, LoRA-B loses no
+correct parent under ordinary numeric remapping or paraphrase, whereas LoRA-A
+loses two and one, respectively. The evidence therefore supports a narrow
+interpretation: controlled perturbations teach surface and magnitude invariance,
+not new reasoning structures. Parsing, CCIR lowering, semantic type validity,
+and execution are recorded separately. In particular, one parseable Boolean
+arithmetic output lowers mechanically but is type-invalid and cannot execute;
+it receives no state/execution correctness.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -1234,6 +1320,13 @@ is Q4 manual gold. The grouped split prevents measured topology leakage but does
 not replace independent-teacher agreement or manual semantic adjudication.
 Twenty-five untouched test programs also give imprecise whole-program estimates;
 the richer component metrics are diagnostic rather than extra independent trials.
+The 900 perturbations share only 100 semantic parents and LoRA-B has roughly twice
+LoRA-100's target-token exposure, so robustness differences cannot be attributed
+to augmentation alone. The normalized pattern signature is useful for leakage
+control but may merge or separate structures imperfectly. The next checkpoint
+adds 350 relation-diversified originals while excluding frozen test source IDs
+and semantic-pattern families. Only after a 500-original QKVO-r8 run do we test
+incremental NL+executed-state transitions, rank 16, or QKVO+MLP adaptation.
 
 \section{Related Work}
 
@@ -1292,9 +1385,15 @@ The ASL bootstrap turns that negative result into a testable next stage without
 claiming success: public records and scopes are mined, a compact extensible
 surface parses to typed state, and all 150 Q1 semantic programs execute exactly.
 A frozen grouped pilot now tests whether context, weights, or controlled
-augmentation produce a measurable compilation signal. Its untouched 25-program
-test and non-manual Q1 labels deliberately bound the conclusion; reviewed and
-larger independently generated semantic data remain the next evidence gate.
+augmentation produce a measurable compilation signal. Context alone teaches the
+surface, 50 genuinely different originals improve semantic compilation, and
+three residual examples complement the 100-row adapter. Controlled perturbations
+mainly improve invariance, not untouched semantic generalization. The result
+supports a hybrid placement---context for local specialization, weights for a
+learned ASL contract, and the runtime for lowering, types, and deterministic
+execution---but its untouched 25-program test and non-manual Q1 labels deliberately
+bound the conclusion. A relation-diversified 500-original checkpoint and
+incremental executed-state condition are the next evidence gates.
 
 \begin{thebibliography}{9}
 

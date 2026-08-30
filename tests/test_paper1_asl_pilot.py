@@ -109,6 +109,21 @@ RETURN jessica.age_now"""
     assert metrics["final_answer_correct"] is True
 
 
+def test_semantic_scoring_handles_typed_but_unlowerable_program():
+    reference = "family.children = 3\nRETURN family.children"
+    predicted = (
+        "family.has_parent = true\n"
+        "family.parent_legs = family.has_parent * 2\n"
+        "RETURN family.parent_legs"
+    )
+    metrics = score_asl(reference, predicted, _scope())
+    assert metrics["parse_valid"] is True
+    assert metrics["lowerable_to_ccir"] is True
+    assert metrics["type_valid"] is False
+    assert metrics["executable"] is False
+    assert metrics["final_answer_correct"] is False
+
+
 def test_extract_asl_ignores_fenced_explanation():
     output = "Here is the program:\n```asl\na.count = 4\nRETURN a.count\n```\nDone."
     assert extract_asl(output) == "a.count = 4\nRETURN a.count"
