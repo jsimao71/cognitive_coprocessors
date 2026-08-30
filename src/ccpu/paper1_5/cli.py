@@ -9,6 +9,7 @@ from ccpu.common.artifacts import (
     environment_manifest,
     file_sha256,
     read_json,
+    read_jsonl,
     write_json,
     write_jsonl,
 )
@@ -441,13 +442,16 @@ def run_public_crag_model_command(args: argparse.Namespace) -> int:
         model["device"] = args.device
     backend = ConfidenceBackend(model)
     output = Path(args.output_dir)
+    checkpoint = output / "predictions.checkpoint.jsonl"
+    existing = read_jsonl(checkpoint) if checkpoint.exists() and not args.no_resume else []
     rows, threshold = run_crag_model_matrix(
         args.public_config,
         args.cache_root,
         args.selection,
         backend,
         seed=int(raw["seed"]),
-        checkpoint_path=output / "predictions.checkpoint.jsonl",
+        checkpoint_path=checkpoint,
+        existing_rows=existing,
     )
     summary = write_crag_model_run(
         output,
@@ -620,5 +624,6 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     crag_model_run.add_argument("--selection", required=True)
     crag_model_run.add_argument("--model-config", required=True)
     crag_model_run.add_argument("--device")
+    crag_model_run.add_argument("--no-resume", action="store_true")
     crag_model_run.add_argument("--output-dir", required=True)
     crag_model_run.set_defaults(handler=run_public_crag_model_command)

@@ -188,6 +188,7 @@ def run_crag_model_matrix(
     *,
     seed: int,
     checkpoint_path: str | Path | None = None,
+    existing_rows: list[dict[str, Any]] | None = None,
 ) -> tuple[list[dict[str, Any]], float]:
     materialized = _materialize(config_path, cache_root, selection_path)
     calibration = [row for row in materialized if row["model_split"] == "calibration"]
@@ -209,8 +210,20 @@ def run_crag_model_matrix(
         return active_task
 
     gateway = GenericCognitiveGateway(resolve)
-    predictions = []
+    predictions = list(existing_rows or [])
+    completed_counts: dict[str, int] = defaultdict(int)
+    for prediction in predictions:
+        completed_counts[str(prediction["example_id"])] += 1
+    invalid_counts = {
+        example_id: count for example_id, count in completed_counts.items() if count != 16
+    }
+    if invalid_counts:
+        raise ValueError(f"partial CRAG question in resume checkpoint: {invalid_counts}")
+    completed_ids = set(completed_counts)
+    starting_count = len(predictions)
     for row_index, row in enumerate(evaluation, 1):
+        if str(row["example_id"]) in completed_ids:
+            continue
         grounded = backend.complete(_grounded_prompt(row), seed=seed + 1)
         for availability in ("external", "context"):
             required = availability == "external"
@@ -301,7 +314,7 @@ def run_crag_model_matrix(
         write_jsonl(checkpoint_path, predictions)
     if retrieved_calls != sum(
         row["retrieved"] and row["condition"] == "voluntary_retrieve_tool"
-        for row in predictions
+        for row in predictions[starting_count:]
     ):
         raise ValueError("CRAG generic retrieval gateway accounting mismatch")
     return predictions, threshold
