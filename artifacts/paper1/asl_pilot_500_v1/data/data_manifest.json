@@ -1,0 +1,26 @@
+{
+  "dataset_counts": {
+    "gsm8k": 326,
+    "tatqa": 124
+  },
+  "dev_rows": 25,
+  "input_sha256": {
+    "expansion_train": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562",
+    "freeze_manifest": "1de74cdd523867366488dca1acd4b1b175f1b08872770800e6003300186bd94a"
+  },
+  "output_sha256": {
+    "dev": "690f3053e39f9941a3904fb547bccb7376aca60985824d9a24a90883f94b05a0",
+    "leakage_audit": "7b9ede8e5ce7b40dae69b5b2da34c70c8542a5d2ee6d8fa83076cce17adbef48",
+    "train_450": "11af658579290114ac782faeafd21e7a5c6c088847b045a12b8c3a39ada2c4f6"
+  },
+  "repair_round_counts": {
+    "0": 311,
+    "1": 134,
+    "2": 5
+  },
+  "schema_version": "ccpu.paper1.asl_expansion_data.v1",
+  "seed": 912734,
+  "test_rows_unchanged": 25,
+  "train_pattern_count": 397,
+  "train_rows": 450
+}

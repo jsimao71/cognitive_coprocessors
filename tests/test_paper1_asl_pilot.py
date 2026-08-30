@@ -1,6 +1,8 @@
+from ccpu.common.artifacts import read_jsonl, write_json, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.paper1.asl_pilot_data import (
     _choose_grouped_splits,
+    build_asl_expansion_data,
     pattern_id,
     perturb_row,
 )
@@ -127,3 +129,32 @@ def test_semantic_scoring_handles_typed_but_unlowerable_program():
 def test_extract_asl_ignores_fenced_explanation():
     output = "Here is the program:\n```asl\na.count = 4\nRETURN a.count\n```\nDone."
     assert extract_asl(output) == "a.count = 4\nRETURN a.count"
+
+
+def test_expansion_data_preserves_frozen_pattern_boundary(tmp_path):
+    def frozen_row(source_id, target):
+        row = _row(
+            source_id,
+            f"{target} = 1\nRETURN {target}",
+            f"The grounded value of {target} is 1.",
+        )
+        return {
+            **row,
+            "split": "train",
+            "semantic_pattern_id": pattern_id(row),
+        }
+
+    freeze = tmp_path / "freeze"
+    original_train = frozen_row("train", "box.count")
+    dev = frozen_row("dev", "person.age")
+    test = frozen_row("test", "shop.price")
+    expansion = frozen_row("expansion", "trip.distance")
+    write_jsonl(freeze / "splits" / "train.jsonl", [original_train])
+    write_jsonl(freeze / "splits" / "dev.jsonl", [dev])
+    write_jsonl(freeze / "splits" / "test.jsonl", [test])
+    write_json(freeze / "freeze_manifest.json", {"frozen": True})
+    expansion_path = write_jsonl(tmp_path / "expansion.jsonl", [expansion])
+    manifest = build_asl_expansion_data(freeze, expansion_path, tmp_path / "output")
+    assert manifest["train_rows"] == 2
+    assert manifest["train_pattern_count"] == 2
+    assert len(read_jsonl(tmp_path / "output" / "sft" / "train_450.jsonl")) == 2

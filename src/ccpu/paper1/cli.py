@@ -18,7 +18,7 @@ from ccpu.common.artifacts import (
 from ccpu.common.gsm8k import materialize_gsm8k
 
 from .asl_pilot_analysis import build_asl_checkpoint_report
-from .asl_pilot_data import build_asl_pilot_data, freeze_asl_pilot
+from .asl_pilot_data import build_asl_expansion_data, build_asl_pilot_data, freeze_asl_pilot
 from .asl_pilot_eval import analyze_asl_predictions, run_asl_pilot
 from .dataset import (
     ArithmeticDatasetConfig,
@@ -459,6 +459,20 @@ def build_asl_pilot_data_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def build_asl_expansion_data_command(args: argparse.Namespace) -> int:
+    manifest = build_asl_expansion_data(
+        args.freeze_dir,
+        args.expansion_train,
+        args.output_dir,
+        seed=args.seed,
+    )
+    print(
+        f"built {manifest['train_rows']} expansion training rows with "
+        f"{manifest['train_pattern_count']} patterns -> {args.output_dir}"
+    )
+    return 0
+
+
 def run_asl_pilot_command(args: argparse.Namespace) -> int:
     model_config = read_json(args.config)
     if args.adapter_path:
@@ -725,6 +739,16 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_data.add_argument("--augmentation-variants", type=int, default=9)
     asl_data.add_argument("--seed", type=int, default=912733)
     asl_data.set_defaults(handler=build_asl_pilot_data_command)
+
+    asl_expansion_data = commands.add_parser(
+        "build-asl-expansion-data",
+        help="build the leakage-audited 500-original checkpoint SFT data",
+    )
+    asl_expansion_data.add_argument("--freeze-dir", required=True)
+    asl_expansion_data.add_argument("--expansion-train", required=True)
+    asl_expansion_data.add_argument("--output-dir", required=True)
+    asl_expansion_data.add_argument("--seed", type=int, default=912734)
+    asl_expansion_data.set_defaults(handler=build_asl_expansion_data_command)
 
     asl_run = commands.add_parser(
         "run-asl-pilot", help="run one base, ICL, or LoRA semantic ASL condition"

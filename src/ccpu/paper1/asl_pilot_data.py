@@ -119,9 +119,7 @@ def _normalized_expr(
 def semantic_pattern(row: dict[str, Any]) -> dict[str, Any]:
     operations = list(row["ccir"]["operations"])
     target_paths = [
-        str(item["operation"]["target"])
-        for item in operations
-        if item["operation"]["op"] == "SET"
+        str(item["operation"]["target"]) for item in operations if item["operation"]["op"] == "SET"
     ]
     targets = {path: f"v{index}" for index, path in enumerate(target_paths)}
     normalized = []
@@ -316,7 +314,9 @@ def _compact_context(row: dict[str, Any]) -> str:
         text = " | ".join(str(cell) for cell in table_row)
         lowered = text.casefold()
         relevant = bool(question_tokens & set(re.findall(r"[a-z]{4,}", lowered)))
-        relevant = relevant or any(number.replace(",", "") in text.replace(",", "") for number in asl_numbers)
+        relevant = relevant or any(
+            number.replace(",", "") in text.replace(",", "") for number in asl_numbers
+        )
         if index < 3 or relevant:
             selected_table.append(text)
     selected_paragraphs = []
@@ -454,9 +454,7 @@ def _replace_entity_context(context: Any, old: str, new: str) -> Any:
 def _percentage_literals(asl: str, question: str) -> set[str]:
     protected = {
         match.group(1)
-        for match in re.finditer(
-            r"(?i)(-?\d+(?:\.\d+)?)\s*(?:%|percent\b|percentage\b)", question
-        )
+        for match in re.finditer(r"(?i)(-?\d+(?:\.\d+)?)\s*(?:%|percent\b|percentage\b)", question)
     }
     protected.update(
         match.group(1)
@@ -496,8 +494,10 @@ def perturb_row(row: dict[str, Any], *, variant: int, mode: str) -> dict[str, An
                 numeric = float(literal)
             except ValueError:
                 continue
-            if literal in protected_percentages or 1900 <= abs(numeric) <= 2100 or not re.search(
-                rf"(?<![A-Za-z0-9_]){re.escape(literal)}(?![A-Za-z0-9_])", surface
+            if (
+                literal in protected_percentages
+                or 1900 <= abs(numeric) <= 2100
+                or not re.search(rf"(?<![A-Za-z0-9_]){re.escape(literal)}(?![A-Za-z0-9_])", surface)
             ):
                 continue
             if mode == "large" or (mode == "augmented" and variant % 4 == 0):
@@ -580,9 +580,7 @@ def build_asl_pilot_data(
     ordered_train = _diverse_order(list(splits["train"]), seed=seed)
     files = {}
     for count in (25, 50, 100):
-        rows = [
-            _sft_record(row, variant_id="original") for row in ordered_train[:count]
-        ]
+        rows = [_sft_record(row, variant_id="original") for row in ordered_train[:count]]
         path = write_jsonl(output / "sft" / f"train_{count}.jsonl", rows)
         files[f"train_{count}"] = {"rows": len(rows), "sha256": file_sha256(path)}
     dev_sft = [_sft_record(row, variant_id="original") for row in splits["dev"]]
@@ -621,9 +619,7 @@ def build_asl_pilot_data(
         eval_sets[mode] = []
         for index, row in enumerate(splits["test"]):
             try:
-                eval_sets[mode].append(
-                    perturb_row(row, variant=10_000 + index, mode=mode)
-                )
+                eval_sets[mode].append(perturb_row(row, variant=10_000 + index, mode=mode))
             except (KeyError, TypeError, ValueError, ZeroDivisionError) as error:
                 eval_perturbation_failures.append(
                     {"suite": mode, "source_id": row["source_id"], "reason": str(error)}
@@ -699,4 +695,77 @@ def build_asl_pilot_data(
     write_json(output / "data_manifest.json", manifest)
     write_json(output / "augmentation_failures.json", augmentation_failures)
     write_json(output / "evaluation_perturbation_failures.json", eval_perturbation_failures)
+    return manifest
+
+
+def build_asl_expansion_data(
+    freeze_dir: str | Path,
+    expansion_train_path: str | Path,
+    output_dir: str | Path,
+    *,
+    seed: int = 912734,
+) -> dict[str, Any]:
+    """Materialize the 500-original checkpoint while preserving frozen evaluation."""
+
+    freeze = Path(freeze_dir)
+    expansion_train_path = Path(expansion_train_path)
+    original = {
+        split: read_jsonl(freeze / "splits" / f"{split}.jsonl")
+        for split in ("train", "dev", "test")
+    }
+    expansion = read_jsonl(expansion_train_path)
+    train = [*original["train"], *expansion]
+    train_ids = {(row["dataset"], row["source_id"]) for row in train}
+    dev_ids = {(row["dataset"], row["source_id"]) for row in original["dev"]}
+    test_ids = {(row["dataset"], row["source_id"]) for row in original["test"]}
+    train_patterns = {row["semantic_pattern_id"] for row in train}
+    dev_patterns = {row["semantic_pattern_id"] for row in original["dev"]}
+    test_patterns = {row["semantic_pattern_id"] for row in original["test"]}
+    audit = {
+        "schema_version": "ccpu.paper1.asl_expansion_leakage_audit.v1",
+        "train_dev_parent_overlap": sorted(train_ids & dev_ids),
+        "train_test_parent_overlap": sorted(train_ids & test_ids),
+        "train_dev_pattern_overlap": sorted(train_patterns & dev_patterns),
+        "train_test_pattern_overlap": sorted(train_patterns & test_patterns),
+        "duplicate_train_parents": len(train) - len(train_ids),
+    }
+    audit["passed"] = not any(
+        value for key, value in audit.items() if key.endswith(("overlap", "parents"))
+    )
+    if not audit["passed"]:
+        raise AssertionError(f"ASL expansion leakage audit failed: {audit}")
+
+    output = Path(output_dir)
+    ordered_train = _diverse_order(train, seed=seed)
+    train_path = write_jsonl(
+        output / "sft" / "train_450.jsonl",
+        (_sft_record(row, variant_id="original") for row in ordered_train),
+    )
+    dev_path = write_jsonl(
+        output / "sft" / "dev.jsonl",
+        (_sft_record(row, variant_id="original") for row in original["dev"]),
+    )
+    audit_path = write_json(output / "leakage_audit.json", audit)
+    manifest = {
+        "schema_version": "ccpu.paper1.asl_expansion_data.v1",
+        "seed": seed,
+        "train_rows": len(train),
+        "dev_rows": len(original["dev"]),
+        "test_rows_unchanged": len(original["test"]),
+        "train_pattern_count": len(train_patterns),
+        "dataset_counts": dict(sorted(Counter(row["dataset"] for row in train).items())),
+        "repair_round_counts": dict(
+            sorted(Counter(str(row["provenance"]["repair_round"]) for row in train).items())
+        ),
+        "input_sha256": {
+            "freeze_manifest": file_sha256(freeze / "freeze_manifest.json"),
+            "expansion_train": file_sha256(expansion_train_path),
+        },
+        "output_sha256": {
+            "train_450": file_sha256(train_path),
+            "dev": file_sha256(dev_path),
+            "leakage_audit": file_sha256(audit_path),
+        },
+    }
+    write_json(output / "data_manifest.json", manifest)
     return manifest
