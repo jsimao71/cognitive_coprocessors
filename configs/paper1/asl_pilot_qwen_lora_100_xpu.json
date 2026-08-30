@@ -21,7 +21,9 @@
     "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
     "seed": 99173,
     "device": "xpu",
-    "dtype": "float16"
+    "dtype": "float16",
+    "gradient_checkpointing": false,
+    "evaluate_each_epoch": false
   },
   "models": [{
     "model_id": "Qwen/Qwen3-0.6B",

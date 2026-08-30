@@ -28,6 +28,8 @@ class LoRATrainingConfig:
     seed: int = 99173
     device: str = "xpu"
     dtype: str = "float16"
+    gradient_checkpointing: bool = True
+    evaluate_each_epoch: bool = True
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> LoRATrainingConfig:
@@ -50,6 +52,8 @@ class LoRATrainingConfig:
             seed=int(data.get("seed", 99173)),
             device=str(data.get("device", "xpu")),
             dtype=str(data.get("dtype", "float16")),
+            gradient_checkpointing=bool(data.get("gradient_checkpointing", True)),
+            evaluate_each_epoch=bool(data.get("evaluate_each_epoch", True)),
         )
 
     def validate(self) -> None:
@@ -186,10 +190,11 @@ def train_lora(
         task_type="CAUSAL_LM",
     )
     model_instance = get_peft_model(base, peft_config).to(device)
-    model_instance.enable_input_require_grads()
-    model_instance.gradient_checkpointing_enable(
-        gradient_checkpointing_kwargs={"use_reentrant": False}
-    )
+    if training.gradient_checkpointing:
+        model_instance.enable_input_require_grads()
+        model_instance.gradient_checkpointing_enable(
+            gradient_checkpointing_kwargs={"use_reentrant": False}
+        )
     model_instance.train()
     trainable_parameters = sum(
         parameter.numel() for parameter in model_instance.parameters() if parameter.requires_grad
@@ -223,8 +228,11 @@ def train_lora(
                 optimizer.step()
                 optimizer.zero_grad(set_to_none=True)
                 optimizer_steps += 1
-        dev_loss = _mean_loss(
-            model_instance, torch, dev_rows, tokenizer.pad_token_id, device
+        should_evaluate = training.evaluate_each_epoch or epoch + 1 == training.epochs
+        dev_loss = (
+            _mean_loss(model_instance, torch, dev_rows, tokenizer.pad_token_id, device)
+            if should_evaluate
+            else None
         )
         history.append(
             {
@@ -233,9 +241,10 @@ def train_lora(
                 "mean_dev_loss": dev_loss,
             }
         )
+        dev_text = f"{dev_loss:.4f}" if dev_loss is not None else "deferred"
         print(
             f"epoch {epoch + 1}/{training.epochs}: "
-            f"train={history[-1]['mean_train_loss']:.4f} dev={dev_loss:.4f}"
+            f"train={history[-1]['mean_train_loss']:.4f} dev={dev_text}"
         )
 
     if device == "xpu":
