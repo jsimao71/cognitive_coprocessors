@@ -38,6 +38,14 @@ from .next_analysis import analyze_runs
 from .next_experiment import run_model_condition, run_oracle_condition, summarize_next
 from .plot import plot_scaling
 from .public_benchmarks import analyze_public_coverage, freeze_public_suite
+from .public_compute import (
+    PUBLIC_COMPUTE_CONDITIONS,
+    analyze_public_compute_runs,
+    freeze_executable_public_slice,
+    materialize_executable_public_slice,
+    run_public_compute_example,
+    write_public_compute_run,
+)
 from .result_use import (
     ResultUseConfig,
     analyze_result_use,
@@ -543,6 +551,100 @@ def compare_generic_tools_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def freeze_public_executable_command(args: argparse.Namespace) -> int:
+    result = freeze_executable_public_slice(
+        args.config,
+        args.cache_root,
+        args.source_selection,
+        args.output_dir,
+        per_benchmark=args.per_benchmark,
+    )
+    print(
+        f"froze {result['record_count']} executable public Paper 2 rows; "
+        f"counts={result['selected_counts']}"
+    )
+    return 0
+
+
+def run_public_compute_command(args: argparse.Namespace) -> int:
+    config = read_json(args.model_config)
+    if config.get("schema_version") != "ccpu.paper2.public_compute_config.v1":
+        raise ValueError("unsupported Paper 2 public compute config schema")
+    model = dict(config["model"])
+    revision = str(model["revision"])
+    invalid_revision = len(revision) != 40 or any(
+        character not in "0123456789abcdef" for character in revision
+    )
+    if invalid_revision:
+        raise ValueError("public compute model revision must be a pinned SHA")
+    backend = HuggingFaceBackend(
+        HuggingFaceGenerationConfig(
+            model_id=str(model["model_id"]),
+            revision=revision,
+            max_new_tokens=int(model.get("max_new_tokens", 128)),
+            device=str(args.device or model.get("device", "auto")),
+            dtype=str(model.get("dtype", "auto")),
+            use_chat_template=bool(model.get("use_chat_template", True)),
+            enable_thinking=bool(model.get("enable_thinking", False)),
+            cached_generation=True,
+        )
+    )
+    examples = materialize_executable_public_slice(
+        args.public_config, args.cache_root, args.selection
+    )
+    examples = examples[args.offset :]
+    if args.limit is not None:
+        examples = examples[: args.limit]
+    output = Path(args.output_dir)
+    prediction_path = output / "predictions.jsonl"
+    rows = read_jsonl(prediction_path) if prediction_path.exists() and not args.no_resume else []
+    if any(row["condition"] != args.condition for row in rows):
+        raise ValueError("resume output contains a different public compute condition")
+    completed = {str(row["example_id"]) for row in rows}
+    pending = [row for row in examples if str(row["example_id"]) not in completed]
+    checkpoint_every = max(1, int(args.checkpoint_every))
+    seed = int(config["seed"])
+    for index, example in enumerate(pending, 1):
+        rows.append(
+            run_public_compute_example(
+                example,
+                backend,
+                condition=args.condition,
+                seed=seed,
+            )
+        )
+        if index % checkpoint_every == 0:
+            write_public_compute_run(
+                output,
+                rows,
+                model_config=args.model_config,
+                selection_path=args.selection,
+                condition=args.condition,
+            )
+            print(f"checkpoint {args.condition}: {len(rows)}/{len(examples)}")
+    summary = write_public_compute_run(
+        output,
+        rows,
+        model_config=args.model_config,
+        selection_path=args.selection,
+        condition=args.condition,
+    )
+    print(
+        f"completed {args.condition} on {summary['base_question_count']} public questions "
+        f"-> {output}"
+    )
+    return 0
+
+
+def analyze_public_compute_command(args: argparse.Namespace) -> int:
+    result = analyze_public_compute_runs(args.predictions, args.output_dir)
+    print(
+        f"analyzed {result['base_question_count']} matched public Paper 2 questions "
+        f"-> {args.output_dir}"
+    )
+    return 0
+
+
 def add_commands(papers: argparse._SubParsersAction) -> None:
     paper = papers.add_parser("paper2", help="heterogeneous symbolic protocol")
     commands = paper.add_subparsers(dest="command", required=True)
@@ -783,3 +885,39 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     generic_tools.add_argument("--benchmark", required=True)
     generic_tools.add_argument("--output-dir", required=True)
     generic_tools.set_defaults(handler=compare_generic_tools_command)
+
+    public_executable = commands.add_parser(
+        "freeze-public-executable",
+        help="freeze a validated executable slice of all five public benchmarks",
+    )
+    public_executable.add_argument("--config", required=True)
+    public_executable.add_argument("--cache-root", required=True)
+    public_executable.add_argument("--source-selection", required=True)
+    public_executable.add_argument("--per-benchmark", type=int, default=12)
+    public_executable.add_argument("--output-dir", required=True)
+    public_executable.set_defaults(handler=freeze_public_executable_command)
+
+    public_run = commands.add_parser(
+        "run-public-compute",
+        help="run one matched model-facing public compute condition",
+    )
+    public_run.add_argument("--public-config", required=True)
+    public_run.add_argument("--cache-root", required=True)
+    public_run.add_argument("--selection", required=True)
+    public_run.add_argument("--model-config", required=True)
+    public_run.add_argument("--condition", required=True, choices=PUBLIC_COMPUTE_CONDITIONS)
+    public_run.add_argument("--device")
+    public_run.add_argument("--checkpoint-every", type=int, default=10)
+    public_run.add_argument("--no-resume", action="store_true")
+    public_run.add_argument("--offset", type=int, default=0)
+    public_run.add_argument("--limit", type=int)
+    public_run.add_argument("--output-dir", required=True)
+    public_run.set_defaults(handler=run_public_compute_command)
+
+    public_compute_analysis = commands.add_parser(
+        "analyze-public-compute",
+        help="merge matched public compute conditions and render results",
+    )
+    public_compute_analysis.add_argument("--predictions", nargs="+", required=True)
+    public_compute_analysis.add_argument("--output-dir", required=True)
+    public_compute_analysis.set_defaults(handler=analyze_public_compute_command)

@@ -1,5 +1,7 @@
 import json
 
+import pytest
+
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
 from ccpu.common.generic_gateway import (
@@ -31,6 +33,7 @@ from ccpu.paper2.next_experiment import (
     run_model_condition,
     summarize_next,
 )
+from ccpu.paper2.public_adapters import registered_assistance
 from ccpu.paper2.public_benchmarks import (
     _clutrr,
     _date_understanding,
@@ -39,6 +42,7 @@ from ccpu.paper2.public_benchmarks import (
     _proofwriter,
     _unit_conversion,
 )
+from ccpu.paper2.public_compute import run_public_compute_example
 from ccpu.paper2.result_use import (
     ResultUseConfig,
     generate_result_use_benchmark,
@@ -709,3 +713,116 @@ def test_public_gsm_gold_trace_checks_actual_bounded_execution():
     assert unsupported["formalization_oracle"]
     assert not unsupported["backend_compatible"]
     assert unsupported["execution_exact"] is None
+
+
+def test_public_compute_adapters_execute_and_validate_targets():
+    cases = [
+        {
+            "benchmark": "gsm8k",
+            "example_id": "gsm:test",
+            "prompt": "Add two and three.",
+            "target": "5",
+            "raw": {"answer": "Compute <<2+3=5>>.\n#### 5"},
+        },
+        {
+            "benchmark": "bigbench_unit_conversion",
+            "example_id": "units:test",
+            "prompt": "What is 1 meter in units of centimeters?",
+            "target": "100",
+            "raw": {},
+        },
+        {
+            "benchmark": "bigbench_date_understanding",
+            "example_id": "date:test",
+            "prompt": "Today is 06/18/2019. What is the date tomorrow?",
+            "target": "06/19/2019",
+            "raw": {},
+        },
+        {
+            "benchmark": "proofwriter_balanced",
+            "example_id": "proof:test",
+            "prompt": "unused",
+            "target": "TRUE",
+            "raw": {
+                "id": "Att1",
+                "theory": "Bob is red. If someone is red then they are round.",
+                "question": "Bob is round.",
+            },
+        },
+        {
+            "benchmark": "clutrr",
+            "example_id": "clutrr:test",
+            "prompt": "unused",
+            "target": "uncle",
+            "raw": {
+                "query": "('a', 'b')",
+                "proof_state": "[{('a', 'uncle', 'b'): [('a', 'brother', 'x')]}]",
+            },
+        },
+    ]
+    adapters = [registered_assistance(row) for row in cases]
+    assert [row["intent"] for row in adapters] == [
+        "compute",
+        "compute",
+        "compute",
+        "verify",
+        "retrieve",
+    ]
+    assert [row["result"] for row in adapters] == [
+        "5",
+        "100",
+        "06/19/2019",
+        "TRUE",
+        "uncle",
+    ]
+
+    corrupted = {**cases[0], "raw": {"answer": "Compute <<2+3=6>>.\n#### 5"}}
+    with pytest.raises(ValueError, match="failed exact execution"):
+        registered_assistance(corrupted)
+
+
+def test_public_four_tool_run_invokes_gateway_and_separates_wrong_route():
+    class Backend:
+        model_id = "fake"
+
+        def __init__(self, outputs):
+            self.outputs = iter(outputs)
+
+        def generate(self, prompt, *, seed):
+            del prompt, seed
+            answer = next(self.outputs)
+            return GenerationResult(answer, answer, 8, 2, 0, 1, 10, {})
+
+    row = {
+        "benchmark": "gsm8k",
+        "example_id": "gsm:test",
+        "content_sha256": "a" * 64,
+        "difficulty": 1,
+        "difficulty_stratum": "2_steps",
+        "prompt": "Add two and three.",
+        "target": "5",
+        "registered": {
+            "intent": "compute",
+            "engine": "calculator",
+            "result": "5",
+            "formalization_source": "annotated_trace",
+        },
+    }
+    exact = run_public_compute_example(
+        row,
+        Backend(['__compute({"payload":{"request":"solve"}})', "Answer: 5"]),
+        condition="four_tools",
+        seed=1,
+    )
+    assert exact["assistance_valid"] and exact["correct"]
+    assert exact["model_calls"] == 2
+
+    wrong = run_public_compute_example(
+        row,
+        Backend(['__verify({"payload":{"request":"solve"}})']),
+        condition="four_tools",
+        seed=1,
+    )
+    assert not wrong["assistance_valid"]
+    assert not wrong["malformed_assistance"]
+    assert wrong["selected_intent"] == "verify"
