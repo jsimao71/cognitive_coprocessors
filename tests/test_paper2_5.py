@@ -7,7 +7,12 @@ from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json
 from ccpu.common.retrieval import SourceRequest
 from ccpu.paper2_5.composition import run_compositions
 from ccpu.paper2_5.production_analysis import analyze_substitution
-from ccpu.paper2_5.public_benchmarks import _decimal_expression, _score_derivation
+from ccpu.paper2_5.public_benchmarks import (
+    _decimal_expression,
+    _score_derivation,
+    freeze_tatqa_subset,
+    run_tatqa_retrieve_compute,
+)
 from ccpu.paper2_5.public_suite import (
     audit_tatqa_generic_transport,
     freeze_public_suite_readiness,
@@ -282,6 +287,63 @@ def test_tatqa_arithmetic_uses_exact_decimal_and_percent_scaling():
     assert unsupported["oracle_compute_exact"] is None
 
 
+def test_tatqa_retrieve_compute_pipeline_is_bounded_and_leak_free(tmp_path):
+    cache = tmp_path / "cache"
+    source_path = cache / "tatqa" / "tatqa_dataset_dev.json"
+    document = {
+        "table": {
+            "uid": "table-1",
+            "table": [
+                ["Metric", "2025", "2026"],
+                ["Revenue", "40", "100"],
+            ],
+        },
+        "paragraphs": [],
+        "questions": [
+            {
+                "uid": "question-1",
+                "question": "What is the increase in revenue from 2025 to 2026?",
+                "answer": 60,
+                "derivation": "100 - 40",
+                "answer_type": "arithmetic",
+                "answer_from": "table",
+                "scale": "",
+                "req_comparison": False,
+                "rel_paragraphs": [],
+            }
+        ],
+    }
+    write_json(source_path, [document])
+    config = write_json(
+        tmp_path / "config.json",
+        {
+            "schema_version": "ccpu.paper2_5.public_tatqa_config.v1",
+            "selection_seed": 7,
+            "max_rows": 1,
+            "source": {
+                "file": source_path.name,
+                "file_sha256": file_sha256(source_path),
+                "expected_documents": 1,
+                "expected_questions": 1,
+            },
+        },
+    )
+    frozen = tmp_path / "frozen"
+    freeze_tatqa_subset(config, cache, frozen)
+    output = tmp_path / "run"
+    summary = run_tatqa_retrieve_compute(
+        config, cache, frozen / "selection.jsonl", output, limit=5
+    )
+    assert summary["typed_adapter_coverage"] == 1.0
+    assert summary["by_condition"]["structured_hybrid_top5"][
+        "eligible_final_accuracy"
+    ] == 1.0
+    assert summary["by_condition"]["oracle_evidence"]["eligible_final_accuracy"] == 1.0
+    predictions = read_jsonl(output / "predictions.jsonl")
+    assert len(predictions) == 3
+    assert not any("answer" in row or "derivation" in row for row in predictions)
+
+
 def test_public_tool_transport_and_suite_readiness_fail_closed(tmp_path):
     predictions = tmp_path / "predictions.jsonl"
     from ccpu.common.artifacts import write_jsonl
@@ -321,6 +383,17 @@ def test_public_tool_transport_and_suite_readiness_fail_closed(tmp_path):
             "by_condition": {"structured_hybrid": {"mean_evidence_recall_at_k": 0.75}},
         },
     )
+    retrieve_compute = write_json(
+        tmp_path / "retrieve_compute.json",
+        {
+            "selection_sha256": selection_sha,
+            "typed_adapter_coverage": 0.5,
+            "by_condition": {
+                "structured_hybrid_top5": {"eligible_final_accuracy": 0.75},
+                "oracle_evidence": {"eligible_final_accuracy": 1.0},
+            },
+        },
+    )
     crag_manifest = write_json(
         tmp_path / "crag_manifest.json",
         {"selection_sha256": "b" * 64, "record_count": 2},
@@ -338,6 +411,7 @@ def test_public_tool_transport_and_suite_readiness_fail_closed(tmp_path):
         tatqa_manifest_path=tatqa_manifest,
         tatqa_composition_path=composition,
         tatqa_retrieval_path=retrieval,
+        tatqa_retrieve_compute_path=retrieve_compute,
         tatqa_tools_path=tmp_path / "tools" / "summary.json",
         crag_manifest_path=crag_manifest,
         crag_analysis_path=crag_analysis,
@@ -346,6 +420,7 @@ def test_public_tool_transport_and_suite_readiness_fail_closed(tmp_path):
     assert suite["headline_ready"] is False
     assert suite["benchmarks"]["spider2"]["freeze_status"] == "blocked_no_local_subset"
     assert suite["benchmarks"]["tatqa"]["generic_tool_accepted_calls"] == 3
+    assert suite["benchmarks"]["tatqa"]["typed_adapter_coverage"] == 0.5
 
 
 def test_tatqa_public_cli_freezes_and_analyzes_verified_source(tmp_path):

@@ -28,14 +28,14 @@ real local Iceberg snapshots, governed metrics, and an Oxigraph ontology: native
 composition reaches 11/11 while a top-5 textualized baseline reaches 2/11. This
 is still deterministic local evidence, not language-model or production-service
 evidence. A pinned 320-question TAT-QA diagnostic then separates retrieval from
-compute: 129/320 questions require computation, all 106 sampled gold arithmetic
-derivations execute exactly, but the current runtime has no TAT-QA table/text
-operation adapter. At matched top-5 retrieval, adding table headers to a hybrid
-lexical ranker raises evidence recall from 0.751 to 0.799 over 308 evaluable
-questions. Oracle-timed replay accepts 449 generic-tool calls for the registered
-320 RETRIEVE and 129 COMPUTE episodes, but does not test model initiation or
-source execution. This is a retrieval/composition audit, not end-to-end question
-answering. The
+compute. A bounded typed arithmetic adapter covers 106/320 questions. Flat and
+header-aware top-5 retrieval complete evidence and answer 68/106 and 78/106;
+oracle evidence answers 106/106. Conditional decimal execution is exact, so the
+10-question gain isolates retrieval structure. Operation selection still uses
+gold derivations, and 214 span, multi-span, and count questions remain
+unsupported. Oracle-timed replay accepts 449 generic-tool calls, but does not
+test model initiation. This is bounded RETRIEVE--COMPUTE execution, not
+end-to-end model question answering. The
 pre-registered
 learned-router gate is \textsc{no-go}: native heterogeneity has value, context
 burden grows, and broadcast costs more, but the heuristic leaves no routing gap.
@@ -296,14 +296,15 @@ Compute required (arithmetic or count) & 129/320 & 0.403\\
 Joint table--text evidence & 130/320 & 0.406\\
 Executable gold arithmetic & 106/320 & 0.331\\
 Exact executable arithmetic & 106/106 & 1.000\\
-End-to-end typed operation adapter & 0/320 & 0.000\\
+Bounded typed arithmetic adapter & 106/320 & 0.331\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Here adapter coverage means a typed end-to-end operation adapter; it remains
-zero. We separately test whether preserving table structure helps retrieve the
-evidence that such an adapter would consume. Word and character BM25 rank a
+Here adapter coverage means that the runtime can execute the annotated
+arithmetic plan after checking evidence completeness. It does not mean that a
+model or CPU policy selected that plan. We test whether preserving table
+structure helps retrieve the evidence that this adapter consumes. Word and character BM25 rank a
 matched pool of flattened table rows and paragraphs. Their reciprocal-rank
 hybrid is compared with the same hybrid over rows enriched with row and column
 headers. All conditions receive only the question and return five chunks.
@@ -333,9 +334,39 @@ joint table--text (0.764 to 0.793) questions, while text-only recall is unchange
 at 0.977. This pattern supports retaining table headers, but it does not
 establish source-native execution: table relevance for arithmetic and spans is
 derived post hoc from gold operands/answers, 12 questions lack defensible labels,
-and operation choice remains oracle. LLM-only, model-initiated generic-tool,
-typed operation, vector/semantic, and final-answer conditions remain pending. This
-diagnostic does not reopen the Paper 3.5 routing gate.
+and operation choice remains oracle. LLM-only, model-initiated generic-tool, and
+vector/semantic conditions remain pending. This diagnostic does not reopen the
+Paper 3.5 routing gate.
+
+\subsection{Bounded RETRIEVE--COMPUTE execution}
+For the 106 executable arithmetic questions, the adapter compiles the annotated
+derivation into a typed decimal plan but executes it only when all labeled
+evidence is present in the retrieved set. Ranking remains question-only. The
+committed records contain IDs, evidence labels, operation type, and plan hashes,
+but neither answers nor derivations.
+
+\begin{table}[t]
+\centering\small
+\caption{Bounded TAT-QA arithmetic execution. Accuracy uses all 106 eligible
+questions; full-selection accuracy uses all 320 frozen questions.}
+\label{tab:p25-tatqa-execution}
+\begin{tabular}{lrrr}
+\toprule
+Evidence condition & Complete & Eligible accuracy & Full selection\\
+\midrule
+Flattened hybrid top-5 & .642 & .642 & .213\\
+Header-aware hybrid top-5 & \textbf{.736} & \textbf{.736} & \textbf{.244}\\
+Oracle evidence & 1.000 & 1.000 & .331\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Whenever evidence is complete, decimal execution is exact. Header-aware
+retrieval therefore enables ten additional correct arithmetic answers over the
+flat hybrid (78 versus 68), while the 28-question gap to oracle evidence is
+entirely upstream of computation. This is an executable RETRIEVE--COMPUTE chain,
+but not model operation selection: the operation plan comes from the gold
+derivation, and count, span, and multi-span adapters remain unsupported.
 
 \subsection{Generic transport and public-suite readiness}
 We replay the registered assistance types through the same fixed four-tool
@@ -360,7 +391,7 @@ not an end-to-end benchmark result.}
 \toprule
 Benchmark & Freeze & Completed evidence & Main blocker\\
 \midrule
-TAT-QA & 320 & retrieval + transport & native operation adapter\\
+TAT-QA & 320 & retrieval + arithmetic execution & operation selection/non-arithmetic\\
 CRAG & 320 shared & trigger + transport & frozen evidence backend\\
 Spider 2.0 & none & none & local reproducible subset\\
 FRAMES & none & none & bounded subset\\
@@ -406,13 +437,14 @@ recovery, remote object storage, model-authored SQL, and natural-language metric
 parsing are not tested. Accordingly, 11/11 establishes bounded composition and
 provenance, not production accuracy.
 
-The public TAT-QA sample is one deterministic development split and uses dataset
-metadata plus gold derivations only to audit composition availability. It does
-now measures lexical evidence selection, but table labels for spans and
-arithmetic are induced from gold answers/operands and 12 rows are not evaluable.
-It does not measure value extraction, operation prediction, model answer use,
-latency, semantic-vector retrieval, or robustness. Header-aware lexical recall
-is not equivalent to a source-native execution advantage.
+The public TAT-QA sample is one deterministic development split. It measures
+lexical evidence selection and bounded arithmetic execution, but table labels
+are induced from gold answers/operands and 12 rows are not retrieval-evaluable.
+The arithmetic operation plan is compiled from the gold derivation; therefore
+the 78/106 result does not measure operation prediction or model answer use. It
+also omits count/span extraction, semantic-vector retrieval, latency, and
+robustness. Header-aware lexical accuracy is not a general source-native
+execution advantage.
 Likewise, the four-tool enterprise audit demonstrates only equal transport of
 already computed governed records. Model-facing intent and R2 invocation remain
 unmeasured.
@@ -468,6 +500,12 @@ python -m ccpu paper2.5 analyze-public-tatqa-retrieval \
   --selection artifacts/paper2_5/public_benchmarks/tatqa_v1/selection.jsonl \
   --top-k 5 \
   --output-dir artifacts/paper2_5/public_benchmarks/tatqa_retrieval_v1
+python -m ccpu paper2.5 run-public-tatqa-retrieve-compute \
+  --config configs/paper2_5/public_tatqa.json \
+  --cache-root <verified-public-cache> \
+  --selection artifacts/paper2_5/public_benchmarks/tatqa_v1/selection.jsonl \
+  --top-k 5 \
+  --output-dir artifacts/paper2_5/public_benchmarks/tatqa_retrieve_compute_v1
 python -m ccpu paper2.5 audit-public-tatqa-tools \
   --predictions artifacts/paper2_5/public_benchmarks/tatqa_v1/predictions.jsonl \
   --output-dir artifacts/paper2_5/public_benchmarks/tatqa_tools_v1
@@ -480,6 +518,8 @@ python -m ccpu paper2.5 freeze-public-suite \
   $T/tatqa_v1/summary.json \
   --tatqa-retrieval \
   $T/tatqa_retrieval_v1/retrieval_summary.json \
+  --tatqa-retrieve-compute \
+  $T/tatqa_retrieve_compute_v1/summary.json \
   --tatqa-tools \
   $T/tatqa_tools_v1/summary.json \
   --crag-manifest \
@@ -509,9 +549,11 @@ governed composition with snapshot and definition provenance. Its universal
 gap supports source-native semantics, but the absence of measured routing
 headroom leaves the learned-router decision unchanged.
 The pinned TAT-QA audit adds external task structure and shows that arithmetic
-is not the current bottleneck. Header-aware lexical retrieval improves matched
-evidence recall, but does not establish comparative QA performance; typed
-operation and model conditions define the next Paper 2.5 step.
+execution is not the current bottleneck. Header-aware retrieval improves both
+matched evidence recall and bounded arithmetic accuracy, from 68/106 to 78/106;
+oracle evidence reaches 106/106. Because operation plans remain oracle and 214
+non-arithmetic questions are unsupported, operation selection and extraction,
+not another arithmetic engine, define the next Paper 2.5 step.
 The fixed four-tool gateway also preserves all 11 governed result records with
 constant visible schema size. A novel invocation claim still requires matched
 model-facing evidence of automatic rescue, earlier safe retrieval, CONTINUE, or

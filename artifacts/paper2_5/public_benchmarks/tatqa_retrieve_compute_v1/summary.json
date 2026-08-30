@@ -1,0 +1,62 @@
+{
+  "by_condition": {
+    "flat_hybrid_top5": {
+      "complete_evidence_rate": 0.6415094339622641,
+      "compute_attempt_rate": 0.6415094339622641,
+      "conditional_compute_exact_rate": 1.0,
+      "eligible_count": 106,
+      "eligible_final_accuracy": 0.6415094339622641,
+      "full_selection_final_accuracy": 0.2125,
+      "mean_assistance_episodes": 1.6415094339622642
+    },
+    "oracle_evidence": {
+      "complete_evidence_rate": 1.0,
+      "compute_attempt_rate": 1.0,
+      "conditional_compute_exact_rate": 1.0,
+      "eligible_count": 106,
+      "eligible_final_accuracy": 1.0,
+      "full_selection_final_accuracy": 0.33125,
+      "mean_assistance_episodes": 2.0
+    },
+    "structured_hybrid_top5": {
+      "complete_evidence_rate": 0.7358490566037735,
+      "compute_attempt_rate": 0.7358490566037735,
+      "conditional_compute_exact_rate": 1.0,
+      "eligible_count": 106,
+      "eligible_final_accuracy": 0.7358490566037735,
+      "full_selection_final_accuracy": 0.24375,
+      "mean_assistance_episodes": 1.7358490566037736
+    }
+  },
+  "claim_boundary": {
+    "answers_or_derivations_redistributed": false,
+    "interpretation": "bounded RETRIEVE-to-COMPUTE execution, not end-to-end model QA",
+    "model_facing": false,
+    "operation_selection": "gold derivation compiled to typed decimal plan",
+    "oracle_evidence_uses_gold": true,
+    "retrieval_ranking_uses_gold": false,
+    "retrieval_scoring_uses_gold": true
+  },
+  "eligible_arithmetic_count": 106,
+  "environment": {
+    "executable": "C:\\Users\\j.simao\\.venvs\\modal-llm-xpu\\Scripts\\python.exe",
+    "git": {
+      "dirty": true,
+      "revision": "071b98d09805738c2df52e1c9d4149378e8d8507"
+    },
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]"
+  },
+  "prediction_count": 318,
+  "predictions_sha256": "5779dcd689ace8d1aef7bd42cabbdee9d6b891fcbf7e310ead3892278b255411",
+  "schema_version": "ccpu.paper2_5.tatqa_retrieve_compute_summary.v1",
+  "selection_count": 320,
+  "selection_sha256": "11b4fee497cf7ffde298cab3bf7aabee02bb77d6be5fecc801a93bab28fa444a",
+  "top_k": 5,
+  "typed_adapter_coverage": 0.33125,
+  "unsupported": {
+    "count": 23,
+    "multi_span": 77,
+    "span": 114
+  }
+}

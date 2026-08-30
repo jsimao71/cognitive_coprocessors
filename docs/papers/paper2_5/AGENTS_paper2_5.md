@@ -59,8 +59,12 @@ Secondary: can capability count grow outside recurring neural context?
 - In that sample, 129/320 questions require arithmetic or counting and 130/320
   require joint table--text evidence. The safe decimal evaluator reproduces all
   106/106 annotated arithmetic derivations exactly.
-- Current source-native TAT-QA adapter coverage is 0/320. Treat this as an
-  end-to-end operation-adapter gap, not final-answer accuracy.
+- Bounded typed arithmetic-adapter coverage is now 106/320. Flat and
+  header-aware top-5 retrieval complete evidence and answer 68/106 and 78/106;
+  oracle evidence answers 106/106. Conditional decimal execution is exact.
+- This is not model operation selection. The adapter compiles gold derivations
+  into typed plans and executes only after complete evidence. Count, span, and
+  multi-span adapters remain unsupported (214/320 total).
 - At matched top-5 lexical retrieval, flattened word BM25 reaches 0.704 mean
   evidence recall, character BM25 0.756, and their flattened hybrid 0.751. A
   row/column-header-aware hybrid reaches 0.799 over 308 evaluable questions.
@@ -70,8 +74,8 @@ Secondary: can capability count grow outside recurring neural context?
   table and table--text questions.
 - Ranking is gold-free, but scoring uses annotated paragraph orders and table
   labels induced from gold spans/arithmetic operands. Twelve rows lack
-  defensible labels. This is not yet a typed source-native, generic-tool,
-  LLM-only, semantic-vector, or final-answer comparison.
+  defensible labels. This is not yet a model-facing generic-tool, LLM-only, or
+  semantic-vector comparison.
 
 These are controlled deterministic runtime results, not language-model or live
 web-search evidence. New natural-language routing work requires a separately
@@ -205,10 +209,13 @@ recorded in `configs/paper2_5/public_tatqa.json`. The source file must remain in
 verified local cache. Never commit question text, tables, paragraphs, answers,
 or derivations.
 
-The current audit separates retrieval requirement, compute requirement,
-composition depth, gold-compute availability, gold-compute exactness, and
-source-native adapter availability. Gold arithmetic validates only the compute
-stage. It must not be reported as model execution or end-to-end QA accuracy.
+The audit separates retrieval requirement, compute requirement, composition
+depth, evidence completeness, typed-plan availability, compute exactness, and
+final arithmetic accuracy. The bounded adapter covers the 106 arithmetic rows:
+flat top-5 reaches 0.642 and structured top-5 reaches 0.736 eligible accuracy;
+oracle evidence reaches 1.000. Never report these as model execution or full
+TAT-QA QA accuracy because operation selection is oracle and 214 rows are
+unsupported.
 
 The retrieval continuation compares word BM25, character BM25, reciprocal-rank
 hybrid, and a structure-aware hybrid at the same top-5 budget. Gold evidence may
@@ -223,8 +230,8 @@ selection, source execution, final-answer accuracy, or Automatic Rescue Rate.
 
 `artifacts/paper2_5/public_benchmarks/suite_v1` binds the TAT-QA diagnostics and
 the shared Paper 1.5 CRAG freeze by SHA-256. Its `headline_ready` field remains
-false. TAT-QA lacks the table/text operation adapter; CRAG lacks a frozen
-evidence backend; Spider 2.0 and FRAMES lack frozen local subsets; BIRD-Interact
-is deferred until live Postgres integration is stable. Keep these blockers
-machine-readable and retain the 11-case enterprise fixture as the current
-source-native execution result.
+false. TAT-QA still lacks model operation selection and non-arithmetic adapters;
+CRAG lacks a production retrieval backend; Spider 2.0 and FRAMES lack frozen
+local subsets; BIRD-Interact is deferred until live Postgres integration is
+stable. Keep these blockers machine-readable and retain the 11-case enterprise
+fixture as the current broad source-native execution result.

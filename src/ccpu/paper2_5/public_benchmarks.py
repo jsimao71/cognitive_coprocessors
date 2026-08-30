@@ -27,6 +27,7 @@ from ccpu.common.lexical_routing import (
     character_word_boundary_ngrams,
     current_word_tokens,
 )
+from ccpu.common.metrics import safe_mean
 from ccpu.common.public_benchmarks import stratified_select
 
 
@@ -477,4 +478,161 @@ def analyze_tatqa_retrieval(
         "environment": environment_manifest(Path(__file__).resolve().parents[3]),
     }
     write_json(output / "retrieval_summary.json", summary)
+    return summary
+
+
+TATQA_RETRIEVE_COMPUTE_CONDITIONS = (
+    "flat_hybrid_top5",
+    "structured_hybrid_top5",
+    "oracle_evidence",
+)
+
+
+def _evaluate_tatqa_retrieve_compute(
+    materialized: list[dict[str, Any]], *, limit: int
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Execute arithmetic plans only after the selected evidence is complete."""
+    predictions = []
+    eligible = 0
+    for source in materialized:
+        question = source["question"]
+        compute = _score_derivation(question)
+        if not compute["oracle_compute_available"]:
+            continue
+        eligible += 1
+        gold = _gold_evidence_labels(source["document"], question)
+        flat = _rank_chunks(
+            _document_chunks(source["document"], structured=False),
+            str(question["question"]),
+            limit,
+        )["hybrid"]
+        structured = _rank_chunks(
+            _document_chunks(source["document"], structured=True),
+            str(question["question"]),
+            limit,
+        )["hybrid"]
+        condition_labels = {
+            "flat_hybrid_top5": flat,
+            "structured_hybrid_top5": structured,
+            "oracle_evidence": sorted(gold),
+        }
+        plan_sha = hashlib.sha256(
+            canonical_json(
+                {
+                    "derivation": question["derivation"],
+                    "scale": question["scale"],
+                }
+            ).encode("utf-8")
+        ).hexdigest()
+        for condition in TATQA_RETRIEVE_COMPUTE_CONDITIONS:
+            retrieved = condition_labels[condition]
+            evidence_complete = bool(gold) and gold.issubset(retrieved)
+            compute_attempted = evidence_complete
+            final_correct = bool(compute_attempted and compute["oracle_compute_exact"])
+            predictions.append(
+                {
+                    "schema_version": "ccpu.paper2_5.tatqa_retrieve_compute.v1",
+                    "example_id": source["example_id"],
+                    "content_sha256": source["content_sha256"],
+                    "condition": condition,
+                    "answer_from": source["answer_from"],
+                    "scale": source["scale"],
+                    "retrieved_evidence_labels": retrieved,
+                    "gold_evidence_label_count": len(gold),
+                    "evidence_complete": evidence_complete,
+                    "operation": "decimal_expression",
+                    "operation_plan_sha256": plan_sha,
+                    "compute_attempted": compute_attempted,
+                    "compute_exact": compute["oracle_compute_exact"]
+                    if compute_attempted
+                    else None,
+                    "final_correct": final_correct,
+                    "assistance_episodes": 2 if compute_attempted else 1,
+                }
+            )
+
+    by_condition = {}
+    for condition in TATQA_RETRIEVE_COMPUTE_CONDITIONS:
+        members = [row for row in predictions if row["condition"] == condition]
+        attempted = [row for row in members if row["compute_attempted"]]
+        by_condition[condition] = {
+            "eligible_count": len(members),
+            "complete_evidence_rate": safe_mean(
+                row["evidence_complete"] for row in members
+            ),
+            "compute_attempt_rate": safe_mean(
+                row["compute_attempted"] for row in members
+            ),
+            "conditional_compute_exact_rate": safe_mean(
+                row["compute_exact"] for row in attempted
+            ),
+            "eligible_final_accuracy": safe_mean(
+                row["final_correct"] for row in members
+            ),
+            "full_selection_final_accuracy": sum(
+                row["final_correct"] for row in members
+            )
+            / len(materialized),
+            "mean_assistance_episodes": safe_mean(
+                row["assistance_episodes"] for row in members
+            ),
+        }
+    summary = {
+        "schema_version": "ccpu.paper2_5.tatqa_retrieve_compute_summary.v1",
+        "selection_count": len(materialized),
+        "eligible_arithmetic_count": eligible,
+        "typed_adapter_coverage": eligible / len(materialized),
+        "prediction_count": len(predictions),
+        "top_k": limit,
+        "by_condition": by_condition,
+        "unsupported": {
+            "count": sum(source["answer_type"] == "count" for source in materialized),
+            "multi_span": sum(
+                source["answer_type"] == "multi-span" for source in materialized
+            ),
+            "span": sum(source["answer_type"] == "span" for source in materialized),
+        },
+        "claim_boundary": {
+            "model_facing": False,
+            "retrieval_ranking_uses_gold": False,
+            "retrieval_scoring_uses_gold": True,
+            "oracle_evidence_uses_gold": True,
+            "operation_selection": "gold derivation compiled to typed decimal plan",
+            "answers_or_derivations_redistributed": False,
+            "interpretation": "bounded RETRIEVE-to-COMPUTE execution, not end-to-end model QA",
+        },
+    }
+    return predictions, summary
+
+
+def run_tatqa_retrieve_compute(
+    config_path: str | Path,
+    cache_root: str | Path,
+    selection_path: str | Path,
+    output_dir: str | Path,
+    *,
+    limit: int = 5,
+) -> dict[str, Any]:
+    materialized = _materialize(config_path, cache_root, selection_path)
+    rows, summary = _evaluate_tatqa_retrieve_compute(materialized, limit=limit)
+    output = Path(output_dir)
+    predictions_path = write_jsonl(output / "predictions.jsonl", rows)
+    summary.update(
+        {
+            "selection_sha256": file_sha256(selection_path),
+            "predictions_sha256": file_sha256(predictions_path),
+            "environment": environment_manifest(Path(__file__).resolve().parents[3]),
+        }
+    )
+    summary_path = write_json(output / "summary.json", summary)
+    write_json(
+        output / "manifest.json",
+        {
+            "schema_version": "ccpu.paper2_5.tatqa_retrieve_compute_manifest.v1",
+            "config_sha256": file_sha256(config_path),
+            "selection_sha256": file_sha256(selection_path),
+            "predictions_sha256": file_sha256(predictions_path),
+            "summary_sha256": file_sha256(summary_path),
+        },
+    )
     return summary

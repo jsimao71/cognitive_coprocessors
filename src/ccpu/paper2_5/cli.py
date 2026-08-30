@@ -25,6 +25,7 @@ from .public_benchmarks import (
     analyze_tatqa_composition,
     analyze_tatqa_retrieval,
     freeze_tatqa_subset,
+    run_tatqa_retrieve_compute,
 )
 from .public_suite import audit_tatqa_generic_transport, freeze_public_suite_readiness
 
@@ -188,6 +189,21 @@ def analyze_public_tatqa_retrieval_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_public_tatqa_retrieve_compute_command(args: argparse.Namespace) -> int:
+    summary = run_tatqa_retrieve_compute(
+        args.config,
+        args.cache_root,
+        args.selection,
+        args.output_dir,
+        limit=args.top_k,
+    )
+    print(
+        "executed bounded TAT-QA RETRIEVE-to-COMPUTE pipeline for "
+        f"{summary['eligible_arithmetic_count']} arithmetic questions -> {args.output_dir}"
+    )
+    return 0
+
+
 def compare_generic_tools_command(args: argparse.Namespace) -> int:
     summary = compare_enterprise_result_transports(args.fixture_root, args.output_dir)
     print(
@@ -211,6 +227,7 @@ def freeze_public_suite_command(args: argparse.Namespace) -> int:
         tatqa_manifest_path=args.tatqa_manifest,
         tatqa_composition_path=args.tatqa_composition,
         tatqa_retrieval_path=args.tatqa_retrieval,
+        tatqa_retrieve_compute_path=args.tatqa_retrieve_compute,
         tatqa_tools_path=args.tatqa_tools,
         crag_manifest_path=args.crag_manifest,
         crag_analysis_path=args.crag_analysis,
@@ -309,6 +326,19 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_tatqa_retrieval.add_argument("--output-dir", required=True)
     public_tatqa_retrieval.set_defaults(handler=analyze_public_tatqa_retrieval_command)
 
+    public_tatqa_retrieve_compute = commands.add_parser(
+        "run-public-tatqa-retrieve-compute",
+        help="run bounded TAT-QA evidence retrieval and typed arithmetic execution",
+    )
+    public_tatqa_retrieve_compute.add_argument("--config", required=True)
+    public_tatqa_retrieve_compute.add_argument("--cache-root", required=True)
+    public_tatqa_retrieve_compute.add_argument("--selection", required=True)
+    public_tatqa_retrieve_compute.add_argument("--top-k", type=int, default=5)
+    public_tatqa_retrieve_compute.add_argument("--output-dir", required=True)
+    public_tatqa_retrieve_compute.set_defaults(
+        handler=run_public_tatqa_retrieve_compute_command
+    )
+
     public_tatqa_tools = commands.add_parser(
         "audit-public-tatqa-tools",
         help="replay registered TAT-QA assistance types through generic tools",
@@ -323,6 +353,7 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     public_suite.add_argument("--tatqa-manifest", required=True)
     public_suite.add_argument("--tatqa-composition", required=True)
     public_suite.add_argument("--tatqa-retrieval", required=True)
+    public_suite.add_argument("--tatqa-retrieve-compute", required=True)
     public_suite.add_argument("--tatqa-tools", required=True)
     public_suite.add_argument("--crag-manifest", required=True)
     public_suite.add_argument("--crag-analysis", required=True)

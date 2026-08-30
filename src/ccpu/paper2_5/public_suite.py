@@ -87,6 +87,7 @@ def freeze_public_suite_readiness(
     tatqa_manifest_path: str | Path,
     tatqa_composition_path: str | Path,
     tatqa_retrieval_path: str | Path,
+    tatqa_retrieve_compute_path: str | Path,
     tatqa_tools_path: str | Path,
     crag_manifest_path: str | Path,
     crag_analysis_path: str | Path,
@@ -97,6 +98,7 @@ def freeze_public_suite_readiness(
         "tatqa_manifest": Path(tatqa_manifest_path),
         "tatqa_composition": Path(tatqa_composition_path),
         "tatqa_retrieval": Path(tatqa_retrieval_path),
+        "tatqa_retrieve_compute": Path(tatqa_retrieve_compute_path),
         "tatqa_tools": Path(tatqa_tools_path),
         "crag_manifest": Path(crag_manifest_path),
         "crag_analysis": Path(crag_analysis_path),
@@ -105,7 +107,11 @@ def freeze_public_suite_readiness(
     tatqa_selection = loaded["tatqa_manifest"]["selection_sha256"]
     if any(
         loaded[name]["selection_sha256"] != tatqa_selection
-        for name in ("tatqa_composition", "tatqa_retrieval")
+        for name in (
+            "tatqa_composition",
+            "tatqa_retrieval",
+            "tatqa_retrieve_compute",
+        )
     ):
         raise ValueError("TAT-QA diagnostics do not share one frozen selection")
     if (
@@ -120,6 +126,7 @@ def freeze_public_suite_readiness(
         raise ValueError("CRAG diagnostics do not share one frozen selection")
 
     tatqa_retrieval = loaded["tatqa_retrieval"]["by_condition"]["structured_hybrid"]
+    tatqa_execution = loaded["tatqa_retrieve_compute"]
     crag_transport = loaded["crag_analysis"]["generic_retrieve_transport"]
     benchmarks = {
         "tatqa": {
@@ -129,8 +136,15 @@ def freeze_public_suite_readiness(
             "structured_hybrid_recall_at_5": tatqa_retrieval["mean_evidence_recall_at_k"],
             "generic_tool_status": "oracle_timed_transport_only",
             "generic_tool_accepted_calls": loaded["tatqa_tools"]["accepted_calls"],
-            "source_native_status": "blocked_missing_table_text_operation_adapter",
-            "final_answer_status": "pending",
+            "source_native_status": "partial_arithmetic_adapter",
+            "typed_adapter_coverage": tatqa_execution["typed_adapter_coverage"],
+            "structured_arithmetic_accuracy": tatqa_execution["by_condition"][
+                "structured_hybrid_top5"
+            ]["eligible_final_accuracy"],
+            "oracle_evidence_arithmetic_accuracy": tatqa_execution["by_condition"][
+                "oracle_evidence"
+            ]["eligible_final_accuracy"],
+            "final_answer_status": "bounded_oracle_operation_arithmetic_only",
         },
         "crag": {
             "freeze_status": "complete_shared_from_paper1_5",
@@ -147,13 +161,16 @@ def freeze_public_suite_readiness(
         "bird_interact": {"freeze_status": "deferred_until_postgres_live_integration"},
     }
     manifest = {
-        "schema_version": "ccpu.paper2_5.public_suite_readiness.v1",
+        "schema_version": "ccpu.paper2_5.public_suite_readiness.v2",
         "input_sha256": {name: file_sha256(path) for name, path in inputs.items()},
         "benchmarks": benchmarks,
         "headline_ready": False,
-        "completed_empirical_benchmarks": ["tatqa_retrieval_only"],
+        "completed_empirical_benchmarks": [
+            "tatqa_retrieval",
+            "tatqa_bounded_retrieve_compute",
+        ],
         "blocking_requirements": [
-            "tatqa_source_native_table_text_operation_adapter",
+            "tatqa_non_arithmetic_adapters_and_operation_selection",
             "spider2_local_subset",
             "crag_frozen_evidence_backend",
             "frames_bounded_subset",
