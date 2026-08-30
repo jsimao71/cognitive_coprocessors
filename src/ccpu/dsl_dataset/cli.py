@@ -10,8 +10,10 @@ from ccpu.common.artifacts import read_json
 
 from .annotated import bootstrap_annotated
 from .audit import audit_chops
+from .expansion import finalize_asl_expansion
+from .local_codex import run_local_codex_batches
 from .mine import mine_datasets
-from .select import select_seed
+from .select import select_diverse_seed, select_seed
 from .semantic import (
     prepare_local_annotation_batches,
     prepare_repair_batches,
@@ -96,6 +98,118 @@ def select_command(input_path: Path, max_examples: int, seed: int, output: Path)
     click.echo(f"selected {manifest['record_count']} execution candidates -> {output}")
 
 
+@main.command("select-diverse")
+@click.option(
+    "--input",
+    "input_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option(
+    "--exclude", "exclude_paths", type=click.Path(exists=True, path_type=Path), multiple=True
+)
+@click.option("--dataset-target", "dataset_targets", multiple=True, required=True)
+@click.option("--seed", default=53011, show_default=True)
+@click.option("--output", type=click.Path(path_type=Path), required=True)
+def select_diverse_command(
+    input_paths: tuple[Path, ...],
+    exclude_paths: tuple[Path, ...],
+    dataset_targets: tuple[str, ...],
+    seed: int,
+    output: Path,
+) -> None:
+    targets = {}
+    for value in dataset_targets:
+        dataset, separator, count = value.partition("=")
+        if not separator or not dataset or int(count) < 1:
+            raise click.BadParameter("dataset targets must use dataset=positive_count")
+        targets[dataset] = int(count)
+    manifest = select_diverse_seed(
+        list(input_paths),
+        output,
+        dataset_targets=targets,
+        exclude_paths=list(exclude_paths),
+        seed=seed,
+    )
+    click.echo(f"selected {manifest['record_count']} relation-diverse candidates -> {output}")
+
+
+@main.command("run-local")
+@click.option("--requests-dir", type=click.Path(exists=True, path_type=Path), required=True)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+@click.option(
+    "--prompt", "prompt_path", type=click.Path(exists=True, path_type=Path), required=True
+)
+@click.option(
+    "--schema", "schema_path", type=click.Path(exists=True, path_type=Path), required=True
+)
+@click.option("--repo-root", type=click.Path(exists=True, path_type=Path), default=Path.cwd())
+@click.option("--executable", default="codex", show_default=True)
+@click.option("--model", default="gpt-5.4", show_default=True)
+@click.option("--reasoning-effort", default="medium", show_default=True)
+@click.option("--concurrency", default=4, type=click.IntRange(min=1, max=16), show_default=True)
+def run_local_command(
+    requests_dir: Path,
+    output_dir: Path,
+    prompt_path: Path,
+    schema_path: Path,
+    repo_root: Path,
+    executable: str,
+    model: str,
+    reasoning_effort: str,
+    concurrency: int,
+) -> None:
+    manifest = run_local_codex_batches(
+        requests_dir,
+        output_dir,
+        prompt_path=prompt_path,
+        schema_path=schema_path,
+        repo_root=repo_root,
+        executable=executable,
+        model=model,
+        reasoning_effort=reasoning_effort,
+        concurrency=concurrency,
+    )
+    click.echo(
+        f"completed {manifest['completed_count']}/{manifest['batch_count']} batches; "
+        f"annotations={manifest['annotation_count']} -> {output_dir}"
+    )
+
+
+@main.command("finalize-expansion")
+@click.option(
+    "--accepted", "candidate_path", type=click.Path(exists=True, path_type=Path), required=True
+)
+@click.option(
+    "--existing", "existing_path", type=click.Path(exists=True, path_type=Path), required=True
+)
+@click.option("--frozen-ledger", type=click.Path(exists=True, path_type=Path), required=True)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+@click.option("--target", default=350, type=click.IntRange(min=1), show_default=True)
+@click.option("--seed", default=53011, show_default=True)
+def finalize_expansion_command(
+    candidate_path: Path,
+    existing_path: Path,
+    frozen_ledger: Path,
+    output_dir: Path,
+    target: int,
+    seed: int,
+) -> None:
+    manifest = finalize_asl_expansion(
+        candidate_path,
+        existing_path,
+        frozen_ledger,
+        output_dir,
+        target=target,
+        seed=seed,
+    )
+    click.echo(
+        f"froze {manifest['selected_count']} new programs; "
+        f"combined={manifest['combined_count']} -> {output_dir}"
+    )
+
+
 @main.command("bootstrap-annotated")
 @click.option(
     "--input",
@@ -132,9 +246,7 @@ def bootstrap_annotated_command(input_paths: tuple[Path, ...], output_dir: Path)
 def validate_semantic_command(
     seed_paths: tuple[Path, ...], annotation_paths: tuple[Path, ...], output_dir: Path
 ) -> None:
-    summary = validate_semantic_annotations(
-        list(seed_paths), list(annotation_paths), output_dir
-    )
+    summary = validate_semantic_annotations(list(seed_paths), list(annotation_paths), output_dir)
     click.echo(
         f"accepted {summary['accepted_count']} semantic ASL programs; "
         f"rejected {summary['rejected_count']} -> {output_dir}"
@@ -151,12 +263,8 @@ def validate_semantic_command(
 )
 @click.option("--output-dir", type=click.Path(path_type=Path), required=True)
 @click.option("--batch-size", default=5, type=click.IntRange(min=1, max=25), show_default=True)
-def prepare_local_command(
-    seed_paths: tuple[Path, ...], output_dir: Path, batch_size: int
-) -> None:
-    manifest = prepare_local_annotation_batches(
-        list(seed_paths), output_dir, batch_size=batch_size
-    )
+def prepare_local_command(seed_paths: tuple[Path, ...], output_dir: Path, batch_size: int) -> None:
+    manifest = prepare_local_annotation_batches(list(seed_paths), output_dir, batch_size=batch_size)
     click.echo(
         f"prepared {manifest['example_count']} answer-free examples in "
         f"{manifest['batch_count']} local batches -> {output_dir}"

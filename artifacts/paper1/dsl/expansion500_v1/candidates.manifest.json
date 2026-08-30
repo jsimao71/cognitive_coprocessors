@@ -1,0 +1,40 @@
+{
+  "dataset_targets": {
+    "gsm8k": 267,
+    "tatqa": 133
+  },
+  "difficulty_counts": {
+    "high": 89,
+    "low": 202,
+    "medium": 109
+  },
+  "excluded_source_count": 150,
+  "exclusion_sha256": {
+    "artifacts\\paper1\\dsl\\annotated_v1\\accepted.jsonl": "afc841dd2d7824717521a69c9186575fd0e64ce5717e3d0d4ce32075faf5b0dc"
+  },
+  "input_sha256": {
+    "artifacts\\paper1\\dsl\\raw_v1\\gsm8k.jsonl": "85db87cc75c61f14504ab7acb2b1731c900705cc25318827f325390a2b783789",
+    "artifacts\\paper1\\dsl\\raw_v1\\tatqa.jsonl": "de7d56e2ff6e186bfb00bd00b4e984cea925e2367bcccc9700b712a7c8891bc4"
+  },
+  "ledger_sha256": "1953bf9f723eb3435865fe07d0aaa890c5c3a3f084a8a3e73626cf3315881e16",
+  "output_sha256": "aac9eb7f851c15fee9b72748337fa67dd4110ce396ba5c97d7429c732bf4e6e1",
+  "post_annotation_pattern_filter_required": true,
+  "record_count": 400,
+  "relation_class_counts": {
+    "aggregation": 200,
+    "chained_relations": 240,
+    "comparison": 142,
+    "equal_allocation": 160,
+    "multiple_entities": 286,
+    "nested_dependencies": 216,
+    "percentage": 164,
+    "rate_or_per_unit": 192,
+    "ratio_or_fraction": 180,
+    "relative_quantity": 133,
+    "remaining_or_difference": 149,
+    "single_relation": 72,
+    "temporal_or_duration": 184
+  },
+  "schema_version": "ccpu.dsl_dataset.diverse_seed_manifest.v1",
+  "seed": 53011
+}

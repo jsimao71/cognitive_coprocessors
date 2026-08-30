@@ -3,6 +3,9 @@ from click.testing import CliRunner
 from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
 from ccpu.dsl_dataset.chop import chop_example
 from ccpu.dsl_dataset.cli import main
+from ccpu.dsl_dataset.expansion import finalize_asl_expansion
+from ccpu.dsl_dataset.local_codex import run_local_codex_batches
+from ccpu.paper1.asl_pilot_data import pattern_id
 
 
 def test_chopper_preserves_decimals_and_common_abbreviations():
@@ -171,6 +174,53 @@ def test_annotation_bootstrap_creates_execution_verified_low_grade_asl(tmp_path)
     assert accepted[0]["quality_grade"].startswith("Q0_")
 
 
+def test_diverse_selector_excludes_sources_and_records_relation_cues(tmp_path):
+    rows = []
+    for source_id, question in (
+        ("ratio", "Ava has half as many books as Ben. How many altogether?"),
+        ("percent", "A store discounts a price by 20 percent. What remains?"),
+        ("rate", "A car travels 30 miles per hour for 2 hours. How far?"),
+        ("time", "In two years Mia will be 20. How old is she now?"),
+    ):
+        rows.append(
+            {
+                "dataset": "gsm8k",
+                "split": "train",
+                "source_id": source_id,
+                "record_sha256": source_id.ljust(64, "0"),
+                "question": question,
+                "metadata": {"arithmetic_compatible": True},
+                "parts": [{"part_id": 0, "teacher_input_default": True}],
+            }
+        )
+    raw = write_jsonl(tmp_path / "raw.jsonl", rows)
+    excluded = write_jsonl(
+        tmp_path / "excluded.jsonl", [{"dataset": "gsm8k", "source_id": "ratio"}]
+    )
+    output = tmp_path / "diverse.jsonl"
+    result = CliRunner().invoke(
+        main,
+        [
+            "select-diverse",
+            "--input",
+            str(raw),
+            "--exclude",
+            str(excluded),
+            "--dataset-target",
+            "gsm8k=3",
+            "--output",
+            str(output),
+        ],
+    )
+    assert result.exit_code == 0, result.output
+    selected = read_jsonl(output)
+    assert {row["source_id"] for row in selected} == {"percent", "rate", "time"}
+    assert all(row["selection_relation_classes"] for row in selected)
+    manifest = read_json(output.with_suffix(".manifest.json"))
+    assert manifest["excluded_source_count"] == 1
+    assert manifest["post_annotation_pattern_filter_required"] is True
+
+
 def test_semantic_validator_accepts_forward_state_and_rejects_operation_ledgers(tmp_path):
     seeds = write_jsonl(
         tmp_path / "seed.jsonl",
@@ -254,6 +304,80 @@ def test_semantic_validator_accepts_forward_state_and_rejects_operation_ledgers(
     )
     assert result.exit_code == 0, result.output
     assert read_json(output / "summary.json")["accepted_count"] == 1
-    assert "anonymous operation-ledger target" in read_jsonl(output / "rejected.jsonl")[0][
-        "reason"
-    ]
+    assert "anonymous operation-ledger target" in read_jsonl(output / "rejected.jsonl")[0]["reason"]
+
+
+def _expansion_row(source_id, target, question):
+    scope = {"id": f"gsm8k:train:{source_id}", "kind": "benchmark_case", "parent": None}
+    return {
+        "dataset": "gsm8k",
+        "split": "train",
+        "source_id": source_id,
+        "record_sha256": source_id.ljust(64, "0"),
+        "question": question,
+        "part_mappings": [{"part_id": 0, "asl": [f"{target} = 1", f"RETURN {target}"]}],
+        "ccir": {
+            "operations": [
+                {
+                    "scope": scope,
+                    "source_line": 1,
+                    "operation": {
+                        "op": "SET",
+                        "target": target,
+                        "expr": {"op": "CONST", "value": 1},
+                    },
+                },
+                {
+                    "scope": scope,
+                    "source_line": 2,
+                    "operation": {"op": "RETURN", "expr": {"op": "REF", "path": target}},
+                },
+            ]
+        },
+    }
+
+
+def test_expansion_finalizer_quarantines_frozen_eval_patterns(tmp_path):
+    frozen_template = _expansion_row("frozen", "person.age", "A person's age is 1.")
+    collision = _expansion_row("collision", "other.age", "Another person's age is 9.")
+    eligible_a = _expansion_row("eligible_a", "shop.total", "A shop has 1 item total.")
+    eligible_b = _expansion_row("eligible_b", "trip.distance", "A trip is 1 mile long.")
+    existing = write_jsonl(
+        tmp_path / "existing.jsonl", [_expansion_row("existing", "box.count", "One box.")]
+    )
+    candidates = write_jsonl(tmp_path / "candidates.jsonl", [collision, eligible_a, eligible_b])
+    ledger = write_jsonl(
+        tmp_path / "ledger.jsonl",
+        [{"split": "test", "semantic_pattern_id": pattern_id(frozen_template)}],
+    )
+    manifest = finalize_asl_expansion(candidates, existing, ledger, tmp_path / "final", target=2)
+    assert manifest["selected_count"] == 2
+    assert manifest["frozen_eval_pattern_overlap"] == []
+    assert manifest["quarantine_reason_counts"] == {"frozen_eval_semantic_pattern": 1}
+    assert {
+        row["source_id"] for row in read_jsonl(tmp_path / "final" / "expansion_train.jsonl")
+    } == {
+        "eligible_a",
+        "eligible_b",
+    }
+
+
+def test_local_codex_runner_resumes_valid_completed_batches(tmp_path):
+    requests = tmp_path / "requests"
+    write_json(requests / "batch_000.json", {"items": []})
+    output = tmp_path / "run"
+    write_json(output / "annotations" / "batch_000.json", {"annotations": [{"source_id": "a"}]})
+    prompt = write_json(tmp_path / "prompt.json", {"instruction": "test"})
+    schema = write_json(tmp_path / "schema.json", {"type": "object"})
+    manifest = run_local_codex_batches(
+        requests,
+        output,
+        prompt_path=prompt,
+        schema_path=schema,
+        repo_root=tmp_path,
+        executable="intentionally-missing-codex",
+        concurrency=1,
+    )
+    assert manifest["completed_count"] == 1
+    assert manifest["annotation_count"] == 1
+    assert manifest["batches"][0]["status"] == "resumed"
