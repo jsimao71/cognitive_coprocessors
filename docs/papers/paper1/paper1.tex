@@ -69,7 +69,11 @@ ten-shot ICL, and 5/25, 7/25, and 7/25 for rank-8 LoRA trained on nested 25-,
 50-, and 100-program subsets. LoRA-100 plus three-shot ICL reaches 10/25
 (40\%; 95\% Wilson 23.4--59.3\%). Training on 100 originals plus 900 controlled
 variants improves lowerability and large-number robustness but reaches only 6/25
-untouched answers. This is a learning signal, not a robust semantic compiler.
+untouched answers. A relation-diversified expansion then freezes 350 additional
+training programs: the resulting 450 training rows contain 397 normalized
+signatures and have zero signature overlap with the unchanged 25-row development
+and test sets. This is a learning signal and a data checkpoint, not a robust
+semantic compiler.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1030,6 +1034,42 @@ and execution are recorded separately. In particular, one parseable Boolean
 arithmetic output lowers mechanically but is type-invalid and cannot execute;
 it receives no state/execution correctness.
 
+\subsection{Relation-diversified 500-original checkpoint}
+
+We next freeze the data checkpoint that precedes any larger-adapter comparison.
+Selection excludes all 150 prior source IDs and greedily balances answer-free
+surface cues for aggregation, comparison, equal allocation, multiple entities,
+percentages, rates, ratios/fractions, relative quantities,
+remaining/difference, temporal shifts, chains, and nested dependencies. We draw
+a 400-row reserve (267 GSM8K and 133 TAT-QA), rather than another uniform sample.
+Eighty answer-blind Codex batches produce 267 programs that pass semantic lint,
+parse, CCIR lowering and types, grounded execution, and answer agreement. One
+labeled answer-visible repair round recovers 124 of 133 rejects, for 391/400
+accepted programs: 267 answer-blind primary and 124 rationale-assisted repair.
+Nine rows remain rejected.
+
+The post-compilation freeze recomputes each normalized semantic signature and
+excludes the 47 frozen development/test pattern families. Seven otherwise
+accepted rows collide and are quarantined. From 384 eligible programs we choose
+exactly 350, retaining 34 as reserve. The selected expansion contains 260 GSM8K
+and 90 TAT-QA programs and 314 distinct signatures; 303 signatures occur once.
+Combined with the original frozen 100-row training partition, the 450 training
+programs contain 397 signatures, with only nine signatures shared between old
+and new training data. Frozen development and test remain unchanged at 25 rows
+each, giving 500 semantic originals total and zero expansion overlap with either
+held-out pattern set.
+
+The expansion campaign reports 1,320,932 primary and 642,753 repair tokens
+(1,963,685 total) and 1,697 plus 565 seconds of wall time under four concurrent
+local Codex workers. These are teacher-generation costs, not student-training
+tokens. Relation labels are multi-valued: among the selected 350, for example,
+171 carry ratio/fraction cues, 130 relative-quantity cues, 138 percentage cues,
+175 aggregation cues, and 232 chained-relation cues. Labels describe selection
+coverage, not independently adjudicated semantic classes. This checkpoint alone
+makes no student-model improvement claim. The next predeclared run is the same
+QKVO rank-8 adapter on the 450 training originals; incremental
+NL+executed-state transitions follow before any rank-16 or QKVO+MLP sweep.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -1276,6 +1316,45 @@ python -m ccpu.dsl_dataset generate --dry-run \
   --config configs/paper1/dsl_teacher.example.json \
   --skill skills/ccir-arith-compiler/SKILL.md \
   --output-dir artifacts/paper1/dsl/teacher_dry_run
+
+# Relation-diversified 500-original checkpoint
+python -m ccpu.dsl_dataset select-diverse \
+  --input ${DSL}/raw_v1/gsm8k.jsonl \
+  --input ${DSL}/raw_v1/tatqa.jsonl \
+  --exclude ${DSL}/annotated_v1/accepted.jsonl \
+  --dataset-target gsm8k=267 --dataset-target tatqa=133 \
+  --output ${DSL}/expansion500_v1/candidates.jsonl
+python -m ccpu.dsl_dataset prepare-local \
+  --seed ${DSL}/expansion500_v1/candidates.jsonl \
+  --output-dir ${DSL}/expansion500_v1/primary
+python -m ccpu.dsl_dataset run-local \
+  --requests-dir ${DSL}/expansion500_v1/primary/requests \
+  --output-dir ${DSL}/expansion500_v1/primary \
+  --prompt configs/paper1/local_codex_annotation_prompt.md \
+  --schema configs/paper1/semantic_annotation_batch.schema.json
+python -m ccpu.dsl_dataset validate-semantic \
+  --seed ${DSL}/expansion500_v1/candidates.jsonl \
+  --annotations ${DSL}/expansion500_v1/primary/annotations.jsonl \
+  --output-dir ${DSL}/expansion500_v1/validated_primary
+python -m ccpu.dsl_dataset prepare-repair \
+  --seed ${DSL}/expansion500_v1/candidates.jsonl \
+  --rejected ${DSL}/expansion500_v1/validated_primary/rejected.jsonl \
+  --output-dir ${DSL}/expansion500_v1/repair1 --repair-round 1
+python -m ccpu.dsl_dataset run-local \
+  --requests-dir ${DSL}/expansion500_v1/repair1/requests \
+  --output-dir ${DSL}/expansion500_v1/repair1 \
+  --prompt configs/paper1/local_codex_repair_prompt.md \
+  --schema configs/paper1/semantic_annotation_batch.schema.json
+python -m ccpu.dsl_dataset validate-semantic \
+  --seed ${DSL}/expansion500_v1/candidates.jsonl \
+  --annotations ${DSL}/expansion500_v1/primary/annotations.jsonl \
+  --annotations ${DSL}/expansion500_v1/repair1/annotations.jsonl \
+  --output-dir ${DSL}/expansion500_v1/validated_repair1
+python -m ccpu.dsl_dataset finalize-expansion \
+  --accepted ${DSL}/expansion500_v1/validated_repair1/accepted.jsonl \
+  --existing ${DSL}/annotated_v1/accepted.jsonl \
+  --frozen-ledger artifacts/paper1/asl_pilot_v1/freeze/split_ledger.jsonl \
+  --output-dir ${DSL}/expansion500_v1/freeze --target 350
 \end{verbatim}
 
 \section{Limitations}
@@ -1313,8 +1392,9 @@ The concrete syntax example causes strong anchoring in generic and automatic
 conditions; because it was frozen before the full outcome, this is valid evidence
 for that protocol but not evidence that all tool or trigger prompts must fail.
 The ASL corpus is suitable only for the explicitly labeled Q1 pilot. Although all
-150 semantic programs execute to the benchmark answer, 52 required
-rationale-assisted repair, and deterministic lint cannot establish that every
+500 frozen semantic programs execute to the benchmark answer, 176 required
+rationale-assisted repair (52 in the initial checkpoint and 124 in the
+expansion), and deterministic lint cannot establish that every
 entity, quantity, or temporal field is the best semantic representation. No row
 is Q4 manual gold. The grouped split prevents measured topology leakage but does
 not replace independent-teacher agreement or manual semantic adjudication.
@@ -1323,10 +1403,11 @@ the richer component metrics are diagnostic rather than extra independent trials
 The 900 perturbations share only 100 semantic parents and LoRA-B has roughly twice
 LoRA-100's target-token exposure, so robustness differences cannot be attributed
 to augmentation alone. The normalized pattern signature is useful for leakage
-control but may merge or separate structures imperfectly. The next checkpoint
-adds 350 relation-diversified originals while excluding frozen test source IDs
-and semantic-pattern families. Only after a 500-original QKVO-r8 run do we test
-incremental NL+executed-state transitions, rank 16, or QKVO+MLP adaptation.
+control but may merge or separate structures imperfectly. The 500-original
+checkpoint adds 350 relation-diversified training programs while excluding every
+frozen development/test semantic-pattern family. Only after its QKVO-r8 run do
+we test incremental NL+executed-state transitions, rank 16, or QKVO+MLP
+adaptation.
 
 \section{Related Work}
 

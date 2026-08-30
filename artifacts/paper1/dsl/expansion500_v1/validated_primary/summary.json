@@ -1,0 +1,35 @@
+{
+  "acceptance_rate": 0.6675,
+  "accepted_count": 267,
+  "accepted_sha256": "db4166a5ed672cfc4c8a2d1265bac534b548f65746f8f0967b7ccdae200fe23c",
+  "annotation_sha256": {
+    "artifacts\\paper1\\dsl\\expansion500_v1\\primary\\annotations.jsonl": "569ac3697d75726143d0d5c8a834a60aebda58bb8315ab8878cf6b8e854144c5"
+  },
+  "by_dataset": {
+    "gsm8k": {
+      "accepted": 200,
+      "rejected": 67
+    },
+    "tatqa": {
+      "accepted": 67,
+      "rejected": 66
+    }
+  },
+  "claim_boundary": "execution-verified semantic ASL with deterministic lint; not manual semantic gold",
+  "provenance_counts": {
+    "answer_blind_primary": 267,
+    "manually_reviewed": 0,
+    "rationale_assisted_repair": 0,
+    "repair_rounds": {
+      "0": 267
+    }
+  },
+  "quality_grade": "Q1_LOCAL_CODEX_EXEC_VERIFIED",
+  "rejected_count": 133,
+  "rejected_sha256": "09a26a7944dc2641eb913a60c3ce2ec94f92cdb5aa9766b92dba3ed27eba9452",
+  "schema_version": "ccpu.dsl_dataset.semantic_summary.v1",
+  "seed_sha256": {
+    "artifacts\\paper1\\dsl\\expansion500_v1\\candidates.jsonl": "aac9eb7f851c15fee9b72748337fa67dd4110ce396ba5c97d7429c732bf4e6e1"
+  },
+  "semantic_lint": "anonymous targets and expression/literal returns rejected"
+}

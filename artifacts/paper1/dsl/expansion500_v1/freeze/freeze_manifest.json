@@ -1,0 +1,61 @@
+{
+  "candidate_accepted_count": 391,
+  "combined_count": 500,
+  "combined_train_pattern_count": 397,
+  "combined_train_row_count": 450,
+  "dataset_counts": {
+    "gsm8k": 260,
+    "tatqa": 90
+  },
+  "eligible_count": 384,
+  "existing_train_pattern_count": 92,
+  "existing_train_pattern_overlap": 9,
+  "frozen_eval_pattern_count": 47,
+  "frozen_eval_pattern_overlap": [],
+  "input_sha256": {
+    "candidate_accepted": "7841835d8b5a0be6eb9e0ff5f34977f49f540842dbc79d2d67cb9f7cde3ecd49",
+    "existing_accepted": "afc841dd2d7824717521a69c9186575fd0e64ce5717e3d0d4ce32075faf5b0dc",
+    "frozen_ledger": "e31c41e22a5d3fab821e19e862447cf8d4d5252aecad5d053d4e26ddd833026e"
+  },
+  "output_sha256": {
+    "accepted_500": "5a85e9495b9a5e0f75633e0afcdfea14d3362ea89f94aa9d9da2fb1aed0137be",
+    "expansion_ledger": "d43c78359a34924da34d1eedcc97f8c89fbee33bbaeda3982c785b0785d6564d",
+    "expansion_train": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562",
+    "quarantine": "b9e353bccc7851971c34db2b545647c54bd3b3b1aa3976ca84cbd5855631a718",
+    "quarantine_ledger": "b5b163f6d129e7f14f7c2d934af59dac2498934a12d65dd3e295d96b0396912f"
+  },
+  "pattern_multiplicities": {
+    "1": 303,
+    "2": 4,
+    "3": 2,
+    "5": 1,
+    "6": 2,
+    "7": 1,
+    "9": 1
+  },
+  "policy": "exclude existing source IDs and frozen dev/test semantic patterns; maximize new signatures",
+  "quarantine_reason_counts": {
+    "frozen_eval_semantic_pattern": 7,
+    "reserve_not_selected": 34
+  },
+  "relation_class_counts": {
+    "aggregation": 175,
+    "chained_relations": 232,
+    "comparison": 139,
+    "equal_allocation": 154,
+    "multiple_entities": 252,
+    "nested_dependencies": 210,
+    "percentage": 138,
+    "rate_or_per_unit": 187,
+    "ratio_or_fraction": 171,
+    "relative_quantity": 130,
+    "remaining_or_difference": 140,
+    "single_relation": 59,
+    "temporal_or_duration": 175
+  },
+  "schema_version": "ccpu.dsl_dataset.asl_expansion_freeze.v1",
+  "seed": 53011,
+  "selected_count": 350,
+  "target": 350,
+  "unique_selected_patterns": 314
+}

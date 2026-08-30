@@ -31,6 +31,9 @@ def finalize_asl_expansion(
     frozen_eval_patterns = {
         str(row["semantic_pattern_id"]) for row in ledger if row["split"] in {"dev", "test"}
     }
+    frozen_train_patterns = {
+        str(row["semantic_pattern_id"]) for row in ledger if row["split"] == "train"
+    }
     eligible = []
     quarantined = []
     for row in candidates:
@@ -84,6 +87,35 @@ def finalize_asl_expansion(
     selected_path = write_jsonl(output / "expansion_train.jsonl", selected)
     combined_path = write_jsonl(output / "accepted_500.jsonl", [*existing, *selected])
     quarantine_path = write_jsonl(output / "quarantine.jsonl", quarantined)
+    selected_ledger_path = write_jsonl(
+        output / "expansion_ledger.jsonl",
+        (
+            {
+                "dataset": row["dataset"],
+                "source_id": row["source_id"],
+                "record_sha256": row["record_sha256"],
+                "semantic_pattern_id": row["semantic_pattern_id"],
+                "relation_classes": row["relation_classes"],
+                "repair_round": row.get("provenance", {}).get("repair_round", 0),
+            }
+            for row in selected
+        ),
+    )
+    quarantine_ledger_path = write_jsonl(
+        output / "quarantine_ledger.jsonl",
+        (
+            {
+                "dataset": row["dataset"],
+                "source_id": row["source_id"],
+                "record_sha256": row["record_sha256"],
+                "semantic_pattern_id": row["semantic_pattern_id"],
+                "quarantine_reasons": row["quarantine_reasons"],
+            }
+            for row in quarantined
+        ),
+    )
+    selected_patterns = set(pattern_counts)
+    existing_train_overlap = selected_patterns & frozen_train_patterns
     manifest = {
         "schema_version": "ccpu.dsl_dataset.asl_expansion_freeze.v1",
         "seed": seed,
@@ -93,6 +125,10 @@ def finalize_asl_expansion(
         "selected_count": len(selected),
         "combined_count": len(existing) + len(selected),
         "unique_selected_patterns": len(pattern_counts),
+        "existing_train_pattern_count": len(frozen_train_patterns),
+        "existing_train_pattern_overlap": len(existing_train_overlap),
+        "combined_train_row_count": sum(row["split"] == "train" for row in ledger) + len(selected),
+        "combined_train_pattern_count": len(frozen_train_patterns | selected_patterns),
         "pattern_multiplicities": dict(sorted(Counter(pattern_counts.values()).items())),
         "dataset_counts": dict(sorted(dataset_counts.items())),
         "relation_class_counts": dict(sorted(relation_counts.items())),
@@ -114,6 +150,8 @@ def finalize_asl_expansion(
             "expansion_train": file_sha256(selected_path),
             "accepted_500": file_sha256(combined_path),
             "quarantine": file_sha256(quarantine_path),
+            "expansion_ledger": file_sha256(selected_ledger_path),
+            "quarantine_ledger": file_sha256(quarantine_ledger_path),
         },
         "policy": "exclude existing source IDs and frozen dev/test semantic patterns; maximize new signatures",
     }

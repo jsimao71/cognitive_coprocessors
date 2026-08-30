@@ -348,18 +348,27 @@ def test_expansion_finalizer_quarantines_frozen_eval_patterns(tmp_path):
     candidates = write_jsonl(tmp_path / "candidates.jsonl", [collision, eligible_a, eligible_b])
     ledger = write_jsonl(
         tmp_path / "ledger.jsonl",
-        [{"split": "test", "semantic_pattern_id": pattern_id(frozen_template)}],
+        [
+            {"split": "test", "semantic_pattern_id": pattern_id(frozen_template)},
+            {"split": "train", "semantic_pattern_id": pattern_id(eligible_a)},
+        ],
     )
     manifest = finalize_asl_expansion(candidates, existing, ledger, tmp_path / "final", target=2)
     assert manifest["selected_count"] == 2
     assert manifest["frozen_eval_pattern_overlap"] == []
     assert manifest["quarantine_reason_counts"] == {"frozen_eval_semantic_pattern": 1}
+    assert manifest["combined_train_pattern_count"] == 2
+    assert manifest["existing_train_pattern_overlap"] == 1
     assert {
         row["source_id"] for row in read_jsonl(tmp_path / "final" / "expansion_train.jsonl")
     } == {
         "eligible_a",
         "eligible_b",
     }
+    assert len(read_jsonl(tmp_path / "final" / "expansion_ledger.jsonl")) == 2
+    assert read_jsonl(tmp_path / "final" / "quarantine_ledger.jsonl")[0]["quarantine_reasons"] == [
+        "frozen_eval_semantic_pattern"
+    ]
 
 
 def test_local_codex_runner_resumes_valid_completed_batches(tmp_path):
