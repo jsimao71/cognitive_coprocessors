@@ -1,0 +1,1715 @@
+{
+  "claim_boundary": "deterministic 25-program diagnostic; symbol alignment is bounded and optional judge cases remain unresolved",
+  "conditions": {
+    "incremental_oracle": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 0.5714285714285714,
+          "correct": 4,
+          "support": 7
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "support": 4
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.09523809523809523,
+          "correct": 2,
+          "support": 21
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.3333333333333333,
+          "correct": 1,
+          "support": 3
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.36363636363636365,
+          "correct": 8,
+          "support": 22
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.045454545454545456,
+          "correct": 1,
+          "support": 22
+        }
+      },
+      "count": 25,
+      "error_counts": {
+        "aggregation_cardinality": 15,
+        "ambiguous_symbol_alignment": 2,
+        "attribute_grounding": 25,
+        "cardinality_qualifier": 16,
+        "dependency_incomplete": 24,
+        "derived_literal_presented_as_source_fact": 1,
+        "entity_grounding": 15,
+        "hallucinated_or_mutated_number": 7,
+        "lowering_unsupported_form": 1,
+        "number_attached_to_wrong_path": 17,
+        "omitted_number": 11,
+        "operator_mapping": 17,
+        "premature_literal_collapse": 1,
+        "qualifier_grounding": 16,
+        "relation_constant": 5,
+        "relation_direction": 1,
+        "return_missing": 3,
+        "return_wrong_target": 14,
+        "source_fact_grounding": 22,
+        "surface_malformed_syntax": 2,
+        "temporal_qualifier": 4,
+        "temporal_semantics": 4,
+        "transitive_shortcut": 2,
+        "unresolved_symbol_equivalence": 8
+      },
+      "operator_confusion": {
+        "ADD->ADD": 3,
+        "CONST->CONST": 22,
+        "CONST->REF": 1,
+        "CONST->SUB": 1,
+        "DIV->ADD": 2,
+        "DIV->DIV": 2,
+        "MUL->ADD": 1,
+        "MUL->MUL": 4,
+        "SUB->CONST": 1,
+        "SUB->MUL": 1,
+        "SUB->SUB": 2
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.04,
+          "correct": 1,
+          "support": 25
+        },
+        "argument_order": {
+          "accuracy": 0.125,
+          "correct": 1,
+          "support": 8
+        },
+        "attribute": {
+          "f1": 0.4350649350649351,
+          "overlap": 67,
+          "precision": 0.39880952380952384,
+          "predicted_count": 168,
+          "recall": 0.4785714285714286,
+          "reference_count": 140,
+          "support": 140
+        },
+        "cardinality_qualifier": {
+          "f1": 0.6440677966101694,
+          "overlap": 38,
+          "precision": 0.5507246376811594,
+          "predicted_count": 69,
+          "recall": 0.7755102040816326,
+          "reference_count": 49,
+          "support": 49
+        },
+        "dependency": {
+          "f1": 0.1391304347826087,
+          "overlap": 16,
+          "precision": 0.14678899082568808,
+          "predicted_count": 109,
+          "recall": 0.1322314049586777,
+          "reference_count": 121,
+          "support": 121
+        },
+        "entity": {
+          "f1": 0.6292134831460674,
+          "overlap": 28,
+          "precision": 0.6666666666666666,
+          "predicted_count": 42,
+          "recall": 0.5957446808510638,
+          "reference_count": 47,
+          "support": 47
+        },
+        "inter_object": {
+          "accuracy": 0.16666666666666666,
+          "correct": 1,
+          "support": 6
+        },
+        "intra_object": {
+          "accuracy": 0.4,
+          "correct": 4,
+          "support": 10
+        },
+        "operator": {
+          "f1": 0.7428571428571429,
+          "overlap": 65,
+          "precision": 0.8024691358024691,
+          "predicted_count": 81,
+          "recall": 0.6914893617021277,
+          "reference_count": 94,
+          "support": 94
+        },
+        "path_exact": {
+          "f1": 0.3311688311688311,
+          "overlap": 51,
+          "precision": 0.30357142857142855,
+          "predicted_count": 168,
+          "recall": 0.36428571428571427,
+          "reference_count": 140,
+          "support": 140
+        },
+        "qualifier": {
+          "f1": 0.6540880503144654,
+          "overlap": 52,
+          "precision": 0.5652173913043478,
+          "predicted_count": 92,
+          "recall": 0.7761194029850746,
+          "reference_count": 67,
+          "support": 67
+        },
+        "relation_constant": {
+          "accuracy": 0.8387096774193549,
+          "correct": 26,
+          "support": 31
+        },
+        "relation_direction": {
+          "accuracy": 0.45454545454545453,
+          "correct": 20,
+          "support": 44
+        },
+        "relation_participant": {
+          "accuracy": 0.3125,
+          "correct": 5,
+          "support": 16
+        },
+        "return_target": {
+          "accuracy": 0.32,
+          "correct": 8,
+          "support": 25
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.04,
+          "correct": 1,
+          "support": 25
+        },
+        "source_fact_attachment": {
+          "f1": 0.28387096774193554,
+          "overlap": 22,
+          "precision": 0.3142857142857143,
+          "predicted_count": 70,
+          "recall": 0.25882352941176473,
+          "reference_count": 85,
+          "support": 85
+        },
+        "source_literal": {
+          "f1": 0.7612903225806451,
+          "overlap": 59,
+          "precision": 0.8428571428571429,
+          "predicted_count": 70,
+          "recall": 0.6941176470588235,
+          "reference_count": 85,
+          "support": 85
+        },
+        "status_qualifier": {
+          "f1": 0.9333333333333333,
+          "overlap": 7,
+          "precision": 1.0,
+          "predicted_count": 7,
+          "recall": 0.875,
+          "reference_count": 8,
+          "support": 8
+        },
+        "temporal": {
+          "accuracy": 0.5,
+          "correct": 5,
+          "support": 10
+        },
+        "temporal_qualifier": {
+          "f1": 0.5384615384615384,
+          "overlap": 7,
+          "precision": 0.4375,
+          "predicted_count": 16,
+          "recall": 0.7,
+          "reference_count": 10,
+          "support": 10
+        },
+        "unit": {
+          "f1": 0.5614035087719298,
+          "overlap": 16,
+          "precision": 0.64,
+          "predicted_count": 25,
+          "recall": 0.5,
+          "reference_count": 32,
+          "support": 32
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": 0.45,
+          "correct": 27,
+          "support": 60
+        },
+        "workspace_symbol_stable": {
+          "accuracy": 0.8571428571428571,
+          "correct": 18,
+          "support": 21
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.28,
+          "correct": 7,
+          "support": 25
+        },
+        "final_answer_correct": {
+          "accuracy": 0.24,
+          "correct": 6,
+          "support": 25
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 0.88,
+          "correct": 22,
+          "support": 25
+        },
+        "parse_valid": {
+          "accuracy": 0.92,
+          "correct": 23,
+          "support": 25
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.16,
+          "correct": 4,
+          "support": 25
+        },
+        "type_valid": {
+          "accuracy": 0.88,
+          "correct": 22,
+          "support": 25
+        }
+      },
+      "transition_analysis": {
+        "conditional": {
+          "answer_correct_given_operator_correct_path_wrong": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 30
+          },
+          "answer_correct_given_semantic_state_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "answer_correct_given_semantic_state_incorrect": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 70
+          },
+          "direction_correct_given_operator_correct": {
+            "accuracy": 0.5714285714285714,
+            "correct": 4,
+            "support": 7
+          },
+          "operator_correct_given_parse_type": {
+            "accuracy": 0.6615384615384615,
+            "correct": 43,
+            "support": 65
+          },
+          "path_correct_given_parse_type": {
+            "accuracy": 0.2,
+            "correct": 13,
+            "support": 65
+          }
+        },
+        "count": 70,
+        "error_counts": {
+          "aggregation_cardinality": 16,
+          "ambiguous_symbol_alignment": 4,
+          "attribute_grounding": 58,
+          "cardinality_qualifier": 27,
+          "dependency_incomplete": 39,
+          "duplicate_semantic_slot": 2,
+          "entity_grounding": 26,
+          "forbidden_stateful_rename": 3,
+          "hallucinated_or_mutated_number": 9,
+          "lowering_unsupported_form": 1,
+          "number_attached_to_wrong_path": 21,
+          "omitted_number": 12,
+          "operator_mapping": 26,
+          "qualifier_grounding": 32,
+          "relation_constant": 4,
+          "relation_direction": 1,
+          "return_missing": 2,
+          "return_wrong_target": 14,
+          "source_fact_grounding": 30,
+          "surface_malformed_syntax": 4,
+          "temporal_qualifier": 8,
+          "temporal_semantics": 8,
+          "unresolved_due_to_rename": 3,
+          "unresolved_symbol_equivalence": 18
+        },
+        "operator_confusion": {
+          "ADD->ADD": 3,
+          "CONST->CONST": 38,
+          "CONST->REF": 1,
+          "DIV->DIV": 5,
+          "MUL->ADD": 1,
+          "MUL->MUL": 4,
+          "SUB->SUB": 4
+        },
+        "semantic": {
+          "aggregation_cardinality": {
+            "accuracy": 0.08,
+            "correct": 2,
+            "support": 25
+          },
+          "argument_order": {
+            "accuracy": 0.4444444444444444,
+            "correct": 4,
+            "support": 9
+          },
+          "attribute": {
+            "f1": 0.3869346733668342,
+            "overlap": 77,
+            "precision": 0.4052631578947368,
+            "predicted_count": 190,
+            "recall": 0.3701923076923077,
+            "reference_count": 208,
+            "support": 208
+          },
+          "cardinality_qualifier": {
+            "f1": 0.647887323943662,
+            "overlap": 46,
+            "precision": 0.6388888888888888,
+            "predicted_count": 72,
+            "recall": 0.6571428571428571,
+            "reference_count": 70,
+            "support": 70
+          },
+          "dependency": {
+            "f1": 0.2136752136752137,
+            "overlap": 25,
+            "precision": 0.22123893805309736,
+            "predicted_count": 113,
+            "recall": 0.2066115702479339,
+            "reference_count": 121,
+            "support": 121
+          },
+          "entity": {
+            "f1": 0.7039106145251396,
+            "overlap": 63,
+            "precision": 0.7590361445783133,
+            "predicted_count": 83,
+            "recall": 0.65625,
+            "reference_count": 96,
+            "support": 96
+          },
+          "inter_object": {
+            "accuracy": 0.3333333333333333,
+            "correct": 2,
+            "support": 6
+          },
+          "intra_object": {
+            "accuracy": 0.5454545454545454,
+            "correct": 6,
+            "support": 11
+          },
+          "operator": {
+            "f1": 0.7142857142857143,
+            "overlap": 65,
+            "precision": 0.7386363636363636,
+            "predicted_count": 88,
+            "recall": 0.6914893617021277,
+            "reference_count": 94,
+            "support": 94
+          },
+          "path_exact": {
+            "f1": 0.2663316582914573,
+            "overlap": 53,
+            "precision": 0.2789473684210526,
+            "predicted_count": 190,
+            "recall": 0.2548076923076923,
+            "reference_count": 208,
+            "support": 208
+          },
+          "qualifier": {
+            "f1": 0.6282722513089005,
+            "overlap": 60,
+            "precision": 0.631578947368421,
+            "predicted_count": 95,
+            "recall": 0.625,
+            "reference_count": 96,
+            "support": 96
+          },
+          "relation_constant": {
+            "accuracy": 0.8979591836734694,
+            "correct": 44,
+            "support": 49
+          },
+          "relation_direction": {
+            "accuracy": 0.675,
+            "correct": 27,
+            "support": 40
+          },
+          "relation_participant": {
+            "accuracy": 0.47058823529411764,
+            "correct": 8,
+            "support": 17
+          },
+          "return_target": {
+            "accuracy": 0.36,
+            "correct": 9,
+            "support": 25
+          },
+          "semantic_name_equivalent": {
+            "accuracy": 0.2,
+            "correct": 14,
+            "support": 70
+          },
+          "source_fact_attachment": {
+            "f1": 0.4390243902439024,
+            "overlap": 36,
+            "precision": 0.45569620253164556,
+            "predicted_count": 79,
+            "recall": 0.4235294117647059,
+            "reference_count": 85,
+            "support": 85
+          },
+          "source_literal": {
+            "f1": 0.8170731707317074,
+            "overlap": 67,
+            "precision": 0.8481012658227848,
+            "predicted_count": 79,
+            "recall": 0.788235294117647,
+            "reference_count": 85,
+            "support": 85
+          },
+          "status_qualifier": {
+            "f1": 0.7777777777777778,
+            "overlap": 7,
+            "precision": 1.0,
+            "predicted_count": 7,
+            "recall": 0.6363636363636364,
+            "reference_count": 11,
+            "support": 11
+          },
+          "temporal": {
+            "accuracy": 0.3333333333333333,
+            "correct": 5,
+            "support": 15
+          },
+          "temporal_qualifier": {
+            "f1": 0.45161290322580644,
+            "overlap": 7,
+            "precision": 0.4375,
+            "predicted_count": 16,
+            "recall": 0.4666666666666667,
+            "reference_count": 15,
+            "support": 15
+          },
+          "unit": {
+            "f1": 0.6301369863013699,
+            "overlap": 23,
+            "precision": 0.7419354838709677,
+            "predicted_count": 31,
+            "recall": 0.5476190476190477,
+            "reference_count": 42,
+            "support": 42
+          },
+          "workspace_path_reuse_rate": {
+            "accuracy": 0.45,
+            "correct": 27,
+            "support": 60
+          },
+          "workspace_symbol_stable": {
+            "accuracy": 0.8571428571428571,
+            "correct": 18,
+            "support": 21
+          }
+        },
+        "surface_and_compute": {
+          "executable": {
+            "accuracy": 0.5428571428571428,
+            "correct": 38,
+            "support": 70
+          },
+          "final_answer_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "lowerable_to_ccir": {
+            "accuracy": 0.9285714285714286,
+            "correct": 65,
+            "support": 70
+          },
+          "parse_valid": {
+            "accuracy": 0.9428571428571428,
+            "correct": 66,
+            "support": 70
+          },
+          "semantic_state_equivalent": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "type_valid": {
+            "accuracy": 0.9285714285714286,
+            "correct": 65,
+            "support": 70
+          }
+        }
+      },
+      "transition_count": 70
+    },
+    "incremental_predicted": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 0.7142857142857143,
+          "correct": 5,
+          "support": 7
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "support": 4
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.14285714285714285,
+          "correct": 3,
+          "support": 21
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.5,
+          "correct": 1,
+          "support": 2
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.34782608695652173,
+          "correct": 8,
+          "support": 23
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.043478260869565216,
+          "correct": 1,
+          "support": 23
+        }
+      },
+      "count": 25,
+      "error_counts": {
+        "aggregation_cardinality": 15,
+        "ambiguous_symbol_alignment": 3,
+        "attribute_grounding": 25,
+        "cardinality_qualifier": 16,
+        "dependency_incomplete": 24,
+        "derived_literal_presented_as_source_fact": 1,
+        "entity_grounding": 15,
+        "hallucinated_or_mutated_number": 8,
+        "number_attached_to_wrong_path": 16,
+        "omitted_number": 11,
+        "operator_mapping": 17,
+        "premature_literal_collapse": 1,
+        "qualifier_grounding": 17,
+        "relation_constant": 4,
+        "return_missing": 3,
+        "return_wrong_target": 16,
+        "source_fact_grounding": 21,
+        "surface_no_asl": 2,
+        "temporal_qualifier": 8,
+        "temporal_semantics": 4,
+        "unresolved_symbol_equivalence": 9
+      },
+      "operator_confusion": {
+        "ADD->ADD": 2,
+        "CONST->CONST": 30,
+        "CONST->MUL": 1,
+        "CONST->REF": 1,
+        "DIV->ADD": 1,
+        "DIV->DIV": 3,
+        "MUL->MUL": 5,
+        "SUB->CONST": 1,
+        "SUB->MUL": 1,
+        "SUB->SUB": 4
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.04,
+          "correct": 1,
+          "support": 25
+        },
+        "argument_order": {
+          "accuracy": 0.4,
+          "correct": 4,
+          "support": 10
+        },
+        "attribute": {
+          "f1": 0.2014388489208633,
+          "overlap": 28,
+          "precision": 0.2028985507246377,
+          "predicted_count": 138,
+          "recall": 0.2,
+          "reference_count": 140,
+          "support": 140
+        },
+        "cardinality_qualifier": {
+          "f1": 0.5242718446601942,
+          "overlap": 27,
+          "precision": 0.5,
+          "predicted_count": 54,
+          "recall": 0.5510204081632653,
+          "reference_count": 49,
+          "support": 49
+        },
+        "dependency": {
+          "f1": 0.125,
+          "overlap": 14,
+          "precision": 0.13592233009708737,
+          "predicted_count": 103,
+          "recall": 0.11570247933884298,
+          "reference_count": 121,
+          "support": 121
+        },
+        "entity": {
+          "f1": 0.6190476190476191,
+          "overlap": 26,
+          "precision": 0.7027027027027027,
+          "predicted_count": 37,
+          "recall": 0.5531914893617021,
+          "reference_count": 47,
+          "support": 47
+        },
+        "inter_object": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 6
+        },
+        "intra_object": {
+          "accuracy": 0.5454545454545454,
+          "correct": 6,
+          "support": 11
+        },
+        "operator": {
+          "f1": 0.7619047619047619,
+          "overlap": 64,
+          "precision": 0.8648648648648649,
+          "predicted_count": 74,
+          "recall": 0.6808510638297872,
+          "reference_count": 94,
+          "support": 94
+        },
+        "path_exact": {
+          "f1": 0.08633093525179857,
+          "overlap": 12,
+          "precision": 0.08695652173913043,
+          "predicted_count": 138,
+          "recall": 0.08571428571428572,
+          "reference_count": 140,
+          "support": 140
+        },
+        "qualifier": {
+          "f1": 0.48,
+          "overlap": 36,
+          "precision": 0.43373493975903615,
+          "predicted_count": 83,
+          "recall": 0.5373134328358209,
+          "reference_count": 67,
+          "support": 67
+        },
+        "relation_constant": {
+          "accuracy": 0.8717948717948718,
+          "correct": 34,
+          "support": 39
+        },
+        "relation_direction": {
+          "accuracy": 0.38095238095238093,
+          "correct": 16,
+          "support": 42
+        },
+        "relation_participant": {
+          "accuracy": 0.35294117647058826,
+          "correct": 6,
+          "support": 17
+        },
+        "return_target": {
+          "accuracy": 0.24,
+          "correct": 6,
+          "support": 25
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.04,
+          "correct": 1,
+          "support": 25
+        },
+        "source_fact_attachment": {
+          "f1": 0.35443037974683544,
+          "overlap": 28,
+          "precision": 0.3835616438356164,
+          "predicted_count": 73,
+          "recall": 0.32941176470588235,
+          "reference_count": 85,
+          "support": 85
+        },
+        "source_literal": {
+          "f1": 0.7848101265822783,
+          "overlap": 62,
+          "precision": 0.8493150684931506,
+          "predicted_count": 73,
+          "recall": 0.7294117647058823,
+          "reference_count": 85,
+          "support": 85
+        },
+        "status_qualifier": {
+          "f1": 0.7692307692307693,
+          "overlap": 5,
+          "precision": 1.0,
+          "predicted_count": 5,
+          "recall": 0.625,
+          "reference_count": 8,
+          "support": 8
+        },
+        "temporal": {
+          "accuracy": 0.3,
+          "correct": 3,
+          "support": 10
+        },
+        "temporal_qualifier": {
+          "f1": 0.23529411764705882,
+          "overlap": 4,
+          "precision": 0.16666666666666666,
+          "predicted_count": 24,
+          "recall": 0.4,
+          "reference_count": 10,
+          "support": 10
+        },
+        "unit": {
+          "f1": 0.5074626865671641,
+          "overlap": 17,
+          "precision": 0.4857142857142857,
+          "predicted_count": 35,
+          "recall": 0.53125,
+          "reference_count": 32,
+          "support": 32
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": 0.03333333333333333,
+          "correct": 2,
+          "support": 60
+        },
+        "workspace_symbol_stable": {
+          "accuracy": 0.6190476190476191,
+          "correct": 13,
+          "support": 21
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.6,
+          "correct": 15,
+          "support": 25
+        },
+        "final_answer_correct": {
+          "accuracy": 0.28,
+          "correct": 7,
+          "support": 25
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 0.92,
+          "correct": 23,
+          "support": 25
+        },
+        "parse_valid": {
+          "accuracy": 0.92,
+          "correct": 23,
+          "support": 25
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.16,
+          "correct": 4,
+          "support": 25
+        },
+        "type_valid": {
+          "accuracy": 0.92,
+          "correct": 23,
+          "support": 25
+        }
+      },
+      "transition_analysis": {
+        "conditional": {
+          "answer_correct_given_operator_correct_path_wrong": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 34
+          },
+          "answer_correct_given_semantic_state_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "answer_correct_given_semantic_state_incorrect": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 70
+          },
+          "direction_correct_given_operator_correct": {
+            "accuracy": 0.8,
+            "correct": 4,
+            "support": 5
+          },
+          "operator_correct_given_parse_type": {
+            "accuracy": 0.6268656716417911,
+            "correct": 42,
+            "support": 67
+          },
+          "path_correct_given_parse_type": {
+            "accuracy": 0.13432835820895522,
+            "correct": 9,
+            "support": 67
+          }
+        },
+        "count": 70,
+        "error_counts": {
+          "aggregation_cardinality": 16,
+          "ambiguous_symbol_alignment": 3,
+          "attribute_grounding": 62,
+          "cardinality_qualifier": 30,
+          "dependency_incomplete": 38,
+          "duplicate_semantic_slot": 3,
+          "entity_grounding": 31,
+          "forbidden_stateful_rename": 8,
+          "hallucinated_or_mutated_number": 8,
+          "lowering_unsupported_form": 1,
+          "number_attached_to_wrong_path": 23,
+          "omitted_number": 15,
+          "operator_mapping": 26,
+          "qualifier_grounding": 37,
+          "relation_constant": 3,
+          "return_missing": 3,
+          "return_wrong_target": 15,
+          "source_fact_grounding": 36,
+          "surface_malformed_syntax": 2,
+          "surface_no_asl": 7,
+          "temporal_qualifier": 16,
+          "temporal_semantics": 9,
+          "unresolved_due_to_rename": 8,
+          "unresolved_symbol_equivalence": 27
+        },
+        "operator_confusion": {
+          "ADD->ADD": 2,
+          "CONST->CONST": 30,
+          "CONST->MUL": 1,
+          "CONST->REF": 1,
+          "DIV->DIV": 3,
+          "MUL->MUL": 4,
+          "SUB->SUB": 4
+        },
+        "semantic": {
+          "aggregation_cardinality": {
+            "accuracy": 0.04,
+            "correct": 1,
+            "support": 25
+          },
+          "argument_order": {
+            "accuracy": 0.5714285714285714,
+            "correct": 4,
+            "support": 7
+          },
+          "attribute": {
+            "f1": 0.19740259740259739,
+            "overlap": 38,
+            "precision": 0.21468926553672316,
+            "predicted_count": 177,
+            "recall": 0.18269230769230768,
+            "reference_count": 208,
+            "support": 208
+          },
+          "cardinality_qualifier": {
+            "f1": 0.5,
+            "overlap": 35,
+            "precision": 0.5,
+            "predicted_count": 70,
+            "recall": 0.5,
+            "reference_count": 70,
+            "support": 70
+          },
+          "dependency": {
+            "f1": 0.14285714285714285,
+            "overlap": 16,
+            "precision": 0.1553398058252427,
+            "predicted_count": 103,
+            "recall": 0.1322314049586777,
+            "reference_count": 121,
+            "support": 121
+          },
+          "entity": {
+            "f1": 0.6820809248554913,
+            "overlap": 59,
+            "precision": 0.7662337662337663,
+            "predicted_count": 77,
+            "recall": 0.6145833333333334,
+            "reference_count": 96,
+            "support": 96
+          },
+          "inter_object": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 5
+          },
+          "intra_object": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "support": 8
+          },
+          "operator": {
+            "f1": 0.7142857142857143,
+            "overlap": 60,
+            "precision": 0.8108108108108109,
+            "predicted_count": 74,
+            "recall": 0.6382978723404256,
+            "reference_count": 94,
+            "support": 94
+          },
+          "path_exact": {
+            "f1": 0.06753246753246754,
+            "overlap": 13,
+            "precision": 0.07344632768361582,
+            "predicted_count": 177,
+            "recall": 0.0625,
+            "reference_count": 208,
+            "support": 208
+          },
+          "qualifier": {
+            "f1": 0.4378109452736318,
+            "overlap": 44,
+            "precision": 0.41904761904761906,
+            "predicted_count": 105,
+            "recall": 0.4583333333333333,
+            "reference_count": 96,
+            "support": 96
+          },
+          "relation_constant": {
+            "accuracy": 0.8947368421052632,
+            "correct": 34,
+            "support": 38
+          },
+          "relation_direction": {
+            "accuracy": 0.5333333333333333,
+            "correct": 16,
+            "support": 30
+          },
+          "relation_participant": {
+            "accuracy": 0.46153846153846156,
+            "correct": 6,
+            "support": 13
+          },
+          "return_target": {
+            "accuracy": 0.28,
+            "correct": 7,
+            "support": 25
+          },
+          "semantic_name_equivalent": {
+            "accuracy": 0.14285714285714285,
+            "correct": 10,
+            "support": 70
+          },
+          "source_fact_attachment": {
+            "f1": 0.35443037974683544,
+            "overlap": 28,
+            "precision": 0.3835616438356164,
+            "predicted_count": 73,
+            "recall": 0.32941176470588235,
+            "reference_count": 85,
+            "support": 85
+          },
+          "source_literal": {
+            "f1": 0.7848101265822783,
+            "overlap": 62,
+            "precision": 0.8493150684931506,
+            "predicted_count": 73,
+            "recall": 0.7294117647058823,
+            "reference_count": 85,
+            "support": 85
+          },
+          "status_qualifier": {
+            "f1": 0.625,
+            "overlap": 5,
+            "precision": 1.0,
+            "predicted_count": 5,
+            "recall": 0.45454545454545453,
+            "reference_count": 11,
+            "support": 11
+          },
+          "temporal": {
+            "accuracy": 0.2,
+            "correct": 3,
+            "support": 15
+          },
+          "temporal_qualifier": {
+            "f1": 0.17777777777777776,
+            "overlap": 4,
+            "precision": 0.13333333333333333,
+            "predicted_count": 30,
+            "recall": 0.26666666666666666,
+            "reference_count": 15,
+            "support": 15
+          },
+          "unit": {
+            "f1": 0.46511627906976744,
+            "overlap": 20,
+            "precision": 0.45454545454545453,
+            "predicted_count": 44,
+            "recall": 0.47619047619047616,
+            "reference_count": 42,
+            "support": 42
+          },
+          "workspace_path_reuse_rate": {
+            "accuracy": 0.03333333333333333,
+            "correct": 2,
+            "support": 60
+          },
+          "workspace_symbol_stable": {
+            "accuracy": 0.6190476190476191,
+            "correct": 13,
+            "support": 21
+          }
+        },
+        "surface_and_compute": {
+          "executable": {
+            "accuracy": 0.6285714285714286,
+            "correct": 44,
+            "support": 70
+          },
+          "final_answer_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "lowerable_to_ccir": {
+            "accuracy": 0.9571428571428572,
+            "correct": 67,
+            "support": 70
+          },
+          "parse_valid": {
+            "accuracy": 0.9714285714285714,
+            "correct": 68,
+            "support": 70
+          },
+          "semantic_state_equivalent": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "type_valid": {
+            "accuracy": 0.9571428571428572,
+            "correct": 67,
+            "support": 70
+          }
+        }
+      },
+      "transition_count": 70
+    },
+    "whole_lora500": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 1.0,
+          "correct": 7,
+          "support": 7
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": 1.0,
+          "correct": 5,
+          "support": 5
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.3,
+          "correct": 6,
+          "support": 20
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.5,
+          "correct": 3,
+          "support": 6
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.42857142857142855,
+          "correct": 9,
+          "support": 21
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.09523809523809523,
+          "correct": 2,
+          "support": 21
+        }
+      },
+      "count": 25,
+      "error_counts": {
+        "aggregation_cardinality": 13,
+        "attribute_grounding": 25,
+        "cardinality_qualifier": 16,
+        "dependency_incomplete": 22,
+        "entity_grounding": 20,
+        "hallucinated_or_mutated_number": 9,
+        "lowering_unsupported_form": 1,
+        "number_attached_to_wrong_path": 15,
+        "omitted_number": 13,
+        "operator_mapping": 16,
+        "qualifier_grounding": 18,
+        "relation_constant": 3,
+        "return_missing": 4,
+        "return_wrong_target": 14,
+        "source_fact_grounding": 22,
+        "surface_malformed_syntax": 3,
+        "temporal_qualifier": 7,
+        "temporal_semantics": 3,
+        "transitive_shortcut": 1,
+        "unresolved_symbol_equivalence": 8
+      },
+      "operator_confusion": {
+        "ADD->SUM": 1,
+        "CONST->CONST": 21,
+        "DIV->DIV": 3,
+        "MUL->DIV": 1,
+        "MUL->MUL": 4,
+        "SUB->SUB": 4,
+        "SUM->SUM": 1
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.08,
+          "correct": 2,
+          "support": 25
+        },
+        "argument_order": {
+          "accuracy": 0.42857142857142855,
+          "correct": 3,
+          "support": 7
+        },
+        "attribute": {
+          "f1": 0.144,
+          "overlap": 18,
+          "precision": 0.16363636363636364,
+          "predicted_count": 110,
+          "recall": 0.12857142857142856,
+          "reference_count": 140,
+          "support": 140
+        },
+        "cardinality_qualifier": {
+          "f1": 0.4466019417475729,
+          "overlap": 23,
+          "precision": 0.42592592592592593,
+          "predicted_count": 54,
+          "recall": 0.46938775510204084,
+          "reference_count": 49,
+          "support": 49
+        },
+        "dependency": {
+          "f1": 0.11267605633802817,
+          "overlap": 12,
+          "precision": 0.13043478260869565,
+          "predicted_count": 92,
+          "recall": 0.09917355371900827,
+          "reference_count": 121,
+          "support": 121
+        },
+        "entity": {
+          "f1": 0.5384615384615384,
+          "overlap": 21,
+          "precision": 0.6774193548387096,
+          "predicted_count": 31,
+          "recall": 0.44680851063829785,
+          "reference_count": 47,
+          "support": 47
+        },
+        "inter_object": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 5
+        },
+        "intra_object": {
+          "accuracy": 0.5555555555555556,
+          "correct": 5,
+          "support": 9
+        },
+        "operator": {
+          "f1": 0.6946107784431137,
+          "overlap": 58,
+          "precision": 0.7945205479452054,
+          "predicted_count": 73,
+          "recall": 0.6170212765957447,
+          "reference_count": 94,
+          "support": 94
+        },
+        "path_exact": {
+          "f1": 0.032,
+          "overlap": 4,
+          "precision": 0.03636363636363636,
+          "predicted_count": 110,
+          "recall": 0.02857142857142857,
+          "reference_count": 140,
+          "support": 140
+        },
+        "qualifier": {
+          "f1": 0.38666666666666666,
+          "overlap": 29,
+          "precision": 0.3493975903614458,
+          "predicted_count": 83,
+          "recall": 0.43283582089552236,
+          "reference_count": 67,
+          "support": 67
+        },
+        "relation_constant": {
+          "accuracy": 0.8148148148148148,
+          "correct": 22,
+          "support": 27
+        },
+        "relation_direction": {
+          "accuracy": 0.4,
+          "correct": 12,
+          "support": 30
+        },
+        "relation_participant": {
+          "accuracy": 0.35714285714285715,
+          "correct": 5,
+          "support": 14
+        },
+        "return_target": {
+          "accuracy": 0.28,
+          "correct": 7,
+          "support": 25
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.08,
+          "correct": 2,
+          "support": 25
+        },
+        "source_fact_attachment": {
+          "f1": 0.22666666666666668,
+          "overlap": 17,
+          "precision": 0.26153846153846155,
+          "predicted_count": 65,
+          "recall": 0.2,
+          "reference_count": 85,
+          "support": 85
+        },
+        "source_literal": {
+          "f1": 0.6799999999999999,
+          "overlap": 51,
+          "precision": 0.7846153846153846,
+          "predicted_count": 65,
+          "recall": 0.6,
+          "reference_count": 85,
+          "support": 85
+        },
+        "status_qualifier": {
+          "f1": 0.2222222222222222,
+          "overlap": 1,
+          "precision": 1.0,
+          "predicted_count": 1,
+          "recall": 0.125,
+          "reference_count": 8,
+          "support": 8
+        },
+        "temporal": {
+          "accuracy": 0.3,
+          "correct": 3,
+          "support": 10
+        },
+        "temporal_qualifier": {
+          "f1": 0.2631578947368421,
+          "overlap": 5,
+          "precision": 0.17857142857142858,
+          "predicted_count": 28,
+          "recall": 0.5,
+          "reference_count": 10,
+          "support": 10
+        },
+        "unit": {
+          "f1": 0.625,
+          "overlap": 20,
+          "precision": 0.625,
+          "predicted_count": 32,
+          "recall": 0.625,
+          "reference_count": 32,
+          "support": 32
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "workspace_symbol_stable": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.76,
+          "correct": 19,
+          "support": 25
+        },
+        "final_answer_correct": {
+          "accuracy": 0.44,
+          "correct": 11,
+          "support": 25
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 0.84,
+          "correct": 21,
+          "support": 25
+        },
+        "parse_valid": {
+          "accuracy": 0.88,
+          "correct": 22,
+          "support": 25
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.2,
+          "correct": 5,
+          "support": 25
+        },
+        "type_valid": {
+          "accuracy": 0.84,
+          "correct": 21,
+          "support": 25
+        }
+      }
+    }
+  },
+  "full_artifact_sha256": {
+    "incremental_oracle.jsonl": "5c18a19d41b7ed917628b2b2308b1e6d4f59e35a92972c722c4a9682aae805de",
+    "incremental_predicted.jsonl": "a1493107716b12af2f0e5f81d4f2bb4a94860585b8f5c6b738edd5dba0884019",
+    "judge_queue.jsonl": "acc287ffda5b9446ad1b27da30baa553ea2abf4d6b673a783c5c1f4d0b5d2aaf",
+    "symbol_alignment.jsonl": "5a0b17745e65c14a20398e03012700b105059e8fabfa17e2d3f11327ea1b26e2",
+    "whole_lora500.jsonl": "fd8b0533f564b9eff12b8ae4cb80d7ad6ff1fb06c182e67fa9e14c2111ef129b"
+  },
+  "incremental_minus_whole": {
+    "incremental_oracle": {
+      "aggregation_cardinality": -0.04,
+      "argument_order": -0.30357142857142855,
+      "attribute": 0.29106493506493514,
+      "dependency": 0.026454378444580526,
+      "entity": 0.09075194468452896,
+      "operator": 0.048246364414029186,
+      "path_reuse": null,
+      "qualifier": 0.2674213836477987,
+      "relation_direction": 0.05454545454545451,
+      "return_target": 0.03999999999999998,
+      "source_fact": 0.05720430107526886,
+      "temporal": 0.2
+    },
+    "incremental_predicted": {
+      "aggregation_cardinality": -0.04,
+      "argument_order": -0.028571428571428525,
+      "attribute": 0.05743884892086332,
+      "dependency": 0.012323943661971828,
+      "entity": 0.08058608058608063,
+      "operator": 0.06729398346164817,
+      "path_reuse": null,
+      "qualifier": 0.09333333333333332,
+      "relation_direction": -0.01904761904761909,
+      "return_target": -0.040000000000000036,
+      "source_fact": 0.12776371308016876,
+      "temporal": 0.0
+    }
+  },
+  "input_sha256": {
+    "eval": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+    "oracle_scored": "08aa04790238b2f7f2f826ab549355bcbc4c963caf1443e1154cb6cbff8f9b77",
+    "predicted_scored": "b8df7dd891bfd7aed32123a5d015efbd2a4ce35caeb84d8abbcfab27734158d0",
+    "programs": "52c091876de79362a2a286e0e9df2d60c0e46b4cc0bbd5c7423d6d6b3299cb4f",
+    "teachers": {
+      "artifacts\\paper1\\dsl\\annotated_v1\\accepted.jsonl": "afc841dd2d7824717521a69c9186575fd0e64ce5717e3d0d4ce32075faf5b0dc",
+      "artifacts\\paper1\\dsl\\expansion500_v1\\freeze\\expansion_train.jsonl": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562"
+    },
+    "whole_scored": "b34daad19f28b1f4712c2b648fc96ae2f181cd417abe7e54a3b8512927a87211"
+  },
+  "judge_queue_count": 26,
+  "schema_version": "ccpu.paper1.semantic_failure_analysis.v1",
+  "teacher_consistency": {
+    "automatic_rewrite_performed": false,
+    "canonical_attribute_shapes": 2191,
+    "likely_synonym_or_shape_clusters": [
+      {
+        "examples": [
+          "amy.age_now",
+          "carla.age_now",
+          "claire.age_now",
+          "jessica.age_now",
+          "karen.age_now"
+        ],
+        "semantic_tokens": [
+          "age"
+        ],
+        "variants": 7
+      },
+      {
+        "examples": [
+          "customers.each.returned_damaged_milk_cartons",
+          "customers.total_accepted_milk_cartons"
+        ],
+        "semantic_tokens": [
+          "milk",
+          "cartons"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "claire.garden.tulips",
+          "elena.garden.tulips"
+        ],
+        "semantic_tokens": [
+          "garden",
+          "tulips"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "jason.goal",
+          "jessica.goal"
+        ],
+        "semantic_tokens": [
+          "goal"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "fishbowl.red_jelly_beans",
+          "sample_bag.red_jelly_beans"
+        ],
+        "semantic_tokens": [
+          "red",
+          "jelly",
+          "beans"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "fishbowl.white_jelly_beans",
+          "sample_bag.white_jelly_beans"
+        ],
+        "semantic_tokens": [
+          "white",
+          "jelly",
+          "beans"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "fishbowl.black_jelly_beans",
+          "sample_bag.black_jelly_beans"
+        ],
+        "semantic_tokens": [
+          "black",
+          "jelly",
+          "beans"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "fishbowl.green_jelly_beans",
+          "sample_bag.green_jelly_beans"
+        ],
+        "semantic_tokens": [
+          "green",
+          "jelly",
+          "beans"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "fishbowl.purple_jelly_beans",
+          "sample_bag.purple_jelly_beans"
+        ],
+        "semantic_tokens": [
+          "purple",
+          "jelly",
+          "beans"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "fishbowl.yellow_jelly_beans",
+          "sample_bag.yellow_jelly_beans"
+        ],
+        "semantic_tokens": [
+          "yellow",
+          "jelly",
+          "beans"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "fire_chief_simpson.hats",
+          "policeman_obrien.hats_now"
+        ],
+        "semantic_tokens": [
+          "hats"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "mikey.jelly_beans",
+          "napoleon.jelly_beans",
+          "sedrich.jelly_beans",
+          "twice_sum_napoleon_sedrich.jelly_beans"
+        ],
+        "semantic_tokens": [
+          "jelly",
+          "beans"
+        ],
+        "variants": 4
+      },
+      {
+        "examples": [
+          "eating_contest.participant_count",
+          "swim_group.participant_count"
+        ],
+        "semantic_tokens": [
+          "participant"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "jacob.preferred_food",
+          "mason.preferred_food",
+          "noah.preferred_food"
+        ],
+        "semantic_tokens": [
+          "preferred",
+          "food"
+        ],
+        "variants": 3
+      },
+      {
+        "examples": [
+          "campaign_poll.subject",
+          "monitoring.subject"
+        ],
+        "semantic_tokens": [
+          "subject"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "henry.initial.games",
+          "neil.initial.games"
+        ],
+        "semantic_tokens": [
+          "initial",
+          "games"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "henry.now.games",
+          "neil.now.games",
+          "zachary.games_sold.count"
+        ],
+        "semantic_tokens": [
+          "games"
+        ],
+        "variants": 3
+      },
+      {
+        "examples": [
+          "james.oreos",
+          "james_and_jordan.total_oreos",
+          "jordan.oreos"
+        ],
+        "semantic_tokens": [
+          "oreos"
+        ],
+        "variants": 3
+      },
+      {
+        "examples": [
+          "anie.weekday.red_marbles",
+          "jenny.weekday.red_marbles",
+          "mary.weekday.red_marbles"
+        ],
+        "semantic_tokens": [
+          "weekday",
+          "red",
+          "marbles"
+        ],
+        "variants": 3
+      },
+      {
+        "examples": [
+          "anie.weekday.blue_marbles",
+          "friends.weekday.total_blue_marbles",
+          "jenny.weekday.blue_marbles",
+          "mary.weekday.blue_marbles"
+        ],
+        "semantic_tokens": [
+          "weekday",
+          "blue",
+          "marbles"
+        ],
+        "variants": 4
+      },
+      {
+        "examples": [
+          "chandra.activity",
+          "cleaning_event.activity",
+          "flyer_dropoff.activity",
+          "mr_rocky.activity",
+          "natalia.activity"
+        ],
+        "semantic_tokens": [
+          "activity"
+        ],
+        "variants": 6
+      },
+      {
+        "examples": [
+          "tim.run_days_per_week_before",
+          "tim.run_days_per_week_now"
+        ],
+        "semantic_tokens": [
+          "run",
+          "days"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "gym_chain.total_replacement_cost",
+          "john.total_replacement_cost"
+        ],
+        "semantic_tokens": [
+          "replacement",
+          "cost"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "arnel.boxes.count",
+          "louise.total_boxes"
+        ],
+        "semantic_tokens": [
+          "boxes"
+        ],
+        "variants": 2
+      },
+      {
+        "examples": [
+          "arnel.total_pencils",
+          "clare.pencils",
+          "jeanine.pencils",
+          "jeff.pencils.remaining",
+          "vicki.pencils.remaining"
+        ],
+        "semantic_tokens": [
+          "pencils"
+        ],
+        "variants": 5
+      }
+    ],
+    "path_shape_entropy_bits": 10.731981944520516,
+    "program_count": 500
+  }
+}

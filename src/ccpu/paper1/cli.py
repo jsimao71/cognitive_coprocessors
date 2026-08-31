@@ -57,6 +57,7 @@ from .public_gsm8k import (
     run_gsm8k_example,
     write_gsm8k_run,
 )
+from .semantic_failure import analyze_saved_semantic_failures
 
 PROTOCOL_VERSIONS = {
     "prompt": PROMPT_VERSION,
@@ -552,6 +553,24 @@ def analyze_asl_incremental_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_asl_semantic_failures_command(args: argparse.Namespace) -> int:
+    report = analyze_saved_semantic_failures(
+        eval_path=args.eval,
+        programs_path=args.programs,
+        whole_scored_path=args.whole_scored,
+        predicted_scored_path=args.predicted_scored,
+        oracle_scored_path=args.oracle_scored,
+        output_dir=args.output_dir,
+        teacher_paths=args.teacher or (),
+    )
+    count = report["conditions"]["whole_lora500"]["count"]
+    print(
+        f"analyzed fine-grained semantic failures for {count} frozen programs "
+        f"-> {args.output_dir}"
+    )
+    return 0
+
+
 def evaluate_asl_pilot_command(args: argparse.Namespace) -> int:
     report = analyze_asl_predictions(args.eval, args.predictions, args.output_dir)
     write_json(Path(args.output_dir) / "summary.json", report)
@@ -862,6 +881,19 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_incremental_analysis.add_argument("--full-context-scored")
     asl_incremental_analysis.add_argument("--output", required=True)
     asl_incremental_analysis.set_defaults(handler=analyze_asl_incremental_command)
+
+    semantic_failures = commands.add_parser(
+        "analyze-asl-semantic-failures",
+        help="decompose saved whole and incremental ASL semantic failures",
+    )
+    semantic_failures.add_argument("--eval", required=True)
+    semantic_failures.add_argument("--programs", required=True)
+    semantic_failures.add_argument("--whole-scored", required=True)
+    semantic_failures.add_argument("--predicted-scored", required=True)
+    semantic_failures.add_argument("--oracle-scored", required=True)
+    semantic_failures.add_argument("--teacher", action="append")
+    semantic_failures.add_argument("--output-dir", required=True)
+    semantic_failures.set_defaults(handler=analyze_asl_semantic_failures_command)
 
     asl_evaluate = commands.add_parser(
         "evaluate-asl-pilot", help="score saved ASL predictions with semantic components"

@@ -1,0 +1,2671 @@
+{
+  "incremental_oracle": {
+    "gsm8k": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 2
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 1
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.14285714285714285,
+          "correct": 2,
+          "support": 14
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 14
+        }
+      },
+      "count": 17,
+      "error_counts": {
+        "aggregation_cardinality": 12,
+        "ambiguous_symbol_alignment": 1,
+        "attribute_grounding": 17,
+        "cardinality_qualifier": 13,
+        "dependency_incomplete": 17,
+        "derived_literal_presented_as_source_fact": 1,
+        "entity_grounding": 9,
+        "hallucinated_or_mutated_number": 5,
+        "lowering_unsupported_form": 1,
+        "number_attached_to_wrong_path": 12,
+        "omitted_number": 9,
+        "operator_mapping": 15,
+        "premature_literal_collapse": 1,
+        "qualifier_grounding": 13,
+        "relation_constant": 5,
+        "relation_direction": 1,
+        "return_missing": 3,
+        "return_wrong_target": 8,
+        "source_fact_grounding": 16,
+        "surface_malformed_syntax": 2,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 2,
+        "transitive_shortcut": 2,
+        "unresolved_symbol_equivalence": 7
+      },
+      "operator_confusion": {
+        "ADD->ADD": 3,
+        "CONST->CONST": 15,
+        "CONST->REF": 1,
+        "CONST->SUB": 1,
+        "DIV->ADD": 2,
+        "DIV->DIV": 2,
+        "MUL->ADD": 1,
+        "MUL->MUL": 3,
+        "SUB->CONST": 1,
+        "SUB->MUL": 1,
+        "SUB->SUB": 1
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.05,
+          "correct": 1,
+          "support": 20
+        },
+        "argument_order": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 7
+        },
+        "attribute": {
+          "f1": 0.5158730158730159,
+          "overlap": 65,
+          "precision": 0.4642857142857143,
+          "predicted_count": 140,
+          "recall": 0.5803571428571429,
+          "reference_count": 112,
+          "support": 112
+        },
+        "cardinality_qualifier": {
+          "f1": 0.6236559139784946,
+          "overlap": 29,
+          "precision": 0.5272727272727272,
+          "predicted_count": 55,
+          "recall": 0.7631578947368421,
+          "reference_count": 38,
+          "support": 38
+        },
+        "dependency": {
+          "f1": 0.15217391304347827,
+          "overlap": 14,
+          "precision": 0.16091954022988506,
+          "predicted_count": 87,
+          "recall": 0.14432989690721648,
+          "reference_count": 97,
+          "support": 97
+        },
+        "entity": {
+          "f1": 0.6956521739130436,
+          "overlap": 24,
+          "precision": 0.7058823529411765,
+          "predicted_count": 34,
+          "recall": 0.6857142857142857,
+          "reference_count": 35,
+          "support": 35
+        },
+        "inter_object": {
+          "accuracy": 0.2,
+          "correct": 1,
+          "support": 5
+        },
+        "intra_object": {
+          "accuracy": 0.3333333333333333,
+          "correct": 3,
+          "support": 9
+        },
+        "operator": {
+          "f1": 0.7153284671532847,
+          "overlap": 49,
+          "precision": 0.7777777777777778,
+          "predicted_count": 63,
+          "recall": 0.6621621621621622,
+          "reference_count": 74,
+          "support": 74
+        },
+        "path_exact": {
+          "f1": 0.39682539682539686,
+          "overlap": 50,
+          "precision": 0.35714285714285715,
+          "predicted_count": 140,
+          "recall": 0.44642857142857145,
+          "reference_count": 112,
+          "support": 112
+        },
+        "qualifier": {
+          "f1": 0.6260869565217391,
+          "overlap": 36,
+          "precision": 0.5294117647058824,
+          "predicted_count": 68,
+          "recall": 0.7659574468085106,
+          "reference_count": 47,
+          "support": 47
+        },
+        "relation_constant": {
+          "accuracy": 0.782608695652174,
+          "correct": 18,
+          "support": 23
+        },
+        "relation_direction": {
+          "accuracy": 0.46153846153846156,
+          "correct": 18,
+          "support": 39
+        },
+        "relation_participant": {
+          "accuracy": 0.2857142857142857,
+          "correct": 4,
+          "support": 14
+        },
+        "return_target": {
+          "accuracy": 0.35294117647058826,
+          "correct": 6,
+          "support": 17
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "source_fact_attachment": {
+          "f1": 0.24793388429752064,
+          "overlap": 15,
+          "precision": 0.2830188679245283,
+          "predicted_count": 53,
+          "recall": 0.22058823529411764,
+          "reference_count": 68,
+          "support": 68
+        },
+        "source_literal": {
+          "f1": 0.7272727272727273,
+          "overlap": 44,
+          "precision": 0.8301886792452831,
+          "predicted_count": 53,
+          "recall": 0.6470588235294118,
+          "reference_count": 68,
+          "support": 68
+        },
+        "status_qualifier": {
+          "f1": 0.8571428571428571,
+          "overlap": 3,
+          "precision": 1.0,
+          "predicted_count": 3,
+          "recall": 0.75,
+          "reference_count": 4,
+          "support": 4
+        },
+        "temporal": {
+          "accuracy": 0.6,
+          "correct": 3,
+          "support": 5
+        },
+        "temporal_qualifier": {
+          "f1": 0.5333333333333333,
+          "overlap": 4,
+          "precision": 0.4,
+          "predicted_count": 10,
+          "recall": 0.8,
+          "reference_count": 5,
+          "support": 5
+        },
+        "unit": {
+          "f1": 0.42424242424242425,
+          "overlap": 7,
+          "precision": 0.4666666666666667,
+          "predicted_count": 15,
+          "recall": 0.3888888888888889,
+          "reference_count": 18,
+          "support": 18
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": 0.45,
+          "correct": 27,
+          "support": 60
+        },
+        "workspace_symbol_stable": {
+          "accuracy": 0.8571428571428571,
+          "correct": 18,
+          "support": 21
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "final_answer_correct": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 0.8235294117647058,
+          "correct": 14,
+          "support": 17
+        },
+        "parse_valid": {
+          "accuracy": 0.8823529411764706,
+          "correct": 15,
+          "support": 17
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "type_valid": {
+          "accuracy": 0.8235294117647058,
+          "correct": 14,
+          "support": 17
+        }
+      },
+      "transition_analysis": {
+        "conditional": {
+          "answer_correct_given_operator_correct_path_wrong": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 25
+          },
+          "answer_correct_given_semantic_state_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "answer_correct_given_semantic_state_incorrect": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 62
+          },
+          "direction_correct_given_operator_correct": {
+            "accuracy": 0.6,
+            "correct": 3,
+            "support": 5
+          },
+          "operator_correct_given_parse_type": {
+            "accuracy": 0.6491228070175439,
+            "correct": 37,
+            "support": 57
+          },
+          "path_correct_given_parse_type": {
+            "accuracy": 0.21052631578947367,
+            "correct": 12,
+            "support": 57
+          }
+        },
+        "count": 62,
+        "error_counts": {
+          "aggregation_cardinality": 13,
+          "ambiguous_symbol_alignment": 3,
+          "attribute_grounding": 50,
+          "cardinality_qualifier": 24,
+          "dependency_incomplete": 32,
+          "duplicate_semantic_slot": 2,
+          "entity_grounding": 20,
+          "forbidden_stateful_rename": 3,
+          "hallucinated_or_mutated_number": 7,
+          "lowering_unsupported_form": 1,
+          "number_attached_to_wrong_path": 16,
+          "omitted_number": 10,
+          "operator_mapping": 24,
+          "qualifier_grounding": 29,
+          "relation_constant": 4,
+          "relation_direction": 1,
+          "return_missing": 2,
+          "return_wrong_target": 8,
+          "source_fact_grounding": 24,
+          "surface_malformed_syntax": 4,
+          "temporal_qualifier": 6,
+          "temporal_semantics": 6,
+          "unresolved_due_to_rename": 3,
+          "unresolved_symbol_equivalence": 17
+        },
+        "operator_confusion": {
+          "ADD->ADD": 3,
+          "CONST->CONST": 31,
+          "CONST->REF": 1,
+          "DIV->DIV": 5,
+          "MUL->ADD": 1,
+          "MUL->MUL": 3,
+          "SUB->SUB": 3
+        },
+        "semantic": {
+          "aggregation_cardinality": {
+            "accuracy": 0.1,
+            "correct": 2,
+            "support": 20
+          },
+          "argument_order": {
+            "accuracy": 0.375,
+            "correct": 3,
+            "support": 8
+          },
+          "attribute": {
+            "f1": 0.43859649122807015,
+            "overlap": 75,
+            "precision": 0.46296296296296297,
+            "predicted_count": 162,
+            "recall": 0.4166666666666667,
+            "reference_count": 180,
+            "support": 180
+          },
+          "cardinality_qualifier": {
+            "f1": 0.6324786324786326,
+            "overlap": 37,
+            "precision": 0.6379310344827587,
+            "predicted_count": 58,
+            "recall": 0.6271186440677966,
+            "reference_count": 59,
+            "support": 59
+          },
+          "dependency": {
+            "f1": 0.24468085106382978,
+            "overlap": 23,
+            "precision": 0.25274725274725274,
+            "predicted_count": 91,
+            "recall": 0.23711340206185566,
+            "reference_count": 97,
+            "support": 97
+          },
+          "entity": {
+            "f1": 0.7421383647798742,
+            "overlap": 59,
+            "precision": 0.7866666666666666,
+            "predicted_count": 75,
+            "recall": 0.7023809523809523,
+            "reference_count": 84,
+            "support": 84
+          },
+          "inter_object": {
+            "accuracy": 0.4,
+            "correct": 2,
+            "support": 5
+          },
+          "intra_object": {
+            "accuracy": 0.5,
+            "correct": 5,
+            "support": 10
+          },
+          "operator": {
+            "f1": 0.6805555555555556,
+            "overlap": 49,
+            "precision": 0.7,
+            "predicted_count": 70,
+            "recall": 0.6621621621621622,
+            "reference_count": 74,
+            "support": 74
+          },
+          "path_exact": {
+            "f1": 0.30409356725146197,
+            "overlap": 52,
+            "precision": 0.32098765432098764,
+            "predicted_count": 162,
+            "recall": 0.28888888888888886,
+            "reference_count": 180,
+            "support": 180
+          },
+          "qualifier": {
+            "f1": 0.5986394557823128,
+            "overlap": 44,
+            "precision": 0.6197183098591549,
+            "predicted_count": 71,
+            "recall": 0.5789473684210527,
+            "reference_count": 76,
+            "support": 76
+          },
+          "relation_constant": {
+            "accuracy": 0.8780487804878049,
+            "correct": 36,
+            "support": 41
+          },
+          "relation_direction": {
+            "accuracy": 0.7142857142857143,
+            "correct": 25,
+            "support": 35
+          },
+          "relation_participant": {
+            "accuracy": 0.4666666666666667,
+            "correct": 7,
+            "support": 15
+          },
+          "return_target": {
+            "accuracy": 0.4117647058823529,
+            "correct": 7,
+            "support": 17
+          },
+          "semantic_name_equivalent": {
+            "accuracy": 0.20967741935483872,
+            "correct": 13,
+            "support": 62
+          },
+          "source_fact_attachment": {
+            "f1": 0.4461538461538461,
+            "overlap": 29,
+            "precision": 0.46774193548387094,
+            "predicted_count": 62,
+            "recall": 0.4264705882352941,
+            "reference_count": 68,
+            "support": 68
+          },
+          "source_literal": {
+            "f1": 0.7999999999999999,
+            "overlap": 52,
+            "precision": 0.8387096774193549,
+            "predicted_count": 62,
+            "recall": 0.7647058823529411,
+            "reference_count": 68,
+            "support": 68
+          },
+          "status_qualifier": {
+            "f1": 0.6,
+            "overlap": 3,
+            "precision": 1.0,
+            "predicted_count": 3,
+            "recall": 0.42857142857142855,
+            "reference_count": 7,
+            "support": 7
+          },
+          "temporal": {
+            "accuracy": 0.3,
+            "correct": 3,
+            "support": 10
+          },
+          "temporal_qualifier": {
+            "f1": 0.4000000000000001,
+            "overlap": 4,
+            "precision": 0.4,
+            "predicted_count": 10,
+            "recall": 0.4,
+            "reference_count": 10,
+            "support": 10
+          },
+          "unit": {
+            "f1": 0.5714285714285715,
+            "overlap": 14,
+            "precision": 0.6666666666666666,
+            "predicted_count": 21,
+            "recall": 0.5,
+            "reference_count": 28,
+            "support": 28
+          },
+          "workspace_path_reuse_rate": {
+            "accuracy": 0.45,
+            "correct": 27,
+            "support": 60
+          },
+          "workspace_symbol_stable": {
+            "accuracy": 0.8571428571428571,
+            "correct": 18,
+            "support": 21
+          }
+        },
+        "surface_and_compute": {
+          "executable": {
+            "accuracy": 0.5,
+            "correct": 31,
+            "support": 62
+          },
+          "final_answer_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "lowerable_to_ccir": {
+            "accuracy": 0.9193548387096774,
+            "correct": 57,
+            "support": 62
+          },
+          "parse_valid": {
+            "accuracy": 0.9354838709677419,
+            "correct": 58,
+            "support": 62
+          },
+          "semantic_state_equivalent": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "type_valid": {
+            "accuracy": 0.9193548387096774,
+            "correct": 57,
+            "support": 62
+          }
+        }
+      },
+      "transition_count": 62
+    },
+    "tatqa": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 0.8,
+          "correct": 4,
+          "support": 5
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "support": 4
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.5,
+          "correct": 2,
+          "support": 4
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.5,
+          "correct": 1,
+          "support": 2
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "support": 8
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.125,
+          "correct": 1,
+          "support": 8
+        }
+      },
+      "count": 8,
+      "error_counts": {
+        "aggregation_cardinality": 3,
+        "ambiguous_symbol_alignment": 1,
+        "attribute_grounding": 8,
+        "cardinality_qualifier": 3,
+        "dependency_incomplete": 7,
+        "entity_grounding": 6,
+        "hallucinated_or_mutated_number": 2,
+        "number_attached_to_wrong_path": 5,
+        "omitted_number": 2,
+        "operator_mapping": 2,
+        "qualifier_grounding": 3,
+        "return_wrong_target": 6,
+        "source_fact_grounding": 6,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 2,
+        "unresolved_symbol_equivalence": 1
+      },
+      "operator_confusion": {
+        "CONST->CONST": 7,
+        "MUL->MUL": 1,
+        "SUB->SUB": 1
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 5
+        },
+        "argument_order": {
+          "accuracy": 1.0,
+          "correct": 1,
+          "support": 1
+        },
+        "attribute": {
+          "f1": 0.07142857142857142,
+          "overlap": 2,
+          "precision": 0.07142857142857142,
+          "predicted_count": 28,
+          "recall": 0.07142857142857142,
+          "reference_count": 28,
+          "support": 28
+        },
+        "cardinality_qualifier": {
+          "f1": 0.7200000000000001,
+          "overlap": 9,
+          "precision": 0.6428571428571429,
+          "predicted_count": 14,
+          "recall": 0.8181818181818182,
+          "reference_count": 11,
+          "support": 11
+        },
+        "dependency": {
+          "f1": 0.08695652173913043,
+          "overlap": 2,
+          "precision": 0.09090909090909091,
+          "predicted_count": 22,
+          "recall": 0.08333333333333333,
+          "reference_count": 24,
+          "support": 24
+        },
+        "entity": {
+          "f1": 0.4,
+          "overlap": 4,
+          "precision": 0.5,
+          "predicted_count": 8,
+          "recall": 0.3333333333333333,
+          "reference_count": 12,
+          "support": 12
+        },
+        "inter_object": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 1
+        },
+        "intra_object": {
+          "accuracy": 1.0,
+          "correct": 1,
+          "support": 1
+        },
+        "operator": {
+          "f1": 0.8421052631578948,
+          "overlap": 16,
+          "precision": 0.8888888888888888,
+          "predicted_count": 18,
+          "recall": 0.8,
+          "reference_count": 20,
+          "support": 20
+        },
+        "path_exact": {
+          "f1": 0.03571428571428571,
+          "overlap": 1,
+          "precision": 0.03571428571428571,
+          "predicted_count": 28,
+          "recall": 0.03571428571428571,
+          "reference_count": 28,
+          "support": 28
+        },
+        "qualifier": {
+          "f1": 0.7272727272727272,
+          "overlap": 16,
+          "precision": 0.6666666666666666,
+          "predicted_count": 24,
+          "recall": 0.8,
+          "reference_count": 20,
+          "support": 20
+        },
+        "relation_constant": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "relation_direction": {
+          "accuracy": 0.4,
+          "correct": 2,
+          "support": 5
+        },
+        "relation_participant": {
+          "accuracy": 0.5,
+          "correct": 1,
+          "support": 2
+        },
+        "return_target": {
+          "accuracy": 0.25,
+          "correct": 2,
+          "support": 8
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.125,
+          "correct": 1,
+          "support": 8
+        },
+        "source_fact_attachment": {
+          "f1": 0.4117647058823529,
+          "overlap": 7,
+          "precision": 0.4117647058823529,
+          "predicted_count": 17,
+          "recall": 0.4117647058823529,
+          "reference_count": 17,
+          "support": 17
+        },
+        "source_literal": {
+          "f1": 0.8823529411764706,
+          "overlap": 15,
+          "precision": 0.8823529411764706,
+          "predicted_count": 17,
+          "recall": 0.8823529411764706,
+          "reference_count": 17,
+          "support": 17
+        },
+        "status_qualifier": {
+          "f1": 1.0,
+          "overlap": 4,
+          "precision": 1.0,
+          "predicted_count": 4,
+          "recall": 1.0,
+          "reference_count": 4,
+          "support": 4
+        },
+        "temporal": {
+          "accuracy": 0.4,
+          "correct": 2,
+          "support": 5
+        },
+        "temporal_qualifier": {
+          "f1": 0.5454545454545454,
+          "overlap": 3,
+          "precision": 0.5,
+          "predicted_count": 6,
+          "recall": 0.6,
+          "reference_count": 5,
+          "support": 5
+        },
+        "unit": {
+          "f1": 0.75,
+          "overlap": 9,
+          "precision": 0.9,
+          "predicted_count": 10,
+          "recall": 0.6428571428571429,
+          "reference_count": 14,
+          "support": 14
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "workspace_symbol_stable": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.875,
+          "correct": 7,
+          "support": 8
+        },
+        "final_answer_correct": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "support": 8
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "parse_valid": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.5,
+          "correct": 4,
+          "support": 8
+        },
+        "type_valid": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        }
+      },
+      "transition_analysis": {
+        "conditional": {
+          "answer_correct_given_operator_correct_path_wrong": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 5
+          },
+          "answer_correct_given_semantic_state_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "answer_correct_given_semantic_state_incorrect": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 8
+          },
+          "direction_correct_given_operator_correct": {
+            "accuracy": 0.5,
+            "correct": 1,
+            "support": 2
+          },
+          "operator_correct_given_parse_type": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "support": 8
+          },
+          "path_correct_given_parse_type": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "support": 8
+          }
+        },
+        "count": 8,
+        "error_counts": {
+          "aggregation_cardinality": 3,
+          "ambiguous_symbol_alignment": 1,
+          "attribute_grounding": 8,
+          "cardinality_qualifier": 3,
+          "dependency_incomplete": 7,
+          "entity_grounding": 6,
+          "hallucinated_or_mutated_number": 2,
+          "number_attached_to_wrong_path": 5,
+          "omitted_number": 2,
+          "operator_mapping": 2,
+          "qualifier_grounding": 3,
+          "return_wrong_target": 6,
+          "source_fact_grounding": 6,
+          "temporal_qualifier": 2,
+          "temporal_semantics": 2,
+          "unresolved_symbol_equivalence": 1
+        },
+        "operator_confusion": {
+          "CONST->CONST": 7,
+          "MUL->MUL": 1,
+          "SUB->SUB": 1
+        },
+        "semantic": {
+          "aggregation_cardinality": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 5
+          },
+          "argument_order": {
+            "accuracy": 1.0,
+            "correct": 1,
+            "support": 1
+          },
+          "attribute": {
+            "f1": 0.07142857142857142,
+            "overlap": 2,
+            "precision": 0.07142857142857142,
+            "predicted_count": 28,
+            "recall": 0.07142857142857142,
+            "reference_count": 28,
+            "support": 28
+          },
+          "cardinality_qualifier": {
+            "f1": 0.7200000000000001,
+            "overlap": 9,
+            "precision": 0.6428571428571429,
+            "predicted_count": 14,
+            "recall": 0.8181818181818182,
+            "reference_count": 11,
+            "support": 11
+          },
+          "dependency": {
+            "f1": 0.08695652173913043,
+            "overlap": 2,
+            "precision": 0.09090909090909091,
+            "predicted_count": 22,
+            "recall": 0.08333333333333333,
+            "reference_count": 24,
+            "support": 24
+          },
+          "entity": {
+            "f1": 0.4,
+            "overlap": 4,
+            "precision": 0.5,
+            "predicted_count": 8,
+            "recall": 0.3333333333333333,
+            "reference_count": 12,
+            "support": 12
+          },
+          "inter_object": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 1
+          },
+          "intra_object": {
+            "accuracy": 1.0,
+            "correct": 1,
+            "support": 1
+          },
+          "operator": {
+            "f1": 0.8421052631578948,
+            "overlap": 16,
+            "precision": 0.8888888888888888,
+            "predicted_count": 18,
+            "recall": 0.8,
+            "reference_count": 20,
+            "support": 20
+          },
+          "path_exact": {
+            "f1": 0.03571428571428571,
+            "overlap": 1,
+            "precision": 0.03571428571428571,
+            "predicted_count": 28,
+            "recall": 0.03571428571428571,
+            "reference_count": 28,
+            "support": 28
+          },
+          "qualifier": {
+            "f1": 0.7272727272727272,
+            "overlap": 16,
+            "precision": 0.6666666666666666,
+            "predicted_count": 24,
+            "recall": 0.8,
+            "reference_count": 20,
+            "support": 20
+          },
+          "relation_constant": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          },
+          "relation_direction": {
+            "accuracy": 0.4,
+            "correct": 2,
+            "support": 5
+          },
+          "relation_participant": {
+            "accuracy": 0.5,
+            "correct": 1,
+            "support": 2
+          },
+          "return_target": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "support": 8
+          },
+          "semantic_name_equivalent": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "support": 8
+          },
+          "source_fact_attachment": {
+            "f1": 0.4117647058823529,
+            "overlap": 7,
+            "precision": 0.4117647058823529,
+            "predicted_count": 17,
+            "recall": 0.4117647058823529,
+            "reference_count": 17,
+            "support": 17
+          },
+          "source_literal": {
+            "f1": 0.8823529411764706,
+            "overlap": 15,
+            "precision": 0.8823529411764706,
+            "predicted_count": 17,
+            "recall": 0.8823529411764706,
+            "reference_count": 17,
+            "support": 17
+          },
+          "status_qualifier": {
+            "f1": 1.0,
+            "overlap": 4,
+            "precision": 1.0,
+            "predicted_count": 4,
+            "recall": 1.0,
+            "reference_count": 4,
+            "support": 4
+          },
+          "temporal": {
+            "accuracy": 0.4,
+            "correct": 2,
+            "support": 5
+          },
+          "temporal_qualifier": {
+            "f1": 0.5454545454545454,
+            "overlap": 3,
+            "precision": 0.5,
+            "predicted_count": 6,
+            "recall": 0.6,
+            "reference_count": 5,
+            "support": 5
+          },
+          "unit": {
+            "f1": 0.75,
+            "overlap": 9,
+            "precision": 0.9,
+            "predicted_count": 10,
+            "recall": 0.6428571428571429,
+            "reference_count": 14,
+            "support": 14
+          },
+          "workspace_path_reuse_rate": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "workspace_symbol_stable": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          }
+        },
+        "surface_and_compute": {
+          "executable": {
+            "accuracy": 0.875,
+            "correct": 7,
+            "support": 8
+          },
+          "final_answer_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "lowerable_to_ccir": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          },
+          "parse_valid": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          },
+          "semantic_state_equivalent": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "type_valid": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          }
+        }
+      },
+      "transition_count": 8
+    }
+  },
+  "incremental_predicted": {
+    "gsm8k": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 0.5,
+          "correct": 1,
+          "support": 2
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.058823529411764705,
+          "correct": 1,
+          "support": 17
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.13333333333333333,
+          "correct": 2,
+          "support": 15
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 15
+        }
+      },
+      "count": 17,
+      "error_counts": {
+        "aggregation_cardinality": 12,
+        "ambiguous_symbol_alignment": 2,
+        "attribute_grounding": 17,
+        "cardinality_qualifier": 13,
+        "dependency_incomplete": 17,
+        "derived_literal_presented_as_source_fact": 1,
+        "entity_grounding": 9,
+        "hallucinated_or_mutated_number": 6,
+        "number_attached_to_wrong_path": 11,
+        "omitted_number": 9,
+        "operator_mapping": 15,
+        "premature_literal_collapse": 1,
+        "qualifier_grounding": 14,
+        "relation_constant": 4,
+        "return_missing": 3,
+        "return_wrong_target": 10,
+        "source_fact_grounding": 15,
+        "surface_no_asl": 2,
+        "temporal_qualifier": 6,
+        "temporal_semantics": 2,
+        "unresolved_symbol_equivalence": 8
+      },
+      "operator_confusion": {
+        "ADD->ADD": 2,
+        "CONST->CONST": 23,
+        "CONST->MUL": 1,
+        "CONST->REF": 1,
+        "DIV->ADD": 1,
+        "DIV->DIV": 3,
+        "MUL->MUL": 4,
+        "SUB->CONST": 1,
+        "SUB->MUL": 1,
+        "SUB->SUB": 3
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.05,
+          "correct": 1,
+          "support": 20
+        },
+        "argument_order": {
+          "accuracy": 0.3333333333333333,
+          "correct": 3,
+          "support": 9
+        },
+        "attribute": {
+          "f1": 0.2342342342342342,
+          "overlap": 26,
+          "precision": 0.23636363636363636,
+          "predicted_count": 110,
+          "recall": 0.23214285714285715,
+          "reference_count": 112,
+          "support": 112
+        },
+        "cardinality_qualifier": {
+          "f1": 0.46153846153846156,
+          "overlap": 18,
+          "precision": 0.45,
+          "predicted_count": 40,
+          "recall": 0.47368421052631576,
+          "reference_count": 38,
+          "support": 38
+        },
+        "dependency": {
+          "f1": 0.1348314606741573,
+          "overlap": 12,
+          "precision": 0.14814814814814814,
+          "predicted_count": 81,
+          "recall": 0.12371134020618557,
+          "reference_count": 97,
+          "support": 97
+        },
+        "entity": {
+          "f1": 0.6875,
+          "overlap": 22,
+          "precision": 0.7586206896551724,
+          "predicted_count": 29,
+          "recall": 0.6285714285714286,
+          "reference_count": 35,
+          "support": 35
+        },
+        "inter_object": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 5
+        },
+        "intra_object": {
+          "accuracy": 0.5,
+          "correct": 5,
+          "support": 10
+        },
+        "operator": {
+          "f1": 0.7384615384615384,
+          "overlap": 48,
+          "precision": 0.8571428571428571,
+          "predicted_count": 56,
+          "recall": 0.6486486486486487,
+          "reference_count": 74,
+          "support": 74
+        },
+        "path_exact": {
+          "f1": 0.09909909909909909,
+          "overlap": 11,
+          "precision": 0.1,
+          "predicted_count": 110,
+          "recall": 0.09821428571428571,
+          "reference_count": 112,
+          "support": 112
+        },
+        "qualifier": {
+          "f1": 0.3773584905660377,
+          "overlap": 20,
+          "precision": 0.3389830508474576,
+          "predicted_count": 59,
+          "recall": 0.425531914893617,
+          "reference_count": 47,
+          "support": 47
+        },
+        "relation_constant": {
+          "accuracy": 0.8387096774193549,
+          "correct": 26,
+          "support": 31
+        },
+        "relation_direction": {
+          "accuracy": 0.3783783783783784,
+          "correct": 14,
+          "support": 37
+        },
+        "relation_participant": {
+          "accuracy": 0.3333333333333333,
+          "correct": 5,
+          "support": 15
+        },
+        "return_target": {
+          "accuracy": 0.23529411764705882,
+          "correct": 4,
+          "support": 17
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "source_fact_attachment": {
+          "f1": 0.33870967741935487,
+          "overlap": 21,
+          "precision": 0.375,
+          "predicted_count": 56,
+          "recall": 0.3088235294117647,
+          "reference_count": 68,
+          "support": 68
+        },
+        "source_literal": {
+          "f1": 0.7580645161290324,
+          "overlap": 47,
+          "precision": 0.8392857142857143,
+          "predicted_count": 56,
+          "recall": 0.6911764705882353,
+          "reference_count": 68,
+          "support": 68
+        },
+        "status_qualifier": {
+          "f1": 0.4,
+          "overlap": 1,
+          "precision": 1.0,
+          "predicted_count": 1,
+          "recall": 0.25,
+          "reference_count": 4,
+          "support": 4
+        },
+        "temporal": {
+          "accuracy": 0.2,
+          "correct": 1,
+          "support": 5
+        },
+        "temporal_qualifier": {
+          "f1": 0.08695652173913045,
+          "overlap": 1,
+          "precision": 0.05555555555555555,
+          "predicted_count": 18,
+          "recall": 0.2,
+          "reference_count": 5,
+          "support": 5
+        },
+        "unit": {
+          "f1": 0.37209302325581395,
+          "overlap": 8,
+          "precision": 0.32,
+          "predicted_count": 25,
+          "recall": 0.4444444444444444,
+          "reference_count": 18,
+          "support": 18
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": 0.03333333333333333,
+          "correct": 2,
+          "support": 60
+        },
+        "workspace_symbol_stable": {
+          "accuracy": 0.6190476190476191,
+          "correct": 13,
+          "support": 21
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.47058823529411764,
+          "correct": 8,
+          "support": 17
+        },
+        "final_answer_correct": {
+          "accuracy": 0.058823529411764705,
+          "correct": 1,
+          "support": 17
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 0.8823529411764706,
+          "correct": 15,
+          "support": 17
+        },
+        "parse_valid": {
+          "accuracy": 0.8823529411764706,
+          "correct": 15,
+          "support": 17
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "type_valid": {
+          "accuracy": 0.8823529411764706,
+          "correct": 15,
+          "support": 17
+        }
+      },
+      "transition_analysis": {
+        "conditional": {
+          "answer_correct_given_operator_correct_path_wrong": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 29
+          },
+          "answer_correct_given_semantic_state_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "answer_correct_given_semantic_state_incorrect": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 62
+          },
+          "direction_correct_given_operator_correct": {
+            "accuracy": 1.0,
+            "correct": 3,
+            "support": 3
+          },
+          "operator_correct_given_parse_type": {
+            "accuracy": 0.6101694915254238,
+            "correct": 36,
+            "support": 59
+          },
+          "path_correct_given_parse_type": {
+            "accuracy": 0.13559322033898305,
+            "correct": 8,
+            "support": 59
+          }
+        },
+        "count": 62,
+        "error_counts": {
+          "aggregation_cardinality": 13,
+          "ambiguous_symbol_alignment": 2,
+          "attribute_grounding": 54,
+          "cardinality_qualifier": 27,
+          "dependency_incomplete": 31,
+          "duplicate_semantic_slot": 3,
+          "entity_grounding": 25,
+          "forbidden_stateful_rename": 8,
+          "hallucinated_or_mutated_number": 6,
+          "lowering_unsupported_form": 1,
+          "number_attached_to_wrong_path": 18,
+          "omitted_number": 13,
+          "operator_mapping": 24,
+          "qualifier_grounding": 34,
+          "relation_constant": 3,
+          "return_missing": 3,
+          "return_wrong_target": 9,
+          "source_fact_grounding": 30,
+          "surface_malformed_syntax": 2,
+          "surface_no_asl": 7,
+          "temporal_qualifier": 14,
+          "temporal_semantics": 7,
+          "unresolved_due_to_rename": 8,
+          "unresolved_symbol_equivalence": 26
+        },
+        "operator_confusion": {
+          "ADD->ADD": 2,
+          "CONST->CONST": 23,
+          "CONST->MUL": 1,
+          "CONST->REF": 1,
+          "DIV->DIV": 3,
+          "MUL->MUL": 3,
+          "SUB->SUB": 3
+        },
+        "semantic": {
+          "aggregation_cardinality": {
+            "accuracy": 0.05,
+            "correct": 1,
+            "support": 20
+          },
+          "argument_order": {
+            "accuracy": 0.5,
+            "correct": 3,
+            "support": 6
+          },
+          "attribute": {
+            "f1": 0.2188449848024316,
+            "overlap": 36,
+            "precision": 0.24161073825503357,
+            "predicted_count": 149,
+            "recall": 0.2,
+            "reference_count": 180,
+            "support": 180
+          },
+          "cardinality_qualifier": {
+            "f1": 0.4521739130434782,
+            "overlap": 26,
+            "precision": 0.4642857142857143,
+            "predicted_count": 56,
+            "recall": 0.4406779661016949,
+            "reference_count": 59,
+            "support": 59
+          },
+          "dependency": {
+            "f1": 0.15730337078651685,
+            "overlap": 14,
+            "precision": 0.1728395061728395,
+            "predicted_count": 81,
+            "recall": 0.14432989690721648,
+            "reference_count": 97,
+            "support": 97
+          },
+          "entity": {
+            "f1": 0.7189542483660131,
+            "overlap": 55,
+            "precision": 0.7971014492753623,
+            "predicted_count": 69,
+            "recall": 0.6547619047619048,
+            "reference_count": 84,
+            "support": 84
+          },
+          "inter_object": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 4
+          },
+          "intra_object": {
+            "accuracy": 0.7142857142857143,
+            "correct": 5,
+            "support": 7
+          },
+          "operator": {
+            "f1": 0.676923076923077,
+            "overlap": 44,
+            "precision": 0.7857142857142857,
+            "predicted_count": 56,
+            "recall": 0.5945945945945946,
+            "reference_count": 74,
+            "support": 74
+          },
+          "path_exact": {
+            "f1": 0.07294832826747721,
+            "overlap": 12,
+            "precision": 0.08053691275167785,
+            "predicted_count": 149,
+            "recall": 0.06666666666666667,
+            "reference_count": 180,
+            "support": 180
+          },
+          "qualifier": {
+            "f1": 0.35668789808917195,
+            "overlap": 28,
+            "precision": 0.345679012345679,
+            "predicted_count": 81,
+            "recall": 0.3684210526315789,
+            "reference_count": 76,
+            "support": 76
+          },
+          "relation_constant": {
+            "accuracy": 0.8666666666666667,
+            "correct": 26,
+            "support": 30
+          },
+          "relation_direction": {
+            "accuracy": 0.56,
+            "correct": 14,
+            "support": 25
+          },
+          "relation_participant": {
+            "accuracy": 0.45454545454545453,
+            "correct": 5,
+            "support": 11
+          },
+          "return_target": {
+            "accuracy": 0.29411764705882354,
+            "correct": 5,
+            "support": 17
+          },
+          "semantic_name_equivalent": {
+            "accuracy": 0.14516129032258066,
+            "correct": 9,
+            "support": 62
+          },
+          "source_fact_attachment": {
+            "f1": 0.33870967741935487,
+            "overlap": 21,
+            "precision": 0.375,
+            "predicted_count": 56,
+            "recall": 0.3088235294117647,
+            "reference_count": 68,
+            "support": 68
+          },
+          "source_literal": {
+            "f1": 0.7580645161290324,
+            "overlap": 47,
+            "precision": 0.8392857142857143,
+            "predicted_count": 56,
+            "recall": 0.6911764705882353,
+            "reference_count": 68,
+            "support": 68
+          },
+          "status_qualifier": {
+            "f1": 0.25,
+            "overlap": 1,
+            "precision": 1.0,
+            "predicted_count": 1,
+            "recall": 0.14285714285714285,
+            "reference_count": 7,
+            "support": 7
+          },
+          "temporal": {
+            "accuracy": 0.1,
+            "correct": 1,
+            "support": 10
+          },
+          "temporal_qualifier": {
+            "f1": 0.058823529411764705,
+            "overlap": 1,
+            "precision": 0.041666666666666664,
+            "predicted_count": 24,
+            "recall": 0.1,
+            "reference_count": 10,
+            "support": 10
+          },
+          "unit": {
+            "f1": 0.3548387096774193,
+            "overlap": 11,
+            "precision": 0.3235294117647059,
+            "predicted_count": 34,
+            "recall": 0.39285714285714285,
+            "reference_count": 28,
+            "support": 28
+          },
+          "workspace_path_reuse_rate": {
+            "accuracy": 0.03333333333333333,
+            "correct": 2,
+            "support": 60
+          },
+          "workspace_symbol_stable": {
+            "accuracy": 0.6190476190476191,
+            "correct": 13,
+            "support": 21
+          }
+        },
+        "surface_and_compute": {
+          "executable": {
+            "accuracy": 0.5967741935483871,
+            "correct": 37,
+            "support": 62
+          },
+          "final_answer_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "lowerable_to_ccir": {
+            "accuracy": 0.9516129032258065,
+            "correct": 59,
+            "support": 62
+          },
+          "parse_valid": {
+            "accuracy": 0.967741935483871,
+            "correct": 60,
+            "support": 62
+          },
+          "semantic_state_equivalent": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "type_valid": {
+            "accuracy": 0.9516129032258065,
+            "correct": 59,
+            "support": 62
+          }
+        }
+      },
+      "transition_count": 62
+    },
+    "tatqa": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 0.8,
+          "correct": 4,
+          "support": 5
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "support": 4
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.5,
+          "correct": 2,
+          "support": 4
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.5,
+          "correct": 1,
+          "support": 2
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "support": 8
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.125,
+          "correct": 1,
+          "support": 8
+        }
+      },
+      "count": 8,
+      "error_counts": {
+        "aggregation_cardinality": 3,
+        "ambiguous_symbol_alignment": 1,
+        "attribute_grounding": 8,
+        "cardinality_qualifier": 3,
+        "dependency_incomplete": 7,
+        "entity_grounding": 6,
+        "hallucinated_or_mutated_number": 2,
+        "number_attached_to_wrong_path": 5,
+        "omitted_number": 2,
+        "operator_mapping": 2,
+        "qualifier_grounding": 3,
+        "return_wrong_target": 6,
+        "source_fact_grounding": 6,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 2,
+        "unresolved_symbol_equivalence": 1
+      },
+      "operator_confusion": {
+        "CONST->CONST": 7,
+        "MUL->MUL": 1,
+        "SUB->SUB": 1
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 5
+        },
+        "argument_order": {
+          "accuracy": 1.0,
+          "correct": 1,
+          "support": 1
+        },
+        "attribute": {
+          "f1": 0.07142857142857142,
+          "overlap": 2,
+          "precision": 0.07142857142857142,
+          "predicted_count": 28,
+          "recall": 0.07142857142857142,
+          "reference_count": 28,
+          "support": 28
+        },
+        "cardinality_qualifier": {
+          "f1": 0.7200000000000001,
+          "overlap": 9,
+          "precision": 0.6428571428571429,
+          "predicted_count": 14,
+          "recall": 0.8181818181818182,
+          "reference_count": 11,
+          "support": 11
+        },
+        "dependency": {
+          "f1": 0.08695652173913043,
+          "overlap": 2,
+          "precision": 0.09090909090909091,
+          "predicted_count": 22,
+          "recall": 0.08333333333333333,
+          "reference_count": 24,
+          "support": 24
+        },
+        "entity": {
+          "f1": 0.4,
+          "overlap": 4,
+          "precision": 0.5,
+          "predicted_count": 8,
+          "recall": 0.3333333333333333,
+          "reference_count": 12,
+          "support": 12
+        },
+        "inter_object": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 1
+        },
+        "intra_object": {
+          "accuracy": 1.0,
+          "correct": 1,
+          "support": 1
+        },
+        "operator": {
+          "f1": 0.8421052631578948,
+          "overlap": 16,
+          "precision": 0.8888888888888888,
+          "predicted_count": 18,
+          "recall": 0.8,
+          "reference_count": 20,
+          "support": 20
+        },
+        "path_exact": {
+          "f1": 0.03571428571428571,
+          "overlap": 1,
+          "precision": 0.03571428571428571,
+          "predicted_count": 28,
+          "recall": 0.03571428571428571,
+          "reference_count": 28,
+          "support": 28
+        },
+        "qualifier": {
+          "f1": 0.7272727272727272,
+          "overlap": 16,
+          "precision": 0.6666666666666666,
+          "predicted_count": 24,
+          "recall": 0.8,
+          "reference_count": 20,
+          "support": 20
+        },
+        "relation_constant": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "relation_direction": {
+          "accuracy": 0.4,
+          "correct": 2,
+          "support": 5
+        },
+        "relation_participant": {
+          "accuracy": 0.5,
+          "correct": 1,
+          "support": 2
+        },
+        "return_target": {
+          "accuracy": 0.25,
+          "correct": 2,
+          "support": 8
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.125,
+          "correct": 1,
+          "support": 8
+        },
+        "source_fact_attachment": {
+          "f1": 0.4117647058823529,
+          "overlap": 7,
+          "precision": 0.4117647058823529,
+          "predicted_count": 17,
+          "recall": 0.4117647058823529,
+          "reference_count": 17,
+          "support": 17
+        },
+        "source_literal": {
+          "f1": 0.8823529411764706,
+          "overlap": 15,
+          "precision": 0.8823529411764706,
+          "predicted_count": 17,
+          "recall": 0.8823529411764706,
+          "reference_count": 17,
+          "support": 17
+        },
+        "status_qualifier": {
+          "f1": 1.0,
+          "overlap": 4,
+          "precision": 1.0,
+          "predicted_count": 4,
+          "recall": 1.0,
+          "reference_count": 4,
+          "support": 4
+        },
+        "temporal": {
+          "accuracy": 0.4,
+          "correct": 2,
+          "support": 5
+        },
+        "temporal_qualifier": {
+          "f1": 0.5454545454545454,
+          "overlap": 3,
+          "precision": 0.5,
+          "predicted_count": 6,
+          "recall": 0.6,
+          "reference_count": 5,
+          "support": 5
+        },
+        "unit": {
+          "f1": 0.75,
+          "overlap": 9,
+          "precision": 0.9,
+          "predicted_count": 10,
+          "recall": 0.6428571428571429,
+          "reference_count": 14,
+          "support": 14
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "workspace_symbol_stable": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.875,
+          "correct": 7,
+          "support": 8
+        },
+        "final_answer_correct": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "support": 8
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "parse_valid": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.5,
+          "correct": 4,
+          "support": 8
+        },
+        "type_valid": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        }
+      },
+      "transition_analysis": {
+        "conditional": {
+          "answer_correct_given_operator_correct_path_wrong": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 5
+          },
+          "answer_correct_given_semantic_state_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "answer_correct_given_semantic_state_incorrect": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 8
+          },
+          "direction_correct_given_operator_correct": {
+            "accuracy": 0.5,
+            "correct": 1,
+            "support": 2
+          },
+          "operator_correct_given_parse_type": {
+            "accuracy": 0.75,
+            "correct": 6,
+            "support": 8
+          },
+          "path_correct_given_parse_type": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "support": 8
+          }
+        },
+        "count": 8,
+        "error_counts": {
+          "aggregation_cardinality": 3,
+          "ambiguous_symbol_alignment": 1,
+          "attribute_grounding": 8,
+          "cardinality_qualifier": 3,
+          "dependency_incomplete": 7,
+          "entity_grounding": 6,
+          "hallucinated_or_mutated_number": 2,
+          "number_attached_to_wrong_path": 5,
+          "omitted_number": 2,
+          "operator_mapping": 2,
+          "qualifier_grounding": 3,
+          "return_wrong_target": 6,
+          "source_fact_grounding": 6,
+          "temporal_qualifier": 2,
+          "temporal_semantics": 2,
+          "unresolved_symbol_equivalence": 1
+        },
+        "operator_confusion": {
+          "CONST->CONST": 7,
+          "MUL->MUL": 1,
+          "SUB->SUB": 1
+        },
+        "semantic": {
+          "aggregation_cardinality": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 5
+          },
+          "argument_order": {
+            "accuracy": 1.0,
+            "correct": 1,
+            "support": 1
+          },
+          "attribute": {
+            "f1": 0.07142857142857142,
+            "overlap": 2,
+            "precision": 0.07142857142857142,
+            "predicted_count": 28,
+            "recall": 0.07142857142857142,
+            "reference_count": 28,
+            "support": 28
+          },
+          "cardinality_qualifier": {
+            "f1": 0.7200000000000001,
+            "overlap": 9,
+            "precision": 0.6428571428571429,
+            "predicted_count": 14,
+            "recall": 0.8181818181818182,
+            "reference_count": 11,
+            "support": 11
+          },
+          "dependency": {
+            "f1": 0.08695652173913043,
+            "overlap": 2,
+            "precision": 0.09090909090909091,
+            "predicted_count": 22,
+            "recall": 0.08333333333333333,
+            "reference_count": 24,
+            "support": 24
+          },
+          "entity": {
+            "f1": 0.4,
+            "overlap": 4,
+            "precision": 0.5,
+            "predicted_count": 8,
+            "recall": 0.3333333333333333,
+            "reference_count": 12,
+            "support": 12
+          },
+          "inter_object": {
+            "accuracy": 0.0,
+            "correct": 0,
+            "support": 1
+          },
+          "intra_object": {
+            "accuracy": 1.0,
+            "correct": 1,
+            "support": 1
+          },
+          "operator": {
+            "f1": 0.8421052631578948,
+            "overlap": 16,
+            "precision": 0.8888888888888888,
+            "predicted_count": 18,
+            "recall": 0.8,
+            "reference_count": 20,
+            "support": 20
+          },
+          "path_exact": {
+            "f1": 0.03571428571428571,
+            "overlap": 1,
+            "precision": 0.03571428571428571,
+            "predicted_count": 28,
+            "recall": 0.03571428571428571,
+            "reference_count": 28,
+            "support": 28
+          },
+          "qualifier": {
+            "f1": 0.7272727272727272,
+            "overlap": 16,
+            "precision": 0.6666666666666666,
+            "predicted_count": 24,
+            "recall": 0.8,
+            "reference_count": 20,
+            "support": 20
+          },
+          "relation_constant": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          },
+          "relation_direction": {
+            "accuracy": 0.4,
+            "correct": 2,
+            "support": 5
+          },
+          "relation_participant": {
+            "accuracy": 0.5,
+            "correct": 1,
+            "support": 2
+          },
+          "return_target": {
+            "accuracy": 0.25,
+            "correct": 2,
+            "support": 8
+          },
+          "semantic_name_equivalent": {
+            "accuracy": 0.125,
+            "correct": 1,
+            "support": 8
+          },
+          "source_fact_attachment": {
+            "f1": 0.4117647058823529,
+            "overlap": 7,
+            "precision": 0.4117647058823529,
+            "predicted_count": 17,
+            "recall": 0.4117647058823529,
+            "reference_count": 17,
+            "support": 17
+          },
+          "source_literal": {
+            "f1": 0.8823529411764706,
+            "overlap": 15,
+            "precision": 0.8823529411764706,
+            "predicted_count": 17,
+            "recall": 0.8823529411764706,
+            "reference_count": 17,
+            "support": 17
+          },
+          "status_qualifier": {
+            "f1": 1.0,
+            "overlap": 4,
+            "precision": 1.0,
+            "predicted_count": 4,
+            "recall": 1.0,
+            "reference_count": 4,
+            "support": 4
+          },
+          "temporal": {
+            "accuracy": 0.4,
+            "correct": 2,
+            "support": 5
+          },
+          "temporal_qualifier": {
+            "f1": 0.5454545454545454,
+            "overlap": 3,
+            "precision": 0.5,
+            "predicted_count": 6,
+            "recall": 0.6,
+            "reference_count": 5,
+            "support": 5
+          },
+          "unit": {
+            "f1": 0.75,
+            "overlap": 9,
+            "precision": 0.9,
+            "predicted_count": 10,
+            "recall": 0.6428571428571429,
+            "reference_count": 14,
+            "support": 14
+          },
+          "workspace_path_reuse_rate": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "workspace_symbol_stable": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          }
+        },
+        "surface_and_compute": {
+          "executable": {
+            "accuracy": 0.875,
+            "correct": 7,
+            "support": 8
+          },
+          "final_answer_correct": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "lowerable_to_ccir": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          },
+          "parse_valid": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          },
+          "semantic_state_equivalent": {
+            "accuracy": null,
+            "correct": 0,
+            "support": 0
+          },
+          "type_valid": {
+            "accuracy": 1.0,
+            "correct": 8,
+            "support": 8
+          }
+        }
+      },
+      "transition_count": 8
+    }
+  },
+  "whole_lora500": {
+    "gsm8k": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 1.0,
+          "correct": 3,
+          "support": 3
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.23529411764705882,
+          "correct": 4,
+          "support": 17
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.3333333333333333,
+          "correct": 1,
+          "support": 3
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.23076923076923078,
+          "correct": 3,
+          "support": 13
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 13
+        }
+      },
+      "count": 17,
+      "error_counts": {
+        "aggregation_cardinality": 11,
+        "attribute_grounding": 17,
+        "cardinality_qualifier": 13,
+        "dependency_incomplete": 16,
+        "entity_grounding": 14,
+        "hallucinated_or_mutated_number": 7,
+        "lowering_unsupported_form": 1,
+        "number_attached_to_wrong_path": 10,
+        "omitted_number": 12,
+        "operator_mapping": 14,
+        "qualifier_grounding": 14,
+        "relation_constant": 2,
+        "return_missing": 4,
+        "return_wrong_target": 9,
+        "source_fact_grounding": 16,
+        "surface_malformed_syntax": 3,
+        "temporal_qualifier": 5,
+        "temporal_semantics": 2,
+        "transitive_shortcut": 1,
+        "unresolved_symbol_equivalence": 8
+      },
+      "operator_confusion": {
+        "ADD->SUM": 1,
+        "CONST->CONST": 13,
+        "DIV->DIV": 3,
+        "MUL->DIV": 1,
+        "MUL->MUL": 3,
+        "SUB->SUB": 3
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.05,
+          "correct": 1,
+          "support": 20
+        },
+        "argument_order": {
+          "accuracy": 0.3333333333333333,
+          "correct": 2,
+          "support": 6
+        },
+        "attribute": {
+          "f1": 0.18556701030927836,
+          "overlap": 18,
+          "precision": 0.21951219512195122,
+          "predicted_count": 82,
+          "recall": 0.16071428571428573,
+          "reference_count": 112,
+          "support": 112
+        },
+        "cardinality_qualifier": {
+          "f1": 0.33766233766233766,
+          "overlap": 13,
+          "precision": 0.3333333333333333,
+          "predicted_count": 39,
+          "recall": 0.34210526315789475,
+          "reference_count": 38,
+          "support": 38
+        },
+        "dependency": {
+          "f1": 0.08433734939759036,
+          "overlap": 7,
+          "precision": 0.10144927536231885,
+          "predicted_count": 69,
+          "recall": 0.07216494845360824,
+          "reference_count": 97,
+          "support": 97
+        },
+        "entity": {
+          "f1": 0.5862068965517241,
+          "overlap": 17,
+          "precision": 0.7391304347826086,
+          "predicted_count": 23,
+          "recall": 0.4857142857142857,
+          "reference_count": 35,
+          "support": 35
+        },
+        "inter_object": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 4
+        },
+        "intra_object": {
+          "accuracy": 0.42857142857142855,
+          "correct": 3,
+          "support": 7
+        },
+        "operator": {
+          "f1": 0.6718749999999999,
+          "overlap": 43,
+          "precision": 0.7962962962962963,
+          "predicted_count": 54,
+          "recall": 0.581081081081081,
+          "reference_count": 74,
+          "support": 74
+        },
+        "path_exact": {
+          "f1": 0.041237113402061855,
+          "overlap": 4,
+          "precision": 0.04878048780487805,
+          "predicted_count": 82,
+          "recall": 0.03571428571428571,
+          "reference_count": 112,
+          "support": 112
+        },
+        "qualifier": {
+          "f1": 0.30188679245283023,
+          "overlap": 16,
+          "precision": 0.2711864406779661,
+          "predicted_count": 59,
+          "recall": 0.3404255319148936,
+          "reference_count": 47,
+          "support": 47
+        },
+        "relation_constant": {
+          "accuracy": 0.8888888888888888,
+          "correct": 16,
+          "support": 18
+        },
+        "relation_direction": {
+          "accuracy": 0.3181818181818182,
+          "correct": 7,
+          "support": 22
+        },
+        "relation_participant": {
+          "accuracy": 0.2727272727272727,
+          "correct": 3,
+          "support": 11
+        },
+        "return_target": {
+          "accuracy": 0.23529411764705882,
+          "correct": 4,
+          "support": 17
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "source_fact_attachment": {
+          "f1": 0.20869565217391306,
+          "overlap": 12,
+          "precision": 0.2553191489361702,
+          "predicted_count": 47,
+          "recall": 0.17647058823529413,
+          "reference_count": 68,
+          "support": 68
+        },
+        "source_literal": {
+          "f1": 0.6434782608695653,
+          "overlap": 37,
+          "precision": 0.7872340425531915,
+          "predicted_count": 47,
+          "recall": 0.5441176470588235,
+          "reference_count": 68,
+          "support": 68
+        },
+        "status_qualifier": {
+          "f1": 0.4,
+          "overlap": 1,
+          "precision": 1.0,
+          "predicted_count": 1,
+          "recall": 0.25,
+          "reference_count": 4,
+          "support": 4
+        },
+        "temporal": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 5
+        },
+        "temporal_qualifier": {
+          "f1": 0.16666666666666666,
+          "overlap": 2,
+          "precision": 0.10526315789473684,
+          "predicted_count": 19,
+          "recall": 0.4,
+          "reference_count": 5,
+          "support": 5
+        },
+        "unit": {
+          "f1": 0.5405405405405405,
+          "overlap": 10,
+          "precision": 0.5263157894736842,
+          "predicted_count": 19,
+          "recall": 0.5555555555555556,
+          "reference_count": 18,
+          "support": 18
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "workspace_symbol_stable": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.7058823529411765,
+          "correct": 12,
+          "support": 17
+        },
+        "final_answer_correct": {
+          "accuracy": 0.23529411764705882,
+          "correct": 4,
+          "support": 17
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 0.7647058823529411,
+          "correct": 13,
+          "support": 17
+        },
+        "parse_valid": {
+          "accuracy": 0.8235294117647058,
+          "correct": 14,
+          "support": 17
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 17
+        },
+        "type_valid": {
+          "accuracy": 0.7647058823529411,
+          "correct": 13,
+          "support": 17
+        }
+      }
+    },
+    "tatqa": {
+      "conditional": {
+        "answer_correct_given_operator_correct_path_wrong": {
+          "accuracy": 1.0,
+          "correct": 4,
+          "support": 4
+        },
+        "answer_correct_given_semantic_state_correct": {
+          "accuracy": 1.0,
+          "correct": 5,
+          "support": 5
+        },
+        "answer_correct_given_semantic_state_incorrect": {
+          "accuracy": 0.6666666666666666,
+          "correct": 2,
+          "support": 3
+        },
+        "direction_correct_given_operator_correct": {
+          "accuracy": 0.6666666666666666,
+          "correct": 2,
+          "support": 3
+        },
+        "operator_correct_given_parse_type": {
+          "accuracy": 0.75,
+          "correct": 6,
+          "support": 8
+        },
+        "path_correct_given_parse_type": {
+          "accuracy": 0.25,
+          "correct": 2,
+          "support": 8
+        }
+      },
+      "count": 8,
+      "error_counts": {
+        "aggregation_cardinality": 2,
+        "attribute_grounding": 8,
+        "cardinality_qualifier": 3,
+        "dependency_incomplete": 6,
+        "entity_grounding": 6,
+        "hallucinated_or_mutated_number": 2,
+        "number_attached_to_wrong_path": 5,
+        "omitted_number": 1,
+        "operator_mapping": 2,
+        "qualifier_grounding": 4,
+        "relation_constant": 1,
+        "return_wrong_target": 5,
+        "source_fact_grounding": 6,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 1
+      },
+      "operator_confusion": {
+        "CONST->CONST": 8,
+        "MUL->MUL": 1,
+        "SUB->SUB": 1,
+        "SUM->SUM": 1
+      },
+      "semantic": {
+        "aggregation_cardinality": {
+          "accuracy": 0.2,
+          "correct": 1,
+          "support": 5
+        },
+        "argument_order": {
+          "accuracy": 1.0,
+          "correct": 1,
+          "support": 1
+        },
+        "attribute": {
+          "f1": 0.0,
+          "overlap": 0,
+          "precision": 0.0,
+          "predicted_count": 28,
+          "recall": 0.0,
+          "reference_count": 28,
+          "support": 28
+        },
+        "cardinality_qualifier": {
+          "f1": 0.7692307692307692,
+          "overlap": 10,
+          "precision": 0.6666666666666666,
+          "predicted_count": 15,
+          "recall": 0.9090909090909091,
+          "reference_count": 11,
+          "support": 11
+        },
+        "dependency": {
+          "f1": 0.2127659574468085,
+          "overlap": 5,
+          "precision": 0.21739130434782608,
+          "predicted_count": 23,
+          "recall": 0.20833333333333334,
+          "reference_count": 24,
+          "support": 24
+        },
+        "entity": {
+          "f1": 0.4,
+          "overlap": 4,
+          "precision": 0.5,
+          "predicted_count": 8,
+          "recall": 0.3333333333333333,
+          "reference_count": 12,
+          "support": 12
+        },
+        "inter_object": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "support": 1
+        },
+        "intra_object": {
+          "accuracy": 1.0,
+          "correct": 2,
+          "support": 2
+        },
+        "operator": {
+          "f1": 0.7692307692307692,
+          "overlap": 15,
+          "precision": 0.7894736842105263,
+          "predicted_count": 19,
+          "recall": 0.75,
+          "reference_count": 20,
+          "support": 20
+        },
+        "path_exact": {
+          "f1": 0.0,
+          "overlap": 0,
+          "precision": 0.0,
+          "predicted_count": 28,
+          "recall": 0.0,
+          "reference_count": 28,
+          "support": 28
+        },
+        "qualifier": {
+          "f1": 0.5909090909090908,
+          "overlap": 13,
+          "precision": 0.5416666666666666,
+          "predicted_count": 24,
+          "recall": 0.65,
+          "reference_count": 20,
+          "support": 20
+        },
+        "relation_constant": {
+          "accuracy": 0.6666666666666666,
+          "correct": 6,
+          "support": 9
+        },
+        "relation_direction": {
+          "accuracy": 0.625,
+          "correct": 5,
+          "support": 8
+        },
+        "relation_participant": {
+          "accuracy": 0.6666666666666666,
+          "correct": 2,
+          "support": 3
+        },
+        "return_target": {
+          "accuracy": 0.375,
+          "correct": 3,
+          "support": 8
+        },
+        "semantic_name_equivalent": {
+          "accuracy": 0.25,
+          "correct": 2,
+          "support": 8
+        },
+        "source_fact_attachment": {
+          "f1": 0.28571428571428575,
+          "overlap": 5,
+          "precision": 0.2777777777777778,
+          "predicted_count": 18,
+          "recall": 0.29411764705882354,
+          "reference_count": 17,
+          "support": 17
+        },
+        "source_literal": {
+          "f1": 0.7999999999999999,
+          "overlap": 14,
+          "precision": 0.7777777777777778,
+          "predicted_count": 18,
+          "recall": 0.8235294117647058,
+          "reference_count": 17,
+          "support": 17
+        },
+        "status_qualifier": {
+          "f1": 0.0,
+          "overlap": 0,
+          "precision": 0.0,
+          "predicted_count": 0,
+          "recall": 0.0,
+          "reference_count": 4,
+          "support": 4
+        },
+        "temporal": {
+          "accuracy": 0.6,
+          "correct": 3,
+          "support": 5
+        },
+        "temporal_qualifier": {
+          "f1": 0.42857142857142855,
+          "overlap": 3,
+          "precision": 0.3333333333333333,
+          "predicted_count": 9,
+          "recall": 0.6,
+          "reference_count": 5,
+          "support": 5
+        },
+        "unit": {
+          "f1": 0.7407407407407408,
+          "overlap": 10,
+          "precision": 0.7692307692307693,
+          "predicted_count": 13,
+          "recall": 0.7142857142857143,
+          "reference_count": 14,
+          "support": 14
+        },
+        "workspace_path_reuse_rate": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        },
+        "workspace_symbol_stable": {
+          "accuracy": null,
+          "correct": 0,
+          "support": 0
+        }
+      },
+      "surface_and_compute": {
+        "executable": {
+          "accuracy": 0.875,
+          "correct": 7,
+          "support": 8
+        },
+        "final_answer_correct": {
+          "accuracy": 0.875,
+          "correct": 7,
+          "support": 8
+        },
+        "lowerable_to_ccir": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "parse_valid": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        },
+        "semantic_state_equivalent": {
+          "accuracy": 0.625,
+          "correct": 5,
+          "support": 8
+        },
+        "type_valid": {
+          "accuracy": 1.0,
+          "correct": 8,
+          "support": 8
+        }
+      }
+    }
+  }
+}

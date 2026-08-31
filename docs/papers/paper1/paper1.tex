@@ -1176,6 +1176,84 @@ but its tie with whole-program synthesis leaves local semantics unresolved.
 Matched QKVO-r16 and QKVO+MLP-r8 runs can now isolate capacity from adapter
 location without mistaking context removal for an architectural gain.
 
+\subsection{Fine-grained semantic failure decomposition}
+
+We replayed the three frozen prediction files through a deterministic AST/CCIR
+diagnostic rather than generating new model output. The analysis separates
+surface validity and executed answers from entity, attribute, qualifier,
+relation, source-fact, dependency, and query grounding. Whole-program symbol
+alignment permits only one-to-one, lexically compatible renames with matching
+graph roles; incremental symbols are sticky once present in the workspace.
+Metrics below are therefore strict deterministic values. Twenty-six
+condition--program records with plausible but unresolved symbol equivalence are
+placed in an optional judge queue and receive no automatic credit. Generic ASL
+type validity does not establish dimensional compatibility, which remains
+explicitly not measurable under the current arithmetic type system.
+
+\begin{table}[t]
+\centering\small
+\caption{Fine-grained whole-program LoRA-500 semantics on the frozen 25-program
+test. F1 is micro-averaged over the listed reference support; accuracy is
+correct/support for deterministically comparable relations.}
+\label{tab:asl-semantic-components}
+\begin{tabular}{lrr@{\qquad}lrr}
+\toprule
+Component & Score & Support & Component & Score & Support\\
+\midrule
+Entity F1       & .538 & 47  & Attribute F1       & .144 & 140\\
+Qualifier F1    & .387 & 67  & Operator F1        & .695 & 94\\
+Argument order  & .429 & 7   & Relation direction & .400 & 30\\
+Source-fact F1  & .227 & 85  & Dependency F1      & .113 & 121\\
+Aggregation/cardinality & .080 & 25 & Temporal grounding & .300 & 10\\
+RETURN target   & .280 & 25  & & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering\small
+\caption{Fine-grained program semantics by frozen condition. Reuse is exact
+reuse of an existing gold semantic path over 60 transition references and is
+undefined for standalone whole-program synthesis. Other columns are program-level
+micro-F1 except direction and RETURN, which are support-aware accuracies.}
+\label{tab:asl-semantic-conditions}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Condition & Entity & Attribute & Qualifier & Operator & Direction & Dependency & RETURN & Reuse\\
+\midrule
+Whole LoRA-500     & .538 & .144 & .387 & .695 & .400 & .113 & .280 & --\\
+Incremental pred.  & .619 & .201 & .480 & .762 & .381 & .125 & .240 & .033\\
+Incremental oracle & .629 & .435 & .654 & .743 & .455 & .139 & .320 & .450\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+The decomposition supports the prespecified broad claim but materially sharpens
+it. Whole-program operator mapping is stronger than strict attributes,
+source-fact attachment, dependencies, relation direction, aggregation, temporal
+qualifiers, and the returned semantic slot. In particular, only 12/30 supported
+directed relations and 7/25 RETURN targets are correct. Correct arithmetic can
+mask this weakness: all five semantically state-equivalent programs answer
+correctly, but 6/20 state-inequivalent programs also reach the benchmark answer.
+Among parse/type-valid programs, 9/21 have exact operator multisets while only
+2/21 satisfy the bounded full semantic-name/graph equivalence test. All seven
+operator-perfect but path-incorrect cases nevertheless return the right answer.
+Thus answer agreement is not evidence of a reusable semantic workspace.
+
+Incremental localization modestly raises entity, attribute, qualifier, and
+operator scores but does not improve final answers, direction, dependencies, or
+RETURN grounding. More importantly, the deployed predicted-state loop exactly
+reuses only 2/60 existing semantic references, versus 27/60 under oracle prior
+state. This identifies symbol continuity as a concrete stateful failure, while
+the oracle condition's 6/25 answer result shows that improved naming continuity
+alone is insufficient. The strict attribute and dependency scores are the
+weakest measured whole-program components, but unresolved ontology aliases and
+the 25-program sample prevent claiming a universal primary cause. The safe
+artifacts retain dataset, semantic-family, complexity, conditional, teacher-name
+consistency, ID-only error examples, and input/output hashes; full records remain
+local under repository benchmark-text policy.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -1583,8 +1661,40 @@ bound the conclusion. The relation-diversified 500-original adapter improves to
 11/25, but clause-local executed-state compilation regresses to 7/25 and oracle
 state reaches only 6/25. Full-question local compilation recovers 11/25 but does
 not exceed whole-program synthesis. Valid deltas remain semantically weak,
-particularly on multi-clause GSM8K, so the next gate is matched adapter-capacity
-and placement diagnosis rather than recovery from poisoned runtime state.
+particularly on multi-clause GSM8K. Fine-grained replay localizes the strict
+whole-program deficit to attribute grounding (.144 F1), dependency preservation
+(.113 F1), relation direction (12/30), and RETURN grounding (7/25), despite .695
+operator F1; 6/20 state-inequivalent programs still obtain the correct answer.
+The next gate is therefore matched adapter-capacity and placement diagnosis
+rather than recovery from poisoned runtime state.
+
+\appendix
+\section{Deterministic Semantic Diagnostic Taxonomy}
+
+The replay analyzer emits multi-label records; categories are not mutually
+exclusive. Path decomposition treats the first path component as the entity,
+non-qualifier semantic tokens as attributes, and separately records temporal,
+cardinality, status, and grouping qualifiers. CCIR assignments provide target,
+ordered sources, root and nested operators, constants, directed edges, and the
+RETURN expression. This supports separate tests for participants, direction,
+noncommutative argument order, literal magnitude, inter- versus intra-object
+relations, direct source-fact attachment, premature literal collapse, and
+transitive shortcuts. Aggregation and temporal supports are reported only when
+the reference contains the corresponding deterministic cues.
+
+Standalone alignment is one-to-one and requires compatible entities, lexical
+semantic overlap, and consistent graph roles; ambiguity or an unresolved local
+ontology enters the judge queue. Stateful replay instead requires exact reuse of
+already established paths and records accidental renames, duplicate slots, and
+unresolved references. The optional semantic judge is not run in the reported
+results. Coreference target accuracy requires mention annotations that the
+frozen corpus does not contain, and unit compatibility requires a dimensional
+type system; both are marked not measurable rather than inferred from generic
+parse or type success. Regression fixtures cover wrong entities and attributes,
+qualifier-only mismatches, allowed standalone versus forbidden stateful renames,
+relation and argument reversal, wrong constants, literal collapse, transitive
+shortcuts, each/total confusion, temporal direction, RETURN grounding, and
+multi-label failures without remote calls.
 
 \begin{thebibliography}{9}
 
