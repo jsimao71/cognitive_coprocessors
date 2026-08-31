@@ -203,8 +203,20 @@ def compare_functor_conditions(
     import json
 
     summaries = {}
+    scored = {}
     for name, path in (("F0", f0_summary), ("F1", f1_summary), ("F2", f2_summary)):
-        summaries[name] = json.loads(Path(path).read_text(encoding="utf-8"))
+        summary_path = Path(path)
+        summaries[name] = json.loads(summary_path.read_text(encoding="utf-8"))
+        scored_path = summary_path.parent / "scored_predictions.jsonl"
+        scored[name] = {
+            (str(row["dataset"]), str(row["parent_source_id"])): row
+            for row in read_jsonl(scored_path)
+        }
+    identity_sets = {name: set(rows) for name, rows in scored.items()}
+    if len(identity_sets["F0"]) != 25 or not (
+        identity_sets["F0"] == identity_sets["F1"] == identity_sets["F2"]
+    ):
+        raise ValueError("F0/F1/F2 must contain the identical frozen 25 source identities")
     metrics = (
         "parse_valid",
         "executable",
@@ -213,12 +225,32 @@ def compare_functor_conditions(
         "semantic_state_equivalent",
         "final_answer_correct",
     )
+    paired = {}
+    for candidate, baseline in (("F1", "F0"), ("F2", "F0"), ("F2", "F1")):
+        outcomes = []
+        for identity in sorted(identity_sets["F0"]):
+            candidate_correct = bool(scored[candidate][identity]["metrics"]["final_answer_correct"])
+            baseline_correct = bool(scored[baseline][identity]["metrics"]["final_answer_correct"])
+            outcomes.append((candidate_correct, baseline_correct))
+        paired[f"{candidate}_minus_{baseline}"] = {
+            "answer_rate_delta": (
+                summaries[candidate]["rates"]["final_answer_correct"]
+                - summaries[baseline]["rates"]["final_answer_correct"]
+            ),
+            "candidate_only_correct": sum(left and not right for left, right in outcomes),
+            "baseline_only_correct": sum(right and not left for left, right in outcomes),
+            "both_correct": sum(left and right for left, right in outcomes),
+            "both_incorrect": sum(not left and not right for left, right in outcomes),
+        }
     comparison = {
         "schema_version": "ccpu.paper1.functor_comparison.v1",
         "conditions": {
             name: {metric: summary["rates"].get(metric) for metric in metrics}
             for name, summary in summaries.items()
         },
+        "frozen_identity_count": len(identity_sets["F0"]),
+        "identical_frozen_source_ids": True,
+        "paired_answer_comparisons": paired,
         "interpretation_gate": {
             "semantic_decomposition_supported": (
                 summaries["F2"]["rates"]["final_answer_correct"]

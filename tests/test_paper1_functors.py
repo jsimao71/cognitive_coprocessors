@@ -13,9 +13,9 @@ SCOPE = {"id": "test:functor:1", "kind": "benchmark_case", "parent": None}
 
 
 def test_f1_isomorphic_program_lowers_and_executes() -> None:
-    program = """set("jessica.age_now", add(ref("claire.age_now"), const(6)))
-set("claire.age_in_2y", const(20))
-set("claire.age_now", sub(ref("claire.age_in_2y"), const(2)))
+    program = """add("jessica.age_now", "claire.age_now", 6)
+value("claire.age_in_2y", 20)
+subtract("claire.age_now", "claire.age_in_2y", 2)
 query("jessica.age_now")"""
     result = validate_functor_program(program, "f1", effective_scope=SCOPE)
     assert result["executable"]
@@ -30,6 +30,19 @@ query("jessica.age_now")"""
     result = validate_functor_program(program, "f2", effective_scope=SCOPE)
     assert result["executable"]
     assert result["validation"]["execution"]["workspace"][SCOPE["id"]]["returned"] == 24
+
+
+def test_f2_blackboard_solves_single_unknown_constraints_bidirectionally() -> None:
+    program = """given("trader.initial", 55)
+given("trader.restocked", 132)
+remaining("trader.after_sale", "trader.initial", "trader.sold")
+sum_of("trader.current", "trader.after_sale", "trader.restocked")
+given("trader.current", 164)
+query("trader.sold")"""
+    result = validate_functor_program(program, "f2", effective_scope=SCOPE)
+    assert result["executable"]
+    returned = result["validation"]["execution"]["workspace"][SCOPE["id"]]["returned"]
+    assert returned == 23
 
 
 def test_f2_percentage_and_rate_lower_through_runtime() -> None:
@@ -53,6 +66,16 @@ query("company.financing_pct")"""
     assert result["executable"]
     returned = result["validation"]["execution"]["workspace"][SCOPE["id"]]["returned"]
     assert float(returned) == pytest.approx(9.1217, abs=0.0001)
+
+
+def test_f1_nary_subtraction_is_left_associative() -> None:
+    program = """value("wallet.total", 20)
+subtract("wallet.remaining", "wallet.total", 3, 4, 5)
+query("wallet.remaining")"""
+    result = validate_functor_program(program, "f1", effective_scope=SCOPE)
+    assert result["executable"]
+    returned = result["validation"]["execution"]["workspace"][SCOPE["id"]]["returned"]
+    assert returned == 8
 
 
 def test_functor_parser_rejects_non_allowlisted_python() -> None:
@@ -79,6 +102,6 @@ def test_student_prompt_is_fixed_and_contains_no_state_or_answer() -> None:
 
 
 def test_lowered_f1_and_f2_are_distinct_surfaces() -> None:
-    f1 = 'set("team.total", mul(ref("team.count"), ref("team.each")))\nquery("team.total")'
+    f1 = 'multiply("team.total", "team.count", "team.each")\nquery("team.total")'
     f2 = 'per_unit_total("team.total", "team.count", "team.each")\nquery("team.total")'
     assert lower_functor_program(f1, "f1") == lower_functor_program(f2, "f2")

@@ -18,19 +18,25 @@ _FIXED_EXAMPLES = {
     "f1": (
         (
             "Mira has 12 cards. Jon has 5 more cards than Mira. How many cards does Jon have?",
-            (
-                'set("mira.cards", const(12))\n'
-                'set("jon.cards", add(ref("mira.cards"), const(5)))\n'
-                'query("jon.cards")'
-            ),
+            'value("mira.cards", 12)\nadd("jon.cards", "mira.cards", 5)\nquery("jon.cards")',
         ),
         (
             "A crate has 8 rows with 6 jars in each row. How many jars are there?",
             (
-                'set("crate.rows", const(8))\n'
-                'set("crate.jars_per_row", const(6))\n'
-                'set("crate.jars_total", mul(ref("crate.rows"), ref("crate.jars_per_row")))\n'
+                'value("crate.rows", 8)\n'
+                'value("crate.jars_per_row", 6)\n'
+                'multiply("crate.jars_total", "crate.rows", "crate.jars_per_row")\n'
                 'query("crate.jars_total")'
+            ),
+        ),
+        (
+            "A club has 60 junior members out of 240 members. What percentage are juniors?",
+            (
+                'value("club.junior_members", 60)\n'
+                'value("club.total_members", 240)\n'
+                'divide("club.junior_fraction", "club.junior_members", "club.total_members")\n'
+                'multiply("club.junior_percentage", "club.junior_fraction", 100)\n'
+                'query("club.junior_percentage")'
             ),
         ),
     ),
@@ -48,6 +54,16 @@ _FIXED_EXAMPLES = {
                 'query("crate.jars_total")'
             ),
         ),
+        (
+            "A club has 60 junior members out of 240 members. What percentage are juniors?",
+            (
+                'given("club.junior_members", 60)\n'
+                'given("club.total_members", 240)\n'
+                'percentage_ratio("club.junior_percentage", "club.junior_members", '
+                '"club.total_members")\n'
+                'query("club.junior_percentage")'
+            ),
+        ),
     ),
 }
 
@@ -57,7 +73,8 @@ def _raw_context(row: dict[str, Any]) -> str:
     if not context:
         return ""
     bounded = {
-        "table": list(context.get("table", []))[:12],
+        # Tables are retained in full; only prose is bounded, without target-based retrieval.
+        "table": list(context.get("table", [])),
         "paragraphs": [
             {"order": paragraph.get("order"), "text": str(paragraph.get("text", ""))[:600]}
             for paragraph in list(context.get("paragraphs", []))[:3]
@@ -72,7 +89,7 @@ def functor_prompt(row: dict[str, Any], condition: str) -> str:
     if condition not in _FIXED_EXAMPLES:
         raise ValueError(f"unsupported functor condition: {condition}")
     description = (
-        "low-level F1 functors using set/query and explicit const/ref expressions"
+        "flat low-level F1 assignment functors with explicit target and operands"
         if condition == "f1"
         else "semantic F2 relation functors whose arithmetic and dependencies are runtime-lowered"
     )

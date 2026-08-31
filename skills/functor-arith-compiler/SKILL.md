@@ -17,8 +17,9 @@ allowed input. Do not calculate and substitute hidden intermediate values.
   dependencies, and the requested query.
 - Use stable lowercase semantic paths. Never use anonymous `step_N`, `tmp`, `result`,
   or `value_N` paths when the text supports a meaningful name.
-- F1 is the low-level control: use `set` with explicit nested `const`, `ref`, and
-  arithmetic operator functors. It must retain the same dependencies as the text.
+- F1 is the low-level control: use flat assignment functors such as `value`, `add`,
+  `subtract`, `multiply`, and `divide`, each with an explicit target. It must retain
+  the same dependencies as the text and must not use nested calls.
 - F2 is the semantic condition: use relation functors such as `offset`, `multiple`,
   `percentage_ratio`, `percent_of`, `remaining`, and `per_unit_total`; the runtime owns arithmetic
   lowering and dependency resolution.

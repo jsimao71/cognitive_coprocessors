@@ -21,23 +21,22 @@ class Call:
 
 
 _F1_ARITY: dict[str, tuple[int, int | None]] = {
-    "set": (2, 2),
+    "value": (2, 2),
+    "copy": (2, 2),
+    "add": (3, None),
+    "subtract": (3, None),
+    "multiply": (3, None),
+    "divide": (3, 3),
+    "absolute": (2, 2),
+    "sum_values": (2, None),
+    "mean_values": (2, None),
+    "minimum": (2, None),
+    "maximum": (2, None),
+    "percent_of": (3, 3),
+    "increase_percent": (3, 3),
+    "decrease_percent": (3, 3),
+    "rate_times_duration": (3, 3),
     "query": (1, 1),
-    "const": (1, 1),
-    "ref": (1, 1),
-    "add": (2, None),
-    "sub": (2, 2),
-    "mul": (2, None),
-    "div": (2, 2),
-    "abs": (1, 1),
-    "sum": (1, None),
-    "mean": (1, None),
-    "min": (1, None),
-    "max": (1, None),
-    "percent_of": (2, 2),
-    "increase_percent": (2, 2),
-    "decrease_percent": (2, 2),
-    "rate_times_duration": (2, 2),
 }
 
 _F2_ARITY: dict[str, tuple[int, int | None]] = {
@@ -142,46 +141,46 @@ def _operand(value: Any) -> str:
     return _number(value)
 
 
-def _f1_expression(value: Any) -> str:
-    if not isinstance(value, Call):
-        raise TypeError("F1 set values must use const/ref/operator functors")
-    _check_arity(value, _F1_ARITY)
-    name, args = value.name, value.args
-    if name == "const":
-        return _number(args[0])
-    if name == "ref":
-        return _path(args[0])
-    if name in {"add", "mul"}:
-        operator = "+" if name == "add" else "*"
-        return "(" + f" {operator} ".join(_f1_expression(arg) for arg in args) + ")"
-    if name in {"sub", "div"}:
-        operator = "-" if name == "sub" else "/"
-        return f"({_f1_expression(args[0])} {operator} {_f1_expression(args[1])})"
-    function = {
-        "abs": "abs",
-        "sum": "sum",
-        "mean": "mean",
-        "min": "min",
-        "max": "max",
-        "percent_of": "percent_of",
-        "increase_percent": "inc_pct",
-        "decrease_percent": "dec_pct",
-        "rate_times_duration": "rate_times_duration",
-    }.get(name)
-    if function:
-        return f"{function}({', '.join(_f1_expression(arg) for arg in args)})"
-    raise ValueError(f"{name} is not valid inside set")
-
-
 def lower_f1(calls: list[Call]) -> str:
     lines = []
     for call in calls:
-        if call.name == "set":
-            lines.append(f"{_path(call.args[0])} = {_f1_expression(call.args[1])}")
-        elif call.name == "query":
+        name, args = call.name, call.args
+        if name == "query":
             lines.append(f"RETURN {_path(call.args[0])}")
+            continue
+        target = _path(args[0])
+        if name == "value":
+            expression = _number(args[1])
+        elif name == "copy":
+            expression = _path(args[1])
+        elif name in {"add", "multiply"}:
+            expression = _join("+" if name == "add" else "*", args[1:])
+        elif name == "subtract":
+            expression = _join("-", args[1:])
+        elif name == "divide":
+            expression = f"({_operand(args[1])} / {_operand(args[2])})"
+        elif name == "absolute":
+            expression = f"abs({_operand(args[1])})"
+        elif name in {"sum_values", "mean_values", "minimum", "maximum"}:
+            function = {
+                "sum_values": "sum",
+                "mean_values": "mean",
+                "minimum": "min",
+                "maximum": "max",
+            }[name]
+            expression = f"{function}({', '.join(_operand(value) for value in args[1:])})"
+        elif name in {"percent_of", "increase_percent", "decrease_percent"}:
+            function = {
+                "percent_of": "percent_of",
+                "increase_percent": "inc_pct",
+                "decrease_percent": "dec_pct",
+            }[name]
+            expression = f"{function}({_operand(args[1])}, {_operand(args[2])})"
+        elif name == "rate_times_duration":
+            expression = f"rate_times_duration({_operand(args[1])}, {_operand(args[2])})"
         else:
-            raise ValueError(f"top-level F1 functor must be set/query, got {call.name}")
+            raise ValueError(f"cannot lower F1 functor: {name}")
+        lines.append(f"{target} = {expression}")
     return "\n".join(lines)
 
 
@@ -242,6 +241,122 @@ def lower_f2(calls: list[Call]) -> str:
     return "\n".join(lines)
 
 
+def _unknown_paths(args: tuple[Any, ...], known: set[str]) -> list[str]:
+    return list(
+        dict.fromkeys(value for value in args if isinstance(value, str) and value not in known)
+    )
+
+
+def _inverse_f2_expression(call: Call, unknown: str) -> str | None:
+    """Return an ASL expression for the sole unknown in one semantic equation."""
+
+    name, args = call.name, call.args
+    target = _path(args[0])
+    operands = args[1:]
+    if unknown == target:
+        return lower_f2([call, Call("query", (target,))]).splitlines()[0].split(" = ", 1)[1]
+    if name == "same":
+        return target
+    if name == "offset" and unknown == args[1]:
+        delta = args[2]
+        operator = "-" if delta >= 0 else "+"
+        return f"({target} {operator} {_number(abs(delta))})"
+    if name == "difference":
+        if unknown == args[1]:
+            return f"({target} + {_operand(args[2])})"
+        if unknown == args[2]:
+            return f"({_operand(args[1])} - {target})"
+    if name == "sum_of":
+        others = tuple(value for value in operands if value != unknown)
+        return f"({target} - {_join('+', others)})"
+    if name in {"product_of", "multiple", "per_unit_total", "rate_total"}:
+        others = tuple(value for value in operands if value != unknown)
+        return f"({target} / {_join('*', others)})"
+    if name == "quotient":
+        if unknown == args[1]:
+            return f"({target} * {_operand(args[2])})"
+        if unknown == args[2]:
+            return f"({_operand(args[1])} / {target})"
+    if name == "fraction_of":
+        base, numerator, denominator = args[1:]
+        if unknown == base:
+            return f"({target} * {_operand(denominator)} / {_operand(numerator)})"
+        if unknown == numerator:
+            return f"({target} * {_operand(denominator)} / {_operand(base)})"
+        if unknown == denominator:
+            return f"({_operand(base)} * {_operand(numerator)} / {target})"
+    if name == "percent_of":
+        if unknown == args[1]:
+            return f"({target} * 100 / {_operand(args[2])})"
+        if unknown == args[2]:
+            return f"({target} * 100 / {_operand(args[1])})"
+    if name == "percentage_ratio":
+        if unknown == args[1]:
+            return f"({target} * {_operand(args[2])} / 100)"
+        if unknown == args[2]:
+            return f"({_operand(args[1])} * 100 / {target})"
+    if name in {"increase_percent", "decrease_percent"}:
+        base, percentage = args[1:]
+        sign = "+" if name == "increase_percent" else "-"
+        if unknown == base:
+            return f"({target} / (1 {sign} {_operand(percentage)} / 100))"
+        if unknown == percentage:
+            if name == "increase_percent":
+                return f"(({target} / {_operand(base)}) - 1) * 100"
+            return f"(1 - ({target} / {_operand(base)})) * 100"
+    if name == "remaining":
+        whole, *used = operands
+        if unknown == whole:
+            return f"({target} + {_join('+', tuple(used))})"
+        other_used = tuple(value for value in used if value != unknown)
+        suffix = f" - {_join('+', other_used)}" if other_used else ""
+        return f"({_operand(whole)} - {target}{suffix})"
+    if name == "mean_of":
+        other_values = tuple(value for value in operands if value != unknown)
+        return f"({target} * {len(operands)} - {_join('+', other_values)})"
+    return None
+
+
+def solve_f2_to_asl(calls: list[Call]) -> str:
+    """Resolve single-unknown semantic constraints and emit an executable ASL plan."""
+
+    givens = [call for call in calls if call.name == "given"]
+    relations = [call for call in calls if call.name not in {"given", "query"}]
+    query = calls[-1]
+    known = {_path(call.args[0]) for call in givens}
+    lines = [f"{_path(call.args[0])} = {_number(call.args[1])}" for call in givens]
+    pending = list(relations)
+    while pending:
+        progress = False
+        next_pending = []
+        for call in pending:
+            unknowns = _unknown_paths(call.args, known)
+            if not unknowns:
+                continue
+            if len(unknowns) != 1:
+                next_pending.append(call)
+                continue
+            unknown = unknowns[0]
+            expression = _inverse_f2_expression(call, unknown)
+            if expression is None:
+                next_pending.append(call)
+                continue
+            lines.append(f"{unknown} = {expression}")
+            known.add(unknown)
+            progress = True
+        if not progress:
+            unresolved = sorted(
+                {path for call in next_pending for path in _unknown_paths(call.args, known)}
+            )
+            raise ValueError(f"semantic constraints remain underdetermined: {unresolved}")
+        pending = next_pending
+    query_path = _path(query.args[0])
+    if query_path not in known:
+        raise ValueError(f"semantic query remains unresolved: {query_path}")
+    lines.append(f"RETURN {query_path}")
+    return "\n".join(lines)
+
+
 def lower_functor_program(program: str, condition: str) -> str:
     calls = parse_functor_program(program, condition)
     return lower_f1(calls) if condition == "f1" else lower_f2(calls)
@@ -263,7 +378,7 @@ def validate_functor_program(
     try:
         calls = parse_functor_program(program, condition)
         result["parse_valid"] = True
-        lowered = lower_f1(calls) if condition == "f1" else lower_f2(calls)
+        lowered = lower_f1(calls) if condition == "f1" else solve_f2_to_asl(calls)
         result["lowered_asl"] = lowered
         result["lowerable"] = True
         validation = validate_asl(lowered, effective_scope=effective_scope)
