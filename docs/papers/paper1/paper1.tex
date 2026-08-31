@@ -1235,12 +1235,16 @@ recomputing from the question while emitting duplicated or semantically poor
 state. The supported conclusion is narrower: removing global intent is more
 damaging than accumulated state error under this representation.
 
-The deterministic intervention analysis consequently ranks a bounded global
-goal, entity, and relation ledger first, followed by factorized path selection
-from a runtime symbol table. Epoch-level development evaluation, early stopping,
+The deterministic intervention analysis consequently ranks retaining the raw
+observed question or a model-generated intent ledger first. A gold semantic
+frame is unavailable at test time and is not an admissible input. Factorized
+path selection may use only symbols already created by accepted model output;
+the model must still propose unseen targets from raw text. Epoch-level
+development evaluation, early stopping,
 and regularization are also warranted by the .029/.022 training losses versus
-1.082/1.167 development losses. A retrieved-demonstration hybrid is supported
-by the earlier LoRA-100 plus three-shot gain of .12. QKVO+MLP at rank 8 remains the
+1.082/1.167 development losses. A fixed-demonstration hybrid is supported by the
+earlier LoRA-100 plus three-shot gain of .12: one seed-fixed training set was
+used for every test item, with no per-problem retrieval. QKVO+MLP at rank 8 remains the
 clean adapter-location ablation after the rank plateau, and a 1--1.7B base-model
 replication can test base capacity. Grammar-constrained decoding is useful for
 fail-closed safety, but rank 16 already converts an eight-point parse gain into

@@ -114,6 +114,6 @@ def test_capacity_intervention_analysis_is_matched_and_deterministic(tmp_path):
     assert report["rank_deltas_r16_minus_r8"]["predicted"]["parse"] == 0.25
     assert report["context_answer_gains"] == {"r8": 0.25, "r16": 0.25}
     assert report["interventions_other_than_more_data"][0]["intervention"] == (
-        "context_preserving_incremental_input"
+        "raw_context_or_self_generated_intent_state"
     )
     assert output.exists()
