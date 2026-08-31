@@ -5,6 +5,7 @@ from ccpu.dsl_dataset.chop import chop_example
 from ccpu.dsl_dataset.cli import main
 from ccpu.dsl_dataset.expansion import finalize_asl_expansion
 from ccpu.dsl_dataset.local_codex import run_local_codex_batches
+from ccpu.dsl_dataset.remote_teacher import generate_remote_programs
 from ccpu.paper1.asl_pilot_data import pattern_id
 
 
@@ -390,3 +391,76 @@ def test_local_codex_runner_resumes_valid_completed_batches(tmp_path):
     assert manifest["completed_count"] == 1
     assert manifest["annotation_count"] == 1
     assert manifest["batches"][0]["status"] == "resumed"
+
+
+def test_remote_teacher_falls_back_after_invalid_asl(tmp_path, monkeypatch):
+    row = {
+        "dataset": "gsm8k",
+        "split": "train",
+        "source_id": "remote-one",
+        "question": "A box has 2 balls. How many balls are there?",
+        "effective_scope": {
+            "id": "gsm8k:train:remote-one",
+            "kind": "benchmark_case",
+            "parent": None,
+            "source": "dataset",
+        },
+        "parts": [
+            {"part_id": 0, "text": "A box has 2 balls.", "teacher_input_default": True},
+            {
+                "part_id": 1,
+                "text": "How many balls are there?",
+                "teacher_input_default": True,
+            },
+        ],
+    }
+    source = write_jsonl(tmp_path / "source.jsonl", [row])
+    skill = tmp_path / "SKILL.md"
+    skill.write_text("Compile semantic ASL.", encoding="utf-8")
+    responses = [
+        {
+            "annotations": [
+                {
+                    "dataset": "gsm8k",
+                    "source_id": "remote-one",
+                    "part_mappings": [
+                        {"part_id": 0, "status": "ok", "asl": ["not valid asl"]},
+                        {"part_id": 1, "status": "ok", "asl": ["RETURN box.balls"]},
+                    ],
+                }
+            ]
+        },
+        {
+            "annotations": [
+                {
+                    "dataset": "gsm8k",
+                    "source_id": "remote-one",
+                    "part_mappings": [
+                        {"part_id": 0, "status": "ok", "asl": ["box.balls = 2"]},
+                        {"part_id": 1, "status": "ok", "asl": ["RETURN box.balls"]},
+                    ],
+                }
+            ]
+        },
+    ]
+
+    def fake_completion(config, model, skill_text, request, feedback):
+        del config, model, skill_text, request
+        if len(responses) == 1:
+            assert "validation failed" in feedback.casefold()
+        return __import__("json").dumps(responses.pop(0))
+
+    monkeypatch.setattr("ccpu.dsl_dataset.remote_teacher._completion", fake_completion)
+    summary = generate_remote_programs(
+        source,
+        skill,
+        {
+            "models": [{"id": "first"}, {"id": "second"}],
+            "delay_seconds": 0,
+            "checkpoint_every": 1,
+        },
+        tmp_path / "output",
+    )
+    assert summary["accepted_program_count"] == 1
+    assert summary["attempt_count"] == 2
+    assert read_jsonl(tmp_path / "output" / "annotations.jsonl")[0]["teacher"]["model"] == "second"

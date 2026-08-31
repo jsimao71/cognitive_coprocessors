@@ -1,0 +1,82 @@
+{
+  "attempt_outcomes": {
+    "accepted": 1,
+    "invalid": 1,
+    "rate_limited": 2
+  },
+  "baseline": {
+    "mean_part_count": 3.076,
+    "mean_statement_count": 6.624,
+    "program_count": 500,
+    "rates": {
+      "answer_correct": 1.0,
+      "converted": 1.0,
+      "execution_verified": 1.0,
+      "lower_verified": 1.0,
+      "semantic_lint_valid": 1.0,
+      "syntax_verified": 1.0,
+      "type_verified": 1.0
+    },
+    "unique_semantic_patterns": 444
+  },
+  "by_dataset": {
+    "gsm8k": {
+      "converted_program_count": 1,
+      "converted_proportion_full_input": 0.00013381506757660912,
+      "converted_proportion_generated": 1.0,
+      "generated_program_count": 1,
+      "generated_proportion": 0.00013381506757660912,
+      "input_program_count": 7473
+    },
+    "tatqa": {
+      "converted_program_count": 0,
+      "converted_proportion_full_input": 0.0,
+      "converted_proportion_generated": 0.0,
+      "generated_program_count": 0,
+      "generated_proportion": 0.0,
+      "input_program_count": 706
+    }
+  },
+  "claim_boundary": "remote outputs are deterministic-execution checked but not manually reviewed semantic gold",
+  "input_program_count": 8179,
+  "input_sha256": {
+    "baseline": {
+      "artifacts\\paper1\\dsl\\annotated_v1\\accepted.jsonl": "afc841dd2d7824717521a69c9186575fd0e64ce5717e3d0d4ce32075faf5b0dc",
+      "artifacts\\paper1\\dsl\\expansion500_v1\\freeze\\expansion_train.jsonl": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562"
+    },
+    "remote": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\smoke_easy_gsm8k\\annotations.jsonl": "5e115ec5130b2a9b5c9c66417f9147928133ff0355f204b4e8e0f9fe02c02773",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\smoke_easy_gsm8k\\attempts.jsonl": "f20cccbc5e64f3067f8329bfaded36592a36a38e1158402940f4015b7413159e",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\smoke_easy_gsm8k\\failures.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sources": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\gsm8k_full.jsonl": "85fb981b6fa0079b6f85bd866c807483aeaba7fa66b4e84ab8b0c17fcf58b650",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\tatqa_arithmetic_full.jsonl": "0391ea3362b58d95c6807a888533a4a5233d6cf2093a2ee15cbecf100a147468"
+    }
+  },
+  "quality_sample_index": [
+    {
+      "baseline_source_id": "1089",
+      "dataset": "gsm8k",
+      "remote_source_id": "0"
+    }
+  ],
+  "quality_samples_sha256": "3ecc1403019631b8eaaa58bd5ba7416cc80030b7a7238e8907ffecb5aa30c9b7",
+  "remote": {
+    "mean_part_count": 2,
+    "mean_statement_count": 4,
+    "program_count": 1,
+    "rates": {
+      "answer_correct": 1.0,
+      "converted": 1.0,
+      "execution_verified": 1.0,
+      "lower_verified": 1.0,
+      "semantic_lint_valid": 1.0,
+      "syntax_verified": 1.0,
+      "type_verified": 1.0
+    },
+    "unique_semantic_patterns": 1
+  },
+  "schema_version": "ccpu.dsl_dataset.remote_program_analysis.v1",
+  "terminal_failure_types": {}
+}

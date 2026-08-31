@@ -1,0 +1,20 @@
+{
+  "schema_version": "ccpu.dsl_dataset.remote_program_teacher_config.v1",
+  "provider": "openrouter",
+  "api_key_env": "OPENROUTER_API_KEY",
+  "models": [
+    {"id": "z-ai/glm-5.2:free", "response_format": true},
+    {"id": "nvidia/nemotron-3-ultra-550b-a55b:free", "response_format": false},
+    {"id": "google/gemma-4-31b-it:free", "response_format": true},
+    {"id": "minimax/minimax-m3:free", "response_format": true},
+    {"id": "openrouter/free", "response_format": true}
+  ],
+  "max_attempts": 5,
+  "temperature": 0,
+  "max_tokens": 1600,
+  "timeout_seconds": 120,
+  "delay_seconds": 1.0,
+  "checkpoint_every": 5,
+  "catalog_checked_utc": "2026-08-31T09:30:00Z",
+  "selection_policy": "zero-price OpenRouter catalog models prioritized for reasoning, coding, and JSON support"
+}

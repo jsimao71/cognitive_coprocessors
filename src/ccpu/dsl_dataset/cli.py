@@ -13,6 +13,8 @@ from .audit import audit_chops
 from .expansion import finalize_asl_expansion
 from .local_codex import run_local_codex_batches
 from .mine import mine_datasets
+from .remote_analysis import analyze_remote_programs
+from .remote_teacher import generate_remote_programs
 from .select import select_diverse_seed, select_seed
 from .semantic import (
     prepare_local_annotation_batches,
@@ -356,6 +358,78 @@ def generate_command(
     )
     click.echo(
         f"accepted {summary['accepted_count']}/{summary['raw_count']} teacher mappings -> {output_dir}"
+    )
+
+
+@main.command("generate-programs")
+@click.option("--input", "input_path", type=click.Path(exists=True, path_type=Path), required=True)
+@click.option(
+    "--config", "config_path", type=click.Path(exists=True, path_type=Path), required=True
+)
+@click.option("--skill", "skill_path", type=click.Path(exists=True, path_type=Path), required=True)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+@click.option("--max-examples", type=click.IntRange(min=1))
+def generate_programs_command(
+    input_path: Path,
+    config_path: Path,
+    skill_path: Path,
+    output_dir: Path,
+    max_examples: int | None,
+) -> None:
+    """Generate full programs with a validation-aware remote-model cascade."""
+
+    summary = generate_remote_programs(
+        input_path,
+        skill_path,
+        read_json(config_path),
+        output_dir,
+        max_examples=max_examples,
+    )
+    click.echo(
+        f"remote programs accepted={summary['accepted_program_count']}/"
+        f"{summary['input_program_count']} status={summary['status']} -> {output_dir}"
+    )
+
+
+@main.command("analyze-programs")
+@click.option(
+    "--source",
+    "source_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option(
+    "--remote-dir", type=click.Path(exists=True, path_type=Path), multiple=True, required=True
+)
+@click.option(
+    "--baseline",
+    "baseline_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+@click.option("--sample-count", default=5, type=click.IntRange(min=1, max=20), show_default=True)
+def analyze_programs_command(
+    source_paths: tuple[Path, ...],
+    remote_dir: tuple[Path, ...],
+    baseline_paths: tuple[Path, ...],
+    output_dir: Path,
+    sample_count: int,
+) -> None:
+    """Compare remote-teacher coverage and quality with the existing corpus."""
+
+    report = analyze_remote_programs(
+        source_paths=list(source_paths),
+        remote_dirs=list(remote_dir),
+        baseline_paths=list(baseline_paths),
+        output_dir=output_dir,
+        sample_count=sample_count,
+    )
+    click.echo(
+        f"remote generated={report['remote']['program_count']}/"
+        f"{report['input_program_count']} -> {output_dir}"
     )
 
 
