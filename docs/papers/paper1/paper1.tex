@@ -1330,6 +1330,60 @@ artifacts retain dataset, semantic-family, complexity, conditional, teacher-name
 consistency, ID-only error examples, and input/output hashes; full records remain
 local under repository benchmark-text policy.
 
+\section{Matched Functor Representation Add-on}
+\label{sec:functor-addon}
+
+We add a representation-controlled experiment over the frozen 500-source ASL
+ledger. F0 is the existing assignment-style ASL. F1 uses flat, low-level
+functors that are deliberately isomorphic to ASL operations, for example
+\texttt{add(dst, lhs, rhs)}. F2 uses semantic functors such as
+\texttt{offset}, \texttt{remaining}, \texttt{per\_unit\_total}, and
+\texttt{percentage\_ratio}; a deterministic runtime lowers these constraints
+to the same typed workspace operations. F1 and F2 therefore share the same
+function-call surface form. A gain confined to F2 is evidence for semantic
+decomposition rather than parentheses, shorter syntax, or a generic functor
+bias.
+
+Primary annotation sees only the raw question, a condition-specific grammar,
+and one fixed three-example teacher prefix. Answers, rationales, ASL programs,
+blackboard records, intermediate values, and validator feedback are hidden.
+Retries are independent raw-question attempts and never receive an earlier
+candidate or its failure. Student training and evaluation use one fixed empty
+ICL prefix for every record. The runtime, not the model, canonicalizes symbols
+and orders F2 constraints; its bounded single-unknown solver supports both
+forward and inverse relations without exposing solved state to the generator.
+
+\begin{table}[t]
+\centering\small
+\caption{Answer-blind functor corpus over the frozen F0 source partition. Each
+accepted source has independently valid F1 and F2 targets. The 17 unresolved
+sources remain quarantined rather than gold-repaired.}
+\label{tab:functor-corpus}
+\begin{tabular}{lrrr}
+\toprule
+Split & Frozen sources & Paired accepted & Quarantined\\
+\midrule
+Train & 450 & 434 & 16\\
+Development & 25 & 24 & 1\\
+Test & 25 & 25 & 0\\
+\midrule
+Total & 500 & 483 & 17\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The primary pass accepted 451/500 paired targets; independent answer-blind
+retries raised coverage to 483/500. Accepted programs average 6.83 calls and
+427 characters for F1 versus 6.65 calls and 420 characters for F2; 82.0\% of
+F2 programs use at least one semantic-specific functor. The longest combined
+student prompt and target is 1,074 tokens for F1 and 1,076 for F2, below the
+shared 1,152-token limit. Both conditions train the same pinned Qwen3-0.6B
+QKVO-r8 adapter, seed, ten-epoch schedule, and decoding protocol as F0, and are
+evaluated on the identical 25 test source IDs. The principal limitation is
+that strict answer-blind filtering leaves F1/F2 with 434 training rows rather
+than F0's 450. We report this deficit instead of repairing targets from hidden
+gold, and treat F1--F2 as the cleaner causal contrast.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
