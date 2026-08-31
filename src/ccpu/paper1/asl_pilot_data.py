@@ -772,30 +772,36 @@ def build_asl_expansion_data(
     return manifest
 
 
+def incremental_prompt(row: dict[str, Any], part: dict[str, Any], state: dict[str, Any]) -> str:
+    """Render one causal transition prompt from runtime-visible information."""
+
+    context = _compact_context(row)
+    prompt_parts = [
+        "Compile only the next quantitative clause into a grounded ASL-Arith delta.",
+        "Use the current runtime state; preserve entities, quantities, and dependencies.",
+        "Return only new ASL statements, one per line; do not repeat prior statements.",
+        f"Scope: {row['effective_scope']['id']}",
+    ]
+    if context:
+        prompt_parts.append(context)
+    prompt_parts.extend(
+        [
+            f"Current runtime state: {canonical_json(state)}",
+            f"Next clause: {part['text']}",
+            "ASL delta:",
+        ]
+    )
+    return "\n\n".join(prompt_parts)
+
+
 def _incremental_records(row: dict[str, Any]) -> list[dict[str, Any]]:
     parts = {int(part["part_id"]): part for part in row["parts"]}
     statements: list[str] = []
     state: dict[str, Any] = {"values": {}, "unresolved": []}
     records = []
-    context = _compact_context(row)
     for mapping in sorted(row["part_mappings"], key=lambda item: int(item["part_id"])):
         part_id = int(mapping["part_id"])
         target = "\n".join(mapping["asl"])
-        prompt_parts = [
-            "Compile only the next quantitative clause into a grounded ASL-Arith delta.",
-            "Use the current runtime state; preserve entities, quantities, and dependencies.",
-            "Return only new ASL statements, one per line; do not repeat prior statements.",
-            f"Scope: {row['effective_scope']['id']}",
-        ]
-        if context:
-            prompt_parts.append(context)
-        prompt_parts.extend(
-            [
-                f"Current runtime state: {canonical_json(state)}",
-                f"Next clause: {parts[part_id]['text']}",
-                "ASL delta:",
-            ]
-        )
         identity = f"{row['dataset']}:{row['source_id']}:{part_id}:incremental"
         records.append(
             {
@@ -805,7 +811,7 @@ def _incremental_records(row: dict[str, Any]) -> list[dict[str, Any]]:
                 "semantic_pattern_id": row["semantic_pattern_id"],
                 "dataset": row["dataset"],
                 "part_id": part_id,
-                "prompt": "\n\n".join(prompt_parts),
+                "prompt": incremental_prompt(row, parts[part_id], state),
                 "target": target,
                 "prior_statement_count": len(statements),
             }

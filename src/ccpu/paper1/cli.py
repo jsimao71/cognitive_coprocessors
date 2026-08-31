@@ -17,6 +17,7 @@ from ccpu.common.artifacts import (
 )
 from ccpu.common.gsm8k import materialize_gsm8k
 
+from .asl_incremental_eval import run_asl_incremental
 from .asl_pilot_analysis import build_asl_checkpoint_report
 from .asl_pilot_data import (
     build_asl_expansion_data,
@@ -514,6 +515,24 @@ def run_asl_pilot_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_asl_incremental_command(args: argparse.Namespace) -> int:
+    model_config = read_json(args.config)
+    model_config["adapter_path"] = args.adapter_path
+    model_config["adapter_id"] = args.adapter_id or Path(args.adapter_path).name
+    report = run_asl_incremental(
+        programs_path=args.programs,
+        model_config=model_config,
+        output_dir=args.output_dir,
+        seed=args.seed,
+        checkpoint_every=args.checkpoint_every,
+    )
+    print(
+        f"completed {report['prediction_count']} closed-loop ASL programs; "
+        f"answer={report['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+    )
+    return 0
+
+
 def evaluate_asl_pilot_command(args: argparse.Namespace) -> int:
     report = analyze_asl_predictions(args.eval, args.predictions, args.output_dir)
     write_json(Path(args.output_dir) / "summary.json", report)
@@ -793,6 +812,19 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_run.add_argument("--seed", type=int, default=44017)
     asl_run.add_argument("--checkpoint-every", type=int, default=5)
     asl_run.set_defaults(handler=run_asl_pilot_command)
+
+    asl_incremental_run = commands.add_parser(
+        "run-asl-incremental",
+        help="run closed-loop clause-local ASL generation with predicted state",
+    )
+    asl_incremental_run.add_argument("--programs", required=True)
+    asl_incremental_run.add_argument("--config", required=True)
+    asl_incremental_run.add_argument("--adapter-path", required=True)
+    asl_incremental_run.add_argument("--adapter-id")
+    asl_incremental_run.add_argument("--output-dir", required=True)
+    asl_incremental_run.add_argument("--seed", type=int, default=44017)
+    asl_incremental_run.add_argument("--checkpoint-every", type=int, default=5)
+    asl_incremental_run.set_defaults(handler=run_asl_incremental_command)
 
     asl_evaluate = commands.add_parser(
         "evaluate-asl-pilot", help="score saved ASL predictions with semantic components"
