@@ -73,7 +73,10 @@ untouched answers. A relation-diversified expansion then freezes 350 additional
 training programs: the resulting 450 training rows contain 397 normalized
 signatures and have zero signature overlap with the unchanged 25-row development
 and test sets. This is a learning signal and a data checkpoint, not a robust
-semantic compiler.
+semantic compiler. Training the same rank-8 QKVO adapter on all 450 training
+originals then reaches 11/25 untouched answers (44\%), compared with 7/25 for
+100 originals; the gain supports data/semantic coverage as the first bottleneck
+but is concentrated in TAT-QA and does not establish a robust compiler.
 \end{abstract}
 
 \section{Status and Scope}
@@ -984,6 +987,7 @@ LoRA-50               & .92 & .88 & .68 & .28 & 234\\
 LoRA-100              & .92 & .84 & .68 & .28 & 234\\
 LoRA-100 + 3-shot ICL & .88 & .84 & .72 & .40 & 1,497\\
 LoRA-B augmented      & .96 & .92 & .64 & .24 & 234\\
+LoRA-500              & .88 & .84 & .76 & .44 & 234\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -998,11 +1002,24 @@ this small test rather than supporting monotonic scaling. Three residual
 demonstrations complement LoRA-100, reaching 10/25; the wide Wilson interval
 (.234, .593) and single seed preclude a strong placement claim.
 
+The same QKVO rank-8 adapter trained on the relation-diversified 450-row training
+set reaches 11/25 answers (44\%; 95\% Wilson interval .267--.629), with 22/25
+parseable, 21/25 lowerable and type-valid, and 19/25 executable programs. This is
+four more answers than LoRA-100 and one more than LoRA-100 plus three-shot ICL,
+without demonstration tokens. Dataset breakdown is asymmetric: TAT-QA reaches
+7/8 answers while GSM8K reaches 4/17. Thus added semantic originals produce a
+whole-program learning gain, but much of it may reflect TAT-QA specialization
+rather than broad GSM8K transfer.
+
 All adapters modify 2,293,760 QKVO parameters (0.383\% of the model). LoRA-25,
 -50, and -100 consume 29,550, 59,640, and 112,950 target tokens and finish in
 427, 836, and 1,462 seconds on XPU. Their final development losses are .682,
 .642, and .579. LoRA-B consumes 235,470 target tokens in 3,176 seconds and reaches
 .535 development loss, so its comparison is not compute matched.
+LoRA-500 retains the same 2,293,760 trainable parameters and ten-epoch schedule,
+consumes 565,160 target tokens, takes 6,832 seconds, and reaches .507 development
+loss. It changes data coverage and total token exposure together; it is not a
+compute-matched ablation against LoRA-100.
 
 \begin{table}[t]
 \centering\small
@@ -1066,9 +1083,12 @@ tokens. Relation labels are multi-valued: among the selected 350, for example,
 171 carry ratio/fraction cues, 130 relative-quantity cues, 138 percentage cues,
 175 aggregation cues, and 232 chained-relation cues. Labels describe selection
 coverage, not independently adjudicated semantic classes. This checkpoint alone
-makes no student-model improvement claim. The next predeclared run is the same
-QKVO rank-8 adapter on the 450 training originals; incremental
-NL+executed-state transitions follow before any rank-16 or QKVO+MLP sweep.
+makes no student-model improvement claim. The subsequent same-rank student run,
+reported above, improves untouched answers from 7/25 to 11/25. We next derive
+1,403 causal clause-local training transitions from the 450 programs, with only
+the current clause, compact evidence, scope, and prior executed state visible;
+the 65-transition development set retains the original 25 development parents.
+That incremental-state condition precedes any rank-16 or QKVO+MLP sweep.
 
 \section{Preliminary XPU Pilot}
 
@@ -1405,9 +1425,9 @@ LoRA-100's target-token exposure, so robustness differences cannot be attributed
 to augmentation alone. The normalized pattern signature is useful for leakage
 control but may merge or separate structures imperfectly. The 500-original
 checkpoint adds 350 relation-diversified training programs while excluding every
-frozen development/test semantic-pattern family. Only after its QKVO-r8 run do
-we test incremental NL+executed-state transitions, rank 16, or QKVO+MLP
-adaptation.
+frozen development/test semantic-pattern family. Its QKVO-r8 result changes
+semantic coverage and total token exposure together. Incremental
+NL+executed-state transitions therefore precede rank 16 or QKVO+MLP adaptation.
 
 \section{Related Work}
 
