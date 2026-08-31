@@ -19,6 +19,15 @@
         0.47576605190361576
       ]
     },
+    "predicted_state_full_question": {
+      "accuracy": 0.44,
+      "successes": 11,
+      "total": 25,
+      "wilson_95": [
+        0.26665638881067344,
+        0.6293266813020123
+      ]
+    },
     "whole": {
       "accuracy": 0.44,
       "successes": 11,
@@ -29,11 +38,57 @@
       ]
     }
   },
+  "full_question_context_gain": 0.15999999999999998,
   "input_sha256": {
+    "full_context_scored": "eb8a8302bddb585c2e6ead2eaf33789d36e27f8a226bbef6d6a62fbd3c65b229",
     "oracle_scored": "08aa04790238b2f7f2f826ab549355bcbc4c963caf1443e1154cb6cbff8f9b77",
     "predicted_scored": "b8df7dd891bfd7aed32123a5d015efbd2a4ce35caeb84d8abbcfab27734158d0",
     "programs": "52c091876de79362a2a286e0e9df2d60c0e46b4cc0bbd5c7423d6d6b3299cb4f",
     "whole_scored": "b34daad19f28b1f4712c2b648fc96ae2f181cd417abe7e54a3b8512927a87211"
+  },
+  "paired_predicted_vs_full_question": {
+    "counts": {
+      "both_correct": 6,
+      "both_wrong": 13,
+      "predicted_correct_full_question_wrong": 1,
+      "predicted_wrong_full_question_correct": 5
+    },
+    "exploratory_exact_binomial_p": 0.21875,
+    "source_ids": {
+      "both_correct": [
+        "237cfd13f0cd6f68dbe8b96bb20c6860",
+        "2866",
+        "319718c17746511f9cc4d51c9bb51f46",
+        "55f69b42bc6bebfe50946d8cfc428734",
+        "5ea8b697b08543967c3f5f567eb27d07",
+        "be0af841a206a4a98939e51462b62623"
+      ],
+      "both_wrong": [
+        "1497",
+        "17",
+        "2041",
+        "2973",
+        "431",
+        "4524",
+        "5419",
+        "5442",
+        "5682",
+        "5758",
+        "6207",
+        "639",
+        "8db33337e2c6be87644b0f65b20d6bcb"
+      ],
+      "predicted_correct_full_question_wrong": [
+        "30fd8f5081139c783553048b9ca81767"
+      ],
+      "predicted_wrong_full_question_correct": [
+        "5584",
+        "6926",
+        "7105",
+        "7158",
+        "a2cc2d575664476f15e55b2ee3d34ceb"
+      ]
+    }
   },
   "paired_predicted_vs_oracle": {
     "counts": {
@@ -76,6 +131,50 @@
         "2866"
       ],
       "predicted_wrong_oracle_correct": []
+    }
+  },
+  "paired_whole_vs_full_question": {
+    "counts": {
+      "both_correct": 8,
+      "both_wrong": 11,
+      "whole_correct_full_question_wrong": 3,
+      "whole_wrong_full_question_correct": 3
+    },
+    "exploratory_exact_binomial_p": 1.0,
+    "source_ids": {
+      "both_correct": [
+        "237cfd13f0cd6f68dbe8b96bb20c6860",
+        "2866",
+        "319718c17746511f9cc4d51c9bb51f46",
+        "55f69b42bc6bebfe50946d8cfc428734",
+        "5ea8b697b08543967c3f5f567eb27d07",
+        "6926",
+        "a2cc2d575664476f15e55b2ee3d34ceb",
+        "be0af841a206a4a98939e51462b62623"
+      ],
+      "both_wrong": [
+        "1497",
+        "2041",
+        "431",
+        "4524",
+        "5419",
+        "5442",
+        "5682",
+        "5758",
+        "6207",
+        "639",
+        "8db33337e2c6be87644b0f65b20d6bcb"
+      ],
+      "whole_correct_full_question_wrong": [
+        "17",
+        "2973",
+        "30fd8f5081139c783553048b9ca81767"
+      ],
+      "whole_wrong_full_question_correct": [
+        "5584",
+        "7105",
+        "7158"
+      ]
     }
   },
   "paired_whole_vs_predicted": {

@@ -194,12 +194,16 @@ def analyze_incremental_capacity(
     predicted_scored_path: str | Path,
     oracle_scored_path: str | Path,
     output_path: str | Path,
+    full_context_scored_path: str | Path | None = None,
 ) -> dict[str, Any]:
     programs = read_jsonl(programs_path)
     whole = read_jsonl(whole_scored_path)
     predicted = read_jsonl(predicted_scored_path)
     oracle = read_jsonl(oracle_scored_path)
     conditions = {"whole": whole, "predicted_state": predicted, "oracle_state": oracle}
+    full_context = read_jsonl(full_context_scored_path) if full_context_scored_path else []
+    if full_context:
+        conditions["predicted_state_full_question"] = full_context
     condition_results = {}
     for name, rows in conditions.items():
         successes = sum(bool(row["metrics"]["final_answer_correct"]) for row in rows)
@@ -241,5 +245,24 @@ def analyze_incremental_capacity(
         },
         "claim_boundary": "single model, seed, and 25-program diagnostic; paired p-values exploratory",
     }
+    if full_context:
+        full_context_map = _correct_by_parent(full_context)
+        report["full_question_context_gain"] = (
+            condition_results["predicted_state_full_question"]["accuracy"]
+            - condition_results["predicted_state"]["accuracy"]
+        )
+        report["paired_predicted_vs_full_question"] = _paired(
+            predicted_map,
+            full_context_map,
+            reference_name="predicted",
+            candidate_name="full_question",
+        )
+        report["paired_whole_vs_full_question"] = _paired(
+            whole_map,
+            full_context_map,
+            reference_name="whole",
+            candidate_name="full_question",
+        )
+        report["input_sha256"]["full_context_scored"] = file_sha256(full_context_scored_path)
     write_json(output_path, report)
     return report

@@ -8,6 +8,7 @@ from ccpu.paper1.asl_pilot_data import (
     _choose_grouped_splits,
     build_asl_expansion_data,
     build_asl_incremental_data,
+    incremental_prompt,
     pattern_id,
     perturb_row,
 )
@@ -243,6 +244,24 @@ def test_incremental_evaluation_feeds_predicted_state_forward():
     assert stopped is None
     assert all(trace["accepted"] for trace in traces)
     assert '"box.count":2' in backend.prompts[1]
+
+
+def test_incremental_full_question_context_preserves_local_target():
+    row = _row(
+        "full-context",
+        "box.count = 2\nRETURN box.count",
+        "There are 2 boxes. How many boxes are there?",
+    )
+    part = {"part_id": 0, "text": "There are 2 boxes."}
+    causal = incremental_prompt(row, part, {"values": {}, "unresolved": []})
+    full = incremental_prompt(
+        row,
+        part,
+        {"values": {}, "unresolved": []},
+        context_mode="full_question",
+    )
+    assert "Full original question:" not in causal
+    assert row["question"] in full
 
 
 def test_incremental_oracle_mode_feeds_gold_state_after_student_error():

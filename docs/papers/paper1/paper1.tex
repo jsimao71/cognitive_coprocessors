@@ -81,7 +81,8 @@ clause-local adapter trained on 1,403 executed-state transitions reaches only
 7/25 answers in strict predicted-state closed loop; supplying gold prior state
 reaches 6/25. The small, negative oracle gap and high delta validity localize the
 remaining failure to semantic grounding and lost global context rather than
-state-error propagation.
+state-error propagation. Restoring the full question while retaining local-delta
+prediction recovers 11/25, equal to whole-program synthesis but not better.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1129,6 +1130,7 @@ Condition & Parse & Lower & Exec. & State & Answer & Answer interval\\
 Whole program      & .88 & .84 & .76 & .20 & 11/25 & [.267,.629]\\
 Incremental pred.  & .92 & .92 & .60 & .16 &  7/25 & [.143,.476]\\
 Incremental oracle & .92 & .88 & .28 & .16 &  6/25 & [.115,.434]\\
+Pred. + full question & .88 & .88 & .64 & .20 & 11/25 & [.267,.629]\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1150,6 +1152,15 @@ no predicted-state answer and loses one. This single-seed diagnostic therefore
 does not support the incremental-state-advantage hypothesis and gives no evidence
 that early workspace errors are the primary limitation.
 
+The prespecified context-loss control keeps predicted-state execution but adds
+the untouched full original question to every local prompt. It reaches 11/25,
+gaining five causal-loop failures and losing one causal-loop success (two-sided
+exact binomial $p=.219$, exploratory). Against whole-program LoRA it has eight
+both correct, 11 both wrong, three gains, and three losses ($p=1.0$). The control
+therefore recovers the causal chopping penalty but does not establish an
+incremental executed-state advantage. Parse/lower/execution are .88/.88/.64;
+GSM8K rises from 1/17 to 5/17 while TAT-QA remains 6/8.
+
 The failure is sharply dataset-dependent. Predicted-state incremental retains
 6/8 TAT-QA answers but only 1/17 GSM8K answers; oracle state retains 6/8 and 0/17.
 The frozen GSM8K programs average 3.65 clauses, 7.65 ASL statements, dependency
@@ -1160,9 +1171,10 @@ error audit likewise concentrates wrong paths, dependencies, operators, and
 returns in GSM8K. Because TAT-QA is effectively one-part in this freeze while
 GSM8K is genuinely sequential, this asymmetry is consistent with a local
 grounding and global-context bottleneck; it is not proof of a dataset-level
-causal explanation. A full-question context control should precede interpreting
-larger adapters, after which matched QKVO-r16 and QKVO+MLP-r8 runs can isolate
-capacity from adapter location.
+causal explanation. The full-question control confirms that global intent matters,
+but its tie with whole-program synthesis leaves local semantics unresolved.
+Matched QKVO-r16 and QKVO+MLP-r8 runs can now isolate capacity from adapter
+location without mistaking context removal for an architectural gain.
 
 \section{Preliminary XPU Pilot}
 
@@ -1569,9 +1581,10 @@ learned ASL contract, and the runtime for lowering, types, and deterministic
 execution---but its untouched 25-program test and non-manual Q1 labels deliberately
 bound the conclusion. The relation-diversified 500-original adapter improves to
 11/25, but clause-local executed-state compilation regresses to 7/25 and oracle
-state reaches only 6/25. Valid deltas remain semantically weak, particularly on
-multi-clause GSM8K, so the next gate is global-context and adapter-capacity
-diagnosis rather than recovery from poisoned runtime state.
+state reaches only 6/25. Full-question local compilation recovers 11/25 but does
+not exceed whole-program synthesis. Valid deltas remain semantically weak,
+particularly on multi-clause GSM8K, so the next gate is matched adapter-capacity
+and placement diagnosis rather than recovery from poisoned runtime state.
 
 \begin{thebibliography}{9}
 

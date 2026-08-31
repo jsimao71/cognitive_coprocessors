@@ -527,6 +527,7 @@ def run_asl_incremental_command(args: argparse.Namespace) -> int:
         seed=args.seed,
         checkpoint_every=args.checkpoint_every,
         state_mode=args.state_mode,
+        context_mode=args.context_mode,
     )
     print(
         f"completed {report['prediction_count']} closed-loop ASL programs; "
@@ -541,6 +542,7 @@ def analyze_asl_incremental_command(args: argparse.Namespace) -> int:
         whole_scored_path=args.whole_scored,
         predicted_scored_path=args.predicted_scored,
         oracle_scored_path=args.oracle_scored,
+        full_context_scored_path=args.full_context_scored,
         output_path=args.output,
     )
     print(
@@ -844,6 +846,9 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_incremental_run.add_argument(
         "--state-mode", choices=("predicted", "oracle"), default="predicted"
     )
+    asl_incremental_run.add_argument(
+        "--context-mode", choices=("causal", "full_question"), default="causal"
+    )
     asl_incremental_run.set_defaults(handler=run_asl_incremental_command)
 
     asl_incremental_analysis = commands.add_parser(
@@ -854,6 +859,7 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_incremental_analysis.add_argument("--whole-scored", required=True)
     asl_incremental_analysis.add_argument("--predicted-scored", required=True)
     asl_incremental_analysis.add_argument("--oracle-scored", required=True)
+    asl_incremental_analysis.add_argument("--full-context-scored")
     asl_incremental_analysis.add_argument("--output", required=True)
     asl_incremental_analysis.set_defaults(handler=analyze_asl_incremental_command)
 

@@ -772,9 +772,17 @@ def build_asl_expansion_data(
     return manifest
 
 
-def incremental_prompt(row: dict[str, Any], part: dict[str, Any], state: dict[str, Any]) -> str:
+def incremental_prompt(
+    row: dict[str, Any],
+    part: dict[str, Any],
+    state: dict[str, Any],
+    *,
+    context_mode: str = "causal",
+) -> str:
     """Render one causal transition prompt from runtime-visible information."""
 
+    if context_mode not in {"causal", "full_question"}:
+        raise ValueError(f"unsupported incremental context mode: {context_mode}")
     context = _compact_context(row)
     prompt_parts = [
         "Compile only the next quantitative clause into a grounded ASL-Arith delta.",
@@ -784,6 +792,8 @@ def incremental_prompt(row: dict[str, Any], part: dict[str, Any], state: dict[st
     ]
     if context:
         prompt_parts.append(context)
+    if context_mode == "full_question":
+        prompt_parts.append(f"Full original question: {row['question']}")
     prompt_parts.extend(
         [
             f"Current runtime state: {canonical_json(state)}",

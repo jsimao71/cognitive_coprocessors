@@ -52,7 +52,11 @@ def _transition_rates(traces: list[dict[str, Any]]) -> dict[str, float]:
 
 
 def _rescore_transition_traces(
-    prediction: dict[str, Any], row: dict[str, Any], *, state_mode: str
+    prediction: dict[str, Any],
+    row: dict[str, Any],
+    *,
+    state_mode: str,
+    context_mode: str,
 ) -> None:
     mappings = {int(item["part_id"]): item for item in row["part_mappings"]}
     predicted_statements: list[str] = []
@@ -69,12 +73,17 @@ def _rescore_transition_traces(
         if trace["accepted"] and trace["predicted_delta"]:
             predicted_statements.extend(trace["predicted_delta"].splitlines())
         gold_statements.extend(mappings[part_id]["asl"])
-    prediction["suite"] = f"incremental_{state_mode}_state"
-    prediction["condition"] = f"lora_incremental_{state_mode}_state"
+    prediction["suite"] = f"incremental_{state_mode}_state_{context_mode}"
+    prediction["condition"] = f"lora_incremental_{state_mode}_state_{context_mode}"
 
 
 def run_incremental_program(
-    row: dict[str, Any], backend: Any, *, seed: int, state_mode: str = "predicted"
+    row: dict[str, Any],
+    backend: Any,
+    *,
+    seed: int,
+    state_mode: str = "predicted",
+    context_mode: str = "causal",
 ) -> tuple[str, list[dict[str, Any]], str | None]:
     """Generate and execute deltas in source order, halting on an invalid prefix."""
 
@@ -89,7 +98,7 @@ def run_incremental_program(
     stopped_reason = None
     for mapping in sorted(row["part_mappings"], key=lambda item: int(item["part_id"])):
         part_id = int(mapping["part_id"])
-        prompt = incremental_prompt(row, parts[part_id], state)
+        prompt = incremental_prompt(row, parts[part_id], state, context_mode=context_mode)
         generation = backend.generate(prompt, seed=seed + part_id)
         delta = extract_asl(generation.generated_text)
         context_statements = statements if state_mode == "predicted" else gold_statements
@@ -154,6 +163,7 @@ def run_asl_incremental(
     seed: int = 44017,
     checkpoint_every: int = 5,
     state_mode: str = "predicted",
+    context_mode: str = "causal",
 ) -> dict[str, Any]:
     """Evaluate an incremental adapter with predicted-state feedback."""
 
@@ -189,7 +199,7 @@ def run_asl_incremental(
                 "parent_source_id": row["source_id"],
                 "semantic_pattern_id": row["semantic_pattern_id"],
                 "dataset": row["dataset"],
-                "suite": f"incremental_{state_mode}_state",
+                "suite": f"incremental_{state_mode}_state_{context_mode}",
                 "reference_asl": row["asl"],
                 "effective_scope": row["effective_scope"],
             }
@@ -197,7 +207,11 @@ def run_asl_incremental(
         if example_id in completed:
             continue
         predicted_asl, traces, stopped_reason = run_incremental_program(
-            row, backend, seed=seed, state_mode=state_mode
+            row,
+            backend,
+            seed=seed,
+            state_mode=state_mode,
+            context_mode=context_mode,
         )
         predictions.append(
             {
@@ -206,8 +220,8 @@ def run_asl_incremental(
                 "parent_source_id": row["source_id"],
                 "semantic_pattern_id": row["semantic_pattern_id"],
                 "dataset": row["dataset"],
-                "suite": f"incremental_{state_mode}_state",
-                "condition": f"lora_incremental_{state_mode}_state",
+                "suite": f"incremental_{state_mode}_state_{context_mode}",
+                "condition": f"lora_incremental_{state_mode}_state_{context_mode}",
                 "shots": 0,
                 "model_id": backend.model_id,
                 "seed": seed,
@@ -226,7 +240,10 @@ def run_asl_incremental(
     }
     for prediction in predictions:
         _rescore_transition_traces(
-            prediction, programs_by_example[prediction["example_id"]], state_mode=state_mode
+            prediction,
+            programs_by_example[prediction["example_id"]],
+            state_mode=state_mode,
+            context_mode=context_mode,
         )
     references_path = write_jsonl(output / "references.jsonl", references)
     write_jsonl(predictions_path, predictions)
@@ -244,6 +261,7 @@ def run_asl_incremental(
     }
     report["incremental"] = {
         "state_mode": state_mode,
+        "context_mode": context_mode,
         "program_count": len(predictions),
         "completed_program_count": sum(
             row["completed_parts"] == row["part_count"] for row in predictions
@@ -261,7 +279,7 @@ def run_asl_incremental(
         },
     }
     report["run"] = {
-        "condition": f"lora_incremental_{state_mode}_state",
+        "condition": f"lora_incremental_{state_mode}_state_{context_mode}",
         "seed": seed,
         "model": model,
         "programs_sha256": file_sha256(programs_path),
@@ -269,6 +287,7 @@ def run_asl_incremental(
         "predicted_state_feedback": state_mode == "predicted",
         "fail_closed_invalid_delta": True,
         "state_mode": state_mode,
+        "context_mode": context_mode,
     }
     write_json(output / "summary.json", report)
     return report
