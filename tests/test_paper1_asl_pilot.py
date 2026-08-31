@@ -1,5 +1,6 @@
 from types import SimpleNamespace
 
+from ccpu.cli import build_parser
 from ccpu.common.artifacts import read_jsonl, write_json, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.paper1.asl_incremental_eval import run_incremental_program
@@ -242,3 +243,72 @@ def test_incremental_evaluation_feeds_predicted_state_forward():
     assert stopped is None
     assert all(trace["accepted"] for trace in traces)
     assert '"box.count":2' in backend.prompts[1]
+
+
+def test_incremental_oracle_mode_feeds_gold_state_after_student_error():
+    row = _row(
+        "oracle-state",
+        "box.count = 2\nRETURN box.count",
+        "There are 2 boxes. How many boxes are there?",
+    )
+    row.update(
+        {
+            "parts": [
+                {"part_id": 0, "text": "There are 2 boxes."},
+                {"part_id": 1, "text": "How many boxes are there?"},
+            ],
+            "part_mappings": [
+                {"part_id": 0, "asl": ["box.count = 2"]},
+                {"part_id": 1, "asl": ["RETURN box.count"]},
+            ],
+        }
+    )
+
+    class Backend:
+        def __init__(self):
+            self.prompts = []
+
+        def generate(self, prompt, *, seed):
+            del seed
+            self.prompts.append(prompt)
+            text = "box.count = 99" if len(self.prompts) == 1 else "RETURN box.count"
+            return SimpleNamespace(
+                generated_text=text,
+                prompt_tokens=10,
+                generated_tokens=3,
+                wall_time_ns=1,
+            )
+
+    backend = Backend()
+    run_incremental_program(row, backend, seed=1, state_mode="oracle")
+    assert '"box.count":2' in backend.prompts[1]
+    assert '"box.count":99' not in backend.prompts[1]
+
+
+def test_incremental_cli_forwards_oracle_state_mode(tmp_path, monkeypatch):
+    config = write_json(tmp_path / "config.json", {"model": {}})
+    captured = {}
+
+    def fake_run(**kwargs):
+        captured.update(kwargs)
+        return {"prediction_count": 0, "rates": {"final_answer_correct": 0.0}}
+
+    monkeypatch.setattr("ccpu.paper1.cli.run_asl_incremental", fake_run)
+    args = build_parser().parse_args(
+        [
+            "paper1",
+            "run-asl-incremental",
+            "--programs",
+            "programs.jsonl",
+            "--config",
+            str(config),
+            "--adapter-path",
+            "adapter",
+            "--output-dir",
+            str(tmp_path / "output"),
+            "--state-mode",
+            "oracle",
+        ]
+    )
+    args.handler(args)
+    assert captured["state_mode"] == "oracle"

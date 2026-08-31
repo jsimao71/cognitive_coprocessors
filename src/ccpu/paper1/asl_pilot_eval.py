@@ -16,9 +16,7 @@ from .asl_pilot_data import asl_prompt, semantic_family
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 
 _FENCE = re.compile(r"```(?:asl|text|ini|python)?\s*(.*?)```", re.IGNORECASE | re.DOTALL)
-_STATEMENT = re.compile(
-    r"^\s*(?:[a-z_][a-z0-9_.]*\s*=\s*.+|RETURN\s+.+)\s*$", re.IGNORECASE
-)
+_STATEMENT = re.compile(r"^\s*(?:[a-z_][a-z0-9_.]*\s*=\s*.+|RETURN\s+.+)\s*$", re.IGNORECASE)
 
 
 def extract_asl(text: str) -> str:
@@ -120,8 +118,7 @@ def _expression_signature(
             )
         return ("EXTERNAL", semantic_family(path))
     arguments = [
-        _expression_signature(argument, assignments, stack)
-        for argument in node.get("args", [])
+        _expression_signature(argument, assignments, stack) for argument in node.get("args", [])
     ]
     if operation in {"ADD", "MUL", "SUM", "MIN", "MAX"}:
         flattened = []
@@ -225,9 +222,7 @@ def score_asl(reference: str, predicted: str, scope: dict[str, Any]) -> dict[str
             reference_components[name], predicted_components[name]
         )
     result["executable"] = predicted_validation["execution_verified"]
-    result["dependency_correct"] = (
-        result["executable"] and result["edges_metrics"]["f1"] == 1.0
-    )
+    result["dependency_correct"] = result["executable"] and result["edges_metrics"]["f1"] == 1.0
     if not result["type_valid"]:
         return result
     reference_states, reference_return = _state_signatures(reference_validation)
@@ -251,7 +246,55 @@ def score_asl(reference: str, predicted: str, scope: dict[str, Any]) -> dict[str
     return result
 
 
-def _select_demos(train_rows: list[dict[str, Any]], shots: int, *, seed: int) -> list[dict[str, Any]]:
+def score_asl_delta(
+    reference: str,
+    predicted: str,
+    scope: dict[str, Any],
+    *,
+    context_asl: str = "",
+) -> dict[str, Any]:
+    """Score one local delta and whether it can be admitted after the supplied prefix."""
+
+    reference_validation = validate_asl(reference, effective_scope=scope)
+    predicted_validation = validate_asl(predicted, effective_scope=scope)
+    context_candidate = "\n".join(part for part in (context_asl, predicted) if part.strip())
+    context_validation = validate_asl(context_candidate, effective_scope=scope)
+    result: dict[str, Any] = {
+        "parse_valid": predicted_validation["syntax_verified"],
+        "lowerable_to_ccir": predicted_validation["lower_verified"],
+        "type_valid": predicted_validation["type_verified"],
+        "accepted": bool(predicted.strip())
+        and all(
+            context_validation[key]
+            for key in ("syntax_verified", "lower_verified", "type_verified")
+        ),
+        "fully_resolved": context_validation["execution_verified"],
+        "errors": context_validation["errors"],
+    }
+    for name in ("paths", "source_facts", "operators", "edges"):
+        result[f"{name}_metrics"] = {"precision": 0.0, "recall": 0.0, "f1": 0.0}
+    result["semantic_state_metrics"] = {"precision": 0.0, "recall": 0.0, "f1": 0.0}
+    result["semantic_return_equivalent"] = False
+    if not reference_validation["lower_verified"] or not predicted_validation["lower_verified"]:
+        return result
+    reference_components = _components(reference_validation)
+    predicted_components = _components(predicted_validation)
+    for name in ("paths", "source_facts", "operators", "edges"):
+        result[f"{name}_metrics"] = _multiset_f1(
+            reference_components[name], predicted_components[name]
+        )
+    if not predicted_validation["type_verified"]:
+        return result
+    reference_states, reference_return = _state_signatures(reference_validation)
+    predicted_states, predicted_return = _state_signatures(predicted_validation)
+    result["semantic_state_metrics"] = _multiset_f1(reference_states, predicted_states)
+    result["semantic_return_equivalent"] = reference_return == predicted_return
+    return result
+
+
+def _select_demos(
+    train_rows: list[dict[str, Any]], shots: int, *, seed: int
+) -> list[dict[str, Any]]:
     if shots == 0:
         return []
     ordered = sorted(
@@ -408,8 +451,7 @@ def analyze_asl_predictions(
         },
         "component_mean_f1": {
             name: sum(
-                float(row["metrics"].get(f"{name}_metrics", {}).get("f1", 0.0))
-                for row in scored
+                float(row["metrics"].get(f"{name}_metrics", {}).get("f1", 0.0)) for row in scored
             )
             / len(scored)
             if scored

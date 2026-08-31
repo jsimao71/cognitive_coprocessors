@@ -76,7 +76,12 @@ and test sets. This is a learning signal and a data checkpoint, not a robust
 semantic compiler. Training the same rank-8 QKVO adapter on all 450 training
 originals then reaches 11/25 untouched answers (44\%), compared with 7/25 for
 100 originals; the gain supports data/semantic coverage as the first bottleneck
-but is concentrated in TAT-QA and does not establish a robust compiler.
+but is concentrated in TAT-QA and does not establish a robust compiler. A
+clause-local adapter trained on 1,403 executed-state transitions reaches only
+7/25 answers in strict predicted-state closed loop; supplying gold prior state
+reaches 6/25. The small, negative oracle gap and high delta validity localize the
+remaining failure to semantic grounding and lost global context rather than
+state-error propagation.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1090,6 +1095,75 @@ the current clause, compact evidence, scope, and prior executed state visible;
 the 65-transition development set retains the original 25 development parents.
 That incremental-state condition precedes any rank-16 or QKVO+MLP sweep.
 
+\subsection{Incremental executed-state compiler}
+
+The clause-local condition uses the same pinned Qwen3-0.6B revision and rank-8
+QKVO placement as the whole-program adapter. Each training row contains only the
+current natural-language clause, compact evidence and scope, and the workspace
+obtained by executing verified prior ASL; answers and future clauses are hidden.
+The 450 training programs yield 1,403 transitions from 397 normalized semantic
+signatures, and the unchanged 25-program development set yields 65 transitions.
+Ten epochs consume 576,570 target tokens in 1,760 optimizer steps. Training takes
+25,762 seconds (7.16 hours), peaks at 7.24~GiB XPU memory, and ends at train/dev
+loss .029/1.082. The adapter has 2,293,760 trainable parameters and its stored
+weight hash begins \texttt{dc7191b9}; the full provenance is machine-readable.
+
+At test time, the deployed condition repeatedly predicts one ASL delta, validates
+syntax, lowering, and type safety, executes an accepted delta, and feeds the
+resulting workspace to the next clause. It stops at the first invalid delta and
+does not repair. A diagnostic oracle-state condition instead supplies the gold
+executed state before each clause, independently of prior student output, while
+leaving the current prediction untouched. Both use the same frozen 25 source IDs,
+model checkpoint, adapter, decoding seed, and metric definitions.
+
+\begin{table}[t]
+\centering\small
+\caption{Frozen 25-program whole versus incremental comparison. Pred. is the
+strict deployed predicted-state loop; Oracle supplies only gold prior state.
+Intervals are 95\% Wilson intervals for final-answer accuracy.}
+\label{tab:asl-incremental-program}
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Parse & Lower & Exec. & State & Answer & Answer interval\\
+\midrule
+Whole program      & .88 & .84 & .76 & .20 & 11/25 & [.267,.629]\\
+Incremental pred.  & .92 & .92 & .60 & .16 &  7/25 & [.143,.476]\\
+Incremental oracle & .92 & .88 & .28 & .16 &  6/25 & [.115,.434]\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The primary predicted-state loop attempts 63 of 70 reference transitions before
+three fail-closed stops, accepts 60/63 (95.2\%), completes all clauses in 22/25
+programs, and has mean completed fraction .888. Delta parse, lower, type, and
+execution rates are .968, .952, .952, and .762. Yet exact operator, semantic path,
+source-fact, dependency, and state-delta rates are only .254, .175, .397, .175,
+and .365. Thus the adapter usually speaks valid ASL but often encodes the wrong
+local relation. Oracle state attempts all 70 transitions and accepts 65; its
+corresponding semantic exact rates remain .257, .300, .414, .186, and .343.
+
+Final-answer accuracy falls from 11/25 whole-program to 7/25 incremental. Paired
+outcomes are seven both correct, 14 both wrong, zero whole-wrong/incremental-correct,
+and four whole-correct/incremental-wrong (two-sided exact binomial $p=.125$,
+exploratory). Oracle state reaches 6/25, a propagation gap of $-.04$: it recovers
+no predicted-state answer and loses one. This single-seed diagnostic therefore
+does not support the incremental-state-advantage hypothesis and gives no evidence
+that early workspace errors are the primary limitation.
+
+The failure is sharply dataset-dependent. Predicted-state incremental retains
+6/8 TAT-QA answers but only 1/17 GSM8K answers; oracle state retains 6/8 and 0/17.
+The frozen GSM8K programs average 3.65 clauses, 7.65 ASL statements, dependency
+depth 3.47, 2.06 entities, and 6.59 paths, versus 1.00 clause, 4.50 statements,
+depth 2.13, 1.50 entities, and 3.50 paths for TAT-QA. Among attempted GSM8K deltas,
+operator, path, and dependency exactness are .182, .182, and .109. The multi-label
+error audit likewise concentrates wrong paths, dependencies, operators, and
+returns in GSM8K. Because TAT-QA is effectively one-part in this freeze while
+GSM8K is genuinely sequential, this asymmetry is consistent with a local
+grounding and global-context bottleneck; it is not proof of a dataset-level
+causal explanation. A full-question context control should precede interpreting
+larger adapters, after which matched QKVO-r16 and QKVO+MLP-r8 runs can isolate
+capacity from adapter location.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -1493,8 +1567,11 @@ mainly improve invariance, not untouched semantic generalization. The result
 supports a hybrid placement---context for local specialization, weights for a
 learned ASL contract, and the runtime for lowering, types, and deterministic
 execution---but its untouched 25-program test and non-manual Q1 labels deliberately
-bound the conclusion. A relation-diversified 500-original checkpoint and
-incremental executed-state condition are the next evidence gates.
+bound the conclusion. The relation-diversified 500-original adapter improves to
+11/25, but clause-local executed-state compilation regresses to 7/25 and oracle
+state reaches only 6/25. Valid deltas remain semantically weak, particularly on
+multi-clause GSM8K, so the next gate is global-context and adapter-capacity
+diagnosis rather than recovery from poisoned runtime state.
 
 \begin{thebibliography}{9}
 

@@ -1,0 +1,321 @@
+{
+  "claim_boundary": "single model, seed, and 25-program diagnostic; paired p-values exploratory",
+  "conditions": {
+    "oracle_state": {
+      "accuracy": 0.24,
+      "successes": 6,
+      "total": 25,
+      "wilson_95": [
+        0.11496313693401444,
+        0.4342968335542908
+      ]
+    },
+    "predicted_state": {
+      "accuracy": 0.28,
+      "successes": 7,
+      "total": 25,
+      "wilson_95": [
+        0.14283853850956563,
+        0.47576605190361576
+      ]
+    },
+    "whole": {
+      "accuracy": 0.44,
+      "successes": 11,
+      "total": 25,
+      "wilson_95": [
+        0.26665638881067344,
+        0.6293266813020123
+      ]
+    }
+  },
+  "input_sha256": {
+    "oracle_scored": "08aa04790238b2f7f2f826ab549355bcbc4c963caf1443e1154cb6cbff8f9b77",
+    "predicted_scored": "b8df7dd891bfd7aed32123a5d015efbd2a4ce35caeb84d8abbcfab27734158d0",
+    "programs": "52c091876de79362a2a286e0e9df2d60c0e46b4cc0bbd5c7423d6d6b3299cb4f",
+    "whole_scored": "b34daad19f28b1f4712c2b648fc96ae2f181cd417abe7e54a3b8512927a87211"
+  },
+  "paired_predicted_vs_oracle": {
+    "counts": {
+      "both_correct": 6,
+      "both_wrong": 18,
+      "predicted_correct_oracle_wrong": 1,
+      "predicted_wrong_oracle_correct": 0
+    },
+    "exploratory_exact_binomial_p": 1.0,
+    "source_ids": {
+      "both_correct": [
+        "237cfd13f0cd6f68dbe8b96bb20c6860",
+        "30fd8f5081139c783553048b9ca81767",
+        "319718c17746511f9cc4d51c9bb51f46",
+        "55f69b42bc6bebfe50946d8cfc428734",
+        "5ea8b697b08543967c3f5f567eb27d07",
+        "be0af841a206a4a98939e51462b62623"
+      ],
+      "both_wrong": [
+        "1497",
+        "17",
+        "2041",
+        "2973",
+        "431",
+        "4524",
+        "5419",
+        "5442",
+        "5584",
+        "5682",
+        "5758",
+        "6207",
+        "639",
+        "6926",
+        "7105",
+        "7158",
+        "8db33337e2c6be87644b0f65b20d6bcb",
+        "a2cc2d575664476f15e55b2ee3d34ceb"
+      ],
+      "predicted_correct_oracle_wrong": [
+        "2866"
+      ],
+      "predicted_wrong_oracle_correct": []
+    }
+  },
+  "paired_whole_vs_predicted": {
+    "counts": {
+      "both_correct": 7,
+      "both_wrong": 14,
+      "whole_correct_predicted_wrong": 4,
+      "whole_wrong_predicted_correct": 0
+    },
+    "exploratory_exact_binomial_p": 0.125,
+    "source_ids": {
+      "both_correct": [
+        "237cfd13f0cd6f68dbe8b96bb20c6860",
+        "2866",
+        "30fd8f5081139c783553048b9ca81767",
+        "319718c17746511f9cc4d51c9bb51f46",
+        "55f69b42bc6bebfe50946d8cfc428734",
+        "5ea8b697b08543967c3f5f567eb27d07",
+        "be0af841a206a4a98939e51462b62623"
+      ],
+      "both_wrong": [
+        "1497",
+        "2041",
+        "431",
+        "4524",
+        "5419",
+        "5442",
+        "5584",
+        "5682",
+        "5758",
+        "6207",
+        "639",
+        "7105",
+        "7158",
+        "8db33337e2c6be87644b0f65b20d6bcb"
+      ],
+      "whole_correct_predicted_wrong": [
+        "17",
+        "2973",
+        "6926",
+        "a2cc2d575664476f15e55b2ee3d34ceb"
+      ],
+      "whole_wrong_predicted_correct": []
+    }
+  },
+  "schema_version": "ccpu.paper1.asl_incremental_capacity_analysis.v1",
+  "state_error_propagation_gap": -0.040000000000000036,
+  "test_structure_by_dataset": {
+    "gsm8k": {
+      "mean_asl_lexical_tokens": 31.941176470588236,
+      "mean_dependency_depth": 3.4705882352941178,
+      "mean_entities": 2.0588235294117645,
+      "mean_parts": 3.6470588235294117,
+      "mean_paths": 6.588235294117647,
+      "mean_statements": 7.647058823529412,
+      "programs": 17
+    },
+    "tatqa": {
+      "mean_asl_lexical_tokens": 19.625,
+      "mean_dependency_depth": 2.125,
+      "mean_entities": 1.5,
+      "mean_parts": 1,
+      "mean_paths": 3.5,
+      "mean_statements": 4.5,
+      "programs": 8
+    }
+  },
+  "transition_error_taxonomy": {
+    "by_dataset": {
+      "gsm8k": {
+        "lowering_unsupported_form": 1,
+        "propagation_oracle_recovers_state_delta": 3,
+        "query_wrong_return": 10,
+        "reference_wrong_dependency": 46,
+        "semantic_wrong_operator": 42,
+        "semantic_wrong_path_entity": 42,
+        "semantic_wrong_source_fact": 31,
+        "semantic_wrong_state_delta": 33,
+        "surface_malformed_syntax": 2
+      },
+      "tatqa": {
+        "query_wrong_return": 4,
+        "reference_wrong_dependency": 3,
+        "semantic_wrong_operator": 2,
+        "semantic_wrong_path_entity": 7,
+        "semantic_wrong_source_fact": 4,
+        "semantic_wrong_state_delta": 4
+      }
+    },
+    "categories_are_multi_label": true,
+    "counts": {
+      "lowering_unsupported_form": 1,
+      "propagation_oracle_recovers_state_delta": 3,
+      "query_wrong_return": 14,
+      "reference_wrong_dependency": 49,
+      "semantic_wrong_operator": 44,
+      "semantic_wrong_path_entity": 49,
+      "semantic_wrong_source_fact": 35,
+      "semantic_wrong_state_delta": 37,
+      "surface_malformed_syntax": 2
+    },
+    "representative_ids": {
+      "lowering_unsupported_form": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 1,
+          "source_id": "5584"
+        }
+      ],
+      "propagation_oracle_recovers_state_delta": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 1,
+          "source_id": "2041"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 3,
+          "source_id": "4524"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 1,
+          "source_id": "5758"
+        }
+      ],
+      "query_wrong_return": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 3,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 1,
+          "source_id": "639"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 1,
+          "source_id": "17"
+        }
+      ],
+      "reference_wrong_dependency": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 0,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 2,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 3,
+          "source_id": "6926"
+        }
+      ],
+      "semantic_wrong_operator": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 0,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 2,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 3,
+          "source_id": "6926"
+        }
+      ],
+      "semantic_wrong_path_entity": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 0,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 1,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 2,
+          "source_id": "6926"
+        }
+      ],
+      "semantic_wrong_source_fact": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 2,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 3,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 0,
+          "source_id": "639"
+        }
+      ],
+      "semantic_wrong_state_delta": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 2,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 3,
+          "source_id": "6926"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 0,
+          "source_id": "639"
+        }
+      ],
+      "surface_malformed_syntax": [
+        {
+          "dataset": "gsm8k",
+          "part_id": 0,
+          "source_id": "5419"
+        },
+        {
+          "dataset": "gsm8k",
+          "part_id": 0,
+          "source_id": "6207"
+        }
+      ]
+    }
+  }
+}

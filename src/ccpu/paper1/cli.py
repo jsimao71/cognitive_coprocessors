@@ -17,6 +17,7 @@ from ccpu.common.artifacts import (
 )
 from ccpu.common.gsm8k import materialize_gsm8k
 
+from .asl_incremental_analysis import analyze_incremental_capacity
 from .asl_incremental_eval import run_asl_incremental
 from .asl_pilot_analysis import build_asl_checkpoint_report
 from .asl_pilot_data import (
@@ -525,10 +526,26 @@ def run_asl_incremental_command(args: argparse.Namespace) -> int:
         output_dir=args.output_dir,
         seed=args.seed,
         checkpoint_every=args.checkpoint_every,
+        state_mode=args.state_mode,
     )
     print(
         f"completed {report['prediction_count']} closed-loop ASL programs; "
         f"answer={report['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+    )
+    return 0
+
+
+def analyze_asl_incremental_command(args: argparse.Namespace) -> int:
+    report = analyze_incremental_capacity(
+        programs_path=args.programs,
+        whole_scored_path=args.whole_scored,
+        predicted_scored_path=args.predicted_scored,
+        oracle_scored_path=args.oracle_scored,
+        output_path=args.output,
+    )
+    print(
+        f"analyzed incremental capacity; propagation gap="
+        f"{report['state_error_propagation_gap']:.3f} -> {args.output}"
     )
     return 0
 
@@ -824,7 +841,21 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_incremental_run.add_argument("--output-dir", required=True)
     asl_incremental_run.add_argument("--seed", type=int, default=44017)
     asl_incremental_run.add_argument("--checkpoint-every", type=int, default=5)
+    asl_incremental_run.add_argument(
+        "--state-mode", choices=("predicted", "oracle"), default="predicted"
+    )
     asl_incremental_run.set_defaults(handler=run_asl_incremental_command)
+
+    asl_incremental_analysis = commands.add_parser(
+        "analyze-asl-incremental",
+        help="analyze paired, propagation, transition, and dataset diagnostics",
+    )
+    asl_incremental_analysis.add_argument("--programs", required=True)
+    asl_incremental_analysis.add_argument("--whole-scored", required=True)
+    asl_incremental_analysis.add_argument("--predicted-scored", required=True)
+    asl_incremental_analysis.add_argument("--oracle-scored", required=True)
+    asl_incremental_analysis.add_argument("--output", required=True)
+    asl_incremental_analysis.set_defaults(handler=analyze_asl_incremental_command)
 
     asl_evaluate = commands.add_parser(
         "evaluate-asl-pilot", help="score saved ASL predictions with semantic components"
