@@ -1094,7 +1094,7 @@ reported above, improves untouched answers from 7/25 to 11/25. We next derive
 1,403 causal clause-local training transitions from the 450 programs, with only
 the current clause, compact evidence, scope, and prior executed state visible;
 the 65-transition development set retains the original 25 development parents.
-That incremental-state condition precedes any rank-16 or QKVO+MLP sweep.
+That incremental-state condition is the fixed input to the rank comparison below.
 
 \subsection{Incremental executed-state compiler}
 
@@ -1173,8 +1173,80 @@ GSM8K is genuinely sequential, this asymmetry is consistent with a local
 grounding and global-context bottleneck; it is not proof of a dataset-level
 causal explanation. The full-question control confirms that global intent matters,
 but its tie with whole-program synthesis leaves local semantics unresolved.
-Matched QKVO-r16 and QKVO+MLP-r8 runs can now isolate capacity from adapter
-location without mistaking context removal for an architectural gain.
+The matched rank ablation below isolates adapter capacity without mistaking
+context removal for an architectural gain.
+
+\subsection{Adapter rank and non-data interventions}
+
+We doubled QKVO rank from 8 to 16 while holding the 1,403 training transitions,
+65 development transitions, ten epochs, base-model revision, seed, decoding,
+and frozen test programs fixed. Rank 16 has 4,587,520 trainable parameters
+(0.764\% of the resulting model), trains in 14,248 seconds (3.96 hours), peaks
+at 7.27~GiB XPU memory, and ends at train/dev loss .022/1.167. The matched
+rank-8 losses are .029/1.082. Thus the larger adapter fits training transitions
+more tightly but generalizes worse by development loss.
+
+\begin{table}[t]
+\centering\small
+\caption{Matched incremental adapter-rank comparison on the frozen 25 programs.
+All entries except Answer are program-level rates. Full adds the untouched
+original question to each predicted-state prompt.}
+\label{tab:asl-rank-capacity}
+\begin{tabular}{llrrrrr}
+\toprule
+Rank & Context/state & Parse & Exec. & State & Dependency & Answer\\
+\midrule
+8  & Causal predicted & .92 & .60 & .16 & .24 & 7/25\\
+16 & Causal predicted & 1.00 & .68 & .12 & .12 & 7/25\\
+8  & Causal oracle    & .92 & .28 & .16 & .20 & 6/25\\
+16 & Causal oracle    & .92 & .32 & .12 & .12 & 6/25\\
+8  & Full predicted   & .88 & .64 & .20 & .20 & 11/25\\
+16 & Full predicted   & .84 & .64 & .12 & .16 & 10/25\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Doubling rank changes neither causal predicted-state nor oracle-state answers.
+The causal paired comparison has six both correct, 17 both wrong, one rank-8-only
+success, and one rank-16-only success ($p=1.0$, exploratory). Rank 16 removes the
+two rank-8 program-level parse failures and raises execution from .60 to .68,
+but semantic state falls from .16 to .12, dependency correctness from .24 to
+.12, and transition operator exactness from .254 to .188. In the full-question
+control it reaches 10/25 rather than 11/25, with two gains and three losses
+($p=1.0$). This diagnostic does not support insufficient QKVO rank as the
+current bottleneck.
+
+The state and context ablations distinguish two kinds of information. The
+executed workspace is mostly \emph{extensional}: it records which paths currently
+have which values. The original question is \emph{intensional}: it preserves
+entity roles, relation provenance, category meaning, the requested target, and
+why a derived value should be computed. Supplying gold extensional state changes
+answers from 7/25 to 6/25 at both ranks; it recovers some individual path or
+state deltas but no net final answers. Supplying the full narrative while keeping
+predicted state instead changes rank-8 from 7/25 to 11/25 and rank-16 from 7/25
+to 10/25. For example, in the frozen necklace case, both causal variants treat
+turquoise as a literal third type/count. Full context restores the residual
+relation and computes $40-7-14=19$.
+
+This is not evidence that full context repairs workspace integration. Rank-8
+full-context path exactness is .097 and rank-16 is .086; their semantic-state
+rates are only .20 and .12. A model can therefore recover the answer by
+recomputing from the question while emitting duplicated or semantically poor
+state. The supported conclusion is narrower: removing global intent is more
+damaging than accumulated state error under this representation.
+
+The deterministic intervention analysis consequently ranks a bounded global
+goal, entity, and relation ledger first, followed by factorized path selection
+from a runtime symbol table. Epoch-level development evaluation, early stopping,
+and regularization are also warranted by the .029/.022 training losses versus
+1.082/1.167 development losses. A retrieved-demonstration hybrid is supported
+by the earlier LoRA-100 plus three-shot gain of .12. QKVO+MLP at rank 8 remains the
+clean adapter-location ablation after the rank plateau, and a 1--1.7B base-model
+replication can test base capacity. Grammar-constrained decoding is useful for
+fail-closed safety, but rank 16 already converts an eight-point parse gain into
+zero answer gain. These interventions may complement additional distinct
+semantic programs; none yet substitutes for an independently evaluated larger
+corpus.
 
 \subsection{Fine-grained semantic failure decomposition}
 
@@ -1591,7 +1663,9 @@ control but may merge or separate structures imperfectly. The 500-original
 checkpoint adds 350 relation-diversified training programs while excluding every
 frozen development/test semantic-pattern family. Its QKVO-r8 result changes
 semantic coverage and total token exposure together. Incremental
-NL+executed-state transitions therefore precede rank 16 or QKVO+MLP adaptation.
+NL+executed-state training and the matched rank-16 ablation show that doubling
+QKVO rank does not move held-out answers. QKVO+MLP placement, context
+preservation, epoch selection, and base-model scale remain developmental tests.
 
 \section{Related Work}
 

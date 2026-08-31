@@ -65,6 +65,16 @@ def test_asl_validation_rejects_dangling_references():
     assert "unresolved reference" in result["errors"][0]
 
 
+def test_asl_validation_rejects_nonnumeric_arithmetic_without_raising():
+    result = validate_asl('quantity.label = "many"\ntotal = quantity.label * 2\nRETURN total')
+
+    assert result["syntax_verified"] is True
+    assert result["lower_verified"] is True
+    assert result["type_verified"] is False
+    assert result["execution_verified"] is False
+    assert result["errors"] == ["value is not arithmetic: 'many'"]
+
+
 def test_asl_deferred_dependency_resolves_when_later_state_is_grounded():
     source = """
 jessica.age_now = claire.age_now + 6

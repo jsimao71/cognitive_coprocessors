@@ -17,7 +17,10 @@ from ccpu.common.artifacts import (
 )
 from ccpu.common.gsm8k import materialize_gsm8k
 
-from .asl_incremental_analysis import analyze_incremental_capacity
+from .asl_incremental_analysis import (
+    analyze_adapter_capacity_interventions,
+    analyze_incremental_capacity,
+)
 from .asl_incremental_eval import run_asl_incremental
 from .asl_pilot_analysis import build_asl_checkpoint_report
 from .asl_pilot_data import (
@@ -553,6 +556,25 @@ def analyze_asl_incremental_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def compare_asl_adapter_capacity_command(args: argparse.Namespace) -> int:
+    report = analyze_adapter_capacity_interventions(
+        baseline_predicted_summary=args.baseline_predicted,
+        baseline_oracle_summary=args.baseline_oracle,
+        baseline_full_summary=args.baseline_full,
+        candidate_predicted_summary=args.candidate_predicted,
+        candidate_oracle_summary=args.candidate_oracle,
+        candidate_full_summary=args.candidate_full,
+        baseline_training_report=args.baseline_training,
+        candidate_training_report=args.candidate_training,
+        pilot_checkpoint=args.pilot_checkpoint,
+        semantic_summary=args.semantic_summary,
+        output_path=args.output,
+    )
+    delta = report["rank_deltas_r16_minus_r8"]["predicted"]["answer"]
+    print(f"compared matched adapter capacity; answer delta={delta:.3f} -> {args.output}")
+    return 0
+
+
 def analyze_asl_semantic_failures_command(args: argparse.Namespace) -> int:
     report = analyze_saved_semantic_failures(
         eval_path=args.eval,
@@ -881,6 +903,23 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_incremental_analysis.add_argument("--full-context-scored")
     asl_incremental_analysis.add_argument("--output", required=True)
     asl_incremental_analysis.set_defaults(handler=analyze_asl_incremental_command)
+
+    capacity_comparison = commands.add_parser(
+        "compare-asl-adapter-capacity",
+        help="compare matched ASL adapter ranks and rank non-data interventions",
+    )
+    capacity_comparison.add_argument("--baseline-predicted", required=True)
+    capacity_comparison.add_argument("--baseline-oracle", required=True)
+    capacity_comparison.add_argument("--baseline-full", required=True)
+    capacity_comparison.add_argument("--candidate-predicted", required=True)
+    capacity_comparison.add_argument("--candidate-oracle", required=True)
+    capacity_comparison.add_argument("--candidate-full", required=True)
+    capacity_comparison.add_argument("--baseline-training", required=True)
+    capacity_comparison.add_argument("--candidate-training", required=True)
+    capacity_comparison.add_argument("--pilot-checkpoint", required=True)
+    capacity_comparison.add_argument("--semantic-summary", required=True)
+    capacity_comparison.add_argument("--output", required=True)
+    capacity_comparison.set_defaults(handler=compare_asl_adapter_capacity_command)
 
     semantic_failures = commands.add_parser(
         "analyze-asl-semantic-failures",

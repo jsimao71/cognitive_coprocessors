@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from decimal import Decimal, localcontext
+from decimal import Decimal, InvalidOperation, localcontext
 from typing import Any
 
 from .registry import ARITHMETIC_FUNCTIONS
@@ -22,7 +22,10 @@ def _decimal(value: Any) -> Decimal:
         return value
     if isinstance(value, bool) or value is None:
         raise TypeError("boolean/null is not arithmetic")
-    return Decimal(str(value))
+    try:
+        return Decimal(str(value))
+    except (InvalidOperation, ValueError) as error:
+        raise TypeError(f"value is not arithmetic: {value!r}") from error
 
 
 def _evaluate(node: dict[str, Any], workspace: Workspace, scope: str) -> Any:
