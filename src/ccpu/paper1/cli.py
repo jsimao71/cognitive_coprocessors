@@ -16,6 +16,7 @@ from ccpu.common.artifacts import (
     write_jsonl,
 )
 from ccpu.common.gsm8k import materialize_gsm8k
+from ccpu.dsl_dataset.local_codex import run_local_codex_batches
 
 from .asl_incremental_analysis import (
     analyze_adapter_capacity_interventions,
@@ -39,6 +40,16 @@ from .dataset import (
 )
 from .evaluate import evaluate, paired_comparisons, rescore_endpoint_predictions
 from .experiment import run_huggingface, run_replay, run_scripted
+from .functor_data import (
+    build_functor_data,
+    prepare_functor_annotation_batches,
+    validate_functor_annotations,
+)
+from .functor_eval import (
+    analyze_functor_predictions,
+    compare_functor_conditions,
+    run_functor_condition,
+)
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 from .lora_data import LoRAProtocolDataConfig, generate_protocol_data
 from .lora_train import LoRATrainingConfig, train_lora
@@ -498,6 +509,100 @@ def build_asl_incremental_data_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def prepare_functor_annotations_command(args: argparse.Namespace) -> int:
+    manifest = prepare_functor_annotation_batches(
+        args.freeze_dir,
+        args.expansion_train,
+        args.output_dir,
+        batch_size=args.batch_size,
+    )
+    print(
+        f"prepared {manifest['example_count']} answer-blind functor requests in "
+        f"{manifest['batch_count']} batches -> {args.output_dir}"
+    )
+    return 0
+
+
+def run_functor_annotations_command(args: argparse.Namespace) -> int:
+    manifest = run_local_codex_batches(
+        args.requests_dir,
+        args.output_dir,
+        prompt_path=args.prompt,
+        schema_path=args.schema,
+        repo_root=args.repo_root,
+        executable=args.executable,
+        model=args.model,
+        reasoning_effort=args.reasoning_effort,
+        concurrency=args.concurrency,
+    )
+    print(
+        f"completed {manifest['annotation_count']} functor annotations; "
+        f"failed batches={manifest['failed_count']} -> {args.output_dir}"
+    )
+    return 0
+
+
+def validate_functor_annotations_command(args: argparse.Namespace) -> int:
+    report = validate_functor_annotations(
+        args.freeze_dir,
+        args.expansion_train,
+        args.annotations,
+        args.output_dir,
+    )
+    print(
+        f"validated {report['paired_accepted_count']}/{report['source_count']} paired "
+        f"functor labels -> {args.output_dir}"
+    )
+    return 0
+
+
+def build_functor_data_command(args: argparse.Namespace) -> int:
+    manifest = build_functor_data(
+        args.freeze_dir,
+        args.expansion_train,
+        args.accepted,
+        args.output_dir,
+    )
+    print(f"built matched functor data {manifest['split_counts']} -> {args.output_dir}")
+    return 0
+
+
+def run_functor_command(args: argparse.Namespace) -> int:
+    config = read_json(args.config)
+    config["adapter_path"] = args.adapter_path
+    config["adapter_id"] = args.adapter_id or Path(args.adapter_path).name
+    report = run_functor_condition(
+        eval_path=args.eval,
+        model_config=config,
+        condition=args.condition,
+        output_dir=args.output_dir,
+        seed=args.seed,
+        checkpoint_every=args.checkpoint_every,
+    )
+    print(
+        f"completed {report['prediction_count']} {args.condition.upper()} generations; "
+        f"answer={report['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+    )
+    return 0
+
+
+def evaluate_functor_command(args: argparse.Namespace) -> int:
+    report = analyze_functor_predictions(args.eval, args.predictions, args.output_dir)
+    print(f"evaluated {report['prediction_count']} functor predictions -> {args.output_dir}")
+    return 0
+
+
+def compare_functors_command(args: argparse.Namespace) -> int:
+    report = compare_functor_conditions(
+        f0_summary=args.f0, f1_summary=args.f1, f2_summary=args.f2, output=args.output
+    )
+    print(
+        "compared F0/F1/F2; semantic decomposition gate="
+        f"{report['interpretation_gate']['semantic_decomposition_supported']} -> {args.output}"
+    )
+    return 0
+
+
 def run_asl_pilot_command(args: argparse.Namespace) -> int:
     model_config = read_json(args.config)
     if args.adapter_path:
@@ -857,6 +962,83 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_incremental_data.add_argument("--output-dir", required=True)
     asl_incremental_data.add_argument("--seed", type=int, default=912735)
     asl_incremental_data.set_defaults(handler=build_asl_incremental_data_command)
+
+    functor_prepare = commands.add_parser(
+        "prepare-functor-annotations",
+        help="prepare raw-NL, answer-blind F1/F2 teacher batches",
+    )
+    functor_prepare.add_argument("--freeze-dir", required=True)
+    functor_prepare.add_argument("--expansion-train", required=True)
+    functor_prepare.add_argument("--output-dir", required=True)
+    functor_prepare.add_argument("--batch-size", type=int, default=5)
+    functor_prepare.set_defaults(handler=prepare_functor_annotations_command)
+
+    functor_annotate = commands.add_parser(
+        "run-functor-annotations", help="run resumable local Codex F1/F2 annotation batches"
+    )
+    functor_annotate.add_argument("--requests-dir", required=True)
+    functor_annotate.add_argument("--output-dir", required=True)
+    functor_annotate.add_argument(
+        "--prompt", default="configs/paper1/local_codex_functor_annotation_prompt.md"
+    )
+    functor_annotate.add_argument(
+        "--schema", default="configs/paper1/functor_annotation_batch.schema.json"
+    )
+    functor_annotate.add_argument("--repo-root", default=".")
+    functor_annotate.add_argument("--executable", default="codex")
+    functor_annotate.add_argument("--model", default="gpt-5.4")
+    functor_annotate.add_argument("--reasoning-effort", default="medium")
+    functor_annotate.add_argument("--concurrency", type=int, default=4)
+    functor_annotate.set_defaults(handler=run_functor_annotations_command)
+
+    functor_validate = commands.add_parser(
+        "validate-functor-annotations",
+        help="parse, lower, execute, and answer-check primary functor labels",
+    )
+    functor_validate.add_argument("--freeze-dir", required=True)
+    functor_validate.add_argument("--expansion-train", required=True)
+    functor_validate.add_argument("--annotations", action="append", required=True)
+    functor_validate.add_argument("--output-dir", required=True)
+    functor_validate.set_defaults(handler=validate_functor_annotations_command)
+
+    functor_data = commands.add_parser(
+        "build-functor-data", help="build exact matched 450/25/25 F1/F2 SFT and evaluation data"
+    )
+    functor_data.add_argument("--freeze-dir", required=True)
+    functor_data.add_argument("--expansion-train", required=True)
+    functor_data.add_argument("--accepted", required=True)
+    functor_data.add_argument("--output-dir", required=True)
+    functor_data.set_defaults(handler=build_functor_data_command)
+
+    functor_run = commands.add_parser(
+        "run-functor", help="run one matched F1 or F2 Qwen LoRA condition"
+    )
+    functor_run.add_argument("--eval", required=True)
+    functor_run.add_argument("--config", required=True)
+    functor_run.add_argument("--adapter-path", required=True)
+    functor_run.add_argument("--adapter-id")
+    functor_run.add_argument("--condition", choices=("f1", "f2"), required=True)
+    functor_run.add_argument("--output-dir", required=True)
+    functor_run.add_argument("--seed", type=int, default=44017)
+    functor_run.add_argument("--checkpoint-every", type=int, default=5)
+    functor_run.set_defaults(handler=run_functor_command)
+
+    functor_evaluate = commands.add_parser(
+        "evaluate-functor", help="score saved F1/F2 predictions through runtime lowering"
+    )
+    functor_evaluate.add_argument("--eval", required=True)
+    functor_evaluate.add_argument("--predictions", required=True)
+    functor_evaluate.add_argument("--output-dir", required=True)
+    functor_evaluate.set_defaults(handler=evaluate_functor_command)
+
+    functor_compare = commands.add_parser(
+        "compare-functors", help="compare matched F0 ASL, F1 low-level, and F2 semantic runs"
+    )
+    functor_compare.add_argument("--f0", required=True)
+    functor_compare.add_argument("--f1", required=True)
+    functor_compare.add_argument("--f2", required=True)
+    functor_compare.add_argument("--output", required=True)
+    functor_compare.set_defaults(handler=compare_functors_command)
 
     asl_run = commands.add_parser(
         "run-asl-pilot", help="run one base, ICL, or LoRA semantic ASL condition"

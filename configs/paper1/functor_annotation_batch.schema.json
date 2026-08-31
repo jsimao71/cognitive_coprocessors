@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["annotations"],
+  "properties": {
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset", "source_id", "annotator", "answer_hidden", "rationale_hidden",
+          "prior_asl_hidden", "blackboard_state_hidden", "f1_status", "f1_program",
+          "f2_status", "f2_program", "assumptions", "confidence"
+        ],
+        "properties": {
+          "dataset": {"type": "string"},
+          "source_id": {"type": "string"},
+          "annotator": {"type": "string"},
+          "answer_hidden": {"type": "boolean"},
+          "rationale_hidden": {"type": "boolean"},
+          "prior_asl_hidden": {"type": "boolean"},
+          "blackboard_state_hidden": {"type": "boolean"},
+          "f1_status": {"type": "string", "enum": ["ok", "ambiguous", "unsupported"]},
+          "f1_program": {"type": "array", "items": {"type": "string"}},
+          "f2_status": {"type": "string", "enum": ["ok", "ambiguous", "unsupported"]},
+          "f2_program": {"type": "array", "items": {"type": "string"}},
+          "assumptions": {"type": "array", "items": {"type": "string"}},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    }
+  }
+}
