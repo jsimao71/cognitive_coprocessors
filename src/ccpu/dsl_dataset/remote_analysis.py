@@ -93,6 +93,7 @@ def analyze_remote_programs(
     remote_hashes = {}
     attempt_counts: Counter[str] = Counter()
     failure_counts: Counter[str] = Counter()
+    failures_by_dataset: Counter[str] = Counter()
     for directory in map(Path, remote_dirs):
         annotation_path = directory / "annotations.jsonl"
         attempt_path = directory / "attempts.jsonl"
@@ -104,6 +105,7 @@ def analyze_remote_programs(
             attempt_counts[str(attempt["outcome"])] += 1
         for failure in read_jsonl(failure_path) if failure_path.exists() else []:
             failure_counts[str(failure.get("final_error", "unknown")).split(":", 1)[0]] += 1
+            failures_by_dataset[str(failure["dataset"])] += 1
         for annotation in read_jsonl(annotation_path) if annotation_path.exists() else []:
             key = (str(annotation["dataset"]), str(annotation["source_id"]))
             source = sources[key]
@@ -125,12 +127,19 @@ def analyze_remote_programs(
         input_count = sum(row["dataset"] == dataset for row in sources.values())
         generated = [row for row in remote_rows if row["source"]["dataset"] == dataset]
         converted = sum(row["converted"] for row in generated)
+        failed = failures_by_dataset[dataset]
+        processed = len(generated) + failed
         by_dataset[dataset] = {
             "input_program_count": input_count,
             "generated_program_count": len(generated),
+            "terminal_failure_count": failed,
+            "processed_program_count": processed,
+            "remaining_program_count": input_count - processed,
             "converted_program_count": converted,
+            "processed_proportion": processed / input_count if input_count else 0.0,
             "generated_proportion": len(generated) / input_count if input_count else 0.0,
             "converted_proportion_full_input": converted / input_count if input_count else 0.0,
+            "converted_proportion_processed": converted / processed if processed else 0.0,
             "converted_proportion_generated": converted / len(generated) if generated else 0.0,
         }
 
