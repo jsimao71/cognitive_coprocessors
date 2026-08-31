@@ -20,6 +20,15 @@ class Call:
     args: tuple[Any, ...]
 
 
+def _canonical_path(value: str) -> str:
+    parts = value.split(".")
+    canonical = [f"y{part}" if part and part[0].isdigit() else part for part in parts]
+    path = ".".join(canonical)
+    if not _PATH.fullmatch(path):
+        raise ValueError(f"invalid semantic path: {value!r}")
+    return path
+
+
 _F1_ARITY: dict[str, tuple[int, int | None]] = {
     "value": (2, 2),
     "copy": (2, 2),
@@ -65,7 +74,9 @@ _F2_ARITY: dict[str, tuple[int, int | None]] = {
 
 
 def _value(node: ast.AST) -> Any:
-    if isinstance(node, ast.Constant) and isinstance(node.value, (str, int, float)):
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return _canonical_path(node.value)
+    if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
         return node.value
     if (
         isinstance(node, ast.UnaryOp)
@@ -74,6 +85,18 @@ def _value(node: ast.AST) -> Any:
         and isinstance(node.operand.value, (int, float))
     ):
         return -node.operand.value if isinstance(node.op, ast.USub) else node.operand.value
+    if (
+        isinstance(node, ast.BinOp)
+        and isinstance(node.op, ast.Div)
+        and isinstance(node.left, ast.Constant)
+        and isinstance(node.right, ast.Constant)
+        and isinstance(node.left.value, (int, float))
+        and isinstance(node.right.value, (int, float))
+    ):
+        denominator = Decimal(str(node.right.value))
+        if denominator == 0:
+            raise ZeroDivisionError("rational literal denominator is zero")
+        return Decimal(str(node.left.value)) / denominator
     if isinstance(node, ast.Call):
         if not isinstance(node.func, ast.Name) or node.keywords:
             raise ValueError("functors require a simple name and positional arguments")
@@ -119,13 +142,13 @@ def parse_functor_program(program: str, condition: str) -> list[Call]:
 
 
 def _path(value: Any) -> str:
-    if not isinstance(value, str) or not _PATH.fullmatch(value):
-        raise ValueError(f"invalid semantic path: {value!r}")
-    return value
+    if not isinstance(value, str):
+        raise TypeError(f"invalid semantic path: {value!r}")
+    return _canonical_path(value)
 
 
 def _number(value: Any) -> str:
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
+    if isinstance(value, bool) or not isinstance(value, (int, float, Decimal)):
         raise TypeError(f"expected numeric literal, got {value!r}")
     decimal = Decimal(str(value))
     return (

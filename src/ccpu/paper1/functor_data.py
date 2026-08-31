@@ -10,7 +10,7 @@ from typing import Any
 
 from ccpu.common.artifacts import file_sha256, fingerprint, read_jsonl, write_json, write_jsonl
 
-from .functor_runtime import validate_functor_program
+from .functor_runtime import parse_functor_program, validate_functor_program
 
 FUNCTOR_PROMPT_VERSION = "paper1-functor-student-v1"
 
@@ -261,7 +261,7 @@ def validate_functor_annotations(
         for split, members in splits.items()
         for row in members
     }
-    annotations: dict[tuple[str, str], tuple[int, dict[str, Any]]] = {}
+    annotations: dict[tuple[str, str], list[tuple[int, dict[str, Any]]]] = {}
     duplicates = set()
     annotation_hashes = {}
     for attempt, raw_path in enumerate(annotation_paths):
@@ -273,50 +273,58 @@ def validate_functor_annotations(
             if key in seen_in_path:
                 duplicates.add((attempt, key))
             seen_in_path.add(key)
-            annotations[key] = (attempt, annotation)
+            annotations.setdefault(key, []).append((attempt, annotation))
 
     accepted = []
     rejected = []
     condition_counts: Counter[str] = Counter()
     for key, (split, source) in sources.items():
-        selected = annotations.get(key)
-        attempt = selected[0] if selected else 0
-        annotation = selected[1] if selected else None
+        attempts = annotations.get(key, [])
         failures = {}
         programs = {}
         validations = {}
-        if (attempt, key) in duplicates:
-            failures["record"] = ["duplicate primary annotation"]
-        elif annotation is None:
+        selected_annotations = {}
+        selected_attempts = {}
+        if not attempts:
             failures["record"] = ["missing primary annotation"]
         else:
             scope_id = str(source["effective_scope"]["id"])
             expected = source["state_after"][scope_id]["returned"]
             for condition in ("f1", "f2"):
-                try:
-                    if annotation.get(f"{condition}_status") != "ok":
-                        raise ValueError(
-                            f"teacher status is {annotation.get(f'{condition}_status')!r}"
+                attempt_errors = []
+                for attempt, annotation in attempts:
+                    try:
+                        if (attempt, key) in duplicates:
+                            raise ValueError("duplicate annotation within attempt")
+                        if annotation.get(f"{condition}_status") != "ok":
+                            raise ValueError(
+                                f"teacher status is {annotation.get(f'{condition}_status')!r}"
+                            )
+                        program = _program(annotation, condition)
+                        validation = validate_functor_program(
+                            program, condition, effective_scope=source["effective_scope"]
                         )
-                    program = _program(annotation, condition)
-                    validation = validate_functor_program(
-                        program, condition, effective_scope=source["effective_scope"]
-                    )
-                    programs[condition] = program
-                    validations[condition] = validation
-                    errors = list(validation["errors"])
-                    if not validation["executable"]:
-                        errors.append("program is not executable")
-                    elif not _equivalent(_returned(validation, scope_id), expected):
-                        errors.append(
-                            f"answer mismatch: actual={_returned(validation, scope_id)}, expected={expected}"
-                        )
-                    if errors:
-                        failures[condition] = sorted(set(errors))
-                    else:
+                        errors = list(validation["errors"])
+                        if not validation["executable"]:
+                            errors.append("program is not executable")
+                        elif not _equivalent(_returned(validation, scope_id), expected):
+                            errors.append(
+                                "answer mismatch: "
+                                f"actual={_returned(validation, scope_id)}, expected={expected}"
+                            )
+                        if errors:
+                            attempt_errors = sorted(set(errors))
+                            continue
+                        programs[condition] = program
+                        validations[condition] = validation
+                        selected_annotations[condition] = annotation
+                        selected_attempts[condition] = attempt
                         condition_counts[condition] += 1
-                except (KeyError, TypeError, ValueError, ZeroDivisionError) as error:
-                    failures[condition] = [str(error)]
+                        break
+                    except (KeyError, TypeError, ValueError, ZeroDivisionError) as error:
+                        attempt_errors = [str(error)]
+                if condition not in programs:
+                    failures[condition] = attempt_errors or ["no valid annotation attempt"]
         base = {
             "dataset": source["dataset"],
             "source_id": source["source_id"],
@@ -324,7 +332,14 @@ def validate_functor_annotations(
             "record_sha256": source["record_sha256"],
         }
         if failures:
-            rejected.append({**base, "failures": failures, "annotation": annotation})
+            rejected.append(
+                {
+                    **base,
+                    "failures": failures,
+                    "annotation": attempts[-1][1] if attempts else None,
+                    "attempt_count": len(attempts),
+                }
+            )
             continue
         accepted.append(
             {
@@ -343,15 +358,23 @@ def validate_functor_annotations(
                 "f1_lowered_asl": validations["f1"]["lowered_asl"],
                 "f2_lowered_asl": validations["f2"]["lowered_asl"],
                 "provenance": {
-                    "annotator": annotation.get("annotator", "local_codex"),
-                    "answer_hidden": bool(annotation.get("answer_hidden", True)),
-                    "rationale_hidden": bool(annotation.get("rationale_hidden", True)),
+                    "annotator": "local_codex",
+                    "answer_hidden": all(
+                        bool(selected_annotations[condition].get("answer_hidden", True))
+                        for condition in ("f1", "f2")
+                    ),
+                    "rationale_hidden": all(
+                        bool(selected_annotations[condition].get("rationale_hidden", True))
+                        for condition in ("f1", "f2")
+                    ),
                     "prior_asl_hidden": True,
                     "blackboard_state_hidden": True,
                     "fixed_prompt": True,
                     "fixed_icl": True,
                     "teacher_fixed_icl_shots": 3,
-                    "annotation_attempt": attempt,
+                    "f1_annotation_attempt": selected_attempts["f1"],
+                    "f2_annotation_attempt": selected_attempts["f2"],
+                    "condition_attempt_selection": "first_execution_and_answer_verified",
                 },
             }
         )
@@ -359,6 +382,26 @@ def validate_functor_annotations(
     output = Path(output_dir)
     accepted_path = write_jsonl(output / "accepted.jsonl", accepted)
     rejected_path = write_jsonl(output / "rejected.jsonl", rejected)
+    functor_counts = {
+        condition: Counter(
+            call.name
+            for row in accepted
+            for call in parse_functor_program(row[f"{condition}_program"], condition)
+        )
+        for condition in ("f1", "f2")
+    }
+    semantic_specific = {
+        "offset",
+        "absolute_difference",
+        "multiple",
+        "fraction_of",
+        "percentage_ratio",
+        "increase_percent",
+        "decrease_percent",
+        "rate_total",
+        "per_unit_total",
+        "remaining",
+    }
     summary = {
         "schema_version": "ccpu.paper1.functor_annotation_validation.v1",
         "source_count": len(sources),
@@ -368,6 +411,38 @@ def validate_functor_annotations(
         "rejected_count": len(rejected),
         "rejection_counts": dict(
             sorted(Counter(condition for row in rejected for condition in row["failures"]).items())
+        ),
+        "representation_diagnostics": {
+            condition: {
+                "mean_calls": (
+                    sum(
+                        len(parse_functor_program(row[f"{condition}_program"], condition))
+                        for row in accepted
+                    )
+                    / len(accepted)
+                    if accepted
+                    else 0.0
+                ),
+                "mean_characters": (
+                    sum(len(row[f"{condition}_program"]) for row in accepted) / len(accepted)
+                    if accepted
+                    else 0.0
+                ),
+                "functor_counts": dict(sorted(functor_counts[condition].items())),
+            }
+            for condition in ("f1", "f2")
+        },
+        "f2_semantic_specific_program_fraction": (
+            sum(
+                bool(
+                    semantic_specific
+                    & {call.name for call in parse_functor_program(row["f2_program"], "f2")}
+                )
+                for row in accepted
+            )
+            / len(accepted)
+            if accepted
+            else 0.0
         ),
         "annotation_sha256": annotation_hashes,
         "accepted_sha256": file_sha256(accepted_path),

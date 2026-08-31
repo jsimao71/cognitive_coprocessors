@@ -83,6 +83,24 @@ def test_functor_parser_rejects_non_allowlisted_python() -> None:
         parse_functor_program('__import__("os")\nquery("safe.path")', "f2")
 
 
+def test_runtime_symbol_table_canonicalizes_numeric_path_segments() -> None:
+    program = """given("revenue.2019.taiwan", 118)
+query("revenue.2019.taiwan")"""
+    result = validate_functor_program(program, "f2", effective_scope=SCOPE)
+    assert result["executable"]
+    assert "revenue.y2019.taiwan" in result["lowered_asl"]
+
+
+def test_exact_rational_literals_are_parsed_without_eval() -> None:
+    program = """given("team.total", 30)
+fraction_of("team.share", "team.total", 1/6, 1)
+query("team.share")"""
+    result = validate_functor_program(program, "f2", effective_scope=SCOPE)
+    assert result["executable"]
+    returned = result["validation"]["execution"]["workspace"][SCOPE["id"]]["returned"]
+    assert float(returned) == pytest.approx(5.0)
+
+
 def test_functor_program_requires_one_terminal_query() -> None:
     with pytest.raises(ValueError, match="end with exactly one"):
         parse_functor_program('given("x.value", 3)', "f2")
