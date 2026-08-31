@@ -472,12 +472,21 @@ def build_functor_data(
         for members in splits.values()
         for row in members
     }
-    if set(accepted) != expected_keys:
-        missing = sorted(expected_keys - set(accepted))
-        extra = sorted(set(accepted) - expected_keys)
+    extra = sorted(set(accepted) - expected_keys)
+    if extra:
         raise ValueError(
-            f"functor labels must cover all frozen rows; missing={missing[:5]} extra={extra[:5]}"
+            f"functor labels contain identities outside the frozen protocol: {extra[:5]}"
         )
+    missing_by_split = {
+        split: [
+            (str(row["dataset"]), str(row["source_id"]))
+            for row in members
+            if (str(row["dataset"]), str(row["source_id"])) not in accepted
+        ]
+        for split, members in splits.items()
+    }
+    if missing_by_split["test"]:
+        raise ValueError("all 25 frozen test identities require paired validated labels")
     output = Path(output_dir)
     files = {}
     for condition in ("f1", "f2"):
@@ -485,6 +494,8 @@ def build_functor_data(
             records = []
             for source in splits[split]:
                 key = (str(source["dataset"]), str(source["source_id"]))
+                if key not in accepted:
+                    continue
                 label = accepted[key]
                 identity = f"{condition}:{key[0]}:{key[1]}"
                 records.append(
@@ -529,7 +540,13 @@ def build_functor_data(
         "schema_version": "ccpu.paper1.functor_data.v1",
         "prompt_version": FUNCTOR_PROMPT_VERSION,
         "split_counts": {split: len(rows) for split, rows in splits.items()},
+        "paired_label_counts": {
+            split: len(splits[split]) - len(missing_by_split[split]) for split in splits
+        },
+        "missing_paired_label_counts": {split: len(missing_by_split[split]) for split in splits},
+        "missing_paired_label_identities": missing_by_split,
         "source_ids_preserved": True,
+        "all_frozen_test_ids_labeled": True,
         "fixed_prompt_per_condition": True,
         "fixed_icl_per_condition": True,
         "student_fixed_icl_shots": 0,

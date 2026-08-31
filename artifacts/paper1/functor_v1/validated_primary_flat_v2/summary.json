@@ -1,0 +1,74 @@
+{
+  "accepted_sha256": "1a124b88a679068e441dec4599cbf343261fc9f0b00a7730e8b50ed8c595defc",
+  "annotation_sha256": {
+    "artifacts\\paper1\\functor_v1\\primary_flat_v1\\annotations.jsonl": "3b8374eb27e7dde3c310bb2fbdb249fdb44b36b6d826cbd2b51b89984ea4c728"
+  },
+  "condition_execution_verified": {
+    "f1": 458,
+    "f2": 452
+  },
+  "f2_semantic_specific_program_fraction": 0.8181818181818182,
+  "paired_acceptance_rate": 0.902,
+  "paired_accepted_count": 451,
+  "primary_annotation_answer_blind": true,
+  "primary_annotation_prior_asl_blind": true,
+  "primary_annotation_rationale_blind": true,
+  "rejected_count": 49,
+  "rejected_sha256": "13163d4af32995cf19630728f1d473a397524affa1d44a6e33aba670e6bc570b",
+  "rejection_counts": {
+    "f1": 42,
+    "f2": 48
+  },
+  "representation_diagnostics": {
+    "f1": {
+      "functor_counts": {
+        "absolute": 11,
+        "add": 310,
+        "copy": 10,
+        "decrease_percent": 24,
+        "divide": 277,
+        "increase_percent": 26,
+        "maximum": 1,
+        "mean_values": 23,
+        "minimum": 1,
+        "multiply": 440,
+        "percent_of": 66,
+        "query": 451,
+        "rate_times_duration": 15,
+        "subtract": 317,
+        "value": 1089
+      },
+      "mean_calls": 6.787139689578714,
+      "mean_characters": 422.159645232816
+    },
+    "f2": {
+      "functor_counts": {
+        "absolute_difference": 13,
+        "decrease_percent": 24,
+        "difference": 99,
+        "fraction_of": 135,
+        "given": 1088,
+        "increase_percent": 27,
+        "maximum_of": 1,
+        "mean_of": 27,
+        "minimum_of": 1,
+        "multiple": 136,
+        "offset": 122,
+        "per_unit_total": 209,
+        "percent_of": 67,
+        "percentage_ratio": 46,
+        "product_of": 7,
+        "query": 451,
+        "quotient": 88,
+        "rate_total": 47,
+        "remaining": 154,
+        "same": 10,
+        "sum_of": 229
+      },
+      "mean_calls": 6.609756097560975,
+      "mean_characters": 414.57871396895786
+    }
+  },
+  "schema_version": "ccpu.paper1.functor_annotation_validation.v1",
+  "source_count": 500
+}

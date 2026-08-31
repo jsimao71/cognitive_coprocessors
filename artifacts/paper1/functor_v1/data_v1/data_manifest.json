@@ -1,0 +1,132 @@
+{
+  "all_frozen_test_ids_labeled": true,
+  "files": {
+    "f1_dev": {
+      "rows": 24,
+      "sha256": "ec9244c475260a23815b8414928cafc6b9fc6e7290e19645de22c6f005118e8b"
+    },
+    "f1_test": {
+      "rows": 25,
+      "sha256": "a6299104021efbac35d50b6abea3738f12c2aa08c6a4c9f4cf52361fd168ce58"
+    },
+    "f1_train": {
+      "rows": 434,
+      "sha256": "5c8f6ab5d111daa9370470167ddef294037c218084958e7f7d537c7f10cee839"
+    },
+    "f2_dev": {
+      "rows": 24,
+      "sha256": "b202b9ac1fcd2f8c6fbacf5fe20a880b0ac6f224cd2e74c92a22ef06f5818ded"
+    },
+    "f2_test": {
+      "rows": 25,
+      "sha256": "be3b4b20dbdb438975e4cb13bd465f96e0f78002f59f964b158432a10cb8e3bf"
+    },
+    "f2_train": {
+      "rows": 434,
+      "sha256": "d76c57fd881ea99ded316d00d9c26f50ed70880fadf8ef09073c5925b8a9547e"
+    }
+  },
+  "fixed_icl_per_condition": true,
+  "fixed_prompt_per_condition": true,
+  "input_sha256": {
+    "accepted": "8713cc2cf4ffc08bcddf6eb3cd0f1b96657fa4e87d316332ea10cd56bf434a7a",
+    "expansion_train": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562",
+    "freeze_manifest": "1de74cdd523867366488dca1acd4b1b175f1b08872770800e6003300186bd94a"
+  },
+  "intermediate_values_in_prompt": false,
+  "missing_paired_label_counts": {
+    "dev": 1,
+    "test": 0,
+    "train": 16
+  },
+  "missing_paired_label_identities": {
+    "dev": [
+      [
+        "tatqa",
+        "3267c23300612df9c6ee80c427a71a23"
+      ]
+    ],
+    "test": [],
+    "train": [
+      [
+        "tatqa",
+        "bc6b51a64566a737d6fb94a66a183160"
+      ],
+      [
+        "tatqa",
+        "f5a956685d6afecb5fd26b422cf6c350"
+      ],
+      [
+        "gsm8k",
+        "3562"
+      ],
+      [
+        "gsm8k",
+        "4284"
+      ],
+      [
+        "gsm8k",
+        "7364"
+      ],
+      [
+        "gsm8k",
+        "3363"
+      ],
+      [
+        "gsm8k",
+        "167"
+      ],
+      [
+        "tatqa",
+        "4f6b26b8ae66357e946c3754b238c736"
+      ],
+      [
+        "gsm8k",
+        "2437"
+      ],
+      [
+        "gsm8k",
+        "881"
+      ],
+      [
+        "gsm8k",
+        "3520"
+      ],
+      [
+        "tatqa",
+        "e7f52b8c7a27747b3d7e33bad425ffe8"
+      ],
+      [
+        "tatqa",
+        "7f5d4ba5fd9815668d0ab1c191621b82"
+      ],
+      [
+        "tatqa",
+        "c65d3290276707fc771ce45aa449888c"
+      ],
+      [
+        "tatqa",
+        "f9364b6ad16b81dd128ab38a0b7fd86f"
+      ],
+      [
+        "tatqa",
+        "dce3bdccbbce1f06cf028bd16563bc8b"
+      ]
+    ]
+  },
+  "paired_label_counts": {
+    "dev": 24,
+    "test": 25,
+    "train": 434
+  },
+  "prompt_version": "paper1-functor-student-v1",
+  "runtime_state_in_prompt": false,
+  "schema_version": "ccpu.paper1.functor_data.v1",
+  "source_ids_preserved": true,
+  "split_counts": {
+    "dev": 25,
+    "test": 25,
+    "train": 450
+  },
+  "student_fixed_icl_shots": 0
+}
