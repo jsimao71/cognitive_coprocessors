@@ -94,7 +94,7 @@ def test_student_prompt_is_fixed_and_contains_no_state_or_answer() -> None:
         "source_context": {"table": [["items", "8"]], "paragraphs": []},
     }
     prompt = functor_prompt(row, "f2")
-    assert "Mira has 12 cards" in prompt
+    assert "Fixed example" not in prompt
     assert "How many remain?" in prompt
     assert "state_after" not in prompt
     assert "reference_asl" not in prompt

@@ -43,6 +43,7 @@ from .experiment import run_huggingface, run_replay, run_scripted
 from .functor_data import (
     build_functor_data,
     prepare_functor_annotation_batches,
+    prepare_functor_retry_batches,
     validate_functor_annotations,
 )
 from .functor_eval import (
@@ -542,6 +543,22 @@ def run_functor_annotations_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def prepare_functor_retries_command(args: argparse.Namespace) -> int:
+    manifest = prepare_functor_retry_batches(
+        args.freeze_dir,
+        args.expansion_train,
+        args.rejected,
+        args.output_dir,
+        batch_size=args.batch_size,
+        retry_round=args.retry_round,
+    )
+    print(
+        f"prepared {manifest['example_count']} raw-only retry requests in "
+        f"{manifest['batch_count']} batches -> {args.output_dir}"
+    )
+    return 0
+
+
 def validate_functor_annotations_command(args: argparse.Namespace) -> int:
     report = validate_functor_annotations(
         args.freeze_dir,
@@ -692,8 +709,7 @@ def analyze_asl_semantic_failures_command(args: argparse.Namespace) -> int:
     )
     count = report["conditions"]["whole_lora500"]["count"]
     print(
-        f"analyzed fine-grained semantic failures for {count} frozen programs "
-        f"-> {args.output_dir}"
+        f"analyzed fine-grained semantic failures for {count} frozen programs -> {args.output_dir}"
     )
     return 0
 
@@ -990,6 +1006,18 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     functor_annotate.add_argument("--reasoning-effort", default="medium")
     functor_annotate.add_argument("--concurrency", type=int, default=4)
     functor_annotate.set_defaults(handler=run_functor_annotations_command)
+
+    functor_retry = commands.add_parser(
+        "prepare-functor-retries",
+        help="retry rejected F1/F2 rows from the same raw-only fixed prompt",
+    )
+    functor_retry.add_argument("--freeze-dir", required=True)
+    functor_retry.add_argument("--expansion-train", required=True)
+    functor_retry.add_argument("--rejected", required=True)
+    functor_retry.add_argument("--output-dir", required=True)
+    functor_retry.add_argument("--batch-size", type=int, default=5)
+    functor_retry.add_argument("--retry-round", type=int, default=1)
+    functor_retry.set_defaults(handler=prepare_functor_retries_command)
 
     functor_validate = commands.add_parser(
         "validate-functor-annotations",

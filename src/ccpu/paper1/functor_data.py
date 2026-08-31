@@ -14,58 +14,7 @@ from .functor_runtime import validate_functor_program
 
 FUNCTOR_PROMPT_VERSION = "paper1-functor-student-v1"
 
-_FIXED_EXAMPLES = {
-    "f1": (
-        (
-            "Mira has 12 cards. Jon has 5 more cards than Mira. How many cards does Jon have?",
-            'value("mira.cards", 12)\nadd("jon.cards", "mira.cards", 5)\nquery("jon.cards")',
-        ),
-        (
-            "A crate has 8 rows with 6 jars in each row. How many jars are there?",
-            (
-                'value("crate.rows", 8)\n'
-                'value("crate.jars_per_row", 6)\n'
-                'multiply("crate.jars_total", "crate.rows", "crate.jars_per_row")\n'
-                'query("crate.jars_total")'
-            ),
-        ),
-        (
-            "A club has 60 junior members out of 240 members. What percentage are juniors?",
-            (
-                'value("club.junior_members", 60)\n'
-                'value("club.total_members", 240)\n'
-                'divide("club.junior_fraction", "club.junior_members", "club.total_members")\n'
-                'multiply("club.junior_percentage", "club.junior_fraction", 100)\n'
-                'query("club.junior_percentage")'
-            ),
-        ),
-    ),
-    "f2": (
-        (
-            "Mira has 12 cards. Jon has 5 more cards than Mira. How many cards does Jon have?",
-            'given("mira.cards", 12)\noffset("jon.cards", "mira.cards", 5)\nquery("jon.cards")',
-        ),
-        (
-            "A crate has 8 rows with 6 jars in each row. How many jars are there?",
-            (
-                'given("crate.rows", 8)\n'
-                'given("crate.jars_per_row", 6)\n'
-                'per_unit_total("crate.jars_total", "crate.rows", "crate.jars_per_row")\n'
-                'query("crate.jars_total")'
-            ),
-        ),
-        (
-            "A club has 60 junior members out of 240 members. What percentage are juniors?",
-            (
-                'given("club.junior_members", 60)\n'
-                'given("club.total_members", 240)\n'
-                'percentage_ratio("club.junior_percentage", "club.junior_members", '
-                '"club.total_members")\n'
-                'query("club.junior_percentage")'
-            ),
-        ),
-    ),
-}
+_CONDITIONS = {"f1", "f2"}
 
 
 def _raw_context(row: dict[str, Any]) -> str:
@@ -86,7 +35,7 @@ def _raw_context(row: dict[str, Any]) -> str:
 def functor_prompt(row: dict[str, Any], condition: str) -> str:
     """Render the fixed student prompt; only raw input varies by record."""
 
-    if condition not in _FIXED_EXAMPLES:
+    if condition not in _CONDITIONS:
         raise ValueError(f"unsupported functor condition: {condition}")
     description = (
         "flat low-level F1 assignment functors with explicit target and operands"
@@ -101,8 +50,6 @@ def functor_prompt(row: dict[str, Any], condition: str) -> str:
             "Do not calculate hidden intermediate values or explain."
         )
     ]
-    for index, (problem, program) in enumerate(_FIXED_EXAMPLES[condition], 1):
-        sections.append(f"Fixed example {index} input:\nProblem: {problem}\nProgram:\n{program}")
     context = _raw_context(row)
     sections.append(
         "Input:\n"
@@ -193,9 +140,86 @@ def prepare_functor_annotation_batches(
         "blackboard_state_hidden": True,
         "fixed_prompt": True,
         "fixed_icl": True,
+        "teacher_fixed_icl_shots": 3,
         "input_sha256": {
             "freeze_manifest": file_sha256(Path(freeze_dir) / "freeze_manifest.json"),
             "expansion_train": file_sha256(expansion_train_path),
+        },
+        "batches": [{"file": path.name, "sha256": file_sha256(path)} for path in batch_paths],
+    }
+    write_json(output / "requests.manifest.json", manifest)
+    return manifest
+
+
+def prepare_functor_retry_batches(
+    freeze_dir: str | Path,
+    expansion_train_path: str | Path,
+    rejected_path: str | Path,
+    output_dir: str | Path,
+    *,
+    batch_size: int = 5,
+    retry_round: int = 1,
+) -> dict[str, Any]:
+    """Retry rejected identities from raw input without exposing prior outputs or failures."""
+
+    if retry_round < 1:
+        raise ValueError("retry_round must be positive")
+    splits = protocol_rows(freeze_dir, expansion_train_path)
+    sources = {
+        (str(row["dataset"]), str(row["source_id"])): row
+        for members in splits.values()
+        for row in members
+    }
+    rejected_path = Path(rejected_path)
+    identities = [(str(row["dataset"]), str(row["source_id"])) for row in read_jsonl(rejected_path)]
+    requests = []
+    for key in identities:
+        source = sources[key]
+        request = {
+            "dataset": source["dataset"],
+            "source_id": source["source_id"],
+            "question": source["question"],
+        }
+        if source.get("source_context"):
+            request["source_context"] = source["source_context"]
+        requests.append(request)
+    output = Path(output_dir)
+    batch_paths = []
+    for index in range(0, len(requests), batch_size):
+        batch_paths.append(
+            write_json(
+                output / "requests" / f"batch_{index // batch_size:03d}.json",
+                {
+                    "schema_version": "ccpu.paper1.functor_annotation_retry_batch.v1",
+                    "retry_round": retry_round,
+                    "answer_hidden": True,
+                    "rationale_hidden": True,
+                    "prior_asl_hidden": True,
+                    "blackboard_state_hidden": True,
+                    "prior_annotation_hidden": True,
+                    "validator_failure_hidden": True,
+                    "items": requests[index : index + batch_size],
+                },
+            )
+        )
+    manifest = {
+        "schema_version": "ccpu.paper1.functor_annotation_retry_requests.v1",
+        "retry_round": retry_round,
+        "example_count": len(requests),
+        "batch_size": batch_size,
+        "batch_count": len(batch_paths),
+        "raw_input_only": True,
+        "prior_annotation_hidden": True,
+        "validator_failure_hidden": True,
+        "answer_hidden": True,
+        "rationale_hidden": True,
+        "fixed_prompt": True,
+        "fixed_icl": True,
+        "teacher_fixed_icl_shots": 3,
+        "input_sha256": {
+            "freeze_manifest": file_sha256(Path(freeze_dir) / "freeze_manifest.json"),
+            "expansion_train": file_sha256(expansion_train_path),
+            "rejected": file_sha256(rejected_path),
         },
         "batches": [{"file": path.name, "sha256": file_sha256(path)} for path in batch_paths],
     }
@@ -237,27 +261,31 @@ def validate_functor_annotations(
         for split, members in splits.items()
         for row in members
     }
-    annotations: dict[tuple[str, str], dict[str, Any]] = {}
+    annotations: dict[tuple[str, str], tuple[int, dict[str, Any]]] = {}
     duplicates = set()
     annotation_hashes = {}
-    for raw_path in annotation_paths:
+    for attempt, raw_path in enumerate(annotation_paths):
         path = Path(raw_path)
         annotation_hashes[str(path)] = file_sha256(path)
+        seen_in_path = set()
         for annotation in read_jsonl(path):
             key = (str(annotation["dataset"]), str(annotation["source_id"]))
-            if key in annotations:
-                duplicates.add(key)
-            annotations[key] = annotation
+            if key in seen_in_path:
+                duplicates.add((attempt, key))
+            seen_in_path.add(key)
+            annotations[key] = (attempt, annotation)
 
     accepted = []
     rejected = []
     condition_counts: Counter[str] = Counter()
     for key, (split, source) in sources.items():
-        annotation = annotations.get(key)
+        selected = annotations.get(key)
+        attempt = selected[0] if selected else 0
+        annotation = selected[1] if selected else None
         failures = {}
         programs = {}
         validations = {}
-        if key in duplicates:
+        if (attempt, key) in duplicates:
             failures["record"] = ["duplicate primary annotation"]
         elif annotation is None:
             failures["record"] = ["missing primary annotation"]
@@ -322,6 +350,8 @@ def validate_functor_annotations(
                     "blackboard_state_hidden": True,
                     "fixed_prompt": True,
                     "fixed_icl": True,
+                    "teacher_fixed_icl_shots": 3,
+                    "annotation_attempt": attempt,
                 },
             }
         )
@@ -427,6 +457,7 @@ def build_functor_data(
         "source_ids_preserved": True,
         "fixed_prompt_per_condition": True,
         "fixed_icl_per_condition": True,
+        "student_fixed_icl_shots": 0,
         "runtime_state_in_prompt": False,
         "intermediate_values_in_prompt": False,
         "input_sha256": {
