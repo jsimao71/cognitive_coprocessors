@@ -1,0 +1,33 @@
+{
+  "schema_version": "ccpu.paper1.asl_pilot_training.v1",
+  "model": {
+    "model_id": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "max_new_tokens": 384,
+    "device": "xpu",
+    "dtype": "float16",
+    "use_chat_template": true,
+    "enable_thinking": false
+  },
+  "training": {
+    "epochs": 10,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "max_length": 1152,
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
+    "seed": 99173,
+    "device": "xpu",
+    "dtype": "float16",
+    "gradient_checkpointing": false,
+    "evaluate_each_epoch": false
+  },
+  "models": [{
+    "model_id": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "adapter_id": "Qwen3-1.7B-ASL-LoRA-original-500-v1"
+  }]
+}
