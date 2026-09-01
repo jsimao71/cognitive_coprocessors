@@ -1,0 +1,277 @@
+{
+  "acceptance_rate": 0.552,
+  "accepted_count": 276,
+  "accepted_sha256": "806e0df6f548f6f68f0870d4f3a755893221e178442a98b562608539b180d9a4",
+  "annotation_sha256": {
+    "artifacts\\paper1\\f3_v1\\full500_guided_repair1_teacher\\annotations.jsonl": "6c83ad702987a1bc76bc0ad9b80a846f79a403b385c7b9a0c18413e33dd92ff3",
+    "artifacts\\paper1\\f3_v1\\full500_primary_teacher\\annotations.jsonl": "7adebec07c88201b532335c003fcc201a6b4cb77cb1dad15e362c77f27689050",
+    "artifacts\\paper1\\f3_v1\\full500_retry1_teacher\\annotations.jsonl": "99c7dc1843eff90a60716d29c1f5a1b3fab4f7e80ae396e190d709aa63586af8",
+    "artifacts\\paper1\\f3_v1\\pilot25_retry1_teacher\\annotations.jsonl": "820d0751b266dbab830f2ec4350ac835e5a10e0c950e3f5fc5208f55de94044b",
+    "artifacts\\paper1\\f3_v1\\pilot25_retry2_teacher\\annotations.jsonl": "c568ad59b6d81d775c6e9694b94366b8b24bb1cc7d2e4c37cf42b91783424a20",
+    "artifacts\\paper1\\f3_v1\\pilot25_teacher\\annotations.jsonl": "0ff4e23b2638a14d8884d8bfd11c9648431347951b78b5101181a36a39e16250"
+  },
+  "answer_mismatch_feedback_hidden": true,
+  "attempted_count": 500,
+  "form_counts": {
+    "add": 18,
+    "collection": 179,
+    "consume": 32,
+    "difference_relation": 26,
+    "fraction_of": 48,
+    "maximum_relation": 1,
+    "mean_relation": 3,
+    "member": 168,
+    "minimum_relation": 3,
+    "multiple": 73,
+    "observe": 638,
+    "offset": 42,
+    "older_than": 3,
+    "partition": 10,
+    "percent_less": 10,
+    "percent_more": 16,
+    "percent_of": 47,
+    "product_relation": 70,
+    "query": 276,
+    "quotient_relation": 19,
+    "rate_relation": 63,
+    "remove": 43,
+    "same": 19,
+    "sum_relation": 80,
+    "transfer": 41,
+    "younger_than": 4
+  },
+  "registry": {
+    "nested": {
+      "at": {
+        "category": "reference",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "cell": {
+        "category": "evidence",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "event_field": {
+        "category": "reference",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "fraction": {
+        "category": "quantity",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 0
+      },
+      "scale": {
+        "category": "quantity",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "source": {
+        "category": "evidence",
+        "maximum": 1,
+        "minimum": 1,
+        "runtime_level": 0
+      }
+    },
+    "runtime_modes": {
+      "r0": 0,
+      "r1": 1,
+      "r2": 2
+    },
+    "schema_version": "ccpu.paper1.f3.registry.v1",
+    "top_level": {
+      "absolute_difference": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "add": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "collection": {
+        "category": "declaration",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 0
+      },
+      "consume": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "difference_relation": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "fraction_of": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "maximum_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "mean_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "member": {
+        "category": "declaration",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 0
+      },
+      "minimum_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "multiple": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "observe": {
+        "category": "observation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 0
+      },
+      "offset": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "older_than": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "partition": {
+        "category": "declaration",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 0
+      },
+      "percent_less": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "percent_more": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "percent_of": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "produce": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "product_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "query": {
+        "category": "query",
+        "maximum": null,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "quotient_relation": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "rate_relation": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "remove": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "same": {
+        "category": "relation",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 1
+      },
+      "sum_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "transfer": {
+        "category": "event",
+        "maximum": 6,
+        "minimum": 6,
+        "runtime_level": 1
+      },
+      "younger_than": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      }
+    }
+  },
+  "rejected_count": 224,
+  "rejected_sha256": "39e429c2ea77939ea71a1184360b23a870ce1016bdf93a328ef5ab3cd96ccc76",
+  "runtime_counts": {
+    "r0_executable": 84,
+    "r1_executable": 221,
+    "r2_executable": 276
+  },
+  "schema_version": "ccpu.paper1.f3.annotation_validation.v1",
+  "source_count": 500,
+  "source_coverage": 1.0,
+  "split_accepted": {
+    "dev": 17,
+    "test": 17,
+    "train": 242
+  },
+  "unattempted_count": 0,
+  "unattempted_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "unique_f3_patterns": 227
+}
