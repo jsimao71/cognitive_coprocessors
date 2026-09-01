@@ -649,7 +649,8 @@ def validate_f3_annotations_command(args: argparse.Namespace) -> int:
         args.output_dir,
     )
     print(
-        f"validated {report['accepted_count']}/{report['source_count']} F3 labels "
+        f"validated {report['accepted_count']}/{report['attempted_count']} attempted F3 labels "
+        f"({report['source_coverage']:.1%} source coverage) "
         f"-> {args.output_dir}"
     )
     return 0

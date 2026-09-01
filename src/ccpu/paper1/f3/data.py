@@ -18,7 +18,7 @@ from .runtime import validate_f3_program
 
 F3_PROMPT_VERSION = "paper1-f3-grounded-student-v1"
 
-_STUDENT_INSTRUCTION = """Compile the raw quantitative document into canonical F3 grounded state/event forms. Represent only explicit observations, events, declarative relations, evidence, and query intent. Use one allowlisted call per line and end with query(...). Use at(path,time), source(exact_span), or cell(exact_row,exact_column) for grounding. Event forms are remove/add/consume/produce/transfer. Relation forms are same/offset/older_than/younger_than/multiple/fraction_of/percent_of/percent_more/percent_less/sum_relation/difference_relation/absolute_difference/product_relation/quotient_relation/mean_relation/minimum_relation/maximum_relation/rate_relation. Query kinds are value/remaining_count/remaining_sum/difference/absolute_difference/percentage_ratio/percentage_change. Do not generate solution steps, hidden intermediate values, arbitrary arithmetic, assignments, explanations, or benchmark answers."""
+_STUDENT_INSTRUCTION = """Compile the raw quantitative document into canonical F3 grounded state/event forms. Represent only explicit observations, events, declarative relations, evidence, and query intent. Use one allowlisted call per line and end with query(...). Use at(path,time), source(exact_span), or cell(exact_row,exact_column) for grounding. Cell row and column labels must each be exact non-empty cells from the supplied table. Event forms are remove/add/consume/produce/transfer. Event quantities may be numeric, a path/reference, event_field(...), scale(...), or fraction(...). Relation forms are same/offset/older_than/younger_than/multiple/fraction_of/percent_of/percent_more/percent_less/sum_relation/difference_relation/absolute_difference/product_relation/quotient_relation/mean_relation/minimum_relation/maximum_relation/rate_relation. Query kinds are value/remaining_count/sum/mean/difference/absolute_difference/percentage_ratio/percentage_change. A mean explicitly requested by the question belongs in query("mean", reference1, reference2, ...), not mean_relation. Do not generate solution steps, hidden intermediate values, arbitrary arithmetic, assignments, explanations, or benchmark answers."""
 
 
 def _raw_context(row: dict[str, Any]) -> str:
@@ -203,8 +203,19 @@ def validate_f3_annotations(
 
     accepted = []
     rejected = []
+    unattempted = []
     runtime_counts: Counter[str] = Counter()
     for key, (split, source) in sources.items():
+        if key not in annotations:
+            unattempted.append(
+                {
+                    "dataset": source["dataset"],
+                    "source_id": source["source_id"],
+                    "split": split,
+                    "record_sha256": source["record_sha256"],
+                }
+            )
+            continue
         selected = None
         failure_codes: list[str] = []
         for attempt, annotation in annotations.get(key, []):
@@ -311,15 +322,20 @@ def validate_f3_annotations(
     output = Path(output_dir)
     accepted_path = write_jsonl(output / "accepted.jsonl", accepted)
     rejected_path = write_jsonl(output / "rejected.jsonl", rejected)
+    unattempted_path = write_jsonl(output / "unattempted.jsonl", unattempted)
+    attempted_count = len(accepted) + len(rejected)
     form_counts = Counter(
         form.name for row in accepted for form in parse_f3_program(row["f3_program"]).forms
     )
     summary = {
         "schema_version": "ccpu.paper1.f3.annotation_validation.v1",
         "source_count": len(sources),
+        "attempted_count": attempted_count,
+        "source_coverage": attempted_count / len(sources),
         "accepted_count": len(accepted),
-        "acceptance_rate": len(accepted) / len(sources),
+        "acceptance_rate": len(accepted) / attempted_count if attempted_count else 0.0,
         "rejected_count": len(rejected),
+        "unattempted_count": len(unattempted),
         "split_accepted": dict(sorted(Counter(row["split"] for row in accepted).items())),
         "runtime_counts": dict(sorted(runtime_counts.items())),
         "form_counts": dict(sorted(form_counts.items())),
@@ -328,6 +344,7 @@ def validate_f3_annotations(
         "annotation_sha256": hashes,
         "accepted_sha256": file_sha256(accepted_path),
         "rejected_sha256": file_sha256(rejected_path),
+        "unattempted_sha256": file_sha256(unattempted_path),
         "registry": registry_manifest(),
     }
     write_json(output / "summary.json", summary)

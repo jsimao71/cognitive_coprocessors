@@ -1,0 +1,44 @@
+{
+  "annotation_count": 9,
+  "batch_count": 3,
+  "batch_output_sha256": {
+    "batch_000.json": "a54764636c954cdd05bcc2f6de894e163b1421bf94b44b81b846537e5ed08873",
+    "batch_001.json": "8e007c64be925eae0408050974b45d8a32b279f206f35d86707c00c8459d01fd",
+    "batch_002.json": "4424011638a6311d8f436f9919a07bd6771e333f773251ed4d82e4d4313e293c"
+  },
+  "batches": [
+    {
+      "annotation_count": 3,
+      "batch": "batch_000.json",
+      "duration_seconds": 221.377,
+      "status": "completed",
+      "tokens": 30635
+    },
+    {
+      "annotation_count": 3,
+      "batch": "batch_001.json",
+      "duration_seconds": 91.729,
+      "status": "completed",
+      "tokens": 25329
+    },
+    {
+      "annotation_count": 3,
+      "batch": "batch_002.json",
+      "duration_seconds": 462.103,
+      "status": "completed",
+      "tokens": 45242
+    }
+  ],
+  "completed_count": 3,
+  "concurrency": 3,
+  "elapsed_seconds": 462.119,
+  "failed_count": 0,
+  "model": "gpt-5.6-sol",
+  "output_sha256": "820d0751b266dbab830f2ec4350ac835e5a10e0c950e3f5fc5208f55de94044b",
+  "prompt_sha256": "c0f5d1755739afee8c425ebf9491ee97048a01623483c10eef71b27e6203c8ae",
+  "reasoning_effort": "max",
+  "reported_tokens": 101206,
+  "sandbox": "read-only",
+  "schema_sha256": "43055928b561ef59a6cfb73aa6c1b9d4b3d686c4851de1c55d60014f9d4fd225",
+  "schema_version": "ccpu.dsl_dataset.local_codex_run.v1"
+}

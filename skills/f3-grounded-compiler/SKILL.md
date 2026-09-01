@@ -16,8 +16,8 @@ runtime state, or validator output.
 
 - Preserve source entities, attributes, quantities, units, time, event roles,
   relations, coreference, collections, and query intent.
-- Attach exact `source(...)` spans or exact `cell(row,column)` labels to every
-  non-query form.
+- Attach exact `source(...)` spans or exact non-empty `cell(row,column)` labels
+  to every non-query form. Never merge multi-row table headers.
 - Use stable lowercase semantic paths. Keep a path consistent within a program;
   do not use `step_N`, `tmp`, or anonymous solution variables.
 - Use `observe` only for explicit numeric source facts.
@@ -25,10 +25,15 @@ runtime state, or validator output.
   state, quantity, and event identity.
 - Preserve symbolic references such as "that many" with `event_field`; never
   replace them with mentally calculated constants.
+- Keep unspecified event quantities as semantic paths or references. A later
+  observed state can constrain them; do not mark an inverse event unsupported.
 - Use declarative relations for source-stated comparisons, ratios, rates,
   totals, products, differences, and averages.
 - Express the question with an intent-level `query`; do not insert unstated
   aggregation or arithmetic steps.
+- Do not invent currency, denomination, or time-unit conversions. Mark a record
+  unsupported when the requested answer requires ontology knowledge absent from
+  the source and the F3-v1 allowlist.
 - Emit one canonical call per line and exactly one terminal `query(...)`.
 - Mark the record `ambiguous` or `unsupported` instead of inventing a predicate
   or unsupported source fact.

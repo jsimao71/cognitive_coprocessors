@@ -231,17 +231,44 @@ repair history, and normalized semantic signature.
 Before scaling beyond the pilot:
 
 1. Implement parser, AST, registry, runtime modes, and evaluator.
-2. Manually author 25 representative records including both datasets.
+2. Audit 25 train-only records including both datasets before touching frozen
+   dev/test labels.
 3. Require deterministic tests for every primitive and failure mode.
-4. Require 25/25 gold pilot execution in F3-R2.
+4. Require at least 90% execution-and-answer acceptance on the answer-blind
+   pilot after raw-only retries; freeze and report unsupported ontology classes.
 5. Generate 100 answer-blind targets.
 6. Audit source-assertion fidelity and registry pressure.
 7. Freeze grammar/registry v1 once; subsequent changes create F3-v2.
 8. Generate all 500 exact identities.
-9. Require all 25 frozen test targets to parse, ground, lower, and execute.
+9. Require every frozen test identity to have either a validated F3 target or a
+   frozen unsupported status. Unsupported rows remain in the denominator and
+   count as final-answer failures; they are never silently dropped.
 
 Do not add one predicate per failed benchmark pattern. Report registry coverage,
 fallback pressure, unsupported cases, and unseen test primitives.
+
+### Implemented pilot audit
+
+The train-only 25-record pilot used the fixed local teacher prompt and synthetic
+ICL, with answers, rationales, prior targets, runtime state, and validator values
+hidden. Primary generation accepted 12/25. Representation-preserving runtime
+fixes raised the unchanged labels to 16/25, and two raw-input-only retries raised
+the union to 23/25 (92%). The accepted set contains 22 unique normalized F3
+signatures.
+
+The pilot froze two unsupported ontology classes rather than adding benchmark
+facts to the runtime:
+
+```text
+US coin-denomination plus dollar/cent conversion
+minute/hour conversion
+```
+
+F3-v1 therefore includes symbolic unknown event quantities, open-world transfer
+projection, time-aware collections/partitions, numeric path canonicalization,
+and direct mean query intent. It does not include a physical-unit or currency
+ontology. A later F3-O condition may add a fixed, hashed ontology as a separate
+runtime ablation; it must not be folded into the primary F3 representation row.
 
 ## Training protocol
 

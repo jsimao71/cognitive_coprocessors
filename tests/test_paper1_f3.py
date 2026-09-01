@@ -2,9 +2,13 @@ from decimal import Decimal
 
 import pytest
 
-from ccpu.common.artifacts import read_json, write_json, write_jsonl
+from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
 from ccpu.paper1.f3 import parse_f3_program, validate_f3_program
-from ccpu.paper1.f3.data import f3_prompt, prepare_f3_annotation_batches
+from ccpu.paper1.f3.data import (
+    f3_prompt,
+    prepare_f3_annotation_batches,
+    validate_f3_annotations,
+)
 from ccpu.paper1.f3.normalize import semantic_signature
 
 SCOPE = {"id": "test:f3:1", "kind": "benchmark_case", "parent": None}
@@ -84,6 +88,72 @@ query("value", at("jessica.age", "now"))
     assert not r1["executable"]
     assert r2["executable"], r2["errors"]
     assert returned(r2) == 24
+
+
+def test_unknown_event_quantity_is_solved_from_final_state() -> None:
+    question = (
+        "A trader has 55 bags of rice in stock. She sells off some bags of rice and "
+        "restocks 132 bags of rice. How many bags did she sell if she now has 164 bags?"
+    )
+    program = """
+observe(at("trader.rice.count", "initial"), 55, "count", source("55 bags of rice in stock"))
+remove("sale", "trader", at("trader.rice.count", "current"), "trader.rice.sold.count", source("sells off some bags of rice"))
+add("restock", "trader", at("trader.rice.count", "current"), 132, source("restocks 132 bags of rice"))
+observe(at("trader.rice.count", "now"), 164, "count", source("if she now has 164 bags"))
+query("value", event_field("sale", "quantity"))
+""".strip()
+    result = validate_f3_program(
+        program, question=question, source_context=None, effective_scope=SCOPE, mode="r2"
+    )
+    assert result["executable"], result["errors"]
+    assert returned(result) == 23
+
+
+def test_event_quantity_can_feed_a_relation() -> None:
+    question = "There are 10 potatoes. She cuts 2 potatoes into 8 wedges each."
+    program = """
+observe(at("potatoes.count", "initial"), 10, "count", source("10 potatoes"))
+remove("cut", "she", at("potatoes.count", "current"), 2, source("cuts 2 potatoes"))
+product_relation(at("wedges.count", "current"), event_field("cut", "quantity"), 8, source("8 wedges each"))
+query("value", at("wedges.count", "current"))
+""".strip()
+    result = validate_f3_program(
+        program, question=question, source_context=None, effective_scope=SCOPE, mode="r2"
+    )
+    assert result["executable"], result["errors"]
+    assert returned(result) == 16
+
+
+def test_collection_sum_resolves_custom_times_and_declared_members() -> None:
+    question = "Payments of 123 and 344 were made for two acquisitions in 2018."
+    program = """
+collection("company.acquisitions", "payment", "company", source("two acquisitions"))
+observe(at("company.acquisitions.first.amount", "august_2018"), 123, "million", source("123"))
+observe(at("company.acquisitions.second.amount", "october_2018"), 344, "million", source("344"))
+member("company.acquisitions", "company.acquisitions.first.amount", source("two acquisitions"))
+member("company.acquisitions", "company.acquisitions.second.amount", source("two acquisitions"))
+query("sum", "company.acquisitions", "2018")
+""".strip()
+    result = validate_f3_program(
+        program, question=question, source_context=None, effective_scope=SCOPE, mode="r2"
+    )
+    assert result["executable"], result["errors"]
+    assert returned(result) == 467
+
+
+def test_mean_query_represents_requested_aggregation_intent() -> None:
+    question = "What is the average of the values 98, 183, and 377?"
+    program = """
+observe(at("shares.nonvested", "2017"), 98, "count", source("98"))
+observe(at("shares.nonvested", "2018"), 183, "count", source("183"))
+observe(at("shares.nonvested", "2019"), 377, "count", source("377"))
+query("mean", at("shares.nonvested", "2017"), at("shares.nonvested", "2018"), at("shares.nonvested", "2019"))
+""".strip()
+    result = validate_f3_program(
+        program, question=question, source_context=None, effective_scope=SCOPE, mode="r2"
+    )
+    assert result["executable"], result["errors"]
+    assert returned(result) == Decimal("219.3333333333333333333333333")
 
 
 def test_evidence_must_match_supplied_source() -> None:
@@ -169,3 +239,52 @@ def test_train_only_pilot_records_selected_identities(tmp_path) -> None:
     assert all(item["source_id"].startswith("train-") for item in manifest["selected_identities"])
     assert "Hidden rationale" not in serialized
     assert "answer" not in batch["items"][0]
+
+
+def test_partial_validation_separates_unattempted_sources(tmp_path) -> None:
+    freeze = tmp_path / "freeze"
+
+    def row(split: str, index: int) -> dict:
+        scope_id = f"scope:{split}:{index}"
+        return {
+            "dataset": "gsm8k",
+            "source_id": f"{split}-{index}",
+            "question": "There are five apples.",
+            "effective_scope": {"id": scope_id, "kind": "benchmark_case", "parent": None},
+            "state_after": {scope_id: {"returned": 5}},
+            "asl": "apples.count = 5\nRETURN apples.count",
+            "semantic_pattern_id": "observe-value",
+            "record_sha256": f"sha-{split}-{index}",
+        }
+
+    train_rows = [row("train", i) for i in range(100)]
+    write_jsonl(freeze / "splits" / "train.jsonl", train_rows)
+    write_jsonl(freeze / "splits" / "dev.jsonl", [row("dev", i) for i in range(25)])
+    write_jsonl(freeze / "splits" / "test.jsonl", [row("test", i) for i in range(25)])
+    write_json(freeze / "freeze_manifest.json", {"frozen": True})
+    expansion = write_jsonl(tmp_path / "expansion.jsonl", [row("expansion", i) for i in range(350)])
+    annotations = write_jsonl(
+        tmp_path / "annotations.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "source_id": "train-0",
+                "f3_status": "ok",
+                "f3_program": [
+                    'observe(at("apples.count", "initial"), 5, "count", source("five apples"))',
+                    'query("value", at("apples.count", "current"))',
+                ],
+            }
+        ],
+    )
+    summary = validate_f3_annotations(
+        freeze,
+        expansion,
+        [annotations],
+        tmp_path / "validated",
+    )
+    assert summary["attempted_count"] == 1
+    assert summary["accepted_count"] == 1
+    assert summary["acceptance_rate"] == 1.0
+    assert summary["unattempted_count"] == 499
+    assert read_jsonl(tmp_path / "validated" / "rejected.jsonl") == []

@@ -52,7 +52,8 @@ def _string(value: Value, label: str) -> str:
 
 
 def _path(value: Value) -> str:
-    path = _string(value, "path").casefold()
+    raw = _string(value, "path").casefold()
+    path = ".".join(f"y{part}" if part and part[0].isdigit() else part for part in raw.split("."))
     if not _PATH.fullmatch(path):
         raise ValueError(f"invalid F3 path: {value!r}")
     return path
@@ -127,6 +128,7 @@ class Compiler:
     query_path: str | None = None
     model_edges: list[tuple[str, str, str]] = field(default_factory=list)
     runtime_edges: list[tuple[str, str, str]] = field(default_factory=list)
+    bound: set[str] = field(default_factory=set)
 
     @property
     def level(self) -> int:
@@ -136,6 +138,12 @@ class Compiler:
         if isinstance(value, str):
             path = _path(value)
             return self.current.get(path, path)
+        if isinstance(value, Form) and value.name == "event_field":
+            source_id = _string(value.args[0], "event ID").casefold()
+            field_name = _string(value.args[1], "event field").casefold()
+            if field_name != "quantity" or source_id not in self.events:
+                raise ValueError(f"unknown event field: {source_id}.{field_name}")
+            return str(self.events[source_id]["quantity"])
         if not isinstance(value, Form) or value.name != "at":
             raise TypeError(f"expected at(path, time) reference, got {value!r}")
         path = _path(value.args[0])
@@ -157,6 +165,8 @@ class Compiler:
             target = f"events.{event_id}.quantity"
             self.calls.append(Call("given", (target, value)))
             return target
+        if isinstance(value, str) or (isinstance(value, Form) and value.name == "at"):
+            return self.reference(value)
         if not isinstance(value, Form):
             raise TypeError(f"invalid event quantity: {value!r}")
         if value.name == "event_field":
@@ -201,8 +211,13 @@ class Compiler:
         time = _string(reference.args[1], "time").casefold()
         target = f"{path}.{_time_suffix(time)}"
         self.calls.append(Call("given", (target, _decimal(value))))
+        self.bound.add(target)
         self.observed[(path, time)] = target
         if time in {"initial", "current", "now"}:
+            previous = self.current.get(path)
+            if previous is not None and previous != target and time in {"current", "now"}:
+                self.calls.append(Call("same", (target, previous)))
+                self.runtime_edges.append((previous, target, "state_observation"))
             self.current[path] = target
         match = re.fullmatch(r"(plus|minus)_(\d+)_year", time)
         if match and path.endswith(".age"):
@@ -275,6 +290,14 @@ class Compiler:
             raise ValueError(f"unsupported relation: {name}")
         self.calls.append(call)
         target = str(call.args[0])
+        self.bound.add(target)
+        target_form = args[0]
+        if isinstance(target_form, Form) and target_form.name == "at":
+            path = _path(target_form.args[0])
+            time = _string(target_form.args[1], "time").casefold()
+            self.observed[(path, time)] = target
+            if time in {"initial", "current", "now"}:
+                self.current[path] = target
         for operand in call.args[1:]:
             if isinstance(operand, str):
                 self.model_edges.append((operand, target, name))
@@ -298,16 +321,18 @@ class Compiler:
             quantity = self.quantity(amount, event_id)
             source_after = f"{source_path}.after_{event_id}"
             destination_after = f"{destination_path}.after_{event_id}"
-            self.calls.append(Call("remaining", (source_after, source_before, quantity)))
-            self.calls.append(Call("sum_of", (destination_after, destination_before, quantity)))
-            self.current[source_path] = source_after
-            self.current[destination_path] = destination_after
-            self.runtime_edges.extend(
-                [
-                    (source_before, source_after, "transfer"),
-                    (destination_before, destination_after, "transfer"),
-                ]
-            )
+            if source_before in self.bound:
+                self.calls.append(Call("remaining", (source_after, source_before, quantity)))
+                self.bound.add(source_after)
+                self.current[source_path] = source_after
+                self.runtime_edges.append((source_before, source_after, "transfer_source"))
+            if destination_before in self.bound:
+                self.calls.append(Call("sum_of", (destination_after, destination_before, quantity)))
+                self.bound.add(destination_after)
+                self.current[destination_path] = destination_after
+                self.runtime_edges.append(
+                    (destination_before, destination_after, "transfer_destination")
+                )
         else:
             _actor, state_ref, amount, _evidence = form.args[1:]
             path = _path(state_ref.args[0]) if isinstance(state_ref, Form) else _path(state_ref)
@@ -316,6 +341,7 @@ class Compiler:
             after = f"{path}.after_{event_id}"
             relation = "remaining" if form.name in {"remove", "consume"} else "sum_of"
             self.calls.append(Call(relation, (after, before, quantity)))
+            self.bound.add(after)
             self.current[path] = after
             self.runtime_edges.append((before, after, form.name))
         self.events[event_id] = {"type": form.name, "quantity": quantity}
@@ -332,9 +358,28 @@ class Compiler:
             total = self.reference(form.args[1])
             member_paths = sorted(self.members.get(collection, set()))
             if member_paths and self.level >= 2:
-                self.calls.append(
-                    Call("sum_of", (total, *(self.current.get(path, path) for path in member_paths)))
-                )
+                member_references: set[str] = set()
+                for member in member_paths:
+                    member_references.update(
+                        reference
+                        for path, reference in self.current.items()
+                        if path == member or path.startswith(member + ".")
+                    )
+                    member_references.update(
+                        reference
+                        for (path, _time), reference in self.observed.items()
+                        if path == member or path.startswith(member + ".")
+                    )
+                if member_references:
+                    self.calls.append(Call("sum_of", (total, *sorted(member_references))))
+                    self.bound.add(total)
+                    target_form = form.args[1]
+                    if isinstance(target_form, Form) and target_form.name == "at":
+                        path = _path(target_form.args[0])
+                        time = _string(target_form.args[1], "time").casefold()
+                        self.observed[(path, time)] = total
+                        if time in {"initial", "current", "now"}:
+                            self.current[path] = total
 
     def add_query(self, form: Form) -> None:
         kind = _string(form.args[0], "query kind").casefold()
@@ -342,16 +387,34 @@ class Compiler:
         if kind == "value" and len(form.args) == 2:
             source = self.reference(form.args[1])
             self.calls.append(Call("same", (target, source)))
+        elif kind == "mean" and len(form.args) >= 3:
+            self.calls.append(Call("mean_of", (target, *(self.operand(item) for item in form.args[1:]))))
         elif kind in {"remaining_count", "sum"} and len(form.args) == 3:
             collection = _path(form.args[1])
-            paths = sorted(
-                path
-                for path in self.current
-                if path.startswith(collection + ".") and path.endswith(".count")
-            )
-            if not paths:
+            query_time = _string(form.args[2], "query time").casefold()
+            declared = self.members.get(collection, set())
+
+            def belongs(path: str) -> bool:
+                if declared:
+                    return any(path == member or path.startswith(member + ".") for member in declared)
+                return path.startswith(collection + ".")
+
+            references = {
+                reference
+                for (path, time), reference in self.observed.items()
+                if belongs(path)
+                and (time == query_time or query_time in time or time in query_time)
+                and (kind == "sum" or path.endswith(".count"))
+            }
+            if query_time in {"current", "now"}:
+                references.update(
+                    reference
+                    for path, reference in self.current.items()
+                    if belongs(path) and (kind == "sum" or path.endswith(".count"))
+                )
+            if not references:
                 raise ValueError(f"query collection has no count state: {collection}")
-            self.calls.append(Call("sum_of", (target, *(self.current[path] for path in paths))))
+            self.calls.append(Call("sum_of", (target, *sorted(references))))
         elif kind in {
             "difference",
             "absolute_difference",

@@ -1,0 +1,45 @@
+{
+  "answer_hidden": true,
+  "batch_count": 1,
+  "batch_size": 3,
+  "batches": [
+    {
+      "file": "batch_000.json",
+      "sha256": "763fcd8a7ccd132fcf27f4727a5c0ca117912aadc08ece0cba779db48ee6514d"
+    }
+  ],
+  "example_count": 3,
+  "fixed_icl": true,
+  "fixed_prompt": true,
+  "input_sha256": {
+    "expansion_train": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562",
+    "freeze_manifest": "1de74cdd523867366488dca1acd4b1b175f1b08872770800e6003300186bd94a",
+    "rejected": "c3d7722cad41e89b638c5550680b50a535294be7a2582481f7e75f9022515f1a"
+  },
+  "prior_annotation_hidden": true,
+  "prior_programs_hidden": true,
+  "rationale_hidden": true,
+  "raw_input_only": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.annotation_retry_requests.v1",
+  "selected_identities": [
+    {
+      "dataset": "gsm8k",
+      "source_id": "3344"
+    },
+    {
+      "dataset": "gsm8k",
+      "source_id": "7021"
+    },
+    {
+      "dataset": "tatqa",
+      "source_id": "bc6b51a64566a737d6fb94a66a183160"
+    }
+  ],
+  "selection": {
+    "kind": "exact_frozen_protocol"
+  },
+  "teacher_fixed_icl_shots": 3,
+  "validator_failure_hidden": true,
+  "validator_values_hidden": true
+}

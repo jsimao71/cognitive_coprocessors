@@ -1,0 +1,77 @@
+{
+  "answer_hidden": true,
+  "batch_count": 3,
+  "batch_size": 3,
+  "batches": [
+    {
+      "file": "batch_000.json",
+      "sha256": "e16613edbe08cf465483631076d1d00e69dd396fdb1dec0537fb3357a3e8b931"
+    },
+    {
+      "file": "batch_001.json",
+      "sha256": "c85548a47ec8121e180a30da4fc22ae5da5ee61cef2e131dc44e918ef065f5bf"
+    },
+    {
+      "file": "batch_002.json",
+      "sha256": "249d8149a04eecacee33bd8ad2ee90add8cab2aa2d365811ace9f9a2d39d07e7"
+    }
+  ],
+  "example_count": 9,
+  "fixed_icl": true,
+  "fixed_prompt": true,
+  "input_sha256": {
+    "expansion_train": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562",
+    "freeze_manifest": "1de74cdd523867366488dca1acd4b1b175f1b08872770800e6003300186bd94a",
+    "rejected": "9fd29264a0644eda072c0d2d034792134267a2fc35f4bc882286b533e8d78408"
+  },
+  "prior_annotation_hidden": true,
+  "prior_programs_hidden": true,
+  "rationale_hidden": true,
+  "raw_input_only": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.annotation_retry_requests.v1",
+  "selected_identities": [
+    {
+      "dataset": "gsm8k",
+      "source_id": "3344"
+    },
+    {
+      "dataset": "gsm8k",
+      "source_id": "6167"
+    },
+    {
+      "dataset": "gsm8k",
+      "source_id": "1122"
+    },
+    {
+      "dataset": "gsm8k",
+      "source_id": "7021"
+    },
+    {
+      "dataset": "tatqa",
+      "source_id": "bc6b51a64566a737d6fb94a66a183160"
+    },
+    {
+      "dataset": "tatqa",
+      "source_id": "6dbf7798fbfb7889aea020072684be4b"
+    },
+    {
+      "dataset": "tatqa",
+      "source_id": "f689211323039c070391d82d0b4cffd5"
+    },
+    {
+      "dataset": "gsm8k",
+      "source_id": "1169"
+    },
+    {
+      "dataset": "gsm8k",
+      "source_id": "5351"
+    }
+  ],
+  "selection": {
+    "kind": "exact_frozen_protocol"
+  },
+  "teacher_fixed_icl_shots": 3,
+  "validator_failure_hidden": true,
+  "validator_values_hidden": true
+}

@@ -50,7 +50,7 @@ TOP_LEVEL: dict[str, Signature] = {
     "consume": Signature(5, 5, "event", 1),
     "produce": Signature(5, 5, "event", 1),
     "transfer": Signature(6, 6, "event", 1),
-    "query": Signature(2, 4, "query"),
+    "query": Signature(2, None, "query"),
 }
 
 RUNTIME_MODES = {"r0": 0, "r1": 1, "r2": 2}
