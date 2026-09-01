@@ -1,0 +1,63 @@
+{
+  "conditions": {
+    "F0": {
+      "dependency_correct": 0.28,
+      "executable": 0.76,
+      "final_answer_correct": 0.44,
+      "parse_valid": 0.88,
+      "semantic_return_equivalent": 0.28,
+      "semantic_state_equivalent": 0.2
+    },
+    "F1": {
+      "dependency_correct": 0.0,
+      "executable": 0.64,
+      "final_answer_correct": 0.24,
+      "parse_valid": 0.68,
+      "semantic_return_equivalent": 0.04,
+      "semantic_state_equivalent": 0.04
+    },
+    "F2": {
+      "dependency_correct": 0.04,
+      "executable": 0.6,
+      "final_answer_correct": 0.36,
+      "parse_valid": 0.6,
+      "semantic_return_equivalent": 0.04,
+      "semantic_state_equivalent": 0.04
+    }
+  },
+  "frozen_identity_count": 25,
+  "identical_frozen_source_ids": true,
+  "input_sha256": {
+    "F0": "7cdde62f0fc79e9fc210643a5f70cf433867402cf5dd347ba3b4d567499e0a1c",
+    "F1": "3d695a1b6a1e395e5980e69c7e9d503f663d90116fca2944e4edd93f038a7c17",
+    "F2": "3cc2c8564c59900e7941bb62e2aa9523644fcdb743abb8dd61784531dcc45ad7"
+  },
+  "interpretation_gate": {
+    "rule": "attribute a gain to semantic decomposition only when F2 exceeds both F0 and F1",
+    "semantic_decomposition_supported": false
+  },
+  "paired_answer_comparisons": {
+    "F1_minus_F0": {
+      "answer_rate_delta": -0.2,
+      "baseline_only_correct": 6,
+      "both_correct": 5,
+      "both_incorrect": 13,
+      "candidate_only_correct": 1
+    },
+    "F2_minus_F0": {
+      "answer_rate_delta": -0.08000000000000002,
+      "baseline_only_correct": 4,
+      "both_correct": 7,
+      "both_incorrect": 12,
+      "candidate_only_correct": 2
+    },
+    "F2_minus_F1": {
+      "answer_rate_delta": 0.12,
+      "baseline_only_correct": 1,
+      "both_correct": 5,
+      "both_incorrect": 15,
+      "candidate_only_correct": 4
+    }
+  },
+  "schema_version": "ccpu.paper1.functor_comparison.v1"
+}
