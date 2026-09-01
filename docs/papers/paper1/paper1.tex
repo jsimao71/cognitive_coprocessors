@@ -1384,6 +1384,54 @@ that strict answer-blind filtering leaves F1/F2 with 434 training rows rather
 than F0's 450. We report this deficit instead of repairing targets from hidden
 gold, and treat F1--F2 as the cleaner causal contrast.
 
+\subsection{Fine-grained 0.6B representation diagnosis}
+
+We replayed the frozen predictions through a deterministic five-layer analyzer:
+surface validity, common semantic structure, runtime lowering, executed
+blackboard state, and final answer. The common reference is the query-relevant
+computational graph in the gold F1 program; this excludes descriptive ASL facts
+that are disconnected from the query. No model judge is used. Exact semantic
+structure requires a complete deterministic symbol alignment, relation graph,
+and query target. Blackboard F1 is the strict path--value fact F1 after execution,
+so it does not credit a numerically correct value stored under an unaligned slot.
+
+\begin{table}[t]
+\centering\small
+\caption{Fine-grained representation comparison on the identical frozen 25
+programs with Qwen3-0.6B. Dependency and blackboard columns are per-program
+macro-F1; other columns are exact program rates.}
+\label{tab:functor-diagnostics}
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Parse & Semantic structure & Dependency & Blackboard & Execute & Final\\
+\midrule
+F0 ASL             & .88 & .08 & .101 & .020 & .76 & .44\\
+F1 low-level       & .68 & .00 & .082 & .087 & .64 & .24\\
+F2 semantic        & .60 & .04 & .121 & .081 & .60 & .36\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The runtime is not the observed ceiling: all 25 gold F0, F1, and F2 programs
+parse, lower, execute, and return the benchmark answer. Nor is unseen vocabulary
+the explanation: every gold test functor occurs in F2 training. Syntax accounts
+for part, but not all, of the loss. Among the 15 parse-valid F2 predictions,
+functor-class micro-F1 is .405 (macro-F1 .377), argument-role accuracy is .388,
+exact argument binding is .307, relation-direction accuracy is .556, and query
+target accuracy is 7/15. F1 achieves 0/25 strict ASL-isomorphic computational
+graphs. Thus the present evidence identifies semantic class selection, binding,
+and symbol/query grounding rather than deterministic lowering as the principal
+measured deficit.
+
+The target surfaces do not provide a simple length explanation. Gold F0, F1,
+and F2 average 6.64, 7.08, and 6.76 statements, respectively; F2 is slightly
+shorter than F1 and has similar mean arity (2.36 versus 2.35). Dataset behavior
+remains heterogeneous: F2 answers 5/17 GSM8K cases versus F0's 4/17, but only
+4/8 TAT-QA cases versus F0's 7/8. With only 25 programs, counts are primary;
+Wilson intervals and paired exact tests are exploratory. A fully matched
+Qwen3-1.7B F0/F1/F2 replication is therefore used to test the prespecified
+model-capacity interaction rather than to reinterpret this checkpoint.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
