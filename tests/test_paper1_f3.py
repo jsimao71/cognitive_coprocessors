@@ -158,6 +158,54 @@ query("mean", at("shares.nonvested", "2017"), at("shares.nonvested", "2018"), at
     assert returned(result) == Decimal("219.3333333333333333333333333")
 
 
+def test_unrelated_open_world_constraint_does_not_block_query() -> None:
+    question = "Mara has 5 apples. Talia's home is the same as her house. How many apples?"
+    program = """
+observe(at("mara.apples.count", "current"), 5, "count", source("Mara has 5 apples"))
+same("talia.home", "talia.house", source("Talia's home is the same as her house"))
+query("value", at("mara.apples.count", "current"))
+""".strip()
+    result = validate_f3_program(
+        program, question=question, source_context=None, effective_scope=SCOPE, mode="r2"
+    )
+    assert result["executable"], result["errors"]
+    assert returned(result) == 5
+
+
+def test_plain_relation_targets_feed_declared_collection_sum() -> None:
+    question = "Jace drives 60 miles per hour for 4 hours and then for 9 hours."
+    program = """
+collection("jace.distances", "distance", "trip", source("drives 60 miles per hour"))
+member("jace.distances", "jace.first.distance", source("for 4 hours"))
+member("jace.distances", "jace.second.distance", source("for 9 hours"))
+observe(at("jace.speed", "current"), 60, "mile_per_hour", source("60 miles per hour"))
+observe(at("jace.first.duration", "current"), 4, "hour", source("for 4 hours"))
+observe(at("jace.second.duration", "current"), 9, "hour", source("for 9 hours"))
+rate_relation("jace.first.distance", at("jace.speed", "current"), at("jace.first.duration", "current"), source("60 miles per hour for 4 hours"))
+rate_relation("jace.second.distance", at("jace.speed", "current"), at("jace.second.duration", "current"), source("then for 9 hours"))
+query("sum", "jace.distances", "current")
+""".strip()
+    result = validate_f3_program(
+        program, question=question, source_context=None, effective_scope=SCOPE, mode="r2"
+    )
+    assert result["executable"], result["errors"]
+    assert returned(result) == 780
+
+
+def test_scale_expression_can_be_used_as_relation_reference() -> None:
+    question = "Carla is 12. Mina is twice Carla's age."
+    program = """
+observe(at("carla.age", "now"), 12, "year", source("Carla is 12"))
+same(at("mina.age", "now"), scale(at("carla.age", "now"), 2), source("Mina is twice Carla's age"))
+query("value", at("mina.age", "now"))
+""".strip()
+    result = validate_f3_program(
+        program, question=question, source_context=None, effective_scope=SCOPE, mode="r2"
+    )
+    assert result["executable"], result["errors"]
+    assert returned(result) == 24
+
+
 def test_unsupported_reference_cannot_win_exact_match_with_empty_output() -> None:
     metrics = score_f3(
         reference_program="",

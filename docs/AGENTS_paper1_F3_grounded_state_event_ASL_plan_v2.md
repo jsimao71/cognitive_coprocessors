@@ -266,9 +266,12 @@ minute/hour conversion
 
 F3-v1 therefore includes symbolic unknown event quantities, open-world transfer
 projection, time-aware collections/partitions, numeric path canonicalization,
-and direct mean query intent. It does not include a physical-unit or currency
-ontology. A later F3-O condition may add a fixed, hashed ontology as a separate
-runtime ablation; it must not be folded into the primary F3 representation row.
+direct mean query intent, and deterministic query-connected graph slicing so
+unrelated document facts do not require artificial numerical closure. The full
+asserted graph remains available for semantic scoring. F3-v1 does not include a
+physical-unit or currency ontology. A later F3-O condition may add a fixed,
+hashed ontology as a separate runtime ablation; it must not be folded into the
+primary F3 representation row.
 
 ## Training protocol
 

@@ -129,6 +129,7 @@ class Compiler:
     model_edges: list[tuple[str, str, str]] = field(default_factory=list)
     runtime_edges: list[tuple[str, str, str]] = field(default_factory=list)
     bound: set[str] = field(default_factory=set)
+    expression_index: int = 0
 
     @property
     def level(self) -> int:
@@ -138,6 +139,21 @@ class Compiler:
         if isinstance(value, str):
             path = _path(value)
             return self.current.get(path, path)
+        if isinstance(value, Form) and value.name in {"scale", "fraction"}:
+            self.expression_index += 1
+            target = f"expressions.e{self.expression_index}.value"
+            base = self.quantity_operand(value.args[0])
+            if value.name == "scale":
+                self.calls.append(Call("multiple", (target, base, _decimal(value.args[1]))))
+            else:
+                self.calls.append(
+                    Call(
+                        "fraction_of",
+                        (target, base, _decimal(value.args[1]), _decimal(value.args[2])),
+                    )
+                )
+            self.bound.add(target)
+            return target
         if isinstance(value, Form) and value.name == "event_field":
             source_id = _string(value.args[0], "event ID").casefold()
             field_name = _string(value.args[1], "event field").casefold()
@@ -200,6 +216,8 @@ class Compiler:
                 raise ValueError(f"unknown event quantity: {source_id}")
             return str(self.events[source_id]["quantity"])
         if isinstance(value, Form) and value.name == "at":
+            return self.reference(value)
+        if isinstance(value, str):
             return self.reference(value)
         raise TypeError(f"invalid quantity operand: {value!r}")
 
@@ -298,6 +316,8 @@ class Compiler:
             self.observed[(path, time)] = target
             if time in {"initial", "current", "now"}:
                 self.current[path] = target
+        elif isinstance(target_form, str):
+            self.current[_path(target_form)] = target
         for operand in call.args[1:]:
             if isinstance(operand, str):
                 self.model_edges.append((operand, target, name))
@@ -403,7 +423,12 @@ class Compiler:
                 reference
                 for (path, time), reference in self.observed.items()
                 if belongs(path)
-                and (time == query_time or query_time in time or time in query_time)
+                and (
+                    bool(declared)
+                    or time == query_time
+                    or query_time in time
+                    or time in query_time
+                )
                 and (kind == "sum" or path.endswith(".count"))
             }
             if query_time in {"current", "now"}:
@@ -437,6 +462,26 @@ class Compiler:
             raise ValueError(f"invalid or unsupported query signature: {kind}")
         self.query_path = target
 
+    def query_connected_calls(self) -> list[Call]:
+        """Keep the undirected constraint component that can affect the query."""
+
+        if self.query_path is None:
+            return []
+        connected = {self.query_path}
+        selected: set[int] = set()
+        changed = True
+        while changed:
+            changed = False
+            for index, call in enumerate(self.calls):
+                variables = {item for item in call.args if isinstance(item, str)}
+                if not variables.intersection(connected):
+                    continue
+                if index not in selected or not variables.issubset(connected):
+                    selected.add(index)
+                    connected.update(variables)
+                    changed = True
+        return [call for index, call in enumerate(self.calls) if index in selected]
+
     def compile(self, program: Program) -> str:
         for form in program.forms:
             if form.name == "observe":
@@ -453,7 +498,7 @@ class Compiler:
                 raise ValueError(f"unsupported top-level form: {form.name}")
         if self.query_path is None:
             raise ValueError("F3 program has no query target")
-        calls = [*self.calls, Call("query", (self.query_path,))]
+        calls = [*self.query_connected_calls(), Call("query", (self.query_path,))]
         return solve_f2_to_asl(calls) if self.level >= 2 else lower_f2(calls)
 
 
