@@ -43,6 +43,7 @@ from .experiment import run_huggingface, run_replay, run_scripted
 from .f3.data import (
     build_f3_data,
     prepare_f3_annotation_batches,
+    prepare_f3_guided_repair_batches,
     prepare_f3_retry_batches,
     validate_f3_annotations,
 )
@@ -641,6 +642,22 @@ def prepare_f3_retries_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def prepare_f3_guided_repairs_command(args: argparse.Namespace) -> int:
+    manifest = prepare_f3_guided_repair_batches(
+        args.freeze_dir,
+        args.expansion_train,
+        args.rejected,
+        args.annotations,
+        args.output_dir,
+        batch_size=args.batch_size,
+    )
+    print(
+        f"prepared {manifest['example_count']} categorical F3 repairs in "
+        f"{manifest['batch_count']} batches -> {args.output_dir}"
+    )
+    return 0
+
+
 def validate_f3_annotations_command(args: argparse.Namespace) -> int:
     report = validate_f3_annotations(
         args.freeze_dir,
@@ -1222,6 +1239,18 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     f3_retry.add_argument("--output-dir", required=True)
     f3_retry.add_argument("--batch-size", type=int, default=5)
     f3_retry.set_defaults(handler=prepare_f3_retries_command)
+
+    f3_guided_repair = commands.add_parser(
+        "prepare-f3-guided-repairs",
+        help="prepare value-blind F3 repairs with prior draft and categorical failure only",
+    )
+    f3_guided_repair.add_argument("--freeze-dir", required=True)
+    f3_guided_repair.add_argument("--expansion-train", required=True)
+    f3_guided_repair.add_argument("--rejected", required=True)
+    f3_guided_repair.add_argument("--annotations", action="append", required=True)
+    f3_guided_repair.add_argument("--output-dir", required=True)
+    f3_guided_repair.add_argument("--batch-size", type=int, default=5)
+    f3_guided_repair.set_defaults(handler=prepare_f3_guided_repairs_command)
 
     f3_validate = commands.add_parser(
         "validate-f3-annotations", help="ground, lower, execute, and answer-check F3 labels"

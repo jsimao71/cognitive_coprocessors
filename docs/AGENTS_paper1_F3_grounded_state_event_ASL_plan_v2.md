@@ -219,6 +219,15 @@ Syntax, evidence-shape, and type failures may be retried with categorical error
 codes. An answer mismatch is quarantined and must not return the expected answer,
 numeric delta, failed intermediate state, or executed values to the teacher.
 
+Use two separately reported retry tiers. Tier 1 regenerates from raw source with
+all prior programs and validator feedback hidden. If that saturates, Tier 2 may
+show the teacher its own latest F3 draft plus one coarse failure class
+(`parse_invalid`, `evidence_invalid`, `not_lowerable`, `type_invalid`, or
+`answer_mismatch`). Tier 2 still hides answers, rationales, expected/actual
+values, numeric deltas, ASL/F0/F1/F2 targets, blackboard state, detailed
+validator errors, and execution values. Record `prior_programs_hidden=false`
+for Tier 2 and report how many retained labels require it.
+
 Annotations are generated from raw source semantics, never by translating F0 or
 F2. F0/F2 are available only to a post-hoc auditor after the F3 target is frozen.
 

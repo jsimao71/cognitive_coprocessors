@@ -8,6 +8,7 @@ from ccpu.paper1.f3.data import (
     build_f3_data,
     f3_prompt,
     prepare_f3_annotation_batches,
+    prepare_f3_guided_repair_batches,
     validate_f3_annotations,
 )
 from ccpu.paper1.f3.eval import score_f3
@@ -419,3 +420,52 @@ def test_partial_validation_separates_unattempted_sources(tmp_path) -> None:
     assert summary["acceptance_rate"] == 1.0
     assert summary["unattempted_count"] == 499
     assert read_jsonl(tmp_path / "validated" / "rejected.jsonl") == []
+
+
+def test_guided_repair_exposes_only_prior_draft_and_failure_class(
+    tmp_path, monkeypatch
+) -> None:
+    from ccpu.paper1.f3 import data as f3_data
+
+    source = {
+        "dataset": "gsm8k",
+        "source_id": "repair-1",
+        "question": "There are five apples. How many apples?",
+    }
+    monkeypatch.setattr(
+        f3_data,
+        "protocol_rows",
+        lambda *_args: {"train": [source], "dev": [], "test": []},
+    )
+    freeze = tmp_path / "freeze"
+    write_json(freeze / "freeze_manifest.json", {"frozen": True})
+    expansion = write_jsonl(tmp_path / "expansion.jsonl", [])
+    rejected = write_jsonl(
+        tmp_path / "rejected.jsonl",
+        [{"dataset": "gsm8k", "source_id": "repair-1", "failure_codes": ["not_lowerable"]}],
+    )
+    annotations = write_jsonl(
+        tmp_path / "annotations.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "source_id": "repair-1",
+                "f3_program": ['query("value", "apples.count")'],
+            }
+        ],
+    )
+    manifest = prepare_f3_guided_repair_batches(
+        freeze,
+        expansion,
+        rejected,
+        [annotations],
+        tmp_path / "repair",
+    )
+    batch = read_json(tmp_path / "repair" / "requests" / "batch_000.json")
+    item = batch["items"][0]
+    assert item["repair"]["failure_class"] == "not_lowerable"
+    assert item["repair"]["previous_f3_program"] == ['query("value", "apples.count")']
+    assert "answer" not in str(item).casefold()
+    assert "expected" not in str(item).casefold()
+    assert not manifest["prior_programs_hidden"]
+    assert manifest["validator_values_hidden"]

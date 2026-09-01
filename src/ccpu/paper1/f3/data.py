@@ -158,6 +158,95 @@ def prepare_f3_retry_batches(
     return report
 
 
+def prepare_f3_guided_repair_batches(
+    freeze_dir: str | Path,
+    expansion_train_path: str | Path,
+    rejected_path: str | Path,
+    annotation_paths: list[str | Path],
+    output_dir: str | Path,
+    *,
+    batch_size: int = 5,
+) -> dict[str, Any]:
+    """Prepare categorical, value-blind repairs from each teacher's latest draft."""
+
+    if batch_size < 1:
+        raise ValueError("batch_size must be positive")
+    splits = protocol_rows(freeze_dir, expansion_train_path)
+    sources = {
+        (str(row["dataset"]), str(row["source_id"])): row
+        for members in splits.values()
+        for row in members
+    }
+    latest: dict[tuple[str, str], dict[str, Any]] = {}
+    annotation_hashes = {}
+    for raw_path in annotation_paths:
+        path = Path(raw_path)
+        annotation_hashes[str(path)] = file_sha256(path)
+        for annotation in read_jsonl(path):
+            latest[(str(annotation["dataset"]), str(annotation["source_id"]))] = annotation
+
+    requests = []
+    for rejected in read_jsonl(rejected_path):
+        key = (str(rejected["dataset"]), str(rejected["source_id"]))
+        source = sources[key]
+        draft = latest.get(key, {})
+        request = {
+            "dataset": source["dataset"],
+            "source_id": source["source_id"],
+            "question": source["question"],
+            "repair": {
+                "failure_class": str(rejected.get("failure_codes", ["rejected"])[0]),
+                "previous_f3_program": list(draft.get("f3_program", [])),
+                "feedback_detail": "categorical_only",
+            },
+        }
+        if source.get("source_context"):
+            request["source_context"] = source["source_context"]
+        requests.append(request)
+
+    output = Path(output_dir)
+    paths = []
+    for index in range(0, len(requests), batch_size):
+        paths.append(
+            write_json(
+                output / "requests" / f"batch_{index // batch_size:03d}.json",
+                {
+                    "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+                    "answer_hidden": True,
+                    "rationale_hidden": True,
+                    "prior_programs_hidden": False,
+                    "runtime_state_hidden": True,
+                    "validator_values_hidden": True,
+                    "categorical_failure_only": True,
+                    "items": requests[index : index + batch_size],
+                },
+            )
+        )
+    manifest = {
+        "schema_version": "ccpu.paper1.f3.guided_repair_requests.v1",
+        "example_count": len(requests),
+        "batch_size": batch_size,
+        "batch_count": len(paths),
+        "answer_hidden": True,
+        "rationale_hidden": True,
+        "prior_programs_hidden": False,
+        "runtime_state_hidden": True,
+        "validator_values_hidden": True,
+        "categorical_failure_only": True,
+        "expected_actual_values_hidden": True,
+        "numeric_deltas_hidden": True,
+        "input_sha256": {
+            "freeze_manifest": file_sha256(Path(freeze_dir) / "freeze_manifest.json"),
+            "expansion_train": file_sha256(expansion_train_path),
+            "rejected": file_sha256(rejected_path),
+            "annotations": annotation_hashes,
+        },
+        "batches": [{"file": path.name, "sha256": file_sha256(path)} for path in paths],
+    }
+    write_json(output / "requests.manifest.json", manifest)
+    return manifest
+
+
 def _program(annotation: dict[str, Any]) -> str:
     value = annotation.get("f3_program", [])
     if isinstance(value, str):
@@ -310,7 +399,9 @@ def validate_f3_annotations(
                     "annotation_attempt": attempt,
                     "answer_hidden": bool(annotation.get("answer_hidden", True)),
                     "rationale_hidden": bool(annotation.get("rationale_hidden", True)),
-                    "prior_programs_hidden": True,
+                    "prior_programs_hidden": bool(
+                        annotation.get("prior_programs_hidden", True)
+                    ),
                     "runtime_state_hidden": True,
                     "fixed_prompt": True,
                     "fixed_icl": True,
