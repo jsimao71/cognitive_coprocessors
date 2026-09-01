@@ -40,6 +40,13 @@ from .dataset import (
 )
 from .evaluate import evaluate, paired_comparisons, rescore_endpoint_predictions
 from .experiment import run_huggingface, run_replay, run_scripted
+from .f3.data import (
+    build_f3_data,
+    prepare_f3_annotation_batches,
+    prepare_f3_retry_batches,
+    validate_f3_annotations,
+)
+from .f3.eval import analyze_f3_predictions, run_f3_condition
 from .functor_data import (
     build_functor_data,
     prepare_functor_annotation_batches,
@@ -585,6 +592,110 @@ def build_functor_data_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def prepare_f3_annotations_command(args: argparse.Namespace) -> int:
+    manifest = prepare_f3_annotation_batches(
+        args.freeze_dir,
+        args.expansion_train,
+        args.output_dir,
+        batch_size=args.batch_size,
+        max_train_examples=args.max_train_examples,
+    )
+    print(
+        f"prepared {manifest['example_count']} answer-blind F3 requests in "
+        f"{manifest['batch_count']} batches -> {args.output_dir}"
+    )
+    return 0
+
+
+def run_f3_annotations_command(args: argparse.Namespace) -> int:
+    manifest = run_local_codex_batches(
+        args.requests_dir,
+        args.output_dir,
+        prompt_path=args.prompt,
+        schema_path=args.schema,
+        repo_root=args.repo_root,
+        executable=args.executable,
+        model=args.model,
+        reasoning_effort=args.reasoning_effort,
+        concurrency=args.concurrency,
+    )
+    print(
+        f"completed {manifest['annotation_count']} F3 annotations; "
+        f"failed batches={manifest['failed_count']} -> {args.output_dir}"
+    )
+    return 0
+
+
+def prepare_f3_retries_command(args: argparse.Namespace) -> int:
+    manifest = prepare_f3_retry_batches(
+        args.freeze_dir,
+        args.expansion_train,
+        args.rejected,
+        args.output_dir,
+        batch_size=args.batch_size,
+    )
+    print(
+        f"prepared {manifest['example_count']} raw-only F3 retries in "
+        f"{manifest['batch_count']} batches -> {args.output_dir}"
+    )
+    return 0
+
+
+def validate_f3_annotations_command(args: argparse.Namespace) -> int:
+    report = validate_f3_annotations(
+        args.freeze_dir,
+        args.expansion_train,
+        args.annotations,
+        args.output_dir,
+    )
+    print(
+        f"validated {report['accepted_count']}/{report['source_count']} F3 labels "
+        f"-> {args.output_dir}"
+    )
+    return 0
+
+
+def build_f3_data_command(args: argparse.Namespace) -> int:
+    manifest = build_f3_data(
+        args.freeze_dir,
+        args.expansion_train,
+        args.accepted,
+        args.output_dir,
+    )
+    print(f"built F3 data {manifest['retained_counts']} -> {args.output_dir}")
+    return 0
+
+
+def run_f3_command(args: argparse.Namespace) -> int:
+    config = read_json(args.config)
+    config["adapter_path"] = args.adapter_path
+    config["adapter_id"] = args.adapter_id or Path(args.adapter_path).name
+    report = run_f3_condition(
+        eval_path=args.eval,
+        model_config=config,
+        output_dir=args.output_dir,
+        primary_mode=args.primary_mode,
+        seed=args.seed,
+        checkpoint_every=args.checkpoint_every,
+    )
+    print(
+        f"completed {report['prediction_count']} F3 generations; "
+        f"answer={report['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+    )
+    return 0
+
+
+def evaluate_f3_command(args: argparse.Namespace) -> int:
+    report = analyze_f3_predictions(
+        args.eval,
+        args.predictions,
+        args.output_dir,
+        primary_mode=args.primary_mode,
+    )
+    print(f"evaluated {report['prediction_count']} F3 predictions -> {args.output_dir}")
+    return 0
+
+
 def run_functor_command(args: argparse.Namespace) -> int:
     config = read_json(args.config)
     config["adapter_path"] = args.adapter_path
@@ -1067,6 +1178,86 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     functor_data.add_argument("--accepted", required=True)
     functor_data.add_argument("--output-dir", required=True)
     functor_data.set_defaults(handler=build_functor_data_command)
+
+    f3_prepare = commands.add_parser(
+        "prepare-f3-annotations", help="prepare raw-source-only F3 teacher batches"
+    )
+    f3_prepare.add_argument("--freeze-dir", required=True)
+    f3_prepare.add_argument("--expansion-train", required=True)
+    f3_prepare.add_argument("--output-dir", required=True)
+    f3_prepare.add_argument("--batch-size", type=int, default=5)
+    f3_prepare.add_argument(
+        "--max-train-examples",
+        type=int,
+        help="prepare a deterministic train-only pilot instead of all frozen identities",
+    )
+    f3_prepare.set_defaults(handler=prepare_f3_annotations_command)
+
+    f3_annotate = commands.add_parser(
+        "run-f3-annotations", help="run resumable local Codex F3 annotation batches"
+    )
+    f3_annotate.add_argument("--requests-dir", required=True)
+    f3_annotate.add_argument("--output-dir", required=True)
+    f3_annotate.add_argument(
+        "--prompt", default="configs/paper1/local_codex_f3_annotation_prompt.md"
+    )
+    f3_annotate.add_argument(
+        "--schema", default="configs/paper1/f3_annotation_batch.schema.json"
+    )
+    f3_annotate.add_argument("--repo-root", default=".")
+    f3_annotate.add_argument("--executable", default="codex")
+    f3_annotate.add_argument("--model", default="gpt-5.4")
+    f3_annotate.add_argument("--reasoning-effort", default="medium")
+    f3_annotate.add_argument("--concurrency", type=int, default=4)
+    f3_annotate.set_defaults(handler=run_f3_annotations_command)
+
+    f3_retry = commands.add_parser(
+        "prepare-f3-retries", help="retry rejected F3 rows from raw source only"
+    )
+    f3_retry.add_argument("--freeze-dir", required=True)
+    f3_retry.add_argument("--expansion-train", required=True)
+    f3_retry.add_argument("--rejected", required=True)
+    f3_retry.add_argument("--output-dir", required=True)
+    f3_retry.add_argument("--batch-size", type=int, default=5)
+    f3_retry.set_defaults(handler=prepare_f3_retries_command)
+
+    f3_validate = commands.add_parser(
+        "validate-f3-annotations", help="ground, lower, execute, and answer-check F3 labels"
+    )
+    f3_validate.add_argument("--freeze-dir", required=True)
+    f3_validate.add_argument("--expansion-train", required=True)
+    f3_validate.add_argument("--annotations", action="append", required=True)
+    f3_validate.add_argument("--output-dir", required=True)
+    f3_validate.set_defaults(handler=validate_f3_annotations_command)
+
+    f3_data = commands.add_parser(
+        "build-f3-data", help="build exact matched F3 SFT and evaluation data"
+    )
+    f3_data.add_argument("--freeze-dir", required=True)
+    f3_data.add_argument("--expansion-train", required=True)
+    f3_data.add_argument("--accepted", required=True)
+    f3_data.add_argument("--output-dir", required=True)
+    f3_data.set_defaults(handler=build_f3_data_command)
+
+    f3_run = commands.add_parser("run-f3", help="run one matched Qwen F3 LoRA condition")
+    f3_run.add_argument("--eval", required=True)
+    f3_run.add_argument("--config", required=True)
+    f3_run.add_argument("--adapter-path", required=True)
+    f3_run.add_argument("--adapter-id")
+    f3_run.add_argument("--primary-mode", choices=("r0", "r1", "r2"), default="r1")
+    f3_run.add_argument("--output-dir", required=True)
+    f3_run.add_argument("--seed", type=int, default=44017)
+    f3_run.add_argument("--checkpoint-every", type=int, default=5)
+    f3_run.set_defaults(handler=run_f3_command)
+
+    f3_evaluate = commands.add_parser(
+        "evaluate-f3", help="score saved F3 predictions through all runtime modes"
+    )
+    f3_evaluate.add_argument("--eval", required=True)
+    f3_evaluate.add_argument("--predictions", required=True)
+    f3_evaluate.add_argument("--primary-mode", choices=("r0", "r1", "r2"), default="r1")
+    f3_evaluate.add_argument("--output-dir", required=True)
+    f3_evaluate.set_defaults(handler=evaluate_f3_command)
 
     functor_run = commands.add_parser(
         "run-functor", help="run one matched F1 or F2 Qwen LoRA condition"
