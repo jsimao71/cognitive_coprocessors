@@ -5,10 +5,12 @@ import pytest
 from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
 from ccpu.paper1.f3 import parse_f3_program, validate_f3_program
 from ccpu.paper1.f3.data import (
+    build_f3_data,
     f3_prompt,
     prepare_f3_annotation_batches,
     validate_f3_annotations,
 )
+from ccpu.paper1.f3.eval import score_f3
 from ccpu.paper1.f3.normalize import semantic_signature
 
 SCOPE = {"id": "test:f3:1", "kind": "benchmark_case", "parent": None}
@@ -154,6 +156,87 @@ query("mean", at("shares.nonvested", "2017"), at("shares.nonvested", "2018"), at
     )
     assert result["executable"], result["errors"]
     assert returned(result) == Decimal("219.3333333333333333333333333")
+
+
+def test_unsupported_reference_cannot_win_exact_match_with_empty_output() -> None:
+    metrics = score_f3(
+        reference_program="",
+        reference_asl="answer = 5\nRETURN answer",
+        predicted_program="",
+        question="How many?",
+        source_context=None,
+        effective_scope=SCOPE,
+        reference_status="unsupported",
+    )
+    assert metrics["reference_status"] == "unsupported"
+    assert not metrics["exact_program"]
+    assert not metrics["final_answer_correct"]
+
+
+def test_data_builder_retains_frozen_unsupported_test_identity(tmp_path) -> None:
+    freeze = tmp_path / "freeze"
+
+    def source(split: str, index: int) -> dict:
+        scope_id = f"scope:{split}:{index}"
+        return {
+            "dataset": "gsm8k",
+            "source_id": f"{split}-{index}",
+            "question": "There are five apples.",
+            "effective_scope": {"id": scope_id, "kind": "benchmark_case", "parent": None},
+            "state_after": {scope_id: {"returned": 5}},
+            "asl": "apples.count = 5\nRETURN apples.count",
+            "semantic_pattern_id": "observe-value",
+            "record_sha256": f"sha-{split}-{index}",
+        }
+
+    train = [source("train", i) for i in range(100)]
+    dev = [source("dev", i) for i in range(25)]
+    test = [source("test", i) for i in range(25)]
+    expansion_rows = [source("expansion", i) for i in range(350)]
+    write_jsonl(freeze / "splits" / "train.jsonl", train)
+    write_jsonl(freeze / "splits" / "dev.jsonl", dev)
+    write_jsonl(freeze / "splits" / "test.jsonl", test)
+    write_json(freeze / "freeze_manifest.json", {"frozen": True})
+    expansion = write_jsonl(tmp_path / "expansion.jsonl", expansion_rows)
+
+    def accepted_label(row: dict) -> dict:
+        return {
+            "dataset": row["dataset"],
+            "source_id": row["source_id"],
+            "f3_semantic_pattern_id": "f3-observe-value",
+            "f3_program": (
+                'observe(at("apples.count", "initial"), 5, "count", source("five apples"))\n'
+                'query("value", at("apples.count", "current"))'
+            ),
+        }
+
+    accepted = write_jsonl(
+        tmp_path / "accepted.jsonl",
+        [accepted_label(train[0]), *(accepted_label(row) for row in test[:-1])],
+    )
+    rejected = write_jsonl(
+        tmp_path / "rejected.jsonl",
+        [
+            {
+                "dataset": test[-1]["dataset"],
+                "source_id": test[-1]["source_id"],
+                "failure_codes": ["teacher_unsupported"],
+            }
+        ],
+    )
+    manifest = build_f3_data(
+        freeze,
+        expansion,
+        accepted,
+        tmp_path / "data",
+        rejected,
+    )
+    eval_rows = read_jsonl(tmp_path / "data" / "eval" / "test.jsonl")
+    assert len(eval_rows) == 25
+    assert manifest["frozen_test_accepted"] == 24
+    assert manifest["frozen_test_rejected"] == 1
+    assert manifest["all_frozen_test_ids_accounted_for"]
+    assert eval_rows[-1]["reference_status"] == "unsupported"
 
 
 def test_evidence_must_match_supplied_source() -> None:

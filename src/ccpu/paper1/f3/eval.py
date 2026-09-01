@@ -22,6 +22,7 @@ def score_f3(
     source_context: dict[str, Any] | None,
     effective_scope: dict[str, Any],
     primary_mode: str = "r1",
+    reference_status: str = "accepted",
 ) -> dict[str, Any]:
     validations = {
         mode: validate_f3_program(
@@ -35,8 +36,9 @@ def score_f3(
     }
     primary = validations[primary_mode]
     result: dict[str, Any] = {
-        "exact_program": "\n".join(reference_program.split())
-        == "\n".join(predicted_program.split()),
+        "reference_status": reference_status,
+        "exact_program": reference_status == "accepted"
+        and "\n".join(reference_program.split()) == "\n".join(predicted_program.split()),
         "parse_valid": primary["parse_valid"],
         "evidence_valid": primary["evidence_valid"],
         "lowerable_to_ccir": primary["lowerable"],
@@ -107,6 +109,7 @@ def analyze_f3_predictions(
             source_context=reference.get("source_context"),
             effective_scope=reference["effective_scope"],
             primary_mode=primary_mode,
+            reference_status=reference.get("reference_status", "accepted"),
         )
         scored.append({**prediction, "metrics": metrics})
     metric_names = (
@@ -128,6 +131,10 @@ def analyze_f3_predictions(
     summary = {
         "schema_version": "ccpu.paper1.f3.evaluation.v1",
         "prediction_count": len(scored),
+        "reference_status_counts": {
+            status: sum(row["metrics"]["reference_status"] == status for row in scored)
+            for status in sorted({row["metrics"]["reference_status"] for row in scored})
+        },
         "primary_mode": primary_mode,
         "rates": {
             name: sum(bool(row["metrics"].get(name)) for row in scored) / len(scored)

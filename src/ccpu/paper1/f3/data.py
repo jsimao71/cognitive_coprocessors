@@ -356,6 +356,7 @@ def build_f3_data(
     expansion_train_path: str | Path,
     accepted_path: str | Path,
     output_dir: str | Path,
+    rejected_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Build F3 SFT and evaluation files without changing frozen identities."""
 
@@ -363,6 +364,14 @@ def build_f3_data(
     labels = {
         (str(row["dataset"]), str(row["source_id"])): row for row in read_jsonl(accepted_path)
     }
+    rejected_labels = (
+        {
+            (str(row["dataset"]), str(row["source_id"])): row
+            for row in read_jsonl(rejected_path)
+        }
+        if rejected_path is not None
+        else {}
+    )
     missing = {
         split: [
             (str(row["dataset"]), str(row["source_id"]))
@@ -371,8 +380,11 @@ def build_f3_data(
         ]
         for split, members in splits.items()
     }
-    if missing["test"]:
-        raise ValueError("all 25 frozen test identities require validated F3 labels")
+    uncovered_test = [key for key in missing["test"] if key not in rejected_labels]
+    if uncovered_test:
+        raise ValueError(
+            "all 25 frozen test identities require a validated target or frozen rejection"
+        )
     output = Path(output_dir)
     files = {}
     for split in ("train", "dev"):
@@ -400,20 +412,37 @@ def build_f3_data(
     eval_rows = []
     for source in splits["test"]:
         key = (str(source["dataset"]), str(source["source_id"]))
+        label = labels.get(key)
+        rejection = rejected_labels.get(key)
         eval_rows.append(
             {
                 "schema_version": "ccpu.paper1.f3.eval.v1",
                 "example_id": f"f3-eval-{fingerprint(f'{key[0]}:{key[1]}:test', 16)}",
                 "parent_source_id": source["source_id"],
                 "semantic_pattern_id": source["semantic_pattern_id"],
-                "f3_semantic_pattern_id": labels[key]["f3_semantic_pattern_id"],
+                "f3_semantic_pattern_id": (
+                    label["f3_semantic_pattern_id"] if label is not None else None
+                ),
                 "dataset": source["dataset"],
                 "condition": "f3",
                 "prompt_version": F3_PROMPT_VERSION,
                 "prompt": f3_prompt(source),
                 "question": source["question"],
                 "source_context": source.get("source_context"),
-                "reference_program": labels[key]["f3_program"],
+                "reference_program": label["f3_program"] if label is not None else "",
+                "reference_status": (
+                    "accepted"
+                    if label is not None
+                    else (
+                        "unsupported"
+                        if rejection is not None
+                        and "teacher_unsupported" in rejection.get("failure_codes", [])
+                        else "rejected"
+                    )
+                ),
+                "reference_failure_codes": rejection.get("failure_codes", [])
+                if rejection is not None
+                else [],
                 "reference_asl": source["asl"],
                 "effective_scope": source["effective_scope"],
             }
@@ -426,7 +455,9 @@ def build_f3_data(
         "split_counts": {name: len(rows) for name, rows in splits.items()},
         "retained_counts": {name: len(rows) - len(missing[name]) for name, rows in splits.items()},
         "missing_identities": missing,
-        "all_frozen_test_ids_labeled": not missing["test"],
+        "frozen_test_accepted": len(splits["test"]) - len(missing["test"]),
+        "frozen_test_rejected": len(missing["test"]) - len(uncovered_test),
+        "all_frozen_test_ids_accounted_for": not uncovered_test,
         "source_ids_preserved": True,
         "fixed_prompt": True,
         "student_fixed_icl_shots": 0,
@@ -436,6 +467,7 @@ def build_f3_data(
             "freeze_manifest": file_sha256(Path(freeze_dir) / "freeze_manifest.json"),
             "expansion_train": file_sha256(expansion_train_path),
             "accepted": file_sha256(accepted_path),
+            "rejected": file_sha256(rejected_path) if rejected_path is not None else None,
         },
         "files": files,
         "registry": registry_manifest(),

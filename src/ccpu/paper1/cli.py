@@ -662,6 +662,7 @@ def build_f3_data_command(args: argparse.Namespace) -> int:
         args.expansion_train,
         args.accepted,
         args.output_dir,
+        args.rejected,
     )
     print(f"built F3 data {manifest['retained_counts']} -> {args.output_dir}")
     return 0
@@ -1237,6 +1238,10 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     f3_data.add_argument("--freeze-dir", required=True)
     f3_data.add_argument("--expansion-train", required=True)
     f3_data.add_argument("--accepted", required=True)
+    f3_data.add_argument(
+        "--rejected",
+        help="frozen rejected labels used to retain unsupported test identities",
+    )
     f3_data.add_argument("--output-dir", required=True)
     f3_data.set_defaults(handler=build_f3_data_command)
 
