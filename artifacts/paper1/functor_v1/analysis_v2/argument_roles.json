@@ -1,0 +1,169 @@
+{
+  "aggregate": {
+    "argument_binding_exact": {
+      "correct": 23,
+      "rate": 0.1597222222222222,
+      "support": 144
+    },
+    "argument_role_accuracy": {
+      "correct": 76,
+      "rate": 0.20052770448548812,
+      "support": 379
+    },
+    "functor_class_macro_f1": 0.20975875875875877,
+    "functor_class_micro": {
+      "f1": 0.27927927927927926,
+      "overlap": 31,
+      "precision": 0.3974358974358974,
+      "predicted_count": 78,
+      "recall": 0.2152777777777778,
+      "reference_count": 144
+    },
+    "per_functor_class": {
+      "decrease_percent": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 0,
+        "recall": 0.0,
+        "reference_count": 1
+      },
+      "difference": {
+        "f1": 0.4000000000000001,
+        "overlap": 2,
+        "precision": 0.4,
+        "predicted_count": 5,
+        "recall": 0.4,
+        "reference_count": 5
+      },
+      "fraction_of": {
+        "f1": 0.6,
+        "overlap": 3,
+        "precision": 0.75,
+        "predicted_count": 4,
+        "recall": 0.5,
+        "reference_count": 6
+      },
+      "given": {
+        "f1": 0.27027027027027023,
+        "overlap": 15,
+        "precision": 0.3488372093023256,
+        "predicted_count": 43,
+        "recall": 0.22058823529411764,
+        "reference_count": 68
+      },
+      "mean_of": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 0,
+        "recall": 0.0,
+        "reference_count": 3
+      },
+      "multiple": {
+        "f1": 0.6666666666666666,
+        "overlap": 2,
+        "precision": 1.0,
+        "predicted_count": 2,
+        "recall": 0.5,
+        "reference_count": 4
+      },
+      "offset": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 0,
+        "recall": 0.0,
+        "reference_count": 4
+      },
+      "per_unit_total": {
+        "f1": 0.24,
+        "overlap": 3,
+        "precision": 0.42857142857142855,
+        "predicted_count": 7,
+        "recall": 0.16666666666666666,
+        "reference_count": 18
+      },
+      "percent_of": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 2,
+        "recall": 0.0,
+        "reference_count": 2
+      },
+      "percentage_ratio": {
+        "f1": 0.4444444444444445,
+        "overlap": 2,
+        "precision": 0.5,
+        "predicted_count": 4,
+        "recall": 0.4,
+        "reference_count": 5
+      },
+      "product_of": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 0,
+        "recall": 0.0,
+        "reference_count": 1
+      },
+      "quotient": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 1,
+        "recall": 0.0,
+        "reference_count": 5
+      },
+      "remaining": {
+        "f1": 0.39999999999999997,
+        "overlap": 3,
+        "precision": 0.75,
+        "predicted_count": 4,
+        "recall": 0.2727272727272727,
+        "reference_count": 11
+      },
+      "same": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 0,
+        "recall": 0.0,
+        "reference_count": 1
+      },
+      "sum_of": {
+        "f1": 0.125,
+        "overlap": 1,
+        "precision": 0.16666666666666666,
+        "predicted_count": 6,
+        "recall": 0.1,
+        "reference_count": 10
+      }
+    },
+    "query_target_accuracy": {
+      "correct": 7,
+      "rate": 0.28,
+      "support": 25
+    },
+    "relation_direction_accuracy": {
+      "correct": 10,
+      "rate": 0.2127659574468085,
+      "support": 47
+    }
+  },
+  "confusion": {
+    "amount->missing": 2,
+    "base->missing": 2,
+    "count->missing": 3,
+    "denominator->missing": 1,
+    "extra->missing": 1,
+    "member->missing": 2,
+    "numerator->missing": 1,
+    "per_unit->missing": 1,
+    "source->missing": 1,
+    "used->member": 1,
+    "used->missing": 2,
+    "whole->missing": 2
+  }
+}

@@ -1,0 +1,1380 @@
+{
+  "outcome_patterns": {
+    "F0": 4,
+    "F0F1F2": 5,
+    "F0F2": 2,
+    "F1": 1,
+    "F2": 2,
+    "NONE": 11
+  },
+  "pairwise": {
+    "F1_minus_F0": {
+      "left_only": 1,
+      "paired_exact_p_exploratory": 0.125,
+      "right_only": 6
+    },
+    "F2_minus_F0": {
+      "left_only": 2,
+      "paired_exact_p_exploratory": 0.6875,
+      "right_only": 4
+    },
+    "F2_minus_F1": {
+      "left_only": 4,
+      "paired_exact_p_exploratory": 0.375,
+      "right_only": 1
+    }
+  },
+  "records": [
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "temporal_qualifier",
+          "temporal_semantics",
+          "unresolved_symbol_equivalence"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics",
+          "unresolved_symbol_equivalence"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl",
+          "temporal_qualifier",
+          "temporal_semantics"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "1497",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "source_fact_grounding"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "unresolved_symbol_equivalence"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "17",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "relation_constant",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "unresolved_symbol_equivalence"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "2041",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": false,
+        "F2": true
+      },
+      "parent_source_id": "2866",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "unresolved_symbol_equivalence"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "unresolved_symbol_equivalence"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "operator_mapping",
+          "relation_constant",
+          "return_wrong_target"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": true,
+        "F2": true
+      },
+      "parent_source_id": "2973",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "source_fact_grounding"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "431",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "hallucinated_or_mutated_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_semantics",
+          "unresolved_symbol_equivalence"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "hallucinated_or_mutated_number",
+          "qualifier_grounding",
+          "relation_constant",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "hallucinated_or_mutated_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "relation_constant",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics",
+          "transitive_shortcut"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "4524",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.3333333333333333
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_malformed_syntax"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "operator_mapping",
+          "relation_constant"
+        ],
+        "F2": [
+          "dependency_incomplete",
+          "derived_literal_presented_as_source_fact",
+          "hallucinated_or_mutated_number",
+          "operator_mapping",
+          "premature_literal_collapse",
+          "relation_constant",
+          "relation_direction",
+          "source_fact_grounding"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "5419",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.09523809523809525
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_malformed_syntax"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "source_fact_grounding",
+          "unresolved_symbol_equivalence"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": true
+      },
+      "parent_source_id": "5442",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.3636363636363636,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "transitive_shortcut"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "unresolved_symbol_equivalence"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": true
+      },
+      "parent_source_id": "5584",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "derived_literal_presented_as_source_fact",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "omitted_number",
+          "operator_mapping",
+          "premature_literal_collapse",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "5682",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "unresolved_symbol_equivalence"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "5758",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_malformed_syntax"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "6207",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.11764705882352941,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "lowering_unsupported_form",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "639",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.5714285714285715,
+        "F2": 1.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "operator_mapping"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": false,
+        "F2": true
+      },
+      "parent_source_id": "6926",
+      "semantic_structure": {
+        "F0": true,
+        "F1": false,
+        "F2": true
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.6666666666666666,
+        "F2": 0.0
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "dependency_incomplete",
+          "entity_grounding",
+          "operator_mapping"
+        ],
+        "F1": [
+          "dependency_incomplete",
+          "entity_grounding"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": true,
+        "F2": false
+      },
+      "parent_source_id": "7105",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.14285714285714285
+      },
+      "dataset": "gsm8k",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "relation_constant",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_semantics",
+          "unresolved_symbol_equivalence"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "ambiguous_symbol_alignment",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "relation_constant",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_semantics",
+          "unresolved_symbol_equivalence"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics",
+          "unresolved_symbol_equivalence"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "7158",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.4444444444444445,
+        "F2": 0.4444444444444445
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "qualifier_grounding",
+          "return_wrong_target"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "qualifier_grounding"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "qualifier_grounding",
+          "transitive_shortcut"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": true,
+        "F2": true
+      },
+      "parent_source_id": "237cfd13f0cd6f68dbe8b96bb20c6860",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "number_attached_to_wrong_path",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "30fd8f5081139c783553048b9ca81767",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": true,
+        "F2": true
+      },
+      "parent_source_id": "319718c17746511f9cc4d51c9bb51f46",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.5,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "return_wrong_target"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "hallucinated_or_mutated_number",
+          "omitted_number",
+          "relation_constant",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "hallucinated_or_mutated_number",
+          "omitted_number",
+          "relation_constant",
+          "source_fact_grounding",
+          "transitive_shortcut"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "55f69b42bc6bebfe50946d8cfc428734",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": true,
+        "F2": true
+      },
+      "parent_source_id": "5ea8b697b08543967c3f5f567eb27d07",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "hallucinated_or_mutated_number",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "ambiguous_symbol_alignment",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "source_fact_grounding",
+          "temporal_qualifier",
+          "temporal_semantics",
+          "transitive_shortcut"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl",
+          "temporal_qualifier",
+          "temporal_semantics"
+        ]
+      },
+      "outcome": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "8db33337e2c6be87644b0f65b20d6bcb",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F1": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "qualifier_grounding",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "aggregation_cardinality",
+          "attribute_grounding",
+          "cardinality_qualifier",
+          "dependency_incomplete",
+          "entity_grounding",
+          "omitted_number",
+          "operator_mapping",
+          "qualifier_grounding",
+          "return_missing",
+          "source_fact_grounding",
+          "surface_no_asl"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": false,
+        "F2": false
+      },
+      "parent_source_id": "a2cc2d575664476f15e55b2ee3d34ceb",
+      "semantic_structure": {
+        "F0": false,
+        "F1": false,
+        "F2": false
+      }
+    },
+    {
+      "blackboard_f1": {
+        "F0": 0.0,
+        "F1": 0.0,
+        "F2": 0.0
+      },
+      "dataset": "tatqa",
+      "errors": {
+        "F0": [
+          "attribute_grounding"
+        ],
+        "F1": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ],
+        "F2": [
+          "attribute_grounding",
+          "dependency_incomplete",
+          "entity_grounding",
+          "number_attached_to_wrong_path",
+          "return_wrong_target",
+          "source_fact_grounding"
+        ]
+      },
+      "outcome": {
+        "F0": true,
+        "F1": true,
+        "F2": true
+      },
+      "parent_source_id": "be0af841a206a4a98939e51462b62623",
+      "semantic_structure": {
+        "F0": true,
+        "F1": false,
+        "F2": false
+      }
+    }
+  ]
+}

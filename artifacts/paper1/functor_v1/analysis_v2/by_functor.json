@@ -1,0 +1,441 @@
+{
+  "bucket_definition": {
+    "frequent": "50+ train occurrences",
+    "medium": "10-49 train occurrences",
+    "rare": "1-9 train occurrences",
+    "unseen": "0 train occurrences"
+  },
+  "by_frequency_bucket": {
+    "frequent": {
+      "argument_binding_exact": {
+        "correct": 21,
+        "rate": 0.15789473684210525,
+        "support": 133
+      },
+      "class_accuracy": {
+        "correct": 29,
+        "rate": 0.21804511278195488,
+        "support": 133
+      },
+      "direction_accuracy": {
+        "correct": 8,
+        "rate": 0.14545454545454545,
+        "support": 55
+      },
+      "final_answer_association": {
+        "correct": 41,
+        "rate": 0.3082706766917293,
+        "support": 133
+      },
+      "support": 133
+    },
+    "medium": {
+      "argument_binding_exact": {
+        "correct": 2,
+        "rate": 0.2,
+        "support": 10
+      },
+      "class_accuracy": {
+        "correct": 2,
+        "rate": 0.2,
+        "support": 10
+      },
+      "direction_accuracy": {
+        "correct": 2,
+        "rate": 0.3333333333333333,
+        "support": 6
+      },
+      "final_answer_association": {
+        "correct": 2,
+        "rate": 0.2,
+        "support": 10
+      },
+      "support": 10
+    },
+    "rare": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": null,
+        "support": 0
+      },
+      "final_answer_association": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "support": 1
+    }
+  },
+  "per_functor": {
+    "decrease_percent": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "final_answer_association": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "support": 1,
+      "train_frequency": 23
+    },
+    "difference": {
+      "argument_binding_exact": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "class_accuracy": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "direction_accuracy": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "final_answer_association": {
+        "correct": 3,
+        "rate": 0.6,
+        "support": 5
+      },
+      "support": 5,
+      "train_frequency": 103
+    },
+    "fraction_of": {
+      "argument_binding_exact": {
+        "correct": 3,
+        "rate": 0.5,
+        "support": 6
+      },
+      "class_accuracy": {
+        "correct": 3,
+        "rate": 0.5,
+        "support": 6
+      },
+      "direction_accuracy": {
+        "correct": 3,
+        "rate": 0.5,
+        "support": 6
+      },
+      "final_answer_association": {
+        "correct": 2,
+        "rate": 0.3333333333333333,
+        "support": 6
+      },
+      "support": 6,
+      "train_frequency": 136
+    },
+    "given": {
+      "argument_binding_exact": {
+        "correct": 13,
+        "rate": 0.19117647058823528,
+        "support": 68
+      },
+      "class_accuracy": {
+        "correct": 15,
+        "rate": 0.22058823529411764,
+        "support": 68
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": null,
+        "support": 0
+      },
+      "final_answer_association": {
+        "correct": 23,
+        "rate": 0.3382352941176471,
+        "support": 68
+      },
+      "support": 68,
+      "train_frequency": 1033
+    },
+    "mean_of": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 3
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 3
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": null,
+        "support": 0
+      },
+      "final_answer_association": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 3
+      },
+      "support": 3,
+      "train_frequency": 23
+    },
+    "multiple": {
+      "argument_binding_exact": {
+        "correct": 1,
+        "rate": 0.25,
+        "support": 4
+      },
+      "class_accuracy": {
+        "correct": 2,
+        "rate": 0.5,
+        "support": 4
+      },
+      "direction_accuracy": {
+        "correct": 1,
+        "rate": 0.25,
+        "support": 4
+      },
+      "final_answer_association": {
+        "correct": 1,
+        "rate": 0.25,
+        "support": 4
+      },
+      "support": 4,
+      "train_frequency": 149
+    },
+    "offset": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 4
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 4
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 4
+      },
+      "final_answer_association": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 4
+      },
+      "support": 4,
+      "train_frequency": 126
+    },
+    "per_unit_total": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 18
+      },
+      "class_accuracy": {
+        "correct": 3,
+        "rate": 0.16666666666666666,
+        "support": 18
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 18
+      },
+      "final_answer_association": {
+        "correct": 3,
+        "rate": 0.16666666666666666,
+        "support": 18
+      },
+      "support": 18,
+      "train_frequency": 192
+    },
+    "percent_of": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 2
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 2
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 2
+      },
+      "final_answer_association": {
+        "correct": 1,
+        "rate": 0.5,
+        "support": 2
+      },
+      "support": 2,
+      "train_frequency": 65
+    },
+    "percentage_ratio": {
+      "argument_binding_exact": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "class_accuracy": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "direction_accuracy": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "final_answer_association": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "support": 5,
+      "train_frequency": 42
+    },
+    "product_of": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": null,
+        "support": 0
+      },
+      "final_answer_association": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "support": 1,
+      "train_frequency": 8
+    },
+    "quotient": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 5
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 5
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 5
+      },
+      "final_answer_association": {
+        "correct": 2,
+        "rate": 0.4,
+        "support": 5
+      },
+      "support": 5,
+      "train_frequency": 84
+    },
+    "remaining": {
+      "argument_binding_exact": {
+        "correct": 2,
+        "rate": 0.18181818181818182,
+        "support": 11
+      },
+      "class_accuracy": {
+        "correct": 3,
+        "rate": 0.2727272727272727,
+        "support": 11
+      },
+      "direction_accuracy": {
+        "correct": 2,
+        "rate": 0.18181818181818182,
+        "support": 11
+      },
+      "final_answer_association": {
+        "correct": 4,
+        "rate": 0.36363636363636365,
+        "support": 11
+      },
+      "support": 11,
+      "train_frequency": 152
+    },
+    "same": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "class_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": null,
+        "support": 0
+      },
+      "final_answer_association": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 1
+      },
+      "support": 1,
+      "train_frequency": 10
+    },
+    "sum_of": {
+      "argument_binding_exact": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 10
+      },
+      "class_accuracy": {
+        "correct": 1,
+        "rate": 0.1,
+        "support": 10
+      },
+      "direction_accuracy": {
+        "correct": 0,
+        "rate": null,
+        "support": 0
+      },
+      "final_answer_association": {
+        "correct": 2,
+        "rate": 0.2,
+        "support": 10
+      },
+      "support": 10,
+      "train_frequency": 227
+    }
+  }
+}

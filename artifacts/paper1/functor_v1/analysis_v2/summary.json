@@ -1,0 +1,2607 @@
+{
+  "argument_role_confusion": {
+    "amount->missing": 2,
+    "base->missing": 2,
+    "count->missing": 3,
+    "denominator->missing": 1,
+    "extra->missing": 1,
+    "member->missing": 2,
+    "numerator->missing": 1,
+    "per_unit->missing": 1,
+    "source->missing": 1,
+    "used->member": 1,
+    "used->missing": 2,
+    "whole->missing": 2
+  },
+  "blackboard": {
+    "F0": {
+      "blackboard_f1": 0.02,
+      "blackboard_precision": 0.026666666666666665,
+      "blackboard_recall": 0.016,
+      "dependency_f1": 0.10088888888888889,
+      "spurious_state_rate": 0.9733333333333334
+    },
+    "F1": {
+      "blackboard_f1": 0.08655292419998302,
+      "blackboard_precision": 0.09377777777777778,
+      "blackboard_recall": 0.081,
+      "dependency_f1": 0.08197402597402598,
+      "spurious_state_rate": 0.9062222222222223
+    },
+    "F2": {
+      "blackboard_f1": 0.08063492063492063,
+      "blackboard_precision": 0.08304761904761905,
+      "blackboard_recall": 0.07868398268398269,
+      "dependency_f1": 0.1211369332421964,
+      "spurious_state_rate": 0.916952380952381
+    }
+  },
+  "by_dataset": {
+    "gsm8k": {
+      "F0": {
+        "conditional": {
+          "answer_given_runtime_state_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_runtime_state_incorrect": {
+            "correct": 4,
+            "rate": 0.23529411764705882,
+            "support": 17
+          },
+          "answer_given_semantic_structure_correct": {
+            "correct": 1,
+            "rate": 1.0,
+            "support": 1
+          },
+          "answer_given_semantic_structure_incorrect": {
+            "correct": 3,
+            "rate": 0.1875,
+            "support": 16
+          },
+          "semantic_structure_given_lowerable": {
+            "correct": 1,
+            "rate": 0.07692307692307693,
+            "support": 13
+          },
+          "semantic_structure_given_parse": {
+            "correct": 1,
+            "rate": 0.07142857142857142,
+            "support": 14
+          }
+        },
+        "cost": {
+          "final_success_per_generated_token": 0.0018552875695732839,
+          "generated_tokens_per_correct_answer": 539.0,
+          "mean_ast_nodes": 7.176470588235294,
+          "mean_generated_tokens": 126.82352941176471,
+          "mean_prompt_tokens": 133.23529411764707,
+          "mean_statement_count": 7.176470588235294,
+          "semantic_success_per_generated_token": 0.00046382189239332097
+        },
+        "count": 17,
+        "error_counts": {
+          "aggregation_cardinality": 11,
+          "attribute_grounding": 15,
+          "cardinality_qualifier": 11,
+          "dependency_incomplete": 16,
+          "derived_literal_presented_as_source_fact": 1,
+          "entity_grounding": 13,
+          "hallucinated_or_mutated_number": 8,
+          "lowering_unsupported_form": 1,
+          "number_attached_to_wrong_path": 9,
+          "omitted_number": 7,
+          "operator_mapping": 14,
+          "premature_literal_collapse": 1,
+          "qualifier_grounding": 12,
+          "relation_constant": 2,
+          "return_missing": 4,
+          "return_wrong_target": 9,
+          "source_fact_grounding": 14,
+          "surface_malformed_syntax": 3,
+          "temporal_qualifier": 3,
+          "temporal_semantics": 3,
+          "transitive_shortcut": 1,
+          "unresolved_symbol_equivalence": 6
+        },
+        "mean_blackboard": {
+          "blackboard_f1": 0.0,
+          "blackboard_precision": 0.0,
+          "blackboard_recall": 0.0,
+          "dependency_f1": 0.08954248366013072,
+          "spurious_state_rate": 1.0
+        },
+        "mean_semantic": {
+          "attribute": 0.19887463757432797,
+          "dependency": 0.08954248366013072,
+          "entity": 0.5196078431372549,
+          "operator": 0.5855360325948561,
+          "qualifier": 0.47373410902822666
+        },
+        "rates": {
+          "executable": {
+            "correct": 12,
+            "rate": 0.7058823529411765,
+            "support": 17,
+            "wilson95": [
+              0.4686688993346016,
+              0.8672001038970478
+            ]
+          },
+          "fail_closed": {
+            "correct": 5,
+            "rate": 0.29411764705882354,
+            "support": 17,
+            "wilson95": [
+              0.1327998961029523,
+              0.5313311006653985
+            ]
+          },
+          "final_answer": {
+            "correct": 4,
+            "rate": 0.23529411764705882,
+            "support": 17,
+            "wilson95": [
+              0.09555044322080117,
+              0.4726179811956498
+            ]
+          },
+          "lowerable": {
+            "correct": 13,
+            "rate": 0.7647058823529411,
+            "support": 17,
+            "wilson95": [
+              0.5273820188043501,
+              0.9044495567791988
+            ]
+          },
+          "parse": {
+            "correct": 14,
+            "rate": 0.8235294117647058,
+            "support": 17,
+            "wilson95": [
+              0.5897054143116588,
+              0.9380887336237901
+            ]
+          },
+          "semantic_state": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 17,
+            "wilson95": [
+              0.0,
+              0.1843181350088518
+            ]
+          },
+          "semantic_structure": {
+            "correct": 1,
+            "rate": 0.058823529411764705,
+            "support": 17,
+            "wilson95": [
+              0.010460400984997592,
+              0.26982030637575405
+            ]
+          },
+          "type_valid": {
+            "correct": 13,
+            "rate": 0.7647058823529411,
+            "support": 17,
+            "wilson95": [
+              0.5273820188043501,
+              0.9044495567791988
+            ]
+          }
+        }
+      },
+      "F1": {
+        "conditional": {
+          "answer_given_runtime_state_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_runtime_state_incorrect": {
+            "correct": 2,
+            "rate": 0.11764705882352941,
+            "support": 17
+          },
+          "answer_given_semantic_structure_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_semantic_structure_incorrect": {
+            "correct": 2,
+            "rate": 0.11764705882352941,
+            "support": 17
+          },
+          "semantic_structure_given_lowerable": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 9
+          },
+          "semantic_structure_given_parse": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 9
+          }
+        },
+        "cost": {
+          "final_success_per_generated_token": 0.0008952551477170994,
+          "generated_tokens_per_correct_answer": 1117.0,
+          "mean_ast_nodes": 19.823529411764707,
+          "mean_generated_tokens": 131.41176470588235,
+          "mean_prompt_tokens": 135.23529411764707,
+          "mean_statement_count": 3.1176470588235294,
+          "semantic_success_per_generated_token": 0.0
+        },
+        "count": 17,
+        "error_counts": {
+          "aggregation_cardinality": 12,
+          "ambiguous_symbol_alignment": 1,
+          "attribute_grounding": 16,
+          "cardinality_qualifier": 13,
+          "dependency_incomplete": 17,
+          "entity_grounding": 11,
+          "hallucinated_or_mutated_number": 3,
+          "number_attached_to_wrong_path": 3,
+          "omitted_number": 11,
+          "operator_mapping": 14,
+          "qualifier_grounding": 14,
+          "relation_constant": 3,
+          "return_missing": 8,
+          "return_wrong_target": 5,
+          "source_fact_grounding": 14,
+          "surface_no_asl": 8,
+          "temporal_qualifier": 2,
+          "temporal_semantics": 3,
+          "unresolved_symbol_equivalence": 3
+        },
+        "f1_asl_isomorphic_accuracy": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 17
+        },
+        "mean_blackboard": {
+          "blackboard_f1": 0.10113992120912536,
+          "blackboard_precision": 0.1084967320261438,
+          "blackboard_recall": 0.09558823529411764,
+          "dependency_f1": 0.03819709702062643,
+          "spurious_state_rate": 0.8915032679738563
+        },
+        "mean_semantic": {
+          "attribute": 0.1724297374452173,
+          "dependency": 0.03819709702062643,
+          "entity": 0.47058823529411764,
+          "operator": 0.3633053221288515,
+          "qualifier": 0.30034602076124567
+        },
+        "rates": {
+          "executable": {
+            "correct": 8,
+            "rate": 0.47058823529411764,
+            "support": 17,
+            "wilson95": [
+              0.26165106442409436,
+              0.6903676493999558
+            ]
+          },
+          "fail_closed": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          },
+          "final_answer": {
+            "correct": 2,
+            "rate": 0.11764705882352941,
+            "support": 17,
+            "wilson95": [
+              0.03287977376379267,
+              0.3433635059488588
+            ]
+          },
+          "lowerable": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          },
+          "parse": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          },
+          "semantic_state": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 17,
+            "wilson95": [
+              0.0,
+              0.1843181350088518
+            ]
+          },
+          "semantic_structure": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 17,
+            "wilson95": [
+              0.0,
+              0.1843181350088518
+            ]
+          },
+          "type_valid": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          }
+        }
+      },
+      "F2": {
+        "conditional": {
+          "answer_given_runtime_state_correct": {
+            "correct": 1,
+            "rate": 1.0,
+            "support": 1
+          },
+          "answer_given_runtime_state_incorrect": {
+            "correct": 4,
+            "rate": 0.25,
+            "support": 16
+          },
+          "answer_given_semantic_structure_correct": {
+            "correct": 1,
+            "rate": 1.0,
+            "support": 1
+          },
+          "answer_given_semantic_structure_incorrect": {
+            "correct": 4,
+            "rate": 0.25,
+            "support": 16
+          },
+          "semantic_structure_given_lowerable": {
+            "correct": 1,
+            "rate": 0.1111111111111111,
+            "support": 9
+          },
+          "semantic_structure_given_parse": {
+            "correct": 1,
+            "rate": 0.1111111111111111,
+            "support": 9
+          }
+        },
+        "cost": {
+          "final_success_per_generated_token": 0.0017164435290078957,
+          "generated_tokens_per_correct_answer": 582.6,
+          "mean_ast_nodes": 24.294117647058822,
+          "mean_generated_tokens": 171.35294117647058,
+          "mean_prompt_tokens": 136.23529411764707,
+          "mean_statement_count": 3.764705882352941,
+          "semantic_success_per_generated_token": 0.00034328870580157915
+        },
+        "count": 17,
+        "error_counts": {
+          "aggregation_cardinality": 10,
+          "attribute_grounding": 15,
+          "cardinality_qualifier": 11,
+          "dependency_incomplete": 16,
+          "derived_literal_presented_as_source_fact": 1,
+          "entity_grounding": 13,
+          "hallucinated_or_mutated_number": 2,
+          "number_attached_to_wrong_path": 5,
+          "omitted_number": 9,
+          "operator_mapping": 16,
+          "premature_literal_collapse": 1,
+          "qualifier_grounding": 13,
+          "relation_constant": 3,
+          "relation_direction": 1,
+          "return_missing": 8,
+          "return_wrong_target": 4,
+          "source_fact_grounding": 15,
+          "surface_no_asl": 8,
+          "temporal_qualifier": 3,
+          "temporal_semantics": 3,
+          "transitive_shortcut": 1,
+          "unresolved_symbol_equivalence": 4
+        },
+        "f2_semantics": {
+          "argument_binding_exact": {
+            "correct": 17,
+            "rate": 0.1504424778761062,
+            "support": 113
+          },
+          "argument_role_accuracy": {
+            "correct": 58,
+            "rate": 0.19141914191419143,
+            "support": 303
+          },
+          "functor_class_macro_f1": 0.17935193012116088,
+          "functor_class_micro": {
+            "f1": 0.27710843373493976,
+            "overlap": 23,
+            "precision": 0.4339622641509434,
+            "predicted_count": 53,
+            "recall": 0.20353982300884957,
+            "reference_count": 113
+          },
+          "per_functor_class": {
+            "decrease_percent": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 0,
+              "recall": 0.0,
+              "reference_count": 1
+            },
+            "fraction_of": {
+              "f1": 0.6,
+              "overlap": 3,
+              "precision": 0.75,
+              "predicted_count": 4,
+              "recall": 0.5,
+              "reference_count": 6
+            },
+            "given": {
+              "f1": 0.28205128205128205,
+              "overlap": 11,
+              "precision": 0.39285714285714285,
+              "predicted_count": 28,
+              "recall": 0.22,
+              "reference_count": 50
+            },
+            "mean_of": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 0,
+              "recall": 0.0,
+              "reference_count": 1
+            },
+            "multiple": {
+              "f1": 0.6666666666666666,
+              "overlap": 2,
+              "precision": 1.0,
+              "predicted_count": 2,
+              "recall": 0.5,
+              "reference_count": 4
+            },
+            "offset": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 0,
+              "recall": 0.0,
+              "reference_count": 4
+            },
+            "per_unit_total": {
+              "f1": 0.24,
+              "overlap": 3,
+              "precision": 0.42857142857142855,
+              "predicted_count": 7,
+              "recall": 0.16666666666666666,
+              "reference_count": 18
+            },
+            "percent_of": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 2,
+              "recall": 0.0,
+              "reference_count": 2
+            },
+            "product_of": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 0,
+              "recall": 0.0,
+              "reference_count": 1
+            },
+            "quotient": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 1,
+              "recall": 0.0,
+              "reference_count": 5
+            },
+            "remaining": {
+              "f1": 0.39999999999999997,
+              "overlap": 3,
+              "precision": 0.75,
+              "predicted_count": 4,
+              "recall": 0.2727272727272727,
+              "reference_count": 11
+            },
+            "same": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 0,
+              "recall": 0.0,
+              "reference_count": 1
+            },
+            "sum_of": {
+              "f1": 0.14285714285714285,
+              "overlap": 1,
+              "precision": 0.2,
+              "predicted_count": 5,
+              "recall": 0.1111111111111111,
+              "reference_count": 9
+            }
+          },
+          "query_target_accuracy": {
+            "correct": 5,
+            "rate": 0.29411764705882354,
+            "support": 17
+          },
+          "relation_direction_accuracy": {
+            "correct": 6,
+            "rate": 0.14634146341463414,
+            "support": 41
+          }
+        },
+        "f2_semantics_given_parse": {
+          "argument_binding_exact": {
+            "correct": 17,
+            "rate": 0.32075471698113206,
+            "support": 53
+          },
+          "argument_role_accuracy": {
+            "correct": 58,
+            "rate": 0.4084507042253521,
+            "support": 142
+          },
+          "functor_class_macro_f1": 0.3659221630919744,
+          "functor_class_micro": {
+            "f1": 0.43396226415094347,
+            "overlap": 23,
+            "precision": 0.4339622641509434,
+            "predicted_count": 53,
+            "recall": 0.4339622641509434,
+            "reference_count": 53
+          },
+          "per_functor_class": {
+            "fraction_of": {
+              "f1": 0.6666666666666665,
+              "overlap": 3,
+              "precision": 0.75,
+              "predicted_count": 4,
+              "recall": 0.6,
+              "reference_count": 5
+            },
+            "given": {
+              "f1": 0.4150943396226415,
+              "overlap": 11,
+              "precision": 0.39285714285714285,
+              "predicted_count": 28,
+              "recall": 0.44,
+              "reference_count": 25
+            },
+            "multiple": {
+              "f1": 1.0,
+              "overlap": 2,
+              "precision": 1.0,
+              "predicted_count": 2,
+              "recall": 1.0,
+              "reference_count": 2
+            },
+            "per_unit_total": {
+              "f1": 0.4615384615384615,
+              "overlap": 3,
+              "precision": 0.42857142857142855,
+              "predicted_count": 7,
+              "recall": 0.5,
+              "reference_count": 6
+            },
+            "percent_of": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 2,
+              "recall": 0.0,
+              "reference_count": 1
+            },
+            "quotient": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 1,
+              "recall": 0.0,
+              "reference_count": 2
+            },
+            "remaining": {
+              "f1": 0.5,
+              "overlap": 3,
+              "precision": 0.75,
+              "predicted_count": 4,
+              "recall": 0.375,
+              "reference_count": 8
+            },
+            "same": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 0,
+              "recall": 0.0,
+              "reference_count": 1
+            },
+            "sum_of": {
+              "f1": 0.25,
+              "overlap": 1,
+              "precision": 0.2,
+              "predicted_count": 5,
+              "recall": 0.3333333333333333,
+              "reference_count": 3
+            }
+          },
+          "query_target_accuracy": {
+            "correct": 5,
+            "rate": 0.5555555555555556,
+            "support": 9
+          },
+          "relation_direction_accuracy": {
+            "correct": 6,
+            "rate": 0.42857142857142855,
+            "support": 14
+          }
+        },
+        "mean_blackboard": {
+          "blackboard_f1": 0.09243697478991597,
+          "blackboard_precision": 0.0927170868347339,
+          "blackboard_recall": 0.09218232747644513,
+          "dependency_f1": 0.13892686261107315,
+          "spurious_state_rate": 0.9072829131652661
+        },
+        "mean_semantic": {
+          "attribute": 0.24789915966386555,
+          "dependency": 0.13892686261107315,
+          "entity": 0.3627450980392157,
+          "operator": 0.38613445378151257,
+          "qualifier": 0.36834733893557425
+        },
+        "rates": {
+          "executable": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          },
+          "fail_closed": {
+            "correct": 8,
+            "rate": 0.47058823529411764,
+            "support": 17,
+            "wilson95": [
+              0.26165106442409436,
+              0.6903676493999558
+            ]
+          },
+          "final_answer": {
+            "correct": 5,
+            "rate": 0.29411764705882354,
+            "support": 17,
+            "wilson95": [
+              0.1327998961029523,
+              0.5313311006653985
+            ]
+          },
+          "lowerable": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          },
+          "parse": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          },
+          "semantic_state": {
+            "correct": 1,
+            "rate": 0.058823529411764705,
+            "support": 17,
+            "wilson95": [
+              0.010460400984997592,
+              0.26982030637575405
+            ]
+          },
+          "semantic_structure": {
+            "correct": 1,
+            "rate": 0.058823529411764705,
+            "support": 17,
+            "wilson95": [
+              0.010460400984997592,
+              0.26982030637575405
+            ]
+          },
+          "type_valid": {
+            "correct": 9,
+            "rate": 0.5294117647058824,
+            "support": 17,
+            "wilson95": [
+              0.30963235060004424,
+              0.7383489355759056
+            ]
+          }
+        }
+      }
+    },
+    "tatqa": {
+      "F0": {
+        "conditional": {
+          "answer_given_runtime_state_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_runtime_state_incorrect": {
+            "correct": 7,
+            "rate": 0.875,
+            "support": 8
+          },
+          "answer_given_semantic_structure_correct": {
+            "correct": 1,
+            "rate": 1.0,
+            "support": 1
+          },
+          "answer_given_semantic_structure_incorrect": {
+            "correct": 6,
+            "rate": 0.8571428571428571,
+            "support": 7
+          },
+          "semantic_structure_given_lowerable": {
+            "correct": 1,
+            "rate": 0.125,
+            "support": 8
+          },
+          "semantic_structure_given_parse": {
+            "correct": 1,
+            "rate": 0.125,
+            "support": 8
+          }
+        },
+        "cost": {
+          "final_success_per_generated_token": 0.006427915518824609,
+          "generated_tokens_per_correct_answer": 155.57142857142858,
+          "mean_ast_nodes": 4.5,
+          "mean_generated_tokens": 136.125,
+          "mean_prompt_tokens": 448.375,
+          "mean_statement_count": 4.5,
+          "semantic_success_per_generated_token": 0.0009182736455463728
+        },
+        "count": 8,
+        "error_counts": {
+          "aggregation_cardinality": 4,
+          "attribute_grounding": 8,
+          "cardinality_qualifier": 4,
+          "dependency_incomplete": 7,
+          "entity_grounding": 5,
+          "hallucinated_or_mutated_number": 1,
+          "number_attached_to_wrong_path": 4,
+          "omitted_number": 1,
+          "operator_mapping": 2,
+          "qualifier_grounding": 5,
+          "return_wrong_target": 7,
+          "source_fact_grounding": 5,
+          "temporal_qualifier": 2,
+          "temporal_semantics": 2
+        },
+        "mean_blackboard": {
+          "blackboard_f1": 0.0625,
+          "blackboard_precision": 0.08333333333333333,
+          "blackboard_recall": 0.05,
+          "dependency_f1": 0.125,
+          "spurious_state_rate": 0.9166666666666666
+        },
+        "mean_semantic": {
+          "attribute": 0.0625,
+          "dependency": 0.125,
+          "entity": 0.375,
+          "operator": 0.8611111111111112,
+          "qualifier": 0.5881410256410257
+        },
+        "rates": {
+          "executable": {
+            "correct": 7,
+            "rate": 0.875,
+            "support": 8,
+            "wilson95": [
+              0.5291118177871464,
+              0.9775825085499433
+            ]
+          },
+          "fail_closed": {
+            "correct": 1,
+            "rate": 0.125,
+            "support": 8,
+            "wilson95": [
+              0.02241749145005667,
+              0.4708881822128535
+            ]
+          },
+          "final_answer": {
+            "correct": 7,
+            "rate": 0.875,
+            "support": 8,
+            "wilson95": [
+              0.5291118177871464,
+              0.9775825085499433
+            ]
+          },
+          "lowerable": {
+            "correct": 8,
+            "rate": 1.0,
+            "support": 8,
+            "wilson95": [
+              0.6755924351161198,
+              1.0
+            ]
+          },
+          "parse": {
+            "correct": 8,
+            "rate": 1.0,
+            "support": 8,
+            "wilson95": [
+              0.6755924351161198,
+              1.0
+            ]
+          },
+          "semantic_state": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8,
+            "wilson95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "semantic_structure": {
+            "correct": 1,
+            "rate": 0.125,
+            "support": 8,
+            "wilson95": [
+              0.02241749145005667,
+              0.4708881822128535
+            ]
+          },
+          "type_valid": {
+            "correct": 8,
+            "rate": 1.0,
+            "support": 8,
+            "wilson95": [
+              0.6755924351161198,
+              1.0
+            ]
+          }
+        }
+      },
+      "F1": {
+        "conditional": {
+          "answer_given_runtime_state_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_runtime_state_incorrect": {
+            "correct": 4,
+            "rate": 0.5,
+            "support": 8
+          },
+          "answer_given_semantic_structure_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_semantic_structure_incorrect": {
+            "correct": 4,
+            "rate": 0.5,
+            "support": 8
+          },
+          "semantic_structure_given_lowerable": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8
+          },
+          "semantic_structure_given_parse": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8
+          }
+        },
+        "cost": {
+          "final_success_per_generated_token": 0.0034453057708871662,
+          "generated_tokens_per_correct_answer": 290.25,
+          "mean_ast_nodes": 32.75,
+          "mean_generated_tokens": 145.125,
+          "mean_prompt_tokens": 396.125,
+          "mean_statement_count": 5.25,
+          "semantic_success_per_generated_token": 0.0
+        },
+        "count": 8,
+        "error_counts": {
+          "aggregation_cardinality": 4,
+          "ambiguous_symbol_alignment": 1,
+          "attribute_grounding": 8,
+          "cardinality_qualifier": 4,
+          "dependency_incomplete": 7,
+          "entity_grounding": 5,
+          "hallucinated_or_mutated_number": 2,
+          "number_attached_to_wrong_path": 5,
+          "omitted_number": 3,
+          "operator_mapping": 2,
+          "qualifier_grounding": 5,
+          "relation_constant": 1,
+          "return_wrong_target": 5,
+          "source_fact_grounding": 7,
+          "temporal_qualifier": 2,
+          "temporal_semantics": 2,
+          "transitive_shortcut": 1
+        },
+        "f1_asl_isomorphic_accuracy": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 8
+        },
+        "mean_blackboard": {
+          "blackboard_f1": 0.05555555555555556,
+          "blackboard_precision": 0.0625,
+          "blackboard_recall": 0.05,
+          "dependency_f1": 0.17500000000000002,
+          "spurious_state_rate": 0.9375
+        },
+        "mean_semantic": {
+          "attribute": 0.21458333333333335,
+          "dependency": 0.17500000000000002,
+          "entity": 0.375,
+          "operator": 0.8916666666666667,
+          "qualifier": 0.5191666666666667
+        },
+        "rates": {
+          "executable": {
+            "correct": 8,
+            "rate": 1.0,
+            "support": 8,
+            "wilson95": [
+              0.6755924351161198,
+              1.0
+            ]
+          },
+          "fail_closed": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8,
+            "wilson95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "final_answer": {
+            "correct": 4,
+            "rate": 0.5,
+            "support": 8,
+            "wilson95": [
+              0.21521606221387757,
+              0.7847839377861224
+            ]
+          },
+          "lowerable": {
+            "correct": 8,
+            "rate": 1.0,
+            "support": 8,
+            "wilson95": [
+              0.6755924351161198,
+              1.0
+            ]
+          },
+          "parse": {
+            "correct": 8,
+            "rate": 1.0,
+            "support": 8,
+            "wilson95": [
+              0.6755924351161198,
+              1.0
+            ]
+          },
+          "semantic_state": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8,
+            "wilson95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "semantic_structure": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8,
+            "wilson95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "type_valid": {
+            "correct": 8,
+            "rate": 1.0,
+            "support": 8,
+            "wilson95": [
+              0.6755924351161198,
+              1.0
+            ]
+          }
+        }
+      },
+      "F2": {
+        "conditional": {
+          "answer_given_runtime_state_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_runtime_state_incorrect": {
+            "correct": 4,
+            "rate": 0.5,
+            "support": 8
+          },
+          "answer_given_semantic_structure_correct": {
+            "correct": 0,
+            "rate": null,
+            "support": 0
+          },
+          "answer_given_semantic_structure_incorrect": {
+            "correct": 4,
+            "rate": 0.5,
+            "support": 8
+          },
+          "semantic_structure_given_lowerable": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 6
+          },
+          "semantic_structure_given_parse": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 6
+          }
+        },
+        "cost": {
+          "final_success_per_generated_token": 0.002936857562408223,
+          "generated_tokens_per_correct_answer": 340.5,
+          "mean_ast_nodes": 23.875,
+          "mean_generated_tokens": 170.25,
+          "mean_prompt_tokens": 397.125,
+          "mean_statement_count": 3.875,
+          "semantic_success_per_generated_token": 0.0
+        },
+        "count": 8,
+        "error_counts": {
+          "aggregation_cardinality": 4,
+          "attribute_grounding": 8,
+          "cardinality_qualifier": 4,
+          "dependency_incomplete": 8,
+          "entity_grounding": 6,
+          "hallucinated_or_mutated_number": 2,
+          "number_attached_to_wrong_path": 4,
+          "omitted_number": 4,
+          "operator_mapping": 3,
+          "qualifier_grounding": 4,
+          "relation_constant": 1,
+          "return_missing": 2,
+          "return_wrong_target": 4,
+          "source_fact_grounding": 7,
+          "surface_no_asl": 2,
+          "temporal_qualifier": 2,
+          "temporal_semantics": 2,
+          "transitive_shortcut": 2
+        },
+        "f2_semantics": {
+          "argument_binding_exact": {
+            "correct": 6,
+            "rate": 0.1935483870967742,
+            "support": 31
+          },
+          "argument_role_accuracy": {
+            "correct": 18,
+            "rate": 0.23684210526315788,
+            "support": 76
+          },
+          "functor_class_macro_f1": 0.21737373737373739,
+          "functor_class_micro": {
+            "f1": 0.2857142857142857,
+            "overlap": 8,
+            "precision": 0.32,
+            "predicted_count": 25,
+            "recall": 0.25806451612903225,
+            "reference_count": 31
+          },
+          "per_functor_class": {
+            "difference": {
+              "f1": 0.4000000000000001,
+              "overlap": 2,
+              "precision": 0.4,
+              "predicted_count": 5,
+              "recall": 0.4,
+              "reference_count": 5
+            },
+            "given": {
+              "f1": 0.2424242424242424,
+              "overlap": 4,
+              "precision": 0.26666666666666666,
+              "predicted_count": 15,
+              "recall": 0.2222222222222222,
+              "reference_count": 18
+            },
+            "mean_of": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 0,
+              "recall": 0.0,
+              "reference_count": 2
+            },
+            "percentage_ratio": {
+              "f1": 0.4444444444444445,
+              "overlap": 2,
+              "precision": 0.5,
+              "predicted_count": 4,
+              "recall": 0.4,
+              "reference_count": 5
+            },
+            "sum_of": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 1,
+              "recall": 0.0,
+              "reference_count": 1
+            }
+          },
+          "query_target_accuracy": {
+            "correct": 2,
+            "rate": 0.25,
+            "support": 8
+          },
+          "relation_direction_accuracy": {
+            "correct": 4,
+            "rate": 0.6666666666666666,
+            "support": 6
+          }
+        },
+        "f2_semantics_given_parse": {
+          "argument_binding_exact": {
+            "correct": 6,
+            "rate": 0.2727272727272727,
+            "support": 22
+          },
+          "argument_role_accuracy": {
+            "correct": 18,
+            "rate": 0.3333333333333333,
+            "support": 54
+          },
+          "functor_class_macro_f1": 0.30753968253968256,
+          "functor_class_micro": {
+            "f1": 0.3404255319148936,
+            "overlap": 8,
+            "precision": 0.32,
+            "predicted_count": 25,
+            "recall": 0.36363636363636365,
+            "reference_count": 22
+          },
+          "per_functor_class": {
+            "difference": {
+              "f1": 0.4444444444444445,
+              "overlap": 2,
+              "precision": 0.4,
+              "predicted_count": 5,
+              "recall": 0.5,
+              "reference_count": 4
+            },
+            "given": {
+              "f1": 0.28571428571428575,
+              "overlap": 4,
+              "precision": 0.26666666666666666,
+              "predicted_count": 15,
+              "recall": 0.3076923076923077,
+              "reference_count": 13
+            },
+            "percentage_ratio": {
+              "f1": 0.5,
+              "overlap": 2,
+              "precision": 0.5,
+              "predicted_count": 4,
+              "recall": 0.5,
+              "reference_count": 4
+            },
+            "sum_of": {
+              "f1": 0.0,
+              "overlap": 0,
+              "precision": 0.0,
+              "predicted_count": 1,
+              "recall": 0.0,
+              "reference_count": 1
+            }
+          },
+          "query_target_accuracy": {
+            "correct": 2,
+            "rate": 0.3333333333333333,
+            "support": 6
+          },
+          "relation_direction_accuracy": {
+            "correct": 4,
+            "rate": 1.0,
+            "support": 4
+          }
+        },
+        "mean_blackboard": {
+          "blackboard_f1": 0.05555555555555556,
+          "blackboard_precision": 0.0625,
+          "blackboard_recall": 0.05,
+          "dependency_f1": 0.08333333333333334,
+          "spurious_state_rate": 0.9375
+        },
+        "mean_semantic": {
+          "attribute": 0.16666666666666663,
+          "dependency": 0.08333333333333334,
+          "entity": 0.25,
+          "operator": 0.725,
+          "qualifier": 0.5
+        },
+        "rates": {
+          "executable": {
+            "correct": 6,
+            "rate": 0.75,
+            "support": 8,
+            "wilson95": [
+              0.40927543031016883,
+              0.9285207872478909
+            ]
+          },
+          "fail_closed": {
+            "correct": 2,
+            "rate": 0.25,
+            "support": 8,
+            "wilson95": [
+              0.071479212752109,
+              0.5907245696898311
+            ]
+          },
+          "final_answer": {
+            "correct": 4,
+            "rate": 0.5,
+            "support": 8,
+            "wilson95": [
+              0.21521606221387757,
+              0.7847839377861224
+            ]
+          },
+          "lowerable": {
+            "correct": 6,
+            "rate": 0.75,
+            "support": 8,
+            "wilson95": [
+              0.40927543031016883,
+              0.9285207872478909
+            ]
+          },
+          "parse": {
+            "correct": 6,
+            "rate": 0.75,
+            "support": 8,
+            "wilson95": [
+              0.40927543031016883,
+              0.9285207872478909
+            ]
+          },
+          "semantic_state": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8,
+            "wilson95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "semantic_structure": {
+            "correct": 0,
+            "rate": 0.0,
+            "support": 8,
+            "wilson95": [
+              0.0,
+              0.32440756488388023
+            ]
+          },
+          "type_valid": {
+            "correct": 6,
+            "rate": 0.75,
+            "support": 8,
+            "wilson95": [
+              0.40927543031016883,
+              0.9285207872478909
+            ]
+          }
+        }
+      }
+    }
+  },
+  "common_reference": "query-computational F1 graph shared across F0/F1/F2",
+  "conditions": {
+    "F0": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 11,
+          "rate": 0.44,
+          "support": 25
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 2,
+          "rate": 1.0,
+          "support": 2
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 9,
+          "rate": 0.391304347826087,
+          "support": 23
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 2,
+          "rate": 0.09523809523809523,
+          "support": 21
+        },
+        "semantic_structure_given_parse": {
+          "correct": 2,
+          "rate": 0.09090909090909091,
+          "support": 22
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.003389830508474576,
+        "generated_tokens_per_correct_answer": 295.0,
+        "mean_ast_nodes": 6.32,
+        "mean_generated_tokens": 129.8,
+        "mean_prompt_tokens": 234.08,
+        "mean_statement_count": 6.32,
+        "semantic_success_per_generated_token": 0.0006163328197226503
+      },
+      "count": 25,
+      "error_counts": {
+        "aggregation_cardinality": 15,
+        "attribute_grounding": 23,
+        "cardinality_qualifier": 15,
+        "dependency_incomplete": 23,
+        "derived_literal_presented_as_source_fact": 1,
+        "entity_grounding": 18,
+        "hallucinated_or_mutated_number": 9,
+        "lowering_unsupported_form": 1,
+        "number_attached_to_wrong_path": 13,
+        "omitted_number": 8,
+        "operator_mapping": 16,
+        "premature_literal_collapse": 1,
+        "qualifier_grounding": 17,
+        "relation_constant": 2,
+        "return_missing": 4,
+        "return_wrong_target": 16,
+        "source_fact_grounding": 19,
+        "surface_malformed_syntax": 3,
+        "temporal_qualifier": 5,
+        "temporal_semantics": 5,
+        "transitive_shortcut": 1,
+        "unresolved_symbol_equivalence": 6
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.02,
+        "blackboard_precision": 0.026666666666666665,
+        "blackboard_recall": 0.016,
+        "dependency_f1": 0.10088888888888889,
+        "spurious_state_rate": 0.9733333333333334
+      },
+      "mean_semantic": {
+        "attribute": 0.15523475355054303,
+        "dependency": 0.10088888888888889,
+        "entity": 0.47333333333333333,
+        "operator": 0.6737200577200577,
+        "qualifier": 0.5103443223443224
+      },
+      "rates": {
+        "executable": {
+          "correct": 19,
+          "rate": 0.76,
+          "support": 25,
+          "wilson95": [
+            0.5657031664457093,
+            0.8850368630659855
+          ]
+        },
+        "fail_closed": {
+          "correct": 6,
+          "rate": 0.24,
+          "support": 25,
+          "wilson95": [
+            0.11496313693401444,
+            0.4342968335542908
+          ]
+        },
+        "final_answer": {
+          "correct": 11,
+          "rate": 0.44,
+          "support": 25,
+          "wilson95": [
+            0.26665638881067344,
+            0.6293266813020123
+          ]
+        },
+        "lowerable": {
+          "correct": 21,
+          "rate": 0.84,
+          "support": 25,
+          "wilson95": [
+            0.6534637839282114,
+            0.9359654854332355
+          ]
+        },
+        "parse": {
+          "correct": 22,
+          "rate": 0.88,
+          "support": 25,
+          "wilson95": [
+            0.7004420607907267,
+            0.9583318284955964
+          ]
+        },
+        "semantic_state": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 25,
+          "wilson95": [
+            1.3877787807814457e-17,
+            0.13319225093904846
+          ]
+        },
+        "semantic_structure": {
+          "correct": 2,
+          "rate": 0.08,
+          "support": 25,
+          "wilson95": [
+            0.022220401284847563,
+            0.24966108950395313
+          ]
+        },
+        "type_valid": {
+          "correct": 21,
+          "rate": 0.84,
+          "support": 25,
+          "wilson95": [
+            0.6534637839282114,
+            0.9359654854332355
+          ]
+        }
+      }
+    },
+    "F1": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 6,
+          "rate": 0.24,
+          "support": 25
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 6,
+          "rate": 0.24,
+          "support": 25
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 17
+        },
+        "semantic_structure_given_parse": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 17
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.0017673048600883653,
+        "generated_tokens_per_correct_answer": 565.8333333333334,
+        "mean_ast_nodes": 23.96,
+        "mean_generated_tokens": 135.8,
+        "mean_prompt_tokens": 218.72,
+        "mean_statement_count": 3.8,
+        "semantic_success_per_generated_token": 0.0
+      },
+      "count": 25,
+      "error_counts": {
+        "aggregation_cardinality": 16,
+        "ambiguous_symbol_alignment": 2,
+        "attribute_grounding": 24,
+        "cardinality_qualifier": 17,
+        "dependency_incomplete": 24,
+        "entity_grounding": 16,
+        "hallucinated_or_mutated_number": 5,
+        "number_attached_to_wrong_path": 8,
+        "omitted_number": 14,
+        "operator_mapping": 16,
+        "qualifier_grounding": 19,
+        "relation_constant": 4,
+        "return_missing": 8,
+        "return_wrong_target": 10,
+        "source_fact_grounding": 21,
+        "surface_no_asl": 8,
+        "temporal_qualifier": 4,
+        "temporal_semantics": 5,
+        "transitive_shortcut": 1,
+        "unresolved_symbol_equivalence": 3
+      },
+      "f1_asl_isomorphic_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 25
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.08655292419998302,
+        "blackboard_precision": 0.09377777777777778,
+        "blackboard_recall": 0.081,
+        "dependency_f1": 0.08197402597402598,
+        "spurious_state_rate": 0.9062222222222223
+      },
+      "mean_semantic": {
+        "attribute": 0.18591888812941446,
+        "dependency": 0.08197402597402598,
+        "entity": 0.44,
+        "operator": 0.5323809523809524,
+        "qualifier": 0.37036862745098037
+      },
+      "rates": {
+        "executable": {
+          "correct": 16,
+          "rate": 0.64,
+          "support": 25,
+          "wilson95": [
+            0.44518497748164865,
+            0.7975211922554178
+          ]
+        },
+        "fail_closed": {
+          "correct": 9,
+          "rate": 0.36,
+          "support": 25,
+          "wilson95": [
+            0.20247880774458224,
+            0.5548150225183514
+          ]
+        },
+        "final_answer": {
+          "correct": 6,
+          "rate": 0.24,
+          "support": 25,
+          "wilson95": [
+            0.11496313693401444,
+            0.4342968335542908
+          ]
+        },
+        "lowerable": {
+          "correct": 17,
+          "rate": 0.68,
+          "support": 25,
+          "wilson95": [
+            0.48410269273102247,
+            0.8279480969309202
+          ]
+        },
+        "parse": {
+          "correct": 17,
+          "rate": 0.68,
+          "support": 25,
+          "wilson95": [
+            0.48410269273102247,
+            0.8279480969309202
+          ]
+        },
+        "semantic_state": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 25,
+          "wilson95": [
+            1.3877787807814457e-17,
+            0.13319225093904846
+          ]
+        },
+        "semantic_structure": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 25,
+          "wilson95": [
+            1.3877787807814457e-17,
+            0.13319225093904846
+          ]
+        },
+        "type_valid": {
+          "correct": 17,
+          "rate": 0.68,
+          "support": 25,
+          "wilson95": [
+            0.48410269273102247,
+            0.8279480969309202
+          ]
+        }
+      }
+    },
+    "F2": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 1,
+          "rate": 1.0,
+          "support": 1
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 8,
+          "rate": 0.3333333333333333,
+          "support": 24
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 1,
+          "rate": 1.0,
+          "support": 1
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 8,
+          "rate": 0.3333333333333333,
+          "support": 24
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 1,
+          "rate": 0.06666666666666667,
+          "support": 15
+        },
+        "semantic_structure_given_parse": {
+          "correct": 1,
+          "rate": 0.06666666666666667,
+          "support": 15
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.002105263157894737,
+        "generated_tokens_per_correct_answer": 475.0,
+        "mean_ast_nodes": 24.16,
+        "mean_generated_tokens": 171.0,
+        "mean_prompt_tokens": 219.72,
+        "mean_statement_count": 3.8,
+        "semantic_success_per_generated_token": 0.00023391812865497077
+      },
+      "count": 25,
+      "error_counts": {
+        "aggregation_cardinality": 14,
+        "attribute_grounding": 23,
+        "cardinality_qualifier": 15,
+        "dependency_incomplete": 24,
+        "derived_literal_presented_as_source_fact": 1,
+        "entity_grounding": 19,
+        "hallucinated_or_mutated_number": 4,
+        "number_attached_to_wrong_path": 9,
+        "omitted_number": 13,
+        "operator_mapping": 19,
+        "premature_literal_collapse": 1,
+        "qualifier_grounding": 17,
+        "relation_constant": 4,
+        "relation_direction": 1,
+        "return_missing": 10,
+        "return_wrong_target": 8,
+        "source_fact_grounding": 22,
+        "surface_no_asl": 10,
+        "temporal_qualifier": 5,
+        "temporal_semantics": 5,
+        "transitive_shortcut": 3,
+        "unresolved_symbol_equivalence": 4
+      },
+      "f2_semantics": {
+        "argument_binding_exact": {
+          "correct": 23,
+          "rate": 0.1597222222222222,
+          "support": 144
+        },
+        "argument_role_accuracy": {
+          "correct": 76,
+          "rate": 0.20052770448548812,
+          "support": 379
+        },
+        "functor_class_macro_f1": 0.20975875875875877,
+        "functor_class_micro": {
+          "f1": 0.27927927927927926,
+          "overlap": 31,
+          "precision": 0.3974358974358974,
+          "predicted_count": 78,
+          "recall": 0.2152777777777778,
+          "reference_count": 144
+        },
+        "per_functor_class": {
+          "decrease_percent": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "difference": {
+            "f1": 0.4000000000000001,
+            "overlap": 2,
+            "precision": 0.4,
+            "predicted_count": 5,
+            "recall": 0.4,
+            "reference_count": 5
+          },
+          "fraction_of": {
+            "f1": 0.6,
+            "overlap": 3,
+            "precision": 0.75,
+            "predicted_count": 4,
+            "recall": 0.5,
+            "reference_count": 6
+          },
+          "given": {
+            "f1": 0.27027027027027023,
+            "overlap": 15,
+            "precision": 0.3488372093023256,
+            "predicted_count": 43,
+            "recall": 0.22058823529411764,
+            "reference_count": 68
+          },
+          "mean_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 3
+          },
+          "multiple": {
+            "f1": 0.6666666666666666,
+            "overlap": 2,
+            "precision": 1.0,
+            "predicted_count": 2,
+            "recall": 0.5,
+            "reference_count": 4
+          },
+          "offset": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 4
+          },
+          "per_unit_total": {
+            "f1": 0.24,
+            "overlap": 3,
+            "precision": 0.42857142857142855,
+            "predicted_count": 7,
+            "recall": 0.16666666666666666,
+            "reference_count": 18
+          },
+          "percent_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 2,
+            "recall": 0.0,
+            "reference_count": 2
+          },
+          "percentage_ratio": {
+            "f1": 0.4444444444444445,
+            "overlap": 2,
+            "precision": 0.5,
+            "predicted_count": 4,
+            "recall": 0.4,
+            "reference_count": 5
+          },
+          "product_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "quotient": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 5
+          },
+          "remaining": {
+            "f1": 0.39999999999999997,
+            "overlap": 3,
+            "precision": 0.75,
+            "predicted_count": 4,
+            "recall": 0.2727272727272727,
+            "reference_count": 11
+          },
+          "same": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "sum_of": {
+            "f1": 0.125,
+            "overlap": 1,
+            "precision": 0.16666666666666666,
+            "predicted_count": 6,
+            "recall": 0.1,
+            "reference_count": 10
+          }
+        },
+        "query_target_accuracy": {
+          "correct": 7,
+          "rate": 0.28,
+          "support": 25
+        },
+        "relation_direction_accuracy": {
+          "correct": 10,
+          "rate": 0.2127659574468085,
+          "support": 47
+        }
+      },
+      "f2_semantics_given_parse": {
+        "argument_binding_exact": {
+          "correct": 23,
+          "rate": 0.30666666666666664,
+          "support": 75
+        },
+        "argument_role_accuracy": {
+          "correct": 76,
+          "rate": 0.3877551020408163,
+          "support": 196
+        },
+        "functor_class_macro_f1": 0.3766381766381766,
+        "functor_class_micro": {
+          "f1": 0.40522875816993464,
+          "overlap": 31,
+          "precision": 0.3974358974358974,
+          "predicted_count": 78,
+          "recall": 0.41333333333333333,
+          "reference_count": 75
+        },
+        "per_functor_class": {
+          "difference": {
+            "f1": 0.4444444444444445,
+            "overlap": 2,
+            "precision": 0.4,
+            "predicted_count": 5,
+            "recall": 0.5,
+            "reference_count": 4
+          },
+          "fraction_of": {
+            "f1": 0.6666666666666665,
+            "overlap": 3,
+            "precision": 0.75,
+            "predicted_count": 4,
+            "recall": 0.6,
+            "reference_count": 5
+          },
+          "given": {
+            "f1": 0.3703703703703704,
+            "overlap": 15,
+            "precision": 0.3488372093023256,
+            "predicted_count": 43,
+            "recall": 0.39473684210526316,
+            "reference_count": 38
+          },
+          "multiple": {
+            "f1": 1.0,
+            "overlap": 2,
+            "precision": 1.0,
+            "predicted_count": 2,
+            "recall": 1.0,
+            "reference_count": 2
+          },
+          "per_unit_total": {
+            "f1": 0.4615384615384615,
+            "overlap": 3,
+            "precision": 0.42857142857142855,
+            "predicted_count": 7,
+            "recall": 0.5,
+            "reference_count": 6
+          },
+          "percent_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 2,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "percentage_ratio": {
+            "f1": 0.5,
+            "overlap": 2,
+            "precision": 0.5,
+            "predicted_count": 4,
+            "recall": 0.5,
+            "reference_count": 4
+          },
+          "quotient": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 2
+          },
+          "remaining": {
+            "f1": 0.5,
+            "overlap": 3,
+            "precision": 0.75,
+            "predicted_count": 4,
+            "recall": 0.375,
+            "reference_count": 8
+          },
+          "same": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "sum_of": {
+            "f1": 0.2,
+            "overlap": 1,
+            "precision": 0.16666666666666666,
+            "predicted_count": 6,
+            "recall": 0.25,
+            "reference_count": 4
+          }
+        },
+        "query_target_accuracy": {
+          "correct": 7,
+          "rate": 0.4666666666666667,
+          "support": 15
+        },
+        "relation_direction_accuracy": {
+          "correct": 10,
+          "rate": 0.5555555555555556,
+          "support": 18
+        }
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.08063492063492063,
+        "blackboard_precision": 0.08304761904761905,
+        "blackboard_recall": 0.07868398268398269,
+        "dependency_f1": 0.1211369332421964,
+        "spurious_state_rate": 0.916952380952381
+      },
+      "mean_semantic": {
+        "attribute": 0.22190476190476188,
+        "dependency": 0.1211369332421964,
+        "entity": 0.32666666666666666,
+        "operator": 0.49457142857142855,
+        "qualifier": 0.4104761904761905
+      },
+      "rates": {
+        "executable": {
+          "correct": 15,
+          "rate": 0.6,
+          "support": 25,
+          "wilson95": [
+            0.40739457358967,
+            0.7659669762225203
+          ]
+        },
+        "fail_closed": {
+          "correct": 10,
+          "rate": 0.4,
+          "support": 25,
+          "wilson95": [
+            0.23403302377747973,
+            0.5926054264103301
+          ]
+        },
+        "final_answer": {
+          "correct": 9,
+          "rate": 0.36,
+          "support": 25,
+          "wilson95": [
+            0.20247880774458224,
+            0.5548150225183514
+          ]
+        },
+        "lowerable": {
+          "correct": 15,
+          "rate": 0.6,
+          "support": 25,
+          "wilson95": [
+            0.40739457358967,
+            0.7659669762225203
+          ]
+        },
+        "parse": {
+          "correct": 15,
+          "rate": 0.6,
+          "support": 25,
+          "wilson95": [
+            0.40739457358967,
+            0.7659669762225203
+          ]
+        },
+        "semantic_state": {
+          "correct": 1,
+          "rate": 0.04,
+          "support": 25,
+          "wilson95": [
+            0.007096233501987265,
+            0.19544063736193734
+          ]
+        },
+        "semantic_structure": {
+          "correct": 1,
+          "rate": 0.04,
+          "support": 25,
+          "wilson95": [
+            0.007096233501987265,
+            0.19544063736193734
+          ]
+        },
+        "type_valid": {
+          "correct": 15,
+          "rate": 0.6,
+          "support": 25,
+          "wilson95": [
+            0.40739457358967,
+            0.7659669762225203
+          ]
+        }
+      }
+    }
+  },
+  "frozen_identity_count": 25,
+  "functor_confusion": {
+    "EXTRA->difference": 3,
+    "EXTRA->fraction_of": 1,
+    "EXTRA->given": 27,
+    "EXTRA->per_unit_total": 4,
+    "EXTRA->percent_of": 2,
+    "EXTRA->percentage_ratio": 2,
+    "EXTRA->quotient": 1,
+    "EXTRA->remaining": 1,
+    "EXTRA->sum_of": 2,
+    "decrease_percent->MISSING": 1,
+    "difference->MISSING": 3,
+    "difference->difference": 2,
+    "fraction_of->MISSING": 2,
+    "fraction_of->fraction_of": 3,
+    "fraction_of->given": 1,
+    "given->MISSING": 53,
+    "given->given": 15,
+    "mean_of->MISSING": 3,
+    "multiple->MISSING": 2,
+    "multiple->multiple": 2,
+    "offset->MISSING": 4,
+    "per_unit_total->MISSING": 15,
+    "per_unit_total->per_unit_total": 3,
+    "percent_of->MISSING": 2,
+    "percentage_ratio->MISSING": 3,
+    "percentage_ratio->percentage_ratio": 2,
+    "product_of->MISSING": 1,
+    "quotient->MISSING": 5,
+    "remaining->MISSING": 6,
+    "remaining->remaining": 3,
+    "remaining->sum_of": 2,
+    "same->sum_of": 1,
+    "sum_of->MISSING": 9,
+    "sum_of->sum_of": 1
+  },
+  "gold_runtime": {
+    "F0": {
+      "answer_correct": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "executable": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "lowerable": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "parse": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "type_valid": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      }
+    },
+    "F1": {
+      "answer_correct": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "executable": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "lowerable": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "parse": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "type_valid": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      }
+    },
+    "F2": {
+      "answer_correct": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "executable": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "lowerable": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "parse": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      },
+      "type_valid": {
+        "correct": 25,
+        "rate": 1.0,
+        "support": 25
+      }
+    }
+  },
+  "identical_frozen_source_ids": true,
+  "input_sha256": {
+    "f0_eval": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+    "f0_scored": "b34daad19f28b1f4712c2b648fc96ae2f181cd417abe7e54a3b8512927a87211",
+    "f1_dev": "ec9244c475260a23815b8414928cafc6b9fc6e7290e19645de22c6f005118e8b",
+    "f1_eval": "a6299104021efbac35d50b6abea3738f12c2aa08c6a4c9f4cf52361fd168ce58",
+    "f1_scored": "6476381692b5d11c0a6d568594f679febd2e4ad10203946f379aa7333d141507",
+    "f1_train": "5c8f6ab5d111daa9370470167ddef294037c218084958e7f7d537c7f10cee839",
+    "f2_dev": "b202b9ac1fcd2f8c6fbacf5fe20a880b0ac6f224cd2e74c92a22ef06f5818ded",
+    "f2_eval": "be3b4b20dbdb438975e4cb13bd465f96e0f78002f59f964b158432a10cb8e3bf",
+    "f2_scored": "ba1e84e5ccd65070b35220cbd84555ebc18d1e832bcc0eb6605e085859f16bf5",
+    "f2_train": "d76c57fd881ea99ded316d00d9c26f50ed70880fadf8ef09073c5925b8a9547e"
+  },
+  "interpretation_gates": {
+    "representation_success": false,
+    "runtime_bottleneck_present": false,
+    "semantic_functor_errors_present": true,
+    "syntax_only_explanation_supported": false
+  },
+  "model_label": "Qwen3-0.6B",
+  "paired": {
+    "outcome_patterns": {
+      "F0": 4,
+      "F0F1F2": 5,
+      "F0F2": 2,
+      "F1": 1,
+      "F2": 2,
+      "NONE": 11
+    },
+    "pairwise": {
+      "F1_minus_F0": {
+        "left_only": 1,
+        "paired_exact_p_exploratory": 0.125,
+        "right_only": 6
+      },
+      "F2_minus_F0": {
+        "left_only": 2,
+        "paired_exact_p_exploratory": 0.6875,
+        "right_only": 4
+      },
+      "F2_minus_F1": {
+        "left_only": 4,
+        "paired_exact_p_exploratory": 0.375,
+        "right_only": 1
+      }
+    }
+  },
+  "representation_cost": {
+    "F0": {
+      "final_success_per_generated_token": 0.003389830508474576,
+      "generated_tokens_per_correct_answer": 295.0,
+      "mean_ast_nodes": 6.32,
+      "mean_generated_tokens": 129.8,
+      "mean_prompt_tokens": 234.08,
+      "mean_statement_count": 6.32,
+      "semantic_success_per_generated_token": 0.0006163328197226503
+    },
+    "F1": {
+      "final_success_per_generated_token": 0.0017673048600883653,
+      "generated_tokens_per_correct_answer": 565.8333333333334,
+      "mean_ast_nodes": 23.96,
+      "mean_generated_tokens": 135.8,
+      "mean_prompt_tokens": 218.72,
+      "mean_statement_count": 3.8,
+      "semantic_success_per_generated_token": 0.0
+    },
+    "F2": {
+      "final_success_per_generated_token": 0.002105263157894737,
+      "generated_tokens_per_correct_answer": 475.0,
+      "mean_ast_nodes": 24.16,
+      "mean_generated_tokens": 171.0,
+      "mean_prompt_tokens": 219.72,
+      "mean_statement_count": 3.8,
+      "semantic_success_per_generated_token": 0.00023391812865497077
+    }
+  },
+  "schema_version": "ccpu.paper1.functor_metrics.v2",
+  "statistical_boundary": "25 programs; exact counts primary, Wilson and paired exact exploratory",
+  "target_complexity": {
+    "F0": {
+      "ast_node_count": 6.64,
+      "distinct_path_count": 5.6,
+      "max_nesting": 0.72,
+      "mean_arity": null,
+      "statement_count": 6.64
+    },
+    "F1": {
+      "ast_node_count": 45.4,
+      "distinct_path_count": 6.08,
+      "max_nesting": 1.0,
+      "mean_arity": 2.3465223665223665,
+      "statement_count": 7.08
+    },
+    "F2": {
+      "ast_node_count": 43.2,
+      "distinct_path_count": 5.76,
+      "max_nesting": 1.0,
+      "mean_arity": 2.3594112554112554,
+      "statement_count": 6.76
+    }
+  },
+  "training_size_limitation": {
+    "F0": 450,
+    "F1": 434,
+    "F2": 434
+  },
+  "vocabulary": {
+    "f1": {
+      "dev": {
+        "distinct_attributes": 141,
+        "distinct_paths": 123,
+        "distinct_qualifiers": 10,
+        "functor_occurrences": {
+          "add": 12,
+          "decrease_percent": 1,
+          "divide": 13,
+          "mean_values": 3,
+          "multiply": 17,
+          "percent_of": 2,
+          "query": 24,
+          "subtract": 10,
+          "value": 65
+        },
+        "functors": [
+          "add",
+          "decrease_percent",
+          "divide",
+          "mean_values",
+          "multiply",
+          "percent_of",
+          "query",
+          "subtract",
+          "value"
+        ]
+      },
+      "test": {
+        "distinct_attributes": 123,
+        "distinct_paths": 152,
+        "distinct_qualifiers": 13,
+        "functor_occurrences": {
+          "add": 15,
+          "copy": 1,
+          "decrease_percent": 1,
+          "divide": 20,
+          "mean_values": 1,
+          "multiply": 26,
+          "percent_of": 2,
+          "query": 25,
+          "subtract": 18,
+          "value": 68
+        },
+        "functors": [
+          "add",
+          "copy",
+          "decrease_percent",
+          "divide",
+          "mean_values",
+          "multiply",
+          "percent_of",
+          "query",
+          "subtract",
+          "value"
+        ]
+      },
+      "train": {
+        "distinct_attributes": 1069,
+        "distinct_paths": 2532,
+        "distinct_qualifiers": 37,
+        "functor_occurrences": {
+          "absolute": 11,
+          "add": 309,
+          "copy": 11,
+          "decrease_percent": 23,
+          "divide": 269,
+          "increase_percent": 30,
+          "maximum": 3,
+          "mean_values": 21,
+          "minimum": 1,
+          "multiply": 430,
+          "percent_of": 64,
+          "query": 434,
+          "rate_times_duration": 16,
+          "subtract": 318,
+          "sum_values": 1,
+          "value": 1036
+        },
+        "functors": [
+          "absolute",
+          "add",
+          "copy",
+          "decrease_percent",
+          "divide",
+          "increase_percent",
+          "maximum",
+          "mean_values",
+          "minimum",
+          "multiply",
+          "percent_of",
+          "query",
+          "rate_times_duration",
+          "subtract",
+          "sum_values",
+          "value"
+        ]
+      }
+    },
+    "f2": {
+      "dev": {
+        "distinct_attributes": 138,
+        "distinct_paths": 119,
+        "distinct_qualifiers": 10,
+        "functor_occurrences": {
+          "absolute_difference": 1,
+          "decrease_percent": 1,
+          "difference": 5,
+          "fraction_of": 4,
+          "given": 65,
+          "mean_of": 3,
+          "multiple": 1,
+          "offset": 1,
+          "per_unit_total": 11,
+          "percent_of": 2,
+          "percentage_ratio": 3,
+          "query": 24,
+          "quotient": 6,
+          "rate_total": 1,
+          "remaining": 4,
+          "sum_of": 11
+        },
+        "functors": [
+          "absolute_difference",
+          "decrease_percent",
+          "difference",
+          "fraction_of",
+          "given",
+          "mean_of",
+          "multiple",
+          "offset",
+          "per_unit_total",
+          "percent_of",
+          "percentage_ratio",
+          "query",
+          "quotient",
+          "rate_total",
+          "remaining",
+          "sum_of"
+        ]
+      },
+      "test": {
+        "distinct_attributes": 121,
+        "distinct_paths": 144,
+        "distinct_qualifiers": 12,
+        "functor_occurrences": {
+          "decrease_percent": 1,
+          "difference": 5,
+          "fraction_of": 6,
+          "given": 68,
+          "mean_of": 3,
+          "multiple": 4,
+          "offset": 4,
+          "per_unit_total": 18,
+          "percent_of": 2,
+          "percentage_ratio": 5,
+          "product_of": 1,
+          "query": 25,
+          "quotient": 5,
+          "remaining": 11,
+          "same": 1,
+          "sum_of": 10
+        },
+        "functors": [
+          "decrease_percent",
+          "difference",
+          "fraction_of",
+          "given",
+          "mean_of",
+          "multiple",
+          "offset",
+          "per_unit_total",
+          "percent_of",
+          "percentage_ratio",
+          "product_of",
+          "query",
+          "quotient",
+          "remaining",
+          "same",
+          "sum_of"
+        ]
+      },
+      "train": {
+        "distinct_attributes": 1060,
+        "distinct_paths": 2457,
+        "distinct_qualifiers": 36,
+        "functor_occurrences": {
+          "absolute_difference": 12,
+          "decrease_percent": 23,
+          "difference": 103,
+          "fraction_of": 136,
+          "given": 1033,
+          "increase_percent": 31,
+          "maximum_of": 3,
+          "mean_of": 23,
+          "minimum_of": 1,
+          "multiple": 149,
+          "offset": 126,
+          "per_unit_total": 192,
+          "percent_of": 65,
+          "percentage_ratio": 42,
+          "product_of": 8,
+          "query": 434,
+          "quotient": 84,
+          "rate_total": 48,
+          "remaining": 152,
+          "same": 10,
+          "sum_of": 227
+        },
+        "functors": [
+          "absolute_difference",
+          "decrease_percent",
+          "difference",
+          "fraction_of",
+          "given",
+          "increase_percent",
+          "maximum_of",
+          "mean_of",
+          "minimum_of",
+          "multiple",
+          "offset",
+          "per_unit_total",
+          "percent_of",
+          "percentage_ratio",
+          "product_of",
+          "query",
+          "quotient",
+          "rate_total",
+          "remaining",
+          "same",
+          "sum_of"
+        ]
+      }
+    },
+    "f2_dev_only_functors": [],
+    "f2_test_only_functors": [],
+    "f2_unseen_functor_rate": 0.0,
+    "registered_vocabulary": {
+      "f1": [
+        "absolute",
+        "add",
+        "copy",
+        "decrease_percent",
+        "divide",
+        "increase_percent",
+        "maximum",
+        "mean_values",
+        "minimum",
+        "multiply",
+        "percent_of",
+        "query",
+        "rate_times_duration",
+        "subtract",
+        "sum_values",
+        "value"
+      ],
+      "f2": [
+        "absolute_difference",
+        "decrease_percent",
+        "difference",
+        "fraction_of",
+        "given",
+        "increase_percent",
+        "maximum_of",
+        "mean_of",
+        "minimum_of",
+        "multiple",
+        "offset",
+        "per_unit_total",
+        "percent_of",
+        "percentage_ratio",
+        "product_of",
+        "query",
+        "quotient",
+        "rate_total",
+        "remaining",
+        "same",
+        "sum_of"
+      ]
+    }
+  }
+}

@@ -51,6 +51,7 @@ from .functor_eval import (
     compare_functor_conditions,
     run_functor_condition,
 )
+from .functor_metrics import analyze_functor_metrics, compare_functor_model_sizes
 from .generation import HuggingFaceBackend, HuggingFaceGenerationConfig
 from .lora_data import LoRAProtocolDataConfig, generate_protocol_data
 from .lora_train import LoRATrainingConfig, train_lora
@@ -620,6 +621,35 @@ def compare_functors_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_functor_metrics_command(args: argparse.Namespace) -> int:
+    report = analyze_functor_metrics(
+        f0_eval_path=args.f0_eval,
+        f0_scored_path=args.f0_scored,
+        f1_eval_path=args.f1_eval,
+        f1_scored_path=args.f1_scored,
+        f2_eval_path=args.f2_eval,
+        f2_scored_path=args.f2_scored,
+        f1_train_path=args.f1_train,
+        f1_dev_path=args.f1_dev,
+        f2_train_path=args.f2_train,
+        f2_dev_path=args.f2_dev,
+        output_dir=args.output_dir,
+        model_label=args.model_label,
+    )
+    print(
+        f"analyzed {report['frozen_identity_count']} matched F0/F1/F2 programs "
+        f"for {report['model_label']} -> {args.output_dir}"
+    )
+    return 0
+
+
+def compare_functor_model_sizes_command(args: argparse.Namespace) -> int:
+    report = compare_functor_model_sizes(args.small, args.large, args.output)
+    gate = report["representation_by_capacity_interaction"]["capacity_bottleneck_supported"]
+    print(f"compared functor model sizes; capacity gate={gate} -> {args.output}")
+    return 0
+
+
 def run_asl_pilot_command(args: argparse.Namespace) -> int:
     model_config = read_json(args.config)
     if args.adapter_path:
@@ -1067,6 +1097,33 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     functor_compare.add_argument("--f2", required=True)
     functor_compare.add_argument("--output", required=True)
     functor_compare.set_defaults(handler=compare_functors_command)
+
+    functor_metrics = commands.add_parser(
+        "analyze-functor-metrics",
+        help="build deterministic fine-grained F0/F1/F2 representation diagnostics",
+    )
+    functor_metrics.add_argument("--f0-eval", required=True)
+    functor_metrics.add_argument("--f0-scored", required=True)
+    functor_metrics.add_argument("--f1-eval", required=True)
+    functor_metrics.add_argument("--f1-scored", required=True)
+    functor_metrics.add_argument("--f2-eval", required=True)
+    functor_metrics.add_argument("--f2-scored", required=True)
+    functor_metrics.add_argument("--f1-train", required=True)
+    functor_metrics.add_argument("--f1-dev", required=True)
+    functor_metrics.add_argument("--f2-train", required=True)
+    functor_metrics.add_argument("--f2-dev", required=True)
+    functor_metrics.add_argument("--model-label", required=True)
+    functor_metrics.add_argument("--output-dir", required=True)
+    functor_metrics.set_defaults(handler=analyze_functor_metrics_command)
+
+    functor_size = commands.add_parser(
+        "compare-functor-model-sizes",
+        help="compare matched F0/F1/F2 diagnostics across model capacities",
+    )
+    functor_size.add_argument("--small", required=True)
+    functor_size.add_argument("--large", required=True)
+    functor_size.add_argument("--output", required=True)
+    functor_size.set_defaults(handler=compare_functor_model_sizes_command)
 
     asl_run = commands.add_parser(
         "run-asl-pilot", help="run one base, ICL, or LoRA semantic ASL condition"

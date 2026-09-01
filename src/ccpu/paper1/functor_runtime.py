@@ -73,6 +73,16 @@ _F2_ARITY: dict[str, tuple[int, int | None]] = {
 }
 
 
+def functor_registry(condition: str) -> dict[str, tuple[int, int | None]]:
+    """Return a copy of the allowlisted functor vocabulary and arities."""
+
+    if condition == "f1":
+        return dict(_F1_ARITY)
+    if condition == "f2":
+        return dict(_F2_ARITY)
+    raise ValueError(f"unsupported functor condition: {condition}")
+
+
 def _value(node: ast.AST) -> Any:
     if isinstance(node, ast.Constant) and isinstance(node.value, str):
         return _canonical_path(node.value)
