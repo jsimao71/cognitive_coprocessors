@@ -1096,6 +1096,18 @@ the current clause, compact evidence, scope, and prior executed state visible;
 the 65-transition development set retains the original 25 development parents.
 That incremental-state condition is the fixed input to the rank comparison below.
 
+A separate free-route LiteLLM/OpenRouter screening campaign covers the full
+7,473-item GSM8K training set and all 706 arithmetic-compatible TAT-QA
+development items. Both resumable queues are complete. They produce 3,885 and
+515 accepted model responses, respectively (4,400 total); deterministic
+post-validation retains 3,489 GSM8K and 407 TAT-QA programs (3,896 total) after
+conversion, execution, and semantic checks. Across all generated responses,
+89.0\% execute to the benchmark answer and 98.7\% pass semantic lint. These
+rates are automatic screening diagnostics, not manual semantic adjudication.
+The remote corpus remains provenance-separated and is excluded from every
+training, development, and test result reported here; a later experiment may
+compare it against the fixed 500-program Codex corpus without mixing teachers.
+
 \subsection{Incremental executed-state compiler}
 
 The clause-local condition uses the same pinned Qwen3-0.6B revision and rank-8
