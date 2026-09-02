@@ -41,7 +41,7 @@ class DualSourceT5CrossAttention(nn.Module):
         self.layer_norm = original.layer_norm
         self.dropout = original.dropout
         self.nl_gate_logit = nn.Parameter(torch.tensor(4.0))
-        self.asl_gate_logit = nn.Parameter(torch.tensor(0.0))
+        self.asl_gate_logit = nn.Parameter(torch.tensor(-4.0))
         self.nl_width: int | None = None
         self.last_diagnostics: dict[str, Any] = {}
 
@@ -154,6 +154,7 @@ class ASLMatrixModel(nn.Module):
         encoder_architecture: str,
         attention_mode: str,
         hybrid_shared_top_layers: int = 2,
+        adaptation: dict[str, Any] | None = None,
     ) -> None:
         super().__init__()
         if encoder_architecture not in self.ARCHITECTURES:
@@ -167,6 +168,7 @@ class ASLMatrixModel(nn.Module):
         self.encoder_architecture = encoder_architecture
         self.attention_mode = attention_mode
         self.hybrid_shared_top_layers = hybrid_shared_top_layers
+        self.adaptation = adaptation or {"method": "full"}
         self.source_type_embeddings = nn.Embedding(2, self.config.d_model)
         nn.init.zeros_(self.source_type_embeddings.weight)
 
@@ -199,15 +201,18 @@ class ASLMatrixModel(nn.Module):
         encoder_architecture: str,
         attention_mode: str,
         hybrid_shared_top_layers: int = 2,
+        adaptation: dict[str, Any] | None = None,
     ) -> ASLMatrixModel:
         from transformers import T5ForConditionalGeneration
 
         backbone = T5ForConditionalGeneration.from_pretrained(model_id, revision=revision)
+        backbone = adapt_pretrained_backbone(backbone, adaptation)
         return cls(
             backbone,
             encoder_architecture=encoder_architecture,
             attention_mode=attention_mode,
             hybrid_shared_top_layers=hybrid_shared_top_layers,
+            adaptation=adaptation,
         )
 
     def _encode(
@@ -329,7 +334,9 @@ class ASLMatrixModel(nn.Module):
         logits = self.lm_head(sequence_output)
         loss = None
         if labels is not None:
-            loss = F.cross_entropy(logits.view(-1, logits.size(-1)), labels.view(-1), ignore_index=-100)
+            loss = F.cross_entropy(
+                logits.view(-1, logits.size(-1)), labels.view(-1), ignore_index=-100
+            )
         diagnostics = self.attention_diagnostics(decoder.cross_attentions, nl_memory, asl_memory)
         return MatrixModelOutput(loss=loss, logits=logits, diagnostics=diagnostics)
 
@@ -412,21 +419,67 @@ class ASLMatrixModel(nn.Module):
         return decoder_ids[:, 1:]
 
     def parameter_report(self) -> dict[str, Any]:
-        parameters = list(self.parameters())
+        named_parameters = list(self.named_parameters())
+        parameters = [parameter for _, parameter in named_parameters]
         total = sum(parameter.numel() for parameter in parameters)
         trainable = sum(parameter.numel() for parameter in parameters if parameter.requires_grad)
+        lora = sum(
+            parameter.numel()
+            for name, parameter in named_parameters
+            if parameter.requires_grad and "lora_" in name
+        )
+        source_type = sum(
+            parameter.numel()
+            for name, parameter in named_parameters
+            if parameter.requires_grad and "source_type_embeddings" in name
+        )
+        gates = sum(
+            parameter.numel()
+            for name, parameter in named_parameters
+            if parameter.requires_grad and name.endswith("_gate_logit")
+        )
         nl_ids = {id(parameter) for parameter in self.nl_encoder.parameters()}
         asl_ids = {id(parameter) for parameter in self.asl_encoder.parameters()}
         return {
             "encoder_architecture": self.encoder_architecture,
             "attention_mode": self.attention_mode,
+            "adaptation": self.adaptation,
             "total_parameters": total,
             "trainable_parameters": trainable,
+            "frozen_parameters": total - trainable,
+            "lora_parameters": lora,
+            "source_type_parameters": source_type,
+            "gate_parameters": gates,
+            "other_trainable_parameters": trainable - lora - source_type - gates,
             "shared_encoder_parameter_tensors": len(nl_ids & asl_ids),
             "hybrid_shared_top_layers": (
                 self.hybrid_shared_top_layers if self.encoder_architecture == "hybrid" else 0
             ),
         }
+
+
+def adapt_pretrained_backbone(backbone: nn.Module, adaptation: dict[str, Any] | None) -> nn.Module:
+    """Apply a budgeted PEFT patch while preserving pretrained base weights."""
+
+    spec = adaptation or {"method": "full"}
+    method = str(spec.get("method", "full"))
+    if method == "full":
+        return backbone
+    if method != "lora":
+        raise ValueError(f"unsupported matrix adaptation method: {method}")
+    try:
+        from peft import LoraConfig, TaskType, get_peft_model
+    except ImportError as error:
+        raise RuntimeError("LoRA matrix adaptation requires peft") from error
+    config = LoraConfig(
+        task_type=TaskType.SEQ_2_SEQ_LM,
+        r=int(spec.get("rank", 8)),
+        lora_alpha=int(spec.get("alpha", 16)),
+        lora_dropout=float(spec.get("dropout", 0.0)),
+        target_modules=list(spec.get("target_modules", ("q", "k", "v", "o"))),
+        bias=str(spec.get("bias", "none")),
+    )
+    return get_peft_model(backbone, config)
 
 
 def representation_alignment(
@@ -442,7 +495,9 @@ def representation_alignment(
     normalized_nl = F.normalize(nl_pooled.float(), dim=-1)
     normalized_asl = F.normalize(asl_pooled.float(), dim=-1)
     similarities = normalized_nl @ normalized_asl.T
-    retrieval = (similarities.argmax(dim=-1) == torch.arange(len(similarities), device=similarities.device)).float()
+    retrieval = (
+        similarities.argmax(dim=-1) == torch.arange(len(similarities), device=similarities.device)
+    ).float()
     return {
         "paired_cosine_mean": float(cosine.mean().detach().cpu()),
         "paired_retrieval_accuracy": float(retrieval.mean().detach().cpu()),

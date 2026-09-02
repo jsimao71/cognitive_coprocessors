@@ -264,6 +264,9 @@ def train_matrix(
         torch.xpu.reset_peak_memory_stats()
 
     tokenizer = AutoTokenizer.from_pretrained(model_spec["model_id"], revision=revision)
+    tokenizer.model_max_length = max(
+        training.max_nl_length, training.max_asl_length, training.max_target_length
+    )
     train_examples = _examples(Path(data_dir) / "source" / "train.jsonl")
     dev_examples = _examples(Path(data_dir) / "source" / "dev.jsonl")
     length_audit = {
@@ -278,11 +281,17 @@ def train_matrix(
         hybrid_shared_top_layers=int(
             config["encoder"].get("hybrid", {}).get("shared_top_layers", 2)
         ),
+        adaptation=config.get("adaptation"),
     ).to(device=device, dtype=dtype)
     model.config.use_cache = False
     builder = _regime_builder(config, training.seed)
+    trainable_parameters = [
+        parameter for parameter in model.parameters() if parameter.requires_grad
+    ]
+    if not trainable_parameters:
+        raise ValueError("matrix model has no trainable parameters")
     optimizer = torch.optim.AdamW(
-        model.parameters(), lr=training.learning_rate, weight_decay=training.weight_decay
+        trainable_parameters, lr=training.learning_rate, weight_decay=training.weight_decay
     )
     last_path = output / "checkpoint_last.pt"
     best_path = output / "checkpoint_best.pt"
@@ -385,6 +394,7 @@ def train_matrix(
         "model": model_spec,
         "encoder": config["encoder"],
         "attention": config["attention"],
+        "adaptation": config.get("adaptation", {"method": "full"}),
         "training": config["training"],
         "device": device,
         "dtype": training.dtype,

@@ -1021,6 +1021,10 @@ T3 batches contain no external ASL
 
 ## P1 — Establish whether symbolic grounding helps
 
+Use the pinned pretrained T5-small checkpoint with a frozen base and QKVO
+rank-8 LoRA. Train the source-type embedding and M1 gates alongside the adapters.
+Keep full-model T5 fine-tuning only as a separately named capacity control.
+
 Run:
 
 ```text
@@ -1134,13 +1138,13 @@ Expose lower/mid/top encoder representations to decoder layers and test whether 
 
 Run this ladder first:
 
-| ID | Architecture | Attention | Training |
-|---|---|---|---|
-| B0 | Separate | Cross | T3 only |
-| B1 | Separate | Cross | mixed T1/T2/T3 |
-| B2 | Separate | Merged K/V | mixed T1/T2/T3 |
-| B3 | Shared | best M1/M2 | mixed T1/T2/T3 |
-| B4 | Hybrid | best M1/M2 | mixed T1/T2/T3 |
+| ID | Architecture | Attention | Adaptation | Training |
+|---|---|---|---|---|
+| B0 | Separate | Cross | frozen T5 + QKVO LoRA-r8 | T3 only |
+| B1 | Separate | Cross | frozen T5 + QKVO LoRA-r8 | mixed T1/T2/T3 |
+| B2 | Separate | Merged K/V | frozen T5 + QKVO LoRA-r8 | mixed T1/T2/T3 |
+| B3 | Shared | best M1/M2 | frozen T5 + QKVO LoRA-r8 | mixed T1/T2/T3 |
+| B4 | Hybrid | best M1/M2 | frozen T5 + QKVO LoRA-r8 | mixed T1/T2/T3 |
 
 Add matched T3-only versions of B2–B4 if architecture/capacity changes autonomous performance materially.
 

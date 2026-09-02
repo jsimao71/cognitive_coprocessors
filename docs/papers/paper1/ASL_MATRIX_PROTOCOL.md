@@ -16,14 +16,17 @@ memory modules. Neither track trains language understanding from scratch.
 - Test: 25 untouched programs and 23 semantic patterns.
 - Backbone: `google-t5/t5-small` at pinned revision
   `df1b051c49625cf57a3d0d8d3863ed4d13564fe4`.
+- Adaptation: frozen pretrained weights plus rank-8 LoRA on T5 Q/K/V/O
+  projections; source-type embeddings and M1 gates are also trainable.
 - Decoder, tokenizer, source lengths, target lengths, optimizer family, ordering,
   and seed are fixed within a matched comparison.
 
 T5-small has six encoder and six decoder layers. The 12-layer dimensions in the
 experiment brief are an illustrative schema, not a checkpoint requirement. A
 small pretrained encoder-decoder is used because 450 examples cannot establish
-natural-language competence for a Transformer trained from scratch and because
-the local XPU can run the complete ladder.
+natural-language competence for a Transformer trained from scratch. The default
+cells preserve that competence by freezing base weights; full T5 fine-tuning is
+reserved as a separately named capacity control.
 
 The XPU cells use bfloat16. An initial float16 B0 launch produced non-finite
 training and autonomous-development loss in epoch 1 and was discarded before

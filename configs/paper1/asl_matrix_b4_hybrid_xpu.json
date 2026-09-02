@@ -9,6 +9,14 @@
     "encoder_layers": 6,
     "decoder_layers": 6
   },
+  "adaptation": {
+    "method": "lora",
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.0,
+    "target_modules": ["q", "k", "v", "o"],
+    "bias": "none"
+  },
   "encoder": {"architecture": "hybrid", "hybrid": {"shared_top_layers": 2}},
   "attention": {"mode": "cross", "source_type_embeddings": true, "separate_output_proj": true},
   "training": {

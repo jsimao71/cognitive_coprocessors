@@ -156,12 +156,18 @@ def run_matrix_evaluation(
     tokenizer = AutoTokenizer.from_pretrained(
         model_spec["model_id"], revision=model_spec["revision"]
     )
+    tokenizer.model_max_length = max(
+        training.max_nl_length, training.max_asl_length, training.max_target_length
+    )
     model = ASLMatrixModel.from_pretrained(
         model_spec["model_id"],
         revision=model_spec["revision"],
         encoder_architecture=config["encoder"]["architecture"],
         attention_mode=config["attention"]["mode"],
-        hybrid_shared_top_layers=int(config["encoder"].get("hybrid", {}).get("shared_top_layers", 2)),
+        hybrid_shared_top_layers=int(
+            config["encoder"].get("hybrid", {}).get("shared_top_layers", 2)
+        ),
+        adaptation=config.get("adaptation"),
     )
     checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     model.load_state_dict(checkpoint["model_state"])
@@ -274,6 +280,7 @@ def run_matrix_evaluation(
         "seed": training.seed,
         "encoder_architecture": config["encoder"]["architecture"],
         "attention_mode": config["attention"]["mode"],
+        "adaptation": config.get("adaptation", {"method": "full"}),
         "training_mixture": config["training"]["static"],
         "test_rows": len(examples),
         "by_condition": by_condition,
@@ -292,9 +299,7 @@ def run_matrix_evaluation(
     return summary
 
 
-def analyze_matrix_runs(
-    summary_paths: list[str | Path], output_dir: str | Path
-) -> dict[str, Any]:
+def analyze_matrix_runs(summary_paths: list[str | Path], output_dir: str | Path) -> dict[str, Any]:
     """Aggregate seeds and compute matched grounding gains for ladder cells."""
 
     rows = []
@@ -325,9 +330,7 @@ def analyze_matrix_runs(
     for row in rows:
         baseline = baseline_by_seed.get(row["seed"])
         row["grounding_gain_semantic"] = (
-            row["autonomous_semantic"] - baseline["autonomous_semantic"]
-            if baseline
-            else None
+            row["autonomous_semantic"] - baseline["autonomous_semantic"] if baseline else None
         )
         row["grounding_gain_answer"] = (
             row["autonomous_answer"] - baseline["autonomous_answer"] if baseline else None
@@ -342,7 +345,11 @@ def analyze_matrix_runs(
             "autonomous_semantic_mean": _mean([row["autonomous_semantic"] for row in members]),
             "autonomous_answer_mean": _mean([row["autonomous_answer"] for row in members]),
             "grounding_gain_semantic_mean": _mean(
-                [row["grounding_gain_semantic"] for row in members if row["grounding_gain_semantic"] is not None]
+                [
+                    row["grounding_gain_semantic"]
+                    for row in members
+                    if row["grounding_gain_semantic"] is not None
+                ]
             ),
         }
     output = Path(output_dir)
@@ -352,7 +359,9 @@ def analyze_matrix_runs(
         "run_count": len(rows),
         "aggregates": aggregates,
         "rows_sha256": file_sha256(rows_path),
-        "single_seed_results_are_exploratory": any(value["seed_count"] < 3 for value in aggregates.values()),
+        "single_seed_results_are_exploratory": any(
+            value["seed_count"] < 3 for value in aggregates.values()
+        ),
     }
     write_json(output / "summary.json", report)
     return report

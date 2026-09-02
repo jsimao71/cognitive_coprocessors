@@ -3,7 +3,11 @@ import pytest
 torch = pytest.importorskip("torch")
 transformers = pytest.importorskip("transformers")
 
-from ccpu.paper1.asl_matrix.model import ASLMatrixModel, representation_alignment
+from ccpu.paper1.asl_matrix.model import (
+    ASLMatrixModel,
+    adapt_pretrained_backbone,
+    representation_alignment,
+)
 
 
 def _backbone():
@@ -51,9 +55,7 @@ def test_encoder_sharing_matches_architecture_contract():
     separate = ASLMatrixModel(
         _backbone(), encoder_architecture="separate", attention_mode="merged_kv"
     )
-    shared = ASLMatrixModel(
-        _backbone(), encoder_architecture="shared", attention_mode="merged_kv"
-    )
+    shared = ASLMatrixModel(_backbone(), encoder_architecture="shared", attention_mode="merged_kv")
     hybrid = ASLMatrixModel(
         _backbone(),
         encoder_architecture="hybrid",
@@ -72,9 +74,7 @@ def test_encoder_sharing_matches_architecture_contract():
 
 
 def test_m1_asl_branch_is_disabled_for_autonomous_view():
-    model = ASLMatrixModel(
-        _backbone(), encoder_architecture="separate", attention_mode="cross"
-    )
+    model = ASLMatrixModel(_backbone(), encoder_architecture="separate", attention_mode="cross")
     output = model(
         nl_input_ids=torch.randint(2, 100, (1, 5)),
         nl_attention_mask=torch.ones(1, 5, dtype=torch.long),
@@ -84,6 +84,33 @@ def test_m1_asl_branch_is_disabled_for_autonomous_view():
     )
     assert all(layer["asl_available_fraction"] == 0 for layer in output.diagnostics["layers"])
     assert all(layer["asl_output_norm"] == 0 for layer in output.diagnostics["layers"])
+    assert all(layer["asl_gate"] < 0.02 for layer in output.diagnostics["layers"])
+
+
+def test_lora_patch_freezes_pretrained_t5_and_reports_budget():
+    pytest.importorskip("peft")
+    adaptation = {
+        "method": "lora",
+        "rank": 4,
+        "alpha": 8,
+        "dropout": 0.0,
+        "target_modules": ["q", "k", "v", "o"],
+        "bias": "none",
+    }
+    backbone = adapt_pretrained_backbone(_backbone(), adaptation)
+    model = ASLMatrixModel(
+        backbone,
+        encoder_architecture="separate",
+        attention_mode="cross",
+        adaptation=adaptation,
+    )
+    report = model.parameter_report()
+    assert report["adaptation"]["method"] == "lora"
+    assert report["lora_parameters"] > 0
+    assert report["frozen_parameters"] > report["trainable_parameters"]
+    assert report["source_type_parameters"] == 64
+    assert report["gate_parameters"] == 4
+    assert report["other_trainable_parameters"] == 0
 
 
 def test_representation_alignment_recovers_identical_pairs():
