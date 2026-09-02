@@ -3,8 +3,10 @@ import pytest
 torch = pytest.importorskip("torch")
 transformers = pytest.importorskip("transformers")
 
+from ccpu.paper1.asl_matrix.qwen import _prompt
 from ccpu.paper1.asl_matrix.qwen_patch import install_qwen_memory_patches
 from ccpu.paper1.asl_matrix.qwen_patch_train import split_patch_record
+from ccpu.paper1.asl_pilot_data import asl_prompt
 
 
 def _tiny_qwen():
@@ -108,19 +110,29 @@ def test_serialized_q1_view_splits_without_changing_autonomous_prompt():
     autonomous = {
         "example_id": "a",
         "has_external_asl": False,
-        "prompt": "Instruction\n\nInput:\nProblem: P\n\nASL:",
+        "prompt": "Instruction\n\nInput:\nProblem: P\nASL:",
     }
     assisted = {
         "example_id": "b",
         "has_external_asl": True,
         "prompt": (
             "Instruction\n\nInput:\nProblem: P\n\nExternal ASL teacher:\n"
-            "x.value = 3\nRETURN x.value\n\nASL:"
+            "x.value = 3\nRETURN x.value\nASL:"
         ),
     }
 
     assert split_patch_record(autonomous) == (autonomous["prompt"], None)
     assert split_patch_record(assisted) == (
-        "Instruction\n\nInput:\nProblem: P\n\nASL:",
+        "Instruction\n\nInput:\nProblem: P\nASL:",
         "x.value = 3\nRETURN x.value",
     )
+
+
+def test_qwen_autonomous_prompt_is_byte_identical_to_historical_f0():
+    question = "There are 3 objects. How many objects are there?"
+    matrix_prompt = _prompt({"nl_input": question, "external_asl_input": None})
+    historical_prompt = asl_prompt(
+        {"question": question, "source_context": None}, demonstrations=[]
+    )
+
+    assert matrix_prompt == historical_prompt

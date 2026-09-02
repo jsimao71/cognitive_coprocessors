@@ -17,7 +17,7 @@ from ccpu.paper1.lora_train import LoRATrainingConfig, _batch, _tokenize_record
 from .qwen_patch import QwenPatchController, install_qwen_memory_patches
 
 _EXTERNAL_MARKER = "\n\nExternal ASL teacher:\n"
-_TARGET_MARKER = "\n\nASL:"
+_TARGET_MARKER = "\nASL:"
 
 
 def split_patch_record(row: dict[str, Any]) -> tuple[str, str | None]:

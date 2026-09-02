@@ -21,11 +21,10 @@ _INSTRUCTION = (
 
 
 def _prompt(view: dict[str, Any]) -> str:
-    sections = [_INSTRUCTION, f"Input:\nProblem: {view['nl_input']}"]
+    prompt = f"{_INSTRUCTION}\n\nInput:\nProblem: {view['nl_input']}"
     if view["external_asl_input"] is not None:
-        sections.append(f"External ASL teacher:\n{view['external_asl_input']}")
-    sections.append("ASL:")
-    return "\n\n".join(sections)
+        prompt += f"\n\nExternal ASL teacher:\n{view['external_asl_input']}"
+    return prompt + "\nASL:"
 
 
 def _examples(path: Path) -> list[MatrixExample]:
