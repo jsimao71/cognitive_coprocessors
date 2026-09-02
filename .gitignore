@@ -284,6 +284,8 @@ artifacts/paper1/dsl/openrouter_full_v1/**/*.jsonl
 # Rebuildable ASL architecture-matrix streams, checkpoints, predictions, and logs
 artifacts/paper1/asl_matrix_v1/qwen_data/**/*.jsonl
 artifacts/paper1/asl_matrix_v1/runs/**/*.pt
+artifacts/paper1/asl_matrix_v1/qwen_runs/**/checkpoint_last.pt
+artifacts/paper1/asl_matrix_v1/qwen_runs/**/adapter/
 artifacts/paper1/asl_matrix_v1/eval/**/predictions.jsonl
 artifacts/paper1/asl_matrix_v1/*.log
 artifacts/paper1/asl_matrix_v1/**/*.stdout.log

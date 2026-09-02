@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import importlib.metadata
+import math
+import os
 import random
 import time
 from dataclasses import asdict, dataclass
@@ -30,6 +32,8 @@ class LoRATrainingConfig:
     dtype: str = "float16"
     gradient_checkpointing: bool = True
     evaluate_each_epoch: bool = True
+    checkpoint_every_optimizer_steps: int = 0
+    reject_truncation: bool = False
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> LoRATrainingConfig:
@@ -54,6 +58,10 @@ class LoRATrainingConfig:
             dtype=str(data.get("dtype", "float16")),
             gradient_checkpointing=bool(data.get("gradient_checkpointing", True)),
             evaluate_each_epoch=bool(data.get("evaluate_each_epoch", True)),
+            checkpoint_every_optimizer_steps=int(
+                data.get("checkpoint_every_optimizer_steps", 0)
+            ),
+            reject_truncation=bool(data.get("reject_truncation", False)),
         )
 
     def validate(self) -> None:
@@ -63,6 +71,8 @@ class LoRATrainingConfig:
             raise ValueError("max length, rank, and alpha are invalid")
         if not 0 <= self.dropout < 1 or not self.target_modules:
             raise ValueError("dropout or target modules are invalid")
+        if self.checkpoint_every_optimizer_steps < 0:
+            raise ValueError("checkpoint interval cannot be negative")
 
     def to_dict(self) -> dict[str, Any]:
         value = asdict(self)
@@ -79,7 +89,13 @@ def _chat_text(tokenizer: Any, messages: list[dict[str, str]], **kwargs: Any) ->
         return str(tokenizer.apply_chat_template(messages, **arguments))
 
 
-def _tokenize_record(tokenizer: Any, row: dict[str, Any], max_length: int) -> dict[str, Any]:
+def _tokenize_record(
+    tokenizer: Any,
+    row: dict[str, Any],
+    max_length: int,
+    *,
+    reject_truncation: bool = False,
+) -> dict[str, Any]:
     user = {"role": "user", "content": str(row["prompt"])}
     prefix = _chat_text(tokenizer, [user], add_generation_prompt=True)
     complete = _chat_text(
@@ -88,15 +104,20 @@ def _tokenize_record(tokenizer: Any, row: dict[str, Any], max_length: int) -> di
         add_generation_prompt=False,
     )
     prefix_ids = tokenizer(prefix, add_special_tokens=False)["input_ids"]
-    input_ids = tokenizer(complete, add_special_tokens=False)["input_ids"]
+    full_input_ids = tokenizer(complete, add_special_tokens=False)["input_ids"]
     common = 0
-    for prefix_token, full_token in zip(prefix_ids, input_ids):
+    for prefix_token, full_token in zip(prefix_ids, full_input_ids):
         if prefix_token != full_token:
             break
         common += 1
     if common < max(1, len(prefix_ids) - 2):
         raise ValueError(f"chat template prefix mismatch for {row['example_id']}")
-    input_ids = input_ids[:max_length]
+    if reject_truncation and len(full_input_ids) > max_length:
+        raise ValueError(
+            f"record exceeds max_length for {row['example_id']}: "
+            f"{len(full_input_ids)} > {max_length}"
+        )
+    input_ids = full_input_ids[:max_length]
     labels = [-100] * min(common, len(input_ids)) + input_ids[common:]
     if not any(label != -100 for label in labels):
         raise ValueError(f"target truncated for {row['example_id']}")
@@ -105,6 +126,9 @@ def _tokenize_record(tokenizer: Any, row: dict[str, Any], max_length: int) -> di
         "input_ids": input_ids,
         "labels": labels,
         "target_tokens": sum(label != -100 for label in labels),
+        "full_tokens": len(full_input_ids),
+        "prefix_tokens": len(prefix_ids),
+        "was_truncated": len(full_input_ids) > max_length,
     }
 
 
@@ -131,7 +155,10 @@ def _mean_loss(model: Any, torch: Any, rows: list[dict[str, Any]], pad: int, dev
     with torch.no_grad():
         for row in rows:
             loss = model(**_batch(torch, [row], pad, device)).loss
-            losses.append(float(loss.detach().cpu()))
+            value = float(loss.detach().cpu())
+            if not math.isfinite(value):
+                raise FloatingPointError("non-finite development loss")
+            losses.append(value)
     model.train()
     return sum(losses) / len(losses)
 
@@ -153,7 +180,12 @@ def train_lora(
         raise FileExistsError(f"refusing to overwrite adapter: {adapter_dir}")
     try:
         import torch
-        from peft import LoraConfig, get_peft_model
+        from peft import (
+            LoraConfig,
+            get_peft_model,
+            get_peft_model_state_dict,
+            set_peft_model_state_dict,
+        )
         from transformers import AutoModelForCausalLM, AutoTokenizer
     except ImportError as error:
         raise RuntimeError("LoRA training requires torch, transformers, and peft") from error
@@ -169,14 +201,27 @@ def train_lora(
     dtype = getattr(torch, model_dtype)
     torch.manual_seed(training.seed)
     random.seed(training.seed)
+    output_dir.mkdir(parents=True, exist_ok=True)
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
     train_rows = [
-        _tokenize_record(tokenizer, row, training.max_length) for row in read_jsonl(train_path)
+        _tokenize_record(
+            tokenizer,
+            row,
+            training.max_length,
+            reject_truncation=training.reject_truncation,
+        )
+        for row in read_jsonl(train_path)
     ]
     dev_rows = [
-        _tokenize_record(tokenizer, row, training.max_length) for row in read_jsonl(dev_path)
+        _tokenize_record(
+            tokenizer,
+            row,
+            training.max_length,
+            reject_truncation=training.reject_truncation,
+        )
+        for row in read_jsonl(dev_path)
     ]
 
     base = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, dtype=dtype)
@@ -204,30 +249,114 @@ def train_lora(
         (parameter for parameter in model_instance.parameters() if parameter.requires_grad),
         lr=training.learning_rate,
     )
+    checkpoint_path = output_dir / "checkpoint_last.pt"
+    train_sha256 = file_sha256(train_path)
+    dev_sha256 = file_sha256(dev_path)
+    checkpoint_identity = {
+        "model_id": model_id,
+        "model_revision": revision,
+        "adapter_id": str(model["adapter_id"]),
+        "training": training.to_dict(),
+        "train_sha256": train_sha256,
+        "dev_sha256": dev_sha256,
+    }
+    start_epoch = 0
+    start_batch_index = 0
+    resume_losses: list[float] = []
+    history: list[dict[str, Any]] = []
+    optimizer_steps = 0
+    resumed_from_optimizer_step = 0
+    previous_wall_time_seconds = 0.0
+    if checkpoint_path.exists():
+        checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+        if checkpoint.get("identity") != checkpoint_identity:
+            raise ValueError(f"checkpoint identity mismatch: {checkpoint_path}")
+        set_peft_model_state_dict(model_instance, checkpoint["adapter_state"])
+        optimizer.load_state_dict(checkpoint["optimizer_state"])
+        start_epoch = int(checkpoint["epoch"])
+        start_batch_index = int(checkpoint["next_batch_index"])
+        resume_losses = [float(value) for value in checkpoint["losses"]]
+        history = list(checkpoint["history"])
+        optimizer_steps = int(checkpoint["optimizer_steps"])
+        resumed_from_optimizer_step = optimizer_steps
+        previous_wall_time_seconds = float(checkpoint.get("wall_time_seconds", 0.0))
+        torch.set_rng_state(checkpoint["torch_rng_state"])
+        random.setstate(checkpoint["python_rng_state"])
+        if device == "xpu" and checkpoint.get("xpu_rng_state") is not None:
+            torch.xpu.set_rng_state(checkpoint["xpu_rng_state"])
+        print(
+            f"resuming at epoch {start_epoch + 1}, batch {start_batch_index}, "
+            f"optimizer step {optimizer_steps}"
+        )
     if device == "xpu":
         torch.xpu.reset_peak_memory_stats()
     started = time.perf_counter()
-    history = []
-    optimizer_steps = 0
+
+    def save_resume(epoch: int, next_batch_index: int, losses: list[float]) -> None:
+        adapter_state = {
+            key: value.detach().cpu()
+            for key, value in get_peft_model_state_dict(model_instance).items()
+        }
+        state = {
+            "schema_version": "ccpu.paper1.lora_checkpoint.v1",
+            "identity": checkpoint_identity,
+            "adapter_state": adapter_state,
+            "optimizer_state": optimizer.state_dict(),
+            "epoch": epoch,
+            "next_batch_index": next_batch_index,
+            "losses": losses,
+            "history": history,
+            "optimizer_steps": optimizer_steps,
+            "wall_time_seconds": previous_wall_time_seconds
+            + (time.perf_counter() - started),
+            "torch_rng_state": torch.get_rng_state(),
+            "python_rng_state": random.getstate(),
+            "xpu_rng_state": torch.xpu.get_rng_state() if device == "xpu" else None,
+        }
+        temporary_path = checkpoint_path.with_suffix(".pt.tmp")
+        torch.save(state, temporary_path)
+        os.replace(temporary_path, checkpoint_path)
+
     optimizer.zero_grad(set_to_none=True)
-    for epoch in range(training.epochs):
+    for epoch in range(start_epoch, training.epochs):
         order = list(range(len(train_rows)))
         random.Random(training.seed + epoch).shuffle(order)
-        losses = []
-        batch_starts = range(0, len(order), training.batch_size)
+        losses = resume_losses if epoch == start_epoch else []
+        batch_starts = list(range(0, len(order), training.batch_size))
         for batch_index, start in enumerate(batch_starts):
+            if epoch == start_epoch and batch_index < start_batch_index:
+                continue
             members = [train_rows[index] for index in order[start : start + training.batch_size]]
             loss = model_instance(
                 **_batch(torch, members, tokenizer.pad_token_id, device)
             ).loss
+            loss_value = float(loss.detach().cpu())
+            if not math.isfinite(loss_value):
+                raise FloatingPointError(
+                    f"non-finite training loss at epoch {epoch + 1}, batch {batch_index}"
+                )
             (loss / training.gradient_accumulation_steps).backward()
-            losses.append(float(loss.detach().cpu()))
+            losses.append(loss_value)
             final_batch = start + training.batch_size >= len(order)
             if (batch_index + 1) % training.gradient_accumulation_steps == 0 or final_batch:
-                torch.nn.utils.clip_grad_norm_(model_instance.parameters(), 1.0)
+                gradient_norm = torch.nn.utils.clip_grad_norm_(
+                    model_instance.parameters(), 1.0
+                )
+                if not math.isfinite(float(gradient_norm.detach().cpu())):
+                    raise FloatingPointError(
+                        f"non-finite gradient norm at epoch {epoch + 1}, "
+                        f"batch {batch_index}"
+                    )
                 optimizer.step()
                 optimizer.zero_grad(set_to_none=True)
                 optimizer_steps += 1
+                interval = training.checkpoint_every_optimizer_steps
+                if interval and optimizer_steps % interval == 0:
+                    save_resume(epoch, batch_index + 1, losses)
+                    print(
+                        f"checkpoint: epoch {epoch + 1}, batch {batch_index + 1}/"
+                        f"{len(batch_starts)}, optimizer step {optimizer_steps}"
+                    )
         should_evaluate = training.evaluate_each_epoch or epoch + 1 == training.epochs
         dev_loss = (
             _mean_loss(model_instance, torch, dev_rows, tokenizer.pad_token_id, device)
@@ -246,10 +375,14 @@ def train_lora(
             f"epoch {epoch + 1}/{training.epochs}: "
             f"train={history[-1]['mean_train_loss']:.4f} dev={dev_text}"
         )
+        if training.checkpoint_every_optimizer_steps:
+            save_resume(epoch + 1, 0, [])
+        start_batch_index = 0
+        resume_losses = []
 
     if device == "xpu":
         torch.xpu.synchronize()
-    wall_time_seconds = time.perf_counter() - started
+    wall_time_seconds = previous_wall_time_seconds + (time.perf_counter() - started)
     adapter_dir.mkdir(parents=True, exist_ok=False)
     model_instance.save_pretrained(adapter_dir, safe_serialization=True)
     adapter_files = {
@@ -271,6 +404,7 @@ def train_lora(
         "training_target_tokens": training.epochs
         * sum(row["target_tokens"] for row in train_rows),
         "optimizer_steps": optimizer_steps,
+        "resumed_from_optimizer_step": resumed_from_optimizer_step,
         "trainable_parameters": trainable_parameters,
         "total_parameters": total_parameters,
         "trainable_fraction": trainable_parameters / total_parameters,
@@ -279,8 +413,16 @@ def train_lora(
             int(torch.xpu.max_memory_allocated()) if device == "xpu" else None
         ),
         "history": history,
-        "train_sha256": file_sha256(train_path),
-        "dev_sha256": file_sha256(dev_path),
+        "token_audit": {
+            "train_max_full_tokens": max(row["full_tokens"] for row in train_rows),
+            "train_max_prefix_tokens": max(row["prefix_tokens"] for row in train_rows),
+            "train_truncated_rows": sum(row["was_truncated"] for row in train_rows),
+            "dev_max_full_tokens": max(row["full_tokens"] for row in dev_rows),
+            "dev_max_prefix_tokens": max(row["prefix_tokens"] for row in dev_rows),
+            "dev_truncated_rows": sum(row["was_truncated"] for row in dev_rows),
+        },
+        "train_sha256": train_sha256,
+        "dev_sha256": dev_sha256,
         "adapter_files": adapter_files,
         "packages": {
             name: importlib.metadata.version(name)

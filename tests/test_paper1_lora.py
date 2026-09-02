@@ -1,10 +1,51 @@
 import importlib.util
 import json
 
+import pytest
+
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl
 from ccpu.paper1.lora_data import LoRAProtocolDataConfig, generate_protocol_data
+from ccpu.paper1.lora_train import LoRATrainingConfig, _tokenize_record
 from ccpu.paper1.placement_analysis import build_placement_comparison
+
+
+class _CharacterChatTokenizer:
+    def apply_chat_template(self, messages, *, add_generation_prompt, **_kwargs):
+        prefix = f"USER: {messages[0]['content']}\nASSISTANT: "
+        if add_generation_prompt:
+            return prefix
+        return prefix + messages[1]["content"] + "<eos>"
+
+    def __call__(self, text, *, add_special_tokens):
+        assert not add_special_tokens
+        return {"input_ids": [ord(character) for character in text]}
+
+
+def test_lora_training_config_parses_restart_and_truncation_guards():
+    config = LoRATrainingConfig.from_dict(
+        {
+            "training": {
+                "checkpoint_every_optimizer_steps": 50,
+                "reject_truncation": True,
+            }
+        }
+    )
+
+    assert config.checkpoint_every_optimizer_steps == 50
+    assert config.reject_truncation is True
+
+
+def test_lora_tokenization_can_reject_instead_of_hiding_truncation():
+    tokenizer = _CharacterChatTokenizer()
+    row = {"example_id": "long-1", "prompt": "short", "target": "x" * 80}
+
+    truncated = _tokenize_record(tokenizer, row, 40)
+    assert truncated["was_truncated"] is True
+    assert truncated["full_tokens"] > 40
+
+    with pytest.raises(ValueError, match="record exceeds max_length"):
+        _tokenize_record(tokenizer, row, 40, reject_truncation=True)
 
 
 def _excluded_dataset(tmp_path):
