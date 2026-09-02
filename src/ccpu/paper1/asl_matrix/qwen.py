@@ -20,15 +20,38 @@ _INSTRUCTION = (
 )
 
 
-def _prompt(view: dict[str, Any]) -> str:
-    prompt = f"{_INSTRUCTION}\n\nInput:\nProblem: {view['nl_input']}"
+def _prompt(view: dict[str, Any], autonomous_prompt: str | None = None) -> str:
+    prompt = autonomous_prompt or f"{_INSTRUCTION}\n\nInput:\nProblem: {view['nl_input']}\nASL:"
+    if not prompt.endswith("\nASL:"):
+        raise ValueError("authoritative autonomous prompt must end with ASL marker")
     if view["external_asl_input"] is not None:
-        prompt += f"\n\nExternal ASL teacher:\n{view['external_asl_input']}"
-    return prompt + "\nASL:"
+        prompt = (
+            prompt[: -len("\nASL:")]
+            + f"\n\nExternal ASL teacher:\n{view['external_asl_input']}\nASL:"
+        )
+    return prompt
 
 
 def _examples(path: Path) -> list[MatrixExample]:
     return [MatrixExample(**row) for row in read_jsonl(path)]
+
+
+def _authoritative_prompts(
+    path: str | Path | None,
+    examples: list[MatrixExample],
+) -> dict[str, str]:
+    if path is None:
+        return {}
+    prompts = {str(row["parent_source_id"]): str(row["prompt"]) for row in read_jsonl(path)}
+    expected = {example.parent_source_id for example in examples}
+    if set(prompts) != expected:
+        missing = sorted(expected - set(prompts))
+        unexpected = sorted(set(prompts) - expected)
+        raise ValueError(
+            f"authoritative prompt identities differ; missing={missing}, "
+            f"unexpected={unexpected}"
+        )
+    return prompts
 
 
 def build_qwen_patch_data(
@@ -38,6 +61,8 @@ def build_qwen_patch_data(
     condition: str,
     epochs: int = 10,
     seed: int = 11,
+    prompt_train_path: str | Path | None = None,
+    prompt_dev_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Unfold runtime regimes into a target-token-matched causal SFT stream."""
 
@@ -48,6 +73,8 @@ def build_qwen_patch_data(
     data = Path(data_dir)
     train = _examples(data / "source" / "train.jsonl")
     dev = _examples(data / "source" / "dev.jsonl")
+    train_prompts = _authoritative_prompts(prompt_train_path, train)
+    dev_prompts = _authoritative_prompts(prompt_dev_path, dev)
     mixture = (
         StaticMixture(full_teacher=0.0, partial_teacher=0.0, autonomous=1.0)
         if condition == "q0_t3"
@@ -80,7 +107,7 @@ def build_qwen_patch_data(
                     "dataset": example.dataset,
                     "epoch_view": epoch,
                     "regime": regime,
-                    "prompt": _prompt(view),
+                    "prompt": _prompt(view, train_prompts.get(example.parent_source_id)),
                     "target": example.target_asl,
                     "has_external_asl": view["has_external_asl"],
                     "external_asl_fraction": view["external_asl_fraction"],
@@ -101,7 +128,7 @@ def build_qwen_patch_data(
                 "dataset": example.dataset,
                 "epoch_view": None,
                 "regime": "autonomous",
-                "prompt": _prompt(view),
+                "prompt": _prompt(view, dev_prompts.get(example.parent_source_id)),
                 "target": example.target_asl,
                 "has_external_asl": False,
                 "external_asl_fraction": 0.0,
@@ -131,6 +158,12 @@ def build_qwen_patch_data(
         "input_sha256": {
             "source_train": file_sha256(data / "source" / "train.jsonl"),
             "source_dev": file_sha256(data / "source" / "dev.jsonl"),
+            "authoritative_prompt_train": (
+                file_sha256(prompt_train_path) if prompt_train_path else None
+            ),
+            "authoritative_prompt_dev": (
+                file_sha256(prompt_dev_path) if prompt_dev_path else None
+            ),
         },
         "output_sha256": {
             "train": file_sha256(train_path),

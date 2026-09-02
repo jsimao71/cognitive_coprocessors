@@ -575,6 +575,8 @@ def prepare_qwen_asl_matrix_command(args: argparse.Namespace) -> int:
         condition=args.condition,
         epochs=args.epochs,
         seed=args.seed,
+        prompt_train_path=args.prompt_train,
+        prompt_dev_path=args.prompt_dev,
     )
     print(
         f"prepared {manifest['condition']} with {manifest['train_views']} views "
@@ -1284,6 +1286,8 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     )
     qwen_matrix_data.add_argument("--epochs", type=int, default=10)
     qwen_matrix_data.add_argument("--seed", type=int, default=11)
+    qwen_matrix_data.add_argument("--prompt-train")
+    qwen_matrix_data.add_argument("--prompt-dev")
     qwen_matrix_data.set_defaults(handler=prepare_qwen_asl_matrix_command)
 
     qwen_patch_train = commands.add_parser(

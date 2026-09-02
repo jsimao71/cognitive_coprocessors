@@ -136,3 +136,21 @@ def test_qwen_autonomous_prompt_is_byte_identical_to_historical_f0():
     )
 
     assert matrix_prompt == historical_prompt
+
+
+def test_qwen_prompt_preserves_authoritative_evidence_before_memory():
+    base = (
+        "Instruction\n\nInput:\nEvidence:\nTABLE: Total | 302 | 148\n"
+        "Problem: What changed?\nASL:"
+    )
+    view = {
+        "nl_input": "What changed?",
+        "external_asl_input": "total.current = 302\nRETURN total.current",
+    }
+
+    assert _prompt({**view, "external_asl_input": None}, base) == base
+    assert _prompt(view, base) == (
+        "Instruction\n\nInput:\nEvidence:\nTABLE: Total | 302 | 148\n"
+        "Problem: What changed?\n\nExternal ASL teacher:\n"
+        "total.current = 302\nRETURN total.current\nASL:"
+    )
