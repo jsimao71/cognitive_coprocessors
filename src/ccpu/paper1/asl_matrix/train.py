@@ -82,6 +82,48 @@ def _regime_builder(config: dict[str, Any], seed: int) -> RegimeBuilder:
     )
 
 
+def _token_length_audit(
+    tokenizer: Any,
+    examples: list[MatrixExample],
+    training: MatrixTrainingConfig,
+    *,
+    split: str,
+) -> dict[str, Any]:
+    """Fail closed when any scientific input or target would be truncated."""
+
+    lengths = {"nl": [], "external_asl": [], "target": []}
+    for example in examples:
+        lengths["nl"].append(
+            len(tokenizer(f"translate natural language to ASL: {example.nl_input}").input_ids)
+        )
+        lengths["external_asl"].append(
+            len(tokenizer(f"external ASL teacher: {example.target_asl}").input_ids)
+        )
+        lengths["target"].append(len(tokenizer(example.target_asl).input_ids))
+    limits = {
+        "nl": training.max_nl_length,
+        "external_asl": training.max_asl_length,
+        "target": training.max_target_length,
+    }
+    report = {"split": split, "rows": len(examples), "fields": {}}
+    violations = []
+    for name, values in lengths.items():
+        ordered = sorted(values)
+        over_limit = sum(value > limits[name] for value in values)
+        report["fields"][name] = {
+            "limit": limits[name],
+            "maximum": max(values),
+            "p95": ordered[int(0.95 * (len(ordered) - 1))],
+            "over_limit": over_limit,
+        }
+        if over_limit:
+            violations.append(f"{name}={over_limit}/{len(values)}")
+    if violations:
+        details = ", ".join(violations)
+        raise ValueError(f"{split} matrix rows would be truncated: {details}")
+    return report
+
+
 def _views(
     examples: list[MatrixExample],
     builder: RegimeBuilder,
@@ -219,16 +261,22 @@ def train_matrix(
         torch.xpu.reset_peak_memory_stats()
 
     tokenizer = AutoTokenizer.from_pretrained(model_spec["model_id"], revision=revision)
+    train_examples = _examples(Path(data_dir) / "source" / "train.jsonl")
+    dev_examples = _examples(Path(data_dir) / "source" / "dev.jsonl")
+    length_audit = {
+        "train": _token_length_audit(tokenizer, train_examples, training, split="train"),
+        "dev": _token_length_audit(tokenizer, dev_examples, training, split="dev"),
+    }
     model = ASLMatrixModel.from_pretrained(
         model_spec["model_id"],
         revision=revision,
         encoder_architecture=config["encoder"]["architecture"],
         attention_mode=config["attention"]["mode"],
-        hybrid_shared_top_layers=int(config["encoder"].get("hybrid", {}).get("shared_top_layers", 2)),
+        hybrid_shared_top_layers=int(
+            config["encoder"].get("hybrid", {}).get("shared_top_layers", 2)
+        ),
     ).to(device=device, dtype=dtype)
     model.config.use_cache = False
-    train_examples = _examples(Path(data_dir) / "source" / "train.jsonl")
-    dev_examples = _examples(Path(data_dir) / "source" / "dev.jsonl")
     builder = _regime_builder(config, training.seed)
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=training.learning_rate, weight_decay=training.weight_decay
@@ -276,7 +324,14 @@ def train_matrix(
             "epoch": epoch + 1,
             "mean_train_loss": sum(losses) / len(losses),
             "autonomous_dev_loss": dev_loss,
-            "regime_counts": dict(sorted({name: sum(v["regime"] == name for v in train_views) for name in ("full", "partial", "autonomous")}.items())),
+            "regime_counts": dict(
+                sorted(
+                    {
+                        name: sum(v["regime"] == name for v in train_views)
+                        for name in ("full", "partial", "autonomous")
+                    }.items()
+                )
+            ),
         }
         history.append(row)
         if dev_loss < best_dev_loss:
@@ -340,10 +395,9 @@ def train_matrix(
             "train": file_sha256(Path(data_dir) / "source" / "train.jsonl"),
             "dev": file_sha256(Path(data_dir) / "source" / "dev.jsonl"),
         },
+        "token_length_audit": length_audit,
         "checkpoint_best_sha256": file_sha256(best_path),
-        "packages": {
-            name: importlib.metadata.version(name) for name in ("torch", "transformers")
-        },
+        "packages": {name: importlib.metadata.version(name) for name in ("torch", "transformers")},
         "resumed_from_epoch": start_epoch,
     }
     write_json(report_path, report)

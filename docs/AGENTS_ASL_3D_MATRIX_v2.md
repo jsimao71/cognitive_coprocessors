@@ -1036,7 +1036,7 @@ Do not move to elaborate architectures before this is understood.
 
 ## P1Q — Patch a small pretrained causal model
 
-In parallel with the clean encoder-decoder comparison, patch a small pretrained
+After the pretrained T5-small B0/B1 grounding gate, patch a small pretrained
 causal language model, beginning with **Qwen3-0.6B**. The purpose is to preserve
 the model's existing natural-language competence while changing only how it can
 learn from and attend to external ASL during training.
@@ -1146,8 +1146,9 @@ Add matched T3-only versions of B2–B4 if architecture/capacity changes autonom
 
 This ladder should determine whether the complete factorial sweep is worth the compute.
 
-Run the pretrained-model patch ladder before scaling a from-scratch model or a
-larger backbone:
+Run the Qwen pretrained-model patch ladder after the T5-small B0/B1 gate and
+before scaling to a larger backbone. No language model in this roadmap is
+trained from scratch:
 
 | ID | Pretrained backbone | Patch | Trainable components | Training |
 |---|---|---|---|---|
@@ -1472,8 +1473,10 @@ Negative results are publishable and should be preserved.
 
 The first milestone is not the complete matrix. It is to establish whether external symbolic grounding produces a measurable autonomous benefit.
 
-For the constrained-compute pretrained track, interleave the following steps
-after item 2 and before committing to large B0--B4 sweeps:
+For the constrained-compute pretrained track, run the following steps after the
+T5-small B0/B1 gate. Complete any B2--B4 cells admitted by that gate before
+starting Qwen so the encoder-decoder architecture evidence is not confounded by
+simultaneous backbone changes:
 
 ```text
 Q0. Reuse/freeze the existing Qwen3-0.6B F0 QKVO-r8 autonomous result.

@@ -15,7 +15,7 @@ from ccpu.paper1.asl_matrix.data import (
 )
 from ccpu.paper1.asl_matrix.eval import analyze_matrix_runs
 from ccpu.paper1.asl_matrix.qwen import build_qwen_patch_data
-from ccpu.paper1.asl_matrix.train import MatrixTrainingConfig
+from ccpu.paper1.asl_matrix.train import MatrixTrainingConfig, _token_length_audit
 
 ASL = """box.initial_count = 12
 box.removed_count = 4
@@ -39,6 +39,33 @@ def _example() -> MatrixExample:
         },
         split="train",
     )
+
+
+class _WhitespaceTokenizer:
+    def __call__(self, text):
+        return type("Tokenized", (), {"input_ids": text.split()})()
+
+
+def test_token_length_audit_reports_lengths_without_truncation():
+    report = _token_length_audit(
+        _WhitespaceTokenizer(),
+        [_example()],
+        MatrixTrainingConfig(),
+        split="train",
+    )
+    assert report["rows"] == 1
+    assert report["fields"]["target"]["over_limit"] == 0
+
+
+def test_token_length_audit_rejects_partial_program_targets():
+    training = replace(MatrixTrainingConfig(), max_target_length=4)
+    with pytest.raises(ValueError, match="target=1/1"):
+        _token_length_audit(
+            _WhitespaceTokenizer(),
+            [_example()],
+            training,
+            split="train",
+        )
 
 
 def test_canonical_reference_executes_and_is_stable():

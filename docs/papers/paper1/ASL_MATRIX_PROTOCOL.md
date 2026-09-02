@@ -4,10 +4,10 @@ This track implements the staged ladder in `docs/AGENTS_ASL_3D_MATRIX_v2.md`
 against the frozen F0 500-source partition. It is separate from F1/F2/F3 and
 from the OpenRouter expansion corpus.
 
-Two pretrained tracks are maintained. The B ladder uses T5-small as a clean
-encoder-decoder architectural control. The higher-priority constrained-compute
-Q ladder patches the existing Qwen3-0.6B F0 model with rank-8 LoRA and small
-memory modules; it never trains language understanding from scratch.
+Two pretrained tracks are maintained. The first B ladder uses T5-small as a
+clean encoder-decoder architectural control. After its B0/B1 grounding gate,
+the Q ladder patches the existing Qwen3-0.6B F0 model with rank-8 LoRA and small
+memory modules. Neither track trains language understanding from scratch.
 
 ## Fixed inputs
 
@@ -69,6 +69,10 @@ for M1 and source-mass based for M2.
 Single-seed ladder results are exploratory. A positive B1-B0 autonomous gain is
 the gate for three-seed confirmation and later B2-B4 runs. Material architecture
 effects require T3-only and parameter/compute controls before a causal claim.
+
+Execution order is fixed: complete B0, B1, and any B2--B4 cells admitted by the
+T5 gate before launching Q1--Q3. This preserves the lower-cost pretrained
+encoder-decoder comparison and avoids simultaneous accelerator contention.
 
 For Qwen, Q0 is the existing F0 QKVO-r8 result. Q1 adds mixed external-ASL
 exposure as serialized context without changing attention. Q2 adds separately
