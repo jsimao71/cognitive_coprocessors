@@ -208,6 +208,7 @@ def run_matrix_evaluation(
                     asl_attention_mask=batch["asl_attention_mask"],
                     max_new_tokens=training.max_target_length,
                 )
+                generation_diagnostics = dict(model.last_generation_diagnostics)
             generated_text = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
             predicted_asl = extract_asl(generated_text)
             metrics = score_asl(example.target_asl, predicted_asl, example.effective_scope)
@@ -233,6 +234,7 @@ def run_matrix_evaluation(
                     "parent_source_id": example.parent_source_id,
                     "semantic_pattern_id": example.semantic_pattern_id,
                     "generated_text": generated_text,
+                    "generation_diagnostics": generation_diagnostics,
                     "predicted_asl": predicted_asl,
                     "metrics": metrics,
                     "followed_wrong_teacher": followed_wrong,
@@ -267,6 +269,15 @@ def run_matrix_evaluation(
             },
             "followed_wrong_teacher_rate": _mean(
                 [float(row["followed_wrong_teacher"]) for row in members]
+            ),
+            "mean_generated_tokens": _mean(
+                [float(row["generation_diagnostics"]["generated_tokens"][0]) for row in members]
+            ),
+            "eos_stop_rate": _mean(
+                [float(row["generation_diagnostics"]["eos_reached"][0]) for row in members]
+            ),
+            "repetition_stop_rate": _mean(
+                [float(row["generation_diagnostics"]["repetition_stopped"][0]) for row in members]
             ),
         }
     autonomous = by_condition["autonomous"]["rates"]

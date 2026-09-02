@@ -32,6 +32,19 @@ class MatrixModelOutput:
     past_key_values: Any = None
 
 
+def has_repeated_generation_suffix(token_ids: list[int]) -> bool:
+    """Detect only sustained token loops that cannot be useful ASL continuations."""
+
+    ngram = 8
+    repeats = 3
+    width = ngram * repeats
+    if len(token_ids) >= width:
+        tail = token_ids[-width:]
+        if all(tail[:ngram] == tail[index : index + ngram] for index in range(ngram, width, ngram)):
+            return True
+    return len(token_ids) >= 64 and len(set(token_ids[-64:])) <= 4
+
+
 class DualSourceT5CrossAttention(nn.Module):
     """Two separately normalized T5 cross-attention branches (matrix M1)."""
 
@@ -170,6 +183,7 @@ class ASLMatrixModel(nn.Module):
         self.attention_mode = attention_mode
         self.hybrid_shared_top_layers = hybrid_shared_top_layers
         self.adaptation = adaptation or {"method": "full"}
+        self.last_generation_diagnostics: dict[str, Any] = {}
         self.source_type_embeddings = nn.Embedding(2, self.config.d_model)
         nn.init.zeros_(self.source_type_embeddings.weight)
 
@@ -418,6 +432,7 @@ class ASLMatrixModel(nn.Module):
             device=nl_input_ids.device,
         )
         complete = torch.zeros(batch, dtype=torch.bool, device=nl_input_ids.device)
+        repeated = torch.zeros(batch, dtype=torch.bool, device=nl_input_ids.device)
         past_key_values = None
         for _ in range(max_new_tokens):
             step_ids = decoder_ids if past_key_values is None else decoder_ids[:, -1:]
@@ -430,10 +445,26 @@ class ASLMatrixModel(nn.Module):
             )
             past_key_values = output.past_key_values
             next_token = output.logits[:, -1].argmax(dim=-1)
+            halted = complete | repeated
+            next_token = torch.where(
+                halted,
+                torch.full_like(next_token, int(self.config.eos_token_id)),
+                next_token,
+            )
             decoder_ids = torch.cat((decoder_ids, next_token[:, None]), dim=1)
             complete |= next_token == int(self.config.eos_token_id)
-            if bool(complete.all()):
+            repeated |= torch.tensor(
+                [has_repeated_generation_suffix(row[1:].tolist()) for row in decoder_ids],
+                device=decoder_ids.device,
+            )
+            if bool((complete | repeated).all()):
                 break
+        self.last_generation_diagnostics = {
+            "generated_tokens": [int(len(row) - 1) for row in decoder_ids],
+            "eos_reached": [bool(value) for value in complete.tolist()],
+            "repetition_stopped": [bool(value) for value in repeated.tolist()],
+            "max_new_tokens": max_new_tokens,
+        }
         return decoder_ids[:, 1:]
 
     def parameter_report(self) -> dict[str, Any]:

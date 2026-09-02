@@ -6,6 +6,7 @@ transformers = pytest.importorskip("transformers")
 from ccpu.paper1.asl_matrix.model import (
     ASLMatrixModel,
     adapt_pretrained_backbone,
+    has_repeated_generation_suffix,
     representation_alignment,
 )
 
@@ -154,3 +155,9 @@ def test_cached_decoder_matches_full_prefix(attention_mode):
         decoder_input_ids=decoder_ids,
     )
     torch.testing.assert_close(cached.logits[:, -1], full.logits[:, -1], rtol=1e-4, atol=1e-5)
+
+
+def test_repetition_stop_is_conservative_for_program_tokens():
+    assert has_repeated_generation_suffix(list(range(80))) is False
+    assert has_repeated_generation_suffix(list(range(8)) * 3) is True
+    assert has_repeated_generation_suffix([1, 2, 3, 4] * 16) is True
