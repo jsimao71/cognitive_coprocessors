@@ -65,6 +65,25 @@ def test_qwen_cross_patch_starts_near_zero_and_counts_only_new_capacity():
 
 
 @pytest.mark.parametrize("mode", ["cross", "native_kv"])
+def test_qwen_patch_matches_pretrained_half_precision(mode):
+    model = _tiny_qwen().half()
+    controller = install_qwen_memory_patches(model, mode=mode)
+    external_ids = torch.randint(2, 100, (1, 5))
+    local_ids = torch.randint(2, 100, (1, 6))
+
+    assert controller.source_type_embedding.dtype == torch.float32
+    if mode == "cross":
+        assert all(
+            patch.external_k_proj.weight.dtype == torch.float32 for patch in controller.patches
+        )
+    with torch.no_grad():
+        controller.capture_external(external_ids, torch.ones_like(external_ids))
+        output = model(input_ids=local_ids, attention_mask=torch.ones_like(local_ids))
+    assert output.logits.dtype == torch.float16
+    assert torch.isfinite(output.logits).all()
+
+
+@pytest.mark.parametrize("mode", ["cross", "native_kv"])
 def test_qwen_external_memory_backpropagates_without_a_second_backbone(mode):
     model = _tiny_qwen().train()
     for parameter in model.parameters():

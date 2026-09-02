@@ -121,12 +121,14 @@ class QwenExternalMemoryAttention(nn.Module):
             self.original.q_proj(hidden_states).view(hidden_shape)
         ).transpose(1, 2)
         external_shape = (*self.external_hidden_states.shape[:-1], -1, self.head_dim)
+        external_hidden = self.external_hidden_states.to(self.external_k_proj.weight.dtype)
         key = self.original.k_norm(
-            self.external_k_proj(self.external_hidden_states).view(external_shape)
+            self.external_k_proj(external_hidden).view(external_shape)
         ).transpose(1, 2)
-        value = self.external_v_proj(self.external_hidden_states).view(external_shape).transpose(1, 2)
+        value = self.external_v_proj(external_hidden).view(external_shape).transpose(1, 2)
         key = _repeat_kv(key, self.num_key_value_groups)
         value = _repeat_kv(value, self.num_key_value_groups)
+        query = query.to(key.dtype)
         scores = torch.matmul(query, key.transpose(2, 3)) * self.scaling
         scores = scores + self._external_validity(scores.dtype, query.shape[-2])
         weights = F.softmax(scores.float(), dim=-1).to(query.dtype)
@@ -148,7 +150,7 @@ class QwenExternalMemoryAttention(nn.Module):
                 .cpu()
             ),
         }
-        return output
+        return output.to(hidden_states.dtype)
 
     def _native_attention(
         self,
@@ -280,7 +282,7 @@ class QwenPatchController:
         for patch in self.patches:
             patch.begin_capture(attention_mask)
         embeddings = self.model.get_input_embeddings()(input_ids)
-        embeddings = embeddings + self.source_type_embedding
+        embeddings = embeddings + self.source_type_embedding.to(embeddings.dtype)
         self.model(
             inputs_embeds=embeddings,
             attention_mask=attention_mask,
@@ -359,7 +361,10 @@ def install_qwen_memory_patches(
     if not patches:
         raise ValueError(f"no Qwen layers selected from {available}")
     hidden_size = int(patches[0].config.hidden_size)
-    source_type_embedding = nn.Parameter(torch.zeros(hidden_size))
+    embedding_weight = model.get_input_embeddings().weight
+    source_type_embedding = nn.Parameter(
+        torch.zeros(hidden_size, device=embedding_weight.device, dtype=torch.float32)
+    )
     model.register_parameter("asl_external_source_embedding", source_type_embedding)
     return QwenPatchController(
         model=model,
