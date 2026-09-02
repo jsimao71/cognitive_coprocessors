@@ -20,6 +20,11 @@ _EXTERNAL_MARKER = "\n\nExternal ASL teacher:\n"
 _TARGET_MARKER = "\nASL:"
 
 
+def _epoch_value(row: dict[str, Any]) -> int | None:
+    value = row.get("epoch_view")
+    return int(value) if value is not None else None
+
+
 def split_patch_record(row: dict[str, Any]) -> tuple[str, str | None]:
     """Separate the fixed NL prompt from serialized Q1 external memory."""
 
@@ -89,7 +94,7 @@ def _tokenize_rows(
                 "external_attention_mask": mask,
                 "external_tokens": tokens,
                 "regime": row["regime"],
-                "logical_epoch": int(row["epoch_view"]),
+                "logical_epoch": _epoch_value(row),
             }
         )
         records.append(record)

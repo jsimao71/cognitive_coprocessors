@@ -5,7 +5,7 @@ transformers = pytest.importorskip("transformers")
 
 from ccpu.paper1.asl_matrix.qwen import _prompt
 from ccpu.paper1.asl_matrix.qwen_patch import install_qwen_memory_patches
-from ccpu.paper1.asl_matrix.qwen_patch_train import split_patch_record
+from ccpu.paper1.asl_matrix.qwen_patch_train import _epoch_value, split_patch_record
 from ccpu.paper1.asl_pilot_data import asl_prompt
 
 
@@ -154,3 +154,8 @@ def test_qwen_prompt_preserves_authoritative_evidence_before_memory():
         "Problem: What changed?\n\nExternal ASL teacher:\n"
         "total.current = 302\nRETURN total.current\nASL:"
     )
+
+
+def test_qwen_patch_epoch_is_optional_for_autonomous_dev_rows():
+    assert _epoch_value({"epoch_view": 7}) == 7
+    assert _epoch_value({"epoch_view": None}) is None
