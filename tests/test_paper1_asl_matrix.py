@@ -1,8 +1,9 @@
-from dataclasses import replace
+from dataclasses import asdict, replace
 
 import pytest
 
 from ccpu.cli import build_parser
+from ccpu.common.artifacts import read_json, read_jsonl, write_json, write_jsonl
 from ccpu.paper1.asl_matrix.data import (
     CORRUPTION_POLICIES,
     MatrixExample,
@@ -12,6 +13,9 @@ from ccpu.paper1.asl_matrix.data import (
     canonicalize_asl,
     corrupt_asl,
 )
+from ccpu.paper1.asl_matrix.eval import analyze_matrix_runs
+from ccpu.paper1.asl_matrix.qwen import build_qwen_patch_data
+from ccpu.paper1.asl_matrix.train import MatrixTrainingConfig
 
 ASL = """box.initial_count = 12
 box.removed_count = 4
@@ -118,3 +122,86 @@ def test_cli_exposes_matrix_data_gate():
         ]
     )
     assert args.seed == 912736
+
+
+def test_training_config_rejects_invalid_optimizer():
+    config = MatrixTrainingConfig(learning_rate=0)
+    with pytest.raises(ValueError, match="optimizer"):
+        config.validate()
+
+
+def test_matrix_analysis_computes_seed_matched_grounding_gain(tmp_path):
+    def summary(run_id, answer):
+        rates = {
+            "exact_asl": 0.0,
+            "parse_valid": 1.0,
+            "semantic_return_equivalent": answer,
+            "final_answer_correct": answer,
+        }
+        return {
+            "run_id": run_id,
+            "seed": 11,
+            "encoder_architecture": "separate",
+            "attention_mode": "cross",
+            "training_mixture": {},
+            "by_condition": {
+                "autonomous": {"rates": rates},
+                "full_teacher": {"rates": rates},
+            },
+            "teacher_gap": {
+                "semantic_return_equivalent": 0.0,
+                "final_answer_correct": 0.0,
+            },
+        }
+
+    b0 = write_json(tmp_path / "b0.json", summary("B0-separate-cross-t3", 0.2))
+    b1 = write_json(tmp_path / "b1.json", summary("B1-separate-cross-mixed", 0.4))
+    report = analyze_matrix_runs([b0, b1], tmp_path / "analysis")
+    assert report["aggregates"]["B1-separate-cross-mixed"][
+        "grounding_gain_semantic_mean"
+    ] == pytest.approx(0.2)
+    assert read_json(tmp_path / "analysis" / "summary.json") == report
+
+
+@pytest.mark.parametrize(
+    ("command", "required"),
+    [
+        (
+            "train-asl-matrix",
+            ["--config", "c.json", "--data-dir", "d", "--output-dir", "o"],
+        ),
+        (
+            "evaluate-asl-matrix",
+            [
+                "--config",
+                "c.json",
+                "--data-dir",
+                "d",
+                "--checkpoint",
+                "best.pt",
+                "--output-dir",
+                "o",
+            ],
+        ),
+        ("analyze-asl-matrix", ["--summary", "s.json", "--output-dir", "o"]),
+    ],
+)
+def test_cli_exposes_matrix_run_commands(command, required):
+    args = build_parser().parse_args(["paper1", command, *required])
+    assert callable(args.handler)
+
+
+def test_qwen_q0_unfolds_matched_epochs_without_teacher_leakage(tmp_path):
+    data = tmp_path / "data" / "source"
+    train = [_example(), replace(_example(), example_id="two", parent_source_id="two")]
+    dev = [replace(_example(), example_id="dev", parent_source_id="dev", split="dev")]
+    write_jsonl(data / "train.jsonl", [asdict(row) for row in train])
+    write_jsonl(data / "dev.jsonl", [asdict(row) for row in dev])
+    report = build_qwen_patch_data(
+        tmp_path / "data", tmp_path / "q0", condition="q0_t3", epochs=3, seed=11
+    )
+    rows = read_jsonl(tmp_path / "q0" / "train.jsonl")
+    assert report["train_views"] == 6
+    assert report["regime_counts"] == {"autonomous": 6}
+    assert all(not row["has_external_asl"] for row in rows)
+    assert all("External ASL teacher:" not in row["prompt"] for row in rows)

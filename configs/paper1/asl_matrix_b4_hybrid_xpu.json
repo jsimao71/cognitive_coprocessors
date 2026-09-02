@@ -1,0 +1,32 @@
+{
+  "schema_version": "ccpu.paper1.asl_matrix.config.v1",
+  "run_id": "B4-hybrid-cross-mixed",
+  "model": {
+    "model_id": "google-t5/t5-small",
+    "revision": "df1b051c49625cf57a3d0d8d3863ed4d13564fe4",
+    "d_model": 512,
+    "n_heads": 8,
+    "encoder_layers": 6,
+    "decoder_layers": 6
+  },
+  "encoder": {"architecture": "hybrid", "hybrid": {"shared_top_layers": 2}},
+  "attention": {"mode": "cross", "source_type_embeddings": true, "separate_output_proj": true},
+  "training": {
+    "schedule": "static",
+    "static": {"full_teacher": 0.25, "partial_teacher": 0.35, "autonomous": 0.40},
+    "corruption": {"policy": ["record_dropout", "value_mask", "argument_mask"], "severity": 0.5},
+    "epochs": 8,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "max_nl_length": 320,
+    "max_asl_length": 384,
+    "max_target_length": 384,
+    "seed": 11,
+    "device": "xpu",
+    "dtype": "float16",
+    "early_stopping_patience": 2
+  },
+  "loss": {"generation": 1.0, "consistency": 0.0, "alignment": 0.0, "asl_denoising": 0.0}
+}

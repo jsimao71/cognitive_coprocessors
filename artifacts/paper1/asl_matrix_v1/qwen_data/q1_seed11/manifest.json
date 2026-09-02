@@ -1,0 +1,31 @@
+{
+  "condition": "q1_serialized_mixed",
+  "corruption_policy_counts": {
+    "argument_mask": 524,
+    "record_dropout": 510,
+    "value_mask": 498
+  },
+  "dev_rows": 25,
+  "document_dependent_icl": false,
+  "fixed_prompt": true,
+  "input_sha256": {
+    "source_dev": "b3da053c125411a63d1a3ca97ebe21bf0c0dedd710cb255c1988d67455214455",
+    "source_train": "a1a1f7ff287cdb5f7d4634915fae8c6ee80df477aa1b3b0b122c48cd3737d1eb"
+  },
+  "output_sha256": {
+    "dev": "1211ac0e16e943dc7999f03f47ecfff57d221326a83fa9115bb7abdbfef6fd1b",
+    "train": "a5fb598bb0e155fd9bc0d85f857c3b7a8ba1ca458a4f7f6261caafea86369e28"
+  },
+  "regime_counts": {
+    "autonomous": 1823,
+    "full": 1145,
+    "partial": 1532
+  },
+  "runtime_epochs_unfolded": 10,
+  "schema_version": "ccpu.paper1.asl_matrix.qwen_data.v1",
+  "seed": 11,
+  "source_train_rows": 450,
+  "target_exposures": 4500,
+  "target_visible_in_source_fields": false,
+  "train_views": 4500
+}

@@ -521,6 +521,68 @@ def prepare_asl_matrix_data_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def train_asl_matrix_command(args: argparse.Namespace) -> int:
+    from .asl_matrix.train import train_matrix
+
+    report = train_matrix(
+        config_path=args.config,
+        data_dir=args.data_dir,
+        output_dir=args.output_dir,
+        seed_override=args.seed,
+    )
+    print(
+        f"trained {report['run_id']} seed={report['seed']} "
+        f"best_dev={report['best_autonomous_dev_loss']:.4f}@{report['best_epoch']} "
+        f"-> {args.output_dir}"
+    )
+    return 0
+
+
+def evaluate_asl_matrix_command(args: argparse.Namespace) -> int:
+    from .asl_matrix.eval import EVALUATION_CONDITIONS, run_matrix_evaluation
+
+    summary = run_matrix_evaluation(
+        config_path=args.config,
+        data_dir=args.data_dir,
+        checkpoint_path=args.checkpoint,
+        output_dir=args.output_dir,
+        seed_override=args.seed,
+        conditions=tuple(args.condition or EVALUATION_CONDITIONS),
+    )
+    autonomous = summary["by_condition"]["autonomous"]["rates"]
+    print(
+        f"evaluated {summary['run_id']} seed={summary['seed']} "
+        f"semantic={autonomous['semantic_return_equivalent']:.3f} "
+        f"answer={autonomous['final_answer_correct']:.3f} -> {args.output_dir}"
+    )
+    return 0
+
+
+def analyze_asl_matrix_command(args: argparse.Namespace) -> int:
+    from .asl_matrix.eval import analyze_matrix_runs
+
+    report = analyze_matrix_runs(args.summary, args.output_dir)
+    print(f"analyzed {report['run_count']} ASL matrix runs -> {args.output_dir}")
+    return 0
+
+
+def prepare_qwen_asl_matrix_command(args: argparse.Namespace) -> int:
+    from .asl_matrix.qwen import build_qwen_patch_data
+
+    manifest = build_qwen_patch_data(
+        args.data_dir,
+        args.output_dir,
+        condition=args.condition,
+        epochs=args.epochs,
+        seed=args.seed,
+    )
+    print(
+        f"prepared {manifest['condition']} with {manifest['train_views']} views "
+        f"-> {args.output_dir}"
+    )
+    return 0
+
+
 def build_asl_incremental_data_command(args: argparse.Namespace) -> int:
     manifest = build_asl_incremental_data(
         args.freeze_dir,
@@ -1145,6 +1207,46 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_matrix_data.add_argument("--output-dir", required=True)
     asl_matrix_data.add_argument("--seed", type=int, default=912736)
     asl_matrix_data.set_defaults(handler=prepare_asl_matrix_data_command)
+
+    asl_matrix_train = commands.add_parser(
+        "train-asl-matrix", help="train one resumable ASL architecture matrix cell"
+    )
+    asl_matrix_train.add_argument("--config", required=True)
+    asl_matrix_train.add_argument("--data-dir", required=True)
+    asl_matrix_train.add_argument("--output-dir", required=True)
+    asl_matrix_train.add_argument("--seed", type=int)
+    asl_matrix_train.set_defaults(handler=train_asl_matrix_command)
+
+    asl_matrix_eval = commands.add_parser(
+        "evaluate-asl-matrix", help="evaluate one matrix cell under teacher ablations"
+    )
+    asl_matrix_eval.add_argument("--config", required=True)
+    asl_matrix_eval.add_argument("--data-dir", required=True)
+    asl_matrix_eval.add_argument("--checkpoint", required=True)
+    asl_matrix_eval.add_argument("--output-dir", required=True)
+    asl_matrix_eval.add_argument("--seed", type=int)
+    asl_matrix_eval.add_argument("--condition", action="append")
+    asl_matrix_eval.set_defaults(handler=evaluate_asl_matrix_command)
+
+    asl_matrix_analysis = commands.add_parser(
+        "analyze-asl-matrix", help="aggregate matched ASL matrix runs and grounding gains"
+    )
+    asl_matrix_analysis.add_argument("--summary", action="append", required=True)
+    asl_matrix_analysis.add_argument("--output-dir", required=True)
+    asl_matrix_analysis.set_defaults(handler=analyze_asl_matrix_command)
+
+    qwen_matrix_data = commands.add_parser(
+        "prepare-qwen-asl-matrix",
+        help="unfold matched Q0/Q1 Qwen LoRA runtime views",
+    )
+    qwen_matrix_data.add_argument("--data-dir", required=True)
+    qwen_matrix_data.add_argument("--output-dir", required=True)
+    qwen_matrix_data.add_argument(
+        "--condition", choices=("q0_t3", "q1_serialized_mixed"), required=True
+    )
+    qwen_matrix_data.add_argument("--epochs", type=int, default=10)
+    qwen_matrix_data.add_argument("--seed", type=int, default=11)
+    qwen_matrix_data.set_defaults(handler=prepare_qwen_asl_matrix_command)
 
     asl_expansion_data = commands.add_parser(
         "build-asl-expansion-data",
