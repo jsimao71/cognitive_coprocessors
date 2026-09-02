@@ -34,6 +34,7 @@ class LoRATrainingConfig:
     evaluate_each_epoch: bool = True
     checkpoint_every_optimizer_steps: int = 0
     reject_truncation: bool = False
+    logical_epoch_field: str | None = None
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> LoRATrainingConfig:
@@ -62,6 +63,11 @@ class LoRATrainingConfig:
                 data.get("checkpoint_every_optimizer_steps", 0)
             ),
             reject_truncation=bool(data.get("reject_truncation", False)),
+            logical_epoch_field=(
+                str(data["logical_epoch_field"])
+                if data.get("logical_epoch_field") is not None
+                else None
+            ),
         )
 
     def validate(self) -> None:
@@ -205,15 +211,22 @@ def train_lora(
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
-    train_rows = [
-        _tokenize_record(
+    train_rows = []
+    for source_row in read_jsonl(train_path):
+        tokenized = _tokenize_record(
             tokenizer,
-            row,
+            source_row,
             training.max_length,
             reject_truncation=training.reject_truncation,
         )
-        for row in read_jsonl(train_path)
-    ]
+        if training.logical_epoch_field is not None:
+            if training.logical_epoch_field not in source_row:
+                raise ValueError(
+                    f"logical epoch field {training.logical_epoch_field!r} is absent from "
+                    f"{source_row['example_id']}"
+                )
+            tokenized["logical_epoch"] = int(source_row[training.logical_epoch_field])
+        train_rows.append(tokenized)
     dev_rows = [
         _tokenize_record(
             tokenizer,
@@ -223,6 +236,18 @@ def train_lora(
         )
         for row in read_jsonl(dev_path)
     ]
+    logical_epoch_rows: dict[int, list[dict[str, Any]]] | None = None
+    if training.logical_epoch_field is not None:
+        logical_epoch_rows = {
+            epoch: [row for row in train_rows if row["logical_epoch"] == epoch]
+            for epoch in range(training.epochs)
+        }
+        observed = {row["logical_epoch"] for row in train_rows}
+        expected = set(range(training.epochs))
+        if observed != expected or any(not rows for rows in logical_epoch_rows.values()):
+            raise ValueError(
+                f"logical epochs must be exactly {sorted(expected)}; observed={sorted(observed)}"
+            )
 
     base = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, dtype=dtype)
     base.config.use_cache = False
@@ -319,14 +344,15 @@ def train_lora(
 
     optimizer.zero_grad(set_to_none=True)
     for epoch in range(start_epoch, training.epochs):
-        order = list(range(len(train_rows)))
+        epoch_rows = logical_epoch_rows[epoch] if logical_epoch_rows is not None else train_rows
+        order = list(range(len(epoch_rows)))
         random.Random(training.seed + epoch).shuffle(order)
         losses = resume_losses if epoch == start_epoch else []
         batch_starts = list(range(0, len(order), training.batch_size))
         for batch_index, start in enumerate(batch_starts):
             if epoch == start_epoch and batch_index < start_batch_index:
                 continue
-            members = [train_rows[index] for index in order[start : start + training.batch_size]]
+            members = [epoch_rows[index] for index in order[start : start + training.batch_size]]
             loss = model_instance(
                 **_batch(torch, members, tokenizer.pad_token_id, device)
             ).loss
@@ -400,9 +426,19 @@ def train_lora(
         "training": effective_training,
         "train_rows": len(train_rows),
         "dev_rows": len(dev_rows),
-        "train_target_tokens_per_epoch": sum(row["target_tokens"] for row in train_rows),
-        "training_target_tokens": training.epochs
-        * sum(row["target_tokens"] for row in train_rows),
+        "train_target_tokens_per_epoch": (
+            [
+                sum(row["target_tokens"] for row in logical_epoch_rows[epoch])
+                for epoch in range(training.epochs)
+            ]
+            if logical_epoch_rows is not None
+            else sum(row["target_tokens"] for row in train_rows)
+        ),
+        "training_target_tokens": (
+            sum(row["target_tokens"] for row in train_rows)
+            if logical_epoch_rows is not None
+            else training.epochs * sum(row["target_tokens"] for row in train_rows)
+        ),
         "optimizer_steps": optimizer_steps,
         "resumed_from_optimizer_step": resumed_from_optimizer_step,
         "trainable_parameters": trainable_parameters,

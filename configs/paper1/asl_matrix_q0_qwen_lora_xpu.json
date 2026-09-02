@@ -6,7 +6,7 @@
     "dtype": "float16"
   },
   "training": {
-    "epochs": 1,
+    "epochs": 10,
     "batch_size": 1,
     "gradient_accumulation_steps": 8,
     "learning_rate": 0.0002,
@@ -15,13 +15,14 @@
     "alpha": 16,
     "dropout": 0.05,
     "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
-    "seed": 11,
+    "seed": 99173,
     "device": "xpu",
     "dtype": "float16",
     "gradient_checkpointing": false,
     "evaluate_each_epoch": false,
     "checkpoint_every_optimizer_steps": 50,
-    "reject_truncation": true
+    "reject_truncation": true,
+    "logical_epoch_field": "epoch_view"
   },
   "models": [{
     "model_id": "Qwen/Qwen3-0.6B",

@@ -28,12 +28,14 @@ def test_lora_training_config_parses_restart_and_truncation_guards():
             "training": {
                 "checkpoint_every_optimizer_steps": 50,
                 "reject_truncation": True,
+                "logical_epoch_field": "epoch_view",
             }
         }
     )
 
     assert config.checkpoint_every_optimizer_steps == 50
     assert config.reject_truncation is True
+    assert config.logical_epoch_field == "epoch_view"
 
 
 def test_lora_tokenization_can_reject_instead_of_hiding_truncation():
