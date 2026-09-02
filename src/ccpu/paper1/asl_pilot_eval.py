@@ -323,6 +323,7 @@ def run_asl_pilot(
     output_dir: str | Path,
     seed: int = 44017,
     checkpoint_every: int = 5,
+    backend_override: Any | None = None,
 ) -> dict[str, Any]:
     if condition not in {"base", "icl", "lora", "lora_icl"}:
         raise ValueError(f"unsupported ASL condition: {condition}")
@@ -333,27 +334,29 @@ def run_asl_pilot(
     else:
         model.pop("adapter_path", None)
         model.pop("adapter_id", None)
-    backend = HuggingFaceBackend(
-        HuggingFaceGenerationConfig(
-            model_id=str(model["model_id"]),
-            revision=str(model["revision"]),
-            max_new_tokens=int(model.get("max_new_tokens", 384)),
-            device=str(model.get("device", "xpu")),
-            dtype=str(model.get("dtype", "float16")),
-            use_chat_template=bool(model.get("use_chat_template", True)),
-            enable_thinking=bool(model.get("enable_thinking", False)),
-            adapter_path=model.get("adapter_path"),
-            adapter_id=model.get("adapter_id"),
-            cached_generation=True,
+    backend = backend_override
+    if backend is None:
+        backend = HuggingFaceBackend(
+            HuggingFaceGenerationConfig(
+                model_id=str(model["model_id"]),
+                revision=str(model["revision"]),
+                max_new_tokens=int(model.get("max_new_tokens", 384)),
+                device=str(model.get("device", "xpu")),
+                dtype=str(model.get("dtype", "float16")),
+                use_chat_template=bool(model.get("use_chat_template", True)),
+                enable_thinking=bool(model.get("enable_thinking", False)),
+                adapter_path=model.get("adapter_path"),
+                adapter_id=model.get("adapter_id"),
+                cached_generation=True,
+            )
         )
-    )
     eval_rows = read_jsonl(eval_path)
     train_rows = read_jsonl(train_split_path)
     demos = _select_demos(train_rows, shots, seed=seed)
     output = Path(output_dir)
     predictions_path = output / "predictions.jsonl"
     predictions = read_jsonl(predictions_path) if predictions_path.exists() else []
-    expected_model_id = str(model["model_id"])
+    expected_model_id = str(backend.model_id)
     eval_suites = {item["suite"] for item in eval_rows}
     if any(
         row.get("condition") != condition

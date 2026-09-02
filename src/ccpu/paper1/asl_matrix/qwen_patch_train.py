@@ -425,3 +425,121 @@ def train_qwen_patch(
     }
     write_json(report_path, report)
     return report
+
+
+def load_qwen_patch_backend(
+    config_path: str | Path,
+    state_path: str | Path,
+    *,
+    max_new_tokens: int = 384,
+) -> Any:
+    """Reconstruct one trained patch behind the common generation backend."""
+
+    try:
+        import torch
+        from peft import LoraConfig, get_peft_model
+        from safetensors.torch import load_file
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+    except ImportError as error:
+        raise RuntimeError(
+            "Qwen patch evaluation requires torch, transformers, peft, and safetensors"
+        ) from error
+    from ccpu.paper1.generation import HuggingFaceBackend, HuggingFaceGenerationConfig
+
+    config = read_json(config_path)
+    training = LoRATrainingConfig.from_dict(config)
+    model_spec = config["model"]
+    revision = str(model_spec["revision"])
+    dtype_name = str(model_spec.get("dtype", training.dtype))
+    tokenizer = AutoTokenizer.from_pretrained(model_spec["model_id"], revision=revision)
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    base = AutoModelForCausalLM.from_pretrained(
+        model_spec["model_id"],
+        revision=revision,
+        dtype=getattr(torch, dtype_name),
+    )
+    peft_config = LoraConfig(
+        r=training.rank,
+        lora_alpha=training.alpha,
+        lora_dropout=training.dropout,
+        target_modules=list(training.target_modules),
+        bias="none",
+        task_type="CAUSAL_LM",
+    )
+    model = get_peft_model(base, peft_config)
+    patch_spec = config["patch"]
+    controller = install_qwen_memory_patches(
+        model,
+        mode=str(patch_spec["mode"]),
+        layer_indices=tuple(int(value) for value in patch_spec["layer_indices"]),
+    )
+    _load_trainable_state(model, load_file(state_path, device="cpu"))
+    controller.clear()
+    generation = HuggingFaceGenerationConfig(
+        model_id=str(model_spec["model_id"]),
+        revision=revision,
+        max_new_tokens=max_new_tokens,
+        device=training.device,
+        dtype=dtype_name,
+        use_chat_template=True,
+        enable_thinking=False,
+        adapter_path=str(state_path),
+        adapter_id=str(model_spec["adapter_id"]),
+        cached_generation=True,
+    )
+    return HuggingFaceBackend.from_components(
+        generation,
+        tokenizer=tokenizer,
+        model=model,
+    )
+
+
+def evaluate_qwen_patch(
+    *,
+    config_path: str | Path,
+    state_path: str | Path,
+    eval_path: str | Path,
+    train_split_path: str | Path,
+    output_dir: str | Path,
+    seed: int = 44017,
+    checkpoint_every: int = 5,
+) -> dict[str, Any]:
+    """Run the frozen autonomous ASL evaluation with a Q2/Q3 patch."""
+
+    from ccpu.paper1.asl_pilot_eval import run_asl_pilot
+
+    config = read_json(config_path)
+    model_spec = config["model"]
+    backend = load_qwen_patch_backend(config_path, state_path)
+    model_config = {
+        "model": {
+            **model_spec,
+            "device": config["training"]["device"],
+            "max_new_tokens": 384,
+            "use_chat_template": True,
+            "enable_thinking": False,
+        },
+        "adapter_path": str(state_path),
+        "adapter_id": str(model_spec["adapter_id"]),
+    }
+    report = run_asl_pilot(
+        eval_path=eval_path,
+        train_split_path=train_split_path,
+        model_config=model_config,
+        condition="lora",
+        shots=0,
+        output_dir=output_dir,
+        seed=seed,
+        checkpoint_every=checkpoint_every,
+        backend_override=backend,
+    )
+    report["qwen_patch"] = {
+        "run_id": config["run_id"],
+        "mode": config["patch"]["mode"],
+        "layer_indices": config["patch"]["layer_indices"],
+        "config_sha256": file_sha256(config_path),
+        "state_sha256": file_sha256(state_path),
+    }
+    write_json(Path(output_dir) / "summary.json", report)
+    return report

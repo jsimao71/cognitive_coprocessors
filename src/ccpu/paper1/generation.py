@@ -122,10 +122,7 @@ class HuggingFaceBackend:
                 'Hugging Face generation requires: pip install -e ".[hf]"'
             ) from error
 
-        self._torch = torch
-        self.config = config
-        self.model_id = config.adapter_id or config.model_id
-        self.tokenizer = AutoTokenizer.from_pretrained(
+        tokenizer = AutoTokenizer.from_pretrained(
             config.model_id,
             revision=config.revision,
             trust_remote_code=config.trust_remote_code,
@@ -138,14 +135,47 @@ class HuggingFaceBackend:
         }
         if dtype is not None:
             model_kwargs["dtype"] = dtype
-        self.model = AutoModelForCausalLM.from_pretrained(config.model_id, **model_kwargs)
+        model = AutoModelForCausalLM.from_pretrained(config.model_id, **model_kwargs)
         if config.adapter_path:
             try:
                 from peft import PeftModel
             except ImportError as error:
                 raise RuntimeError("Adapter inference requires the PEFT package") from error
-            self.model = PeftModel.from_pretrained(self.model, config.adapter_path)
-        self.model = self.model.to(device)
+            model = PeftModel.from_pretrained(model, config.adapter_path)
+        self._initialize_components(config, torch, tokenizer, model, device)
+
+    @classmethod
+    def from_components(
+        cls,
+        config: HuggingFaceGenerationConfig,
+        *,
+        tokenizer: Any,
+        model: Any,
+    ) -> HuggingFaceBackend:
+        """Build the standard evaluator around an already reconstructed model."""
+
+        try:
+            import torch
+        except ImportError as error:
+            raise RuntimeError("Hugging Face generation requires torch") from error
+        backend = cls.__new__(cls)
+        device = select_device(torch, config.device)
+        backend._initialize_components(config, torch, tokenizer, model, device)
+        return backend
+
+    def _initialize_components(
+        self,
+        config: HuggingFaceGenerationConfig,
+        torch: Any,
+        tokenizer: Any,
+        model: Any,
+        device: str,
+    ) -> None:
+        self._torch = torch
+        self.config = config
+        self.model_id = config.adapter_id or config.model_id
+        self.tokenizer = tokenizer
+        self.model = model.to(device)
         self.model.eval()
         self.eos_token_ids = _eos_token_ids(
             self.tokenizer.eos_token_id,

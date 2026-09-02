@@ -600,6 +600,27 @@ def train_qwen_asl_patch_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def evaluate_qwen_asl_patch_command(args: argparse.Namespace) -> int:
+    from .asl_matrix.qwen_patch_train import evaluate_qwen_patch
+
+    report = evaluate_qwen_patch(
+        config_path=args.config,
+        state_path=args.state,
+        eval_path=args.eval,
+        train_split_path=args.train_split,
+        output_dir=args.output_dir,
+        seed=args.seed,
+        checkpoint_every=args.checkpoint_every,
+    )
+    rates = report["rates"]
+    print(
+        f"evaluated {report['qwen_patch']['run_id']}: "
+        f"parse={rates['parse_valid']:.3f} answer={rates['final_answer_correct']:.3f} "
+        f"-> {args.output_dir}"
+    )
+    return 0
+
+
 def build_asl_incremental_data_command(args: argparse.Namespace) -> int:
     manifest = build_asl_incremental_data(
         args.freeze_dir,
@@ -1274,6 +1295,19 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     qwen_patch_train.add_argument("--dev", required=True)
     qwen_patch_train.add_argument("--output-dir", required=True)
     qwen_patch_train.set_defaults(handler=train_qwen_asl_patch_command)
+
+    qwen_patch_eval = commands.add_parser(
+        "evaluate-qwen-asl-patch",
+        help="evaluate a Qwen Q2/Q3 patch on the frozen autonomous test",
+    )
+    qwen_patch_eval.add_argument("--config", required=True)
+    qwen_patch_eval.add_argument("--state", required=True)
+    qwen_patch_eval.add_argument("--eval", required=True)
+    qwen_patch_eval.add_argument("--train-split", required=True)
+    qwen_patch_eval.add_argument("--output-dir", required=True)
+    qwen_patch_eval.add_argument("--seed", type=int, default=44017)
+    qwen_patch_eval.add_argument("--checkpoint-every", type=int, default=1)
+    qwen_patch_eval.set_defaults(handler=evaluate_qwen_asl_patch_command)
 
     asl_expansion_data = commands.add_parser(
         "build-asl-expansion-data",
