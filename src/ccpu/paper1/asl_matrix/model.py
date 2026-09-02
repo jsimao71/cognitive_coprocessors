@@ -29,6 +29,7 @@ class MatrixModelOutput:
     loss: torch.Tensor | None
     logits: torch.Tensor
     diagnostics: dict[str, Any]
+    past_key_values: Any = None
 
 
 class DualSourceT5CrossAttention(nn.Module):
@@ -76,8 +77,6 @@ class DualSourceT5CrossAttention(nn.Module):
         cache_position: torch.Tensor | None = None,
     ) -> tuple[torch.Tensor, ...]:
         del position_bias
-        if use_cache or past_key_values is not None:
-            raise ValueError("matrix M1 currently requires use_cache=False")
         if self.nl_width is None:
             raise RuntimeError("M1 NL memory width was not set")
         nl_states = key_value_states[:, : self.nl_width]
@@ -87,8 +86,6 @@ class DualSourceT5CrossAttention(nn.Module):
         normed = self.layer_norm(hidden_states)
         kwargs = {
             "layer_head_mask": layer_head_mask,
-            "past_key_values": None,
-            "use_cache": False,
             "query_length": query_length,
             "output_attentions": output_attentions,
             "cache_position": cache_position,
@@ -98,6 +95,8 @@ class DualSourceT5CrossAttention(nn.Module):
             mask=nl_mask,
             key_value_states=nl_states,
             position_bias=None,
+            past_key_values=past_key_values,
+            use_cache=use_cache,
             **kwargs,
         )
         asl_output = self.asl_attention(
@@ -105,6 +104,8 @@ class DualSourceT5CrossAttention(nn.Module):
             mask=asl_mask,
             key_value_states=asl_states,
             position_bias=None,
+            past_key_values=None,
+            use_cache=False,
             **kwargs,
         )
         nl_gate = torch.sigmoid(self.nl_gate_logit)
@@ -290,6 +291,8 @@ class ASLMatrixModel(nn.Module):
         decoder_input_ids: torch.Tensor | None = None,
         output_attentions: bool = False,
         output_hidden_states: bool = False,
+        past_key_values: Any = None,
+        use_cache: bool = False,
     ) -> MatrixModelOutput:
         if labels is None and decoder_input_ids is None:
             raise ValueError("labels or decoder_input_ids are required")
@@ -306,6 +309,8 @@ class ASLMatrixModel(nn.Module):
             labels=labels,
             decoder_input_ids=decoder_input_ids,
             output_attentions=output_attentions,
+            past_key_values=past_key_values,
+            use_cache=use_cache,
         )
 
     def _decode_memories(
@@ -316,6 +321,8 @@ class ASLMatrixModel(nn.Module):
         labels: torch.Tensor | None = None,
         decoder_input_ids: torch.Tensor | None = None,
         output_attentions: bool = False,
+        past_key_values: Any = None,
+        use_cache: bool = False,
     ) -> MatrixModelOutput:
         memory, memory_mask = self._memory(nl_memory, asl_memory)
         if decoder_input_ids is None:
@@ -324,7 +331,8 @@ class ASLMatrixModel(nn.Module):
             input_ids=decoder_input_ids,
             encoder_hidden_states=memory,
             encoder_attention_mask=memory_mask,
-            use_cache=False,
+            past_key_values=past_key_values,
+            use_cache=use_cache,
             output_attentions=output_attentions,
             return_dict=True,
         )
@@ -338,7 +346,12 @@ class ASLMatrixModel(nn.Module):
                 logits.view(-1, logits.size(-1)), labels.view(-1), ignore_index=-100
             )
         diagnostics = self.attention_diagnostics(decoder.cross_attentions, nl_memory, asl_memory)
-        return MatrixModelOutput(loss=loss, logits=logits, diagnostics=diagnostics)
+        return MatrixModelOutput(
+            loss=loss,
+            logits=logits,
+            diagnostics=diagnostics,
+            past_key_values=decoder.past_key_values,
+        )
 
     def _shift_right(self, labels: torch.Tensor) -> torch.Tensor:
         decoder_start = self.config.decoder_start_token_id
@@ -405,12 +418,17 @@ class ASLMatrixModel(nn.Module):
             device=nl_input_ids.device,
         )
         complete = torch.zeros(batch, dtype=torch.bool, device=nl_input_ids.device)
+        past_key_values = None
         for _ in range(max_new_tokens):
+            step_ids = decoder_ids if past_key_values is None else decoder_ids[:, -1:]
             output = self._decode_memories(
                 nl_memory,
                 asl_memory,
-                decoder_input_ids=decoder_ids,
+                decoder_input_ids=step_ids,
+                past_key_values=past_key_values,
+                use_cache=True,
             )
+            past_key_values = output.past_key_values
             next_token = output.logits[:, -1].argmax(dim=-1)
             decoder_ids = torch.cat((decoder_ids, next_token[:, None]), dim=1)
             complete |= next_token == int(self.config.eos_token_id)

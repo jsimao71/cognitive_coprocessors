@@ -119,3 +119,38 @@ def test_representation_alignment_recovers_identical_pairs():
     metrics = representation_alignment(states, states.clone(), mask, mask)
     assert metrics["paired_cosine_mean"] == pytest.approx(1.0)
     assert metrics["paired_retrieval_accuracy"] == 1.0
+
+
+@pytest.mark.parametrize("attention_mode", ASLMatrixModel.ATTENTION_MODES)
+def test_cached_decoder_matches_full_prefix(attention_mode):
+    model = ASLMatrixModel(
+        _backbone(), encoder_architecture="separate", attention_mode=attention_mode
+    ).eval()
+    nl_ids = torch.randint(2, 100, (1, 5))
+    asl_ids = torch.randint(2, 100, (1, 4))
+    nl_memory, asl_memory = model.encode_sources(
+        nl_ids,
+        torch.ones_like(nl_ids),
+        asl_ids,
+        torch.ones_like(asl_ids),
+    )
+    decoder_ids = torch.tensor([[0, 7]])
+    first = model._decode_memories(
+        nl_memory,
+        asl_memory,
+        decoder_input_ids=decoder_ids[:, :1],
+        use_cache=True,
+    )
+    cached = model._decode_memories(
+        nl_memory,
+        asl_memory,
+        decoder_input_ids=decoder_ids[:, 1:],
+        past_key_values=first.past_key_values,
+        use_cache=True,
+    )
+    full = model._decode_memories(
+        nl_memory,
+        asl_memory,
+        decoder_input_ids=decoder_ids,
+    )
+    torch.testing.assert_close(cached.logits[:, -1], full.logits[:, -1], rtol=1e-4, atol=1e-5)
