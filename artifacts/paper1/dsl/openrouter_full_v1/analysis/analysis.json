@@ -1,8 +1,8 @@
 {
   "attempt_outcomes": {
-    "accepted": 55,
-    "invalid": 97,
-    "rate_limited": 263
+    "accepted": 4400,
+    "invalid": 7216,
+    "rate_limited": 11833
   },
   "baseline": {
     "mean_part_count": 3.076,
@@ -21,30 +21,30 @@
   },
   "by_dataset": {
     "gsm8k": {
-      "converted_program_count": 15,
-      "converted_proportion_full_input": 0.002007226013649137,
-      "converted_proportion_generated": 1.0,
-      "converted_proportion_processed": 0.3333333333333333,
-      "generated_program_count": 15,
-      "generated_proportion": 0.002007226013649137,
+      "converted_program_count": 3489,
+      "converted_proportion_full_input": 0.46688077077478923,
+      "converted_proportion_generated": 0.8980694980694981,
+      "converted_proportion_processed": 0.46688077077478923,
+      "generated_program_count": 3885,
+      "generated_proportion": 0.5198715375351265,
       "input_program_count": 7473,
-      "processed_program_count": 45,
-      "processed_proportion": 0.00602167804094741,
-      "remaining_program_count": 7428,
-      "terminal_failure_count": 30
+      "processed_program_count": 7473,
+      "processed_proportion": 1.0,
+      "remaining_program_count": 0,
+      "terminal_failure_count": 3588
     },
     "tatqa": {
-      "converted_program_count": 30,
-      "converted_proportion_full_input": 0.042492917847025496,
-      "converted_proportion_generated": 0.75,
-      "converted_proportion_processed": 0.5454545454545454,
-      "generated_program_count": 40,
-      "generated_proportion": 0.056657223796033995,
+      "converted_program_count": 407,
+      "converted_proportion_full_input": 0.5764872521246459,
+      "converted_proportion_generated": 0.7902912621359224,
+      "converted_proportion_processed": 0.5764872521246459,
+      "generated_program_count": 515,
+      "generated_proportion": 0.7294617563739377,
       "input_program_count": 706,
-      "processed_program_count": 55,
-      "processed_proportion": 0.07790368271954674,
-      "remaining_program_count": 651,
-      "terminal_failure_count": 15
+      "processed_program_count": 706,
+      "processed_proportion": 1.0,
+      "remaining_program_count": 0,
+      "terminal_failure_count": 191
     }
   },
   "claim_boundary": "remote outputs are deterministic-execution checked but not manually reviewed semantic gold",
@@ -55,12 +55,12 @@
       "artifacts\\paper1\\dsl\\expansion500_v1\\freeze\\expansion_train.jsonl": "f63f41544c68cc8b39233a73385bf23d58bd66cbdd4e0017b4667de932492562"
     },
     "remote": {
-      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\annotations.jsonl": "8ae5114c0d167e73ede82f62c9941e52103aefa979228d0b35ea02e437c0c471",
-      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\attempts.jsonl": "dd3ea153d01e79546eb5697b7502e7d7b1f9d77ea2882afc2793790054721729",
-      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\failures.jsonl": "91dc49cfd8b356bb86ef4aa5d6af09f5c78d50f6493040713220becb03b998b4",
-      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\annotations.jsonl": "bfe68fdea10dbb21e22d3d46acbb7aeac939386ece0647d75f136c8bb15ea664",
-      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\attempts.jsonl": "1e5dcb24756e85baf53cafc43ddc03acbf52501ddf3b6cdef4e02899e1ebd865",
-      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\failures.jsonl": "d54cd2d0a41a869fb213932aa0760729fdfb581673439c999db3555a6cf8b179"
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\annotations.jsonl": "8376855a31a235af07bf888bf09c17466fbc0f754baa910cbf7547413fe9b7ad",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\attempts.jsonl": "70707f864e12edd9890da309bde1fd465d3c4b74f5b721c13e40dff906bc205f",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\failures.jsonl": "c88730090318bf698993afa550227dd63c6a4628b3ef3868f150bc35e384a9e5",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\annotations.jsonl": "a3401c123e90c8ef923f73bb17894a3f675ec6ec0d11a83de82cb5094772fd83",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\attempts.jsonl": "a8e7af1eba66d5975ef5467810ee9d4f4a367ea2bdeacdf41e41372f54e31abc",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\failures.jsonl": "c1575f579fd3b0911b38a19153ccc8902830f7ea15755c4d79694bdb3bae4a7a"
     },
     "sources": {
       "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\gsm8k_full.jsonl": "85fb981b6fa0079b6f85bd866c807483aeaba7fa66b4e84ab8b0c17fcf58b650",
@@ -69,49 +69,51 @@
   },
   "quality_sample_index": [
     {
-      "baseline_source_id": "1048",
-      "dataset": "gsm8k",
-      "remote_source_id": "5566"
+      "baseline_source_id": "0364f014a75c0374597390eeb92ab029",
+      "dataset": "tatqa",
+      "remote_source_id": "5d4852d8e2b45d3ce45f4203e9b76405"
     },
     {
-      "baseline_source_id": "1186",
+      "baseline_source_id": "1166",
       "dataset": "gsm8k",
-      "remote_source_id": "1298"
+      "remote_source_id": "2394"
     },
     {
-      "baseline_source_id": "1089",
+      "baseline_source_id": "1032",
       "dataset": "gsm8k",
-      "remote_source_id": "7366"
+      "remote_source_id": "1440"
     },
     {
       "baseline_source_id": "0364f014a75c0374597390eeb92ab029",
       "dataset": "tatqa",
-      "remote_source_id": "b9fcce99883069c174fc9245b506efca"
+      "remote_source_id": "4bc0d228100ba8b650fc5614b23fbf04"
     },
     {
-      "baseline_source_id": "8db33337e2c6be87644b0f65b20d6bcb",
-      "dataset": "tatqa",
-      "remote_source_id": "8db33337e2c6be87644b0f65b20d6bcb"
+      "baseline_source_id": "1032",
+      "dataset": "gsm8k",
+      "remote_source_id": "1436"
     }
   ],
-  "quality_samples_sha256": "cf442d1315e1fd5e371d27168289188c65dc64f9e14649bcd65e3ed58f489d9b",
+  "quality_samples_sha256": "93b4f18f1f4f6449fd2b553366fa2699773df784687b168b1bf0827aa891dda7",
   "remote": {
-    "mean_part_count": 1.7272727272727273,
-    "mean_statement_count": 5.3090909090909095,
-    "program_count": 55,
+    "mean_part_count": 3.0895454545454544,
+    "mean_statement_count": 6.994090909090909,
+    "program_count": 4400,
     "rates": {
-      "answer_correct": 0.8181818181818182,
-      "converted": 0.8181818181818182,
+      "answer_correct": 0.8902272727272728,
+      "converted": 0.8854545454545455,
       "execution_verified": 1.0,
       "lower_verified": 1.0,
-      "semantic_lint_valid": 1.0,
+      "semantic_lint_valid": 0.9872727272727273,
       "syntax_verified": 1.0,
       "type_verified": 1.0
     },
-    "unique_semantic_patterns": 48
+    "unique_semantic_patterns": 4049
   },
   "schema_version": "ccpu.dsl_dataset.remote_program_analysis.v1",
   "terminal_failure_types": {
-    "APIError": 45
+    "APIError": 1998,
+    "NotFoundError": 1731,
+    "RateLimitError": 50
   }
 }
