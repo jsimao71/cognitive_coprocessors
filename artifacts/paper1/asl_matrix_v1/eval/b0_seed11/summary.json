@@ -1,0 +1,112 @@
+{
+  "adaptation": {
+    "alpha": 16,
+    "bias": "none",
+    "dropout": 0.0,
+    "method": "lora",
+    "rank": 8,
+    "target_modules": [
+      "q",
+      "k",
+      "v",
+      "o"
+    ]
+  },
+  "attention_mode": "cross",
+  "by_condition": {
+    "autonomous": {
+      "count": 25,
+      "eos_stop_rate": 0.0,
+      "followed_wrong_teacher_rate": 0.0,
+      "mean_generated_tokens": 22.6,
+      "rates": {
+        "dependency_correct": 0.0,
+        "exact_asl": 0.0,
+        "executable": 0.0,
+        "final_answer_correct": 0.0,
+        "lowerable_to_ccir": 0.0,
+        "parse_valid": 0.0,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.0
+      },
+      "repetition_stop_rate": 1.0
+    },
+    "full_teacher": {
+      "count": 25,
+      "eos_stop_rate": 0.0,
+      "followed_wrong_teacher_rate": 0.0,
+      "mean_generated_tokens": 23.56,
+      "rates": {
+        "dependency_correct": 0.0,
+        "exact_asl": 0.0,
+        "executable": 0.0,
+        "final_answer_correct": 0.0,
+        "lowerable_to_ccir": 0.0,
+        "parse_valid": 0.0,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.0
+      },
+      "repetition_stop_rate": 1.0
+    }
+  },
+  "checkpoint_sha256": "4055be608243e9f38c8178db1ae1c37e936c54378256f1cbfb0ab21e19319b20",
+  "config_sha256": "f284609f8f4df0cf95f4cdc60133248b6a82b5998ccf6258750645bce5cae892",
+  "encoder_architecture": "separate",
+  "predictions_sha256": "994dcdde2de7911230e14484ae29bb2a90319eb718146c4b94892cbbae462cda",
+  "representation_diagnostics": {
+    "final": {
+      "batch_size": 25.0,
+      "paired_cosine_mean": 0.5427550673484802,
+      "paired_retrieval_accuracy": 0.3199999928474426
+    },
+    "layerwise": [
+      {
+        "layer": 1,
+        "linear_cka": 0.6844698190689087,
+        "paired_cosine_mean": 0.647465705871582
+      },
+      {
+        "layer": 2,
+        "linear_cka": 0.6274985671043396,
+        "paired_cosine_mean": 0.6195862293243408
+      },
+      {
+        "layer": 3,
+        "linear_cka": 0.6066373586654663,
+        "paired_cosine_mean": 0.6832076907157898
+      },
+      {
+        "layer": 4,
+        "linear_cka": 0.4820482134819031,
+        "paired_cosine_mean": 0.5487063527107239
+      },
+      {
+        "layer": 5,
+        "linear_cka": 0.23553363978862762,
+        "paired_cosine_mean": 0.5054517388343811
+      },
+      {
+        "layer": 6,
+        "linear_cka": 0.7524480819702148,
+        "paired_cosine_mean": 0.5299768447875977
+      }
+    ]
+  },
+  "run_id": "B0-separate-cross-t3",
+  "schema_version": "ccpu.paper1.asl_matrix.evaluation.v1",
+  "seed": 11,
+  "teacher_gap": {
+    "final_answer_correct": 0.0,
+    "semantic_return_equivalent": 0.0
+  },
+  "test_rows": 25,
+  "test_sha256": "e7a2a2f2cbcb8d776db3144d1f8b9db3e12578f2863f9f35e5eb0ed629488923",
+  "training_mixture": {
+    "autonomous": 1.0,
+    "full_teacher": 0.0,
+    "partial_teacher": 0.0
+  },
+  "wall_time_seconds": 118.71796449999965
+}

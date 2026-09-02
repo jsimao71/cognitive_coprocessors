@@ -108,3 +108,14 @@ python -m ccpu paper1 evaluate-asl-matrix `
   --checkpoint artifacts/paper1/asl_matrix_v1/runs/b0_seed11/checkpoint_best.pt `
   --output-dir artifacts/paper1/asl_matrix_v1/eval/b0_seed11
 ```
+
+## Current results
+
+B0 completed all eight epochs at seed 11. Autonomous development loss selected
+epoch 8 at 1.49375. Training took 1,605.5 seconds for 456 optimizer steps and
+reported 612,666,880 bytes peak XPU allocation. On the frozen 25-program test,
+both autonomous and full-teacher evaluation produced 0/25 parse-valid,
+executable, semantic-return-equivalent, and answer-correct programs. All 25
+outputs in each condition triggered the deterministic repeated-token stop. This
+is a negative capacity-matched baseline, not a grounding result; B1 remains the
+required comparison.

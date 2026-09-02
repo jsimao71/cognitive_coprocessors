@@ -1432,6 +1432,43 @@ Wilson intervals and paired exact tests are exploratory. A fully matched
 Qwen3-1.7B F0/F1/F2 replication is therefore used to test the prespecified
 model-capacity interaction rather than to reinterpret this checkpoint.
 
+\section{Pretrained LoRA Grounding Architecture Matrix}
+
+We next test whether external symbolic training can improve autonomous
+NL-to-ASL compilation without training language understanding from scratch.
+The frozen 500-program F0 partition supplies 450 training, 25 development, and
+25 untouched test programs. The first ladder uses pretrained T5-small revision
+\texttt{df1b051c}, freezes 85,679,360 parameters, and trains 983,040 rank-8
+QKVO LoRA parameters, 1,024 source-type parameters, and 12 cross-attention gate
+parameters. B0 and B1 use the same separate NL/ASL encoders and separately
+normalized decoder cross-attention; B0 sees NL only, whereas B1 mixes full,
+corrupted, and absent external ASL. Checkpoint selection uses autonomous
+development loss only.
+
+\begin{table}[t]
+\centering\small
+\caption{Pretrained T5-small LoRA matrix baseline on the frozen 25-program
+test set. Counts are exact; the single seed is exploratory.}
+\label{tab:asl-matrix-t5}
+\begin{tabular}{lrrrrrr}
+\toprule
+Cell & Best dev loss & Parse & Execute & Semantic & Answer & Repeat stop\\
+\midrule
+B0 autonomous & 1.494 & 0/25 & 0/25 & 0/25 & 0/25 & 25/25\\
+B0 full teacher & --- & 0/25 & 0/25 & 0/25 & 0/25 & 25/25\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+B0 trained for eight epochs (456 optimizer steps) in 1,606 seconds and peaked
+at 0.61~GB of XPU allocation. Development loss decreased monotonically from
+2.653 to 1.494, but greedy test outputs collapsed into short repeated symbol
+cycles: mean bounded lengths were 22.6 tokens autonomously and 23.6 with the
+untrained full-teacher branch. Thus lower token loss alone does not establish a
+usable compiler, and B0 provides no evidence that teacher memory helps. Its
+role is the capacity-matched autonomous baseline for B1; only B1-minus-B0 on
+the same test identities can measure transfer from symbolic grounding.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
