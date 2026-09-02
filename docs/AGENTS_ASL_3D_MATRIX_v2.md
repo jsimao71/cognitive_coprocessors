@@ -1150,6 +1150,11 @@ Add matched T3-only versions of B2–B4 if architecture/capacity changes autonom
 
 This ladder should determine whether the complete factorial sweep is worth the compute.
 
+Current execution status: the seed-11 pretrained T5-small LoRA B0 and B1 cells
+both produced 0/25 autonomous parse-valid, executable, semantic, and
+answer-correct programs. The B1-minus-B0 autonomous grounding gain is zero, so
+the gate stops B2--B4 and advances to the Qwen3-0.6B pretrained-LoRA ladder.
+
 Run the Qwen pretrained-model patch ladder after the T5-small B0/B1 gate and
 before scaling to a larger backbone. No language model in this roadmap is
 trained from scratch:

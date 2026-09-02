@@ -119,3 +119,12 @@ executable, semantic-return-equivalent, and answer-correct programs. All 25
 outputs in each condition triggered the deterministic repeated-token stop. This
 is a negative capacity-matched baseline, not a grounding result; B1 remains the
 required comparison.
+
+B1 completed eight epochs and 456 matched optimizer steps at seed 11. Its best
+autonomous development loss was 1.48625, training took 1,335.7 seconds, and peak
+XPU allocation was 940,878,336 bytes. Autonomous and full-teacher test results
+were again 0/25 for parse validity, execution, semantic return, and answer. The
+B1-minus-B0 autonomous semantic and answer gains are both exactly zero. This
+fails the P1 grounding gate, so B2--B4 are not run. The next admitted stage is
+the Qwen3-0.6B pretrained-LoRA ladder, anchored by the existing executable F0
+baseline.

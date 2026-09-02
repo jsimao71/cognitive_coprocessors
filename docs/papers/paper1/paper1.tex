@@ -1456,6 +1456,8 @@ Cell & Best dev loss & Parse & Execute & Semantic & Answer & Repeat stop\\
 \midrule
 B0 autonomous & 1.494 & 0/25 & 0/25 & 0/25 & 0/25 & 25/25\\
 B0 full teacher & --- & 0/25 & 0/25 & 0/25 & 0/25 & 25/25\\
+B1 autonomous & 1.486 & 0/25 & 0/25 & 0/25 & 0/25 & 25/25\\
+B1 full teacher & --- & 0/25 & 0/25 & 0/25 & 0/25 & 24/25\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1468,6 +1470,20 @@ untrained full-teacher branch. Thus lower token loss alone does not establish a
 usable compiler, and B0 provides no evidence that teacher memory helps. Its
 role is the capacity-matched autonomous baseline for B1; only B1-minus-B0 on
 the same test identities can measure transfer from symbolic grounding.
+
+B1 also completed eight epochs and 456 optimizer steps, taking 1,336 seconds
+and peaking at 0.94~GB. Its selected autonomous development loss was slightly
+lower than B0 (1.486 versus 1.494), but this likelihood difference did not
+change any behavioral endpoint: autonomous and full-teacher evaluation both
+remained 0/25 for parse validity, execution, semantic return, and answer. All
+autonomous outputs and 24/25 full-teacher outputs met the repeated-cycle stop;
+the remaining full-teacher output reached EOS but was still not parseable.
+Accordingly, the paired B1-minus-B0 autonomous grounding gain is exactly zero.
+The prespecified gate rejects T5 cells B2--B4: changing encoder sharing or K/V
+competition is not justified when external symbolic training has not produced
+even syntactic transfer in the simplest matched cell. We retain this negative
+result and next test the same idea on a pretrained causal model whose existing
+F0 LoRA baseline already generates executable ASL.
 
 \section{Preliminary XPU Pilot}
 

@@ -1,0 +1,243 @@
+{
+  "adaptation": {
+    "alpha": 16,
+    "bias": "none",
+    "dropout": 0.0,
+    "method": "lora",
+    "rank": 8,
+    "target_modules": [
+      "q",
+      "k",
+      "v",
+      "o"
+    ]
+  },
+  "attention": {
+    "mode": "cross",
+    "separate_output_proj": true,
+    "source_type_embeddings": true
+  },
+  "best_autonomous_dev_loss": 1.48625,
+  "best_epoch": 8,
+  "checkpoint_best_sha256": "a2f2bad599586ae476462af6dd6e4c4ba57cdaf5dd8d6b55faba2b2c1105ac19",
+  "config_sha256": "4852357686bfd5ac5e455acba03686a3e1df6529f6c4f6ccd38c1cb2b2fbc7a8",
+  "data_sha256": {
+    "dev": "b3da053c125411a63d1a3ca97ebe21bf0c0dedd710cb255c1988d67455214455",
+    "train": "a1a1f7ff287cdb5f7d4634915fae8c6ee80df477aa1b3b0b122c48cd3737d1eb"
+  },
+  "dev_rows": 25,
+  "device": "xpu",
+  "dtype": "bfloat16",
+  "encoder": {
+    "architecture": "separate",
+    "hybrid": {
+      "shared_top_layers": 2
+    }
+  },
+  "history": [
+    {
+      "autonomous_dev_loss": 2.619375,
+      "epoch": 1,
+      "mean_train_loss": 4.106076388888889,
+      "regime_counts": {
+        "autonomous": 184,
+        "full": 104,
+        "partial": 162
+      }
+    },
+    {
+      "autonomous_dev_loss": 2.2021875,
+      "epoch": 2,
+      "mean_train_loss": 2.8968576388888887,
+      "regime_counts": {
+        "autonomous": 196,
+        "full": 116,
+        "partial": 138
+      }
+    },
+    {
+      "autonomous_dev_loss": 1.9728125,
+      "epoch": 3,
+      "mean_train_loss": 2.539670138888889,
+      "regime_counts": {
+        "autonomous": 189,
+        "full": 113,
+        "partial": 148
+      }
+    },
+    {
+      "autonomous_dev_loss": 1.790625,
+      "epoch": 4,
+      "mean_train_loss": 2.326111111111111,
+      "regime_counts": {
+        "autonomous": 188,
+        "full": 108,
+        "partial": 154
+      }
+    },
+    {
+      "autonomous_dev_loss": 1.666875,
+      "epoch": 5,
+      "mean_train_loss": 2.164878472222222,
+      "regime_counts": {
+        "autonomous": 188,
+        "full": 113,
+        "partial": 149
+      }
+    },
+    {
+      "autonomous_dev_loss": 1.5959375,
+      "epoch": 6,
+      "mean_train_loss": 2.033611111111111,
+      "regime_counts": {
+        "autonomous": 163,
+        "full": 129,
+        "partial": 158
+      }
+    },
+    {
+      "autonomous_dev_loss": 1.53375,
+      "epoch": 7,
+      "mean_train_loss": 1.936015625,
+      "regime_counts": {
+        "autonomous": 176,
+        "full": 120,
+        "partial": 154
+      }
+    },
+    {
+      "autonomous_dev_loss": 1.48625,
+      "epoch": 8,
+      "mean_train_loss": 1.856484375,
+      "regime_counts": {
+        "autonomous": 173,
+        "full": 115,
+        "partial": 162
+      }
+    }
+  ],
+  "model": {
+    "d_model": 512,
+    "decoder_layers": 6,
+    "encoder_layers": 6,
+    "model_id": "google-t5/t5-small",
+    "n_heads": 8,
+    "revision": "df1b051c49625cf57a3d0d8d3863ed4d13564fe4"
+  },
+  "optimizer_steps": 456,
+  "packages": {
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "parameter_report": {
+    "adaptation": {
+      "alpha": 16,
+      "bias": "none",
+      "dropout": 0.0,
+      "method": "lora",
+      "rank": 8,
+      "target_modules": [
+        "q",
+        "k",
+        "v",
+        "o"
+      ]
+    },
+    "attention_mode": "cross",
+    "encoder_architecture": "separate",
+    "frozen_parameters": 85679360,
+    "gate_parameters": 12,
+    "hybrid_shared_top_layers": 0,
+    "lora_parameters": 983040,
+    "other_trainable_parameters": 0,
+    "shared_encoder_parameter_tensors": 1,
+    "source_type_parameters": 1024,
+    "total_parameters": 86663436,
+    "trainable_parameters": 984076
+  },
+  "peak_memory_bytes": 940878336,
+  "resumed_from_epoch": 0,
+  "run_id": "B1-separate-cross-mixed",
+  "schema_version": "ccpu.paper1.asl_matrix.training.v1",
+  "seed": 11,
+  "token_length_audit": {
+    "dev": {
+      "fields": {
+        "external_asl": {
+          "limit": 640,
+          "maximum": 417,
+          "over_limit": 0,
+          "p95": 292
+        },
+        "nl": {
+          "limit": 320,
+          "maximum": 143,
+          "over_limit": 0,
+          "p95": 85
+        },
+        "target": {
+          "limit": 640,
+          "maximum": 412,
+          "over_limit": 0,
+          "p95": 287
+        }
+      },
+      "rows": 25,
+      "split": "dev"
+    },
+    "train": {
+      "fields": {
+        "external_asl": {
+          "limit": 640,
+          "maximum": 604,
+          "over_limit": 0,
+          "p95": 328
+        },
+        "nl": {
+          "limit": 320,
+          "maximum": 176,
+          "over_limit": 0,
+          "p95": 116
+        },
+        "target": {
+          "limit": 640,
+          "maximum": 599,
+          "over_limit": 0,
+          "p95": 323
+        }
+      },
+      "rows": 450,
+      "split": "train"
+    }
+  },
+  "train_rows": 450,
+  "training": {
+    "batch_size": 1,
+    "corruption": {
+      "policy": [
+        "record_dropout",
+        "value_mask",
+        "argument_mask"
+      ],
+      "severity": 0.5
+    },
+    "device": "xpu",
+    "dtype": "bfloat16",
+    "early_stopping_patience": 2,
+    "epochs": 8,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0003,
+    "max_asl_length": 640,
+    "max_nl_length": 320,
+    "max_target_length": 640,
+    "schedule": "static",
+    "seed": 11,
+    "static": {
+      "autonomous": 0.4,
+      "full_teacher": 0.25,
+      "partial_teacher": 0.35
+    },
+    "weight_decay": 0.01
+  },
+  "wall_time_seconds": 1335.6669378000006
+}
