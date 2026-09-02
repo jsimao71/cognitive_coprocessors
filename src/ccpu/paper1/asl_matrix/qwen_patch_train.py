@@ -89,6 +89,7 @@ def _tokenize_rows(
                 "external_attention_mask": mask,
                 "external_tokens": tokens,
                 "regime": row["regime"],
+                "logical_epoch": int(row["epoch_view"]),
             }
         )
         records.append(record)
@@ -185,8 +186,6 @@ def train_qwen_patch(
     config = read_json(config_path)
     training = LoRATrainingConfig.from_dict(config)
     training.validate()
-    if training.epochs != 1:
-        raise ValueError("the persisted mixed-view stream requires epochs=1")
     if training.gradient_checkpointing:
         raise ValueError("Qwen memory patches require gradient_checkpointing=false")
     patch_spec = config["patch"]
@@ -236,6 +235,17 @@ def train_qwen_patch(
     )
     if any(row["regime"] != "autonomous" for row in dev_rows):
         raise ValueError("Qwen patch development rows must be autonomous")
+    epoch_rows = {
+        epoch: [row for row in train_rows if row["logical_epoch"] == epoch]
+        for epoch in range(training.epochs)
+    }
+    observed_epochs = {row["logical_epoch"] for row in train_rows}
+    expected_epochs = set(range(training.epochs))
+    if observed_epochs != expected_epochs or any(not rows for rows in epoch_rows.values()):
+        raise ValueError(
+            f"logical epochs must be exactly {sorted(expected_epochs)}; "
+            f"observed={sorted(observed_epochs)}"
+        )
 
     base = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, dtype=dtype)
     base.config.use_cache = False
@@ -269,8 +279,10 @@ def train_qwen_patch(
         "dev_sha256": dev_sha256,
     }
     checkpoint_path = output / "checkpoint_last.pt"
+    start_epoch = 0
     start_batch_index = 0
-    losses: list[float] = []
+    resume_losses: list[float] = []
+    history: list[dict[str, Any]] = []
     optimizer_steps = 0
     resumed_from_optimizer_step = 0
     previous_wall_time = 0.0
@@ -280,8 +292,10 @@ def train_qwen_patch(
             raise ValueError(f"checkpoint identity mismatch: {checkpoint_path}")
         _load_trainable_state(model, checkpoint["trainable_state"])
         optimizer.load_state_dict(checkpoint["optimizer_state"])
+        start_epoch = int(checkpoint["epoch"])
         start_batch_index = int(checkpoint["next_batch_index"])
-        losses = [float(value) for value in checkpoint["losses"]]
+        resume_losses = [float(value) for value in checkpoint["losses"]]
+        history = list(checkpoint["history"])
         optimizer_steps = int(checkpoint["optimizer_steps"])
         resumed_from_optimizer_step = optimizer_steps
         previous_wall_time = float(checkpoint.get("wall_time_seconds", 0.0))
@@ -290,20 +304,23 @@ def train_qwen_patch(
         if device == "xpu" and checkpoint.get("xpu_rng_state") is not None:
             torch.xpu.set_rng_state(checkpoint["xpu_rng_state"])
         print(
-            f"resuming at batch {start_batch_index}, optimizer step {optimizer_steps}"
+            f"resuming at epoch {start_epoch + 1}, batch {start_batch_index}, "
+            f"optimizer step {optimizer_steps}"
         )
     if device == "xpu":
         torch.xpu.reset_peak_memory_stats()
     started = time.perf_counter()
 
-    def save_resume(next_batch_index: int) -> None:
+    def save_resume(epoch: int, next_batch_index: int, losses: list[float]) -> None:
         state = {
             "schema_version": "ccpu.paper1.qwen_patch_checkpoint.v1",
             "identity": identity,
             "trainable_state": _trainable_state(model),
             "optimizer_state": optimizer.state_dict(),
+            "epoch": epoch,
             "next_batch_index": next_batch_index,
             "losses": losses,
+            "history": history,
             "optimizer_steps": optimizer_steps,
             "wall_time_seconds": previous_wall_time + time.perf_counter() - started,
             "torch_rng_state": torch.get_rng_state(),
@@ -314,46 +331,72 @@ def train_qwen_patch(
         torch.save(state, temporary)
         os.replace(temporary, checkpoint_path)
 
-    order = list(range(len(train_rows)))
-    random.Random(training.seed).shuffle(order)
-    batch_starts = list(range(0, len(order), training.batch_size))
     optimizer.zero_grad(set_to_none=True)
-    for batch_index, start in enumerate(batch_starts):
-        if batch_index < start_batch_index:
-            continue
-        members = [train_rows[index] for index in order[start : start + training.batch_size]]
-        external_ids, external_mask = _external_batch(
-            torch, members, tokenizer.pad_token_id, device
-        )
-        controller.capture_external(external_ids, external_mask)
-        loss = model(**_batch(torch, members, tokenizer.pad_token_id, device)).loss
-        value = float(loss.detach().cpu())
-        if not math.isfinite(value):
-            raise FloatingPointError(f"non-finite training loss at batch {batch_index}")
-        (loss / training.gradient_accumulation_steps).backward()
-        losses.append(value)
-        final_batch = start + training.batch_size >= len(order)
-        if (batch_index + 1) % training.gradient_accumulation_steps == 0 or final_batch:
-            gradient_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            if not math.isfinite(float(gradient_norm.detach().cpu())):
-                raise FloatingPointError(f"non-finite gradient norm at batch {batch_index}")
-            optimizer.step()
-            optimizer.zero_grad(set_to_none=True)
-            optimizer_steps += 1
-            interval = training.checkpoint_every_optimizer_steps
-            if interval and optimizer_steps % interval == 0:
-                save_resume(batch_index + 1)
-                print(
-                    f"checkpoint: batch {batch_index + 1}/{len(batch_starts)}, "
-                    f"optimizer step {optimizer_steps}"
+    for epoch in range(start_epoch, training.epochs):
+        rows = epoch_rows[epoch]
+        order = list(range(len(rows)))
+        random.Random(training.seed + epoch).shuffle(order)
+        batch_starts = list(range(0, len(order), training.batch_size))
+        losses = resume_losses if epoch == start_epoch else []
+        for batch_index, start in enumerate(batch_starts):
+            if epoch == start_epoch and batch_index < start_batch_index:
+                continue
+            members = [rows[index] for index in order[start : start + training.batch_size]]
+            external_ids, external_mask = _external_batch(
+                torch, members, tokenizer.pad_token_id, device
+            )
+            controller.capture_external(external_ids, external_mask)
+            loss = model(**_batch(torch, members, tokenizer.pad_token_id, device)).loss
+            value = float(loss.detach().cpu())
+            if not math.isfinite(value):
+                raise FloatingPointError(
+                    f"non-finite training loss at epoch {epoch + 1}, batch {batch_index}"
                 )
-        controller.clear()
+            (loss / training.gradient_accumulation_steps).backward()
+            losses.append(value)
+            final_batch = start + training.batch_size >= len(order)
+            if (batch_index + 1) % training.gradient_accumulation_steps == 0 or final_batch:
+                gradient_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                if not math.isfinite(float(gradient_norm.detach().cpu())):
+                    raise FloatingPointError(
+                        f"non-finite gradient norm at epoch {epoch + 1}, "
+                        f"batch {batch_index}"
+                    )
+                optimizer.step()
+                optimizer.zero_grad(set_to_none=True)
+                optimizer_steps += 1
+                interval = training.checkpoint_every_optimizer_steps
+                if interval and optimizer_steps % interval == 0:
+                    save_resume(epoch, batch_index + 1, losses)
+                    print(
+                        f"checkpoint: epoch {epoch + 1}, batch {batch_index + 1}/"
+                        f"{len(batch_starts)}, optimizer step {optimizer_steps}"
+                    )
+            controller.clear()
+        history.append(
+            {
+                "epoch": epoch + 1,
+                "mean_train_loss": sum(losses) / len(losses),
+                "regime_counts": {
+                    name: sum(row["regime"] == name for row in rows)
+                    for name in ("full", "partial", "autonomous")
+                },
+            }
+        )
+        print(
+            f"epoch {epoch + 1}/{training.epochs}: "
+            f"train={history[-1]['mean_train_loss']:.4f}"
+        )
+        if training.checkpoint_every_optimizer_steps:
+            save_resume(epoch + 1, 0, [])
+        start_batch_index = 0
+        resume_losses = []
 
     autonomous_dev_loss = _mean_autonomous_loss(
         model, controller, torch, dev_rows, tokenizer, training, device
     )
     if training.checkpoint_every_optimizer_steps:
-        save_resume(len(batch_starts))
+        save_resume(training.epochs, 0, [])
     if device == "xpu":
         torch.xpu.synchronize()
     wall_time = previous_wall_time + time.perf_counter() - started
@@ -395,7 +438,8 @@ def train_qwen_patch(
         },
         "training_target_tokens": sum(row["target_tokens"] for row in train_rows),
         "teacher_tokens_processed": sum(row["external_tokens"] for row in train_rows),
-        "mean_train_loss": sum(losses) / len(losses),
+        "history": history,
+        "mean_train_loss": sum(row["mean_train_loss"] for row in history) / len(history),
         "autonomous_dev_loss": autonomous_dev_loss,
         "optimizer_steps": optimizer_steps,
         "resumed_from_optimizer_step": resumed_from_optimizer_step,

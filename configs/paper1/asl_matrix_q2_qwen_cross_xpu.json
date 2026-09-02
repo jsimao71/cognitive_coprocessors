@@ -1,10 +1,10 @@
 {
   "schema_version": "ccpu.paper1.asl_matrix.qwen_patch.v1",
-  "run_id": "q2-qwen3-0.6b-cross-r8-seed11",
+  "run_id": "q2-qwen3-0.6b-cross-r8-views11-init99173",
   "model": {
     "model_id": "Qwen/Qwen3-0.6B",
     "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
-    "adapter_id": "Qwen3-0.6B-ASL-Matrix-Q2-Cross-r8-seed11",
+    "adapter_id": "Qwen3-0.6B-ASL-Matrix-Q2-Cross-r8-views11-init99173",
     "dtype": "float16"
   },
   "patch": {
@@ -13,7 +13,7 @@
     "max_external_length": 640
   },
   "training": {
-    "epochs": 1,
+    "epochs": 10,
     "batch_size": 1,
     "gradient_accumulation_steps": 8,
     "learning_rate": 0.0002,
@@ -22,7 +22,7 @@
     "alpha": 16,
     "dropout": 0.05,
     "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
-    "seed": 11,
+    "seed": 99173,
     "device": "xpu",
     "dtype": "float16",
     "gradient_checkpointing": false,
