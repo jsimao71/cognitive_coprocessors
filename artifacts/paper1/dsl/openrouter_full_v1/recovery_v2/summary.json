@@ -1,0 +1,35 @@
+{
+  "combined_strict_count": 4761,
+  "existing_strict_count": 3896,
+  "input_sha256": {
+    "remote": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\annotations.jsonl": "8376855a31a235af07bf888bf09c17466fbc0f754baa910cbf7547413fe9b7ad",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\attempts.jsonl": "70707f864e12edd9890da309bde1fd465d3c4b74f5b721c13e40dff906bc205f",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\failures.jsonl": "c88730090318bf698993afa550227dd63c6a4628b3ef3868f150bc35e384a9e5",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\annotations.jsonl": "a3401c123e90c8ef923f73bb17894a3f675ec6ec0d11a83de82cb5094772fd83",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\attempts.jsonl": "a8e7af1eba66d5975ef5467810ee9d4f4a367ea2bdeacdf41e41372f54e31abc",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\failures.jsonl": "c1575f579fd3b0911b38a19153ccc8902830f7ea15755c4d79694bdb3bae4a7a"
+    },
+    "sources": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\gsm8k_full.jsonl": "85fb981b6fa0079b6f85bd866c807483aeaba7fa66b4e84ab8b0c17fcf58b650",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\tatqa_arithmetic_full.jsonl": "0391ea3362b58d95c6807a888533a4a5233d6cf2093a2ee15cbecf100a147468"
+    }
+  },
+  "normalization_policy": [
+    "restore dataset from trusted request envelope",
+    "restore source_id from trusted request envelope",
+    "do not alter generated ASL or part mappings",
+    "rerun syntax, lowering, type, execution, semantic lint, and answer checks"
+  ],
+  "output_sha256": {
+    "retry_input": "09c23eece77f35cccc29558b6e69c4ee7d63d90d40ad0e4d706e9f2c118db8f4",
+    "salvaged_executable": "11a95af2b5ceed11d28082583aa0fd25b40238ca7f351e4e1b6148532226621f",
+    "salvaged_strict": "f36f839a06335158c0aa145b168459d039800668a66bb4197a622cc55b5a2e27",
+    "strict_index": "b6dbdabdcadf1f07d1515083edca76c5e500cf83b0064817cceac44d5f2a6913"
+  },
+  "retry_count": 3418,
+  "salvaged_executable_count": 1060,
+  "salvaged_strict_count": 865,
+  "schema_version": "ccpu.dsl_dataset.remote_program_recovery_summary.v1",
+  "source_count": 8179
+}

@@ -5,6 +5,7 @@ from ccpu.dsl_dataset.chop import chop_example
 from ccpu.dsl_dataset.cli import main
 from ccpu.dsl_dataset.expansion import finalize_asl_expansion
 from ccpu.dsl_dataset.local_codex import run_local_codex_batches
+from ccpu.dsl_dataset.remote_recovery import prepare_remote_recovery
 from ccpu.dsl_dataset.remote_teacher import generate_remote_programs
 from ccpu.paper1.asl_pilot_data import pattern_id
 
@@ -464,3 +465,138 @@ def test_remote_teacher_falls_back_after_invalid_asl(tmp_path, monkeypatch):
     assert summary["accepted_program_count"] == 1
     assert summary["attempt_count"] == 2
     assert read_jsonl(tmp_path / "output" / "annotations.jsonl")[0]["teacher"]["model"] == "second"
+
+
+def test_remote_recovery_restores_trusted_metadata_and_deduplicates_retry(tmp_path):
+    def source(source_id, answer):
+        return {
+            "dataset": "gsm8k",
+            "split": "train",
+            "source_id": source_id,
+            "answer": answer,
+            "question": "A box has 2 balls. How many balls are there?",
+            "effective_scope": {
+                "id": f"gsm8k:train:{source_id}",
+                "kind": "benchmark_case",
+                "parent": None,
+                "source": "dataset",
+            },
+            "parts": [
+                {"part_id": 0, "text": "A box has 2 balls.", "teacher_input_default": True},
+                {
+                    "part_id": 1,
+                    "text": "How many balls are there?",
+                    "teacher_input_default": True,
+                },
+            ],
+        }
+
+    sources = write_jsonl(tmp_path / "sources.jsonl", [source("salvage", "2"), source("retry", "2")])
+    remote = tmp_path / "remote"
+    wrong = {
+        "dataset": "gsm8k",
+        "source_id": "retry",
+        "part_mappings": [
+            {"part_id": 0, "status": "ok", "asl": ["box.balls = 3"]},
+            {"part_id": 1, "status": "ok", "asl": ["RETURN box.balls"]},
+        ],
+        "full_asl": "box.balls = 3\nRETURN box.balls",
+    }
+    write_jsonl(remote / "annotations.jsonl", [wrong])
+    response = {
+        "annotations": [
+            {
+                "part_mappings": [
+                    {"part_id": 0, "status": "ok", "asl": ["box.balls = 2"]},
+                    {"part_id": 1, "status": "ok", "asl": ["RETURN box.balls"]},
+                ]
+            }
+        ]
+    }
+    write_jsonl(
+        remote / "attempts.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "source_id": "salvage",
+                "attempt": 1,
+                "model": "teacher",
+                "outcome": "invalid",
+                "error": "ValueError: annotation dataset does not match request",
+                "response_text": __import__("json").dumps(response),
+            }
+        ],
+    )
+    write_jsonl(remote / "failures.jsonl", [])
+
+    summary = prepare_remote_recovery(
+        source_paths=[sources], remote_dirs=[remote], output_dir=tmp_path / "recovery"
+    )
+
+    assert summary["salvaged_strict_count"] == 1
+    assert summary["combined_strict_count"] == 1
+    assert summary["retry_count"] == 1
+    salvaged = read_jsonl(tmp_path / "recovery" / "salvaged_strict.jsonl")[0]
+    assert salvaged["dataset"] == "gsm8k"
+    assert salvaged["source_id"] == "salvage"
+    retry = read_jsonl(tmp_path / "recovery" / "retry_input.jsonl")[0]
+    assert retry["source_id"] == "retry"
+    assert "hidden deterministic verifier" in retry["recovery_context"]["validator_feedback"][0]
+
+
+def test_remote_teacher_strict_mode_retries_hidden_verifier_mismatch(tmp_path, monkeypatch):
+    row = {
+        "dataset": "gsm8k",
+        "split": "train",
+        "source_id": "strict-one",
+        "answer": "2",
+        "question": "A box has 2 balls. How many balls are there?",
+        "effective_scope": {
+            "id": "gsm8k:train:strict-one",
+            "kind": "benchmark_case",
+            "parent": None,
+            "source": "dataset",
+        },
+        "parts": [
+            {"part_id": 0, "text": "A box has 2 balls.", "teacher_input_default": True},
+            {"part_id": 1, "text": "How many balls are there?", "teacher_input_default": True},
+        ],
+    }
+    source_path = write_jsonl(tmp_path / "source.jsonl", [row])
+    skill = tmp_path / "SKILL.md"
+    skill.write_text("Compile semantic ASL.", encoding="utf-8")
+    responses = [3, 2]
+
+    def fake_completion(config, model, skill_text, request, feedback):
+        del config, model, skill_text, request
+        value = responses.pop(0)
+        if value == 2:
+            assert "hidden deterministic verifier mismatch" in feedback
+        return __import__("json").dumps(
+            {
+                "annotations": [
+                    {
+                        "dataset": "gsm8k",
+                        "source_id": "strict-one",
+                        "part_mappings": [
+                            {"part_id": 0, "status": "ok", "asl": [f"box.balls = {value}"]},
+                            {"part_id": 1, "status": "ok", "asl": ["RETURN box.balls"]},
+                        ],
+                    }
+                ]
+            }
+        )
+
+    monkeypatch.setattr("ccpu.dsl_dataset.remote_teacher._completion", fake_completion)
+    summary = generate_remote_programs(
+        source_path,
+        skill,
+        {
+            "models": [{"id": "first"}, {"id": "second"}],
+            "strict_acceptance": True,
+            "delay_seconds": 0,
+        },
+        tmp_path / "output",
+    )
+    assert summary["accepted_program_count"] == 1
+    assert summary["attempt_count"] == 2

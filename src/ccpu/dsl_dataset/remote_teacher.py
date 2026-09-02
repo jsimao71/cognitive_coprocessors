@@ -42,6 +42,12 @@ def _answer_hidden_request(row: dict[str, Any]) -> dict[str, Any]:
     }
     if row.get("source_context"):
         request["source_context"] = row["source_context"]
+    if row.get("recovery_context"):
+        context = row["recovery_context"]
+        request["recovery_context"] = {
+            "previous_asl": str(context.get("previous_asl", "")),
+            "validator_feedback": [str(item) for item in context.get("validator_feedback", [])],
+        }
     return request
 
 
@@ -244,7 +250,8 @@ def generate_remote_programs(
         if key in completed:
             continue
         request = _answer_hidden_request(row)
-        feedback = ""
+        recovery_context = row.get("recovery_context", {})
+        feedback = " ".join(str(item) for item in recovery_context.get("validator_feedback", []))
         row_attempts = []
         accepted = None
         for attempt_index, model in enumerate(models[:max_attempts], start=1):
@@ -254,6 +261,17 @@ def generate_remote_programs(
                 value = _response_json(response_text)
                 candidate = _annotation(value, row)
                 full_asl, _ = _candidate_asl(candidate, row)
+                if config.get("strict_acceptance", False):
+                    from .remote_analysis import _program_metrics
+
+                    metrics = _program_metrics(row, full_asl, candidate["part_mappings"])
+                    strict_errors = []
+                    if not metrics["semantic_lint_valid"]:
+                        strict_errors.append("semantic lint failed")
+                    if not metrics["answer_correct"]:
+                        strict_errors.append("hidden deterministic verifier mismatch")
+                    if strict_errors:
+                        raise ValueError("strict validation failed: " + "; ".join(strict_errors))
                 outcome = "accepted"
                 error = None
                 accepted = {
@@ -276,7 +294,12 @@ def generate_remote_programs(
                 }
             except Exception as exc:  # noqa: BLE001 - provider SDK exceptions vary by backend.
                 error = _safe_error(exc)
-                outcome = "rate_limited" if _is_rate_limit(error) else "invalid"
+                if _is_rate_limit(error):
+                    outcome = "rate_limited"
+                elif not response_text:
+                    outcome = "provider_error"
+                else:
+                    outcome = "invalid"
                 feedback = error
             attempt_record = {
                 "schema_version": "ccpu.dsl_dataset.remote_program_attempt.v1",
@@ -298,9 +321,10 @@ def generate_remote_programs(
                 time.sleep(delay_seconds)
 
         if accepted is None:
-            if row_attempts and all(item["outcome"] == "rate_limited" for item in row_attempts):
+            unavailable = {"provider_error", "rate_limited"}
+            if row_attempts and all(item["outcome"] in unavailable for item in row_attempts):
                 stop_reason = (
-                    "all configured models rate limited; leave current and later rows pending"
+                    "all configured models unavailable; leave current and later rows pending"
                 )
                 break
             failures.append(

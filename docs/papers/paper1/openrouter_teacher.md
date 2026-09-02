@@ -47,3 +47,29 @@ answer-verified programs. Detailed question/ASL sample pairs remain in ignored
 JSONL; only IDs and aggregate statistics need to be tracked. Free-route results
 are a screening corpus, not semantic gold. Hard failures can later be isolated
 for a stronger paid teacher or local Codex review without mixing provenance.
+
+## Recovery campaign v2
+
+The recovery campaign is provenance-separated under `openrouter_full_v1/recovery_v2`.
+It restores only request-owned `dataset` and `source_id` envelope fields, never
+changes generated ASL, and reruns syntax, lowering, typing, execution, semantic
+lint, and hidden-answer verification. The resulting strict index contains 4,761
+unique source programs: 3,896 original strict programs plus 865 conservative
+salvages. A deduplicated 3,418-row queue contains only sources still missing a
+strict program.
+
+Prepare the queue reproducibly with:
+
+```powershell
+python -m ccpu.dsl_dataset prepare-program-recovery `
+  --source artifacts\paper1\dsl\openrouter_full_v1\inputs\gsm8k_full.jsonl `
+  --source artifacts\paper1\dsl\openrouter_full_v1\inputs\tatqa_arithmetic_full.jsonl `
+  --remote-dir artifacts\paper1\dsl\openrouter_full_v1\gsm8k `
+  --remote-dir artifacts\paper1\dsl\openrouter_full_v1\tatqa `
+  --output-dir artifacts\paper1\dsl\openrouter_full_v1\recovery_v2
+```
+
+Recovery retries use `dsl_teacher_openrouter_recovery_v2.json`, which requires
+strict local acceptance and contains five zero-price routes refreshed from the
+authenticated catalog. Prior candidates may be returned with validator feedback,
+but neither hidden answers nor rationales are included in remote requests.

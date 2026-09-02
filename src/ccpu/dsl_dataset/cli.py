@@ -14,6 +14,7 @@ from .expansion import finalize_asl_expansion
 from .local_codex import run_local_codex_batches
 from .mine import mine_datasets
 from .remote_analysis import analyze_remote_programs
+from .remote_recovery import prepare_remote_recovery
 from .remote_teacher import generate_remote_programs
 from .select import select_diverse_seed, select_seed
 from .semantic import (
@@ -388,6 +389,33 @@ def generate_programs_command(
     click.echo(
         f"remote programs accepted={summary['accepted_program_count']}/"
         f"{summary['input_program_count']} status={summary['status']} -> {output_dir}"
+    )
+
+
+@main.command("prepare-program-recovery")
+@click.option(
+    "--source",
+    "source_paths",
+    type=click.Path(exists=True, path_type=Path),
+    multiple=True,
+    required=True,
+)
+@click.option(
+    "--remote-dir", type=click.Path(exists=True, path_type=Path), multiple=True, required=True
+)
+@click.option("--output-dir", type=click.Path(path_type=Path), required=True)
+def prepare_program_recovery_command(
+    source_paths: tuple[Path, ...], remote_dir: tuple[Path, ...], output_dir: Path
+) -> None:
+    """Salvage trusted envelopes and prepare a strict deduplicated retry queue."""
+
+    summary = prepare_remote_recovery(
+        source_paths=list(source_paths), remote_dirs=list(remote_dir), output_dir=output_dir
+    )
+    click.echo(
+        f"strict={summary['combined_strict_count']}/{summary['source_count']} "
+        f"salvaged={summary['salvaged_strict_count']} retry={summary['retry_count']} "
+        f"-> {output_dir}"
     )
 
 
