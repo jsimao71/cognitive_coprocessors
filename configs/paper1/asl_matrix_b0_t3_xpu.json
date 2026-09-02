@@ -35,7 +35,7 @@
     "max_target_length": 640,
     "seed": 11,
     "device": "xpu",
-    "dtype": "float16",
+    "dtype": "bfloat16",
     "early_stopping_patience": 2
   },
   "loss": {"generation": 1.0, "consistency": 0.0, "alignment": 0.0, "asl_denoising": 0.0}

@@ -205,7 +205,10 @@ def _mean_loss(
             output = model(
                 **_batch(tokenizer, views[start : start + training.batch_size], training, device)
             )
-            losses.append(float(output.loss.detach().cpu()))
+            loss = float(output.loss.detach().float().cpu())
+            if not torch.isfinite(output.loss).all():
+                raise FloatingPointError(f"non-finite autonomous development loss at row {start}")
+            losses.append(loss)
     model.train()
     return sum(losses) / len(losses)
 
@@ -310,6 +313,10 @@ def train_matrix(
             indexes = order[start : start + training.batch_size]
             batch_views = [train_views[index] for index in indexes]
             result = model(**_batch(tokenizer, batch_views, training, device))
+            if not torch.isfinite(result.loss).all():
+                raise FloatingPointError(
+                    f"non-finite training loss at epoch {epoch + 1}, batch {batch_index + 1}"
+                )
             (result.loss / training.gradient_accumulation_steps).backward()
             losses.append(float(result.loss.detach().cpu()))
             final_batch = start + training.batch_size >= len(order)

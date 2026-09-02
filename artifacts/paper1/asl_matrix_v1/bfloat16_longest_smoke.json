@@ -1,0 +1,20 @@
+{
+  "schema_version": "ccpu.paper1.asl_matrix.xpu_smoke.v1",
+  "model_id": "google-t5/t5-small",
+  "revision": "df1b051c49625cf57a3d0d8d3863ed4d13564fe4",
+  "encoder_architecture": "separate",
+  "attention_mode": "cross",
+  "device": "xpu",
+  "dtype": "bfloat16",
+  "example_id": "matrix-train-2d4ae6e47e133a09",
+  "target_tokens": 599,
+  "optimizer": "AdamW",
+  "learning_rate": 0.0003,
+  "weight_decay": 0.01,
+  "loss_before": 3.546875,
+  "loss_after_one_step": 1.953125,
+  "peak_xpu_memory_bytes": 862749696,
+  "forward_finite": true,
+  "backward_passed": true,
+  "post_update_forward_finite": true
+}

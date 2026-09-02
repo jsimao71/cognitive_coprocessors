@@ -25,6 +25,11 @@ small pretrained encoder-decoder is used because 450 examples cannot establish
 natural-language competence for a Transformer trained from scratch and because
 the local XPU can run the complete ladder.
 
+The XPU cells use bfloat16. An initial float16 B0 launch produced non-finite
+training and autonomous-development loss in epoch 1 and was discarded before
+evaluation. Every training and development batch now has a fail-closed finite-
+loss assertion; the invalid checkpoint is not part of the reported ladder.
+
 ## Axes
 
 `A1/separate` uses two encoder block stacks with a shared token embedding.
