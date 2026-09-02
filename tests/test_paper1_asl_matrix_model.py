@@ -160,4 +160,5 @@ def test_cached_decoder_matches_full_prefix(attention_mode):
 def test_repetition_stop_is_conservative_for_program_tokens():
     assert has_repeated_generation_suffix(list(range(80))) is False
     assert has_repeated_generation_suffix(list(range(8)) * 3) is True
+    assert has_repeated_generation_suffix([9, 8, 7, 6, 5] * 3) is True
     assert has_repeated_generation_suffix([1, 2, 3, 4] * 16) is True

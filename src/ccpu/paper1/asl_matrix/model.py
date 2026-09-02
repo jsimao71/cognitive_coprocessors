@@ -35,10 +35,11 @@ class MatrixModelOutput:
 def has_repeated_generation_suffix(token_ids: list[int]) -> bool:
     """Detect only sustained token loops that cannot be useful ASL continuations."""
 
-    ngram = 8
     repeats = 3
-    width = ngram * repeats
-    if len(token_ids) >= width:
+    for ngram in range(1, 33):
+        width = ngram * repeats
+        if len(token_ids) < width:
+            continue
         tail = token_ids[-width:]
         if all(tail[:ngram] == tail[index : index + ngram] for index in range(ngram, width, ngram)):
             return True
