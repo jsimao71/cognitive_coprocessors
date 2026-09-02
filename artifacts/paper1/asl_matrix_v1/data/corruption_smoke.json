@@ -1,0 +1,244 @@
+[
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 0.4090909090909091,
+      "input_token_count": 66,
+      "output_token_count": 27,
+      "policy": "record_dropout",
+      "seed": 905331481,
+      "selected": [
+        "10",
+        "11",
+        "13",
+        "3",
+        "4",
+        "8",
+        "9"
+      ],
+      "severity": 0.5
+    },
+    "policy": "record_dropout"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 66,
+      "policy": "entity_mask",
+      "seed": 463570849,
+      "selected": [
+        "fred.slices_to_eat",
+        "george.large_pizzas_purchased",
+        "george.slices_to_eat",
+        "mark.slices_to_eat",
+        "pizza.total_slices_purchased",
+        "small_pizza.slices"
+      ],
+      "severity": 0.5
+    },
+    "policy": "entity_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 66,
+      "policy": "relation_mask",
+      "seed": 958213208,
+      "selected": [
+        "bill.slices_to_eat",
+        "george.large_pizzas_purchased",
+        "large_pizza.slices",
+        "mark.slices_to_eat",
+        "pizza.total_slices_purchased",
+        "susie.slices_to_eat"
+      ],
+      "severity": 0.5
+    },
+    "policy": "relation_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 0.6818181818181818,
+      "input_token_count": 66,
+      "output_token_count": 45,
+      "policy": "argument_mask",
+      "seed": 1676015149,
+      "selected": [
+        "0",
+        "1",
+        "10",
+        "11",
+        "4",
+        "6"
+      ],
+      "severity": 0.5
+    },
+    "policy": "argument_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 66,
+      "policy": "value_mask",
+      "seed": 1879344491,
+      "selected": [
+        "1",
+        "2"
+      ],
+      "severity": 0.5
+    },
+    "policy": "value_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 66,
+      "policy": "dependency_mask",
+      "seed": 1086113682,
+      "selected": [
+        "0",
+        "10",
+        "2",
+        "4",
+        "5",
+        "7"
+      ],
+      "severity": 0.5
+    },
+    "policy": "dependency_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 66,
+      "policy": "attribute_mask",
+      "seed": 76858299,
+      "selected": [
+        "fred.slices_to_eat",
+        "george.slices_to_eat",
+        "large_pizza.slices",
+        "pizza.slices_eaten",
+        "small_pizza.slices",
+        "susie.slices_to_eat"
+      ],
+      "severity": 0.5
+    },
+    "policy": "attribute_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 0.5454545454545454,
+      "input_token_count": 66,
+      "output_token_count": 36,
+      "policy": "span_mask",
+      "seed": 2069865871,
+      "selected": [
+        "lines:4:11"
+      ],
+      "severity": 0.5
+    },
+    "policy": "span_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 66,
+      "policy": "random_token_mask",
+      "seed": 420236061,
+      "selected": [
+        "10",
+        "11",
+        "12",
+        "14",
+        "16",
+        "18",
+        "19",
+        "2",
+        "21",
+        "23",
+        "24",
+        "27",
+        "30",
+        "34",
+        "37",
+        "38",
+        "39",
+        "4",
+        "41",
+        "43",
+        "44",
+        "45",
+        "49",
+        "5",
+        "51",
+        "55",
+        "57",
+        "58",
+        "59",
+        "61",
+        "63",
+        "8",
+        "9"
+      ],
+      "severity": 0.5
+    },
+    "policy": "random_token_mask"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 66,
+      "policy": "record_permutation",
+      "seed": 1756281244,
+      "selected": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "severity": 0.5
+    },
+    "policy": "record_permutation"
+  },
+  {
+    "changed": true,
+    "metadata": {
+      "external_asl_fraction": 1.0,
+      "input_token_count": 66,
+      "output_token_count": 69,
+      "policy": "noise_record_insertion",
+      "seed": 1758706776,
+      "selected": [
+        "candles.total_bought = 40"
+      ],
+      "severity": 0.5
+    },
+    "policy": "noise_record_insertion"
+  }
+]
