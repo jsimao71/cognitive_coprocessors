@@ -1034,6 +1034,40 @@ Question:
 
 Do not move to elaborate architectures before this is understood.
 
+## P1Q — Patch a small pretrained causal model
+
+In parallel with the clean encoder-decoder comparison, patch a small pretrained
+causal language model, beginning with **Qwen3-0.6B**. The purpose is to preserve
+the model's existing natural-language competence while changing only how it can
+learn from and attend to external ASL during training.
+
+Freeze the pretrained backbone by default. Train only:
+
+- QKVO rank-8 LoRA adapters;
+- source-type embeddings;
+- small external-memory projection modules;
+- M1 cross-attention branches or M2 native-K/V injection modules;
+- explicit gates and normalizations introduced by the patch.
+
+Do not train a new language model from scratch for this track. Do not fully
+fine-tune Qwen unless a later, separately named control justifies that cost.
+
+The first Qwen gate is:
+
+```text
+Q0: existing Qwen3-0.6B F0 QKVO-r8, T3 only
+Q1: same backbone/LoRA budget, serialized mixed T1/T2/T3 context baseline
+Q2: same backbone/LoRA budget, M1 side cross-attention patch
+Q3: same backbone/LoRA budget, M2 native merged-K/V patch
+```
+
+Evaluate every condition autonomously with NL only. Q1 is required to separate
+the benefit of extra symbolic training text from the benefit of an architectural
+memory patch. Q2/Q3 must report patch parameters separately from LoRA parameters.
+
+Only after Q1--Q3 establish a signal should the Qwen track test shared versus
+hybrid source adaptation or move to Qwen3-1.7B.
+
 ## P2 — Attention-mode comparison
 
 Fix A1 and compare:
@@ -1111,6 +1145,21 @@ Run this ladder first:
 Add matched T3-only versions of B2–B4 if architecture/capacity changes autonomous performance materially.
 
 This ladder should determine whether the complete factorial sweep is worth the compute.
+
+Run the pretrained-model patch ladder before scaling a from-scratch model or a
+larger backbone:
+
+| ID | Pretrained backbone | Patch | Trainable components | Training |
+|---|---|---|---|---|
+| Q0 | Qwen3-0.6B | none | QKVO LoRA r8 | T3 only |
+| Q1 | Qwen3-0.6B | serialized teacher | QKVO LoRA r8 | mixed T1/T2/T3 |
+| Q2 | Qwen3-0.6B | M1 side cross-attention | QKVO LoRA r8 + patch | mixed T1/T2/T3 |
+| Q3 | Qwen3-0.6B | M2 native merged K/V | QKVO LoRA r8 + patch | mixed T1/T2/T3 |
+
+Use the same frozen 450/25/25 F0 identities, runtime views, corruption seeds,
+target-token budget, optimizer steps, and autonomous evaluator as B0--B4. If a
+patch changes sequence length or FLOPs materially, report both optimizer-matched
+and token/compute-matched controls.
 
 ---
 
@@ -1422,3 +1471,114 @@ Negative results are publishable and should be preserved.
 ```
 
 The first milestone is not the complete matrix. It is to establish whether external symbolic grounding produces a measurable autonomous benefit.
+
+For the constrained-compute pretrained track, interleave the following steps
+after item 2 and before committing to large B0--B4 sweeps:
+
+```text
+Q0. Reuse/freeze the existing Qwen3-0.6B F0 QKVO-r8 autonomous result.
+Q1. Train a matched mixed-regime serialized-teacher LoRA control.
+Q2. Add per-layer M1 external-memory side adapters and train LoRA + adapters.
+Q3. Add per-layer M2 external K/V injection into native attention.
+Q4. Compare autonomous behavior, teacher gap, wrong-teacher susceptibility,
+    trainable parameters, peak memory, and wall time.
+Q5. Confirm a positive cell with seeds 11, 23, and 37.
+Q6. Only then test modality-specific versus shared/hybrid LoRA placement.
+Q7. Only after a replicated gain consider Qwen3-1.7B.
+```
+
+## 31. Pretrained Qwen patch design
+
+### 31.1 Preserve pretrained language competence
+
+The Qwen track starts from the same pinned Qwen3-0.6B checkpoint already used by
+F0. Natural-language input remains in the model's ordinary causal context. ASL
+is an additional training-time memory source, not a replacement tokenizer or a
+new language model objective.
+
+Each cell must preserve:
+
+```text
+pretrained checkpoint revision
+QKVO LoRA rank and alpha
+F0 450/25/25 source identities
+fixed prompt (no document-dependent ICL)
+runtime T1/T2/T3 mixture
+answer/rationale hiding boundary
+autonomous NL-only test condition
+```
+
+### 31.2 Q1 serialized-teacher control
+
+Q1 requires no attention patch. Serialize external ASL behind a fixed source
+marker for T1/T2 examples and omit it completely for T3 examples. This is a
+strong but conventional context-training baseline. It determines whether mixed
+symbolic exposure can improve autonomous generation using LoRA alone.
+
+Q1 must not be described as architectural evidence.
+
+### 31.3 Q2 M1 side cross-attention patch
+
+At selected Qwen layers, retain ordinary causal self-attention and add a
+separately normalized external-ASL branch:
+
+```text
+h_local = NativeSelfAttention(Q, K_local, V_local)
+h_asl   = CrossAttention(Q, K_asl, V_asl)
+h       = h_local + sigmoid(g_asl) * P_asl(h_asl)
+```
+
+Initialize the ASL gate near zero so the initial model approximates the
+pretrained checkpoint. Encode ASL with frozen shared Qwen blocks plus a small
+trainable source projection, or with cached hidden states from those blocks.
+Do not duplicate and train a second 0.6B backbone.
+
+### 31.4 Q3 M2 native merged-K/V patch
+
+At selected Qwen layers, project external ASL states into that layer's native
+K/V geometry and concatenate them with local causal K/V before one softmax:
+
+```text
+K_total = concat(K_asl_ext, K_local)
+V_total = concat(V_asl_ext, V_local)
+h = NativeSelfAttention(Q, K_total, V_total)
+```
+
+Use source-type embeddings and an explicit visibility mask. Keep routing,
+retrieval, persistent memory, and PRA runtime behavior out of this experiment.
+The shared-softmax transport idea is informed by PRA, but Q3 is a local
+training-time grounding patch.
+
+### 31.5 Mapping A1/A2/A3 onto a frozen causal backbone
+
+Do not create three trainable copies of Qwen. Interpret the encoder axis through
+the source-adaptation path:
+
+- `A1/separate`: ASL uses distinct lightweight source adapters; NL uses native
+  Qwen states.
+- `A2/shared`: NL and ASL use the same frozen Qwen blocks and shared LoRA/source
+  adapters, with source-type markers.
+- `A3/hybrid`: lower source adapters are modality-specific while upper LoRA and
+  memory projections are shared/aligned.
+
+This mapping preserves the conceptual sharing test while respecting the local
+compute budget.
+
+### 31.6 Required pretrained controls
+
+Report at least:
+
+```text
+LoRA parameters
+patch parameters
+total trainable parameters
+frozen backbone parameters
+peak XPU memory
+training wall time
+teacher tokens processed
+autonomous exact/semantic/answer metrics
+```
+
+Add a parameter-matched Q0/Q1 adapter when Q2 or Q3 has materially more trainable
+capacity. A positive architectural result requires Q2 or Q3 to exceed both Q0
+and Q1 autonomously, not merely under teacher-assisted evaluation.
