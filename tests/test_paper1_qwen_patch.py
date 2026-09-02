@@ -4,6 +4,7 @@ torch = pytest.importorskip("torch")
 transformers = pytest.importorskip("transformers")
 
 from ccpu.paper1.asl_matrix.qwen_patch import install_qwen_memory_patches
+from ccpu.paper1.asl_matrix.qwen_patch_train import split_patch_record
 
 
 def _tiny_qwen():
@@ -61,6 +62,33 @@ def test_qwen_cross_patch_starts_near_zero_and_counts_only_new_capacity():
     )
 
 
+@pytest.mark.parametrize("mode", ["cross", "native_kv"])
+def test_qwen_external_memory_backpropagates_without_a_second_backbone(mode):
+    model = _tiny_qwen().train()
+    for parameter in model.parameters():
+        parameter.requires_grad = False
+    controller = install_qwen_memory_patches(model, mode=mode)
+    external_ids = torch.randint(2, 100, (1, 5))
+    local_ids = torch.randint(2, 100, (1, 6))
+
+    controller.capture_external(external_ids, torch.ones_like(external_ids))
+    loss = model(
+        input_ids=local_ids,
+        attention_mask=torch.ones_like(local_ids),
+        labels=local_ids,
+    ).loss
+    loss.backward()
+
+    gradients = [
+        parameter.grad
+        for parameter in model.parameters()
+        if parameter.requires_grad and parameter.grad is not None
+    ]
+    assert gradients
+    assert all(torch.isfinite(gradient).all() for gradient in gradients)
+    assert len({id(patch.original) for patch in controller.patches}) == 2
+
+
 def test_qwen_native_patch_uses_only_a_source_type_embedding():
     model = _tiny_qwen()
     for parameter in model.parameters():
@@ -74,3 +102,25 @@ def test_qwen_native_patch_uses_only_a_source_type_embedding():
         "other_trainable_parameters": 0,
         "total_trainable_parameters": 32,
     }
+
+
+def test_serialized_q1_view_splits_without_changing_autonomous_prompt():
+    autonomous = {
+        "example_id": "a",
+        "has_external_asl": False,
+        "prompt": "Instruction\n\nInput:\nProblem: P\n\nASL:",
+    }
+    assisted = {
+        "example_id": "b",
+        "has_external_asl": True,
+        "prompt": (
+            "Instruction\n\nInput:\nProblem: P\n\nExternal ASL teacher:\n"
+            "x.value = 3\nRETURN x.value\n\nASL:"
+        ),
+    }
+
+    assert split_patch_record(autonomous) == (autonomous["prompt"], None)
+    assert split_patch_record(assisted) == (
+        "Instruction\n\nInput:\nProblem: P\n\nASL:",
+        "x.value = 3\nRETURN x.value",
+    )

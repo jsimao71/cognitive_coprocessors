@@ -583,6 +583,23 @@ def prepare_qwen_asl_matrix_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def train_qwen_asl_patch_command(args: argparse.Namespace) -> int:
+    from .asl_matrix.qwen_patch_train import train_qwen_patch
+
+    report = train_qwen_patch(
+        config_path=args.config,
+        train_path=args.train,
+        dev_path=args.dev,
+        output_dir=args.output_dir,
+    )
+    print(
+        f"trained {report['run_id']} with "
+        f"{report['parameter_report']['total_trainable_parameters']} trainable parameters; "
+        f"autonomous_dev={report['autonomous_dev_loss']:.4f} -> {args.output_dir}"
+    )
+    return 0
+
+
 def build_asl_incremental_data_command(args: argparse.Namespace) -> int:
     manifest = build_asl_incremental_data(
         args.freeze_dir,
@@ -1247,6 +1264,16 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     qwen_matrix_data.add_argument("--epochs", type=int, default=10)
     qwen_matrix_data.add_argument("--seed", type=int, default=11)
     qwen_matrix_data.set_defaults(handler=prepare_qwen_asl_matrix_command)
+
+    qwen_patch_train = commands.add_parser(
+        "train-qwen-asl-patch",
+        help="train a restartable Qwen Q2/Q3 external-memory patch",
+    )
+    qwen_patch_train.add_argument("--config", required=True)
+    qwen_patch_train.add_argument("--train", required=True)
+    qwen_patch_train.add_argument("--dev", required=True)
+    qwen_patch_train.add_argument("--output-dir", required=True)
+    qwen_patch_train.set_defaults(handler=train_qwen_asl_patch_command)
 
     asl_expansion_data = commands.add_parser(
         "build-asl-expansion-data",
