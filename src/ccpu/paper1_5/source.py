@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from enum import StrEnum
 from typing import Any
 
 from ccpu.common.artifacts import fingerprint
+from ccpu.common.compat import StrEnum
 from ccpu.common.schema import CoprocessorRequest, CoprocessorResult
 
 
