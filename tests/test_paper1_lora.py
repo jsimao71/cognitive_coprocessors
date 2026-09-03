@@ -6,7 +6,12 @@ import pytest
 from ccpu.cli import main
 from ccpu.common.artifacts import read_json, read_jsonl
 from ccpu.paper1.lora_data import LoRAProtocolDataConfig, generate_protocol_data
-from ccpu.paper1.lora_train import LoRATrainingConfig, _tokenize_record
+from ccpu.paper1.lora_train import (
+    LoRATrainingConfig,
+    _model_loss,
+    _tokenize_record,
+    semantic_weight_spans,
+)
 from ccpu.paper1.placement_analysis import build_placement_comparison
 
 
@@ -48,6 +53,52 @@ def test_lora_tokenization_can_reject_instead_of_hiding_truncation():
 
     with pytest.raises(ValueError, match="record exceeds max_length"):
         _tokenize_record(tokenizer, row, 40, reject_truncation=True)
+
+
+def test_semantic_weight_spans_prioritize_binding_and_query_tokens():
+    weights = {"default": 0.35, "path": 4.0, "operator": 3.0, "literal": 2.0, "return": 5.0}
+    target = "box.remaining = box.initial - 4\nRETURN box.remaining"
+    spans = semantic_weight_spans(target, weights)
+    observed = {(target[start:end], weight) for start, end, weight in spans}
+    assert ("box.remaining", 4.0) in observed
+    assert ("box.initial", 4.0) in observed
+    assert ("-", 3.0) in observed
+    assert ("4", 2.0) in observed
+    assert ("RETURN box.remaining", 5.0) in observed
+
+
+def test_semantic_weight_config_is_explicit_and_positive():
+    config = LoRATrainingConfig(
+        semantic_token_weights={
+            "default": 0.35,
+            "path": 4.0,
+            "operator": 3.0,
+            "literal": 2.0,
+            "return": 5.0,
+        }
+    )
+    config.validate()
+    with pytest.raises(ValueError, match="exactly"):
+        LoRATrainingConfig(semantic_token_weights={"path": 4.0}).validate()
+
+
+def test_weighted_causal_loss_emphasizes_high_weight_errors():
+    torch = pytest.importorskip("torch")
+
+    class Model:
+        def __call__(self, **_kwargs):
+            # Position zero predicts label zero correctly; position one predicts label one poorly.
+            logits = torch.tensor([[[4.0, 0.0], [4.0, 0.0], [0.0, 0.0]]])
+            return type("Output", (), {"logits": logits})()
+
+    batch = {
+        "input_ids": torch.tensor([[0, 0, 0]]),
+        "attention_mask": torch.ones((1, 3), dtype=torch.long),
+        "labels": torch.tensor([[-100, 0, 1]]),
+        "loss_weights": torch.tensor([[0.0, 1.0, 10.0]]),
+    }
+    weighted, ordinary = _model_loss(Model(), torch, batch)
+    assert weighted > ordinary
 
 
 def _excluded_dataset(tmp_path):

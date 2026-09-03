@@ -177,6 +177,89 @@ E3b: C1 + contrastive hybrid -> identical NL-memory generation
 Measure paired retrieval and layerwise similarity before and after causal
 fine-tuning to detect alignment drift.
 
+### Phase 3A - Semantic compilation bottleneck
+
+The specialization and alignment experiments above do not directly address
+the dominant measured error: choosing and binding the correct semantic
+structure. Before scaling the adapter or base model, run this matched ladder:
+
+```text
+M0 direct ASL:
+NL -> ordinary ASL token loss (the frozen Q0 control)
+
+M0.5 semantic-weighted direct ASL:
+the identical M0 inputs and ASL targets, with higher causal-loss weight on
+bindings, references, source values, operators, dependencies, and RETURN
+
+M1 canonical bottleneck:
+NL -> symbol table + ASL-isomorphic expression graph -> deterministic ASL lowering
+
+M2 decision-weighted bottleneck:
+M1 + extra weight on bindings, source facts, operators, references,
+dependencies, and the query target
+
+M3 contrastive bottleneck:
+M2 + executable hard negatives differing in one semantic decision
+
+M4 semantic selection:
+M3 + development-checkpoint selection by safety and semantic structure,
+not token loss alone
+```
+
+M1 deliberately remains isomorphic to ASL. It factors path grounding from the
+operation/dependency graph but does not introduce an unreviewed ontology or
+claim new semantic supervision. Its generated JSON is accepted only when it
+has unique contiguous slots, exactly one final query, lowers to ordinary ASL,
+and passes the existing parse, lower, type, scope, and execution gates.
+
+Hard-negative classes are operator swaps, reference/dependency rebinding,
+query-target swaps, path-binding swaps, and source-fact perturbations. Keep
+only syntactically valid, lowerable, executable negatives that are not
+semantically equivalent to the positive program. Never generate test
+negatives or select negative policy from test outcomes.
+
+Checkpoint ranking is lexicographic on the development set: lowerability,
+type validity, execution, semantic return, semantic state, dependency,
+operator/path/source-fact scores, answer, then token loss. This ordering makes
+an unsafe or structurally wrong checkpoint unable to win merely through lower
+surface-form loss.
+
+Use the same Qwen3-0.6B QKVO-r8 adapter, frozen 450/25/25 identities, optimizer
+budget, fixed zero-shot prompt, and autonomous test path for M0-M4. Neither
+gold ASL, rationale, answers, intermediate values, retrieved examples, nor a
+record-dependent ICL prefix may enter the model input. Retrieved
+demonstrations remain a separate later intervention.
+
+Treat the M0.5 weights as hyperparameters rather than facts. First compare the
+already-frozen uniform M0 against one predeclared strong-weight condition. If
+that gives a development semantic signal, compare mild and strong weighting
+with the adapter rank, optimizer, examples, and exposures fixed. Normalize the
+weighted token loss by the sum of active weights, report ordinary loss beside
+it, and freeze the selected weighting before applying it to another
+architecture or model. Do not independently tune every architecture on the
+test set. Later optimizer sweeps vary one axis at a time in this order:
+
+```text
+semantic-weight ratio -> learning rate -> selected epoch -> dropout -> rank
+```
+
+This ordering tests the semantic-objective hypothesis before adding capacity.
+The 25-case development set is small, so retain exact counts and treat close
+settings as tied rather than selecting on a one-example fluctuation.
+
+Gates:
+
+1. M1 requires 500/500 gold bottlenecks to round-trip with equivalent state,
+   return, dependencies, and answer.
+2. M2 requires unit-tested token/component weighting and reports both weighted
+   and ordinary development loss.
+3. M3 reports every negative class and the fraction whose final answer is
+   accidentally unchanged; such cases remain useful binding negatives.
+4. M4 may inspect only the 25 development programs. The frozen test is run
+   once after checkpoint selection.
+5. A gain is attributed to factorized semantic decisions only if M1-M4 beat
+   M0 on semantic return/state or answer under matched identities and budget.
+
 ### Phase 4 - Developmental curriculum
 
 Only continue if E3b improves at least one autonomous semantic metric over E3a
@@ -289,6 +372,10 @@ difference to a positive result.
 ```text
 src/ccpu/paper1/e3/
   data.py
+  bottleneck.py
+  components.py
+  negatives.py
+  selection.py
   adapters.py
   alignment.py
   pretrain.py
@@ -326,17 +413,21 @@ P0  Finish S2 and S3.
 P1  Freeze their reports and update the architecture table.
 P2  Build and audit C0/C1 ASL-only views.
 P3  Train C0 and C1; freeze the ASL-channel checkpoint.
-P4  Implement and train E3a NL-memory generation.
-P5  Precondition E3b with C1 plus paired contrastive alignment.
-P6  Measure retrieval and layerwise convergence before generation.
-P7  Transfer E3b into the identical E3a generation schedule.
-P8  Evaluate E3a/E3b autonomously on the frozen 25 programs.
-P9  If positive, replicate and run the capacity control.
-P10 Build D0/D1/D2 with provenance and overlap masks.
-P11 Run ordered, static, reverse, NL-only, and shuffled-pair controls.
-P12 Run predicted-ASL execution and reinjection for frozen controls and winner.
-P13 Compare architecture, alignment, curriculum, reinjection, and F0-large data.
-P14 Update Paper 1, build the PDF, commit, and push each major result.
+P4  Train/evaluate M0.5 on unchanged F0 data; tune weights only after a dev signal.
+P5  Build M1, require the 500/500 exact semantic round-trip, and freeze data.
+P6  Train/evaluate matched M0 and M1 QKVO-r8 conditions.
+P6A Add decision weighting (M2), hard negatives (M3), and dev-only selection (M4).
+P7  Implement and train E3a NL-memory generation.
+P8  Precondition E3b with C1 plus paired contrastive alignment.
+P9  Measure retrieval and layerwise convergence before generation.
+P10 Transfer E3b into the identical E3a generation schedule.
+P11 Evaluate E3a/E3b autonomously on the frozen 25 programs.
+P12 If positive, replicate and run the capacity control.
+P13 Build D0/D1/D2 with provenance and overlap masks.
+P14 Run ordered, static, reverse, NL-only, and shuffled-pair controls.
+P15 Run predicted-ASL execution and reinjection for frozen controls and winner.
+P16 Compare architecture, bottleneck, alignment, curriculum, reinjection, and F0-large data.
+P17 Update Paper 1, build the PDF, commit, and push each major result.
 ```
 
 Do not change ICL examples between records or steps. Do not select prompts,

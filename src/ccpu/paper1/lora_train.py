@@ -6,6 +6,7 @@ import importlib.metadata
 import math
 import os
 import random
+import re
 import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -35,6 +36,7 @@ class LoRATrainingConfig:
     checkpoint_every_optimizer_steps: int = 0
     reject_truncation: bool = False
     logical_epoch_field: str | None = None
+    semantic_token_weights: dict[str, float] | None = None
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> LoRATrainingConfig:
@@ -68,6 +70,11 @@ class LoRATrainingConfig:
                 if data.get("logical_epoch_field") is not None
                 else None
             ),
+            semantic_token_weights=(
+                {str(key): float(weight) for key, weight in data["semantic_token_weights"].items()}
+                if data.get("semantic_token_weights") is not None
+                else None
+            ),
         )
 
     def validate(self) -> None:
@@ -79,6 +86,12 @@ class LoRATrainingConfig:
             raise ValueError("dropout or target modules are invalid")
         if self.checkpoint_every_optimizer_steps < 0:
             raise ValueError("checkpoint interval cannot be negative")
+        if self.semantic_token_weights is not None:
+            required = {"default", "path", "operator", "literal", "return"}
+            if set(self.semantic_token_weights) != required:
+                raise ValueError(f"semantic token weights must have exactly {sorted(required)}")
+            if any(weight <= 0 for weight in self.semantic_token_weights.values()):
+                raise ValueError("semantic token weights must be positive")
 
     def to_dict(self) -> dict[str, Any]:
         value = asdict(self)
@@ -101,6 +114,7 @@ def _tokenize_record(
     max_length: int,
     *,
     reject_truncation: bool = False,
+    semantic_token_weights: dict[str, float] | None = None,
 ) -> dict[str, Any]:
     user = {"role": "user", "content": str(row["prompt"])}
     prefix = _chat_text(tokenizer, [user], add_generation_prompt=True)
@@ -110,7 +124,12 @@ def _tokenize_record(
         add_generation_prompt=False,
     )
     prefix_ids = tokenizer(prefix, add_special_tokens=False)["input_ids"]
-    full_input_ids = tokenizer(complete, add_special_tokens=False)["input_ids"]
+    encoded = tokenizer(
+        complete,
+        add_special_tokens=False,
+        **({"return_offsets_mapping": True} if semantic_token_weights else {}),
+    )
+    full_input_ids = encoded["input_ids"]
     common = 0
     for prefix_token, full_token in zip(prefix_ids, full_input_ids):
         if prefix_token != full_token:
@@ -127,7 +146,7 @@ def _tokenize_record(
     labels = [-100] * min(common, len(input_ids)) + input_ids[common:]
     if not any(label != -100 for label in labels):
         raise ValueError(f"target truncated for {row['example_id']}")
-    return {
+    result = {
         "example_id": row["example_id"],
         "input_ids": input_ids,
         "labels": labels,
@@ -136,6 +155,49 @@ def _tokenize_record(
         "prefix_tokens": len(prefix_ids),
         "was_truncated": len(full_input_ids) > max_length,
     }
+    if semantic_token_weights is not None:
+        target = str(row["target"])
+        target_start = complete.rfind(target)
+        if target_start < 0:
+            raise ValueError(f"target is absent from rendered chat for {row['example_id']}")
+        spans = semantic_weight_spans(target, semantic_token_weights)
+        offsets = encoded.get("offset_mapping")
+        if offsets is None:
+            raise ValueError("semantic token weighting requires a fast tokenizer with offsets")
+        weights = []
+        for index, (start, end) in enumerate(offsets[:max_length]):
+            if index < common or end <= target_start:
+                weights.append(0.0)
+                continue
+            local_start = max(0, start - target_start)
+            local_end = max(0, end - target_start)
+            matched = [
+                weight
+                for span_start, span_end, weight in spans
+                if local_start < span_end and local_end > span_start
+            ]
+            weights.append(max(matched, default=semantic_token_weights["default"]))
+        result["loss_weights"] = weights
+    return result
+
+
+_SEMANTIC_SPANS = {
+    "path": re.compile(r"\b[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)+\b"),
+    "operator": re.compile(r"\b[A-Za-z_][A-Za-z0-9_]*(?=\s*\()|(?<!\w)[+*/-](?!\w)"),
+    "literal": re.compile(r'(?<![A-Za-z0-9_])(?:\d+(?:\.\d+)?|"(?:\\.|[^"\\])*")'),
+    "return": re.compile(r"\bRETURN\b[^\n]*", re.IGNORECASE),
+}
+
+
+def semantic_weight_spans(
+    target: str, weights: dict[str, float]
+) -> list[tuple[int, int, float]]:
+    """Locate semantic decisions without changing any existing F0 target."""
+
+    spans = []
+    for component, pattern in _SEMANTIC_SPANS.items():
+        spans.extend((match.start(), match.end(), weights[component]) for match in pattern.finditer(target))
+    return spans
 
 
 def _batch(torch: Any, records: list[dict[str, Any]], pad_token_id: int, device: str):
@@ -143,30 +205,67 @@ def _batch(torch: Any, records: list[dict[str, Any]], pad_token_id: int, device:
     input_ids = []
     attention_mask = []
     labels = []
+    loss_weights = []
+    weighted = any("loss_weights" in row for row in records)
     for row in records:
         padding = length - len(row["input_ids"])
         input_ids.append(row["input_ids"] + [pad_token_id] * padding)
         attention_mask.append([1] * len(row["input_ids"]) + [0] * padding)
         labels.append(row["labels"] + [-100] * padding)
-    return {
+        if weighted:
+            if "loss_weights" not in row:
+                raise ValueError("cannot mix weighted and unweighted training records")
+            loss_weights.append(row["loss_weights"] + [0.0] * padding)
+    batch = {
         "input_ids": torch.tensor(input_ids, dtype=torch.long, device=device),
         "attention_mask": torch.tensor(attention_mask, dtype=torch.long, device=device),
         "labels": torch.tensor(labels, dtype=torch.long, device=device),
     }
+    if weighted:
+        batch["loss_weights"] = torch.tensor(loss_weights, dtype=torch.float32, device=device)
+    return batch
 
 
-def _mean_loss(model: Any, torch: Any, rows: list[dict[str, Any]], pad: int, device: str) -> float:
+def _model_loss(model: Any, torch: Any, batch: dict[str, Any]) -> tuple[Any, Any]:
+    weights = batch.pop("loss_weights", None)
+    if weights is None:
+        loss = model(**batch).loss
+        return loss, loss
+    labels = batch.pop("labels")
+    logits = model(**batch).logits
+    shifted_logits = logits[..., :-1, :].contiguous().float()
+    shifted_labels = labels[..., 1:].contiguous()
+    shifted_weights = weights[..., 1:].contiguous()
+    token_losses = torch.nn.functional.cross_entropy(
+        shifted_logits.view(-1, shifted_logits.size(-1)),
+        shifted_labels.view(-1),
+        ignore_index=-100,
+        reduction="none",
+    ).view_as(shifted_labels)
+    active = shifted_labels.ne(-100)
+    ordinary = token_losses[active].mean()
+    effective = shifted_weights * active
+    weighted_loss = (token_losses * effective).sum() / effective.sum().clamp_min(1e-12)
+    return weighted_loss, ordinary
+
+
+def _mean_loss(
+    model: Any, torch: Any, rows: list[dict[str, Any]], pad: int, device: str
+) -> tuple[float, float]:
     model.eval()
     losses = []
+    ordinary_losses = []
     with torch.no_grad():
         for row in rows:
-            loss = model(**_batch(torch, [row], pad, device)).loss
+            loss, ordinary = _model_loss(model, torch, _batch(torch, [row], pad, device))
             value = float(loss.detach().cpu())
-            if not math.isfinite(value):
+            ordinary_value = float(ordinary.detach().cpu())
+            if not math.isfinite(value) or not math.isfinite(ordinary_value):
                 raise FloatingPointError("non-finite development loss")
             losses.append(value)
+            ordinary_losses.append(ordinary_value)
     model.train()
-    return sum(losses) / len(losses)
+    return sum(losses) / len(losses), sum(ordinary_losses) / len(ordinary_losses)
 
 
 def train_lora(
@@ -218,6 +317,7 @@ def train_lora(
             source_row,
             training.max_length,
             reject_truncation=training.reject_truncation,
+            semantic_token_weights=training.semantic_token_weights,
         )
         if training.logical_epoch_field is not None:
             if training.logical_epoch_field not in source_row:
@@ -233,6 +333,7 @@ def train_lora(
             row,
             training.max_length,
             reject_truncation=training.reject_truncation,
+            semantic_token_weights=training.semantic_token_weights,
         )
         for row in read_jsonl(dev_path)
     ]
@@ -348,21 +449,26 @@ def train_lora(
         order = list(range(len(epoch_rows)))
         random.Random(training.seed + epoch).shuffle(order)
         losses = resume_losses if epoch == start_epoch else []
+        ordinary_losses = []
         batch_starts = list(range(0, len(order), training.batch_size))
         for batch_index, start in enumerate(batch_starts):
             if epoch == start_epoch and batch_index < start_batch_index:
                 continue
             members = [epoch_rows[index] for index in order[start : start + training.batch_size]]
-            loss = model_instance(
-                **_batch(torch, members, tokenizer.pad_token_id, device)
-            ).loss
+            loss, ordinary_loss = _model_loss(
+                model_instance,
+                torch,
+                _batch(torch, members, tokenizer.pad_token_id, device),
+            )
             loss_value = float(loss.detach().cpu())
+            ordinary_loss_value = float(ordinary_loss.detach().cpu())
             if not math.isfinite(loss_value):
                 raise FloatingPointError(
                     f"non-finite training loss at epoch {epoch + 1}, batch {batch_index}"
                 )
             (loss / training.gradient_accumulation_steps).backward()
             losses.append(loss_value)
+            ordinary_losses.append(ordinary_loss_value)
             final_batch = start + training.batch_size >= len(order)
             if (batch_index + 1) % training.gradient_accumulation_steps == 0 or final_batch:
                 gradient_norm = torch.nn.utils.clip_grad_norm_(
@@ -384,16 +490,20 @@ def train_lora(
                         f"{len(batch_starts)}, optimizer step {optimizer_steps}"
                     )
         should_evaluate = training.evaluate_each_epoch or epoch + 1 == training.epochs
-        dev_loss = (
+        dev_losses = (
             _mean_loss(model_instance, torch, dev_rows, tokenizer.pad_token_id, device)
             if should_evaluate
             else None
         )
+        dev_loss = dev_losses[0] if dev_losses is not None else None
+        ordinary_dev_loss = dev_losses[1] if dev_losses is not None else None
         history.append(
             {
                 "epoch": epoch + 1,
                 "mean_train_loss": sum(losses) / len(losses),
                 "mean_dev_loss": dev_loss,
+                "mean_unweighted_train_loss": sum(ordinary_losses) / len(ordinary_losses),
+                "mean_unweighted_dev_loss": ordinary_dev_loss,
             }
         )
         dev_text = f"{dev_loss:.4f}" if dev_loss is not None else "deferred"

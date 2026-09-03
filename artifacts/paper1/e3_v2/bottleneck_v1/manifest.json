@@ -1,0 +1,50 @@
+{
+  "files": {
+    "dev": {
+      "rows": 25,
+      "sha256": "5923db20e7ac1173fabb307601ac713ec7580b2e3865c26dce5160ac6e19d8f4"
+    },
+    "dev_negatives": {
+      "rows": 106,
+      "sha256": "81ad76ab2a1bc18b9864e749c35c6d8aa8366c9ee2ee5b30bea6beee90c1a236"
+    },
+    "test": {
+      "rows": 25,
+      "sha256": "adb80d00742f31845ddba765c7c7ce6613ec07824f8fe43c928f47d0157f0a6d"
+    },
+    "train": {
+      "rows": 450,
+      "sha256": "21941226a3b6d7038646213e0a8e1a7ae4c5e6e0a34b03542d12e5ae972442ef"
+    },
+    "train_negatives": {
+      "rows": 2061,
+      "sha256": "65ba6d2ee53b2b97b39dee829fbb863887f50758be5ae70c1db6eed45950abd1"
+    }
+  },
+  "gold_roundtrip_passed": 500,
+  "gold_roundtrip_total": 500,
+  "hard_negative_counts": {
+    "dependency_rebind": 369,
+    "operator_swap": 433,
+    "path_binding_swap": 475,
+    "query_target_swap": 471,
+    "source_fact_shift": 419
+  },
+  "prompt_policy": "one fixed zero-shot prompt; no record-dependent ICL or state",
+  "representation": "ASL-isomorphic symbol table plus expression graph",
+  "schema_version": "ccpu.paper1.e3_bottleneck_manifest.v1",
+  "source_data_dir": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\asl_matrix_v1\\data",
+  "source_files": {
+    "dev": "b3da053c125411a63d1a3ca97ebe21bf0c0dedd710cb255c1988d67455214455",
+    "test": "e7a2a2f2cbcb8d776db3144d1f8b9db3e12578f2863f9f35e5eb0ed629488923",
+    "train": "a1a1f7ff287cdb5f7d4634915fae8c6ee80df477aa1b3b0b122c48cd3737d1eb"
+  },
+  "split_overlap": {
+    "dev_test_patterns": [],
+    "dev_test_sources": [],
+    "train_dev_sources": [],
+    "train_test_patterns": [],
+    "train_test_sources": []
+  },
+  "test_negatives_generated": false
+}
