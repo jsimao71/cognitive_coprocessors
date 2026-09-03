@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import argparse
 
-from ccpu.common.artifacts import read_jsonl, write_json
+from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
 from .data import build_bottleneck_data, build_direct_preference_data
+from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .selection import select_semantic_checkpoint
 
 
@@ -23,6 +24,19 @@ def build_parser() -> argparse.ArgumentParser:
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
+    run = commands.add_parser("run-bottleneck")
+    run.add_argument("--eval", required=True)
+    run.add_argument("--config", required=True)
+    run.add_argument("--adapter-path", required=True)
+    run.add_argument("--adapter-id", required=True)
+    run.add_argument("--output-dir", required=True)
+    run.add_argument("--objective-id", default="L0")
+    run.add_argument("--seed", type=int, default=44017)
+    run.add_argument("--checkpoint-every", type=int, default=5)
+    evaluate = commands.add_parser("evaluate-bottleneck")
+    evaluate.add_argument("--eval", required=True)
+    evaluate.add_argument("--predictions", required=True)
+    evaluate.add_argument("--output-dir", required=True)
     return parser
 
 
@@ -42,6 +56,31 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"built {report['files']['train']['rows']} train and "
             f"{report['files']['dev']['rows']} dev preference rows -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "run-bottleneck":
+        summary = run_bottleneck_condition(
+            eval_path=args.eval,
+            model_config=read_json(args.config),
+            adapter_path=args.adapter_path,
+            adapter_id=args.adapter_id,
+            output_dir=args.output_dir,
+            objective_id=args.objective_id,
+            seed=args.seed,
+            checkpoint_every=args.checkpoint_every,
+        )
+        print(
+            f"F4/{args.objective_id} answer="
+            f"{summary['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "evaluate-bottleneck":
+        summary = analyze_bottleneck_predictions(
+            args.eval, args.predictions, args.output_dir
+        )
+        print(
+            f"F4 answer={summary['rates']['final_answer_correct']:.3f} "
+            f"-> {args.output_dir}"
         )
         return 0
     report = select_semantic_checkpoint(read_jsonl(args.metrics))

@@ -1,7 +1,9 @@
 from copy import deepcopy
+from types import SimpleNamespace
 
 import pytest
 
+from ccpu.common.artifacts import read_jsonl, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.paper1.asl_pilot_eval import score_asl
 from ccpu.paper1.e3.bottleneck import (
@@ -11,6 +13,11 @@ from ccpu.paper1.e3.bottleneck import (
     render_bottleneck,
 )
 from ccpu.paper1.e3.components import component_labels
+from ccpu.paper1.e3.eval import (
+    extract_bottleneck,
+    run_bottleneck_condition,
+    score_bottleneck,
+)
 from ccpu.paper1.e3.negatives import generate_hard_negatives
 from ccpu.paper1.e3.selection import select_semantic_checkpoint
 
@@ -65,6 +72,76 @@ def test_bottleneck_rejects_unknown_slot_and_nonfinal_return():
     broken["steps"][-2], broken["steps"][-1] = broken["steps"][-1], broken["steps"][-2]
     with pytest.raises(ValueError, match="final return"):
         render_bottleneck(broken)
+
+
+def test_bottleneck_extraction_and_scoring_use_deterministic_lowering():
+    rendered = render_bottleneck(asl_to_bottleneck(ASL, effective_scope=SCOPE))
+    extracted = extract_bottleneck(f"Result:\n```json\n{rendered}\n```")
+    assert extracted == rendered
+    metrics = score_bottleneck(
+        reference_program=rendered,
+        reference_asl=ASL,
+        predicted_program=extracted,
+        effective_scope=SCOPE,
+    )
+    assert metrics["exact_program"]
+    assert metrics["parse_valid"]
+    assert metrics["lowerable_to_asl"]
+    assert metrics["semantic_state_equivalent"]
+    assert metrics["final_answer_correct"]
+
+
+def test_bottleneck_run_is_autonomous_and_checkpointed(tmp_path):
+    rendered = render_bottleneck(asl_to_bottleneck(ASL, effective_scope=SCOPE))
+    eval_path = write_jsonl(
+        tmp_path / "eval.jsonl",
+        [
+            {
+                "example_id": "f4-test-1",
+                "parent_source_id": "source-1",
+                "semantic_pattern_id": "pattern-1",
+                "dataset": "gsm8k",
+                "prompt": "Compile this problem without demonstrations.",
+                "target": rendered,
+                "target_asl": ASL,
+                "effective_scope": SCOPE,
+            }
+        ],
+    )
+
+    class Backend:
+        model_id = "Qwen/Qwen3-0.6B"
+
+        def generate(self, prompt, *, seed):
+            assert prompt == "Compile this problem without demonstrations."
+            assert seed == 44017
+            return SimpleNamespace(
+                generated_text=rendered,
+                prompt_tokens=7,
+                generated_tokens=11,
+                wall_time_ns=13,
+                metadata={"device": "test"},
+            )
+
+    output = tmp_path / "output"
+    summary = run_bottleneck_condition(
+        eval_path=eval_path,
+        model_config={
+            "model": {
+                "model_id": "Qwen/Qwen3-0.6B",
+                "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+            }
+        },
+        adapter_path=tmp_path / "adapter",
+        adapter_id="f4-test-adapter",
+        output_dir=output,
+        backend_override=Backend(),
+        checkpoint_every=1,
+    )
+    assert summary["rates"]["final_answer_correct"] == 1.0
+    prediction = read_jsonl(output / "predictions.jsonl")[0]
+    assert prediction["representation_id"] == "F4"
+    assert prediction["objective_id"] == "L0"
 
 
 def test_hard_negatives_are_executable_and_semantically_different():
