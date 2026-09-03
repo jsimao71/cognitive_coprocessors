@@ -92,7 +92,9 @@ def test_weighted_causal_loss_emphasizes_high_weight_errors():
     class Model:
         def __call__(self, **_kwargs):
             # Position zero predicts label zero correctly; position one predicts label one poorly.
-            logits = torch.tensor([[[4.0, 0.0], [4.0, 0.0], [0.0, 0.0]]])
+            logits = torch.tensor(
+                [[[4.0, 0.0], [4.0, 0.0], [0.0, 0.0]]], requires_grad=True
+            )
             return type("Output", (), {"logits": logits})()
 
     batch = {
@@ -103,6 +105,7 @@ def test_weighted_causal_loss_emphasizes_high_weight_errors():
     }
     weighted, ordinary = _model_loss(Model(), torch, batch)
     assert weighted > ordinary
+    weighted.backward()
 
 
 def test_pairwise_rank_terms_match_direct_logistic_gradient():

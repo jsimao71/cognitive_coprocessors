@@ -259,7 +259,11 @@ def _loss_and_score(
     ).view_as(shifted_labels)
     active = shifted_labels.ne(-100)
     ordinary = token_losses[active].mean()
-    effective = active.float() if weights is None else weights[..., 1:].contiguous() * active
+    effective = (
+        active.float()
+        if weights is None
+        else weights[..., 1:].contiguous() * active.to(dtype=weights.dtype)
+    )
     weighted_loss = (token_losses * effective).sum() / effective.sum().clamp_min(1e-12)
     return weighted_loss, ordinary, -weighted_loss
 
