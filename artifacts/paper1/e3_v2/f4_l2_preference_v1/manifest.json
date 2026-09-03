@@ -1,0 +1,32 @@
+{
+  "files": {
+    "dev": {
+      "rows": 25,
+      "sha256": "04ff1eb6701c5ed6607e9167983366bdfeed8c906643d459feae0115e78e4517"
+    },
+    "train": {
+      "rows": 4500,
+      "sha256": "9ab8fd47b3f6af0e0d26736843452dd6b6df65b1f45721918ae719be0ade5c2a"
+    }
+  },
+  "logical_epochs": 10,
+  "negative_policy": "rotating executable native-F4 semantic corruption",
+  "objective_id": "L2",
+  "positive_policy": "byte-equivalent existing F4 prompt and target",
+  "representation_id": "F4",
+  "schema_version": "ccpu.paper1.e3_bottleneck_preference_manifest.v1",
+  "selected_negative_counts": {
+    "dependency_rebind": 817,
+    "operator_swap": 1034,
+    "path_binding_swap": 1046,
+    "query_target_swap": 958,
+    "source_fact_swap": 670
+  },
+  "source_files": {
+    "negative_dev": "aee8b8eaea926521f34d4abecedca1d405d1fd6a6d334a1d748eab89afcbc029",
+    "negative_train": "e2d88fe99a8331f1c70fd47822e153c9b8284b195ef4a26b0faf0c21320e183b",
+    "sft_dev": "5923db20e7ac1173fabb307601ac713ec7580b2e3865c26dce5160ac6e19d8f4",
+    "sft_train": "21941226a3b6d7038646213e0a8e1a7ae4c5e6e0a34b03542d12e5ae972442ef"
+  },
+  "test_rows_generated": 0
+}
