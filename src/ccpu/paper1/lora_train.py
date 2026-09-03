@@ -37,6 +37,7 @@ class LoRATrainingConfig:
     checkpoint_every_optimizer_steps: int = 0
     reject_truncation: bool = False
     restore_best_dev: bool = False
+    save_epoch_adapters: bool = False
     logical_epoch_field: str | None = None
     semantic_token_weights: dict[str, float] | None = None
     pairwise_rank_weight: float = 0.0
@@ -70,6 +71,7 @@ class LoRATrainingConfig:
             ),
             reject_truncation=bool(data.get("reject_truncation", False)),
             restore_best_dev=bool(data.get("restore_best_dev", False)),
+            save_epoch_adapters=bool(data.get("save_epoch_adapters", False)),
             logical_epoch_field=(
                 str(data["logical_epoch_field"])
                 if data.get("logical_epoch_field") is not None
@@ -567,6 +569,24 @@ def train_lora(
         torch.save(state, temporary_path)
         os.replace(temporary_path, checkpoint_path)
 
+    def save_epoch_adapter(epoch: int) -> None:
+        epoch_dir = output_dir / "epoch_adapters" / f"epoch-{epoch}"
+        if epoch_dir.exists():
+            required = {"adapter_config.json", "adapter_model.safetensors"}
+            if not required <= {path.name for path in epoch_dir.iterdir()}:
+                raise RuntimeError(f"incomplete saved epoch adapter: {epoch_dir}")
+            return
+        temporary = epoch_dir.with_name(f"{epoch_dir.name}.tmp-{os.getpid()}")
+        temporary.parent.mkdir(parents=True, exist_ok=True)
+        epoch_state = {
+            key: value.detach().cpu()
+            for key, value in get_peft_model_state_dict(model_instance).items()
+        }
+        model_instance.save_pretrained(
+            temporary, state_dict=epoch_state, safe_serialization=True
+        )
+        temporary.rename(epoch_dir)
+
     optimizer.zero_grad(set_to_none=True)
     for epoch in range(start_epoch, training.epochs):
         epoch_rows = logical_epoch_rows[epoch] if logical_epoch_rows is not None else train_rows
@@ -704,6 +724,8 @@ def train_lora(
             f"epoch {epoch + 1}/{training.epochs}: "
             f"train={history[-1]['mean_train_loss']:.4f} dev={dev_text}"
         )
+        if training.save_epoch_adapters:
+            save_epoch_adapter(epoch + 1)
         if training.checkpoint_every_optimizer_steps:
             save_resume(epoch + 1, 0, [])
         start_batch_index = 0
@@ -762,6 +784,19 @@ def train_lora(
         ),
         "selected_dev_loss": (
             best_dev_loss if training.restore_best_dev else history[-1]["mean_dev_loss"]
+        ),
+        "epoch_adapters": (
+            {
+                path.name: {
+                    file.name: file_sha256(file)
+                    for file in sorted(path.iterdir())
+                    if file.is_file()
+                }
+                for path in sorted((output_dir / "epoch_adapters").iterdir())
+                if path.is_dir()
+            }
+            if training.save_epoch_adapters
+            else {}
         ),
         "trainable_parameters": trainable_parameters,
         "total_parameters": total_parameters,

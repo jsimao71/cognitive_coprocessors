@@ -39,6 +39,7 @@ def test_lora_training_config_parses_restart_and_truncation_guards():
                 "reject_truncation": True,
                 "evaluate_each_epoch": True,
                 "restore_best_dev": True,
+                "save_epoch_adapters": True,
                 "logical_epoch_field": "epoch_view",
             }
         }
@@ -47,6 +48,7 @@ def test_lora_training_config_parses_restart_and_truncation_guards():
     assert config.checkpoint_every_optimizer_steps == 50
     assert config.reject_truncation is True
     assert config.restore_best_dev is True
+    assert config.save_epoch_adapters is True
     assert config.logical_epoch_field == "epoch_view"
 
 
