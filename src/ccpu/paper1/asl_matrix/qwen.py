@@ -12,7 +12,7 @@ from .data import MatrixExample, RegimeBuilder, StaticMixture
 
 QWEN_CONDITIONS = ("q0_t3", "q1_serialized_mixed")
 
-_INSTRUCTION = (
+AUTONOMOUS_ASL_INSTRUCTION = (
     "Compile the quantitative problem into semantically grounded ASL-Arith. "
     "Preserve entities, measured quantities, source facts, relations, temporal state, "
     "dependencies, and the requested RETURN. Use meaningful lowercase paths. "
@@ -20,8 +20,12 @@ _INSTRUCTION = (
 )
 
 
+def autonomous_asl_prompt(problem: str) -> str:
+    return f"{AUTONOMOUS_ASL_INSTRUCTION}\n\nInput:\nProblem: {problem}\nASL:"
+
+
 def _prompt(view: dict[str, Any], autonomous_prompt: str | None = None) -> str:
-    prompt = autonomous_prompt or f"{_INSTRUCTION}\n\nInput:\nProblem: {view['nl_input']}\nASL:"
+    prompt = autonomous_prompt or autonomous_asl_prompt(str(view["nl_input"]))
     if not prompt.endswith("\nASL:"):
         raise ValueError("authoritative autonomous prompt must end with ASL marker")
     if view["external_asl_input"] is not None:

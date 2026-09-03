@@ -5,6 +5,7 @@ import pytest
 
 from ccpu.common.artifacts import read_jsonl, write_jsonl
 from ccpu.dsl import validate_asl
+from ccpu.dsl_dataset.remote_analysis import _program_metrics
 from ccpu.paper1.asl_pilot_eval import score_asl
 from ccpu.paper1.e3.bottleneck import (
     asl_to_bottleneck,
@@ -13,6 +14,7 @@ from ccpu.paper1.e3.bottleneck import (
     render_bottleneck,
 )
 from ccpu.paper1.e3.components import component_labels
+from ccpu.paper1.e3.data_scale import build_d1_f0_data
 from ccpu.paper1.e3.eval import (
     extract_bottleneck,
     run_bottleneck_condition,
@@ -142,6 +144,96 @@ def test_bottleneck_run_is_autonomous_and_checkpointed(tmp_path):
     prediction = read_jsonl(output / "predictions.jsonl")[0]
     assert prediction["representation_id"] == "F4"
     assert prediction["objective_id"] == "L0"
+
+
+def _d1_source(source_id, target, answer):
+    return {
+        "dataset": "gsm8k",
+        "source_id": source_id,
+        "question": f"What is the value for {source_id}?",
+        "answer": str(answer),
+        "effective_scope": {
+            "id": f"gsm8k:train:{source_id}",
+            "kind": "benchmark_case",
+            "parent": None,
+            "source": "dataset",
+        },
+        "record_sha256": source_id.ljust(64, "0"),
+        "target_fixture": target,
+    }
+
+
+def _d1_annotation(source):
+    lines = source["target_fixture"].splitlines()
+    return {
+        "dataset": source["dataset"],
+        "source_id": source["source_id"],
+        "full_asl": source["target_fixture"],
+        "part_mappings": [
+            {
+                "part_id": 0,
+                "asl": lines,
+                "status": "ok",
+                "confidence": 1.0,
+                "assumptions": [],
+                "semantic_notes": [],
+            }
+        ],
+        "teacher": {"model": "test/model", "attempt": 1},
+    }
+
+
+def test_d1_freeze_matches_exposure_and_excludes_frozen_leakage(tmp_path):
+    sources = [
+        _d1_source("a", "a.count = 1\nRETURN a.count", 1),
+        _d1_source("b", "shared.count = 2\nRETURN shared.count", 2),
+        _d1_source("c", "c.left = 3\nc.total = c.left + 1\nRETURN c.total", 4),
+        _d1_source("d", "d.left = 8\nd.total = d.left - 2\nRETURN d.total", 6),
+    ]
+    annotations = [_d1_annotation(source) for source in sources]
+    frozen_pattern = _program_metrics(
+        sources[1], annotations[1]["full_asl"], annotations[1]["part_mappings"]
+    )["semantic_pattern_id"]
+    source_path = write_jsonl(tmp_path / "sources.jsonl", sources)
+    strict_path = write_jsonl(tmp_path / "strict.jsonl", annotations)
+    frozen = tmp_path / "frozen"
+    write_jsonl(
+        frozen / "dev.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "parent_source_id": "a",
+                "semantic_pattern_id": "dev-pattern",
+            }
+        ],
+    )
+    write_jsonl(
+        frozen / "test.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "parent_source_id": "frozen-test",
+                "semantic_pattern_id": frozen_pattern,
+            }
+        ],
+    )
+
+    manifest = build_d1_f0_data(
+        strict_path=strict_path,
+        source_paths=[source_path],
+        frozen_data_dir=frozen,
+        output_dir=tmp_path / "d1",
+        target=2,
+        epochs=2,
+        seed=11,
+    )
+    train = read_jsonl(tmp_path / "d1" / "train.jsonl")
+    assert {row["parent_source_id"] for row in train} == {"c", "d"}
+    assert {row["epoch_view"] for row in train} == {0, 1}
+    assert all(row["source_fields_visible_to_model"] == ["question"] for row in train)
+    assert manifest["counts"]["strict_pre_exclusion"] == 4
+    assert manifest["counts"]["excluded"] == 2
+    assert manifest["leakage_audit"]["passed"]
 
 
 def test_hard_negatives_are_executable_and_semantically_different():

@@ -7,6 +7,7 @@ import argparse
 from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
 from .data import build_bottleneck_data, build_direct_preference_data
+from .data_scale import build_d1_f0_data
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .selection import select_semantic_checkpoint
 
@@ -21,6 +22,14 @@ def build_parser() -> argparse.ArgumentParser:
     preference.add_argument("--qwen-data-dir", required=True)
     preference.add_argument("--bottleneck-data-dir", required=True)
     preference.add_argument("--output-dir", required=True)
+    d1 = commands.add_parser("prepare-d1")
+    d1.add_argument("--strict", required=True)
+    d1.add_argument("--source", action="append", required=True)
+    d1.add_argument("--frozen-data-dir", required=True)
+    d1.add_argument("--output-dir", required=True)
+    d1.add_argument("--target", type=int, default=4500)
+    d1.add_argument("--epochs", type=int, default=10)
+    d1.add_argument("--seed", type=int, default=11)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -56,6 +65,21 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"built {report['files']['train']['rows']} train and "
             f"{report['files']['dev']['rows']} dev preference rows -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-d1":
+        manifest = build_d1_f0_data(
+            strict_path=args.strict,
+            source_paths=args.source,
+            frozen_data_dir=args.frozen_data_dir,
+            output_dir=args.output_dir,
+            target=args.target,
+            epochs=args.epochs,
+            seed=args.seed,
+        )
+        print(
+            f"D1 selected={manifest['counts']['selected']} "
+            f"patterns={manifest['counts']['selected_patterns']} -> {args.output_dir}"
         )
         return 0
     if args.command == "run-bottleneck":
