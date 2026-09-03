@@ -654,7 +654,13 @@ def train_lora(
         torch.xpu.synchronize()
     wall_time_seconds = previous_wall_time_seconds + (time.perf_counter() - started)
     adapter_dir.mkdir(parents=True, exist_ok=False)
-    model_instance.save_pretrained(adapter_dir, safe_serialization=True)
+    adapter_state = {
+        key: value.detach().cpu()
+        for key, value in get_peft_model_state_dict(model_instance).items()
+    }
+    model_instance.save_pretrained(
+        adapter_dir, state_dict=adapter_state, safe_serialization=True
+    )
     adapter_files = {
         path.name: file_sha256(path) for path in sorted(adapter_dir.iterdir()) if path.is_file()
     }
