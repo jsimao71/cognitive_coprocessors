@@ -5,7 +5,8 @@ for %%I in ("%~dp0..") do set "REPO_ROOT=%%~fI"
 set "PYTHON=C:\Users\j.simao\.venvs\modal-llm-xpu\Scripts\python.exe"
 set "PYTHONPATH=%REPO_ROOT%\src"
 set "DATA=%REPO_ROOT%\artifacts\paper1\asl_matrix_v1\qwen_data\q1_seed11"
-set "SOURCE=%REPO_ROOT%\artifacts\paper1\asl_matrix_v1\data\source"
+set "EVAL_SOURCE=%REPO_ROOT%\artifacts\paper1\asl_pilot_v1\data\eval\original.jsonl"
+set "TRAIN_SPLIT=%REPO_ROOT%\artifacts\paper1\asl_pilot_500_v1\data\sft\train_450.jsonl"
 set "RUNS=%REPO_ROOT%\artifacts\paper1\asl_matrix_v1\qwen_runs"
 set "EVALS=%REPO_ROOT%\artifacts\paper1\asl_matrix_v1\eval"
 
@@ -36,7 +37,7 @@ if not exist "%RUN%\training_report.json" (
 )
 
 if not exist "%EVALUATION%\summary.json" (
-    "%PYTHON%" -u -m ccpu paper1 evaluate-qwen-asl-patch --config "%CONFIG%" --state "%RUN%\trainable_patch_state.safetensors" --eval "%SOURCE%\test.jsonl" --train-split "%SOURCE%\train.jsonl" --output-dir "%EVALUATION%" --checkpoint-every 1
+    "%PYTHON%" -u -m ccpu paper1 evaluate-qwen-asl-patch --config "%CONFIG%" --state "%RUN%\trainable_patch_state.safetensors" --eval "%EVAL_SOURCE%" --train-split "%TRAIN_SPLIT%" --output-dir "%EVALUATION%" --checkpoint-every 1
     if errorlevel 1 exit /b 1
 )
 exit /b 0

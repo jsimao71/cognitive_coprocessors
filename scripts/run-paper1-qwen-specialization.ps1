@@ -12,7 +12,8 @@ if (-not (Test-Path -LiteralPath $Python)) {
 }
 
 $data = Join-Path $RepoRoot "artifacts\paper1\asl_matrix_v1\qwen_data\q1_seed11"
-$source = Join-Path $RepoRoot "artifacts\paper1\asl_matrix_v1\data\source"
+$evalSource = Join-Path $RepoRoot "artifacts\paper1\asl_pilot_v1\data\eval\original.jsonl"
+$trainSplit = Join-Path $RepoRoot "artifacts\paper1\asl_pilot_500_v1\data\sft\train_450.jsonl"
 $runs = Join-Path $RepoRoot "artifacts\paper1\asl_matrix_v1\qwen_runs"
 $evals = Join-Path $RepoRoot "artifacts\paper1\asl_matrix_v1\eval"
 
@@ -51,8 +52,8 @@ foreach ($condition in $conditions) {
         & $Python -u -m ccpu paper1 evaluate-qwen-asl-patch `
             --config $condition.Config `
             --state (Join-Path $run "trainable_patch_state.safetensors") `
-            --eval (Join-Path $source "test.jsonl") `
-            --train-split (Join-Path $source "train.jsonl") `
+            --eval $evalSource `
+            --train-split $trainSplit `
             --output-dir $evaluation `
             --checkpoint-every 1
         if ($LASTEXITCODE -ne 0) {
