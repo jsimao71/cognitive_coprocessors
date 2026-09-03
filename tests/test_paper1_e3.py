@@ -14,6 +14,7 @@ from ccpu.paper1.e3.bottleneck import (
     render_bottleneck,
 )
 from ccpu.paper1.e3.components import component_labels
+from ccpu.paper1.e3.data import build_bottleneck_preference_data
 from ccpu.paper1.e3.data_scale import build_d1_f0_data
 from ccpu.paper1.e3.eval import (
     extract_bottleneck,
@@ -247,6 +248,44 @@ def test_hard_negatives_are_executable_and_semantically_different():
         assert item["binding_changed"] or not (
             item["semantic_state_equivalent"] and item["semantic_return_equivalent"]
         )
+
+
+def test_f4_preference_data_rotates_native_negatives_without_changing_positive(tmp_path):
+    program = asl_to_bottleneck(ASL, effective_scope=SCOPE)
+    rendered = render_bottleneck(program)
+    generated = generate_hard_negatives(
+        program, reference_asl=ASL, effective_scope=SCOPE
+    )[:2]
+    source = tmp_path / "bottleneck"
+    positive = {
+        "example_id": "f4-positive",
+        "prompt": "fixed prompt",
+        "target": rendered,
+    }
+    for split in ("train", "dev"):
+        write_jsonl(source / "sft" / f"{split}.jsonl", [positive])
+        write_jsonl(
+            source / "negatives" / f"{split}.jsonl",
+            [
+                {
+                    **negative,
+                    "example_id": f"f4-negative-{index}",
+                    "parent_example_id": "f4-positive",
+                }
+                for index, negative in enumerate(generated)
+            ],
+        )
+    report = build_bottleneck_preference_data(
+        source, tmp_path / "preference", epochs=2
+    )
+    train = read_jsonl(tmp_path / "preference" / "train.jsonl")
+    assert len(train) == 2
+    assert {row["epoch_view"] for row in train} == {0, 1}
+    assert all(row["prompt"] == positive["prompt"] for row in train)
+    assert all(row["target"] == positive["target"] for row in train)
+    assert len({row["negative_target"] for row in train}) == 2
+    assert all(parse_bottleneck(row["negative_target"]) for row in train)
+    assert report["test_rows_generated"] == 0
 
 
 def _metrics(epoch, *, executable, semantic_state, loss):

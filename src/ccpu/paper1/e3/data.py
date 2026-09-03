@@ -234,3 +234,87 @@ def build_direct_preference_data(
     }
     write_json(output / "manifest.json", manifest)
     return manifest
+
+
+def build_bottleneck_preference_data(
+    bottleneck_data_dir: str | Path,
+    output_dir: str | Path,
+    *,
+    epochs: int = 10,
+) -> dict[str, Any]:
+    """Attach rotating native-F4 hard negatives to unchanged F4 positives."""
+
+    if epochs < 1:
+        raise ValueError("F4 preference epochs must be positive")
+    bottleneck = Path(bottleneck_data_dir)
+    output = Path(output_dir)
+    files: dict[str, Any] = {}
+    selected_counts: Counter[str] = Counter()
+    for split in ("train", "dev"):
+        positive_rows = read_jsonl(bottleneck / "sft" / f"{split}.jsonl")
+        negatives_by_parent: dict[str, list[dict[str, Any]]] = {}
+        for negative in read_jsonl(bottleneck / "negatives" / f"{split}.jsonl"):
+            negatives_by_parent.setdefault(str(negative["parent_example_id"]), []).append(
+                negative
+            )
+        for negatives in negatives_by_parent.values():
+            negatives.sort(key=lambda row: (str(row["negative_type"]), str(row["example_id"])))
+
+        built = []
+        epoch_values = range(epochs) if split == "train" else (None,)
+        for epoch in epoch_values:
+            for row in positive_rows:
+                candidates = negatives_by_parent.get(str(row["example_id"]), [])
+                if not candidates:
+                    raise AssertionError(f"no native-F4 negatives for {row['example_id']}")
+                choice_index = (
+                    int(epoch) % len(candidates)
+                    if epoch is not None
+                    else int(fingerprint(str(row["example_id"]), 8), 16) % len(candidates)
+                )
+                negative = candidates[choice_index]
+                selected_counts[str(negative["negative_type"])] += 1
+                built.append(
+                    {
+                        **row,
+                        "schema_version": "ccpu.paper1.e3_bottleneck_preference.v1",
+                        "example_id": (
+                            f"{row['example_id']}-epoch-{epoch}"
+                            if epoch is not None
+                            else row["example_id"]
+                        ),
+                        "epoch_view": epoch,
+                        "negative_target": render_bottleneck(negative["bottleneck"]),
+                        "negative_type": str(negative["negative_type"]),
+                        "negative_example_id": str(negative["example_id"]),
+                        "preference_source": (
+                            "deterministic-executable-within-example-native-f4"
+                        ),
+                    }
+                )
+        path = write_jsonl(output / f"{split}.jsonl", built)
+        files[split] = {"rows": len(built), "sha256": file_sha256(path)}
+
+    manifest = {
+        "schema_version": "ccpu.paper1.e3_bottleneck_preference_manifest.v1",
+        "representation_id": "F4",
+        "objective_id": "L2",
+        "positive_policy": "byte-equivalent existing F4 prompt and target",
+        "negative_policy": "rotating executable native-F4 semantic corruption",
+        "logical_epochs": epochs,
+        "test_rows_generated": 0,
+        "files": files,
+        "selected_negative_counts": dict(sorted(selected_counts.items())),
+        "source_files": {
+            f"sft_{split}": file_sha256(bottleneck / "sft" / f"{split}.jsonl")
+            for split in ("train", "dev")
+        }
+        | {
+            f"negative_{split}": file_sha256(
+                bottleneck / "negatives" / f"{split}.jsonl"
+            )
+            for split in ("train", "dev")
+        },
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest
