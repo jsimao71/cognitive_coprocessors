@@ -363,6 +363,8 @@ def train_lora(
     device = select_device(torch, training.device)
     if training.device == "xpu" and device != "xpu":
         raise RuntimeError("the requested XPU training device is unavailable")
+    if training.device == "directml" and not str(device).startswith("privateuseone"):
+        raise RuntimeError("the requested DirectML training device is unavailable")
     model_dtype = str(model.get("dtype", training.dtype))
     dtype = getattr(torch, model_dtype)
     torch.manual_seed(training.seed)
@@ -417,7 +419,10 @@ def train_lora(
                 f"logical epochs must be exactly {sorted(expected)}; observed={sorted(observed)}"
             )
 
-    base = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, dtype=dtype)
+    model_kwargs: dict[str, Any] = {"revision": revision, "dtype": dtype}
+    if model.get("attn_implementation") is not None:
+        model_kwargs["attn_implementation"] = str(model["attn_implementation"])
+    base = AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
     base.config.use_cache = False
     peft_config = LoraConfig(
         r=training.rank,
@@ -581,7 +586,7 @@ def train_lora(
             final_batch = start + training.batch_size >= len(order)
             if (batch_index + 1) % training.gradient_accumulation_steps == 0 or final_batch:
                 gradient_norm = torch.nn.utils.clip_grad_norm_(
-                    model_instance.parameters(), 1.0
+                    model_instance.parameters(), 1.0, foreach=False
                 )
                 if not math.isfinite(float(gradient_norm.detach().cpu())):
                     raise FloatingPointError(
@@ -656,7 +661,7 @@ def train_lora(
         "model_id": model_id,
         "model_revision": revision,
         "adapter_id": str(model["adapter_id"]),
-        "device": device,
+        "device": str(device),
         "dtype": model_dtype,
         "training": effective_training,
         "train_rows": len(train_rows),

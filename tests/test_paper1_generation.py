@@ -1,3 +1,4 @@
+import sys
 from types import SimpleNamespace
 
 from ccpu.paper1.generation import _eos_token_ids, select_device
@@ -18,6 +19,12 @@ def test_auto_device_prefers_cuda_then_xpu_then_cpu():
 
 def test_explicit_device_is_preserved():
     assert select_device(_torch(cuda=False, xpu=False), "xpu") == "xpu"
+
+
+def test_explicit_directml_loads_optional_backend(monkeypatch):
+    backend = SimpleNamespace(device=lambda: "privateuseone:0")
+    monkeypatch.setitem(sys.modules, "torch_directml", backend)
+    assert select_device(_torch(cuda=False, xpu=False), "directml") == "privateuseone:0"
 
 
 def test_eos_tokens_include_model_specific_end_of_turn():

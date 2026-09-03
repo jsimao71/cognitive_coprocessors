@@ -12,8 +12,14 @@ from ccpu.common.schema import GenerationResult
 from .dataset import ArithmeticExample
 
 
-def select_device(torch_module: Any, requested: str) -> str:
+def select_device(torch_module: Any, requested: str) -> Any:
     """Resolve auto devices consistently across supported PyTorch backends."""
+    if requested == "directml":
+        try:
+            import torch_directml
+        except ImportError as error:
+            raise RuntimeError("the requested DirectML device is unavailable") from error
+        return torch_directml.device()
     if requested != "auto":
         return requested
     if torch_module.cuda.is_available():
@@ -91,6 +97,7 @@ class HuggingFaceGenerationConfig:
     adapter_path: str | None = None
     adapter_id: str | None = None
     cached_generation: bool = False
+    attn_implementation: str | None = None
 
 
 def _eos_token_ids(tokenizer_eos: Any, model_eos: Any) -> frozenset[int]:
@@ -135,6 +142,8 @@ class HuggingFaceBackend:
         }
         if dtype is not None:
             model_kwargs["dtype"] = dtype
+        if config.attn_implementation is not None:
+            model_kwargs["attn_implementation"] = config.attn_implementation
         model = AutoModelForCausalLM.from_pretrained(config.model_id, **model_kwargs)
         if config.adapter_path:
             try:
@@ -169,7 +178,7 @@ class HuggingFaceBackend:
         torch: Any,
         tokenizer: Any,
         model: Any,
-        device: str,
+        device: Any,
     ) -> None:
         self._torch = torch
         self.config = config
@@ -294,7 +303,7 @@ class HuggingFaceBackend:
                 "revision": self.config.revision,
                 "adapter_path": self.config.adapter_path,
                 "adapter_id": self.config.adapter_id,
-                "device": self.device,
+                "device": str(self.device),
                 "dtype": self.config.dtype,
                 "use_chat_template": self.config.use_chat_template,
                 "used_chat_template": used_chat_template,
@@ -376,7 +385,7 @@ class HuggingFaceBackend:
                 "revision": self.config.revision,
                 "adapter_path": self.config.adapter_path,
                 "adapter_id": self.config.adapter_id,
-                "device": self.device,
+                "device": str(self.device),
                 "dtype": self.config.dtype,
                 "use_chat_template": self.config.use_chat_template,
                 "used_chat_template": used_chat_template,
