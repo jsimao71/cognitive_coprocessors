@@ -1,0 +1,89 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "dependency_correct": 0.058823529411764705,
+        "exact_asl": 0.0,
+        "executable": 0.5294117647058824,
+        "final_answer_correct": 0.29411764705882354,
+        "lowerable_to_ccir": 0.7058823529411765,
+        "parse_valid": 0.8235294117647058,
+        "semantic_lint_valid": 0.6470588235294118,
+        "semantic_return_equivalent": 0.058823529411764705,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.7058823529411765
+      }
+    },
+    "tatqa": {
+      "count": 8,
+      "rates": {
+        "dependency_correct": 0.5,
+        "exact_asl": 0.0,
+        "executable": 0.875,
+        "final_answer_correct": 0.625,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 1.0,
+        "semantic_return_equivalent": 0.5,
+        "semantic_state_equivalent": 0.5,
+        "type_valid": 1.0
+      }
+    }
+  },
+  "component_mean_f1": {
+    "edges": 0.4105968253968254,
+    "operators": 0.6672701807995927,
+    "paths": 0.3724388944388944,
+    "semantic_state": 0.4027510267510268,
+    "source_facts": 0.5161568627450981
+  },
+  "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+  "prediction_count": 25,
+  "predictions_sha256": "a84e1e1a44773a3878ce2742dbd54d622c29355714d0100c0784c1da617d0b0b",
+  "qwen_patch": {
+    "config_sha256": "db99606219b8b47557793291a0a0365645bf35a2f19fd9aff9f334b8cfc2a1a1",
+    "layer_indices": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "mode": "cross",
+    "run_id": "q2-qwen3-0.6b-cross-r8-views11-init99173",
+    "state_sha256": "c4282ac7d6da6230aac94992b1334af5bed07e09139d1d32ea074294e2dc46ea"
+  },
+  "rates": {
+    "dependency_correct": 0.2,
+    "exact_asl": 0.0,
+    "executable": 0.64,
+    "final_answer_correct": 0.4,
+    "lowerable_to_ccir": 0.8,
+    "parse_valid": 0.88,
+    "semantic_lint_valid": 0.76,
+    "semantic_return_equivalent": 0.2,
+    "semantic_state_equivalent": 0.16,
+    "type_valid": 0.8
+  },
+  "run": {
+    "condition": "lora",
+    "demo_source_ids": [],
+    "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-ASL-Matrix-Q2-Cross-r8-views11-init99173",
+      "adapter_path": "artifacts\\paper1\\asl_matrix_v1\\qwen_runs\\q2_seed11_v3\\trainable_patch_state.safetensors",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "seed": 44017,
+    "shots": 0,
+    "train_split_sha256": "11af658579290114ac782faeafd21e7a5c6c088847b045a12b8c3a39ada2c4f6"
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v1",
+  "scored_predictions_sha256": "13376a1425e0eb48e4ca9b20420d53483bdf477eab6342de9ea922c3349afae4"
+}

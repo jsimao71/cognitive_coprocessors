@@ -1497,6 +1497,49 @@ even syntactic transfer in the simplest matched cell. We retain this negative
 result and next test the same idea on a pretrained causal model whose existing
 F0 LoRA baseline already generates executable ASL.
 
+\subsection{Qwen Causal-Model Matrix}
+
+We then ran the matched causal-model ladder with Qwen3-0.6B revision
+\texttt{c1899de}. Q0 is the original F0 rank-8 QKVO LoRA control. Q1 presents
+serialized full, partial, or absent ASL through the ordinary token context. Q2
+adds separately normalized, gated side cross-attention at transformer layers
+0, 7, 14, and 21. Q3 instead merges external keys and values into native
+attention at those layers, preserving a single softmax. Every cell uses the
+same frozen 450/25/25 source-ID split, initialization and generation seeds,
+565,160 supervised target tokens, ten epochs, and autonomous test input; no
+test program, rationale, intermediate value, or record-specific demonstration
+is exposed to the model.
+
+\begin{table}[t]
+\centering\small
+\caption{Qwen3-0.6B grounding architecture matrix on the frozen 25-program
+test set. Sem. is semantic-return equivalence. The single seed is exploratory.}
+\label{tab:asl-matrix-qwen}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Cell & Trainable & Dev loss & Parse & Execute & Sem. & Answer & Time (min)\\
+\midrule
+Q0 plain F0 LoRA & 2.294M & 0.507 & 22/25 & 19/25 & 7/25 & 11/25 & 113.9\\
+Q1 context memory & 2.294M & 0.339 & 23/25 & 18/25 & 6/25 & 6/25 & 133.4\\
+Q2 side cross-attn. & 19.072M & 0.486 & 22/25 & 16/25 & 5/25 & 10/25 & 136.3\\
+Q3 native merged K/V & 2.295M & 0.332 & 22/25 & 19/25 & 6/25 & 10/25 & 128.2\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Q2 and Q3 each recover four answers relative to Q1 (10/25 versus 6/25), so
+external memory placement matters when compared with serializing the same
+training signal into ordinary context. Neither clears the prespecified Q0
+gate: the plain LoRA control remains higher on answers (11/25) and semantic
+return (7/25). Q2 is especially unattractive because its 16.778M memory-patch
+parameters raise the trainable total by 8.3$\times$ over Q3 without an answer
+gain and reduce execution to 16/25. Q3 preserves Q0's 19/25 execution with only
+1,024 patch-specific trainable parameters, making it the parameter-efficient
+diagnostic architecture, not a positive winner. We therefore do not launch
+multi-seed confirmation for any cell from this checkpoint. The 25-program
+sample remains too small for a definitive null claim; subsequent experiments
+first increase genuine semantic coverage and retain Q0 as the frozen control.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}

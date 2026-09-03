@@ -1,0 +1,186 @@
+{
+  "adapter_files": {
+    "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+    "adapter_config.json": "db2905962e7a60eb8b8cf6e9433ef493e95945d1628b8dfe2bee7df29b439cd8",
+    "adapter_model.safetensors": "ac5f722634a35cf9d4d389ab804441d1e81a863be52b0609a8918c8d1944c80c"
+  },
+  "autonomous_dev_loss": 0.3319000869989395,
+  "config_sha256": "3a79535237b54b47bad02b285c9eeffffc8b0e0ef985a3262e931313ad26a815",
+  "dev_rows": 25,
+  "dev_sha256": "9456759a8b17197ce6cc8ff947d9ce52e764bcd4c1dcf9b1b6ffa66ea399666c",
+  "device": "xpu",
+  "dtype": "float16",
+  "history": [
+    {
+      "epoch": 1,
+      "mean_train_loss": 0.456537948385683,
+      "regime_counts": {
+        "autonomous": 184,
+        "full": 104,
+        "partial": 162
+      }
+    },
+    {
+      "epoch": 2,
+      "mean_train_loss": 0.1759000142359744,
+      "regime_counts": {
+        "autonomous": 196,
+        "full": 116,
+        "partial": 138
+      }
+    },
+    {
+      "epoch": 3,
+      "mean_train_loss": 0.13966209202991903,
+      "regime_counts": {
+        "autonomous": 189,
+        "full": 113,
+        "partial": 148
+      }
+    },
+    {
+      "epoch": 4,
+      "mean_train_loss": 0.11547948151269036,
+      "regime_counts": {
+        "autonomous": 188,
+        "full": 108,
+        "partial": 154
+      }
+    },
+    {
+      "epoch": 5,
+      "mean_train_loss": 0.10576455208718673,
+      "regime_counts": {
+        "autonomous": 188,
+        "full": 113,
+        "partial": 149
+      }
+    },
+    {
+      "epoch": 6,
+      "mean_train_loss": 0.07988701185758044,
+      "regime_counts": {
+        "autonomous": 163,
+        "full": 129,
+        "partial": 158
+      }
+    },
+    {
+      "epoch": 7,
+      "mean_train_loss": 0.07852544012219166,
+      "regime_counts": {
+        "autonomous": 176,
+        "full": 120,
+        "partial": 154
+      }
+    },
+    {
+      "epoch": 8,
+      "mean_train_loss": 0.06861475245404614,
+      "regime_counts": {
+        "autonomous": 173,
+        "full": 115,
+        "partial": 162
+      }
+    },
+    {
+      "epoch": 9,
+      "mean_train_loss": 0.06183236355159251,
+      "regime_counts": {
+        "autonomous": 187,
+        "full": 120,
+        "partial": 143
+      }
+    },
+    {
+      "epoch": 10,
+      "mean_train_loss": 0.05155151874001604,
+      "regime_counts": {
+        "autonomous": 179,
+        "full": 107,
+        "partial": 164
+      }
+    }
+  ],
+  "mean_train_loss": 0.13337551749768803,
+  "model": {
+    "adapter_id": "Qwen3-0.6B-ASL-Matrix-Q3-NativeKV-r8-views11-init99173",
+    "dtype": "float16",
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "optimizer_steps": 570,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "safetensors": "0.8.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "parameter_report": {
+    "frozen_parameters": 596049920,
+    "lora_trainable_parameters": 2293760,
+    "memory_patch_trainable_parameters": 1024,
+    "mode": "native_kv",
+    "other_trainable_parameters": 2293760,
+    "patched_layers": 4,
+    "total_parameters": 598344704,
+    "total_trainable_parameters": 2294784
+  },
+  "patch": {
+    "layer_indices": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "max_external_length": 640,
+    "mode": "native_kv"
+  },
+  "peak_memory_bytes": 8369168896,
+  "regime_counts": {
+    "autonomous": 1823,
+    "full": 1145,
+    "partial": 1532
+  },
+  "resumed_from_optimizer_step": 0,
+  "run_id": "q3-qwen3-0.6b-native-kv-r8-views11-init99173",
+  "schema_version": "ccpu.paper1.qwen_patch_training.v1",
+  "teacher_tokens_processed": 297331,
+  "token_audit": {
+    "dev_max_full_tokens": 787,
+    "dev_truncated_rows": 0,
+    "train_max_external_tokens": 354,
+    "train_max_full_tokens": 1010,
+    "train_truncated_rows": 0
+  },
+  "train_rows": 4500,
+  "train_sha256": "8011eb1c29f01035b283504bc7ca477559ed0d87393e2bcb78c3784ee6f93561",
+  "trainable_patch_state_sha256": "dfe333e05e3e82599605f1414028e1b848beca3b947db88a7141e337bef3e22e",
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "checkpoint_every_optimizer_steps": 50,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 10,
+    "evaluate_each_epoch": false,
+    "gradient_accumulation_steps": 8,
+    "gradient_checkpointing": false,
+    "learning_rate": 0.0002,
+    "logical_epoch_field": null,
+    "max_length": 1536,
+    "rank": 8,
+    "reject_truncation": true,
+    "seed": 99173,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 565160,
+  "wall_time_seconds": 7694.951788499995
+}
