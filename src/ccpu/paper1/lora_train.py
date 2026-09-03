@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.metadata
+import json
 import math
 import os
 import random
@@ -35,6 +36,7 @@ class LoRATrainingConfig:
     evaluate_each_epoch: bool = True
     checkpoint_every_optimizer_steps: int = 0
     reject_truncation: bool = False
+    restore_best_dev: bool = False
     logical_epoch_field: str | None = None
     semantic_token_weights: dict[str, float] | None = None
     pairwise_rank_weight: float = 0.0
@@ -67,6 +69,7 @@ class LoRATrainingConfig:
                 data.get("checkpoint_every_optimizer_steps", 0)
             ),
             reject_truncation=bool(data.get("reject_truncation", False)),
+            restore_best_dev=bool(data.get("restore_best_dev", False)),
             logical_epoch_field=(
                 str(data["logical_epoch_field"])
                 if data.get("logical_epoch_field") is not None
@@ -90,6 +93,8 @@ class LoRATrainingConfig:
             raise ValueError("dropout or target modules are invalid")
         if self.checkpoint_every_optimizer_steps < 0:
             raise ValueError("checkpoint interval cannot be negative")
+        if self.restore_best_dev and not self.evaluate_each_epoch:
+            raise ValueError("best-dev restoration requires evaluation after every epoch")
         if self.pairwise_rank_weight < 0 or self.pairwise_temperature <= 0:
             raise ValueError("pairwise rank weight must be non-negative and temperature positive")
         if self.semantic_token_weights is not None:
@@ -208,6 +213,32 @@ _SEMANTIC_SPANS = {
     "return": re.compile(r"\bRETURN\b[^\n]*", re.IGNORECASE),
 }
 
+_JSON_STRING = r'"(?:\\.|[^"\\])*"'
+_F4_SEMANTIC_SPANS = {
+    "path": (
+        re.compile(rf'"path":(?P<value>{_JSON_STRING})'),
+        re.compile(r'"(?:slot|target)":(?P<value>"s\d+")'),
+    ),
+    "operator": (re.compile(rf'"operator":(?P<value>{_JSON_STRING})'),),
+    "literal": (
+        re.compile(
+            rf'"value":(?P<value>{_JSON_STRING}|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?|true|false|null)'
+        ),
+    ),
+    "return": (re.compile(r'"kind":(?P<value>"return")'),),
+}
+
+
+def _is_f4_target(target: str) -> bool:
+    try:
+        value = json.loads(target)
+    except (json.JSONDecodeError, TypeError):
+        return False
+    return (
+        isinstance(value, dict)
+        and value.get("schema_version") == "ccpu.paper1.semantic_bottleneck.v1"
+    )
+
 
 def semantic_weight_spans(
     target: str, weights: dict[str, float]
@@ -215,6 +246,14 @@ def semantic_weight_spans(
     """Locate semantic decisions without changing any existing F0 target."""
 
     spans = []
+    if _is_f4_target(target):
+        for component, patterns in _F4_SEMANTIC_SPANS.items():
+            for pattern in patterns:
+                spans.extend(
+                    (*match.span("value"), weights[component])
+                    for match in pattern.finditer(target)
+                )
+        return spans
     for component, pattern in _SEMANTIC_SPANS.items():
         spans.extend((match.start(), match.end(), weights[component]) for match in pattern.finditer(target))
     return spans
@@ -469,6 +508,9 @@ def train_lora(
     optimizer_steps = 0
     resumed_from_optimizer_step = 0
     previous_wall_time_seconds = 0.0
+    best_dev_loss = math.inf
+    best_epoch: int | None = None
+    best_adapter_state: dict[str, Any] | None = None
     if checkpoint_path.exists():
         checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
         if checkpoint.get("identity") != checkpoint_identity:
@@ -482,6 +524,9 @@ def train_lora(
         optimizer_steps = int(checkpoint["optimizer_steps"])
         resumed_from_optimizer_step = optimizer_steps
         previous_wall_time_seconds = float(checkpoint.get("wall_time_seconds", 0.0))
+        best_dev_loss = float(checkpoint.get("best_dev_loss", math.inf))
+        best_epoch = checkpoint.get("best_epoch")
+        best_adapter_state = checkpoint.get("best_adapter_state")
         torch.set_rng_state(checkpoint["torch_rng_state"])
         random.setstate(checkpoint["python_rng_state"])
         if device == "xpu" and checkpoint.get("xpu_rng_state") is not None:
@@ -511,6 +556,9 @@ def train_lora(
             "optimizer_steps": optimizer_steps,
             "wall_time_seconds": previous_wall_time_seconds
             + (time.perf_counter() - started),
+            "best_dev_loss": best_dev_loss,
+            "best_epoch": best_epoch,
+            "best_adapter_state": best_adapter_state,
             "torch_rng_state": torch.get_rng_state(),
             "python_rng_state": random.getstate(),
             "xpu_rng_state": torch.xpu.get_rng_state() if device == "xpu" else None,
@@ -640,6 +688,17 @@ def train_lora(
                 ),
             }
         )
+        if (
+            training.restore_best_dev
+            and dev_loss is not None
+            and dev_loss < best_dev_loss
+        ):
+            best_dev_loss = dev_loss
+            best_epoch = epoch + 1
+            best_adapter_state = {
+                key: value.detach().cpu().clone()
+                for key, value in get_peft_model_state_dict(model_instance).items()
+            }
         dev_text = f"{dev_loss:.4f}" if dev_loss is not None else "deferred"
         print(
             f"epoch {epoch + 1}/{training.epochs}: "
@@ -653,6 +712,10 @@ def train_lora(
     if device == "xpu":
         torch.xpu.synchronize()
     wall_time_seconds = previous_wall_time_seconds + (time.perf_counter() - started)
+    if training.restore_best_dev:
+        if best_adapter_state is None or best_epoch is None:
+            raise RuntimeError("best-dev restoration did not observe a development loss")
+        set_peft_model_state_dict(model_instance, best_adapter_state)
     adapter_dir.mkdir(parents=True, exist_ok=False)
     adapter_state = {
         key: value.detach().cpu()
@@ -691,6 +754,15 @@ def train_lora(
         ),
         "optimizer_steps": optimizer_steps,
         "resumed_from_optimizer_step": resumed_from_optimizer_step,
+        "selected_epoch": best_epoch if training.restore_best_dev else training.epochs,
+        "selection_policy": (
+            "minimum_weighted_dev_loss"
+            if training.restore_best_dev
+            else "final_epoch"
+        ),
+        "selected_dev_loss": (
+            best_dev_loss if training.restore_best_dev else history[-1]["mean_dev_loss"]
+        ),
         "trainable_parameters": trainable_parameters,
         "total_parameters": total_parameters,
         "trainable_fraction": trainable_parameters / total_parameters,

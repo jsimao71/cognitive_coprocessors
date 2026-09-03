@@ -37,6 +37,8 @@ def test_lora_training_config_parses_restart_and_truncation_guards():
             "training": {
                 "checkpoint_every_optimizer_steps": 50,
                 "reject_truncation": True,
+                "evaluate_each_epoch": True,
+                "restore_best_dev": True,
                 "logical_epoch_field": "epoch_view",
             }
         }
@@ -44,7 +46,16 @@ def test_lora_training_config_parses_restart_and_truncation_guards():
 
     assert config.checkpoint_every_optimizer_steps == 50
     assert config.reject_truncation is True
+    assert config.restore_best_dev is True
     assert config.logical_epoch_field == "epoch_view"
+
+
+def test_best_dev_restoration_requires_epoch_evaluation():
+    with pytest.raises(ValueError, match="requires evaluation after every epoch"):
+        LoRATrainingConfig(
+            evaluate_each_epoch=False,
+            restore_best_dev=True,
+        ).validate()
 
 
 def test_lora_tokenization_can_reject_instead_of_hiding_truncation():
@@ -69,6 +80,44 @@ def test_semantic_weight_spans_prioritize_binding_and_query_tokens():
     assert ("-", 3.0) in observed
     assert ("4", 2.0) in observed
     assert ("RETURN box.remaining", 5.0) in observed
+
+
+def test_semantic_weight_spans_understand_f4_json_decisions():
+    weights = {"default": 0.35, "path": 4.0, "operator": 3.0, "literal": 2.0, "return": 5.0}
+    target = json.dumps(
+        {
+            "bindings": [
+                {"path": "john.green_removed", "slot": "s0"},
+                {"path": "john.pink_removed", "slot": "s1"},
+            ],
+            "schema_version": "ccpu.paper1.semantic_bottleneck.v1",
+            "steps": [
+                {
+                    "expression": {
+                        "arguments": [
+                            {"kind": "ref", "slot": "s1"},
+                            {"kind": "literal", "literal_type": "number", "value": 2},
+                        ],
+                        "kind": "apply",
+                        "operator": "MUL",
+                    },
+                    "kind": "set",
+                    "target": "s0",
+                },
+                {"expression": {"kind": "ref", "slot": "s0"}, "kind": "return"},
+            ],
+        },
+        separators=(",", ":"),
+        sort_keys=True,
+    )
+    spans = semantic_weight_spans(target, weights)
+    observed = {(target[start:end], weight) for start, end, weight in spans}
+    assert ('"john.green_removed"', 4.0) in observed
+    assert ('"s1"', 4.0) in observed
+    assert ('"MUL"', 3.0) in observed
+    assert ("2", 2.0) in observed
+    assert ('"return"', 5.0) in observed
+    assert ('"ccpu.paper1.semantic_bottleneck.v1"', 4.0) not in observed
 
 
 def test_semantic_weight_config_is_explicit_and_positive():
