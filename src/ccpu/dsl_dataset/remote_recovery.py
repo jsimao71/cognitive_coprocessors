@@ -93,7 +93,7 @@ def prepare_remote_recovery(
             }
             prior_context[key] = context
             if metrics["converted"]:
-                existing_strict[key] = annotation
+                existing_strict.setdefault(key, annotation)
         attempts_path = directory / "attempts.jsonl"
         if attempts_path.exists():
             for attempt in read_jsonl(attempts_path):
@@ -167,6 +167,13 @@ def prepare_remote_recovery(
         output / "salvaged_strict.jsonl",
         (salvaged_strict[key] for key in sorted(salvaged_strict)),
     )
+    combined_strict_path = write_jsonl(
+        output / "combined_strict.jsonl",
+        (
+            salvaged_strict[key] if key in salvaged_strict else existing_strict[key]
+            for key in sorted(strict_keys)
+        ),
+    )
     retry_path = write_jsonl(output / "retry_input.jsonl", retry_rows)
     strict_index_path = write_jsonl(
         output / "strict_index.jsonl",
@@ -192,6 +199,7 @@ def prepare_remote_recovery(
         "output_sha256": {
             "salvaged_executable": file_sha256(executable_path),
             "salvaged_strict": file_sha256(strict_path),
+            "combined_strict": file_sha256(combined_strict_path),
             "retry_input": file_sha256(retry_path),
             "strict_index": file_sha256(strict_index_path),
         },

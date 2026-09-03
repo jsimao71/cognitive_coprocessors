@@ -535,6 +535,8 @@ def test_remote_recovery_restores_trusted_metadata_and_deduplicates_retry(tmp_pa
 
     assert summary["salvaged_strict_count"] == 1
     assert summary["combined_strict_count"] == 1
+    assert len(read_jsonl(tmp_path / "recovery" / "combined_strict.jsonl")) == 1
+    assert "combined_strict" in summary["output_sha256"]
     assert summary["retry_count"] == 1
     salvaged = read_jsonl(tmp_path / "recovery" / "salvaged_strict.jsonl")[0]
     assert salvaged["dataset"] == "gsm8k"
