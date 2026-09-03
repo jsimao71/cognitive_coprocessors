@@ -3,7 +3,7 @@
 ## Status and authority
 
 This is the canonical execution order for the Paper 1 E3 experiments. It
-refines `AGENTS_paper1_E3_semantic_alignment_ladder.md` by separating five
+refines `AGENTS_paper1_E3_semantic_alignment_ladder.md` by separating seven
 questions that must not be confounded:
 
 1. Does modality-specific adaptation help?
@@ -11,6 +11,10 @@ questions that must not be confounded:
 3. Can paired NL and ASL converge on shared world content?
 4. Does a grounded-to-NL-only curriculum improve autonomous internal ASL?
 5. Does executing and reinjecting predicted internal ASL improve continuation?
+6. Does a factorized output representation help independently of its loss and
+   checkpoint-selection policy?
+7. Does a larger execution-verified remote-teacher corpus help independently
+   of representation and objective?
 
 The design is developmentally inspired. Do not claim that it models human
 child cognition or physical grounding. External ASL is a privileged symbolic
@@ -177,44 +181,108 @@ E3b: C1 + contrastive hybrid -> identical NL-memory generation
 Measure paired retrieval and layerwise similarity before and after causal
 fine-tuning to detect alignment drift.
 
-### Phase 3A - Semantic compilation bottleneck
+### Phase 3A - Factorized representation and objective matrix
 
 The specialization and alignment experiments above do not directly address
 the dominant measured error: choosing and binding the correct semantic
-structure. Before scaling the adapter or base model, run this matched ladder:
+structure. The earlier `M0`-`M4` ladder mixed a representation change with loss
+and checkpoint-selection changes. Treat these as independent axes before
+scaling the adapter or base model.
+
+Representation axis:
 
 ```text
-M0 direct ASL:
-NL -> ordinary ASL token loss (the frozen Q0 control)
+F0 direct ASL:
+NL -> canonical ASL text
 
-M0.5 semantic-weighted direct ASL:
-the identical M0 inputs and ASL targets, with higher causal-loss weight on
-bindings, references, source values, operators, dependencies, and RETURN
+F4 canonical semantic IR:
+NL -> symbol table + ASL-isomorphic expression graph
+   -> deterministic lowering to canonical ASL
+```
 
-M0.6 within-example semantic ranking:
-M0.5 + require the conditional likelihood of each gold ASL to exceed one
-executable AST-derived corruption from the same problem
+`F4` is a generated language and a lightweight structural ontology/IR. It is
+not a domain ontology and introduces no new facts, operators, rationales, or
+answer supervision. It deliberately remains isomorphic to F0 ASL: it factors
+path grounding from the operation/dependency graph and makes bindings, source
+facts, references, dependencies, and the query target explicit. Its generated
+JSON is accepted only when it has unique contiguous slots, exactly one final
+query, lowers to ordinary ASL, and passes the existing parse, lower, type,
+scope, and execution gates.
 
-M1 canonical bottleneck:
-NL -> symbol table + ASL-isomorphic expression graph -> deterministic ASL lowering
+Objective and selection axis:
 
-M2 decision-weighted bottleneck:
-M1 + extra weight on bindings, source facts, operators, references,
-dependencies, and the query target
+```text
+L0 ordinary:
+ordinary causal token loss
 
-M3 contrastive bottleneck:
-M2 + executable hard negatives differing in one semantic decision
+L1 semantic-weighted:
+higher normalized causal-loss weight on explicit semantic decisions
 
-M4 semantic selection:
-M3 + development-checkpoint selection by safety and semantic structure,
+L2 within-example ranking:
+L1 + score(gold | NL) > score(executable semantic corruption | NL)
+
+L3 semantic selection:
+L2 + development-checkpoint selection by safety and semantic structure,
 not token loss alone
 ```
 
-M1 deliberately remains isomorphic to ASL. It factors path grounding from the
-operation/dependency graph but does not introduce an unreviewed ontology or
-claim new semantic supervision. Its generated JSON is accepted only when it
-has unique contiguous slots, exactly one final query, lowers to ordinary ASL,
-and passes the existing parse, lower, type, scope, and execution gates.
+Preserve the historical aliases in existing paths and reports, but do not use
+them as the primary scientific factor names:
+
+| Historical alias | Factorized condition | Meaning |
+|---|---|---|
+| M0 | F0 x L0 | Frozen direct-ASL Q0 control |
+| M0.5 | F0 x L1 | Semantic-weighted direct ASL |
+| M0.6 | F0 x L2 | Direct ASL plus within-example ranking |
+| M1 | F4 x L0 | Canonical semantic IR with ordinary loss |
+| M2 | F4 x L1 | Canonical semantic IR with decision weighting |
+| M3 | F4 x L2 | Canonical semantic IR with hard-negative ranking |
+| M4 | F4 x L3 | M3 trajectory with semantic checkpoint selection |
+
+New manifests and reports must record `representation_id` and `objective_id`
+separately. They may additionally record `historical_alias` for compatibility.
+Do not create new bare `M*` configuration names because the 3D architecture
+matrix already uses `M1/M2` for attention modes.
+
+Data scale and provenance are a third independent axis:
+
+```text
+D0 Codex-500:
+the frozen 450/25/25 manually/Codex-curated semantic-program checkpoint
+
+D1 OpenRouter-strict:
+the versioned, deduplicated, execution-verified remote-teacher corpus
+```
+
+Use D0 for every primary F/L causal comparison. D1 is a later scale and
+teacher-quality intervention, not a replacement test set and not semantic
+gold. Before constructing any D1 training split, exclude all frozen D0 dev/test
+source IDs and all frozen test semantic-pattern families. Keep OpenRouter model,
+attempt, validation, recovery, and corpus-version provenance attached.
+
+The September 3 recovery checkpoint contains 6,950 strict unique programs from
+8,179 sources; 1,229 sources remain in a provenance-separated retry queue.
+Freeze a new D1 version only after the active recovery pass is consolidated.
+Train F0 x L0 on D1 first. If that shows a scale signal, train the already
+selected objective within F0, then deterministically derive F4 from the same
+strict programs and run the matched representation comparison. Do not tune F,
+L, and D simultaneously.
+
+The minimum causal comparisons are:
+
+```text
+representation effect: F4 x L0 versus F0 x L0
+weighting effect:      F0 x L1 versus F0 x L0
+ranking effect:        F0 x L2 versus F0 x L1
+F4 weighting effect:   F4 x L1 versus F4 x L0
+F4 ranking effect:     F4 x L2 versus F4 x L1
+selection effect:      F4 x L3 versus F4 x L2 on the same trajectory
+data-scale effect:     D1 versus D0 within one frozen F x L condition
+```
+
+Do not attribute an F4 gain to ontology or factorization if the matched L0
+comparison does not improve. Do not attribute an L1/L2 gain to F4 when the
+same objective also improves F0 by a similar amount.
 
 Hard-negative classes are operator swaps, reference/dependency rebinding,
 query-target swaps, path-binding swaps, and source-fact perturbations. Keep
@@ -229,13 +297,14 @@ an unsafe or structurally wrong checkpoint unable to win merely through lower
 surface-form loss.
 
 Use the same Qwen3-0.6B QKVO-r8 adapter, frozen 450/25/25 identities, optimizer
-budget, fixed zero-shot prompt, and autonomous test path for M0-M4. Neither
-gold ASL, rationale, answers, intermediate values, retrieved examples, nor a
-record-dependent ICL prefix may enter the model input. Retrieved
-demonstrations remain a separate later intervention.
+budget, fixed zero-shot prompt, and autonomous test path for every D0 F x L
+cell. Neither gold ASL, rationale, answers, intermediate values, retrieved
+examples, nor a record-dependent ICL prefix may enter the model input.
+Retrieved demonstrations remain a separate later intervention.
 
-Treat the M0.5 weights as hyperparameters rather than facts. First compare the
-already-frozen uniform M0 against one predeclared strong-weight condition. If
+Treat the L1 weights as hyperparameters rather than facts. First compare the
+already-frozen F0 x L0 control against one predeclared F0 x L1 strong-weight
+condition. If
 that gives a development semantic signal, compare mild and strong weighting
 with the adapter rank, optimizer, examples, and exposures fixed. Normalize the
 weighted token loss by the sum of active weights, report ordinary loss beside
@@ -251,7 +320,7 @@ This ordering tests the semantic-objective hypothesis before adding capacity.
 The 25-case development set is small, so retain exact counts and treat close
 settings as tied rather than selecting on a one-example fluctuation.
 
-M0.6 uses no new teacher annotation. Define the pair score as mean
+L2 uses no new teacher annotation. Define the pair score as mean
 semantic-weighted conditional log likelihood:
 
 ```text
@@ -265,21 +334,27 @@ parse, lower, type-check, and execute, and it must share the exact NL prompt
 with its positive. Preserve negatives whose final numeric answer happens to
 match when their binding is wrong, but report them explicitly; they test
 semantic grounding rather than answer discrimination. Generate no test
-preferences. M0.6 retains the M0.5 positive SFT loss, and changes only the
+preferences. L2 retains the L1 positive SFT loss, and changes only the
 additional ranking term.
 
 Gates:
 
-1. M1 requires 500/500 gold bottlenecks to round-trip with equivalent state,
+1. F4 requires 500/500 gold IR programs to round-trip with equivalent state,
    return, dependencies, and answer.
-2. M2 requires unit-tested token/component weighting and reports both weighted
-   and ordinary development loss.
-3. M3 reports every negative class and the fraction whose final answer is
-   accidentally unchanged; such cases remain useful binding negatives.
-4. M4 may inspect only the 25 development programs. The frozen test is run
+2. F4 x L1 requires unit-tested token/component weighting and reports both
+   weighted and ordinary development loss.
+3. Every L2 cell reports every negative class and the fraction whose final
+   answer is accidentally unchanged; such cases remain useful binding
+   negatives.
+4. L3 may inspect only the 25 development programs. The frozen test is run
    once after checkpoint selection.
-5. A gain is attributed to factorized semantic decisions only if M1-M4 beat
-   M0 on semantic return/state or answer under matched identities and budget.
+5. A gain is attributed to the F4 representation only if F4 x L0 beats F0 x L0
+   on semantic return/state or answer under matched identities and budget.
+6. Objective gains are reported within representation first; pooled claims
+   across F0 and F4 are secondary.
+7. D1 must publish pre-exclusion and post-exclusion source/pattern counts,
+   teacher-model composition, strict acceptance rate, and overlap audit before
+   training.
 
 ### Phase 4 - Developmental curriculum
 
@@ -434,11 +509,12 @@ P0  Finish S2 and S3.
 P1  Freeze their reports and update the architecture table.
 P2  Build and audit C0/C1 ASL-only views.
 P3  Train C0 and C1; freeze the ASL-channel checkpoint.
-P4  Train/evaluate M0.5 on unchanged F0 data; tune weights only after a dev signal.
-P4A Train/evaluate M0.6 with executable within-example semantic negatives.
-P5  Build M1, require the 500/500 exact semantic round-trip, and freeze data.
-P6  Train/evaluate matched M0 and M1 QKVO-r8 conditions.
-P6A Add bottleneck decision weighting (M2), hard negatives (M3), and selection (M4).
+P4  Train/evaluate F0 x L1 (historical M0.5); tune weights only after a dev signal.
+P4A Train/evaluate F0 x L2 (historical M0.6) with within-example negatives.
+P5  Build F4, require the 500/500 exact semantic round-trip, and freeze data.
+P6  Train/evaluate the matched F0 x L0 versus F4 x L0 representation comparison.
+P6A Run F4 x L1 and F4 x L2, then apply L3 selection to the same L2 trajectory.
+P6B Freeze leakage-audited D1; run F0 x L0 scale, then matched winner/F4 cells.
 P7  Implement and train E3a NL-memory generation.
 P8  Precondition E3b with C1 plus paired contrastive alignment.
 P9  Measure retrieval and layerwise convergence before generation.

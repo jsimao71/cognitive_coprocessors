@@ -20,6 +20,24 @@ The experimental space has three independent axes:
 
 Keep these axes orthogonal in code, configuration, reporting, and analysis.
 
+### Naming boundary with the semantic compilation matrix
+
+In this document, historical `M1` and `M2` identify attention/memory fusion
+modes only. The Paper 1 semantic compilation experiments use separate factor
+IDs:
+
+```text
+representation_id: F0 direct ASL | F4 canonical semantic IR
+objective_id:      L0 ordinary | L1 weighted | L2 ranked | L3 selected
+dataset_id:        D0 Codex-500 | D1 OpenRouter-strict
+```
+
+Existing semantic-compilation artifact aliases `M0`, `M0.5`, and `M0.6`
+remain readable for provenance, but new configurations and reports must record
+the explicit F/L factors. Never infer an attention mode from a semantic-run
+alias or vice versa. Treat D1 as a later scale/provenance intervention; primary
+architecture comparisons remain on D0.
+
 ---
 
 ## 1. Terminology
