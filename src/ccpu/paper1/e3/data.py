@@ -146,3 +146,91 @@ def build_bottleneck_data(data_dir: str | Path, output_dir: str | Path) -> dict[
     }
     write_json(output / "manifest.json", manifest)
     return manifest
+
+
+def build_direct_preference_data(
+    qwen_data_dir: str | Path,
+    bottleneck_data_dir: str | Path,
+    output_dir: str | Path,
+) -> dict[str, Any]:
+    """Attach one deterministic within-example ASL negative to each unchanged F0 row."""
+
+    qwen = Path(qwen_data_dir)
+    bottleneck = Path(bottleneck_data_dir)
+    output = Path(output_dir)
+    files: dict[str, Any] = {}
+    selected_counts: Counter[str] = Counter()
+    accidental_answers = 0
+    for split in ("train", "dev"):
+        semantic_rows = read_jsonl(bottleneck / "sft" / f"{split}.jsonl")
+        by_matrix_id = {str(row["parent_example_id"]): row for row in semantic_rows}
+        negatives_by_parent: dict[str, list[dict[str, Any]]] = {}
+        for negative in read_jsonl(bottleneck / "negatives" / f"{split}.jsonl"):
+            negatives_by_parent.setdefault(str(negative["parent_example_id"]), []).append(negative)
+        for negatives in negatives_by_parent.values():
+            negatives.sort(key=lambda row: (str(row["negative_type"]), str(row["example_id"])))
+
+        source_rows = read_jsonl(qwen / f"{split}.jsonl")
+        built = []
+        for row in source_rows:
+            matrix_id = str(row["parent_example_id"])
+            semantic = by_matrix_id.get(matrix_id)
+            if semantic is None:
+                raise AssertionError(f"missing bottleneck identity for {matrix_id}")
+            candidates = negatives_by_parent.get(str(semantic["example_id"]), [])
+            if not candidates:
+                raise AssertionError(f"no executable semantic negatives for {matrix_id}")
+            if split == "train":
+                choice_index = int(row.get("epoch_view", 0)) % len(candidates)
+            else:
+                choice_index = int(fingerprint(matrix_id, 8), 16) % len(candidates)
+            negative = candidates[choice_index]
+            selected_counts[str(negative["negative_type"])] += 1
+            accidental_answers += int(bool(negative["final_answer_accidentally_correct"]))
+            built.append(
+                {
+                    **row,
+                    "schema_version": "ccpu.paper1.e3_direct_preference.v1",
+                    "negative_target": str(negative["lowered_asl"]),
+                    "negative_type": str(negative["negative_type"]),
+                    "negative_example_id": str(negative["example_id"]),
+                    "negative_binding_changed": bool(negative["binding_changed"]),
+                    "negative_final_answer_accidentally_correct": bool(
+                        negative["final_answer_accidentally_correct"]
+                    ),
+                    "preference_source": "deterministic-executable-within-example-ast",
+                }
+            )
+        if any(
+            built[index]["prompt"] != source_rows[index]["prompt"]
+            or built[index]["target"] != source_rows[index]["target"]
+            for index in range(len(built))
+        ):
+            raise AssertionError("preference construction changed an F0 prompt or positive target")
+        path = write_jsonl(output / f"{split}.jsonl", built)
+        files[split] = {"rows": len(built), "sha256": file_sha256(path)}
+
+    total = sum(item["rows"] for item in files.values())
+    manifest = {
+        "schema_version": "ccpu.paper1.e3_direct_preference_manifest.v1",
+        "positive_policy": "byte-equivalent existing F0 prompt and target",
+        "negative_policy": "one executable within-example semantic corruption per row",
+        "score_policy": "semantic-weighted conditional mean log likelihood",
+        "test_rows_generated": 0,
+        "files": files,
+        "selected_negative_counts": dict(sorted(selected_counts.items())),
+        "accidental_answer_match_rows": accidental_answers,
+        "accidental_answer_match_rate": accidental_answers / total,
+        "source_files": {
+            f"qwen_{split}": file_sha256(qwen / f"{split}.jsonl")
+            for split in ("train", "dev")
+        }
+        | {
+            f"negative_{split}": file_sha256(
+                bottleneck / "negatives" / f"{split}.jsonl"
+            )
+            for split in ("train", "dev")
+        },
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest

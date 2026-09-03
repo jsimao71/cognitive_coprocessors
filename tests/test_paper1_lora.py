@@ -10,6 +10,7 @@ from ccpu.paper1.lora_train import (
     LoRATrainingConfig,
     _model_loss,
     _tokenize_record,
+    pairwise_rank_terms,
     semantic_weight_spans,
 )
 from ccpu.paper1.placement_analysis import build_placement_comparison
@@ -22,9 +23,12 @@ class _CharacterChatTokenizer:
             return prefix
         return prefix + messages[1]["content"] + "<eos>"
 
-    def __call__(self, text, *, add_special_tokens):
+    def __call__(self, text, *, add_special_tokens, return_offsets_mapping=False):
         assert not add_special_tokens
-        return {"input_ids": [ord(character) for character in text]}
+        result = {"input_ids": [ord(character) for character in text]}
+        if return_offsets_mapping:
+            result["offset_mapping"] = [(index, index + 1) for index in range(len(text))]
+        return result
 
 
 def test_lora_training_config_parses_restart_and_truncation_guards():
@@ -99,6 +103,40 @@ def test_weighted_causal_loss_emphasizes_high_weight_errors():
     }
     weighted, ordinary = _model_loss(Model(), torch, batch)
     assert weighted > ordinary
+
+
+def test_pairwise_rank_terms_match_direct_logistic_gradient():
+    torch = pytest.importorskip("torch")
+    positive = torch.tensor(-0.7, requires_grad=True)
+    negative = torch.tensor(-0.2, requires_grad=True)
+    direct = torch.nn.functional.softplus(negative - positive)
+    direct.backward()
+    expected = (positive.grad.item(), negative.grad.item())
+
+    positive = torch.tensor(-0.7, requires_grad=True)
+    negative = torch.tensor(-0.2, requires_grad=True)
+    loss, coefficient = pairwise_rank_terms(torch, positive, negative, 1.0)
+    (-coefficient * positive + coefficient * negative).backward()
+    assert (positive.grad.item(), negative.grad.item()) == pytest.approx(expected)
+    assert loss.item() == pytest.approx(direct.item())
+
+
+def test_pairwise_tokenization_preserves_prompt_and_adds_negative_view():
+    tokenizer = _CharacterChatTokenizer()
+    weights = {"default": 0.35, "path": 4.0, "operator": 3.0, "literal": 2.0, "return": 5.0}
+    row = {
+        "example_id": "pair-1",
+        "prompt": "Two values are related.",
+        "target": "john.green = john.pink * 2\nRETURN john.green",
+        "negative_target": "john.green = carl.pink * 2\nRETURN john.green",
+        "negative_type": "dependency_rebind",
+    }
+    tokenized = _tokenize_record(
+        tokenizer, row, 256, reject_truncation=True, semantic_token_weights=weights
+    )
+    assert tokenized["negative_type"] == "dependency_rebind"
+    assert tokenized["negative"]["target_tokens"] > 0
+    assert tokenized["prefix_tokens"] == tokenized["negative"]["prefix_tokens"]
 
 
 def _excluded_dataset(tmp_path):

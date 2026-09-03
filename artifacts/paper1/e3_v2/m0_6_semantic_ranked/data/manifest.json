@@ -1,0 +1,32 @@
+{
+  "accidental_answer_match_rate": 0.27071823204419887,
+  "accidental_answer_match_rows": 1225,
+  "files": {
+    "dev": {
+      "rows": 25,
+      "sha256": "91f6bdf76023cf2166ab15ecf8fd2d40ca53a6c9ea109e9fbc9fe6635372850e"
+    },
+    "train": {
+      "rows": 4500,
+      "sha256": "c0d347fd9307fec8e4d13310af4474869c0d6d221da41ccb61581df6137e9e5b"
+    }
+  },
+  "negative_policy": "one executable within-example semantic corruption per row",
+  "positive_policy": "byte-equivalent existing F0 prompt and target",
+  "schema_version": "ccpu.paper1.e3_direct_preference_manifest.v1",
+  "score_policy": "semantic-weighted conditional mean log likelihood",
+  "selected_negative_counts": {
+    "dependency_rebind": 813,
+    "operator_swap": 1034,
+    "path_binding_swap": 1045,
+    "query_target_swap": 959,
+    "source_fact_swap": 674
+  },
+  "source_files": {
+    "negative_dev": "aee8b8eaea926521f34d4abecedca1d405d1fd6a6d334a1d748eab89afcbc029",
+    "negative_train": "e2d88fe99a8331f1c70fd47822e153c9b8284b195ef4a26b0faf0c21320e183b",
+    "qwen_dev": "e5ad9b0bea25b87f63e9971e00528103c4656edb1bcad18d2bc4b6c9a4f3b690",
+    "qwen_train": "2c8f0718b347794ead7fb1e7ef6d9dcb750d00be03916b564d0bb114cd3fa11f"
+  },
+  "test_rows_generated": 0
+}

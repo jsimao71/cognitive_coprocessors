@@ -97,13 +97,12 @@ def _source_fact(candidate: dict[str, Any]) -> bool:
         and step["expression"].get("kind") == "literal"
         and step["expression"].get("literal_type") == "number"
     ]
-    if not literals:
-        return False
-    value = literals[0].get("value")
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
-        return False
-    literals[0]["value"] = value + 1
-    return True
+    for index, left in enumerate(literals):
+        for right in literals[index + 1 :]:
+            if left.get("value") != right.get("value"):
+                left["value"], right["value"] = right["value"], left["value"]
+                return True
+    return False
 
 
 _MUTATORS: tuple[tuple[str, Callable[[dict[str, Any]], bool]], ...] = (
@@ -111,7 +110,7 @@ _MUTATORS: tuple[tuple[str, Callable[[dict[str, Any]], bool]], ...] = (
     ("dependency_rebind", _dependency),
     ("query_target_swap", _query),
     ("path_binding_swap", _binding),
-    ("source_fact_shift", _source_fact),
+    ("source_fact_swap", _source_fact),
 )
 
 

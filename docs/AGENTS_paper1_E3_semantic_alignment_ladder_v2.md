@@ -191,6 +191,10 @@ M0.5 semantic-weighted direct ASL:
 the identical M0 inputs and ASL targets, with higher causal-loss weight on
 bindings, references, source values, operators, dependencies, and RETURN
 
+M0.6 within-example semantic ranking:
+M0.5 + require the conditional likelihood of each gold ASL to exceed one
+executable AST-derived corruption from the same problem
+
 M1 canonical bottleneck:
 NL -> symbol table + ASL-isomorphic expression graph -> deterministic ASL lowering
 
@@ -246,6 +250,23 @@ semantic-weight ratio -> learning rate -> selected epoch -> dropout -> rank
 This ordering tests the semantic-objective hypothesis before adding capacity.
 The 25-case development set is small, so retain exact counts and treat close
 settings as tied rather than selecting on a one-example fluctuation.
+
+M0.6 uses no new teacher annotation. Define the pair score as mean
+semantic-weighted conditional log likelihood:
+
+```text
+score(NL, ASL) = mean_w log p(ASL tokens | NL)
+loss_rank = softplus((score_negative - score_positive) / temperature)
+```
+
+Cycle deterministically across available operator, dependency, query, binding,
+and source-fact corruptions over the ten logical epochs. Every negative must
+parse, lower, type-check, and execute, and it must share the exact NL prompt
+with its positive. Preserve negatives whose final numeric answer happens to
+match when their binding is wrong, but report them explicitly; they test
+semantic grounding rather than answer discrimination. Generate no test
+preferences. M0.6 retains the M0.5 positive SFT loss, and changes only the
+additional ranking term.
 
 Gates:
 
@@ -414,9 +435,10 @@ P1  Freeze their reports and update the architecture table.
 P2  Build and audit C0/C1 ASL-only views.
 P3  Train C0 and C1; freeze the ASL-channel checkpoint.
 P4  Train/evaluate M0.5 on unchanged F0 data; tune weights only after a dev signal.
+P4A Train/evaluate M0.6 with executable within-example semantic negatives.
 P5  Build M1, require the 500/500 exact semantic round-trip, and freeze data.
 P6  Train/evaluate matched M0 and M1 QKVO-r8 conditions.
-P6A Add decision weighting (M2), hard negatives (M3), and dev-only selection (M4).
+P6A Add bottleneck decision weighting (M2), hard negatives (M3), and selection (M4).
 P7  Implement and train E3a NL-memory generation.
 P8  Precondition E3b with C1 plus paired contrastive alignment.
 P9  Measure retrieval and layerwise convergence before generation.

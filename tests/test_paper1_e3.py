@@ -71,7 +71,7 @@ def test_hard_negatives_are_executable_and_semantically_different():
     program = asl_to_bottleneck(ASL, effective_scope=SCOPE)
     negatives = generate_hard_negatives(program, reference_asl=ASL, effective_scope=SCOPE)
     kinds = {item["negative_type"] for item in negatives}
-    assert {"operator_swap", "query_target_swap", "path_binding_swap", "source_fact_shift"} <= kinds
+    assert {"operator_swap", "query_target_swap", "path_binding_swap", "source_fact_swap"} <= kinds
     for item in negatives:
         assert validate_asl(item["lowered_asl"], effective_scope=SCOPE)["execution_verified"]
         assert item["binding_changed"] or not (

@@ -37,6 +37,8 @@ class LoRATrainingConfig:
     reject_truncation: bool = False
     logical_epoch_field: str | None = None
     semantic_token_weights: dict[str, float] | None = None
+    pairwise_rank_weight: float = 0.0
+    pairwise_temperature: float = 1.0
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> LoRATrainingConfig:
@@ -75,6 +77,8 @@ class LoRATrainingConfig:
                 if data.get("semantic_token_weights") is not None
                 else None
             ),
+            pairwise_rank_weight=float(data.get("pairwise_rank_weight", 0.0)),
+            pairwise_temperature=float(data.get("pairwise_temperature", 1.0)),
         )
 
     def validate(self) -> None:
@@ -86,6 +90,8 @@ class LoRATrainingConfig:
             raise ValueError("dropout or target modules are invalid")
         if self.checkpoint_every_optimizer_steps < 0:
             raise ValueError("checkpoint interval cannot be negative")
+        if self.pairwise_rank_weight < 0 or self.pairwise_temperature <= 0:
+            raise ValueError("pairwise rank weight must be non-negative and temperature positive")
         if self.semantic_token_weights is not None:
             required = {"default", "path", "operator", "literal", "return"}
             if set(self.semantic_token_weights) != required:
@@ -178,6 +184,20 @@ def _tokenize_record(
             ]
             weights.append(max(matched, default=semantic_token_weights["default"]))
         result["loss_weights"] = weights
+    if row.get("negative_target") is not None:
+        negative_row = {
+            "example_id": f"{row['example_id']}:negative",
+            "prompt": row["prompt"],
+            "target": row["negative_target"],
+        }
+        result["negative"] = _tokenize_record(
+            tokenizer,
+            negative_row,
+            max_length,
+            reject_truncation=reject_truncation,
+            semantic_token_weights=semantic_token_weights,
+        )
+        result["negative_type"] = row.get("negative_type")
     return result
 
 
@@ -226,16 +246,11 @@ def _batch(torch: Any, records: list[dict[str, Any]], pad_token_id: int, device:
     return batch
 
 
-def _model_loss(model: Any, torch: Any, batch: dict[str, Any]) -> tuple[Any, Any]:
-    weights = batch.pop("loss_weights", None)
-    if weights is None:
-        loss = model(**batch).loss
-        return loss, loss
-    labels = batch.pop("labels")
-    logits = model(**batch).logits
+def _loss_and_score(
+    torch: Any, logits: Any, labels: Any, weights: Any | None
+) -> tuple[Any, Any, Any]:
     shifted_logits = logits[..., :-1, :].contiguous().float()
     shifted_labels = labels[..., 1:].contiguous()
-    shifted_weights = weights[..., 1:].contiguous()
     token_losses = torch.nn.functional.cross_entropy(
         shifted_logits.view(-1, shifted_logits.size(-1)),
         shifted_labels.view(-1),
@@ -244,20 +259,66 @@ def _model_loss(model: Any, torch: Any, batch: dict[str, Any]) -> tuple[Any, Any
     ).view_as(shifted_labels)
     active = shifted_labels.ne(-100)
     ordinary = token_losses[active].mean()
-    effective = shifted_weights * active
+    effective = active.float() if weights is None else weights[..., 1:].contiguous() * active
     weighted_loss = (token_losses * effective).sum() / effective.sum().clamp_min(1e-12)
-    return weighted_loss, ordinary
+    return weighted_loss, ordinary, -weighted_loss
+
+
+def _model_loss_and_score(model: Any, torch: Any, batch: dict[str, Any]) -> tuple[Any, Any, Any]:
+    weights = batch.pop("loss_weights", None)
+    labels = batch.pop("labels")
+    logits = model(**batch).logits
+    return _loss_and_score(torch, logits, labels, weights)
+
+
+def _model_loss(model: Any, torch: Any, batch: dict[str, Any]) -> tuple[Any, Any]:
+    weighted, ordinary, _ = _model_loss_and_score(model, torch, batch)
+    return weighted, ordinary
+
+
+def _negative_batch(
+    torch: Any, records: list[dict[str, Any]], pad_token_id: int, device: str
+) -> dict[str, Any]:
+    if any("negative" not in row for row in records):
+        raise ValueError("pairwise ranking requires one negative target per record")
+    return _batch(torch, [row["negative"] for row in records], pad_token_id, device)
+
+
+def pairwise_rank_terms(
+    torch: Any, positive_score: Any, negative_score: Any, temperature: float
+) -> tuple[Any, Any]:
+    """Return logistic rank loss and its detached score-gradient coefficient."""
+
+    delta = (negative_score - positive_score) / temperature
+    return torch.nn.functional.softplus(delta), torch.sigmoid(delta).detach() / temperature
 
 
 def _mean_loss(
-    model: Any, torch: Any, rows: list[dict[str, Any]], pad: int, device: str
+    model: Any,
+    torch: Any,
+    rows: list[dict[str, Any]],
+    pad: int,
+    device: str,
+    *,
+    pairwise_rank_weight: float = 0.0,
+    pairwise_temperature: float = 1.0,
 ) -> tuple[float, float]:
     model.eval()
     losses = []
     ordinary_losses = []
     with torch.no_grad():
         for row in rows:
-            loss, ordinary = _model_loss(model, torch, _batch(torch, [row], pad, device))
+            loss, ordinary, positive_score = _model_loss_and_score(
+                model, torch, _batch(torch, [row], pad, device)
+            )
+            if pairwise_rank_weight:
+                _, _, negative_score = _model_loss_and_score(
+                    model, torch, _negative_batch(torch, [row], pad, device)
+                )
+                rank_loss = torch.nn.functional.softplus(
+                    (negative_score - positive_score) / pairwise_temperature
+                )
+                loss = loss + pairwise_rank_weight * rank_loss
             value = float(loss.detach().cpu())
             ordinary_value = float(ordinary.detach().cpu())
             if not math.isfinite(value) or not math.isfinite(ordinary_value):
@@ -312,6 +373,10 @@ def train_lora(
         tokenizer.pad_token = tokenizer.eos_token
     train_rows = []
     for source_row in read_jsonl(train_path):
+        if training.pairwise_rank_weight and source_row.get("negative_target") is None:
+            raise ValueError(
+                f"pairwise ranking is enabled but {source_row['example_id']} has no negative"
+            )
         tokenized = _tokenize_record(
             tokenizer,
             source_row,
@@ -337,6 +402,8 @@ def train_lora(
         )
         for row in read_jsonl(dev_path)
     ]
+    if training.pairwise_rank_weight and any("negative" not in row for row in dev_rows):
+        raise ValueError("pairwise ranking requires development negatives")
     logical_epoch_rows: dict[int, list[dict[str, Any]]] | None = None
     if training.logical_epoch_field is not None:
         logical_epoch_rows = {
@@ -450,23 +517,65 @@ def train_lora(
         random.Random(training.seed + epoch).shuffle(order)
         losses = resume_losses if epoch == start_epoch else []
         ordinary_losses = []
+        rank_losses = []
+        rank_correct = []
         batch_starts = list(range(0, len(order), training.batch_size))
         for batch_index, start in enumerate(batch_starts):
             if epoch == start_epoch and batch_index < start_batch_index:
                 continue
             members = [epoch_rows[index] for index in order[start : start + training.batch_size]]
-            loss, ordinary_loss = _model_loss(
+            loss, ordinary_loss, positive_score = _model_loss_and_score(
                 model_instance,
                 torch,
                 _batch(torch, members, tokenizer.pad_token_id, device),
             )
-            loss_value = float(loss.detach().cpu())
+            rank_loss = None
+            if training.pairwise_rank_weight:
+                cpu_rng_state = torch.get_rng_state()
+                xpu_rng_state = torch.xpu.get_rng_state() if device == "xpu" else None
+                with torch.no_grad():
+                    _, _, negative_score_probe = _model_loss_and_score(
+                        model_instance,
+                        torch,
+                        _negative_batch(torch, members, tokenizer.pad_token_id, device),
+                    )
+                torch.set_rng_state(cpu_rng_state)
+                if device == "xpu" and xpu_rng_state is not None:
+                    torch.xpu.set_rng_state(xpu_rng_state)
+                rank_loss, coefficient = pairwise_rank_terms(
+                    torch,
+                    positive_score.detach(),
+                    negative_score_probe,
+                    training.pairwise_temperature,
+                )
+                positive_objective = (
+                    loss
+                    - training.pairwise_rank_weight * coefficient * positive_score
+                )
+                (positive_objective / training.gradient_accumulation_steps).backward()
+                _, _, negative_score = _model_loss_and_score(
+                    model_instance,
+                    torch,
+                    _negative_batch(torch, members, tokenizer.pad_token_id, device),
+                )
+                negative_objective = (
+                    training.pairwise_rank_weight * coefficient * negative_score
+                )
+                (negative_objective / training.gradient_accumulation_steps).backward()
+                objective_for_report = loss + training.pairwise_rank_weight * rank_loss
+                rank_losses.append(float(rank_loss.detach().cpu()))
+                rank_correct.append(
+                    float((positive_score.detach() > negative_score_probe).detach().cpu())
+                )
+            else:
+                (loss / training.gradient_accumulation_steps).backward()
+                objective_for_report = loss
+            loss_value = float(objective_for_report.detach().cpu())
             ordinary_loss_value = float(ordinary_loss.detach().cpu())
             if not math.isfinite(loss_value):
                 raise FloatingPointError(
                     f"non-finite training loss at epoch {epoch + 1}, batch {batch_index}"
                 )
-            (loss / training.gradient_accumulation_steps).backward()
             losses.append(loss_value)
             ordinary_losses.append(ordinary_loss_value)
             final_batch = start + training.batch_size >= len(order)
@@ -491,7 +600,17 @@ def train_lora(
                     )
         should_evaluate = training.evaluate_each_epoch or epoch + 1 == training.epochs
         dev_losses = (
-            _mean_loss(model_instance, torch, dev_rows, tokenizer.pad_token_id, device)
+                _mean_loss(model_instance, torch, dev_rows, tokenizer.pad_token_id, device)
+                if not training.pairwise_rank_weight
+                else _mean_loss(
+                    model_instance,
+                    torch,
+                    dev_rows,
+                    tokenizer.pad_token_id,
+                    device,
+                    pairwise_rank_weight=training.pairwise_rank_weight,
+                    pairwise_temperature=training.pairwise_temperature,
+                )
             if should_evaluate
             else None
         )
@@ -504,6 +623,12 @@ def train_lora(
                 "mean_dev_loss": dev_loss,
                 "mean_unweighted_train_loss": sum(ordinary_losses) / len(ordinary_losses),
                 "mean_unweighted_dev_loss": ordinary_dev_loss,
+                "mean_pairwise_rank_loss": (
+                    sum(rank_losses) / len(rank_losses) if rank_losses else None
+                ),
+                "pairwise_train_accuracy": (
+                    sum(rank_correct) / len(rank_correct) if rank_correct else None
+                ),
             }
         )
         dev_text = f"{dev_loss:.4f}" if dev_loss is not None else "deferred"
