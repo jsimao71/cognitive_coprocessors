@@ -42,6 +42,36 @@ def _diversity_order(rows: list[dict[str, Any]], seed: int) -> list[dict[str, An
     return ordered
 
 
+def _dataset_quotas(
+    rows: list[dict[str, Any]], reference_rows: list[dict[str, Any]], target: int
+) -> dict[str, int]:
+    available = Counter(str(row["dataset"]) for row in rows)
+    reference = Counter(str(row["dataset"]) for row in reference_rows)
+    if set(available) != set(reference):
+        raise ValueError("D1 and frozen test must cover the same datasets")
+    total_reference = sum(reference.values())
+    raw = {
+        dataset: target * reference[dataset] / total_reference for dataset in available
+    }
+    quotas = {
+        dataset: min(available[dataset], int(raw[dataset])) for dataset in available
+    }
+    remainder = target - sum(quotas.values())
+    for dataset in sorted(
+        available,
+        key=lambda name: (raw[name] - int(raw[name]), available[name], name),
+        reverse=True,
+    ):
+        if remainder <= 0:
+            break
+        addition = min(remainder, available[dataset] - quotas[dataset])
+        quotas[dataset] += addition
+        remainder -= addition
+    if remainder:
+        raise ValueError(f"D1 dataset quotas cannot satisfy target; missing {remainder}")
+    return quotas
+
+
 def build_d1_f0_data(
     *,
     strict_path: str | Path,
@@ -128,7 +158,12 @@ def build_d1_f0_data(
     if len(eligible) < target:
         raise ValueError(f"D1 has only {len(eligible)} eligible rows; target is {target}")
 
-    selected = _diversity_order(eligible, seed)[:target]
+    dataset_quotas = _dataset_quotas(eligible, frozen_rows["test"], target)
+    selected = []
+    for dataset, quota in sorted(dataset_quotas.items()):
+        dataset_rows = [row for row in eligible if row["dataset"] == dataset]
+        selected.extend(_diversity_order(dataset_rows, seed)[:quota])
+    selected.sort(key=lambda row: fingerprint(f"{seed}:epoch:{row['annotation_sha256']}"))
     selected_identities = {(row["dataset"], row["source_id"]) for row in selected}
     selected_patterns = {str(row["semantic_pattern_id"]) for row in selected}
     if selected_identities & frozen_identities or selected_patterns & frozen_test_patterns:
@@ -176,7 +211,12 @@ def build_d1_f0_data(
         "representation_id": "F0",
         "objective_id": "L0",
         "seed": seed,
-        "selection_policy": "semantic-pattern round-robin with deterministic hashed order",
+        "selection_policy": (
+            "dataset-stratified semantic-pattern round-robin with deterministic hashed order"
+        ),
+        "dataset_quota_policy": (
+            "match frozen-test proportions, cap at available strict rows, then redistribute"
+        ),
         "exposure_control": {
             "logical_epochs": epochs,
             "rows_per_epoch": rows_per_epoch,
@@ -195,6 +235,7 @@ def build_d1_f0_data(
             "selected": len(selected),
             "selected_patterns": len(selected_patterns),
             "selected_by_dataset": dict(Counter(row["dataset"] for row in selected)),
+            "selected_dataset_quotas": dataset_quotas,
             "exclusion_reasons": dict(reason_counts),
         },
         "leakage_audit": {

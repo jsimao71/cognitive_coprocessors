@@ -233,6 +233,7 @@ def test_d1_freeze_matches_exposure_and_excludes_frozen_leakage(tmp_path):
     assert all(row["source_fields_visible_to_model"] == ["question"] for row in train)
     assert manifest["counts"]["strict_pre_exclusion"] == 4
     assert manifest["counts"]["excluded"] == 2
+    assert manifest["counts"]["selected_dataset_quotas"] == {"gsm8k": 2}
     assert manifest["leakage_audit"]["passed"]
 
 
