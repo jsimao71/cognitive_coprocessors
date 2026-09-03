@@ -15,6 +15,7 @@ from ccpu.paper1.asl_matrix.data import (
 )
 from ccpu.paper1.asl_matrix.eval import analyze_matrix_runs
 from ccpu.paper1.asl_matrix.qwen import build_qwen_patch_data
+from ccpu.paper1.asl_matrix.qwen_patch_train import adapter_specialization_plan
 from ccpu.paper1.asl_matrix.train import MatrixTrainingConfig, _token_length_audit
 
 ASL = """box.initial_count = 12
@@ -232,3 +233,41 @@ def test_qwen_q0_unfolds_matched_epochs_without_teacher_leakage(tmp_path):
     assert report["regime_counts"] == {"autonomous": 6}
     assert all(not row["has_external_asl"] for row in rows)
     assert all("External ASL teacher:" not in row["prompt"] for row in rows)
+
+
+@pytest.mark.parametrize(
+    ("strategy", "capture", "decode", "adapter_count"),
+    [
+        ("shared", ("default",), ("default",), 1),
+        ("capture_delta", ("shared", "asl_capture"), ("shared",), 2),
+        ("separate", ("asl",), ("nl",), 2),
+        (
+            "hybrid",
+            ("shared_upper", "asl_lower"),
+            ("shared_upper", "nl_lower"),
+            3,
+        ),
+    ],
+)
+def test_qwen_adapter_specialization_plan_routes_modalities(
+    strategy, capture, decode, adapter_count
+):
+    plan = adapter_specialization_plan(
+        strategy, num_hidden_layers=28, split_layer=14
+    )
+    assert plan["capture"] == capture
+    assert plan["decode"] == decode
+    assert len(plan["adapters"]) == adapter_count
+
+
+def test_qwen_hybrid_adapter_plan_partitions_layers():
+    plan = adapter_specialization_plan(
+        "hybrid", num_hidden_layers=28, split_layer=14
+    )
+    assert plan["adapters"]["nl_lower"] == tuple(range(14))
+    assert plan["adapters"]["asl_lower"] == tuple(range(14))
+    assert plan["adapters"]["shared_upper"] == tuple(range(14, 28))
+    with pytest.raises(ValueError, match="split_layer"):
+        adapter_specialization_plan(
+            "hybrid", num_hidden_layers=28, split_layer=28
+        )

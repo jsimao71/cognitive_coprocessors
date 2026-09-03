@@ -18,6 +18,108 @@ from .qwen_patch import QwenPatchController, install_qwen_memory_patches
 
 _EXTERNAL_MARKER = "\n\nExternal ASL teacher:\n"
 _TARGET_MARKER = "\nASL:"
+ADAPTER_SPECIALIZATION_STRATEGIES = (
+    "shared",
+    "capture_delta",
+    "separate",
+    "hybrid",
+)
+
+
+def adapter_specialization_plan(
+    strategy: str,
+    *,
+    num_hidden_layers: int,
+    split_layer: int | None = None,
+) -> dict[str, Any]:
+    """Describe named LoRA placement and routing without loading a model."""
+
+    if strategy not in ADAPTER_SPECIALIZATION_STRATEGIES:
+        raise ValueError(f"unsupported adapter specialization strategy: {strategy}")
+    if num_hidden_layers < 2:
+        raise ValueError("adapter specialization requires at least two hidden layers")
+    if strategy == "shared":
+        return {
+            "strategy": strategy,
+            "adapters": {"default": None},
+            "capture": ("default",),
+            "decode": ("default",),
+            "split_layer": None,
+        }
+    if strategy == "capture_delta":
+        return {
+            "strategy": strategy,
+            "adapters": {"shared": None, "asl_capture": None},
+            "capture": ("shared", "asl_capture"),
+            "decode": ("shared",),
+            "split_layer": None,
+        }
+    if strategy == "separate":
+        return {
+            "strategy": strategy,
+            "adapters": {"nl": None, "asl": None},
+            "capture": ("asl",),
+            "decode": ("nl",),
+            "split_layer": None,
+        }
+    boundary = num_hidden_layers // 2 if split_layer is None else split_layer
+    if boundary <= 0 or boundary >= num_hidden_layers:
+        raise ValueError(
+            f"hybrid split_layer must be in [1, {num_hidden_layers - 1}]"
+        )
+    lower = tuple(range(boundary))
+    upper = tuple(range(boundary, num_hidden_layers))
+    return {
+        "strategy": strategy,
+        "adapters": {
+            "shared_upper": upper,
+            "nl_lower": lower,
+            "asl_lower": lower,
+        },
+        "capture": ("shared_upper", "asl_lower"),
+        "decode": ("shared_upper", "nl_lower"),
+        "split_layer": boundary,
+    }
+
+
+def _install_specialized_lora(
+    base: Any,
+    training: LoRATrainingConfig,
+    specialization: dict[str, Any],
+    lora_config_type: Any,
+    get_peft_model: Any,
+) -> tuple[Any, dict[str, Any]]:
+    strategy = str(specialization.get("strategy", "shared"))
+    split_layer = specialization.get("split_layer")
+    plan = adapter_specialization_plan(
+        strategy,
+        num_hidden_layers=int(base.config.num_hidden_layers),
+        split_layer=int(split_layer) if split_layer is not None else None,
+    )
+
+    def make_config(layers: tuple[int, ...] | None) -> Any:
+        kwargs = {
+            "r": training.rank,
+            "lora_alpha": training.alpha,
+            "lora_dropout": training.dropout,
+            "target_modules": list(training.target_modules),
+            "bias": "none",
+            "task_type": "CAUSAL_LM",
+        }
+        if layers is not None:
+            kwargs.update(layers_to_transform=list(layers), layers_pattern="layers")
+        return lora_config_type(**kwargs)
+
+    entries = list(plan["adapters"].items())
+    first_name, first_layers = entries[0]
+    model = get_peft_model(
+        base,
+        make_config(first_layers),
+        adapter_name=first_name,
+    )
+    for adapter_name, layers in entries[1:]:
+        model.add_adapter(adapter_name, make_config(layers))
+    return model, plan
 
 
 def _epoch_value(row: dict[str, Any]) -> int | None:
@@ -254,19 +356,21 @@ def train_qwen_patch(
 
     base = AutoModelForCausalLM.from_pretrained(model_id, revision=revision, dtype=dtype)
     base.config.use_cache = False
-    peft_config = LoraConfig(
-        r=training.rank,
-        lora_alpha=training.alpha,
-        lora_dropout=training.dropout,
-        target_modules=list(training.target_modules),
-        bias="none",
-        task_type="CAUSAL_LM",
+    specialization = dict(config.get("adapter_specialization", {"strategy": "shared"}))
+    model, adapter_plan = _install_specialized_lora(
+        base,
+        training,
+        specialization,
+        LoraConfig,
+        get_peft_model,
     )
-    model = get_peft_model(base, peft_config)
     controller = install_qwen_memory_patches(
         model,
         mode=patch_mode,
         layer_indices=layer_indices,
+        capture_adapters=tuple(adapter_plan["capture"]),
+        decode_adapters=tuple(adapter_plan["decode"]),
+        trainable_adapters=tuple(adapter_plan["adapters"]),
     )
     model = model.to(device)
     controller.model = model
@@ -432,6 +536,15 @@ def train_qwen_patch(
         "run_id": config["run_id"],
         "model": model_spec,
         "patch": patch_spec,
+        "adapter_specialization": {
+            **adapter_plan,
+            "adapters": {
+                name: list(layers) if layers is not None else None
+                for name, layers in adapter_plan["adapters"].items()
+            },
+            "capture": list(adapter_plan["capture"]),
+            "decode": list(adapter_plan["decode"]),
+        },
         "training": training.to_dict(),
         "device": device,
         "dtype": dtype_name,
@@ -508,20 +621,22 @@ def load_qwen_patch_backend(
         revision=revision,
         dtype=getattr(torch, dtype_name),
     )
-    peft_config = LoraConfig(
-        r=training.rank,
-        lora_alpha=training.alpha,
-        lora_dropout=training.dropout,
-        target_modules=list(training.target_modules),
-        bias="none",
-        task_type="CAUSAL_LM",
+    specialization = dict(config.get("adapter_specialization", {"strategy": "shared"}))
+    model, adapter_plan = _install_specialized_lora(
+        base,
+        training,
+        specialization,
+        LoraConfig,
+        get_peft_model,
     )
-    model = get_peft_model(base, peft_config)
     patch_spec = config["patch"]
     controller = install_qwen_memory_patches(
         model,
         mode=str(patch_spec["mode"]),
         layer_indices=tuple(int(value) for value in patch_spec["layer_indices"]),
+        capture_adapters=tuple(adapter_plan["capture"]),
+        decode_adapters=tuple(adapter_plan["decode"]),
+        trainable_adapters=tuple(adapter_plan["adapters"]),
     )
     _load_trainable_state(model, load_file(state_path, device="cpu"))
     controller.clear()

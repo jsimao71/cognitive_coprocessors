@@ -268,10 +268,31 @@ class QwenPatchController:
     mode: str
     patches: list[QwenExternalMemoryAttention]
     source_type_embedding: nn.Parameter
+    capture_adapters: tuple[str, ...] = ()
+    decode_adapters: tuple[str, ...] = ()
+    trainable_adapters: tuple[str, ...] = ()
+
+    def _activate_adapters(self, adapter_names: tuple[str, ...]) -> None:
+        if not adapter_names:
+            return
+        tuner = getattr(self.model, "base_model", None)
+        if tuner is None or not hasattr(tuner, "set_adapter"):
+            raise TypeError("adapter routing requires a PEFT tuner-backed model")
+        active: str | list[str]
+        active = adapter_names[0] if len(adapter_names) == 1 else list(adapter_names)
+        tuner.set_adapter(active)
+        # PEFT freezes inactive adapters when switching. Keep every routed adapter
+        # differentiable because capture and decode graphs share one backward pass.
+        if self.trainable_adapters:
+            tuner.set_requires_grad(self.trainable_adapters, True)
+
+    def activate_decode(self) -> None:
+        self._activate_adapters(self.decode_adapters)
 
     def clear(self) -> None:
         for patch in self.patches:
             patch.clear_external()
+        self.activate_decode()
 
     def capture_external(
         self, input_ids: torch.Tensor, attention_mask: torch.Tensor
@@ -279,17 +300,21 @@ class QwenPatchController:
         self.clear()
         if not bool(attention_mask.any()):
             return
+        self._activate_adapters(self.capture_adapters)
         for patch in self.patches:
             patch.begin_capture(attention_mask)
-        embeddings = self.model.get_input_embeddings()(input_ids)
-        embeddings = embeddings + self.source_type_embedding.to(embeddings.dtype)
-        self.model(
-            inputs_embeds=embeddings,
-            attention_mask=attention_mask,
-            use_cache=False,
-        )
-        for patch in self.patches:
-            patch.end_capture()
+        try:
+            embeddings = self.model.get_input_embeddings()(input_ids)
+            embeddings = embeddings + self.source_type_embedding.to(embeddings.dtype)
+            self.model(
+                inputs_embeds=embeddings,
+                attention_mask=attention_mask,
+                use_cache=False,
+            )
+        finally:
+            for patch in self.patches:
+                patch.end_capture()
+            self.activate_decode()
 
     def diagnostics(self) -> list[dict[str, float]]:
         return [dict(patch.last_diagnostics) for patch in self.patches]
@@ -320,6 +345,16 @@ class QwenPatchController:
         return {
             "mode": self.mode,
             "patched_layers": len(self.patches),
+            "capture_adapters": list(self.capture_adapters),
+            "decode_adapters": list(self.decode_adapters),
+            "adapter_trainable_parameters": {
+                adapter: sum(
+                    parameter.numel()
+                    for name, parameter in self.model.named_parameters()
+                    if f".{adapter}." in name and parameter.requires_grad
+                )
+                for adapter in self.trainable_adapters
+            },
             "memory_patch_trainable_parameters": memory_count,
             "other_trainable_parameters": sum(
                 parameter.numel()
@@ -337,6 +372,9 @@ def install_qwen_memory_patches(
     *,
     mode: str,
     layer_indices: tuple[int, ...] | None = None,
+    capture_adapters: tuple[str, ...] = (),
+    decode_adapters: tuple[str, ...] = (),
+    trainable_adapters: tuple[str, ...] = (),
 ) -> QwenPatchController:
     """Install Q2/Q3 patches without creating another Qwen backbone."""
 
@@ -366,9 +404,14 @@ def install_qwen_memory_patches(
         torch.zeros(hidden_size, device=embedding_weight.device, dtype=torch.float32)
     )
     model.register_parameter("asl_external_source_embedding", source_type_embedding)
-    return QwenPatchController(
+    controller = QwenPatchController(
         model=model,
         mode=mode,
         patches=patches,
         source_type_embedding=source_type_embedding,
+        capture_adapters=capture_adapters,
+        decode_adapters=decode_adapters,
+        trainable_adapters=trainable_adapters,
     )
+    controller.activate_decode()
+    return controller
