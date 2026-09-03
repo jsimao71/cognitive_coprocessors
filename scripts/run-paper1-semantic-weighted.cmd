@@ -53,7 +53,7 @@ set "WAIT_PID=%~1"
 tasklist /FI "PID eq %WAIT_PID%" /NH 2>nul | findstr /R /C:"[ ]%WAIT_PID%[ ]" >nul
 if errorlevel 1 exit /b 0
 echo Waiting for process %WAIT_PID% to release the XPU...
-timeout /T 60 /NOBREAK >nul
+ping -n 61 127.0.0.1 >nul
 goto :wait_loop
 
 :failed
