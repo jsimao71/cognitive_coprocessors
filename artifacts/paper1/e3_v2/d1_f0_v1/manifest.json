@@ -1,0 +1,58 @@
+{
+  "counts": {
+    "eligible_post_exclusion": 6936,
+    "eligible_post_exclusion_patterns": 6481,
+    "excluded": 53,
+    "exclusion_reasons": {
+      "frozen_dev_or_test_source": 37,
+      "frozen_test_semantic_pattern": 20
+    },
+    "selected": 4500,
+    "selected_by_dataset": {
+      "gsm8k": 4044,
+      "tatqa": 456
+    },
+    "selected_dataset_quotas": {
+      "gsm8k": 4044,
+      "tatqa": 456
+    },
+    "selected_patterns": 4208,
+    "source": 8179,
+    "strict_pre_exclusion": 6989,
+    "strict_pre_exclusion_patterns": 6516
+  },
+  "dataset_id": "D1",
+  "dataset_quota_policy": "match frozen-test proportions, cap at available strict rows, then redistribute",
+  "exposure_control": {
+    "comparison": "D0 uses 450 unique rows repeated for the same 4500 exposures",
+    "logical_epochs": 10,
+    "rows_per_epoch": 450,
+    "unique_train_rows": 4500
+  },
+  "input_sha256": {
+    "frozen_dev": "b3da053c125411a63d1a3ca97ebe21bf0c0dedd710cb255c1988d67455214455",
+    "frozen_test": "e7a2a2f2cbcb8d776db3144d1f8b9db3e12578f2863f9f35e5eb0ed629488923",
+    "sources": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\gsm8k_full.jsonl": "85fb981b6fa0079b6f85bd866c807483aeaba7fa66b4e84ab8b0c17fcf58b650",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\tatqa_arithmetic_full.jsonl": "0391ea3362b58d95c6807a888533a4a5233d6cf2093a2ee15cbecf100a147468"
+    },
+    "strict": "50e165430e5944f2cdb012cc40d706064d4be1c15f839b3ee4c62ed99e510586"
+  },
+  "leakage_audit": {
+    "frozen_dev_test_source_count": 50,
+    "frozen_test_pattern_count": 23,
+    "passed": true,
+    "selected_source_overlap": [],
+    "selected_test_pattern_overlap": []
+  },
+  "objective_id": "L0",
+  "output_sha256": {
+    "eligible": "2dd4a6f26ddaeae1ad46a45831fc5b80c1586c30d49e27fc798ed43470327faa",
+    "excluded": "47d8a25a9173648287b20c71531347f97f8f83e7ecf70f7b20d7d971106b265a",
+    "train": "cb2083f39aa30415c371183f96417387db2ecc2cfa837ad71fa7f47667807079"
+  },
+  "representation_id": "F0",
+  "schema_version": "ccpu.paper1.e3_d1_f0_manifest.v1",
+  "seed": 11,
+  "selection_policy": "dataset-stratified semantic-pattern round-robin with deterministic hashed order"
+}

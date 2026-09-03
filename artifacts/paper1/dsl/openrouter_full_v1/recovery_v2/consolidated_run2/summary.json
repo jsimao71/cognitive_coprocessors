@@ -1,0 +1,42 @@
+{
+  "combined_strict_count": 6989,
+  "existing_strict_count": 6064,
+  "input_sha256": {
+    "remote": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\annotations.jsonl": "8376855a31a235af07bf888bf09c17466fbc0f754baa910cbf7547413fe9b7ad",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\attempts.jsonl": "70707f864e12edd9890da309bde1fd465d3c4b74f5b721c13e40dff906bc205f",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\failures.jsonl": "c88730090318bf698993afa550227dd63c6a4628b3ef3868f150bc35e384a9e5",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run1\\annotations.jsonl": "7983ebbcb7e9deb62677b7410e44c9b86ec7e2e20614aeaefff86e251edd1846",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run1\\attempts.jsonl": "02c1d06647f451acba5156166646382da33870ad9b657e1242bd40361da3b1d2",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run1\\failures.jsonl": "067fd55ecd58c08cbb2cb80df448354538f84d2de871aab92e8bb8e85cf5e7e3",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run2\\annotations.jsonl": "cc012dca500796eea21513a337765d0e75b20afb5e0b97339415f6764c203b13",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run2\\attempts.jsonl": "169728716aaffcfa7de3f6bd1fa0c96efe00f59869067e51fb7bbaf3fb7a627e",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run2\\failures.jsonl": "25bdb4affad20743741f89fb8b90bf5e1b3e43cd2289ff4b1c48940159a14758",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\annotations.jsonl": "a3401c123e90c8ef923f73bb17894a3f675ec6ec0d11a83de82cb5094772fd83",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\attempts.jsonl": "a8e7af1eba66d5975ef5467810ee9d4f4a367ea2bdeacdf41e41372f54e31abc",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\failures.jsonl": "c1575f579fd3b0911b38a19153ccc8902830f7ea15755c4d79694bdb3bae4a7a"
+    },
+    "sources": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\gsm8k_full.jsonl": "85fb981b6fa0079b6f85bd866c807483aeaba7fa66b4e84ab8b0c17fcf58b650",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\tatqa_arithmetic_full.jsonl": "0391ea3362b58d95c6807a888533a4a5233d6cf2093a2ee15cbecf100a147468"
+    }
+  },
+  "normalization_policy": [
+    "restore dataset from trusted request envelope",
+    "restore source_id from trusted request envelope",
+    "do not alter generated ASL or part mappings",
+    "rerun syntax, lowering, type, execution, semantic lint, and answer checks"
+  ],
+  "output_sha256": {
+    "combined_strict": "50e165430e5944f2cdb012cc40d706064d4be1c15f839b3ee4c62ed99e510586",
+    "retry_input": "85993e095007a558d796f2ea452a5566cd8bf944e5d51dd9a9fc9294b19e20ef",
+    "salvaged_executable": "40245e582ee7a3eafe9e862d8d1db6348f2d2cda98d7a08a6a580bd753567eb1",
+    "salvaged_strict": "b52fe10fd265a50693425b6e08d8de9369e7aacf33b78ceacbb73be47c50ae11",
+    "strict_index": "59cb6c957ad5908e85befe19f17313673261be6300724cc0a5db6945d9c5244e"
+  },
+  "retry_count": 1190,
+  "salvaged_executable_count": 1108,
+  "salvaged_strict_count": 925,
+  "schema_version": "ccpu.dsl_dataset.remote_program_recovery_summary.v1",
+  "source_count": 8179
+}
