@@ -11,7 +11,11 @@ from .data import (
     build_bottleneck_preference_data,
     build_direct_preference_data,
 )
-from .data_scale import build_d1_f0_data, build_gsm8k_f0_data
+from .data_scale import (
+    build_d1_f0_data,
+    build_gsm8k_f0_data,
+    freeze_gsm8k_eval_views,
+)
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .selection import select_semantic_checkpoint
 
@@ -46,6 +50,11 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k.add_argument("--target", type=int, default=4500)
     gsm8k.add_argument("--epochs", type=int, default=10)
     gsm8k.add_argument("--seed", type=int, default=11)
+    gsm8k_eval = commands.add_parser("prepare-gsm8k-eval")
+    gsm8k_eval.add_argument("--train", required=True)
+    gsm8k_eval.add_argument("--dev", required=True)
+    gsm8k_eval.add_argument("--test", required=True)
+    gsm8k_eval.add_argument("--output-dir", required=True)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -122,6 +131,19 @@ def main(argv: list[str] | None = None) -> int:
             f"G1_GSM8K selected={manifest['counts']['selected']} "
             f"patterns={manifest['counts']['selected_patterns']} "
             f"rejected_non_gsm8k={manifest['counts']['strict_scope_rejected']} "
+            f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-eval":
+        manifest = freeze_gsm8k_eval_views(
+            train_path=args.train,
+            dev_path=args.dev,
+            test_path=args.test,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"GSM8K dev={manifest['counts']['dev']['selected_gsm8k']} "
+            f"test={manifest['counts']['test']['selected_gsm8k']} "
             f"-> {args.output_dir}"
         )
         return 0

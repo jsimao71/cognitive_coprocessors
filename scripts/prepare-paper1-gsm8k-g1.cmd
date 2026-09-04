@@ -8,6 +8,8 @@ set "STRICT=%REPO_ROOT%\artifacts\paper1\dsl\openrouter_full_v1\recovery_v2\cons
 set "SOURCE=%REPO_ROOT%\artifacts\paper1\dsl\openrouter_full_v1\inputs\gsm8k_full.jsonl"
 set "FROZEN=%REPO_ROOT%\artifacts\paper1\asl_matrix_v1\data\source"
 set "OUTPUT=%REPO_ROOT%\artifacts\paper1\gsm8k_scale_v1\g1_f0_4500"
+set "DEV_SOURCE=%REPO_ROOT%\artifacts\paper1\asl_pilot_500_v1\data\sft\dev.jsonl"
+set "TEST_SOURCE=%REPO_ROOT%\artifacts\paper1\asl_pilot_v1\data\eval\original.jsonl"
 
 if not exist "%PYTHON%" (
     echo XPU Python is unavailable: %PYTHON% 1>&2
@@ -27,6 +29,12 @@ pushd "%REPO_ROOT%"
     --target 4500 ^
     --epochs 10 ^
     --seed 11
+if errorlevel 1 goto :failed
+"%PYTHON%" -m ccpu.paper1.e3 prepare-gsm8k-eval ^
+    --train "%OUTPUT%\train.jsonl" ^
+    --dev "%DEV_SOURCE%" ^
+    --test "%TEST_SOURCE%" ^
+    --output-dir "%OUTPUT%\eval"
 if errorlevel 1 goto :failed
 popd
 exit /b 0

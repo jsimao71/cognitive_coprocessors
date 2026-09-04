@@ -352,3 +352,72 @@ def build_gsm8k_f0_data(
         datasets=("gsm8k",),
         dataset_id="G1_GSM8K",
     )
+
+
+def freeze_gsm8k_eval_views(
+    *,
+    train_path: str | Path,
+    dev_path: str | Path,
+    test_path: str | Path,
+    output_dir: str | Path,
+) -> dict[str, Any]:
+    """Freeze GSM8K-only dev/test views and audit them against G1 training."""
+
+    inputs = {
+        "train": Path(train_path),
+        "dev": Path(dev_path),
+        "test": Path(test_path),
+    }
+    raw_rows = {name: read_jsonl(path) for name, path in inputs.items()}
+    rows = {
+        name: [row for row in split_rows if str(row["dataset"]) == "gsm8k"]
+        for name, split_rows in raw_rows.items()
+    }
+    for name, split_rows in rows.items():
+        identities = [str(row["parent_source_id"]) for row in split_rows]
+        if len(set(identities)) != len(identities):
+            raise ValueError(f"duplicate GSM8K source identity in {name}")
+        if name != "train" and not split_rows:
+            raise ValueError(f"no GSM8K rows in {name}")
+    train_ids = {str(row["parent_source_id"]) for row in rows["train"]}
+    dev_ids = {str(row["parent_source_id"]) for row in rows["dev"]}
+    test_ids = {str(row["parent_source_id"]) for row in rows["test"]}
+    train_patterns = {str(row["semantic_pattern_id"]) for row in rows["train"]}
+    test_patterns = {str(row["semantic_pattern_id"]) for row in rows["test"]}
+    overlaps = {
+        "train_dev_source": sorted(train_ids & dev_ids),
+        "train_test_source": sorted(train_ids & test_ids),
+        "dev_test_source": sorted(dev_ids & test_ids),
+        "train_test_pattern": sorted(train_patterns & test_patterns),
+    }
+    if any(overlaps.values()):
+        raise ValueError(f"GSM8K split leakage detected: {overlaps}")
+
+    output = Path(output_dir)
+    output_paths = {
+        "dev": write_jsonl(output / "dev.jsonl", rows["dev"]),
+        "test": write_jsonl(output / "test.jsonl", rows["test"]),
+    }
+    manifest = {
+        "schema_version": "ccpu.paper1.gsm8k_eval_freeze.v1",
+        "dataset_scope": ["gsm8k"],
+        "roles": {
+            "dev": "checkpoint selection only",
+            "test": "historical paired evaluation only",
+        },
+        "counts": {
+            name: {
+                "input": len(raw_rows[name]),
+                "selected_gsm8k": len(rows[name]),
+                "scope_rejected": len(raw_rows[name]) - len(rows[name]),
+            }
+            for name in ("train", "dev", "test")
+        },
+        "leakage_audit": {**overlaps, "passed": True},
+        "input_sha256": {name: file_sha256(path) for name, path in inputs.items()},
+        "output_sha256": {
+            name: file_sha256(path) for name, path in output_paths.items()
+        },
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest

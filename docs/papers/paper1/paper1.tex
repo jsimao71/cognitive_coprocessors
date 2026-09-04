@@ -1747,10 +1747,13 @@ The later arithmetic-only expansion ladder adds ASDiv and overlap-audited MAWPS
 as candidate training diversity, reserves SVAMP primarily for adversarial
 testing, and reserves GSM-Plus and GSM-Symbolic for robustness and controlled
 generalization. MultiArith is considered only after auditing overlap with the
-older arithmetic-word-problem collections. The historical 25-item test remains
-for continuity, while the larger untouched confirmation set will be drawn from
-the official GSM8K test split and may not guide architecture or hyperparameter
-selection.
+older arithmetic-word-problem collections. The historical mixed 25-item test
+and its old scores remain immutable provenance, but all new paired comparisons
+use its frozen 17-item GSM8K projection. A deterministic split manifest removes
+eight TAT-QA rows from both development and test and verifies zero train/dev/test
+source overlap and zero train/test pattern overlap. The larger untouched
+confirmation set will be drawn from the official GSM8K test split and may not
+guide architecture or hyperparameter selection.
 
 \section{Preliminary XPU Pilot}
 

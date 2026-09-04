@@ -1,0 +1,43 @@
+{
+  "counts": {
+    "dev": {
+      "input": 25,
+      "scope_rejected": 8,
+      "selected_gsm8k": 17
+    },
+    "test": {
+      "input": 25,
+      "scope_rejected": 8,
+      "selected_gsm8k": 17
+    },
+    "train": {
+      "input": 4500,
+      "scope_rejected": 0,
+      "selected_gsm8k": 4500
+    }
+  },
+  "dataset_scope": [
+    "gsm8k"
+  ],
+  "input_sha256": {
+    "dev": "690f3053e39f9941a3904fb547bccb7376aca60985824d9a24a90883f94b05a0",
+    "test": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+    "train": "9f640bf0cb1cf8fa7d83d0615bfacf8520f346598776addff963e5a568042645"
+  },
+  "leakage_audit": {
+    "dev_test_source": [],
+    "passed": true,
+    "train_dev_source": [],
+    "train_test_pattern": [],
+    "train_test_source": []
+  },
+  "output_sha256": {
+    "dev": "724a2887ac818ae1d932f4889363788369689890c94bc953e10cb7b4b0ec22aa",
+    "test": "2473d2b634d9572b36025029d15c632c27c2fce31d1d6abf82e9cf8018340d34"
+  },
+  "roles": {
+    "dev": "checkpoint selection only",
+    "test": "historical paired evaluation only"
+  },
+  "schema_version": "ccpu.paper1.gsm8k_eval_freeze.v1"
+}

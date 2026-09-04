@@ -328,9 +328,11 @@ The alpha form must ignore arbitrary local variable names.
 
 # WORKSTREAM D — Larger Confirmatory Evaluation
 
-## 11. Preserve historical TEST-25
+## 11. Preserve historical TEST-25 as provenance
 
-Do not replace the 25 frozen test examples.
+Do not delete or mutate the 25 frozen historical examples. Retain their old
+scores for provenance, but define `TEST-GSM17` as the immutable GSM8K projection
+used by every new Paper 1 run. Do not generate new TAT-QA predictions.
 
 Add a larger untouched **GSM8K-only** confirmatory set from the official GSM8K
 test split:
@@ -351,7 +353,8 @@ Roles:
 
 ```text
 DEV       tuning/checkpoint selection
-TEST-25   historical paired R&D continuity
+TEST-25   archived mixed-result provenance only
+TEST-GSM17 historical paired GSM8K continuity
 CONFIRM   untouched final confirmation
 ```
 

@@ -15,7 +15,11 @@ from ccpu.paper1.e3.bottleneck import (
 )
 from ccpu.paper1.e3.components import component_labels
 from ccpu.paper1.e3.data import build_bottleneck_preference_data
-from ccpu.paper1.e3.data_scale import build_d1_f0_data, build_gsm8k_f0_data
+from ccpu.paper1.e3.data_scale import (
+    build_d1_f0_data,
+    build_gsm8k_f0_data,
+    freeze_gsm8k_eval_views,
+)
 from ccpu.paper1.e3.eval import (
     extract_bottleneck,
     run_bottleneck_condition,
@@ -281,6 +285,64 @@ def test_gsm8k_freeze_rejects_other_datasets_at_boundary(tmp_path):
     assert manifest["counts"]["strict_input"] == 3
     assert manifest["counts"]["strict_scope_rejected"] == 1
     assert manifest["leakage_audit"]["dataset_scope_enforced"]
+
+
+def test_gsm8k_eval_freeze_filters_scope_and_audits_leakage(tmp_path):
+    def row(dataset, source_id, pattern):
+        return {
+            "dataset": dataset,
+            "parent_source_id": source_id,
+            "semantic_pattern_id": pattern,
+        }
+
+    train = write_jsonl(
+        tmp_path / "train.jsonl",
+        [row("gsm8k", "train", "train-pattern")],
+    )
+    dev = write_jsonl(
+        tmp_path / "dev.jsonl",
+        [row("gsm8k", "dev", "dev-pattern"), row("tatqa", "t-dev", "t-dev")],
+    )
+    test = write_jsonl(
+        tmp_path / "test.jsonl",
+        [row("gsm8k", "test", "test-pattern"), row("tatqa", "t-test", "t-test")],
+    )
+    manifest = freeze_gsm8k_eval_views(
+        train_path=train,
+        dev_path=dev,
+        test_path=test,
+        output_dir=tmp_path / "eval",
+    )
+    assert manifest["counts"]["dev"] == {
+        "input": 2,
+        "selected_gsm8k": 1,
+        "scope_rejected": 1,
+    }
+    assert manifest["counts"]["test"]["selected_gsm8k"] == 1
+    assert manifest["leakage_audit"]["passed"]
+    assert read_jsonl(tmp_path / "eval" / "test.jsonl") == [
+        row("gsm8k", "test", "test-pattern")
+    ]
+
+
+def test_gsm8k_eval_freeze_rejects_training_pattern_leakage(tmp_path):
+    def row(source_id, pattern):
+        return {
+            "dataset": "gsm8k",
+            "parent_source_id": source_id,
+            "semantic_pattern_id": pattern,
+        }
+
+    train = write_jsonl(tmp_path / "train.jsonl", [row("train", "shared")])
+    dev = write_jsonl(tmp_path / "dev.jsonl", [row("dev", "dev")])
+    test = write_jsonl(tmp_path / "test.jsonl", [row("test", "shared")])
+    with pytest.raises(ValueError, match="split leakage"):
+        freeze_gsm8k_eval_views(
+            train_path=train,
+            dev_path=dev,
+            test_path=test,
+            output_dir=tmp_path / "eval",
+        )
 
 
 def test_hard_negatives_are_executable_and_semantically_different():
