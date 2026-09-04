@@ -81,26 +81,48 @@ def build_d1_f0_data(
     target: int = 4500,
     epochs: int = 10,
     seed: int = 11,
+    datasets: tuple[str, ...] | None = None,
+    dataset_id: str = "D1",
 ) -> dict[str, Any]:
-    """Freeze unique D1 programs while excluding D0 evaluation leakage."""
+    """Freeze unique F0 programs while excluding frozen evaluation leakage."""
 
     if target < 1 or epochs < 1 or target % epochs:
         raise ValueError("D1 target must be positive and divisible by logical epochs")
+    allowed_datasets = set(datasets) if datasets is not None else None
+    if allowed_datasets is not None and (not allowed_datasets or "" in allowed_datasets):
+        raise ValueError("dataset scope must contain non-empty dataset names")
+    if not dataset_id.strip():
+        raise ValueError("dataset_id must be non-empty")
     sources: dict[tuple[str, str], dict[str, Any]] = {}
     source_hashes = {}
+    source_input_count = 0
+    source_scope_rejected = 0
     for source_path_value in source_paths:
         source_path = Path(source_path_value)
         source_hashes[str(source_path)] = file_sha256(source_path)
         for source in read_jsonl(source_path):
+            source_input_count += 1
+            if (
+                allowed_datasets is not None
+                and str(source["dataset"]) not in allowed_datasets
+            ):
+                source_scope_rejected += 1
+                continue
             key = _key(source)
             if key in sources:
                 raise ValueError(f"duplicate D1 source identity: {key}")
             sources[key] = source
 
     frozen_dir = Path(frozen_data_dir)
-    frozen_rows = {
-        split: read_jsonl(frozen_dir / f"{split}.jsonl") for split in ("dev", "test")
-    }
+    frozen_rows = {}
+    for split in ("dev", "test"):
+        rows = read_jsonl(frozen_dir / f"{split}.jsonl")
+        frozen_rows[split] = [
+            row
+            for row in rows
+            if allowed_datasets is None
+            or str(row["dataset"]) in allowed_datasets
+        ]
     frozen_identities = {
         (str(row["dataset"]), str(row["parent_source_id"]))
         for rows in frozen_rows.values()
@@ -110,7 +132,14 @@ def build_d1_f0_data(
         str(row["semantic_pattern_id"]) for row in frozen_rows["test"]
     }
 
-    strict_rows = read_jsonl(strict_path)
+    strict_input_rows = read_jsonl(strict_path)
+    strict_rows = [
+        row
+        for row in strict_input_rows
+        if allowed_datasets is None
+        or str(row["dataset"]) in allowed_datasets
+    ]
+    strict_scope_rejected = len(strict_input_rows) - len(strict_rows)
     if len({_key(row) for row in strict_rows}) != len(strict_rows):
         raise ValueError("combined strict corpus contains duplicate source identities")
     eligible = []
@@ -168,16 +197,34 @@ def build_d1_f0_data(
     selected_patterns = {str(row["semantic_pattern_id"]) for row in selected}
     if selected_identities & frozen_identities or selected_patterns & frozen_test_patterns:
         raise AssertionError("D1 selection overlaps frozen D0 evaluation")
+    selected_dataset_names = {str(row["dataset"]) for row in selected}
+    if (
+        allowed_datasets is not None
+        and not selected_dataset_names <= allowed_datasets
+    ):
+        raise AssertionError("F0 selection escaped its registered dataset scope")
     rows_per_epoch = target // epochs
+    legacy_d1 = dataset_id == "D1" and allowed_datasets is None
+    id_prefix = (
+        "d1-f0"
+        if legacy_d1
+        else f"{dataset_id.lower().replace('_', '-')}-f0"
+    )
     train = [
         {
-            "schema_version": "ccpu.paper1.e3_d1_f0_sft.v1",
-            "example_id": f"d1-f0-{index:05d}-{fingerprint(row['annotation_sha256'], 10)}",
+            "schema_version": (
+                "ccpu.paper1.e3_d1_f0_sft.v1"
+                if legacy_d1
+                else "ccpu.paper1.e3_f0_scale_sft.v1"
+            ),
+            "example_id": (
+                f"{id_prefix}-{index:05d}-{fingerprint(row['annotation_sha256'], 10)}"
+            ),
             "parent_example_id": f"{row['dataset']}:{row['source_id']}",
             "parent_source_id": row["source_id"],
             "semantic_pattern_id": row["semantic_pattern_id"],
             "dataset": row["dataset"],
-            "dataset_id": "D1",
+            "dataset_id": dataset_id,
             "representation_id": "F0",
             "objective_id": "L0",
             "epoch_view": index // rows_per_epoch,
@@ -206,26 +253,43 @@ def build_d1_f0_data(
         reason for row in excluded for reason in row["exclusion_reasons"]
     )
     manifest = {
-        "schema_version": "ccpu.paper1.e3_d1_f0_manifest.v1",
-        "dataset_id": "D1",
+        "schema_version": (
+            "ccpu.paper1.e3_d1_f0_manifest.v1"
+            if legacy_d1
+            else "ccpu.paper1.e3_f0_scale_manifest.v1"
+        ),
+        "dataset_id": dataset_id,
+        "dataset_scope": sorted(allowed_datasets or selected_dataset_names),
         "representation_id": "F0",
         "objective_id": "L0",
         "seed": seed,
         "selection_policy": (
-            "dataset-stratified semantic-pattern round-robin with deterministic hashed order"
+            "semantic-pattern round-robin with deterministic hashed order"
+            if len(selected_dataset_names) == 1
+            else "dataset-stratified semantic-pattern round-robin with deterministic hashed order"
         ),
         "dataset_quota_policy": (
-            "match frozen-test proportions, cap at available strict rows, then redistribute"
+            "single registered dataset"
+            if len(selected_dataset_names) == 1
+            else "match frozen-test proportions, cap at available strict rows, then redistribute"
         ),
         "exposure_control": {
             "logical_epochs": epochs,
             "rows_per_epoch": rows_per_epoch,
             "unique_train_rows": target,
-            "comparison": "D0 uses 450 unique rows repeated for the same 4500 exposures",
+            "comparison": (
+                "D0 uses 450 unique rows repeated for the same 4500 exposures"
+                if target == 4500
+                else "data-scale preparation; exposure policy is registered by the run config"
+            ),
         },
         "counts": {
             "source": len(sources),
+            "source_input": source_input_count,
+            "source_scope_rejected": source_scope_rejected,
             "strict_pre_exclusion": len(strict_rows),
+            "strict_input": len(strict_input_rows),
+            "strict_scope_rejected": strict_scope_rejected,
             "strict_pre_exclusion_patterns": len(pre_patterns),
             "excluded": len(excluded),
             "eligible_post_exclusion": len(eligible),
@@ -239,6 +303,10 @@ def build_d1_f0_data(
             "exclusion_reasons": dict(reason_counts),
         },
         "leakage_audit": {
+            "dataset_scope_enforced": (
+                allowed_datasets is None
+                or selected_dataset_names <= allowed_datasets
+            ),
             "frozen_dev_test_source_count": len(frozen_identities),
             "frozen_test_pattern_count": len(frozen_test_patterns),
             "selected_source_overlap": [],
@@ -259,3 +327,28 @@ def build_d1_f0_data(
     }
     write_json(output / "manifest.json", manifest)
     return manifest
+
+
+def build_gsm8k_f0_data(
+    *,
+    strict_path: str | Path,
+    source_path: str | Path,
+    frozen_data_dir: str | Path,
+    output_dir: str | Path,
+    target: int = 4500,
+    epochs: int = 10,
+    seed: int = 11,
+) -> dict[str, Any]:
+    """Freeze a GSM8K-only F0 corpus for post-D1 Paper 1 experiments."""
+
+    return build_d1_f0_data(
+        strict_path=strict_path,
+        source_paths=[source_path],
+        frozen_data_dir=frozen_data_dir,
+        output_dir=output_dir,
+        target=target,
+        epochs=epochs,
+        seed=seed,
+        datasets=("gsm8k",),
+        dataset_id="G1_GSM8K",
+    )

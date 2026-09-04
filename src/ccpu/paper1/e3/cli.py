@@ -11,7 +11,7 @@ from .data import (
     build_bottleneck_preference_data,
     build_direct_preference_data,
 )
-from .data_scale import build_d1_f0_data
+from .data_scale import build_d1_f0_data, build_gsm8k_f0_data
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .selection import select_semantic_checkpoint
 
@@ -38,6 +38,14 @@ def build_parser() -> argparse.ArgumentParser:
     d1.add_argument("--target", type=int, default=4500)
     d1.add_argument("--epochs", type=int, default=10)
     d1.add_argument("--seed", type=int, default=11)
+    gsm8k = commands.add_parser("prepare-gsm8k")
+    gsm8k.add_argument("--strict", required=True)
+    gsm8k.add_argument("--source", required=True)
+    gsm8k.add_argument("--frozen-data-dir", required=True)
+    gsm8k.add_argument("--output-dir", required=True)
+    gsm8k.add_argument("--target", type=int, default=4500)
+    gsm8k.add_argument("--epochs", type=int, default=10)
+    gsm8k.add_argument("--seed", type=int, default=11)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -98,6 +106,23 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"D1 selected={manifest['counts']['selected']} "
             f"patterns={manifest['counts']['selected_patterns']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k":
+        manifest = build_gsm8k_f0_data(
+            strict_path=args.strict,
+            source_path=args.source,
+            frozen_data_dir=args.frozen_data_dir,
+            output_dir=args.output_dir,
+            target=args.target,
+            epochs=args.epochs,
+            seed=args.seed,
+        )
+        print(
+            f"G1_GSM8K selected={manifest['counts']['selected']} "
+            f"patterns={manifest['counts']['selected_patterns']} "
+            f"rejected_non_gsm8k={manifest['counts']['strict_scope_rejected']} "
+            f"-> {args.output_dir}"
         )
         return 0
     if args.command == "run-bottleneck":

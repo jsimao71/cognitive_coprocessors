@@ -15,7 +15,7 @@ from ccpu.paper1.e3.bottleneck import (
 )
 from ccpu.paper1.e3.components import component_labels
 from ccpu.paper1.e3.data import build_bottleneck_preference_data
-from ccpu.paper1.e3.data_scale import build_d1_f0_data
+from ccpu.paper1.e3.data_scale import build_d1_f0_data, build_gsm8k_f0_data
 from ccpu.paper1.e3.eval import (
     extract_bottleneck,
     run_bottleneck_condition,
@@ -236,6 +236,51 @@ def test_d1_freeze_matches_exposure_and_excludes_frozen_leakage(tmp_path):
     assert manifest["counts"]["excluded"] == 2
     assert manifest["counts"]["selected_dataset_quotas"] == {"gsm8k": 2}
     assert manifest["leakage_audit"]["passed"]
+
+
+def test_gsm8k_freeze_rejects_other_datasets_at_boundary(tmp_path):
+    gsm_sources = [
+        _d1_source("a", "a.count = 1\nRETURN a.count", 1),
+        _d1_source("b", "b.count = 2\nRETURN b.count", 2),
+    ]
+    tatqa_source = _d1_source("t", "t.count = 3\nRETURN t.count", 3)
+    tatqa_source["dataset"] = "tatqa"
+    strict = [_d1_annotation(source) for source in [*gsm_sources, tatqa_source]]
+    source_path = write_jsonl(tmp_path / "gsm8k.jsonl", gsm_sources)
+    strict_path = write_jsonl(tmp_path / "strict.jsonl", strict)
+    frozen = tmp_path / "frozen"
+    for split in ("dev", "test"):
+        write_jsonl(
+            frozen / f"{split}.jsonl",
+            [
+                {
+                    "dataset": "tatqa",
+                    "parent_source_id": f"tatqa-{split}",
+                    "semantic_pattern_id": f"tatqa-{split}-pattern",
+                },
+                {
+                    "dataset": "gsm8k",
+                    "parent_source_id": f"gsm8k-{split}",
+                    "semantic_pattern_id": f"gsm8k-{split}-pattern",
+                },
+            ],
+        )
+
+    manifest = build_gsm8k_f0_data(
+        strict_path=strict_path,
+        source_path=source_path,
+        frozen_data_dir=frozen,
+        output_dir=tmp_path / "g1",
+        target=2,
+        epochs=2,
+    )
+    train = read_jsonl(tmp_path / "g1" / "train.jsonl")
+    assert {row["dataset"] for row in train} == {"gsm8k"}
+    assert {row["dataset_id"] for row in train} == {"G1_GSM8K"}
+    assert manifest["dataset_scope"] == ["gsm8k"]
+    assert manifest["counts"]["strict_input"] == 3
+    assert manifest["counts"]["strict_scope_rejected"] == 1
+    assert manifest["leakage_audit"]["dataset_scope_enforced"]
 
 
 def test_hard_negatives_are_executable_and_semantically_different():

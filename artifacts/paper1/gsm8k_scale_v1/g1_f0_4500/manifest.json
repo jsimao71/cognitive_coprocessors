@@ -1,0 +1,63 @@
+{
+  "counts": {
+    "eligible_post_exclusion": 6540,
+    "eligible_post_exclusion_patterns": 6375,
+    "excluded": 29,
+    "exclusion_reasons": {
+      "frozen_dev_or_test_source": 29,
+      "frozen_test_semantic_pattern": 2
+    },
+    "selected": 4500,
+    "selected_by_dataset": {
+      "gsm8k": 4500
+    },
+    "selected_dataset_quotas": {
+      "gsm8k": 4500
+    },
+    "selected_patterns": 4500,
+    "source": 7473,
+    "source_input": 7473,
+    "source_scope_rejected": 0,
+    "strict_input": 7049,
+    "strict_pre_exclusion": 6569,
+    "strict_pre_exclusion_patterns": 6404,
+    "strict_scope_rejected": 480
+  },
+  "dataset_id": "G1_GSM8K",
+  "dataset_quota_policy": "single registered dataset",
+  "dataset_scope": [
+    "gsm8k"
+  ],
+  "exposure_control": {
+    "comparison": "D0 uses 450 unique rows repeated for the same 4500 exposures",
+    "logical_epochs": 10,
+    "rows_per_epoch": 450,
+    "unique_train_rows": 4500
+  },
+  "input_sha256": {
+    "frozen_dev": "b3da053c125411a63d1a3ca97ebe21bf0c0dedd710cb255c1988d67455214455",
+    "frozen_test": "e7a2a2f2cbcb8d776db3144d1f8b9db3e12578f2863f9f35e5eb0ed629488923",
+    "sources": {
+      "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\gsm8k_full.jsonl": "85fb981b6fa0079b6f85bd866c807483aeaba7fa66b4e84ab8b0c17fcf58b650"
+    },
+    "strict": "d91ca91b5f35100207ed7205319d53072376257d41d0771cca4c6377227f1c5d"
+  },
+  "leakage_audit": {
+    "dataset_scope_enforced": true,
+    "frozen_dev_test_source_count": 34,
+    "frozen_test_pattern_count": 17,
+    "passed": true,
+    "selected_source_overlap": [],
+    "selected_test_pattern_overlap": []
+  },
+  "objective_id": "L0",
+  "output_sha256": {
+    "eligible": "956ef02c5cf42bc75952f683b1c05882e83ad25eb3457a7197862aca06ca62df",
+    "excluded": "b1a1c76fd4006813e02d8f5932f58ebeb05af919022939051e224796eefd4825",
+    "train": "9f640bf0cb1cf8fa7d83d0615bfacf8520f346598776addff963e5a568042645"
+  },
+  "representation_id": "F0",
+  "schema_version": "ccpu.paper1.e3_f0_scale_manifest.v1",
+  "seed": 11,
+  "selection_policy": "semantic-pattern round-robin with deterministic hashed order"
+}
