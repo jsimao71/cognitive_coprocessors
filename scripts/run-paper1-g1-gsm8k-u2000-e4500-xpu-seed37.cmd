@@ -1,0 +1,39 @@
+@echo off
+setlocal EnableExtensions
+
+for %%I in ("%~dp0..") do set "REPO_ROOT=%%~fI"
+set "PYTHON=%USERPROFILE%\.venvs\modal-llm-xpu\Scripts\python.exe"
+set "PYTHONPATH=%REPO_ROOT%\src"
+set "DATA=%REPO_ROOT%\artifacts\paper1\gsm8k_scale_v1\u2000_e4500"
+set "EVAL=%REPO_ROOT%\artifacts\paper1\gsm8k_scale_v1\g1_f0_4500\eval"
+set "REPLICATION=%DATA%\replications\seed37_xpu"
+set "RUN=%REPLICATION%\qwen_run"
+set "EVALUATION=%REPLICATION%\historical_test_eval"
+
+if not exist "%PYTHON%" exit /b 1
+
+pushd "%REPO_ROOT%"
+if not exist "%RUN%\training_report.json" (
+    "%PYTHON%" -u -m ccpu paper1 train-lora ^
+        --config "%REPO_ROOT%\configs\paper1\e3_g1_gsm8k_u2000_e4500_f0_l0_qwen_lora_xpu_seed37.json" ^
+        --model "Qwen/Qwen3-0.6B" ^
+        --train "%DATA%\train.jsonl" ^
+        --dev "%EVAL%\dev.jsonl" ^
+        --output-dir "%RUN%"
+    if errorlevel 1 goto :failed
+)
+if not exist "%EVALUATION%\summary.json" (
+    "%PYTHON%" -u -m ccpu paper1 run-asl-pilot ^
+        --eval "%EVAL%\test.jsonl" ^
+        --train-split "%DATA%\train.jsonl" ^
+        --config "%REPO_ROOT%\configs\paper1\asl_pilot_qwen_base_xpu.json" ^
+        --adapter-path "%RUN%\adapter" ^
+        --adapter-id "Qwen3-0.6B-G1-GSM8K-U2000-E4500-F0-L0-r8-seed37" ^
+        --condition lora --shots 0 --output-dir "%EVALUATION%" --checkpoint-every 1
+    if errorlevel 1 goto :failed
+)
+popd
+exit /b 0
+:failed
+popd
+exit /b 1
