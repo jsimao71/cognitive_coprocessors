@@ -85,14 +85,14 @@ state-error propagation. Restoring the full question while retaining local-delta
 prediction recovers 11/25, equal to whole-program synthesis but not better.
 An exposure-matched OpenRouter diversity cell then replaces ten repeats of 450
 programs with 4,500 unique, leakage-audited programs while retaining the same
-rank-8 adapter and 570 optimizer steps. Its first seed reaches 16/25 answers and
-23/25 executable programs, versus 11/25 and 19/25 for the frozen control, but
-strict path-sensitive semantic-state and return equivalence do not improve.
-Alpha-normalized return equivalence, which ignores arbitrary internal symbol
-names but retains the executed expression graph, rises from 10/25 to 14/25. A
-second training seed reaches 13/25 answers, 24/25 execution, and 11/25
-alpha-normalized returns. We therefore treat this as a replicated but still
-imprecise data-diversity signal pending the third declared seed.
+rank-8 adapter and 570 optimizer steps. Three declared training seeds reach
+16/25, 13/25, and 17/25 answers and 23/25, 24/25, and 22/25 executable programs,
+versus 11/25 and 19/25 for the frozen control. Alpha-normalized return
+equivalence, which ignores arbitrary internal symbol names but retains the
+executed expression graph, reaches 14/25, 11/25, and 14/25 versus 10/25. Strict
+path-sensitive semantic-state and return equivalence remain below the control.
+Thus semantic diversity yields a replicated autonomous answer, execution, and
+alpha-normalized computation gain, but not a robust canonical ontology compiler.
 \end{abstract}
 
 \section{Status and Scope}
@@ -109,8 +109,9 @@ run is empirical and protocol-frozen, but it also has one checkpoint and one
 greedy seed; its condition ordering is evidence for replication, not a final
 architecture-level estimate. The public GSM8K slice is likewise a
 single-checkpoint developmental transfer test, not a benchmark-wide estimate.
-The ASL compiler pilot is also single-checkpoint and has only 25 untouched test
-programs; its component and robustness results are diagnostic Q1 evidence.
+Most ASL compiler cells are single-checkpoint and all use only 25 untouched test
+programs; the final data-diversity cell has three matched training seeds, but its
+component and robustness results remain diagnostic Q1 evidence.
 
 Paper 1 asks one question:
 \begin{quote}
@@ -1642,7 +1643,7 @@ Q0's 565,160 because the remote programs are shorter.
 
 \begin{table}[t]
 \centering\small
-\caption{Frozen autonomous data-diversity comparison. Two of three declared D1
+\caption{Frozen autonomous data-diversity comparison. All three declared D1
 training seeds are complete. Counts are exact on the same 25 programs.}
 \label{tab:asl-d1-scale}
 \begin{tabular}{lrrrrrr}
@@ -1652,6 +1653,7 @@ Condition & Parse & Lower & Execute & State & Return & Answer\\
 Q0 Codex-450 repeated & 22 & 21 & 19 & 5 & 7 & 11\\
 D1 OpenRouter-4,500, seed 11 & 25 & 25 & 23 & 4 & 5 & 16\\
 D1 OpenRouter-4,500, seed 23 & 25 & 25 & 24 & 3 & 4 & 13\\
+D1 OpenRouter-4,500, seed 37 & 24 & 24 & 22 & 4 & 6 & 17\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1681,7 +1683,7 @@ teacher's canonical path vocabulary. The final epoch is the preregistered endpoi
 (.306) and is not substituted post hoc. Training takes 4,753 seconds and 4.41
 GiB peak XPU memory. Independent deterministic rescoring reproduces the stored
 scored-prediction hash byte for byte. Seeds 23 and 37 are matched confirmatory
-replications and must determine whether this data-diversity effect is durable.
+replications.
 
 The first replication, seed 23, independently preserves the direction of the
 main runtime endpoints while reducing their magnitude. It reaches 13/25 answers
@@ -1693,7 +1695,31 @@ formerly non-executable cases are recovered with no execution loss
 equivalence are 3/25 and 4/25. Training takes 4,791 seconds and ends at
 development loss .319; its diagnostic minimum is epoch 8 at .316. Thus seed 23
 confirms improved answer, execution, and soft alpha-state behavior, but not a
-uniform exact-semantic gain. Seed 37 remains the final declared replication.
+uniform exact-semantic gain.
+
+The final declared replication, seed 37, reaches 17/25 answers and 22/25
+executable programs. Relative to Q0, eight identities become correct and two
+become incorrect (exact McNemar $p=.109$, exploratory). GSM8K reaches 11/17 and
+TAT-QA 6/8. Alpha-return equivalence is 14/25, exact alpha-state is 7/25, and
+mean alpha-state F1 is .606; strict state and return equivalence are 4/25 and
+6/25. Training takes 5,302 seconds, ends at development loss .311, and retains
+epoch 8's .305 minimum as a diagnostic only.
+
+Across the three seeds, answer counts are 16, 13, and 17 (mean 15.33/25,
+range 52--68\%) versus Q0's 11/25 (44\%). Execution counts are 23, 24, and 22
+versus 19; alpha-return counts are 14, 11, and 14 versus 10; and mean
+alpha-state F1 values are .692, .631, and .606 versus .595. Exact alpha-state
+is improved or tied at 7, 6, and 7 versus 6. Every seed therefore preserves the
+direction of the answer, execution, alpha-return, and soft alpha-state effects.
+In contrast, strict state counts are 4, 3, and 4 versus 5 and strict return
+counts are 5, 4, and 6 versus 7. Because the seeds reuse the same 25 identities,
+we report seed means and ranges rather than pooling 75 predictions as independent
+tests. Local independent rescoring and a second-machine Python 3.13 rescore of
+seeds 23 and 37 reproduce the complete scored JSONL hashes byte for byte. The
+defensible conclusion is therefore a replicated gain in autonomous answers,
+runtime usability, and computation graphs under internal renaming---not improved
+agreement with the teacher's canonical path vocabulary and not yet a broad
+semantic-compiler claim.
 
 \section{Preliminary XPU Pilot}
 
@@ -2110,13 +2136,13 @@ whole-program deficit to attribute grounding (.144 F1), dependency preservation
 operator F1; 6/20 state-inequivalent programs still obtain the correct answer.
 Matched adapter-capacity, memory-placement, semantic-weighting, ranking, and
 graph-bottleneck controls do not exceed the 11/25 whole-program control. In
-contrast, two exposure-matched 4,500-program diversity seeds reach 16/25 and
-13/25 answers, with 23/25 and 24/25 executable programs. The first is driven by
-GSM8K and improves soft operator, source-fact, path, and state-component scores;
-the second preserves smaller answer and alpha-state gains. Strict state and
-return equivalence remain below the control in both seeds, while alpha-normalized
-return and mean state equivalence improve. The next gate is the third matched
-seed, not a stronger architecture claim.
+contrast, three exposure-matched 4,500-program diversity seeds reach 16/25,
+13/25, and 17/25 answers, with 23/25, 24/25, and 22/25 executable programs. All
+three exceed Q0 on answers, execution, alpha-normalized return, and mean
+alpha-state F1. Strict state and return equivalence remain below the control in
+all three. The replicated result therefore supports semantic training diversity
+as the only tested intervention that improves autonomous answer generation, not
+a stronger architecture claim or a solved canonical grounding problem.
 
 \appendix
 \section{Deterministic Semantic Diagnostic Taxonomy}
