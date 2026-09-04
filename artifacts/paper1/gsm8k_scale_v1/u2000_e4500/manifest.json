@@ -1,0 +1,36 @@
+{
+  "counts": {
+    "eligible_parent_rows": 6540,
+    "exposures": 4500,
+    "logical_epochs": 10,
+    "maximum_source_reuse": 3,
+    "minimum_source_reuse": 2,
+    "rows_per_epoch": 450,
+    "unique_semantic_patterns": 2000,
+    "unique_train_rows": 2000
+  },
+  "dataset_id": "G1_GSM8K_U2000_E4500",
+  "dataset_scope": [
+    "gsm8k"
+  ],
+  "exposure_policy": "deterministically shuffled balanced cycles",
+  "input_sha256": {
+    "eligible": "956ef02c5cf42bc75952f683b1c05882e83ad25eb3457a7197862aca06ca62df",
+    "parent_manifest": "5679aef291a19ff7f7b32257d09b8fa147eee1bd58cd4e28eb83cb840e275fff"
+  },
+  "leakage_audit": {
+    "dataset_scope_enforced": true,
+    "inherited_parent_manifest": "artifacts\\paper1\\gsm8k_scale_v1\\g1_f0_4500\\manifest.json",
+    "parent_passed": true,
+    "passed": true,
+    "unique_source_count_verified": true
+  },
+  "objective_id": "L0",
+  "output_sha256": {
+    "train": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+  },
+  "representation_id": "F0",
+  "schema_version": "ccpu.paper1.gsm8k_exposure_scale.v1",
+  "seed": 11,
+  "selection_policy": "semantic-pattern round-robin from frozen G1 eligible pool"
+}

@@ -9,6 +9,7 @@ from typing import Any
 from ccpu.common.artifacts import (
     file_sha256,
     fingerprint,
+    read_json,
     read_jsonl,
     write_json,
     write_jsonl,
@@ -418,6 +419,125 @@ def freeze_gsm8k_eval_views(
         "output_sha256": {
             name: file_sha256(path) for name, path in output_paths.items()
         },
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest
+
+
+def build_gsm8k_exposure_scale(
+    *,
+    parent_dir: str | Path,
+    output_dir: str | Path,
+    unique_rows: int,
+    exposures: int = 4500,
+    epochs: int = 10,
+    seed: int = 11,
+) -> dict[str, Any]:
+    """Build a balanced GSM8K subset with a fixed number of row exposures."""
+
+    if unique_rows < 1 or exposures < unique_rows:
+        raise ValueError("exposures must be at least the positive unique-row count")
+    if epochs < 1 or exposures % epochs:
+        raise ValueError("exposures must divide evenly across logical epochs")
+    parent = Path(parent_dir)
+    parent_manifest = read_json(parent / "manifest.json")
+    if parent_manifest.get("dataset_scope") != ["gsm8k"]:
+        raise ValueError("scale parent must be a GSM8K-only freeze")
+    if not parent_manifest.get("leakage_audit", {}).get("passed"):
+        raise ValueError("scale parent did not pass its leakage audit")
+    eligible_path = parent / "eligible.jsonl"
+    eligible = read_jsonl(eligible_path)
+    if any(str(row["dataset"]) != "gsm8k" for row in eligible):
+        raise ValueError("scale parent contains a non-GSM8K row")
+    if len(eligible) < unique_rows:
+        raise ValueError(
+            f"scale parent has only {len(eligible)} rows; requested {unique_rows}"
+        )
+    selected = _diversity_order(eligible, seed)[:unique_rows]
+    selected_ids = {str(row["source_id"]) for row in selected}
+    if len(selected_ids) != unique_rows:
+        raise ValueError("scale selection contains duplicate source identities")
+
+    stream = []
+    cycle = 0
+    while len(stream) < exposures:
+        cycle_rows = sorted(
+            selected,
+            key=lambda row: fingerprint(
+                f"{seed}:scale-cycle:{cycle}:{row['annotation_sha256']}"
+            ),
+        )
+        stream.extend(cycle_rows[: exposures - len(stream)])
+        cycle += 1
+    rows_per_epoch = exposures // epochs
+    dataset_id = f"G1_GSM8K_U{unique_rows}_E{exposures}"
+    train = [
+        {
+            "schema_version": "ccpu.paper1.e3_f0_scale_sft.v1",
+            "example_id": (
+                f"g1-gsm8k-u{unique_rows}-e{exposures}-f0-{index:05d}-"
+                f"{fingerprint(row['annotation_sha256'], 10)}"
+            ),
+            "parent_example_id": f"gsm8k:{row['source_id']}",
+            "parent_source_id": row["source_id"],
+            "semantic_pattern_id": row["semantic_pattern_id"],
+            "dataset": "gsm8k",
+            "dataset_id": dataset_id,
+            "representation_id": "F0",
+            "objective_id": "L0",
+            "epoch_view": index // rows_per_epoch,
+            "regime": "autonomous",
+            "prompt": autonomous_asl_prompt(row["question"]),
+            "target": row["target"],
+            "has_external_asl": False,
+            "external_asl_fraction": 0.0,
+            "external_asl_corruption": None,
+            "source_fields_visible_to_model": ["question"],
+            "teacher_provenance": {
+                "teacher": row["teacher"],
+                "recovery": row["recovery"],
+                "annotation_sha256": row["annotation_sha256"],
+                "source_record_sha256": row["source_record_sha256"],
+            },
+        }
+        for index, row in enumerate(stream)
+    ]
+    reuse = Counter(str(row["source_id"]) for row in stream)
+    output = Path(output_dir)
+    train_path = write_jsonl(output / "train.jsonl", train)
+    manifest = {
+        "schema_version": "ccpu.paper1.gsm8k_exposure_scale.v1",
+        "dataset_id": dataset_id,
+        "dataset_scope": ["gsm8k"],
+        "representation_id": "F0",
+        "objective_id": "L0",
+        "seed": seed,
+        "selection_policy": "semantic-pattern round-robin from frozen G1 eligible pool",
+        "exposure_policy": "deterministically shuffled balanced cycles",
+        "counts": {
+            "eligible_parent_rows": len(eligible),
+            "unique_train_rows": unique_rows,
+            "unique_semantic_patterns": len(
+                {str(row["semantic_pattern_id"]) for row in selected}
+            ),
+            "exposures": exposures,
+            "logical_epochs": epochs,
+            "rows_per_epoch": rows_per_epoch,
+            "minimum_source_reuse": min(reuse.values()),
+            "maximum_source_reuse": max(reuse.values()),
+        },
+        "leakage_audit": {
+            "inherited_parent_manifest": str(parent / "manifest.json"),
+            "parent_passed": True,
+            "dataset_scope_enforced": True,
+            "unique_source_count_verified": len(selected_ids) == unique_rows,
+            "passed": True,
+        },
+        "input_sha256": {
+            "parent_manifest": file_sha256(parent / "manifest.json"),
+            "eligible": file_sha256(eligible_path),
+        },
+        "output_sha256": {"train": file_sha256(train_path)},
     }
     write_json(output / "manifest.json", manifest)
     return manifest

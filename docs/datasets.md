@@ -111,6 +111,18 @@ on model behavior.
 - Eligible pool: `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eligible.jsonl`
 - Exclusions: `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/excluded.jsonl`
 
+#### Exposure-matched scaling cells
+
+The first learning-curve derivative is `G1_GSM8K_U2000_E4500`. It selects
+2,000 unique source IDs and 2,000 semantic signatures from the frozen eligible
+pool, then creates exactly 4,500 deterministic training exposures. Every source
+appears two or three times, and each of ten logical epochs contains 450 rows.
+This matches G1-4500 on row exposures and optimizer steps while changing unique
+semantic diversity.
+
+- Manifest: `artifacts/paper1/gsm8k_scale_v1/u2000_e4500/manifest.json`
+- Training stream: `artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl`
+
 ### G1 development and historical test
 
 The run boundary projects the legacy mixed development and test artifacts onto

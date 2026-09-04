@@ -1,9 +1,10 @@
+from collections import Counter
 from copy import deepcopy
 from types import SimpleNamespace
 
 import pytest
 
-from ccpu.common.artifacts import read_jsonl, write_jsonl
+from ccpu.common.artifacts import read_jsonl, write_json, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.dsl_dataset.remote_analysis import _program_metrics
 from ccpu.paper1.asl_pilot_eval import score_asl
@@ -17,6 +18,7 @@ from ccpu.paper1.e3.components import component_labels
 from ccpu.paper1.e3.data import build_bottleneck_preference_data
 from ccpu.paper1.e3.data_scale import (
     build_d1_f0_data,
+    build_gsm8k_exposure_scale,
     build_gsm8k_f0_data,
     freeze_gsm8k_eval_views,
 )
@@ -343,6 +345,53 @@ def test_gsm8k_eval_freeze_rejects_training_pattern_leakage(tmp_path):
             test_path=test,
             output_dir=tmp_path / "eval",
         )
+
+
+def test_gsm8k_exposure_scale_balances_reuse_and_epochs(tmp_path):
+    parent = tmp_path / "parent"
+    eligible = []
+    for index in range(4):
+        source = _d1_source(
+            str(index),
+            f"item{index}.count = {index + 1}\nRETURN item{index}.count",
+            index + 1,
+        )
+        annotation = _d1_annotation(source)
+        eligible.append(
+            {
+                "dataset": "gsm8k",
+                "source_id": str(index),
+                "question": source["question"],
+                "target": source["target_fixture"],
+                "effective_scope": source["effective_scope"],
+                "semantic_pattern_id": f"pattern-{index}",
+                "source_record_sha256": source["record_sha256"],
+                "annotation_sha256": str(index).ljust(64, "a"),
+                "teacher": annotation["teacher"],
+                "recovery": None,
+            }
+        )
+    write_jsonl(parent / "eligible.jsonl", eligible)
+    write_json(
+        parent / "manifest.json",
+        {"dataset_scope": ["gsm8k"], "leakage_audit": {"passed": True}},
+    )
+    manifest = build_gsm8k_exposure_scale(
+        parent_dir=parent,
+        output_dir=tmp_path / "scale",
+        unique_rows=3,
+        exposures=6,
+        epochs=2,
+    )
+    train = read_jsonl(tmp_path / "scale" / "train.jsonl")
+    counts = Counter(row["parent_source_id"] for row in train)
+    assert len(train) == 6
+    assert len(counts) == 3
+    assert set(counts.values()) == {2}
+    assert {row["epoch_view"] for row in train} == {0, 1}
+    assert {row["dataset"] for row in train} == {"gsm8k"}
+    assert manifest["counts"]["minimum_source_reuse"] == 2
+    assert manifest["counts"]["maximum_source_reuse"] == 2
 
 
 def test_hard_negatives_are_executable_and_semantically_different():

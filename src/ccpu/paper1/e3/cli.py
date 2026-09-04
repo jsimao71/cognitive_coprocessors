@@ -13,6 +13,7 @@ from .data import (
 )
 from .data_scale import (
     build_d1_f0_data,
+    build_gsm8k_exposure_scale,
     build_gsm8k_f0_data,
     freeze_gsm8k_eval_views,
 )
@@ -55,6 +56,13 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_eval.add_argument("--dev", required=True)
     gsm8k_eval.add_argument("--test", required=True)
     gsm8k_eval.add_argument("--output-dir", required=True)
+    gsm8k_scale = commands.add_parser("prepare-gsm8k-scale")
+    gsm8k_scale.add_argument("--parent-dir", required=True)
+    gsm8k_scale.add_argument("--output-dir", required=True)
+    gsm8k_scale.add_argument("--unique-rows", type=int, required=True)
+    gsm8k_scale.add_argument("--exposures", type=int, default=4500)
+    gsm8k_scale.add_argument("--epochs", type=int, default=10)
+    gsm8k_scale.add_argument("--seed", type=int, default=11)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -145,6 +153,20 @@ def main(argv: list[str] | None = None) -> int:
             f"GSM8K dev={manifest['counts']['dev']['selected_gsm8k']} "
             f"test={manifest['counts']['test']['selected_gsm8k']} "
             f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-scale":
+        manifest = build_gsm8k_exposure_scale(
+            parent_dir=args.parent_dir,
+            output_dir=args.output_dir,
+            unique_rows=args.unique_rows,
+            exposures=args.exposures,
+            epochs=args.epochs,
+            seed=args.seed,
+        )
+        print(
+            f"GSM8K unique={manifest['counts']['unique_train_rows']} "
+            f"exposures={manifest['counts']['exposures']} -> {args.output_dir}"
         )
         return 0
     if args.command == "run-bottleneck":
