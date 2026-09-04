@@ -89,9 +89,10 @@ rank-8 adapter and 570 optimizer steps. Its first seed reaches 16/25 answers and
 23/25 executable programs, versus 11/25 and 19/25 for the frozen control, but
 strict path-sensitive semantic-state and return equivalence do not improve.
 Alpha-normalized return equivalence, which ignores arbitrary internal symbol
-names but retains the executed expression graph, rises from 10/25 to 14/25. We
-therefore treat this as a promising data-diversity result pending matched seed
-replication, not as a completed robustness claim.
+names but retains the executed expression graph, rises from 10/25 to 14/25. A
+second training seed reaches 13/25 answers, 24/25 execution, and 11/25
+alpha-normalized returns. We therefore treat this as a replicated but still
+imprecise data-diversity signal pending the third declared seed.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1641,8 +1642,8 @@ Q0's 565,160 because the remote programs are shorter.
 
 \begin{table}[t]
 \centering\small
-\caption{Frozen autonomous data-diversity comparison. D1 seed 11 is the first
-of three declared training seeds. Counts are exact on the same 25 programs.}
+\caption{Frozen autonomous data-diversity comparison. Two of three declared D1
+training seeds are complete. Counts are exact on the same 25 programs.}
 \label{tab:asl-d1-scale}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -1650,6 +1651,7 @@ Condition & Parse & Lower & Execute & State & Return & Answer\\
 \midrule
 Q0 Codex-450 repeated & 22 & 21 & 19 & 5 & 7 & 11\\
 D1 OpenRouter-4,500, seed 11 & 25 & 25 & 23 & 4 & 5 & 16\\
+D1 OpenRouter-4,500, seed 23 & 25 & 25 & 24 & 3 & 4 & 13\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1680,6 +1682,18 @@ teacher's canonical path vocabulary. The final epoch is the preregistered endpoi
 GiB peak XPU memory. Independent deterministic rescoring reproduces the stored
 scored-prediction hash byte for byte. Seeds 23 and 37 are matched confirmatory
 replications and must determine whether this data-diversity effect is durable.
+
+The first replication, seed 23, independently preserves the direction of the
+main runtime endpoints while reducing their magnitude. It reaches 13/25 answers
+and 24/25 executable programs. Relative to Q0, five identities become correct
+and three become incorrect (exact McNemar $p=.727$, exploratory); all five
+formerly non-executable cases are recovered with no execution loss
+($p=.0625$). Alpha-return equivalence reaches 11/25, exact alpha-state remains
+6/25, and mean alpha-state F1 rises from .595 to .631. Strict state and return
+equivalence are 3/25 and 4/25. Training takes 4,791 seconds and ends at
+development loss .319; its diagnostic minimum is epoch 8 at .316. Thus seed 23
+confirms improved answer, execution, and soft alpha-state behavior, but not a
+uniform exact-semantic gain. Seed 37 remains the final declared replication.
 
 \section{Preliminary XPU Pilot}
 
@@ -2096,13 +2110,13 @@ whole-program deficit to attribute grounding (.144 F1), dependency preservation
 operator F1; 6/20 state-inequivalent programs still obtain the correct answer.
 Matched adapter-capacity, memory-placement, semantic-weighting, ranking, and
 graph-bottleneck controls do not exceed the 11/25 whole-program control. In
-contrast, the first exposure-matched 4,500-program diversity seed reaches 16/25
-answers and 23/25 executable programs, driven by GSM8K and accompanied by better
-soft operator, source-fact, path, and state-component scores. Its strict state
-and return equivalence remain below the control, while alpha-normalized return
-and state equivalence improve; the paired 25-item interval is still wide. The
-next gate is therefore matched-seed confirmation of data diversity, not a
-stronger architecture claim.
+contrast, two exposure-matched 4,500-program diversity seeds reach 16/25 and
+13/25 answers, with 23/25 and 24/25 executable programs. The first is driven by
+GSM8K and improves soft operator, source-fact, path, and state-component scores;
+the second preserves smaller answer and alpha-state gains. Strict state and
+return equivalence remain below the control in both seeds, while alpha-normalized
+return and mean state equivalence improve. The next gate is the third matched
+seed, not a stronger architecture claim.
 
 \appendix
 \section{Deterministic Semantic Diagnostic Taxonomy}
