@@ -1,0 +1,27 @@
+{
+  "evaluator_commit": "bdcc3d6744a8978547bb4f7a7aa2d6586cfbfe68",
+  "local": {
+    "host": "DESKTOP-9IOCN3C",
+    "python": "3.11"
+  },
+  "method": "Transfer the frozen evaluation JSONL and completed prediction JSONL, run evaluator v2 independently, and compare the complete scored JSONL SHA-256.",
+  "remote": {
+    "host": "DESKTOP-FOA3OK5",
+    "python": "3.13.14",
+    "repository": "C:\\Users\\LeoPl\\git\\rd\\cognitive_coprocessors",
+    "ssh": "LeoPl@192.168.1.97"
+  },
+  "runs": {
+    "seed23": {
+      "byte_identical": true,
+      "local_scored_sha256": "f44e0fb332081809a6aebe796ebe0be2333236d4e9a1f12caf3cb66237edcd26",
+      "remote_scored_sha256": "f44e0fb332081809a6aebe796ebe0be2333236d4e9a1f12caf3cb66237edcd26"
+    },
+    "seed37": {
+      "byte_identical": true,
+      "local_scored_sha256": "d381d82bb815d5c2def0fd5e8fcfe3b5a7269ed77c25cc6c39ec7db80fb3b491",
+      "remote_scored_sha256": "d381d82bb815d5c2def0fd5e8fcfe3b5a7269ed77c25cc6c39ec7db80fb3b491"
+    }
+  },
+  "schema_version": "ccpu.paper1.cross_machine_rescore.v1"
+}

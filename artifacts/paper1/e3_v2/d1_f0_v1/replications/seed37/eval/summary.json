@@ -1,0 +1,84 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "alpha_return_equivalent": 0.5294117647058824,
+        "alpha_state_equivalent": 0.23529411764705882,
+        "dependency_correct": 0.058823529411764705,
+        "exact_asl": 0.0,
+        "executable": 0.8235294117647058,
+        "final_answer_correct": 0.6470588235294118,
+        "lowerable_to_ccir": 0.9411764705882353,
+        "parse_valid": 0.9411764705882353,
+        "semantic_lint_valid": 0.8235294117647058,
+        "semantic_return_equivalent": 0.11764705882352941,
+        "semantic_state_equivalent": 0.11764705882352941,
+        "type_valid": 0.8823529411764706
+      }
+    },
+    "tatqa": {
+      "count": 8,
+      "rates": {
+        "alpha_return_equivalent": 0.625,
+        "alpha_state_equivalent": 0.375,
+        "dependency_correct": 0.5,
+        "exact_asl": 0.0,
+        "executable": 1.0,
+        "final_answer_correct": 0.75,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 1.0,
+        "semantic_return_equivalent": 0.5,
+        "semantic_state_equivalent": 0.25,
+        "type_valid": 1.0
+      }
+    }
+  },
+  "component_mean_f1": {
+    "alpha_state": 0.6060359640359639,
+    "edges": 0.41300030128989734,
+    "operators": 0.8344588744588745,
+    "paths": 0.262847290640394,
+    "semantic_state": 0.3865268065268065,
+    "source_facts": 0.46922222222222226
+  },
+  "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+  "prediction_count": 25,
+  "predictions_sha256": "77884a382662ca4e2a3ccb865ea1c4be2ec42702ffa5fcce516ab2fd6ebc13b8",
+  "rates": {
+    "alpha_return_equivalent": 0.56,
+    "alpha_state_equivalent": 0.28,
+    "dependency_correct": 0.2,
+    "exact_asl": 0.0,
+    "executable": 0.88,
+    "final_answer_correct": 0.68,
+    "lowerable_to_ccir": 0.96,
+    "parse_valid": 0.96,
+    "semantic_lint_valid": 0.88,
+    "semantic_return_equivalent": 0.24,
+    "semantic_state_equivalent": 0.16,
+    "type_valid": 0.92
+  },
+  "run": {
+    "condition": "lora",
+    "demo_source_ids": [],
+    "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-E3-D1-F0-L0-r8-seed37",
+      "adapter_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\e3_v2\\d1_f0_v1\\replications\\seed37\\qwen_run\\adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "seed": 44017,
+    "shots": 0,
+    "train_split_sha256": "cb2083f39aa30415c371183f96417387db2ecc2cfa837ad71fa7f47667807079"
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v2",
+  "scored_predictions_sha256": "d381d82bb815d5c2def0fd5e8fcfe3b5a7269ed77c25cc6c39ec7db80fb3b491"
+}
