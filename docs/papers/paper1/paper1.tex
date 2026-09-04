@@ -1576,6 +1576,7 @@ lowering through ASL to CCIR; its JSON-to-ASL rate is 21/25. Counts are exact.}
 Condition & Parse & Lower & Execute & State & Return & Answer\\
 \midrule
 Q0 F0 ordinary likelihood & 22 & 21 & 19 & 5 & 7 & 11\\
+M0.5 F0 semantic weights & 21 & 21 & 18 & 3 & 6 & 9\\
 M0.6 F0 hard-negative rank & 22 & 20 & 13 & 1 & 2 & 7\\
 F4 L0 graph bottleneck    & 22 & 20 & 16 & 0 & 1 & 2\\
 \bottomrule
@@ -1589,6 +1590,18 @@ operators (.642 versus .691), dependencies/edges (.341 versus .443), and
 semantic state (.268 versus .434). Thus ranking the generated gold program over
 local AST corruptions does not transfer to autonomous decoding and degrades
 execution from 19/25 to 13/25. The 2.294M-parameter run takes 8,459 seconds.
+
+M0.5 raises the loss weight on paths, operators, literals, and RETURN while
+down-weighting other target tokens. It improves source-fact F1 (.521 versus
+.484), edge F1 (.470 versus .443), and operator F1 (.700 versus .691), but path
+F1 falls from .379 to .305 and answer accuracy falls from 11/25 to 9/25. The
+paired answer transition has two gains, four losses, and seven cases correct in
+both conditions. Its development objective reaches its unique minimum at epoch
+2 (.326 weighted, .337 ordinary) and deteriorates to .512/.486 by epoch 10,
+despite monotonically decreasing training loss. The final-checkpoint primary
+run takes 7,343 seconds. We therefore retain it as a negative matched endpoint
+and test the independently dev-motivated two-epoch duration as a labeled
+replication, not as a test-selected replacement.
 
 F4 demonstrates that a structured surface does not by itself repair grounding.
 Twenty-two predictions are valid JSON and 21 lower to ASL, yet only 16 execute
