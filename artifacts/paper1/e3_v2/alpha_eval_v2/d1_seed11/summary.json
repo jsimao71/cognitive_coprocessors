@@ -1,0 +1,65 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "alpha_return_equivalent": 0.5294117647058824,
+        "alpha_state_equivalent": 0.17647058823529413,
+        "dependency_correct": 0.11764705882352941,
+        "exact_asl": 0.0,
+        "executable": 0.8823529411764706,
+        "final_answer_correct": 0.5882352941176471,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 0.8235294117647058,
+        "semantic_return_equivalent": 0.058823529411764705,
+        "semantic_state_equivalent": 0.058823529411764705,
+        "type_valid": 1.0
+      }
+    },
+    "tatqa": {
+      "count": 8,
+      "rates": {
+        "alpha_return_equivalent": 0.625,
+        "alpha_state_equivalent": 0.5,
+        "dependency_correct": 0.5,
+        "exact_asl": 0.0,
+        "executable": 1.0,
+        "final_answer_correct": 0.75,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 1.0,
+        "semantic_return_equivalent": 0.5,
+        "semantic_state_equivalent": 0.375,
+        "type_valid": 1.0
+      }
+    }
+  },
+  "component_mean_f1": {
+    "alpha_state": 0.6916220446220447,
+    "edges": 0.443486509133568,
+    "operators": 0.8154783734783736,
+    "paths": 0.3930464731347085,
+    "semantic_state": 0.4487795537795538,
+    "source_facts": 0.5569815805109922
+  },
+  "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+  "prediction_count": 25,
+  "predictions_sha256": "37ef03dd80c2280739d55e5864458f0211e1a8ff84bb2201308f18df7c7d749a",
+  "rates": {
+    "alpha_return_equivalent": 0.56,
+    "alpha_state_equivalent": 0.28,
+    "dependency_correct": 0.24,
+    "exact_asl": 0.0,
+    "executable": 0.92,
+    "final_answer_correct": 0.64,
+    "lowerable_to_ccir": 1.0,
+    "parse_valid": 1.0,
+    "semantic_lint_valid": 0.88,
+    "semantic_return_equivalent": 0.2,
+    "semantic_state_equivalent": 0.16,
+    "type_valid": 1.0
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v2",
+  "scored_predictions_sha256": "721666bdf24a1a88a3a04fe6742df5702de55d11cd4ef2aaba71b812b507b8f0"
+}

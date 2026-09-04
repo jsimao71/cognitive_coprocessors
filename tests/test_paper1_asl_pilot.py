@@ -114,7 +114,31 @@ RETURN jessica.age_now"""
     assert metrics["executable"] is True
     assert metrics["semantic_return_equivalent"] is True
     assert metrics["semantic_state_equivalent"] is True
+    assert metrics["alpha_return_equivalent"] is True
+    assert metrics["alpha_state_equivalent"] is True
     assert metrics["final_answer_correct"] is True
+
+
+def test_alpha_semantic_scoring_ignores_internal_symbol_vocabulary():
+    reference = """item.price = 100
+item.discount = 20
+item.sale = item.price - item.discount
+RETURN item.sale"""
+    predicted = """x.base = 100
+x.offset = 20
+x.result = x.base - x.offset
+RETURN x.result"""
+    same_answer_wrong_graph = "x.result = 80\nRETURN x.result"
+
+    renamed_metrics = score_asl(reference, predicted, _scope())
+    assert renamed_metrics["semantic_return_equivalent"] is False
+    assert renamed_metrics["alpha_return_equivalent"] is True
+    assert renamed_metrics["alpha_state_equivalent"] is True
+    assert renamed_metrics["final_answer_correct"] is True
+
+    wrong_graph_metrics = score_asl(reference, same_answer_wrong_graph, _scope())
+    assert wrong_graph_metrics["final_answer_correct"] is True
+    assert wrong_graph_metrics["alpha_return_equivalent"] is False
 
 
 def test_semantic_scoring_handles_typed_but_unlowerable_program():

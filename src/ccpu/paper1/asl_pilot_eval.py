@@ -132,6 +132,39 @@ def _expression_signature(
     return (operation, *arguments)
 
 
+def _alpha_expression_signature(
+    node: dict[str, Any], assignments: dict[str, dict[str, Any]], stack: frozenset[str]
+) -> Any:
+    """Inline local bindings so arbitrary target names do not define equivalence."""
+
+    operation = str(node["op"])
+    if operation == "CONST":
+        return ("CONST", str(node.get("value")))
+    if operation == "REF":
+        path = str(node["path"])
+        if path in stack:
+            return ("CYCLE",)
+        if path in assignments:
+            return _alpha_expression_signature(
+                assignments[path], assignments, stack | {path}
+            )
+        return ("EXTERNAL", semantic_family(path))
+    arguments = [
+        _alpha_expression_signature(argument, assignments, stack)
+        for argument in node.get("args", [])
+    ]
+    if operation in {"ADD", "MUL", "SUM", "MIN", "MAX"}:
+        flattened = []
+        equivalent = "ADD" if operation == "SUM" else operation
+        for argument in arguments:
+            if isinstance(argument, tuple) and argument and argument[0] == equivalent:
+                flattened.extend(argument[1:])
+            else:
+                flattened.append(argument)
+        return (equivalent, *sorted(flattened, key=repr))
+    return (operation, *arguments)
+
+
 def _state_signatures(validation: dict[str, Any]) -> tuple[Counter[Any], Any]:
     assignments = {
         str(item["operation"]["target"]): item["operation"]["expr"]
@@ -161,6 +194,32 @@ def _state_signatures(validation: dict[str, Any]) -> tuple[Counter[Any], Any]:
     return states, returned
 
 
+def _alpha_state_signatures(validation: dict[str, Any]) -> tuple[Counter[Any], Any]:
+    assignments = {
+        str(item["operation"]["target"]): item["operation"]["expr"]
+        for item in validation["ccir"]["operations"]
+        if item["operation"]["op"] == "SET"
+    }
+    states = Counter(
+        _alpha_expression_signature(expression, assignments, frozenset({path}))
+        for path, expression in assignments.items()
+    )
+    return_operation = next(
+        (
+            item["operation"]["expr"]
+            for item in reversed(validation["ccir"]["operations"])
+            if item["operation"]["op"] == "RETURN"
+        ),
+        None,
+    )
+    returned = (
+        _alpha_expression_signature(return_operation, assignments, frozenset())
+        if return_operation is not None
+        else None
+    )
+    return states, returned
+
+
 def _decimal(value: Any) -> Decimal:
     return Decimal(str(value))
 
@@ -179,6 +238,8 @@ def score_asl(reference: str, predicted: str, scope: dict[str, Any]) -> dict[str
         "dependency_correct": False,
         "semantic_return_equivalent": False,
         "semantic_state_equivalent": False,
+        "alpha_return_equivalent": False,
+        "alpha_state_equivalent": False,
         "final_answer_correct": False,
         "errors": [],
     }
@@ -231,6 +292,16 @@ def score_asl(reference: str, predicted: str, scope: dict[str, Any]) -> dict[str
     result["semantic_state_metrics"] = state_metrics
     result["semantic_state_equivalent"] = state_metrics["f1"] == 1.0
     result["semantic_return_equivalent"] = reference_return == predicted_return
+    reference_alpha_states, reference_alpha_return = _alpha_state_signatures(
+        reference_validation
+    )
+    predicted_alpha_states, predicted_alpha_return = _alpha_state_signatures(
+        predicted_validation
+    )
+    alpha_state_metrics = _multiset_f1(reference_alpha_states, predicted_alpha_states)
+    result["alpha_state_metrics"] = alpha_state_metrics
+    result["alpha_state_equivalent"] = alpha_state_metrics["f1"] == 1.0
+    result["alpha_return_equivalent"] = reference_alpha_return == predicted_alpha_return
     if result["executable"]:
         scope_id = str(scope["id"])
         expected = reference_validation["execution"]["workspace"][scope_id]["returned"]
@@ -275,6 +346,8 @@ def score_asl_delta(
         result[f"{name}_metrics"] = {"precision": 0.0, "recall": 0.0, "f1": 0.0}
     result["semantic_state_metrics"] = {"precision": 0.0, "recall": 0.0, "f1": 0.0}
     result["semantic_return_equivalent"] = False
+    result["alpha_state_metrics"] = {"precision": 0.0, "recall": 0.0, "f1": 0.0}
+    result["alpha_return_equivalent"] = False
     if not reference_validation["lower_verified"] or not predicted_validation["lower_verified"]:
         return result
     reference_components = _components(reference_validation)
@@ -289,6 +362,16 @@ def score_asl_delta(
     predicted_states, predicted_return = _state_signatures(predicted_validation)
     result["semantic_state_metrics"] = _multiset_f1(reference_states, predicted_states)
     result["semantic_return_equivalent"] = reference_return == predicted_return
+    reference_alpha_states, reference_alpha_return = _alpha_state_signatures(
+        reference_validation
+    )
+    predicted_alpha_states, predicted_alpha_return = _alpha_state_signatures(
+        predicted_validation
+    )
+    result["alpha_state_metrics"] = _multiset_f1(
+        reference_alpha_states, predicted_alpha_states
+    )
+    result["alpha_return_equivalent"] = reference_alpha_return == predicted_alpha_return
     return result
 
 
@@ -440,11 +523,20 @@ def analyze_asl_predictions(
         "dependency_correct",
         "semantic_return_equivalent",
         "semantic_state_equivalent",
+        "alpha_return_equivalent",
+        "alpha_state_equivalent",
         "final_answer_correct",
     )
-    component_names = ("paths", "source_facts", "operators", "edges", "semantic_state")
+    component_names = (
+        "paths",
+        "source_facts",
+        "operators",
+        "edges",
+        "semantic_state",
+        "alpha_state",
+    )
     summary = {
-        "schema_version": "ccpu.paper1.asl_evaluation.v1",
+        "schema_version": "ccpu.paper1.asl_evaluation.v2",
         "prediction_count": len(scored),
         "rates": {
             name: sum(bool(row["metrics"].get(name)) for row in scored) / len(scored)
