@@ -1755,6 +1755,18 @@ source overlap and zero train/test pattern overlap. The larger untouched
 confirmation set will be drawn from the official GSM8K test split and may not
 guide architecture or hyperparameter selection.
 
+Before new confirmation inference, we freeze the pinned official
+\texttt{openai/gsm8k} test split. Its full view contains all 1,319 test
+identities. A 250-item diagnostic projection, selected with fixed seed 22,901,
+balances solution-step strata at 83 low, 84 medium, and 83 high cases. Exact
+normalized-question hashing finds no overlap with the U2000/E4500 training
+freeze. Only question text is rendered into the model prompt; benchmark
+rationales and answers remain scorer-only fields. Because official GSM8K
+supplies no gold ASL, this evaluation measures syntax, lowering, type validity,
+execution, and final-answer accuracy, but not teacher-program component or
+state equivalence. Both views are confirmation sets and may not select
+checkpoints or experimental settings.
+
 \subsection{GSM8K-Only Diversity and Repetition}
 
 We train three G1-GSM8K adapters on the 4,500-unique-program freeze

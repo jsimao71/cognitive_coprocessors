@@ -18,6 +18,11 @@ from .data_scale import (
     freeze_gsm8k_eval_views,
 )
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
+from .gsm8k_confirmatory import (
+    freeze_official_gsm8k,
+    merge_official_gsm8k_shards,
+    run_official_gsm8k_shard,
+)
 from .selection import select_semantic_checkpoint
 
 
@@ -63,6 +68,28 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_scale.add_argument("--exposures", type=int, default=4500)
     gsm8k_scale.add_argument("--epochs", type=int, default=10)
     gsm8k_scale.add_argument("--seed", type=int, default=11)
+    gsm8k_official = commands.add_parser("prepare-gsm8k-official")
+    gsm8k_official.add_argument("--source", required=True)
+    gsm8k_official.add_argument("--train", action="append", required=True)
+    gsm8k_official.add_argument("--output-dir", required=True)
+    gsm8k_official.add_argument("--expected-sha256", required=True)
+    gsm8k_official.add_argument("--expected-rows", type=int, default=1319)
+    gsm8k_official.add_argument("--confirmatory-size", type=int, default=250)
+    gsm8k_official.add_argument("--seed", type=int, default=22901)
+    gsm8k_run = commands.add_parser("run-gsm8k-official-shard")
+    gsm8k_run.add_argument("--eval", required=True)
+    gsm8k_run.add_argument("--config", required=True)
+    gsm8k_run.add_argument("--adapter-path", required=True)
+    gsm8k_run.add_argument("--adapter-id", required=True)
+    gsm8k_run.add_argument("--output-dir", required=True)
+    gsm8k_run.add_argument("--shard-index", type=int, required=True)
+    gsm8k_run.add_argument("--shard-count", type=int, required=True)
+    gsm8k_run.add_argument("--seed", type=int, default=44017)
+    gsm8k_run.add_argument("--checkpoint-every", type=int, default=5)
+    gsm8k_merge = commands.add_parser("merge-gsm8k-official")
+    gsm8k_merge.add_argument("--eval", required=True)
+    gsm8k_merge.add_argument("--shard-dir", action="append", required=True)
+    gsm8k_merge.add_argument("--output-dir", required=True)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -167,6 +194,49 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K unique={manifest['counts']['unique_train_rows']} "
             f"exposures={manifest['counts']['exposures']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-official":
+        manifest = freeze_official_gsm8k(
+            source_path=args.source,
+            train_paths=args.train,
+            output_dir=args.output_dir,
+            expected_sha256=args.expected_sha256,
+            expected_rows=args.expected_rows,
+            confirmatory_size=args.confirmatory_size,
+            seed=args.seed,
+        )
+        print(
+            f"GSM8K official full={manifest['counts']['full']} "
+            f"confirmatory={manifest['counts']['confirmatory']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "run-gsm8k-official-shard":
+        summary = run_official_gsm8k_shard(
+            eval_path=args.eval,
+            model_config=read_json(args.config),
+            adapter_path=args.adapter_path,
+            adapter_id=args.adapter_id,
+            output_dir=args.output_dir,
+            shard_index=args.shard_index,
+            shard_count=args.shard_count,
+            seed=args.seed,
+            checkpoint_every=args.checkpoint_every,
+        )
+        print(
+            f"GSM8K shard {args.shard_index}: answer="
+            f"{summary['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "merge-gsm8k-official":
+        summary = merge_official_gsm8k_shards(
+            eval_path=args.eval,
+            shard_dirs=args.shard_dir,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"GSM8K merged={summary['prediction_count']} answer="
+            f"{summary['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
         )
         return 0
     if args.command == "run-bottleneck":

@@ -128,6 +128,24 @@ The first seed-11 run is complete. On `TEST-GSM17`, U2000/E4500 reaches
 the same-seed G1-4500 condition. This is exploratory single-seed evidence and
 requires replication before it changes the registered dataset policy.
 
+#### Official GSM8K confirmation freeze
+
+`GSM8K_OFFICIAL_TEST_V1` freezes the pinned `openai/gsm8k` official test
+Parquet at revision `a05f38c23a0e9ab0b71de8a2b4947e20f74f68f7`. The source
+contains 1,319 rows and has SHA-256
+`ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59`.
+The full view retains all 1,319 identities for answer/execution confirmation.
+A separately frozen 250-row diagnostic view uses seed 22,901 and balances the
+observed solution-step strata at 83 low, 84 medium, and 83 high examples.
+
+The model prompt contains only the question. Gold rationales and final answers
+are never passed to generation. Final answers are retained only in the scoring
+record because official GSM8K does not provide teacher ASL. Exact normalized
+question hashing finds zero overlaps with the U2000/E4500 training freeze. The
+manifest and immutable views are under
+`artifacts/paper1/gsm8k_scale_v1/official_test_v1/`. Neither view may be used
+for checkpoint, architecture, objective, or hyperparameter selection.
+
 ### G1 development and historical test
 
 The run boundary projects the legacy mixed development and test artifacts onto

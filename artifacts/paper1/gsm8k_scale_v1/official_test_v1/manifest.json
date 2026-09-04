@@ -1,0 +1,43 @@
+{
+  "answers_visible_to_model": false,
+  "counts": {
+    "confirmatory": 250,
+    "confirmatory_by_stratum": {
+      "high": 83,
+      "low": 83,
+      "medium": 84
+    },
+    "full": 1319,
+    "full_by_stratum": {
+      "high": 225,
+      "low": 440,
+      "medium": 654
+    }
+  },
+  "dataset": "openai/gsm8k",
+  "leakage_audit": {
+    "exact_normalized_question_overlap": [],
+    "passed": true,
+    "train_files": {
+      "artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\train.jsonl": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+    }
+  },
+  "output_sha256": {
+    "confirmatory": "3314a09bcd409d66f5bcd3dfe536cf0dc2d7e6ac8f106f876129d2144a6dd0e9",
+    "full": "fd7117fde7b9361784fb3e0c94269d411dd468c2e64cb8bd7fe3bf105813b044"
+  },
+  "rationales_visible_to_model": false,
+  "revision": "a05f38c23a0e9ab0b71de8a2b4947e20f74f68f7",
+  "roles": {
+    "confirmatory": "stratified frozen diagnostic view; never tune",
+    "full": "untouched answer/execution confirmation; never tune"
+  },
+  "schema_version": "ccpu.paper1.gsm8k_confirmatory_manifest.v1",
+  "selection_seed": 22901,
+  "source": {
+    "expected_rows": 1319,
+    "path": "C:\\Users\\j.simao\\.cache\\ccpu-public-v1\\openai_gsm8k\\main\\test\\0000.parquet",
+    "sha256": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59"
+  },
+  "split": "test"
+}
