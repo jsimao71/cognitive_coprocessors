@@ -1540,6 +1540,52 @@ multi-seed confirmation for any cell from this checkpoint. The 25-program
 sample remains too small for a definitive null claim; subsequent experiments
 first increase genuine semantic coverage and retain Q0 as the frozen control.
 
+\subsection{Semantic-Gradient and Bottleneck Controls}
+
+We next test two inexpensive explanations for Q0's binding errors while keeping
+the pinned Qwen revision, rank-8 QKVO placement, ten-epoch schedule, frozen
+source split, zero-shot prompt, and autonomous NL-only test fixed. M0.6 adds a
+pairwise objective over deterministic within-example corruptions of paths,
+dependencies, operators, source facts, and query targets. F4 instead predicts a
+JSON symbol table and expression graph that deterministically lowers to F0 ASL;
+its L0 condition uses ordinary token likelihood, isolating representation from
+semantic reweighting.
+
+\begin{table}[t]
+\centering\small
+\caption{Frozen autonomous 25-program semantic controls. F4 Lower is successful
+lowering through ASL to CCIR; its JSON-to-ASL rate is 21/25. Counts are exact.}
+\label{tab:asl-semantic-controls}
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Parse & Lower & Execute & State & Return & Answer\\
+\midrule
+Q0 F0 ordinary likelihood & 22 & 21 & 19 & 5 & 7 & 11\\
+M0.6 F0 hard-negative rank & 22 & 20 & 13 & 1 & 2 & 7\\
+F4 L0 graph bottleneck    & 22 & 20 & 16 & 0 & 1 & 2\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+M0.6 reaches 100\% pairwise training accuracy by epoch 3 and retains it at the
+final epoch, but loses six Q0 answers while gaining only two. Its component F1
+also falls for paths (.317 versus .379), source facts (.384 versus .484),
+operators (.642 versus .691), dependencies/edges (.341 versus .443), and
+semantic state (.268 versus .434). Thus ranking the generated gold program over
+local AST corruptions does not transfer to autonomous decoding and degrades
+execution from 19/25 to 13/25. The 2.294M-parameter run takes 8,459 seconds.
+
+F4 demonstrates that a structured surface does not by itself repair grounding.
+Twenty-two predictions are valid JSON and 21 lower to ASL, yet only 16 execute
+and two obtain the answer. Both answers are GSM8K cases; TAT-QA falls from Q0's
+7/8 to 0/8. Development likelihood is best at epoch 3 (.182) and deteriorates
+to .223 at epoch 10 while training likelihood continues to improve; the run
+takes 9,655 seconds. These single-seed controls reject syntax substitution and
+hard-negative ranking as stand-alone solutions. They motivate separately
+declared semantic weighting, dev-only checkpoint selection, and a
+leakage-audited increase in genuine semantic training programs; no test result
+is used for checkpoint selection.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
