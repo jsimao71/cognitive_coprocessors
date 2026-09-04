@@ -1523,6 +1523,9 @@ Q0 plain F0 LoRA & 2.294M & 0.507 & 22/25 & 19/25 & 7/25 & 11/25 & 113.9\\
 Q1 context memory & 2.294M & 0.339 & 23/25 & 18/25 & 6/25 & 6/25 & 133.4\\
 Q2 side cross-attn. & 19.072M & 0.486 & 22/25 & 16/25 & 5/25 & 10/25 & 136.3\\
 Q3 native merged K/V & 2.295M & 0.332 & 22/25 & 19/25 & 6/25 & 10/25 & 128.2\\
+Q3S1 capture delta & 4.589M & 0.343 & 22/25 & 16/25 & 5/25 & 8/25 & 147.1\\
+Q3S2 separate LoRAs & 4.589M & 0.334 & 22/25 & 17/25 & 3/25 & 6/25 & 147.1\\
+Q3S3 hybrid LoRAs & 3.442M & 0.349 & 22/25 & 19/25 & 2/25 & 9/25 & 148.1\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1539,6 +1542,18 @@ diagnostic architecture, not a positive winner. We therefore do not launch
 multi-seed confirmation for any cell from this checkpoint. The 25-program
 sample remains too small for a definitive null claim; subsequent experiments
 first increase genuine semantic coverage and retain Q0 as the frozen control.
+
+We also complete the planned Q3 adapter-specialization controls. Q3S1 adds an
+ASL-specific capture delta, Q3S2 gives NL and ASL fully separate LoRAs, and Q3S3
+uses modality-specific lower adapters with a shared upper adapter. None improves
+over Q0. Q3S3 is the strongest specialization at 9/25 answers and preserves
+Q0's 19/25 execution, but reaches only 2/25 semantic returns. Q3S2 performs no
+better than serialized context despite doubling the LoRA budget. Thus forcing
+two surface languages through specialized adapters does not yield a measured
+autonomous semantic advantage in this configuration; lower development loss is
+again not predictive of answer or semantic-return improvement. These results
+close the single-seed specialization branch until either genuine semantic
+coverage or a stronger autonomous alignment objective supplies a positive gate.
 
 \subsection{Semantic-Gradient and Bottleneck Controls}
 

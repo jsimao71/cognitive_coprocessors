@@ -1,0 +1,259 @@
+{
+  "adapter_files": {
+    "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061"
+  },
+  "adapter_specialization": {
+    "adapters": {
+      "asl_lower": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "nl_lower": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "shared_upper": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    "capture": [
+      "shared_upper",
+      "asl_lower"
+    ],
+    "decode": [
+      "shared_upper",
+      "nl_lower"
+    ],
+    "split_layer": 14,
+    "strategy": "hybrid"
+  },
+  "autonomous_dev_loss": 0.34876043677330015,
+  "config_sha256": "af23411f0956fac3a416407c498d8facf2c613d9b37ec09ae246cc0d636ce067",
+  "dev_rows": 25,
+  "dev_sha256": "9456759a8b17197ce6cc8ff947d9ce52e764bcd4c1dcf9b1b6ffa66ea399666c",
+  "device": "xpu",
+  "dtype": "float16",
+  "history": [
+    {
+      "epoch": 1,
+      "mean_train_loss": 0.4575333398757761,
+      "regime_counts": {
+        "autonomous": 184,
+        "full": 104,
+        "partial": 162
+      }
+    },
+    {
+      "epoch": 2,
+      "mean_train_loss": 0.17659166848594193,
+      "regime_counts": {
+        "autonomous": 196,
+        "full": 116,
+        "partial": 138
+      }
+    },
+    {
+      "epoch": 3,
+      "mean_train_loss": 0.14026585549834028,
+      "regime_counts": {
+        "autonomous": 189,
+        "full": 113,
+        "partial": 148
+      }
+    },
+    {
+      "epoch": 4,
+      "mean_train_loss": 0.11555037345077532,
+      "regime_counts": {
+        "autonomous": 188,
+        "full": 108,
+        "partial": 154
+      }
+    },
+    {
+      "epoch": 5,
+      "mean_train_loss": 0.10511315847320171,
+      "regime_counts": {
+        "autonomous": 188,
+        "full": 113,
+        "partial": 149
+      }
+    },
+    {
+      "epoch": 6,
+      "mean_train_loss": 0.07955692102592568,
+      "regime_counts": {
+        "autonomous": 163,
+        "full": 129,
+        "partial": 158
+      }
+    },
+    {
+      "epoch": 7,
+      "mean_train_loss": 0.07733644788772734,
+      "regime_counts": {
+        "autonomous": 176,
+        "full": 120,
+        "partial": 154
+      }
+    },
+    {
+      "epoch": 8,
+      "mean_train_loss": 0.06801394300677607,
+      "regime_counts": {
+        "autonomous": 173,
+        "full": 115,
+        "partial": 162
+      }
+    },
+    {
+      "epoch": 9,
+      "mean_train_loss": 0.06167343159374367,
+      "regime_counts": {
+        "autonomous": 187,
+        "full": 120,
+        "partial": 143
+      }
+    },
+    {
+      "epoch": 10,
+      "mean_train_loss": 0.05146369819186576,
+      "regime_counts": {
+        "autonomous": 179,
+        "full": 107,
+        "partial": 164
+      }
+    }
+  ],
+  "mean_train_loss": 0.13330988374900737,
+  "model": {
+    "adapter_id": "Qwen3-0.6B-ASL-Matrix-Q3S3-Hybrid-r8-seed11",
+    "dtype": "float16",
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "optimizer_steps": 570,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "safetensors": "0.8.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "parameter_report": {
+    "adapter_trainable_parameters": {
+      "asl_lower": 1146880,
+      "nl_lower": 1146880,
+      "shared_upper": 1146880
+    },
+    "capture_adapters": [
+      "shared_upper",
+      "asl_lower"
+    ],
+    "decode_adapters": [
+      "shared_upper",
+      "nl_lower"
+    ],
+    "frozen_parameters": 596049920,
+    "lora_trainable_parameters": 3440640,
+    "memory_patch_trainable_parameters": 1024,
+    "mode": "native_kv",
+    "other_trainable_parameters": 3440640,
+    "patched_layers": 4,
+    "total_parameters": 599491584,
+    "total_trainable_parameters": 3441664
+  },
+  "patch": {
+    "layer_indices": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "max_external_length": 640,
+    "mode": "native_kv"
+  },
+  "peak_memory_bytes": 8387518976,
+  "regime_counts": {
+    "autonomous": 1823,
+    "full": 1145,
+    "partial": 1532
+  },
+  "resumed_from_optimizer_step": 0,
+  "run_id": "q3s3-qwen3-0.6b-native-kv-hybrid-r8-seed11",
+  "schema_version": "ccpu.paper1.qwen_patch_training.v1",
+  "teacher_tokens_processed": 297331,
+  "token_audit": {
+    "dev_max_full_tokens": 787,
+    "dev_truncated_rows": 0,
+    "train_max_external_tokens": 354,
+    "train_max_full_tokens": 1010,
+    "train_truncated_rows": 0
+  },
+  "train_rows": 4500,
+  "train_sha256": "8011eb1c29f01035b283504bc7ca477559ed0d87393e2bcb78c3784ee6f93561",
+  "trainable_patch_state_sha256": "5b278f5ce635fad1a2dfa0e6e58b039aef011359571dc7c7723ffd9384b0fcdf",
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "checkpoint_every_optimizer_steps": 50,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 10,
+    "evaluate_each_epoch": false,
+    "gradient_accumulation_steps": 8,
+    "gradient_checkpointing": false,
+    "learning_rate": 0.0002,
+    "logical_epoch_field": null,
+    "max_length": 1536,
+    "rank": 8,
+    "reject_truncation": true,
+    "seed": 99173,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 565160,
+  "wall_time_seconds": 8885.755346799997
+}
