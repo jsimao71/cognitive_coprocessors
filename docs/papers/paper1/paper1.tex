@@ -83,6 +83,13 @@ reaches 6/25. The small, negative oracle gap and high delta validity localize th
 remaining failure to semantic grounding and lost global context rather than
 state-error propagation. Restoring the full question while retaining local-delta
 prediction recovers 11/25, equal to whole-program synthesis but not better.
+An exposure-matched OpenRouter diversity cell then replaces ten repeats of 450
+programs with 4,500 unique, leakage-audited programs while retaining the same
+rank-8 adapter and 570 optimizer steps. Its first seed reaches 16/25 answers and
+23/25 executable programs, versus 11/25 and 19/25 for the frozen control, but
+strict semantic-state and return equivalence do not improve. We therefore treat
+this as a promising data-diversity result pending matched seed replication, not
+as a completed robustness claim.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1105,8 +1112,11 @@ conversion, execution, and semantic checks. Across all generated responses,
 89.0\% execute to the benchmark answer and 98.7\% pass semantic lint. These
 rates are automatic screening diagnostics, not manual semantic adjudication.
 The remote corpus remains provenance-separated and is excluded from every
-training, development, and test result reported here; a later experiment may
-compare it against the fixed 500-program Codex corpus without mixing teachers.
+preceding training, development, and test result. Conservative recovery over
+the original response envelopes raises the strict pool to 6,989 unique source
+programs. The D1 experiment below draws a fixed, leakage-audited 4,500-program
+training sample from that pool without mixing remote and Codex teachers within
+a condition.
 
 \subsection{Incremental executed-state compiler}
 
@@ -1614,6 +1624,52 @@ declared semantic weighting, dev-only checkpoint selection, and a
 leakage-audited increase in genuine semantic training programs; no test result
 is used for checkpoint selection.
 
+\subsection{OpenRouter Data-Diversity Scale Control}
+
+We next hold model revision, QKVO rank, learning rate, gradient accumulation,
+570 optimizer steps, zero-shot prompt, and frozen development/test identities
+fixed while changing training diversity. Q0 repeats 450 Codex programs for ten
+epochs. D1 instead partitions 4,500 distinct strict OpenRouter programs into ten
+disjoint 450-row logical epoch views. The selected sample contains 4,044 GSM8K
+and 456 TAT-QA rows spanning 4,208 normalized signatures. It has zero source-ID
+overlap with frozen development or test and zero overlap with the 23 frozen test
+signature families. No row is truncated. This is exposure matched by rows and
+optimizer steps, but not by target tokens: D1 uses 435,971 target tokens versus
+Q0's 565,160 because the remote programs are shorter.
+
+\begin{table}[t]
+\centering\small
+\caption{Frozen autonomous data-diversity comparison. D1 seed 11 is the first
+of three declared training seeds. Counts are exact on the same 25 programs.}
+\label{tab:asl-d1-scale}
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Parse & Lower & Execute & State & Return & Answer\\
+\midrule
+Q0 Codex-450 repeated & 22 & 21 & 19 & 5 & 7 & 11\\
+D1 OpenRouter-4,500, seed 11 & 25 & 25 & 23 & 4 & 5 & 16\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+D1 raises final answers from 44\% to 64\% (95\% Wilson interval
+.445--.798) and shifts seven identities from wrong to correct while losing two
+(two-sided exact McNemar $p=.180$, exploratory). The gain is concentrated in
+GSM8K, which rises from 4/17 to 10/17; TAT-QA changes from 7/8 to 6/8. Syntax and
+runtime usability improve monotonically: parse validity reaches 25/25,
+lowering and typing 25/25, and execution 23/25. Mean operator F1 rises from
+.691 to .815, source-fact F1 from .484 to .557, path F1 from .379 to .393, and
+semantic-state component F1 from .434 to .449; edge F1 is unchanged at .443.
+However, strict state equivalence falls from 5/25 to 4/25 and strict return
+equivalence from 7/25 to 5/25. Thus this seed provides a substantial
+answer/executability signal and improved soft semantic components, but not a
+uniform exact-semantic win. The final epoch is the preregistered endpoint
+(development loss .315); epoch 9 has the lowest diagnostic development loss
+(.306) and is not substituted post hoc. Training takes 4,753 seconds and 4.41
+GiB peak XPU memory. Independent deterministic rescoring reproduces the stored
+scored-prediction hash byte for byte. Seeds 23 and 37 are matched confirmatory
+replications and must determine whether this data-diversity effect is durable.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -2027,8 +2083,14 @@ particularly on multi-clause GSM8K. Fine-grained replay localizes the strict
 whole-program deficit to attribute grounding (.144 F1), dependency preservation
 (.113 F1), relation direction (12/30), and RETURN grounding (7/25), despite .695
 operator F1; 6/20 state-inequivalent programs still obtain the correct answer.
-The next gate is therefore matched adapter-capacity and placement diagnosis
-rather than recovery from poisoned runtime state.
+Matched adapter-capacity, memory-placement, semantic-weighting, ranking, and
+graph-bottleneck controls do not exceed the 11/25 whole-program control. In
+contrast, the first exposure-matched 4,500-program diversity seed reaches 16/25
+answers and 23/25 executable programs, driven by GSM8K and accompanied by better
+soft operator, source-fact, path, and state-component scores. Its strict state
+and return equivalence remain below the control, and the paired 25-item interval
+is wide. The next gate is therefore matched-seed confirmation of data diversity,
+not a stronger architecture claim.
 
 \appendix
 \section{Deterministic Semantic Diagnostic Taxonomy}
