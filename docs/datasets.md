@@ -1,0 +1,211 @@
+# Dataset Registry
+
+This file records dataset roles, frozen counts, provenance, and leakage policy
+for the cognitive-coprocessor papers. Counts here refer to local frozen
+artifacts unless explicitly marked as approximate upstream sizes.
+
+## Paper 1 Scope
+
+Paper 1 now studies semantic compilation for simple arithmetic word problems.
+All newly created Paper 1 training, development, historical-test,
+confirmatory, and robustness artifacts must be arithmetic-only.
+
+- The immediate dataset is GSM8K only.
+- TAT-QA is retired from all new Paper 1 work.
+- Legacy mixed GSM8K/TAT-QA artifacts remain immutable provenance.
+- A legacy mixed checkpoint must never be described as GSM8K-only.
+- New dataset and checkpoint IDs must identify their corpus scope.
+
+Table/document retrieval belongs to the retrieval and heterogeneous-runtime
+papers rather than the forward Paper 1 experiment ladder.
+
+## Current Paper 1 Inventory
+
+### Upstream materialization
+
+| Dataset and upstream split | Local source rows | Current role |
+|---|---:|---|
+| GSM8K `train` | 7,473 | Annotation source and current training universe |
+| TAT-QA `development`, arithmetic-compatible subset | 706 | Legacy provenance only; retired from Paper 1 |
+| **Total OpenRouter source requests** | **8,179** | Historical annotation campaign |
+
+The current OpenRouter campaign did not materialize or annotate the official
+GSM8K test split. That split remains the intended source for the larger
+untouched confirmatory evaluation.
+
+Source manifests:
+
+- `artifacts/paper1/dsl/openrouter_full_v1/inputs/gsm8k_full.manifest.json`
+- `artifacts/paper1/dsl/openrouter_full_v1/inputs/tatqa_arithmetic_full.manifest.json`
+
+### Final OpenRouter strict corpus
+
+"Strict-valid" means that the generated ASL passed deterministic syntax,
+lowering, type, execution, semantic-lint, and final-answer checks. It does not
+mean that every symbolic path was manually reviewed or that strict-valid rows
+form an untouched benchmark test set.
+
+| Dataset | Source rows | Strict-valid ASL | Strict yield |
+|---|---:|---:|---:|
+| GSM8K `train` | 7,473 | 6,569 | 87.9% |
+| TAT-QA `development` | 706 | 480 | 68.0% |
+| **Total** | **8,179** | **7,049** | **86.2%** |
+
+Final corpus:
+
+- `artifacts/paper1/dsl/openrouter_full_v1/recovery_v2/consolidated_run3/combined_strict.jsonl`
+- `artifacts/paper1/dsl/openrouter_full_v1/recovery_v2/consolidated_run3/summary.json`
+
+The final strict corpus is annotation material. Membership in it does not by
+itself assign a record to training, development, or test.
+
+### Legacy D1 mixed training freeze
+
+D1 was frozen before the final recovery additions. It trained all three
+reported seeds on the same 4,500 unique programs:
+
+| Dataset | D1 training rows |
+|---|---:|
+| GSM8K | 4,044 |
+| TAT-QA | 456 |
+| **Total** | **4,500** |
+
+D1 excluded the then-frozen development/test identities and protected test
+semantic patterns. Its manifest reports zero selected source-ID overlap and
+zero protected-pattern overlap. D1 is historical mixed-data evidence and is
+not the forward Paper 1 corpus.
+
+- Manifest: `artifacts/paper1/e3_v2/d1_f0_v1/manifest.json`
+- Training rows: `artifacts/paper1/e3_v2/d1_f0_v1/train.jsonl`
+- Replication summary:
+  `artifacts/paper1/e3_v2/d1_f0_v1/replications/aggregate/summary.json`
+
+Relative to the final strict corpus, 2,549 strict-valid annotations were not
+used by D1: 2,525 GSM8K and 24 TAT-QA. These are unused annotation candidates,
+not an official public test set.
+
+### G1_GSM8K forward training freeze
+
+`G1_GSM8K` is the first forward GSM8K-only corpus. The builder reads the final
+strict annotation corpus but rejects every non-GSM8K annotation at the data
+boundary.
+
+| Stage | Count |
+|---|---:|
+| Final strict corpus input | 7,049 |
+| Non-GSM8K annotations scope-rejected | 480 |
+| Strict GSM8K programs | 6,569 |
+| Frozen-identity or protected-pattern exclusions | 29 |
+| Eligible GSM8K programs | 6,540 |
+| Eligible semantic signatures | 6,375 |
+| Selected training programs | 4,500 |
+| Selected semantic signatures | 4,500 |
+| Eligible programs outside training | 2,040 |
+
+The 2,040 records outside G1 training are an internal reserve. They have not
+been registered as a confirmatory test and must not be selected post hoc based
+on model behavior.
+
+- Manifest: `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/manifest.json`
+- Training rows: `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/train.jsonl`
+- Eligible pool: `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eligible.jsonl`
+- Exclusions: `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/excluded.jsonl`
+
+### G1 development and historical test
+
+The run boundary projects the legacy mixed development and test artifacts onto
+GSM8K before model training or evaluation:
+
+| Role | Mixed input | GSM8K selected | TAT-QA scope-rejected |
+|---|---:|---:|---:|
+| Development, checkpoint selection only | 25 | 17 | 8 |
+| Historical paired test (`TEST-GSM17`) | 25 | 17 | 8 |
+
+The split manifest verifies:
+
+- zero train/development source overlap;
+- zero train/test source overlap;
+- zero development/test source overlap;
+- zero train/test protected semantic-pattern overlap.
+
+The archived mixed `TEST-25` and old scores remain available for historical
+reproduction. New Paper 1 runs use only `TEST-GSM17`. Neither set is the future
+official-test confirmation set.
+
+- Eval manifest:
+  `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eval/manifest.json`
+- GSM8K development view:
+  `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eval/dev.jsonl`
+- GSM8K historical-test view:
+  `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eval/test.jsonl`
+
+## Paper 1 Arithmetic Dataset Ladder
+
+Approximate sizes below are planning values. Each dataset must receive a pinned
+upstream version, license record, source hash, split manifest, and overlap audit
+when it is imported.
+
+| Dataset | Approximate size | Character | Registered Paper 1 role | Status |
+|---|---:|---|---|---|
+| **GSM8K** | 8.8K | Diverse 2-8 step grade-school problems | Immediate core training; official test for later confirmation | Active |
+| **ASDiv** | 2.3K | Diverse elementary problems with equations | Later training diversity | Planned |
+| **SVAMP** | 1K | Adversarial variations of simple arithmetic problems | Held-out adversarial test | Planned |
+| **MAWPS** | 3.3K | Classic elementary word-problem collection with equations | Later training diversity after overlap audit | Planned |
+| **MultiArith** | about 600 | Multi-step arithmetic stories | Secondary set only after legacy-overlap audit | Planned |
+| **GSM-Plus** | 10.5K | Adversarial GSM8K perturbations | Untouched robustness test | Planned |
+| **GSM-Symbolic** | GSM-derived | Controlled symbolic/template perturbations | Untouched invariance and generalization test | Planned |
+
+Do not train on SVAMP, GSM-Plus, or GSM-Symbolic before their registered
+held-out evaluation role has been completed. MAWPS and MultiArith require
+cross-collection deduplication because classic arithmetic-word-problem
+collections may share source problems or templates.
+
+## Split Vocabulary
+
+Use these terms consistently:
+
+| Term | Meaning |
+|---|---|
+| Upstream split | Split published by the source dataset |
+| Annotation corpus | Teacher-generated ASL plus deterministic validation metadata |
+| Training freeze | Exact immutable rows exposed to adapter optimization |
+| Development | May select checkpoints or tune declared settings; never reports final confirmation |
+| Historical test | Frozen identities retained for paired continuity across experiments |
+| Internal reserve | Unused rows from a training-side upstream split; not automatically a test |
+| Confirmatory test | Untouched upstream test identities frozen before final evaluation |
+| Robustness test | Registered adversarial or controlled-shift dataset never used for training |
+
+## Leakage Rules
+
+Every new Paper 1 freeze must record and enforce:
+
+1. Dataset scope and upstream split.
+2. Stable source and document IDs.
+3. Input and output SHA-256 hashes.
+4. Exact source-ID intersections across train, development, and test.
+5. Normalized semantic-pattern intersections where available.
+6. Template and near-duplicate overlap for derived or aggregated datasets.
+7. Teacher provenance and whether answers or rationales were visible.
+8. A fixed prompt and fixed ICL policy across records.
+
+Public benchmark exposure during the base model's original pretraining is a
+separate, generally unknown contamination risk. Source-disjoint adapter splits
+do not prove that the pretrained base model never encountered a benchmark.
+
+## Reproduction
+
+Prepare the current GSM8K-only freeze and evaluation boundary without Docker:
+
+```powershell
+cmd /c scripts\prepare-paper1-gsm8k-g1.cmd
+```
+
+Train and evaluate the Qwen3-0.6B QKVO-r8 G1 adapter using the validated XPU
+environment:
+
+```powershell
+cmd /c scripts\run-paper1-g1-gsm8k-f0-l0-xpu.cmd
+```
+
+The authoritative forward roadmap is
+`docs/AGENTS_paper1_next_steps_after_D1.md`.
