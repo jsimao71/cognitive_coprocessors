@@ -1755,6 +1755,56 @@ source overlap and zero train/test pattern overlap. The larger untouched
 confirmation set will be drawn from the official GSM8K test split and may not
 guide architecture or hyperparameter selection.
 
+\subsection{GSM8K-Only Diversity and Repetition}
+
+We train three G1-GSM8K adapters on the 4,500-unique-program freeze
+and evaluate only TEST-GSM17. All use the pinned Qwen3-0.6B revision,
+QKVO rank 8, 4,500 row exposures, 570 optimizer steps, and the same autonomous
+prompt and decoding seed. Seed 11 runs on XPU; seeds 23 and 37 run on CUDA.
+Backend provenance is retained per run. We additionally run an exposure-matched
+scale cell, U2000/E4500, which selects 2,000 unique GSM8K programs and
+reuses each two or three times in deterministic shuffled cycles. It uses seed
+11 and is directly paired with the seed-11 4,500-unique condition.
+
+\begin{table}[t]
+\centering\small
+\caption{GSM8K-only scaling on the frozen 17-item historical projection. All
+trained conditions use 4,500 row exposures and 570 optimizer steps. U2000 is a
+single-seed exploratory cell.}
+\label{tab:gsm8k-only-scale}
+\begin{tabular}{lrrrrrr}
+\toprule
+Condition & Parse & Lower & Type & Execute & $\alpha$-return & Answer\\
+\midrule
+Q0 Codex-450 repeated & 14 & 13 & 13 & 12 & 4 & 4\\
+G1 4,500 unique, seed 11 & 16 & 16 & 15 & 13 & 5 & 6\\
+G1 4,500 unique, seed 23 & 16 & 16 & 16 & 13 & 6 & 7\\
+G1 4,500 unique, seed 37 & 16 & 16 & 16 & 14 & 5 & 6\\
+G1 2,000 unique, seed 11 & 16 & 16 & 16 & 15 & 6 & 11\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 4,500-unique GSM8K condition obtains 6, 7, and 6 answers across seeds
+(mean 6.33/17, 37.3\%; range 35.3--41.2\%), improving over Q0's 4/17 in every
+seed. Executable counts are 13, 13, and 14 versus 12, and mean alpha-state F1
+values are .527, .559, and .556 versus .502. However, these GSM8K-only scores
+are below the historical mixed-D1 GSM8K counts of 10, 8, and 11. This comparison
+does not isolate a beneficial effect of TAT-QA: removing TAT-QA also changes the
+selected GSM8K identities and their exposure schedule.
+
+The exposure-matched U2000 cell reaches 11/17 answers, 15/17 executable
+programs, 6/17 alpha-equivalent returns, and mean alpha-state F1 .620. Relative
+to same-seed G1-4500, five identities move from wrong to correct and none move
+from correct to wrong (two-sided exact McNemar $p=.0625$, exploratory).
+Relative to Q0, it has eight gains and one loss ($p=.0391$, exploratory). The
+result is not yet replicated, but it rejects a simple ``more unique programs is
+always better'' interpretation under fixed exposure. The current evidence is
+instead consistent with a diversity--repetition tradeoff: 4,500 nearly one-shot
+programs may under-train recurring semantic bindings, while 2,000 structures
+retain broad coverage and receive two to three optimization exposures. We next
+replicate U2000 before filling the 450/1,000 points or changing architecture.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}

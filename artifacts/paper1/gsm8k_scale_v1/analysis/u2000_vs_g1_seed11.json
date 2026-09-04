@@ -1,0 +1,210 @@
+{
+  "aggregate": {
+    "alpha_return_equivalent": {
+      "all_seeds_above_baseline": true,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 5,
+      "candidate_counts": [
+        6
+      ],
+      "candidate_max_count": 6,
+      "candidate_mean_count": 6,
+      "candidate_min_count": 6
+    },
+    "alpha_state_equivalent": {
+      "all_seeds_above_baseline": false,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 2,
+      "candidate_counts": [
+        2
+      ],
+      "candidate_max_count": 2,
+      "candidate_mean_count": 2,
+      "candidate_min_count": 2
+    },
+    "executable": {
+      "all_seeds_above_baseline": true,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 13,
+      "candidate_counts": [
+        15
+      ],
+      "candidate_max_count": 15,
+      "candidate_mean_count": 15,
+      "candidate_min_count": 15
+    },
+    "final_answer_correct": {
+      "all_seeds_above_baseline": true,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 6,
+      "candidate_counts": [
+        11
+      ],
+      "candidate_max_count": 11,
+      "candidate_mean_count": 11,
+      "candidate_min_count": 11
+    },
+    "lowerable_to_ccir": {
+      "all_seeds_above_baseline": false,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 16,
+      "candidate_counts": [
+        16
+      ],
+      "candidate_max_count": 16,
+      "candidate_mean_count": 16,
+      "candidate_min_count": 16
+    },
+    "parse_valid": {
+      "all_seeds_above_baseline": false,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 16,
+      "candidate_counts": [
+        16
+      ],
+      "candidate_max_count": 16,
+      "candidate_mean_count": 16,
+      "candidate_min_count": 16
+    },
+    "semantic_return_equivalent": {
+      "all_seeds_above_baseline": false,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 2,
+      "candidate_counts": [
+        2
+      ],
+      "candidate_max_count": 2,
+      "candidate_mean_count": 2,
+      "candidate_min_count": 2
+    },
+    "semantic_state_equivalent": {
+      "all_seeds_above_baseline": false,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 1,
+      "candidate_counts": [
+        1
+      ],
+      "candidate_max_count": 1,
+      "candidate_mean_count": 1,
+      "candidate_min_count": 1
+    },
+    "type_valid": {
+      "all_seeds_above_baseline": true,
+      "all_seeds_at_or_above_baseline": true,
+      "baseline_count": 15,
+      "candidate_counts": [
+        16
+      ],
+      "candidate_max_count": 16,
+      "candidate_mean_count": 16,
+      "candidate_min_count": 16
+    }
+  },
+  "alpha_state_f1": {
+    "candidate_max": 0.6195696460402342,
+    "candidate_mean": 0.6195696460402342,
+    "candidate_min": 0.6195696460402342,
+    "candidate_values": [
+      0.6195696460402342
+    ]
+  },
+  "baseline": {
+    "mean_alpha_state_f1": 0.5269432861128363,
+    "path": "artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/historical_test_eval/scored_predictions.jsonl",
+    "sha256": "1cea041d0d3f09e75bc04c0f785d6b78e9811dde3670836b2c2bc9207c07def3"
+  },
+  "identity_count": 17,
+  "per_seed": {
+    "u2000_seed11": {
+      "endpoints": {
+        "alpha_return_equivalent": {
+          "baseline_count": 5,
+          "candidate_count": 6,
+          "delta_count": 1,
+          "gains": 2,
+          "losses": 1,
+          "ties": 14,
+          "two_sided_exact_mcnemar_p": 1.0
+        },
+        "alpha_state_equivalent": {
+          "baseline_count": 2,
+          "candidate_count": 2,
+          "delta_count": 0,
+          "gains": 0,
+          "losses": 0,
+          "ties": 17,
+          "two_sided_exact_mcnemar_p": 1.0
+        },
+        "executable": {
+          "baseline_count": 13,
+          "candidate_count": 15,
+          "delta_count": 2,
+          "gains": 3,
+          "losses": 1,
+          "ties": 13,
+          "two_sided_exact_mcnemar_p": 0.625
+        },
+        "final_answer_correct": {
+          "baseline_count": 6,
+          "candidate_count": 11,
+          "delta_count": 5,
+          "gains": 5,
+          "losses": 0,
+          "ties": 12,
+          "two_sided_exact_mcnemar_p": 0.0625
+        },
+        "lowerable_to_ccir": {
+          "baseline_count": 16,
+          "candidate_count": 16,
+          "delta_count": 0,
+          "gains": 0,
+          "losses": 0,
+          "ties": 17,
+          "two_sided_exact_mcnemar_p": 1.0
+        },
+        "parse_valid": {
+          "baseline_count": 16,
+          "candidate_count": 16,
+          "delta_count": 0,
+          "gains": 0,
+          "losses": 0,
+          "ties": 17,
+          "two_sided_exact_mcnemar_p": 1.0
+        },
+        "semantic_return_equivalent": {
+          "baseline_count": 2,
+          "candidate_count": 2,
+          "delta_count": 0,
+          "gains": 0,
+          "losses": 0,
+          "ties": 17,
+          "two_sided_exact_mcnemar_p": 1.0
+        },
+        "semantic_state_equivalent": {
+          "baseline_count": 1,
+          "candidate_count": 1,
+          "delta_count": 0,
+          "gains": 0,
+          "losses": 0,
+          "ties": 17,
+          "two_sided_exact_mcnemar_p": 1.0
+        },
+        "type_valid": {
+          "baseline_count": 15,
+          "candidate_count": 16,
+          "delta_count": 1,
+          "gains": 1,
+          "losses": 0,
+          "ties": 16,
+          "two_sided_exact_mcnemar_p": 1.0
+        }
+      },
+      "mean_alpha_state_f1": 0.6195696460402342,
+      "path": "artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\historical_test_eval\\scored_predictions.jsonl",
+      "sha256": "116af10f8b118edb9f3f71107706b127d1e9490fe931868ad4fd236e88b50ced"
+    }
+  },
+  "schema_version": "ccpu.paper1.asl_replication_analysis.v1",
+  "seed_count": 1,
+  "statistical_boundary": "Seeds reuse the same frozen identities; seed counts and ranges are reported without pooling them as independent test observations."
+}

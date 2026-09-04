@@ -123,6 +123,11 @@ semantic diversity.
 - Manifest: `artifacts/paper1/gsm8k_scale_v1/u2000_e4500/manifest.json`
 - Training stream: `artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl`
 
+The first seed-11 run is complete. On `TEST-GSM17`, U2000/E4500 reaches
+11/17 answers and 15/17 executable programs, compared with 6/17 and 13/17 for
+the same-seed G1-4500 condition. This is exploratory single-seed evidence and
+requires replication before it changes the registered dataset policy.
+
 ### G1 development and historical test
 
 The run boundary projects the legacy mixed development and test artifacts onto
