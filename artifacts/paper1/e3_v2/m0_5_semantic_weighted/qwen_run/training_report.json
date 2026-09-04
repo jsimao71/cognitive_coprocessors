@@ -1,0 +1,176 @@
+{
+  "adapter_files": {
+    "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+    "adapter_config.json": "fb3ceb8cc3c434b8d40dcd3a3c96caf3c0f0a6eb5ef026a9fe8aea94c450a966",
+    "adapter_model.safetensors": "131d33044d77e4742b9f28640ab516e7146a5efe456143c80e509cc823460a65"
+  },
+  "adapter_id": "Qwen3-0.6B-ASL-Matrix-Q0-SemanticWeighted-r8-seed11",
+  "dev_rows": 25,
+  "dev_sha256": "e5ad9b0bea25b87f63e9971e00528103c4656edb1bcad18d2bc4b6c9a4f3b690",
+  "device": "xpu",
+  "dtype": "float16",
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dev_loss": 0.3496933388710022,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.541714126550489,
+      "mean_unweighted_dev_loss": 0.3655854570865631,
+      "mean_unweighted_train_loss": 0.5440302749309275,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 2,
+      "mean_dev_loss": 0.32555118650197984,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.34816483991841474,
+      "mean_unweighted_dev_loss": 0.33691094398498533,
+      "mean_unweighted_train_loss": 0.358197089334329,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 3,
+      "mean_dev_loss": 0.3305203694105148,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.26224096227023336,
+      "mean_unweighted_dev_loss": 0.3391043996810913,
+      "mean_unweighted_train_loss": 0.2767258590087295,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 4,
+      "mean_dev_loss": 0.35700656831264493,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.19192857175444564,
+      "mean_unweighted_dev_loss": 0.3670856666564941,
+      "mean_unweighted_train_loss": 0.21207200035866763,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 5,
+      "mean_dev_loss": 0.36494688808917997,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.1422531491248972,
+      "mean_unweighted_dev_loss": 0.3702148759365082,
+      "mean_unweighted_train_loss": 0.16434603366586897,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 6,
+      "mean_dev_loss": 0.38615787893533704,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.10215524492371414,
+      "mean_unweighted_dev_loss": 0.3882245856523514,
+      "mean_unweighted_train_loss": 0.12459148803415397,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 7,
+      "mean_dev_loss": 0.4198735290765762,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.0742280490220421,
+      "mean_unweighted_dev_loss": 0.4207430911064148,
+      "mean_unweighted_train_loss": 0.09708910174667836,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 8,
+      "mean_dev_loss": 0.4629481893777847,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.056074825139043646,
+      "mean_unweighted_dev_loss": 0.44520174860954287,
+      "mean_unweighted_train_loss": 0.07610500088530696,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 9,
+      "mean_dev_loss": 0.4490408462285995,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.0397081395626689,
+      "mean_unweighted_dev_loss": 0.4362970823049545,
+      "mean_unweighted_train_loss": 0.05775375061875416,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 10,
+      "mean_dev_loss": 0.5115216121077537,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.03032966263566373,
+      "mean_unweighted_dev_loss": 0.4855625593662262,
+      "mean_unweighted_train_loss": 0.04539013260587429,
+      "pairwise_train_accuracy": null
+    }
+  ],
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "optimizer_steps": 570,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "peak_memory_bytes": 7437087232,
+  "resumed_from_optimizer_step": 0,
+  "schema_version": "ccpu.paper1.lora_training.v1",
+  "token_audit": {
+    "dev_max_full_tokens": 787,
+    "dev_max_prefix_tokens": 613,
+    "dev_truncated_rows": 0,
+    "train_max_full_tokens": 1010,
+    "train_max_prefix_tokens": 772,
+    "train_truncated_rows": 0
+  },
+  "total_parameters": 598343680,
+  "train_rows": 4500,
+  "train_sha256": "2c8f0718b347794ead7fb1e7ef6d9dcb750d00be03916b564d0bb114cd3fa11f",
+  "train_target_tokens_per_epoch": [
+    56516,
+    56516,
+    56516,
+    56516,
+    56516,
+    56516,
+    56516,
+    56516,
+    56516,
+    56516
+  ],
+  "trainable_fraction": 0.0038335158817086527,
+  "trainable_parameters": 2293760,
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "checkpoint_every_optimizer_steps": 50,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 10,
+    "evaluate_each_epoch": true,
+    "gradient_accumulation_steps": 8,
+    "gradient_checkpointing": false,
+    "learning_rate": 0.0002,
+    "logical_epoch_field": "epoch_view",
+    "max_length": 1536,
+    "pairwise_rank_weight": 0.0,
+    "pairwise_temperature": 1.0,
+    "rank": 8,
+    "reject_truncation": true,
+    "seed": 99173,
+    "semantic_token_weights": {
+      "default": 0.35,
+      "literal": 2.0,
+      "operator": 3.0,
+      "path": 4.0,
+      "return": 5.0
+    },
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 565160,
+  "wall_time_seconds": 7342.824561799993
+}
