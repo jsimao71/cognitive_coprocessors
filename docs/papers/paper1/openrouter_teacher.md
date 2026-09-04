@@ -53,10 +53,14 @@ for a stronger paid teacher or local Codex review without mixing provenance.
 The recovery campaign is provenance-separated under `openrouter_full_v1/recovery_v2`.
 It restores only request-owned `dataset` and `source_id` envelope fields, never
 changes generated ASL, and reruns syntax, lowering, typing, execution, semantic
-lint, and hidden-answer verification. The resulting strict index contains 4,761
-unique source programs: 3,896 original strict programs plus 865 conservative
-salvages. A deduplicated 3,418-row queue contains only sources still missing a
-strict program.
+lint, and hidden-answer verification. The initial recovery snapshot contained
+4,761 unique strict source programs: 3,896 original strict programs plus 865
+conservative salvages. Two resumable free-route retry campaigns raise the final
+snapshot to 7,049/8,179 strict programs: 6,122 accepted candidates and 927
+conservative salvages. The remaining deduplicated queue has 1,130 sources. The
+Paper 1 D1 training set remains frozen from the preceding 6,989-program snapshot;
+the later 60 programs are provenance-preserved for a future corpus version and
+do not alter an active experiment.
 
 Prepare the queue reproducibly with:
 
@@ -66,7 +70,9 @@ python -m ccpu.dsl_dataset prepare-program-recovery `
   --source artifacts\paper1\dsl\openrouter_full_v1\inputs\tatqa_arithmetic_full.jsonl `
   --remote-dir artifacts\paper1\dsl\openrouter_full_v1\gsm8k `
   --remote-dir artifacts\paper1\dsl\openrouter_full_v1\tatqa `
-  --output-dir artifacts\paper1\dsl\openrouter_full_v1\recovery_v2
+  --remote-dir artifacts\paper1\dsl\openrouter_full_v1\recovery_v2\retry_run1 `
+  --remote-dir artifacts\paper1\dsl\openrouter_full_v1\recovery_v2\retry_run2 `
+  --output-dir artifacts\paper1\dsl\openrouter_full_v1\recovery_v2\consolidated_run3
 ```
 
 Recovery retries use `dsl_teacher_openrouter_recovery_v2.json`, which requires
