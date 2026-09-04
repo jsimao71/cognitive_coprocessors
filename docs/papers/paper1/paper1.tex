@@ -87,9 +87,11 @@ An exposure-matched OpenRouter diversity cell then replaces ten repeats of 450
 programs with 4,500 unique, leakage-audited programs while retaining the same
 rank-8 adapter and 570 optimizer steps. Its first seed reaches 16/25 answers and
 23/25 executable programs, versus 11/25 and 19/25 for the frozen control, but
-strict semantic-state and return equivalence do not improve. We therefore treat
-this as a promising data-diversity result pending matched seed replication, not
-as a completed robustness claim.
+strict path-sensitive semantic-state and return equivalence do not improve.
+Alpha-normalized return equivalence, which ignores arbitrary internal symbol
+names but retains the executed expression graph, rises from 10/25 to 14/25. We
+therefore treat this as a promising data-diversity result pending matched seed
+replication, not as a completed robustness claim.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1663,7 +1665,16 @@ semantic-state component F1 from .434 to .449; edge F1 is unchanged at .443.
 However, strict state equivalence falls from 5/25 to 4/25 and strict return
 equivalence from 7/25 to 5/25. Thus this seed provides a substantial
 answer/executability signal and improved soft semantic components, but not a
-uniform exact-semantic win. The final epoch is the preregistered endpoint
+uniform canonical-path win. To separate wrong computation from harmless symbol
+renaming, evaluator v2 additionally inlines local assignments and compares
+alpha-normalized expression graphs. It retains constants, operators, dependency
+structure, and external semantic families, and does not credit a constant-only
+program that happens to return the right answer. Under this metric, exact return
+equivalence rises from 10/25 to 14/25, exact state-multiset equivalence from 6/25
+to 7/25, and mean state F1 from .595 to .692. Every alpha-return success in both
+runs also has the correct executed answer. D1 therefore improves computational
+semantics under internal renaming even though it aligns less often with the
+teacher's canonical path vocabulary. The final epoch is the preregistered endpoint
 (development loss .315); epoch 9 has the lowest diagnostic development loss
 (.306) and is not substituted post hoc. Training takes 4,753 seconds and 4.41
 GiB peak XPU memory. Independent deterministic rescoring reproduces the stored
@@ -2088,9 +2099,10 @@ graph-bottleneck controls do not exceed the 11/25 whole-program control. In
 contrast, the first exposure-matched 4,500-program diversity seed reaches 16/25
 answers and 23/25 executable programs, driven by GSM8K and accompanied by better
 soft operator, source-fact, path, and state-component scores. Its strict state
-and return equivalence remain below the control, and the paired 25-item interval
-is wide. The next gate is therefore matched-seed confirmation of data diversity,
-not a stronger architecture claim.
+and return equivalence remain below the control, while alpha-normalized return
+and state equivalence improve; the paired 25-item interval is still wide. The
+next gate is therefore matched-seed confirmation of data diversity, not a
+stronger architecture claim.
 
 \appendix
 \section{Deterministic Semantic Diagnostic Taxonomy}
@@ -2105,6 +2117,19 @@ noncommutative argument order, literal magnitude, inter- versus intra-object
 relations, direct source-fact attachment, premature literal collapse, and
 transitive shortcuts. Aggregation and temporal supports are reported only when
 the reference contains the corresponding deterministic cues.
+
+Evaluator v2 keeps those strict metrics and adds a weaker alpha view. It
+recursively inlines references to local
+assignments, removes the local target names, flattens and sorts commutative
+operations, and compares the resulting signatures of constants, operators, and
+external references. The return metric compares the complete inlined expression;
+the state metric compares multisets of all inlined assignment expressions. An
+unresolved external reference retains its semantic family, so alpha normalization
+does not erase external grounding. The metric is deterministic and
+answer-blind: equal numeric outputs with different expression graphs are not
+alpha equivalent. It measures computational equivalence under local renaming,
+not canonical ontology naming, and is therefore always reported beside rather
+than instead of strict path-sensitive equivalence and final execution.
 
 Standalone alignment is one-to-one and requires compatible entities, lexical
 semantic overlap, and consistent graph roles; ambiguity or an unresolved local
