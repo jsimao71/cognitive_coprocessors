@@ -32,6 +32,7 @@ from .asl_pilot_data import (
     freeze_asl_pilot,
 )
 from .asl_pilot_eval import analyze_asl_predictions, run_asl_pilot
+from .asl_replication_analysis import analyze_asl_replications
 from .dataset import (
     ArithmeticDatasetConfig,
     ArithmeticExample,
@@ -1014,6 +1015,25 @@ def analyze_asl_checkpoint_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def analyze_asl_replications_command(args: argparse.Namespace) -> int:
+    candidates = []
+    for value in args.candidate:
+        if "=" not in value:
+            raise ValueError("--candidate must use LABEL=PATH")
+        label, path = value.split("=", 1)
+        candidates.append((label, path))
+    report = analyze_asl_replications(
+        baseline_path=args.baseline,
+        candidate_paths=candidates,
+        output_path=args.output,
+    )
+    print(
+        f"analyzed {report['seed_count']} matched seeds on "
+        f"{report['identity_count']} identities -> {args.output}"
+    )
+    return 0
+
+
 def analyze_placement_command(args: argparse.Namespace) -> int:
     result = build_placement_comparison(
         read_json(args.config), config_path=args.config, output_dir=args.output_dir
@@ -1628,6 +1648,20 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     asl_evaluate.add_argument("--predictions", required=True)
     asl_evaluate.add_argument("--output-dir", required=True)
     asl_evaluate.set_defaults(handler=evaluate_asl_pilot_command)
+
+    asl_replications = commands.add_parser(
+        "analyze-asl-replications",
+        help="compare matched ASL training seeds without pooling test identities",
+    )
+    asl_replications.add_argument("--baseline", required=True)
+    asl_replications.add_argument(
+        "--candidate",
+        required=True,
+        action="append",
+        help="candidate scored JSONL as LABEL=PATH",
+    )
+    asl_replications.add_argument("--output", required=True)
+    asl_replications.set_defaults(handler=analyze_asl_replications_command)
 
     asl_checkpoint = commands.add_parser(
         "analyze-asl-checkpoint", help="aggregate and pair the frozen ASL pilot results"
