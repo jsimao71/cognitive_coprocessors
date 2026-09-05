@@ -1,0 +1,54 @@
+{
+  "by_difficulty": {
+    "high": {
+      "count": 11,
+      "final_answer_correct": 3
+    },
+    "low": {
+      "count": 26,
+      "final_answer_correct": 14
+    },
+    "medium": {
+      "count": 22,
+      "final_answer_correct": 10
+    }
+  },
+  "counts": {
+    "executable": 54,
+    "final_answer_correct": 27,
+    "lowerable_to_ccir": 58,
+    "parse_valid": 58,
+    "type_valid": 58
+  },
+  "eval_sha256": "f99bb00f46d97c284b9f574d46672bf59b089a85d0f9ad80a0f04df0920480ba",
+  "prediction_count": 59,
+  "predictions_sha256": "0ba2d01d6654543b65e5a71ca9d4f475205e0b5cdea018ecfe4e4a931d16e41d",
+  "rates": {
+    "executable": 0.9152542372881356,
+    "final_answer_correct": 0.4576271186440678,
+    "lowerable_to_ccir": 0.9830508474576272,
+    "parse_valid": 0.9830508474576272,
+    "type_valid": 0.9830508474576272
+  },
+  "run": {
+    "adapter_id": "Qwen3-0.6B-G1-GSM8K-U2000-E4500-F0-L0-r8-seed11",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-G1-GSM8K-U2000-E4500-F0-L0-r8-seed11",
+      "adapter_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\qwen_run\\adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "prompt_fields": [
+      "question"
+    ],
+    "seed": 44017,
+    "shard_count": 1
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_evaluation.v1",
+  "shard_index": 0
+}

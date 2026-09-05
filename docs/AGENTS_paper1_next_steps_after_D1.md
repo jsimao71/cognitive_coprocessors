@@ -50,6 +50,18 @@ D1 OpenRouter 4,500 unique programs:
   init 99173 (historical run label seed11): 16/25 answers, 23/25 executable
   init 23: 13/25 answers, 24/25 executable
   init 37: 17/25 answers, 22/25 executable
+
+U2000 official GSM8K confirmation, 250 untouched question-only examples:
+  init 99173 (artifact label seed11): 110/250 answers, 212/250 executable
+  init 23: 94/250 answers, 222/250 executable
+  init 37: 85/250 answers, 208/250 executable
+  mean answer accuracy: 38.5% (range 34.0--44.0%)
+
+U2000 paired factor-1,000 view, 59 pre-frozen eligible examples:
+  init 99173: 27/59 answers
+  init 23: 28/59 answers
+  init 37: 23/59 answers
+  paired direct-reasoning contribution analysis: in progress
 ```
 
 Dataset selection and model initialization are separate seed axes. The frozen
@@ -918,7 +930,9 @@ Proceed to F3-large only if F3 improves alpha/world semantics or sample efficien
 Proceed to E3c/d only if preconditioning improves meaningful autonomous semantic metrics over E3a.
 
 ### Gate E — confirmatory set
-No broad semantic-compiler claim until the best condition is tested on the larger untouched set.
+Complete for U2000: all three adapters were tested on the untouched frozen 250
+set. The 34.0--44.0% answer range and cross-seed disagreement preclude a broad
+semantic-compiler claim.
 
 ### Gate F — matched direct and magnitude controls
 No claim that ASL improves Qwen answer accuracy or numeric robustness until A0,
@@ -956,6 +970,7 @@ P5  Run exposure-matched 1k/2k cells.
 
 P6  Freeze a larger confirmatory set from official GSM8K test.
     Never use it for tuning.
+    COMPLETE: frozen 250-item view and all three U2000 evaluations.
 
 P6a Freeze B0 direct-concise and B1 direct-reasoning prompts and endpoint
     scorers on the same official identities. Run both before interpreting the
@@ -964,6 +979,7 @@ P6a Freeze B0 direct-concise and B1 direct-reasoning prompts and endpoint
 P6b Build and execution-verify the paired official GSM8K large-number suite.
     Freeze eligibility, transformations, exclusions, and hashes before any
     transformed inference.
+    COMPLETE: 59 paired factor-1,000 variants; all three A0 seeds evaluated.
 
 P6c Run B0, B1, and all A0 adapter seeds on both original and large-number
     questions. Treat answer accuracy and differential magnitude degradation as

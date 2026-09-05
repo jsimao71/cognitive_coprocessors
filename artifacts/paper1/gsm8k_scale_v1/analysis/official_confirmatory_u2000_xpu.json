@@ -1,0 +1,276 @@
+{
+  "aggregate": {
+    "executable": {
+      "counts": [
+        212,
+        222,
+        208
+      ],
+      "max_rate": 0.888,
+      "mean_rate": 0.856,
+      "min_rate": 0.832,
+      "rates": [
+        0.848,
+        0.888,
+        0.832
+      ]
+    },
+    "final_answer_correct": {
+      "counts": [
+        110,
+        94,
+        85
+      ],
+      "max_rate": 0.44,
+      "mean_rate": 0.38533333333333336,
+      "min_rate": 0.34,
+      "rates": [
+        0.44,
+        0.376,
+        0.34
+      ]
+    },
+    "lowerable_to_ccir": {
+      "counts": [
+        247,
+        242,
+        240
+      ],
+      "max_rate": 0.988,
+      "mean_rate": 0.972,
+      "min_rate": 0.96,
+      "rates": [
+        0.988,
+        0.968,
+        0.96
+      ]
+    },
+    "parse_valid": {
+      "counts": [
+        247,
+        247,
+        243
+      ],
+      "max_rate": 0.988,
+      "mean_rate": 0.9826666666666667,
+      "min_rate": 0.972,
+      "rates": [
+        0.988,
+        0.988,
+        0.972
+      ]
+    },
+    "type_valid": {
+      "counts": [
+        245,
+        241,
+        237
+      ],
+      "max_rate": 0.98,
+      "mean_rate": 0.964,
+      "min_rate": 0.948,
+      "rates": [
+        0.98,
+        0.964,
+        0.948
+      ]
+    }
+  },
+  "aggregate_by_difficulty": {
+    "high": {
+      "count_per_seed": 83,
+      "final_answer_correct_counts": [
+        23,
+        22,
+        14
+      ],
+      "max_rate": 0.27710843373493976,
+      "mean_rate": 0.23694779116465864,
+      "min_rate": 0.1686746987951807,
+      "rates": [
+        0.27710843373493976,
+        0.26506024096385544,
+        0.1686746987951807
+      ]
+    },
+    "low": {
+      "count_per_seed": 83,
+      "final_answer_correct_counts": [
+        47,
+        44,
+        44
+      ],
+      "max_rate": 0.5662650602409639,
+      "mean_rate": 0.5421686746987953,
+      "min_rate": 0.5301204819277109,
+      "rates": [
+        0.5662650602409639,
+        0.5301204819277109,
+        0.5301204819277109
+      ]
+    },
+    "medium": {
+      "count_per_seed": 84,
+      "final_answer_correct_counts": [
+        40,
+        28,
+        27
+      ],
+      "max_rate": 0.47619047619047616,
+      "mean_rate": 0.376984126984127,
+      "min_rate": 0.32142857142857145,
+      "rates": [
+        0.47619047619047616,
+        0.3333333333333333,
+        0.32142857142857145
+      ]
+    }
+  },
+  "answer_agreement": {
+    "correct_seed_count_histogram": {
+      "0": 113,
+      "1": 39,
+      "2": 44,
+      "3": 54
+    },
+    "unanimous_correct": 54,
+    "unanimous_wrong": 113
+  },
+  "identity_count": 250,
+  "pairwise_answer_outcomes": {
+    "seed11__seed23": {
+      "both_correct": 77,
+      "both_wrong": 123,
+      "left_only": 33,
+      "right_only": 17
+    },
+    "seed11__seed37": {
+      "both_correct": 70,
+      "both_wrong": 125,
+      "left_only": 40,
+      "right_only": 15
+    },
+    "seed23__seed37": {
+      "both_correct": 59,
+      "both_wrong": 130,
+      "left_only": 35,
+      "right_only": 26
+    }
+  },
+  "per_seed": {
+    "seed11": {
+      "answer_wilson_95": [
+        0.37983697819773843,
+        0.5019790177417148
+      ],
+      "by_difficulty": {
+        "high": {
+          "count": 83,
+          "final_answer_correct": 23
+        },
+        "low": {
+          "count": 83,
+          "final_answer_correct": 47
+        },
+        "medium": {
+          "count": 84,
+          "final_answer_correct": 40
+        }
+      },
+      "count": 250,
+      "counts": {
+        "executable": 212,
+        "final_answer_correct": 110,
+        "lowerable_to_ccir": 247,
+        "parse_valid": 247,
+        "type_valid": 245
+      },
+      "path": "artifacts\\paper1\\gsm8k_scale_v1\\official_eval_v1\\confirmatory\\seed11_xpu\\predictions.jsonl",
+      "rates": {
+        "executable": 0.848,
+        "final_answer_correct": 0.44,
+        "lowerable_to_ccir": 0.988,
+        "parse_valid": 0.988,
+        "type_valid": 0.98
+      },
+      "sha256": "b2bd41fa184c68d139ebaa613602b5215b64197c04e893c2548e3595eeaf32e0"
+    },
+    "seed23": {
+      "answer_wilson_95": [
+        0.31825978130242794,
+        0.4374932769724422
+      ],
+      "by_difficulty": {
+        "high": {
+          "count": 83,
+          "final_answer_correct": 22
+        },
+        "low": {
+          "count": 83,
+          "final_answer_correct": 44
+        },
+        "medium": {
+          "count": 84,
+          "final_answer_correct": 28
+        }
+      },
+      "count": 250,
+      "counts": {
+        "executable": 222,
+        "final_answer_correct": 94,
+        "lowerable_to_ccir": 242,
+        "parse_valid": 247,
+        "type_valid": 241
+      },
+      "path": "artifacts\\paper1\\gsm8k_scale_v1\\official_eval_v1\\confirmatory\\seed23_xpu\\predictions.jsonl",
+      "rates": {
+        "executable": 0.888,
+        "final_answer_correct": 0.376,
+        "lowerable_to_ccir": 0.968,
+        "parse_valid": 0.988,
+        "type_valid": 0.964
+      },
+      "sha256": "597aa8ce0eccc6f22380ee047475232507c9d6ea4e42fdda0c79a61d0a11ea6b"
+    },
+    "seed37": {
+      "answer_wilson_95": [
+        0.2840965884370376,
+        0.4007460674015046
+      ],
+      "by_difficulty": {
+        "high": {
+          "count": 83,
+          "final_answer_correct": 14
+        },
+        "low": {
+          "count": 83,
+          "final_answer_correct": 44
+        },
+        "medium": {
+          "count": 84,
+          "final_answer_correct": 27
+        }
+      },
+      "count": 250,
+      "counts": {
+        "executable": 208,
+        "final_answer_correct": 85,
+        "lowerable_to_ccir": 240,
+        "parse_valid": 243,
+        "type_valid": 237
+      },
+      "path": "artifacts\\paper1\\gsm8k_scale_v1\\official_eval_v1\\confirmatory\\seed37_xpu\\predictions.jsonl",
+      "rates": {
+        "executable": 0.832,
+        "final_answer_correct": 0.34,
+        "lowerable_to_ccir": 0.96,
+        "parse_valid": 0.972,
+        "type_valid": 0.948
+      },
+      "sha256": "adad772283f4206340813e4cd0ac1b26e890f4e68c435f9d71aba2a3aa667fc2"
+    }
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_replications.v1",
+  "seed_count": 3,
+  "statistical_boundary": "Seeds reuse identical frozen questions; report seed means and ranges without pooling seed-question predictions as independent observations."
+}

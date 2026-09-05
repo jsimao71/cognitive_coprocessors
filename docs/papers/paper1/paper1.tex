@@ -95,10 +95,13 @@ Thus semantic diversity yields a replicated autonomous answer, execution, and
 alpha-normalized computation gain, but not a robust canonical ontology compiler.
 The decisive Paper~1 comparison is therefore registered on the same frozen
 official GSM8K identities: base Qwen3-0.6B answering directly versus the learned
-NL-to-ASL path followed by deterministic execution. A paired factor-1,000
-large-number suite preserves each eligible problem's dependency graph and tests
-whether any ASL advantage reflects systematic computation rather than another
-learned answer surface. These matched results remain in progress in this draft.
+NL-to-ASL path followed by deterministic execution. On 250 untouched questions,
+three U2000 adapters obtain 110, 94, and 85 correct answers (44.0\%, 37.6\%, and
+34.0\%; mean 38.5\%) while retaining 97.2--98.8\% parse validity. A paired
+factor-1,000 large-number suite preserves each eligible problem's dependency
+graph and tests whether any ASL advantage reflects systematic computation rather
+than another learned answer surface. The matched direct-reasoning comparison
+remains in progress, so these ASL results alone do not establish contribution.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1832,6 +1835,41 @@ values. Only the transformed question is model-visible. The principal
 robustness statistic is the difference between each condition's paired
 original-to-large accuracy change; this suite is exploratory because its design
 postdates the first original-set ASL result.
+
+\subsection{Official GSM8K Confirmation}
+
+All three U2000/E4500 adapters have now completed the frozen 250-question
+confirmation view (Table~\ref{tab:gsm8k-official-confirmation}). Final-answer
+accuracy is 44.0\%, 37.6\%, and 34.0\% (mean 38.5\%, range 34.0--44.0\%). Parse
+validity remains high at 97.2--98.8\%, whereas execution is lower at
+83.2--88.8\%. The initialization spread is material: only 54 questions are
+correct under all three adapters, 113 are wrong under all three, and 83 change
+outcome across initializations. We therefore report seed results separately and
+do not pool the 750 seed-question predictions as independent observations.
+
+\begin{table}[t]
+\centering\small
+\caption{Frozen official GSM8K confirmation for U2000/E4500. Counts are out of
+250 question-only examples; answers and benchmark rationales are scorer-only.}
+\label{tab:gsm8k-official-confirmation}
+\begin{tabular}{lrrrrr}
+\toprule
+Initialization & Parse & Lower & Type & Execute & Answer\\
+\midrule
+99173 & 247 & 247 & 245 & 212 & 110\\
+23    & 247 & 242 & 241 & 222 & 94\\
+37    & 243 & 240 & 237 & 208 & 85\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+On the 59 pre-frozen factor-1,000 variants, the same adapters obtain 27, 28,
+and 23 correct answers (45.8\%, 47.5\%, and 39.0\%; mean 44.1\%). Those marginal
+rates cannot by themselves show magnitude robustness because eligibility selects
+a non-random subset of the 250 questions. The registered analysis instead pairs
+each transformed item with its own original outcome and compares degradation
+against the direct-reasoning baseline. That contribution analysis remains
+incomplete at this milestone.
 
 \subsection{GSM8K-Only Diversity and Repetition}
 
