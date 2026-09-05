@@ -91,17 +91,22 @@ def test_contribution_analysis_preserves_pairing_and_differential(tmp_path):
     assert paired["left_only"] == 1
     assert paired["right_only"] == 1
     assert paired["both_wrong"] == 1
+    assert len(paired["delta_bootstrap_identity_95"]) == 2
+    assert paired["delta_bootstrap_identity_95"][0] <= paired["delta"]
+    assert paired["delta_bootstrap_identity_95"][1] >= paired["delta"]
 
     direct = report["large_number_robustness"]["direct_reasoning"]
     assert direct["original_eligible_rate"] == 0.5
     assert direct["large_rate"] == 0.0
     assert direct["large_minus_original"] == -0.5
+    assert direct["large_minus_original_bootstrap_identity_95"] == [-1, 0]
     assert direct["lost_on_large"] == 1
 
     asl = report["large_number_robustness"]["seed11"]
     assert asl["original_eligible_rate"] == 1.0
     assert asl["large_rate"] == 1.0
     assert asl["retained_correct"] == 2
+    assert asl["large_minus_original_bootstrap_identity_95"] == [0, 0]
     differential = report["large_number_differential_degradation"][
         "seed11__vs__direct_reasoning"
     ]

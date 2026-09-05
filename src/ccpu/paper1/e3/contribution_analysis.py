@@ -242,11 +242,18 @@ def analyze_gsm8k_contribution(
         for group in ("original_direct", "original_asl")
     }
 
-    original_pairwise = {
-        f"{asl_label}__vs__{direct_label}": _paired(asl_vector, direct_vector)
-        for asl_label, asl_vector in original_vectors["original_asl"].items()
-        for direct_label, direct_vector in original_vectors["original_direct"].items()
-    }
+    original_pairwise = {}
+    for asl_label, asl_vector in original_vectors["original_asl"].items():
+        for direct_label, direct_vector in original_vectors["original_direct"].items():
+            key = f"{asl_label}__vs__{direct_label}"
+            result = _paired(asl_vector, direct_vector)
+            result["delta_bootstrap_identity_95"] = _bootstrap_difference(
+                {identity: int(value) for identity, value in asl_vector.items()},
+                {identity: int(value) for identity, value in direct_vector.items()},
+                seed=bootstrap_seed,
+                samples=bootstrap_samples,
+            )
+            original_pairwise[key] = result
     robustness = {}
     changes = {}
     for family in ("direct", "asl"):
@@ -255,6 +262,14 @@ def analyze_gsm8k_contribution(
                 predictions[f"original_{family}"][label],
                 predictions[f"large_{family}"][label],
                 large_to_parent,
+            )
+            result["large_minus_original_bootstrap_identity_95"] = (
+                _bootstrap_difference(
+                    change,
+                    {identity: 0 for identity in change},
+                    seed=bootstrap_seed,
+                    samples=bootstrap_samples,
+                )
             )
             robustness[label] = result
             changes[label] = change
