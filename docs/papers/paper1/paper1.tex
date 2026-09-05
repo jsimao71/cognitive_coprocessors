@@ -1787,7 +1787,7 @@ to confirmation performance.
 \centering\small
 \caption{GSM8K-only scaling on the frozen 17-item historical projection. All
 trained conditions use 4,500 row exposures and 570 optimizer steps. U2000 is a
-single-seed exploratory cell.}
+three-seed matched replication.}
 \label{tab:gsm8k-only-scale}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -1797,7 +1797,9 @@ Q0 Codex-450 repeated & 14 & 13 & 13 & 12 & 4 & 4\\
 G1 4,500 unique, seed 11 & 16 & 16 & 15 & 13 & 5 & 6\\
 G1 4,500 unique, seed 23 & 16 & 16 & 16 & 13 & 6 & 7\\
 G1 4,500 unique, seed 37 & 16 & 16 & 16 & 14 & 5 & 6\\
-G1 2,000 unique, seed 11 & 16 & 16 & 16 & 15 & 6 & 11\\
+U2000, seed 11 & 16 & 16 & 16 & 15 & 6 & 11\\
+U2000, seed 23 & 15 & 15 & 15 & 14 & 5 & 6\\
+U2000, seed 37 & 15 & 15 & 15 & 14 & 6 & 6\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1810,17 +1812,21 @@ are below the historical mixed-D1 GSM8K counts of 10, 8, and 11. This comparison
 does not isolate a beneficial effect of TAT-QA: removing TAT-QA also changes the
 selected GSM8K identities and their exposure schedule.
 
-The exposure-matched U2000 cell reaches 11/17 answers, 15/17 executable
-programs, 6/17 alpha-equivalent returns, and mean alpha-state F1 .620. Relative
-to same-seed G1-4500, five identities move from wrong to correct and none move
-from correct to wrong (two-sided exact McNemar $p=.0625$, exploratory).
-Relative to Q0, it has eight gains and one loss ($p=.0391$, exploratory). The
-result is not yet replicated, but it rejects a simple ``more unique programs is
-always better'' interpretation under fixed exposure. The current evidence is
-instead consistent with a diversity--repetition tradeoff: 4,500 nearly one-shot
-programs may under-train recurring semantic bindings, while 2,000 structures
-retain broad coverage and receive two to three optimization exposures. We next
-replicate U2000 before filling the 450/1,000 points or changing architecture.
+The exposure-matched U2000 answer counts are 11, 6, and 6 (mean 7.67/17,
+45.1\%; range 35.3--64.7\%), compared with same-seed G1-4500 counts of 6, 7,
+and 6. Thus the same-seed answer deltas are $+5,-1,0$: seed 11 has five gains
+and no losses (two-sided exact McNemar $p=.0625$, exploratory), seed 23 has two
+gains and three losses ($p=1.0$), and seed 37 has two gains and two losses
+($p=1.0$). The large seed-11 gain therefore does not replicate uniformly.
+
+U2000 nevertheless remains above Q0's 4/17 in every seed. Its executable counts
+are 15, 14, and 14, and mean alpha-state F1 values are .620, .571, and .572,
+versus G1's 13, 13, and 14 executable programs and .527, .559, and .556 F1.
+The more consistent effect is therefore soft alpha-normalized semantic overlap,
+not final answers. These data reject both a monotonic ``more unique is always
+better'' rule and a confirmed U2000 optimum. The predeclared U1000 cell and the
+larger official confirmation are required to distinguish a real
+diversity--repetition tradeoff from high seed and small-test variance.
 
 \section{Preliminary XPU Pilot}
 

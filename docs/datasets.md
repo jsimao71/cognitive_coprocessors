@@ -123,10 +123,14 @@ semantic diversity.
 - Manifest: `artifacts/paper1/gsm8k_scale_v1/u2000_e4500/manifest.json`
 - Training stream: `artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl`
 
-The first seed-11 run is complete. On `TEST-GSM17`, U2000/E4500 reaches
-11/17 answers and 15/17 executable programs, compared with 6/17 and 13/17 for
-the same-seed G1-4500 condition. This is exploratory single-seed evidence and
-requires replication before it changes the registered dataset policy.
+All three declared runs are complete on `TEST-GSM17`. U2000/E4500 reaches
+11, 6, and 6 answers across seeds 11, 23, and 37 (mean 7.67/17, 45.1%; range
+35.3--64.7%), versus 6, 7, and 6 for same-seed G1-4500. The corresponding
+same-seed answer deltas are therefore +5, -1, and 0: the seed-11 gain does not
+replicate uniformly. Mean alpha-state F1 is .620, .571, and .572, exceeding
+the corresponding G1 values in every seed, so repetition has a more consistent
+soft-semantic than final-answer effect. This small historical test cannot select
+the final condition; the official confirmation freeze below remains decisive.
 
 The next predeclared derivative, `G1_GSM8K_U1000_E4500`, freezes 1,000 unique
 source IDs and semantic signatures before any official-test result is known.
