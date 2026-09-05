@@ -46,11 +46,25 @@ def _resources(rows: dict[str, dict[str, Any]]) -> dict[str, Any]:
     prompt_tokens = [int(row["prompt_tokens"]) for row in rows.values()]
     generated_tokens = [int(row["generated_tokens"]) for row in rows.values()]
     wall_times = [int(row["wall_time_ns"]) for row in rows.values()]
+    observed_maximum = max(generated_tokens)
+    maximum_rows = [
+        row
+        for row in rows.values()
+        if int(row["generated_tokens"]) == observed_maximum
+    ]
     return {
         "count": len(rows),
         "mean_prompt_tokens": mean(prompt_tokens),
         "mean_generated_tokens": mean(generated_tokens),
         "total_generated_tokens": sum(generated_tokens),
+        "observed_maximum_generated_tokens": observed_maximum,
+        "observed_maximum_count": len(maximum_rows),
+        "observed_maximum_rate": len(maximum_rows) / len(rows),
+        "observed_maximum_scorable_count": sum(
+            bool(row.get("metrics", {}).get("answer_scorable"))
+            for row in maximum_rows
+        ),
+        "observed_maximum_correct_count": sum(_correct(row) for row in maximum_rows),
         "mean_generation_wall_time_ms": mean(wall_times) / 1e6,
         "total_generation_wall_time_seconds": sum(wall_times) / 1e9,
     }

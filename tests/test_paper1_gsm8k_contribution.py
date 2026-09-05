@@ -124,6 +124,11 @@ def test_contribution_analysis_preserves_pairing_and_differential(tmp_path):
     assert resources["mean_prompt_tokens"] == 10
     assert resources["mean_generated_tokens"] == 20
     assert resources["total_generated_tokens"] == 80
+    assert resources["observed_maximum_generated_tokens"] == 20
+    assert resources["observed_maximum_count"] == 4
+    assert resources["observed_maximum_rate"] == 1
+    assert resources["observed_maximum_scorable_count"] == 0
+    assert resources["observed_maximum_correct_count"] == 2
     assert resources["mean_generation_wall_time_ms"] == 1000
     assert read_json(tmp_path / "report.json") == report
 

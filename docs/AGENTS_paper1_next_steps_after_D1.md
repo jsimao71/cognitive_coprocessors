@@ -173,6 +173,14 @@ B1 DIRECT-REASONING
    Give this control a sufficient but bounded output budget so ASL is not
    compared only against an artificially answer-constrained base model.
 
+B1L DIRECT-REASONING-LONG (post-hoc capacity sensitivity)
+   If at least 10% of B1 generations reach the 1,024-token ceiling, rerun B1
+   with an otherwise identical 2,048-token ceiling. Report B1 unchanged as the
+   registered primary control and B1L as a post-hoc sensitivity. Any ASL
+   contribution claim must also survive comparison with the stronger of B1 and
+   B1L; token-ceiling failures may not be presented as arithmetic failures
+   without separate disclosure.
+
 A0 ASL-RUNTIME
    Qwen3-0.6B U2000 adapter, question -> ASL -> validated deterministic
    execution -> returned answer.
@@ -191,6 +199,11 @@ range, and paired outcomes against each direct control. Do not pool the three
 predictions per question as independent observations. Deterministic direct
 decoding needs one run; stochastic direct decoding requires the same declared
 seed policy as A0.
+
+For every generative condition, report the observed maximum generated-token
+count and how many rows at that maximum are scorable and correct. Equality
+between the observed maximum and the configured ceiling is treated as possible
+truncation, not a successful termination signal.
 
 ## Paired large-number suite
 
