@@ -106,6 +106,115 @@ Do not equate strict path-sensitive mismatch with wrong computation without alph
 
 ---
 
+# PRIMARY WORKSTREAM — Matched ASL Contribution
+
+## Main Paper 1 estimand
+
+The main Paper 1 question is not whether an ASL adapter can produce correct
+answers in isolation. It is:
+
+> How much does the learned `NL -> ASL -> deterministic runtime` path add over
+> the same pretrained model answering the same arithmetic questions directly,
+> and does that advantage survive large changes in numeric magnitude?
+
+No score from a different identity set, prompt budget, model revision, backend,
+or decoding regime is an acceptable substitute. In particular, do not subtract
+the historical 120-item direct-Qwen score from an official 250-item ASL score.
+
+## Matched conditions
+
+Freeze and run these conditions on identical official GSM8K identities:
+
+```text
+B0 DIRECT-CONCISE
+   Base Qwen3-0.6B, question -> concise final answer, thinking disabled.
+
+B1 DIRECT-REASONING
+   Base Qwen3-0.6B, question -> natural-language reasoning + final answer.
+   Give this control a sufficient but bounded output budget so ASL is not
+   compared only against an artificially answer-constrained base model.
+
+A0 ASL-RUNTIME
+   Qwen3-0.6B U2000 adapter, question -> ASL -> validated deterministic
+   execution -> returned answer.
+```
+
+Pin the base-model revision, question text, chat template, backend/dtype,
+generation mode, endpoint extraction, and random seed. Record prompt and output
+budgets explicitly. B0 and B1 must never see ASL demonstrations, benchmark
+rationales, reference answers, runtime state, or intermediate values. A0 must
+remain the autonomous zero-shot ASL condition already frozen. Where a control
+requires a genuinely different mode, such as reasoning-enabled generation,
+declare that difference rather than calling the protocols identical.
+
+A0 is a three-training-seed condition. Report each adapter seed, its mean and
+range, and paired outcomes against each direct control. Do not pool the three
+predictions per question as independent observations. Deterministic direct
+decoding needs one run; stochastic direct decoding requires the same declared
+seed policy as A0.
+
+## Paired large-number suite
+
+Large-number robustness is a primary comparison, not an appendix. Create a
+separate deterministic transformation of eligible frozen official questions:
+
+```text
+original question
+  -> registered source-number spans
+  -> magnitude transformation
+  -> mechanically updated hidden arithmetic trace
+  -> execution-verified transformed answer
+```
+
+Requirements:
+
+- transform source quantities, not merely the final answer;
+- preserve the arithmetic dependency graph and linguistic relation;
+- use integer-safe mappings and retain required divisibility;
+- exclude unsafe dates, percentages, ordinals, unit conventions, lexicalized
+  numbers, and real-world constraints unless a deterministic validator proves
+  that the transformation preserves meaning;
+- validate every transformed hidden arithmetic equation and final answer;
+- expose only the transformed question to generation;
+- freeze source IDs, spans, mapping, transformed hashes, eligibility reasons,
+  exclusions, and answers before model inference;
+- keep transformed descendants out of all training and development data;
+- report the eligible denominator rather than silently replacing exclusions.
+
+Run B0, B1, and every declared A0 seed on the same transformed descendants. The
+primary robustness statistic is the paired change from original to large:
+
+```text
+ASL degradation     = accuracy(A0_large) - accuracy(A0_original)
+direct degradation  = accuracy(Bx_large) - accuracy(Bx_original)
+ASL robustness gain = ASL degradation - direct degradation
+```
+
+Also report paired retention (correct original and transformed), gains, losses,
+parse/lower/type/execute failures for A0, answer-extraction failures for direct
+conditions, and results by original difficulty and magnitude band. Because this
+suite is added after observing one A0 seed on the original set, label its first
+result exploratory and freeze it before inspecting any direct or transformed
+outputs.
+
+## Claim gate
+
+Paper 1 may claim that ASL adds value only if the matched comparison supports at
+least one clearly delimited result:
+
+```text
+accuracy:           A0 improves over both B0 and the stronger B1 control;
+numeric robustness: A0 has materially smaller paired large-number degradation;
+mechanism:          executable ASL converts correct semantic bindings into exact
+                    answers that the direct model misses.
+```
+
+If A0 does not beat B1, report that faithfully: ASL generation may still be a
+useful inspectable interface, but the current experiment would not establish an
+answer-accuracy advantage over direct reasoning.
+
+---
+
 ## 3. Alpha-equivalent semantics
 
 Maintain two notions:
@@ -644,6 +753,18 @@ mean alpha-state F1
 4500
 ```
 
+### Table E — primary matched contribution
+
+```text
+condition
+original answer accuracy
+large-number answer accuracy
+paired retention / gains / losses
+large-number degradation
+latency and generated tokens
+ASL parse / lower / type / execute (A0 only)
+```
+
 For legacy mixed experiments, continue reporting GSM8K and TAT-QA separately so
 the historical record is auditable. All new tables must report GSM8K alone until
 the registered arithmetic dataset ladder is activated.
@@ -662,6 +783,14 @@ For future key scale points:
 
 Use exact McNemar for paired answer transitions where appropriate and label exploratory p-values.
 
+For the primary ASL contribution comparison:
+- use identical frozen identities for A0, B0, and B1;
+- report paired gains/losses and exact McNemar intervals/tests, not only the
+  difference between marginal percentages;
+- report each A0 training seed separately plus its mean/range;
+- bootstrap identities, not repeated seed-question rows, for the exploratory
+  large-number difference-in-differences interval.
+
 ---
 
 # 24. New code/artifacts
@@ -675,6 +804,8 @@ src/ccpu/paper1/
   paired_diversity_analysis.py
   scaling_dataset.py
   confirmatory_split.py
+  direct_answer_eval.py
+  large_number_suite.py
 ```
 
 Suggested artifacts:
@@ -690,6 +821,8 @@ artifacts/paper1/d1_v1/
 
 artifacts/paper1/f3_v2/
 artifacts/paper1/e3_v2/
+artifacts/paper1/gsm8k_scale_v1/matched_direct_v1/
+artifacts/paper1/gsm8k_scale_v1/large_number_v1/
 ```
 
 ---
@@ -707,6 +840,12 @@ query-target preservation
 signature invariance to local rename
 signature sensitivity to operator changes
 signature sensitivity to source-fact changes
+direct prompt contains question but no hidden rationale or answer
+direct endpoint extraction handles declared final-answer forms
+large-number transformation is deterministic
+large-number transformed trace recomputes the stored answer
+unsafe numeric contexts are excluded with reasons
+original/transformed identities remain one-to-one
 ```
 
 ---
@@ -727,6 +866,11 @@ Proceed to E3c/d only if preconditioning improves meaningful autonomous semantic
 
 ### Gate E — confirmatory set
 No broad semantic-compiler claim until the best condition is tested on the larger untouched set.
+
+### Gate F — matched direct and magnitude controls
+No claim that ASL improves Qwen answer accuracy or numeric robustness until A0,
+B0, and B1 are evaluated on identical frozen original and large-number
+identities.
 
 ---
 
@@ -756,6 +900,18 @@ P5  Run exposure-matched 1k/2k cells.
 P6  Freeze a larger confirmatory set from official GSM8K test.
     Never use it for tuning.
 
+P6a Freeze B0 direct-concise and B1 direct-reasoning prompts and endpoint
+    scorers on the same official identities. Run both before interpreting the
+    ASL-vs-direct effect.
+
+P6b Build and execution-verify the paired official GSM8K large-number suite.
+    Freeze eligibility, transformations, exclusions, and hashes before any
+    transformed inference.
+
+P6c Run B0, B1, and all A0 adapter seeds on both original and large-number
+    questions. Treat answer accuracy and differential magnitude degradation as
+    the primary Paper 1 comparisons.
+
 P7  Revise F3 around grounded identity + alpha-renamable locals.
 
 P8  Run F3-450.
@@ -771,7 +927,8 @@ P12 Compare:
      best F3/E3-450
      D1-F0-4500
 
-P13 Confirm best conditions on larger untouched evaluation.
+P13 Confirm best conditions and matched direct controls on the larger untouched
+    evaluation.
 
 P14 Only then consider:
      F3/E3-large
