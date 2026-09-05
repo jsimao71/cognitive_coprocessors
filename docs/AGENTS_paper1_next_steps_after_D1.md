@@ -117,6 +117,27 @@ answers in isolation. It is:
 > the same pretrained model answering the same arithmetic questions directly,
 > and does that advantage survive large changes in numeric magnitude?
 
+This is the central result of Paper 1. Architecture ablations, semantic error
+analysis, dataset scaling, and parser/runtime diagnostics explain the result,
+but they do not replace it. The primary endpoint hierarchy is frozen as:
+
+```text
+1. Original answer contribution:
+   accuracy(A0_original) - accuracy(B1_original)
+
+2. Large-number robustness contribution:
+   [accuracy(A0_large) - accuracy(A0_original_eligible)]
+   - [accuracy(B1_large) - accuracy(B1_original_eligible)]
+
+3. Supporting controls:
+   repeat 1 and 2 against B0; report ASL execution-stage failures and paired
+   question-level wins/losses against both direct conditions.
+```
+
+Endpoint 2 is especially important: preserving the dependency graph while
+changing only numeric magnitude tests whether the symbolic route contributes
+systematic computation rather than merely another learned answer surface.
+
 No score from a different identity set, prompt budget, model revision, backend,
 or decoding regime is an acceptable substitute. In particular, do not subtract
 the historical 120-item direct-Qwen score from an official 250-item ASL score.
@@ -212,6 +233,12 @@ mechanism:          executable ASL converts correct semantic bindings into exact
 If A0 does not beat B1, report that faithfully: ASL generation may still be a
 useful inspectable interface, but the current experiment would not establish an
 answer-accuracy advantage over direct reasoning.
+
+If A0 and B1 are similar on original questions but A0 degrades materially less
+on paired large-number variants, the paper may claim a bounded robustness
+advantage, not a general accuracy advantage. If neither endpoint favors A0,
+frame ASL as an inspectable runtime interface and treat the added generation
+stage as an unresolved accuracy cost.
 
 ---
 
@@ -761,6 +788,9 @@ original answer accuracy
 large-number answer accuracy
 paired retention / gains / losses
 large-number degradation
+ASL minus direct original accuracy
+ASL minus direct large-number degradation (difference-in-differences)
+paired exact McNemar p-value and identity-bootstrap 95% interval
 latency and generated tokens
 ASL parse / lower / type / execute (A0 only)
 ```

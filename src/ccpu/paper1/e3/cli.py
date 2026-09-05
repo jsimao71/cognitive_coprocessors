@@ -6,6 +6,7 @@ import argparse
 
 from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
+from .contribution_analysis import analyze_gsm8k_contribution
 from .data import (
     build_bottleneck_data,
     build_bottleneck_preference_data,
@@ -119,6 +120,16 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_large.add_argument("--output-dir", required=True)
     gsm8k_large.add_argument("--expected-source-sha256", required=True)
     gsm8k_large.add_argument("--factor", type=int, default=1000)
+    contribution = commands.add_parser("analyze-gsm8k-contribution")
+    contribution.add_argument("--original-eval", required=True)
+    contribution.add_argument("--large-eval", required=True)
+    contribution.add_argument("--original-direct", action="append", required=True)
+    contribution.add_argument("--original-asl", action="append", required=True)
+    contribution.add_argument("--large-direct", action="append", required=True)
+    contribution.add_argument("--large-asl", action="append", required=True)
+    contribution.add_argument("--output", required=True)
+    contribution.add_argument("--bootstrap-seed", type=int, default=22903)
+    contribution.add_argument("--bootstrap-samples", type=int, default=10000)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -321,6 +332,31 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K large-number eligible={manifest['counts']['eligible']} "
             f"excluded={manifest['counts']['excluded']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "analyze-gsm8k-contribution":
+        for values in (
+            args.original_direct,
+            args.original_asl,
+            args.large_direct,
+            args.large_asl,
+        ):
+            if any("=" not in value for value in values):
+                raise ValueError("contribution paths must use LABEL=PATH")
+        report = analyze_gsm8k_contribution(
+            original_eval_path=args.original_eval,
+            large_eval_path=args.large_eval,
+            original_direct_paths=[value.split("=", 1) for value in args.original_direct],
+            original_asl_paths=[value.split("=", 1) for value in args.original_asl],
+            large_direct_paths=[value.split("=", 1) for value in args.large_direct],
+            large_asl_paths=[value.split("=", 1) for value in args.large_asl],
+            output_path=args.output,
+            bootstrap_seed=args.bootstrap_seed,
+            bootstrap_samples=args.bootstrap_samples,
+        )
+        print(
+            f"GSM8K contribution original={report['identity_counts']['original']} "
+            f"large={report['identity_counts']['large_number']} -> {args.output}"
         )
         return 0
     if args.command == "run-bottleneck":

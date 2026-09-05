@@ -306,6 +306,7 @@ def _run_official_gsm8k_shard_unlocked(
         prediction = {
             "schema_version": "ccpu.paper1.gsm8k_answer_prediction.v1",
             "example_id": row["example_id"],
+            "parent_example_id": row.get("parent_example_id", row["example_id"]),
             "source_row": row["source_row"],
             "difficulty_stratum": row["difficulty_stratum"],
             "adapter_id": adapter_id,

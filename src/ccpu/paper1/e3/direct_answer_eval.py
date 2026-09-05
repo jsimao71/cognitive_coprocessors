@@ -215,6 +215,7 @@ def _run_direct_shard_unlocked(
             "protocol_id": DIRECT_PROTOCOL_ID,
             "condition": condition,
             "example_id": row["example_id"],
+            "parent_example_id": row.get("parent_example_id", row["example_id"]),
             "source_row": row["source_row"],
             "difficulty_stratum": row["difficulty_stratum"],
             "question_sha256": row["question_sha256"],
