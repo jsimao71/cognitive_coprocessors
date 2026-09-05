@@ -4,11 +4,26 @@ import pytest
 
 from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_jsonl
 from ccpu.paper1.e3.gsm8k_confirmatory import (
+    _score_prediction,
     analyze_official_gsm8k_replications,
     freeze_official_gsm8k,
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
 )
+
+
+def test_score_contains_invalid_functor_arity():
+    score = _score_prediction(
+        "answer = rate_times_duration(2)\nRETURN answer",
+        "4",
+        {"id": "global"},
+    )
+    assert score["parse_valid"]
+    assert score["lowerable_to_ccir"]
+    assert not score["type_valid"]
+    assert not score["executable"]
+    assert not score["final_answer_correct"]
+    assert score["errors"] == ["rate_times_duration expects 2 arguments, got 1"]
 
 
 def _source(tmp_path):

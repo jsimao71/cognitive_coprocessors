@@ -18,6 +18,16 @@ def _percent_of(arguments: list[Decimal]) -> Decimal:
     return arguments[0] * arguments[1] / Decimal(100)
 
 
+def _absolute(arguments: list[Decimal]) -> Decimal:
+    _require(arguments, 1, "abs")
+    return abs(arguments[0])
+
+
+def _rate_times_duration(arguments: list[Decimal]) -> Decimal:
+    _require(arguments, 2, "rate_times_duration")
+    return arguments[0] * arguments[1]
+
+
 def _inc_pct(arguments: list[Decimal]) -> Decimal:
     _require(arguments, 2, "inc_pct")
     return arguments[0] * (Decimal(1) + arguments[1] / Decimal(100))
@@ -35,7 +45,7 @@ def _mean(arguments: list[Decimal]) -> Decimal:
 
 
 ARITHMETIC_FUNCTIONS: dict[str, ArithmeticFunction] = {
-    "abs": lambda values: abs(values[0]),
+    "abs": _absolute,
     "dec_pct": _dec_pct,
     "decrease_by_percent": _dec_pct,
     "inc_pct": _inc_pct,
@@ -44,7 +54,7 @@ ARITHMETIC_FUNCTIONS: dict[str, ArithmeticFunction] = {
     "mean": _mean,
     "min": min,
     "percent_of": _percent_of,
-    "rate_times_duration": lambda values: values[0] * values[1],
+    "rate_times_duration": _rate_times_duration,
     "sum": sum,
 }
 
