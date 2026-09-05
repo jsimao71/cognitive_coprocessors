@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 from collections import Counter
 from decimal import Decimal, InvalidOperation
@@ -9,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from ccpu.common.artifacts import (
+    canonical_json,
     file_sha256,
     fingerprint,
     read_jsonl,
@@ -248,7 +250,7 @@ def _summary(
     }
 
 
-def run_official_gsm8k_shard(
+def _run_official_gsm8k_shard_unlocked(
     *,
     eval_path: str | Path,
     model_config: dict[str, Any],
@@ -336,6 +338,58 @@ def run_official_gsm8k_shard(
     }
     write_json(output / "summary.json", summary)
     return summary
+
+
+def run_official_gsm8k_shard(
+    *,
+    eval_path: str | Path,
+    model_config: dict[str, Any],
+    adapter_path: str | Path,
+    adapter_id: str,
+    output_dir: str | Path,
+    shard_index: int,
+    shard_count: int,
+    seed: int = 44017,
+    checkpoint_every: int = 5,
+    backend_override: Any | None = None,
+) -> dict[str, Any]:
+    """Run one shard while preventing concurrent writers for its output path."""
+
+    output = Path(output_dir)
+    output.mkdir(parents=True, exist_ok=True)
+    lock_path = output / ".run.lock"
+    try:
+        descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+    except FileExistsError as error:
+        owner = lock_path.read_text(encoding="utf-8", errors="replace").strip()
+        raise RuntimeError(f"GSM8K shard output is already locked: {owner}") from error
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as stream:
+            stream.write(
+                canonical_json(
+                    {
+                        "pid": os.getpid(),
+                        "adapter_id": adapter_id,
+                        "shard_index": shard_index,
+                        "shard_count": shard_count,
+                    }
+                )
+            )
+            stream.write("\n")
+        return _run_official_gsm8k_shard_unlocked(
+            eval_path=eval_path,
+            model_config=model_config,
+            adapter_path=adapter_path,
+            adapter_id=adapter_id,
+            output_dir=output,
+            shard_index=shard_index,
+            shard_count=shard_count,
+            seed=seed,
+            checkpoint_every=checkpoint_every,
+            backend_override=backend_override,
+        )
+    finally:
+        lock_path.unlink(missing_ok=True)
 
 
 def merge_official_gsm8k_shards(

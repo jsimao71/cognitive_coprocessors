@@ -158,3 +158,30 @@ def test_merge_rejects_incomplete_shards(tmp_path):
             shard_dirs=[output],
             output_dir=tmp_path / "merged",
         )
+
+
+def test_shard_rejects_concurrent_output_writer(tmp_path):
+    source, train = _source(tmp_path)
+    frozen = tmp_path / "frozen"
+    freeze_official_gsm8k(
+        source_path=source,
+        train_paths=[train],
+        output_dir=frozen,
+        expected_sha256=file_sha256(source),
+        expected_rows=3,
+        confirmatory_size=2,
+    )
+    output = tmp_path / "locked"
+    output.mkdir()
+    (output / ".run.lock").write_text('{"pid":123}\n', encoding="utf-8")
+    with pytest.raises(RuntimeError, match="already locked"):
+        run_official_gsm8k_shard(
+            eval_path=frozen / "full.jsonl",
+            model_config={"model": {"model_id": "fake", "revision": "test"}},
+            adapter_path="adapter",
+            adapter_id="test-adapter",
+            output_dir=output,
+            shard_index=0,
+            shard_count=1,
+            backend_override=_Backend(),
+        )
