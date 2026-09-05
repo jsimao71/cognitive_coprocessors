@@ -187,6 +187,16 @@ route has smaller paired accuracy degradation than direct reasoning. The primary
 statistic is the ASL-minus-direct difference between transformed and eligible
 original accuracy, with identities rather than seed-question rows resampled.
 
+\paragraph{H7: ASL model-size leverage.}
+On the identical official and factor-1,000 identities, increasing the base model
+from Qwen3-0.6B to Qwen3-1.7B improves the ASL-minus-direct answer contribution
+or its differential magnitude robustness. The estimand is the model-size
+difference-in-differences,
+$(\mathrm{ASL}_{1.7}-\mathrm{Direct}_{1.7})-
+(\mathrm{ASL}_{0.6}-\mathrm{Direct}_{0.6})$, rather than the standalone ASL
+accuracy change. The first initialization-99,173 run is an exploratory gate;
+any positive interaction requires replication before a model-size claim.
+
 H1--H4 are conditional on detection and use. Oracle detection
 estimates interface headroom; engine correctness alone does not demonstrate that
 the model will expose the syntax or use the inserted result.

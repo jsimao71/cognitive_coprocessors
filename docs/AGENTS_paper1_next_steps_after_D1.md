@@ -100,6 +100,24 @@ Do not conflate them.
 ### Positive but incomplete
 **Model size.** Qwen3-1.7B improves raw answers relative to 0.6B in earlier matched runs, but semantic-state/dependency quality does not improve proportionally.
 
+The next model-size gate uses the exact U2000/E4500 F0 representation rather
+than the older 500-program comparison. Qwen3-1.7B must use the same 2,000 unique
+programs, 4,500 exposures, 570 optimizer steps, QKVO rank 8, initialization
+99,173, and frozen 250/59 original/large identities as Qwen3-0.6B. Compare each
+model against its own matched direct-reasoning control and report:
+
+```text
+answer interaction =
+  (ASL_1.7B - direct_1.7B) - (ASL_0.6B - direct_0.6B)
+
+robustness interaction =
+  differential_degradation_1.7B - differential_degradation_0.6B
+```
+
+One 1.7B initialization is an exploratory resource gate. Replicate seeds 23 and
+37 only when at least one interaction is positive and scientifically material;
+do not infer ASL-specific leverage from a standalone 1.7B ASL improvement.
+
 ### Negative / null so far
 - Q1/Q2/Q3 external-ASL memory do not beat Q0.
 - Q3S1/Q3S2/Q3S3 encoder-specialization variants do not beat Q0.
@@ -997,6 +1015,10 @@ P6b Build and execution-verify the paired official GSM8K large-number suite.
 P6c Run B0, B1, and all A0 adapter seeds on both original and large-number
     questions. Treat answer accuracy and differential magnitude degradation as
     the primary Paper 1 comparisons.
+
+P6d Run the matched Qwen3-1.7B U2000/E4500 initialization-99173 gate on the same
+    250/59 identities. Compute answer and robustness model-size interactions.
+    Replicate seeds 23 and 37 only if the one-seed gate is positive and material.
 
 P7  Revise F3 around grounded identity + alpha-renamable locals.
 

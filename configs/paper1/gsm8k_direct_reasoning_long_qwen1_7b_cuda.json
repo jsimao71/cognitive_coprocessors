@@ -1,0 +1,14 @@
+{
+  "schema_version": "ccpu.paper1.gsm8k_direct_config.v1",
+  "condition": "direct_reasoning",
+  "model": {
+    "model_id": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "max_new_tokens": 2048,
+    "device": "cuda",
+    "dtype": "float16",
+    "use_chat_template": true,
+    "enable_thinking": true,
+    "cached_generation": true
+  }
+}

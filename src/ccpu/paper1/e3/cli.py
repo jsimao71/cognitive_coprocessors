@@ -33,6 +33,7 @@ from .gsm8k_confirmatory import (
     run_official_gsm8k_shard,
 )
 from .large_number_suite import freeze_large_number_gsm8k
+from .model_size_analysis import analyze_model_size_interaction
 from .selection import select_semantic_checkpoint
 
 
@@ -141,6 +142,12 @@ def build_parser() -> argparse.ArgumentParser:
     contribution.add_argument("--output", required=True)
     contribution.add_argument("--bootstrap-seed", type=int, default=22903)
     contribution.add_argument("--bootstrap-samples", type=int, default=10000)
+    model_size = commands.add_parser("analyze-gsm8k-model-size")
+    model_size.add_argument("--small-report", required=True)
+    model_size.add_argument("--large-report", required=True)
+    model_size.add_argument("--small-pair", required=True)
+    model_size.add_argument("--large-pair", required=True)
+    model_size.add_argument("--output", required=True)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -391,6 +398,22 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K contribution original={report['identity_counts']['original']} "
             f"large={report['identity_counts']['large_number']} -> {args.output}"
+        )
+        return 0
+    if args.command == "analyze-gsm8k-model-size":
+        report = analyze_model_size_interaction(
+            small_report_path=args.small_report,
+            large_report_path=args.large_report,
+            small_pair=args.small_pair,
+            large_pair=args.large_pair,
+            output_path=args.output,
+        )
+        print(
+            "GSM8K model-size answer interaction="
+            f"{report['original_answer_contribution']['model_size_interaction']:.3f} "
+            "robustness interaction="
+            f"{report['large_number_robustness_contribution']['model_size_interaction']:.3f} "
+            f"-> {args.output}"
         )
         return 0
     if args.command == "run-bottleneck":
