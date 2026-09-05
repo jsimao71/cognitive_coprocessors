@@ -93,6 +93,12 @@ executed expression graph, reaches 14/25, 11/25, and 14/25 versus 10/25. Strict
 path-sensitive semantic-state and return equivalence remain below the control.
 Thus semantic diversity yields a replicated autonomous answer, execution, and
 alpha-normalized computation gain, but not a robust canonical ontology compiler.
+The decisive Paper~1 comparison is therefore registered on the same frozen
+official GSM8K identities: base Qwen3-0.6B answering directly versus the learned
+NL-to-ASL path followed by deterministic execution. A paired factor-1,000
+large-number suite preserves each eligible problem's dependency graph and tests
+whether any ASL advantage reflects systematic computation rather than another
+learned answer surface. These matched results remain in progress in this draft.
 \end{abstract}
 
 \section{Status and Scope}
@@ -113,12 +119,24 @@ Most ASL compiler cells are single-checkpoint and all use only 25 untouched test
 programs; the final data-diversity cell has three matched training seeds, but its
 component and robustness results remain diagnostic Q1 evidence.
 
-Paper 1 asks one question:
+The initial reflex-computation phase asked:
 \begin{quote}
 When a language model naturally exposes a completed arithmetic expression
 during generation, does automatic bounded evaluation improve reliability or
 cost relative to model-only generation and explicit calculator calls?
 \end{quote}
+
+The failed public-transfer result and the subsequent NL-to-ASL experiments make
+the mature confirmatory question more fundamental:
+\begin{quote}
+How much does the learned \texttt{NL -> ASL -> deterministic runtime} path add
+over the same pretrained model answering the same arithmetic questions directly,
+and does that contribution survive large changes in numeric magnitude?
+\end{quote}
+This matched comparison is the primary Paper~1 endpoint. The earlier interface,
+architecture, loss, and data-scale experiments motivate and diagnose it, but do
+not substitute for it. We compare autonomous ASL against both concise direct
+answering and a stronger native-reasoning control on identical frozen questions.
 
 The scope remains calculator only and deterministic syntax interfaces. The
 experiment does not test semantic recognition of prose arithmetic, learned routing, persistent
@@ -149,6 +167,20 @@ Smaller models receive at least as much marginal accuracy benefit from correct
 reflex assistance as larger matched-family models. This is tested as a
 model-size-by-condition interaction, not inferred from separate unrelated
 checkpoints.
+
+\paragraph{H5: learned-ASL contribution.}
+On identical official GSM8K questions, autonomous ASL generation followed by
+validated deterministic execution improves final-answer accuracy over the same
+base Qwen3-0.6B answering directly. The primary baseline is native direct
+reasoning; concise direct answering is a supporting control. Evidence is paired
+by question and reported separately for every ASL training seed.
+
+\paragraph{H6: magnitude robustness.}
+When eligible source quantities are increased by a factor of 1,000 while the
+linguistic relations and arithmetic dependency graph are preserved, the ASL
+route has smaller paired accuracy degradation than direct reasoning. The primary
+statistic is the ASL-minus-direct difference between transformed and eligible
+original accuracy, with identities rather than seed-question rows resampled.
 
 These hypotheses are conditional on detection and use. Oracle detection
 estimates interface headroom; engine correctness alone does not demonstrate that
