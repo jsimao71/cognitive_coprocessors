@@ -950,6 +950,10 @@ P4  Build GSM8K-only subsets:
 P5  Run exposure-matched 1k/2k cells.
     Replicate only if the trend is coherent.
 
+    For U1000, run the unchanged historical 17-item projection and then the
+    frozen official 250-item question-only view. The official result is
+    confirmatory evaluation, never checkpoint or hyperparameter selection.
+
 P6  Freeze a larger confirmatory set from official GSM8K test.
     Never use it for tuning.
 

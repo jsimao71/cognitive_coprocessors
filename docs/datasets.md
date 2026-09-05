@@ -143,6 +143,13 @@ it is not selected in response to confirmatory performance. Its first run uses
 dataset-selection seed 11 and model-training seed 99,173, matching the first G1
 and U2000 runs rather than conflating selection and initialization seeds.
 
+- Official confirmation output:
+  `artifacts/paper1/gsm8k_scale_v1/u1000_e4500/official_confirmatory_eval/`
+
+The U1000 runner evaluates the unchanged historical projection first and then
+the frozen 250-item official question-only view. Neither result may select an
+epoch, alter the training configuration, or redefine the U1000 dataset.
+
 #### Official GSM8K confirmation freeze
 
 `GSM8K_OFFICIAL_TEST_V1` freezes the pinned `openai/gsm8k` official test

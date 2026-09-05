@@ -8,6 +8,8 @@ set "DATA=%REPO_ROOT%\artifacts\paper1\gsm8k_scale_v1\u1000_e4500"
 set "EVAL=%REPO_ROOT%\artifacts\paper1\gsm8k_scale_v1\g1_f0_4500\eval"
 set "RUN=%DATA%\qwen_run"
 set "EVALUATION=%DATA%\historical_test_eval"
+set "OFFICIAL=%REPO_ROOT%\artifacts\paper1\gsm8k_scale_v1\official_test_v1\confirmatory.jsonl"
+set "OFFICIAL_EVALUATION=%DATA%\official_confirmatory_eval"
 
 if not exist "%PYTHON%" exit /b 1
 
@@ -29,6 +31,18 @@ if not exist "%EVALUATION%\summary.json" (
         --adapter-path "%RUN%\adapter" ^
         --adapter-id "Qwen3-0.6B-G1-GSM8K-U1000-E4500-F0-L0-r8-seed11" ^
         --condition lora --shots 0 --output-dir "%EVALUATION%" --checkpoint-every 1
+    if errorlevel 1 goto :failed
+)
+if not exist "%OFFICIAL_EVALUATION%\summary.json" (
+    "%PYTHON%" -u -m ccpu.paper1.e3 run-gsm8k-official-shard ^
+        --eval "%OFFICIAL%" ^
+        --config "%REPO_ROOT%\configs\paper1\asl_pilot_qwen_base_xpu.json" ^
+        --adapter-path "%RUN%\adapter" ^
+        --adapter-id "Qwen3-0.6B-G1-GSM8K-U1000-E4500-F0-L0-r8-viewseed11-init99173" ^
+        --output-dir "%OFFICIAL_EVALUATION%" ^
+        --shard-index 0 ^
+        --shard-count 1 ^
+        --checkpoint-every 1
     if errorlevel 1 goto :failed
 )
 popd
