@@ -17,6 +17,11 @@ from .data_scale import (
     build_gsm8k_f0_data,
     freeze_gsm8k_eval_views,
 )
+from .direct_answer_eval import (
+    DIRECT_CONDITIONS,
+    freeze_direct_gsm8k_protocol,
+    run_direct_gsm8k_shard,
+)
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .gsm8k_confirmatory import (
     analyze_official_gsm8k_replications,
@@ -94,6 +99,19 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_analyze = commands.add_parser("analyze-gsm8k-official")
     gsm8k_analyze.add_argument("--candidate", action="append", required=True)
     gsm8k_analyze.add_argument("--output", required=True)
+    gsm8k_direct_freeze = commands.add_parser("prepare-gsm8k-direct")
+    gsm8k_direct_freeze.add_argument("--eval", required=True)
+    gsm8k_direct_freeze.add_argument("--config", action="append", required=True)
+    gsm8k_direct_freeze.add_argument("--output-dir", required=True)
+    gsm8k_direct = commands.add_parser("run-gsm8k-direct-shard")
+    gsm8k_direct.add_argument("--eval", required=True)
+    gsm8k_direct.add_argument("--config", required=True)
+    gsm8k_direct.add_argument("--condition", choices=DIRECT_CONDITIONS, required=True)
+    gsm8k_direct.add_argument("--output-dir", required=True)
+    gsm8k_direct.add_argument("--shard-index", type=int, required=True)
+    gsm8k_direct.add_argument("--shard-count", type=int, required=True)
+    gsm8k_direct.add_argument("--seed", type=int, default=44017)
+    gsm8k_direct.add_argument("--checkpoint-every", type=int, default=5)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -256,6 +274,33 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K official seeds={report['seed_count']} "
             f"identities={report['identity_count']} -> {args.output}"
+        )
+        return 0
+    if args.command == "run-gsm8k-direct-shard":
+        summary = run_direct_gsm8k_shard(
+            eval_path=args.eval,
+            model_config=read_json(args.config),
+            condition=args.condition,
+            output_dir=args.output_dir,
+            shard_index=args.shard_index,
+            shard_count=args.shard_count,
+            seed=args.seed,
+            checkpoint_every=args.checkpoint_every,
+        )
+        print(
+            f"GSM8K {args.condition} shard {args.shard_index}: answer="
+            f"{summary['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-direct":
+        manifest = freeze_direct_gsm8k_protocol(
+            eval_path=args.eval,
+            config_paths=args.config,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"GSM8K direct protocol identities={manifest['identity_count']} "
+            f"-> {args.output_dir}"
         )
         return 0
     if args.command == "run-bottleneck":

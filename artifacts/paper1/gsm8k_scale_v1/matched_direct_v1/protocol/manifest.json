@@ -1,0 +1,44 @@
+{
+  "answers_visible_to_model": false,
+  "conditions": {
+    "direct_concise": {
+      "config_path": "configs\\paper1\\gsm8k_direct_concise_qwen_xpu.json",
+      "config_sha256": "f6b64b862aff366860cc43d9d9fbe9c18e877ccd3c8f213f29a83013ec3a8af8",
+      "enable_thinking": false,
+      "instruction": "Solve the arithmetic word problem. Return only one final line in the exact form `Answer: <number>`. Do not write a program, ASL, or tool call.",
+      "instruction_sha256": "96b8a5c1061a71e6c33c502c84b16521e8eeb342976f5bd5c3414603511ab8c3",
+      "max_new_tokens": 128
+    },
+    "direct_reasoning": {
+      "config_path": "configs\\paper1\\gsm8k_direct_reasoning_qwen_xpu.json",
+      "config_sha256": "e9a8385149530a8158d116e85e4a381bb7016f399e4fc0fffa166149b58108c3",
+      "enable_thinking": true,
+      "instruction": "Solve the arithmetic word problem carefully. You may reason step by step, but do not write ASL or use tools. End with one final line in the exact form `Answer: <number>`.",
+      "instruction_sha256": "5bfefeea98d07daa4f35ee06618106e156a07f3170d66cbb1f54e7fd15843ee4",
+      "max_new_tokens": 1024
+    }
+  },
+  "declared_condition_differences": [
+    "enable_thinking",
+    "max_new_tokens"
+  ],
+  "eval_path": "artifacts\\paper1\\gsm8k_scale_v1\\official_test_v1\\confirmatory.jsonl",
+  "eval_sha256": "3314a09bcd409d66f5bcd3dfe536cf0dc2d7e6ac8f106f876129d2144a6dd0e9",
+  "example_ids_sha256": "9e11bbd0a8f723f52424e4411a8369d2967bb763d19561bfa84b9f01ffc80477",
+  "identity_count": 250,
+  "matched_model_fields": {
+    "device": "xpu",
+    "dtype": "float16",
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "use_chat_template": true
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "protocol_id": "paper1_gsm8k_matched_direct_v1",
+  "question_hashes_sha256": "1e1928e1a635490036c895e0bba37dd7b3e63c2f549317e19207d69154c8d9b2",
+  "rationales_visible_to_model": false,
+  "schema_version": "ccpu.paper1.gsm8k_direct_protocol.v1",
+  "statistical_role": "primary paired controls for the autonomous ASL-runtime condition; never tune on official outcomes"
+}
