@@ -509,6 +509,30 @@ def analyze_official_gsm8k_replications(
             "min_rate": min(values),
             "max_rate": max(values),
         }
+    difficulty_strata = sorted(
+        {str(row["difficulty_stratum"]) for row in indexed[0][2].values()}
+    )
+    aggregate_by_difficulty = {}
+    for stratum in difficulty_strata:
+        stratum_counts = [
+            per_seed[label]["by_difficulty"][stratum]["count"]
+            for label, _, _ in indexed
+        ]
+        if len(set(stratum_counts)) != 1:
+            raise ValueError(f"difficulty count differs across seeds for {stratum}")
+        correct_counts = [
+            per_seed[label]["by_difficulty"][stratum]["final_answer_correct"]
+            for label, _, _ in indexed
+        ]
+        rates = [correct / stratum_counts[0] for correct in correct_counts]
+        aggregate_by_difficulty[stratum] = {
+            "count_per_seed": stratum_counts[0],
+            "final_answer_correct_counts": correct_counts,
+            "rates": rates,
+            "mean_rate": mean(rates),
+            "min_rate": min(rates),
+            "max_rate": max(rates),
+        }
     answer_vectors = {
         label: {
             identity: bool(rows[identity]["metrics"]["final_answer_correct"])
@@ -538,12 +562,25 @@ def analyze_official_gsm8k_replications(
                     for key in identities
                 ),
             }
+    correct_seed_histogram = Counter(
+        sum(answer_vectors[label][identity] for label in labels)
+        for identity in identities
+    )
     report = {
         "schema_version": "ccpu.paper1.gsm8k_answer_replications.v1",
         "identity_count": len(identities),
         "seed_count": len(indexed),
         "per_seed": per_seed,
         "aggregate": aggregate,
+        "aggregate_by_difficulty": aggregate_by_difficulty,
+        "answer_agreement": {
+            "correct_seed_count_histogram": {
+                str(correct_count): correct_seed_histogram.get(correct_count, 0)
+                for correct_count in range(len(labels) + 1)
+            },
+            "unanimous_correct": correct_seed_histogram.get(len(labels), 0),
+            "unanimous_wrong": correct_seed_histogram.get(0, 0),
+        },
         "pairwise_answer_outcomes": pairwise,
         "statistical_boundary": (
             "Seeds reuse identical frozen questions; report seed means and ranges without "

@@ -222,3 +222,16 @@ def test_official_replication_analysis_keeps_seed_boundary(tmp_path):
         "right_only": 1,
         "both_wrong": 0,
     }
+    assert report["aggregate_by_difficulty"]["low"] == {
+        "count_per_seed": 2,
+        "final_answer_correct_counts": [1, 2],
+        "rates": [0.5, 1.0],
+        "mean_rate": 0.75,
+        "min_rate": 0.5,
+        "max_rate": 1.0,
+    }
+    assert report["answer_agreement"] == {
+        "correct_seed_count_histogram": {"0": 0, "1": 2, "2": 1},
+        "unanimous_correct": 1,
+        "unanimous_wrong": 0,
+    }
