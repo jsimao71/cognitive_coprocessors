@@ -23,6 +23,7 @@ from ccpu.paper1.public_gsm8k import extract_gsm8k_answer
 
 DIRECT_CONDITIONS = ("direct_concise", "direct_reasoning")
 DIRECT_PROTOCOL_ID = "paper1_gsm8k_matched_direct_v1"
+DIRECT_SCORER_ID = "paper1_gsm8k_numeric_endpoint_fraction_v1"
 
 _INSTRUCTIONS = {
     "direct_concise": (
@@ -79,6 +80,17 @@ def freeze_direct_gsm8k_protocol(
         "prompt_fields": ["question"],
         "rationales_visible_to_model": False,
         "answers_visible_to_model": False,
+        "answer_scorer": {
+            "policy_id": DIRECT_SCORER_ID,
+            "selection": "latest-ending accepted numeric endpoint",
+            "accepted_forms": [
+                "final answer is|:|= NUMBER",
+                "boxed{NUMBER}",
+                "terminal NUMBER",
+            ],
+            "equivalence": "exact Fraction after removing comma and dollar separators",
+            "condition_independent": True,
+        },
         "matched_model_fields": {
             field: reference.get(field) for field in matched_fields
         },
@@ -215,6 +227,7 @@ def _run_direct_shard_unlocked(
             "schema_version": "ccpu.paper1.gsm8k_direct_prediction.v1",
             "protocol_id": DIRECT_PROTOCOL_ID,
             "condition": condition,
+            "scorer_id": DIRECT_SCORER_ID,
             "example_id": row["example_id"],
             "parent_example_id": row.get("parent_example_id", row["example_id"]),
             "source_row": row["source_row"],
@@ -345,6 +358,7 @@ def merge_direct_gsm8k_shards(
     invariant_fields = (
         "protocol_id",
         "condition",
+        "scorer_id",
         "instruction_sha256",
         "model_id",
         "seed",

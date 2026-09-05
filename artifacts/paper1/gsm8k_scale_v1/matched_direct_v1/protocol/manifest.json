@@ -1,4 +1,15 @@
 {
+  "answer_scorer": {
+    "accepted_forms": [
+      "final answer is|:|= NUMBER",
+      "boxed{NUMBER}",
+      "terminal NUMBER"
+    ],
+    "condition_independent": true,
+    "equivalence": "exact Fraction after removing comma and dollar separators",
+    "policy_id": "paper1_gsm8k_numeric_endpoint_fraction_v1",
+    "selection": "latest-ending accepted numeric endpoint"
+  },
   "answers_visible_to_model": false,
   "conditions": {
     "direct_concise": {

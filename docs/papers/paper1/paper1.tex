@@ -1813,6 +1813,10 @@ from being manufactured by an artificially answer-constrained baseline. The
 primary Paper~1 estimand is the paired answer difference between these direct
 conditions and autonomous ASL generation followed by deterministic execution,
 not a comparison with the earlier nonidentical 120-item transfer test.
+The scorer selects the latest accepted endpoint among an explicit final-answer
+form, a boxed number, or a terminal number, then compares exactly as a rational
+after removing comma and dollar separators. Its policy identifier is stored in
+every direct prediction and enforced during shard merging.
 
 We also freeze an exploratory paired large-number view before any transformed
 inference. A factor-1,000 rewrite changes registered digit source quantities and

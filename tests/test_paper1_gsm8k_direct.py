@@ -10,6 +10,7 @@ from ccpu.common.artifacts import (
     write_jsonl,
 )
 from ccpu.paper1.e3.direct_answer_eval import (
+    DIRECT_SCORER_ID,
     direct_prompt,
     freeze_direct_gsm8k_protocol,
     merge_direct_gsm8k_shards,
@@ -99,6 +100,8 @@ def test_freeze_direct_protocol_pins_matched_provenance(tmp_path):
     assert manifest["prompt_fields"] == ["question"]
     assert manifest["conditions"]["direct_reasoning"]["enable_thinking"]
     assert manifest["conditions"]["direct_reasoning"]["max_new_tokens"] == 1024
+    assert manifest["answer_scorer"]["policy_id"] == DIRECT_SCORER_ID
+    assert manifest["answer_scorer"]["condition_independent"]
     assert read_json(tmp_path / "protocol" / "manifest.json") == manifest
 
 
@@ -129,6 +132,7 @@ def test_direct_shard_scores_and_records_no_gold_visibility(tmp_path):
     assert all("####" not in prompt for prompt, _ in backend.prompts)
     rows = read_jsonl(output / "predictions.jsonl")
     assert [row["predicted_answer"] for row in rows] == ["2", "5"]
+    assert {row["scorer_id"] for row in rows} == {DIRECT_SCORER_ID}
     assert read_json(output / "summary.json")["predictions_sha256"] == summary[
         "predictions_sha256"
     ]
