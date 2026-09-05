@@ -834,8 +834,12 @@ src/ccpu/paper1/
   paired_diversity_analysis.py
   scaling_dataset.py
   confirmatory_split.py
-  direct_answer_eval.py
-  large_number_suite.py
+  e3/direct_answer_eval.py
+  e3/large_number_suite.py
+  e3/contribution_analysis.py
+
+scripts/
+  run-paper1-gsm8k-matched-contribution-xpu.ps1
 ```
 
 Suggested artifacts:
@@ -853,7 +857,19 @@ artifacts/paper1/f3_v2/
 artifacts/paper1/e3_v2/
 artifacts/paper1/gsm8k_scale_v1/matched_direct_v1/
 artifacts/paper1/gsm8k_scale_v1/large_number_v1/
+artifacts/paper1/gsm8k_scale_v1/analysis/matched_contribution_v1.json
 ```
+
+After all three official A0 summaries exist, run the complete resumable matched
+campaign with:
+
+```powershell
+& scripts\run-paper1-gsm8k-matched-contribution-xpu.ps1 -WaitForOfficial
+```
+
+The script checkpoints every prediction, skips completed conditions, and emits
+the paired analysis only after original and transformed B0, B1, and all three A0
+seed files pass exact identity checks.
 
 ---
 
