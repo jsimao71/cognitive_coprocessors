@@ -19,6 +19,7 @@ from .data_scale import (
 )
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .gsm8k_confirmatory import (
+    analyze_official_gsm8k_replications,
     freeze_official_gsm8k,
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
@@ -90,6 +91,9 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_merge.add_argument("--eval", required=True)
     gsm8k_merge.add_argument("--shard-dir", action="append", required=True)
     gsm8k_merge.add_argument("--output-dir", required=True)
+    gsm8k_analyze = commands.add_parser("analyze-gsm8k-official")
+    gsm8k_analyze.add_argument("--candidate", action="append", required=True)
+    gsm8k_analyze.add_argument("--output", required=True)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -237,6 +241,21 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K merged={summary['prediction_count']} answer="
             f"{summary['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "analyze-gsm8k-official":
+        candidates = []
+        for value in args.candidate:
+            if "=" not in value:
+                raise ValueError("--candidate must use LABEL=PATH")
+            label, path = value.split("=", 1)
+            candidates.append((label, path))
+        report = analyze_official_gsm8k_replications(
+            candidate_paths=candidates, output_path=args.output
+        )
+        print(
+            f"GSM8K official seeds={report['seed_count']} "
+            f"identities={report['identity_count']} -> {args.output}"
         )
         return 0
     if args.command == "run-bottleneck":

@@ -4,6 +4,7 @@ import pytest
 
 from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_jsonl
 from ccpu.paper1.e3.gsm8k_confirmatory import (
+    analyze_official_gsm8k_replications,
     freeze_official_gsm8k,
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
@@ -185,3 +186,39 @@ def test_shard_rejects_concurrent_output_writer(tmp_path):
             shard_count=1,
             backend_override=_Backend(),
         )
+
+
+def test_official_replication_analysis_keeps_seed_boundary(tmp_path):
+    rows = []
+    for index, correct in enumerate((True, False, True)):
+        rows.append(
+            {
+                "example_id": f"example-{index}",
+                "difficulty_stratum": "low" if index < 2 else "high",
+                "metrics": {
+                    "parse_valid": True,
+                    "lowerable_to_ccir": True,
+                    "type_valid": True,
+                    "executable": True,
+                    "final_answer_correct": correct,
+                },
+            }
+        )
+    left = write_jsonl(tmp_path / "left.jsonl", rows)
+    right_rows = [dict(row, metrics=dict(row["metrics"])) for row in rows]
+    right_rows[1]["metrics"]["final_answer_correct"] = True
+    right_rows[2]["metrics"]["final_answer_correct"] = False
+    right = write_jsonl(tmp_path / "right.jsonl", right_rows)
+    report = analyze_official_gsm8k_replications(
+        candidate_paths=[("seed11", left), ("seed37", right)],
+        output_path=tmp_path / "analysis.json",
+    )
+    assert report["identity_count"] == 3
+    assert report["seed_count"] == 2
+    assert report["aggregate"]["final_answer_correct"]["counts"] == [2, 2]
+    assert report["pairwise_answer_outcomes"]["seed11__seed37"] == {
+        "both_correct": 1,
+        "left_only": 1,
+        "right_only": 1,
+        "both_wrong": 0,
+    }

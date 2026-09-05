@@ -6,7 +6,9 @@ import os
 import re
 from collections import Counter
 from decimal import Decimal, InvalidOperation
+from math import sqrt
 from pathlib import Path
+from statistics import mean
 from typing import Any
 
 from ccpu.common.artifacts import (
@@ -423,3 +425,130 @@ def merge_official_gsm8k_shards(
     summary["predictions_sha256"] = file_sha256(predictions_path)
     write_json(output / "summary.json", summary)
     return summary
+
+
+def _wilson(successes: int, total: int, z: float = 1.959963984540054) -> list[float]:
+    if total == 0:
+        return [0.0, 0.0]
+    proportion = successes / total
+    denominator = 1 + z * z / total
+    center = (proportion + z * z / (2 * total)) / denominator
+    margin = z * sqrt(proportion * (1 - proportion) / total + z * z / (4 * total**2))
+    margin /= denominator
+    return [max(0.0, center - margin), min(1.0, center + margin)]
+
+
+def analyze_official_gsm8k_replications(
+    *, candidate_paths: list[tuple[str, str | Path]], output_path: str | Path
+) -> dict[str, Any]:
+    """Aggregate matched-seed confirmation without pooling seed observations."""
+
+    if not candidate_paths:
+        raise ValueError("at least one official GSM8K candidate is required")
+    indexed = []
+    for label, path_value in candidate_paths:
+        path = Path(path_value)
+        rows = read_jsonl(path)
+        by_id = {str(row["example_id"]): row for row in rows}
+        if len(by_id) != len(rows):
+            raise ValueError(f"duplicate official GSM8K identity in {label}")
+        indexed.append((label, path, by_id))
+    identities = set(indexed[0][2])
+    for label, _, rows in indexed[1:]:
+        if set(rows) != identities:
+            raise ValueError(f"official GSM8K identities differ for {label}")
+
+    endpoints = (
+        "parse_valid",
+        "lowerable_to_ccir",
+        "type_valid",
+        "executable",
+        "final_answer_correct",
+    )
+    per_seed = {}
+    for label, path, rows in indexed:
+        counts = {
+            endpoint: sum(bool(row["metrics"][endpoint]) for row in rows.values())
+            for endpoint in endpoints
+        }
+        per_seed[label] = {
+            "path": str(path),
+            "sha256": file_sha256(path),
+            "count": len(rows),
+            "counts": counts,
+            "rates": {endpoint: counts[endpoint] / len(rows) for endpoint in endpoints},
+            "answer_wilson_95": _wilson(counts["final_answer_correct"], len(rows)),
+            "by_difficulty": {
+                stratum: {
+                    "count": len(members),
+                    "final_answer_correct": sum(
+                        bool(row["metrics"]["final_answer_correct"]) for row in members
+                    ),
+                }
+                for stratum in sorted(
+                    {str(row["difficulty_stratum"]) for row in rows.values()}
+                )
+                if (
+                    members := [
+                        row
+                        for row in rows.values()
+                        if str(row["difficulty_stratum"]) == stratum
+                    ]
+                )
+            },
+        }
+
+    aggregate = {}
+    for endpoint in endpoints:
+        values = [per_seed[label]["rates"][endpoint] for label, _, _ in indexed]
+        counts = [per_seed[label]["counts"][endpoint] for label, _, _ in indexed]
+        aggregate[endpoint] = {
+            "counts": counts,
+            "rates": values,
+            "mean_rate": mean(values),
+            "min_rate": min(values),
+            "max_rate": max(values),
+        }
+    answer_vectors = {
+        label: {
+            identity: bool(rows[identity]["metrics"]["final_answer_correct"])
+            for identity in identities
+        }
+        for label, _, rows in indexed
+    }
+    pairwise = {}
+    labels = [label for label, _, _ in indexed]
+    for left_index, left in enumerate(labels):
+        for right in labels[left_index + 1 :]:
+            pairwise[f"{left}__{right}"] = {
+                "both_correct": sum(
+                    answer_vectors[left][key] and answer_vectors[right][key]
+                    for key in identities
+                ),
+                "left_only": sum(
+                    answer_vectors[left][key] and not answer_vectors[right][key]
+                    for key in identities
+                ),
+                "right_only": sum(
+                    not answer_vectors[left][key] and answer_vectors[right][key]
+                    for key in identities
+                ),
+                "both_wrong": sum(
+                    not answer_vectors[left][key] and not answer_vectors[right][key]
+                    for key in identities
+                ),
+            }
+    report = {
+        "schema_version": "ccpu.paper1.gsm8k_answer_replications.v1",
+        "identity_count": len(identities),
+        "seed_count": len(indexed),
+        "per_seed": per_seed,
+        "aggregate": aggregate,
+        "pairwise_answer_outcomes": pairwise,
+        "statistical_boundary": (
+            "Seeds reuse identical frozen questions; report seed means and ranges without "
+            "pooling seed-question predictions as independent observations."
+        ),
+    }
+    write_json(output_path, report)
+    return report
