@@ -14,6 +14,7 @@ from ccpu.paper1.e3.direct_answer_eval import (
     direct_prompt,
     freeze_direct_gsm8k_protocol,
     merge_direct_gsm8k_shards,
+    prepare_long_budget_resume,
     run_direct_gsm8k_shard,
 )
 from ccpu.paper1.e3.gsm8k_confirmatory import freeze_official_gsm8k
@@ -242,3 +243,37 @@ def test_direct_shard_rejects_concurrent_writer(tmp_path):
             shard_count=1,
             backend_override=_DirectBackend(),
         )
+
+
+def test_long_budget_resume_reuses_only_pre_ceiling_rows(tmp_path):
+    source = write_jsonl(
+        tmp_path / "source.jsonl",
+        [
+            {
+                "example_id": f"item-{index}",
+                "protocol_id": "paper1_gsm8k_matched_direct_v1",
+                "condition": "direct_reasoning",
+                "scorer_id": DIRECT_SCORER_ID,
+                "instruction_sha256": "fixed",
+                "model_id": "fake",
+                "seed": 7,
+                "shard_index": 0,
+                "shard_count": 1,
+                "generated_tokens": tokens,
+            }
+            for index, tokens in enumerate((17, 1024, 1023))
+        ],
+    )
+    output = tmp_path / "long"
+    manifest = prepare_long_budget_resume(
+        source_predictions_path=source,
+        output_dir=output,
+        source_ceiling=1024,
+        target_ceiling=2048,
+    )
+    assert manifest["reused_count"] == 2
+    assert manifest["regenerate_count"] == 1
+    rows = read_jsonl(output / "predictions.jsonl")
+    assert [row["example_id"] for row in rows] == ["item-0", "item-2"]
+    assert all(row["long_budget_reuse"]["target_ceiling"] == 2048 for row in rows)
+    assert read_json(output / "long_budget_resume_manifest.json") == manifest

@@ -22,6 +22,7 @@ from .direct_answer_eval import (
     DIRECT_CONDITIONS,
     freeze_direct_gsm8k_protocol,
     merge_direct_gsm8k_shards,
+    prepare_long_budget_resume,
     run_direct_gsm8k_shard,
 )
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
@@ -119,6 +120,11 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_direct_merge.add_argument("--eval", required=True)
     gsm8k_direct_merge.add_argument("--shard-dir", action="append", required=True)
     gsm8k_direct_merge.add_argument("--output-dir", required=True)
+    gsm8k_long_resume = commands.add_parser("prepare-gsm8k-long-budget-resume")
+    gsm8k_long_resume.add_argument("--source-predictions", required=True)
+    gsm8k_long_resume.add_argument("--output-dir", required=True)
+    gsm8k_long_resume.add_argument("--source-ceiling", type=int, required=True)
+    gsm8k_long_resume.add_argument("--target-ceiling", type=int, required=True)
     gsm8k_large = commands.add_parser("prepare-gsm8k-large-numbers")
     gsm8k_large.add_argument("--source", required=True)
     gsm8k_large.add_argument("--eval", required=True)
@@ -335,6 +341,18 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K direct protocol identities={manifest['identity_count']} "
             f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-long-budget-resume":
+        manifest = prepare_long_budget_resume(
+            source_predictions_path=args.source_predictions,
+            output_dir=args.output_dir,
+            source_ceiling=args.source_ceiling,
+            target_ceiling=args.target_ceiling,
+        )
+        print(
+            f"GSM8K long-budget reuse={manifest['reused_count']} "
+            f"regenerate={manifest['regenerate_count']} -> {args.output_dir}"
         )
         return 0
     if args.command == "prepare-gsm8k-large-numbers":

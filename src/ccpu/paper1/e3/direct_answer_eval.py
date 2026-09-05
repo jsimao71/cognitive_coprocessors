@@ -172,6 +172,83 @@ def _summary(
     }
 
 
+def prepare_long_budget_resume(
+    *,
+    source_predictions_path: str | Path,
+    output_dir: str | Path,
+    source_ceiling: int,
+    target_ceiling: int,
+) -> dict[str, Any]:
+    """Reuse deterministic rows that terminated before a smaller token ceiling."""
+
+    if source_ceiling < 1 or target_ceiling <= source_ceiling:
+        raise ValueError("target ceiling must be greater than the positive source ceiling")
+    source_path = Path(source_predictions_path)
+    rows = read_jsonl(source_path)
+    if not rows:
+        raise ValueError("long-budget preparation requires nonempty source predictions")
+    invariant_fields = (
+        "protocol_id",
+        "condition",
+        "scorer_id",
+        "instruction_sha256",
+        "model_id",
+        "seed",
+        "shard_index",
+        "shard_count",
+    )
+    mixed = {
+        field: {str(row.get(field)) for row in rows}
+        for field in invariant_fields
+        if len({str(row.get(field)) for row in rows}) != 1
+    }
+    if mixed:
+        raise ValueError(f"long-budget source has mixed provenance: {mixed}")
+    if rows[0].get("protocol_id") != DIRECT_PROTOCOL_ID:
+        raise ValueError("long-budget source uses an unsupported protocol")
+    if rows[0].get("condition") != "direct_reasoning":
+        raise ValueError("long-budget reuse is restricted to direct_reasoning")
+    if rows[0].get("scorer_id") != DIRECT_SCORER_ID:
+        raise ValueError("long-budget source uses an unsupported scorer")
+    if len({str(row["example_id"]) for row in rows}) != len(rows):
+        raise ValueError("long-budget source contains duplicate identities")
+
+    reusable = []
+    for source_row in rows:
+        if int(source_row["generated_tokens"]) >= source_ceiling:
+            continue
+        row = dict(source_row)
+        row["long_budget_reuse"] = {
+            "source_ceiling": source_ceiling,
+            "target_ceiling": target_ceiling,
+            "criterion": "terminated_before_source_ceiling",
+            "deterministic_prefix_equivalence": True,
+        }
+        reusable.append(row)
+
+    output = Path(output_dir)
+    predictions_path = write_jsonl(output / "predictions.jsonl", reusable)
+    manifest = {
+        "schema_version": "ccpu.paper1.gsm8k_long_budget_resume.v1",
+        "source_predictions_path": str(source_predictions_path),
+        "source_predictions_sha256": file_sha256(source_path),
+        "source_prediction_count": len(rows),
+        "source_ceiling": source_ceiling,
+        "target_ceiling": target_ceiling,
+        "reused_count": len(reusable),
+        "regenerate_count": len(rows) - len(reusable),
+        "reuse_criterion": "generated_tokens < source_ceiling",
+        "assumption": (
+            "greedy decoding that emitted EOS before the source ceiling is identical "
+            "under the larger ceiling on the same pinned backend"
+        ),
+        "predictions_path": str(predictions_path),
+        "reused_predictions_sha256": file_sha256(predictions_path),
+    }
+    write_json(output / "long_budget_resume_manifest.json", manifest)
+    return manifest
+
+
 def _run_direct_shard_unlocked(
     *,
     eval_path: str | Path,
