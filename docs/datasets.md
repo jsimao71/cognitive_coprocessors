@@ -124,10 +124,12 @@ semantic diversity.
 - Training stream: `artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl`
 
 All three declared runs are complete on `TEST-GSM17`. U2000/E4500 reaches
-11, 6, and 6 answers across seeds 11, 23, and 37 (mean 7.67/17, 45.1%; range
-35.3--64.7%), versus 6, 7, and 6 for same-seed G1-4500. The corresponding
-same-seed answer deltas are therefore +5, -1, and 0: the seed-11 gain does not
-replicate uniformly. Mean alpha-state F1 is .620, .571, and .572, exceeding
+11, 6, and 6 answers across initialization seeds 99,173, 23, and 37 (mean
+7.67/17, 45.1%; range 35.3--64.7%), versus 6, 7, and 6 for the matched G1-4500
+runs. The corresponding same-initialization answer deltas are therefore +5,
+-1, and 0: the first-run gain does not replicate uniformly. Historical artifact
+paths call the first run `seed11` because 11 is the shared dataset-selection
+seed; its model-training seed is 99,173. Mean alpha-state F1 is .620, .571, and .572, exceeding
 the corresponding G1 values in every seed, so repetition has a more consistent
 soft-semantic than final-answer effect. This small historical test cannot select
 the final condition; the official confirmation freeze below remains decisive.
@@ -137,7 +139,9 @@ source IDs and semantic signatures before any official-test result is known.
 It preserves 4,500 exposures and 570 optimizer steps, with every source reused
 four or five times across ten 450-row logical epochs. Its role is to distinguish
 the effect of additional repetition from the U2000 and G1-4500 diversity cells;
-it is not selected in response to confirmatory performance.
+it is not selected in response to confirmatory performance. Its first run uses
+dataset-selection seed 11 and model-training seed 99,173, matching the first G1
+and U2000 runs rather than conflating selection and initialization seeds.
 
 #### Official GSM8K confirmation freeze
 

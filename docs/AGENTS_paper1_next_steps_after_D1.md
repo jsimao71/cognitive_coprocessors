@@ -47,12 +47,18 @@ Q0 F0 ordinary likelihood, 450 unique programs:
   19/25 executable
 
 D1 OpenRouter 4,500 unique programs:
-  seed 11: 16/25 answers, 23/25 executable
-  seed 23: 13/25 answers, 24/25 executable
-  seed 37: 17/25 answers, 22/25 executable
+  init 99173 (historical run label seed11): 16/25 answers, 23/25 executable
+  init 23: 13/25 answers, 24/25 executable
+  init 37: 17/25 answers, 22/25 executable
 ```
 
-Across all three declared D1 seeds:
+Dataset selection and model initialization are separate seed axes. The frozen
+G1, U2000, and U1000 first-run datasets use selection seed 11, while their
+matched first model run uses initialization/training seed 99,173. Historical
+artifact names containing `seed11` are retained for provenance and must not be
+described as training seed 11.
+
+Across all three declared D1 initialization runs:
 - autonomous answer accuracy exceeds Q0;
 - executable rate exceeds Q0;
 - alpha-normalized return equivalence exceeds Q0;
@@ -77,7 +83,7 @@ Do not conflate them.
 ## 1. Current evidence hierarchy
 
 ### Positive / replicated
-**D1 semantic diversity.** Replacing repeated exposure to 450 programs with 4,500 unique leakage-audited programs improves autonomous answer generation and execution across three seeds.
+**D1 semantic diversity.** Replacing repeated exposure to 450 programs with 4,500 unique leakage-audited programs improves autonomous answer generation and execution across three initialization seeds.
 
 ### Positive but incomplete
 **Model size.** Qwen3-1.7B improves raw answers relative to 0.6B in earlier matched runs, but semantic-state/dependency quality does not improve proportionally.
@@ -733,7 +739,7 @@ Do not silently mutate D1_v1.
 
 Use the evidence-supported narrative:
 
-> The main obstacle in autonomous NL→ASL transfer is not parser validity or deterministic execution. Memory transport, adapter specialization, semantic weighting, hard-negative ranking, and a stronger explicit graph bottleneck do not outperform the 450-program Q0 control. In contrast, replacing repeated exposure with 4,500 unique leakage-audited programs improves autonomous answer generation and executable program rate across three matched seeds. Alpha-normalized semantic metrics also improve, while strict teacher-path equivalence does not. The evidence therefore supports semantic diversity as the first replicated lever and motivates separating computational/world equivalence from arbitrary symbolic naming.
+> The main obstacle in autonomous NL→ASL transfer is not parser validity or deterministic execution. Memory transport, adapter specialization, semantic weighting, hard-negative ranking, and a stronger explicit graph bottleneck do not outperform the 450-program Q0 control. In contrast, replacing repeated exposure with 4,500 unique leakage-audited programs improves autonomous answer generation and executable program rate across three matched initialization runs. Alpha-normalized semantic metrics also improve, while strict teacher-path equivalence does not. The evidence therefore supports semantic diversity as the first replicated lever and motivates separating computational/world equivalence from arbitrary symbolic naming.
 
 Do not claim a solved semantic compiler.
 
@@ -756,7 +762,7 @@ F4
 
 ```text
 Q0
-D1 seed11
+D1 init99173
 D1 seed23
 D1 seed37
 ```
@@ -924,7 +930,7 @@ identities.
 # 27. Immediate execution order
 
 ```text
-P0  Freeze legacy mixed D1_v1 and all three D1 seeds without mutation.
+P0  Freeze legacy mixed D1_v1 and all three D1 initialization runs without mutation.
 
 P0a Freeze a new GSM8K-only corpus and manifest from strict OpenRouter GSM8K
     programs. Reject every non-GSM8K row at the data boundary. Give all derived

@@ -85,7 +85,7 @@ state-error propagation. Restoring the full question while retaining local-delta
 prediction recovers 11/25, equal to whole-program synthesis but not better.
 An exposure-matched OpenRouter diversity cell then replaces ten repeats of 450
 programs with 4,500 unique, leakage-audited programs while retaining the same
-rank-8 adapter and 570 optimizer steps. Three declared training seeds reach
+rank-8 adapter and 570 optimizer steps. Three declared training runs reach
 16/25, 13/25, and 17/25 answers and 23/25, 24/25, and 22/25 executable programs,
 versus 11/25 and 19/25 for the frozen control. Alpha-normalized return
 equivalence, which ignores arbitrary internal symbol names but retains the
@@ -116,7 +116,7 @@ greedy seed; its condition ordering is evidence for replication, not a final
 architecture-level estimate. The public GSM8K slice is likewise a
 single-checkpoint developmental transfer test, not a benchmark-wide estimate.
 Most ASL compiler cells are single-checkpoint and all use only 25 untouched test
-programs; the final data-diversity cell has three matched training seeds, but its
+programs; the final data-diversity cell has three matched training runs, but its
 component and robustness results remain diagnostic Q1 evidence.
 
 The initial reflex-computation phase asked:
@@ -1678,16 +1678,16 @@ Q0's 565,160 because the remote programs are shorter.
 \begin{table}[t]
 \centering\small
 \caption{Frozen autonomous data-diversity comparison. All three declared D1
-training seeds are complete. Counts are exact on the same 25 programs.}
+training runs are complete. Counts are exact on the same 25 programs.}
 \label{tab:asl-d1-scale}
 \begin{tabular}{lrrrrrr}
 \toprule
 Condition & Parse & Lower & Execute & State & Return & Answer\\
 \midrule
 Q0 Codex-450 repeated & 22 & 21 & 19 & 5 & 7 & 11\\
-D1 OpenRouter-4,500, seed 11 & 25 & 25 & 23 & 4 & 5 & 16\\
-D1 OpenRouter-4,500, seed 23 & 25 & 25 & 24 & 3 & 4 & 13\\
-D1 OpenRouter-4,500, seed 37 & 24 & 24 & 22 & 4 & 6 & 17\\
+D1 OpenRouter-4,500, init 99173 & 25 & 25 & 23 & 4 & 5 & 16\\
+D1 OpenRouter-4,500, init 23 & 25 & 25 & 24 & 3 & 4 & 13\\
+D1 OpenRouter-4,500, init 37 & 24 & 24 & 22 & 4 & 6 & 17\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1739,11 +1739,11 @@ mean alpha-state F1 is .606; strict state and return equivalence are 4/25 and
 6/25. Training takes 5,302 seconds, ends at development loss .311, and retains
 epoch 8's .305 minimum as a diagnostic only.
 
-Across the three seeds, answer counts are 16, 13, and 17 (mean 15.33/25,
+Across the three initialization runs, answer counts are 16, 13, and 17 (mean 15.33/25,
 range 52--68\%) versus Q0's 11/25 (44\%). Execution counts are 23, 24, and 22
 versus 19; alpha-return counts are 14, 11, and 14 versus 10; and mean
 alpha-state F1 values are .692, .631, and .606 versus .595. Exact alpha-state
-is improved or tied at 7, 6, and 7 versus 6. Every seed therefore preserves the
+is improved or tied at 7, 6, and 7 versus 6. Every initialization therefore preserves the
 direction of the answer, execution, alpha-return, and soft alpha-state effects.
 In contrast, strict state counts are 4, 3, and 4 versus 5 and strict return
 counts are 5, 4, and 6 versus 7. Because the seeds reuse the same 25 identities,
@@ -1834,11 +1834,15 @@ postdates the first original-set ASL result.
 We train three G1-GSM8K adapters on the 4,500-unique-program freeze
 and evaluate only TEST-GSM17. All use the pinned Qwen3-0.6B revision,
 QKVO rank 8, 4,500 row exposures, 570 optimizer steps, and the same autonomous
-prompt and decoding seed. Seed 11 runs on XPU; seeds 23 and 37 run on CUDA.
+prompt and decoding seed. The first run uses initialization seed 99,173 on XPU;
+initialization seeds 23 and 37 run on CUDA. All use dataset-selection seed 11.
+Historical artifact paths retain the shorthand \texttt{seed11} for the first
+run, but that shorthand must not be interpreted as model-training seed 11.
 Backend provenance is retained per run. We additionally run an exposure-matched
 scale cell, U2000/E4500, which selects 2,000 unique GSM8K programs and
-reuses each two or three times in deterministic shuffled cycles. It uses seed
-11 and is directly paired with the seed-11 4,500-unique condition.
+reuses each two or three times in deterministic shuffled cycles. It uses
+dataset-selection seed 11 and is directly paired with the corresponding
+initialization-99,173 4,500-unique condition.
 Before observing official-test outcomes, we also freeze U1000/E4500: 1,000
 unique source IDs and semantic signatures, each reused four or five times, with
 the same 4,500 exposures, ten logical epochs, and 570 optimizer steps. This
@@ -1849,24 +1853,24 @@ to confirmation performance.
 \centering\small
 \caption{GSM8K-only scaling on the frozen 17-item historical projection. All
 trained conditions use 4,500 row exposures and 570 optimizer steps. U2000 is a
-three-seed matched replication.}
+three-initialization matched replication.}
 \label{tab:gsm8k-only-scale}
 \begin{tabular}{lrrrrrr}
 \toprule
 Condition & Parse & Lower & Type & Execute & $\alpha$-return & Answer\\
 \midrule
 Q0 Codex-450 repeated & 14 & 13 & 13 & 12 & 4 & 4\\
-G1 4,500 unique, seed 11 & 16 & 16 & 15 & 13 & 5 & 6\\
-G1 4,500 unique, seed 23 & 16 & 16 & 16 & 13 & 6 & 7\\
-G1 4,500 unique, seed 37 & 16 & 16 & 16 & 14 & 5 & 6\\
-U2000, seed 11 & 16 & 16 & 16 & 15 & 6 & 11\\
-U2000, seed 23 & 15 & 15 & 15 & 14 & 5 & 6\\
-U2000, seed 37 & 15 & 15 & 15 & 14 & 6 & 6\\
+G1 4,500 unique, init 99173 & 16 & 16 & 15 & 13 & 5 & 6\\
+G1 4,500 unique, init 23 & 16 & 16 & 16 & 13 & 6 & 7\\
+G1 4,500 unique, init 37 & 16 & 16 & 16 & 14 & 5 & 6\\
+U2000, init 99173 & 16 & 16 & 16 & 15 & 6 & 11\\
+U2000, init 23 & 15 & 15 & 15 & 14 & 5 & 6\\
+U2000, init 37 & 15 & 15 & 15 & 14 & 6 & 6\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The 4,500-unique GSM8K condition obtains 6, 7, and 6 answers across seeds
+The 4,500-unique GSM8K condition obtains 6, 7, and 6 answers across initializations
 (mean 6.33/17, 37.3\%; range 35.3--41.2\%), improving over Q0's 4/17 in every
 seed. Executable counts are 13, 13, and 14 versus 12, and mean alpha-state F1
 values are .527, .559, and .556 versus .502. However, these GSM8K-only scores
@@ -1875,11 +1879,12 @@ does not isolate a beneficial effect of TAT-QA: removing TAT-QA also changes the
 selected GSM8K identities and their exposure schedule.
 
 The exposure-matched U2000 answer counts are 11, 6, and 6 (mean 7.67/17,
-45.1\%; range 35.3--64.7\%), compared with same-seed G1-4500 counts of 6, 7,
-and 6. Thus the same-seed answer deltas are $+5,-1,0$: seed 11 has five gains
-and no losses (two-sided exact McNemar $p=.0625$, exploratory), seed 23 has two
-gains and three losses ($p=1.0$), and seed 37 has two gains and two losses
-($p=1.0$). The large seed-11 gain therefore does not replicate uniformly.
+45.1\%; range 35.3--64.7\%), compared with same-initialization G1-4500 counts
+of 6, 7, and 6. Thus the matched answer deltas are $+5,-1,0$: initialization
+99,173 has five gains and no losses (two-sided exact McNemar $p=.0625$,
+exploratory), initialization 23 has two gains and three losses ($p=1.0$), and
+initialization 37 has two gains and two losses ($p=1.0$). The large first-run
+gain therefore does not replicate uniformly.
 
 U2000 nevertheless remains above Q0's 4/17 in every seed. Its executable counts
 are 15, 14, and 14, and mean alpha-state F1 values are .620, .571, and .572,
@@ -2305,7 +2310,7 @@ whole-program deficit to attribute grounding (.144 F1), dependency preservation
 operator F1; 6/20 state-inequivalent programs still obtain the correct answer.
 Matched adapter-capacity, memory-placement, semantic-weighting, ranking, and
 graph-bottleneck controls do not exceed the 11/25 whole-program control. In
-contrast, three exposure-matched 4,500-program diversity seeds reach 16/25,
+contrast, three exposure-matched 4,500-program diversity runs reach 16/25,
 13/25, and 17/25 answers, with 23/25, 24/25, and 22/25 executable programs. All
 three exceed Q0 on answers, execution, alpha-normalized return, and mean
 alpha-state F1. Strict state and return equivalence remain below the control in
