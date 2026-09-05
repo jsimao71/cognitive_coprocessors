@@ -20,13 +20,29 @@ def _predictions(path, outcomes):
 def _inputs(tmp_path):
     original = write_jsonl(
         tmp_path / "original.jsonl",
-        [{"example_id": f"o{index}"} for index in range(1, 5)],
+        [
+            {
+                "example_id": f"o{index}",
+                "difficulty_stratum": "low" if index <= 2 else "high",
+            }
+            for index in range(1, 5)
+        ],
     )
     large = write_jsonl(
         tmp_path / "large.jsonl",
         [
-            {"example_id": "l1", "parent_example_id": "o1"},
-            {"example_id": "l2", "parent_example_id": "o2"},
+            {
+                "example_id": "l1",
+                "parent_example_id": "o1",
+                "difficulty_stratum": "low",
+                "reference_return": "12000",
+            },
+            {
+                "example_id": "l2",
+                "parent_example_id": "o2",
+                "difficulty_stratum": "low",
+                "reference_return": "12000000",
+            },
         ],
     )
     paths = {
@@ -88,6 +104,14 @@ def test_contribution_analysis_preserves_pairing_and_differential(tmp_path):
     ]
     assert differential["estimate"] == 0.5
     assert differential["bootstrap_identity_95"] == [0, 1]
+    difficulty = report["large_number_subgroups"]["difficulty"]["low"]
+    assert difficulty["count"] == 2
+    assert difficulty["differential_degradation"][
+        "seed11__vs__direct_reasoning"
+    ] == 0.5
+    magnitude = report["large_number_subgroups"]["transformed_answer_magnitude"]
+    assert magnitude["4_to_6_digits"]["count"] == 1
+    assert magnitude["7_to_9_digits"]["count"] == 1
     assert read_json(tmp_path / "report.json") == report
 
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import random
+from fractions import Fraction
 from math import comb
 from pathlib import Path
 from statistics import mean
@@ -118,6 +119,56 @@ def _bootstrap_difference(
     return [low, high]
 
 
+def _magnitude_band(value: Any) -> str:
+    number = Fraction(str(value).replace(",", "").replace("$", ""))
+    if number.denominator != 1:
+        raise ValueError(f"large-number answer is not integral: {value}")
+    digits = len(str(abs(number.numerator)))
+    if digits <= 6:
+        return "4_to_6_digits"
+    if digits <= 9:
+        return "7_to_9_digits"
+    return "10plus_digits"
+
+
+def _subgroup_robustness(
+    *,
+    groups: dict[str, set[str]],
+    predictions: dict[str, dict[str, dict[str, dict[str, Any]]]],
+    direct_labels: set[str],
+    asl_labels: set[str],
+    large_to_parent: dict[str, str],
+) -> dict[str, Any]:
+    report = {}
+    for group, identities in sorted(groups.items()):
+        mapping = {
+            identity: large_to_parent[identity] for identity in sorted(identities)
+        }
+        robustness = {}
+        changes = {}
+        for family, labels in (("direct", direct_labels), ("asl", asl_labels)):
+            for label in sorted(labels):
+                original = predictions[f"original_{family}"][label]
+                large = predictions[f"large_{family}"][label]
+                result, change = _robustness(original, large, mapping)
+                robustness[label] = result
+                changes[label] = change
+        differential = {
+            f"{asl_label}__vs__{direct_label}": (
+                robustness[asl_label]["large_minus_original"]
+                - robustness[direct_label]["large_minus_original"]
+            )
+            for asl_label in sorted(asl_labels)
+            for direct_label in sorted(direct_labels)
+        }
+        report[group] = {
+            "count": len(identities),
+            "robustness": robustness,
+            "differential_degradation": differential,
+        }
+    return report
+
+
 def analyze_gsm8k_contribution(
     *,
     original_eval_path: str | Path,
@@ -211,6 +262,40 @@ def analyze_gsm8k_contribution(
                 ),
             }
 
+    large_by_id = {str(row["example_id"]): row for row in large_eval}
+    subgroup_definitions = {
+        "difficulty": {
+            stratum: {
+                identity
+                for identity, row in large_by_id.items()
+                if str(row["difficulty_stratum"]) == stratum
+            }
+            for stratum in sorted(
+                {str(row["difficulty_stratum"]) for row in large_by_id.values()}
+            )
+        },
+        "transformed_answer_magnitude": {
+            band: {
+                identity
+                for identity, row in large_by_id.items()
+                if _magnitude_band(row["reference_return"]) == band
+            }
+            for band in sorted(
+                {_magnitude_band(row["reference_return"]) for row in large_by_id.values()}
+            )
+        },
+    }
+    subgroups = {
+        dimension: _subgroup_robustness(
+            groups=groups,
+            predictions=predictions,
+            direct_labels=set(path_groups["original_direct"]),
+            asl_labels=set(path_groups["original_asl"]),
+            large_to_parent=large_to_parent,
+        )
+        for dimension, groups in subgroup_definitions.items()
+    }
+
     asl_original_rates = [
         sum(vector.values()) / len(vector)
         for vector in original_vectors["original_asl"].values()
@@ -237,6 +322,7 @@ def analyze_gsm8k_contribution(
         "original_asl_vs_direct": original_pairwise,
         "large_number_robustness": robustness,
         "large_number_differential_degradation": differential,
+        "large_number_subgroups": subgroups,
         "bootstrap": {
             "seed": bootstrap_seed,
             "samples": bootstrap_samples,
