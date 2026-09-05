@@ -42,6 +42,20 @@ def _correct(row: dict[str, Any]) -> bool:
     return bool(row["metrics"]["final_answer_correct"])
 
 
+def _resources(rows: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    prompt_tokens = [int(row["prompt_tokens"]) for row in rows.values()]
+    generated_tokens = [int(row["generated_tokens"]) for row in rows.values()]
+    wall_times = [int(row["wall_time_ns"]) for row in rows.values()]
+    return {
+        "count": len(rows),
+        "mean_prompt_tokens": mean(prompt_tokens),
+        "mean_generated_tokens": mean(generated_tokens),
+        "total_generated_tokens": sum(generated_tokens),
+        "mean_generation_wall_time_ms": mean(wall_times) / 1e6,
+        "total_generation_wall_time_seconds": sum(wall_times) / 1e9,
+    }
+
+
 def _mcnemar(left_only: int, right_only: int) -> float:
     discordant = left_only + right_only
     if discordant == 0:
@@ -323,6 +337,14 @@ def analyze_gsm8k_contribution(
         "large_number_robustness": robustness,
         "large_number_differential_degradation": differential,
         "large_number_subgroups": subgroups,
+        "resource_use": {
+            scope: {
+                label: _resources(rows)
+                for family in ("direct", "asl")
+                for label, rows in predictions[f"{scope}_{family}"].items()
+            }
+            for scope in ("original", "large")
+        },
         "bootstrap": {
             "seed": bootstrap_seed,
             "samples": bootstrap_samples,

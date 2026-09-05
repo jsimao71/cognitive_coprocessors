@@ -10,6 +10,9 @@ def _predictions(path, outcomes):
         [
             {
                 "example_id": example_id,
+                "prompt_tokens": 10,
+                "generated_tokens": 20,
+                "wall_time_ns": 1_000_000_000,
                 "metrics": {"final_answer_correct": correct},
             }
             for example_id, correct in outcomes.items()
@@ -112,6 +115,11 @@ def test_contribution_analysis_preserves_pairing_and_differential(tmp_path):
     magnitude = report["large_number_subgroups"]["transformed_answer_magnitude"]
     assert magnitude["4_to_6_digits"]["count"] == 1
     assert magnitude["7_to_9_digits"]["count"] == 1
+    resources = report["resource_use"]["original"]["direct_reasoning"]
+    assert resources["mean_prompt_tokens"] == 10
+    assert resources["mean_generated_tokens"] == 20
+    assert resources["total_generated_tokens"] == 80
+    assert resources["mean_generation_wall_time_ms"] == 1000
     assert read_json(tmp_path / "report.json") == report
 
 
