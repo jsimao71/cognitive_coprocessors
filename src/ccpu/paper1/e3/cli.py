@@ -21,6 +21,7 @@ from .data_scale import (
 from .direct_answer_eval import (
     DIRECT_CONDITIONS,
     freeze_direct_gsm8k_protocol,
+    merge_direct_gsm8k_shards,
     run_direct_gsm8k_shard,
 )
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
@@ -114,6 +115,10 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_direct.add_argument("--shard-count", type=int, required=True)
     gsm8k_direct.add_argument("--seed", type=int, default=44017)
     gsm8k_direct.add_argument("--checkpoint-every", type=int, default=5)
+    gsm8k_direct_merge = commands.add_parser("merge-gsm8k-direct")
+    gsm8k_direct_merge.add_argument("--eval", required=True)
+    gsm8k_direct_merge.add_argument("--shard-dir", action="append", required=True)
+    gsm8k_direct_merge.add_argument("--output-dir", required=True)
     gsm8k_large = commands.add_parser("prepare-gsm8k-large-numbers")
     gsm8k_large.add_argument("--source", required=True)
     gsm8k_large.add_argument("--eval", required=True)
@@ -307,6 +312,17 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(
             f"GSM8K {args.condition} shard {args.shard_index}: answer="
+            f"{summary['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "merge-gsm8k-direct":
+        summary = merge_direct_gsm8k_shards(
+            eval_path=args.eval,
+            shard_dirs=args.shard_dir,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"GSM8K direct merged={summary['prediction_count']} answer="
             f"{summary['rates']['final_answer_correct']:.3f} -> {args.output_dir}"
         )
         return 0

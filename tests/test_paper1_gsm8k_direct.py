@@ -12,6 +12,7 @@ from ccpu.common.artifacts import (
 from ccpu.paper1.e3.direct_answer_eval import (
     direct_prompt,
     freeze_direct_gsm8k_protocol,
+    merge_direct_gsm8k_shards,
     run_direct_gsm8k_shard,
 )
 from ccpu.paper1.e3.gsm8k_confirmatory import freeze_official_gsm8k
@@ -157,6 +158,62 @@ def test_direct_resume_rejects_different_condition(tmp_path):
             shard_index=0,
             shard_count=1,
             backend_override=_DirectBackend(),
+        )
+
+
+def test_direct_shards_merge_with_complete_matched_provenance(tmp_path):
+    eval_path = _frozen(tmp_path)
+    shard_dirs = []
+    for shard_index in range(2):
+        output = tmp_path / f"shard{shard_index}"
+        run_direct_gsm8k_shard(
+            eval_path=eval_path,
+            model_config={
+                "model": {"model_id": "fake", "revision": "test", "max_new_tokens": 32}
+            },
+            condition="direct_concise",
+            output_dir=output,
+            shard_index=shard_index,
+            shard_count=2,
+            backend_override=_DirectBackend(),
+        )
+        shard_dirs.append(output)
+
+    summary = merge_direct_gsm8k_shards(
+        eval_path=eval_path,
+        shard_dirs=shard_dirs,
+        output_dir=tmp_path / "merged",
+    )
+    assert summary["prediction_count"] == 2
+    assert summary["counts"]["final_answer_correct"] == 2
+    assert summary["shard_index"] is None
+    assert summary["run"]["shard_count"] == 2
+    assert len(summary["run"]["source_prediction_sha256"]) == 2
+    assert [row["example_id"] for row in read_jsonl(tmp_path / "merged" / "predictions.jsonl")] == [
+        "gsm8k-official-test-0000",
+        "gsm8k-official-test-0001",
+    ]
+
+
+def test_direct_merge_rejects_duplicate_shards(tmp_path):
+    eval_path = _frozen(tmp_path)
+    output = tmp_path / "shard0"
+    run_direct_gsm8k_shard(
+        eval_path=eval_path,
+        model_config={
+            "model": {"model_id": "fake", "revision": "test", "max_new_tokens": 32}
+        },
+        condition="direct_concise",
+        output_dir=output,
+        shard_index=0,
+        shard_count=2,
+        backend_override=_DirectBackend(),
+    )
+    with pytest.raises(ValueError, match="incomplete direct shard merge"):
+        merge_direct_gsm8k_shards(
+            eval_path=eval_path,
+            shard_dirs=[output, output],
+            output_dir=tmp_path / "merged",
         )
 
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from collections import Counter
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -122,7 +123,7 @@ def _numeric_equal(predicted: str | None, expected: Any) -> bool:
 
 
 def _summary(
-    *, eval_path: str | Path, predictions: list[dict[str, Any]], shard_index: int
+    *, eval_path: str | Path, predictions: list[dict[str, Any]], shard_index: int | None
 ) -> dict[str, Any]:
     count = len(predictions)
     correct = sum(bool(row["metrics"]["final_answer_correct"]) for row in predictions)
@@ -314,3 +315,80 @@ def run_direct_gsm8k_shard(
         )
     finally:
         lock_path.unlink(missing_ok=True)
+
+
+def merge_direct_gsm8k_shards(
+    *, eval_path: str | Path, shard_dirs: list[str | Path], output_dir: str | Path
+) -> dict[str, Any]:
+    """Merge a complete matched direct run while enforcing shard provenance."""
+
+    if not shard_dirs:
+        raise ValueError("at least one direct shard directory is required")
+    eval_rows = read_jsonl(eval_path)
+    eval_positions = {
+        str(row["example_id"]): position for position, row in enumerate(eval_rows)
+    }
+    if len(eval_positions) != len(eval_rows):
+        raise ValueError("direct evaluation contains duplicate identities")
+    source_paths = [Path(directory) / "predictions.jsonl" for directory in shard_dirs]
+    predictions = [row for path in source_paths for row in read_jsonl(path)]
+    observed_ids = [str(row["example_id"]) for row in predictions]
+    duplicates = sorted(key for key, count in Counter(observed_ids).items() if count > 1)
+    missing = sorted(set(eval_positions) - set(observed_ids))
+    unexpected = sorted(set(observed_ids) - set(eval_positions))
+    if duplicates or missing or unexpected:
+        raise ValueError(
+            f"incomplete direct shard merge: duplicates={duplicates[:3]} "
+            f"missing={missing[:3]} unexpected={unexpected[:3]}"
+        )
+
+    invariant_fields = (
+        "protocol_id",
+        "condition",
+        "instruction_sha256",
+        "model_id",
+        "seed",
+        "shard_count",
+    )
+    invariants = {
+        field: {str(row.get(field)) for row in predictions} for field in invariant_fields
+    }
+    mixed = {field: values for field, values in invariants.items() if len(values) != 1}
+    if mixed:
+        raise ValueError(f"direct shards have mixed provenance: {mixed}")
+    if next(iter(invariants["protocol_id"])) != DIRECT_PROTOCOL_ID:
+        raise ValueError("direct shards use an unsupported protocol")
+    shard_count = int(next(iter(invariants["shard_count"])))
+    shard_indices = {int(row["shard_index"]) for row in predictions}
+    if shard_indices != set(range(shard_count)):
+        raise ValueError(
+            f"direct shard indices are incomplete: observed={sorted(shard_indices)} "
+            f"expected={list(range(shard_count))}"
+        )
+    misplaced = [
+        row["example_id"]
+        for row in predictions
+        if eval_positions[str(row["example_id"])] % shard_count != int(row["shard_index"])
+    ]
+    if misplaced:
+        raise ValueError(f"direct predictions are assigned to the wrong shard: {misplaced[:3]}")
+
+    predictions.sort(key=lambda row: eval_positions[str(row["example_id"])])
+    output = Path(output_dir)
+    predictions_path = write_jsonl(output / "predictions.jsonl", predictions)
+    summary = _summary(eval_path=eval_path, predictions=predictions, shard_index=None)
+    summary["predictions_sha256"] = file_sha256(predictions_path)
+    summary["run"] = {
+        "protocol_id": DIRECT_PROTOCOL_ID,
+        "condition": next(iter(invariants["condition"])),
+        "instruction_sha256": next(iter(invariants["instruction_sha256"])),
+        "model_id": next(iter(invariants["model_id"])),
+        "seed": int(next(iter(invariants["seed"]))),
+        "shard_count": shard_count,
+        "source_prediction_sha256": [file_sha256(path) for path in source_paths],
+        "prompt_fields": ["question"],
+        "rationales_visible_to_model": False,
+        "answers_visible_to_model": False,
+    }
+    write_json(output / "summary.json", summary)
+    return summary
