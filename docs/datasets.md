@@ -128,6 +128,13 @@ The first seed-11 run is complete. On `TEST-GSM17`, U2000/E4500 reaches
 the same-seed G1-4500 condition. This is exploratory single-seed evidence and
 requires replication before it changes the registered dataset policy.
 
+The next predeclared derivative, `G1_GSM8K_U1000_E4500`, freezes 1,000 unique
+source IDs and semantic signatures before any official-test result is known.
+It preserves 4,500 exposures and 570 optimizer steps, with every source reused
+four or five times across ten 450-row logical epochs. Its role is to distinguish
+the effect of additional repetition from the U2000 and G1-4500 diversity cells;
+it is not selected in response to confirmatory performance.
+
 #### Official GSM8K confirmation freeze
 
 `GSM8K_OFFICIAL_TEST_V1` freezes the pinned `openai/gsm8k` official test
