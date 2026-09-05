@@ -1,9 +1,15 @@
 param(
-    [switch]$WaitForOfficial
+    [switch]$WaitForOfficial,
+    [string]$RepositoryRoot
 )
 
 $ErrorActionPreference = "Stop"
-$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$RepoRoot = if ($RepositoryRoot) {
+    (Resolve-Path $RepositoryRoot).Path
+}
+else {
+    (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+}
 $Python = Join-Path $env:USERPROFILE ".venvs\modal-llm-xpu\Scripts\python.exe"
 $env:PYTHONPATH = Join-Path $RepoRoot "src"
 

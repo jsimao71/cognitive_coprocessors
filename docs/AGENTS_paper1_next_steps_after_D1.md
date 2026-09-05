@@ -840,6 +840,7 @@ src/ccpu/paper1/
 
 scripts/
   run-paper1-gsm8k-matched-contribution-xpu.ps1
+  run-paper1-gsm8k-matched-contribution-xpu.cmd
 ```
 
 Suggested artifacts:
@@ -863,8 +864,8 @@ artifacts/paper1/gsm8k_scale_v1/analysis/matched_contribution_v1.json
 After all three official A0 summaries exist, run the complete resumable matched
 campaign with:
 
-```powershell
-& scripts\run-paper1-gsm8k-matched-contribution-xpu.ps1 -WaitForOfficial
+```bat
+scripts\run-paper1-gsm8k-matched-contribution-xpu.cmd
 ```
 
 The script checkpoints every prediction, skips completed conditions, and emits
