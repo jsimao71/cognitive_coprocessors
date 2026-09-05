@@ -138,11 +138,13 @@ architecture, loss, and data-scale experiments motivate and diagnose it, but do
 not substitute for it. We compare autonomous ASL against both concise direct
 answering and a stronger native-reasoning control on identical frozen questions.
 
-The scope remains calculator only and deterministic syntax interfaces. The
-experiment does not test semantic recognition of prose arithmetic, learned routing, persistent
-symbolic memory, transactional state, Progressive Retrieval Attention (PRA), or
-native key/value access. Those mechanisms would make a positive result harder
-to attribute and a negative result harder to diagnose.
+The initial runtime mechanism remains calculator-only and bounded by
+deterministic syntax interfaces. The later ASL extension does test semantic
+recognition of simple arithmetic prose, but not broad-domain learned routing,
+persistent cross-document symbolic memory, transactional concurrency,
+Progressive Retrieval Attention (PRA), or native key/value access. Those
+mechanisms would make a positive result harder to attribute and a negative
+result harder to diagnose.
 
 \section{Hypotheses}
 
@@ -182,7 +184,7 @@ route has smaller paired accuracy degradation than direct reasoning. The primary
 statistic is the ASL-minus-direct difference between transformed and eligible
 original accuracy, with identities rather than seed-question rows resampled.
 
-These hypotheses are conditional on detection and use. Oracle detection
+H1--H4 are conditional on detection and use. Oracle detection
 estimates interface headroom; engine correctness alone does not demonstrate that
 the model will expose the syntax or use the inserted result.
 
