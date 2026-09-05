@@ -29,6 +29,7 @@ from .gsm8k_confirmatory import (
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
 )
+from .large_number_suite import freeze_large_number_gsm8k
 from .selection import select_semantic_checkpoint
 
 
@@ -112,6 +113,12 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_direct.add_argument("--shard-count", type=int, required=True)
     gsm8k_direct.add_argument("--seed", type=int, default=44017)
     gsm8k_direct.add_argument("--checkpoint-every", type=int, default=5)
+    gsm8k_large = commands.add_parser("prepare-gsm8k-large-numbers")
+    gsm8k_large.add_argument("--source", required=True)
+    gsm8k_large.add_argument("--eval", required=True)
+    gsm8k_large.add_argument("--output-dir", required=True)
+    gsm8k_large.add_argument("--expected-source-sha256", required=True)
+    gsm8k_large.add_argument("--factor", type=int, default=1000)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -301,6 +308,19 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K direct protocol identities={manifest['identity_count']} "
             f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-large-numbers":
+        manifest = freeze_large_number_gsm8k(
+            source_path=args.source,
+            official_eval_path=args.eval,
+            output_dir=args.output_dir,
+            expected_source_sha256=args.expected_source_sha256,
+            factor=args.factor,
+        )
+        print(
+            f"GSM8K large-number eligible={manifest['counts']['eligible']} "
+            f"excluded={manifest['counts']['excluded']} -> {args.output_dir}"
         )
         return 0
     if args.command == "run-bottleneck":

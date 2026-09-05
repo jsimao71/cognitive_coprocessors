@@ -157,6 +157,42 @@ manifest and immutable views are under
 `artifacts/paper1/gsm8k_scale_v1/official_test_v1/`. Neither view may be used
 for checkpoint, architecture, objective, or hyperparameter selection.
 
+#### Matched direct and large-number controls
+
+`PAPER1_GSM8K_MATCHED_DIRECT_V1` freezes two base-Qwen3-0.6B controls on the
+same 250 official identities before direct inference. `direct_concise` uses
+thinking-disabled greedy decoding with a 128-token ceiling;
+`direct_reasoning` uses native thinking with a 1,024-token ceiling. Both use the
+same pinned revision, XPU FP16 backend, chat template, question ordering, and
+numeric endpoint scorer. Prompts contain only the question and never expose
+ASL demonstrations, benchmark rationales, answers, state, or intermediate
+values. This comparison was added after observing the first ASL seed and is not
+presented as preregistered.
+
+- Protocol manifest:
+  `artifacts/paper1/gsm8k_scale_v1/matched_direct_v1/protocol/manifest.json`
+
+`PAPER1_GSM8K_LARGE_NUMBER_V1` is a separately frozen exploratory paired
+robustness view. A deterministic factor-1,000 transform changes registered
+digit source quantities, propagates the changes through every hidden GSM8K
+arithmetic equation, and retains a row only when the source trace verifies, all
+transformed source values are trace-grounded, operator signatures are
+unchanged, and the terminal result is an integer. Unsafe or ambiguous
+percentages, ages/calendar values, clocks, bounded time ratios, numeric
+ordinals, lexicalized quantities, hyphenated unit modifiers, collisions, and
+incomplete traces are excluded with recorded reasons.
+
+The final freeze retains 59/250 parent identities: 26 low-, 22 medium-, and 11
+high-step cases. Transformed answers comprise 38 four-to-six-digit, 14
+seven-to-nine-digit, and seven ten-or-more-digit values. Only transformed
+questions are model-visible; hidden traces and answers remain scorer-only. The
+suite was frozen before any transformed inference and remains exploratory
+because its design followed the first original-set ASL result.
+
+- Paired rows: `artifacts/paper1/gsm8k_scale_v1/large_number_v1/data/large.jsonl`
+- Exclusions: `artifacts/paper1/gsm8k_scale_v1/large_number_v1/data/excluded.jsonl`
+- Manifest: `artifacts/paper1/gsm8k_scale_v1/large_number_v1/data/manifest.json`
+
 ### G1 development and historical test
 
 The run boundary projects the legacy mixed development and test artifacts onto

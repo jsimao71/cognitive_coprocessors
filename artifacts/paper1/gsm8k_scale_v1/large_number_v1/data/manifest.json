@@ -1,0 +1,62 @@
+{
+  "answers_visible_to_model": false,
+  "counts": {
+    "answer_magnitude_bands": {
+      "10plus_digits": 7,
+      "4_to_6_digits": 38,
+      "7_to_9_digits": 14
+    },
+    "eligible": 59,
+    "eligible_by_difficulty": {
+      "high": 11,
+      "low": 26,
+      "medium": 22
+    },
+    "excluded": 191,
+    "exclusion_reasons": {
+      "ambiguous numeric-value dependency collision": 15,
+      "ambiguous source and dimensionless numeric value": 5,
+      "bounded_time_ratio": 4,
+      "calendar_or_age": 13,
+      "clock_or_ratio_notation": 3,
+      "final answer is not grounded in the hidden trace": 3,
+      "final answer is unchanged by magnitude transformation": 6,
+      "hyphenated_numeric_modifier": 5,
+      "lexicalized_number": 70,
+      "no executable hidden arithmetic trace": 2,
+      "non-integer transformed answer": 3,
+      "numeric_ordinal": 2,
+      "operator graph changed during transformation": 2,
+      "percentage": 44,
+      "source quantities missing from hidden trace": 14
+    },
+    "transformed_source_values": {
+      "maximum": 7,
+      "minimum": 1,
+      "total": 159
+    }
+  },
+  "eligible_parent_ids_sha256": "374a6db751cf856d9ddcfc63d242404ac1b2fddc3100cc37c6e0282ae5c16230",
+  "factor": 1000,
+  "hidden_trace_visible_to_model": false,
+  "official_eval": {
+    "count": 250,
+    "path": "artifacts\\paper1\\gsm8k_scale_v1\\official_test_v1\\confirmatory.jsonl",
+    "sha256": "3314a09bcd409d66f5bcd3dfe536cf0dc2d7e6ac8f106f876129d2144a6dd0e9"
+  },
+  "output_sha256": {
+    "excluded": "9bf006fd34c79ca8881d628433ff669bd009d08aff15db4d575c3c9eb08a8274",
+    "large": "f99bb00f46d97c284b9f574d46672bf59b089a85d0f9ad80a0f04df0920480ba"
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "protocol_id": "paper1_gsm8k_large_number_v1",
+  "schema_version": "ccpu.paper1.gsm8k_large_number_manifest.v1",
+  "selection_role": "exploratory paired large-number robustness; frozen before transformed inference",
+  "source": {
+    "path": "C:\\Users\\j.simao\\.cache\\ccpu-public-v1\\openai_gsm8k\\main\\test\\0000.parquet",
+    "sha256": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59"
+  },
+  "transformation_policy": "scale registered digit source quantities, propagate values through every verified hidden arithmetic equation, preserve operator signatures, and reject unsafe or ambiguous records"
+}

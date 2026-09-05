@@ -1767,6 +1767,34 @@ execution, and final-answer accuracy, but not teacher-program component or
 state equivalence. Both views are confirmation sets and may not select
 checkpoints or experimental settings.
 
+After observing the first ASL seed, we add a necessary but explicitly post-hoc
+matched contribution protocol. On the identical 250 identities, B0 asks the
+pinned base Qwen3-0.6B for a concise answer with thinking disabled and a
+128-token ceiling; B1 permits native reasoning with a 1,024-token ceiling. Both
+use greedy decoding, the same XPU FP16 backend and chat template, and a frozen
+condition-independent numeric endpoint scorer. Their prompts expose only the
+question and never ASL examples, benchmark rationales, answers, state, or
+intermediate values. This stronger B1 control prevents an apparent ASL gain
+from being manufactured by an artificially answer-constrained baseline. The
+primary Paper~1 estimand is the paired answer difference between these direct
+conditions and autonomous ASL generation followed by deterministic execution,
+not a comparison with the earlier nonidentical 120-item transfer test.
+
+We also freeze an exploratory paired large-number view before any transformed
+inference. A factor-1,000 rewrite changes registered digit source quantities and
+propagates them through every hidden benchmark arithmetic equation. Acceptance
+requires source-trace verification, complete transformed-source grounding,
+unchanged operator signatures, successful exact replay, and an integer terminal
+answer. Conservative filters reject percentages, ages/calendar values, clocks,
+bounded time ratios, ordinals, lexicalized quantities, hyphenated numeric unit
+modifiers, value-role collisions, and incomplete traces. This retains 59 of the
+250 parents: 26 low-, 22 medium-, and 11 high-step cases. Transformed answers
+span 38 four-to-six-digit, 14 seven-to-nine-digit, and seven ten-or-more-digit
+values. Only the transformed question is model-visible. The principal
+robustness statistic is the difference between each condition's paired
+original-to-large accuracy change; this suite is exploratory because its design
+postdates the first original-set ASL result.
+
 \subsection{GSM8K-Only Diversity and Repetition}
 
 We train three G1-GSM8K adapters on the 4,500-unique-program freeze
