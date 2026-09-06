@@ -240,6 +240,74 @@ count and how many rows at that maximum are scorable and correct. Equality
 between the observed maximum and the configured ceiling is treated as possible
 truncation, not a successful termination signal.
 
+## Inference-token budget and Qwen reasoning-mode ladder
+
+Preserve B1 at 1,024 tokens and B1L at 2,048 tokens as the registered and
+post-hoc direct controls. Their current Qwen3-0.6B configurations use thinking
+enabled, whereas A0 uses thinking disabled with a 384-token ceiling. Treat this
+as a declared protocol difference and investigate it directly rather than
+interpreting maximum token limits as actual compute consumption.
+
+First recover the following telemetry from every existing B0, B1, B1L, and A0
+prediction without rerunning inference where the records are sufficient:
+
+- prompt, generated, and total tokenizer-token counts per example;
+- mean, median, p90, and maximum generated tokens;
+- explicit stop reason and ceiling-hit rate;
+- generated tokens for correct and incorrect answers separately;
+- generation wall time, followed separately by ASL parse/lower/execute time;
+- final-answer accuracy and paired correctness at each budget.
+
+All neural tokens, including thinking tokens emitted by the local Qwen model,
+count toward inference cost. Do not compare only configured maxima. Report
+correct answers per 1,000 generated tokens as a descriptive aggregate, but use
+the full accuracy-versus-token-cost Pareto frontier as the primary efficiency
+analysis because a short incorrect response must not appear efficient merely by
+terminating early.
+
+Use one fixed prompt per output mode and define reasoning level operationally;
+do not claim a model-native reasoning-effort control that Qwen does not expose:
+
+```text
+R0  thinking disabled
+R1  thinking enabled, 256 generated-token ceiling
+R2  thinking enabled, 512 generated-token ceiling
+R3  thinking enabled, 1,024 generated-token ceiling (registered B1)
+R4  thinking enabled, 2,048 generated-token ceiling (post-hoc B1L)
+```
+
+Run R0 at matched ceilings where needed to separate the effect of thinking mode
+from the effect of available tokens. For direct answers, start with the frozen
+55-parent magnitude cohort at ceilings `128`, `256`, `512`, `1024`, and `2048`.
+For ASL, start with `64`, `128`, `256`, and `384` tokens with thinking disabled.
+Add a bounded ASL-thinking diagnostic at `384` and `512` tokens only after its
+output contract is frozen: the model may think internally, but the scored final
+payload must be an ASL program processed by the unchanged parser and runtime.
+No benchmark rationale, answer, runtime state, dynamic ICL, or intermediate
+value may enter either prompt.
+
+For each budget and reasoning mode, plot both accuracy and actual generated
+tokens against `log10(source-number scale)`. Estimate:
+
+```text
+reasoning compression = mean direct generated tokens / mean ASL generated tokens
+token-cost slope       = change in generated tokens per log10 magnitude unit
+accuracy slope         = change in accuracy per log10 magnitude unit
+```
+
+The intended mechanistic test is whether ASL generation cost depends mainly on
+program structure rather than operand magnitude, while direct neural reasoning
+requires more tokens or loses accuracy as magnitude grows. CPU execution cost
+must be reported, but separately from autoregressive token cost. Promote only
+non-dominated or scientifically diagnostic settings from the 55-parent screen
+to the untouched 250-item ordinary comparison. Freeze those selected settings
+before inspecting their 250-item predictions.
+
+After the 0.6B frontier and magnitude curves are complete, repeat only the
+frozen frontier endpoints with Qwen3-1.7B. This tests whether model scaling
+improves accuracy by consuming a similar reasoning budget, needs a larger
+budget, shifts the direct/ASL crossover, or removes magnitude sensitivity.
+
 ## Paired large-number suite
 
 Large-number robustness is a primary comparison, not an appendix. Create a
@@ -1365,6 +1433,16 @@ P6c.3 Make accuracy versus `log10(source-number scale)` the primary robustness
       test whether scaling shifts the crossover rightward or eliminates
       magnitude sensitivity. Extend the complete ladder to 1.7B only when the
       matched gate warrants the additional compute.
+
+P6c.4 Recover actual token counts, stop reasons, ceiling hits, and timing from
+      existing B0/B1/B1L/A0 records. Produce accuracy-versus-generated-token
+      Pareto plots and generated-token cost versus log magnitude; rerun only
+      records whose saved telemetry is insufficient.
+
+P6c.5 Screen the frozen Qwen reasoning ladder R0--R4 on the identical 55-parent
+      cohort. Cross thinking on/off at matched ceilings where needed, test the
+      bounded no-thinking ASL budget ladder, and admit only predeclared Pareto or
+      diagnostic endpoints to the 250-item confirmation and 1.7B replication.
 
 P6d Run the matched Qwen3-1.7B U2000/E4500 initialization-99173 gate on the same
     250/59 identities. Compute answer and robustness model-size interactions.
