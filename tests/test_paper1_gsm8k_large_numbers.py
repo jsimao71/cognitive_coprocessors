@@ -1,6 +1,9 @@
 from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_jsonl
 from ccpu.paper1.e3.gsm8k_confirmatory import freeze_official_gsm8k
-from ccpu.paper1.e3.large_number_suite import freeze_large_number_gsm8k
+from ccpu.paper1.e3.large_number_suite import (
+    freeze_large_number_gsm8k,
+    freeze_magnitude_ladder_gsm8k,
+)
 
 
 def _inputs(tmp_path):
@@ -120,3 +123,25 @@ def test_large_number_freeze_rejects_wrong_source_hash(tmp_path):
         assert "source hash differs" in str(error)
     else:
         raise AssertionError("wrong source hash was accepted")
+
+
+def test_magnitude_ladder_uses_one_common_parent_intersection(tmp_path):
+    source, official = _inputs(tmp_path)
+    output = tmp_path / "magnitude"
+    manifest = freeze_magnitude_ladder_gsm8k(
+        source_path=source,
+        official_eval_path=official,
+        output_dir=output,
+        expected_source_sha256=file_sha256(source),
+        factors=(1, 100, 1000, 10000, 1000000),
+    )
+
+    assert manifest["factors"] == [1, 100, 1000, 10000, 1000000]
+    assert manifest["factor_labels"] == ["x1", "x10^2", "x10^3", "x10^4", "x10^6"]
+    assert manifest["counts"]["common_parents"] == 2
+    original_ids = [row["example_id"] for row in read_jsonl(output / "factor_1.jsonl")]
+    for factor in (100, 1000, 10000, 1000000):
+        rows = read_jsonl(output / f"factor_{factor}.jsonl")
+        assert [row["parent_example_id"] for row in rows] == original_ids
+        assert all(row["transformation"]["factor"] == factor for row in rows)
+        assert all(f":magnitude-x{factor}" in row["example_id"] for row in rows)

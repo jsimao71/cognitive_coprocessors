@@ -1,0 +1,70 @@
+{
+  "answers_visible_to_model": false,
+  "common_parent_ids_sha256": "2535a022212c80365419b0ed3457dfe08926de59baed8623bce340304cc9fe4f",
+  "counts": {
+    "common_by_difficulty": {
+      "high": 10,
+      "low": 25,
+      "medium": 20
+    },
+    "common_parents": 55,
+    "excluded": 195,
+    "excluded_by_first_failing_factor_and_reason": {
+      "factor_100:ambiguous numeric-value dependency collision": 13,
+      "factor_100:ambiguous source and dimensionless numeric value": 5,
+      "factor_100:bounded_time_ratio": 4,
+      "factor_100:calendar_or_age": 13,
+      "factor_100:clock_or_ratio_notation": 3,
+      "factor_100:final answer is not grounded in the hidden trace": 3,
+      "factor_100:final answer is unchanged by magnitude transformation": 5,
+      "factor_100:hyphenated_numeric_modifier": 5,
+      "factor_100:lexicalized_number": 70,
+      "factor_100:no executable hidden arithmetic trace": 2,
+      "factor_100:non-integer transformed answer": 1,
+      "factor_100:numeric_ordinal": 2,
+      "factor_100:operator graph changed during transformation": 2,
+      "factor_100:percentage": 44,
+      "factor_100:source quantities missing from hidden trace": 11,
+      "factor_100:transformation does not reach large-number threshold": 12
+    }
+  },
+  "factor_labels": [
+    "x1",
+    "x10^2",
+    "x10^3",
+    "x10^4",
+    "x10^6"
+  ],
+  "factors": [
+    1,
+    100,
+    1000,
+    10000,
+    1000000
+  ],
+  "hidden_trace_visible_to_model": false,
+  "official_eval": {
+    "count": 250,
+    "path": "artifacts/paper1/gsm8k_scale_v1/official_test_v1/confirmatory.jsonl",
+    "sha256": "3314a09bcd409d66f5bcd3dfe536cf0dc2d7e6ac8f106f876129d2144a6dd0e9"
+  },
+  "output_sha256": {
+    "excluded": "130fbcf583605859b09c973573182d72d0b0ec463aaf6cf8b6a182207eea931f",
+    "factor_1": "0b3fc17242b1581db25fd517f51e2e64a20b3abe7ea5b3e8ed36339b91c6060d",
+    "factor_100": "4d5809d4ebb97cc8aa2a93a9db17c58ac32719cf3d0670b1d668d78b59d3ff59",
+    "factor_1000": "96dae9671b4c10d9ea2c3b42c3278928763341a9b697cc16c7b16c0380217b7c",
+    "factor_10000": "9edcf3953fb96c651ac944bb4e8d15d60f05123cb86c2cfa92c55b4250155d61",
+    "factor_1000000": "49cd9aaf823a6f1c1446ff16674117143871d1fe43a17addfffc691f0d4b5001"
+  },
+  "pairing_policy": "retain a parent only when every transformed factor passes the same conservative trace, graph, integer, and linguistic safety checks",
+  "prompt_fields": [
+    "question"
+  ],
+  "protocol_id": "paper1_gsm8k_magnitude_ladder_v1",
+  "schema_version": "ccpu.paper1.gsm8k_magnitude_ladder_manifest.v1",
+  "selection_role": "exploratory paired magnitude curve; common eligibility frozen before inference",
+  "source": {
+    "path": "C:\\Users\\j.simao\\.cache\\ccpu-public-v1\\openai_gsm8k\\main\\test\\0000.parquet",
+    "sha256": "ee7b8da9e381df27b9e3f7758a159ab2bdaa4dbaa910546cbbc47e0cb44e4f59"
+  }
+}

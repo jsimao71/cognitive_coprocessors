@@ -1,0 +1,30 @@
+{
+  "counts": {
+    "correct": 27,
+    "failures": 32,
+    "literal_copy_error": 1,
+    "runtime_failure": 10,
+    "total": 59,
+    "wrong_semantic_structure": 21
+  },
+  "diagnostics_sha256": "edf696fe6180d156e25d571f35431cadc36eee26a7854f3deec10554cb6d4bff",
+  "factor": 1000,
+  "inputs": {
+    "original_predictions": "b2bd41fa184c68d139ebaa613602b5215b64197c04e893c2548e3595eeaf32e0",
+    "transformed_eval": "f99bb00f46d97c284b9f574d46672bf59b089a85d0f9ad80a0f04df0920480ba",
+    "transformed_predictions": "0ba2d01d6654543b65e5a71ca9d4f475205e0b5cdea018ecfe4e4a931d16e41d"
+  },
+  "interpretation": "literal_copy_error is a conservative lower bound: the original prediction must be correct, strict or literal-free alpha structure must match, and changing only position-aligned literals must execute to the transformed answer",
+  "protocol_id": "paper1_gsm8k_magnitude_diagnostic_v1",
+  "rates": {
+    "accuracy": 0.4576271186440678,
+    "oracle_corrected_accuracy": 0.4745762711864407,
+    "oracle_literal_rescue_among_failures": 0.03125
+  },
+  "runtime_failure_stages": {
+    "execute": 4,
+    "missing_return": 5,
+    "parse": 1
+  },
+  "schema_version": "ccpu.paper1.gsm8k_magnitude_diagnostic_summary.v1"
+}

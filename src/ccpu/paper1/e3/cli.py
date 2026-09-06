@@ -33,7 +33,8 @@ from .gsm8k_confirmatory import (
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
 )
-from .large_number_suite import freeze_large_number_gsm8k
+from .large_number_suite import freeze_large_number_gsm8k, freeze_magnitude_ladder_gsm8k
+from .magnitude_analysis import analyze_magnitude_curve, analyze_magnitude_failures
 from .model_size_analysis import analyze_model_size_interaction
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
@@ -171,6 +172,21 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_large.add_argument("--output-dir", required=True)
     gsm8k_large.add_argument("--expected-source-sha256", required=True)
     gsm8k_large.add_argument("--factor", type=int, default=1000)
+    magnitude_ladder = commands.add_parser("prepare-gsm8k-magnitude-ladder")
+    magnitude_ladder.add_argument("--source", required=True)
+    magnitude_ladder.add_argument("--eval", required=True)
+    magnitude_ladder.add_argument("--output-dir", required=True)
+    magnitude_ladder.add_argument("--expected-source-sha256", required=True)
+    magnitude_ladder.add_argument("--factor", type=int, action="append", required=True)
+    magnitude_failures = commands.add_parser("analyze-gsm8k-magnitude-failures")
+    magnitude_failures.add_argument("--eval", required=True)
+    magnitude_failures.add_argument("--original-predictions", required=True)
+    magnitude_failures.add_argument("--transformed-predictions", required=True)
+    magnitude_failures.add_argument("--output-dir", required=True)
+    magnitude_curve = commands.add_parser("analyze-gsm8k-magnitude-curve")
+    magnitude_curve.add_argument("--eval", action="append", required=True)
+    magnitude_curve.add_argument("--prediction", action="append", required=True)
+    magnitude_curve.add_argument("--output-dir", required=True)
     contribution = commands.add_parser("analyze-gsm8k-contribution")
     contribution.add_argument("--original-eval", required=True)
     contribution.add_argument("--large-eval", required=True)
@@ -474,6 +490,58 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K large-number eligible={manifest['counts']['eligible']} "
             f"excluded={manifest['counts']['excluded']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-magnitude-ladder":
+        manifest = freeze_magnitude_ladder_gsm8k(
+            source_path=args.source,
+            official_eval_path=args.eval,
+            output_dir=args.output_dir,
+            expected_source_sha256=args.expected_source_sha256,
+            factors=tuple(args.factor),
+        )
+        print(
+            f"GSM8K magnitude ladder factors={manifest['factors']} "
+            f"common={manifest['counts']['common_parents']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "analyze-gsm8k-magnitude-failures":
+        report = analyze_magnitude_failures(
+            transformed_eval_path=args.eval,
+            original_predictions_path=args.original_predictions,
+            transformed_predictions_path=args.transformed_predictions,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"GSM8K magnitude factor={report['factor']} "
+            f"correct={report['counts']['correct']}/{report['counts']['total']} "
+            f"literal-rescues={report['counts']['literal_copy_error']} "
+            f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "analyze-gsm8k-magnitude-curve":
+        eval_paths = []
+        for value in args.eval:
+            if "=" not in value:
+                raise ValueError("--eval must use FACTOR=PATH")
+            factor, path = value.split("=", 1)
+            eval_paths.append((int(factor), path))
+        prediction_paths = []
+        for value in args.prediction:
+            if "=" not in value or ":" not in value.split("=", 1)[0]:
+                raise ValueError("--prediction must use CONDITION:FACTOR=PATH")
+            label_factor, path = value.split("=", 1)
+            label, factor = label_factor.rsplit(":", 1)
+            prediction_paths.append((label, int(factor), path))
+        report = analyze_magnitude_curve(
+            eval_paths=eval_paths,
+            prediction_paths=prediction_paths,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"GSM8K magnitude curve conditions="
+            f"{len({row['condition'] for row in report['results']})} "
+            f"parents={report['common_parent_count']} -> {args.output_dir}"
         )
         return 0
     if args.command == "analyze-gsm8k-contribution":

@@ -284,6 +284,47 @@ suite is added after observing one A0 seed on the original set, label its first
 result exploratory and freeze it before inspecting any direct or transformed
 outputs.
 
+## Common-parent magnitude curve and failure audit
+
+Keep the registered 250-question ordinary comparison and its 59 eligible
+factor-1,000 descendants as the primary causal test. Add a separate exploratory
+curve over one frozen intersection of parents that passes the conservative
+transformer at every scale:
+
+```text
+x1, x10^2, x10^3, x10^4, x10^6
+```
+
+The frozen intersection contains 55 parents (10 high, 20 medium, and 25 low
+difficulty). Every B1, B1L, and A0 point in the curve must use exactly these 55
+ordered parent identities. Never increase a scale's denominator independently;
+that would confound magnitude with changing question composition. The curve is
+an exploratory visualization and does not replace the larger 250/59 estimands.
+
+For each transformed A0 prediction, use three mutually exclusive outcome bins:
+
+```text
+wrong semantic structure
+literal-copy error
+runtime failure
+```
+
+`runtime failure` includes parse, lower, type, execute, and missing-RETURN
+failures, with the failing stage retained. `literal-copy error` is deliberately
+conservative: the corresponding x1 prediction must be correct, every nonliteral
+ASL token must either match or have the same literal-free alpha structure, and
+replacing only position-aligned numeric literals according to the frozen
+source/trace mapping must execute to the right transformed answer. All remaining
+wrong executable programs are `wrong semantic structure`. Report both raw ASL
+accuracy and oracle-literal-corrected accuracy;
+the latter estimates a lower bound on errors attributable only to numeric
+transcription and is not a deployable model result.
+
+The main Paper 1 figure is answer accuracy versus numeric scale for B1, B1L,
+and each A0 seed. The desired robustness pattern is a declining direct curve and
+a comparatively horizontal ASL curve. If this pattern does not occur, report it
+without weakening the fixed-identity protocol.
+
 ## Claim gate
 
 Paper 1 may claim that ASL adds value only if the matched comparison supports at
@@ -1199,6 +1240,11 @@ and 18/59 large generations, the registered result remains primary while the
 post-hoc B1L 2,048-token sensitivity tests whether the robustness conclusion
 survives a less truncated direct baseline.
 
+The full 1,319-question A0 seed-37 audit is descriptive confirmation only:
+509/1,319 answers (38.6%) are correct and 1,123/1,319 programs execute. Preserve
+the frozen 250/59 experiment as the causal comparison. An independent full-audit
+replication may verify reproducibility but must not be used for selection.
+
 ### Gate G - semantic augmentation and supervision
 
 Run AUG0--AUG4 only after the parent split, transformation ledger, and semantic
@@ -1258,6 +1304,15 @@ P6c Run B0, B1, and all A0 adapter seeds on both original and large-number
     is running. Ordinary ASL contribution is negative for all three seeds;
     differential factor-1,000 robustness is positive for all three seeds.
 
+P6c.1 Finish B1L on the 59 transformed descendants and regenerate only the 18
+      rows that reached the old token ceiling. Then rerun the registered
+      contribution analysis against the stronger direct control.
+
+P6c.2 Run B1, B1L, and all A0 seeds on the frozen 55-parent magnitude ladder at
+      x1, x10^2, x10^3, x10^4, and x10^6. Build the common-denominator accuracy
+      curve and the ASL semantic/literal/runtime failure audit. Include the
+      literal-only oracle correction as a diagnostic, never as model accuracy.
+
 P6d Run the matched Qwen3-1.7B U2000/E4500 initialization-99173 gate on the same
     250/59 identities. Compute answer and robustness model-size interactions.
     Replicate seeds 23 and 37 only if the one-seed gate is positive and material.
@@ -1277,7 +1332,10 @@ P6g On the best passed data cell, run T1 slot-level auxiliary supervision, then 
     T4 bounded semantic reranking. Test QKVO+MLP and modality-specific adapters only
     after a semantic-supervision condition passes. Never use dynamic ICL.
 
-P7  Revise F3 around grounded identity + alpha-renamable locals.
+P7  After B1L, the full-audit verification, the 1.7B gate, and magnitude
+    diagnostics are frozen, revise F3 around grounded identity + alpha-renamable
+    locals. Optimize F3/E3 for the observed 38.5% semantic compiler accuracy,
+    not for arithmetic that the deterministic runtime already solves.
 
 P8  Run F3-450.
 

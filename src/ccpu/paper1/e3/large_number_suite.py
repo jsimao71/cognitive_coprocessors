@@ -5,6 +5,7 @@ from __future__ import annotations
 import ast
 import operator
 import re
+from collections import Counter
 from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
@@ -20,6 +21,7 @@ from ccpu.common.artifacts import (
 from ccpu.dsl_dataset.loaders import load_dataset
 
 LARGE_NUMBER_PROTOCOL_ID = "paper1_gsm8k_large_number_v1"
+MAGNITUDE_LADDER_PROTOCOL_ID = "paper1_gsm8k_magnitude_ladder_v1"
 
 _NUMBER_TEXT = r"-?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?"
 _QUESTION_NUMBER = re.compile(
@@ -365,6 +367,118 @@ def freeze_large_number_gsm8k(
             "scale registered digit source quantities, propagate values through every "
             "verified hidden arithmetic equation, preserve operator signatures, and reject "
             "unsafe or ambiguous records"
+        ),
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest
+
+
+def freeze_magnitude_ladder_gsm8k(
+    *,
+    source_path: str | Path,
+    official_eval_path: str | Path,
+    output_dir: str | Path,
+    expected_source_sha256: str,
+    factors: tuple[int, ...] = (1, 100, 1000, 10000, 1000000),
+) -> dict[str, Any]:
+    """Freeze one parent intersection that is safe at every numeric scale."""
+
+    if not factors or factors[0] != 1 or any(factor < 1 for factor in factors):
+        raise ValueError("magnitude factors must start with the original factor 1")
+    if len(set(factors)) != len(factors) or tuple(sorted(factors)) != factors:
+        raise ValueError("magnitude factors must be unique and increasing")
+    if any(factor < 100 for factor in factors[1:]):
+        raise ValueError("transformed magnitude factors must be at least 100")
+    if file_sha256(source_path) != expected_source_sha256:
+        raise ValueError("GSM8K source hash differs from the pinned source")
+
+    raw_rows = load_dataset("gsm8k", source_path, "test")
+    frozen_rows = read_jsonl(official_eval_path)
+    accepted: dict[int, list[dict[str, Any]]] = {factor: [] for factor in factors}
+    excluded = []
+    for frozen in frozen_rows:
+        source_row = int(frozen["source_row"])
+        transformed = {}
+        exclusion = None
+        for factor in factors[1:]:
+            try:
+                row = _transform_row(raw_rows[source_row], frozen, factor)
+            except LargeNumberExclusion as error:
+                exclusion = {"factor": factor, "reason": str(error)}
+                break
+            row["protocol_id"] = MAGNITUDE_LADDER_PROTOCOL_ID
+            row["split"] = f"test_magnitude_x{factor}"
+            row["example_id"] = f"{frozen['example_id']}:magnitude-x{factor}"
+            row["effective_scope"] = {
+                **frozen["effective_scope"],
+                "id": f"{frozen['effective_scope']['id']}:magnitude-x{factor}",
+            }
+            transformed[factor] = row
+        if exclusion is not None:
+            excluded.append(
+                {
+                    "example_id": frozen["example_id"],
+                    "source_row": source_row,
+                    "question_sha256": frozen["question_sha256"],
+                    **exclusion,
+                }
+            )
+            continue
+        accepted[1].append(frozen)
+        for factor in factors[1:]:
+            accepted[factor].append(transformed[factor])
+
+    if not accepted[1]:
+        raise ValueError("magnitude-ladder intersection produced no accepted records")
+    parent_ids = [str(row["example_id"]) for row in accepted[1]]
+    for factor in factors[1:]:
+        if [str(row["parent_example_id"]) for row in accepted[factor]] != parent_ids:
+            raise AssertionError(f"factor {factor} parent order differs from factor 1")
+
+    output = Path(output_dir)
+    paths = {
+        factor: write_jsonl(output / f"factor_{factor}.jsonl", accepted[factor])
+        for factor in factors
+    }
+    excluded_path = write_jsonl(output / "excluded.jsonl", excluded)
+    reason_counts = Counter(
+        f"factor_{row['factor']}:{row['reason']}" for row in excluded
+    )
+    manifest = {
+        "schema_version": "ccpu.paper1.gsm8k_magnitude_ladder_manifest.v1",
+        "protocol_id": MAGNITUDE_LADDER_PROTOCOL_ID,
+        "factors": list(factors),
+        "factor_labels": [
+            "x1" if factor == 1 else f"x10^{len(str(factor)) - 1}" for factor in factors
+        ],
+        "source": {"path": str(source_path), "sha256": expected_source_sha256},
+        "official_eval": {
+            "path": str(official_eval_path),
+            "sha256": file_sha256(official_eval_path),
+            "count": len(frozen_rows),
+        },
+        "counts": {
+            "common_parents": len(parent_ids),
+            "excluded": len(excluded),
+            "excluded_by_first_failing_factor_and_reason": dict(sorted(reason_counts.items())),
+            "common_by_difficulty": dict(
+                sorted(Counter(str(row["difficulty_stratum"]) for row in accepted[1]).items())
+            ),
+        },
+        "common_parent_ids_sha256": fingerprint(parent_ids),
+        "output_sha256": {
+            **{f"factor_{factor}": file_sha256(path) for factor, path in paths.items()},
+            "excluded": file_sha256(excluded_path),
+        },
+        "prompt_fields": ["question"],
+        "hidden_trace_visible_to_model": False,
+        "answers_visible_to_model": False,
+        "selection_role": (
+            "exploratory paired magnitude curve; common eligibility frozen before inference"
+        ),
+        "pairing_policy": (
+            "retain a parent only when every transformed factor passes the same conservative "
+            "trace, graph, integer, and linguistic safety checks"
         ),
     }
     write_json(output / "manifest.json", manifest)
