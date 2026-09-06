@@ -303,3 +303,76 @@ def build_relation_paraphrase_increment(
     }
     write_json(output / "manifest.json", manifest)
     return manifest
+
+
+def freeze_augmentation_selection_gate(
+    *,
+    full_eval_path: str | Path,
+    excluded_eval_path: str | Path,
+    output_dir: str | Path,
+    count: int = 250,
+    seed: int = 73033,
+) -> dict[str, Any]:
+    """Freeze a stratified development gate disjoint from final confirmation."""
+
+    full = read_jsonl(full_eval_path)
+    excluded = {str(row["example_id"]) for row in read_jsonl(excluded_eval_path)}
+    if len({str(row["example_id"]) for row in full}) != len(full):
+        raise ValueError("full evaluation contains duplicate identities")
+    eligible = [row for row in full if str(row["example_id"]) not in excluded]
+    if count < 1 or count > len(eligible):
+        raise ValueError("selection count must fit the non-confirmatory evaluation pool")
+
+    buckets = {
+        stratum: sorted(
+            [row for row in eligible if str(row["difficulty_stratum"]) == stratum],
+            key=lambda row: fingerprint(f"{seed}:{row['example_id']}"),
+        )
+        for stratum in sorted({str(row["difficulty_stratum"]) for row in eligible})
+    }
+    offsets = Counter()
+    selected = []
+    while len(selected) < count:
+        progressed = False
+        for stratum in sorted(
+            buckets,
+            key=lambda value: fingerprint(f"{seed}:{len(selected)}:{value}"),
+        ):
+            offset = offsets[stratum]
+            if offset < len(buckets[stratum]) and len(selected) < count:
+                selected.append(buckets[stratum][offset])
+                offsets[stratum] += 1
+                progressed = True
+        if not progressed:
+            raise AssertionError("selection buckets exhausted before reaching target")
+    selected.sort(key=lambda row: int(row["source_row"]))
+    selected_ids = {str(row["example_id"]) for row in selected}
+    if selected_ids & excluded:
+        raise AssertionError("augmentation selection gate overlaps final confirmation")
+
+    output = Path(output_dir)
+    gate_path = write_jsonl(output / "gate.jsonl", selected)
+    manifest = {
+        "schema_version": "ccpu.paper1.gsm8k_augmentation_selection.v1",
+        "role": "development-only greedy augmentation selection; never final confirmation",
+        "selection_seed": seed,
+        "counts": {
+            "full": len(full),
+            "excluded_final_confirmation": len(excluded),
+            "eligible": len(eligible),
+            "selected": len(selected),
+            "selected_by_difficulty": dict(
+                sorted(Counter(str(row["difficulty_stratum"]) for row in selected).items())
+            ),
+        },
+        "overlap_with_final_confirmation": sorted(selected_ids & excluded),
+        "answers_visible_to_model": False,
+        "rationales_visible_to_model": False,
+        "input_sha256": {
+            "full_eval": file_sha256(full_eval_path),
+            "excluded_eval": file_sha256(excluded_eval_path),
+        },
+        "output_sha256": {"gate": file_sha256(gate_path)},
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest

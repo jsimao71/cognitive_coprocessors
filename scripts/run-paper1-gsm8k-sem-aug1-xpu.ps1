@@ -26,17 +26,19 @@ $Parent = Join-Path $Scale "u2000_e4500"
 $ParentAdapter = Join-Path $Parent "qwen_run\adapter"
 $HistoricalEval = Join-Path $Scale "g1_f0_4500\eval\test.jsonl"
 $Dev = Join-Path $Scale "g1_f0_4500\eval\dev.jsonl"
-$OfficialEval = Join-Path $Scale "official_test_v1\confirmatory.jsonl"
-$LargeEval = Join-Path $Scale "large_number_v1\data\large.jsonl"
+$FullEval = Join-Path $Scale "official_test_v1\full.jsonl"
+$FinalConfirmation = Join-Path $Scale "official_test_v1\confirmatory.jsonl"
+$SelectionRoot = Join-Path $RepoRoot "artifacts\paper1\gsm8k_semantic_augmentation_v1\selection_gate_v1"
+$SelectionEval = Join-Path $SelectionRoot "gate.jsonl"
 $Run = Join-Path $Stage "qwen_run"
 $Historical = Join-Path $Stage "eval\historical"
-$Official = Join-Path $Stage "eval\official"
-$Large = Join-Path $Stage "eval\large"
+$BaselineSelection = Join-Path $SelectionRoot "eval\u2000_seed11"
+$CandidateSelection = Join-Path $Stage "eval\selection"
 $Analysis = Join-Path $Stage "analysis\greedy_gate.json"
 $AdapterId = "Qwen3-0.6B-U2000-plus-AUG1-relation-F0-L0-r8-init99173"
 $B1L = Join-Path $Scale "analysis\matched_contribution_b1l_v1.json"
 
-foreach ($path in @($Increment, $Config, $ParentAdapter, $HistoricalEval, $Dev, $OfficialEval, $LargeEval)) {
+foreach ($path in @($Increment, $Config, $ParentAdapter, $HistoricalEval, $Dev, $FullEval, $FinalConfirmation)) {
     if (-not (Test-Path -LiteralPath $path)) {
         throw "Required campaign input is unavailable: $path"
     }
@@ -79,6 +81,32 @@ function Invoke-ResumableStep {
 Push-Location $RepoRoot
 try {
     Invoke-ResumableStep `
+        -Name "freeze augmentation selection gate" `
+        -CompletionPath (Join-Path $SelectionRoot "manifest.json") `
+        -Arguments @(
+            "prepare-gsm8k-augmentation-gate",
+            "--full-eval", $FullEval,
+            "--excluded-eval", $FinalConfirmation,
+            "--output-dir", $SelectionRoot,
+            "--count", "250"
+        )
+
+    Invoke-ResumableStep `
+        -Name "U2000 baseline selection evaluation" `
+        -CompletionPath (Join-Path $BaselineSelection "summary.json") `
+        -Arguments @(
+            "run-gsm8k-official-shard",
+            "--eval", $SelectionEval,
+            "--config", $ModelConfig,
+            "--adapter-path", $ParentAdapter,
+            "--adapter-id", "Qwen3-0.6B-G1-GSM8K-U2000-E4500-F0-L0-r8-seed11",
+            "--output-dir", $BaselineSelection,
+            "--shard-index", "0",
+            "--shard-count", "1",
+            "--checkpoint-every", "1"
+        )
+
+    Invoke-ResumableStep `
         -Name "AUG1 warm-start training" `
         -CompletionPath (Join-Path $Run "training_report.json") `
         -MainCli `
@@ -109,25 +137,20 @@ try {
             "--checkpoint-every", "1"
         )
 
-    foreach ($evaluation in @(
-        @{ Name = "official"; Eval = $OfficialEval; Output = $Official },
-        @{ Name = "large-number"; Eval = $LargeEval; Output = $Large }
-    )) {
-        Invoke-ResumableStep `
-            -Name "AUG1 $($evaluation.Name) evaluation" `
-            -CompletionPath (Join-Path $evaluation.Output "summary.json") `
-            -Arguments @(
-                "run-gsm8k-official-shard",
-                "--eval", $evaluation.Eval,
-                "--config", $ModelConfig,
-                "--adapter-path", (Join-Path $Run "adapter"),
-                "--adapter-id", $AdapterId,
-                "--output-dir", $evaluation.Output,
-                "--shard-index", "0",
-                "--shard-count", "1",
-                "--checkpoint-every", "1"
-            )
-    }
+    Invoke-ResumableStep `
+        -Name "AUG1 selection evaluation" `
+        -CompletionPath (Join-Path $CandidateSelection "summary.json") `
+        -Arguments @(
+            "run-gsm8k-official-shard",
+            "--eval", $SelectionEval,
+            "--config", $ModelConfig,
+            "--adapter-path", (Join-Path $Run "adapter"),
+            "--adapter-id", $AdapterId,
+            "--output-dir", $CandidateSelection,
+            "--shard-index", "0",
+            "--shard-count", "1",
+            "--checkpoint-every", "1"
+        )
 
     Invoke-ResumableStep `
         -Name "AUG1 greedy gate" `
@@ -135,17 +158,14 @@ try {
         -Arguments @(
             "analyze-gsm8k-augmentation",
             "--stage", "AUG1-relation-paraphrase",
-            "--official-eval", $OfficialEval,
+            "--selection-eval", $SelectionEval,
             "--historical-eval", $HistoricalEval,
-            "--large-eval", $LargeEval,
-            "--baseline-official", (Join-Path $Scale "official_eval_v1\confirmatory\seed11_xpu\predictions.jsonl"),
-            "--candidate-official", (Join-Path $Official "predictions.jsonl"),
+            "--baseline-selection", (Join-Path $BaselineSelection "predictions.jsonl"),
+            "--candidate-selection", (Join-Path $CandidateSelection "predictions.jsonl"),
             "--baseline-historical", (Join-Path $Parent "historical_test_eval\predictions.jsonl"),
             "--candidate-historical", (Join-Path $Historical "predictions.jsonl"),
             "--baseline-historical-summary", (Join-Path $Parent "historical_test_eval\summary.json"),
             "--candidate-historical-summary", (Join-Path $Historical "summary.json"),
-            "--baseline-large", (Join-Path $Scale "large_number_v1\eval\asl\seed11_xpu\predictions.jsonl"),
-            "--candidate-large", (Join-Path $Large "predictions.jsonl"),
             "--output", $Analysis
         )
 }

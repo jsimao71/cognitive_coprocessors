@@ -18,20 +18,17 @@ def _summary(path, count: int, answer: float, path_f1: float):
     )
 
 
-def test_augmentation_gate_accepts_strict_positive_official_delta(tmp_path):
-    official_eval = write_jsonl(
-        tmp_path / "official.jsonl", [{"example_id": "a"}, {"example_id": "b"}]
+def test_augmentation_gate_accepts_strict_positive_selection_delta(tmp_path):
+    selection_eval = write_jsonl(
+        tmp_path / "selection.jsonl", [{"example_id": "a"}, {"example_id": "b"}]
     )
     historical_eval = write_jsonl(tmp_path / "historical.jsonl", [{"example_id": "h"}])
-    large_eval = write_jsonl(
-        tmp_path / "large.jsonl", [{"example_id": "large-a", "parent_example_id": "a"}]
-    )
-    baseline_official = write_jsonl(
-        tmp_path / "baseline-official.jsonl",
+    baseline_selection = write_jsonl(
+        tmp_path / "baseline-selection.jsonl",
         [_prediction("a", True), _prediction("b", False)],
     )
-    candidate_official = write_jsonl(
-        tmp_path / "candidate-official.jsonl",
+    candidate_selection = write_jsonl(
+        tmp_path / "candidate-selection.jsonl",
         [_prediction("a", True), _prediction("b", True)],
     )
     baseline_historical = write_jsonl(
@@ -40,66 +37,48 @@ def test_augmentation_gate_accepts_strict_positive_official_delta(tmp_path):
     candidate_historical = write_jsonl(
         tmp_path / "candidate-historical.jsonl", [_prediction("h", True)]
     )
-    baseline_large = write_jsonl(tmp_path / "baseline-large.jsonl", [_prediction("large-a", False)])
-    candidate_large = write_jsonl(
-        tmp_path / "candidate-large.jsonl", [_prediction("large-a", True)]
-    )
-
     report = analyze_gsm8k_augmentation_stage(
         stage="AUG1",
-        official_eval_path=official_eval,
+        selection_eval_path=selection_eval,
         historical_eval_path=historical_eval,
-        large_eval_path=large_eval,
-        baseline_official_predictions=baseline_official,
-        candidate_official_predictions=candidate_official,
+        baseline_selection_predictions=baseline_selection,
+        candidate_selection_predictions=candidate_selection,
         baseline_historical_predictions=baseline_historical,
         candidate_historical_predictions=candidate_historical,
         baseline_historical_summary=_summary(tmp_path / "base-summary.json", 1, 0.0, 0.25),
         candidate_historical_summary=_summary(tmp_path / "candidate-summary.json", 1, 1.0, 0.75),
-        baseline_large_predictions=baseline_large,
-        candidate_large_predictions=candidate_large,
         output_path=tmp_path / "report.json",
     )
 
     assert report["decision"] == {
         "accepted": True,
-        "criterion": "candidate official correct count must strictly exceed baseline",
+        "criterion": "candidate selection correct count must strictly exceed baseline",
         "delta_correct": 1,
         "next_parent": "candidate",
     }
-    assert report["official_confirmatory"]["candidate_only"] == 1
+    assert report["augmentation_selection"]["candidate_only"] == 1
     assert (
         report["historical_diagnostic"]["semantic_diagnostics"]["component_mean_f1_deltas"]["paths"]
         == 0.5
     )
-    assert report["large_number_robustness"]["candidate"]["large_minus_original"] == 0.0
     assert read_json(tmp_path / "report.json")["stage"] == "AUG1"
 
 
 def test_augmentation_gate_rejects_tie(tmp_path):
     evaluation = write_jsonl(tmp_path / "eval.jsonl", [{"example_id": "a"}])
-    large_eval = write_jsonl(
-        tmp_path / "large.jsonl", [{"example_id": "large-a", "parent_example_id": "a"}]
-    )
     predictions = write_jsonl(tmp_path / "predictions.jsonl", [_prediction("a", True)])
-    large_predictions = write_jsonl(
-        tmp_path / "large-predictions.jsonl", [_prediction("large-a", True)]
-    )
     summary = _summary(tmp_path / "summary.json", 1, 1.0, 1.0)
 
     report = analyze_gsm8k_augmentation_stage(
         stage="AUG1",
-        official_eval_path=evaluation,
+        selection_eval_path=evaluation,
         historical_eval_path=evaluation,
-        large_eval_path=large_eval,
-        baseline_official_predictions=predictions,
-        candidate_official_predictions=predictions,
+        baseline_selection_predictions=predictions,
+        candidate_selection_predictions=predictions,
         baseline_historical_predictions=predictions,
         candidate_historical_predictions=predictions,
         baseline_historical_summary=summary,
         candidate_historical_summary=summary,
-        baseline_large_predictions=large_predictions,
-        candidate_large_predictions=large_predictions,
         output_path=tmp_path / "report.json",
     )
 

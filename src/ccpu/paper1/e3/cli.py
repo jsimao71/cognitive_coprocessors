@@ -36,7 +36,10 @@ from .gsm8k_confirmatory import (
 from .large_number_suite import freeze_large_number_gsm8k
 from .model_size_analysis import analyze_model_size_interaction
 from .selection import select_semantic_checkpoint
-from .semantic_augmentation import build_relation_paraphrase_increment
+from .semantic_augmentation import (
+    build_relation_paraphrase_increment,
+    freeze_augmentation_selection_gate,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -91,19 +94,22 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_augmentation.add_argument("--variants-per-parent", type=int, default=1)
     gsm8k_augmentation.add_argument("--max-rows", type=int)
     gsm8k_augmentation.add_argument("--seed", type=int, default=73031)
+    augmentation_gate = commands.add_parser("prepare-gsm8k-augmentation-gate")
+    augmentation_gate.add_argument("--full-eval", required=True)
+    augmentation_gate.add_argument("--excluded-eval", required=True)
+    augmentation_gate.add_argument("--output-dir", required=True)
+    augmentation_gate.add_argument("--count", type=int, default=250)
+    augmentation_gate.add_argument("--seed", type=int, default=73033)
     augmentation_analysis = commands.add_parser("analyze-gsm8k-augmentation")
     augmentation_analysis.add_argument("--stage", required=True)
-    augmentation_analysis.add_argument("--official-eval", required=True)
+    augmentation_analysis.add_argument("--selection-eval", required=True)
     augmentation_analysis.add_argument("--historical-eval", required=True)
-    augmentation_analysis.add_argument("--large-eval", required=True)
-    augmentation_analysis.add_argument("--baseline-official", required=True)
-    augmentation_analysis.add_argument("--candidate-official", required=True)
+    augmentation_analysis.add_argument("--baseline-selection", required=True)
+    augmentation_analysis.add_argument("--candidate-selection", required=True)
     augmentation_analysis.add_argument("--baseline-historical", required=True)
     augmentation_analysis.add_argument("--candidate-historical", required=True)
     augmentation_analysis.add_argument("--baseline-historical-summary", required=True)
     augmentation_analysis.add_argument("--candidate-historical-summary", required=True)
-    augmentation_analysis.add_argument("--baseline-large", required=True)
-    augmentation_analysis.add_argument("--candidate-large", required=True)
     augmentation_analysis.add_argument("--output", required=True)
     gsm8k_official = commands.add_parser("prepare-gsm8k-official")
     gsm8k_official.add_argument("--source", required=True)
@@ -294,27 +300,38 @@ def main(argv: list[str] | None = None) -> int:
             f"parents={manifest['counts']['matched_parent_ids']} -> {args.output_dir}"
         )
         return 0
+    if args.command == "prepare-gsm8k-augmentation-gate":
+        manifest = freeze_augmentation_selection_gate(
+            full_eval_path=args.full_eval,
+            excluded_eval_path=args.excluded_eval,
+            output_dir=args.output_dir,
+            count=args.count,
+            seed=args.seed,
+        )
+        print(
+            f"GSM8K augmentation selection={manifest['counts']['selected']} "
+            f"excluded-confirmation={manifest['counts']['excluded_final_confirmation']} "
+            f"-> {args.output_dir}"
+        )
+        return 0
     if args.command == "analyze-gsm8k-augmentation":
         report = analyze_gsm8k_augmentation_stage(
             stage=args.stage,
-            official_eval_path=args.official_eval,
+            selection_eval_path=args.selection_eval,
             historical_eval_path=args.historical_eval,
-            large_eval_path=args.large_eval,
-            baseline_official_predictions=args.baseline_official,
-            candidate_official_predictions=args.candidate_official,
+            baseline_selection_predictions=args.baseline_selection,
+            candidate_selection_predictions=args.candidate_selection,
             baseline_historical_predictions=args.baseline_historical,
             candidate_historical_predictions=args.candidate_historical,
             baseline_historical_summary=args.baseline_historical_summary,
             candidate_historical_summary=args.candidate_historical_summary,
-            baseline_large_predictions=args.baseline_large,
-            candidate_large_predictions=args.candidate_large,
             output_path=args.output,
         )
         decision = "ACCEPT" if report["decision"]["accepted"] else "REJECT"
         print(
             f"GSM8K {args.stage} {decision} "
             f"delta={report['decision']['delta_correct']:+d}/"
-            f"{report['official_confirmatory']['count']} -> {args.output}"
+            f"{report['augmentation_selection']['count']} -> {args.output}"
         )
         return 0
     if args.command == "prepare-gsm8k-official":

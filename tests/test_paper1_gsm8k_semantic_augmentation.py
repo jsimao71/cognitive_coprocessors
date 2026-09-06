@@ -1,6 +1,7 @@
 from ccpu.common.artifacts import read_jsonl, write_jsonl
 from ccpu.paper1.e3.semantic_augmentation import (
     build_relation_paraphrase_increment,
+    freeze_augmentation_selection_gate,
     relation_paraphrases,
 )
 
@@ -98,3 +99,48 @@ def test_relation_increment_is_deterministic(tmp_path):
     )
 
     assert first["output_sha256"] == second["output_sha256"]
+
+
+def test_augmentation_gate_is_stratified_and_disjoint(tmp_path):
+    full = write_jsonl(
+        tmp_path / "full.jsonl",
+        [
+            {
+                "example_id": f"case-{index}",
+                "source_row": index,
+                "difficulty_stratum": ("low", "medium", "high")[index % 3],
+            }
+            for index in range(12)
+        ],
+    )
+    excluded = write_jsonl(
+        tmp_path / "excluded.jsonl",
+        [
+            {
+                "example_id": f"case-{index}",
+                "source_row": index,
+                "difficulty_stratum": ("low", "medium", "high")[index % 3],
+            }
+            for index in range(3)
+        ],
+    )
+
+    manifest = freeze_augmentation_selection_gate(
+        full_eval_path=full,
+        excluded_eval_path=excluded,
+        output_dir=tmp_path / "selection",
+        count=6,
+        seed=19,
+    )
+    selected = read_jsonl(tmp_path / "selection" / "gate.jsonl")
+
+    assert manifest["counts"]["selected"] == 6
+    assert manifest["overlap_with_final_confirmation"] == []
+    assert {row["example_id"] for row in selected}.isdisjoint(
+        {"case-0", "case-1", "case-2"}
+    )
+    assert manifest["counts"]["selected_by_difficulty"] == {
+        "high": 2,
+        "low": 2,
+        "medium": 2,
+    }

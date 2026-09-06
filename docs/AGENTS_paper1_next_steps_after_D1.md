@@ -595,6 +595,16 @@ AUG4 AUG3 + coreference/entity collision, clause order/distractors,
      and compositional recombination
 ```
 
+Use a greedy continuation protocol for the fast-track pass. Start from the
+frozen U2000 adapter, train only on one new increment with a fresh optimizer,
+and advance the resulting adapter only when its correct-answer count strictly
+improves on a separately frozen 250-case augmentation-selection view. This view
+must be sampled from the 1,069 official GSM8K cases outside the final
+confirmatory 250, balanced by difficulty, and immutable across augmentation
+stages. A tie or negative delta retains the previous adapter. Run the untouched
+confirmatory set and factor-1,000 comparison only after the greedy ladder and
+its decisions are frozen.
+
 For every cell, include an originals-repeat control with the same optimizer steps
 and approximately matched target tokens. Also report an epoch-matched view when
 affordable. Do not attribute a gain to semantic augmentation when it can be
