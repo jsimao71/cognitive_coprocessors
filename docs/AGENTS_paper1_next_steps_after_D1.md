@@ -325,6 +325,45 @@ and each A0 seed. The desired robustness pattern is a declining direct curve and
 a comparatively horizontal ASL curve. If this pattern does not occur, report it
 without weakening the fixed-identity protocol.
 
+### Magnitude-curve hypothesis and model-size decision
+
+The next primary experiment is the complete magnitude curve, not another
+two-point comparison. Plot final-answer accuracy against
+`log10(source-number scale)` at the frozen factors `x1`, `x10^2`, `x10^3`,
+`x10^4`, and `x10^6`. Show B1/B1L and every A0 seed, together with the ASL
+mean and uncertainty or seed range. Lines may connect the points because every
+factor uses the same fixed 55 parent problems, but the figure and table must
+also report counts and paired uncertainty.
+
+The directional hypothesis is:
+
+```yaml
+Direct: 66 -> 60 -> 52 -> 44 -> ...
+ASL:    49 -> 48 -> 47 -> 46 -> ...
+```
+
+These values are schematic and must never be reported as observations. If the
+measured direct curve declines materially with log magnitude while the ASL
+curve remains comparatively horizontal, Paper 1 gains direct mechanistic
+evidence that deterministic execution removes magnitude sensitivity after
+successful semantic compilation. Do not make that claim before the complete
+curve is available.
+
+After completing the 0.6B curve, interpret the frozen 1.7B matched gate as a
+model-size decision test:
+
+- `crossover_shift`: the larger direct model moves the ASL crossover to a
+  larger magnitude but remains magnitude-sensitive;
+- `sensitivity_elimination`: the larger direct model stays approximately flat
+  and closes the ASL robustness gap.
+
+The first outcome supports a capacity-dependent or small-model advantage. A
+persistent direct-versus-ASL slope difference supports a more fundamental
+neural-computation versus deterministic-execution effect. Elimination of the
+difference bounds the present claim to the tested small-model regime. Compare
+only identical parent IDs and transformations, and never infer the gate from an
+incomplete arm or mismatched denominator.
+
 ## Claim gate
 
 Paper 1 may claim that ASL adds value only if the matched comparison supports at
@@ -1320,6 +1359,12 @@ P6c.2 Run B1, B1L, and all A0 seeds on the frozen 55-parent magnitude ladder at
       x1, x10^2, x10^3, x10^4, and x10^6. Build the common-denominator accuracy
       curve and the ASL semantic/literal/runtime failure audit. Include the
       literal-only oracle correction as a diagnostic, never as model accuracy.
+
+P6c.3 Make accuracy versus `log10(source-number scale)` the primary robustness
+      plot. Once the 0.6B curve is complete, use the frozen 1.7B matched gate to
+      test whether scaling shifts the crossover rightward or eliminates
+      magnitude sensitivity. Extend the complete ladder to 1.7B only when the
+      matched gate warrants the additional compute.
 
 P6d Run the matched Qwen3-1.7B U2000/E4500 initialization-99173 gate on the same
     250/59 identities. Compute answer and robustness model-size interactions.
