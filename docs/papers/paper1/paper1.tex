@@ -497,6 +497,16 @@ Oracle             & 0.875 [0.640, 0.965] & 7--0 & 0.0156 \\
 \end{tabular}
 \end{table}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.96\linewidth]{../../../artifacts/paper1/gsm8k_scale_v1/figures_v1/matched_magnitude_robustness.png}
+\caption{Matched factor-1,000 robustness on the same 59 parent questions. The
+direct B1/B1L controls lose 23.7/22.0 points, while the three ASL-runtime seeds
+remain comparatively stable. The emphasized ASL mean ties B1L at the transformed
+endpoint; seed-level lines retain the substantial initialization variation.}
+\label{fig:gsm8k-magnitude-robustness}
+\end{figure}
+
 Normalized reflex was numerically the strongest non-oracle condition, improving
 by 31.25 percentage points over LLM-only and 12.5 points over explicit tools.
 The five paired gains and zero losses are suggestive but do not reach 0.05 in
@@ -1947,6 +1957,36 @@ $(23,16,1,19)$ cases in the order just listed. Oracle literal correction therefo
 adds only one answer per seed. This lower-bound diagnostic does not support
 numeric transcription as the main large-number failure source; semantic and
 runtime/output failures dominate.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.94\linewidth]{../../../artifacts/paper1/gsm8k_scale_v1/figures_v1/asl_large_number_failures.png}
+\caption{Mutually exclusive outcomes for the 59 factor-1,000 ASL predictions.
+Counts are printed within each seed's bar. Literal-only oracle correction rescues
+one case per seed; executable semantic mismatch and runtime/output failure account
+for almost all remaining errors.}
+\label{fig:gsm8k-large-failures}
+\end{figure}
+
+The ASL arms of the frozen model-size gate are also complete. With the same
+U2000/E4500 data, rank-8 QKVO placement, and initialization 99173, Qwen3-1.7B
+improves the full ordinary score from 110/250 (44.0\%) to 139/250 (55.6\%). On
+the 59 paired parents it improves ordinary accuracy from 29/59 (49.2\%) to
+37/59 (62.7\%) and factor-1,000 accuracy from 27/59 (45.8\%) to 36/59
+(61.0\%); the larger ASL model therefore loses only 1.7 points under the
+transformation. Figure~\ref{fig:gsm8k-asl-scaling} visualizes this consistent
+11.6--15.3-point gain. The matched 1.7B direct arm remains in progress, so these
+completed ASL arms establish a semantic-compilation scaling signal but not yet
+an ASL-over-direct accuracy claim at 1.7B.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.94\linewidth]{../../../artifacts/paper1/gsm8k_scale_v1/figures_v1/asl_model_size_scaling.png}
+\caption{ASL-runtime scaling at matched training data, adapter placement, and
+initialization. Qwen3-1.7B improves over Qwen3-0.6B on the complete 250-question
+view and both endpoints of the fixed 59-parent robustness comparison.}
+\label{fig:gsm8k-asl-scaling}
+\end{figure}
 
 \subsection{GSM8K-Only Diversity and Repetition}
 

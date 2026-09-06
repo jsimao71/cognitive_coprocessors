@@ -40,6 +40,7 @@ from .magnitude_analysis import (
     project_magnitude_predictions,
 )
 from .model_size_analysis import analyze_model_size_interaction
+from .result_plots import build_gsm8k_result_plots
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
     build_entity_rename_increment,
@@ -196,6 +197,15 @@ def build_parser() -> argparse.ArgumentParser:
     magnitude_projection.add_argument("--target-eval", required=True)
     magnitude_projection.add_argument("--source-predictions", required=True)
     magnitude_projection.add_argument("--output-dir", required=True)
+    result_plots = commands.add_parser("plot-gsm8k-main-results")
+    result_plots.add_argument("--contribution", required=True)
+    result_plots.add_argument("--large-eval", required=True)
+    result_plots.add_argument("--small-original", required=True)
+    result_plots.add_argument("--small-large", required=True)
+    result_plots.add_argument("--large-original", required=True)
+    result_plots.add_argument("--large-large", required=True)
+    result_plots.add_argument("--failure-summary", action="append", required=True)
+    result_plots.add_argument("--output-dir", required=True)
     contribution = commands.add_parser("analyze-gsm8k-contribution")
     contribution.add_argument("--original-eval", required=True)
     contribution.add_argument("--large-eval", required=True)
@@ -564,6 +574,24 @@ def main(argv: list[str] | None = None) -> int:
             f"GSM8K projected magnitude predictions={manifest['count']} "
             f"-> {args.output_dir}"
         )
+        return 0
+    if args.command == "plot-gsm8k-main-results":
+        failures = []
+        for value in args.failure_summary:
+            if "=" not in value:
+                raise ValueError("--failure-summary must use LABEL=PATH")
+            failures.append(tuple(value.split("=", 1)))
+        report = build_gsm8k_result_plots(
+            contribution_path=args.contribution,
+            large_eval_path=args.large_eval,
+            small_original_predictions=args.small_original,
+            small_large_predictions=args.small_large,
+            large_original_predictions=args.large_original,
+            large_large_predictions=args.large_large,
+            failure_summaries=failures,
+            output_dir=args.output_dir,
+        )
+        print(f"GSM8K result plots={len(report['outputs'])} -> {args.output_dir}")
         return 0
     if args.command == "analyze-gsm8k-contribution":
         for values in (

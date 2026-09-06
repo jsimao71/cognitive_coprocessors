@@ -1,0 +1,99 @@
+{
+  "inputs": {
+    "contribution": "912ba5d1509293640d6731833d1a8adb8931c44faa6ecc86c0f751220900ab36",
+    "failure_summaries": {
+      "init 23": "30d05c48f4f13dc2444f029e93fb713348ca21d306b53abd8031a61dc62ee2d9",
+      "init 37": "93beec1eae6ce3ac90cf1172c8a3d3745875113b04506f1ce98a40b792d3e4be",
+      "init 99173": "06971ae97b36b05e867d9530cfb916e2d631b78c039ad9ac087389f26b9985c3"
+    },
+    "large_eval": "f99bb00f46d97c284b9f574d46672bf59b089a85d0f9ad80a0f04df0920480ba"
+  },
+  "model_size": {
+    "large": {
+      "ordinary": {
+        "accuracy": 0.556,
+        "correct": 139,
+        "count": 250,
+        "sha256": "cdb0ca386f1c7a4de1c081a671289b3c2da086a655fe203039a7a307f6ef714b"
+      },
+      "paired_large": {
+        "accuracy": 0.6101694915254238,
+        "correct": 36,
+        "count": 59,
+        "sha256": "192c0c613c8791fac14e30d8826c242577e86cf345fdd65f8dd189c5a21a8515"
+      },
+      "paired_ordinary": {
+        "accuracy": 0.6271186440677966,
+        "correct": 37,
+        "count": 59,
+        "sha256": "cdb0ca386f1c7a4de1c081a671289b3c2da086a655fe203039a7a307f6ef714b"
+      }
+    },
+    "plot_values": {
+      "Qwen3-0.6B": [
+        0.44,
+        0.4915254237288136,
+        0.4576271186440678
+      ],
+      "Qwen3-1.7B": [
+        0.556,
+        0.6271186440677966,
+        0.6101694915254238
+      ]
+    },
+    "small": {
+      "ordinary": {
+        "accuracy": 0.44,
+        "correct": 110,
+        "count": 250,
+        "sha256": "b2bd41fa184c68d139ebaa613602b5215b64197c04e893c2548e3595eeaf32e0"
+      },
+      "paired_large": {
+        "accuracy": 0.4576271186440678,
+        "correct": 27,
+        "count": 59,
+        "sha256": "0ba2d01d6654543b65e5a71ca9d4f475205e0b5cdea018ecfe4e4a931d16e41d"
+      },
+      "paired_ordinary": {
+        "accuracy": 0.4915254237288136,
+        "correct": 29,
+        "count": 59,
+        "sha256": "b2bd41fa184c68d139ebaa613602b5215b64197c04e893c2548e3595eeaf32e0"
+      }
+    }
+  },
+  "outputs": {
+    "failures": "08c37b3a4deb622b0053739a122d617920d8d3b16de450858e9c69a190995cd9",
+    "model_size": "073631325cd5bb00260aec3a587e006362fc3aa219c2f63b44e1a8754bcd1c7f",
+    "robustness": "2c3f2ff6b68be906b064460f4553835a45861f139c0e041f91ec9959abc09eba"
+  },
+  "robustness": {
+    "asl_mean": [
+      0.45762711864406774,
+      0.4406779661016949
+    ],
+    "series": {
+      "ASL seed 23": [
+        0.4406779661016949,
+        0.4745762711864407
+      ],
+      "ASL seed 37": [
+        0.4406779661016949,
+        0.3898305084745763
+      ],
+      "ASL seed 99173": [
+        0.4915254237288136,
+        0.4576271186440678
+      ],
+      "B1 direct": [
+        0.6610169491525424,
+        0.423728813559322
+      ],
+      "B1L direct": [
+        0.6610169491525424,
+        0.4406779661016949
+      ]
+    }
+  },
+  "schema_version": "ccpu.paper1.gsm8k_result_plots.v1"
+}
