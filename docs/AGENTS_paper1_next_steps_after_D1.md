@@ -772,6 +772,32 @@ untouched parents. Parse/lower improvements alone do not pass the gate. Evaluate
 ordinary official GSM8K, the frozen factor-1,000 suite, and separately frozen
 paraphrase/binding challenge descendants of test-only parents.
 
+### Cross-size augmentation gate before 4B
+
+Complete the current magnitude, full-audit, and Qwen3-1.7B matched-control runs
+before interpreting augmentation. Select increments greedily with Qwen3-0.6B,
+then retrain and evaluate the frozen winning cumulative dataset independently at
+both Qwen3-0.6B and Qwen3-1.7B. Each size must use its own matched AUG0 adapter
+with the same initialization, source parents, optimizer-step budget, approximate
+target-token exposure, prompt, decoding policy, and untouched 250/59 identities.
+
+Report the within-size augmentation delta and the model-size-by-augmentation
+interaction for final answers and every semantic component. An increment is
+portable only if its answer or binding gain is positive at both sizes without a
+material regression in the other primary semantic metrics. A gain at only one
+size is still informative but must be reported as size-dependent rather than
+pooled into a general augmentation claim.
+
+Advance to Qwen3-4B only after both size checks are complete. For each model,
+carry forward the best passed cumulative dataset; if no augmentation passes at a
+given size, retain AUG0 rather than forcing a negative increment. The first 4B
+condition is a one-initialization QKVO-r8 QLoRA gate using the same U2000/E4500
+parents and the frozen 250/59 evaluation. Require a 4-bit load/training memory
+smoke, gradient checkpointing, no truncation, and recorded peak memory before the
+full run. Compare 4B ASL against its own matched 4B direct control, not against a
+smaller model's direct result. Replicate or extend the magnitude ladder only if
+the one-seed gate is positive or resolves the registered scaling hypothesis.
+
 ---
 
 ## 9.2 Additional training and inference approaches
@@ -1457,6 +1483,17 @@ P6e Freeze the offline GSM8K semantic-augmentation protocol over the same source
 P6f Run AUG0--AUG4 with Qwen3-0.6B QKVO-r8. Match optimizer steps and target-token
     exposure against originals-repeat controls. Use one exploratory initialization;
     replicate only cells that pass Gate G on autonomous untouched-parent metrics.
+
+P6f.1 Freeze the winning cumulative augmentation after the 0.6B greedy ladder.
+      Retrain matched AUG0 and winning-augmentation adapters at both 0.6B and
+      1.7B, then evaluate the same untouched 250/59 identities and semantic
+      components. Report within-size deltas and the size-by-augmentation
+      interaction; never carry a negative increment into the next model.
+
+P6f.2 After the two-size augmentation gate, implement and memory-smoke Qwen3-4B
+      QKVO-r8 QLoRA. Train the best passed data condition, run the same 250/59
+      ASL and matched direct controls, and only then decide whether 4B seeds or
+      the complete magnitude ladder are warranted.
 
 P6g On the best passed data cell, run T1 slot-level auxiliary supervision, then T2
     runtime-symbol pointers, then T3 clause-local contrastive binding, and finally
