@@ -351,6 +351,8 @@ Alpha-renaming may be permissive for `LOCAL_TEMP` and selected derived/event IDs
 3. Can revised F3 preserve computation while making world-state semantics more stable/reusable?
 4. Can E3 NL↔ASL preconditioning improve sample efficiency relative to simply adding more examples?
 5. At what data scale does D1 saturate?
+6. Can execution-verified semantic augmentation improve binding and dependency
+   correctness, rather than only surface or numeric invariance?
 
 ---
 
@@ -498,6 +500,171 @@ Original OpenRouter diversity.
 Question:
 
 > Is D1 mainly benefiting from semantic structure diversity or generic lexical exposure?
+
+---
+
+## 9.1 Offline semantic augmentation ladder
+
+These are offline dataset-construction interventions. They must not change the
+test-time prompt, retrieve problem-dependent demonstrations, expose hidden
+answers/rationales, or feed intermediate execution values back to the model.
+Use one frozen instruction and either zero ICL or one globally fixed ICL prefix
+for every record in a condition. The primary comparison remains zero-shot.
+
+Split source parents before generating descendants. Every paraphrase,
+counterfactual, query variant, reordered story, and recombination lineage must
+remain in its parent's partition. When a recombination has multiple parents, its
+partition is the most restrictive partition of any parent and it may not cross a
+protected semantic-pattern family. Record parent IDs, transformation IDs,
+generator versions, seeds, and pre/post CCIR hashes.
+
+### C1 Relation-specific lexical and syntactic paraphrases
+
+Replace the historical six-phrase paraphraser with operator-aware families. At
+minimum cover addition/aggregation, difference/remaining, multiplicative
+comparison, ratio/rate, equal allocation, percentage, and temporal shift. Include
+equivalent realizations such as `twice`, `double`, `two times`, and `two for every
+one`, and grammatical alternations rather than isolated random synonyms.
+
+Meaning-preserving variants must retain the normalized CCIR graph, ordered
+dependencies, query target, and executed answer. Reject a paraphrase if a
+deterministic checker cannot establish preservation or if a teacher audit marks
+it ambiguous.
+
+### C2 Meaning-changing positive counterfactuals
+
+Mutate one registered semantic slot in the gold AST/CCIR and generate a complete
+new NL/ASL positive pair. Target the measured confusions: source entity, source
+attribute, operator, noncommutative argument order, multiplier owner, temporal
+state, and query target. For example, contrast `twice John's pink amount` with
+`twice Carl's pink amount` while holding vocabulary and most numbers fixed.
+
+Unlike M0.6, these are not merely rejected programs. Each counterfactual must
+have a newly lowered, type-valid, executable gold program and a recomputed answer.
+Require the intended semantic slot and answer to change unless the registered
+mutation class explicitly tests an answer-preserving equivalence.
+
+### C3 Query-target augmentation
+
+Keep a verified world and ask for multiple valid quantities: an intermediate
+source/derived fact, one category's remaining value, an aggregate, a difference,
+or the original terminal quantity. Generate a new gold RETURN and recompute the
+answer. This cell directly targets the observed RETURN-grounding failures.
+
+### C4 Dependency-direction minimal pairs
+
+Create tightly matched positive pairs such as `A has six more than B` versus `B
+has six more than A`, and `A is twice B` versus `B is twice A`. Preserve lexical
+content and constants where possible so success requires direction and ordered
+argument binding rather than keyword recognition.
+
+### C5 Coreference and entity-collision augmentation
+
+Vary names, descriptions, pronouns, repeated entity types, and multiple agents
+performing similar actions. Include only deterministically resolvable references
+in positive training data. Register deliberately ambiguous variants as rejection
+or abstention tests, not as ordinary positive programs.
+
+### C6 Clause-order and distractor augmentation
+
+Reorder independent clauses, vary question position, and add plausible irrelevant
+facts using entities/units that cannot alter the gold dependency graph. Preserve
+dependent-clause order unless a verified rewrite also updates references. The
+checker must prove that the source-fact subgraph selected by RETURN and the answer
+remain unchanged.
+
+### C7 Compositional recombination
+
+Compose compatible verified subgraphs into new worlds, prioritizing thin semantic
+signatures and longer chains such as `rate -> aggregation -> remaining`. Unify
+units and symbol identities explicitly, lower the merged graph, and generate NL
+from the merged semantics. Reject accidental shortcuts, disconnected query
+targets, duplicated facts, unit conflicts, and any recombination that reproduces
+a protected test signature.
+
+### Augmentation conditions
+
+Run a cumulative ladder over the same frozen GSM8K source parents:
+
+```text
+AUG0 originals only
+AUG1 AUG0 + relation-specific paraphrases
+AUG2 AUG1 + positive semantic counterfactuals
+AUG3 AUG2 + query-target and dependency-direction pairs
+AUG4 AUG3 + coreference/entity collision, clause order/distractors,
+     and compositional recombination
+```
+
+For every cell, include an originals-repeat control with the same optimizer steps
+and approximately matched target tokens. Also report an epoch-matched view when
+affordable. Do not attribute a gain to semantic augmentation when it can be
+explained solely by greater exposure. Report unique parents, descendant rows,
+alpha signatures, dependency DAGs, relation classes, and per-parent sampling
+weights.
+
+Primary augmentation gates are answer accuracy, source-fact F1, path/attribute
+grounding, ordered dependency F1, relation direction, and RETURN grounding on
+untouched parents. Parse/lower improvements alone do not pass the gate. Evaluate
+ordinary official GSM8K, the frozen factor-1,000 suite, and separately frozen
+paraphrase/binding challenge descendants of test-only parents.
+
+---
+
+## 9.2 Additional training and inference approaches
+
+Apply these only after the corresponding labels/candidates can be derived
+deterministically from verified gold ASL/CCIR. Keep the base model, source parents,
+exposures, prompt, decoding seed, and evaluation identities matched to AUG0.
+
+### T0 Ordinary autoregressive control
+
+Retain the current QKVO-r8 token-likelihood model as the mandatory control.
+
+### T1 Slot-level semantic auxiliary objectives
+
+Add supervised heads or tagged losses for entity identity, attribute identity,
+source-fact selection, operator class, ordered arguments, dependency edges, and
+RETURN target. Normalize each objective independently and report gradient norms
+and component losses so syntax-token volume cannot silently dominate semantics.
+Compare fixed weights, uncertainty-normalized weights, and a bounded focal variant
+on one development-only sweep; freeze the selected setting before confirmation.
+
+### T2 Runtime-symbol pointer grounding
+
+Build a deterministic per-question symbol table from model-visible spans and
+canonical runtime aliases. Predict source/target slots by pointer or constrained
+classification, then lower selected symbols into ASL paths. The table may contain
+only information extractable from the question at test time. Measure extraction,
+candidate recall, pointer accuracy, and downstream ASL accuracy separately.
+
+### T3 Clause-local semantic contrastive training
+
+Replace M0.6's successful-but-nontransferring whole-program ranking loss with
+local comparisons at the erroneous slot. Rank the gold source path, ordered
+argument, operator, edge, or RETURN target against valid confounders from the same
+question. Keep the generative objective active and gate on autonomous generation,
+not ranking accuracy alone.
+
+### T4 Generate, execute, and semantically rerank
+
+Train a verifier on gold programs plus deterministic local semantic corruptions.
+At inference, generate a bounded grammar-valid candidate set, lower/type-check and
+execute each candidate, then select by NL-to-ASL semantic consistency. The
+verifier sees only the question and candidate program, never the benchmark answer
+or hidden rationale. Report candidate oracle coverage, verifier selection
+accuracy, final answers, generated tokens, and latency separately.
+
+### T5 Adapter placement after semantic-supervision gate
+
+Only after T1--T3 show a positive semantic signal, compare matched QKVO-r8 against
+QKVO+MLP-r8 and modality-specific lower/shared upper adapters. Rank-only expansion
+is lower priority because QKVO-r16 already improved fit/syntax without improving
+answers. Run the same best semantic objective at 1.7B before advancing to a 4B
+QLoRA gate.
+
+No condition in this ladder may use dynamic or problem-dependent ICL. Grammar
+constraints remain a safety/validity control and cannot be presented as semantic
+supervision.
 
 ---
 
@@ -903,6 +1070,10 @@ src/ccpu/paper1/
   e3/direct_answer_eval.py
   e3/large_number_suite.py
   e3/contribution_analysis.py
+  e3/semantic_augmentation.py
+  e3/semantic_auxiliary.py
+  e3/symbol_pointer.py
+  e3/semantic_reranker.py
 
 scripts/
   run-paper1-gsm8k-matched-contribution-xpu.ps1
@@ -925,6 +1096,16 @@ artifacts/paper1/e3_v2/
 artifacts/paper1/gsm8k_scale_v1/matched_direct_v1/
 artifacts/paper1/gsm8k_scale_v1/large_number_v1/
 artifacts/paper1/gsm8k_scale_v1/analysis/matched_contribution_v1.json
+artifacts/paper1/gsm8k_semantic_augmentation_v1/
+  parent_manifest.json
+  transformation_ledger.jsonl
+  aug0_originals/
+  aug1_relation_paraphrase/
+  aug2_positive_counterfactual/
+  aug3_query_dependency/
+  aug4_grounding_composition/
+  test_challenges/
+artifacts/paper1/gsm8k_semantic_training_v1/
 ```
 
 After all three official A0 summaries exist, run the complete resumable matched
@@ -959,6 +1140,16 @@ large-number transformation is deterministic
 large-number transformed trace recomputes the stored answer
 unsafe numeric contexts are excluded with reasons
 original/transformed identities remain one-to-one
+augmentation descendants cannot cross parent partitions
+meaning-preserving rewrites retain normalized CCIR and answer
+positive counterfactuals change the registered semantic slot and recompute answer
+query-target variants return the newly registered target
+dependency-direction pairs preserve constants but reverse the registered edge
+coreference positives have one deterministic resolution
+distractors remain disconnected from the RETURN dependency closure
+compositions lower, type-check, execute, and avoid protected test signatures
+symbol-table candidates contain model-visible spans only
+semantic reranker never reads hidden benchmark answers or rationales
 ```
 
 ---
@@ -991,6 +1182,16 @@ intervals above zero. Because B1 reached its token ceiling on 58/250 ordinary
 and 18/59 large generations, the registered result remains primary while the
 post-hoc B1L 2,048-token sensitivity tests whether the robustness conclusion
 survives a less truncated direct baseline.
+
+### Gate G - semantic augmentation and supervision
+
+Run AUG0--AUG4 only after the parent split, transformation ledger, and semantic
+preservation/mutation tests are frozen. Advance an augmentation cell only when it
+improves answer accuracy and at least one binding-sensitive metric without a
+material regression in another: source facts, grounded paths/attributes, ordered
+dependencies, relation direction, or RETURN target. Parse/lower gains alone fail
+the gate. Run T1--T5 sequentially; do not combine multiple unvalidated training
+or architecture changes in one cell.
 
 ---
 
@@ -1044,6 +1245,21 @@ P6c Run B0, B1, and all A0 adapter seeds on both original and large-number
 P6d Run the matched Qwen3-1.7B U2000/E4500 initialization-99173 gate on the same
     250/59 identities. Compute answer and robustness model-size interactions.
     Replicate seeds 23 and 37 only if the one-seed gate is positive and material.
+
+P6e Freeze the offline GSM8K semantic-augmentation protocol over the same source
+    parents: relation paraphrases, positive counterfactuals, query-target variants,
+    dependency-direction pairs, coreference/entity collisions, clause order and
+    distractors, and compositional recombinations. Freeze parent lineages and the
+    test-only paraphrase/binding challenge before training.
+
+P6f Run AUG0--AUG4 with Qwen3-0.6B QKVO-r8. Match optimizer steps and target-token
+    exposure against originals-repeat controls. Use one exploratory initialization;
+    replicate only cells that pass Gate G on autonomous untouched-parent metrics.
+
+P6g On the best passed data cell, run T1 slot-level auxiliary supervision, then T2
+    runtime-symbol pointers, then T3 clause-local contrastive binding, and finally
+    T4 bounded semantic reranking. Test QKVO+MLP and modality-specific adapters only
+    after a semantic-supervision condition passes. Never use dynamic ICL.
 
 P7  Revise F3 around grounded identity + alpha-renamable locals.
 
