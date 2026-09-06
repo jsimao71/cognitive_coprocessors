@@ -37,6 +37,7 @@ from .large_number_suite import freeze_large_number_gsm8k
 from .model_size_analysis import analyze_model_size_interaction
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
+    build_entity_rename_increment,
     build_relation_paraphrase_increment,
     freeze_augmentation_selection_gate,
 )
@@ -94,6 +95,12 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_augmentation.add_argument("--variants-per-parent", type=int, default=1)
     gsm8k_augmentation.add_argument("--max-rows", type=int)
     gsm8k_augmentation.add_argument("--seed", type=int, default=73031)
+    entity_augmentation = commands.add_parser("prepare-gsm8k-entity-augmentation")
+    entity_augmentation.add_argument("--parent-train", required=True)
+    entity_augmentation.add_argument("--eligible", required=True)
+    entity_augmentation.add_argument("--output-dir", required=True)
+    entity_augmentation.add_argument("--max-rows", type=int)
+    entity_augmentation.add_argument("--seed", type=int, default=73035)
     augmentation_gate = commands.add_parser("prepare-gsm8k-augmentation-gate")
     augmentation_gate.add_argument("--full-eval", required=True)
     augmentation_gate.add_argument("--excluded-eval", required=True)
@@ -298,6 +305,20 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K {manifest['stage']} rows={manifest['counts']['increment_rows']} "
             f"parents={manifest['counts']['matched_parent_ids']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-entity-augmentation":
+        manifest = build_entity_rename_increment(
+            parent_train_path=args.parent_train,
+            eligible_path=args.eligible,
+            output_dir=args.output_dir,
+            max_rows=args.max_rows,
+            seed=args.seed,
+        )
+        print(
+            f"GSM8K {manifest['stage']} rows={manifest['counts']['increment_rows']} "
+            f"renamed-entities={manifest['counts']['renamed_entities']} "
+            f"-> {args.output_dir}"
         )
         return 0
     if args.command == "prepare-gsm8k-augmentation-gate":

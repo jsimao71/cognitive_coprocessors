@@ -1,6 +1,8 @@
 from ccpu.common.artifacts import read_jsonl, write_jsonl
 from ccpu.paper1.e3.semantic_augmentation import (
+    build_entity_rename_increment,
     build_relation_paraphrase_increment,
+    entity_rename_variant,
     freeze_augmentation_selection_gate,
     relation_paraphrases,
 )
@@ -99,6 +101,61 @@ def test_relation_increment_is_deterministic(tmp_path):
     )
 
     assert first["output_sha256"] == second["output_sha256"]
+
+
+def test_entity_rename_is_synchronized_reversible_and_excludes_calendar_roots():
+    variant = entity_rename_variant(
+        "Yesterday, John had twice as many hats as Carl.",
+        "yesterday.day = 1\n"
+        "carl.hats = 4\n"
+        "john.hats = carl.hats * 2\n"
+        "RETURN john.hats",
+        source_id="42",
+        seed=7,
+    )
+
+    assert variant is not None
+    assert set(variant["entity_mapping"]) == {"carl", "john"}
+    assert "Yesterday" in variant["question"]
+    assert "yesterday.day" in variant["target"]
+    assert "john.hats" not in variant["target"]
+    assert "carl.hats" not in variant["target"]
+
+    nested = entity_rename_variant(
+        "Teresa is older than Michiko.",
+        "teresa.age_at_michiko_birth = 26\nRETURN teresa.age_at_michiko_birth",
+        source_id="44",
+        seed=7,
+    )
+    assert nested is not None
+    assert "michiko" not in nested["target"]
+
+    unsafe = entity_rename_variant(
+        "The Tampa Bay Bucs have cards for Valentine's day.",
+        "bucs.players = 13\nvalentine.cards = 20\nRETURN bucs.players",
+        source_id="43",
+        seed=7,
+    )
+    assert unsafe is None
+
+
+def test_entity_increment_preserves_execution_and_changes_paths(tmp_path):
+    parent = write_jsonl(tmp_path / "parent.jsonl", [_training()])
+    eligible = write_jsonl(tmp_path / "eligible.jsonl", [_eligible()])
+
+    manifest = build_entity_rename_increment(
+        parent_train_path=parent,
+        eligible_path=eligible,
+        output_dir=tmp_path / "entity",
+        seed=11,
+    )
+    rows = read_jsonl(tmp_path / "entity" / "increment.jsonl")
+
+    assert manifest["counts"]["increment_rows"] == 1
+    assert manifest["counts"]["renamed_entities"] == 2
+    assert rows[0]["target"] != _eligible()["target"]
+    assert rows[0]["augmentation"]["target_alpha_equivalent"] is True
+    assert manifest["protocol"]["execution_return_preserved"] is True
 
 
 def test_augmentation_gate_is_stratified_and_disjoint(tmp_path):

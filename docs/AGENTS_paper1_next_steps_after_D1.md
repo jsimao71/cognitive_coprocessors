@@ -605,6 +605,12 @@ stages. A tie or negative delta retains the previous adapter. Run the untouched
 confirmatory set and factor-1,000 comparison only after the greedy ladder and
 its decisions are frozen.
 
+Fast-track increment order is `AUG1 relation paraphrase`, then `AUG2 synchronized
+entity/path rename`. AUG2 is generated and audited independently, but its
+training parent is AUG1 only when AUG1 passes; otherwise it starts from U2000.
+Later increments follow the same single-addition rule rather than a factorial
+combination sweep.
+
 For every cell, include an originals-repeat control with the same optimizer steps
 and approximately matched target tokens. Also report an epoch-matched view when
 affordable. Do not attribute a gain to semantic augmentation when it can be

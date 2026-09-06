@@ -1,0 +1,45 @@
+{
+  "counts": {
+    "execution_verified": 928,
+    "frozen_parent_exposures": 4500,
+    "increment_rows": 928,
+    "matched_parent_ids": 928,
+    "renamed_entities": 1308,
+    "rows_by_renamed_entity_count": {
+      "1": 669,
+      "2": 153,
+      "3": 94,
+      "4": 10,
+      "5": 1,
+      "6": 1
+    },
+    "unique_parent_ids": 2000,
+    "unmatched_parent_ids": 1072
+  },
+  "dataset_id": "GSM8K_SEM_AUG2_ENTITY_RENAME_V1_N928",
+  "input_sha256": {
+    "eligible": "956ef02c5cf42bc75952f683b1c05882e83ad25eb3457a7197862aca06ca62df",
+    "parent_train": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+  },
+  "max_rows": null,
+  "output_sha256": {
+    "increment": "df5724927e31369b91241a44de069e8eeefd65332f5c5fc30a2bacbee2fb6043",
+    "transformation_ledger": "a7f286547855e5460318eb3a898d690a9117f0a3ccc92ba8be1a735d71d03680",
+    "unmatched_parents": "dfcd81df377c0875480dc753b4131450e6ebd4e59fbebe6851d723a6bb38e8bd"
+  },
+  "protocol": {
+    "execution_return_preserved": true,
+    "fixed_zero_shot_prompt": true,
+    "hidden_answer_visible": false,
+    "hidden_rationale_visible": false,
+    "offline_only": true,
+    "problem_dependent_icl": false,
+    "split_inherited_from_parent": true,
+    "synchronized_nl_and_asl_rename": true,
+    "target_exactly_reversible": true
+  },
+  "schema_version": "ccpu.paper1.gsm8k_semantic_augmentation.v1",
+  "seed": 73035,
+  "stage": "AUG2",
+  "transformation": "synchronized_entity_rename"
+}
