@@ -10,6 +10,7 @@ from ccpu.paper1.lora_train import (
     LoRATrainingConfig,
     _model_loss,
     _tokenize_record,
+    initial_adapter_provenance,
     pairwise_rank_terms,
     semantic_weight_spans,
 )
@@ -58,6 +59,43 @@ def test_best_dev_restoration_requires_epoch_evaluation():
             evaluate_each_epoch=False,
             restore_best_dev=True,
         ).validate()
+
+
+def test_initial_adapter_provenance_validates_shape_and_hashes(tmp_path):
+    adapter = tmp_path / "adapter"
+    adapter.mkdir()
+    (adapter / "adapter_config.json").write_text(
+        json.dumps(
+            {
+                "base_model_name_or_path": "Qwen/Qwen3-0.6B",
+                "lora_alpha": 16,
+                "lora_dropout": 0.05,
+                "r": 8,
+                "target_modules": ["v_proj", "q_proj", "o_proj", "k_proj"],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (adapter / "adapter_model.safetensors").write_bytes(b"weights")
+
+    provenance = initial_adapter_provenance(
+        adapter,
+        model_id="Qwen/Qwen3-0.6B",
+        training=LoRATrainingConfig(),
+    )
+
+    assert provenance["adapter_config"]["r"] == 8
+    assert set(provenance["files"]) == {
+        "adapter_config.json",
+        "adapter_model.safetensors",
+    }
+
+    with pytest.raises(ValueError, match="configuration mismatch"):
+        initial_adapter_provenance(
+            adapter,
+            model_id="Qwen/Qwen3-1.7B",
+            training=LoRATrainingConfig(),
+        )
 
 
 def test_lora_tokenization_can_reject_instead_of_hiding_truncation():

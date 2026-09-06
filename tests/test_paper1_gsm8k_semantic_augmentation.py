@@ -1,0 +1,100 @@
+from ccpu.common.artifacts import read_jsonl, write_jsonl
+from ccpu.paper1.e3.semantic_augmentation import (
+    build_relation_paraphrase_increment,
+    relation_paraphrases,
+)
+
+
+def _eligible(source_id: str = "1") -> dict:
+    return {
+        "annotation_sha256": "a" * 64,
+        "dataset": "gsm8k",
+        "effective_scope": {
+            "id": f"gsm8k:train:{source_id}",
+            "kind": "benchmark_case",
+            "parent": None,
+            "source": "dataset",
+        },
+        "question": "John has twice as many green hats as Carl. How many hats does John have?",
+        "recovery": None,
+        "semantic_pattern_id": "asl-pattern-test",
+        "source_id": source_id,
+        "source_record_sha256": "b" * 64,
+        "target": "carl.green_hats = 4\njohn.green_hats = carl.green_hats * 2\nRETURN john.green_hats",
+        "teacher": {"provider": "test"},
+    }
+
+
+def _training(source_id: str = "1", exposure: int = 0) -> dict:
+    source = _eligible(source_id)
+    return {
+        "dataset": "gsm8k",
+        "dataset_id": "G1_GSM8K_U1_E2",
+        "epoch_view": exposure,
+        "example_id": f"parent-{exposure}",
+        "parent_example_id": f"gsm8k:{source_id}",
+        "parent_source_id": source_id,
+        "prompt": f"Problem: {source['question']}\nASL:",
+        "semantic_pattern_id": source["semantic_pattern_id"],
+        "target": source["target"],
+    }
+
+
+def test_relation_paraphrases_are_one_rule_unique_variants():
+    variants = relation_paraphrases(
+        "Each box has twice as many red balls as blue balls, with half the rest set aside."
+    )
+    questions = [row["question"] for row in variants]
+
+    assert len(questions) == len(set(questions))
+    assert any("Every box" in question for question in questions)
+    assert any("two times as many" in question for question in questions)
+    assert any("one-half the" in question for question in questions)
+
+
+def test_relation_increment_deduplicates_exposures_and_preserves_target(tmp_path):
+    parent = write_jsonl(
+        tmp_path / "parent.jsonl",
+        [_training(exposure=0), _training(exposure=1)],
+    )
+    eligible = write_jsonl(tmp_path / "eligible.jsonl", [_eligible()])
+
+    manifest = build_relation_paraphrase_increment(
+        parent_train_path=parent,
+        eligible_path=eligible,
+        output_dir=tmp_path / "output",
+        seed=7,
+    )
+    rows = read_jsonl(tmp_path / "output" / "increment.jsonl")
+    ledger = read_jsonl(tmp_path / "output" / "transformation_ledger.jsonl")
+
+    assert manifest["counts"]["frozen_parent_exposures"] == 2
+    assert manifest["counts"]["unique_parent_ids"] == 1
+    assert manifest["counts"]["increment_rows"] == 1
+    assert manifest["counts"]["execution_verified"] == 1
+    assert rows[0]["target"] == _eligible()["target"]
+    assert rows[0]["prompt"] != _training()["prompt"]
+    assert rows[0]["source_fields_visible_to_model"] == ["question"]
+    assert rows[0]["augmentation"]["target_unchanged"] is True
+    assert ledger[0]["execution_verified"] is True
+    assert manifest["protocol"]["problem_dependent_icl"] is False
+
+
+def test_relation_increment_is_deterministic(tmp_path):
+    parent = write_jsonl(tmp_path / "parent.jsonl", [_training()])
+    eligible = write_jsonl(tmp_path / "eligible.jsonl", [_eligible()])
+
+    first = build_relation_paraphrase_increment(
+        parent_train_path=parent,
+        eligible_path=eligible,
+        output_dir=tmp_path / "first",
+        seed=13,
+    )
+    second = build_relation_paraphrase_increment(
+        parent_train_path=parent,
+        eligible_path=eligible,
+        output_dir=tmp_path / "second",
+        seed=13,
+    )
+
+    assert first["output_sha256"] == second["output_sha256"]

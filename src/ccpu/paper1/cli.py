@@ -462,6 +462,7 @@ def train_lora_command(args: argparse.Namespace) -> int:
         train_path=args.train,
         dev_path=args.dev,
         output_dir=args.output_dir,
+        initial_adapter_path=args.initial_adapter_path,
     )
     print(
         f"trained {report['adapter_id']} with {report['trainable_parameters']} parameters "
@@ -1238,6 +1239,7 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     lora_train.add_argument("--train", required=True)
     lora_train.add_argument("--dev", required=True)
     lora_train.add_argument("--output-dir", required=True)
+    lora_train.add_argument("--initial-adapter-path")
     lora_train.set_defaults(handler=train_lora_command)
 
     asl_freeze = commands.add_parser(

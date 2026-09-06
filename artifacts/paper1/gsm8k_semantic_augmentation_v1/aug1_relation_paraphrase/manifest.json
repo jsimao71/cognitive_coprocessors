@@ -1,0 +1,72 @@
+{
+  "counts": {
+    "execution_verified": 983,
+    "frozen_parent_exposures": 4500,
+    "increment_rows": 983,
+    "matched_parent_ids": 983,
+    "unique_parent_ids": 2000,
+    "unique_transformed_questions": 983,
+    "unmatched_parent_ids": 1017
+  },
+  "dataset_id": "GSM8K_SEM_AUG1_RELATION_V1_N983",
+  "input_sha256": {
+    "eligible": "956ef02c5cf42bc75952f683b1c05882e83ad25eb3457a7197862aca06ca62df",
+    "parent_train": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+  },
+  "max_rows": null,
+  "output_sha256": {
+    "increment": "f27a904409dd2f5686f5004e4b2b85207f2201cc3712296d52aceaad31603c77",
+    "transformation_ledger": "c98cd8712d59ca5f9cb0e30a66ca3bd53098f04e8b9e10f12dd670d345094900",
+    "unmatched_parents": "21c704ebf93850cb8314b1c8192017fc0181973ff0af6da44edcd07c28ccef59"
+  },
+  "protocol": {
+    "fixed_zero_shot_prompt": true,
+    "hidden_answer_visible": false,
+    "hidden_rationale_visible": false,
+    "offline_only": true,
+    "problem_dependent_icl": false,
+    "split_inherited_from_parent": true,
+    "target_program_changed": false
+  },
+  "relation_class_counts": {
+    "aggregation": 105,
+    "average": 66,
+    "equal_allocation": 253,
+    "multiplicative_comparison": 196,
+    "percentage": 7,
+    "rate": 130,
+    "ratio_fraction": 133,
+    "remaining_difference": 93
+  },
+  "rule_counts": {
+    "aggregate_altogether": 25,
+    "aggregate_in_all": 26,
+    "aggregate_total_number": 54,
+    "allocation_apiece": 114,
+    "allocation_divided_equally": 1,
+    "allocation_each_of": 43,
+    "allocation_equally_among": 3,
+    "allocation_for_each": 24,
+    "allocation_sentence_each": 67,
+    "allocation_sentence_initial_each": 1,
+    "average_mean": 66,
+    "difference_gap": 7,
+    "multiple_triple": 7,
+    "multiple_twice": 86,
+    "multiple_twice_as_many": 71,
+    "multiple_twice_the": 32,
+    "percent_symbol_less": 1,
+    "percent_symbol_more": 6,
+    "rate_per_time": 130,
+    "ratio_half_as_many": 24,
+    "ratio_half_of": 65,
+    "ratio_half_the": 44,
+    "remaining_left_over_inverse": 4,
+    "remaining_the_rest": 82
+  },
+  "schema_version": "ccpu.paper1.gsm8k_semantic_augmentation.v1",
+  "seed": 73031,
+  "stage": "AUG1",
+  "transformation": "relation_paraphrase",
+  "variants_per_parent": 1
+}

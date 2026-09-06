@@ -13,7 +13,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-from ccpu.common.artifacts import file_sha256, read_jsonl, write_json
+from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json
 
 from .generation import select_device
 
@@ -374,6 +374,53 @@ def _mean_loss(
     return sum(losses) / len(losses), sum(ordinary_losses) / len(ordinary_losses)
 
 
+def initial_adapter_provenance(
+    path: str | Path, *, model_id: str, training: LoRATrainingConfig
+) -> dict[str, Any]:
+    """Validate a continuation adapter and freeze its exact file identity."""
+
+    initial_path = Path(path).resolve()
+    config_path = initial_path / "adapter_config.json"
+    weights = [
+        candidate
+        for candidate in (
+            initial_path / "adapter_model.safetensors",
+            initial_path / "adapter_model.bin",
+        )
+        if candidate.is_file()
+    ]
+    if not config_path.is_file() or len(weights) != 1:
+        raise FileNotFoundError(f"incomplete initial adapter: {initial_path}")
+    adapter_config = read_json(config_path)
+    expected = {
+        "base_model_name_or_path": model_id,
+        "r": training.rank,
+        "lora_alpha": training.alpha,
+        "lora_dropout": training.dropout,
+        "target_modules": sorted(training.target_modules),
+    }
+    observed = {
+        "base_model_name_or_path": adapter_config.get("base_model_name_or_path"),
+        "r": int(adapter_config.get("r", -1)),
+        "lora_alpha": int(adapter_config.get("lora_alpha", -1)),
+        "lora_dropout": float(adapter_config.get("lora_dropout", -1)),
+        "target_modules": sorted(str(item) for item in adapter_config.get("target_modules", [])),
+    }
+    if observed != expected:
+        raise ValueError(
+            f"initial adapter configuration mismatch: expected={expected}, observed={observed}"
+        )
+    return {
+        "path": str(initial_path),
+        "adapter_config": observed,
+        "files": {
+            candidate.name: file_sha256(candidate)
+            for candidate in sorted(initial_path.iterdir())
+            if candidate.is_file()
+        },
+    }
+
+
 def train_lora(
     *,
     model: dict[str, Any],
@@ -381,6 +428,7 @@ def train_lora(
     train_path: str | Path,
     dev_path: str | Path,
     output_dir: str | Path,
+    initial_adapter_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Train and save one protocol adapter without teaching answer values."""
 
@@ -393,6 +441,7 @@ def train_lora(
         import torch
         from peft import (
             LoraConfig,
+            PeftModel,
             get_peft_model,
             get_peft_model_state_dict,
             set_peft_model_state_dict,
@@ -415,6 +464,14 @@ def train_lora(
     torch.manual_seed(training.seed)
     random.seed(training.seed)
     output_dir.mkdir(parents=True, exist_ok=True)
+    initial_adapter = None
+    if initial_adapter_path is not None:
+        initial_path = Path(initial_adapter_path).resolve()
+        if initial_path == adapter_dir.resolve():
+            raise ValueError("initial adapter and output adapter directories must differ")
+        initial_adapter = initial_adapter_provenance(
+            initial_path, model_id=model_id, training=training
+        )
     tokenizer = AutoTokenizer.from_pretrained(model_id, revision=revision)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -469,15 +526,20 @@ def train_lora(
         model_kwargs["attn_implementation"] = str(model["attn_implementation"])
     base = AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
     base.config.use_cache = False
-    peft_config = LoraConfig(
-        r=training.rank,
-        lora_alpha=training.alpha,
-        lora_dropout=training.dropout,
-        target_modules=list(training.target_modules),
-        bias="none",
-        task_type="CAUSAL_LM",
-    )
-    model_instance = get_peft_model(base, peft_config).to(device)
+    if initial_adapter is not None:
+        model_instance = PeftModel.from_pretrained(
+            base, initial_adapter["path"], is_trainable=True
+        ).to(device)
+    else:
+        peft_config = LoraConfig(
+            r=training.rank,
+            lora_alpha=training.alpha,
+            lora_dropout=training.dropout,
+            target_modules=list(training.target_modules),
+            bias="none",
+            task_type="CAUSAL_LM",
+        )
+        model_instance = get_peft_model(base, peft_config).to(device)
     if training.gradient_checkpointing:
         model_instance.enable_input_require_grads()
         model_instance.gradient_checkpointing_enable(
@@ -503,6 +565,8 @@ def train_lora(
         "train_sha256": train_sha256,
         "dev_sha256": dev_sha256,
     }
+    if initial_adapter is not None:
+        checkpoint_identity["initial_adapter"] = initial_adapter
     start_epoch = 0
     start_batch_index = 0
     resume_losses: list[float] = []
@@ -776,6 +840,7 @@ def train_lora(
         ),
         "optimizer_steps": optimizer_steps,
         "resumed_from_optimizer_step": resumed_from_optimizer_step,
+        "initial_adapter": initial_adapter,
         "selected_epoch": best_epoch if training.restore_best_dev else training.epochs,
         "selection_policy": (
             "minimum_weighted_dev_loss"
