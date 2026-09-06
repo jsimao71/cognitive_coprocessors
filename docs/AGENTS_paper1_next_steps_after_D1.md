@@ -61,7 +61,24 @@ U2000 paired factor-1,000 view, 59 pre-frozen eligible examples:
   init 99173: 27/59 answers
   init 23: 28/59 answers
   init 37: 23/59 answers
-  paired direct-reasoning contribution analysis: in progress
+
+Matched Qwen3-0.6B direct reasoning:
+  ordinary: 149/250 answers (59.6%)
+  eligible original: 39/59 answers (66.1%)
+  factor-1,000: 25/59 answers (42.4%), degradation -23.7 pp
+
+ASL ordinary contribution versus direct reasoning:
+  init 99173: -15.6 pp, bootstrap 95% [-23.2, -8.4]
+  init 23: -22.0 pp, bootstrap 95% [-30.0, -14.0]
+  init 37: -25.6 pp, bootstrap 95% [-32.8, -18.4]
+
+ASL factor-1,000 relative robustness versus direct reasoning:
+  init 99173: +20.3 pp, bootstrap 95% [+5.1, +37.3]
+  init 23: +27.1 pp, bootstrap 95% [+10.2, +44.1]
+  init 37: +18.6 pp, bootstrap 95% [+3.4, +33.9]
+
+Full official GSM8K confirmation, init 37 only:
+  509/1,319 answers (38.6%), 1,123/1,319 executable
 ```
 
 Dataset selection and model initialization are separate seed axes. The frozen
@@ -966,9 +983,14 @@ set. The 34.0--44.0% answer range and cross-seed disagreement preclude a broad
 semantic-compiler claim.
 
 ### Gate F — matched direct and magnitude controls
-No claim that ASL improves Qwen answer accuracy or numeric robustness until A0,
-B0, and B1 are evaluated on identical frozen original and large-number
-identities.
+Primary 1,024-token comparison complete. Direct reasoning wins ordinary answer
+accuracy (59.6% versus 34.0--44.0% for ASL), so no ordinary ASL benefit is
+supported at 0.6B. ASL has +18.6 to +27.1 percentage-point differential
+factor-1,000 robustness across the three seeds, with all paired bootstrap
+intervals above zero. Because B1 reached its token ceiling on 58/250 ordinary
+and 18/59 large generations, the registered result remains primary while the
+post-hoc B1L 2,048-token sensitivity tests whether the robustness conclusion
+survives a less truncated direct baseline.
 
 ---
 
@@ -1015,6 +1037,9 @@ P6b Build and execution-verify the paired official GSM8K large-number suite.
 P6c Run B0, B1, and all A0 adapter seeds on both original and large-number
     questions. Treat answer accuracy and differential magnitude degradation as
     the primary Paper 1 comparisons.
+    COMPLETE for the registered 1,024-token B1 control; B1L post-hoc sensitivity
+    is running. Ordinary ASL contribution is negative for all three seeds;
+    differential factor-1,000 robustness is positive for all three seeds.
 
 P6d Run the matched Qwen3-1.7B U2000/E4500 initialization-99173 gate on the same
     250/59 identities. Compute answer and robustness model-size interactions.
