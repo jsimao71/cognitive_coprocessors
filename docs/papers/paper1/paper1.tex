@@ -103,8 +103,9 @@ however, direct reasoning degrades by 23.7 percentage points, whereas ASL change
 by only $-5.1$ to $+3.4$ points across seeds. The resulting ASL relative-robustness
 gains are 18.6--27.1 points, with all three paired bootstrap intervals above zero.
 This supports a bounded magnitude-robustness benefit, not a general accuracy
-benefit. The ordinary arm of a post-hoc 2,048-token direct-reasoning sensitivity
-obtains 154/250 (61.6\%); its transformed arm is still running.
+benefit. A post-hoc 2,048-token direct-reasoning sensitivity obtains 154/250
+(61.6\%) ordinary and 26/59 (44.1\%) transformed answers; ASL's differential
+robustness remains 16.9--25.4 points across seeds.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1897,8 +1898,12 @@ direct reasoning falls from 39/59 to 25/59 ($-23.7$ points; paired bootstrap
 change by only $-3.4$, $+3.4$, and $-5.1$ points. Relative to direct reasoning,
 their difference-in-differences gains are 20.3, 27.1, and 18.6 points; all three
 paired bootstrap intervals exclude zero. The registered 1,024-token B1 ceiling
-was reached by 58/250 ordinary and 18/59 large generations, so a post-hoc B1L
-2,048-token sensitivity is reported separately when complete.
+was reached by 58/250 ordinary and 18/59 large generations. The post-hoc
+2,048-token B1L sensitivity improves ordinary accuracy from 149/250 to 154/250
+and transformed accuracy from 25/59 to 26/59. On the 59 paired parents B1L
+declines from 39/59 to 26/59 ($-22.0$ points), so the three ASL differential
+robustness gains remain 18.6, 25.4, and 16.9 points; their paired bootstrap
+intervals remain above zero.
 
 \begin{table}[t]
 \centering\small
@@ -1911,6 +1916,7 @@ gain is the ASL $\Delta$ minus the direct-reasoning $\Delta$.}
 Condition & Original & Large & $\Delta$ (pp) & Gain (pp)\\
 \midrule
 Direct reasoning & 39/59 & 25/59 & $-23.7$ & ---\\
+Direct reasoning long & 39/59 & 26/59 & $-22.0$ & ---\\
 ASL init 99173   & 29/59 & 27/59 & $-3.4$ & $+20.3$\\
 ASL init 23      & 26/59 & 28/59 & $+3.4$ & $+27.1$\\
 ASL init 37      & 26/59 & 23/59 & $-5.1$ & $+18.6$\\
@@ -2436,8 +2442,9 @@ not add ordinary answer accuracy at 0.6B. Under the paired factor-1,000 rewrite,
 however, direct reasoning loses 23.7 points while ASL changes by only $-5.1$ to
 $+3.4$ points, yielding an 18.6--27.1-point relative robustness gain with all
 three paired intervals above zero. This is evidence for bounded numerical
-magnitude robustness; the long-budget direct sensitivity and matched 1.7B gate
-determine whether it survives a stronger decoder and greater model capacity.
+magnitude robustness. The completed long-budget sensitivity preserves this
+result; the matched 1.7B gate determines whether it survives greater model
+capacity.
 
 \appendix
 \section{Deterministic Semantic Diagnostic Taxonomy}

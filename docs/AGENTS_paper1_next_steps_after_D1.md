@@ -1240,6 +1240,12 @@ and 18/59 large generations, the registered result remains primary while the
 post-hoc B1L 2,048-token sensitivity tests whether the robustness conclusion
 survives a less truncated direct baseline.
 
+B1L is complete: 154/250 (61.6%) ordinary and 26/59 (44.1%) transformed
+answers. Its paired transformed degradation is -22.0 points versus -23.7 for
+B1. ASL's differential robustness remains +16.9 to +25.4 points across seeds,
+with all paired bootstrap intervals above zero. The bounded robustness result
+therefore survives the long-output sensitivity.
+
 The full 1,319-question A0 seed-37 audit is descriptive confirmation only:
 509/1,319 answers (38.6%) are correct and 1,123/1,319 programs execute. Preserve
 the frozen 250/59 experiment as the causal comparison. An independent full-audit
@@ -1300,13 +1306,15 @@ P6b Build and execution-verify the paired official GSM8K large-number suite.
 P6c Run B0, B1, and all A0 adapter seeds on both original and large-number
     questions. Treat answer accuracy and differential magnitude degradation as
     the primary Paper 1 comparisons.
-    COMPLETE for the registered 1,024-token B1 control; B1L post-hoc sensitivity
-    is running. Ordinary ASL contribution is negative for all three seeds;
+    COMPLETE for the registered 1,024-token B1 control and post-hoc B1L
+    sensitivity. Ordinary ASL contribution is negative for all three seeds;
     differential factor-1,000 robustness is positive for all three seeds.
 
 P6c.1 Finish B1L on the 59 transformed descendants and regenerate only the 18
       rows that reached the old token ceiling. Then rerun the registered
       contribution analysis against the stronger direct control.
+      COMPLETE: 154/250 ordinary, 26/59 transformed, and the ASL robustness
+      result survives comparison with B1L.
 
 P6c.2 Run B1, B1L, and all A0 seeds on the frozen 55-parent magnitude ladder at
       x1, x10^2, x10^3, x10^4, and x10^6. Build the common-denominator accuracy
