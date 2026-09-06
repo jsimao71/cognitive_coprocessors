@@ -103,7 +103,8 @@ however, direct reasoning degrades by 23.7 percentage points, whereas ASL change
 by only $-5.1$ to $+3.4$ points across seeds. The resulting ASL relative-robustness
 gains are 18.6--27.1 points, with all three paired bootstrap intervals above zero.
 This supports a bounded magnitude-robustness benefit, not a general accuracy
-benefit; a post-hoc 2,048-token direct-reasoning sensitivity is still running.
+benefit. The ordinary arm of a post-hoc 2,048-token direct-reasoning sensitivity
+obtains 154/250 (61.6\%); its transformed arm is still running.
 \end{abstract}
 
 \section{Status and Scope}
@@ -1916,6 +1917,30 @@ ASL init 37      & 26/59 & 23/59 & $-5.1$ & $+18.6$\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+To measure whether this effect changes smoothly with numeric scale, we freeze a
+second exploratory view over the common intersection of parents that passes the
+same conservative transformer at every factor: $\times1$, $\times10^2$,
+$\times10^3$, $\times10^4$, and $\times10^6$. This retains 55 fixed parents
+(10 high-, 20 medium-, and 25 low-step cases). The larger 250/59 experiment
+remains the primary causal comparison; the 55-parent view is only a
+common-denominator curve. Before running the three new scales, provenance-checked
+projection of the identical cached $\times1$ and $\times10^3$ questions gives
+36/55 to 23/55 for B1. The ASL seeds change from 27/55 to 25/55, 25/55 to 26/55,
+and 24/55 to 21/55, respectively. Thus the endpoint-only curve reproduces the
+large direct drop and comparatively stable ASL behavior, but remains interim
+until B1L and all five factors complete.
+
+We also partition each of the 59 factor-1,000 ASL outcomes into correct,
+runtime/output failure, conservative literal-copy error, or remaining executable
+semantic mismatch. A literal-copy label requires a correct original prediction,
+matching literal-free alpha structure, and a correction that changes numeric
+literals only according to the frozen source/trace mapping. Initializations
+99173, 23, and 37 yield, respectively, $(27,10,1,21)$, $(28,9,1,21)$, and
+$(23,16,1,19)$ cases in the order just listed. Oracle literal correction therefore
+adds only one answer per seed. This lower-bound diagnostic does not support
+numeric transcription as the main large-number failure source; semantic and
+runtime/output failures dominate.
 
 \subsection{GSM8K-Only Diversity and Repetition}
 

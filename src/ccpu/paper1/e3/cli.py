@@ -34,7 +34,11 @@ from .gsm8k_confirmatory import (
     run_official_gsm8k_shard,
 )
 from .large_number_suite import freeze_large_number_gsm8k, freeze_magnitude_ladder_gsm8k
-from .magnitude_analysis import analyze_magnitude_curve, analyze_magnitude_failures
+from .magnitude_analysis import (
+    analyze_magnitude_curve,
+    analyze_magnitude_failures,
+    project_magnitude_predictions,
+)
 from .model_size_analysis import analyze_model_size_interaction
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
@@ -187,6 +191,11 @@ def build_parser() -> argparse.ArgumentParser:
     magnitude_curve.add_argument("--eval", action="append", required=True)
     magnitude_curve.add_argument("--prediction", action="append", required=True)
     magnitude_curve.add_argument("--output-dir", required=True)
+    magnitude_projection = commands.add_parser("project-gsm8k-magnitude-predictions")
+    magnitude_projection.add_argument("--source-eval", required=True)
+    magnitude_projection.add_argument("--target-eval", required=True)
+    magnitude_projection.add_argument("--source-predictions", required=True)
+    magnitude_projection.add_argument("--output-dir", required=True)
     contribution = commands.add_parser("analyze-gsm8k-contribution")
     contribution.add_argument("--original-eval", required=True)
     contribution.add_argument("--large-eval", required=True)
@@ -542,6 +551,18 @@ def main(argv: list[str] | None = None) -> int:
             f"GSM8K magnitude curve conditions="
             f"{len({row['condition'] for row in report['results']})} "
             f"parents={report['common_parent_count']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "project-gsm8k-magnitude-predictions":
+        manifest = project_magnitude_predictions(
+            source_eval_path=args.source_eval,
+            target_eval_path=args.target_eval,
+            source_predictions_path=args.source_predictions,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"GSM8K projected magnitude predictions={manifest['count']} "
+            f"-> {args.output_dir}"
         )
         return 0
     if args.command == "analyze-gsm8k-contribution":

@@ -2,6 +2,7 @@ from ccpu.common.artifacts import read_json, write_jsonl
 from ccpu.paper1.e3.magnitude_analysis import (
     analyze_magnitude_curve,
     analyze_magnitude_failures,
+    project_magnitude_predictions,
 )
 
 
@@ -103,3 +104,31 @@ def test_magnitude_curve_requires_and_reports_common_parents(tmp_path):
     assert [row["accuracy"] for row in report["results"]] == [1.0, 0.5]
     assert (tmp_path / "curve" / "accuracy_by_magnitude.csv").exists()
     assert (tmp_path / "curve" / "accuracy_by_magnitude.svg").exists()
+
+
+def test_projection_reuses_only_identical_questions_and_answers(tmp_path):
+    source_eval = [_eval_row(index, factor=100) for index in range(2)]
+    target_eval = [_eval_row(index, factor=100) for index in range(2)]
+    for index, row in enumerate(source_eval):
+        row["question_sha256"] = f"question-{index}"
+        target_eval[index]["question_sha256"] = f"question-{index}"
+        source_eval[index]["difficulty_stratum"] = "low"
+        target_eval[index]["difficulty_stratum"] = "low"
+        source_eval[index]["source_row"] = index
+        target_eval[index]["source_row"] = index
+        source_eval[index]["example_id"] += ":old-protocol"
+    predictions = [
+        _prediction(row["example_id"], "RETURN 700", True) for row in source_eval
+    ]
+    manifest = project_magnitude_predictions(
+        source_eval_path=write_jsonl(tmp_path / "source-eval.jsonl", source_eval),
+        target_eval_path=write_jsonl(tmp_path / "target-eval.jsonl", target_eval),
+        source_predictions_path=write_jsonl(
+            tmp_path / "source-predictions.jsonl", predictions
+        ),
+        output_dir=tmp_path / "projected",
+    )
+
+    assert manifest["count"] == 2
+    projected = read_json(tmp_path / "projected" / "projection_manifest.json")
+    assert projected == manifest

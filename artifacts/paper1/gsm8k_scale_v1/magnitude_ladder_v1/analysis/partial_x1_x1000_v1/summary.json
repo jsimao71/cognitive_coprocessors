@@ -1,0 +1,94 @@
+{
+  "common_parent_count": 55,
+  "factors": [
+    1,
+    1000
+  ],
+  "outputs": {
+    "csv": {
+      "path": "artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\analysis\\partial_x1_x1000_v1\\accuracy_by_magnitude.csv",
+      "sha256": "743c09e6f0c822f1944c90f0e0a9dd039bf123ec8a1575b3d1bb2586e34eed51"
+    },
+    "svg": {
+      "path": "artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\analysis\\partial_x1_x1000_v1\\accuracy_by_magnitude.svg",
+      "sha256": "2762445c5ccbe41f92358c2cd5df43beeb93e62863ebc34d7e2f25b758d57bb6"
+    }
+  },
+  "protocol_id": "paper1_gsm8k_magnitude_curve_v1",
+  "results": [
+    {
+      "accuracy": 0.6545454545454545,
+      "condition": "b1",
+      "correct": 36,
+      "count": 55,
+      "factor": 1,
+      "factor_label": "x1",
+      "predictions_sha256": "7642a9ca73e966a0c29976f66746c6cde61e4247e2905c479e35d8aaab627cf9"
+    },
+    {
+      "accuracy": 0.41818181818181815,
+      "condition": "b1",
+      "correct": 23,
+      "count": 55,
+      "factor": 1000,
+      "factor_label": "x10^3",
+      "predictions_sha256": "97c39af645afc1c30897fcaaf8bf9d7b5b43b88d5b45e531ae446355c2f7a31b"
+    },
+    {
+      "accuracy": 0.4909090909090909,
+      "condition": "asl_seed11",
+      "correct": 27,
+      "count": 55,
+      "factor": 1,
+      "factor_label": "x1",
+      "predictions_sha256": "c7120137d42a23db6004620ebde120e38f575aa4609c2a9bc4f1b27dd46d0f23"
+    },
+    {
+      "accuracy": 0.45454545454545453,
+      "condition": "asl_seed11",
+      "correct": 25,
+      "count": 55,
+      "factor": 1000,
+      "factor_label": "x10^3",
+      "predictions_sha256": "aa1273cc97e83cecaf997517146d6ccd9a49a6c98d96b27b0d61f2df96f2779d"
+    },
+    {
+      "accuracy": 0.45454545454545453,
+      "condition": "asl_seed23",
+      "correct": 25,
+      "count": 55,
+      "factor": 1,
+      "factor_label": "x1",
+      "predictions_sha256": "d7ec4599a533091b2829a35622669943ca4e02720eb77dff4ebba60599b4986b"
+    },
+    {
+      "accuracy": 0.4727272727272727,
+      "condition": "asl_seed23",
+      "correct": 26,
+      "count": 55,
+      "factor": 1000,
+      "factor_label": "x10^3",
+      "predictions_sha256": "da9bb829ce53e91b751d60ac255f9ec6808206677683d927767296353f72cbd2"
+    },
+    {
+      "accuracy": 0.43636363636363634,
+      "condition": "asl_seed37",
+      "correct": 24,
+      "count": 55,
+      "factor": 1,
+      "factor_label": "x1",
+      "predictions_sha256": "623f83d957f89de1876df88866f4c1bf546d8947c63a84c0bccde20ceed59ca9"
+    },
+    {
+      "accuracy": 0.38181818181818183,
+      "condition": "asl_seed37",
+      "correct": 21,
+      "count": 55,
+      "factor": 1000,
+      "factor_label": "x10^3",
+      "predictions_sha256": "b5120433ede7d4819aab790c73bcfde51d50d24c14ac40749eb71b0ba333924a"
+    }
+  ],
+  "role": "exploratory common-parent magnitude curve; not a replacement for the 250/59 primary comparison",
+  "schema_version": "ccpu.paper1.gsm8k_magnitude_curve_summary.v1"
+}

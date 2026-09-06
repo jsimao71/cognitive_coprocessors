@@ -15,6 +15,7 @@ from ccpu.dsl import validate_asl
 
 MAGNITUDE_DIAGNOSTIC_PROTOCOL_ID = "paper1_gsm8k_magnitude_diagnostic_v1"
 MAGNITUDE_CURVE_PROTOCOL_ID = "paper1_gsm8k_magnitude_curve_v1"
+MAGNITUDE_PROJECTION_PROTOCOL_ID = "paper1_gsm8k_magnitude_projection_v1"
 
 # ASL identifiers may contain digits, so only standalone arithmetic literals are rewritten.
 _ASL_NUMBER = re.compile(r"(?<![A-Za-z0-9_.])-?(?:\d+(?:\.\d+)?|\.\d+)(?![A-Za-z0-9_.])")
@@ -28,6 +29,85 @@ def _prediction_index(rows: list[dict[str, Any]], *, label: str) -> dict[str, di
             raise ValueError(f"duplicate {label} prediction for {example_id}")
         indexed[example_id] = row
     return indexed
+
+
+def _eval_parent_index(
+    rows: list[dict[str, Any]], *, label: str
+) -> dict[str, dict[str, Any]]:
+    indexed: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        parent_id = str(row.get("parent_example_id", row["example_id"]))
+        if parent_id in indexed:
+            raise ValueError(f"duplicate {label} parent {parent_id}")
+        indexed[parent_id] = row
+    return indexed
+
+
+def project_magnitude_predictions(
+    *,
+    source_eval_path: str | Path,
+    target_eval_path: str | Path,
+    source_predictions_path: str | Path,
+    output_dir: str | Path,
+) -> dict[str, Any]:
+    """Project cached predictions onto an identical-question magnitude subset."""
+
+    source_eval = _eval_parent_index(read_jsonl(source_eval_path), label="source eval")
+    source_predictions = _prediction_index(
+        read_jsonl(source_predictions_path), label="source"
+    )
+    target_rows = read_jsonl(target_eval_path)
+    projected = []
+    for target in target_rows:
+        parent_id = str(target.get("parent_example_id", target["example_id"]))
+        if parent_id not in source_eval:
+            raise ValueError(f"target parent is absent from source evaluation: {parent_id}")
+        source = source_eval[parent_id]
+        source_id = str(source["example_id"])
+        if source_id not in source_predictions:
+            raise ValueError(f"missing source prediction for {source_id}")
+        if source["question_sha256"] != target["question_sha256"]:
+            raise ValueError(f"question differs for projected parent {parent_id}")
+        if Decimal(str(source["reference_return"])) != Decimal(
+            str(target["reference_return"])
+        ):
+            raise ValueError(f"reference answer differs for projected parent {parent_id}")
+        prediction = dict(source_predictions[source_id])
+        prediction.update(
+            {
+                "example_id": str(target["example_id"]),
+                "parent_example_id": parent_id,
+                "source_row": target["source_row"],
+                "difficulty_stratum": target["difficulty_stratum"],
+                "projection": {
+                    "protocol_id": MAGNITUDE_PROJECTION_PROTOCOL_ID,
+                    "source_example_id": source_id,
+                    "source_question_sha256": source["question_sha256"],
+                    "target_question_sha256": target["question_sha256"],
+                },
+            }
+        )
+        projected.append(prediction)
+
+    output = Path(output_dir)
+    predictions_path = write_jsonl(output / "predictions.jsonl", projected)
+    manifest = {
+        "schema_version": "ccpu.paper1.gsm8k_magnitude_projection_manifest.v1",
+        "protocol_id": MAGNITUDE_PROJECTION_PROTOCOL_ID,
+        "count": len(projected),
+        "inputs": {
+            "source_eval": file_sha256(source_eval_path),
+            "target_eval": file_sha256(target_eval_path),
+            "source_predictions": file_sha256(source_predictions_path),
+        },
+        "predictions_sha256": file_sha256(predictions_path),
+        "reuse_rule": (
+            "project cached output only when parent identity, normalized question hash, "
+            "and reference answer are identical"
+        ),
+    }
+    write_json(output / "projection_manifest.json", manifest)
+    return manifest
 
 
 def _returned(validation: dict[str, Any], scope: dict[str, Any]) -> Any:
