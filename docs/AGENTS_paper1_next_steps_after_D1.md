@@ -1532,10 +1532,12 @@ P15 After the GSM8K conclusions are frozen, add arithmetic datasets one role at
     GSM-Plus, and GSM-Symbolic for untouched robustness/generalization; and
     MultiArith only after legacy-overlap analysis.
 
-P16 Treat `AGENTS_paper1_operator_complexity_ladder.md` as a post-primary
-    Paper 1.x extension after the augmentation portability and first 4B gates.
-    Build its registry/runtime/generator on CPU when resources are free, but do
-    not start model runs early. Treat O0--O6 as categorical capability families;
+P16 Start `AGENTS_paper1_operator_complexity_ladder.md` after the active matched
+    Qwen3-1.7B magnitude gate, running Qwen3-0.6B first. Augmentation selection
+    may continue concurrently, but augmentation portability and the first 4B
+    gate no longer block the 0.6B operator ladder. Build its registry/runtime/
+    generator on CPU while the 1.7B control finishes. Treat O0--O6 as
+    categorical capability families;
     estimate complexity slopes and crossovers only along frozen operation-count,
     dependency-depth, nesting-depth, and magnitude axes within a family. Compare
     direct reasoning, a generic expression tool, primitive ASL, and matched

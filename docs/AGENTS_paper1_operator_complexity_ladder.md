@@ -26,11 +26,13 @@ neural reasoning tokens
 
 ## Integration and causal-design constraints
 
-This is a post-primary Paper 1.x extension. Complete the current magnitude and
-token-budget analyses, the matched augmentation tests at 0.6B and 1.7B, and the
-first 4B gate before launching model-facing operator-complexity runs. Registry,
-runtime, generator, and validator implementation may proceed on CPU earlier,
-but it must not delay or alter those frozen experiments.
+This is a Paper 1.x extension that starts immediately after the active matched
+Qwen3-1.7B magnitude gate. Run the operator-complexity ladder first with
+Qwen3-0.6B; augmentation selection may continue concurrently on another worker
+but does not block the ladder. Defer the first 4B gate until the 0.6B ladder has
+produced its initial O1 and gate-family results. Registry, runtime, generator,
+and validator implementation may proceed on CPU while the 1.7B gate is active,
+but it must not delay or alter that frozen experiment.
 
 O0--O6 are capability-family labels, not points on a validated scalar measure
 of difficulty. Trigonometry, geometry, and algebra change domain vocabulary and
@@ -1101,8 +1103,9 @@ Add deterministic tests for:
 ```text
 P-2 Finish the frozen magnitude, token-budget, and 1.7B matched controls.
 
-P-1 Complete augmentation selection at 0.6B, portability at 1.7B, and the
-     first matched 4B gate from the main roadmap.
+P-1 Complete the active matched 1.7B magnitude control. Allow the independent
+     0.6B augmentation gate to continue concurrently, but do not make it or the
+     first 4B gate a prerequisite for 0.6B operator-complexity runs.
 
 P0  Freeze GSM8K-OC-v1 schema.
 
@@ -1117,7 +1120,8 @@ P2  Implement O1 runtime and generator.
 
 P3  Generate/validate O1 train/dev/test.
 
-P4  Run the 0.6B direct + generic-tool + AP + AS O1 gate.
+P4  Run the 0.6B direct + generic-tool + AP + AS O1 gate immediately after the
+    active 1.7B magnitude control completes.
 
 P5  Implement O2/O3 operators and data.
 
