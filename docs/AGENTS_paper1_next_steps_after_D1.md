@@ -1531,6 +1531,15 @@ P15 After the GSM8K conclusions are frozen, add arithmetic datasets one role at
     a time: ASDiv and overlap-audited MAWPS for training diversity; SVAMP,
     GSM-Plus, and GSM-Symbolic for untouched robustness/generalization; and
     MultiArith only after legacy-overlap analysis.
+
+P16 Treat `AGENTS_paper1_operator_complexity_ladder.md` as a post-primary
+    Paper 1.x extension after the augmentation portability and first 4B gates.
+    Build its registry/runtime/generator on CPU when resources are free, but do
+    not start model runs early. Treat O0--O6 as categorical capability families;
+    estimate complexity slopes and crossovers only along frozen operation-count,
+    dependency-depth, nesting-depth, and magnitude axes within a family. Compare
+    direct reasoning, a generic expression tool, primitive ASL, and matched
+    semantic-functor ASL before attributing gains to CogCop decomposition.
 ```
 
 ---
