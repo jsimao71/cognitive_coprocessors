@@ -162,8 +162,8 @@ try {
             "--historical-eval", $HistoricalEval,
             "--baseline-selection", (Join-Path $BaselineSelection "predictions.jsonl"),
             "--candidate-selection", (Join-Path $CandidateSelection "predictions.jsonl"),
-            "--baseline-historical", (Join-Path $Parent "historical_test_eval\predictions.jsonl"),
-            "--candidate-historical", (Join-Path $Historical "predictions.jsonl"),
+            "--baseline-historical", (Join-Path $Parent "historical_test_eval\scored_predictions.jsonl"),
+            "--candidate-historical", (Join-Path $Historical "scored_predictions.jsonl"),
             "--baseline-historical-summary", (Join-Path $Parent "historical_test_eval\summary.json"),
             "--candidate-historical-summary", (Join-Path $Historical "summary.json"),
             "--output", $Analysis
