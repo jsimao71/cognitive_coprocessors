@@ -760,6 +760,48 @@ degradation(C) =
   Acc_transformed(C) - Acc_original(C)
 ```
 
+## Primary operator-complexity dashboard
+
+Freeze the following dashboard before inspecting model outcomes. Report it for
+every pilot and promoted operator family on identical test identities:
+
+```text
+1. direct answer accuracy by operator family
+2. direct change from matched O0
+3. AP and AS answer accuracy by operator family
+4. AP and AS parse, operator-selection, argument-binding, dependency,
+   executable, and semantic-state accuracy
+5. AP-minus-direct and AS-minus-direct paired answer gaps
+6. AS-minus-AP paired answer gap
+7. deterministic runtime accuracy conditional on a semantically correct program
+8. generated neural tokens and ceiling-hit rate for every condition
+```
+
+The three primary questions are:
+
+```text
+Does direct accuracy decline as required computation becomes more complex?
+Does NL-to-ASL compilation itself decline when the operator vocabulary changes?
+Does the ASL-minus-direct gap become less negative or positive on harder families?
+```
+
+Do not treat O0--O6 as equally spaced scalar levels. Compare categorical
+operator families and estimate complexity effects only within matched operation
+count, dependency-depth, nesting-depth, entity-count, prompt-length, and
+operand-magnitude cells. Report paired flips as well as aggregate rates so a
+stable total cannot hide different solved examples.
+
+Run strict operator-family comparisons first. Only after those results are
+frozen, generate and evaluate R1J independently jittered numeric variants. R1J
+is a second-stage interaction test:
+
+```text
+condition x operator family x randomized magnitude
+```
+
+Its purpose is to determine whether any operator-complexity crossover survives
+non-power-of-ten numeric changes, not to tune or select the operator datasets.
+
 CogCop relative robustness:
 
 ```text

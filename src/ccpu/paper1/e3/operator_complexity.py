@@ -286,6 +286,12 @@ def freeze_o1_pilot(
             ("test", test_count),
         )
     }
+    # Older frozen O1 rows predate the generic evaluator's bookkeeping fields.
+    for split, rows in selected.items():
+        for index, row in enumerate(rows):
+            row.setdefault("source_row", index)
+            row.setdefault("difficulty_steps", 1)
+            row.setdefault("difficulty_stratum", "low")
     output = Path(output_dir)
     eval_path = write_jsonl(output / "test.jsonl", selected["test"])
     output_paths: dict[str, dict[str, Path]] = {}

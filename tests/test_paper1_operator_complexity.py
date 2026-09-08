@@ -60,3 +60,6 @@ def test_o1_pilot_is_balanced_and_uses_fixed_representation_prompts(tmp_path):
         row["evaluation_representation"] == "AP"
         for row in read_jsonl(pilot / "ap" / "test.jsonl")
     )
+    assert [row["source_row"] for row in read_jsonl(pilot / "test.jsonl")] == list(
+        range(6)
+    )
