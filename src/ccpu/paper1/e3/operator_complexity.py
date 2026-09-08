@@ -270,7 +270,7 @@ def freeze_o1_pilot(
     source_dir: str | Path,
     output_dir: str | Path,
     *,
-    train_count: int = 200,
+    train_count: int = 250,
     dev_count: int = 30,
     test_count: int = 100,
     seed: int = 99173,
@@ -350,7 +350,7 @@ def freeze_o1_pilot(
             },
         },
         "promotion_rule": (
-            "do not train the 2000-record O1 condition unless the one-seed pilot "
+            "do not train the 2000-record O1 condition unless the 250-record one-seed pilot "
             "shows a useful accuracy, robustness, representation, or token signal"
         ),
     }

@@ -1048,7 +1048,7 @@ Before the full gates, run a one-seed behavior pilot at every new operator
 family:
 
 ```text
-train: 200 unique records
+train: 250 unique records
 dev:    30 records
 test:  100 records
 epochs: 3
@@ -1159,8 +1159,8 @@ P2  Implement O1 runtime and generator.
 
 P3  Generate/validate O1 train/dev/test.
 
-P3a Before full O1 training, freeze and run the 200/30/100, one-seed O1 pilot.
-    Use three short epochs (600 exposures per adapter) and matched AP/AS test
+P3a Before full O1 training, freeze and run the 250/30/100, one-seed O1 pilot.
+    Use three short epochs (750 exposures per adapter) and matched AP/AS test
     identities. Apply the same pilot-first gate independently to O3, O5, and O6.
 
 P4  Run the 0.6B direct + generic-tool + AP + AS O1 gate immediately after the

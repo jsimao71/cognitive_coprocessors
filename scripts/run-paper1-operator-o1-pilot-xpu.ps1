@@ -11,7 +11,7 @@ $Python = Join-Path $env:USERPROFILE ".venvs\modal-llm-xpu\Scripts\python.exe"
 $env:PYTHONPATH = Join-Path $RepoRoot "src"
 $Root = Join-Path $RepoRoot "artifacts\paper1\operator_complexity_v1"
 $O1 = Join-Path $Root "o1"
-$Pilot = Join-Path $Root "o1_pilot_seed99173"
+$Pilot = Join-Path $Root "o1_pilot250_seed99173"
 $BaseConfig = Join-Path $RepoRoot "configs\paper1\asl_pilot_qwen_base_xpu.json"
 $DirectConfig = Join-Path $RepoRoot "configs\paper1\gsm8k_direct_reasoning_qwen_xpu.json"
 
@@ -40,7 +40,7 @@ try {
     Invoke-Step -Name "freeze O1 pilot" -CompletionPath (Join-Path $Pilot "manifest.json") `
         -Arguments @(
             "prepare-operator-o1-pilot", "--source-dir", $O1, "--output-dir", $Pilot,
-            "--train-count", "200", "--dev-count", "30", "--test-count", "100",
+            "--train-count", "250", "--dev-count", "30", "--test-count", "100",
             "--seed", "99173"
         )
 

@@ -1,0 +1,39 @@
+{
+  "counts": {
+    "dev": 30,
+    "test": 100,
+    "train": 250
+  },
+  "dataset_version": "gsm8k-oc-v1",
+  "operator_level": "O1",
+  "output_sha256": {
+    "ap_dev": "d73ae13b02b05bb41e74b0e2c11aba483eb583ea9a2d5c81568ea85e2e795b56",
+    "ap_test": "4dcd6181375abd5cf08ef9baf7b466c22b98a140fbf6ac66d4eefb9e01d17e42",
+    "ap_train": "1c64b2b94206e9f97566c0ed26c9bb9e22e97120d82becb4fdf5a4d13cb98bad",
+    "as_dev": "c66824c7db7a180c94d55172d1542b56adfb21224f4b119c7daf00a26aa46324",
+    "as_test": "709448732e7fe54d6762ff6b8464b558f5e674915af8e595b350bfd1c68d16ab",
+    "as_train": "354828075eb8f7fc7a62bf3b1983677107d75dab43ee2ddaac5bf5942bf8f330",
+    "test": "75159f7de9ea5572c380cf8cad28dbcad49068b57e4a36891c3d5f6f249aef43"
+  },
+  "promotion_rule": "do not train the 2000-record O1 condition unless the 250-record one-seed pilot shows a useful accuracy, robustness, representation, or token signal",
+  "schema_version": "ccpu.paper1.gsm8k_oc_pilot_manifest.v1",
+  "seed": 99173,
+  "source": {
+    "directory": "artifacts\\paper1\\operator_complexity_v1\\o1",
+    "manifest_sha256": "f3323b7c519c9833b122709dd176efd814a0a82941b040c279f17f6ff158adf9"
+  },
+  "test_operator_counts": {
+    "cube": 34,
+    "sqrt": 33,
+    "square": 33
+  },
+  "training": {
+    "adapter_representations": [
+      "AP",
+      "AS"
+    ],
+    "epochs": 3,
+    "exposures_per_adapter": 750,
+    "unique_records": 250
+  }
+}

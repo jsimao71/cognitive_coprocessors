@@ -232,7 +232,7 @@ def build_parser() -> argparse.ArgumentParser:
     operator_o1_pilot = commands.add_parser("prepare-operator-o1-pilot")
     operator_o1_pilot.add_argument("--source-dir", required=True)
     operator_o1_pilot.add_argument("--output-dir", required=True)
-    operator_o1_pilot.add_argument("--train-count", type=int, default=200)
+    operator_o1_pilot.add_argument("--train-count", type=int, default=250)
     operator_o1_pilot.add_argument("--dev-count", type=int, default=30)
     operator_o1_pilot.add_argument("--test-count", type=int, default=100)
     operator_o1_pilot.add_argument("--seed", type=int, default=99173)
