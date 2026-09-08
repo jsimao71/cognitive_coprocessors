@@ -2054,6 +2054,27 @@ better'' rule and a confirmed U2000 optimum. The predeclared U1000 cell and the
 larger official confirmation are required to distinguish a real
 diversity--repetition tradeoff from high seed and small-test variance.
 
+\subsection{Greedy Semantic Augmentation}
+
+We next apply the frozen development-only augmentation gate to the
+initialization-99,173 U2000 checkpoint. The 250-case selection view is disjoint
+from final confirmation and remains fixed across increments. AUG1 adds
+execution-preserving relation paraphrases; it ties the parent at 99/250
+(39.6\%) and is rejected. AUG2 therefore warm-starts from U2000 rather than
+from AUG1 and adds synchronized entity renaming. It reaches 101/250 (40.4\%),
+with 21 candidate-only and 19 parent-only successes, and passes the prespecified
+strict-improvement rule by two answers. The paired difference is small and not
+statistically resolved (two-sided exact McNemar $p=.875$), so this is an
+exploratory carry-forward decision rather than evidence of a general gain.
+
+The separate 17-case historical diagnostic moves in the opposite direction:
+U2000 obtains 11/17 whereas AUG2 obtains 7/17, with four parent-only and no
+candidate-only successes. Candidate alpha-state F1 also falls from .620 to
+.539. This disagreement is retained rather than optimized away. It indicates
+that entity renaming may modestly help the broader frozen selection sample while
+damaging some previously successful structures, and motivates replication at
+both model sizes before making a semantic-augmentation claim.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}

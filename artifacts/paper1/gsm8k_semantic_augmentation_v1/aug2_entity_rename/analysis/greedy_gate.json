@@ -1,0 +1,143 @@
+{
+  "augmentation_selection": {
+    "baseline_correct": 99,
+    "baseline_only": 19,
+    "baseline_rate": 0.396,
+    "both_correct": 80,
+    "both_wrong": 130,
+    "candidate_correct": 101,
+    "candidate_only": 21,
+    "candidate_rate": 0.404,
+    "count": 250,
+    "delta_correct": 2,
+    "delta_rate": 0.008,
+    "two_sided_exact_mcnemar_p": 0.8746293123804207
+  },
+  "claim_boundary": "The greedy gate is directional and exploratory. It is disjoint from final confirmation. Historical semantic diagnostics are reported but do not override the frozen selection answer-count decision.",
+  "decision": {
+    "accepted": true,
+    "criterion": "candidate selection correct count must strictly exceed baseline",
+    "delta_correct": 2,
+    "next_parent": "candidate"
+  },
+  "historical_diagnostic": {
+    "baseline_correct": 11,
+    "baseline_only": 4,
+    "baseline_rate": 0.6470588235294118,
+    "both_correct": 7,
+    "both_wrong": 6,
+    "candidate_correct": 7,
+    "candidate_only": 0,
+    "candidate_rate": 0.4117647058823529,
+    "count": 17,
+    "delta_correct": -4,
+    "delta_rate": -0.23529411764705882,
+    "semantic_diagnostics": {
+      "baseline_component_mean_f1": {
+        "alpha_state": 0.6195696460402341,
+        "edges": 0.41385987593417933,
+        "operators": 0.7360964199199492,
+        "paths": 0.434692824210972,
+        "semantic_state": 0.4409394527041586,
+        "source_facts": 0.5909825468648997
+      },
+      "baseline_rates": {
+        "alpha_return_equivalent": 0.35294117647058826,
+        "alpha_state_equivalent": 0.11764705882352941,
+        "dependency_correct": 0.11764705882352941,
+        "exact_asl": 0.0,
+        "executable": 0.8823529411764706,
+        "final_answer_correct": 0.6470588235294118,
+        "lowerable_to_ccir": 0.9411764705882353,
+        "parse_valid": 0.9411764705882353,
+        "semantic_lint_valid": 0.8823529411764706,
+        "semantic_return_equivalent": 0.11764705882352941,
+        "semantic_state_equivalent": 0.058823529411764705,
+        "type_valid": 0.9411764705882353
+      },
+      "candidate_component_mean_f1": {
+        "alpha_state": 0.5392989290734188,
+        "edges": 0.38980430009841777,
+        "operators": 0.7174136321195145,
+        "paths": 0.3370445344129555,
+        "semantic_state": 0.34887583680687123,
+        "source_facts": 0.5214615257867853
+      },
+      "candidate_rates": {
+        "alpha_return_equivalent": 0.29411764705882354,
+        "alpha_state_equivalent": 0.11764705882352941,
+        "dependency_correct": 0.11764705882352941,
+        "exact_asl": 0.0,
+        "executable": 0.7647058823529411,
+        "final_answer_correct": 0.4117647058823529,
+        "lowerable_to_ccir": 0.8823529411764706,
+        "parse_valid": 0.8823529411764706,
+        "semantic_lint_valid": 0.7058823529411765,
+        "semantic_return_equivalent": 0.11764705882352941,
+        "semantic_state_equivalent": 0.058823529411764705,
+        "type_valid": 0.8823529411764706
+      },
+      "component_mean_f1_deltas": {
+        "alpha_state": -0.08027071696681531,
+        "edges": -0.024055575835761567,
+        "operators": -0.018682787800434753,
+        "paths": -0.09764828979801649,
+        "semantic_state": -0.09206361589728734,
+        "source_facts": -0.06952102107811442
+      },
+      "count": 17,
+      "eval_sha256": "2473d2b634d9572b36025029d15c632c27c2fce31d1d6abf82e9cf8018340d34",
+      "rate_deltas": {
+        "alpha_return_equivalent": -0.05882352941176472,
+        "alpha_state_equivalent": 0.0,
+        "dependency_correct": 0.0,
+        "exact_asl": 0.0,
+        "executable": -0.11764705882352944,
+        "final_answer_correct": -0.23529411764705888,
+        "lowerable_to_ccir": -0.05882352941176472,
+        "parse_valid": -0.05882352941176472,
+        "semantic_lint_valid": -0.17647058823529405,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": -0.05882352941176472
+      }
+    },
+    "two_sided_exact_mcnemar_p": 0.125
+  },
+  "schema_version": "ccpu.paper1.gsm8k_augmentation_gate.v1",
+  "sources": {
+    "baseline_historical_predictions": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\historical_test_eval\\scored_predictions.jsonl",
+      "sha256": "116af10f8b118edb9f3f71107706b127d1e9490fe931868ad4fd236e88b50ced"
+    },
+    "baseline_historical_summary": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\historical_test_eval\\summary.json",
+      "sha256": "c69f177ef0c65a1bfc65aae94c00a9e921349e4fdc555ed365d455fd3c15056d"
+    },
+    "baseline_selection_predictions": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_semantic_augmentation_v1\\selection_gate_v1\\eval\\u2000_seed11\\predictions.jsonl",
+      "sha256": "7c51339b462d39d611f1dbeb1bece45cb02b36a58dc82ae26dd396499f2b4ee9"
+    },
+    "candidate_historical_predictions": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_semantic_augmentation_v1\\aug2_entity_rename\\eval\\historical\\scored_predictions.jsonl",
+      "sha256": "ff30ee3874dd9dcd7367568a28d8f2afb203c3e2df63b5d73d4f693e3ec56020"
+    },
+    "candidate_historical_summary": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_semantic_augmentation_v1\\aug2_entity_rename\\eval\\historical\\summary.json",
+      "sha256": "d7861df7ba91f40ffa8c120e070dad78128037fee120c81a90bde5f5ba470c77"
+    },
+    "candidate_selection_predictions": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_semantic_augmentation_v1\\aug2_entity_rename\\eval\\selection\\predictions.jsonl",
+      "sha256": "e4c595af49480f1fa7c7dff8a9f01a6471e70e4e285324b63c8af1fdec7f8565"
+    },
+    "historical_eval": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\g1_f0_4500\\eval\\test.jsonl",
+      "sha256": "2473d2b634d9572b36025029d15c632c27c2fce31d1d6abf82e9cf8018340d34"
+    },
+    "selection_eval": {
+      "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_semantic_augmentation_v1\\selection_gate_v1\\gate.jsonl",
+      "sha256": "09fbb1d637b4a64eb4e57a9268fea3e5d1df06fc94fb0ef005306910e58649e9"
+    }
+  },
+  "stage": "AUG2-synchronized-entity-rename"
+}
