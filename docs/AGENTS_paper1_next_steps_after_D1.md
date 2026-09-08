@@ -1542,6 +1542,16 @@ P16 Start `AGENTS_paper1_operator_complexity_ladder.md` after the active matched
     dependency-depth, nesting-depth, and magnitude axes within a family. Compare
     direct reasoning, a generic expression tool, primitive ASL, and matched
     semantic-functor ASL before attributing gains to CogCop decomposition.
+
+P17 After the 0.6B operator-complexity ladder is complete, add the matched R1J
+    randomized-magnitude control. Apply independent deterministic
+    `Uniform(-0.30,+0.30)` jitter to each eligible source quantity after its
+    registered `10^k` scaling for `k in {0,2,3,4,6}`; use at least three frozen
+    perturbation seeds, recompute intermediates and answers through the hidden
+    authoritative trace, and freeze one common parent intersection. Evaluate
+    identical transformed questions under Direct and ASL and compare against
+    the existing strict power-of-ten curve. Do not mix R1J into the completed
+    R1 estimand.
 ```
 
 ---

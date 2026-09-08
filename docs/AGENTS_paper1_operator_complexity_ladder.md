@@ -714,6 +714,27 @@ Where valid:
 ×1000000
 ```
 
+After the operator ladder is complete, add a separate randomized-magnitude
+control rather than folding it into R1. For each eligible source quantity and
+registered scale factor, derive an independent deterministic jitter from the
+frozen parent identity, semantic role, factor, and perturbation seed:
+
+```text
+scaled_value = original_value * 10^k
+jitter       ~ Uniform(-0.30, +0.30)
+new_value    = deterministic_quantize(scaled_value * (1 + jitter))
+k            in {0, 2, 3, 4, 6}
+```
+
+Use at least three frozen jitter seeds. Recompute every hidden intermediate and
+the final answer through the authoritative program; never adjust the answer by
+an independent shortcut. Preserve protected dimensionless constants, reject
+zero denominators and invalid domains, require exact execution, and freeze one
+common parent intersection across all factors and seeds. Direct and ASL arms
+must receive identical transformed questions. Report this as `R1J`, separately
+from strict global scaling, because independent role-wise jitter changes
+relative quantities and tests semantic binding rather than scale recognition.
+
 ## R2 — Entity renaming
 Names/objects changed, program preserved.
 
@@ -1157,6 +1178,11 @@ P16 If justified, run 4B on:
     observed crossover level.
 
 P17 Update Paper 1 / Paper 1.x with operator-complexity scaling.
+
+P18 After the operator ladder is complete, freeze and run the matched R1J
+    independently jittered magnitude campaign. Compare its Direct/ASL curves
+    with strict R1 scaling and report whether the crossover survives when
+    source quantities are no longer exact powers-of-ten copies.
 ```
 
 ---
