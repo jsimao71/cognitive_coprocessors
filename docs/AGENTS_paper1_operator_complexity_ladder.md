@@ -1044,6 +1044,24 @@ The semantic representation/training strategy is the bottleneck; prioritize F3/E
 
 # 36. Go/no-go gates
 
+Before the full gates, run a one-seed behavior pilot at every new operator
+family:
+
+```text
+train: 200 unique records
+dev:    30 records
+test:  100 records
+epochs: 3
+seed:   99173
+```
+
+Run direct reasoning, AP, and semantic AS first. Add the generic-expression
+baseline in the same pilot analysis, but do not let it delay the first AP/AS
+readout. Promote a family to 2,000/100/250 training only if the pilot shows a
+useful accuracy, representation, robustness, or token signal. A null pilot is
+diagnostic and should stop expensive expansion rather than trigger a larger run
+automatically.
+
 ## G0
 Gold runtime ceiling must be essentially perfect.
 
@@ -1140,6 +1158,10 @@ P1  Implement versioned O0–O6 operator registry.
 P2  Implement O1 runtime and generator.
 
 P3  Generate/validate O1 train/dev/test.
+
+P3a Before full O1 training, freeze and run the 200/30/100, one-seed O1 pilot.
+    Use three short epochs (600 exposures per adapter) and matched AP/AS test
+    identities. Apply the same pilot-first gate independently to O3, O5, and O6.
 
 P4  Run the 0.6B direct + generic-tool + AP + AS O1 gate immediately after the
     active 1.7B magnitude control completes.

@@ -7,7 +7,13 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from ccpu.common.artifacts import file_sha256, fingerprint, write_json, write_jsonl
+from ccpu.common.artifacts import (
+    file_sha256,
+    fingerprint,
+    read_jsonl,
+    write_json,
+    write_jsonl,
+)
 from ccpu.dsl import validate_asl
 
 OPERATOR_REGISTRY_VERSION = "paper1-operator-registry-v1"
@@ -117,8 +123,11 @@ def _record(
         "dataset": OPERATOR_DATASET_VERSION,
         "split": split,
         "example_id": example_id,
+        "source_row": index,
         "parent_template_id": template_id,
         "operator_level": "O1",
+        "difficulty_steps": 1,
+        "difficulty_stratum": "low",
         "operator_family": operator,
         "operator_signature": [operator],
         "semantic_signature": f"{operator}(CONST)->RETURN",
@@ -214,6 +223,136 @@ def freeze_o1_dataset(
         },
         "prompt_fields": ["question"],
         "hidden_fields": ["targets", "reference_return", "runtime"],
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest
+
+
+def _pilot_prompt(question: str, representation: str) -> str:
+    if representation == "ap":
+        instruction = (
+            "Use the primitive O1 operators square(x), cube(x), and sqrt(x). "
+            "Use sqrt only for exact roots."
+        )
+    else:
+        instruction = (
+            "Use the semantic O1 operators area_of_square(side), "
+            "side_of_square(area), and volume_of_cube(edge)."
+        )
+    return (
+        "Compile the quantitative problem into executable ASL-Arith. "
+        f"{instruction} Return only ASL, one statement per line; do not explain.\n\n"
+        f"Problem: {question}\nASL:"
+    )
+
+
+def _balanced_prefix(rows: list[dict[str, Any]], count: int) -> list[dict[str, Any]]:
+    by_operator: dict[str, list[dict[str, Any]]] = {}
+    for row in rows:
+        by_operator.setdefault(str(row["operator_family"]), []).append(row)
+    operators = sorted(by_operator)
+    selected = []
+    offsets = {operator: 0 for operator in operators}
+    while len(selected) < count:
+        progressed = False
+        for operator in operators:
+            offset = offsets[operator]
+            if offset < len(by_operator[operator]) and len(selected) < count:
+                selected.append(by_operator[operator][offset])
+                offsets[operator] += 1
+                progressed = True
+        if not progressed:
+            raise ValueError(f"cannot select {count} balanced records from {len(rows)} rows")
+    return selected
+
+
+def freeze_o1_pilot(
+    source_dir: str | Path,
+    output_dir: str | Path,
+    *,
+    train_count: int = 200,
+    dev_count: int = 30,
+    test_count: int = 100,
+    seed: int = 99173,
+) -> dict[str, Any]:
+    """Freeze a one-seed pilot before promoting O1 to full-scale training."""
+
+    source = Path(source_dir)
+    selected = {
+        split: _balanced_prefix(read_jsonl(source / f"{split}.jsonl"), count)
+        for split, count in (
+            ("train", train_count),
+            ("dev", dev_count),
+            ("test", test_count),
+        )
+    }
+    output = Path(output_dir)
+    eval_path = write_jsonl(output / "test.jsonl", selected["test"])
+    output_paths: dict[str, dict[str, Path]] = {}
+    for representation, target_key in (("ap", "ap_asl"), ("as", "as_asl")):
+        output_paths[representation] = {}
+        for split in ("train", "dev"):
+            rows = [
+                {
+                    "schema_version": "ccpu.paper1.gsm8k_oc_sft.v1",
+                    "dataset": OPERATOR_DATASET_VERSION,
+                    "dataset_id": f"GSM8K_OC_O1_{representation.upper()}_PILOT",
+                    "example_id": f"{row['example_id']}:{representation}",
+                    "parent_example_id": row["example_id"],
+                    "parent_template_id": row["parent_template_id"],
+                    "operator_family": row["operator_family"],
+                    "representation_id": representation.upper(),
+                    "objective_id": "L0",
+                    "prompt": _pilot_prompt(str(row["question"]), representation),
+                    "target": row["targets"][target_key],
+                    "source_fields_visible_to_model": ["question"],
+                }
+                for row in selected[split]
+            ]
+            path = write_jsonl(output / representation / f"{split}.jsonl", rows)
+            output_paths[representation][split] = path
+        evaluation_rows = [
+            {
+                **row,
+                "prompt": _pilot_prompt(str(row["question"]), representation),
+                "evaluation_representation": representation.upper(),
+            }
+            for row in selected["test"]
+        ]
+        output_paths[representation]["test"] = write_jsonl(
+            output / representation / "test.jsonl", evaluation_rows
+        )
+    manifest = {
+        "schema_version": "ccpu.paper1.gsm8k_oc_pilot_manifest.v1",
+        "dataset_version": OPERATOR_DATASET_VERSION,
+        "operator_level": "O1",
+        "seed": seed,
+        "counts": {"train": train_count, "dev": dev_count, "test": test_count},
+        "training": {
+            "epochs": 3,
+            "unique_records": train_count,
+            "exposures_per_adapter": train_count * 3,
+            "adapter_representations": ["AP", "AS"],
+        },
+        "test_operator_counts": dict(
+            sorted(Counter(row["operator_family"] for row in selected["test"]).items())
+        ),
+        "source": {
+            "directory": str(source),
+            "manifest_sha256": file_sha256(source / "manifest.json"),
+        },
+        "output_sha256": {
+            "test": file_sha256(eval_path),
+            **{
+                f"{representation}_{split}": file_sha256(path)
+                for representation, paths in output_paths.items()
+                for split, path in paths.items()
+            },
+        },
+        "promotion_rule": (
+            "do not train the 2000-record O1 condition unless the one-seed pilot "
+            "shows a useful accuracy, robustness, representation, or token signal"
+        ),
     }
     write_json(output / "manifest.json", manifest)
     return manifest

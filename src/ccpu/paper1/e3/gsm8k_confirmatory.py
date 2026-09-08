@@ -300,7 +300,7 @@ def _run_official_gsm8k_shard_unlocked(
         raise ValueError("resume output does not match the requested GSM8K shard")
     completed = {row["example_id"] for row in predictions}
     for index, row in enumerate([row for row in rows if row["example_id"] not in completed], 1):
-        prompt = autonomous_asl_prompt(str(row["question"]))
+        prompt = str(row.get("prompt") or autonomous_asl_prompt(str(row["question"])))
         generation = backend.generate(prompt, seed=seed)
         predicted_asl = extract_asl(generation.generated_text)
         prediction = {
