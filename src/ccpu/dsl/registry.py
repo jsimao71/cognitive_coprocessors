@@ -44,6 +44,27 @@ def _mean(arguments: list[Decimal]) -> Decimal:
     return sum(arguments) / len(arguments)
 
 
+def _square(arguments: list[Decimal]) -> Decimal:
+    _require(arguments, 1, "square")
+    return arguments[0] * arguments[0]
+
+
+def _cube(arguments: list[Decimal]) -> Decimal:
+    _require(arguments, 1, "cube")
+    return arguments[0] * arguments[0] * arguments[0]
+
+
+def _exact_sqrt(arguments: list[Decimal]) -> Decimal:
+    _require(arguments, 1, "sqrt")
+    value = arguments[0]
+    if value < 0:
+        raise ValueError("sqrt requires a non-negative argument")
+    root = value.sqrt()
+    if root * root != value:
+        raise ValueError("sqrt is restricted to exact roots in operator registry v1")
+    return root
+
+
 ARITHMETIC_FUNCTIONS: dict[str, ArithmeticFunction] = {
     "abs": _absolute,
     "dec_pct": _dec_pct,
@@ -53,6 +74,12 @@ ARITHMETIC_FUNCTIONS: dict[str, ArithmeticFunction] = {
     "max": max,
     "mean": _mean,
     "min": min,
+    "cube": _cube,
+    "sqrt": _exact_sqrt,
+    "square": _square,
+    "area_of_square": _square,
+    "side_of_square": _exact_sqrt,
+    "volume_of_cube": _cube,
     "percent_of": _percent_of,
     "rate_times_duration": _rate_times_duration,
     "sum": sum,
@@ -67,6 +94,12 @@ CCIR_CALL_OPERATORS = {
     "max": "MAX",
     "mean": "MEAN",
     "min": "MIN",
+    "cube": "CUBE",
+    "sqrt": "SQRT",
+    "square": "SQUARE",
+    "area_of_square": "SQUARE",
+    "side_of_square": "SQRT",
+    "volume_of_cube": "CUBE",
     "percent_of": "PERCENT_OF",
     "rate_times_duration": "RATE_TIMES_DURATION",
     "sum": "SUM",

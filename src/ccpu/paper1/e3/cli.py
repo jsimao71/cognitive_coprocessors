@@ -40,6 +40,7 @@ from .magnitude_analysis import (
     project_magnitude_predictions,
 )
 from .model_size_analysis import analyze_model_size_interaction
+from .operator_complexity import freeze_o1_dataset
 from .result_plots import build_gsm8k_result_plots
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
@@ -222,6 +223,12 @@ def build_parser() -> argparse.ArgumentParser:
     model_size.add_argument("--small-pair", required=True)
     model_size.add_argument("--large-pair", required=True)
     model_size.add_argument("--output", required=True)
+    operator_o1 = commands.add_parser("prepare-operator-o1")
+    operator_o1.add_argument("--output-dir", required=True)
+    operator_o1.add_argument("--train-count", type=int, default=2000)
+    operator_o1.add_argument("--dev-count", type=int, default=100)
+    operator_o1.add_argument("--test-count", type=int, default=250)
+    operator_o1.add_argument("--seed", type=int, default=81001)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -632,6 +639,20 @@ def main(argv: list[str] | None = None) -> int:
             "robustness interaction="
             f"{report['large_number_robustness_contribution']['model_size_interaction']:.3f} "
             f"-> {args.output}"
+        )
+        return 0
+    if args.command == "prepare-operator-o1":
+        manifest = freeze_o1_dataset(
+            args.output_dir,
+            train_count=args.train_count,
+            dev_count=args.dev_count,
+            test_count=args.test_count,
+            seed=args.seed,
+        )
+        print(
+            f"GSM8K-OC O1 train={manifest['counts']['train']} "
+            f"dev={manifest['counts']['dev']} test={manifest['counts']['test']} "
+            f"-> {args.output_dir}"
         )
         return 0
     if args.command == "run-bottleneck":

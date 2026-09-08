@@ -1,0 +1,48 @@
+{
+  "operators": {
+    "add": {
+      "arity": 2,
+      "ccir": "ADD",
+      "exactness": "EXACT_RATIONAL",
+      "level": "O0"
+    },
+    "cube": {
+      "arity": 1,
+      "ccir": "CUBE",
+      "exactness": "EXACT_INTEGER",
+      "level": "O1"
+    },
+    "divide": {
+      "arity": 2,
+      "ccir": "DIV",
+      "exactness": "EXACT_RATIONAL",
+      "level": "O0"
+    },
+    "multiply": {
+      "arity": 2,
+      "ccir": "MUL",
+      "exactness": "EXACT_RATIONAL",
+      "level": "O0"
+    },
+    "sqrt": {
+      "arity": 1,
+      "ccir": "SQRT",
+      "domain": "non-negative perfect squares",
+      "exactness": "EXACT_INTEGER",
+      "level": "O1"
+    },
+    "square": {
+      "arity": 1,
+      "ccir": "SQUARE",
+      "exactness": "EXACT_INTEGER",
+      "level": "O1"
+    },
+    "subtract": {
+      "arity": 2,
+      "ccir": "SUB",
+      "exactness": "EXACT_RATIONAL",
+      "level": "O0"
+    }
+  },
+  "version": "paper1-operator-registry-v1"
+}

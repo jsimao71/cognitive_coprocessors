@@ -1,0 +1,70 @@
+{
+  "counts": {
+    "dev": 100,
+    "test": 250,
+    "train": 2000
+  },
+  "dataset_version": "gsm8k-oc-v1",
+  "gold_runtime_ceiling": {
+    "answer": 1.0,
+    "ap_execute": 1.0,
+    "ap_parse": 1.0,
+    "as_execute": 1.0,
+    "as_parse": 1.0,
+    "ccir_equivalent": 1.0
+  },
+  "hidden_fields": [
+    "targets",
+    "reference_return",
+    "runtime"
+  ],
+  "operator_counts": {
+    "dev": {
+      "cube": 33,
+      "sqrt": 33,
+      "square": 34
+    },
+    "test": {
+      "cube": 84,
+      "sqrt": 83,
+      "square": 83
+    },
+    "train": {
+      "cube": 668,
+      "sqrt": 666,
+      "square": 666
+    }
+  },
+  "operator_level": "O1",
+  "output_sha256": {
+    "dev": "6d34f5ab425b6183e7faeca4cb2eb6a47b9d3b450eca12edda135adad29168fc",
+    "operator_registry": "c7678abb22d3fd0f73acc0c4ffe6423998ade39eaa319db0dfb37f1c349f9854",
+    "test": "cf380d24b8565d3547db330a8ec6115a3d45532db89cdde0fbf22f6de4979261",
+    "train": "28a6d95bf910a66e6aef637274a1c93a04523542d4a7b148efa85ea6781fe5f1"
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "schema_version": "ccpu.paper1.gsm8k_oc_manifest.v1",
+  "seed": 81001,
+  "template_families": {
+    "dev": [
+      "poster_square_area",
+      "tank_cube_volume",
+      "window_square_side"
+    ],
+    "test": [
+      "box_cube_volume",
+      "court_square_side",
+      "plaza_square_area"
+    ],
+    "train": [
+      "block_cube_volume",
+      "crate_cube_volume",
+      "field_square_side",
+      "garden_square_area",
+      "mat_square_side",
+      "tile_square_area"
+    ]
+  }
+}
