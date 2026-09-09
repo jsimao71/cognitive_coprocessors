@@ -2162,6 +2162,23 @@ must consume the same frozen row and match both ordered identity and question
 hash. Results from this panel supersede the synthetic pilot for the principal
 direct-versus-ASL crossover analysis once both arms complete.
 
+The intended claim is explicitly conditional on semantic-compiler quality.
+Generated ASL may underperform direct reasoning on easy inputs while the
+NL-to-ASL compiler is inaccurate; perfect execution of a gold program is only
+a processor ceiling and is not an end-to-end CogCop result. We therefore
+measure four independent stress axes: numeric scale, deterministic non-round
+value jitter, operator family, and expression dependency depth. After freezing
+the one-axis curves, a preregistered extreme-corner panel crosses
+$S\in\{1,10^6\}$, jitter absent or sampled from
+$\operatorname{Uniform}[-0.30,+0.30]$, selected O0/O1/O5/O6 families, and
+expression depths zero or four on common natural GSM8K parents. For each cell
+we report Direct accuracy, generated-ASL end-to-end accuracy, gold-runtime
+ceiling, compiler-stage accuracy, paired flips, and the generated-ASL minus
+Direct margin. This design tests whether increasing data or model capacity can
+make ASL compilation sufficiently accurate for deterministic execution to
+yield a flatter robustness surface than direct neural computation, including
+under the joint combination of all four stresses.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}

@@ -12,6 +12,24 @@ Current evidence suggests:
 - ASL generation is compact and execution is deterministic;
 - the dominant ASL bottleneck is semantic compilation, not syntax/runtime.
 
+The central claim is conditional rather than unconditional. Small models may
+lose on easy items because NL-to-ASL compilation is still inaccurate. The
+scientific question is whether, as compiler accuracy improves with data or
+model capacity, generated ASL becomes the more robust route under four
+independently controlled stresses:
+
+```text
+S  numeric scale
+J  non-round value perturbation
+O  operator complexity
+E  expression complexity
+```
+
+The primary endpoint is end-to-end generated ASL, never gold ASL. Gold-program
+execution is reported only as a runtime ceiling that separates compiler errors
+from processor errors. Evaluate each axis alone before evaluating registered
+S x J x O x E combinations on the same frozen parent identities.
+
 The next question is:
 
 > Does this factorization advantage persist when computational difficulty increases through a richer operator/function vocabulary rather than only larger numbers?
@@ -169,6 +187,25 @@ CogCop replaces part of long autoregressive reasoning with compact symbolic prog
 Direct reasoning may dominate at low operator complexity, while ASL/CogCop may become competitive or superior at higher complexity or under perturbation.
 
 Do not assume a crossover exists; measure it.
+
+## H7 - Four-factor robustness interaction
+
+Once semantic compilation is sufficiently accurate, Direct degrades faster
+than generated ASL as numeric scale, non-round jitter, operator requirements,
+and expression depth are increased separately and jointly.
+
+For every registered cell report both observed end-to-end ASL accuracy and the
+minimum compiler accuracy required to match Direct:
+
+```text
+runtime_ceiling(c) = accuracy(gold ASL executed by the frozen runtime)
+compiler_break_even(c) = direct_accuracy(c) / runtime_ceiling(c)
+compiler_margin(c) = observed_generated_ASL_accuracy(c) - direct_accuracy(c)
+```
+
+When the runtime ceiling is one, break-even compiler accuracy equals Direct
+accuracy. This quantity is descriptive, not a substitute for actually running
+the generated-ASL arm.
 
 ---
 
@@ -838,6 +875,45 @@ Delta_robust =
 
 Use paired identity bootstrap and exact paired tests.
 
+## Four-factor intervention design
+
+Treat the four stresses as distinct interventions:
+
+```text
+S0/S2/S3/S4/S6  source-value multipliers x1, x100, x1000, x10000, x1000000
+J0/J1            no jitter or deterministic Uniform[-30%, +30%] role-wise jitter
+O0/O1/O3/O5/O6  registered operator families
+E0/E2/E4         matched expression dependency depth 0, 2, or 4
+```
+
+Expression depth must modify an original GSM8K-derived problem while
+preserving its entities, discourse, requested answer, and downstream program.
+Do not use isolated expression templates as primary evidence. Each E-level
+must have a runtime-verified value-preserving construction and record primitive
+operation count, dependency depth, and function nesting depth.
+
+Run this staged design to control cost and avoid outcome-driven cell selection:
+
+```text
+Stage A: one-axis curves on the same 100 parents
+Stage B: frozen extreme-corner gate over S{0,6} x J{0,1} x O{0,1,5,6} x E{0,4}
+Stage C: fill intermediate cells only for interactions registered before Stage B
+```
+
+O3 logarithms are excluded from high-scale combinations when preserving the
+output would require exponentially large operands; report those cells as
+structurally undefined rather than silently changing the task. Direct and ASL
+must consume byte-identical questions in every defined cell.
+
+The central plots are:
+
+```text
+accuracy vs S, stratified by Direct/generated-ASL and E/O
+accuracy vs E, stratified by Direct/generated-ASL and S/J
+ASL-minus-Direct margin over the registered S x J x O x E cells
+compiler accuracy and compiler break-even over the same cells
+```
+
 ---
 
 # 25. Neural reasoning-token metrics
@@ -1274,6 +1350,21 @@ P18 After the operator ladder is complete, freeze and run the matched R1J
     independently jittered magnitude campaign. Compare its Direct/ASL curves
     with strict R1 scaling and report whether the crossover survives when
     source quantities are no longer exact powers-of-ten copies.
+
+P19 Freeze E0/E2/E4 expression-depth transformations on the same natural
+    GSM8K parents. Validate value preservation, dependency depth, question
+    hashes, and exact gold-runtime execution before inference.
+
+P20 Run the one-axis expression curve with Direct and generated ASL. Report
+    compiler-stage errors separately from deterministic runtime errors.
+
+P21 Freeze the preregistered S{0,6} x J{0,1} x O{0,1,5,6} x E{0,4}
+    extreme-corner panel. Reuse model checkpoints; do not train on test
+    transformations or select cells from observed outcomes.
+
+P22 Run the four-factor panel first on 0.6B, then on the frozen 1.7B and gated
+    4B compilers. Estimate where improved compiler accuracy changes the
+    end-to-end ASL-minus-Direct margin.
 ```
 
 ---
