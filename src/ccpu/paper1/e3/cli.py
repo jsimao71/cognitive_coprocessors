@@ -8,7 +8,7 @@ from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
 from .augmentation_analysis import analyze_gsm8k_augmentation_stage
 from .contribution_analysis import analyze_gsm8k_contribution
-from .cross_dataset import freeze_cross_dataset_benchmark
+from .cross_dataset import build_cross_dataset_teacher_seed, freeze_cross_dataset_benchmark
 from .data import (
     build_bottleneck_data,
     build_bottleneck_preference_data,
@@ -148,6 +148,9 @@ def build_parser() -> argparse.ArgumentParser:
     cross_dataset.add_argument("--diagnostic-size", type=int, default=250)
     cross_dataset.add_argument("--dev-size", type=int, default=100)
     cross_dataset.add_argument("--seed", type=int, default=93001)
+    cross_seed = commands.add_parser("prepare-cross-dataset-teacher-seed")
+    cross_seed.add_argument("--frozen-dir", required=True)
+    cross_seed.add_argument("--output", required=True)
     gsm8k_run = commands.add_parser("run-gsm8k-official-shard")
     gsm8k_run.add_argument("--eval", required=True)
     gsm8k_run.add_argument("--config", required=True)
@@ -486,6 +489,15 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"{args.dataset} diagnostic={manifest['counts']['diagnostic']} "
             f"train={manifest['counts']['train_source']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-cross-dataset-teacher-seed":
+        manifest = build_cross_dataset_teacher_seed(
+            frozen_dir=args.frozen_dir,
+            output_path=args.output,
+        )
+        print(
+            f"{manifest['dataset']} teacher seeds={manifest['count']} -> {args.output}"
         )
         return 0
     if args.command == "run-gsm8k-official-shard":

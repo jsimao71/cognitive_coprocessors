@@ -64,6 +64,10 @@ The pinned source registry is
 `configs/paper1/cross_dataset_transfer_v1.json`; frozen manifests and splits
 are under `artifacts/paper1/cross_dataset_transfer_v1/`. GSM-Plus is grouped by
 seed-question family. Only question text is model-visible during evaluation.
+Answer-blind teacher seed scaffolds contain 1,898 ASDiv, 600 SVAMP, 3,635
+MAWPS, and 6,782 GSM-Plus training candidates. They are not ASL labels: do not
+start teacher generation, accept/reject repair, E1, or E2 until E0 predictions
+for that dataset have been copied back and checksummed.
 
 Latest frozen evidence:
 

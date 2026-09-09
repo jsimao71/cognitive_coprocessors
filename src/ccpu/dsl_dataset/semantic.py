@@ -21,7 +21,10 @@ def _expected_decimal(value: Any) -> Decimal:
         if len(value) != 1:
             raise InvalidOperation("answer is not scalar")
         value = value[0]
-    cleaned = re.sub(r"[^0-9.+-]", "", str(value).replace(",", ""))
+    cleaned = re.sub(r"[^0-9./+-]", "", str(value).replace(",", "").replace("_", ""))
+    if "/" in cleaned:
+        numerator, denominator = cleaned.split("/", 1)
+        return Decimal(numerator) / Decimal(denominator)
     return Decimal(cleaned)
 
 

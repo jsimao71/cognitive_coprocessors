@@ -292,6 +292,10 @@ question family rather than perturbation row. Its answerless `critical
 thinking` arm is excluded from numeric scoring, while the seven answerable
 perturbation classes are balanced in the diagnostic. Published MAWPS split
 duplicates and all exact GSM-training overlaps are removed before selection.
+The committed `teacher_seed.jsonl` files retain answers and supplied equations
+for deterministic validation, but the primary annotation request builder
+exposes only the question clauses. These are seed scaffolds, not accepted ASL
+training targets.
 
 ### Paper 2 symbolic and mathematical capability
 

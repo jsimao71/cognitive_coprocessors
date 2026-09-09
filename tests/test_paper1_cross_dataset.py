@@ -4,7 +4,11 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_jsonl
-from ccpu.paper1.e3.cross_dataset import freeze_cross_dataset_benchmark
+from ccpu.dsl_dataset.semantic import prepare_local_annotation_batches
+from ccpu.paper1.e3.cross_dataset import (
+    build_cross_dataset_teacher_seed,
+    freeze_cross_dataset_benchmark,
+)
 from ccpu.paper1.e3.gsm8k_confirmatory import _score_prediction
 
 
@@ -109,3 +113,44 @@ def test_fractional_reference_answer_scores_numerically():
         {"id": "global"},
     )
     assert score["final_answer_correct"]
+
+
+def test_teacher_seed_keeps_answers_out_of_primary_requests(tmp_path):
+    source = _parquet(
+        tmp_path / "asdiv.parquet",
+        [
+            {
+                "body": f"Sam has {index} red balls and 2 blue balls.",
+                "question": "How many balls does Sam have?",
+                "solution_type": "Addition",
+                "answer": f"{index + 2} (balls)",
+                "formula": f"{index}+2={index + 2}",
+            }
+            for index in range(1, 7)
+        ],
+    )
+    gsm_train = write_jsonl(tmp_path / "gsm.jsonl", [{"question": "Unrelated."}])
+    frozen = tmp_path / "frozen"
+    freeze_cross_dataset_benchmark(
+        dataset="asdiv",
+        source_paths={"all": source},
+        expected_sha256={"all": file_sha256(source)},
+        gsm_train_paths=[gsm_train],
+        gsm_adapter_path=_adapter(tmp_path),
+        output_dir=frozen,
+        diagnostic_size=2,
+        dev_size=1,
+        seed=13,
+    )
+    seed_path = tmp_path / "teacher_seed.jsonl"
+    report = build_cross_dataset_teacher_seed(
+        frozen_dir=frozen, output_path=seed_path
+    )
+    assert report["count"] == 3
+    request_dir = tmp_path / "requests"
+    prepare_local_annotation_batches([seed_path], request_dir, batch_size=3)
+    payload = read_json(request_dir / "requests" / "batch_000.json")
+    assert payload["answer_hidden"]
+    assert payload["rationale_hidden"]
+    assert all("answer" not in item for item in payload["items"])
+    assert all("gold_reasoning" not in item for item in payload["items"])

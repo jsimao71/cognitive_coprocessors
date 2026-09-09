@@ -12,10 +12,12 @@ import pyarrow.parquet as pq
 from ccpu.common.artifacts import (
     file_sha256,
     fingerprint,
+    read_json,
     read_jsonl,
     write_json,
     write_jsonl,
 )
+from ccpu.dsl_dataset.chop import chop_example
 
 
 DATASET_SOURCES = {
@@ -418,3 +420,61 @@ def freeze_cross_dataset_benchmark(
     }
     write_json(output / "manifest.json", manifest)
     return manifest
+
+
+def build_cross_dataset_teacher_seed(
+    *, frozen_dir: str | Path, output_path: str | Path
+) -> dict[str, Any]:
+    """Build scorer-rich seeds whose downstream teacher view remains question-only."""
+
+    frozen = Path(frozen_dir)
+    manifest_path = frozen / "manifest.json"
+    train_path = frozen / "train_source.jsonl"
+    manifest = read_json(manifest_path)
+    if file_sha256(train_path) != manifest["outputs"]["train_source"]["sha256"]:
+        raise ValueError("frozen train_source checksum mismatch")
+    rows = []
+    for source in read_jsonl(train_path):
+        seed = {
+            "schema_version": "ccpu.dsl_dataset.raw_record.v1",
+            "dataset": source["dataset"],
+            "split": "train",
+            "source_id": source["example_id"],
+            "question": source["question"],
+            "answer": source["reference_return"],
+            "gold_reasoning": source["supervision"]["expression"],
+            "effective_scope": source["effective_scope"],
+            "source_context": None,
+            "metadata": {
+                "arithmetic_compatible": True,
+                "semantic_category": source["semantic_category"],
+                "parent_example_id": source["parent_example_id"],
+                "teacher_visible_fields": ["question"],
+            },
+        }
+        seed["parts"] = chop_example(seed)
+        seed["record_sha256"] = fingerprint(
+            {
+                "dataset": seed["dataset"],
+                "split": seed["split"],
+                "source_id": seed["source_id"],
+                "question": seed["question"],
+            }
+        )
+        rows.append(seed)
+    path = write_jsonl(output_path, rows)
+    report = {
+        "schema_version": "ccpu.paper1.cross_dataset_teacher_seed_manifest.v1",
+        "dataset": manifest["dataset"],
+        "source_manifest": str(manifest_path),
+        "source_manifest_sha256": file_sha256(manifest_path),
+        "source_train_sha256": file_sha256(train_path),
+        "output": str(path),
+        "output_sha256": file_sha256(path),
+        "count": len(rows),
+        "teacher_visible_fields": ["question"],
+        "answers_hidden_during_primary_annotation": True,
+        "rationales_hidden_during_primary_annotation": True,
+    }
+    write_json(Path(output_path).with_suffix(".manifest.json"), report)
+    return report
