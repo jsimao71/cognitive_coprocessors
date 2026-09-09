@@ -313,6 +313,7 @@ def _run_official_gsm8k_shard_unlocked(
             "parent_example_id": row.get("parent_example_id", row["example_id"]),
             "source_row": row["source_row"],
             "difficulty_stratum": row["difficulty_stratum"],
+            "question_sha256": row.get("question_sha256"),
             "adapter_id": adapter_id,
             "model_id": backend.model_id,
             "seed": seed,
