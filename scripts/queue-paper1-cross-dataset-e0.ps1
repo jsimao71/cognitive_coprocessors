@@ -22,7 +22,8 @@ if ($WaitTaskName) {
 }
 
 $runner = Join-Path $RepositoryRoot "scripts/run-paper1-cross-dataset-e0.ps1"
+$runnerBlock = [scriptblock]::Create((Get-Content -LiteralPath $runner -Raw))
 foreach ($name in $DatasetList.Split(",")) {
-    & $runner -RepositoryRoot $RepositoryRoot -Dataset $name -Device $Device `
+    & $runnerBlock -RepositoryRoot $RepositoryRoot -Dataset $name -Device $Device `
         -PythonExecutable $PythonExecutable
 }

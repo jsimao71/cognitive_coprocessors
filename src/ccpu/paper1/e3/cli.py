@@ -8,7 +8,11 @@ from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
 from .augmentation_analysis import analyze_gsm8k_augmentation_stage
 from .contribution_analysis import analyze_gsm8k_contribution
-from .cross_dataset import build_cross_dataset_teacher_seed, freeze_cross_dataset_benchmark
+from .cross_dataset import (
+    build_cross_dataset_sft_data,
+    build_cross_dataset_teacher_seed,
+    freeze_cross_dataset_benchmark,
+)
 from .cross_dataset_analysis import analyze_cross_dataset_transfer
 from .data import (
     build_bottleneck_data,
@@ -152,6 +156,15 @@ def build_parser() -> argparse.ArgumentParser:
     cross_seed = commands.add_parser("prepare-cross-dataset-teacher-seed")
     cross_seed.add_argument("--frozen-dir", required=True)
     cross_seed.add_argument("--output", required=True)
+    cross_seed.add_argument(
+        "--source-role", choices=("train_source", "dev"), default="train_source"
+    )
+    cross_sft = commands.add_parser("prepare-cross-dataset-sft")
+    cross_sft.add_argument("--frozen-dir", required=True)
+    cross_sft.add_argument("--accepted-train", required=True)
+    cross_sft.add_argument("--accepted-dev", required=True)
+    cross_sft.add_argument("--output-dir", required=True)
+    cross_sft.add_argument("--seed", type=int, default=93001)
     cross_analysis = commands.add_parser("analyze-cross-dataset-transfer")
     cross_analysis.add_argument("--manifest", action="append", required=True)
     cross_analysis.add_argument("--prediction", action="append", required=True)
@@ -500,9 +513,23 @@ def main(argv: list[str] | None = None) -> int:
         manifest = build_cross_dataset_teacher_seed(
             frozen_dir=args.frozen_dir,
             output_path=args.output,
+            source_role=args.source_role,
         )
         print(
             f"{manifest['dataset']} teacher seeds={manifest['count']} -> {args.output}"
+        )
+        return 0
+    if args.command == "prepare-cross-dataset-sft":
+        manifest = build_cross_dataset_sft_data(
+            frozen_dir=args.frozen_dir,
+            accepted_train_path=args.accepted_train,
+            accepted_dev_path=args.accepted_dev,
+            output_dir=args.output_dir,
+            seed=args.seed,
+        )
+        print(
+            f"{manifest['dataset']} SFT train={manifest['counts']['train']} "
+            f"dev={manifest['counts']['dev']} -> {args.output_dir}"
         )
         return 0
     if args.command == "analyze-cross-dataset-transfer":

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from collections import Counter
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -17,7 +18,9 @@ from ccpu.common.artifacts import (
     write_json,
     write_jsonl,
 )
+from ccpu.dsl import validate_asl
 from ccpu.dsl_dataset.chop import chop_example
+from ccpu.paper1.asl_pilot_data import asl_prompt
 
 
 DATASET_SOURCES = {
@@ -423,26 +426,32 @@ def freeze_cross_dataset_benchmark(
 
 
 def build_cross_dataset_teacher_seed(
-    *, frozen_dir: str | Path, output_path: str | Path
+    *,
+    frozen_dir: str | Path,
+    output_path: str | Path,
+    source_role: str = "train_source",
 ) -> dict[str, Any]:
     """Build scorer-rich seeds whose downstream teacher view remains question-only."""
 
+    if source_role not in {"train_source", "dev"}:
+        raise ValueError("teacher seed source_role must be train_source or dev")
     frozen = Path(frozen_dir)
     manifest_path = frozen / "manifest.json"
-    train_path = frozen / "train_source.jsonl"
+    source_path = frozen / f"{source_role}.jsonl"
     manifest = read_json(manifest_path)
-    if file_sha256(train_path) != manifest["outputs"]["train_source"]["sha256"]:
-        raise ValueError("frozen train_source checksum mismatch")
+    if file_sha256(source_path) != manifest["outputs"][source_role]["sha256"]:
+        raise ValueError(f"frozen {source_role} checksum mismatch")
     rows = []
-    for source in read_jsonl(train_path):
+    for source in read_jsonl(source_path):
+        supervision = source.get("supervision", {})
         seed = {
             "schema_version": "ccpu.dsl_dataset.raw_record.v1",
             "dataset": source["dataset"],
-            "split": "train",
+            "split": "train" if source_role == "train_source" else "dev",
             "source_id": source["example_id"],
             "question": source["question"],
             "answer": source["reference_return"],
-            "gold_reasoning": source["supervision"]["expression"],
+            "gold_reasoning": supervision.get("expression"),
             "effective_scope": source["effective_scope"],
             "source_context": None,
             "metadata": {
@@ -466,9 +475,10 @@ def build_cross_dataset_teacher_seed(
     report = {
         "schema_version": "ccpu.paper1.cross_dataset_teacher_seed_manifest.v1",
         "dataset": manifest["dataset"],
+        "source_role": source_role,
         "source_manifest": str(manifest_path),
         "source_manifest_sha256": file_sha256(manifest_path),
-        "source_train_sha256": file_sha256(train_path),
+        "source_sha256": file_sha256(source_path),
         "output": str(path),
         "output_sha256": file_sha256(path),
         "count": len(rows),
@@ -477,4 +487,139 @@ def build_cross_dataset_teacher_seed(
         "rationales_hidden_during_primary_annotation": True,
     }
     write_json(Path(output_path).with_suffix(".manifest.json"), report)
+    return report
+
+
+def build_cross_dataset_sft_data(
+    *,
+    frozen_dir: str | Path,
+    accepted_train_path: str | Path,
+    accepted_dev_path: str | Path,
+    output_dir: str | Path,
+    seed: int = 93001,
+) -> dict[str, Any]:
+    """Materialize the one shared target corpus used by E1 and E2."""
+
+    frozen = Path(frozen_dir)
+    manifest_path = frozen / "manifest.json"
+    manifest = read_json(manifest_path)
+    frozen_rows = {
+        role: read_jsonl(frozen / f"{role}.jsonl")
+        for role in ("train_source", "dev", "diagnostic")
+    }
+    for role, rows in frozen_rows.items():
+        path = frozen / f"{role}.jsonl"
+        if file_sha256(path) != manifest["outputs"][role]["sha256"]:
+            raise ValueError(f"frozen {role} checksum mismatch")
+        if len({row["example_id"] for row in rows}) != len(rows):
+            raise ValueError(f"duplicate example_id in frozen {role}")
+
+    accepted_paths = {
+        "train": Path(accepted_train_path),
+        "dev": Path(accepted_dev_path),
+    }
+    accepted = {role: read_jsonl(path) for role, path in accepted_paths.items()}
+    source_by_role = {
+        "train": {row["example_id"]: row for row in frozen_rows["train_source"]},
+        "dev": {row["example_id"]: row for row in frozen_rows["dev"]},
+    }
+    diagnostic_ids = {row["example_id"] for row in frozen_rows["diagnostic"]}
+    selected_ids: dict[str, set[str]] = {}
+    sft_rows: dict[str, list[dict[str, Any]]] = {}
+    for role in ("train", "dev"):
+        ids = [str(row["source_id"]) for row in accepted[role]]
+        if len(set(ids)) != len(ids):
+            raise ValueError(f"duplicate accepted {role} source_id")
+        unknown = sorted(set(ids) - set(source_by_role[role]))
+        if unknown:
+            raise ValueError(f"accepted {role} IDs outside frozen split: {unknown[:5]}")
+        wrong_split = [
+            row["source_id"] for row in accepted[role] if row["split"] != role
+        ]
+        if wrong_split:
+            raise ValueError(f"accepted {role} rows have wrong split: {wrong_split[:5]}")
+        invalid = []
+        for row in accepted[role]:
+            source = source_by_role[role][str(row["source_id"])]
+            validation = validate_asl(
+                row["asl"], effective_scope=source["effective_scope"]
+            )
+            if not validation["execution_verified"]:
+                invalid.append(row["source_id"])
+                continue
+            returned = validation["execution"]["workspace"][
+                str(source["effective_scope"]["id"])
+            ]["returned"]
+            expected = Fraction(str(source["reference_return"]))
+            if Fraction(str(returned)) != expected:
+                invalid.append(row["source_id"])
+        if invalid:
+            raise ValueError(
+                f"accepted {role} rows are not execution verified: {invalid[:5]}"
+            )
+        question_mismatches = [
+            row["source_id"]
+            for row in accepted[role]
+            if _question_hash(row["question"])
+            != source_by_role[role][str(row["source_id"])]["question_sha256"]
+        ]
+        if question_mismatches:
+            raise ValueError(f"accepted {role} question mismatch: {question_mismatches[:5]}")
+        ordered = sorted(
+            accepted[role],
+            key=lambda row: fingerprint(f"{seed}:sft-{role}:{row['source_id']}"),
+        )
+        sft_rows[role] = [
+            {
+                "schema_version": "ccpu.paper1.cross_dataset_sft.v1",
+                "example_id": f"{manifest['dataset']}-{role}-{row['source_id']}",
+                "parent_source_id": str(row["source_id"]),
+                "dataset": manifest["dataset"],
+                "prompt": asl_prompt(row),
+                "target": row["asl"],
+                "quality_grade": row["quality_grade"],
+            }
+            for row in ordered
+        ]
+        selected_ids[role] = set(ids)
+
+    overlaps = {
+        "train_dev": sorted(selected_ids["train"] & selected_ids["dev"]),
+        "train_diagnostic": sorted(selected_ids["train"] & diagnostic_ids),
+        "dev_diagnostic": sorted(selected_ids["dev"] & diagnostic_ids),
+    }
+    if any(overlaps.values()):
+        raise ValueError(f"cross-dataset SFT split leakage: {overlaps}")
+
+    output = Path(output_dir)
+    output_paths = {
+        role: write_jsonl(output / f"{role}.jsonl", rows)
+        for role, rows in sft_rows.items()
+    }
+    report = {
+        "schema_version": "ccpu.paper1.cross_dataset_sft_manifest.v1",
+        "dataset": manifest["dataset"],
+        "selection_seed": seed,
+        "counts": {role: len(rows) for role, rows in sft_rows.items()},
+        "accepted_inputs": {
+            role: {"path": str(path), "sha256": file_sha256(path)}
+            for role, path in accepted_paths.items()
+        },
+        "outputs": {
+            role: {"path": str(path), "sha256": file_sha256(path)}
+            for role, path in output_paths.items()
+        },
+        "frozen_manifest": {
+            "path": str(manifest_path),
+            "sha256": file_sha256(manifest_path),
+        },
+        "frozen_diagnostic_sha256": manifest["outputs"]["diagnostic"]["sha256"],
+        "leakage_audit": {"passed": True, **overlaps},
+        "condition_contract": {
+            "E1": "copy immutable GSM adapter and continue on this train/dev corpus",
+            "E2": "initialize fresh base-model adapter on this same train/dev corpus",
+            "matched_rows_and_order": True,
+        },
+    }
+    write_json(output / "manifest.json", report)
     return report
