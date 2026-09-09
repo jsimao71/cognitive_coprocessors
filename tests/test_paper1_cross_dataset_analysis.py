@@ -1,7 +1,10 @@
 import pytest
 
 from ccpu.common.artifacts import write_json, write_jsonl
-from ccpu.paper1.e3.cross_dataset_analysis import analyze_cross_dataset_transfer
+from ccpu.paper1.e3.cross_dataset_analysis import (
+    analyze_cross_dataset_transfer,
+    plot_cross_dataset_transfer,
+)
 
 
 def _prediction(identity, correct):
@@ -60,3 +63,17 @@ def test_cross_dataset_analysis_rejects_incomplete_condition(tmp_path):
             prediction_paths={("asdiv", "E0"): e0, ("asdiv", "E1"): partial},
             output_path=tmp_path / "analysis.json",
         )
+
+
+def test_cross_dataset_plot_uses_available_conditions(tmp_path):
+    manifest, e0, e1 = _fixture(tmp_path)
+    analysis = tmp_path / "analysis.json"
+    analyze_cross_dataset_transfer(
+        manifest_paths={"asdiv": manifest},
+        prediction_paths={("asdiv", "E0"): e0, ("asdiv", "E1"): e1},
+        output_path=analysis,
+    )
+    output = plot_cross_dataset_transfer(
+        analysis_path=analysis, output_path=tmp_path / "transfer.png"
+    )
+    assert output.stat().st_size > 1_000

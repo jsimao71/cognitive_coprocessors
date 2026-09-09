@@ -173,3 +173,66 @@ def analyze_cross_dataset_transfer(
     }
     write_json(output_path, report)
     return report
+
+
+def plot_cross_dataset_transfer(
+    *, analysis_path: str | Path, output_path: str | Path
+) -> Path:
+    """Plot matched answer and execution rates for every available condition."""
+
+    import matplotlib.pyplot as plt
+
+    report = read_json(analysis_path)
+    datasets = list(report["datasets"])
+    conditions = [
+        condition
+        for condition in ("E0", "E1", "E2")
+        if any(condition in report["datasets"][dataset] for dataset in datasets)
+    ]
+    if not datasets or not conditions:
+        raise ValueError("transfer analysis has no plottable conditions")
+    colors = {"E0": "#0B6E75", "E1": "#D97706", "E2": "#2563A6"}
+    labels = {"E0": "GSM LoRA", "E1": "GSM -> target", "E2": "Fresh target"}
+    width = 0.72 / len(conditions)
+    positions = list(range(len(datasets)))
+    figure, axes = plt.subplots(1, 2, figsize=(10.2, 4.25), sharey=True)
+    for axis, (endpoint, title) in zip(
+        axes,
+        (("final_answer_correct", "Correct answers"), ("executable", "Executable ASL")),
+        strict=True,
+    ):
+        for condition_index, condition in enumerate(conditions):
+            offset = (condition_index - (len(conditions) - 1) / 2) * width
+            values = [
+                report["datasets"][dataset].get(condition, {}).get("rates", {}).get(
+                    endpoint, 0.0
+                )
+                for dataset in datasets
+            ]
+            bars = axis.bar(
+                [position + offset for position in positions],
+                values,
+                width=width * 0.92,
+                color=colors[condition],
+                label=labels[condition],
+            )
+            axis.bar_label(
+                bars,
+                labels=[f"{value * 100:.0f}" for value in values],
+                padding=2,
+                fontsize=8,
+            )
+        axis.set_title(title, loc="left", fontweight="bold")
+        axis.set_xticks(positions, [name.replace("_", "-").upper() for name in datasets])
+        axis.set_ylim(0, 1.08)
+        axis.grid(axis="y", color="#D7D9D4", linewidth=0.8)
+        axis.set_axisbelow(True)
+    axes[0].set_ylabel("Rate")
+    axes[0].legend(frameon=False, ncol=min(3, len(conditions)), loc="upper left")
+    figure.suptitle("Cross-dataset semantic compiler transfer", x=0.08, ha="left")
+    figure.tight_layout()
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(output, dpi=180, bbox_inches="tight")
+    plt.close(figure)
+    return output

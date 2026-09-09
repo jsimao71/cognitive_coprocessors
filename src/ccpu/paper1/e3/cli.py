@@ -13,7 +13,10 @@ from .cross_dataset import (
     build_cross_dataset_teacher_seed,
     freeze_cross_dataset_benchmark,
 )
-from .cross_dataset_analysis import analyze_cross_dataset_transfer
+from .cross_dataset_analysis import (
+    analyze_cross_dataset_transfer,
+    plot_cross_dataset_transfer,
+)
 from .data import (
     build_bottleneck_data,
     build_bottleneck_preference_data,
@@ -170,6 +173,9 @@ def build_parser() -> argparse.ArgumentParser:
     cross_analysis.add_argument("--manifest", action="append", required=True)
     cross_analysis.add_argument("--prediction", action="append", required=True)
     cross_analysis.add_argument("--output", required=True)
+    cross_plot = commands.add_parser("plot-cross-dataset-transfer")
+    cross_plot.add_argument("--analysis", required=True)
+    cross_plot.add_argument("--output", required=True)
     gsm8k_run = commands.add_parser("run-gsm8k-official-shard")
     gsm8k_run.add_argument("--eval", required=True)
     gsm8k_run.add_argument("--config", required=True)
@@ -557,6 +563,12 @@ def main(argv: list[str] | None = None) -> int:
             f"cross-dataset conditions={sorted(report['macro_answer_accuracy'])} "
             f"-> {args.output}"
         )
+        return 0
+    if args.command == "plot-cross-dataset-transfer":
+        output = plot_cross_dataset_transfer(
+            analysis_path=args.analysis, output_path=args.output
+        )
+        print(f"cross-dataset transfer plot -> {output}")
         return 0
     if args.command == "run-gsm8k-official-shard":
         summary = run_official_gsm8k_shard(
