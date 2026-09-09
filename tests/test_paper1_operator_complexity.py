@@ -2,11 +2,12 @@ from decimal import Decimal
 
 import pytest
 
-from ccpu.common.artifacts import read_jsonl, write_json, write_jsonl
+from ccpu.common.artifacts import file_sha256, read_jsonl, write_json, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
 from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from ccpu.paper1.e3.gsm8k_interventions import freeze_gsm8k_matched_interventions
+from ccpu.paper1.e3.intervention_analysis import analyze_matched_interventions
 from ccpu.paper1.e3.operator_analysis import analyze_operator_ladder, analyze_operator_pilot
 from ccpu.paper1.e3.operator_levels import freeze_operator_level, freeze_operator_pilot
 
@@ -251,3 +252,53 @@ def test_matched_interventions_keep_real_parent_graph_and_exclude_training(tmp_p
         -0.30 <= row["transformation"]["jitter_realized"] <= 0.30
         for row in jittered
     )
+
+
+def test_intervention_analysis_rejects_unpaired_rows_and_reports_only_matched(tmp_path):
+    evaluation = tmp_path / "eval.jsonl"
+    write_jsonl(
+        evaluation,
+        [
+            {"example_id": "a", "question_sha256": "qa"},
+            {"example_id": "b", "question_sha256": "qb"},
+        ],
+    )
+    paths = {}
+    for label, correctness in (("direct", (True, False)), ("asl", (True, True))):
+        directory = tmp_path / label
+        predictions = directory / "predictions.jsonl"
+        write_jsonl(
+            predictions,
+            [
+                {
+                    "example_id": example_id,
+                    "question_sha256": question_sha,
+                    "generated_tokens": 20 if label == "asl" else 100,
+                    "metrics": {"final_answer_correct": correct},
+                }
+                for example_id, question_sha, correct in zip(
+                    ("a", "b"), ("qa", "qb"), correctness, strict=True
+                )
+            ],
+        )
+        write_json(directory / "summary.json", {"eval_sha256": file_sha256(evaluation)})
+        paths[label] = predictions
+
+    report = analyze_matched_interventions(
+        cells=[("O5", evaluation, paths["direct"], paths["asl"])],
+        output_dir=tmp_path / "analysis",
+    )
+
+    assert report["cells"][0]["direct_accuracy"] == 0.5
+    assert report["cells"][0]["asl_accuracy"] == 1.0
+    assert report["cells"][0]["asl_minus_direct"] == 0.5
+    assert report["cells"][0]["paired"]["asl_only"] == 1
+
+    rows = read_jsonl(paths["asl"])
+    rows[0]["question_sha256"] = "wrong"
+    write_jsonl(paths["asl"], rows)
+    with pytest.raises(ValueError, match="question hash mismatch"):
+        analyze_matched_interventions(
+            cells=[("O5", evaluation, paths["direct"], paths["asl"])],
+            output_dir=tmp_path / "bad",
+        )

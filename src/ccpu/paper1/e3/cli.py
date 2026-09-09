@@ -43,6 +43,7 @@ from .gsm8k_confirmatory import (
     run_official_gsm8k_shard,
 )
 from .gsm8k_interventions import freeze_gsm8k_matched_interventions
+from .intervention_analysis import analyze_matched_interventions
 from .large_number_suite import freeze_large_number_gsm8k, freeze_magnitude_ladder_gsm8k
 from .magnitude_analysis import (
     analyze_magnitude_curve,
@@ -316,6 +317,14 @@ def build_parser() -> argparse.ArgumentParser:
     matched_interventions.add_argument("--factor", type=int, action="append")
     matched_interventions.add_argument("--jitter-seed", type=int, action="append")
     matched_interventions.add_argument("--seed", type=int, default=99173)
+    matched_analysis = commands.add_parser("analyze-gsm8k-matched-interventions")
+    matched_analysis.add_argument(
+        "--cell",
+        action="append",
+        required=True,
+        help="LABEL=EVAL|DIRECT_PREDICTIONS|ASL_PREDICTIONS",
+    )
+    matched_analysis.add_argument("--output-dir", required=True)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -915,6 +924,18 @@ def main(argv: list[str] | None = None) -> int:
             f"test={manifest['counts']['test']} eligible={manifest['eligibility']['eligible']} "
             f"-> {args.output_dir}"
         )
+        return 0
+    if args.command == "analyze-gsm8k-matched-interventions":
+        cells = []
+        for value in args.cell:
+            if "=" not in value or len(value.split("=", 1)[1].split("|")) != 3:
+                raise ValueError(
+                    "matched cells must use LABEL=EVAL|DIRECT_PREDICTIONS|ASL_PREDICTIONS"
+                )
+            label, paths = value.split("=", 1)
+            cells.append((label, *paths.split("|")))
+        report = analyze_matched_interventions(cells=cells, output_dir=args.output_dir)
+        print(f"matched Direct-vs-ASL cells={len(report['cells'])} -> {args.output_dir}")
         return 0
     if args.command == "run-bottleneck":
         summary = run_bottleneck_condition(
