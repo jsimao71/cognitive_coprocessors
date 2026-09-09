@@ -1,0 +1,113 @@
+{
+  "answers_visible_to_model": false,
+  "counts": {
+    "after_audit": {
+      "test": 520,
+      "train": 3635,
+      "validation": 1039
+    },
+    "dev": 100,
+    "diagnostic": 250,
+    "diagnostic_by_category": {
+      "arithmetic": 250
+    },
+    "diagnostic_by_difficulty": {
+      "low": 239,
+      "medium": 11
+    },
+    "e0_full": 520,
+    "source": {
+      "test": 520,
+      "train": 3636,
+      "validation": 1040
+    },
+    "train_source": 3635
+  },
+  "dataset": "mawps",
+  "equations_visible_to_model": false,
+  "gsm_adapter_snapshot": {
+    "files": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5f4fa901924c17a6b3bb7017c8b81425b8663a195e03c292dfb798acb03b71ca",
+      "adapter_model.safetensors": "cf8063841603023289d4b5074b8be2352aea3abebe3b0b8d28b0e62b96807621"
+    },
+    "immutable_for_E0_E1_E2": true,
+    "path": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/qwen_run/adapter"
+  },
+  "leakage_audit": {
+    "excluded_cross_split_duplicates": [
+      {
+        "example_id": "mawps__nLnbN42BTMK532gs",
+        "role": "validation"
+      },
+      {
+        "example_id": "mawps__ANMCjEDDzkz5L66p",
+        "role": "train"
+      }
+    ],
+    "excluded_exact_gsm_train_questions": [],
+    "excluded_unsupported_rows": [],
+    "gsm_train_files": {
+      "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+    },
+    "parent_overlaps": {
+      "dev_train": [],
+      "diagnostic_dev": [],
+      "diagnostic_train": []
+    },
+    "passed": true
+  },
+  "outputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\dev.jsonl",
+      "sha256": "549954db44a64e3fc8b4b7cba6e29f0db0bf8e588b75cdb7bf2e63426e4c12b4"
+    },
+    "diagnostic": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\diagnostic.jsonl",
+      "sha256": "79426260e89a21214ab2c714c1d44aacc0fc0755d0600b339b9783bc9690e973"
+    },
+    "e0_full": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\e0_full.jsonl",
+      "sha256": "2beeb92f2cc3e73f0fafb6fae99b0d2c4d30f1184a4fd5d53a7c712d1bc63867"
+    },
+    "train_source": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\train_source.jsonl",
+      "sha256": "5aee61510174040324f249f37ae94268ff0ba812bce076cd754985ba7a7d03a7"
+    }
+  },
+  "protocol": {
+    "E0": "existing GSM LoRA, no target training",
+    "E1": "copy GSM LoRA, then continue on target train_source",
+    "E2": "fresh target LoRA from the same base model and train_source",
+    "comparison": "E1 and E2 must match target rows and optimizer budget"
+  },
+  "rationales_visible_to_model": false,
+  "roles": {
+    "dev": "selection only; never report as test",
+    "diagnostic": "immutable 250-item E0/E1/E2 comparison; never train",
+    "e0_full": "complete upstream test view for E0 before target training",
+    "train_source": "target annotation pool; no ASL target yet"
+  },
+  "schema_version": "ccpu.paper1.arithmetic_transfer_manifest.v1",
+  "selection_seed": 93001,
+  "source_registry": {
+    "configuration": "original-splits",
+    "hub_id": "MU-NLPC/Calc-mawps",
+    "license": "MIT",
+    "revision": "38c10053efeafd20ab6ff4e08c3ec17de26c19b7"
+  },
+  "sources": {
+    "test": {
+      "path": "downloads\\paper1_cross_dataset\\mawps\\original-splits\\test-00000-of-00001-4f420cd8985debf1.parquet",
+      "sha256": "2ef6313cb811d5c5ebef422a909015f7db4750020f835fd95c2ac2ccbf343d82"
+    },
+    "train": {
+      "path": "downloads\\paper1_cross_dataset\\mawps\\original-splits\\train-00000-of-00001-17c94e510c7854ad.parquet",
+      "sha256": "379233ef8365d207b0128f506cd4636e7b9cc64f2bbcf32c3c171aa07061cbb6"
+    },
+    "validation": {
+      "path": "downloads\\paper1_cross_dataset\\mawps\\original-splits\\val-00000-of-00001-975313b7170ce834.parquet",
+      "sha256": "83ed41eb2fbd76235efba6635569bff59ededc171befb98b62862e826209a0fe"
+    }
+  }
+}

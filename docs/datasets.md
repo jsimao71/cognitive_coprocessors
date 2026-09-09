@@ -250,10 +250,10 @@ problem datasets that test transfer or robustness of NL-to-ASL compilation.
 |---|---:|---|---|---|
 | **GSM8K** | 8.8K | Linguistically diverse, multi-step grade-school arithmetic | Core training and untouched official confirmation | Active |
 | **GSM8K-OC O0--O6** | Generated per level | Controlled operator-family changes | Primary mechanism and operator-sensitivity study | Active |
-| **ASDiv** | 2.3K | Diverse elementary word problems with supplied equations | Near-distribution transfer and optional training diversity | Planned |
-| **SVAMP** | 1K | Adversarial variations of elementary arithmetic problems | Held-out semantic robustness test | Planned |
-| **MAWPS** | 3.3K | Broader collection of classic arithmetic word problems with equations | Cross-dataset transfer after deduplication | Planned |
-| **GSM-Plus** | 10.5K | Numerical, arithmetic, and semantic perturbations of GSM8K | Untouched out-of-distribution robustness test | Planned |
+| **ASDiv** | 2.3K | Diverse elementary word problems with supplied equations | Near-distribution transfer and optional training diversity | Frozen v1: 250 diagnostic, 1,898 train-source |
+| **SVAMP** | 1K | Adversarial variations of elementary arithmetic problems | Held-out semantic robustness test | Frozen v1: 250 diagnostic, 600 train-source |
+| **MAWPS** | 3.3K | Broader collection of classic arithmetic word problems with equations | Cross-dataset transfer after deduplication | Frozen v1: 250 diagnostic, 3,635 train-source |
+| **GSM-Plus** | 10.5K | Numerical, arithmetic, and semantic perturbations of GSM8K | Untouched out-of-distribution robustness test | Frozen v1: 250 diagnostic, 6,782 train-source |
 
 The preferred Paper 1 sequence is:
 
@@ -274,6 +274,24 @@ sets first. Do not train on their registered test identities before the
 corresponding held-out comparisons are complete. MAWPS requires cross-
 collection source, equation, template, and near-duplicate audits because
 classic math-word-problem collections can share examples.
+
+The frozen transfer study uses three ordered experiment sets on the same 250
+diagnostic identities. **E0** evaluates the existing GSM8K LoRA unchanged and
+is frozen before target annotations or training. **E1** copies that immutable
+GSM adapter and continues training separately on each target dataset. **E2**
+trains a fresh target-specific LoRA from the same base model. E1 and E2 must
+use identical target rows, optimizer budget, decoding, and evaluation. Every
+E1 run re-evaluates GSM/O0 to measure retention; the original GSM adapter is
+never modified in place. SVAMP and GSM-Plus retain their pre-training E0
+results as the primary OOD evidence even if their disjoint reserve pools are
+used later for the transfer study.
+
+The v1 sources are pinned in
+`configs/paper1/cross_dataset_transfer_v1.json`. GSM-Plus is split by seed-
+question family rather than perturbation row. Its answerless `critical
+thinking` arm is excluded from numeric scoring, while the seven answerable
+perturbation classes are balanced in the diagnostic. Published MAWPS split
+duplicates and all exact GSM-training overlaps are removed before selection.
 
 ### Paper 2 symbolic and mathematical capability
 

@@ -8,6 +8,7 @@ from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
 from .augmentation_analysis import analyze_gsm8k_augmentation_stage
 from .contribution_analysis import analyze_gsm8k_contribution
+from .cross_dataset import freeze_cross_dataset_benchmark
 from .data import (
     build_bottleneck_data,
     build_bottleneck_preference_data,
@@ -135,6 +136,18 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_official.add_argument("--expected-rows", type=int, default=1319)
     gsm8k_official.add_argument("--confirmatory-size", type=int, default=250)
     gsm8k_official.add_argument("--seed", type=int, default=22901)
+    cross_dataset = commands.add_parser("prepare-cross-dataset")
+    cross_dataset.add_argument(
+        "--dataset", choices=("asdiv", "svamp", "mawps", "gsm_plus"), required=True
+    )
+    cross_dataset.add_argument("--source", action="append", required=True)
+    cross_dataset.add_argument("--expected-sha256", action="append", required=True)
+    cross_dataset.add_argument("--gsm-train", action="append", required=True)
+    cross_dataset.add_argument("--gsm-adapter", required=True)
+    cross_dataset.add_argument("--output-dir", required=True)
+    cross_dataset.add_argument("--diagnostic-size", type=int, default=250)
+    cross_dataset.add_argument("--dev-size", type=int, default=100)
+    cross_dataset.add_argument("--seed", type=int, default=93001)
     gsm8k_run = commands.add_parser("run-gsm8k-official-shard")
     gsm8k_run.add_argument("--eval", required=True)
     gsm8k_run.add_argument("--config", required=True)
@@ -445,6 +458,34 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K official full={manifest['counts']['full']} "
             f"confirmatory={manifest['counts']['confirmatory']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-cross-dataset":
+        def keyed(values: list[str], option: str) -> dict[str, str]:
+            result = {}
+            for value in values:
+                if "=" not in value:
+                    raise ValueError(f"{option} must use ROLE=VALUE")
+                role, item = value.split("=", 1)
+                if role in result:
+                    raise ValueError(f"duplicate {option} role: {role}")
+                result[role] = item
+            return result
+
+        manifest = freeze_cross_dataset_benchmark(
+            dataset=args.dataset,
+            source_paths=keyed(args.source, "--source"),
+            expected_sha256=keyed(args.expected_sha256, "--expected-sha256"),
+            gsm_train_paths=args.gsm_train,
+            gsm_adapter_path=args.gsm_adapter,
+            output_dir=args.output_dir,
+            diagnostic_size=args.diagnostic_size,
+            dev_size=args.dev_size,
+            seed=args.seed,
+        )
+        print(
+            f"{args.dataset} diagnostic={manifest['counts']['diagnostic']} "
+            f"train={manifest['counts']['train_source']} -> {args.output_dir}"
         )
         return 0
     if args.command == "run-gsm8k-official-shard":

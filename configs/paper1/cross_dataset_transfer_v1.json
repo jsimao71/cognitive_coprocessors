@@ -1,0 +1,67 @@
+{
+  "schema_version": "ccpu.paper1.cross_dataset_transfer_config.v1",
+  "diagnostic_size": 250,
+  "dev_size": 100,
+  "selection_seed": 93001,
+  "gsm_train": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl",
+  "gsm_adapter": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/qwen_run/adapter",
+  "datasets": {
+    "asdiv": {
+      "hub_id": "EleutherAI/asdiv",
+      "revision": "8f95807222d87b4c688c3c22a6ba2801e1fa03e2",
+      "license": "CC-BY-NC-4.0",
+      "sources": {
+        "all": {
+          "path": "downloads/paper1_cross_dataset/asdiv/asdiv/validation-00000-of-00001.parquet",
+          "sha256": "79dbad6536fe3e8cd449e67da859d7a6f5ac0d8f852efe563742ca5faee7fb75"
+        }
+      }
+    },
+    "svamp": {
+      "hub_id": "ChilleD/SVAMP",
+      "revision": "5e0bf1e5e7c0e9c4bc39180d224f41f3f801b7ef",
+      "license": "MIT",
+      "sources": {
+        "train": {
+          "path": "downloads/paper1_cross_dataset/svamp/data/train-00000-of-00001.parquet",
+          "sha256": "c910f362fb2e863642414e9957d7712c82261f266ebe8d5681f5519a4a28248a"
+        },
+        "test": {
+          "path": "downloads/paper1_cross_dataset/svamp/data/test-00000-of-00001.parquet",
+          "sha256": "9e77ea83fd48aa4a7840fd5f15efaf1cb6eacffda414dd87d5a952012b5ac1fe"
+        }
+      }
+    },
+    "mawps": {
+      "hub_id": "MU-NLPC/Calc-mawps",
+      "revision": "38c10053efeafd20ab6ff4e08c3ec17de26c19b7",
+      "configuration": "original-splits",
+      "license": "MIT",
+      "sources": {
+        "train": {
+          "path": "downloads/paper1_cross_dataset/mawps/original-splits/train-00000-of-00001-17c94e510c7854ad.parquet",
+          "sha256": "379233ef8365d207b0128f506cd4636e7b9cc64f2bbcf32c3c171aa07061cbb6"
+        },
+        "validation": {
+          "path": "downloads/paper1_cross_dataset/mawps/original-splits/val-00000-of-00001-975313b7170ce834.parquet",
+          "sha256": "83ed41eb2fbd76235efba6635569bff59ededc171befb98b62862e826209a0fe"
+        },
+        "test": {
+          "path": "downloads/paper1_cross_dataset/mawps/original-splits/test-00000-of-00001-4f420cd8985debf1.parquet",
+          "sha256": "2ef6313cb811d5c5ebef422a909015f7db4750020f835fd95c2ac2ccbf343d82"
+        }
+      }
+    },
+    "gsm_plus": {
+      "hub_id": "qintongli/GSM-Plus",
+      "revision": "3b708db57b96a16e8e3368ed2956990c0809440e",
+      "license": "CC-BY-SA-4.0",
+      "sources": {
+        "test": {
+          "path": "downloads/paper1_cross_dataset/gsm_plus/data/test-00000-of-00001.jsonl",
+          "sha256": "885c279bfa9cde767ea23f79fd462d566fa0dbf6af9f2dcf30c75aa94f3d4041"
+        }
+      }
+    }
+  }
+}

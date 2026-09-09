@@ -1,0 +1,402 @@
+{
+  "answers_visible_to_model": false,
+  "counts": {
+    "after_audit": {
+      "all": 2248
+    },
+    "dev": 100,
+    "diagnostic": 250,
+    "diagnostic_by_category": {
+      "Addition": 19,
+      "Algebra-1": 18,
+      "Algebra-2": 21,
+      "Ceil-Division": 7,
+      "Common-Division": 19,
+      "Comparison": 1,
+      "Difference": 7,
+      "Floor-Division": 8,
+      "GCD": 7,
+      "Geometry": 20,
+      "LCM": 6,
+      "Multiplication": 19,
+      "Number-Operation": 2,
+      "Number-Pattern": 1,
+      "Ratio": 7,
+      "Sequential-Operation": 8,
+      "Set-Operation": 7,
+      "Substraction": 1,
+      "Subtraction": 20,
+      "Sum": 13,
+      "Surplus": 13,
+      "TVQ-Change": 7,
+      "TVQ-Final": 8,
+      "TVQ-Initial": 7,
+      "UnitTrans": 4
+    },
+    "diagnostic_by_difficulty": {
+      "high": 67,
+      "low": 100,
+      "medium": 83
+    },
+    "e0_full": 250,
+    "source": {
+      "all": 2305
+    },
+    "train_source": 1898
+  },
+  "dataset": "asdiv",
+  "equations_visible_to_model": false,
+  "gsm_adapter_snapshot": {
+    "files": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5f4fa901924c17a6b3bb7017c8b81425b8663a195e03c292dfb798acb03b71ca",
+      "adapter_model.safetensors": "cf8063841603023289d4b5074b8be2352aea3abebe3b0b8d28b0e62b96807621"
+    },
+    "immutable_for_E0_E1_E2": true,
+    "path": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/qwen_run/adapter"
+  },
+  "leakage_audit": {
+    "excluded_cross_split_duplicates": [
+      {
+        "example_id": "asdiv-0676",
+        "role": "all"
+      }
+    ],
+    "excluded_exact_gsm_train_questions": [],
+    "excluded_unsupported_rows": [
+      {
+        "reason": "answer has no numeric value: 'Mrs. Hilt'",
+        "role": "all",
+        "source_row": 29
+      },
+      {
+        "reason": "answer has no numeric value: 'Yes'",
+        "role": "all",
+        "source_row": 75
+      },
+      {
+        "reason": "answer has no numeric value: 'Purple'",
+        "role": "all",
+        "source_row": 163
+      },
+      {
+        "reason": "answer has no numeric value: 'Yes'",
+        "role": "all",
+        "source_row": 170
+      },
+      {
+        "reason": "answer has no numeric value: 'Yes'",
+        "role": "all",
+        "source_row": 172
+      },
+      {
+        "reason": "answer has no numeric value: 'No'",
+        "role": "all",
+        "source_row": 183
+      },
+      {
+        "reason": "answer has no numeric value: 'No'",
+        "role": "all",
+        "source_row": 189
+      },
+      {
+        "reason": "answer has no numeric value: 'Bryan'",
+        "role": "all",
+        "source_row": 195
+      },
+      {
+        "reason": "answer has no numeric value: 'Rug B'",
+        "role": "all",
+        "source_row": 632
+      },
+      {
+        "reason": "answer has no numeric value: \"Cesar's toothbrush\"",
+        "role": "all",
+        "source_row": 823
+      },
+      {
+        "reason": "answer has no numeric value: 'Sara'",
+        "role": "all",
+        "source_row": 824
+      },
+      {
+        "reason": "answer has no numeric value: 'John'",
+        "role": "all",
+        "source_row": 825
+      },
+      {
+        "reason": "answer has no numeric value: 'Harry'",
+        "role": "all",
+        "source_row": 826
+      },
+      {
+        "reason": "answer has no numeric value: 'John'",
+        "role": "all",
+        "source_row": 827
+      },
+      {
+        "reason": "answer has no numeric value: 'Alex'",
+        "role": "all",
+        "source_row": 828
+      },
+      {
+        "reason": "answer has no numeric value: 'Jim'",
+        "role": "all",
+        "source_row": 829
+      },
+      {
+        "reason": "answer has no numeric value: 'Jimmy'",
+        "role": "all",
+        "source_row": 830
+      },
+      {
+        "reason": "answer has no numeric value: \"The men's track team\"",
+        "role": "all",
+        "source_row": 1045
+      },
+      {
+        "reason": "answer has no numeric value: 'Fall'",
+        "role": "all",
+        "source_row": 1046
+      },
+      {
+        "reason": "answer has no numeric value: \"Lisa's soccer team\"",
+        "role": "all",
+        "source_row": 1047
+      },
+      {
+        "reason": "answer has no numeric value: 'Shannon'",
+        "role": "all",
+        "source_row": 1048
+      },
+      {
+        "reason": "answer has no numeric value: \"Ezra's class\"",
+        "role": "all",
+        "source_row": 1049
+      },
+      {
+        "reason": "answer has no numeric value: \"Mrs. Doyle's class\"",
+        "role": "all",
+        "source_row": 1050
+      },
+      {
+        "reason": "answer has no numeric value: \"Jacob's punch recipe\"",
+        "role": "all",
+        "source_row": 1051
+      },
+      {
+        "reason": "answer has no numeric value: 'They are equal'",
+        "role": "all",
+        "source_row": 1052
+      },
+      {
+        "reason": "answer has no numeric value: \"Daniel's pizza restaurant\"",
+        "role": "all",
+        "source_row": 1053
+      },
+      {
+        "reason": "answer has no numeric value: 'They are equal'",
+        "role": "all",
+        "source_row": 1054
+      },
+      {
+        "reason": "answer has no numeric value: 'This year'",
+        "role": "all",
+        "source_row": 1055
+      },
+      {
+        "reason": "answer has no numeric value: \"Jesse's class\"",
+        "role": "all",
+        "source_row": 1056
+      },
+      {
+        "reason": "answer has no numeric value: 'They are equal'",
+        "role": "all",
+        "source_row": 1057
+      },
+      {
+        "reason": "answer has no numeric value: 'The Cooper wedding'",
+        "role": "all",
+        "source_row": 1058
+      },
+      {
+        "reason": "answer has no numeric value: 'The first rest stop'",
+        "role": "all",
+        "source_row": 1059
+      },
+      {
+        "reason": "answer has no numeric value: 'Westford location'",
+        "role": "all",
+        "source_row": 1060
+      },
+      {
+        "reason": "answer has no numeric value: 'They are equal'",
+        "role": "all",
+        "source_row": 1061
+      },
+      {
+        "reason": "answer has no numeric value: 'Georgetown Middle School'",
+        "role": "all",
+        "source_row": 1062
+      },
+      {
+        "reason": "answer has no numeric value: 'Clara'",
+        "role": "all",
+        "source_row": 1160
+      },
+      {
+        "reason": "answer has no numeric value: 'Mabel'",
+        "role": "all",
+        "source_row": 1161
+      },
+      {
+        "reason": "answer has no numeric value: 'Adams County College'",
+        "role": "all",
+        "source_row": 1162
+      },
+      {
+        "reason": "answer has no numeric value: 'Leon'",
+        "role": "all",
+        "source_row": 1163
+      },
+      {
+        "reason": "answer has no numeric value: \"Richard's recipe\"",
+        "role": "all",
+        "source_row": 1164
+      },
+      {
+        "reason": "answer has no numeric value: 'History'",
+        "role": "all",
+        "source_row": 1165
+      },
+      {
+        "reason": "answer has no numeric value: 'Yardley'",
+        "role": "all",
+        "source_row": 1166
+      },
+      {
+        "reason": "answer has no numeric value: 'They are equal'",
+        "role": "all",
+        "source_row": 1167
+      },
+      {
+        "reason": "answer has no numeric value: \"Jake's stables\"",
+        "role": "all",
+        "source_row": 1168
+      },
+      {
+        "reason": "answer has no numeric value: 'Ivan'",
+        "role": "all",
+        "source_row": 1169
+      },
+      {
+        "reason": "answer has no numeric value: 'Ted'",
+        "role": "all",
+        "source_row": 1490
+      },
+      {
+        "reason": "answer has no numeric value: 'Book store'",
+        "role": "all",
+        "source_row": 1694
+      },
+      {
+        "reason": "answer has no numeric value: 'Hamburger'",
+        "role": "all",
+        "source_row": 1698
+      },
+      {
+        "reason": "answer has no numeric value: 'Monday'",
+        "role": "all",
+        "source_row": 1699
+      },
+      {
+        "reason": "answer has no numeric value: 'Red'",
+        "role": "all",
+        "source_row": 1700
+      },
+      {
+        "reason": "answer has no numeric value: 'October'",
+        "role": "all",
+        "source_row": 1701
+      },
+      {
+        "reason": "answer has no numeric value: 'Online'",
+        "role": "all",
+        "source_row": 1702
+      },
+      {
+        "reason": "answer has no numeric value: 'Market'",
+        "role": "all",
+        "source_row": 1705
+      },
+      {
+        "reason": "answer has no numeric value: 'Chicken finger'",
+        "role": "all",
+        "source_row": 1707
+      },
+      {
+        "reason": "answer has no numeric value: 'Brand B'",
+        "role": "all",
+        "source_row": 1709
+      },
+      {
+        "reason": "answer has no numeric value: 'Red'",
+        "role": "all",
+        "source_row": 1713
+      }
+    ],
+    "gsm_train_files": {
+      "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+    },
+    "parent_overlaps": {
+      "dev_train": [],
+      "diagnostic_dev": [],
+      "diagnostic_train": []
+    },
+    "passed": true
+  },
+  "outputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\dev.jsonl",
+      "sha256": "4946ed4f3315557f11360c9a9c977ff2b27dbb243fad2e5fb2897333d533cc7c"
+    },
+    "diagnostic": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\diagnostic.jsonl",
+      "sha256": "74a0397971c2359b2626d54b1b0dd5b79ef81e42403c5755fccf58e92e0ab737"
+    },
+    "e0_full": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\e0_full.jsonl",
+      "sha256": "b45c6806e389ceecba504291695fb6a15ff30712401659eb9f02ae2cf80a8c79"
+    },
+    "train_source": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\train_source.jsonl",
+      "sha256": "2159a6d256697e48a7eea5028525894dd357462be445f8d0e542920df16ca4f7"
+    }
+  },
+  "protocol": {
+    "E0": "existing GSM LoRA, no target training",
+    "E1": "copy GSM LoRA, then continue on target train_source",
+    "E2": "fresh target LoRA from the same base model and train_source",
+    "comparison": "E1 and E2 must match target rows and optimizer budget"
+  },
+  "rationales_visible_to_model": false,
+  "roles": {
+    "dev": "selection only; never report as test",
+    "diagnostic": "immutable 250-item E0/E1/E2 comparison; never train",
+    "e0_full": "complete upstream test view for E0 before target training",
+    "train_source": "target annotation pool; no ASL target yet"
+  },
+  "schema_version": "ccpu.paper1.arithmetic_transfer_manifest.v1",
+  "selection_seed": 93001,
+  "source_registry": {
+    "hub_id": "EleutherAI/asdiv",
+    "license": "CC-BY-NC-4.0",
+    "revision": "8f95807222d87b4c688c3c22a6ba2801e1fa03e2"
+  },
+  "sources": {
+    "all": {
+      "path": "downloads\\paper1_cross_dataset\\asdiv\\asdiv\\validation-00000-of-00001.parquet",
+      "sha256": "79dbad6536fe3e8cd449e67da859d7a6f5ac0d8f852efe563742ca5faee7fb75"
+    }
+  }
+}

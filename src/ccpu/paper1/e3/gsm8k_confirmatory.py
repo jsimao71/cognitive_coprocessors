@@ -32,7 +32,10 @@ def _answer(raw: Any) -> str:
 
 
 def _decimal(raw: Any) -> Decimal:
-    text = str(raw).strip().replace(",", "").replace("$", "")
+    text = str(raw).strip().replace(",", "").replace("_", "").replace("$", "")
+    if "/" in text:
+        numerator, denominator = text.split("/", 1)
+        return Decimal(numerator) / Decimal(denominator)
     return Decimal(text)
 
 
@@ -306,6 +309,7 @@ def _run_official_gsm8k_shard_unlocked(
         prediction = {
             "schema_version": "ccpu.paper1.gsm8k_answer_prediction.v1",
             "example_id": row["example_id"],
+            "dataset": row.get("dataset", "gsm8k"),
             "parent_example_id": row.get("parent_example_id", row["example_id"]),
             "source_row": row["source_row"],
             "difficulty_stratum": row["difficulty_stratum"],

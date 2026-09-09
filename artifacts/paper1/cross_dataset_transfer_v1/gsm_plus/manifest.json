@@ -1,0 +1,6699 @@
+{
+  "answers_visible_to_model": false,
+  "counts": {
+    "after_audit": {
+      "test": 9232
+    },
+    "dev": 700,
+    "diagnostic": 250,
+    "diagnostic_by_category": {
+      "adding operation": 36,
+      "digit expansion": 36,
+      "distraction insertion": 36,
+      "integer-decimal-fraction conversion": 35,
+      "numerical substitution": 36,
+      "problem understanding": 35,
+      "reversing operation": 36
+    },
+    "diagnostic_by_difficulty": {
+      "high": 213,
+      "low": 2,
+      "medium": 35
+    },
+    "e0_full": 9232,
+    "source": {
+      "test": 10552
+    },
+    "train_source": 6782
+  },
+  "dataset": "gsm_plus",
+  "equations_visible_to_model": false,
+  "gsm_adapter_snapshot": {
+    "files": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5f4fa901924c17a6b3bb7017c8b81425b8663a195e03c292dfb798acb03b71ca",
+      "adapter_model.safetensors": "cf8063841603023289d4b5074b8be2352aea3abebe3b0b8d28b0e62b96807621"
+    },
+    "immutable_for_E0_E1_E2": true,
+    "path": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/qwen_run/adapter"
+  },
+  "leakage_audit": {
+    "excluded_cross_split_duplicates": [
+      {
+        "example_id": "gsm-plus-02410",
+        "role": "test"
+      }
+    ],
+    "excluded_exact_gsm_train_questions": [],
+    "excluded_unsupported_rows": [
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 15
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 23
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 31
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 39
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 47
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 55
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 63
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 71
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 79
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 87
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 95
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 1999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 2999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 3999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 4999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 5999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 6999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 7999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 8999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9551
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9559
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9567
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9575
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9583
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9591
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9599
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9607
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9615
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9623
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9631
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9639
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9647
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9655
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9663
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9671
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9679
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9687
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9695
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9703
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9711
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9719
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9727
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9735
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9743
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9751
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9759
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9767
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9775
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9783
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9791
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9799
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9807
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9815
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9823
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9831
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9839
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9847
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9855
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9863
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9871
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9879
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9887
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9895
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9903
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9911
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9919
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9927
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9935
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9943
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9951
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9959
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9967
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9975
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9983
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9991
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 9999
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10007
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10015
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10023
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10031
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10039
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10047
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10055
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10063
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10071
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10079
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10087
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10095
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10103
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10111
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10119
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10127
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10135
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10143
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10151
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10159
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10167
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10175
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10183
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10191
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10199
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10207
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10215
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10223
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10231
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10239
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10247
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10255
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10263
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10271
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10279
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10287
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10295
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10303
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10311
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10319
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10327
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10335
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10343
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10351
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10359
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10367
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10375
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10383
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10391
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10399
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10407
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10415
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10423
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10431
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10439
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10447
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10455
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10463
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10471
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10479
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10487
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10495
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10503
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10511
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10519
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10527
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10535
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10543
+      },
+      {
+        "reason": "answer has no numeric value: 'None'",
+        "role": "test",
+        "source_row": 10551
+      }
+    ],
+    "gsm_train_files": {
+      "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+    },
+    "parent_overlaps": {
+      "dev_train": [],
+      "diagnostic_dev": [],
+      "diagnostic_train": []
+    },
+    "passed": true
+  },
+  "outputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\dev.jsonl",
+      "sha256": "bf6f3f8cd7bd2d1d127a3941fb3f31b6f454ab863840638b76eb0bb54ae8b8ca"
+    },
+    "diagnostic": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\diagnostic.jsonl",
+      "sha256": "d6a380071c0577f4f50e714ae3a2dab92d5af974e4c2624adde32148a6ddafd9"
+    },
+    "e0_full": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\e0_full.jsonl",
+      "sha256": "29df4020ef3b671f5d20dac6e059ea1587f8cead564d9dd6eb47523f5a8756f7"
+    },
+    "train_source": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\train_source.jsonl",
+      "sha256": "950b1571ba7e0ccba72f3a16d35e278779a083b8137382ac1393a7d34f1f31e8"
+    }
+  },
+  "protocol": {
+    "E0": "existing GSM LoRA, no target training",
+    "E1": "copy GSM LoRA, then continue on target train_source",
+    "E2": "fresh target LoRA from the same base model and train_source",
+    "comparison": "E1 and E2 must match target rows and optimizer budget"
+  },
+  "rationales_visible_to_model": false,
+  "roles": {
+    "dev": "selection only; never report as test",
+    "diagnostic": "immutable 250-item E0/E1/E2 comparison; never train",
+    "e0_full": "complete upstream test view for E0 before target training",
+    "train_source": "target annotation pool; no ASL target yet"
+  },
+  "schema_version": "ccpu.paper1.arithmetic_transfer_manifest.v1",
+  "selection_seed": 93001,
+  "source_registry": {
+    "hub_id": "qintongli/GSM-Plus",
+    "license": "CC-BY-SA-4.0",
+    "revision": "3b708db57b96a16e8e3368ed2956990c0809440e"
+  },
+  "sources": {
+    "test": {
+      "path": "downloads\\paper1_cross_dataset\\gsm_plus\\data\\test-00000-of-00001.jsonl",
+      "sha256": "885c279bfa9cde767ea23f79fd462d566fa0dbf6af9f2dcf30c75aa94f3d4041"
+    }
+  }
+}

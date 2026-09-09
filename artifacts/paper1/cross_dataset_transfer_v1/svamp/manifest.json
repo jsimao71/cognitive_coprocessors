@@ -1,0 +1,100 @@
+{
+  "answers_visible_to_model": false,
+  "counts": {
+    "after_audit": {
+      "test": 300,
+      "train": 700
+    },
+    "dev": 100,
+    "diagnostic": 250,
+    "diagnostic_by_category": {
+      "Addition": 59,
+      "Common-Division": 48,
+      "Multiplication": 33,
+      "Subtraction": 110
+    },
+    "diagnostic_by_difficulty": {
+      "low": 167,
+      "medium": 83
+    },
+    "e0_full": 300,
+    "source": {
+      "test": 300,
+      "train": 700
+    },
+    "train_source": 600
+  },
+  "dataset": "svamp",
+  "equations_visible_to_model": false,
+  "gsm_adapter_snapshot": {
+    "files": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5f4fa901924c17a6b3bb7017c8b81425b8663a195e03c292dfb798acb03b71ca",
+      "adapter_model.safetensors": "cf8063841603023289d4b5074b8be2352aea3abebe3b0b8d28b0e62b96807621"
+    },
+    "immutable_for_E0_E1_E2": true,
+    "path": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/qwen_run/adapter"
+  },
+  "leakage_audit": {
+    "excluded_cross_split_duplicates": [],
+    "excluded_exact_gsm_train_questions": [],
+    "excluded_unsupported_rows": [],
+    "gsm_train_files": {
+      "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+    },
+    "parent_overlaps": {
+      "dev_train": [],
+      "diagnostic_dev": [],
+      "diagnostic_train": []
+    },
+    "passed": true
+  },
+  "outputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\dev.jsonl",
+      "sha256": "27dcc7970e617c516f959c10a0976cfd77bfd66bc2ad18f048ed0ab0e456a2be"
+    },
+    "diagnostic": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\diagnostic.jsonl",
+      "sha256": "4dab3b3ed28412d4f34ddb836089c5214c2d54a35d924149c17c203daffa44b0"
+    },
+    "e0_full": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\e0_full.jsonl",
+      "sha256": "5880ceccbefae1054d89c867f1aaf416dcc1cb74dca5678c8145a5feae1934e5"
+    },
+    "train_source": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\train_source.jsonl",
+      "sha256": "9d077bfa8568c0aecd8b9b781147774d77b86744ecf9af8316484a0c7fc372f6"
+    }
+  },
+  "protocol": {
+    "E0": "existing GSM LoRA, no target training",
+    "E1": "copy GSM LoRA, then continue on target train_source",
+    "E2": "fresh target LoRA from the same base model and train_source",
+    "comparison": "E1 and E2 must match target rows and optimizer budget"
+  },
+  "rationales_visible_to_model": false,
+  "roles": {
+    "dev": "selection only; never report as test",
+    "diagnostic": "immutable 250-item E0/E1/E2 comparison; never train",
+    "e0_full": "complete upstream test view for E0 before target training",
+    "train_source": "target annotation pool; no ASL target yet"
+  },
+  "schema_version": "ccpu.paper1.arithmetic_transfer_manifest.v1",
+  "selection_seed": 93001,
+  "source_registry": {
+    "hub_id": "ChilleD/SVAMP",
+    "license": "MIT",
+    "revision": "5e0bf1e5e7c0e9c4bc39180d224f41f3f801b7ef"
+  },
+  "sources": {
+    "test": {
+      "path": "downloads\\paper1_cross_dataset\\svamp\\data\\test-00000-of-00001.parquet",
+      "sha256": "9e77ea83fd48aa4a7840fd5f15efaf1cb6eacffda414dd87d5a952012b5ac1fe"
+    },
+    "train": {
+      "path": "downloads\\paper1_cross_dataset\\svamp\\data\\train-00000-of-00001.parquet",
+      "sha256": "c910f362fb2e863642414e9957d7712c82261f266ebe8d5681f5519a4a28248a"
+    }
+  }
+}

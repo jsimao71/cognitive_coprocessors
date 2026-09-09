@@ -39,6 +39,32 @@ GSM-Symbolic before their registered test role has been completed. Audit MAWPS
 and MultiArith against each other and against any shared legacy word-problem
 collections before use.
 
+### Cross-dataset LoRA sequence (frozen v1)
+
+Run ASDiv, SVAMP, MAWPS, and GSM-Plus in this exact order of conditions:
+
+1. **E0, existing GSM LoRA:** evaluate the immutable U2000/E4500 GSM adapter
+   without target examples, target ICL, or additional training. Freeze these
+   predictions before creating target ASL supervision.
+2. **E1, continued target LoRA:** copy the GSM adapter into a new dataset-
+   specific run and continue training. Never update the GSM-only checkpoint in
+   place. Report target accuracy and GSM/O0 retention.
+3. **E2, fresh target LoRA:** initialize the same LoRA architecture from the
+   base Qwen checkpoint and train only on that target dataset.
+
+E1 and E2 must use the same target train/dev identities, optimizer-step and
+example-exposure budget, seed policy, prompt, decoder, and frozen 250-example
+diagnostic. Their difference estimates transfer from the learned GSM NL-to-ASL
+compiler; E0 measures zero-shot transfer. Preserve the initial E0 results for
+SVAMP and GSM-Plus as OOD evidence before using any disjoint reserve families
+for E1/E2. Dataset-specific training is ordered last, after the quick E0 pass
+and the transferred E1 pass.
+
+The pinned source registry is
+`configs/paper1/cross_dataset_transfer_v1.json`; frozen manifests and splits
+are under `artifacts/paper1/cross_dataset_transfer_v1/`. GSM-Plus is grouped by
+seed-question family. Only question text is model-visible during evaluation.
+
 Latest frozen evidence:
 
 ```text
