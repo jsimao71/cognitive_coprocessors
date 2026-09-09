@@ -192,6 +192,33 @@ The objective is to hold linguistic style and semantic-story complexity relative
 
 Do not simply concatenate unrelated external math datasets into this experiment.
 
+## 5.1 Natural-parent primary ladder
+
+The original template-generated GSM8K-OC sets are retained only as synthetic
+operator/runtime sanity checks. They are not primary evidence for a
+direct-versus-ASL crossover.
+
+The primary `GSM8K-OC-natural-v2` ladder starts from execution-verified GSM8K
+programs excluded from the U2000 adapter's training identities. A single
+grounded source binding is selected per parent. Every intervention preserves
+the remaining natural-language story and downstream ASL dependency graph:
+
+```text
+R0   original GSM8K parent
+R1   designated binding scaled by x1, x10^2, x10^3, x10^4, x10^6
+R1J  the same scaled binding with deterministic Uniform[-30%, +30%] jitter
+O1   binding recovered through exact sqrt
+O3   binding recovered through exact log10
+O5   binding recovered through solve_linear
+O6   binding recovered through positive_quadratic_root
+```
+
+Gold answers are always obtained by executing the transformed full program.
+Direct and ASL inference consume the same frozen row for each condition and
+must match ordered `example_id` and `question_sha256`. The operator prompt lists
+the complete available registry but does not preselect an operator. Training
+mixes all operator levels so level identity cannot select a dedicated adapter.
+
 ---
 
 # 6. Dataset construction principle

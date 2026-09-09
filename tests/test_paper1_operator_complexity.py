@@ -6,6 +6,7 @@ from ccpu.common.artifacts import read_jsonl, write_json, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
 from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
+from ccpu.paper1.e3.gsm8k_interventions import freeze_gsm8k_matched_interventions
 from ccpu.paper1.e3.operator_analysis import analyze_operator_ladder, analyze_operator_pilot
 from ccpu.paper1.e3.operator_levels import freeze_operator_level, freeze_operator_pilot
 
@@ -192,3 +193,61 @@ def test_operator_ladder_analysis_preserves_categorical_level_order(tmp_path):
     assert report["level_order"] == ["O0", "O3"]
     assert "not equally spaced" in report["categorical_level_warning"]
     assert (tmp_path / "ladder" / "operator_ladder_pilots.png").exists()
+
+
+def test_matched_interventions_keep_real_parent_graph_and_exclude_training(tmp_path):
+    source = tmp_path / "source.jsonl"
+    training = tmp_path / "training.jsonl"
+    rows = []
+    for index in range(8):
+        value = 4 + index % 6
+        rows.append(
+            {
+                "parent_source_id": str(index),
+                "prompt": (
+                    "Compile.\n\nInput:\nProblem: Mina has "
+                    f"{value} red boxes and 3 blue boxes. Each box contains 2 cards. "
+                    "How many cards are in all the boxes?\nASL:"
+                ),
+                "target": (
+                    f"mina.red.boxes = {value}\n"
+                    "mina.blue.boxes = 3\n"
+                    "mina.total.boxes = mina.red.boxes + mina.blue.boxes\n"
+                    "box.cards = 2\n"
+                    "mina.total.cards = mina.total.boxes * box.cards\n"
+                    "RETURN mina.total.cards"
+                ),
+            }
+        )
+    write_jsonl(source, rows)
+    write_jsonl(training, [{"parent_source_id": "0"}])
+
+    manifest = freeze_gsm8k_matched_interventions(
+        source_corpus_path=source,
+        excluded_training_path=training,
+        output_dir=tmp_path / "out",
+        train_count=3,
+        dev_count=2,
+        test_count=2,
+        factors=(1, 100),
+        jitter_seeds=(17,),
+    )
+
+    assert manifest["leakage_audit"]["selected_source_overlap"] == 0
+    original = read_jsonl(tmp_path / "out" / "original" / "test.jsonl")
+    o6 = read_jsonl(tmp_path / "out" / "operators" / "o6" / "test.jsonl")
+    assert [row["parent_example_id"] for row in original] == [
+        row["parent_example_id"] for row in o6
+    ]
+    assert [row["reference_return"] for row in original] == [
+        row["reference_return"] for row in o6
+    ]
+    assert all("mina.total.cards" in row["gold_asl"] for row in o6)
+    assert all("positive_quadratic_root" in row["gold_asl"] for row in o6)
+    jittered = read_jsonl(
+        tmp_path / "out" / "jitter" / "seed_17" / "x100" / "test.jsonl"
+    )
+    assert all(
+        -0.30 <= row["transformation"]["jitter_realized"] <= 0.30
+        for row in jittered
+    )

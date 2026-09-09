@@ -2140,6 +2140,28 @@ cube-argument binding failure.}
 \label{fig:operator-o1-pilot}
 \end{figure}
 
+\paragraph{Natural-parent operator correction.}
+The preceding pilot isolates operator invocation and runtime execution, but its
+single-operation templates do not measure the multi-entity binding and
+dependency errors that dominate natural GSM8K compilation. We therefore retain
+it only as a synthetic sanity baseline. The primary operator experiment is now
+frozen as \texttt{GSM8K-OC-natural-v2}: 250 training, 30 development, and 100
+test parents are drawn from execution-verified GSM8K programs excluded from all
+2,000 U2000 training identities. The eligibility audit found 766 held-out
+parents and selected the splits before inference.
+
+For each parent, one grounded source binding is shared across all interventions.
+The remainder of the original question and downstream ASL dependency graph is
+preserved. The panel includes the original problem; strict multipliers
+$\{1,10^2,10^3,10^4,10^6\}$; three deterministic
+$\operatorname{Uniform}[-0.30,+0.30]$ jitter seeds; and value-preserving O1,
+O3, O5, and O6 subgraphs using exact square root, base-10 logarithm, linear
+solution, and positive quadratic-root operators. Every transformed answer is
+recomputed by executing the full transformed program. Direct and ASL conditions
+must consume the same frozen row and match both ordered identity and question
+hash. Results from this panel supersede the synthetic pilot for the principal
+direct-versus-ASL crossover analysis once both arms complete.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}

@@ -305,6 +305,21 @@ programs. One explicitly provenance-marked repair pass brought both splits to
 250-example diagnostic is disjoint and was first evaluated with the untouched
 GSM adapter at 202/250 correct (80.8%) and 236/250 executable (94.4%).
 
+#### GSM8K matched intervention panel v2
+
+`artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173` freezes a
+natural-parent intervention panel from execution-verified GSM8K programs that
+were not used by the U2000 LoRA. It contains 250 training, 30 development, and
+100 test parents selected from 766 eligible held-out programs, with zero source
+identity overlap against the 2,000 U2000 training parents.
+
+The same parent binding is used for strict `x1/x10^2/x10^3/x10^4/x10^6`
+magnitude variants, three deterministic `Uniform[-30%, +30%]` jitter seeds,
+and O1/O3/O5/O6 operator-injection variants. Operator variants retain the
+original GSM8K story and downstream dependency graph. The older template-only
+operator datasets remain sanity baselines and must not be used as primary
+direct-versus-ASL evidence.
+
 ### Paper 2 symbolic and mathematical capability
 
 Paper 2 extends beyond Paper 1's arithmetic-only contract. It adds controlled

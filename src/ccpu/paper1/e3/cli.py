@@ -42,6 +42,7 @@ from .gsm8k_confirmatory import (
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
 )
+from .gsm8k_interventions import freeze_gsm8k_matched_interventions
 from .large_number_suite import freeze_large_number_gsm8k, freeze_magnitude_ladder_gsm8k
 from .magnitude_analysis import (
     analyze_magnitude_curve,
@@ -305,6 +306,16 @@ def build_parser() -> argparse.ArgumentParser:
     operator_level_pilot.add_argument("--dev-count", type=int, default=30)
     operator_level_pilot.add_argument("--test-count", type=int, default=100)
     operator_level_pilot.add_argument("--seed", type=int, default=99173)
+    matched_interventions = commands.add_parser("prepare-gsm8k-matched-interventions")
+    matched_interventions.add_argument("--source-corpus", required=True)
+    matched_interventions.add_argument("--excluded-training", required=True)
+    matched_interventions.add_argument("--output-dir", required=True)
+    matched_interventions.add_argument("--train-count", type=int, default=250)
+    matched_interventions.add_argument("--dev-count", type=int, default=30)
+    matched_interventions.add_argument("--test-count", type=int, default=100)
+    matched_interventions.add_argument("--factor", type=int, action="append")
+    matched_interventions.add_argument("--jitter-seed", type=int, action="append")
+    matched_interventions.add_argument("--seed", type=int, default=99173)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -880,6 +891,28 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K-OC {args.level} pilot train={manifest['counts']['train']} "
             f"dev={manifest['counts']['dev']} test={manifest['counts']['test']} "
+            f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-matched-interventions":
+        keyword = {
+            "source_corpus_path": args.source_corpus,
+            "excluded_training_path": args.excluded_training,
+            "output_dir": args.output_dir,
+            "train_count": args.train_count,
+            "dev_count": args.dev_count,
+            "test_count": args.test_count,
+            "seed": args.seed,
+        }
+        if args.factor:
+            keyword["factors"] = tuple(args.factor)
+        if args.jitter_seed:
+            keyword["jitter_seeds"] = tuple(args.jitter_seed)
+        manifest = freeze_gsm8k_matched_interventions(**keyword)
+        print(
+            "GSM8K matched interventions "
+            f"train={manifest['counts']['train']} dev={manifest['counts']['dev']} "
+            f"test={manifest['counts']['test']} eligible={manifest['eligibility']['eligible']} "
             f"-> {args.output_dir}"
         )
         return 0
