@@ -9,6 +9,7 @@ from ccpu.common.artifacts import read_json, read_jsonl, write_json
 from .augmentation_analysis import analyze_gsm8k_augmentation_stage
 from .contribution_analysis import analyze_gsm8k_contribution
 from .cross_dataset import build_cross_dataset_teacher_seed, freeze_cross_dataset_benchmark
+from .cross_dataset_analysis import analyze_cross_dataset_transfer
 from .data import (
     build_bottleneck_data,
     build_bottleneck_preference_data,
@@ -151,6 +152,10 @@ def build_parser() -> argparse.ArgumentParser:
     cross_seed = commands.add_parser("prepare-cross-dataset-teacher-seed")
     cross_seed.add_argument("--frozen-dir", required=True)
     cross_seed.add_argument("--output", required=True)
+    cross_analysis = commands.add_parser("analyze-cross-dataset-transfer")
+    cross_analysis.add_argument("--manifest", action="append", required=True)
+    cross_analysis.add_argument("--prediction", action="append", required=True)
+    cross_analysis.add_argument("--output", required=True)
     gsm8k_run = commands.add_parser("run-gsm8k-official-shard")
     gsm8k_run.add_argument("--eval", required=True)
     gsm8k_run.add_argument("--config", required=True)
@@ -498,6 +503,30 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(
             f"{manifest['dataset']} teacher seeds={manifest['count']} -> {args.output}"
+        )
+        return 0
+    if args.command == "analyze-cross-dataset-transfer":
+        manifests = {}
+        for value in args.manifest:
+            if "=" not in value:
+                raise ValueError("--manifest must use DATASET=PATH")
+            dataset, path = value.split("=", 1)
+            manifests[dataset] = path
+        predictions = {}
+        for value in args.prediction:
+            if "=" not in value or ":" not in value.split("=", 1)[0]:
+                raise ValueError("--prediction must use DATASET:CONDITION=PATH")
+            key, path = value.split("=", 1)
+            dataset, condition = key.split(":", 1)
+            predictions[(dataset, condition)] = path
+        report = analyze_cross_dataset_transfer(
+            manifest_paths=manifests,
+            prediction_paths=predictions,
+            output_path=args.output,
+        )
+        print(
+            f"cross-dataset conditions={sorted(report['macro_answer_accuracy'])} "
+            f"-> {args.output}"
         )
         return 0
     if args.command == "run-gsm8k-official-shard":
