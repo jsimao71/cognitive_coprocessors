@@ -2,10 +2,11 @@ from decimal import Decimal
 
 import pytest
 
-from ccpu.common.artifacts import read_jsonl
+from ccpu.common.artifacts import read_jsonl, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
 from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
+from ccpu.paper1.e3.operator_analysis import analyze_operator_pilot
 
 
 def test_o1_exact_runtime_and_semantic_aliases():
@@ -63,3 +64,46 @@ def test_o1_pilot_is_balanced_and_uses_fixed_representation_prompts(tmp_path):
     assert [row["source_row"] for row in read_jsonl(pilot / "test.jsonl")] == list(
         range(6)
     )
+
+
+def test_operator_pilot_analysis_is_paired_and_audits_bindings(tmp_path):
+    evaluation = tmp_path / "eval.jsonl"
+    conditions = {name: tmp_path / f"{name}.jsonl" for name in ("direct", "ap", "as")}
+    rows = [
+        {"example_id": "a", "operator_family": "square"},
+        {"example_id": "b", "operator_family": "cube"},
+    ]
+    write_jsonl(evaluation, rows)
+    for name, path in conditions.items():
+        predictions = []
+        for index, row in enumerate(rows):
+            correct = name == "ap" or (name == "direct" and index == 0)
+            errors = ["unresolved reference 'edge'"] if name == "as" else []
+            predictions.append(
+                {
+                    "example_id": row["example_id"],
+                    "generated_tokens": 10 + index,
+                    "metrics": {
+                        "final_answer_correct": correct,
+                        "parse_valid": True,
+                        "lowerable_to_ccir": True,
+                        "type_valid": True,
+                        "executable": correct,
+                        "errors": errors,
+                    },
+                }
+            )
+        write_jsonl(path, predictions)
+
+    report = analyze_operator_pilot(
+        eval_path=evaluation,
+        direct_predictions_path=conditions["direct"],
+        ap_predictions_path=conditions["ap"],
+        as_predictions_path=conditions["as"],
+        output_dir=tmp_path / "analysis",
+    )
+
+    assert report["conditions"]["ap"]["correct"] == 2
+    assert report["paired"]["ap_vs_direct"]["left_only"] == 1
+    assert report["as_failure_audit"]["unresolved_reference"] == 2
+    assert (tmp_path / "analysis" / "operator_o1_pilot.png").exists()

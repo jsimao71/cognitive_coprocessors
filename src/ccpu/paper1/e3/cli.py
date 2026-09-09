@@ -41,6 +41,7 @@ from .magnitude_analysis import (
 )
 from .model_size_analysis import analyze_model_size_interaction
 from .operator_complexity import freeze_o1_dataset, freeze_o1_pilot
+from .operator_analysis import analyze_operator_pilot
 from .result_plots import build_gsm8k_result_plots
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
@@ -236,6 +237,12 @@ def build_parser() -> argparse.ArgumentParser:
     operator_o1_pilot.add_argument("--dev-count", type=int, default=30)
     operator_o1_pilot.add_argument("--test-count", type=int, default=100)
     operator_o1_pilot.add_argument("--seed", type=int, default=99173)
+    operator_analysis = commands.add_parser("analyze-operator-pilot")
+    operator_analysis.add_argument("--eval", required=True)
+    operator_analysis.add_argument("--direct-predictions", required=True)
+    operator_analysis.add_argument("--ap-predictions", required=True)
+    operator_analysis.add_argument("--as-predictions", required=True)
+    operator_analysis.add_argument("--output-dir", required=True)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -674,6 +681,22 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K-OC O1 pilot train={manifest['counts']['train']} "
             f"dev={manifest['counts']['dev']} test={manifest['counts']['test']} "
+            f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "analyze-operator-pilot":
+        report = analyze_operator_pilot(
+            eval_path=args.eval,
+            direct_predictions_path=args.direct_predictions,
+            ap_predictions_path=args.ap_predictions,
+            as_predictions_path=args.as_predictions,
+            output_dir=args.output_dir,
+        )
+        print(
+            "operator pilot "
+            f"direct={report['conditions']['direct']['correct']}/{report['identity_count']} "
+            f"AP={report['conditions']['ap']['correct']}/{report['identity_count']} "
+            f"AS={report['conditions']['as']['correct']}/{report['identity_count']} "
             f"-> {args.output_dir}"
         )
         return 0

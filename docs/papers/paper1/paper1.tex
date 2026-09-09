@@ -105,7 +105,14 @@ gains are 18.6--27.1 points, with all three paired bootstrap intervals above zer
 This supports a bounded magnitude-robustness benefit, not a general accuracy
 benefit. A post-hoc 2,048-token direct-reasoning sensitivity obtains 154/250
 (61.6\%) ordinary and 26/59 (44.1\%) transformed answers; ASL's differential
-robustness remains 16.9--25.4 points across seeds.
+robustness remains 16.9--25.4 points across seeds. Finally, a one-seed,
+100-question operator pilot replaces basic arithmetic with square, cube, and
+exact square root. Primitive ASL plus deterministic execution obtains 100\%
+answers versus 86\% for direct reasoning while using 14.5 rather than 464 mean
+generated tokens. A more semantic ASL obtains only 66\% because every cube case
+contains the same unresolved argument binding. This supports an
+operator-delegation signal while identifying symbol grounding as its immediate
+limit; the synthetic pilot is not yet an operator-complexity curve.
 \end{abstract}
 
 \section{Status and Scope}
@@ -2075,6 +2082,64 @@ that entity renaming may modestly help the broader frozen selection sample while
 damaging some previously successful structures, and motivates replication at
 both model sizes before making a semantic-augmentation claim.
 
+\subsection{One-Seed O1 Operator Pilot}
+
+We next freeze a pilot designed to obtain an early read before running the full
+operator-complexity ladder. Qwen3-0.6B sees 250 training and 30 development
+records for three exact unary families: square, cube, and perfect square root.
+The 100 test questions use disjoint surface-template families and contain 33,
+34, and 33 cases, respectively. AP denotes a primitive ASL vocabulary
+(\texttt{square}, \texttt{cube}, and \texttt{sqrt}); AS denotes semantic
+aliases (\texttt{area\_of\_square}, \texttt{volume\_of\_cube}, and
+\texttt{side\_of\_square}). Each rank-8 QKVO adapter receives 750 total
+exposures. Direct reasoning uses the same base revision, identities, inference
+seed, and hidden answers, with native thinking enabled. This is a synthetic,
+single-seed behavior pilot rather than confirmatory evidence.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Matched O1 operator pilot. Entries are correct/count; tokens are mean
+generated tokens. The generic-tool arm remains pending.}
+\label{tab:operator-o1-pilot}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+Condition & Overall & Square & Square root & Cube & Tokens \\
+\midrule
+Direct reasoning & 86/100 & 30/33 & 33/33 & 23/34 & 464.0 \\
+Primitive ASL (AP) & 100/100 & 33/33 & 33/33 & 34/34 & 14.5 \\
+Semantic ASL (AS) & 66/100 & 33/33 & 33/33 & 0/34 & 16.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+AP gains 14 paired answers and loses none relative to direct reasoning
+(two-sided exact McNemar $p=0.00012$, exploratory). Its mean output is 32.1
+times shorter, because the model selects and binds an operator while the runtime
+performs exact execution. The direct deficit is concentrated in cube (67.6\%)
+and, to a lesser degree, square (90.9\%); exact roots are perfect. Thus the
+result is consistent with operator delegation helping as direct calculation
+becomes less reliable, but O0 and harder matched families are required to
+measure a complexity interaction.
+
+AS provides the corresponding warning. All outputs parse, lower, and type-check,
+but all 34 cube outputs create \texttt{side} and invoke
+\texttt{volume\_of\_cube(edge)}. The undefined \texttt{edge} prevents execution,
+while every square and root case succeeds. The 34 errors are therefore a single
+systematic argument-binding failure, not evidence that semantic operators are
+intrinsically worse. The frozen result is retained unchanged; a separately
+labeled symbol-grounding diagnostic will test the repair without overwriting the
+pilot.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{../../../artifacts/paper1/operator_complexity_v1/o1_pilot250_seed99173/analysis/operator_o1_pilot.png}
+\caption{O1 answer accuracy by operator family and generation cost. Token cost
+uses a logarithmic axis. AP is perfect in this pilot; AS exposes a systematic
+cube-argument binding failure.}
+\label{fig:operator-o1-pilot}
+\end{figure}
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}
@@ -2505,7 +2570,14 @@ $+3.4$ points, yielding an 18.6--27.1-point relative robustness gain with all
 three paired intervals above zero. This is evidence for bounded numerical
 magnitude robustness. The completed long-budget sensitivity preserves this
 result; the matched 1.7B gate determines whether it survives greater model
-capacity.
+capacity. The subsequent O1 behavior pilot supplies a complementary operator
+signal: primitive ASL obtains 100/100 answers versus direct reasoning's 86/100,
+with 32.1-fold fewer generated tokens. This does not yet establish a monotonic
+operator-complexity advantage: it uses synthetic one-operation questions and
+one seed. Moreover, semantic ASL reaches only 66/100 because a systematic
+\texttt{side}/\texttt{edge} binding mismatch breaks every cube execution. The
+next evidence gate is therefore a matched categorical O0/O1/O3/O5/O6 ladder,
+followed by independently sampled uniform $[-30\%,+30\%]$ numeric jitter.
 
 \appendix
 \section{Deterministic Semantic Diagnostic Taxonomy}
