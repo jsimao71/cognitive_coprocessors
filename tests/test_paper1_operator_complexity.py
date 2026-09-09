@@ -2,11 +2,11 @@ from decimal import Decimal
 
 import pytest
 
-from ccpu.common.artifacts import read_jsonl, write_jsonl
+from ccpu.common.artifacts import read_jsonl, write_json, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
 from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
-from ccpu.paper1.e3.operator_analysis import analyze_operator_pilot
+from ccpu.paper1.e3.operator_analysis import analyze_operator_ladder, analyze_operator_pilot
 from ccpu.paper1.e3.operator_levels import freeze_operator_level, freeze_operator_pilot
 
 
@@ -123,8 +123,8 @@ def test_operator_pilot_analysis_is_paired_and_audits_bindings(tmp_path):
     evaluation = tmp_path / "eval.jsonl"
     conditions = {name: tmp_path / f"{name}.jsonl" for name in ("direct", "ap", "as")}
     rows = [
-        {"example_id": "a", "operator_family": "square"},
-        {"example_id": "b", "operator_family": "cube"},
+        {"example_id": "a", "operator_family": "square", "operator_level": "O1"},
+        {"example_id": "b", "operator_family": "cube", "operator_level": "O1"},
     ]
     write_jsonl(evaluation, rows)
     for name, path in conditions.items():
@@ -160,3 +160,35 @@ def test_operator_pilot_analysis_is_paired_and_audits_bindings(tmp_path):
     assert report["paired"]["ap_vs_direct"]["left_only"] == 1
     assert report["as_failure_audit"]["unresolved_reference"] == 2
     assert (tmp_path / "analysis" / "operator_o1_pilot.png").exists()
+
+
+def test_operator_ladder_analysis_preserves_categorical_level_order(tmp_path):
+    summaries = []
+    for level, direct in (("O3", 0.4), ("O0", 0.9)):
+        path = tmp_path / f"{level}.json"
+        conditions = {
+            condition: {
+                "correct": round(10 * accuracy),
+                "count": 10,
+                "accuracy": accuracy,
+                "generated_tokens": {"mean": tokens},
+            }
+            for condition, accuracy, tokens in (
+                ("direct", direct, 100), ("ap", 1.0, 12), ("as", 0.8, 14)
+            )
+        }
+        write_json(
+            path,
+            {
+                "schema_version": "ccpu.paper1.operator_pilot_analysis.v1",
+                "operator_level": level,
+                "conditions": conditions,
+            },
+        )
+        summaries.append((level, path))
+
+    report = analyze_operator_ladder(summaries, tmp_path / "ladder")
+
+    assert report["level_order"] == ["O0", "O3"]
+    assert "not equally spaced" in report["categorical_level_warning"]
+    assert (tmp_path / "ladder" / "operator_ladder_pilots.png").exists()

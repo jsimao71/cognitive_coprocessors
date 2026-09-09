@@ -9,7 +9,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from ccpu.common.artifacts import file_sha256, read_jsonl, write_json
+from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json
 
 
 def _index(rows: list[dict[str, Any]], label: str) -> dict[str, dict[str, Any]]:
@@ -154,7 +154,7 @@ def _plot(report: dict[str, Any], output_path: Path) -> None:
     accuracy_axis.set_xticks(range(len(operators)), [value.title() for value in operators])
     accuracy_axis.set_ylim(0, 1.10)
     accuracy_axis.set_ylabel("Final-answer accuracy")
-    accuracy_axis.set_title("Matched O1 accuracy (%)")
+    accuracy_axis.set_title(f"Matched {report['operator_level']} accuracy (%)")
     accuracy_axis.grid(axis="y", color="#d8d2c4", linewidth=0.8)
 
     token_values = [report["conditions"][condition]["generated_tokens"]["mean"] for condition in conditions]
@@ -166,7 +166,11 @@ def _plot(report: dict[str, Any], output_path: Path) -> None:
     token_axis.tick_params(axis="x", rotation=25)
     token_axis.grid(axis="y", color="#d8d2c4", linewidth=0.8)
     handles, legend_labels = accuracy_axis.get_legend_handles_labels()
-    figure.suptitle("Qwen3-0.6B one-seed operator pilot", fontweight="bold", y=0.99)
+    figure.suptitle(
+        f"Qwen3-0.6B one-seed {report['operator_level']} operator pilot",
+        fontweight="bold",
+        y=0.99,
+    )
     figure.legend(
         handles,
         legend_labels,
@@ -198,6 +202,10 @@ def analyze_operator_pilot(
         "as": _index(read_jsonl(as_predictions_path), "AS"),
     }
     expected = set(eval_rows)
+    levels = {str(row["operator_level"]) for row in eval_rows.values()}
+    if len(levels) != 1:
+        raise ValueError(f"operator pilot must contain exactly one level, got {sorted(levels)}")
+    operator_level = levels.pop()
     for condition, rows in predictions.items():
         if set(rows) != expected:
             missing = sorted(expected - set(rows))
@@ -211,6 +219,7 @@ def analyze_operator_pilot(
     )
     report = {
         "schema_version": "ccpu.paper1.operator_pilot_analysis.v1",
+        "operator_level": operator_level,
         "identity_count": len(expected),
         "operator_counts": dict(sorted(Counter(str(row["operator_family"]) for row in eval_rows.values()).items())),
         "conditions": {
@@ -236,7 +245,7 @@ def analyze_operator_pilot(
     }
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    figure_path = output / "operator_o1_pilot.png"
+    figure_path = output / f"operator_{operator_level.lower()}_pilot.png"
     _plot(report, figure_path)
     report["outputs"] = {"figure": file_sha256(figure_path)}
     write_json(output / "summary.json", report)
@@ -248,3 +257,106 @@ def analyze_operator_pilot(
             for operator, cell in summary["by_operator"].items():
                 writer.writerow((condition, operator, cell["correct"], cell["count"], cell["accuracy"]))
     return report
+
+
+def analyze_operator_ladder(
+    summaries: list[tuple[str, str | Path]], output_dir: str | Path
+) -> dict[str, Any]:
+    """Build a categorical cross-level view from completed pilot summaries."""
+
+    preferred_levels = ("O0", "O1", "O3", "O5", "O6")
+    reports: dict[str, dict[str, Any]] = {}
+    input_hashes = {}
+    for label, path in summaries:
+        report = read_json(path)
+        level = str(report["operator_level"])
+        if label != level:
+            raise ValueError(f"summary label {label} does not match report level {level}")
+        if level in reports:
+            raise ValueError(f"duplicate operator summary: {level}")
+        reports[level] = report
+        input_hashes[level] = file_sha256(path)
+    levels = [level for level in preferred_levels if level in reports]
+    levels.extend(sorted(set(reports) - set(preferred_levels)))
+    if not levels:
+        raise ValueError("at least one operator summary is required")
+
+    conditions = ("direct", "ap", "as")
+    cells = {
+        level: {
+            condition: {
+                "correct": reports[level]["conditions"][condition]["correct"],
+                "count": reports[level]["conditions"][condition]["count"],
+                "accuracy": reports[level]["conditions"][condition]["accuracy"],
+                "mean_generated_tokens": reports[level]["conditions"][condition][
+                    "generated_tokens"
+                ]["mean"],
+            }
+            for condition in conditions
+        }
+        for level in levels
+    }
+    output = Path(output_dir)
+    output.mkdir(parents=True, exist_ok=True)
+    figure_path = output / "operator_ladder_pilots.png"
+    _plot_ladder(levels, cells, figure_path)
+    report = {
+        "schema_version": "ccpu.paper1.operator_ladder_analysis.v1",
+        "level_order": levels,
+        "categorical_level_warning": (
+            "O-levels are capability families, not equally spaced scalar complexity values"
+        ),
+        "cells": cells,
+        "inputs": input_hashes,
+        "outputs": {"figure": file_sha256(figure_path)},
+    }
+    write_json(output / "summary.json", report)
+    return report
+
+
+def _plot_ladder(
+    levels: list[str], cells: dict[str, dict[str, dict[str, Any]]], output_path: Path
+) -> None:
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+    except ImportError as error:
+        raise RuntimeError("operator-ladder plotting requires matplotlib") from error
+    plt.rcParams.update(
+        {
+            "font.family": "DejaVu Serif",
+            "font.size": 10,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "figure.facecolor": "#fbf7ef",
+            "axes.facecolor": "#fbf7ef",
+        }
+    )
+    styles = {
+        "direct": ("Direct", "#c55a35", "o"),
+        "ap": ("Primitive ASL", "#147d84", "s"),
+        "as": ("Semantic ASL", "#d39447", "D"),
+    }
+    figure, (accuracy_axis, token_axis) = plt.subplots(1, 2, figsize=(10.2, 4.1))
+    positions = list(range(len(levels)))
+    for condition, (label, color, marker) in styles.items():
+        accuracy = [cells[level][condition]["accuracy"] for level in levels]
+        tokens = [cells[level][condition]["mean_generated_tokens"] for level in levels]
+        accuracy_axis.plot(positions, accuracy, color=color, marker=marker, linewidth=2.4, label=label)
+        token_axis.plot(positions, tokens, color=color, marker=marker, linewidth=2.4, label=label)
+    for axis in (accuracy_axis, token_axis):
+        axis.set_xticks(positions, levels)
+        axis.grid(axis="y", color="#d8d2c4", linewidth=0.8)
+    accuracy_axis.set_ylim(0, 1.05)
+    accuracy_axis.set_ylabel("Final-answer accuracy")
+    accuracy_axis.set_title("Accuracy by capability family")
+    accuracy_axis.legend(frameon=False)
+    token_axis.set_yscale("log")
+    token_axis.set_ylabel("Mean generated tokens (log scale)")
+    token_axis.set_title("Generation cost")
+    figure.suptitle("Qwen3-0.6B matched operator pilots", fontweight="bold")
+    figure.tight_layout()
+    figure.savefig(output_path, dpi=220, bbox_inches="tight")
+    plt.close(figure)

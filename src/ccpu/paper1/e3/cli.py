@@ -40,7 +40,7 @@ from .magnitude_analysis import (
     project_magnitude_predictions,
 )
 from .model_size_analysis import analyze_model_size_interaction
-from .operator_analysis import analyze_operator_pilot
+from .operator_analysis import analyze_operator_ladder, analyze_operator_pilot
 from .operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from .operator_levels import freeze_operator_level, freeze_operator_pilot
 from .result_plots import build_gsm8k_result_plots
@@ -244,6 +244,9 @@ def build_parser() -> argparse.ArgumentParser:
     operator_analysis.add_argument("--ap-predictions", required=True)
     operator_analysis.add_argument("--as-predictions", required=True)
     operator_analysis.add_argument("--output-dir", required=True)
+    operator_ladder = commands.add_parser("analyze-operator-ladder")
+    operator_ladder.add_argument("--summary", action="append", required=True)
+    operator_ladder.add_argument("--output-dir", required=True)
     operator_level = commands.add_parser("prepare-operator-level")
     operator_level.add_argument("--level", choices=("O0", "O3", "O5", "O6"), required=True)
     operator_level.add_argument("--output-dir", required=True)
@@ -717,6 +720,14 @@ def main(argv: list[str] | None = None) -> int:
             f"AS={report['conditions']['as']['correct']}/{report['identity_count']} "
             f"-> {args.output_dir}"
         )
+        return 0
+    if args.command == "analyze-operator-ladder":
+        if any("=" not in value for value in args.summary):
+            raise ValueError("operator summaries must use LEVEL=PATH")
+        report = analyze_operator_ladder(
+            [value.split("=", 1) for value in args.summary], args.output_dir
+        )
+        print(f"operator ladder levels={','.join(report['level_order'])} -> {args.output_dir}")
         return 0
     if args.command == "prepare-operator-level":
         manifest = freeze_operator_level(
