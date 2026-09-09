@@ -1,0 +1,33 @@
+{
+  "level": "O3",
+  "operators": {
+    "cos_degrees": {
+      "ccir": "COS_DEGREES",
+      "domain": [
+        0,
+        30,
+        45,
+        60,
+        90
+      ],
+      "exactness": "FROZEN_DECIMAL_28"
+    },
+    "log10": {
+      "ccir": "LOG10",
+      "domain": "positive integer powers of ten",
+      "exactness": "EXACT_INTEGER"
+    },
+    "sin_degrees": {
+      "ccir": "SIN_DEGREES",
+      "domain": [
+        0,
+        30,
+        45,
+        60,
+        90
+      ],
+      "exactness": "FROZEN_DECIMAL_28"
+    }
+  },
+  "version": "paper1-operator-registry-v2"
+}

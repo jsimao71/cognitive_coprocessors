@@ -40,8 +40,9 @@ from .magnitude_analysis import (
     project_magnitude_predictions,
 )
 from .model_size_analysis import analyze_model_size_interaction
-from .operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from .operator_analysis import analyze_operator_pilot
+from .operator_complexity import freeze_o1_dataset, freeze_o1_pilot
+from .operator_levels import freeze_operator_level, freeze_operator_pilot
 from .result_plots import build_gsm8k_result_plots
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
@@ -243,6 +244,21 @@ def build_parser() -> argparse.ArgumentParser:
     operator_analysis.add_argument("--ap-predictions", required=True)
     operator_analysis.add_argument("--as-predictions", required=True)
     operator_analysis.add_argument("--output-dir", required=True)
+    operator_level = commands.add_parser("prepare-operator-level")
+    operator_level.add_argument("--level", choices=("O0", "O3"), required=True)
+    operator_level.add_argument("--output-dir", required=True)
+    operator_level.add_argument("--train-count", type=int, default=2000)
+    operator_level.add_argument("--dev-count", type=int, default=100)
+    operator_level.add_argument("--test-count", type=int, default=250)
+    operator_level.add_argument("--seed", type=int, default=81001)
+    operator_level_pilot = commands.add_parser("prepare-operator-level-pilot")
+    operator_level_pilot.add_argument("--level", choices=("O0", "O3"), required=True)
+    operator_level_pilot.add_argument("--source-dir", required=True)
+    operator_level_pilot.add_argument("--output-dir", required=True)
+    operator_level_pilot.add_argument("--train-count", type=int, default=250)
+    operator_level_pilot.add_argument("--dev-count", type=int, default=30)
+    operator_level_pilot.add_argument("--test-count", type=int, default=100)
+    operator_level_pilot.add_argument("--seed", type=int, default=99173)
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -697,6 +713,37 @@ def main(argv: list[str] | None = None) -> int:
             f"direct={report['conditions']['direct']['correct']}/{report['identity_count']} "
             f"AP={report['conditions']['ap']['correct']}/{report['identity_count']} "
             f"AS={report['conditions']['as']['correct']}/{report['identity_count']} "
+            f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-operator-level":
+        manifest = freeze_operator_level(
+            args.output_dir,
+            level=args.level,
+            train_count=args.train_count,
+            dev_count=args.dev_count,
+            test_count=args.test_count,
+            seed=args.seed,
+        )
+        print(
+            f"GSM8K-OC {args.level} train={manifest['counts']['train']} "
+            f"dev={manifest['counts']['dev']} test={manifest['counts']['test']} "
+            f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-operator-level-pilot":
+        manifest = freeze_operator_pilot(
+            args.source_dir,
+            args.output_dir,
+            level=args.level,
+            train_count=args.train_count,
+            dev_count=args.dev_count,
+            test_count=args.test_count,
+            seed=args.seed,
+        )
+        print(
+            f"GSM8K-OC {args.level} pilot train={manifest['counts']['train']} "
+            f"dev={manifest['counts']['dev']} test={manifest['counts']['test']} "
             f"-> {args.output_dir}"
         )
         return 0

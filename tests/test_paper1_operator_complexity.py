@@ -7,6 +7,7 @@ from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
 from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from ccpu.paper1.e3.operator_analysis import analyze_operator_pilot
+from ccpu.paper1.e3.operator_levels import freeze_operator_level, freeze_operator_pilot
 
 
 def test_o1_exact_runtime_and_semantic_aliases():
@@ -16,6 +17,20 @@ def test_o1_exact_runtime_and_semantic_aliases():
     assert ARITHMETIC_FUNCTIONS["area_of_square"]([Decimal(7)]) == 49
     with pytest.raises(ValueError, match="exact roots"):
         ARITHMETIC_FUNCTIONS["sqrt"]([Decimal(2)])
+
+
+def test_o0_and_o3_runtime_aliases_are_deterministic():
+    assert ARITHMETIC_FUNCTIONS["total_of"]([Decimal(9), Decimal(4)]) == 13
+    assert ARITHMETIC_FUNCTIONS["difference"]([Decimal(9), Decimal(4)]) == 5
+    assert ARITHMETIC_FUNCTIONS["product"]([Decimal(9), Decimal(4)]) == 36
+    assert ARITHMETIC_FUNCTIONS["quotient"]([Decimal(36), Decimal(4)]) == 9
+    assert ARITHMETIC_FUNCTIONS["sin_degrees"]([Decimal(30)]) == Decimal("0.5")
+    assert ARITHMETIC_FUNCTIONS["horizontal_component_of_unit"](
+        [Decimal(60)]
+    ) == Decimal("0.5")
+    assert ARITHMETIC_FUNCTIONS["decimal_order"]([Decimal(100000)]) == 5
+    with pytest.raises(ValueError, match="common angles"):
+        ARITHMETIC_FUNCTIONS["sin_degrees"]([Decimal(12)])
 
 
 def test_o1_ap_and_as_lower_to_same_ccir():
@@ -64,6 +79,35 @@ def test_o1_pilot_is_balanced_and_uses_fixed_representation_prompts(tmp_path):
     assert [row["source_row"] for row in read_jsonl(pilot / "test.jsonl")] == list(
         range(6)
     )
+
+
+@pytest.mark.parametrize(
+    ("level", "operator_count"), (("O0", 4), ("O3", 3))
+)
+def test_additional_operator_levels_freeze_matched_pilots(
+    tmp_path, level, operator_count
+):
+    full = tmp_path / level / "full"
+    pilot = tmp_path / level / "pilot"
+    manifest = freeze_operator_level(
+        full, level=level, train_count=40, dev_count=20, test_count=20
+    )
+    pilot_manifest = freeze_operator_pilot(
+        full,
+        pilot,
+        level=level,
+        train_count=20,
+        dev_count=operator_count * 2,
+        test_count=operator_count * 2,
+    )
+
+    assert manifest["operator_level"] == level
+    assert len(pilot_manifest["test_operator_counts"]) == operator_count
+    ap = read_jsonl(pilot / "ap" / "test.jsonl")
+    semantic = read_jsonl(pilot / "as" / "test.jsonl")
+    assert [row["example_id"] for row in ap] == [row["example_id"] for row in semantic]
+    assert all(row["evaluation_representation"] == "AP" for row in ap)
+    assert all(row["evaluation_representation"] == "AS" for row in semantic)
 
 
 def test_operator_pilot_analysis_is_paired_and_audits_bindings(tmp_path):

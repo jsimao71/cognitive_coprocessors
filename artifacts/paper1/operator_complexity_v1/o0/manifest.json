@@ -1,0 +1,69 @@
+{
+  "counts": {
+    "dev": 100,
+    "test": 250,
+    "train": 2000
+  },
+  "dataset_version": "gsm8k-oc-levels-v1",
+  "hidden_fields": [
+    "targets",
+    "reference_return",
+    "runtime"
+  ],
+  "operator_counts": {
+    "dev": {
+      "add": 25,
+      "divide": 25,
+      "multiply": 25,
+      "subtract": 25
+    },
+    "test": {
+      "add": 63,
+      "divide": 62,
+      "multiply": 62,
+      "subtract": 63
+    },
+    "train": {
+      "add": 500,
+      "divide": 500,
+      "multiply": 500,
+      "subtract": 500
+    }
+  },
+  "operator_level": "O0",
+  "output_sha256": {
+    "dev": "3948b1dc5a1ddfe862a6b3dd98c87df5cb5e108d47bdf2da03b48f471839029b",
+    "operator_registry": "affae5309b88b36d8f0a7aa1cc88ba63ca02b790241b53119fcda0656bdd50ae",
+    "test": "719aaf1449eb4da1786d998a18ddebf775e7f723296ca306b32d07e3ac839100",
+    "train": "7a07355bce6abefb53564d6ef3c6d3ff749c3ceb0f2a75ee1d18f5f0016d84d6"
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "schema_version": "ccpu.paper1.gsm8k_oc_manifest.v1",
+  "seed": 81001,
+  "template_families": {
+    "dev": [
+      "add_dev",
+      "sub_dev",
+      "mul_dev",
+      "div_dev"
+    ],
+    "test": [
+      "add_test",
+      "sub_test",
+      "mul_test",
+      "div_test"
+    ],
+    "train": [
+      "add_train_a",
+      "add_train_b",
+      "sub_train_a",
+      "sub_train_b",
+      "mul_train_a",
+      "mul_train_b",
+      "div_train_a",
+      "div_train_b"
+    ]
+  }
+}

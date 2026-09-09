@@ -1,0 +1,62 @@
+{
+  "counts": {
+    "dev": 100,
+    "test": 250,
+    "train": 2000
+  },
+  "dataset_version": "gsm8k-oc-levels-v1",
+  "hidden_fields": [
+    "targets",
+    "reference_return",
+    "runtime"
+  ],
+  "operator_counts": {
+    "dev": {
+      "cos_degrees": 33,
+      "log10": 33,
+      "sin_degrees": 34
+    },
+    "test": {
+      "cos_degrees": 83,
+      "log10": 83,
+      "sin_degrees": 84
+    },
+    "train": {
+      "cos_degrees": 666,
+      "log10": 666,
+      "sin_degrees": 668
+    }
+  },
+  "operator_level": "O3",
+  "output_sha256": {
+    "dev": "8354a267e65c0d522ff778e066de8514991a5fa59c7720dc94956a22652bfbe6",
+    "operator_registry": "5b55f42d0a2e7cead08d9a75415868a26f6a4f13f7fbd7e205fce242d4d0019b",
+    "test": "f19840c252effadd2bfa17313926c21fbf2ea43f126b5f90b9e55287395d6a9c",
+    "train": "03467a357d81810affe3568f4198a9a55349aea0688de8534aed248b8bd8480f"
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "schema_version": "ccpu.paper1.gsm8k_oc_manifest.v1",
+  "seed": 81001,
+  "template_families": {
+    "dev": [
+      "sin_dev",
+      "cos_dev",
+      "log_dev"
+    ],
+    "test": [
+      "sin_test",
+      "cos_test",
+      "log_test"
+    ],
+    "train": [
+      "sin_train_a",
+      "sin_train_b",
+      "cos_train_a",
+      "cos_train_b",
+      "log_train_a",
+      "log_train_b"
+    ]
+  }
+}
