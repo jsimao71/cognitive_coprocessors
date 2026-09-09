@@ -2179,6 +2179,14 @@ make ASL compilation sufficiently accurate for deterministic execution to
 yield a flatter robustness surface than direct neural computation, including
 under the joint combination of all four stresses.
 
+To obtain an interpretable result early, the randomized campaign is executed
+seed-major. Its fast gate uses only multipliers $1$ and $10^3$ and completes
+all Direct and generated-ASL jitter-only and O1/O5/O6 operator--jitter cells for
+seed 17011 before beginning seed 17023, then repeats the complete matrix for
+seed 17037. Thus the first seed supplies a complete exploratory interaction
+surface, while later seeds refine perturbation uncertainty without changing
+the registered cells or model checkpoints.
+
 \section{Preliminary XPU Pilot}
 
 \subsection{Setup}

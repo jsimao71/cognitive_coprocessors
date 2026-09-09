@@ -1,0 +1,131 @@
+{
+  "comparison_contract": "Complete every Direct/generated-ASL cell for one jitter seed before starting the next seed; compare byte-identical questions by identity and hash.",
+  "counts": {
+    "dev": 30,
+    "test": 100,
+    "train": 250
+  },
+  "execution_order": [
+    {
+      "cells": [
+        "x1/o1",
+        "x1/o5",
+        "x1/o6",
+        "x1000/o1",
+        "x1000/o5",
+        "x1000/o6"
+      ],
+      "jitter_seed": 17011,
+      "stage": 1
+    },
+    {
+      "cells": [
+        "x1/o1",
+        "x1/o5",
+        "x1/o6",
+        "x1000/o1",
+        "x1000/o5",
+        "x1000/o6"
+      ],
+      "jitter_seed": 17023,
+      "stage": 2
+    },
+    {
+      "cells": [
+        "x1/o1",
+        "x1/o5",
+        "x1/o6",
+        "x1000/o1",
+        "x1000/o5",
+        "x1000/o6"
+      ],
+      "jitter_seed": 17037,
+      "stage": 3
+    }
+  ],
+  "factors": [
+    1,
+    1000
+  ],
+  "jitter": {
+    "distribution": "deterministic_uniform[-0.30,+0.30]",
+    "seeds": [
+      17011,
+      17023,
+      17037
+    ]
+  },
+  "operator_levels": [
+    "O1",
+    "O5",
+    "O6"
+  ],
+  "output_sha256": {
+    "seed_17011_x1000_o1_dev": "1db82a95ba940e0f67c2650d80082cee238e757926b1d9b7ad09cb600ccb222a",
+    "seed_17011_x1000_o1_test": "d058a79db7e2e7ba61995eafe3d05e47c43a18bc52252cdde3e3b78b826ef428",
+    "seed_17011_x1000_o1_train": "0d67e411e51a3a17f331b8d6187a98f1b5734ccbe7fe1a20b44009c2fe27cd7a",
+    "seed_17011_x1000_o5_dev": "f9e1a08373dbd5bbe878ef679619c7c1a4a25ec7f4e9ba68c3fe96973c573618",
+    "seed_17011_x1000_o5_test": "df3920bfed0f7c3b5aa8c76412239e82bff124ce350066680244c220615c2658",
+    "seed_17011_x1000_o5_train": "e7bc73edfc2a8de71ccee48c7d265404225588d44721df3c6fce4823daccbe05",
+    "seed_17011_x1000_o6_dev": "ca84896a222c0b91537b1a77de672ada6c82217a89dddd9f76caa39b4b81cac2",
+    "seed_17011_x1000_o6_test": "642d9d28d036af7babe18387ffd72a31bf1b9ab38845f131212c2d593d95dea3",
+    "seed_17011_x1000_o6_train": "7f89aded562343bfe0ecdc5e39643aaf0eecb3cbb98e13061237a1fefb634aaa",
+    "seed_17011_x1_o1_dev": "70fcc33dcf0d1d39cc0c0ac5dd550eb173de1504566abdb8c0a166f2880f8f50",
+    "seed_17011_x1_o1_test": "ecf5dc0ecc6be7aac3269baf8217dc3da91263e4baf9a276d51f309c962f8880",
+    "seed_17011_x1_o1_train": "73e73d771bc177f2fb81675b418a998b5d662e4f1b50ac36ad0627f8bdf32955",
+    "seed_17011_x1_o5_dev": "ebf2b53b4ba486eecf5a9f8ece9a97e7f3507dfada8bc6daab8d85f9f20e02c7",
+    "seed_17011_x1_o5_test": "977239c40d8f7b20fcb956e7ecee60add4ada67cb8807b1bef1fd1bc8f5d3c14",
+    "seed_17011_x1_o5_train": "8d1e436b816a8841b2c6ac7dbb9586121419a52c7c7ce9a379e9254a93dfa3d1",
+    "seed_17011_x1_o6_dev": "082fed8889b367c1f93ca8eb003b3a6f1aaffd8d6c50437a2c9c6815d7835325",
+    "seed_17011_x1_o6_test": "749bb9457b70ba3d6631cdc300181e8c2871cac2c0aa78fc8ede990f8a3f72bb",
+    "seed_17011_x1_o6_train": "d7b469b24dd2cc5b313c564864ad05854af5ca0ae6fdbd9f6042ad1caea09ea6",
+    "seed_17023_x1000_o1_dev": "06cfd542b5463ea9cfa5abdb6105015641d59152b16c74cbd4999098312f6ce2",
+    "seed_17023_x1000_o1_test": "9e734710d62fa937406d7ca3db961601124459af7fb6238110193cb87f430bfd",
+    "seed_17023_x1000_o1_train": "c3d0009bddc5be70a2b5a83cd7bd54d9c0c94efad896b237bad1d6bec3bb3df8",
+    "seed_17023_x1000_o5_dev": "0f2fca4e86d94ae81571284bebc715b916cd32e687b1ba4c49578a8062a1f669",
+    "seed_17023_x1000_o5_test": "dbe8667f570f4f1ee418d7b6c13a46947df745a2f3a52bd1bc00819a3f0c5c5b",
+    "seed_17023_x1000_o5_train": "b198f5de3253a65d3b55c5747b29fdf858f40a510f41e633a4ea9b8385bc6316",
+    "seed_17023_x1000_o6_dev": "7140b21032a4c299d4160f8ea3e41659ed72225896cd1f0e717fb2b35576f639",
+    "seed_17023_x1000_o6_test": "55e2298159a25758dca08a8b0231737978e41c9563530c48f9f06703aa67bfff",
+    "seed_17023_x1000_o6_train": "83a671a514ec97d4095b0fdb78d058525d940c955d4dcc3524c81bec15189152",
+    "seed_17023_x1_o1_dev": "7ca410fa2a8a19cebba84a873b544b69b105b771d44244fdd3e3e43f6b72b63e",
+    "seed_17023_x1_o1_test": "0f59218d3726984cf0a971d51b7ec8c2f8061f957f64bde0e27dddc439b1180b",
+    "seed_17023_x1_o1_train": "113e0b91934280a723ea710fc40dc66e40462ff1068e68cff98d2af232051a2e",
+    "seed_17023_x1_o5_dev": "53f58e1fe363fa9ef0e1bca48aa25dda0e93444a6b7a582e7c65fecc0b919b54",
+    "seed_17023_x1_o5_test": "8fe1e346cf72398526067b2ed135d8713ba4ba0f873c51d2c364dc03419fb0a5",
+    "seed_17023_x1_o5_train": "4e2e0a92b372cc503248b4dcbd36704008f1e20e8fb77e20144be3723e148b4a",
+    "seed_17023_x1_o6_dev": "0c52a0c513730245b2246acd9bc5e4d7ad17e0c10a336a4818cdb3e5f37b710c",
+    "seed_17023_x1_o6_test": "292eae8ba3fd23ee1dfbe4a76ec1212080648dc7321bc659a1957249387627ac",
+    "seed_17023_x1_o6_train": "d10309f0fa33fc95959309bfd4b4792fcdcc21348c24f5267494b774927dae81",
+    "seed_17037_x1000_o1_dev": "8c983d8860d16307ce9c3b21318cb18b5529151e54cbb14d7e2976fe49f12660",
+    "seed_17037_x1000_o1_test": "bb7882bc9e166b047a2b537656544ef42052d31151e990b13a49bfac462c1a31",
+    "seed_17037_x1000_o1_train": "2c8199af28aa2e960c0fb8b112e1e5c34c333ee094408706e4fd87e3a6a257bb",
+    "seed_17037_x1000_o5_dev": "90ad93ac235a9fe903596d87c27e8d661e4c66687e7f68903dd19e8dbe8d3583",
+    "seed_17037_x1000_o5_test": "e0f2d603345ea6efef10c51e3401fcd01a974b3f481fae668122c76c3fd828ec",
+    "seed_17037_x1000_o5_train": "dc4b51d99c123cae04db31023df88b9679346c185a7088ef6cb3c6c31feaa570",
+    "seed_17037_x1000_o6_dev": "6118c913992b7d5def24c8ea9505965f69851d829586049401ff4efc37ac75d4",
+    "seed_17037_x1000_o6_test": "672cf751630f557984c6fb0ab5850fc18363bbc2dead98ef73b48bb0242979f9",
+    "seed_17037_x1000_o6_train": "0e65ae48906e3d5bb37bbbddeab06a65dbe2e21d4e2f4f87aed37e14bdc160b5",
+    "seed_17037_x1_o1_dev": "d7952168bf24daf1d508092bf00f15bb97044ab8a27297c8a7e625422285707d",
+    "seed_17037_x1_o1_test": "d8edd2e890c5bd75fa992f8f44a398532162c9b888e3fb2a4d6345a0be094a67",
+    "seed_17037_x1_o1_train": "acb77601c1e01f0254a9e506fc1727bef88cd035beb2b43fd5bd0187ea22d7a8",
+    "seed_17037_x1_o5_dev": "f9729ae6693b2936735eab233f809339d187987255a6fa8b3574167e904bed41",
+    "seed_17037_x1_o5_test": "5e932f6c271a51102c3687f6add168a9141c09f9fdd6fcf7373cb1519fd7645f",
+    "seed_17037_x1_o5_train": "24448e0f7db19e1d49a2337f4e469ded1418ecb76411ecd56ade27f99877e5a4",
+    "seed_17037_x1_o6_dev": "f8ca49f3403ad9af4084db3cf191afecf9449f608b1236381bc8a7d07ccac7f6",
+    "seed_17037_x1_o6_test": "87aa86af80c23bb8e51b574bff0b91d8c8ecd21b62cb49899003b49a4cc332fd",
+    "seed_17037_x1_o6_train": "d0a833430797cd2de2f7044da636629dd17595b05f0ede644b66d17656ce0b3b"
+  },
+  "parent_ids_sha256": {
+    "dev": "91eae0b99703260acff0ec91b8d3e42fd7cf7405677c979a8ebc15908013bb74",
+    "test": "b14dd87035912e500bf155b0fbdfe98790b92af2a29f2cc62d15498dacc271d9",
+    "train": "ee7989e9bdcd70154a8dee3879390f968623ba61cfaf2751f135fb38bdccb718"
+  },
+  "parent_manifest_sha256": "5dd456cea668dd49d4c0357798220e7f3103f3e5bb22ca49b12cc88045aba7e1",
+  "parent_panel": "artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173",
+  "protocol_id": "paper1_gsm8k_matched_interventions_v2",
+  "schema_version": "ccpu.paper1.operator_jitter_matrix.v1",
+  "structurally_excluded": {
+    "O3_x1000": "value-preserving log10 output requires an exponential operand"
+  }
+}

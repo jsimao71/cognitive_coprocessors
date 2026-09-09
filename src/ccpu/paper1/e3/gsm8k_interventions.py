@@ -16,6 +16,7 @@ PROTOCOL_ID = "paper1_gsm8k_matched_interventions_v2"
 OPERATOR_LEVELS = ("O1", "O3", "O5", "O6")
 DEFAULT_FACTORS = (1, 100, 1000, 10000, 1000000)
 DEFAULT_JITTER_SEEDS = (17011, 17023, 17037)
+COMBINED_OPERATOR_LEVELS = ("O1", "O5", "O6")
 
 _QUESTION_FROM_PROMPT = re.compile(r"\nProblem:\s*(?P<question>.*?)\nASL:\s*$", re.DOTALL)
 _LITERAL_ASSIGNMENT = re.compile(
@@ -266,6 +267,168 @@ def _operator_variant(row: dict[str, Any], split: str, level: str) -> dict[str, 
         }
     )
     return result
+
+
+def _combined_variant(
+    base: dict[str, Any], *, factor: int, jitter_seed: int, level: str
+) -> dict[str, Any]:
+    question = str(base["question"])
+    program = str(base["gold_asl"])
+    path, value, original_line = _eligible_binding(question, program)
+    scaled = value * factor
+    rng = random.Random(f"{jitter_seed}:{base['source_row']}:{path}:{factor}")
+    jitter = rng.uniform(-0.30, 0.30)
+    transformed = max(1, round(scaled * (1.0 + jitter)))
+    if transformed == scaled:
+        transformed += 1 if jitter >= 0 else -1
+
+    numeric_program = _replace_assignment(
+        program, original_line, f"{path} = {transformed}"
+    )
+    transformed_line = f"{path} = {transformed}"
+    combined_program, definition, family = _operator_injection(
+        level, path, transformed, transformed_line, numeric_program
+    )
+    combined_question = _replace_question_value(
+        question, value, "this derived quantity"
+    )
+    combined_question = (
+        f"First determine a quantity defined as {definition}. In the problem below, "
+        f"'this derived quantity' refers to that value. {combined_question}"
+    )
+    condition = f"combined-s{jitter_seed}-x{factor}-{level.lower()}"
+    example_id = f"{base['parent_example_id']}:{condition}"
+    answer = _returned(combined_program, example_id)
+    steps = sum(1 for line in combined_program.splitlines() if "=" in line)
+    result = dict(base)
+    result.update(
+        {
+            "schema_version": "ccpu.paper1.gsm8k_intervention.v2",
+            "condition": condition,
+            "example_id": example_id,
+            "question": combined_question,
+            "question_sha256": fingerprint(combined_question),
+            "reference_return": str(answer),
+            "difficulty_steps": steps,
+            "difficulty_stratum": (
+                "low" if steps <= 3 else "medium" if steps <= 5 else "high"
+            ),
+            "gold_asl": combined_program,
+            "operator_level": level,
+            "operator_family": family,
+            "operator_signature": [family],
+            "prompt": _operator_prompt(combined_question),
+            "transformation": {
+                "kind": "operator_x_uniform_jitter",
+                "factor": factor,
+                "jitter_seed": jitter_seed,
+                "jitter_requested": jitter,
+                "jitter_realized": transformed / scaled - 1,
+                "binding_path": path,
+                "original_value": value,
+                "scaled_value": scaled,
+                "transformed_value": transformed,
+                "operator_level": level,
+                "operator_family": family,
+                "answer_recomputed_by_runtime": True,
+            },
+        }
+    )
+    return result
+
+
+def freeze_gsm8k_operator_jitter_matrix(
+    *,
+    panel_dir: str | Path,
+    output_dir: str | Path,
+    factors: tuple[int, ...] = (1, 1000),
+    jitter_seeds: tuple[int, ...] = DEFAULT_JITTER_SEEDS,
+    operator_levels: tuple[str, ...] = COMBINED_OPERATOR_LEVELS,
+) -> dict[str, Any]:
+    """Freeze seed-major operator-by-jitter cells on an existing parent panel."""
+
+    if factors != tuple(sorted(set(factors))) or factors != (1, 1000):
+        raise ValueError("the registered fast matrix requires factors (1, 1000)")
+    if not jitter_seeds or len(set(jitter_seeds)) != len(jitter_seeds):
+        raise ValueError("jitter seeds must be non-empty and unique")
+    if not operator_levels or any(level not in COMBINED_OPERATOR_LEVELS for level in operator_levels):
+        raise ValueError(f"operator levels must be selected from {COMBINED_OPERATOR_LEVELS}")
+    if len(set(operator_levels)) != len(operator_levels):
+        raise ValueError("operator levels must be unique")
+
+    panel = Path(panel_dir)
+    output = Path(output_dir)
+    paths: dict[str, Path] = {}
+    parent_hashes: dict[str, str] = {}
+    counts: dict[str, int] = {}
+    for split in ("train", "dev", "test"):
+        base_rows = read_jsonl(panel / "original" / f"{split}.jsonl")
+        if not base_rows:
+            raise ValueError(f"empty parent split: {split}")
+        parent_ids = [str(row["parent_example_id"]) for row in base_rows]
+        if len(parent_ids) != len(set(parent_ids)):
+            raise ValueError(f"duplicate parent identities in {split}")
+        parent_hashes[split] = fingerprint(parent_ids)
+        counts[split] = len(base_rows)
+        for jitter_seed in jitter_seeds:
+            for factor in factors:
+                for level in operator_levels:
+                    rows = [
+                        _combined_variant(
+                            row, factor=factor, jitter_seed=jitter_seed, level=level
+                        )
+                        for row in base_rows
+                    ]
+                    observed_parents = [str(row["parent_example_id"]) for row in rows]
+                    if observed_parents != parent_ids:
+                        raise ValueError("combined matrix changed ordered parent identities")
+                    key = f"seed_{jitter_seed}_x{factor}_{level.lower()}_{split}"
+                    paths[key] = write_jsonl(
+                        output
+                        / f"seed_{jitter_seed}"
+                        / f"x{factor}"
+                        / level.lower()
+                        / f"{split}.jsonl",
+                        rows,
+                    )
+
+    execution_order = [
+        {
+            "stage": seed_index + 1,
+            "jitter_seed": jitter_seed,
+            "cells": [
+                f"x{factor}/{level.lower()}"
+                for factor in factors
+                for level in operator_levels
+            ],
+        }
+        for seed_index, jitter_seed in enumerate(jitter_seeds)
+    ]
+    manifest = {
+        "schema_version": "ccpu.paper1.operator_jitter_matrix.v1",
+        "protocol_id": PROTOCOL_ID,
+        "parent_panel": str(panel),
+        "parent_manifest_sha256": file_sha256(panel / "manifest.json"),
+        "counts": counts,
+        "factors": list(factors),
+        "jitter": {
+            "distribution": "deterministic_uniform[-0.30,+0.30]",
+            "seeds": list(jitter_seeds),
+        },
+        "operator_levels": list(operator_levels),
+        "structurally_excluded": {
+            "O3_x1000": "value-preserving log10 output requires an exponential operand"
+        },
+        "execution_order": execution_order,
+        "parent_ids_sha256": parent_hashes,
+        "comparison_contract": (
+            "Complete every Direct/generated-ASL cell for one jitter seed before "
+            "starting the next seed; compare byte-identical questions by identity and hash."
+        ),
+        "output_sha256": {name: file_sha256(path) for name, path in sorted(paths.items())},
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest
 
 
 def _source_id(row: dict[str, Any]) -> str:

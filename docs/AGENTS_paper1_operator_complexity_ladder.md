@@ -896,9 +896,18 @@ Run this staged design to control cost and avoid outcome-driven cell selection:
 
 ```text
 Stage A: one-axis curves on the same 100 parents
-Stage B: frozen extreme-corner gate over S{0,6} x J{0,1} x O{0,1,5,6} x E{0,4}
+Stage B1: jitter-only gate over S{0,3} x J{1} using seed 17011
+Stage B2: operator-jitter gate over S{0,3} x J{1} x O{0,1,5,6}
+Stage B3: repeat the complete B1/B2 matrix with seeds 17023, then 17037
+Stage B4: frozen extreme-corner gate over S{0,6} x J{0,1} x O{0,1,5,6} x E{0,4}
 Stage C: fill intermediate cells only for interactions registered before Stage B
 ```
+
+The fast jitter gate uses only `x1` and `x1000`. Complete every Direct and
+generated-ASL cell for seed 17011 before starting any seed-17023 cell, and
+likewise complete seed 17023 before seed 17037. This yields one complete early
+scientific estimate that is refined by independent perturbation seeds instead
+of delaying all interpretation until every seed is finished.
 
 O3 logarithms are excluded from high-scale combinations when preserving the
 output would require exponentially large operands; report those cells as
@@ -1358,11 +1367,15 @@ P19 Freeze E0/E2/E4 expression-depth transformations on the same natural
 P20 Run the one-axis expression curve with Direct and generated ASL. Report
     compiler-stage errors separately from deterministic runtime errors.
 
-P21 Freeze the preregistered S{0,6} x J{0,1} x O{0,1,5,6} x E{0,4}
+P21 Freeze and run the seed-major x1/x1000 jitter matrix. For each seed, run
+    jitter-only O0 and the O1/O5/O6 operator-jitter combinations for Direct and
+    generated ASL. Complete 17011 before 17023, and 17023 before 17037.
+
+P22 Freeze the preregistered S{0,6} x J{0,1} x O{0,1,5,6} x E{0,4}
     extreme-corner panel. Reuse model checkpoints; do not train on test
     transformations or select cells from observed outcomes.
 
-P22 Run the four-factor panel first on 0.6B, then on the frozen 1.7B and gated
+P23 Run the four-factor panel first on 0.6B, then on the frozen 1.7B and gated
     4B compilers. Estimate where improved compiler accuracy changes the
     end-to-end ASL-minus-Direct margin.
 ```

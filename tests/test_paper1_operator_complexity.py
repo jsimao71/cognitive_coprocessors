@@ -6,7 +6,10 @@ from ccpu.common.artifacts import file_sha256, read_jsonl, write_json, write_jso
 from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
 from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
-from ccpu.paper1.e3.gsm8k_interventions import freeze_gsm8k_matched_interventions
+from ccpu.paper1.e3.gsm8k_interventions import (
+    freeze_gsm8k_matched_interventions,
+    freeze_gsm8k_operator_jitter_matrix,
+)
 from ccpu.paper1.e3.intervention_analysis import analyze_matched_interventions
 from ccpu.paper1.e3.operator_analysis import analyze_operator_ladder, analyze_operator_pilot
 from ccpu.paper1.e3.operator_levels import freeze_operator_level, freeze_operator_pilot
@@ -230,7 +233,7 @@ def test_matched_interventions_keep_real_parent_graph_and_exclude_training(tmp_p
         train_count=3,
         dev_count=2,
         test_count=2,
-        factors=(1, 100),
+        factors=(1, 100, 1000),
         jitter_seeds=(17,),
     )
 
@@ -252,6 +255,36 @@ def test_matched_interventions_keep_real_parent_graph_and_exclude_training(tmp_p
         -0.30 <= row["transformation"]["jitter_realized"] <= 0.30
         for row in jittered
     )
+
+    combined = freeze_gsm8k_operator_jitter_matrix(
+        panel_dir=tmp_path / "out",
+        output_dir=tmp_path / "combined",
+        jitter_seeds=(17, 23),
+    )
+    assert [stage["jitter_seed"] for stage in combined["execution_order"]] == [17, 23]
+    assert combined["execution_order"][0]["cells"] == [
+        "x1/o1",
+        "x1/o5",
+        "x1/o6",
+        "x1000/o1",
+        "x1000/o5",
+        "x1000/o6",
+    ]
+    combined_o5 = read_jsonl(
+        tmp_path / "combined" / "seed_17" / "x1000" / "o5" / "test.jsonl"
+    )
+    standalone = read_jsonl(
+        tmp_path / "out" / "jitter" / "seed_17" / "x1000" / "test.jsonl"
+    )
+    assert [row["parent_example_id"] for row in combined_o5] == [
+        row["parent_example_id"] for row in standalone
+    ]
+    assert all("solve_linear" in row["gold_asl"] for row in combined_o5)
+    assert all(row["transformation"]["factor"] == 1000 for row in combined_o5)
+    assert all(row["transformation"]["answer_recomputed_by_runtime"] for row in combined_o5)
+    assert [row["transformation"]["transformed_value"] for row in combined_o5] == [
+        row["transformation"]["transformed_value"] for row in standalone
+    ]
 
 
 def test_intervention_analysis_rejects_unpaired_rows_and_reports_only_matched(tmp_path):

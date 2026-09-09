@@ -42,7 +42,10 @@ from .gsm8k_confirmatory import (
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
 )
-from .gsm8k_interventions import freeze_gsm8k_matched_interventions
+from .gsm8k_interventions import (
+    freeze_gsm8k_matched_interventions,
+    freeze_gsm8k_operator_jitter_matrix,
+)
 from .intervention_analysis import analyze_matched_interventions
 from .large_number_suite import freeze_large_number_gsm8k, freeze_magnitude_ladder_gsm8k
 from .magnitude_analysis import (
@@ -317,6 +320,14 @@ def build_parser() -> argparse.ArgumentParser:
     matched_interventions.add_argument("--factor", type=int, action="append")
     matched_interventions.add_argument("--jitter-seed", type=int, action="append")
     matched_interventions.add_argument("--seed", type=int, default=99173)
+    combined_interventions = commands.add_parser("prepare-gsm8k-operator-jitter-matrix")
+    combined_interventions.add_argument("--panel-dir", required=True)
+    combined_interventions.add_argument("--output-dir", required=True)
+    combined_interventions.add_argument("--factor", type=int, action="append")
+    combined_interventions.add_argument("--jitter-seed", type=int, action="append")
+    combined_interventions.add_argument(
+        "--operator-level", choices=("O1", "O5", "O6"), action="append"
+    )
     matched_analysis = commands.add_parser("analyze-gsm8k-matched-interventions")
     matched_analysis.add_argument(
         "--cell",
@@ -923,6 +934,25 @@ def main(argv: list[str] | None = None) -> int:
             f"train={manifest['counts']['train']} dev={manifest['counts']['dev']} "
             f"test={manifest['counts']['test']} eligible={manifest['eligibility']['eligible']} "
             f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-gsm8k-operator-jitter-matrix":
+        keyword = {
+            "panel_dir": args.panel_dir,
+            "output_dir": args.output_dir,
+        }
+        if args.factor:
+            keyword["factors"] = tuple(args.factor)
+        if args.jitter_seed:
+            keyword["jitter_seeds"] = tuple(args.jitter_seed)
+        if args.operator_level:
+            keyword["operator_levels"] = tuple(args.operator_level)
+        manifest = freeze_gsm8k_operator_jitter_matrix(**keyword)
+        print(
+            "GSM8K operator-jitter matrix "
+            f"seeds={len(manifest['jitter']['seeds'])} "
+            f"cells-per-seed={len(manifest['execution_order'][0]['cells'])} "
+            f"test={manifest['counts']['test']} -> {args.output_dir}"
         )
         return 0
     if args.command == "analyze-gsm8k-matched-interventions":
