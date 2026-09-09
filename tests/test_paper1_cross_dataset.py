@@ -188,7 +188,7 @@ def test_dev_teacher_seed_and_matched_sft_materialization(tmp_path):
     dev_seed = tmp_path / "dev_seed.jsonl"
     build_cross_dataset_teacher_seed(frozen_dir=frozen, output_path=train_seed)
     build_cross_dataset_teacher_seed(
-        frozen_dir=frozen, output_path=dev_seed, source_role="dev"
+        frozen_dir=frozen, output_path=dev_seed, source_role="dev", max_records=1
     )
     assert all(row["split"] == "dev" for row in read_jsonl(dev_seed))
 
@@ -220,7 +220,7 @@ def test_dev_teacher_seed_and_matched_sft_materialization(tmp_path):
         output_dir=tmp_path / "sft",
         seed=19,
     )
-    assert report["counts"] == {"train": 4, "dev": 2}
+    assert report["counts"] == {"train": 4, "dev": 1}
     assert report["leakage_audit"]["passed"]
     train_rows = read_jsonl(tmp_path / "sft/train.jsonl")
     assert all(row["prompt"].endswith("ASL:") for row in train_rows)

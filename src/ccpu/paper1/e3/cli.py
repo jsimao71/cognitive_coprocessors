@@ -159,6 +159,7 @@ def build_parser() -> argparse.ArgumentParser:
     cross_seed.add_argument(
         "--source-role", choices=("train_source", "dev"), default="train_source"
     )
+    cross_seed.add_argument("--max-records", type=int)
     cross_sft = commands.add_parser("prepare-cross-dataset-sft")
     cross_sft.add_argument("--frozen-dir", required=True)
     cross_sft.add_argument("--accepted-train", required=True)
@@ -514,6 +515,7 @@ def main(argv: list[str] | None = None) -> int:
             frozen_dir=args.frozen_dir,
             output_path=args.output,
             source_role=args.source_role,
+            max_records=args.max_records,
         )
         print(
             f"{manifest['dataset']} teacher seeds={manifest['count']} -> {args.output}"

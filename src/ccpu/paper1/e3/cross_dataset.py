@@ -430,6 +430,7 @@ def build_cross_dataset_teacher_seed(
     frozen_dir: str | Path,
     output_path: str | Path,
     source_role: str = "train_source",
+    max_records: int | None = None,
 ) -> dict[str, Any]:
     """Build scorer-rich seeds whose downstream teacher view remains question-only."""
 
@@ -441,8 +442,17 @@ def build_cross_dataset_teacher_seed(
     manifest = read_json(manifest_path)
     if file_sha256(source_path) != manifest["outputs"][source_role]["sha256"]:
         raise ValueError(f"frozen {source_role} checksum mismatch")
+    sources = read_jsonl(source_path)
+    if max_records is not None:
+        if max_records < 1 or max_records > len(sources):
+            raise ValueError(f"invalid teacher seed max_records={max_records}")
+        sources = (
+            _select_distinct_parents(sources, max_records, 93001, "teacher-dev")
+            if source_role == "dev"
+            else _balanced_select(sources, max_records, 93001, "teacher-train")
+        )
     rows = []
-    for source in read_jsonl(source_path):
+    for source in sources:
         supervision = source.get("supervision", {})
         seed = {
             "schema_version": "ccpu.dsl_dataset.raw_record.v1",
@@ -476,6 +486,7 @@ def build_cross_dataset_teacher_seed(
         "schema_version": "ccpu.paper1.cross_dataset_teacher_seed_manifest.v1",
         "dataset": manifest["dataset"],
         "source_role": source_role,
+        "max_records": max_records,
         "source_manifest": str(manifest_path),
         "source_manifest_sha256": file_sha256(manifest_path),
         "source_sha256": file_sha256(source_path),
