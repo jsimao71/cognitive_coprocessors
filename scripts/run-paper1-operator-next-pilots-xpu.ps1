@@ -62,6 +62,24 @@ try {
             "--output-dir", (Join-Path $pilot "direct\eval"),
             "--shard-index", "0", "--shard-count", "1", "--checkpoint-every", "1"
         )
+        Invoke-Step "analyze $level pilot" (Join-Path $pilot "analysis\summary.json") @(
+            "analyze-operator-pilot", "--eval", (Join-Path $pilot "test.jsonl"),
+            "--direct-predictions", (Join-Path $pilot "direct\eval\predictions.jsonl"),
+            "--ap-predictions", (Join-Path $pilot "ap\eval\predictions.jsonl"),
+            "--as-predictions", (Join-Path $pilot "as\eval\predictions.jsonl"),
+            "--output-dir", (Join-Path $pilot "analysis")
+        )
     }
+
+    $summaryArguments = @()
+    foreach ($level in @("O0", "O1", "O3", "O5", "O6")) {
+        $summary = Join-Path $Root "$($level.ToLowerInvariant())_pilot250_seed99173\analysis\summary.json"
+        if (Test-Path -LiteralPath $summary) {
+            $summaryArguments += @("--summary", "$level=$summary")
+        }
+    }
+    & $Python -u -m ccpu.paper1.e3 analyze-operator-ladder @summaryArguments `
+        --output-dir (Join-Path $Root "analysis")
+    if ($LASTEXITCODE -ne 0) { throw "operator ladder analysis failed" }
 }
 finally { Pop-Location }
