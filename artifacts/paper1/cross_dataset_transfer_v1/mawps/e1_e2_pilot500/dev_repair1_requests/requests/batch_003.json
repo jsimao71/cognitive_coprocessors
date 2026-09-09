@@ -1,0 +1,211 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sam invited 9 friends to a birthday party, but 6 couldn't come.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 160,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "If he wanted to buy enough cupcakes so each person could have exactly 2, how many should he buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "party.invited_friends = 9",
+              "party.friends_unable_to_attend = 6",
+              "party.attending_friends = party.invited_friends - party.friends_unable_to_attend"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "party.total_people = party.attending_friends + 1",
+              "party.cupcakes_per_person = 2",
+              "party.cupcakes_needed = party.total_people * party.cupcakes_per_person",
+              "RETURN party.cupcakes_needed"
+            ],
+            "assumptions": [
+              "Sam is included along with the attending friends in \"each person\"."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__V5GctpUfJGO62UNu"
+      },
+      "question": "Sam invited 9 friends to a birthday party, but 6 couldn't come. If he wanted to buy enough cupcakes so each person could have exactly 2, how many should he buy?",
+      "source_context": null,
+      "source_id": "mawps__V5GctpUfJGO62UNu",
+      "validation_failure": "answer mismatch: actual=8, expected=6",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Thomas wants to share some Biscuit among 24 friends.If each friend get 11 Biscuit, then how many Biscuit john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "John is not introduced as one of Thomas's friends, so it is unclear whether the question asks for John's individual share of 11 biscuits or Thomas's total supply for 24 friends."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__rYPOi5EMDJLkKhno"
+      },
+      "question": "Thomas wants to share some Biscuit among 24 friends.If each friend get 11 Biscuit, then how many Biscuit john would have?",
+      "source_context": null,
+      "source_id": "mawps__rYPOi5EMDJLkKhno",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "264",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "While digging through her clothes for ice cream money, Joan found 15 dimes in her jacket, and 4 dimes in her shorts.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "How much money did Joan find?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "joan.jacket.dimes = 15",
+              "joan.shorts.dimes = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "joan.total.dimes_found = joan.jacket.dimes + joan.shorts.dimes",
+              "RETURN joan.total.dimes_found"
+            ],
+            "assumptions": [
+              "How much money refers to the combined dimes found, without converting them into an unstated currency unit."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "The requested money is represented in the stated denomination, as a total count of dimes."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__mmkOCAesM4JqqIhM"
+      },
+      "question": "While digging through her clothes for ice cream money, Joan found 15 dimes in her jacket, and 4 dimes in her shorts. How much money did Joan find?",
+      "source_context": null,
+      "source_id": "mawps__mmkOCAesM4JqqIhM",
+      "validation_failure": "answer mismatch: actual=19, expected=1.9",
+      "validator_context": {
+        "correct_answer": "1.9",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

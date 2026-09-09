@@ -1,0 +1,562 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John had some lychee.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Floyd gave him 3 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "Now John has 28 lychee.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "How many lychee did John have incipiently?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause introduces an indefinite initial quantity (\"some\") without a numeric value or arithmetic relation, and the active ASL profile has no declaration form for an ungrounded quantity."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "john.received_from_floyd.lychee = 3"
+            ],
+            "assumptions": [
+              "Interpreted \"him\" as John and \"more\" as additional lychee from the preceding sentence."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.after_gift.lychee = 28"
+            ],
+            "assumptions": [
+              "Interpreted \"Now\" as the state after Floyd's gift."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.initial.lychee = john.after_gift.lychee - john.received_from_floyd.lychee",
+              "RETURN john.initial.lychee"
+            ],
+            "assumptions": [
+              "Interpreted \"incipiently\" as initially, before Floyd's gift."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__joAVHaWBaSoTMTw3"
+      },
+      "question": "John had some lychee. Floyd gave him 3 more. Now John has 28 lychee. How many lychee did John have incipiently?",
+      "source_context": null,
+      "source_id": "mawps__joAVHaWBaSoTMTw3",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "25",
+        "gold_reasoning": "28-3"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Randy needs 53 cupcakes for a birthday party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "He already has 7 chocolate cupcakes and 19 vanilla cupcakes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 107,
+          "teacher_input_default": true,
+          "text": "How many more cupcakes should Randy buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "randy.party.required_cupcakes = 53"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The literal is the total cupcake requirement for the party."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "randy.current.chocolate_cupcakes = 7",
+              "randy.current.vanilla_cupcakes = 19",
+              "randy.current.total_cupcakes = randy.current.chocolate_cupcakes + randy.current.vanilla_cupcakes"
+            ],
+            "assumptions": [
+              "The chocolate and vanilla cupcakes constitute all cupcakes Randy already has."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "Flavor-specific quantities are preserved before forming the current total."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "randy.cupcakes_to_buy = randy.party.required_cupcakes - randy.current.total_cupcakes",
+              "RETURN randy.cupcakes_to_buy"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__EnU0mwu1cTJn4HkB"
+      },
+      "question": "Randy needs 53 cupcakes for a birthday party. He already has 7 chocolate cupcakes and 19 vanilla cupcakes. How many more cupcakes should Randy buy?",
+      "source_context": null,
+      "source_id": "mawps__EnU0mwu1cTJn4HkB",
+      "validation_failure": "answer mismatch: actual=27, expected=32",
+      "validator_context": {
+        "correct_answer": "32",
+        "gold_reasoning": "53-(7+14)"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Melissa had 135 Flower.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "Andrea took 52 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Now How many Flower Melissa have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "melissa.initial_flowers = 135"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "andrea.flowers_taken_from_melissa = 52",
+              "melissa.flowers_after_take = melissa.initial_flowers - andrea.flowers_taken_from_melissa"
+            ],
+            "assumptions": [
+              "Despite the mismatched pronoun \"him,\" Melissa is the only established source from whom Andrea could take the flowers."
+            ],
+            "confidence": 0.84,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" is incomplete: it supplies neither a comparison target nor a clear indication that it means flowers remaining."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__567GPCnVeenmMq0l"
+      },
+      "question": "Melissa had 135 Flower. Andrea took 52 from him. Now How many Flower Melissa have less than?",
+      "source_context": null,
+      "source_id": "mawps__567GPCnVeenmMq0l",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "83",
+        "gold_reasoning": "135-52"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 18,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Erin had some fig.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 19,
+          "teacher_input_default": true,
+          "text": "Felipe gave him 7 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "Now Erin has 26 fig.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "How many fig did Erin have incipiently?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Erin's unknown initial fig quantity; ASL-Arith has no unbound-value declaration."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "felipe.gift_to_erin.fig = 7",
+              "erin.after_gift.fig = erin.initial.fig + felipe.gift_to_erin.fig"
+            ],
+            "assumptions": [
+              "Despite the pronoun mismatch, \"him\" refers to Erin, the only stated recipient."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "Preserves both the transferred quantity and the resulting inventory relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "erin.after_gift.fig = 26"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Grounds the stated post-gift inventory without collapsing the earlier transition relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN erin.initial.fig"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [
+              "Interprets \"incipiently\" as initially, before Felipe's gift."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__xJC5ZASm2K4PVGEd"
+      },
+      "question": "Erin had some fig. Felipe gave him 7 more. Now Erin has 26 fig. How many fig did Erin have incipiently?",
+      "source_context": null,
+      "source_id": "mawps__xJC5ZASm2K4PVGEd",
+      "validation_failure": "unresolved reference 'erin.initial.fig' from scope 'global'; unresolved reference 'erin.initial.fig' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "19",
+        "gold_reasoning": "26-7"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Robert had some kiwi(fruit).",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "Timothy gave him 1 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "Now Robert has 23 kiwi(fruit).",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "How many kiwi(fruit) did Robert have originally?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Robert's unknown original kiwi quantity; ASL-Arith has no unbound-value declaration."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "timothy.gift_to_robert.kiwi = 1",
+              "robert.after_gift.kiwi = robert.original.kiwi + timothy.gift_to_robert.kiwi"
+            ],
+            "assumptions": [
+              "\"Him\" refers to Robert."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Preserves both the transferred quantity and the resulting inventory relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "robert.after_gift.kiwi = 23"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Grounds the stated post-gift inventory without replacing the original quantity."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN robert.original.kiwi"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__T7z4yhCx74ezjPyc"
+      },
+      "question": "Robert had some kiwi(fruit). Timothy gave him 1 more. Now Robert has 23 kiwi(fruit). How many kiwi(fruit) did Robert have originally?",
+      "source_context": null,
+      "source_id": "mawps__T7z4yhCx74ezjPyc",
+      "validation_failure": "unresolved reference 'robert.original.kiwi' from scope 'global'; unresolved reference 'robert.original.kiwi' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "22",
+        "gold_reasoning": "23-1"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

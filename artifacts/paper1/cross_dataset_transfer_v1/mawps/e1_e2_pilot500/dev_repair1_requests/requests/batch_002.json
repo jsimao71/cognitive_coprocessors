@@ -1,0 +1,420 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The Sears Tower in Chicago is 1450 feet tall.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 99,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "The John Hancock Center in Chicago is 1127 feet tall.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 161,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 100,
+          "teacher_input_default": true,
+          "text": "Suppose you are asked to build a small-scale replica of each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 270,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 162,
+          "teacher_input_default": true,
+          "text": "If you make the Sears Tower 3 meter tall , what would be the approximate height of the John Hancock replica?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 314,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 271,
+          "teacher_input_default": true,
+          "text": "Round your answer to the nearest hundredth.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "sears_tower.actual.height_feet = 1450"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john_hancock_center.actual.height_feet = 1127"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 2,
+            "semantic_notes": [
+              "This clause establishes the replica scenario but introduces no numeric fact or arithmetic relation by itself."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sears_tower.replica.height_meters = 3",
+              "john_hancock_center.replica.height_meters = john_hancock_center.actual.height_feet / sears_tower.actual.height_feet * sears_tower.replica.height_meters",
+              "RETURN john_hancock_center.replica.height_meters"
+            ],
+            "assumptions": [
+              "Both replicas use the same scale, as implied by determining one replica's height from the other's."
+            ],
+            "confidence": 0.94,
+            "part_id": 3,
+            "semantic_notes": [
+              "The relative actual heights are used to preserve a common replica scale."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Rounding to the nearest hundredth cannot be expressed because no rounding operator is present in the active registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [
+              "This clause specifies output precision rather than a new measured quantity."
+            ],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__bMWMwWwbr5VqFtLr"
+      },
+      "question": "The Sears Tower in Chicago is 1450 feet tall. The John Hancock Center in Chicago is 1127 feet tall. Suppose you are asked to build a small-scale replica of each. If you make the Sears Tower 3 meter tall , what would be the approximate height of the John Hancock replica? Round your answer to the nearest hundredth.",
+      "source_context": null,
+      "source_id": "mawps__bMWMwWwbr5VqFtLr",
+      "validation_failure": "non-ok semantic parts: part 4=unsupported",
+      "validator_context": {
+        "correct_answer": "3381/1450",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Emelda wants to share some blueberry among 32 friends.If each friend get 29 blueberry, then how many blueberry john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "John is not introduced or identified as one of Emelda's friends. The query could ask for John's stated per-friend share or could contain a name error and intend Emelda's total blueberry count."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__qP31Oqr2d4hiJeQt"
+      },
+      "question": "Emelda wants to share some blueberry among 32 friends.If each friend get 29 blueberry, then how many blueberry john would have?",
+      "source_context": null,
+      "source_id": "mawps__qP31Oqr2d4hiJeQt",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "928",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Andrea wants to share some blueberry among 19 friends.If each friend get 5 blueberry, then how many blueberry john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "John is not introduced or identified as one of Andrea's friends. The query could ask for John's stated per-friend share or could contain a name error and intend Andrea's total blueberry count."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__mP3QE2fZdfM4pice"
+      },
+      "question": "Andrea wants to share some blueberry among 19 friends.If each friend get 5 blueberry, then how many blueberry john would have?",
+      "source_context": null,
+      "source_id": "mawps__mP3QE2fZdfM4pice",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "95",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Trenton sells electronic supplies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "Each week he earns 190 dollars plus commission equal to 4 % of his sales.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 109,
+          "teacher_input_default": true,
+          "text": "This week his goal is to earn no less than 500 dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 254,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "Write and solve an inequality to find the amount of sales he must make to reach his goal.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "trenton.occupation = \"electronic_supply_sales\""
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trenton.compensation.weekly_base_dollars = 190",
+              "trenton.compensation.commission_percent_of_sales = 4",
+              "trenton.weekly.commission_dollars = percent_of(trenton.weekly.sales_dollars, trenton.compensation.commission_percent_of_sales)",
+              "trenton.weekly.earnings_dollars = trenton.compensation.weekly_base_dollars + trenton.weekly.commission_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trenton.this_week.minimum_earnings_goal_dollars = 500"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "The minimum-qualified path preserves the no-less-than threshold without requiring an unregistered comparison operator."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trenton.this_week.minimum_sales_dollars = (trenton.this_week.minimum_earnings_goal_dollars - trenton.compensation.weekly_base_dollars) / (trenton.compensation.commission_percent_of_sales / 100)",
+              "RETURN trenton.this_week.minimum_sales_dollars"
+            ],
+            "assumptions": [
+              "The stated base pay and commission schedule apply to this week.",
+              "Sales and commission are modeled as continuous dollar quantities."
+            ],
+            "confidence": 0.94,
+            "part_id": 3,
+            "semantic_notes": [
+              "The requested inequality boundary is represented as the minimum sales amount that reaches the earnings threshold."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__f9zkHZ2D12ZKflEX"
+      },
+      "question": "Trenton sells electronic supplies. Each week he earns 190 dollars plus commission equal to 4 % of his sales. This week his goal is to earn no less than 500 dollars. Write and solve an inequality to find the amount of sales he must make to reach his goal.",
+      "source_context": null,
+      "source_id": "mawps__f9zkHZ2D12ZKflEX",
+      "validation_failure": "unresolved reference 'trenton.weekly.sales_dollars' from scope 'global'; unresolved reference 'trenton.weekly.commission_dollars' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "7750",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "William wants to share some papaya among 18 friends.If each friend get 16 papaya, then how many papaya john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause says William is sharing papayas but asks how many papayas John would have; John is not introduced and the text does not establish whether John is one of the 18 friends or whether the intended query concerns William's total papayas."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__udZxAuXq3PyhoOq4"
+      },
+      "question": "William wants to share some papaya among 18 friends.If each friend get 16 papaya, then how many papaya john would have?",
+      "source_context": null,
+      "source_id": "mawps__udZxAuXq3PyhoOq4",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "288",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

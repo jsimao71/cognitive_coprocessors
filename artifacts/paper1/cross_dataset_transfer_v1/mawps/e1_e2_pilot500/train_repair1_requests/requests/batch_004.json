@@ -1,0 +1,545 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Beth has 4 packs of crayons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "Each pack has 10 crayons in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "She also has 6 extra crayons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "How many crayons does Beth have altogether?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "beth.crayon_packs = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "beth.crayons_per_pack = 10"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "beth.extra_crayons = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "beth.packed_crayons = beth.crayon_packs * beth.crayons_per_pack",
+              "beth.total_crayons = beth.packed_crayons + beth.extra_crayons",
+              "RETURN beth.total_crayons"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__YIhdd8hjTTAsdaai"
+      },
+      "question": "Beth has 4 packs of crayons. Each pack has 10 crayons in it. She also has 6 extra crayons. How many crayons does Beth have altogether?",
+      "source_context": null,
+      "source_id": "mawps__YIhdd8hjTTAsdaai",
+      "validation_failure": "answer mismatch: actual=46, expected=40",
+      "validator_context": {
+        "correct_answer": "40",
+        "gold_reasoning": "(4.0*10.0)"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lauren had some Bread.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "Oliver gave him 4 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Now Lauren has 25 Bread.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "How many Bread did Lauren have in the first?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause establishes an unknown initial bread quantity but supplies no value or arithmetic relation to assign yet."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "oliver.bread_given_to_lauren = 4",
+              "lauren.current_bread = lauren.initial_bread + oliver.bread_given_to_lauren"
+            ],
+            "assumptions": [
+              "Despite the pronoun \u201chim,\u201d the recipient is resolved as Lauren from the surrounding state-change narrative."
+            ],
+            "confidence": 0.91,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lauren.current_bread = 25"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN lauren.initial_bread"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__n3RuUcBREBrBrBKP"
+      },
+      "question": "Lauren had some Bread. Oliver gave him 4 more. Now Lauren has 25 Bread. How many Bread did Lauren have in the first?",
+      "source_context": null,
+      "source_id": "mawps__n3RuUcBREBrBrBKP",
+      "validation_failure": "unresolved reference 'lauren.initial_bread' from scope 'global'; unresolved reference 'lauren.initial_bread' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "21",
+        "gold_reasoning": "25-4"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 20,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Keith had 170 peach.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 21,
+          "teacher_input_default": true,
+          "text": "Edra took 80 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "Now How many peach Keith have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "keith.initial.peaches = 170"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "edra.taken_from_keith.peaches = 80",
+              "keith.after_edra_took.peaches = keith.initial.peaches - edra.taken_from_keith.peaches"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Keith, and the quantity taken consists of peaches."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" lacks a comparison target and could mean either how many peaches Keith has left or how many fewer peaches he has than before."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__IMkDjRtuoBmdB2Fe"
+      },
+      "question": "Keith had 170 peach. Edra took 80 from him. Now How many peach Keith have less than?",
+      "source_context": null,
+      "source_id": "mawps__IMkDjRtuoBmdB2Fe",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "90",
+        "gold_reasoning": "170-80"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sabrina had 175 papaya.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "Virgil took 153 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Now How many papaya Sabrina have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "sabrina.papayas_initial = 175"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "virgil.papayas_taken_from_sabrina = 153",
+              "sabrina.papayas_now = sabrina.papayas_initial - virgil.papayas_taken_from_sabrina"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Sabrina despite the inconsistent gender."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The malformed phrase \"have less than\" does not identify whether the query asks for Sabrina's remaining papayas or a comparison with an unstated quantity."
+            ],
+            "confidence": 0.43,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__EyQsjJOVStssnAu3"
+      },
+      "question": "Sabrina had 175 papaya. Virgil took 153 from him. Now How many papaya Sabrina have less than?",
+      "source_context": null,
+      "source_id": "mawps__EyQsjJOVStssnAu3",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "22",
+        "gold_reasoning": "175-153"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Melissa had some blackcurrant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "Alisha gave him 6 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "Now Melissa has 32 blackcurrant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "How many blackcurrant did Melissa have primitively?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces Melissa's possession of blackcurrants but supplies no quantitative value or relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "alisha.gift.blackcurrants = 6",
+              "melissa.after_gift.blackcurrants = melissa.before_gift.blackcurrants + alisha.gift.blackcurrants"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Melissa despite the grammatical gender mismatch."
+            ],
+            "confidence": 0.95,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "melissa.after_gift.blackcurrants = 32"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "\"Now\" identifies Melissa's state after Alisha's gift."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN melissa.before_gift.blackcurrants"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [
+              "\"Primitively\" is interpreted as before Alisha's gift."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__jDQNHMxELKgcKJrU"
+      },
+      "question": "Melissa had some blackcurrant. Alisha gave him 6 more. Now Melissa has 32 blackcurrant. How many blackcurrant did Melissa have primitively?",
+      "source_context": null,
+      "source_id": "mawps__jDQNHMxELKgcKJrU",
+      "validation_failure": "unresolved reference 'melissa.before_gift.blackcurrants' from scope 'global'; unresolved reference 'melissa.before_gift.blackcurrants' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "26",
+        "gold_reasoning": "32-6"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

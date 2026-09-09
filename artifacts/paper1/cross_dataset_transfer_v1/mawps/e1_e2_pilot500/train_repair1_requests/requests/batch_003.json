@@ -1,0 +1,504 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lester had some strawberry.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 28,
+          "teacher_input_default": true,
+          "text": "Patsy gave him 8 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "Now Lester has 45 strawberry.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "How many strawberry did Lester have earlier?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The arithmetic profile cannot encode an unspecified existential quantity while preserving that Lester possessed some strawberries earlier."
+            ],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "patsy.strawberries_given_to_lester = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lester.strawberries_now = 45"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lester.strawberries_earlier = lester.strawberries_now - patsy.strawberries_given_to_lester",
+              "RETURN lester.strawberries_earlier"
+            ],
+            "assumptions": [
+              "Patsy's gift is the only change between the earlier and current quantities."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__fD3w25I1dsB9842I"
+      },
+      "question": "Lester had some strawberry. Patsy gave him 8 more. Now Lester has 45 strawberry. How many strawberry did Lester have earlier?",
+      "source_context": null,
+      "source_id": "mawps__fD3w25I1dsB9842I",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "37",
+        "gold_reasoning": "45-8"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 18,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Karen had 195 fig.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 19,
+          "teacher_input_default": true,
+          "text": "Jeffrey took 80 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "Now How many fig Karen have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "karen.initial.figs = 195"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jeffrey.taken_from_karen.figs = 80",
+              "karen.after_jeffrey_took.figs = karen.initial.figs - jeffrey.taken_from_karen.figs"
+            ],
+            "assumptions": [
+              "Despite the mismatched pronoun \"him,\" Karen is the only contextually available source of the figs."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" lacks a comparison target and does not unambiguously ask for Karen's remaining figs."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__QA0qsgbb9Uy3bYTb"
+      },
+      "question": "Karen had 195 fig. Jeffrey took 80 from him. Now How many fig Karen have less than?",
+      "source_context": null,
+      "source_id": "mawps__QA0qsgbb9Uy3bYTb",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "115",
+        "gold_reasoning": "195-80"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 18,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jean had 61 Watch.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 19,
+          "teacher_input_default": true,
+          "text": "Victor took 57 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "Now How many Watch Jean have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jean.watches.before_victor_took = 61"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "victor.watches_taken_from_jean = 57",
+              "jean.watches.after_victor_took = jean.watches.before_victor_took - victor.watches_taken_from_jean"
+            ],
+            "assumptions": [
+              "\u201cfrom him\u201d refers to Jean."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \u201chave less than\u201d omits a comparison target and does not unambiguously ask for Jean's remaining watches."
+            ],
+            "confidence": 0.42,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__k849isyC15sdRN6g"
+      },
+      "question": "Jean had 61 Watch. Victor took 57 from him. Now How many Watch Jean have less than?",
+      "source_context": null,
+      "source_id": "mawps__k849isyC15sdRN6g",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "61-57"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Eugene had some blackcurrant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "Dorothy gave him 8 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "Now Eugene has 26 blackcurrant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "How many blackcurrant did Eugene have primitively?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Eugene's unknown initial blackcurrant quantity, which is referenced by later clauses but has no stated value or relation in this clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dorothy.gift.blackcurrants = 8",
+              "eugene.after_gift.blackcurrants = eugene.before_gift.blackcurrants + dorothy.gift.blackcurrants"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Eugene, and \"8 more\" denotes 8 blackcurrants."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "eugene.after_gift.blackcurrants = 26"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The stated current quantity grounds the post-gift state introduced previously."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN eugene.before_gift.blackcurrants"
+            ],
+            "assumptions": [
+              "\"Primitively\" means before Dorothy's gift."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__Jr2EkmsBBikbODp3"
+      },
+      "question": "Eugene had some blackcurrant. Dorothy gave him 8 more. Now Eugene has 26 blackcurrant. How many blackcurrant did Eugene have primitively?",
+      "source_context": null,
+      "source_id": "mawps__Jr2EkmsBBikbODp3",
+      "validation_failure": "unresolved reference 'eugene.before_gift.blackcurrants' from scope 'global'; unresolved reference 'eugene.before_gift.blackcurrants' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "18",
+        "gold_reasoning": "26-8"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 39,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "7 less than 4 times a number equals 13.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "What is the number?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "number.four_times_minus_seven = 13",
+              "number.value = (number.four_times_minus_seven + 7) / 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The first assignment preserves the stated expression's equality to 13; the second records the corresponding dependency for the unknown number."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN number.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__q3K2cdoRU1L08Lcu"
+      },
+      "question": "7 less than 4 times a number equals 13. What is the number?",
+      "source_context": null,
+      "source_id": "mawps__q3K2cdoRU1L08Lcu",
+      "validation_failure": "anonymous operation-ledger target: number.value",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "(13.0+7.0)/4.0"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

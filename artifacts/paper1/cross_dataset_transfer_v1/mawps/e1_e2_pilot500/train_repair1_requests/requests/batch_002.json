@@ -1,0 +1,566 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John had some Flower.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 58,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "He divide each Flower into 6 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 59,
+          "teacher_input_default": true,
+          "text": "If total 102 Flower slices John make, then how many Flower John had?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces John's initial flower quantity as unknown; no numeric fact or relation is asserted in this clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "flower.slices_per_flower = 6",
+              "john.total_flower_slices = john.initial.flowers * flower.slices_per_flower"
+            ],
+            "assumptions": [
+              "Each flower John had was divided into six slices."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.total_flower_slices = 102",
+              "RETURN john.initial.flowers"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__U0Fwn1zqHqAhA31I"
+      },
+      "question": "John had some Flower. He divide each Flower into 6 slices. If total 102 Flower slices John make, then how many Flower John had?",
+      "source_context": null,
+      "source_id": "mawps__U0Fwn1zqHqAhA31I",
+      "validation_failure": "unresolved reference 'john.initial.flowers' from scope 'global'; unresolved reference 'john.initial.flowers' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "17",
+        "gold_reasoning": "102/6"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Chester had some Mango.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "Charisse gave him 2 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Now Chester has 12 Mango.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "How many Mango did Chester have in the first?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Chester's initial mango quantity as unknown."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "charisse.gift_to_chester.mangoes = 2",
+              "chester.after_gift.mangoes = chester.initial.mangoes + charisse.gift_to_chester.mangoes"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Chester."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chester.after_gift.mangoes = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN chester.initial.mangoes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__v7t4HO91DBfD8SRK"
+      },
+      "question": "Chester had some Mango. Charisse gave him 2 more. Now Chester has 12 Mango. How many Mango did Chester have in the first?",
+      "source_context": null,
+      "source_id": "mawps__v7t4HO91DBfD8SRK",
+      "validation_failure": "unresolved reference 'chester.initial.mangoes' from scope 'global'; unresolved reference 'chester.initial.mangoes' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "12-2"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Patricia had some Chocolate.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "Ronald gave him 4 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Now Patricia has 37 Chocolate.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "How many Chocolate did Patricia have initially?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Patricia's initial chocolate quantity as unknown."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ronald.gift_to_patricia.chocolates = 4",
+              "patricia.after_gift.chocolates = patricia.initial.chocolates + ronald.gift_to_patricia.chocolates"
+            ],
+            "assumptions": [
+              "Despite the mismatched pronoun \"him,\" the recipient is Patricia, as established by the following sentence."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "patricia.after_gift.chocolates = 37"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN patricia.initial.chocolates"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__INc2cgmW34ZMxfU3"
+      },
+      "question": "Patricia had some Chocolate. Ronald gave him 4 more. Now Patricia has 37 Chocolate. How many Chocolate did Patricia have initially?",
+      "source_context": null,
+      "source_id": "mawps__INc2cgmW34ZMxfU3",
+      "validation_failure": "unresolved reference 'patricia.initial.chocolates' from scope 'global'; unresolved reference 'patricia.initial.chocolates' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "33",
+        "gold_reasoning": "37-4"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 20,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Maria had some lime.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 21,
+          "teacher_input_default": true,
+          "text": "Rickey gave him 8 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "Now Maria has 49 lime.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "How many lime did Maria have at first?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Maria's initial lime quantity as unknown."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rickey.gift_to_maria.limes = 8",
+              "maria.after_gift.limes = maria.initial.limes + rickey.gift_to_maria.limes"
+            ],
+            "assumptions": [
+              "Despite the mismatched pronoun \"him,\" the recipient is Maria, as established by the following sentence."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "maria.after_gift.limes = 49"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN maria.initial.limes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__gIiuMMVtg5SgJLly"
+      },
+      "question": "Maria had some lime. Rickey gave him 8 more. Now Maria has 49 lime. How many lime did Maria have at first?",
+      "source_context": null,
+      "source_id": "mawps__gIiuMMVtg5SgJLly",
+      "validation_failure": "unresolved reference 'maria.initial.limes' from scope 'global'; unresolved reference 'maria.initial.limes' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "41",
+        "gold_reasoning": "49-8"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Betty had some Bread.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Roy gave him 5 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "Now Betty has 28 Bread.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "How many Bread did Betty have initially?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "ASL-Arith v0 has no declaration syntax for an explicitly unspecified initial quantity without inventing a value or relation."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "roy.bread_given_to_betty = 5"
+            ],
+            "assumptions": [
+              "Despite the masculine pronoun \"him,\" Betty is treated as the recipient because the surrounding clauses identify her as the person whose bread quantity changes."
+            ],
+            "confidence": 0.86,
+            "part_id": 1,
+            "semantic_notes": [
+              "The transfer supplies the increment used to relate Betty's initial and post-gift bread quantities."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "betty.after_roy_gift.bread = 28"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "betty.initial.bread = betty.after_roy_gift.bread - roy.bread_given_to_betty",
+              "RETURN betty.initial.bread"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__Z5p0PRlYcEqNPb5S"
+      },
+      "question": "Betty had some Bread. Roy gave him 5 more. Now Betty has 28 Bread. How many Bread did Betty have initially?",
+      "source_context": null,
+      "source_id": "mawps__Z5p0PRlYcEqNPb5S",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "23",
+        "gold_reasoning": "28-5"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

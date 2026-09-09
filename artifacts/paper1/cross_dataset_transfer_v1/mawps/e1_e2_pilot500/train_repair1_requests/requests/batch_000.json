@@ -1,0 +1,527 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "William had 194 kiwi.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Linda took 138 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Now How many kiwi William have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "william.before_linda_took.kiwi = 194"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "linda.kiwi_taken_from_william = 138",
+              "william.after_linda_took.kiwi = william.before_linda_took.kiwi - linda.kiwi_taken_from_william"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to William."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" lacks a comparison target and could ask either for William's remaining kiwi or for the amount by which his kiwi count decreased."
+            ],
+            "confidence": 0.42,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__pXiXQI6LYf86RA1W"
+      },
+      "question": "William had 194 kiwi. Linda took 138 from him. Now How many kiwi William have less than?",
+      "source_context": null,
+      "source_id": "mawps__pXiXQI6LYf86RA1W",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "56",
+        "gold_reasoning": "194-138"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 18,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dana had 137 kiwi.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 19,
+          "teacher_input_default": true,
+          "text": "Elizabeth took 25 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Now How many kiwi Dana have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "dana.initial.kiwi = 137"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "elizabeth.taken_from_dana.kiwi = 25",
+              "dana.after_take.kiwi = dana.initial.kiwi - elizabeth.taken_from_dana.kiwi"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Dana."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" lacks a comparison target and does not unambiguously ask for Dana's remaining kiwi quantity."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__LdZBMUud5wTb0qIp"
+      },
+      "question": "Dana had 137 kiwi. Elizabeth took 25 from him. Now How many kiwi Dana have less than?",
+      "source_context": null,
+      "source_id": "mawps__LdZBMUud5wTb0qIp",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "112",
+        "gold_reasoning": "137-25"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Marvin had some quince.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "Harland gave him 3 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Now Marvin has 48 quince.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "How many quince did Marvin have primitively?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.91,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Marvin's initially unknown quantity of quince; the semantic path is established by the subsequent relation and query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "harland.gift_to_marvin.quince = 3",
+              "marvin.after_gift.quince = marvin.initial.quince + harland.gift_to_marvin.quince"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Marvin."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marvin.after_gift.quince = 48"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN marvin.initial.quince"
+            ],
+            "assumptions": [
+              "\"Primitively\" means before Harland's gift."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__0IGLuKMalk5byuMh"
+      },
+      "question": "Marvin had some quince. Harland gave him 3 more. Now Marvin has 48 quince. How many quince did Marvin have primitively?",
+      "source_context": null,
+      "source_id": "mawps__0IGLuKMalk5byuMh",
+      "validation_failure": "unresolved reference 'marvin.initial.quince' from scope 'global'; unresolved reference 'marvin.initial.quince' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "45",
+        "gold_reasoning": "48-3"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Robin had some papaya.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "Caryn gave him 5 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "Now Robin has 19 papaya.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "How many papaya did Robin have originally?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.91,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Robin's initially unknown quantity of papaya; the semantic path is established by the subsequent relation and query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "caryn.gift_to_robin.papaya = 5",
+              "robin.after_gift.papaya = robin.initial.papaya + caryn.gift_to_robin.papaya"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Robin."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "robin.after_gift.papaya = 19"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN robin.initial.papaya"
+            ],
+            "assumptions": [
+              "\"Originally\" means before Caryn's gift."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__E9I7Q5FziJehbAov"
+      },
+      "question": "Robin had some papaya. Caryn gave him 5 more. Now Robin has 19 papaya. How many papaya did Robin have originally?",
+      "source_context": null,
+      "source_id": "mawps__E9I7Q5FziJehbAov",
+      "validation_failure": "unresolved reference 'robin.initial.papaya' from scope 'global'; unresolved reference 'robin.initial.papaya' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "14",
+        "gold_reasoning": "19-5"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julie had some quince.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "He cube each quince into 3 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "If total 161 quince slices Julie make, then how many quince Julie had?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.9,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Julie's initially unknown quantity of quince; the semantic path is established by the subsequent relation and query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "julie.slices_per_quince = 3",
+              "julie.total.quince_slices = julie.initial.quince * julie.slices_per_quince"
+            ],
+            "assumptions": [
+              "The pronoun \"He\" refers to Julie despite the grammatical mismatch.",
+              "\"Cube\" is interpreted as cutting each quince into slices."
+            ],
+            "confidence": 0.86,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "julie.total.quince_slices = 161",
+              "RETURN julie.initial.quince"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__9zLY5kmRabWsIthg"
+      },
+      "question": "Julie had some quince. He cube each quince into 3 slices. If total 161 quince slices Julie make, then how many quince Julie had?",
+      "source_context": null,
+      "source_id": "mawps__9zLY5kmRabWsIthg",
+      "validation_failure": "unresolved reference 'julie.initial.quince' from scope 'global'; unresolved reference 'julie.initial.quince' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "161/3",
+        "gold_reasoning": "161/3"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

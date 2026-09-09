@@ -1,0 +1,306 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A car rental agency advertised renting a luxury , full size car for 24.95 dollars per day and 0.49 dollars per mile.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "If you rent this car for 5 days , how many whole miles can you drive if you only have 200.00 dollars to spend?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rental.daily_cost_dollars = 24.95",
+              "rental.per_mile_cost_dollars = 0.49"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Computing the maximum number of whole miles requires a floor or integer-division operation, which is absent from the supplied operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__4mc6hKYBBzVuEpy2"
+      },
+      "question": "A car rental agency advertised renting a luxury , full size car for 24.95 dollars per day and 0.49 dollars per mile. If you rent this car for 5 days , how many whole miles can you drive if you only have 200.00 dollars to spend?",
+      "source_context": null,
+      "source_id": "mawps__4mc6hKYBBzVuEpy2",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "153.571429",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ethel wants to share some Chocolate among 30 friends.If each friend get 15 Chocolate, then how many Chocolate john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The distributer is Ethel, but the query asks how many chocolates John would have without identifying John or stating his relationship to Ethel or the 30 friends; the intended requested quantity is therefore underdetermined."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__rJT5xdTXwzZfKinb"
+      },
+      "question": "Ethel wants to share some Chocolate among 30 friends.If each friend get 15 Chocolate, then how many Chocolate john would have?",
+      "source_context": null,
+      "source_id": "mawps__rJT5xdTXwzZfKinb",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "450",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James wants to share some Car among 15 friends.If each friend get 5 Car, then how many Car john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The distributer is James, but the query asks how many cars John would have without identifying John or stating his relationship to James or the 15 friends; the intended requested quantity is therefore underdetermined."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__HMpg89qraW7RqQuo"
+      },
+      "question": "James wants to share some Car among 15 friends.If each friend get 5 Car, then how many Car john would have?",
+      "source_context": null,
+      "source_id": "mawps__HMpg89qraW7RqQuo",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "75",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Khalilah wants to halve 352 Flowers among 5 friends.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "How many would each friend obtain?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"halve 352 Flowers among 5 friends\" is internally unclear: \"halve\" suggests division by two, while \"among 5 friends\" suggests equal division by five."
+            ],
+            "confidence": 0.45,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "RETURN khalilah.each_friend.flowers_received"
+            ],
+            "assumptions": [],
+            "confidence": 0.87,
+            "part_id": 1,
+            "semantic_notes": [
+              "The clause supplies query intent but does not resolve the ambiguous distribution operation in the preceding clause."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__LR3WWUWzC3rw45Dh"
+      },
+      "question": "Khalilah wants to halve 352 Flowers among 5 friends. How many would each friend obtain?",
+      "source_context": null,
+      "source_id": "mawps__LR3WWUWzC3rw45Dh",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "352/5",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Hazel wants to share some fig among 11 friends.If each friend get 11 fig, then how many fig john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "hazel.friends_count = 11",
+              "hazel.each_friend.figs_received = 11",
+              "john.figs_received = hazel.each_friend.figs_received",
+              "RETURN john.figs_received"
+            ],
+            "assumptions": [
+              "John is one of the 11 friends among whom Hazel shares the figs."
+            ],
+            "confidence": 0.91,
+            "part_id": 0,
+            "semantic_notes": [
+              "The stated per-friend allocation directly determines John's allocation if he belongs to the referenced group."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__FnNeDJ6Rpls5zx0G"
+      },
+      "question": "Hazel wants to share some fig among 11 friends.If each friend get 11 fig, then how many fig john would have?",
+      "source_context": null,
+      "source_id": "mawps__FnNeDJ6Rpls5zx0G",
+      "validation_failure": "answer mismatch: actual=11, expected=121",
+      "validator_context": {
+        "correct_answer": "121",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

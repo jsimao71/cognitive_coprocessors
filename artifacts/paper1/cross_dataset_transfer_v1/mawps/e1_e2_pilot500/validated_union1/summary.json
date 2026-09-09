@@ -1,0 +1,33 @@
+{
+  "acceptance_rate": 1.0,
+  "accepted_count": 500,
+  "accepted_sha256": "53e6d5905d5ed8c49c2284b3d74db26852ffa86d4bcd67c8bd52fc5004273a8b",
+  "annotation_sha256": {
+    "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\e1_e2_pilot500\\primary_codex\\annotations.jsonl": "fa6fffe6889fa0adc8a90bb66aaf86a44876896a0274cb124a95f7d482b389e8",
+    "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\e1_e2_pilot500\\train_repair1_codex\\annotations.jsonl": "e074ba0d21fc60437dde6e06fa4427e639e4acda8a57b73472053c91aaf0aae1"
+  },
+  "by_dataset": {
+    "mawps": {
+      "accepted": 500,
+      "rejected": 0
+    }
+  },
+  "claim_boundary": "execution-verified semantic ASL with deterministic lint; not manual semantic gold",
+  "provenance_counts": {
+    "answer_blind_primary": 458,
+    "manually_reviewed": 0,
+    "rationale_assisted_repair": 42,
+    "repair_rounds": {
+      "0": 458,
+      "1": 42
+    }
+  },
+  "quality_grade": "Q1_LOCAL_CODEX_EXEC_VERIFIED",
+  "rejected_count": 0,
+  "rejected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "schema_version": "ccpu.dsl_dataset.semantic_summary.v1",
+  "seed_sha256": {
+    "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\pilot500_seed.jsonl": "c7aa316210e6094ed6a0201463e1b21c2fa191f31e74f96c3ca02834f342d9ac"
+  },
+  "semantic_lint": "anonymous targets and expression/literal returns rejected"
+}

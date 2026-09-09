@@ -1,0 +1,443 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Donna had 115 lychee.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Janet took 28 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "Now How many lychee Donna have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "donna.lychee.before_janet_took = 115"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "janet.lychee.taken_from_donna = 28",
+              "donna.lychee.after_janet_took = donna.lychee.before_janet_took - janet.lychee.taken_from_donna"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" is treated as referring to Donna despite the gender mismatch."
+            ],
+            "confidence": 0.88,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" is incomplete: it could be a malformed request for Donna's remaining lychee or a comparison whose target is missing."
+            ],
+            "confidence": 0.3,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__qx6qbIXBS70TfBBX"
+      },
+      "question": "Donna had 115 lychee. Janet took 28 from him. Now How many lychee Donna have less than?",
+      "source_context": null,
+      "source_id": "mawps__qx6qbIXBS70TfBBX",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "87",
+        "gold_reasoning": "115-28"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The first minute of a telephone call costs 24 cents and each additional minute 13 cents.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "What is the cost of a 5 minute telephone call?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "telephone_call.first_minute.cost_cents = 24",
+              "telephone_call.additional_minute.rate_cents_per_minute = 13"
+            ],
+            "assumptions": [],
+            "confidence": 1.0,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "telephone_call.duration_minutes = 5",
+              "telephone_call.billable_additional.duration_minutes = telephone_call.duration_minutes - 1",
+              "telephone_call.additional_cost_cents = rate_times_duration(telephone_call.additional_minute.rate_cents_per_minute, telephone_call.billable_additional.duration_minutes)",
+              "telephone_call.total_cost_cents = telephone_call.first_minute.cost_cents + telephone_call.additional_cost_cents",
+              "RETURN telephone_call.total_cost_cents"
+            ],
+            "assumptions": [
+              "A five-minute call contains one first minute and four additional billable minutes."
+            ],
+            "confidence": 1.0,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__03KUagUdRbXl6Ylt"
+      },
+      "question": "The first minute of a telephone call costs 24 cents and each additional minute 13 cents. What is the cost of a 5 minute telephone call?",
+      "source_context": null,
+      "source_id": "mawps__03KUagUdRbXl6Ylt",
+      "validation_failure": "answer mismatch: actual=76, expected=89",
+      "validator_context": {
+        "correct_answer": "89",
+        "gold_reasoning": "24.0+(13.0*5.0)"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 19,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary had 170 Bread.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 20,
+          "teacher_input_default": true,
+          "text": "Lyman took 71 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "Now How many Bread Mary have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mary.bread_initial = 170"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lyman.bread_taken_from_mary = 71",
+              "mary.bread_after_lyman = mary.bread_initial - lyman.bread_taken_from_mary"
+            ],
+            "assumptions": [
+              "Treated \"him\" as a gender-mismatched reference to Mary because Mary is the only previously established possessor and non-reflexive wording indicates that Lyman took the bread from another person."
+            ],
+            "confidence": 0.72,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" omits the comparison target and does not clearly ask for Mary's remaining bread, the amount removed, or a difference from another quantity."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__acr6tV3Gs82FCSF4"
+      },
+      "question": "Mary had 170 Bread. Lyman took 71 from him. Now How many Bread Mary have less than?",
+      "source_context": null,
+      "source_id": "mawps__acr6tV3Gs82FCSF4",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "99",
+        "gold_reasoning": "170-71"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Katie's team won their dodgeball game and scored 12 points total.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 172,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "If Katie scored 4 of the points and everyone else scored 4 points each, how many players were on her team?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "katie.team.points_total = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "katie.points_scored = 4",
+              "katie.team.points_per_other_player = 4",
+              "katie.team.other_players_points_total = katie.team.points_total - katie.points_scored",
+              "katie.team.other_players_count = katie.team.other_players_points_total / katie.team.points_per_other_player",
+              "katie.team.players_count = katie.team.other_players_count + 1",
+              "RETURN katie.team.players_count"
+            ],
+            "assumptions": [
+              "Counted Katie as one of the players on her team."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__zCGYjbSUMSJsQESB"
+      },
+      "question": "Katie's team won their dodgeball game and scored 12 points total. If Katie scored 4 of the points and everyone else scored 4 points each, how many players were on her team?",
+      "source_context": null,
+      "source_id": "mawps__zCGYjbSUMSJsQESB",
+      "validation_failure": "answer mismatch: actual=3, expected=2",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "((12.0-4.0)/4.0)"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 18,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Joseph had 61 Box.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 19,
+          "teacher_input_default": true,
+          "text": "Keisha took 8 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "Now How many Box Joseph have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "joseph.initial.boxes = 61"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "keisha.took_from_joseph.boxes = 8",
+              "joseph.after_keisha.boxes = joseph.initial.boxes - keisha.took_from_joseph.boxes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" is incomplete: it does not identify whether the query asks for Joseph's remaining boxes, the decrease in his boxes, or a comparison with another quantity."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__113KD9jLkSb4KagP"
+      },
+      "question": "Joseph had 61 Box. Keisha took 8 from him. Now How many Box Joseph have less than?",
+      "source_context": null,
+      "source_id": "mawps__113KD9jLkSb4KagP",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "53",
+        "gold_reasoning": "61-8"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

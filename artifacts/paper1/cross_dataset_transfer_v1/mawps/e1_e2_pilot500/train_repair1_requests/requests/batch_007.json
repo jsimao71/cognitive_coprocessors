@@ -1,0 +1,547 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Michael had some Doll.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "Sandra gave him 1 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Now Michael has 17 Doll.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "How many Doll did Michael have to begin with?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces Michael's unknown initial doll quantity but supplies no assignable value or relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sandra.gift_to_michael.dolls = 1",
+              "michael.after_gift.dolls = michael.initial.dolls + sandra.gift_to_michael.dolls"
+            ],
+            "assumptions": [
+              "\u201chim\u201d refers to Michael, the only recipient established by context."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "michael.after_gift.dolls = 17"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN michael.initial.dolls"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__MIbgRV2gWrViSk7n"
+      },
+      "question": "Michael had some Doll. Sandra gave him 1 more. Now Michael has 17 Doll. How many Doll did Michael have to begin with?",
+      "source_context": null,
+      "source_id": "mawps__MIbgRV2gWrViSk7n",
+      "validation_failure": "unresolved reference 'michael.initial.dolls' from scope 'global'; unresolved reference 'michael.initial.dolls' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "16",
+        "gold_reasoning": "17-1"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jeffrey had some raspberry.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 28,
+          "teacher_input_default": true,
+          "text": "Dina gave him 9 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Now Jeffrey has 33 raspberry.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "How many raspberry did Jeffrey have at first?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces Jeffrey's unknown initial raspberry quantity but supplies no assignable value or relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dina.gift_to_jeffrey.raspberries = 9",
+              "jeffrey.after_gift.raspberries = jeffrey.initial.raspberries + dina.gift_to_jeffrey.raspberries"
+            ],
+            "assumptions": [
+              "\u201chim\u201d refers to Jeffrey, the only recipient established by context."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jeffrey.after_gift.raspberries = 33"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN jeffrey.initial.raspberries"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__9z6moHWj4sPTwMPf"
+      },
+      "question": "Jeffrey had some raspberry. Dina gave him 9 more. Now Jeffrey has 33 raspberry. How many raspberry did Jeffrey have at first?",
+      "source_context": null,
+      "source_id": "mawps__9z6moHWj4sPTwMPf",
+      "validation_failure": "unresolved reference 'jeffrey.initial.raspberries' from scope 'global'; unresolved reference 'jeffrey.initial.raspberries' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "24",
+        "gold_reasoning": "33-9"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rhonda had some apple.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "Lloyd gave him 1 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "Now Rhonda has 17 apple.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "How many apple did Rhonda have earlier?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces Rhonda's unknown initial apple quantity but supplies no assignable value or relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lloyd.gift_to_rhonda.apples = 1",
+              "rhonda.after_gift.apples = rhonda.initial.apples + lloyd.gift_to_rhonda.apples"
+            ],
+            "assumptions": [
+              "The recipient is interpreted as Rhonda because she is the only previously introduced possessor and the next clause describes her resulting quantity."
+            ],
+            "confidence": 0.93,
+            "part_id": 1,
+            "semantic_notes": [
+              "The source uses the pronoun \u201chim\u201d despite naming Rhonda."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rhonda.after_gift.apples = 17"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN rhonda.initial.apples"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__Pb9OXRT2nKbTi0nK"
+      },
+      "question": "Rhonda had some apple. Lloyd gave him 1 more. Now Rhonda has 17 apple. How many apple did Rhonda have earlier?",
+      "source_context": null,
+      "source_id": "mawps__Pb9OXRT2nKbTi0nK",
+      "validation_failure": "unresolved reference 'rhonda.initial.apples' from scope 'global'; unresolved reference 'rhonda.initial.apples' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "16",
+        "gold_reasoning": "17-1"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "William had 113 kiwi.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Sean took 30 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "Now How many kiwi William have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "william.before_removal.kiwi = 113"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sean.taken_from_william.kiwi = 30",
+              "william.after_removal.kiwi = william.before_removal.kiwi - sean.taken_from_william.kiwi"
+            ],
+            "assumptions": [
+              "\"Him\" refers to William."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The malformed phrase \"have less than\" does not specify whether the query asks for William's remaining kiwi, the amount removed, or a comparison with an unstated quantity."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__zMniwrmyEn89qTkh"
+      },
+      "question": "William had 113 kiwi. Sean took 30 from him. Now How many kiwi William have less than?",
+      "source_context": null,
+      "source_id": "mawps__zMniwrmyEn89qTkh",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "83",
+        "gold_reasoning": "113-30"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Saturday, Sara spent $10.62 each on 2 tickets to a movie theater.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "Sara also rented a movie for $1.59, and bought a movie for $13.95.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "How much money in total did Sara spend on movies?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "sara.saturday.movie_tickets.unit_cost_usd = 10.62",
+              "sara.saturday.movie_tickets.count = 2",
+              "sara.saturday.movie_tickets.spending_usd = sara.saturday.movie_tickets.unit_cost_usd * sara.saturday.movie_tickets.count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sara.saturday.movie_rental.spending_usd = 1.59",
+              "sara.saturday.movie_purchase.spending_usd = 13.95"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sara.saturday.movies.total_spending_usd = sum(sara.saturday.movie_tickets.spending_usd, sara.saturday.movie_rental.spending_usd, sara.saturday.movie_purchase.spending_usd)",
+              "RETURN sara.saturday.movies.total_spending_usd"
+            ],
+            "assumptions": [
+              "Interpreted spending on movies as including the movie-theater tickets, movie rental, and movie purchase."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__bFTSp9UsQReLfJz5"
+      },
+      "question": "On Saturday, Sara spent $10.62 each on 2 tickets to a movie theater. Sara also rented a movie for $1.59, and bought a movie for $13.95. How much money in total did Sara spend on movies?",
+      "source_context": null,
+      "source_id": "mawps__bFTSp9UsQReLfJz5",
+      "validation_failure": "answer mismatch: actual=36.78, expected=36.42",
+      "validator_context": {
+        "correct_answer": "36.42",
+        "gold_reasoning": "(2*10.62)+1.59+13.59"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

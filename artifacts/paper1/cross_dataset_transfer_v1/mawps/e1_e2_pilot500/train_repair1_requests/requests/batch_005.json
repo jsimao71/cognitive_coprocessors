@@ -1,0 +1,500 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Beatrice had some Box.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "He cut each Box into 10 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "If total 134 Box slices Beatrice make, then how many Box Beatrice had?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces Beatrice's boxes but gives no quantitative value or relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "beatrice.slices_per_box = 10",
+              "beatrice.total_box_slices = beatrice.boxes * beatrice.slices_per_box"
+            ],
+            "assumptions": [
+              "Each box is cut into the same number of slices."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "beatrice.total_box_slices = 134",
+              "RETURN beatrice.boxes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__rNI9BhvG328Qpkjc"
+      },
+      "question": "Beatrice had some Box. He cut each Box into 10 slices. If total 134 Box slices Beatrice make, then how many Box Beatrice had?",
+      "source_context": null,
+      "source_id": "mawps__rNI9BhvG328Qpkjc",
+      "validation_failure": "unresolved reference 'beatrice.boxes' from scope 'global'; unresolved reference 'beatrice.boxes' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "67/5",
+        "gold_reasoning": "134/10"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 19,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Scott had 116 Doll.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 20,
+          "teacher_input_default": true,
+          "text": "Michael took 107 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Now How many Doll Scott have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "scott.initial.dolls = 116"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "michael.taken_from_scott.dolls = 107",
+              "scott.after_michael_took.dolls = scott.initial.dolls - michael.taken_from_scott.dolls"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Scott."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" omits a comparison target and could ask either how many dolls Scott has remaining or how many fewer dolls he has than an unspecified reference quantity."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__1zzOVBF421dvZnqr"
+      },
+      "question": "Scott had 116 Doll. Michael took 107 from him. Now How many Doll Scott have less than?",
+      "source_context": null,
+      "source_id": "mawps__1zzOVBF421dvZnqr",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "116-107"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Scott had 177 papaya.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Benjamin took 88 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Now How many papaya Scott have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "scott.papayas_initial = 177"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "benjamin.papayas_taken = 88",
+              "scott.papayas_now = scott.papayas_initial - benjamin.papayas_taken"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Scott."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The malformed phrase \"have less than\" does not specify a comparison target and does not unambiguously mean either Scott's remaining papayas or an amount-by-which comparison."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__Gyz5IRj2EvDIfZFY"
+      },
+      "question": "Scott had 177 papaya. Benjamin took 88 from him. Now How many papaya Scott have less than?",
+      "source_context": null,
+      "source_id": "mawps__Gyz5IRj2EvDIfZFY",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "89",
+        "gold_reasoning": "177-88"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 24,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kathryn had some cherry.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 25,
+          "teacher_input_default": true,
+          "text": "Kathryn gave him 2 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Now Kathryn has 39 cherry.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "How many cherry did Kathryn have in the first?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.91,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Kathryn's initial cherry quantity, but supplies no numeric fact or expressible relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The recipient denoted by \"him\" is unresolved, and the wording does not establish that Kathryn received the two cherries; therefore the direction and participants of the transfer cannot be encoded safely."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "kathryn.current.cherries = 39"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN kathryn.initial.cherries"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [
+              "Preserves the request for Kathryn's initial cherry quantity without inferring a relation from the ambiguous transfer clause."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__GlOKsE6iQHnKTdX1"
+      },
+      "question": "Kathryn had some cherry. Kathryn gave him 2 more. Now Kathryn has 39 cherry. How many cherry did Kathryn have in the first?",
+      "source_context": null,
+      "source_id": "mawps__GlOKsE6iQHnKTdX1",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "37",
+        "gold_reasoning": "39-2"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jennifer had 153 kiwi.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "Rachael took 44 from him.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 91,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Now How many kiwi Jennifer have less than?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jennifer.initial.kiwi = 153"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rachael.took_from_jennifer.kiwi = 44",
+              "jennifer.after_rachael_take.kiwi = jennifer.initial.kiwi - rachael.took_from_jennifer.kiwi"
+            ],
+            "assumptions": [
+              "Interpreted \"him\" as Jennifer because Jennifer is the only previously introduced possessor of kiwi, despite the pronoun-gender mismatch."
+            ],
+            "confidence": 0.82,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"have less than\" supplies no comparison target and could instead be a malformed rendering of \"have left,\" so the requested quantity is underdetermined."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__yWZTP23bt2AFoVei"
+      },
+      "question": "Jennifer had 153 kiwi. Rachael took 44 from him. Now How many kiwi Jennifer have less than?",
+      "source_context": null,
+      "source_id": "mawps__yWZTP23bt2AFoVei",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "109",
+        "gold_reasoning": "153-44"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

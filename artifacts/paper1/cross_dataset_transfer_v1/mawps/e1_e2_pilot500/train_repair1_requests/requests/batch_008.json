@@ -1,0 +1,220 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Gertrude had some Doll.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "He dice each Doll into 21 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "If total 117 Doll slices Gertrude make, then how many Doll Gertrude had?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Gertrude's initially unknown doll count; ASL-Arith v0 has no declaration-only syntax."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "gertrude.total.doll_slices = gertrude.initial.dolls * 21"
+            ],
+            "assumptions": [
+              "The pronoun \"He\" refers to Gertrude despite the grammatical gender mismatch."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "gertrude.total.doll_slices = 117",
+              "RETURN gertrude.initial.dolls"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__CCmf2elnijG6Plhx"
+      },
+      "question": "Gertrude had some Doll. He dice each Doll into 21 slices. If total 117 Doll slices Gertrude make, then how many Doll Gertrude had?",
+      "source_context": null,
+      "source_id": "mawps__CCmf2elnijG6Plhx",
+      "validation_failure": "unresolved reference 'gertrude.initial.dolls' from scope 'global'; unresolved reference 'gertrude.initial.dolls' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "39/7",
+        "gold_reasoning": "117/21"
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 25,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Elizabeth had some Bread.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 26,
+          "teacher_input_default": true,
+          "text": "Irene gave him 5 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Now Elizabeth has 20 Bread.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "How many Bread did Elizabeth have incipiently?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Elizabeth's initially unknown bread count; ASL-Arith v0 has no declaration-only syntax."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "elizabeth.bread_received = 5",
+              "elizabeth.bread_after_gift = elizabeth.initial.bread + elizabeth.bread_received"
+            ],
+            "assumptions": [
+              "The pronoun \"him\" refers to Elizabeth despite the grammatical gender mismatch, and \"5 more\" means five units of bread."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "elizabeth.bread_after_gift = 20"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN elizabeth.initial.bread"
+            ],
+            "assumptions": [
+              "\"incipiently\" means initially."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__ocg8XpkFA0Dhm4HG"
+      },
+      "question": "Elizabeth had some Bread. Irene gave him 5 more. Now Elizabeth has 20 Bread. How many Bread did Elizabeth have incipiently?",
+      "source_context": null,
+      "source_id": "mawps__ocg8XpkFA0Dhm4HG",
+      "validation_failure": "unresolved reference 'elizabeth.initial.bread' from scope 'global'; unresolved reference 'elizabeth.initial.bread' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "15",
+        "gold_reasoning": "20-5"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

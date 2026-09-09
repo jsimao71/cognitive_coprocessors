@@ -297,6 +297,14 @@ for deterministic validation, but the primary annotation request builder
 exposes only the question clauses. These are seed scaffolds, not accepted ASL
 training targets.
 
+The first target corpus is the MAWPS `e1_e2_pilot500` checkpoint. Its primary
+question-only annotation accepted 458/500 training and 82/100 development
+programs. One explicitly provenance-marked repair pass brought both splits to
+500/500 and 100/100 execution- and answer-verified programs. The checksummed
+`sft_union1` train/dev files are shared unchanged by E1 and E2. Their frozen
+250-example diagnostic is disjoint and was first evaluated with the untouched
+GSM adapter at 202/250 correct (80.8%) and 236/250 executable (94.4%).
+
 ### Paper 2 symbolic and mathematical capability
 
 Paper 2 extends beyond Paper 1's arithmetic-only contract. It adds controlled

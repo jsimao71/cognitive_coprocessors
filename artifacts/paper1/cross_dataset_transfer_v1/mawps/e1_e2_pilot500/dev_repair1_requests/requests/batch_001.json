@@ -1,0 +1,316 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Theresa wants to share some blackberry among 36 friends.If each friend get 5 blackberry, then how many blackberry john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "John is not established as one of Theresa's friends, and the question may ask either John's individual share or Theresa's total blackberry supply; these interpretations yield different arithmetic."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__k3pLrSGvMmscXHFj"
+      },
+      "question": "Theresa wants to share some blackberry among 36 friends.If each friend get 5 blackberry, then how many blackberry john would have?",
+      "source_context": null,
+      "source_id": "mawps__k3pLrSGvMmscXHFj",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "180",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 26,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Patricia had some coconut.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 27,
+          "teacher_input_default": true,
+          "text": "He chop each coconut into 20 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "If total 38 coconut slices Patricia make, then how many coconut Patricia had?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "Patricia's initial coconut quantity is unspecified, so this clause has no grounded quantitative assignment."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "patricia.slices_per_coconut = 20",
+              "patricia.total_coconut_slices = patricia.initial_coconuts * patricia.slices_per_coconut"
+            ],
+            "assumptions": [
+              "The pronoun \"He\" refers to Patricia despite the grammatical mismatch."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "The total-slices relation legitimately references Patricia's initially unspecified coconut count."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "patricia.total_coconut_slices = 38",
+              "RETURN patricia.initial_coconuts"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__XixCUoBuHfQH0eed"
+      },
+      "question": "Patricia had some coconut. He chop each coconut into 20 slices. If total 38 coconut slices Patricia make, then how many coconut Patricia had?",
+      "source_context": null,
+      "source_id": "mawps__XixCUoBuHfQH0eed",
+      "validation_failure": "unresolved reference 'patricia.initial_coconuts' from scope 'global'; unresolved reference 'patricia.initial_coconuts' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "19/10",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Diane wants to share some blackberry among 38 friends.If each friend get 40 blackberry, then how many blackberry john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "diane.distribution.friend_count = 38",
+              "diane.distribution.blackberries_per_friend = 40",
+              "john.blackberries = diane.distribution.blackberries_per_friend",
+              "RETURN john.blackberries"
+            ],
+            "assumptions": [
+              "John is one of the 38 friends receiving the stated number of blackberries per friend."
+            ],
+            "confidence": 0.78,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__C5XSXS5k11KFEr3U"
+      },
+      "question": "Diane wants to share some blackberry among 38 friends.If each friend get 40 blackberry, then how many blackberry john would have?",
+      "source_context": null,
+      "source_id": "mawps__C5XSXS5k11KFEr3U",
+      "validation_failure": "answer mismatch: actual=40, expected=1520",
+      "validator_context": {
+        "correct_answer": "1520",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Melissa wants to share some Book among 11 friends.If each friend get 19 Book, then how many Book john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "melissa.sharing.friend_count = 11",
+              "melissa.sharing.books_per_friend = 19",
+              "melissa.sharing.total_books = melissa.sharing.friend_count * melissa.sharing.books_per_friend",
+              "john.books_received = melissa.sharing.books_per_friend",
+              "RETURN john.books_received"
+            ],
+            "assumptions": [
+              "John is one of the 11 friends receiving 19 books."
+            ],
+            "confidence": 0.86,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause states the group size and each friend's allocation; it does not directly state the total number of books.",
+              "John's allocation is represented separately from Melissa's total shared books."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__QrlRYPtm1nJn9P1Z"
+      },
+      "question": "Melissa wants to share some Book among 11 friends.If each friend get 19 Book, then how many Book john would have?",
+      "source_context": null,
+      "source_id": "mawps__QrlRYPtm1nJn9P1Z",
+      "validation_failure": "answer mismatch: actual=19, expected=209",
+      "validator_context": {
+        "correct_answer": "209",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "mawps",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rebeca wants to share some orange among 12 friends.If each friend get 6 orange, then how many orange john would have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "mawps",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause says each friend receives 6 oranges, which would make John's share 6 if John is one of the friends, but the quantities 12 and 6 also suggest a request for Rebeca's total oranges. The text does not determine which quantity is intended."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "mawps__VgPKEcZvqjmjXjgh"
+      },
+      "question": "Rebeca wants to share some orange among 12 friends.If each friend get 6 orange, then how many orange john would have?",
+      "source_context": null,
+      "source_id": "mawps__VgPKEcZvqjmjXjgh",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "72",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

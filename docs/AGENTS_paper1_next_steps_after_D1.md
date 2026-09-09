@@ -69,6 +69,17 @@ MAWPS, and 6,782 GSM-Plus training candidates. They are not ASL labels: do not
 start teacher generation, accept/reject repair, E1, or E2 until E0 predictions
 for that dataset have been copied back and checksummed.
 
+MAWPS has passed that per-dataset gate. Its immutable E0 run scored 202/250
+answers (80.8%) and 236/250 executable programs (94.4%). A relation-diverse
+500-record training pilot and disjoint 100-record development split were then
+annotated. The answer-blind primary pass accepted 458/500 train and 82/100 dev;
+one provenance-marked rationale-assisted repair round recovered the remaining
+42 train and 18 dev records. The final E1/E2 corpus therefore contains 500
+train and 100 dev programs, all execution- and answer-verified, with zero
+train/dev/diagnostic identity overlap. E1 continues from a copied GSM adapter;
+E2 uses the same ordered corpus and optimizer budget from a fresh base-model
+adapter. The source GSM checkpoint remains immutable.
+
 Latest frozen evidence:
 
 ```text
