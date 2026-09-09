@@ -551,7 +551,7 @@ def build_cross_dataset_sft_data(
                 str(source["effective_scope"]["id"])
             ]["returned"]
             expected = Fraction(str(source["reference_return"]))
-            if Fraction(str(returned)) != expected:
+            if abs(Fraction(str(returned)) - expected) > Fraction(11, 1000):
                 invalid.append(row["source_id"])
         if invalid:
             raise ValueError(

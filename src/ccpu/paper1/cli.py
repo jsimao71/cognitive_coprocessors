@@ -456,8 +456,11 @@ def train_lora_command(args: argparse.Namespace) -> int:
     entries = [entry for entry in raw_config.get("models", []) if entry["model_id"] == args.model]
     if len(entries) != 1:
         raise ValueError(f"expected one pinned training model for {args.model}")
+    model = dict(entries[0])
+    if args.adapter_id:
+        model["adapter_id"] = args.adapter_id
     report = train_lora(
-        model=entries[0],
+        model=model,
         training=LoRATrainingConfig.from_dict(raw_config),
         train_path=args.train,
         dev_path=args.dev,
@@ -1240,6 +1243,7 @@ def add_commands(papers: argparse._SubParsersAction) -> None:
     lora_train.add_argument("--dev", required=True)
     lora_train.add_argument("--output-dir", required=True)
     lora_train.add_argument("--initial-adapter-path")
+    lora_train.add_argument("--adapter-id")
     lora_train.set_defaults(handler=train_lora_command)
 
     asl_freeze = commands.add_parser(
