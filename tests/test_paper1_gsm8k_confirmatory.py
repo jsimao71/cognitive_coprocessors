@@ -4,12 +4,27 @@ import pytest
 
 from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_jsonl
 from ccpu.paper1.e3.gsm8k_confirmatory import (
+    _evaluation_scope,
     _score_prediction,
     analyze_official_gsm8k_replications,
     freeze_official_gsm8k,
     merge_official_gsm8k_shards,
     run_official_gsm8k_shard,
 )
+
+
+def test_evaluation_scope_reconstructs_scope_for_intervention_rows():
+    row = {
+        "example_id": "gsm8k:42:operator-o5",
+        "protocol_id": "paper1_gsm8k_matched_interventions_v2",
+    }
+
+    assert _evaluation_scope(row) == {
+        "id": "gsm8k:42:operator-o5",
+        "parent": None,
+        "kind": "benchmark_case",
+        "source": "paper1_gsm8k_matched_interventions_v2",
+    }
 
 
 def test_score_contains_invalid_functor_arity():

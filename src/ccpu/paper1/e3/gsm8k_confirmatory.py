@@ -216,6 +216,16 @@ def _score_prediction(predicted_asl: str, expected: Any, scope: dict[str, Any]) 
     return metrics
 
 
+def _evaluation_scope(row: dict[str, Any]) -> dict[str, Any]:
+    """Return the persisted scope or reconstruct the benchmark-local equivalent."""
+    return row.get("effective_scope") or {
+        "id": str(row["example_id"]),
+        "parent": None,
+        "kind": "benchmark_case",
+        "source": str(row.get("protocol_id", "paper1_gsm8k_confirmatory")),
+    }
+
+
 def _summary(
     *, eval_path: str | Path, predictions: list[dict[str, Any]], shard_index: int | None = None
 ) -> dict[str, Any]:
@@ -326,7 +336,7 @@ def _run_official_gsm8k_shard_unlocked(
             "wall_time_ns": generation.wall_time_ns,
             "backend_metadata": generation.metadata,
             "metrics": _score_prediction(
-                predicted_asl, row["reference_return"], row["effective_scope"]
+                predicted_asl, row["reference_return"], _evaluation_scope(row)
             ),
         }
         predictions.append(prediction)
