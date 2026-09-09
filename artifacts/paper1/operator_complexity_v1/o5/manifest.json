@@ -1,0 +1,48 @@
+{
+  "counts": {
+    "dev": 100,
+    "test": 250,
+    "train": 2000
+  },
+  "dataset_version": "gsm8k-oc-levels-v1",
+  "hidden_fields": [
+    "targets",
+    "reference_return",
+    "runtime"
+  ],
+  "operator_counts": {
+    "dev": {
+      "solve_linear": 100
+    },
+    "test": {
+      "solve_linear": 250
+    },
+    "train": {
+      "solve_linear": 2000
+    }
+  },
+  "operator_level": "O5",
+  "output_sha256": {
+    "dev": "462d342e1a7cfcd9ea6ae22289f45c1593c87392c7062ea0f225b5d0850db20a",
+    "operator_registry": "54c3db2ef88703aff2c775c1b961214ab19f5ff8e71a98b511926b81d5df2d3a",
+    "test": "f33c2568b752b320c593b790299bf90a5dcd9836dc9708faf731bdec8c0d5355",
+    "train": "a82573205313c02090a4fd970e15a1c359f88fc363255ea960ed7ad50e5e02aa"
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "schema_version": "ccpu.paper1.gsm8k_oc_manifest.v1",
+  "seed": 81001,
+  "template_families": {
+    "dev": [
+      "linear_dev"
+    ],
+    "test": [
+      "linear_test"
+    ],
+    "train": [
+      "linear_train_a",
+      "linear_train_b"
+    ]
+  }
+}

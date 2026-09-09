@@ -1,4 +1,7 @@
-param([string]$RepositoryRoot)
+param(
+    [string]$RepositoryRoot,
+    [string[]]$Levels = @("O0", "O3", "O5", "O6")
+)
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = if ($RepositoryRoot) { (Resolve-Path $RepositoryRoot).Path } else { (Resolve-Path (Join-Path $PSScriptRoot "..")).Path }
@@ -22,7 +25,7 @@ Push-Location $RepoRoot
 try {
     & $Python -c "import torch; assert torch.xpu.is_available(); print(torch.xpu.get_device_name(0))"
     if ($LASTEXITCODE -ne 0) { throw "XPU validation failed" }
-    foreach ($level in @("O0", "O3")) {
+    foreach ($level in $Levels) {
         $lower = $level.ToLowerInvariant()
         $source = Join-Path $Root $lower
         $pilot = Join-Path $Root "${lower}_pilot250_seed99173"

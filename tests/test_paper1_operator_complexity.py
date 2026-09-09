@@ -31,6 +31,15 @@ def test_o0_and_o3_runtime_aliases_are_deterministic():
     assert ARITHMETIC_FUNCTIONS["decimal_order"]([Decimal(100000)]) == 5
     with pytest.raises(ValueError, match="common angles"):
         ARITHMETIC_FUNCTIONS["sin_degrees"]([Decimal(12)])
+    assert ARITHMETIC_FUNCTIONS["solve_linear"](
+        [Decimal(3), Decimal(4), Decimal(25)]
+    ) == 7
+    assert ARITHMETIC_FUNCTIONS["positive_quadratic_root"](
+        [Decimal(1), Decimal(-3), Decimal(-10)]
+    ) == 5
+    assert ARITHMETIC_FUNCTIONS["larger_solution_of_quadratic"](
+        [Decimal(1), Decimal(-9), Decimal(20)]
+    ) == 5
 
 
 def test_o1_ap_and_as_lower_to_same_ccir():
@@ -82,7 +91,7 @@ def test_o1_pilot_is_balanced_and_uses_fixed_representation_prompts(tmp_path):
 
 
 @pytest.mark.parametrize(
-    ("level", "operator_count"), (("O0", 4), ("O3", 3))
+    ("level", "operator_count"), (("O0", 4), ("O3", 3), ("O5", 1), ("O6", 2))
 )
 def test_additional_operator_levels_freeze_matched_pilots(
     tmp_path, level, operator_count

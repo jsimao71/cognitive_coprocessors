@@ -245,14 +245,16 @@ def build_parser() -> argparse.ArgumentParser:
     operator_analysis.add_argument("--as-predictions", required=True)
     operator_analysis.add_argument("--output-dir", required=True)
     operator_level = commands.add_parser("prepare-operator-level")
-    operator_level.add_argument("--level", choices=("O0", "O3"), required=True)
+    operator_level.add_argument("--level", choices=("O0", "O3", "O5", "O6"), required=True)
     operator_level.add_argument("--output-dir", required=True)
     operator_level.add_argument("--train-count", type=int, default=2000)
     operator_level.add_argument("--dev-count", type=int, default=100)
     operator_level.add_argument("--test-count", type=int, default=250)
     operator_level.add_argument("--seed", type=int, default=81001)
     operator_level_pilot = commands.add_parser("prepare-operator-level-pilot")
-    operator_level_pilot.add_argument("--level", choices=("O0", "O3"), required=True)
+    operator_level_pilot.add_argument(
+        "--level", choices=("O0", "O3", "O5", "O6"), required=True
+    )
     operator_level_pilot.add_argument("--source-dir", required=True)
     operator_level_pilot.add_argument("--output-dir", required=True)
     operator_level_pilot.add_argument("--train-count", type=int, default=250)

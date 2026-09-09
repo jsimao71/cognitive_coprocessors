@@ -1,0 +1,33 @@
+{
+  "counts": {
+    "dev": 30,
+    "test": 100,
+    "train": 250
+  },
+  "dataset_version": "gsm8k-oc-levels-v1",
+  "operator_level": "O5",
+  "output_sha256": {
+    "ap_dev": "f303a421f70ae893786f74c3350f440700aba93e6b7e2d4686fa1649eb0bca01",
+    "ap_test": "e409b272ff06b2d948efc279aa90f84bf30106318ce49972128250035cc4c21e",
+    "ap_train": "3bc543760fea0e56a2d60e08a2e17c558ef0ec38f52530a68e6d52cf4beadd6e",
+    "as_dev": "86dbc1246d5091e95a7b403a913f79709e07074e12f1e766fb4d48c756fd84cf",
+    "as_test": "53168a16514dbe0d859fc8f09ac364441b6b99ca811da26ea27be7f8f63029b8",
+    "as_train": "b43c5825e0735544b9b00bbf23c2883fd3d82abd913321877332a92ad588b2cd",
+    "test": "e492c498ca073e629a60de08a761c397b43d1e08a56b2fae0dc4e46b655e000a"
+  },
+  "schema_version": "ccpu.paper1.gsm8k_oc_pilot_manifest.v1",
+  "seed": 99173,
+  "source_manifest_sha256": "045d9d083b83ba2d69728c5fb557d3786b26ac3dcfa8c1fafd64f6a0a534b23e",
+  "test_operator_counts": {
+    "solve_linear": 100
+  },
+  "training": {
+    "adapter_representations": [
+      "AP",
+      "AS"
+    ],
+    "epochs": 3,
+    "exposures_per_adapter": 750,
+    "unique_records": 250
+  }
+}

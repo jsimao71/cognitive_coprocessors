@@ -37,6 +37,25 @@ LEVEL_REGISTRY = {
             "exactness": "EXACT_INTEGER",
         },
     },
+    "O5": {
+        "solve_linear": {
+            "ccir": "SOLVE_LINEAR",
+            "form": "a*x+b=c",
+            "exactness": "EXACT_RATIONAL",
+        }
+    },
+    "O6": {
+        "positive_quadratic_root": {
+            "ccir": "POSITIVE_QUADRATIC_ROOT",
+            "domain": "one positive integer root and one negative integer root",
+            "exactness": "EXACT_INTEGER",
+        },
+        "larger_quadratic_root": {
+            "ccir": "LARGER_QUADRATIC_ROOT",
+            "domain": "two positive integer roots",
+            "exactness": "EXACT_INTEGER",
+        },
+    },
 }
 
 _TEMPLATES: dict[str, dict[str, tuple[str, str]]] = {
@@ -71,6 +90,22 @@ _TEMPLATES: dict[str, dict[str, tuple[str, str]]] = {
         "sin_test": ("sin_degrees", "A unit arrow makes a {value}-degree angle above the horizon. Find its vertical component. Give a decimal to three places if needed."),
         "cos_test": ("cos_degrees", "A unit cable is inclined {value} degrees above horizontal. Find its horizontal component. Give a decimal to three places if needed."),
         "log_test": ("log10", "How many factors of 10 are multiplied to obtain {derived}?"),
+    },
+    "O5": {
+        "linear_train_a": ("solve_linear", "A number is multiplied by {a}, then {b} is added, giving {c}. What is the number?"),
+        "linear_train_b": ("solve_linear", "After {b} is added to {a} times an unknown quantity, the result is {c}. Find the unknown."),
+        "linear_dev": ("solve_linear", "The balance {a} times a number plus {b} equals {c}. What is the number?"),
+        "linear_test": ("solve_linear", "A machine multiplies an unknown input by {a} and adds {b}; its output is {c}. Find the input."),
+    },
+    "O6": {
+        "positive_train_a": ("positive_quadratic_root", "A quantity x satisfies x squared plus {b} times x plus {c} equals zero and has exactly one positive solution. Find it."),
+        "positive_train_b": ("positive_quadratic_root", "The equation x^2 + ({b})x + ({c}) = 0 has one positive root. What is that root?"),
+        "larger_train_a": ("larger_quadratic_root", "A quantity x satisfies x squared plus {b} times x plus {c} equals zero and has two positive solutions. Find the larger one."),
+        "larger_train_b": ("larger_quadratic_root", "The equation x^2 + ({b})x + {c} = 0 has two positive roots. What is the larger root?"),
+        "positive_dev": ("positive_quadratic_root", "Find the positive solution of x squared plus {b}x plus {c} equals zero."),
+        "larger_dev": ("larger_quadratic_root", "For x^2 + ({b})x + {c} = 0, report the larger of its two positive solutions."),
+        "positive_test": ("positive_quadratic_root", "A physical length x obeys x squared plus {b}x plus {c} equals zero. Only one root is positive. Find that length."),
+        "larger_test": ("larger_quadratic_root", "Two positive values solve x squared plus {b}x plus {c} equals zero. What is the larger value?"),
     },
 }
 
@@ -138,11 +173,54 @@ def _o3_program(operator: str, rng: random.Random) -> tuple[dict[str, Any], str,
     return values, ap, semantic, f"{operator}({angle})", Decimal(values_table[operator][angle])
 
 
+def _o5_program(operator: str, rng: random.Random) -> tuple[dict[str, Any], str, str, str, Decimal]:
+    if operator != "solve_linear":
+        raise ValueError(f"unsupported O5 operator: {operator}")
+    coefficient = rng.randint(2, 12)
+    answer = rng.randint(2, 50)
+    offset = rng.randint(1, 30)
+    total = coefficient * answer + offset
+    values = {"a": coefficient, "b": offset, "c": total}
+    prefix = f"a = {coefficient}\nb = {offset}\nc = {total}"
+    ap = f"{prefix}\nanswer = solve_linear(a, b, c)\nRETURN answer"
+    semantic = f"{prefix}\nanswer = unknown_from_linear_balance(a, b, c)\nRETURN answer"
+    return values, ap, semantic, f"({total} - {offset}) / {coefficient}", Decimal(answer)
+
+
+def _o6_program(operator: str, rng: random.Random) -> tuple[dict[str, Any], str, str, str, Decimal]:
+    first = rng.randint(3, 25)
+    if operator == "positive_quadratic_root":
+        second = -rng.randint(2, 15)
+        semantic_name = "positive_solution_of_quadratic"
+    elif operator == "larger_quadratic_root":
+        second = rng.randint(1, first - 1)
+        semantic_name = "larger_solution_of_quadratic"
+    else:
+        raise ValueError(f"unsupported O6 operator: {operator}")
+    coefficient = 1
+    linear = -(first + second)
+    constant = first * second
+    values = {"a": coefficient, "b": linear, "c": constant}
+    prefix = f"a = {coefficient}\nb = {linear}\nc = {constant}"
+    ap = f"{prefix}\nanswer = {operator}(a, b, c)\nRETURN answer"
+    semantic = f"{prefix}\nanswer = {semantic_name}(a, b, c)\nRETURN answer"
+    expression = f"root({coefficient}*x^2 + {linear}*x + {constant})"
+    return values, ap, semantic, expression, Decimal(first)
+
+
+def _program(level: str, operator: str, rng: random.Random):
+    builders = {
+        "O0": _o0_program,
+        "O3": _o3_program,
+        "O5": _o5_program,
+        "O6": _o6_program,
+    }
+    return builders[level](operator, rng)
+
+
 def _record(level: str, split: str, index: int, template: tuple[str, str, str], rng: random.Random) -> dict[str, Any]:
     template_id, operator, surface = template
-    values, ap, semantic, expression, answer = (
-        _o0_program(operator, rng) if level == "O0" else _o3_program(operator, rng)
-    )
+    values, ap, semantic, expression, answer = _program(level, operator, rng)
     question = surface.format(**values)
     example_id = f"gsm8k-oc-{level.lower()}-{split}-{index:05d}"
     scope = {"id": example_id, "parent": None, "kind": "benchmark_case", "source": LEVEL_VERSION}
@@ -226,6 +304,10 @@ def _prompt(question: str, level: str, representation: str) -> str:
         ("O0", "as"): "Use the semantic operators total_of, difference, product, and quotient.",
         ("O3", "ap"): "Use sin_degrees(x), cos_degrees(x), or log10(x). Angles are degrees.",
         ("O3", "as"): "Use vertical_component_of_unit(angle_degrees), horizontal_component_of_unit(angle_degrees), or decimal_order(value).",
+        ("O5", "ap"): "Use solve_linear(a, b, c) for a*x + b = c.",
+        ("O5", "as"): "Use unknown_from_linear_balance(a, b, c) for a*x + b = c.",
+        ("O6", "ap"): "Use positive_quadratic_root(a, b, c) or larger_quadratic_root(a, b, c).",
+        ("O6", "as"): "Use positive_solution_of_quadratic(a, b, c) or larger_solution_of_quadratic(a, b, c).",
     }
     return (
         "Compile the quantitative problem into executable ASL-Arith. "

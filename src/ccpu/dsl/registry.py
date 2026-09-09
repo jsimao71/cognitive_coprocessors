@@ -133,6 +133,41 @@ def _exact_log10(arguments: list[Decimal]) -> Decimal:
     return Decimal(exponent)
 
 
+def _solve_linear(arguments: list[Decimal]) -> Decimal:
+    _require(arguments, 3, "solve_linear")
+    coefficient, offset, total = arguments
+    if coefficient == 0:
+        raise ValueError("solve_linear requires a non-zero coefficient")
+    return (total - offset) / coefficient
+
+
+def _quadratic_roots(arguments: list[Decimal], name: str) -> tuple[Decimal, Decimal]:
+    _require(arguments, 3, name)
+    coefficient, linear, constant = arguments
+    if coefficient == 0:
+        raise ValueError(f"{name} requires a non-zero quadratic coefficient")
+    discriminant = linear * linear - Decimal(4) * coefficient * constant
+    if discriminant < 0:
+        raise ValueError(f"{name} requires real roots")
+    root = discriminant.sqrt()
+    if root * root != discriminant:
+        raise ValueError(f"{name} is restricted to exact roots")
+    denominator = Decimal(2) * coefficient
+    return (-linear - root) / denominator, (-linear + root) / denominator
+
+
+def _positive_quadratic_root(arguments: list[Decimal]) -> Decimal:
+    roots = _quadratic_roots(arguments, "positive_quadratic_root")
+    positive = [root for root in roots if root > 0]
+    if len(positive) != 1:
+        raise ValueError("positive_quadratic_root requires exactly one positive root")
+    return positive[0]
+
+
+def _larger_quadratic_root(arguments: list[Decimal]) -> Decimal:
+    return max(_quadratic_roots(arguments, "larger_quadratic_root"))
+
+
 ARITHMETIC_FUNCTIONS: dict[str, ArithmeticFunction] = {
     "abs": _absolute,
     "dec_pct": _dec_pct,
@@ -158,6 +193,12 @@ ARITHMETIC_FUNCTIONS: dict[str, ArithmeticFunction] = {
     "vertical_component_of_unit": _sin_degrees,
     "horizontal_component_of_unit": _cos_degrees,
     "decimal_order": _exact_log10,
+    "solve_linear": _solve_linear,
+    "unknown_from_linear_balance": _solve_linear,
+    "positive_quadratic_root": _positive_quadratic_root,
+    "positive_solution_of_quadratic": _positive_quadratic_root,
+    "larger_quadratic_root": _larger_quadratic_root,
+    "larger_solution_of_quadratic": _larger_quadratic_root,
     "percent_of": _percent_of,
     "rate_times_duration": _rate_times_duration,
     "sum": sum,
@@ -188,6 +229,12 @@ CCIR_CALL_OPERATORS = {
     "vertical_component_of_unit": "SIN_DEGREES",
     "horizontal_component_of_unit": "COS_DEGREES",
     "decimal_order": "LOG10",
+    "solve_linear": "SOLVE_LINEAR",
+    "unknown_from_linear_balance": "SOLVE_LINEAR",
+    "positive_quadratic_root": "POSITIVE_QUADRATIC_ROOT",
+    "positive_solution_of_quadratic": "POSITIVE_QUADRATIC_ROOT",
+    "larger_quadratic_root": "LARGER_QUADRATIC_ROOT",
+    "larger_solution_of_quadratic": "LARGER_QUADRATIC_ROOT",
     "percent_of": "PERCENT_OF",
     "rate_times_duration": "RATE_TIMES_DURATION",
     "sum": "SUM",

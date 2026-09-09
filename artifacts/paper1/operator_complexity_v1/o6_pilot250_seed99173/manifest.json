@@ -1,0 +1,34 @@
+{
+  "counts": {
+    "dev": 30,
+    "test": 100,
+    "train": 250
+  },
+  "dataset_version": "gsm8k-oc-levels-v1",
+  "operator_level": "O6",
+  "output_sha256": {
+    "ap_dev": "b1ed04ac53c47b44470aac8ac3d901ca681caa346e3e8570cb765cfdb60fdcc7",
+    "ap_test": "b03c7273bb7f9e2ae1dc4fbe0205347a822388fa3a6587e273a257d8f32d28f8",
+    "ap_train": "d0cf52a4b6e162bea0c1ebd3faa6bab6f04c8d5cd8972b4228128870647dbaf7",
+    "as_dev": "5ce7c4972d1f0bde6a32d9d920586f79ff346927d676d049e570de5a79f28622",
+    "as_test": "5f2b2c6275401dc6fcd655e144f10bb980ce8a0975c679d3089d15a4a13a04c7",
+    "as_train": "9855d3759c7d08fe824118828f3484916e4fe0c3a2326757373db3b5d4ec73e4",
+    "test": "4d3f016fadedc210c470f1a6fbe6eeb212eeeb3a75d8d4a3aff4be69ba4f4b40"
+  },
+  "schema_version": "ccpu.paper1.gsm8k_oc_pilot_manifest.v1",
+  "seed": 99173,
+  "source_manifest_sha256": "53c3d2da4a2f25a29b2090694fcbd5da5bacdae0f866b540a25546ae78f77669",
+  "test_operator_counts": {
+    "larger_quadratic_root": 50,
+    "positive_quadratic_root": 50
+  },
+  "training": {
+    "adapter_representations": [
+      "AP",
+      "AS"
+    ],
+    "epochs": 3,
+    "exposures_per_adapter": 750,
+    "unique_records": 250
+  }
+}
