@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$DatasetList,
     [ValidateSet("cpu", "xpu", "cuda")][string]$Device = "cuda",
+    [string]$PythonExecutable = "python",
     [string]$WaitTaskName = "",
     [int]$WaitProcessId = 0
 )
@@ -22,5 +23,6 @@ if ($WaitTaskName) {
 
 $runner = Join-Path $RepositoryRoot "scripts/run-paper1-cross-dataset-e0.ps1"
 foreach ($name in $DatasetList.Split(",")) {
-    & $runner -RepositoryRoot $RepositoryRoot -Dataset $name -Device $Device
+    & $runner -RepositoryRoot $RepositoryRoot -Dataset $name -Device $Device `
+        -PythonExecutable $PythonExecutable
 }

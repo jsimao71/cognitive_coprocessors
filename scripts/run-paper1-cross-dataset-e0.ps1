@@ -2,6 +2,7 @@ param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][ValidateSet("asdiv", "svamp", "mawps", "gsm_plus")][string]$Dataset,
     [ValidateSet("cpu", "xpu", "cuda")][string]$Device = "cpu",
+    [string]$PythonExecutable = "python",
     [int]$ShardIndex = 0,
     [int]$ShardCount = 1
 )
@@ -20,7 +21,9 @@ $stderr = Join-Path $logDir "shard_$ShardIndex.stderr.log"
 $env:PYTHONPATH = Join-Path $RepositoryRoot "src"
 Push-Location $RepositoryRoot
 try {
-    & python -u -m ccpu.paper1.e3 run-gsm8k-official-shard `
+    $previousErrorAction = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    & $PythonExecutable -u -m ccpu.paper1.e3 run-gsm8k-official-shard `
         --eval $evalPath `
         --config $configPath `
         --adapter-path $adapterPath `
@@ -29,8 +32,10 @@ try {
         --shard-index $ShardIndex `
         --shard-count $ShardCount `
         --checkpoint-every 1 1>> $stdout 2>> $stderr
-    if ($LASTEXITCODE -ne 0) {
-        throw "E0 shard failed with exit code $LASTEXITCODE"
+    $exitCode = $LASTEXITCODE
+    $ErrorActionPreference = $previousErrorAction
+    if ($exitCode -ne 0) {
+        throw "E0 shard failed with exit code $exitCode"
     }
 }
 finally {
