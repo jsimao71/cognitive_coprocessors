@@ -232,26 +232,90 @@ official-test confirmation set.
 - GSM8K historical-test view:
   `artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eval/test.jsonl`
 
-## Paper 1 Arithmetic Dataset Ladder
+## Planned Dataset Progression
 
-Approximate sizes below are planning values. Each dataset must receive a pinned
-upstream version, license record, source hash, split manifest, and overlap audit
-when it is imported.
+Approximate sizes below are planning values rather than frozen local counts.
+Every import must receive a pinned upstream version, license record, source
+hash, split manifest, and overlap audit before it becomes an experiment input.
+The progression deliberately separates Paper 1 arithmetic transfer from Paper
+2's broader symbolic-operation and multi-coprocessor questions.
 
-| Dataset | Approximate size | Character | Registered Paper 1 role | Status |
+### Paper 1 arithmetic transfer and robustness
+
+Paper 1 remains anchored in GSM8K and the controlled GSM8K-derived O0--O6
+operator ladder. After that mechanism study, it adds only arithmetic word-
+problem datasets that test transfer or robustness of NL-to-ASL compilation.
+
+| Dataset | Approximate size | Main difficulty | Registered Paper 1 role | Status |
 |---|---:|---|---|---|
-| **GSM8K** | 8.8K | Diverse 2-8 step grade-school problems | Immediate core training; official test for later confirmation | Active |
-| **ASDiv** | 2.3K | Diverse elementary problems with equations | Later training diversity | Planned |
-| **SVAMP** | 1K | Adversarial variations of simple arithmetic problems | Held-out adversarial test | Planned |
-| **MAWPS** | 3.3K | Classic elementary word-problem collection with equations | Later training diversity after overlap audit | Planned |
-| **MultiArith** | about 600 | Multi-step arithmetic stories | Secondary set only after legacy-overlap audit | Planned |
-| **GSM-Plus** | 10.5K | Adversarial GSM8K perturbations | Untouched robustness test | Planned |
-| **GSM-Symbolic** | GSM-derived | Controlled symbolic/template perturbations | Untouched invariance and generalization test | Planned |
+| **GSM8K** | 8.8K | Linguistically diverse, multi-step grade-school arithmetic | Core training and untouched official confirmation | Active |
+| **GSM8K-OC O0--O6** | Generated per level | Controlled operator-family changes | Primary mechanism and operator-sensitivity study | Active |
+| **ASDiv** | 2.3K | Diverse elementary word problems with supplied equations | Near-distribution transfer and optional training diversity | Planned |
+| **SVAMP** | 1K | Adversarial variations of elementary arithmetic problems | Held-out semantic robustness test | Planned |
+| **MAWPS** | 3.3K | Broader collection of classic arithmetic word problems with equations | Cross-dataset transfer after deduplication | Planned |
+| **GSM-Plus** | 10.5K | Numerical, arithmetic, and semantic perturbations of GSM8K | Untouched out-of-distribution robustness test | Planned |
 
-Do not train on SVAMP, GSM-Plus, or GSM-Symbolic before their registered
-held-out evaluation role has been completed. MAWPS and MultiArith require
-cross-collection deduplication because classic arithmetic-word-problem
-collections may share source problems or templates.
+The preferred Paper 1 sequence is:
+
+```text
+GSM8K-OC O0--O6
+        |
+        +--> ASDiv / MAWPS transfer
+        |
+        +--> SVAMP semantic robustness
+        |
+        +--> GSM-Plus OOD robustness
+```
+
+ASDiv and MAWPS should be used economically: they are most valuable for
+measuring cross-dataset transfer or adding elementary-math diversity if the
+controlled ladder reveals a data bottleneck. SVAMP and GSM-Plus are evaluation
+sets first. Do not train on their registered test identities before the
+corresponding held-out comparisons are complete. MAWPS requires cross-
+collection source, equation, template, and near-duplicate audits because
+classic math-word-problem collections can share examples.
+
+### Paper 2 symbolic and mathematical capability
+
+Paper 2 extends beyond Paper 1's arithmetic-only contract. It adds controlled
+symbolic invariance, naturally occurring program-annotated mathematics, more
+compositional algebraic reasoning, and finally a hard multi-domain benchmark.
+
+| Dataset | Approximate size | Main difficulty | Registered Paper 2 role | Status |
+|---|---:|---|---|---|
+| **GSM-Symbolic** | GSM-derived | Controlled changes to variables, values, and templates | Invariance test for symbolic representations and routing | Planned |
+| **MathQA** | about 37K | Multi-domain problems with program-like operation annotations | First external rich-operation benchmark and ASL/CCIR lowering source | Planned, highest priority after O0--O6 |
+| **AQuA-RAT** | about 100K | Multi-step algebraic reasoning with rationales and answer choices | Intermediate composition bridge between MathQA and MATH | Planned |
+| **MATH** | 12.5K | Algebra, geometry, number theory, probability, and precalculus | Hard multi-CogCop routing and composition benchmark | Planned |
+
+The preferred Paper 2 capability sequence is:
+
+```text
+GSM-Symbolic invariance
+          |
+          v
+MathQA program-to-ASL/CCIR validation
+          |
+          v
+AQuA-RAT compositional bridge
+          |
+          v
+MATH multi-domain routing and composition
+```
+
+MathQA is the first external capability priority after GSM8K-OC because its
+program annotations can seed deterministic mappings into canonical ASL/CCIR;
+teacher models must not invent semantic gold where an authoritative operation
+program can be translated and verified. GSM-Symbolic is evaluation-first and
+must remain separate from Paper 1's training ladder. AQuA-RAT rationales are
+never model-visible during primary evaluation. MATH requires category-specific
+processor coverage and must not be presented as a calculator-only benchmark:
+algebra may lower to a symbolic engine, while geometry, number theory, and
+combinatorics can require distinct processors or explicit unsupported outcomes.
+
+Formal/Lean datasets remain a later verified-reasoning trajectory rather than
+a current Paper 1 or Paper 2 benchmark. They should be introduced only after
+the intermediate ASL-to-symbolic-engine composition boundary is validated.
 
 ## Split Vocabulary
 
@@ -270,7 +334,7 @@ Use these terms consistently:
 
 ## Leakage Rules
 
-Every new Paper 1 freeze must record and enforce:
+Every new Paper 1 or Paper 2 freeze must record and enforce:
 
 1. Dataset scope and upstream split.
 2. Stable source and document IDs.
@@ -280,6 +344,10 @@ Every new Paper 1 freeze must record and enforce:
 6. Template and near-duplicate overlap for derived or aggregated datasets.
 7. Teacher provenance and whether answers or rationales were visible.
 8. A fixed prompt and fixed ICL policy across records.
+9. Whether upstream equations, programs, rationales, choices, or proofs are
+   model-visible, scorer-only, or used only for deterministic target creation.
+10. Cross-dataset normalized-question, equation/program, and template overlap
+    whenever a corpus aggregates or derives from another math benchmark.
 
 Public benchmark exposure during the base model's original pretraining is a
 separate, generally unknown contamination risk. Source-disjoint adapter splits
@@ -302,3 +370,8 @@ cmd /c scripts\run-paper1-g1-gsm8k-f0-l0-xpu.cmd
 
 The authoritative forward roadmap is
 `docs/AGENTS_paper1_next_steps_after_D1.md`.
+
+Paper 2 dataset imports must additionally register their required processor
+catalog and unsupported-category policy before model-facing evaluation. The
+current Paper 2 roadmap is maintained under the corresponding
+`docs/AGENTS_paper2*.md` protocol files.
