@@ -17,6 +17,7 @@ New-Item -ItemType Directory -Force -Path $outputDir, $logDir | Out-Null
 
 $stdout = Join-Path $logDir "shard_$ShardIndex.stdout.log"
 $stderr = Join-Path $logDir "shard_$ShardIndex.stderr.log"
+$env:PYTHONPATH = Join-Path $RepositoryRoot "src"
 Push-Location $RepositoryRoot
 try {
     & python -u -m ccpu.paper1.e3 run-gsm8k-official-shard `
