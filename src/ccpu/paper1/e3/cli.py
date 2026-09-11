@@ -59,6 +59,7 @@ from .model_size_analysis import analyze_model_size_interaction
 from .operator_analysis import analyze_operator_ladder, analyze_operator_pilot
 from .operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from .operator_levels import freeze_operator_level, freeze_operator_pilot
+from .reinjection import REINJECTION_CONDITIONS, run_reinjection
 from .result_plots import build_gsm8k_result_plots
 from .selection import select_semantic_checkpoint
 from .semantic_augmentation import (
@@ -228,6 +229,14 @@ def build_parser() -> argparse.ArgumentParser:
     direct_audit.add_argument("--output-dir", required=True)
     direct_audit.add_argument("--token-ceiling", type=int, required=True)
     direct_audit.add_argument("--common-support")
+    reinjection = commands.add_parser("run-gsm8k-reinjection")
+    reinjection.add_argument("--eval", required=True)
+    reinjection.add_argument("--asl-predictions", required=True)
+    reinjection.add_argument("--config", required=True)
+    reinjection.add_argument("--condition", choices=REINJECTION_CONDITIONS, required=True)
+    reinjection.add_argument("--output-dir", required=True)
+    reinjection.add_argument("--seed", type=int, default=55017)
+    reinjection.add_argument("--checkpoint-every", type=int, default=5)
     gsm8k_large = commands.add_parser("prepare-gsm8k-large-numbers")
     gsm8k_large.add_argument("--source", required=True)
     gsm8k_large.add_argument("--eval", required=True)
@@ -724,6 +733,22 @@ def main(argv: list[str] | None = None) -> int:
             f"Direct scorer v2 n={report['all_rows']['count']} "
             f"strict={report['all_rows']['strict_accuracy']:.3f} "
             f"v2={report['all_rows']['v2_accuracy']:.3f} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "run-gsm8k-reinjection":
+        report = run_reinjection(
+            eval_path=args.eval,
+            asl_predictions_path=args.asl_predictions,
+            model_config=read_json(args.config),
+            condition=args.condition,
+            output_dir=args.output_dir,
+            seed=args.seed,
+            checkpoint_every=args.checkpoint_every,
+        )
+        print(
+            f"reinjection {args.condition} n={report['prediction_count']} "
+            f"answer={report['rates']['final_answer_correct']:.3f} "
+            f"uptake={report['rates']['value_uptake']:.3f} -> {args.output_dir}"
         )
         return 0
     if args.command == "prepare-gsm8k-large-numbers":

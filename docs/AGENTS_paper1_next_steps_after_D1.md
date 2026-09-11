@@ -1854,6 +1854,23 @@ correctness.  Also report value uptake conditional on a correct runtime value,
 wrong-value uptake, correction, correct-value override, contradiction, injected
 tokens, continuation tokens, and latency.
 
+### J6 implementation checkpoint (2026-09-11)
+
+`run-gsm8k-reinjection` implements the registered I1--I6 conditions as a
+resumable, identity-matched experiment.  It consumes frozen ASL predictions and
+their runtime returns; it never regenerates ASL or supplies gold values in the
+primary I1--I3 conditions.  The continuation is a fresh Qwen3-0.6B base-model
+NL pass with the ASL adapter inactive, 128 generated tokens, thinking disabled,
+and one fixed prompt per condition.  This isolates result use from semantic
+compilation and restores the model's ordinary NL output mode.
+
+Every record stores the runtime value, injected value, grounding status,
+continuation text, endpoint, token/latency provenance, and distinct booleans for
+runtime correctness, final-answer correctness, value uptake, wrong-value uptake,
+wrong-value correction, correct-value override, and contradiction.  Oracle and
+corrupted values are explicitly marked controls.  Run I1--I3 first on the
+seed-17011 O0 x1/x1000 cells, then I4--I6; do not tune the prompt between cells.
+
 ## 29.5 Two-part cascade boundary
 
 Paper 1 includes only a bounded bridge experiment:
