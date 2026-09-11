@@ -1738,10 +1738,12 @@ degraded_hyphenated_rewrite              66 cell rows / 3 parents
 ```
 
 The `extreme_world_magnitude` label occurs by design and is retained only as an
-intervention stratum; it is not an exclusion rule.  Freeze the 82-parent common
-support only after blind manual review confirms or revises all 18 parent-level
-flags.  Report full-panel and strict-common-support results side by side so the
-audit cannot become an outcome-dependent filter.
+intervention stratum; it is not an exclusion rule.  Outcome-masked adjudication
+confirmed all 18 parent-level flags and froze the 82-parent common support.  No
+prediction rows were consulted during adjudication; disclose that the reviewer
+had prior knowledge of aggregate results.  Report full-panel and strict-common-
+support results side by side so the audit cannot become an outcome-dependent
+filter.
 
 ## 29.3 Direct failure taxonomy and scorer v2
 
@@ -1796,7 +1798,7 @@ evidence.  It cannot validly infer whether every remaining error is primarily
 semantic-structure or relation/binding failure from free-form text alone; those
 rows retain `manual_subtype_review=true` for blind annotation.
 
-### J3 provisional paired checkpoint (2026-09-11)
+### J3 frozen seed-17011 paired checkpoint (2026-09-11)
 
 The matched analyzer now joins each evaluation, Direct generation, scorer-v2
 ledger, and ASL generation by exact identity and question hash.  It verifies the
@@ -1817,8 +1819,8 @@ x1000           21/82        35/82          +17.1 pp          0.0243
 
 Thus the crossover survives the deterministic audit: removing every parent with
 any review flag narrows the x1000 advantage from 20.0 to 17.1 percentage points
-but does not remove it.  This remains developmental until blind review freezes
-the 82-parent support set and seeds 17023/17037 replicate the comparison.
+but does not remove it.  The support set is now frozen; this remains
+developmental until seeds 17023/17037 replicate the comparison.
 
 ## 29.4 Short-context reinjection matrix
 

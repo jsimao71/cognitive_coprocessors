@@ -472,3 +472,73 @@ def audit_intervention_panel(
     report["outputs"]["summary"] = {"path": str(summary_path)}
     write_json(summary_path, report)
     return report
+
+
+def finalize_intervention_review(
+    *, audit_records_path: str | Path, decisions_path: str | Path, output_path: str | Path
+) -> dict[str, Any]:
+    """Freeze parent-level manual decisions without consulting model predictions."""
+
+    records = read_jsonl(audit_records_path)
+    decisions = read_jsonl(decisions_path)
+    all_parents = {str(row["parent_example_id"]) for row in records}
+    review_parents = {
+        str(row["parent_example_id"])
+        for row in records
+        if row["analysis_disposition"] != "eligible_pending_manual_review"
+    }
+    by_parent = {str(row["parent_example_id"]): row for row in decisions}
+    if len(by_parent) != len(decisions):
+        raise ValueError("manual review decisions contain duplicate parent IDs")
+    if set(by_parent) != review_parents:
+        raise ValueError(
+            "manual review decisions must cover exactly every flagged parent: "
+            f"missing={len(review_parents - set(by_parent))} "
+            f"extra={len(set(by_parent) - review_parents)}"
+        )
+    allowed = {"exclude_from_strict_common_support", "retain"}
+    for parent, decision in by_parent.items():
+        if decision.get("decision") not in allowed:
+            raise ValueError(f"unsupported manual decision for {parent}")
+        if not str(decision.get("rationale", "")).strip():
+            raise ValueError(f"manual decision lacks rationale for {parent}")
+    excluded = sorted(
+        parent
+        for parent, row in by_parent.items()
+        if row["decision"] == "exclude_from_strict_common_support"
+    )
+    retained_after_review = sorted(set(by_parent) - set(excluded))
+    support = sorted(all_parents - set(excluded))
+    report = {
+        "schema_version": "ccpu.paper1.intervention_common_support_frozen.v1",
+        "policy": (
+            "Condition-independent parent exclusion based only on questions, gold-runtime "
+            "state, and audit flags; model prediction rows were not present in the packet."
+        ),
+        "blinding_disclosure": {
+            "model_prediction_rows_consulted_during_adjudication": False,
+            "reviewer_had_prior_aggregate_result_knowledge": True,
+        },
+        "counts": {
+            "all_parents": len(all_parents),
+            "reviewed_parents": len(review_parents),
+            "excluded_parents": len(excluded),
+            "retained_flagged_parents": len(retained_after_review),
+            "strict_common_support_parents": len(support),
+        },
+        "excluded_parent_example_ids": excluded,
+        "retained_flagged_parent_example_ids": retained_after_review,
+        "parent_example_ids": support,
+        "inputs": {
+            "audit_records": {
+                "path": str(audit_records_path),
+                "sha256": file_sha256(audit_records_path),
+            },
+            "decisions": {
+                "path": str(decisions_path),
+                "sha256": file_sha256(decisions_path),
+            },
+        },
+    }
+    write_json(output_path, report)
+    return report

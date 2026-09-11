@@ -2742,9 +2742,11 @@ violations, and degraded hyphenated rewrites.  A separate
 \texttt{extreme\_world\_magnitude} label records the designed intervention and
 is not itself an exclusion criterion.
 
-The resulting 82-parent strict-common-support set is provisional until the
-manual review is frozen.  Final tables will report the complete observed panel
-and strict common support side by side.  This prevents ordinary Direct reasoning
+Outcome-masked adjudication confirmed all 18 flagged parents and froze the
+resulting 82-parent strict-common-support set.  No prediction rows were present
+in the review packet, although the reviewer had prior knowledge of aggregate
+results.  Final tables report the complete observed panel and strict common
+support side by side.  This prevents ordinary Direct reasoning
 from being penalized merely for respecting an impossible rewritten world, while
 also preventing outcome-dependent removal of difficult examples.  The complete
 row-level ledger, review queue, input hashes, and support IDs are stored under
@@ -2771,7 +2773,7 @@ Ten generations in each cell mention the reference value before truncation;
 this is an upper-bound diagnostic, not a recovered-answer count, because the
 number can be an intermediate rather than the intended endpoint.  No new correct
 answer is recovered solely through an approved wrapper in either cell.  On the
-provisional 82-parent strict common support, scorer-v2 gives 47/82 at
+frozen 82-parent strict common support, scorer-v2 gives 47/82 at
 $\times1$ and 21/82 at $\times1000$.  A longer-token matched run is therefore
 required before attributing the full magnitude decline to reasoning rather than
 decode budget.
@@ -2779,13 +2781,12 @@ decode budget.
 Pairing those same scorer-v2 Direct outcomes with generated-ASL runtime outcomes
 gives 45/100 versus 53/100 at jitter $\times1$, but 42/100 versus 22/100 at
 jitter $\times1000$ (ASL-minus-Direct $+20.0$ points; exact McNemar
-$p=0.0022$).  On the provisional 82-parent common support, the corresponding
+$p=0.0022$).  On the frozen 82-parent common support, the corresponding
 counts are 39/82 versus 47/82 at $\times1$ and 35/82 versus 21/82 at
 $\times1000$ (ASL-minus-Direct $+17.1$ points; exact McNemar $p=0.0243$).
 The crossover therefore survives deterministic removal of every parent carrying
 an audit-review flag.  These are still seed-17011 developmental estimates;
-blind review and the two remaining registered seeds precede any confirmatory
-claim.
+the two remaining registered seeds precede any confirmatory claim.
 
 \section{Deterministic Semantic Diagnostic Taxonomy}
 

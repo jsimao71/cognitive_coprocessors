@@ -16,7 +16,10 @@ from ccpu.paper1.e3.gsm8k_interventions import (
     freeze_gsm8k_operator_jitter_matrix,
 )
 from ccpu.paper1.e3.intervention_analysis import analyze_matched_interventions
-from ccpu.paper1.e3.intervention_audit import audit_intervention_panel
+from ccpu.paper1.e3.intervention_audit import (
+    audit_intervention_panel,
+    finalize_intervention_review,
+)
 from ccpu.paper1.e3.operator_analysis import analyze_operator_ladder, analyze_operator_pilot
 from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from ccpu.paper1.e3.operator_levels import freeze_operator_level, freeze_operator_pilot
@@ -102,6 +105,30 @@ def test_intervention_audit_replays_and_flags_without_automatic_exclusion(tmp_pa
     second_codes = {flag["code"] for flag in records[1]["semantic_flags"]}
     assert "bounded_rate_or_duration_exceeded" in second_codes
     assert all(row["analysis_disposition"] == "manual_review_required" for row in records)
+
+    decisions = write_jsonl(
+        tmp_path / "decisions.jsonl",
+        [
+            {
+                "parent_example_id": "gsm8k:1",
+                "decision": "exclude_from_strict_common_support",
+                "rationale": "negative inventory is inconsistent",
+            },
+            {
+                "parent_example_id": "gsm8k:2",
+                "decision": "retain",
+                "rationale": "retain for test coverage",
+            },
+        ],
+    )
+    frozen = finalize_intervention_review(
+        audit_records_path=tmp_path / "audit" / "audit_records.jsonl",
+        decisions_path=decisions,
+        output_path=tmp_path / "audit" / "frozen.json",
+    )
+    assert frozen["counts"]["strict_common_support_parents"] == 1
+    assert frozen["parent_example_ids"] == ["gsm8k:2"]
+    assert frozen["blinding_disclosure"]["reviewer_had_prior_aggregate_result_knowledge"]
 
 
 def test_o1_exact_runtime_and_semantic_aliases():

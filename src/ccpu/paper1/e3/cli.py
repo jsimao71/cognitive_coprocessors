@@ -48,7 +48,7 @@ from .gsm8k_interventions import (
     freeze_gsm8k_operator_jitter_matrix,
 )
 from .intervention_analysis import analyze_matched_interventions
-from .intervention_audit import audit_intervention_panel
+from .intervention_audit import audit_intervention_panel, finalize_intervention_review
 from .large_number_suite import freeze_large_number_gsm8k, freeze_magnitude_ladder_gsm8k
 from .magnitude_analysis import (
     analyze_magnitude_curve,
@@ -349,6 +349,10 @@ def build_parser() -> argparse.ArgumentParser:
     intervention_audit.add_argument("--input-dir", action="append", required=True)
     intervention_audit.add_argument("--output-dir", required=True)
     intervention_audit.add_argument("--split", default="test")
+    intervention_finalize = commands.add_parser("finalize-gsm8k-intervention-audit")
+    intervention_finalize.add_argument("--audit-records", required=True)
+    intervention_finalize.add_argument("--decisions", required=True)
+    intervention_finalize.add_argument("--output", required=True)
     matched_analysis = commands.add_parser("analyze-gsm8k-matched-interventions")
     matched_analysis.add_argument(
         "--cell",
@@ -1047,6 +1051,17 @@ def main(argv: list[str] | None = None) -> int:
             f"review_required={report['counts']['review_required_rows']} "
             f"common_support={report['counts']['strict_common_support_parents']} "
             f"-> {args.output_dir}"
+        )
+        return 0
+    if args.command == "finalize-gsm8k-intervention-audit":
+        report = finalize_intervention_review(
+            audit_records_path=args.audit_records,
+            decisions_path=args.decisions,
+            output_path=args.output,
+        )
+        print(
+            f"intervention support frozen={report['counts']['strict_common_support_parents']} "
+            f"excluded={report['counts']['excluded_parents']} -> {args.output}"
         )
         return 0
     if args.command == "run-bottleneck":
