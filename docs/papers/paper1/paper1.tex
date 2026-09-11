@@ -2505,6 +2505,24 @@ different hardware.  It instead isolates an avoidable neural decoding burden:
 when the program is semantically correct, increasing reasoning length is not
 needed to approximate the arithmetic operation itself.
 
+\paragraph{Efficiency and robustness are coupled evidence.}
+The token result is not merely the observation that CPU arithmetic is cheap.
+On matched questions, Direct spends substantially more neural inference on the
+computational trajectory and nevertheless becomes less robust when operand
+magnitude moves away from the familiar regime.  Generated ASL shortens that
+trajectory and removes exact execution from the learned approximation.  The
+joint result is consistent with direct small-model mathematical behavior being
+implemented by learned, distribution-sensitive neural approximations rather
+than by a reliably factorized symbolic executor.  It does not establish that
+language models do not reason or that their behavior is only memorization.
+CogCop explicitly imposes the factorization
+\[
+  \text{natural language}\rightarrow\text{formal program}
+  \rightarrow\text{deterministic computation},
+\]
+exchanging a semantic-compilation bottleneck for exact execution, shorter
+neural trajectories, and greater computational invariance.
+
 \paragraph{Uncertainty is relocated to the semantic compiler.}
 CogCop does not remove the hard language problem.  It moves uncertainty from
 the execution of an operation to selecting that operation, binding its
@@ -2528,9 +2546,9 @@ well-specified arithmetic after that mapping is available.  Under the proposed
 division of labor, model scaling targets the semantic compiler and router,
 while bounded CPU coprocessors provide exact arithmetic and, in later papers,
 logic, algebra, graphs, units, dates, retrieval, and simulation.  The frozen
-1.7B and later model-size comparisons must determine whether greater capacity
-eliminates Direct magnitude sensitivity, merely moves the crossover, or
-primarily improves ASL compilation.
+1.7B and gated 4B model-size comparisons must determine whether greater
+capacity eliminates Direct magnitude sensitivity, merely moves the crossover,
+or preferentially improves ASL compilation.
 
 \paragraph{Auditability and continued generation.}
 The explicit ASL program and runtime value create an inspectable boundary that
