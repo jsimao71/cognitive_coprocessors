@@ -1,0 +1,50 @@
+{
+  "by_difficulty": {
+    "high": {
+      "count": 89,
+      "final_answer_correct": 30
+    },
+    "medium": {
+      "count": 11,
+      "final_answer_correct": 5
+    }
+  },
+  "counts": {
+    "executable": 85,
+    "final_answer_correct": 35,
+    "lowerable_to_ccir": 98,
+    "parse_valid": 98,
+    "type_valid": 98
+  },
+  "eval_sha256": "d058a79db7e2e7ba61995eafe3d05e47c43a18bc52252cdde3e3b78b826ef428",
+  "prediction_count": 100,
+  "predictions_sha256": "4b4b1418c57022a3a60364bfa66a7377896c55b58d95d832542c7256ebc1b82d",
+  "rates": {
+    "executable": 0.85,
+    "final_answer_correct": 0.35,
+    "lowerable_to_ccir": 0.98,
+    "parse_valid": 0.98,
+    "type_valid": 0.98
+  },
+  "run": {
+    "adapter_id": "Qwen3-0.6B-GSM8K-OC-natural-v2-r8-seed99173",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-GSM8K-OC-natural-v2-r8-seed99173",
+      "adapter_path": "artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\runs\\operator_adapter_r8_seed99173_cuda\\adapter",
+      "device": "cuda",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 512,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "prompt_fields": [
+      "question"
+    ],
+    "seed": 44017,
+    "shard_count": 1
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_evaluation.v1",
+  "shard_index": 0
+}

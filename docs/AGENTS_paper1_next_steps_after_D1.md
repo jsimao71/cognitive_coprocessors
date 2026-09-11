@@ -1683,10 +1683,12 @@ J10 Freeze analyses, figures, qualitative examples, and claim table; then perfor
 ```
 
 J4 seed-17011 execution status on 2026-09-11: O0 x1/x1000 is complete and
-paired; ASL x1+O5 is complete at 32/100 final-answer correctness, 78/100
-executable, 95/100 type-valid, and 100/100 parse/lower-valid.  Treat this as an
-unpaired operational checkpoint only.  Do not interpret an operator-relative
-advantage until the byte-identical Direct x1+O5 cell is complete.
+paired.  The completed unpaired ASL operator cells are x1+O1 at 31/100,
+x1+O5 at 32/100, x1+O6 at 35/100, and x1000+O1 at 35/100 final-answer
+correctness.  The x1+O5 and x1+O6 cells are respectively 78/100 and 84/100
+executable; x1000+O1 is 85/100 executable.  Treat these as operational
+checkpoints only.  Do not interpret an operator-relative advantage until each
+byte-identical Direct cell is complete.
 
 ## 29.2 Transformation audit
 
