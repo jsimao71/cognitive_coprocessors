@@ -1618,3 +1618,229 @@ SAMPLE-EFFICIENT REPRESENTATION LEARNING
 ```
 
 before returning to heavier architecture.
+
+---
+
+# 29. Journal-readiness program
+
+Paper 1 is evidence-rich enough to stand alone, but it is not submission-ready
+until the matched robustness data, result-use bridge, transformed-data validity,
+and comparator fairness are closed.  Do not add the full long-context
+architecture to this manuscript.  Keep the main paper centered on:
+
+```text
+NL
+-> generated ASL
+-> deterministic execution
+-> controlled result reinjection
+-> continued generation
+```
+
+The complete long/multipart ladder---learned block boundaries, dynamic adapter
+switching, 2/4/8/16 interventions, persistent world memory, block-causal masks,
+typed K/V injection, and PRA selection---is a separate follow-up paper.  Paper 1
+may include one short, oracle-boundary, two-part cascade only as the bridge from
+terminal execution to downstream result use.
+
+## 29.1 Execution order
+
+The following order supersedes any older ordering where running more inference
+precedes validation of the transformed panel.  Existing predictions remain
+preserved, but do not spend multiple seeds on a panel or scorer that may change.
+
+```text
+J0  Preserve the current seed-17011 checkpoints as developmental evidence.
+
+J1  Audit transformation semantic consistency and freeze eligibility rules.
+    Detect contradictory totals, impossible remaining counts, fractional-object
+    answers, unit/world-plausibility violations, broken cross-sentence numeric
+    dependencies, and stale aggregate quantities.  Rules must be condition-blind.
+
+J2  Audit Direct endpoints and freeze scorer v2.
+    Separate semantic, arithmetic, formatting, and token-ceiling failures.
+    Deterministically rescore saved generations before rerunning inference.
+
+J3  Freeze journal panel v2, manifests, exclusions, hashes, and common parent
+    intersections.  Report both the original all-row analysis and the audited
+    validity subset; never silently replace the observed panel.
+
+J4  Complete Direct/ASL O0/O1/O5/O6 x scale x jitter for seeds
+    17011/17023/17037 on panel v2.  Run seed-major and preserve paired outcomes.
+
+J5  Run the long-token Direct sensitivity on the same panel and report ceiling
+    hits, formatting-only recoveries, semantic errors, and arithmetic errors.
+
+J6  Run short-context result reinjection with existing ASL checkpoints.
+
+J7  Run one bounded two-part cascade with oracle boundaries.
+
+J8  Train and evaluate a compute/exposure-matched Direct-answer LoRA control.
+
+J9  Evaluate untouched SVAMP and GSM-Plus before any training on either source.
+
+J10 Freeze analyses, figures, qualitative examples, and claim table; then perform
+    the editorial revision, build, commit, and push.
+```
+
+## 29.2 Transformation audit
+
+The independent `Uniform(-0.30,+0.30)` jitter tests non-round numeric changes,
+not generic randomness.  A transformed row is admissible only when all textual
+mentions, hidden computations, and the reference answer remain mutually
+consistent.  The audit must distinguish:
+
+```text
+arithmetically replayable
+semantically coherent
+world-plausible
+object-integral where required
+unit-consistent
+free of stale totals or durations
+```
+
+World-plausibility is a declared sensitivity stratum, not a license to remove
+hard examples after observing model outcomes.  Freeze deterministic exclusions
+and a stratified manual audit before confirmatory inference.  In particular,
+flag examples that imply negative inventory, fractional people/objects, a target
+already exceeded when the wording asks for "more," or a stated total that no
+longer equals transformed components.
+
+## 29.3 Direct failure taxonomy and scorer v2
+
+Do not equate every endpoint mismatch with failed reasoning.  Rescore existing
+text into mutually exclusive primary labels:
+
+```text
+CORRECT_ENDPOINT
+CORRECT_VALUE_FORMAT_MISS
+CORRECT_INTERMEDIATE_THEN_OVERRIDE
+CORRECT_INTERMEDIATE_THEN_TRUNCATED
+SEMANTIC_STRUCTURE_ERROR
+RELATION_OR_BINDING_ERROR
+ARITHMETIC_EXECUTION_ERROR
+NO_SCORABLE_VALUE
+```
+
+The deterministic endpoint parser must recognize the frozen allowed answer
+wrappers, including plain numbers, commas, decimals, fractions, `Answer:`,
+boxed forms, and angle-bracket wrappers.  Never infer an answer from an arbitrary
+earlier number when no endpoint is present.  Report registered strict scoring
+and scorer-v2 sensitivity together.
+
+## 29.4 Short-context reinjection matrix
+
+The current official ASL evaluator stops after executing the complete generated
+program.  Restore result-use measurement without changing ASL generation:
+
+```text
+I0 TERMINAL_RUNTIME_VALUE       current endpoint
+I1 VALUE_TEXT                  VALUE: <computed-value>
+I2 TYPED_RESULT_TEXT           value + provenance/status
+I3 ASL_PLUS_RESULT_TEXT        generated ASL + typed result
+I4 ORACLE_VALUE                result-use ceiling
+I5 CORRUPTED_OR_STALE_VALUE    trust/calibration control
+I6 CONTINUATION_NO_VALUE       extra-generation control
+```
+
+The primary I1--I3 values come only from the model-generated ASL, whether right
+or wrong.  A runtime-success flag verifies execution, not semantic truth.  Use a
+fixed continuation prompt and fixed formatting across every record.  Never
+select the format per question or outcome.
+
+Minimum typed record:
+
+```text
+VALUE: <value>
+EXECUTION_STATUS: VERIFIED
+SEMANTIC_GROUNDING: UNVERIFIED
+SOURCE: MODEL_GENERATED_ASL
+```
+
+Report runtime-value correctness separately from post-injection final-answer
+correctness.  Also report value uptake conditional on a correct runtime value,
+wrong-value uptake, correction, correct-value override, contradiction, injected
+tokens, continuation tokens, and latency.
+
+## 29.5 Two-part cascade boundary
+
+Paper 1 includes only a bounded bridge experiment:
+
+```text
+part A -> generated ASL A -> execute -> inject result A
+part B depends on result A -> final answer
+```
+
+Use short inputs, oracle part boundaries, one intermediate result, and no
+retrieval or persistent cross-document memory.  Compare no value, generated-ASL
+value, oracle value, and corrupted value.  This tests whether a correct result
+can help a later step and whether a wrong result propagates.  Learned selection,
+multiple interventions, long distractor regions, dynamic adapters, typed K/V,
+and PRA remain out of Paper 1.
+
+## 29.6 Comparator and OOD requirements
+
+Train one Direct-answer LoRA from the same base model using the same eligible
+training questions, optimizer-step budget, and approximate target-token exposure
+as the primary ASL adapter.  Compare:
+
+```text
+base Direct
+budget-matched Direct LoRA
+ASL LoRA + deterministic runtime
+ASL LoRA + runtime + reinjection
+```
+
+This control separates architectural delegation from generic supervised
+adaptation.  Preserve SVAMP and GSM-Plus as evaluation-only OOD datasets until
+their first reported evaluation is frozen.  Report source-overlap and semantic-
+pattern audits before interpreting transfer.
+
+## 29.7 Manuscript structure
+
+Keep the journal main text to the causal argument and move implementation and
+diagnostic detail to appendices/supplement.
+
+Main text:
+
+```text
+1. Motivation and precise claim boundary
+2. NL->ASL->runtime->reinjection architecture
+3. Frozen datasets, models, and matched controls
+4. Ordinary accuracy and magnitude/jitter robustness
+5. Operator/expression complexity
+6. Result use and bounded cascade
+7. OOD and matched-Direct-LoRA results
+8. Limitations and conclusion
+```
+
+Appendices/supplement:
+
+```text
+ASL grammar and lowering
+dataset construction and provenance
+all prompts and hyperparameters
+semantic-validity audit and exclusions
+scorer-v2 taxonomy and fixtures
+full per-seed tables and confidence intervals
+failure decomposition and qualitative examples
+token/latency/memory accounting
+negative architecture/loss/augmentation results
+reproducibility commands and artifact hashes
+```
+
+## 29.8 Submission gates
+
+The journal draft is evidence-complete only when:
+
+- all three audited matrix seeds are complete;
+- the result survives scorer-v2 and long-token sensitivity;
+- runtime correctness and post-injection use are reported separately;
+- the two-part cascade has no hidden gold state or future-source leakage;
+- the matched Direct LoRA control is complete;
+- at least SVAMP and GSM-Plus have untouched OOD results;
+- transformed-data audit decisions are frozen independently of outcomes;
+- all headline claims map to tables, figures, manifests, and scripts.
+
+Editorial readiness additionally requires a shortened main narrative, complete
+appendices, cross-reference and terminology normalization, reproducibility audit,
+PDF build, and one claim-by-claim consistency pass.
