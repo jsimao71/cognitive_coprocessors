@@ -348,6 +348,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="LABEL=EVAL|DIRECT_PREDICTIONS|ASL_PREDICTIONS",
     )
     matched_analysis.add_argument("--output-dir", required=True)
+    matched_analysis.add_argument("--common-support")
+    matched_analysis.add_argument(
+        "--direct-diagnostic",
+        action="append",
+        help="LABEL=PATH to scorer-v2 diagnostics.jsonl",
+    )
     select = commands.add_parser("select-checkpoint")
     select.add_argument("--metrics", required=True)
     select.add_argument("--output", required=True)
@@ -990,7 +996,18 @@ def main(argv: list[str] | None = None) -> int:
                 )
             label, paths = value.split("=", 1)
             cells.append((label, *paths.split("|")))
-        report = analyze_matched_interventions(cells=cells, output_dir=args.output_dir)
+        diagnostics = {}
+        for value in args.direct_diagnostic or []:
+            if "=" not in value:
+                raise ValueError("--direct-diagnostic must use LABEL=PATH")
+            label, path = value.split("=", 1)
+            diagnostics[label] = path
+        report = analyze_matched_interventions(
+            cells=cells,
+            output_dir=args.output_dir,
+            common_support_path=args.common_support,
+            direct_diagnostic_paths=diagnostics,
+        )
         print(f"matched Direct-vs-ASL cells={len(report['cells'])} -> {args.output_dir}")
         return 0
     if args.command == "audit-gsm8k-interventions":

@@ -54,16 +54,82 @@ def _verify_predictions(
             raise ValueError(f"{label} question hash mismatch: {example_id}")
 
 
+def _verify_direct_diagnostic_summary(
+    diagnostic_path: Path, eval_path: Path, direct_path: Path, label: str
+) -> None:
+    summary_path = diagnostic_path.with_name("summary.json")
+    if not summary_path.exists():
+        raise ValueError(f"missing {label} summary: {summary_path}")
+    summary = read_json(summary_path)
+    inputs = summary.get("inputs", {})
+    if inputs.get("eval", {}).get("sha256") != file_sha256(eval_path):
+        raise ValueError(f"{label} summary uses a different evaluation")
+    if inputs.get("predictions", {}).get("sha256") != file_sha256(direct_path):
+        raise ValueError(f"{label} summary uses different Direct predictions")
+
+
+def _paired_metrics(
+    *,
+    example_ids: list[str],
+    direct: dict[str, dict[str, Any]],
+    asl: dict[str, dict[str, Any]],
+    direct_v2: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    direct_correct = asl_correct = 0
+    asl_only = direct_only = both_correct = both_wrong = 0
+    for example_id in example_ids:
+        d_ok = bool(
+            direct_v2[example_id]["v2_correct"]
+            if direct_v2 is not None
+            else direct[example_id]["metrics"]["final_answer_correct"]
+        )
+        a_ok = bool(asl[example_id]["metrics"]["final_answer_correct"])
+        direct_correct += d_ok
+        asl_correct += a_ok
+        if d_ok and a_ok:
+            both_correct += 1
+        elif d_ok:
+            direct_only += 1
+        elif a_ok:
+            asl_only += 1
+        else:
+            both_wrong += 1
+    count = len(example_ids)
+    return {
+        "count": count,
+        "direct_correct": direct_correct,
+        "direct_accuracy": direct_correct / count if count else 0.0,
+        "asl_correct": asl_correct,
+        "asl_accuracy": asl_correct / count if count else 0.0,
+        "asl_minus_direct": (asl_correct - direct_correct) / count if count else 0.0,
+        "paired": {
+            "both_correct": both_correct,
+            "direct_only": direct_only,
+            "asl_only": asl_only,
+            "both_wrong": both_wrong,
+            "exact_mcnemar_p": _mcnemar(direct_only, asl_only),
+        },
+    }
+
+
 def analyze_matched_interventions(
     *,
     cells: list[tuple[str, str | Path, str | Path, str | Path]],
     output_dir: str | Path,
+    common_support_path: str | Path | None = None,
+    direct_diagnostic_paths: dict[str, str | Path] | None = None,
 ) -> dict[str, Any]:
     """Analyze only complete, hash-matched Direct and ASL cells."""
 
     if not cells:
         raise ValueError("at least one matched intervention cell is required")
     results = []
+    common_support = None
+    if common_support_path is not None:
+        common_support = set(
+            map(str, read_json(common_support_path)["parent_example_ids"])
+        )
+    direct_diagnostic_paths = direct_diagnostic_paths or {}
     seen = set()
     for label, eval_value, direct_value, asl_value in cells:
         if label in seen:
@@ -80,40 +146,72 @@ def analyze_matched_interventions(
         _verify_predictions(evaluation=evaluation, predictions=direct, label=f"{label} Direct")
         _verify_predictions(evaluation=evaluation, predictions=asl, label=f"{label} ASL")
 
-        direct_correct = sum(bool(row["metrics"]["final_answer_correct"]) for row in direct.values())
-        asl_correct = sum(bool(row["metrics"]["final_answer_correct"]) for row in asl.values())
-        asl_only = direct_only = both_correct = both_wrong = 0
-        for example_id in evaluation:
-            d_ok = bool(direct[example_id]["metrics"]["final_answer_correct"])
-            a_ok = bool(asl[example_id]["metrics"]["final_answer_correct"])
-            if d_ok and a_ok:
-                both_correct += 1
-            elif d_ok:
-                direct_only += 1
-            elif a_ok:
-                asl_only += 1
-            else:
-                both_wrong += 1
+        direct_v2 = None
+        if label in direct_diagnostic_paths:
+            diagnostic_path = Path(direct_diagnostic_paths[label])
+            _verify_direct_diagnostic_summary(
+                diagnostic_path, eval_path, direct_path, f"{label} Direct scorer v2"
+            )
+            direct_v2 = _index(
+                read_jsonl(diagnostic_path), f"{label} Direct scorer v2"
+            )
+            _verify_predictions(
+                evaluation=evaluation,
+                predictions=direct_v2,
+                label=f"{label} Direct scorer v2",
+            )
+
+        all_ids = list(evaluation)
+        registered = _paired_metrics(example_ids=all_ids, direct=direct, asl=asl)
+        scorer_v2 = (
+            _paired_metrics(
+                example_ids=all_ids, direct=direct, asl=asl, direct_v2=direct_v2
+            )
+            if direct_v2 is not None
+            else None
+        )
+        common_ids = (
+            [
+                example_id
+                for example_id, row in evaluation.items()
+                if str(row.get("parent_example_id", example_id)) in common_support
+            ]
+            if common_support is not None
+            else []
+        )
+        if common_support is not None:
+            observed_parents = {
+                str(row.get("parent_example_id", example_id))
+                for example_id, row in evaluation.items()
+            }
+            if not common_support <= observed_parents:
+                raise ValueError(f"{label} common support contains unknown parent IDs")
+        registered_common = (
+            _paired_metrics(example_ids=common_ids, direct=direct, asl=asl)
+            if common_support is not None
+            else None
+        )
+        scorer_v2_common = (
+            _paired_metrics(
+                example_ids=common_ids,
+                direct=direct,
+                asl=asl,
+                direct_v2=direct_v2,
+            )
+            if common_support is not None and direct_v2 is not None
+            else None
+        )
         direct_tokens = [int(row["generated_tokens"]) for row in direct.values()]
         asl_tokens = [int(row["generated_tokens"]) for row in asl.values()]
-        count = len(evaluation)
         results.append(
             {
                 "label": label,
-                "count": count,
                 "eval_sha256": file_sha256(eval_path),
-                "direct_correct": direct_correct,
-                "direct_accuracy": direct_correct / count,
-                "asl_correct": asl_correct,
-                "asl_accuracy": asl_correct / count,
-                "asl_minus_direct": (asl_correct - direct_correct) / count,
-                "paired": {
-                    "both_correct": both_correct,
-                    "direct_only": direct_only,
-                    "asl_only": asl_only,
-                    "both_wrong": both_wrong,
-                    "exact_mcnemar_p": _mcnemar(direct_only, asl_only),
-                },
+                **registered,
+                "registered_all": registered,
+                "scorer_v2_all": scorer_v2,
+                "registered_common_support": registered_common,
+                "scorer_v2_common_support": scorer_v2_common,
                 "generated_tokens": {
                     "direct_mean": statistics.fmean(direct_tokens),
                     "asl_mean": statistics.fmean(asl_tokens),
@@ -162,6 +260,21 @@ def analyze_matched_interventions(
     report = {
         "schema_version": "ccpu.paper1.matched_intervention_analysis.v1",
         "primary_comparison": "paired Direct versus generated ASL plus deterministic execution",
+        "analysis_views": [
+            "registered_all",
+            "scorer_v2_all",
+            "registered_common_support",
+            "scorer_v2_common_support",
+        ],
+        "common_support": (
+            {
+                "path": str(common_support_path),
+                "sha256": file_sha256(common_support_path),
+                "parent_count": len(common_support),
+            }
+            if common_support is not None
+            else None
+        ),
         "cells": results,
         "output_sha256": {"direct_vs_asl_csv": file_sha256(csv_path)},
     }

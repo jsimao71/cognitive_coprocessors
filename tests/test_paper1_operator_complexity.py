@@ -416,6 +416,40 @@ def test_intervention_analysis_rejects_unpaired_rows_and_reports_only_matched(tm
     assert report["cells"][0]["asl_minus_direct"] == 0.5
     assert report["cells"][0]["paired"]["asl_only"] == 1
 
+    diagnostics = write_jsonl(
+        tmp_path / "direct_v2.jsonl",
+        [
+            {
+                "example_id": example_id,
+                "question_sha256": question_sha,
+                "v2_correct": correct,
+            }
+            for example_id, question_sha, correct in zip(
+                ("a", "b"), ("qa", "qb"), (True, True), strict=True
+            )
+        ],
+    )
+    write_json(
+        diagnostics.with_name("summary.json"),
+        {
+            "inputs": {
+                "eval": {"sha256": file_sha256(evaluation)},
+                "predictions": {"sha256": file_sha256(paths["direct"])},
+            }
+        },
+    )
+    support = write_json(tmp_path / "support.json", {"parent_example_ids": ["a"]})
+    audited = analyze_matched_interventions(
+        cells=[("O5", evaluation, paths["direct"], paths["asl"])],
+        output_dir=tmp_path / "audited",
+        common_support_path=support,
+        direct_diagnostic_paths={"O5": diagnostics},
+    )
+    cell = audited["cells"][0]
+    assert cell["scorer_v2_all"]["direct_accuracy"] == 1.0
+    assert cell["registered_common_support"]["count"] == 1
+    assert cell["scorer_v2_common_support"]["paired"]["both_correct"] == 1
+
     rows = read_jsonl(paths["asl"])
     rows[0]["question_sha256"] = "wrong"
     write_jsonl(paths["asl"], rows)

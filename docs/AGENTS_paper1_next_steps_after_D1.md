@@ -1796,6 +1796,30 @@ evidence.  It cannot validly infer whether every remaining error is primarily
 semantic-structure or relation/binding failure from free-form text alone; those
 rows retain `manual_subtype_review=true` for blind annotation.
 
+### J3 provisional paired checkpoint (2026-09-11)
+
+The matched analyzer now joins each evaluation, Direct generation, scorer-v2
+ledger, and ASL generation by exact identity and question hash.  It verifies the
+scorer ledger's source-file hashes and emits four simultaneous views: registered
+all rows, scorer-v2 all rows, registered common support, and scorer-v2 common
+support.  For the complete seed-17011 O0 jitter cells:
+
+```text
+all 100 rows, scorer v2
+                Direct       ASL runtime    ASL - Direct     McNemar p
+x1              53/100       45/100          -8.0 pp          0.2295
+x1000           22/100       42/100         +20.0 pp          0.0022
+
+candidate strict common support, 82 parents
+x1              47/82        39/82           -9.8 pp          0.2153
+x1000           21/82        35/82          +17.1 pp          0.0243
+```
+
+Thus the crossover survives the deterministic audit: removing every parent with
+any review flag narrows the x1000 advantage from 20.0 to 17.1 percentage points
+but does not remove it.  This remains developmental until blind review freezes
+the 82-parent support set and seeds 17023/17037 replicate the comparison.
+
 ## 29.4 Short-context reinjection matrix
 
 The current official ASL evaluator stops after executing the complete generated
