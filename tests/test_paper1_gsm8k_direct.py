@@ -17,6 +17,10 @@ from ccpu.paper1.e3.direct_answer_eval import (
     prepare_long_budget_resume,
     run_direct_gsm8k_shard,
 )
+from ccpu.paper1.e3.direct_failure_audit import (
+    audit_direct_predictions,
+    extract_direct_endpoint_v2,
+)
 from ccpu.paper1.e3.gsm8k_confirmatory import freeze_official_gsm8k
 
 
@@ -277,3 +281,68 @@ def test_long_budget_resume_reuses_only_pre_ceiling_rows(tmp_path):
     assert [row["example_id"] for row in rows] == ["item-0", "item-2"]
     assert all(row["long_budget_reuse"]["target_ceiling"] == 2048 for row in rows)
     assert read_json(output / "long_budget_resume_manifest.json") == manifest
+
+
+def test_direct_scorer_v2_recovers_wrappers_and_partitions_failures(tmp_path):
+    assert extract_direct_endpoint_v2("Result: <answer>3/2</answer>", allow_bare_terminal=False) == "3/2"
+    assert extract_direct_endpoint_v2("unfinished thought 2", allow_bare_terminal=False) is None
+
+    evaluation = write_jsonl(
+        tmp_path / "eval.jsonl",
+        [
+            {
+                "example_id": f"case-{index}",
+                "parent_example_id": f"parent-{index}",
+                "question_sha256": f"hash-{index}",
+                "reference_return": expected,
+            }
+            for index, expected in enumerate(("1.5", "9", "7", "8", "8"))
+        ],
+    )
+    texts = (
+        "<answer>3/2</answer>",
+        "We get 4 + 5 = 9 but reconsider. Answer: 8",
+        "The total is 7 and now I should format the answer",
+        "I compute 4 * 2 = 6. Answer: 6",
+        "I use the wrong relation. Answer: 10",
+    )
+    predictions = write_jsonl(
+        tmp_path / "predictions.jsonl",
+        [
+            {
+                "example_id": f"case-{index}",
+                "parent_example_id": f"parent-{index}",
+                "question_sha256": f"hash-{index}",
+                "generated_text": text,
+                "generated_tokens": 32 if index == 2 else 10,
+                "predicted_answer": None if index in (0, 2) else text.rsplit(" ", 1)[-1],
+                "metrics": {"final_answer_correct": False},
+            }
+            for index, text in enumerate(texts)
+        ],
+    )
+    support = write_json(
+        tmp_path / "support.json",
+        {"parent_example_ids": [f"parent-{index}" for index in range(4)]},
+    )
+
+    report = audit_direct_predictions(
+        eval_path=evaluation,
+        predictions_path=predictions,
+        output_dir=tmp_path / "audit",
+        token_ceiling=32,
+        common_support_path=support,
+    )
+    rows = read_jsonl(tmp_path / "audit" / "diagnostics.jsonl")
+
+    assert [row["category"] for row in rows] == [
+        "CORRECT_VALUE_FORMAT_MISS",
+        "CORRECT_INTERMEDIATE_THEN_OVERRIDE",
+        "CORRECT_INTERMEDIATE_THEN_TRUNCATED",
+        "ARITHMETIC_EXECUTION_ERROR",
+        "SEMANTIC_STRUCTURE_ERROR",
+    ]
+    assert report["all_rows"]["v2_correct"] == 1
+    assert report["all_rows"]["strict_correct"] == 0
+    assert report["strict_common_support"]["count"] == 4
+    assert rows[-1]["manual_subtype_review"] is True

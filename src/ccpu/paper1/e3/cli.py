@@ -35,6 +35,7 @@ from .direct_answer_eval import (
     prepare_long_budget_resume,
     run_direct_gsm8k_shard,
 )
+from .direct_failure_audit import audit_direct_predictions
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .gsm8k_confirmatory import (
     analyze_official_gsm8k_replications,
@@ -221,6 +222,12 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_long_resume.add_argument("--output-dir", required=True)
     gsm8k_long_resume.add_argument("--source-ceiling", type=int, required=True)
     gsm8k_long_resume.add_argument("--target-ceiling", type=int, required=True)
+    direct_audit = commands.add_parser("audit-gsm8k-direct")
+    direct_audit.add_argument("--eval", required=True)
+    direct_audit.add_argument("--predictions", required=True)
+    direct_audit.add_argument("--output-dir", required=True)
+    direct_audit.add_argument("--token-ceiling", type=int, required=True)
+    direct_audit.add_argument("--common-support")
     gsm8k_large = commands.add_parser("prepare-gsm8k-large-numbers")
     gsm8k_large.add_argument("--source", required=True)
     gsm8k_large.add_argument("--eval", required=True)
@@ -697,6 +704,20 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"GSM8K long-budget reuse={manifest['reused_count']} "
             f"regenerate={manifest['regenerate_count']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "audit-gsm8k-direct":
+        report = audit_direct_predictions(
+            eval_path=args.eval,
+            predictions_path=args.predictions,
+            output_dir=args.output_dir,
+            token_ceiling=args.token_ceiling,
+            common_support_path=args.common_support,
+        )
+        print(
+            f"Direct scorer v2 n={report['all_rows']['count']} "
+            f"strict={report['all_rows']['strict_accuracy']:.3f} "
+            f"v2={report['all_rows']['v2_accuracy']:.3f} -> {args.output_dir}"
         )
         return 0
     if args.command == "prepare-gsm8k-large-numbers":

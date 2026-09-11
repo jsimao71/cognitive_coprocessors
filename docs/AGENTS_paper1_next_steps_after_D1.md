@@ -1765,6 +1765,37 @@ boxed forms, and angle-bracket wrappers.  Never infer an answer from an arbitrar
 earlier number when no endpoint is present.  Report registered strict scoring
 and scorer-v2 sensitivity together.
 
+### J2 implementation checkpoint (2026-09-11)
+
+`audit-gsm8k-direct` now rescored the two complete seed-17011 O0 Direct cells
+from saved generations only.  The scorer recognizes the registered wrappers,
+disallows a bare terminal number when the generation hit its token ceiling or
+left an open thinking block, verifies explicit arithmetic equations, and marks
+residual semantic cases for blind structure-versus-binding review.
+
+```text
+                         strict       scorer v2     ceiling hits
+jitter x1                54/100       53/100        33/100
+jitter x1000             22/100       22/100        65/100
+
+strict common support (82 parents):
+jitter x1                48/82        47/82         25/82
+jitter x1000             21/82        21/82         50/82
+```
+
+The single x1 downgrade is a truncated open reasoning trace whose accidental
+last token was the reference value; it had not emitted an answer endpoint and
+continued reasoning toward another value.  No approved-wrapper format rescue
+occurs in either completed cell.  Ten rows in each cell explicitly mention the
+reference value before truncation, but this is only a diagnostic upper bound:
+the mention may be an intermediate value rather than the model's intended final
+answer.  The long-budget run must determine actual recoveries.
+
+The deterministic scorer can establish endpoint, truncation, and arithmetic
+evidence.  It cannot validly infer whether every remaining error is primarily
+semantic-structure or relation/binding failure from free-form text alone; those
+rows retain `manual_subtype_review=true` for blind annotation.
+
 ## 29.4 Short-context reinjection matrix
 
 The current official ASL evaluator stops after executing the complete generated

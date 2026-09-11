@@ -2750,6 +2750,32 @@ also preventing outcome-dependent removal of difficult examples.  The complete
 row-level ledger, review queue, input hashes, and support IDs are stored under
 \texttt{artifacts/paper1/journal\_audit\_v1/}.
 
+\section{Direct Endpoint and Truncation Audit}
+\label{app:direct-scorer-v2}
+
+We also preserve the registered endpoint score while applying a deterministic
+scorer-v2 sensitivity to saved Direct generations.  The revised parser accepts
+commas, decimals, fractions, explicit answer labels, boxed answers, and tagged
+answer wrappers.  It does not accept a bare terminal number if generation hit
+the 1,024-token ceiling or left an open thinking block.  It additionally records
+verified explicit arithmetic equations and whether the reference value occurred
+in an answer-like intermediate statement.  Residual semantic errors remain
+queued for blind structure-versus-binding annotation; the script does not claim
+to infer that distinction from free-form prose.
+
+On the complete seed-17011 O0 cells, registered/scorer-v2 accuracy is 54/53 out
+of 100 at jitter $\times1$ and 22/22 at jitter $\times1000$.  The one downgrade
+is an unfinished trace whose accidental final number matched the reference but
+was not a completed answer.  Token-ceiling hits increase from 33/100 to 65/100.
+Ten generations in each cell mention the reference value before truncation;
+this is an upper-bound diagnostic, not a recovered-answer count, because the
+number can be an intermediate rather than the intended endpoint.  No new correct
+answer is recovered solely through an approved wrapper in either cell.  On the
+provisional 82-parent strict common support, scorer-v2 gives 47/82 at
+$\times1$ and 21/82 at $\times1000$.  A longer-token matched run is therefore
+required before attributing the full magnitude decline to reasoning rather than
+decode budget.
+
 \section{Deterministic Semantic Diagnostic Taxonomy}
 
 The replay analyzer emits multi-label records; categories are not mutually
