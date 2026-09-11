@@ -2474,6 +2474,88 @@ python -m ccpu.dsl_dataset finalize-expansion \
   --output-dir ${DSL}/expansion500_v1/freeze --target 350
 \end{verbatim}
 
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{Two claims and a crossover, not universal ASL superiority.}
+The results support two distinct claims.  First, direct neural answers from the
+measured small model are brittle under a controlled change in operand magnitude.
+On the complete seed-17011 O0 panel, scorer-v2 Direct accuracy falls from
+53/100 at $\times1$ to 22/100 at $\times1000$, whereas generated ASL followed
+by deterministic execution changes from 45/100 to 42/100.  The same crossover
+survives the frozen common-support audit: Direct changes from 47/82 to 21/82,
+while ASL changes from 39/82 to 35/82.  Thus Direct is better on the familiar
+ordinary-number condition, but the ASL path is substantially flatter and is
+better after the magnitude intervention.  This is a robustness crossover, not
+a claim that generated ASL is always more accurate.  The first matched natural
+O1 cell reinforces that qualification: at $\times1$, Direct obtains 35/100 and
+ASL 31/100 (ASL-minus-Direct $-4.0$ points, exact McNemar $p=0.585$).
+Operator complexity, independent numeric jitter, and their interaction require
+the remaining matrix cells and seeds before they can support the same claim.
+
+\paragraph{Separate semantic inference from exact computation.}
+Second, direct reasoning uses a long autoregressive trace to approximate
+operations that a conventional processor can execute exactly once their
+semantics have been specified.  In the matched $\times1$ O1 cell, Direct emits
+721.27 generated tokens on average, compared with 141.68 for ASL, a 5.09-fold
+reduction.  The deterministic runtime then evaluates the accepted program
+without additional model-generated reasoning tokens.  This result does not by
+itself establish lower end-to-end latency, energy, or monetary cost across
+different hardware.  It instead isolates an avoidable neural decoding burden:
+when the program is semantically correct, increasing reasoning length is not
+needed to approximate the arithmetic operation itself.
+
+\paragraph{Uncertainty is relocated to the semantic compiler.}
+CogCop does not remove the hard language problem.  It moves uncertainty from
+the execution of an operation to selecting that operation, binding its
+arguments, and grounding entities and quantities.  This distinction is visible
+in the unpaired O6 checkpoint, where 84/100 generated programs are executable
+but only 35/100 return the correct answer.  A parser and typed runtime can reject
+malformed or illegal programs and can execute valid programs deterministically;
+they cannot repair a fluent, executable program with the wrong relation,
+operand, or return target.  Consequently, parse validity and executability are
+safety/interface metrics, while final-answer execution and semantic-state
+equivalence measure compiler quality.  The latter remains the principal
+bottleneck in this paper.
+
+\paragraph{A different target for model scaling.}
+The architectural lesson is not that larger language models are unnecessary.
+Greater neural capacity is valuable for resolving discourse, coreference,
+relation direction, operator choice, and other aspects of the mapping from
+language and world knowledge to a formal operation.  The results instead
+question whether the same autoregressive substrate should also approximate
+well-specified arithmetic after that mapping is available.  Under the proposed
+division of labor, model scaling targets the semantic compiler and router,
+while bounded CPU coprocessors provide exact arithmetic and, in later papers,
+logic, algebra, graphs, units, dates, retrieval, and simulation.  The frozen
+1.7B and later model-size comparisons must determine whether greater capacity
+eliminates Direct magnitude sensitivity, merely moves the crossover, or
+primarily improves ASL compilation.
+
+\paragraph{Auditability and continued generation.}
+The explicit ASL program and runtime value create an inspectable boundary that
+is absent from a final number embedded in a free-form reasoning trace.  A user
+or policy layer can display, reject, correct, or provenance-log the selected
+operation and its computed value.  Reinjection is nevertheless a separate
+empirical requirement: runtime-result correctness must be reported apart from
+whether subsequent neural generation accepts the injected value and preserves
+it through later steps.  The short-context reinjection and two-part cascade
+conditions therefore test whether deterministic correctness survives return to
+the neural stream; longer multipart documents remain follow-on work rather than
+a prerequisite for the present arithmetic claim.
+
+\paragraph{Scope of the evidence.}
+The strongest current evidence is the one-seed matched magnitude crossover and
+its outcome-blind common-support sensitivity.  A journal-level claim about
+general computational robustness still requires the registered three-seed
+operator--magnitude--jitter matrix, a long-token control, a training-budget-
+matched Direct LoRA, and untouched arithmetic OOD evaluation.  These controls
+also separate semantic or arithmetic errors from endpoint formatting and token
+truncation.  Until they are complete, the defensible conclusion is narrower:
+deterministic execution provides magnitude robustness and substantially lower
+generation burden when semantic compilation succeeds, while semantic binding
+accuracy determines how often that architectural advantage is realized.
+
 \section{Limitations}
 
 The elicitation instruction asks reflex models to expose an expression followed
