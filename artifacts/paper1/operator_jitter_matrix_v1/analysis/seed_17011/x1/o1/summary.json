@@ -1,0 +1,102 @@
+{
+  "analysis_views": [
+    "registered_all",
+    "scorer_v2_all",
+    "registered_common_support",
+    "scorer_v2_common_support"
+  ],
+  "cells": [
+    {
+      "asl_accuracy": 0.31,
+      "asl_correct": 31,
+      "asl_minus_direct": -0.04,
+      "count": 100,
+      "direct_accuracy": 0.35,
+      "direct_correct": 35,
+      "eval_sha256": "ecf5dc0ecc6be7aac3269baf8217dc3da91263e4baf9a276d51f309c962f8880",
+      "generated_tokens": {
+        "asl_mean": 141.68,
+        "direct_mean": 721.27,
+        "direct_to_asl_ratio": 5.09083850931677
+      },
+      "label": "x1_o1",
+      "paired": {
+        "asl_only": 13,
+        "both_correct": 18,
+        "both_wrong": 52,
+        "direct_only": 17,
+        "exact_mcnemar_p": 0.584664711728692
+      },
+      "registered_all": {
+        "asl_accuracy": 0.31,
+        "asl_correct": 31,
+        "asl_minus_direct": -0.04,
+        "count": 100,
+        "direct_accuracy": 0.35,
+        "direct_correct": 35,
+        "paired": {
+          "asl_only": 13,
+          "both_correct": 18,
+          "both_wrong": 52,
+          "direct_only": 17,
+          "exact_mcnemar_p": 0.584664711728692
+        }
+      },
+      "registered_common_support": {
+        "asl_accuracy": 0.3048780487804878,
+        "asl_correct": 25,
+        "asl_minus_direct": -0.04878048780487805,
+        "count": 82,
+        "direct_accuracy": 0.35365853658536583,
+        "direct_correct": 29,
+        "paired": {
+          "asl_only": 12,
+          "both_correct": 13,
+          "both_wrong": 41,
+          "direct_only": 16,
+          "exact_mcnemar_p": 0.5715881884098053
+        }
+      },
+      "scorer_v2_all": {
+        "asl_accuracy": 0.31,
+        "asl_correct": 31,
+        "asl_minus_direct": -0.04,
+        "count": 100,
+        "direct_accuracy": 0.35,
+        "direct_correct": 35,
+        "paired": {
+          "asl_only": 13,
+          "both_correct": 18,
+          "both_wrong": 52,
+          "direct_only": 17,
+          "exact_mcnemar_p": 0.584664711728692
+        }
+      },
+      "scorer_v2_common_support": {
+        "asl_accuracy": 0.3048780487804878,
+        "asl_correct": 25,
+        "asl_minus_direct": -0.04878048780487805,
+        "count": 82,
+        "direct_accuracy": 0.35365853658536583,
+        "direct_correct": 29,
+        "paired": {
+          "asl_only": 12,
+          "both_correct": 13,
+          "both_wrong": 41,
+          "direct_only": 16,
+          "exact_mcnemar_p": 0.5715881884098053
+        }
+      }
+    }
+  ],
+  "common_support": {
+    "parent_count": 82,
+    "path": "artifacts/paper1/journal_audit_v1/strict_common_support_frozen.json",
+    "sha256": "96bc7769d123f47a8b1ca1d0aefe2015e247e041cd043648578d32b5c5b91776"
+  },
+  "output_sha256": {
+    "direct_vs_asl_csv": "dd6d70de7ea21e9ffe66641aedbecfc71dea4fa57b66cf0d7eb3251ed62e2921"
+  },
+  "primary_comparison": "paired Direct versus generated ASL plus deterministic execution",
+  "schema_version": "ccpu.paper1.matched_intervention_analysis.v1"
+}

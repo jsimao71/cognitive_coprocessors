@@ -1682,12 +1682,16 @@ J10 Freeze analyses, figures, qualitative examples, and claim table; then perfor
     the editorial revision, build, commit, and push.
 ```
 
-J4 seed-17011 execution status on 2026-09-11: O0 x1/x1000 is complete and
-paired.  The completed unpaired ASL operator cells are x1+O1 at 31/100,
-x1+O5 at 32/100, x1+O6 at 35/100, and x1000+O1 at 35/100 final-answer
-correctness.  The x1+O5 and x1+O6 cells are respectively 78/100 and 84/100
-executable; x1000+O1 is 85/100 executable.  Treat these as operational
-checkpoints only.  Do not interpret an operator-relative advantage until each
+J4 seed-17011 execution status on 2026-09-11: O0 x1/x1000 and O1 x1 are
+complete and paired.  At x1+O1, Direct is 35/100 and generated ASL is 31/100
+(`ASL - Direct = -4.0` percentage points, exact McNemar `p=0.585`); on the
+frozen 82-parent common support the result is 29/82 versus 25/82 (`-4.9`
+points, `p=0.572`).  Mean generated tokens are 721.27 for Direct and 141.68
+for ASL, a 5.09-fold reduction.  The completed unpaired ASL cells are x1+O5
+at 32/100, x1+O6 at 35/100, x1000+O1 at 35/100, and x1000+O5 at 32/100
+final-answer correctness.  The latter three operator cells are respectively
+84/100, 85/100, and 78/100 executable.  Treat unpaired cells as operational
+checkpoints only; do not interpret an operator-relative advantage until each
 byte-identical Direct cell is complete.
 
 ## 29.2 Transformation audit
