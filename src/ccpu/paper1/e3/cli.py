@@ -47,6 +47,7 @@ from .gsm8k_interventions import (
     freeze_gsm8k_operator_jitter_matrix,
 )
 from .intervention_analysis import analyze_matched_interventions
+from .intervention_audit import audit_intervention_panel
 from .large_number_suite import freeze_large_number_gsm8k, freeze_magnitude_ladder_gsm8k
 from .magnitude_analysis import (
     analyze_magnitude_curve,
@@ -328,6 +329,10 @@ def build_parser() -> argparse.ArgumentParser:
     combined_interventions.add_argument(
         "--operator-level", choices=("O1", "O5", "O6"), action="append"
     )
+    intervention_audit = commands.add_parser("audit-gsm8k-interventions")
+    intervention_audit.add_argument("--input-dir", action="append", required=True)
+    intervention_audit.add_argument("--output-dir", required=True)
+    intervention_audit.add_argument("--split", default="test")
     matched_analysis = commands.add_parser("analyze-gsm8k-matched-interventions")
     matched_analysis.add_argument(
         "--cell",
@@ -966,6 +971,20 @@ def main(argv: list[str] | None = None) -> int:
             cells.append((label, *paths.split("|")))
         report = analyze_matched_interventions(cells=cells, output_dir=args.output_dir)
         print(f"matched Direct-vs-ASL cells={len(report['cells'])} -> {args.output_dir}")
+        return 0
+    if args.command == "audit-gsm8k-interventions":
+        report = audit_intervention_panel(
+            input_dirs=args.input_dir,
+            output_dir=args.output_dir,
+            split=args.split,
+        )
+        print(
+            f"intervention audit rows={report['counts']['rows']} "
+            f"integrity_failures={report['counts']['integrity_failures']} "
+            f"review_required={report['counts']['review_required_rows']} "
+            f"common_support={report['counts']['strict_common_support_parents']} "
+            f"-> {args.output_dir}"
+        )
         return 0
     if args.command == "run-bottleneck":
         summary = run_bottleneck_condition(

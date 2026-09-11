@@ -2627,6 +2627,129 @@ next evidence gate is therefore a matched categorical O0/O1/O3/O5/O6 ladder,
 followed by independently sampled uniform $[-30\%,+30\%]$ numeric jitter.
 
 \appendix
+\section{Qualitative Examples from the Matched Robustness Test}
+\label{app:qualitative-robustness}
+
+This appendix makes the primary comparison concrete.  Each case below is an
+actual factor-1,000, uniform-jitter item from the frozen seed-17011 panel.  The
+same natural-language question was given either to base Qwen3-0.6B for direct
+reasoning or to the trained Qwen3-0.6B ASL compiler; in the latter condition,
+the generated program was executed by the deterministic runtime.  The ASL is
+model output, not an oracle or a mechanical translation of the reference
+rationale.  We selected these cases post hoc from the Direct-wrong/ASL-correct
+cell to illustrate distinct failure mechanisms.  They are explanatory examples,
+not an additional estimand.  We excluded internally inconsistent perturbations,
+fractional-object ambiguities, and cases in which Direct computed the right
+number but violated only the endpoint format.  All such rows remain in the
+aggregate quantitative evaluation.
+
+\subsection{Dropped quantity binding}
+
+\paragraph{Question (\texttt{gsm8k:3630:jitter-s17011-x1000}).}
+Two apartment buildings have 12 floors each, each floor has 5,433 apartments,
+and each apartment needs seven doors.  How many doors are required?
+
+The Direct trace multiplied buildings, floors, and doors, but silently dropped
+the 5,433 apartments per floor.  It therefore returned
+$2\mathbin{\times}12\mathbin{\times}7=168$.  The generated ASL retained all four
+quantities:
+\begin{verbatim}
+company.buildings = 2
+company.floor_per_building = 12
+company.floor_per_apartment = 5433
+company.floor_per_door = 7
+company.total_apartments = company.buildings
+    * company.floor_per_building * company.floor_per_apartment
+company.total_doors = company.total_apartments
+    * company.floor_per_door
+RETURN company.total_doors
+\end{verbatim}
+The runtime returned 912,744, equal to the frozen reference.  The internal path
+names are not canonical---for example, \texttt{floor\_per\_apartment} denotes
+apartments per floor---but the dependency graph and execution are correct.  This
+case distinguishes usable computational grounding from ontology-name agreement.
+
+\subsection{Correct structure, failed neural arithmetic}
+
+\paragraph{Question (\texttt{gsm8k:2053:jitter-s17011-x1000}).}
+Adam picks 3,436 apples per day for 30 days and then collects the remaining 230
+apples.  How many apples did he collect in total?
+
+Direct identified the intended expression but repeatedly evaluated
+$3{,}436\mathbin{\times}30$ as 44,668 and returned 44,898.  The generated ASL
+was:
+\begin{verbatim}
+adam.daily_apples = 3436
+adam.days = 30
+adam.apples_collected = adam.daily_apples * adam.days
+adam.remaining_apples = 230
+adam.total_apples = adam.apples_collected + adam.remaining_apples
+RETURN adam.total_apples
+\end{verbatim}
+The runtime evaluated the same structure as
+$3{,}436\mathbin{\times}30+230=103{,}310$.  Here the semantic compiler succeeded
+and the benefit comes specifically from moving exact multiplication out of the
+autoregressive trace.
+
+\subsection{Ratio-role grounding}
+
+\paragraph{Question (\texttt{gsm8k:5211:jitter-s17011-x1000}).}
+A drink is two parts Coke, one part Sprite, and three parts Mountain Dew.  If it
+contains 5,458 ounces of Coke, how many ounces of drink are there?
+
+Direct summed the six ratio parts but treated the observed Coke quantity as one
+part, returning $5{,}458\mathbin{\times}6=32{,}748$.  The generated ASL made the
+normalization by Coke's two parts explicit:
+\begin{verbatim}
+drink.coke_ratio = 2
+drink.sprite_ratio = 1
+drink.mountain_dew_ratio = 3
+drink.total_ratio = drink.coke_ratio + drink.sprite_ratio
+    + drink.mountain_dew_ratio
+drink.coke_ounces = 5458
+drink.total_ounces = drink.coke_ounces / drink.coke_ratio
+    * drink.total_ratio
+RETURN drink.total_ounces
+\end{verbatim}
+The runtime returned 16,374, equal to the reference.  Unlike the preceding
+arithmetic-error case, this is a relation-role error in Direct generation: the
+critical distinction is between an observed two-part subtotal and a one-part
+unit.
+
+Together, the examples show what the matched test is intended to separate:
+retaining grounded quantities, selecting the right expression graph, and
+executing that graph exactly.  ASL helps only when the first two stages succeed;
+parseable but semantically wrong programs remain ordinary ASL failures in every
+reported table.
+
+\section{Transformation-Validity Audit}
+\label{app:transformation-audit}
+
+Before confirmatory replication, we apply a condition-blind audit to every
+frozen intervention cell.  The audit recomputes the question hash, parses and
+lowers the gold ASL, checks its types, executes it, compares the runtime return
+with the stored reference, checks duplicate identities and common parent
+support, and emits named semantic-review flags.  It does not inspect Direct or
+ASL model outcomes and never removes a row automatically.
+
+The initial audit covers 43 files and 4,300 cell rows derived from the same 100
+parent questions.  All rows pass the technical integrity checks and all files
+contain identical parent sets.  Deterministic rules place 461 cell rows from 18
+parent questions into blind manual review.  The flags include negative requested
+or world-state quantities, stale partition totals, fractional discrete-object
+answers, transformed components larger than available totals, fixed-unit bound
+violations, and degraded hyphenated rewrites.  A separate
+\texttt{extreme\_world\_magnitude} label records the designed intervention and
+is not itself an exclusion criterion.
+
+The resulting 82-parent strict-common-support set is provisional until the
+manual review is frozen.  Final tables will report the complete observed panel
+and strict common support side by side.  This prevents ordinary Direct reasoning
+from being penalized merely for respecting an impossible rewritten world, while
+also preventing outcome-dependent removal of difficult examples.  The complete
+row-level ledger, review queue, input hashes, and support IDs are stored under
+\texttt{artifacts/paper1/journal\_audit\_v1/}.
+
 \section{Deterministic Semantic Diagnostic Taxonomy}
 
 The replay analyzer emits multi-label records; categories are not mutually

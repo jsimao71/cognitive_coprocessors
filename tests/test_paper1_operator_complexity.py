@@ -2,17 +2,106 @@ from decimal import Decimal
 
 import pytest
 
-from ccpu.common.artifacts import file_sha256, read_jsonl, write_json, write_jsonl
+from ccpu.common.artifacts import (
+    file_sha256,
+    fingerprint,
+    read_jsonl,
+    write_json,
+    write_jsonl,
+)
 from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
-from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from ccpu.paper1.e3.gsm8k_interventions import (
     freeze_gsm8k_matched_interventions,
     freeze_gsm8k_operator_jitter_matrix,
 )
 from ccpu.paper1.e3.intervention_analysis import analyze_matched_interventions
+from ccpu.paper1.e3.intervention_audit import audit_intervention_panel
 from ccpu.paper1.e3.operator_analysis import analyze_operator_ladder, analyze_operator_pilot
+from ccpu.paper1.e3.operator_complexity import freeze_o1_dataset, freeze_o1_pilot
 from ccpu.paper1.e3.operator_levels import freeze_operator_level, freeze_operator_pilot
+
+
+def _audit_row(example_id, question, program, answer, binding_path, transformed_value):
+    return {
+        "example_id": example_id,
+        "parent_example_id": example_id.split(":cell", 1)[0],
+        "condition": "audit-test",
+        "question": question,
+        "question_sha256": fingerprint(question),
+        "reference_return": str(answer),
+        "gold_asl": program,
+        "transformation": {
+            "factor": 1,
+            "jitter_seed": 17,
+            "binding_path": binding_path,
+            "transformed_value": transformed_value,
+        },
+    }
+
+
+def test_intervention_audit_replays_and_flags_without_automatic_exclusion(tmp_path):
+    root = tmp_path / "panel"
+    rows = [
+        _audit_row(
+            "gsm8k:1:cell-a",
+            (
+                "A box held 5 hats. Ana removed 9 hats. "
+                "How many more hats are needed to restore the box?"
+            ),
+            (
+                "box.hats.initial = 5\n"
+                "ana.hats.removed = 9\n"
+                "box.hats.remaining = box.hats.initial - ana.hats.removed\n"
+                "RETURN box.hats.remaining"
+            ),
+            -4,
+            "ana.hats.removed",
+            9,
+        ),
+        _audit_row(
+            "gsm8k:2:cell-a",
+            "Mike watches television for 30 hours per day. How many hours is that?",
+            "mike.hours_per_day = 30\nRETURN mike.hours_per_day",
+            30,
+            "mike.hours_per_day",
+            30,
+        ),
+    ]
+    write_jsonl(root / "cell_a" / "test.jsonl", rows)
+    write_jsonl(
+        root / "cell_b" / "test.jsonl",
+        [
+            {**row, "example_id": row["example_id"].replace("cell-a", "cell-b")}
+            for row in rows
+        ],
+    )
+
+    report = audit_intervention_panel(
+        input_dirs=[root], output_dir=tmp_path / "audit", split="test"
+    )
+    records = read_jsonl(tmp_path / "audit" / "audit_records.jsonl")
+
+    assert report["counts"] == {
+        "files": 2,
+        "rows": 4,
+        "unique_parent_examples": 2,
+        "integrity_failures": 0,
+        "labeled_rows": 4,
+        "review_required_rows": 4,
+        "review_required_unique_parents": 2,
+        "strict_common_support_parents": 0,
+        "labeled_unique_parents": 2,
+    }
+    assert report["pairing_audit"]["identical_parent_sets_across_files"] is True
+    assert report["policy"]["automatic_exclusion"] is False
+    first_codes = {flag["code"] for flag in records[0]["semantic_flags"]}
+    assert "negative_requested_quantity" in first_codes
+    assert "negative_world_quantity" in first_codes
+    assert "component_exceeds_available_total" in first_codes
+    second_codes = {flag["code"] for flag in records[1]["semantic_flags"]}
+    assert "bounded_rate_or_duration_exceeded" in second_codes
+    assert all(row["analysis_disposition"] == "manual_review_required" for row in records)
 
 
 def test_o1_exact_runtime_and_semantic_aliases():

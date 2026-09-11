@@ -1705,6 +1705,44 @@ flag examples that imply negative inventory, fractional people/objects, a target
 already exceeded when the wording asks for "more," or a stated total that no
 longer equals transformed components.
 
+### J1 implementation checkpoint (2026-09-11)
+
+The deterministic audit CLI is implemented as:
+
+```powershell
+python -m ccpu.paper1.e3 audit-gsm8k-interventions `
+  --input-dir artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173 `
+  --input-dir artifacts/paper1/operator_jitter_matrix_v1/gsm8k_matched_seed99173 `
+  --output-dir artifacts/paper1/journal_audit_v1
+```
+
+It replays gold ASL and verifies question hashes, syntax, lowering, typing,
+execution, reference returns, duplicate IDs, and common parent support.  It then
+emits condition-blind semantic, bounded-plausibility, surface-quality, and
+designed-intervention labels.  It never removes a record automatically.
+
+The first complete pass covers 43 files and 4,300 rows over the same 100 parent
+questions.  All 4,300 pass integrity and all files have identical parent sets.
+Deterministic rules place 461 cell rows from 18 parent questions into manual
+review, leaving 82 parent questions on strict condition-independent common
+support.  The observed review flags are:
+
+```text
+negative_requested_quantity             225 cell rows / 9 parents
+negative_world_quantity                 171 cell rows / 7 parents
+partition_total_mismatch                 37 cell rows / 1 parent
+fractional_discrete_answer               27 cell rows / 1 parent
+component_exceeds_available_total        25 cell rows / 1 parent
+bounded_rate_or_duration_exceeded        50 cell rows / 2 parents
+degraded_hyphenated_rewrite              66 cell rows / 3 parents
+```
+
+The `extreme_world_magnitude` label occurs by design and is retained only as an
+intervention stratum; it is not an exclusion rule.  Freeze the 82-parent common
+support only after blind manual review confirms or revises all 18 parent-level
+flags.  Report full-panel and strict-common-support results side by side so the
+audit cannot become an outcome-dependent filter.
+
 ## 29.3 Direct failure taxonomy and scorer v2
 
 Do not equate every endpoint mismatch with failed reasoning.  Rescore existing
