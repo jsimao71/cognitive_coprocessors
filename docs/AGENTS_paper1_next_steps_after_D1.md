@@ -1688,10 +1688,13 @@ complete and paired.  At x1+O1, Direct is 35/100 and generated ASL is 31/100
 frozen 82-parent common support the result is 29/82 versus 25/82 (`-4.9`
 points, `p=0.572`).  Mean generated tokens are 721.27 for Direct and 141.68
 for ASL, a 5.09-fold reduction.  All seed-17011 ASL cells are now complete.
-The still-unpaired operator cells are x1+O5 at 32/100, x1+O6 at 35/100,
-x1000+O1 at 35/100, x1000+O5 at 32/100, and x1000+O6 at 39/100 final-answer
-correctness.  The x1+O6, x1000+O1, x1000+O5, and x1000+O6 cells are
-respectively 84/100, 85/100, 78/100, and 84/100 executable.  Treat unpaired
+The x1000+O5 pair is also complete: Direct is 11/100 and ASL is 32/100
+(`+21.0` points, exact McNemar `p=0.00032`); on common support the result is
+11/82 versus 28/82 (`+20.7` points, `p=0.0023`).  Direct emits 982.85 tokens
+on average versus 173.87 for ASL, a 5.65-fold ratio.  The still-unpaired
+operator cells are x1+O5 at 32/100, x1+O6 at 35/100, x1000+O1 at 35/100,
+and x1000+O6 at 39/100 final-answer correctness.  Those four ASL cells are
+respectively 78/100, 84/100, 85/100, and 84/100 executable.  Treat unpaired
 cells as operational checkpoints only; do not interpret an operator-relative
 advantage until each byte-identical Direct cell is complete.
 

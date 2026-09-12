@@ -1,0 +1,70 @@
+{
+  "all_rows": {
+    "categories": {
+      "ARITHMETIC_EXECUTION_ERROR": 13,
+      "CORRECT_ENDPOINT": 11,
+      "CORRECT_INTERMEDIATE_THEN_OVERRIDE": 1,
+      "CORRECT_INTERMEDIATE_THEN_TRUNCATED": 10,
+      "NO_SCORABLE_VALUE": 52,
+      "SEMANTIC_STRUCTURE_ERROR": 13
+    },
+    "count": 100,
+    "format_rescues": 0,
+    "manual_semantic_subtype_review": 13,
+    "strict_accuracy": 0.11,
+    "strict_correct": 11,
+    "token_ceiling_hits": 79,
+    "v2_accuracy": 0.11,
+    "v2_correct": 11,
+    "v2_wilson_95": [
+      0.0625419635706457,
+      0.1863129650308031
+    ]
+  },
+  "deterministic": true,
+  "inputs": {
+    "common_support": {
+      "path": "artifacts\\paper1\\journal_audit_v1\\strict_common_support_frozen.json",
+      "sha256": "96bc7769d123f47a8b1ca1d0aefe2015e247e041cd043648578d32b5c5b91776"
+    },
+    "eval": {
+      "path": "artifacts\\paper1\\operator_jitter_matrix_v1\\gsm8k_matched_seed99173\\seed_17011\\x1000\\o5\\test.jsonl",
+      "sha256": "df3920bfed0f7c3b5aa8c76412239e82bff124ce350066680244c220615c2658"
+    },
+    "predictions": {
+      "path": "artifacts\\paper1\\operator_jitter_matrix_v1\\runs\\seed_17011\\direct\\x1000\\o5\\xpu\\shard_0\\predictions.jsonl",
+      "sha256": "1343bed6cfeb58f3ea3daa0e903a18d3cf95a2883b2b8844ac311f490b9102e8"
+    }
+  },
+  "outputs": {
+    "diagnostics": {
+      "path": "artifacts\\paper1\\journal_direct_scorer_v2\\seed_17011\\x1000\\o5\\diagnostics.jsonl",
+      "sha256": "23758ae102972c7b560006a19c985ece3bd5fcdd84fd03307df6ea5795d6cf0d"
+    }
+  },
+  "schema_version": "ccpu.paper1.direct_failure_audit_summary.v2",
+  "scorer_id": "paper1_direct_endpoint_and_trace_audit_v2",
+  "strict_common_support": {
+    "categories": {
+      "ARITHMETIC_EXECUTION_ERROR": 9,
+      "CORRECT_ENDPOINT": 11,
+      "CORRECT_INTERMEDIATE_THEN_OVERRIDE": 1,
+      "CORRECT_INTERMEDIATE_THEN_TRUNCATED": 9,
+      "NO_SCORABLE_VALUE": 43,
+      "SEMANTIC_STRUCTURE_ERROR": 9
+    },
+    "count": 82,
+    "format_rescues": 0,
+    "manual_semantic_subtype_review": 9,
+    "strict_accuracy": 0.13414634146341464,
+    "strict_correct": 11,
+    "token_ceiling_hits": 64,
+    "v2_accuracy": 0.13414634146341464,
+    "v2_correct": 11,
+    "v2_wilson_95": [
+      0.07658691429563848,
+      0.2244501274288252
+    ]
+  },
+  "taxonomy_boundary": "Endpoint, truncation, and explicit arithmetic evidence are deterministic. Residual semantic failures require blind review to distinguish structure from relation/binding errors."
+}
