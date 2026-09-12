@@ -1282,6 +1282,54 @@ ASL; preserve and report the complete frozen ascending pilot.
 
 ---
 
+# 36.2 Contamination-resistant scaling frontier
+
+Public arithmetic benchmarks can saturate partly because pretraining and
+instruction tuning expose larger models to the benchmark itself or to closely
+matching problem families. The compositional generator therefore serves a
+second purpose: define a post-pretraining evaluation frontier whose operator
+mix, dependency depth, expression depth, distractors, magnitude, and numeric
+jitter can be increased without selecting individual questions from model
+failures.
+
+Do not treat unseen random seeds as sufficient protection against synthetic
+template memorization. Freeze train/dev/test partitions that hold out complete
+story grammars, surface renderers, dependency-graph motifs, and selected
+operator compositions. Publish generator versions, configurations, seeds, and
+hashes, and evaluate every model size on the identical frozen test programs.
+No model outputs may be used to rewrite or filter the test set.
+
+Use the 0.6B, 1.7B, and gated 4B models to estimate a scaling frontier rather
+than a single benchmark score. For each size, measure Direct and generated ASL
+over a preregistered grid of:
+
+```text
+compositional tier x operator family x expression depth x magnitude x jitter
+```
+
+Expected scaling can raise both curves, especially by improving NL-to-ASL
+compilation. The critical question is whether increasing model size eliminates
+Direct sensitivity or merely moves its failure boundary to stronger
+perturbations and deeper compositions. Report the first tier at which Direct
+falls materially below its own ordinary-regime score, the first tier at which
+end-to-end ASL exceeds Direct, ASL compilation accuracy at that crossover, and
+generated-token cost. A valid result may show that 1.7B or 4B postpones the
+crossover; it must not assume that CogCop wins at a fixed difficulty.
+
+Keep three controls:
+
+```text
+gold ASL runtime       deterministic execution ceiling
+generated ASL          end-to-end semantic compiler plus runtime
+Direct                 matched neural answer generation
+```
+
+This design tests whether scale is best spent only on direct neural execution,
+or whether a larger model is more useful as a semantic compiler whose exact
+operations are delegated to the runtime.
+
+---
+
 # 37. Suggested artifact layout
 
 ```text
@@ -1413,6 +1461,11 @@ P19 Implement and freeze the deterministic C1--C4 compositional generator in
     addition to E0/E2/E4 natural-parent transformations. Validate causal
     operator use, measured dependency depth, split-template isolation,
     question hashes, and exact gold-runtime execution before inference.
+
+P19a Freeze the contamination-resistant scaling protocol before 1.7B or 4B
+     evaluation. Hold out complete story/rendering families, graph motifs, and
+     operator compositions; publish all generator configurations and hashes;
+     prohibit model-conditioned filtering of test records.
 
 P20 Run the one-axis expression curve with Direct and generated ASL. Report
     compiler-stage errors separately from deterministic runtime errors.
