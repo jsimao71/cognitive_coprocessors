@@ -1920,6 +1920,25 @@ adaptation.  Preserve SVAMP and GSM-Plus as evaluation-only OOD datasets until
 their first reported evaluation is frozen.  Report source-overlap and semantic-
 pattern audits before interpreting transfer.
 
+### J8 preparation checkpoint (2026-09-12)
+
+The budget-matched Direct-answer control is frozen before training.  It preserves
+the exact ordered 4,500 exposure rows and 2,000 unique source identities from
+U2000/E4500, uses the same 17 development identities, and has zero train/dev
+source overlap.  Inputs contain only the question under the frozen Direct
+reasoning instruction.  Targets use GSM8K gold reasoning with dataset-only
+`<<...>>` annotations removed and append the exact `Answer: <number>` endpoint;
+this is a deliberately strong supervised Direct control rather than an
+answer-only baseline.
+
+With the pinned Qwen3-0.6B tokenizer and 1,152-token ceiling, the Direct targets
+contain 412,475 tokens versus 439,388 for the ASL control (`-6.1%`), with zero
+truncation and maximum full length 483.  Both conditions use 4,500 rows, ten
+logical epoch views, batch size one, accumulation eight, and therefore 570
+optimizer steps.  The deterministic builder, XPU/CUDA configs, adapter-aware
+Direct evaluator, and resumable runner are implemented; no Direct-LoRA outcome
+is claimed until training and matched evaluation complete.
+
 ## 29.7 Manuscript structure
 
 Keep the journal main text to the causal argument and move implementation and

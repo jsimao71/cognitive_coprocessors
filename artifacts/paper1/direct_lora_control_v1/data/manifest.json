@@ -1,0 +1,32 @@
+{
+  "comparison_role": "compute/exposure-matched Direct-answer LoRA control",
+  "condition": "direct_reasoning",
+  "counts": {
+    "dev_rows": 17,
+    "dev_target_characters": 3298,
+    "train_rows": 4500,
+    "train_target_characters": 1104483,
+    "unique_dev_sources": 17,
+    "unique_train_sources": 2000
+  },
+  "identity_audit": {
+    "dev_row_order_preserved": true,
+    "train_dev_source_overlap": [],
+    "train_row_order_preserved": true
+  },
+  "input_sha256": {
+    "asl_dev": "724a2887ac818ae1d932f4889363788369689890c94bc953e10cb7b4b0ec22aa",
+    "asl_train": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9",
+    "raw_gsm8k": "85db87cc75c61f14504ab7acb2b1731c900705cc25318827f325390a2b783789"
+  },
+  "output_sha256": {
+    "dev": "b295415e042cf967a84a8e6e6a33a3ee7d583685ec243c6aa519d24a61464070",
+    "train": "1f6c4408ebcc9574aba850d8a8a449c3f1abb98dc3ef55eb7b99383669407637"
+  },
+  "protocol_id": "paper1_gsm8k_matched_direct_v1",
+  "schema_version": "ccpu.paper1.gsm8k_direct_lora_freeze.v1",
+  "source_fields_visible_to_model": [
+    "question"
+  ],
+  "target_supervision": "GSM8K gold reasoning with calculation annotations removed; exact Answer line appended"
+}

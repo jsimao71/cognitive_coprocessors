@@ -275,6 +275,8 @@ def _run_direct_shard_unlocked(
             dtype=str(model.get("dtype", "float16")),
             use_chat_template=bool(model.get("use_chat_template", True)),
             enable_thinking=bool(model.get("enable_thinking", False)),
+            adapter_path=model.get("adapter_path"),
+            adapter_id=model.get("adapter_id"),
             cached_generation=True,
         )
     )

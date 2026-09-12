@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
@@ -36,6 +37,7 @@ from .direct_answer_eval import (
     run_direct_gsm8k_shard,
 )
 from .direct_failure_audit import audit_direct_predictions
+from .direct_lora import build_direct_lora_data
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .gsm8k_confirmatory import (
     analyze_official_gsm8k_replications,
@@ -111,6 +113,11 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_scale.add_argument("--exposures", type=int, default=4500)
     gsm8k_scale.add_argument("--epochs", type=int, default=10)
     gsm8k_scale.add_argument("--seed", type=int, default=11)
+    direct_lora = commands.add_parser("prepare-gsm8k-direct-lora")
+    direct_lora.add_argument("--train", required=True)
+    direct_lora.add_argument("--dev", required=True)
+    direct_lora.add_argument("--raw-gsm8k", required=True)
+    direct_lora.add_argument("--output-dir", required=True)
     gsm8k_augmentation = commands.add_parser("prepare-gsm8k-semantic-augmentation")
     gsm8k_augmentation.add_argument("--parent-train", required=True)
     gsm8k_augmentation.add_argument("--eligible", required=True)
@@ -209,6 +216,8 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_direct.add_argument("--eval", required=True)
     gsm8k_direct.add_argument("--config", required=True)
     gsm8k_direct.add_argument("--condition", choices=DIRECT_CONDITIONS, required=True)
+    gsm8k_direct.add_argument("--adapter-path")
+    gsm8k_direct.add_argument("--adapter-id")
     gsm8k_direct.add_argument("--output-dir", required=True)
     gsm8k_direct.add_argument("--shard-index", type=int, required=True)
     gsm8k_direct.add_argument("--shard-count", type=int, required=True)
@@ -473,6 +482,18 @@ def main(argv: list[str] | None = None) -> int:
             f"exposures={manifest['counts']['exposures']} -> {args.output_dir}"
         )
         return 0
+    if args.command == "prepare-gsm8k-direct-lora":
+        manifest = build_direct_lora_data(
+            train_path=args.train,
+            dev_path=args.dev,
+            raw_gsm8k_path=args.raw_gsm8k,
+            output_dir=args.output_dir,
+        )
+        print(
+            f"Direct LoRA train={manifest['counts']['train_rows']} "
+            f"dev={manifest['counts']['dev_rows']} -> {args.output_dir}"
+        )
+        return 0
     if args.command == "prepare-gsm8k-semantic-augmentation":
         manifest = build_relation_paraphrase_increment(
             parent_train_path=args.parent_train,
@@ -676,9 +697,13 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
     if args.command == "run-gsm8k-direct-shard":
+        model_config = read_json(args.config)
+        if args.adapter_path:
+            model_config["model"]["adapter_path"] = args.adapter_path
+            model_config["model"]["adapter_id"] = args.adapter_id or Path(args.adapter_path).name
         summary = run_direct_gsm8k_shard(
             eval_path=args.eval,
-            model_config=read_json(args.config),
+            model_config=model_config,
             condition=args.condition,
             output_dir=args.output_dir,
             shard_index=args.shard_index,

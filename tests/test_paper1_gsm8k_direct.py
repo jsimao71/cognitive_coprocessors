@@ -21,6 +21,7 @@ from ccpu.paper1.e3.direct_failure_audit import (
     audit_direct_predictions,
     extract_direct_endpoint_v2,
 )
+from ccpu.paper1.e3.direct_lora import build_direct_lora_data
 from ccpu.paper1.e3.gsm8k_confirmatory import freeze_official_gsm8k
 
 
@@ -40,6 +41,74 @@ class _DirectBackend:
             wall_time_ns=10,
             metadata={"backend": "fake"},
         )
+
+
+def test_build_direct_lora_data_preserves_frozen_identities(tmp_path):
+    raw = write_jsonl(
+        tmp_path / "raw.jsonl",
+        [
+            {
+                "dataset": "gsm8k",
+                "split": "train",
+                "source_id": "10",
+                "question": "One plus one?",
+                "gold_reasoning": "Compute <<1+1=2>>2.",
+                "answer": "2",
+            },
+            {
+                "dataset": "gsm8k",
+                "split": "train",
+                "source_id": "11",
+                "question": "Three plus two?",
+                "gold_reasoning": "Compute <<3+2=5>>5.",
+                "answer": "5",
+            },
+        ],
+    )
+    train = write_jsonl(
+        tmp_path / "asl_train.jsonl",
+        [
+            {
+                "example_id": "asl-a",
+                "parent_source_id": "10",
+                "epoch_view": 0,
+                "prompt": "Problem: One plus one?\nASL:",
+            },
+            {
+                "example_id": "asl-b",
+                "parent_source_id": "10",
+                "epoch_view": 1,
+                "prompt": "Problem: One plus one?\nASL:",
+            },
+        ],
+    )
+    dev = write_jsonl(
+        tmp_path / "asl_dev.jsonl",
+        [
+            {
+                "example_id": "asl-dev",
+                "parent_source_id": "11",
+                "prompt": "Problem: Three plus two?\nASL:",
+            }
+        ],
+    )
+
+    manifest = build_direct_lora_data(
+        train_path=train,
+        dev_path=dev,
+        raw_gsm8k_path=raw,
+        output_dir=tmp_path / "direct",
+    )
+    rows = read_jsonl(tmp_path / "direct" / "train.jsonl")
+    assert manifest["counts"]["train_rows"] == 2
+    assert manifest["counts"]["unique_train_sources"] == 1
+    assert manifest["identity_audit"]["train_row_order_preserved"] is True
+    assert [row["paired_asl_example_id"] for row in rows] == ["asl-a", "asl-b"]
+    assert rows[0]["epoch_view"] == 0
+    assert "<<" not in rows[0]["target"]
+    assert rows[0]["target"].endswith("Answer: 2")
+    assert rows[0]["source_fields_visible_to_model"] == ["question"]
+    assert "ASL:" not in rows[0]["prompt"]
 
 
 def _frozen(tmp_path):
