@@ -1233,6 +1233,55 @@ Run 4B only after 1.7B leaves a scientifically meaningful scaling/crossover ques
 
 ---
 
+# 36.1 Deterministic compositional-generator gate
+
+The natural-parent intervention panel changes one selected source binding and
+must not be treated as a general test of compositional complexity. Add a
+separate, model-free generator that samples a typed symbolic world and causal
+dependency graph first, renders natural language second, and accepts a record
+only after its gold ASL lowers, type-checks, executes, and returns the reference
+answer.
+
+Freeze the first generator pilot as cumulative tiers:
+
+```text
+C1  one causal operation; dependency depth 1; no distractor
+C2  two-operation chain; dependency depth 2; at least two grounded bindings
+C3  branch-and-merge graph; 3--4 causal operations; one distractor
+C4  nested O1/O5/O6 operator plus downstream arithmetic; dependency depth >= 4;
+    multiple references; two distractors
+```
+
+The generator configuration and every output row must record:
+
+```text
+operator families and counts
+primitive-operation count
+dependency and function-nesting depth
+graph structure
+entity, binding, intermediate, and reference counts
+distractor count
+story-template and rendering-template lineage
+seed and split
+gold-program validation and runtime result
+```
+
+Every requested operator must lie in the transitive dependency closure of the
+RETURN value. Distractors must remain outside that closure. Reject decorative
+operator prefixes, answer-preserving substitutions, or records whose stated
+complexity differs from the measured gold graph. Hold out complete story and
+surface-template families across train/dev/test.
+
+The purpose is to identify cells in which the model can still compile the
+question into ASL, but Direct generation either loses answer reliability or
+uses substantially more neural tokens to approximate the deterministic
+computation. Report Direct correctness, generated-ASL correctness, gold-ASL
+runtime ceiling, executable-program rate, semantic compiler error classes, and
+neural output tokens for every tier. Do not select tiers only because they favor
+ASL; preserve and report the complete frozen ascending pilot.
+
+---
+
 # 37. Suggested artifact layout
 
 ```text
@@ -1360,9 +1409,10 @@ P18 After the operator ladder is complete, freeze and run the matched R1J
     with strict R1 scaling and report whether the crossover survives when
     source quantities are no longer exact powers-of-ten copies.
 
-P19 Freeze E0/E2/E4 expression-depth transformations on the same natural
-    GSM8K parents. Validate value preservation, dependency depth, question
-    hashes, and exact gold-runtime execution before inference.
+P19 Implement and freeze the deterministic C1--C4 compositional generator in
+    addition to E0/E2/E4 natural-parent transformations. Validate causal
+    operator use, measured dependency depth, split-template isolation,
+    question hashes, and exact gold-runtime execution before inference.
 
 P20 Run the one-axis expression curve with Direct and generated ASL. Report
     compiler-stage errors separately from deterministic runtime errors.
