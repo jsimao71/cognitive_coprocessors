@@ -250,6 +250,7 @@ problem datasets that test transfer or robustness of NL-to-ASL compilation.
 |---|---:|---|---|---|
 | **GSM8K** | 8.8K | Linguistically diverse, multi-step grade-school arithmetic | Core training and untouched official confirmation | Active |
 | **GSM8K-OC O0--O6** | Generated per level | Controlled operator-family changes | Primary mechanism and operator-sensitivity study | Active |
+| **CogMath-Comp C1--C4** | Deterministic; pilot 250/30/100 per tier | Independently controlled causal graph, operator, binding, and distractor complexity | Direct-vs-ASL compositional crossover and token-cost study | Frozen v1 |
 | **ASDiv** | 2.3K | Diverse elementary word problems with supplied equations | Near-distribution transfer and optional training diversity | Frozen v1: 250 diagnostic, 1,898 train-source |
 | **SVAMP** | 1K | Adversarial variations of elementary arithmetic problems | Held-out semantic robustness test | Frozen v1: 250 diagnostic, 600 train-source |
 | **MAWPS** | 3.3K | Broader collection of classic arithmetic word problems with equations | Cross-dataset transfer after deduplication | Frozen v1: 250 diagnostic, 3,635 train-source |
@@ -319,6 +320,34 @@ and O1/O3/O5/O6 operator-injection variants. Operator variants retain the
 original GSM8K story and downstream dependency graph. The older template-only
 operator datasets remain sanity baselines and must not be used as primary
 direct-versus-ASL evidence.
+
+#### CogMath-Comp deterministic compositional panel v1
+
+`CogMath-Comp C1--C4` complements the matched GSM8K panel rather than replacing
+it. A deterministic generator constructs a typed symbolic world, an executable
+ASL dependency graph, and its exact runtime result before rendering the natural
+language question. No teacher model or hidden rationale defines the target.
+
+The cumulative pilot tiers independently expose operation count, dependency
+depth, function nesting, graph shape, entity and binding counts, references,
+and disconnected distractors. C1 is a one-operation control; C2 is a two-step
+chain; C3 branches and merges; C4 nests an O1/O5/O6 operator inside a longer
+causal computation. Every specialized operation must influence `RETURN`, while
+distractors must not. Complete story and rendering template families are held
+out across train/dev/test.
+
+The primary use is to locate regions where NL-to-ASL compilation remains
+viable but Direct generation becomes inaccurate, token-expensive, or unstable.
+Accordingly, every tier is retained and reported even when Direct wins. Gold
+ASL execution is only the runtime ceiling; headline comparisons use generated
+ASL on the exact same questions as Direct reasoning.
+
+The first freeze is stored at
+`artifacts/paper1/compositional_complexity_v1/pilot_seed124001`. Each tier has
+250 training, 30 development, and 100 test rows. All 1,520 questions are unique;
+all gold programs pass syntax, lowering, type, scope, execution, and exact-answer
+validation. C1--C4 respectively expose 1, 2, 3--4, and 4 causal operations;
+dependency depths 1, 2, 2--3, and 4; and distractor counts 0, 0, 1, and 2.
 
 ### Paper 2 symbolic and mathematical capability
 

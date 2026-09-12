@@ -1,0 +1,224 @@
+{
+  "counts_per_tier": {
+    "dev": 30,
+    "test": 100,
+    "train": 250
+  },
+  "dataset_version": "paper1-compositional-word-problems-v1",
+  "model_or_teacher_used": false,
+  "schema_version": "ccpu.paper1.compositional_collection_manifest.v1",
+  "seed": 124001,
+  "tier_manifest_sha256": {
+    "C1": "5484f5b9e68f6a63b92bce59854cad9139adc7bef660ea518106583340dbffc7",
+    "C2": "d53933be8dd902f3b132b0df9d6d5ab465a8878dac1c393d7e1df50092cb88d4",
+    "C3": "c20b8e3f3a49f891b1ea0598ae1c90fe38f9ce68cb7f8fcaa1890b98e383c23d",
+    "C4": "e018b06975b2d5cc5c061f3cf1cad2fead60998c75fb64b525d6cf5091bc5765"
+  },
+  "tier_summaries": {
+    "C1": {
+      "controls": {
+        "dependency_depth": [
+          1,
+          1
+        ],
+        "distractor_count": 0,
+        "function_nesting_depth": [
+          0,
+          0
+        ],
+        "graph_structure": "single",
+        "minimum_binding_count": 3,
+        "minimum_entity_count": 2,
+        "operator_count": [
+          1,
+          1
+        ],
+        "operator_families": [
+          "O0"
+        ]
+      },
+      "validation_counts": {
+        "answer_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "execution_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "lower_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "scope_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "syntax_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "type_verified": {
+          "passed": 380,
+          "total": 380
+        }
+      }
+    },
+    "C2": {
+      "controls": {
+        "dependency_depth": [
+          2,
+          2
+        ],
+        "distractor_count": 0,
+        "function_nesting_depth": [
+          0,
+          0
+        ],
+        "graph_structure": "chain",
+        "minimum_binding_count": 5,
+        "minimum_entity_count": 2,
+        "operator_count": [
+          2,
+          2
+        ],
+        "operator_families": [
+          "O0"
+        ]
+      },
+      "validation_counts": {
+        "answer_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "execution_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "lower_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "scope_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "syntax_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "type_verified": {
+          "passed": 380,
+          "total": 380
+        }
+      }
+    },
+    "C3": {
+      "controls": {
+        "dependency_depth": [
+          2,
+          3
+        ],
+        "distractor_count": 1,
+        "function_nesting_depth": [
+          0,
+          0
+        ],
+        "graph_structure": "branch_merge",
+        "minimum_binding_count": 8,
+        "minimum_entity_count": 4,
+        "operator_count": [
+          3,
+          4
+        ],
+        "operator_families": [
+          "O0"
+        ]
+      },
+      "validation_counts": {
+        "answer_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "execution_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "lower_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "scope_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "syntax_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "type_verified": {
+          "passed": 380,
+          "total": 380
+        }
+      }
+    },
+    "C4": {
+      "controls": {
+        "dependency_depth": [
+          4,
+          4
+        ],
+        "distractor_count": 2,
+        "function_nesting_depth": [
+          2,
+          2
+        ],
+        "graph_structure": "nested",
+        "minimum_binding_count": 8,
+        "minimum_entity_count": 5,
+        "operator_count": [
+          4,
+          4
+        ],
+        "operator_families": [
+          "O0",
+          "O1",
+          "O5",
+          "O6"
+        ]
+      },
+      "validation_counts": {
+        "answer_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "execution_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "lower_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "scope_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "syntax_verified": {
+          "passed": 380,
+          "total": 380
+        },
+        "type_verified": {
+          "passed": 380,
+          "total": 380
+        }
+      }
+    }
+  },
+  "tiers": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+  ]
+}

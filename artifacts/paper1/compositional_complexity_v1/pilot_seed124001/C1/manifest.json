@@ -1,0 +1,281 @@
+{
+  "counts": {
+    "dev": 30,
+    "test": 100,
+    "train": 250
+  },
+  "dataset_version": "paper1-compositional-word-problems-v1",
+  "hidden_fields": [
+    "gold_asl",
+    "target",
+    "reference_return",
+    "reference_answer",
+    "typed_symbolic_graph"
+  ],
+  "model_or_teacher_used": false,
+  "observed_complexity": {
+    "dev": {
+      "binding_count": {
+        "counts": {
+          "3": 30
+        },
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "dependency_depth": {
+        "counts": {
+          "1": 30
+        },
+        "max": 1,
+        "mean": 1.0,
+        "min": 1
+      },
+      "distractor_count": {
+        "counts": {
+          "0": 30
+        },
+        "max": 0,
+        "mean": 0.0,
+        "min": 0
+      },
+      "entity_count": {
+        "counts": {
+          "3": 30
+        },
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "function_nesting_depth": {
+        "counts": {
+          "0": 30
+        },
+        "max": 0,
+        "mean": 0.0,
+        "min": 0
+      },
+      "graph_structures": {
+        "single": 30
+      },
+      "operator_count": {
+        "counts": {
+          "1": 30
+        },
+        "max": 1,
+        "mean": 1.0,
+        "min": 1
+      },
+      "operator_families": {
+        "O0": 30
+      },
+      "reference_count": {
+        "counts": {
+          "2": 30
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      }
+    },
+    "test": {
+      "binding_count": {
+        "counts": {
+          "3": 100
+        },
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "dependency_depth": {
+        "counts": {
+          "1": 100
+        },
+        "max": 1,
+        "mean": 1.0,
+        "min": 1
+      },
+      "distractor_count": {
+        "counts": {
+          "0": 100
+        },
+        "max": 0,
+        "mean": 0.0,
+        "min": 0
+      },
+      "entity_count": {
+        "counts": {
+          "3": 100
+        },
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "function_nesting_depth": {
+        "counts": {
+          "0": 100
+        },
+        "max": 0,
+        "mean": 0.0,
+        "min": 0
+      },
+      "graph_structures": {
+        "single": 100
+      },
+      "operator_count": {
+        "counts": {
+          "1": 100
+        },
+        "max": 1,
+        "mean": 1.0,
+        "min": 1
+      },
+      "operator_families": {
+        "O0": 100
+      },
+      "reference_count": {
+        "counts": {
+          "2": 100
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      }
+    },
+    "train": {
+      "binding_count": {
+        "counts": {
+          "3": 250
+        },
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "dependency_depth": {
+        "counts": {
+          "1": 250
+        },
+        "max": 1,
+        "mean": 1.0,
+        "min": 1
+      },
+      "distractor_count": {
+        "counts": {
+          "0": 250
+        },
+        "max": 0,
+        "mean": 0.0,
+        "min": 0
+      },
+      "entity_count": {
+        "counts": {
+          "3": 250
+        },
+        "max": 3,
+        "mean": 3.0,
+        "min": 3
+      },
+      "function_nesting_depth": {
+        "counts": {
+          "0": 250
+        },
+        "max": 0,
+        "mean": 0.0,
+        "min": 0
+      },
+      "graph_structures": {
+        "single": 250
+      },
+      "operator_count": {
+        "counts": {
+          "1": 250
+        },
+        "max": 1,
+        "mean": 1.0,
+        "min": 1
+      },
+      "operator_families": {
+        "O0": 250
+      },
+      "reference_count": {
+        "counts": {
+          "2": 250
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      }
+    }
+  },
+  "output_sha256": {
+    "dev": "75bf90e509233fd9d6b552cc53e1768de3e73b5a2c53d464612a321c457013af",
+    "test": "111948098fadb576709b7fb3b9673837d3bbba13957a502d494a5b6c507593ef",
+    "train": "9239f0f5c1aa2b719e388e67258f1ceae2b85c9aaf7df90a38e44dbf9fd3be82"
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "schema_version": "ccpu.paper1.compositional_manifest.v1",
+  "seed": 124001,
+  "template_families": {
+    "dev": [
+      "c1_school_inventory"
+    ],
+    "test": [
+      "c1_museum_inventory"
+    ],
+    "train": [
+      "c1_shop_ledger",
+      "c1_depot_log"
+    ]
+  },
+  "tier": "C1",
+  "tier_controls": {
+    "dependency_depth": [
+      1,
+      1
+    ],
+    "distractor_count": 0,
+    "function_nesting_depth": [
+      0,
+      0
+    ],
+    "graph_structure": "single",
+    "minimum_binding_count": 3,
+    "minimum_entity_count": 2,
+    "operator_count": [
+      1,
+      1
+    ],
+    "operator_families": [
+      "O0"
+    ]
+  },
+  "train_test_template_families_disjoint": true,
+  "validation_counts": {
+    "answer_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "execution_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "lower_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "scope_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "syntax_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "type_verified": {
+      "passed": 380,
+      "total": 380
+    }
+  }
+}

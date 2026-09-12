@@ -1,0 +1,302 @@
+{
+  "counts": {
+    "dev": 30,
+    "test": 100,
+    "train": 250
+  },
+  "dataset_version": "paper1-compositional-word-problems-v1",
+  "hidden_fields": [
+    "gold_asl",
+    "target",
+    "reference_return",
+    "reference_answer",
+    "typed_symbolic_graph"
+  ],
+  "model_or_teacher_used": false,
+  "observed_complexity": {
+    "dev": {
+      "binding_count": {
+        "counts": {
+          "10": 20,
+          "8": 10
+        },
+        "max": 10,
+        "mean": 9.333333333333334,
+        "min": 8
+      },
+      "dependency_depth": {
+        "counts": {
+          "4": 30
+        },
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "distractor_count": {
+        "counts": {
+          "2": 30
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "entity_count": {
+        "counts": {
+          "6": 10,
+          "7": 20
+        },
+        "max": 7,
+        "mean": 6.666666666666667,
+        "min": 6
+      },
+      "function_nesting_depth": {
+        "counts": {
+          "2": 30
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "graph_structures": {
+        "nested": 30
+      },
+      "operator_count": {
+        "counts": {
+          "4": 30
+        },
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "operator_families": {
+        "O0": 30,
+        "O1": 30,
+        "O5": 10,
+        "O6": 10
+      },
+      "reference_count": {
+        "counts": {
+          "5": 10,
+          "7": 20
+        },
+        "max": 7,
+        "mean": 6.333333333333333,
+        "min": 5
+      }
+    },
+    "test": {
+      "binding_count": {
+        "counts": {
+          "10": 66,
+          "8": 34
+        },
+        "max": 10,
+        "mean": 9.32,
+        "min": 8
+      },
+      "dependency_depth": {
+        "counts": {
+          "4": 100
+        },
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "distractor_count": {
+        "counts": {
+          "2": 100
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "entity_count": {
+        "counts": {
+          "6": 33,
+          "7": 67
+        },
+        "max": 7,
+        "mean": 6.67,
+        "min": 6
+      },
+      "function_nesting_depth": {
+        "counts": {
+          "2": 100
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "graph_structures": {
+        "nested": 100
+      },
+      "operator_count": {
+        "counts": {
+          "4": 100
+        },
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "operator_families": {
+        "O0": 100,
+        "O1": 100,
+        "O5": 33,
+        "O6": 33
+      },
+      "reference_count": {
+        "counts": {
+          "5": 34,
+          "7": 66
+        },
+        "max": 7,
+        "mean": 6.32,
+        "min": 5
+      }
+    },
+    "train": {
+      "binding_count": {
+        "counts": {
+          "10": 166,
+          "8": 84
+        },
+        "max": 10,
+        "mean": 9.328,
+        "min": 8
+      },
+      "dependency_depth": {
+        "counts": {
+          "4": 250
+        },
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "distractor_count": {
+        "counts": {
+          "2": 250
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "entity_count": {
+        "counts": {
+          "6": 83,
+          "7": 167
+        },
+        "max": 7,
+        "mean": 6.668,
+        "min": 6
+      },
+      "function_nesting_depth": {
+        "counts": {
+          "2": 250
+        },
+        "max": 2,
+        "mean": 2.0,
+        "min": 2
+      },
+      "graph_structures": {
+        "nested": 250
+      },
+      "operator_count": {
+        "counts": {
+          "4": 250
+        },
+        "max": 4,
+        "mean": 4.0,
+        "min": 4
+      },
+      "operator_families": {
+        "O0": 250,
+        "O1": 250,
+        "O5": 83,
+        "O6": 83
+      },
+      "reference_count": {
+        "counts": {
+          "5": 84,
+          "7": 166
+        },
+        "max": 7,
+        "mean": 6.328,
+        "min": 5
+      }
+    }
+  },
+  "output_sha256": {
+    "dev": "4224baa1d28c488ce6825582b9b86af42f5658549119e35008664784f9af2cc1",
+    "test": "64d308e936334a59f243fde13508f65e3adfa137176199e276a47ad66a3464ce",
+    "train": "17543949448fcb07b9f823fb934460bed15fb228a7a9919f6fb0760a7e5a5e75"
+  },
+  "prompt_fields": [
+    "question"
+  ],
+  "schema_version": "ccpu.paper1.compositional_manifest.v1",
+  "seed": 124001,
+  "template_families": {
+    "dev": [
+      "c4_field_station_plan"
+    ],
+    "test": [
+      "c4_orbital_habitat_plan"
+    ],
+    "train": [
+      "c4_engineering_plan",
+      "c4_construction_plan"
+    ]
+  },
+  "tier": "C4",
+  "tier_controls": {
+    "dependency_depth": [
+      4,
+      4
+    ],
+    "distractor_count": 2,
+    "function_nesting_depth": [
+      2,
+      2
+    ],
+    "graph_structure": "nested",
+    "minimum_binding_count": 8,
+    "minimum_entity_count": 5,
+    "operator_count": [
+      4,
+      4
+    ],
+    "operator_families": [
+      "O0",
+      "O1",
+      "O5",
+      "O6"
+    ]
+  },
+  "train_test_template_families_disjoint": true,
+  "validation_counts": {
+    "answer_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "execution_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "lower_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "scope_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "syntax_verified": {
+      "passed": 380,
+      "total": 380
+    },
+    "type_verified": {
+      "passed": 380,
+      "total": 380
+    }
+  }
+}
