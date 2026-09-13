@@ -1,0 +1,55 @@
+{
+  "by_difficulty": {
+    "high": {
+      "count": 41,
+      "final_answer_correct": 9
+    },
+    "low": {
+      "count": 45,
+      "final_answer_correct": 24
+    },
+    "medium": {
+      "count": 39,
+      "final_answer_correct": 14
+    }
+  },
+  "counts": {
+    "executable": 96,
+    "final_answer_correct": 47,
+    "lowerable_to_ccir": 120,
+    "parse_valid": 122,
+    "type_valid": 119
+  },
+  "eval_sha256": "3314a09bcd409d66f5bcd3dfe536cf0dc2d7e6ac8f106f876129d2144a6dd0e9",
+  "prediction_count": 125,
+  "predictions_sha256": "0131331cb758250d257f4e8f549b2c3535993969b0d241192eb70af3a527c7b3",
+  "rates": {
+    "executable": 0.768,
+    "final_answer_correct": 0.376,
+    "lowerable_to_ccir": 0.96,
+    "parse_valid": 0.976,
+    "type_valid": 0.952
+  },
+  "run": {
+    "adapter_id": "Qwen3-0.6B-U2000-compositional-C1-C4-r8-seed124019",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-U2000-compositional-C1-C4-r8-seed124019",
+      "adapter_path": "artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\lora_u2000_continue_c1_c4_seed124019_xpu\\adapter",
+      "cached_generation": true,
+      "device": "cuda",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "prompt_fields": [
+      "question"
+    ],
+    "seed": 44017,
+    "shard_count": 2
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_evaluation.v1",
+  "shard_index": 0
+}
