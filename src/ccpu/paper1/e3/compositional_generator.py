@@ -16,7 +16,7 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Any, Literal
 
-from ccpu.common.artifacts import file_sha256, fingerprint, write_json, write_jsonl
+from ccpu.common.artifacts import file_sha256, fingerprint, read_jsonl, write_json, write_jsonl
 from ccpu.dsl import validate_asl
 from ccpu.dsl.registry import ARITHMETIC_FUNCTIONS
 
@@ -1031,10 +1031,77 @@ def freeze_compositional_pilots(
     return root_manifest
 
 
+def build_compositional_curriculum(
+    source_dir: str | Path,
+    output_dir: str | Path,
+    *,
+    tiers: list[str] | tuple[str, ...] = ("C1", "C2", "C3", "C4"),
+    seed: int = 124019,
+) -> dict[str, Any]:
+    """Combine frozen tier parts into deterministic, leakage-checked SFT splits."""
+
+    source = Path(source_dir)
+    output = Path(output_dir)
+    selected = _normalize_tiers(tiers)
+    split_paths: dict[str, Path] = {}
+    split_rows: dict[str, list[dict[str, Any]]] = {}
+    source_hashes: dict[str, dict[str, str]] = {}
+    for split_index, split in enumerate(("train", "dev")):
+        rows: list[dict[str, Any]] = []
+        source_hashes[split] = {}
+        for tier in selected:
+            path = source / tier / f"{split}.jsonl"
+            tier_rows = read_jsonl(path)
+            if not tier_rows:
+                raise ValueError(f"empty compositional source: {path}")
+            for row in tier_rows:
+                if row.get("tier") != tier or row.get("split") != split:
+                    raise ValueError(f"tier/split mismatch in {path}")
+                if not row.get("validation_status", {}).get("valid"):
+                    raise ValueError(f"unvalidated compositional row in {path}")
+                if not row.get("prompt") or not row.get("target"):
+                    raise ValueError(f"missing SFT prompt/target in {path}")
+            rows.extend(tier_rows)
+            source_hashes[split][tier] = file_sha256(path)
+        random.Random(seed + split_index).shuffle(rows)
+        split_rows[split] = rows
+        split_paths[split] = write_jsonl(output / f"{split}.jsonl", rows)
+
+    train_ids = {str(row["example_id"]) for row in split_rows["train"]}
+    dev_ids = {str(row["example_id"]) for row in split_rows["dev"]}
+    train_questions = {str(row["question_sha256"]) for row in split_rows["train"]}
+    dev_questions = {str(row["question_sha256"]) for row in split_rows["dev"]}
+    if train_ids & dev_ids or train_questions & dev_questions:
+        raise AssertionError("compositional train/dev leakage detected")
+    manifest = {
+        "schema_version": "ccpu.paper1.compositional_curriculum_manifest.v1",
+        "dataset_version": GENERATOR_VERSION,
+        "source_dir": str(source),
+        "tiers": selected,
+        "seed": seed,
+        "counts": {split: len(rows) for split, rows in split_rows.items()},
+        "counts_by_tier": {
+            split: dict(sorted(Counter(str(row["tier"]) for row in rows).items()))
+            for split, rows in split_rows.items()
+        },
+        "source_sha256": source_hashes,
+        "output_sha256": {
+            split: file_sha256(path) for split, path in split_paths.items()
+        },
+        "train_dev_id_overlap": 0,
+        "train_dev_question_overlap": 0,
+        "test_rows_included": False,
+        "model_or_teacher_used": False,
+    }
+    write_json(output / "manifest.json", manifest)
+    return manifest
+
+
 __all__ = [
     "GENERATOR_VERSION",
     "TIER_CONTROLS",
     "GenerationControls",
+    "build_compositional_curriculum",
     "freeze_compositional_pilots",
     "generate_compositional_record",
 ]

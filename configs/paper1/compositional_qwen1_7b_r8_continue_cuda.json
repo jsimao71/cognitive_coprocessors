@@ -1,0 +1,32 @@
+{
+  "schema_version": "ccpu.paper1.compositional_lora.v1",
+  "model": {
+    "model_id": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "dtype": "float16"
+  },
+  "training": {
+    "epochs": 4,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0001,
+    "max_length": 768,
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
+    "seed": 124019,
+    "device": "cuda",
+    "dtype": "float16",
+    "gradient_checkpointing": true,
+    "evaluate_each_epoch": true,
+    "restore_best_dev": true,
+    "checkpoint_every_optimizer_steps": 25,
+    "reject_truncation": true
+  },
+  "models": [{
+    "model_id": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "adapter_id": "Qwen3-1.7B-U2000-compositional-C1-C4-r8-seed124019"
+  }]
+}

@@ -1,0 +1,52 @@
+{
+  "counts": {
+    "dev": 120,
+    "train": 1000
+  },
+  "counts_by_tier": {
+    "dev": {
+      "C1": 30,
+      "C2": 30,
+      "C3": 30,
+      "C4": 30
+    },
+    "train": {
+      "C1": 250,
+      "C2": 250,
+      "C3": 250,
+      "C4": 250
+    }
+  },
+  "dataset_version": "paper1-compositional-word-problems-v1",
+  "model_or_teacher_used": false,
+  "output_sha256": {
+    "dev": "615f83020799e1db6ecd516626059f313196cfe421de48d65d74d64972b35adc",
+    "train": "e09d10516f3e9889a957af31ddd7ff5835cc2641b6acd93ebe04c437f8b54a21"
+  },
+  "schema_version": "ccpu.paper1.compositional_curriculum_manifest.v1",
+  "seed": 124019,
+  "source_dir": "artifacts\\paper1\\compositional_complexity_v1\\pilot_seed124001",
+  "source_sha256": {
+    "dev": {
+      "C1": "75bf90e509233fd9d6b552cc53e1768de3e73b5a2c53d464612a321c457013af",
+      "C2": "71974acea674b566ca5408f61ff4b0591986753d1474ae55af3ae5293704e3ff",
+      "C3": "efd1ac75ebd44d9243db0865c8d883dde17e22deacd97a1cbea6d025cc10962c",
+      "C4": "4224baa1d28c488ce6825582b9b86af42f5658549119e35008664784f9af2cc1"
+    },
+    "train": {
+      "C1": "9239f0f5c1aa2b719e388e67258f1ceae2b85c9aaf7df90a38e44dbf9fd3be82",
+      "C2": "03167874807b98a12e780acab3f7e1bb27d5f5944153ee783fa0e425833ff3c5",
+      "C3": "2e62f68e805214f306c962fca76dd35b8a51f893b24248cfd11a2c12a548edec",
+      "C4": "17543949448fcb07b9f823fb934460bed15fb228a7a9919f6fb0760a7e5a5e75"
+    }
+  },
+  "test_rows_included": false,
+  "tiers": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+  ],
+  "train_dev_id_overlap": 0,
+  "train_dev_question_overlap": 0
+}

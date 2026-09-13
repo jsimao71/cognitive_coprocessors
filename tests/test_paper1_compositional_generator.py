@@ -9,6 +9,7 @@ from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_json
 from ccpu.paper1.e3.cli import main
 from ccpu.paper1.e3.compositional_generator import (
     TIER_CONTROLS,
+    build_compositional_curriculum,
     freeze_compositional_pilots,
     generate_compositional_record,
 )
@@ -206,6 +207,58 @@ def test_cli_all_expands_the_complete_ladder(tmp_path: Path) -> None:
     assert result == 0
     assert read_json(output / "manifest.json")["tiers"] == ["C1", "C2", "C3", "C4"]
     assert all((output / tier / "test.jsonl").is_file() for tier in ("C1", "C2", "C3", "C4"))
+
+
+def test_curriculum_combines_only_train_and_dev_without_leakage(tmp_path: Path) -> None:
+    source = tmp_path / "source"
+    output = tmp_path / "curriculum"
+    freeze_compositional_pilots(
+        source, tiers=("C1", "C3"), train_count=4, dev_count=2, test_count=3, seed=91
+    )
+
+    manifest = build_compositional_curriculum(
+        source, output, tiers=("C1", "C3"), seed=97
+    )
+
+    assert manifest["counts"] == {"train": 8, "dev": 4}
+    assert manifest["counts_by_tier"]["train"] == {"C1": 4, "C3": 4}
+    assert manifest["test_rows_included"] is False
+    assert not (output / "test.jsonl").exists()
+    train = read_jsonl(output / "train.jsonl")
+    dev = read_jsonl(output / "dev.jsonl")
+    assert {row["split"] for row in train} == {"train"}
+    assert {row["split"] for row in dev} == {"dev"}
+    assert {row["example_id"] for row in train}.isdisjoint(
+        row["example_id"] for row in dev
+    )
+
+
+def test_cli_builds_compositional_curriculum(tmp_path: Path) -> None:
+    source = tmp_path / "source"
+    output = tmp_path / "curriculum"
+    freeze_compositional_pilots(
+        source, tiers=("C2", "C4"), train_count=3, dev_count=2, test_count=1, seed=101
+    )
+
+    result = main(
+        [
+            "prepare-compositional-curriculum",
+            "--source-dir",
+            str(source),
+            "--output-dir",
+            str(output),
+            "--tier",
+            "C2",
+            "--tier",
+            "C4",
+            "--seed",
+            "103",
+        ]
+    )
+
+    assert result == 0
+    assert read_json(output / "manifest.json")["tiers"] == ["C2", "C4"]
+    assert len(read_jsonl(output / "train.jsonl")) == 6
 
 
 def test_frozen_row_runs_through_existing_direct_and_asl_evaluators(tmp_path: Path) -> None:

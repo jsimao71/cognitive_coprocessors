@@ -8,7 +8,10 @@ from pathlib import Path
 from ccpu.common.artifacts import read_json, read_jsonl, write_json
 
 from .augmentation_analysis import analyze_gsm8k_augmentation_stage
-from .compositional_generator import freeze_compositional_pilots
+from .compositional_generator import (
+    build_compositional_curriculum,
+    freeze_compositional_pilots,
+)
 from .contribution_analysis import analyze_gsm8k_contribution
 from .cross_dataset import (
     build_cross_dataset_sft_data,
@@ -350,6 +353,16 @@ def build_parser() -> argparse.ArgumentParser:
     compositional.add_argument("--dev-count", type=int, default=30)
     compositional.add_argument("--test-count", type=int, default=100)
     compositional.add_argument("--seed", type=int, default=124001)
+    compositional_curriculum = commands.add_parser("prepare-compositional-curriculum")
+    compositional_curriculum.add_argument("--source-dir", required=True)
+    compositional_curriculum.add_argument("--output-dir", required=True)
+    compositional_curriculum.add_argument(
+        "--tier",
+        action="append",
+        choices=("C1", "C2", "C3", "C4", "all"),
+        required=True,
+    )
+    compositional_curriculum.add_argument("--seed", type=int, default=124019)
     matched_interventions = commands.add_parser("prepare-gsm8k-matched-interventions")
     matched_interventions.add_argument("--source-corpus", required=True)
     matched_interventions.add_argument("--excluded-training", required=True)
@@ -1029,6 +1042,20 @@ def main(argv: list[str] | None = None) -> int:
             f"train={manifest['counts_per_tier']['train']} "
             f"dev={manifest['counts_per_tier']['dev']} "
             f"test={manifest['counts_per_tier']['test']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-compositional-curriculum":
+        manifest = build_compositional_curriculum(
+            args.source_dir,
+            args.output_dir,
+            tiers=args.tier,
+            seed=args.seed,
+        )
+        print(
+            "Paper 1 compositional curriculum "
+            f"tiers={','.join(manifest['tiers'])} "
+            f"train={manifest['counts']['train']} "
+            f"dev={manifest['counts']['dev']} -> {args.output_dir}"
         )
         return 0
     if args.command == "prepare-gsm8k-matched-interventions":
