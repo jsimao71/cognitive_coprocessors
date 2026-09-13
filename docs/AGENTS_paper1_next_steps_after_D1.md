@@ -176,6 +176,42 @@ One 1.7B initialization is an exploratory resource gate. Replicate seeds 23 and
 37 only when at least one interaction is positive and scientifically material;
 do not infer ASL-specific leverage from a standalone 1.7B ASL improvement.
 
+### Cross-size and cross-family evaluation matrix
+
+The matched dataset/intervention matrix must continue beyond Qwen3-0.6B. Do
+not require the full expensive matrix from every model initially. First run the
+frozen anchor panel from `configs/paper1/evaluation_model_ladder_v1.json`:
+
+```text
+GSM8K official
+scale x1, x1000, x1000000
+operator O1 and O5
+jitter +/-30% x scale x1000 x O5
+SVAMP
+GSM-Plus
+```
+
+Every model uses separate `Direct`, base zero-shot `ASL no LoRA`, and matched
+`ASL U2000/E4500 LoRA` conditions. Never compare a new model's Direct score to
+another model's adapter score. Run Qwen3-1.7B first, then the small cross-family
+controls Llama-3.2-1B-Instruct and Gemma-3-1B-IT. Qwen3-4B is the gated size
+endpoint. Train each cross-family adapter on the identical frozen ASL records,
+example-exposure budget, rank, seed policy, and evaluation identities; record
+unavoidable tokenizer-specific optimizer-step differences.
+
+Expand a model to all matrix rows only when the anchor panel shows at least one
+material compiler, robustness, or Direct-vs-ASL interaction. The primary
+cross-model result is an interaction, not a standalone accuracy increase:
+
+```text
+size/family interaction =
+  (ASL - Direct)_candidate - (ASL - Direct)_Qwen3-0.6B
+```
+
+Keep the current C1--C4 surface-held-out results diagnostic-only. No larger
+model may use them as generalization evidence until graph schemas, canonical
+paths, and operator compositions are structurally held out.
+
 ### Negative / null so far
 - Q1/Q2/Q3 external-ASL memory do not beat Q0.
 - Q3S1/Q3S2/Q3S3 encoder-specialization variants do not beat Q0.

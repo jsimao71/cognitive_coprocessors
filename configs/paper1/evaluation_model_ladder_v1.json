@@ -1,0 +1,91 @@
+{
+  "schema_version": "ccpu.paper1.evaluation_model_ladder.v1",
+  "reference_matrix": "configs/paper1/evaluation_matrix_v1.json",
+  "conditions": [
+    "direct_reasoning_long",
+    "asl_base_zero_shot",
+    "asl_lora_u2000_e4500"
+  ],
+  "anchor_rows": [
+    "gsm8k_official",
+    "gsm8k_scale_x1",
+    "gsm8k_scale_x1000",
+    "gsm8k_scale_x1000000",
+    "gsm8k_operator_o1",
+    "gsm8k_operator_o5",
+    "gsm8k_hybrid_x1000_o5_j17011",
+    "svamp",
+    "gsm_plus"
+  ],
+  "models": [
+    {
+      "id": "qwen3_0_6b",
+      "family": "qwen3",
+      "model_id": "Qwen/Qwen3-0.6B",
+      "role": "full_matrix_reference",
+      "required_rows": "all"
+    },
+    {
+      "id": "qwen3_1_7b",
+      "family": "qwen3",
+      "model_id": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "parameter_count": 2031739904,
+      "role": "matched_size_gate",
+      "required_rows": "anchor_rows",
+      "adapter_policy": "existing matched U2000/E4500 QKVO-r8 adapter"
+    },
+    {
+      "id": "qwen3_4b",
+      "family": "qwen3",
+      "model_id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "parameter_count": 4022468096,
+      "role": "gated_size_endpoint",
+      "required_rows": "anchor_rows",
+      "adapter_policy": "train matched U2000/E4500 QKVO-r8 only after inference smoke"
+    },
+    {
+      "id": "llama3_2_1b_instruct",
+      "family": "llama3_2",
+      "model_id": "meta-llama/Llama-3.2-1B-Instruct",
+      "revision": "9213176726f574b556790deb65791e0c5aa438b6",
+      "parameter_count": 1235814400,
+      "gated": true,
+      "role": "small_cross_family_control",
+      "required_rows": "anchor_rows",
+      "adapter_policy": "run Direct and base-ASL first; train matched QKVO-r8 after viability gate"
+    },
+    {
+      "id": "gemma3_1b_it",
+      "family": "gemma3",
+      "model_id": "google/gemma-3-1b-it",
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "parameter_count": 999885952,
+      "gated": true,
+      "role": "small_cross_family_control",
+      "required_rows": "anchor_rows",
+      "adapter_policy": "run Direct and base-ASL first; train matched QKVO-r8 after viability gate"
+    }
+  ],
+  "execution_order": [
+    "finish qwen3_0_6b full matrix",
+    "complete qwen3_1_7b anchor matrix",
+    "run llama3_2_1b_instruct and gemma3_1b_it Direct/base-ASL anchors",
+    "train and evaluate matched family LoRAs",
+    "run qwen3_4b anchor inference and memory gate",
+    "train qwen3_4b LoRA only if the gate is viable",
+    "expand only scientifically informative models to the full matrix"
+  ],
+  "expansion_gate": {
+    "minimum_material_accuracy_change_pp": 5.0,
+    "requirements": [
+      "same frozen evaluation identities",
+      "same route-specific prompts and scoring",
+      "long-token Direct control",
+      "runtime correctness separated from semantic compilation",
+      "model-specific token counts reported",
+      "at least one robustness or compiler interaction is scientifically material"
+    ]
+  }
+}
