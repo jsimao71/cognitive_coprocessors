@@ -3085,7 +3085,7 @@
     {
       "cells": {
         "asl_base": {
-          "avg_generated_tokens": 38.78947368421053,
+          "avg_generated_tokens": 44.1,
           "counts": {
             "executable": 0,
             "final_answer_correct": 0,
@@ -3093,11 +3093,11 @@
             "parse_valid": 0,
             "type_valid": 0
           },
-          "coverage": 0.076,
+          "coverage": 1.0,
           "expected_count": 250,
-          "missing_count": 231,
+          "missing_count": 0,
           "missing_prediction_paths": [],
-          "prediction_count": 19,
+          "prediction_count": 250,
           "prediction_paths": [
             "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\asdiv\\asl_base\\xpu\\shard_0\\predictions.jsonl"
           ],
@@ -3108,7 +3108,7 @@
             "parse_valid": 0.0,
             "type_valid": 0.0
           },
-          "status": "partial"
+          "status": "complete"
         },
         "asl_gsm": {
           "avg_generated_tokens": 69.396,
@@ -3247,30 +3247,30 @@
     {
       "cells": {
         "asl_base": {
-          "avg_generated_tokens": null,
+          "avg_generated_tokens": 72.436,
           "counts": {
-            "executable": null,
+            "executable": 0,
             "final_answer_correct": 0,
-            "lowerable_to_ccir": null,
-            "parse_valid": null,
-            "type_valid": null
+            "lowerable_to_ccir": 0,
+            "parse_valid": 0,
+            "type_valid": 0
           },
-          "coverage": 0.0,
+          "coverage": 1.0,
           "expected_count": 250,
-          "missing_count": 250,
-          "missing_prediction_paths": [
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
             "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm_plus\\asl_base\\xpu\\shard_0\\predictions.jsonl"
           ],
-          "prediction_count": 0,
-          "prediction_paths": [],
           "rates": {
-            "executable": null,
-            "final_answer_correct": null,
-            "lowerable_to_ccir": null,
-            "parse_valid": null,
-            "type_valid": null
+            "executable": 0.0,
+            "final_answer_correct": 0.0,
+            "lowerable_to_ccir": 0.0,
+            "parse_valid": 0.0,
+            "type_valid": 0.0
           },
-          "status": "missing"
+          "status": "complete"
         },
         "asl_gsm": {
           "avg_generated_tokens": 126.064,

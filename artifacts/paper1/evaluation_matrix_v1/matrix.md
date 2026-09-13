@@ -24,8 +24,8 @@ progress only and is not a publishable comparison. `-` means not run or not copi
 | GSM8K jitter +/-30%, x1000, O5 | 11.0% (11/100; N=100) | - | 32.0% (32/100; N=100) | - | - | - |
 | SVAMP | - | 0.0% (0/250; N=250) | 65.2% (163/250; N=250) | 54.0% (135/250; N=250) | - | - |
 | MAWPS | - | 0.0% (0/250; N=250) | 80.8% (202/250; N=250) | - | - | - |
-| ASDiv | 68.0% (170/250; N=250) | 0.0% (0/19 partial; N=250) | 42.8% (107/250; N=250) | - | - | - |
-| GSM-Plus | - | - | 35.6% (89/250; N=250) | - | - | - |
+| ASDiv | 68.0% (170/250; N=250) | 0.0% (0/250; N=250) | 42.8% (107/250; N=250) | - | - | - |
+| GSM-Plus | - | 0.0% (0/250; N=250) | 35.6% (89/250; N=250) | - | - | - |
 
 ## Notes
 
@@ -57,5 +57,5 @@ progress only and is not a publishable comparison. `-` means not run or not copi
 | GSM8K jitter +/-30%, x1000, O5 | `df3920bfed0f7c3b5aa8c76412239e82bff124ce350066680244c220615c2658` | 2 | 0 |
 | SVAMP | `4dab3b3ed28412d4f34ddb836089c5214c2d54a35d924149c17c203daffa44b0` | 3 | 0 |
 | MAWPS | `79426260e89a21214ab2c714c1d44aacc0fc0755d0600b339b9783bc9690e973` | 2 | 0 |
-| ASDiv | `74a0397971c2359b2626d54b1b0dd5b79ef81e42403c5755fccf58e92e0ab737` | 2 | 1 |
-| GSM-Plus | `d6a380071c0577f4f50e714ae3a2dab92d5af974e4c2624adde32148a6ddafd9` | 1 | 0 |
+| ASDiv | `74a0397971c2359b2626d54b1b0dd5b79ef81e42403c5755fccf58e92e0ab737` | 3 | 0 |
+| GSM-Plus | `d6a380071c0577f4f50e714ae3a2dab92d5af974e4c2624adde32148a6ddafd9` | 2 | 0 |
