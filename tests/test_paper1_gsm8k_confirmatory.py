@@ -161,6 +161,32 @@ def test_sharded_answer_only_run_and_complete_merge(tmp_path):
     assert read_json(tmp_path / "merged" / "summary.json") == merged
 
 
+def test_answer_only_run_supports_base_model_without_adapter(tmp_path):
+    source, train = _source(tmp_path)
+    frozen = tmp_path / "frozen"
+    freeze_official_gsm8k(
+        source_path=source,
+        train_paths=[train],
+        output_dir=frozen,
+        expected_sha256=file_sha256(source),
+        expected_rows=3,
+        confirmatory_size=2,
+    )
+    report = run_official_gsm8k_shard(
+        eval_path=frozen / "confirmatory.jsonl",
+        model_config={"model": {"model_id": "fake", "revision": "test"}},
+        adapter_path=None,
+        adapter_id="base-no-lora",
+        output_dir=tmp_path / "base",
+        shard_index=0,
+        shard_count=1,
+        backend_override=_Backend(),
+    )
+
+    assert report["rates"]["final_answer_correct"] == 1.0
+    assert "adapter_path" not in report["run"]["model"]
+
+
 def test_merge_rejects_incomplete_shards(tmp_path):
     source, train = _source(tmp_path)
     frozen = tmp_path / "frozen"

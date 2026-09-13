@@ -1,0 +1,3379 @@
+{
+  "columns": [
+    {
+      "id": "direct",
+      "label": "Direct"
+    },
+    {
+      "id": "asl_base",
+      "label": "ASL no LoRA"
+    },
+    {
+      "id": "asl_gsm",
+      "label": "ASL LoRA GSM-U2000"
+    },
+    {
+      "id": "asl_gsm_cstar",
+      "label": "ASL LoRA GSM->C*"
+    },
+    {
+      "id": "asl_target_transfer",
+      "label": "ASL LoRA target transfer"
+    },
+    {
+      "id": "asl_target_fresh",
+      "label": "ASL LoRA target fresh"
+    }
+  ],
+  "manifest_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\configs\\paper1\\evaluation_matrix_v1.json",
+  "rows": [
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 122.904,
+          "counts": {
+            "executable": 212,
+            "final_answer_correct": 110,
+            "lowerable_to_ccir": 247,
+            "parse_valid": 247,
+            "type_valid": 245
+          },
+          "coverage": 1.0,
+          "expected_count": 250,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\official_eval_v1\\confirmatory\\seed11_xpu\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.848,
+            "final_answer_correct": 0.44,
+            "lowerable_to_ccir": 0.988,
+            "parse_valid": 0.988,
+            "type_valid": 0.98
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\retention\\gsm8k_250\\seed44017\\shard_0\\predictions.jsonl",
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\retention\\gsm8k_250\\seed44017\\shard_1\\predictions.jsonl"
+          ],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 755.908,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 154,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 250,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\matched_direct_v1\\original\\direct_reasoning_long\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.616,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 250,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\official_test_v1\\confirmatory.jsonl",
+      "eval_sha256": "3314a09bcd409d66f5bcd3dfe536cf0dc2d7e6ac8f106f876129d2144a6dd0e9",
+      "group": "public",
+      "id": "gsm8k_official",
+      "label": "GSM8K official",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 109,
+          "counts": {
+            "executable": 46,
+            "final_answer_correct": 27,
+            "lowerable_to_ccir": 55,
+            "parse_valid": 55,
+            "type_valid": 55
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\asl_seed11\\factor_1\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.8363636363636363,
+            "final_answer_correct": 0.4909090909090909,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 613.5272727272727,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 36,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\b1l\\factor_1\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.6545454545454545,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 55,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\data\\factor_1.jsonl",
+      "eval_sha256": "0b3fc17242b1581db25fd517f51e2e64a20b3abe7ea5b3e8ed36339b91c6060d",
+      "group": "scale",
+      "id": "gsm8k_scale_x1",
+      "label": "GSM8K scale x1",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 110.12727272727273,
+          "counts": {
+            "executable": 44,
+            "final_answer_correct": 25,
+            "lowerable_to_ccir": 53,
+            "parse_valid": 53,
+            "type_valid": 53
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\asl_seed11\\factor_100\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.8,
+            "final_answer_correct": 0.45454545454545453,
+            "lowerable_to_ccir": 0.9636363636363636,
+            "parse_valid": 0.9636363636363636,
+            "type_valid": 0.9636363636363636
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 899.3454545454546,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 31,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\b1l\\factor_100\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.5636363636363636,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 55,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\data\\factor_100.jsonl",
+      "eval_sha256": "4d5809d4ebb97cc8aa2a93a9db17c58ac32719cf3d0670b1d668d78b59d3ff59",
+      "group": "scale",
+      "id": "gsm8k_scale_x100",
+      "label": "GSM8K scale x100",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 108.07272727272728,
+          "counts": {
+            "executable": 51,
+            "final_answer_correct": 25,
+            "lowerable_to_ccir": 55,
+            "parse_valid": 55,
+            "type_valid": 55
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\asl_seed11\\factor_1000\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.9272727272727272,
+            "final_answer_correct": 0.45454545454545453,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 954.1454545454545,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 24,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\b1l\\factor_1000\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.43636363636363634,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 55,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\data\\factor_1000.jsonl",
+      "eval_sha256": "96dae9671b4c10d9ea2c3b42c3278928763341a9b697cc16c7b16c0380217b7c",
+      "group": "scale",
+      "id": "gsm8k_scale_x1000",
+      "label": "GSM8K scale x1000",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 100.03636363636363,
+          "counts": {
+            "executable": 49,
+            "final_answer_correct": 24,
+            "lowerable_to_ccir": 55,
+            "parse_valid": 55,
+            "type_valid": 55
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\asl_seed11\\factor_10000\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.8909090909090909,
+            "final_answer_correct": 0.43636363636363634,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 1081.2,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 20,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\b1l\\factor_10000\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.36363636363636365,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 55,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\data\\factor_10000.jsonl",
+      "eval_sha256": "9edcf3953fb96c651ac944bb4e8d15d60f05123cb86c2cfa92c55b4250155d61",
+      "group": "scale",
+      "id": "gsm8k_scale_x10000",
+      "label": "GSM8K scale x10000",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 123.67272727272727,
+          "counts": {
+            "executable": 45,
+            "final_answer_correct": 22,
+            "lowerable_to_ccir": 53,
+            "parse_valid": 54,
+            "type_valid": 53
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\asl_seed11\\factor_1000000\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.8181818181818182,
+            "final_answer_correct": 0.4,
+            "lowerable_to_ccir": 0.9636363636363636,
+            "parse_valid": 0.9818181818181818,
+            "type_valid": 0.9636363636363636
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 55,
+          "missing_count": 55,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 1144.2545454545455,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 17,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 55,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 55,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\eval\\b1l\\factor_1000000\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.3090909090909091,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 55,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\magnitude_ladder_v1\\data\\factor_1000000.jsonl",
+      "eval_sha256": "49cd9aaf823a6f1c1446ff16674117143871d1fe43a17addfffc691f0d4b5001",
+      "group": "scale",
+      "id": "gsm8k_scale_x1000000",
+      "label": "GSM8K scale x1000000",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 659.02,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 51,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\runs\\direct\\o1\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.51,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\operators\\o1\\test.jsonl",
+      "eval_sha256": "2c252fedd30b01b800a2e2a37a9a4c871972f44a0d439cadf056624549b3d6bf",
+      "group": "operator",
+      "id": "gsm8k_operator_o1",
+      "label": "GSM8K + operator O1",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\operators\\o3\\test.jsonl",
+      "eval_sha256": "a5d4bbae658cd7be808e9cdd9dc9324ead67adf9e054c6637c0cca9d26e463de",
+      "group": "operator",
+      "id": "gsm8k_operator_o3",
+      "label": "GSM8K + operator O3",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\operators\\o5\\test.jsonl",
+      "eval_sha256": "195d1ff0b4b28735b2bada2c5ac689baf9eaeec850116223fa085a93c27844f7",
+      "group": "operator",
+      "id": "gsm8k_operator_o5",
+      "label": "GSM8K + operator O5",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\operators\\o6\\test.jsonl",
+      "eval_sha256": "498e2ece0a242c0a89c186f191dcbe22aa1d14a0ed3642b2b56e536e2c1c4a83",
+      "group": "operator",
+      "id": "gsm8k_operator_o6",
+      "label": "GSM8K + operator O6",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 25.666666666666668,
+          "counts": {
+            "executable": 3,
+            "final_answer_correct": 3,
+            "lowerable_to_ccir": 3,
+            "parse_valid": 3,
+            "type_valid": 3
+          },
+          "coverage": 0.03,
+          "expected_count": 100,
+          "missing_count": 97,
+          "missing_prediction_paths": [],
+          "prediction_count": 3,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\asl_u2000\\C1\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 1.0,
+            "final_answer_correct": 1.0,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "partial"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 252.31,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 100,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\direct\\C1\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 1.0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\pilot_seed124001\\C1\\test.jsonl",
+      "eval_sha256": "111948098fadb576709b7fb3b9673837d3bbba13957a502d494a5b6c507593ef",
+      "group": "depth",
+      "id": "gsm8k_depth_c1",
+      "label": "Synthetic depth C1",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "scientific_status": "diagnostic_only"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 54.64,
+          "counts": {
+            "executable": 100,
+            "final_answer_correct": 100,
+            "lowerable_to_ccir": 100,
+            "parse_valid": 100,
+            "type_valid": 100
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\asl_u2000\\C2\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 1.0,
+            "final_answer_correct": 1.0,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": 49.56,
+          "counts": {
+            "executable": 100,
+            "final_answer_correct": 100,
+            "lowerable_to_ccir": 100,
+            "parse_valid": 100,
+            "type_valid": 100
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\asl_compositional\\C2\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 1.0,
+            "final_answer_correct": 1.0,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 309.01,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 93,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\direct\\C2\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.93,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\pilot_seed124001\\C2\\test.jsonl",
+      "eval_sha256": "dce27f31ff83f6e904030101c739823d613f0c2a674d7a51488062572d7bce97",
+      "group": "depth",
+      "id": "gsm8k_depth_c2",
+      "label": "Synthetic depth C2",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "scientific_status": "diagnostic_only"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": 94.5,
+          "counts": {
+            "executable": 100,
+            "final_answer_correct": 100,
+            "lowerable_to_ccir": 100,
+            "parse_valid": 100,
+            "type_valid": 100
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\asl_compositional\\C3\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 1.0,
+            "final_answer_correct": 1.0,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 570.46,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 92,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\direct\\C3\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.92,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\pilot_seed124001\\C3\\test.jsonl",
+      "eval_sha256": "0462cad01c18a52465a1707a1b7ca08cf431d4895f88e4608f9e0142e3e52c31",
+      "group": "depth",
+      "id": "gsm8k_depth_c3",
+      "label": "Synthetic depth C3",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "scientific_status": "diagnostic_only"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": 93.52,
+          "counts": {
+            "executable": 100,
+            "final_answer_correct": 100,
+            "lowerable_to_ccir": 100,
+            "parse_valid": 100,
+            "type_valid": 100
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\asl_compositional\\C4\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 1.0,
+            "final_answer_correct": 1.0,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 764.36,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 64,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\direct\\C4\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.64,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\pilot_seed124001\\C4\\test.jsonl",
+      "eval_sha256": "64d308e936334a59f243fde13508f65e3adfa137176199e276a47ad66a3464ce",
+      "group": "depth",
+      "id": "gsm8k_depth_c4",
+      "label": "Synthetic depth C4",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "scientific_status": "diagnostic_only"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 128.89,
+          "counts": {
+            "executable": 91,
+            "final_answer_correct": 45,
+            "lowerable_to_ccir": 99,
+            "parse_valid": 99,
+            "type_valid": 98
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_jitter_matrix_v1\\runs\\seed_17011\\asl\\x1\\o0\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.91,
+            "final_answer_correct": 0.45,
+            "lowerable_to_ccir": 0.99,
+            "parse_valid": 0.99,
+            "type_valid": 0.98
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 657.28,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 54,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_jitter_matrix_v1\\runs\\seed_17011\\direct\\x1\\o0\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.54,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\jitter\\seed_17011\\x1\\test.jsonl",
+      "eval_sha256": "4e3fc5b39487c5dae27757456f83047fd412b14aa1120396591640b1e4b659f2",
+      "group": "hybrid",
+      "id": "gsm8k_hybrid_x1_o0_j17011",
+      "label": "GSM8K jitter +/-30%, x1, O0",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 128.25,
+          "counts": {
+            "executable": 88,
+            "final_answer_correct": 42,
+            "lowerable_to_ccir": 97,
+            "parse_valid": 98,
+            "type_valid": 97
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_jitter_matrix_v1\\runs\\seed_17011\\asl\\x1000\\o0\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.88,
+            "final_answer_correct": 0.42,
+            "lowerable_to_ccir": 0.97,
+            "parse_valid": 0.98,
+            "type_valid": 0.97
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 929.7,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 11,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.4,
+          "expected_count": 100,
+          "missing_count": 60,
+          "missing_prediction_paths": [],
+          "prediction_count": 40,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_jitter_matrix_v1\\runs\\seed_17011\\direct\\x1000\\o0\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.275,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "partial"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v2\\gsm8k_matched_seed99173\\jitter\\seed_17011\\x1000\\test.jsonl",
+      "eval_sha256": "f65c1acc5ec7716dbd25c0c5febd33116ad34ea4d951c3b7d946195201b2f7f3",
+      "group": "hybrid",
+      "id": "gsm8k_hybrid_x1000_o0_j17011",
+      "label": "GSM8K jitter +/-30%, x1000, O0",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 173.87,
+          "counts": {
+            "executable": 78,
+            "final_answer_correct": 32,
+            "lowerable_to_ccir": 99,
+            "parse_valid": 99,
+            "type_valid": 95
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_jitter_matrix_v1\\runs\\seed_17011\\asl\\x1000\\o5\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.78,
+            "final_answer_correct": 0.32,
+            "lowerable_to_ccir": 0.99,
+            "parse_valid": 0.99,
+            "type_valid": 0.95
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 100,
+          "missing_count": 100,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 982.85,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 11,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 100,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 100,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_jitter_matrix_v1\\runs\\seed_17011\\direct\\x1000\\o5\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.11,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 100,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_jitter_matrix_v1\\gsm8k_matched_seed99173\\seed_17011\\x1000\\o5\\test.jsonl",
+      "eval_sha256": "df3920bfed0f7c3b5aa8c76412239e82bff124ce350066680244c220615c2658",
+      "group": "hybrid",
+      "id": "gsm8k_hybrid_x1000_o5_j17011",
+      "label": "GSM8K jitter +/-30%, x1000, O5",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 64.768,
+          "counts": {
+            "executable": 234,
+            "final_answer_correct": 163,
+            "lowerable_to_ccir": 245,
+            "parse_valid": 249,
+            "type_valid": 245
+          },
+          "coverage": 1.0,
+          "expected_count": 250,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\e0_gsm_lora\\cuda\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.936,
+            "final_answer_correct": 0.652,
+            "lowerable_to_ccir": 0.98,
+            "parse_valid": 0.996,
+            "type_valid": 0.98
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": 60.30434782608695,
+          "counts": {
+            "executable": 107,
+            "final_answer_correct": 63,
+            "lowerable_to_ccir": 114,
+            "parse_valid": 115,
+            "type_valid": 114
+          },
+          "coverage": 0.46,
+          "expected_count": 250,
+          "missing_count": 135,
+          "missing_prediction_paths": [],
+          "prediction_count": 115,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\retention\\svamp_250\\seed44017\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.9304347826086956,
+            "final_answer_correct": 0.5478260869565217,
+            "lowerable_to_ccir": 0.991304347826087,
+            "parse_valid": 1.0,
+            "type_valid": 0.991304347826087
+          },
+          "status": "partial"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        }
+      },
+      "eval_count": 250,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\diagnostic.jsonl",
+      "eval_sha256": "4dab3b3ed28412d4f34ddb836089c5214c2d54a35d924149c17c203daffa44b0",
+      "group": "public",
+      "id": "svamp",
+      "label": "SVAMP",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 42.8,
+          "counts": {
+            "executable": 236,
+            "final_answer_correct": 202,
+            "lowerable_to_ccir": 250,
+            "parse_valid": 250,
+            "type_valid": 250
+          },
+          "coverage": 1.0,
+          "expected_count": 250,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\e0_gsm_lora\\cuda\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.944,
+            "final_answer_correct": 0.808,
+            "lowerable_to_ccir": 1.0,
+            "parse_valid": 1.0,
+            "type_valid": 1.0
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        }
+      },
+      "eval_count": 250,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\diagnostic.jsonl",
+      "eval_sha256": "79426260e89a21214ab2c714c1d44aacc0fc0755d0600b339b9783bc9690e973",
+      "group": "public",
+      "id": "mawps",
+      "label": "MAWPS",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 69.396,
+          "counts": {
+            "executable": 193,
+            "final_answer_correct": 107,
+            "lowerable_to_ccir": 217,
+            "parse_valid": 240,
+            "type_valid": 215
+          },
+          "coverage": 1.0,
+          "expected_count": 250,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\e0_gsm_lora\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.772,
+            "final_answer_correct": 0.428,
+            "lowerable_to_ccir": 0.868,
+            "parse_valid": 0.96,
+            "type_valid": 0.86
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": 535.156,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 170,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 1.0,
+          "expected_count": 250,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\e0_direct_reasoning\\xpu\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": 0.68,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "complete"
+        }
+      },
+      "eval_count": 250,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\diagnostic.jsonl",
+      "eval_sha256": "74a0397971c2359b2626d54b1b0dd5b79ef81e42403c5755fccf58e92e0ab737",
+      "group": "public",
+      "id": "asdiv",
+      "label": "ASDiv",
+      "note": null,
+      "scientific_status": "primary"
+    },
+    {
+      "cells": {
+        "asl_base": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_gsm": {
+          "avg_generated_tokens": 126.064,
+          "counts": {
+            "executable": 216,
+            "final_answer_correct": 89,
+            "lowerable_to_ccir": 242,
+            "parse_valid": 247,
+            "type_valid": 242
+          },
+          "coverage": 1.0,
+          "expected_count": 250,
+          "missing_count": 0,
+          "missing_prediction_paths": [],
+          "prediction_count": 250,
+          "prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\e0_gsm_lora\\cuda\\shard_0\\predictions.jsonl"
+          ],
+          "rates": {
+            "executable": 0.864,
+            "final_answer_correct": 0.356,
+            "lowerable_to_ccir": 0.968,
+            "parse_valid": 0.988,
+            "type_valid": 0.968
+          },
+          "status": "complete"
+        },
+        "asl_gsm_cstar": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_fresh": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "asl_target_transfer": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        },
+        "direct": {
+          "avg_generated_tokens": null,
+          "counts": {
+            "executable": null,
+            "final_answer_correct": 0,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "coverage": 0.0,
+          "expected_count": 250,
+          "missing_count": 250,
+          "missing_prediction_paths": [],
+          "prediction_count": 0,
+          "prediction_paths": [],
+          "rates": {
+            "executable": null,
+            "final_answer_correct": null,
+            "lowerable_to_ccir": null,
+            "parse_valid": null,
+            "type_valid": null
+          },
+          "status": "missing"
+        }
+      },
+      "eval_count": 250,
+      "eval_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\diagnostic.jsonl",
+      "eval_sha256": "d6a380071c0577f4f50e714ae3a2dab92d5af974e4c2624adde32148a6ddafd9",
+      "group": "public",
+      "id": "gsm_plus",
+      "label": "GSM-Plus",
+      "note": null,
+      "scientific_status": "primary"
+    }
+  ],
+  "schema_version": "ccpu.paper1.evaluation_matrix.v1"
+}

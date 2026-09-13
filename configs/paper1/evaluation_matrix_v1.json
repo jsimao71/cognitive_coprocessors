@@ -1,0 +1,218 @@
+{
+  "schema_version": "ccpu.paper1.evaluation_matrix_manifest.v1",
+  "columns": [
+    {"id": "direct", "label": "Direct"},
+    {"id": "asl_base", "label": "ASL no LoRA"},
+    {"id": "asl_gsm", "label": "ASL LoRA GSM-U2000"},
+    {"id": "asl_gsm_cstar", "label": "ASL LoRA GSM->C*"},
+    {"id": "asl_target_transfer", "label": "ASL LoRA target transfer"},
+    {"id": "asl_target_fresh", "label": "ASL LoRA target fresh"}
+  ],
+  "rows": [
+    {
+      "id": "gsm8k_official",
+      "label": "GSM8K official",
+      "group": "public",
+      "eval_path": "artifacts/paper1/gsm8k_scale_v1/official_test_v1/confirmatory.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/matched_direct_v1/original/direct_reasoning_long/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/official_eval_v1/confirmatory/seed11_xpu/predictions.jsonl"]},
+        "asl_gsm_cstar": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/retention/gsm8k_250/seed44017/shard_0/predictions.jsonl", "artifacts/paper1/compositional_complexity_v1/runs/qwen06/retention/gsm8k_250/seed44017/shard_1/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_scale_x1",
+      "label": "GSM8K scale x1",
+      "group": "scale",
+      "eval_path": "artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/data/factor_1.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/b1l/factor_1/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/asl_seed11/factor_1/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_scale_x100",
+      "label": "GSM8K scale x100",
+      "group": "scale",
+      "eval_path": "artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/data/factor_100.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/b1l/factor_100/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/asl_seed11/factor_100/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_scale_x1000",
+      "label": "GSM8K scale x1000",
+      "group": "scale",
+      "eval_path": "artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/data/factor_1000.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/b1l/factor_1000/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/asl_seed11/factor_1000/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_scale_x10000",
+      "label": "GSM8K scale x10000",
+      "group": "scale",
+      "eval_path": "artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/data/factor_10000.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/b1l/factor_10000/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/asl_seed11/factor_10000/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_scale_x1000000",
+      "label": "GSM8K scale x1000000",
+      "group": "scale",
+      "eval_path": "artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/data/factor_1000000.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/b1l/factor_1000000/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/magnitude_ladder_v1/eval/asl_seed11/factor_1000000/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_operator_o1",
+      "label": "GSM8K + operator O1",
+      "group": "operator",
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o1/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/runs/direct/o1/xpu/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_operator_o3",
+      "label": "GSM8K + operator O3",
+      "group": "operator",
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o3/test.jsonl"
+    },
+    {
+      "id": "gsm8k_operator_o5",
+      "label": "GSM8K + operator O5",
+      "group": "operator",
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o5/test.jsonl"
+    },
+    {
+      "id": "gsm8k_operator_o6",
+      "label": "GSM8K + operator O6",
+      "group": "operator",
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o6/test.jsonl"
+    },
+    {
+      "id": "gsm8k_depth_c1",
+      "label": "Synthetic depth C1",
+      "group": "depth",
+      "scientific_status": "diagnostic_only",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "eval_path": "artifacts/paper1/compositional_complexity_v1/pilot_seed124001/C1/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/direct/C1/seed44017/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/asl_u2000/C1/seed44017/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_depth_c2",
+      "label": "Synthetic depth C2",
+      "group": "depth",
+      "scientific_status": "diagnostic_only",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "eval_path": "artifacts/paper1/compositional_complexity_v1/pilot_seed124001/C2/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/direct/C2/seed44017/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/asl_u2000/C2/seed44017/shard_0/predictions.jsonl"]},
+        "asl_gsm_cstar": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/asl_compositional/C2/seed44017/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_depth_c3",
+      "label": "Synthetic depth C3",
+      "group": "depth",
+      "scientific_status": "diagnostic_only",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "eval_path": "artifacts/paper1/compositional_complexity_v1/pilot_seed124001/C3/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/direct/C3/seed44017/shard_0/predictions.jsonl"]},
+        "asl_gsm_cstar": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/asl_compositional/C3/seed44017/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_depth_c4",
+      "label": "Synthetic depth C4",
+      "group": "depth",
+      "scientific_status": "diagnostic_only",
+      "note": "Surface-held-out only; every test graph schema occurs in training.",
+      "eval_path": "artifacts/paper1/compositional_complexity_v1/pilot_seed124001/C4/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/direct/C4/seed44017/shard_0/predictions.jsonl"]},
+        "asl_gsm_cstar": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/asl_compositional/C4/seed44017/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_hybrid_x1_o0_j17011",
+      "label": "GSM8K jitter +/-30%, x1, O0",
+      "group": "hybrid",
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/jitter/seed_17011/x1/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/operator_jitter_matrix_v1/runs/seed_17011/direct/x1/o0/xpu/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/operator_jitter_matrix_v1/runs/seed_17011/asl/x1/o0/xpu/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_hybrid_x1000_o0_j17011",
+      "label": "GSM8K jitter +/-30%, x1000, O0",
+      "group": "hybrid",
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/jitter/seed_17011/x1000/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/operator_jitter_matrix_v1/runs/seed_17011/direct/x1000/o0/xpu/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/operator_jitter_matrix_v1/runs/seed_17011/asl/x1000/o0/xpu/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm8k_hybrid_x1000_o5_j17011",
+      "label": "GSM8K jitter +/-30%, x1000, O5",
+      "group": "hybrid",
+      "eval_path": "artifacts/paper1/operator_jitter_matrix_v1/gsm8k_matched_seed99173/seed_17011/x1000/o5/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/operator_jitter_matrix_v1/runs/seed_17011/direct/x1000/o5/xpu/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/operator_jitter_matrix_v1/runs/seed_17011/asl/x1000/o5/xpu/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "svamp",
+      "label": "SVAMP",
+      "group": "public",
+      "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/svamp/diagnostic.jsonl",
+      "cells": {
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/svamp/e0_gsm_lora/cuda/shard_0/predictions.jsonl"]},
+        "asl_gsm_cstar": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/retention/svamp_250/seed44017/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "mawps",
+      "label": "MAWPS",
+      "group": "public",
+      "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/mawps/diagnostic.jsonl",
+      "cells": {
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/mawps/e0_gsm_lora/cuda/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "asdiv",
+      "label": "ASDiv",
+      "group": "public",
+      "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/diagnostic.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/asdiv/e0_direct_reasoning/xpu/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/asdiv/e0_gsm_lora/xpu/shard_0/predictions.jsonl"]}
+      }
+    },
+    {
+      "id": "gsm_plus",
+      "label": "GSM-Plus",
+      "group": "public",
+      "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/diagnostic.jsonl",
+      "cells": {
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/e0_gsm_lora/cuda/shard_0/predictions.jsonl"]}
+      }
+    }
+  ]
+}

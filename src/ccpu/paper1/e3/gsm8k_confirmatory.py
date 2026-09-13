@@ -269,7 +269,7 @@ def _run_official_gsm8k_shard_unlocked(
     *,
     eval_path: str | Path,
     model_config: dict[str, Any],
-    adapter_path: str | Path,
+    adapter_path: str | Path | None,
     adapter_id: str,
     output_dir: str | Path,
     shard_index: int,
@@ -281,7 +281,10 @@ def _run_official_gsm8k_shard_unlocked(
     if shard_count < 1 or shard_index < 0 or shard_index >= shard_count:
         raise ValueError("invalid shard index/count")
     model = dict(model_config["model"])
-    model["adapter_path"] = str(adapter_path)
+    if adapter_path is not None:
+        model["adapter_path"] = str(adapter_path)
+    else:
+        model.pop("adapter_path", None)
     model["adapter_id"] = adapter_id
     backend = backend_override or HuggingFaceBackend(
         HuggingFaceGenerationConfig(
@@ -292,7 +295,7 @@ def _run_official_gsm8k_shard_unlocked(
             dtype=str(model.get("dtype", "float16")),
             use_chat_template=bool(model.get("use_chat_template", True)),
             enable_thinking=bool(model.get("enable_thinking", False)),
-            adapter_path=str(adapter_path),
+            adapter_path=str(adapter_path) if adapter_path is not None else None,
             adapter_id=adapter_id,
             cached_generation=True,
         )
@@ -362,7 +365,7 @@ def run_official_gsm8k_shard(
     *,
     eval_path: str | Path,
     model_config: dict[str, Any],
-    adapter_path: str | Path,
+    adapter_path: str | Path | None,
     adapter_id: str,
     output_dir: str | Path,
     shard_index: int,

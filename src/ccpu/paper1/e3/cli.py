@@ -42,6 +42,7 @@ from .direct_answer_eval import (
 )
 from .direct_failure_audit import audit_direct_predictions
 from .direct_lora import build_direct_lora_data
+from .evaluation_matrix import build_evaluation_matrix
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
 from .gsm8k_confirmatory import (
     analyze_official_gsm8k_replications,
@@ -198,7 +199,10 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_run = commands.add_parser("run-gsm8k-official-shard")
     gsm8k_run.add_argument("--eval", required=True)
     gsm8k_run.add_argument("--config", required=True)
-    gsm8k_run.add_argument("--adapter-path", required=True)
+    gsm8k_run.add_argument(
+        "--adapter-path",
+        help="Optional PEFT adapter; omit for the base-model ASL condition.",
+    )
     gsm8k_run.add_argument("--adapter-id", required=True)
     gsm8k_run.add_argument("--output-dir", required=True)
     gsm8k_run.add_argument("--shard-index", type=int, required=True)
@@ -212,6 +216,10 @@ def build_parser() -> argparse.ArgumentParser:
     gsm8k_analyze = commands.add_parser("analyze-gsm8k-official")
     gsm8k_analyze.add_argument("--candidate", action="append", required=True)
     gsm8k_analyze.add_argument("--output", required=True)
+    evaluation_matrix = commands.add_parser("build-evaluation-matrix")
+    evaluation_matrix.add_argument("--manifest", required=True)
+    evaluation_matrix.add_argument("--repository-root", default=".")
+    evaluation_matrix.add_argument("--output-dir", required=True)
     gsm8k_direct_freeze = commands.add_parser("prepare-gsm8k-direct")
     gsm8k_direct_freeze.add_argument("--eval", required=True)
     gsm8k_direct_freeze.add_argument("--config", action="append", required=True)
@@ -722,6 +730,19 @@ def main(argv: list[str] | None = None) -> int:
             f"GSM8K official seeds={report['seed_count']} "
             f"identities={report['identity_count']} -> {args.output}"
         )
+        return 0
+    if args.command == "build-evaluation-matrix":
+        report = build_evaluation_matrix(
+            manifest_path=args.manifest,
+            repository_root=args.repository_root,
+            output_dir=args.output_dir,
+        )
+        complete = sum(
+            cell["status"] == "complete"
+            for row in report["rows"]
+            for cell in row["cells"].values()
+        )
+        print(f"evaluation matrix rows={len(report['rows'])} complete_cells={complete}")
         return 0
     if args.command == "run-gsm8k-direct-shard":
         model_config = read_json(args.config)
