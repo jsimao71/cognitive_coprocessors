@@ -51,6 +51,15 @@ Run ASDiv, SVAMP, MAWPS, and GSM-Plus in this exact order of conditions:
    place. Report target accuracy and GSM/O0 retention.
 3. **E2, fresh target LoRA:** initialize the same LoRA architecture from the
    base Qwen checkpoint and train only on that target dataset.
+4. **E3, balanced multi-dataset LoRA:** train a reusable arithmetic compiler
+   with dataset-aware replay rather than sequentially overwriting the GSM
+   adapter. Run two frozen stages:
+   - **E3a core:** GSM8K + ASDiv + overlap-audited MAWPS. Keep SVAMP and
+     GSM-Plus untouched as OOD tests.
+   - **E3b all-data:** add execution-verified SVAMP and GSM-Plus training
+     reserves only after E0/E3a OOD predictions are frozen. Reserve families
+     must be disjoint from every diagnostic identity and, for GSM-Plus, from
+     every diagnostic seed-question family.
 
 E1 and E2 must use the same target train/dev identities, optimizer-step and
 example-exposure budget, seed policy, prompt, decoder, and frozen 250-example
@@ -59,6 +68,16 @@ compiler; E0 measures zero-shot transfer. Preserve the initial E0 results for
 SVAMP and GSM-Plus as OOD evidence before using any disjoint reserve families
 for E1/E2. Dataset-specific training is ordered last, after the quick E0 pass
 and the transferred E1 pass.
+
+E3 uses only execution- and answer-verified ASL programs. Sampling is balanced
+by dataset rather than proportional to raw corpus size, and every optimizer
+window includes GSM rehearsal. Preserve the immutable GSM-only checkpoint and
+train both a GSM-initialized E3 adapter and a from-base budget-matched control.
+Report each dataset separately, the macro-average, GSM retention, parse and
+execution rates, and the magnitude/operator/jitter panels. A mixed score must
+never replace per-dataset results. Naive sequential continuation is prohibited:
+the GSM-to-C1--C4 adapter reduced official GSM8K accuracy from 44.0% to 32.4%
+and SVAMP from 65.2% to 54.0%, demonstrating measurable forgetting.
 
 The pinned source registry is
 `configs/paper1/cross_dataset_transfer_v1.json`; frozen manifests and splits

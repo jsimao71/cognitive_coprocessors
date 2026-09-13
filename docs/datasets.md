@@ -287,6 +287,17 @@ never modified in place. SVAMP and GSM-Plus retain their pre-training E0
 results as the primary OOD evidence even if their disjoint reserve pools are
 used later for the transfer study.
 
+After the per-dataset E1/E2 controls, Paper 1 adds a balanced multi-dataset
+compiler condition. **E3a** combines execution-verified GSM8K, ASDiv, and
+overlap-audited MAWPS while retaining SVAMP and GSM-Plus as untouched OOD
+tests. **E3b** subsequently adds disjoint SVAMP and GSM-Plus training reserves,
+after their OOD predictions have been frozen. GSM-Plus is split by original
+seed-question family, not by perturbation row. Dataset-aware sampling and GSM
+rehearsal prevent a large source from dominating and provide an explicit
+catastrophic-forgetting control. Results are always reported per dataset and
+on the existing magnitude, operator, and jitter panels; a pooled score alone
+is not acceptable.
+
 The v1 sources are pinned in
 `configs/paper1/cross_dataset_transfer_v1.json`. GSM-Plus is split by seed-
 question family rather than perturbation row. Its answerless `critical

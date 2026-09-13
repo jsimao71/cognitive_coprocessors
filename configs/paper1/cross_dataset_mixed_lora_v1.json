@@ -1,0 +1,68 @@
+{
+  "schema_version": "ccpu.paper1.cross_dataset_mixed_lora.v1",
+  "base_model": "Qwen/Qwen3-0.6B",
+  "initial_adapter": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/qwen_run/adapter",
+  "training_policy": {
+    "representation": "F0_ASL",
+    "rank": 8,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
+    "sampling": "dataset_balanced_round_robin",
+    "gsm_rehearsal_required": true,
+    "train_only_execution_verified": true,
+    "train_only_answer_verified": true,
+    "preserve_source_adapter": true
+  },
+  "stages": [
+    {
+      "id": "E3a_core",
+      "datasets": ["gsm8k", "asdiv", "mawps"],
+      "ood_evaluation_only": ["svamp", "gsm_plus"]
+    },
+    {
+      "id": "E3b_all",
+      "datasets": ["gsm8k", "asdiv", "mawps", "svamp", "gsm_plus"],
+      "requires_frozen_e3a_ood_predictions": true
+    }
+  ],
+  "sources": {
+    "gsm8k": {
+      "train": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl",
+      "dev": "artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eval/dev.jsonl",
+      "status": "ready"
+    },
+    "asdiv": {
+      "train": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/e1_e2_pilot500/sft_union1/train.jsonl",
+      "dev": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/e1_e2_pilot500/sft_union1/dev.jsonl",
+      "status": "annotations_pending_validation"
+    },
+    "mawps": {
+      "train": "artifacts/paper1/cross_dataset_transfer_v1/mawps/e1_e2_pilot500/sft_union1/train.jsonl",
+      "dev": "artifacts/paper1/cross_dataset_transfer_v1/mawps/e1_e2_pilot500/sft_union1/dev.jsonl",
+      "status": "ready"
+    },
+    "svamp": {
+      "train": "artifacts/paper1/cross_dataset_transfer_v1/svamp/e1_e2_pilot500/sft_union1/train.jsonl",
+      "dev": "artifacts/paper1/cross_dataset_transfer_v1/svamp/e1_e2_pilot500/sft_union1/dev.jsonl",
+      "status": "annotations_pending"
+    },
+    "gsm_plus": {
+      "train": "artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/e1_e2_pilot500/sft_union1/train.jsonl",
+      "dev": "artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/e1_e2_pilot500/sft_union1/dev.jsonl",
+      "status": "annotations_pending",
+      "group_disjoint_by": "seed_question_family"
+    }
+  },
+  "required_evaluations": [
+    "gsm8k_official",
+    "gsm8k_scale_x1",
+    "gsm8k_scale_x1000",
+    "gsm8k_scale_x1000000",
+    "gsm8k_operator_o1",
+    "gsm8k_operator_o5",
+    "gsm8k_hybrid_x1000_o5_j17011",
+    "asdiv",
+    "mawps",
+    "svamp",
+    "gsm_plus"
+  ]
+}
