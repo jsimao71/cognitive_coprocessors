@@ -6,7 +6,7 @@
     },
     {
       "id": "asl_base",
-      "label": "ASL no LoRA"
+      "label": "ASL base zero-shot (no LoRA)"
     },
     {
       "id": "asl_gsm",
@@ -41,7 +41,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_official\\asl_base\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1004,7 +1006,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o1\\asl_base\\cpu\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1028,7 +1032,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o1\\asl_gsm\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1186,7 +1192,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o3\\asl_gsm\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1282,7 +1290,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o3\\direct\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1342,7 +1352,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o5\\asl_gsm\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1438,7 +1450,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o5\\direct\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1498,7 +1512,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o6\\asl_gsm\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -1594,7 +1610,9 @@
           "coverage": 0.0,
           "expected_count": 100,
           "missing_count": 100,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm8k_operator_o6\\direct\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -2752,7 +2770,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\svamp\\asl_base\\xpu\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -2791,28 +2811,28 @@
           "status": "complete"
         },
         "asl_gsm_cstar": {
-          "avg_generated_tokens": 60.30434782608695,
+          "avg_generated_tokens": 59.93167701863354,
           "counts": {
-            "executable": 107,
-            "final_answer_correct": 63,
-            "lowerable_to_ccir": 114,
-            "parse_valid": 115,
-            "type_valid": 114
+            "executable": 149,
+            "final_answer_correct": 83,
+            "lowerable_to_ccir": 158,
+            "parse_valid": 160,
+            "type_valid": 156
           },
-          "coverage": 0.46,
+          "coverage": 0.644,
           "expected_count": 250,
-          "missing_count": 135,
+          "missing_count": 89,
           "missing_prediction_paths": [],
-          "prediction_count": 115,
+          "prediction_count": 161,
           "prediction_paths": [
             "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\compositional_complexity_v1\\runs\\qwen06\\retention\\svamp_250\\seed44017\\shard_0\\predictions.jsonl"
           ],
           "rates": {
-            "executable": 0.9304347826086956,
-            "final_answer_correct": 0.5478260869565217,
-            "lowerable_to_ccir": 0.991304347826087,
-            "parse_valid": 1.0,
-            "type_valid": 0.991304347826087
+            "executable": 0.9254658385093167,
+            "final_answer_correct": 0.515527950310559,
+            "lowerable_to_ccir": 0.9813664596273292,
+            "parse_valid": 0.9937888198757764,
+            "type_valid": 0.968944099378882
           },
           "status": "partial"
         },
@@ -2876,7 +2896,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\e0_direct_reasoning\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -2912,7 +2934,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\mawps\\asl_base\\xpu\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -3034,7 +3058,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\e0_direct_reasoning\\cpu\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -3070,7 +3096,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\asdiv\\asl_base\\xpu\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -3230,7 +3258,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\evaluation_matrix_v1\\runs\\gsm_plus\\asl_base\\xpu\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {
@@ -3352,7 +3382,9 @@
           "coverage": 0.0,
           "expected_count": 250,
           "missing_count": 250,
-          "missing_prediction_paths": [],
+          "missing_prediction_paths": [
+            "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\e0_direct_reasoning\\cuda\\shard_0\\predictions.jsonl"
+          ],
           "prediction_count": 0,
           "prediction_paths": [],
           "rates": {

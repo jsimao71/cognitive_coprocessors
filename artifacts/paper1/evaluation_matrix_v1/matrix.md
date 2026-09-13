@@ -3,7 +3,7 @@
 Accuracy is final-answer correctness after the declared route. A partial cell is
 progress only and is not a publishable comparison. `-` means not run or not copied back.
 
-| Dataset or intervention | Direct | ASL no LoRA | ASL LoRA GSM-U2000 | ASL LoRA GSM->C* | ASL LoRA target transfer | ASL LoRA target fresh |
+| Dataset or intervention | Direct | ASL base zero-shot (no LoRA) | ASL LoRA GSM-U2000 | ASL LoRA GSM->C* | ASL LoRA target transfer | ASL LoRA target fresh |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | GSM8K official | 61.6% (154/250; N=250) | - | 44.0% (110/250; N=250) | - | - | - |
 | GSM8K scale x1 | 65.5% (36/55; N=55) | - | 49.1% (27/55; N=55) | - | - | - |
@@ -22,7 +22,7 @@ progress only and is not a publishable comparison. `-` means not run or not copi
 | GSM8K jitter +/-30%, x1, O0 | 54.0% (54/100; N=100) | - | 45.0% (45/100; N=100) | - | - | - |
 | GSM8K jitter +/-30%, x1000, O0 | 27.5% (11/40 partial; N=100) | - | 42.0% (42/100; N=100) | - | - | - |
 | GSM8K jitter +/-30%, x1000, O5 | 11.0% (11/100; N=100) | - | 32.0% (32/100; N=100) | - | - | - |
-| SVAMP | - | - | 65.2% (163/250; N=250) | 54.8% (63/115 partial; N=250) | - | - |
+| SVAMP | - | - | 65.2% (163/250; N=250) | 51.6% (83/161 partial; N=250) | - | - |
 | MAWPS | - | - | 80.8% (202/250; N=250) | - | - | - |
 | ASDiv | 68.0% (170/250; N=250) | - | 42.8% (107/250; N=250) | - | - | - |
 | GSM-Plus | - | - | 35.6% (89/250; N=250) | - | - | - |

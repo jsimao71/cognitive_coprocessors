@@ -2,7 +2,7 @@
   "schema_version": "ccpu.paper1.evaluation_matrix_manifest.v1",
   "columns": [
     {"id": "direct", "label": "Direct"},
-    {"id": "asl_base", "label": "ASL no LoRA"},
+    {"id": "asl_base", "label": "ASL base zero-shot (no LoRA)"},
     {"id": "asl_gsm", "label": "ASL LoRA GSM-U2000"},
     {"id": "asl_gsm_cstar", "label": "ASL LoRA GSM->C*"},
     {"id": "asl_target_transfer", "label": "ASL LoRA target transfer"},
@@ -16,6 +16,7 @@
       "eval_path": "artifacts/paper1/gsm8k_scale_v1/official_test_v1/confirmatory.jsonl",
       "cells": {
         "direct": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/matched_direct_v1/original/direct_reasoning_long/predictions.jsonl"]},
+        "asl_base": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_official/asl_base/cuda/shard_0/predictions.jsonl"]},
         "asl_gsm": {"prediction_paths": ["artifacts/paper1/gsm8k_scale_v1/official_eval_v1/confirmatory/seed11_xpu/predictions.jsonl"]},
         "asl_gsm_cstar": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/retention/gsm8k_250/seed44017/shard_0/predictions.jsonl", "artifacts/paper1/compositional_complexity_v1/runs/qwen06/retention/gsm8k_250/seed44017/shard_1/predictions.jsonl"]}
       }
@@ -76,26 +77,40 @@
       "group": "operator",
       "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o1/test.jsonl",
       "cells": {
-        "direct": {"prediction_paths": ["artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/runs/direct/o1/xpu/shard_0/predictions.jsonl"]}
+        "direct": {"prediction_paths": ["artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/runs/direct/o1/xpu/shard_0/predictions.jsonl"]},
+        "asl_base": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o1/asl_base/cpu/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o1/asl_gsm/cuda/shard_0/predictions.jsonl"]}
       }
     },
     {
       "id": "gsm8k_operator_o3",
       "label": "GSM8K + operator O3",
       "group": "operator",
-      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o3/test.jsonl"
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o3/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o3/direct/cuda/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o3/asl_gsm/cuda/shard_0/predictions.jsonl"]}
+      }
     },
     {
       "id": "gsm8k_operator_o5",
       "label": "GSM8K + operator O5",
       "group": "operator",
-      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o5/test.jsonl"
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o5/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o5/direct/cuda/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o5/asl_gsm/cuda/shard_0/predictions.jsonl"]}
+      }
     },
     {
       "id": "gsm8k_operator_o6",
       "label": "GSM8K + operator O6",
       "group": "operator",
-      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o6/test.jsonl"
+      "eval_path": "artifacts/paper1/operator_complexity_v2/gsm8k_matched_seed99173/operators/o6/test.jsonl",
+      "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o6/direct/cuda/shard_0/predictions.jsonl"]},
+        "asl_gsm": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm8k_operator_o6/asl_gsm/cuda/shard_0/predictions.jsonl"]}
+      }
     },
     {
       "id": "gsm8k_depth_c1",
@@ -182,6 +197,8 @@
       "group": "public",
       "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/svamp/diagnostic.jsonl",
       "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/svamp/e0_direct_reasoning/cuda/shard_0/predictions.jsonl"]},
+        "asl_base": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/svamp/asl_base/xpu/shard_0/predictions.jsonl"]},
         "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/svamp/e0_gsm_lora/cuda/shard_0/predictions.jsonl"]},
         "asl_gsm_cstar": {"prediction_paths": ["artifacts/paper1/compositional_complexity_v1/runs/qwen06/retention/svamp_250/seed44017/shard_0/predictions.jsonl"]}
       }
@@ -192,6 +209,8 @@
       "group": "public",
       "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/mawps/diagnostic.jsonl",
       "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/mawps/e0_direct_reasoning/cpu/shard_0/predictions.jsonl"]},
+        "asl_base": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/mawps/asl_base/xpu/shard_0/predictions.jsonl"]},
         "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/mawps/e0_gsm_lora/cuda/shard_0/predictions.jsonl"]}
       }
     },
@@ -202,6 +221,7 @@
       "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/diagnostic.jsonl",
       "cells": {
         "direct": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/asdiv/e0_direct_reasoning/xpu/shard_0/predictions.jsonl"]},
+        "asl_base": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/asdiv/asl_base/xpu/shard_0/predictions.jsonl"]},
         "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/asdiv/e0_gsm_lora/xpu/shard_0/predictions.jsonl"]}
       }
     },
@@ -211,6 +231,8 @@
       "group": "public",
       "eval_path": "artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/diagnostic.jsonl",
       "cells": {
+        "direct": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/e0_direct_reasoning/cuda/shard_0/predictions.jsonl"]},
+        "asl_base": {"prediction_paths": ["artifacts/paper1/evaluation_matrix_v1/runs/gsm_plus/asl_base/xpu/shard_0/predictions.jsonl"]},
         "asl_gsm": {"prediction_paths": ["artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/e0_gsm_lora/cuda/shard_0/predictions.jsonl"]}
       }
     }
