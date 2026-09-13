@@ -1,0 +1,46 @@
+{
+  "by_difficulty": {
+    "high": {
+      "count": 100,
+      "final_answer_correct": 7
+    }
+  },
+  "counts": {
+    "executable": 70,
+    "final_answer_correct": 7,
+    "lowerable_to_ccir": 94,
+    "parse_valid": 97,
+    "type_valid": 94
+  },
+  "eval_sha256": "195d1ff0b4b28735b2bada2c5ac689baf9eaeec850116223fa085a93c27844f7",
+  "prediction_count": 100,
+  "predictions_sha256": "6cf499c8cbe01e24dcc9a98b88a025f3ce1be238635fbc3791d805ffcb1220de",
+  "rates": {
+    "executable": 0.7,
+    "final_answer_correct": 0.07,
+    "lowerable_to_ccir": 0.94,
+    "parse_valid": 0.97,
+    "type_valid": 0.94
+  },
+  "run": {
+    "adapter_id": "Qwen3-0.6B-G1-GSM8K-U2000-E4500-F0-L0-r8-seed11",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-G1-GSM8K-U2000-E4500-F0-L0-r8-seed11",
+      "adapter_path": "artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\qwen_run\\adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "prompt_fields": [
+      "question"
+    ],
+    "seed": 44017,
+    "shard_count": 1
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_evaluation.v1",
+  "shard_index": 0
+}
