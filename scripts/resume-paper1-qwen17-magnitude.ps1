@@ -1,7 +1,8 @@
 param(
     [Parameter(Mandatory = $true)][string]$RepositoryRoot,
     [Parameter(Mandatory = $true)][string]$PythonExecutable,
-    [Parameter(Mandatory = $true)][string]$AdapterPath
+    [Parameter(Mandatory = $true)][string]$AdapterPath,
+    [switch]$RunSeed17011Direct
 )
 
 $ErrorActionPreference = "Stop"
@@ -69,3 +70,18 @@ Invoke-MagnitudeCondition -Factor "1000" -Condition "asl_gsm"
 Invoke-MagnitudeCondition -Factor "1000000" -Condition "direct"
 Invoke-MagnitudeCondition -Factor "1000000" -Condition "asl_gsm"
 Write-Host "QWEN17_MAGNITUDE_QUEUE_COMPLETE"
+
+if ($RunSeed17011Direct) {
+    & (Join-Path $RepositoryRoot "scripts/run-paper1-qwen17-seed17011-matrix.ps1") `
+        -RepositoryRoot $RepositoryRoot `
+        -PythonExecutable $PythonExecutable `
+        -AdapterPath $AdapterPath `
+        -DirectConfig (Join-Path $RepositoryRoot "configs/paper1/gsm8k_direct_reasoning_long_qwen1_7b_cuda.json") `
+        -AslConfig (Join-Path $RepositoryRoot "configs/paper1/asl_pilot_qwen1_7b_base_cuda.json") `
+        -Route direct `
+        -Phase all `
+        -Device cuda
+    if ($LASTEXITCODE -ne 0) {
+        throw "seed-17011 Direct matrix failed with exit code $LASTEXITCODE"
+    }
+}

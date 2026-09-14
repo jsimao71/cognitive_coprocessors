@@ -25,7 +25,8 @@ $arguments = @(
     "-File", $runner,
     "-RepositoryRoot", $RepositoryRoot,
     "-PythonExecutable", $PythonExecutable,
-    "-AdapterPath", $AdapterPath
+    "-AdapterPath", $AdapterPath,
+    "-RunSeed17011Direct"
 )
 $process = Start-Process `
     -FilePath "powershell.exe" `
