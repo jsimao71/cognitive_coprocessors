@@ -17,6 +17,28 @@
     "svamp",
     "gsm_plus"
   ],
+  "qwen3_1_7b_seed_17011_matrix": {
+    "order": [
+      "operator_o1",
+      "operator_o3",
+      "operator_o5",
+      "operator_o6",
+      "jitter_x1_o0",
+      "jitter_x1000_o0",
+      "mixed_x1_o1",
+      "mixed_x1_o5",
+      "mixed_x1_o6",
+      "mixed_x1000_o1",
+      "mixed_x1000_o5",
+      "mixed_x1000_o6"
+    ],
+    "examples_per_cell": 100,
+    "routes": ["direct_reasoning_long", "asl_lora_u2000_e4500"],
+    "perturbation_seed": 17011,
+    "decoding_seed": 44017,
+    "replication_seeds": [17023, 17037],
+    "replication_gate": "complete seed 17011 first; run later seeds only for uncertainty/significance of preregistered material interactions"
+  },
   "models": [
     {
       "id": "qwen3_0_6b",

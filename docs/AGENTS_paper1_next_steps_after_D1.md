@@ -206,6 +206,16 @@ One 1.7B initialization is an exploratory resource gate. Replicate seeds 23 and
 37 only when at least one interaction is positive and scientifically material;
 do not infer ASL-specific leverage from a standalone 1.7B ASL improvement.
 
+After the matched 1.7B magnitude gate, run perturbation seed 17011 to completion
+before any perturbation-seed replication. The 100-parent seed-1 panel contains
+plain O1/O3/O5/O6 operator complexity, jitter-only O0 at x1 and x1000, and
+operator+jitter cells O1/O5/O6 at both x1 and x1000. Direct and generated ASL
+must consume byte-identical frozen questions. This first seed provides the
+direction and approximate size of the model-size interaction; seeds 17023 and
+17037 are confirmatory and are run only to estimate uncertainty/significance
+for preregistered effects that are scientifically material, never to select a
+favorable perturbation realization.
+
 ### Cross-size and cross-family evaluation matrix
 
 The matched dataset/intervention matrix must continue beyond Qwen3-0.6B. Do
