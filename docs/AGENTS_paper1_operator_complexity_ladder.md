@@ -731,6 +731,13 @@ x1000 O5/O6. Start with one row to verify memory, then run ten rows per cell.
 These results diagnose 4B feasibility and zero-shot behavior only; the primary
 trained comparison still requires a matched QKVO-r8 4B adapter.
 
+The expanded 4B campaign uses 4096 Direct tokens and 100 frozen rows per cell,
+partitioned into ten disjoint shards. It covers original, strict magnitude,
+independent +/-30% jitter, O1/O3/O5/O6, operator-by-jitter mixtures, and C1--C4.
+Run shard zero across all stages before completing the remaining shards. Keep a
+paired 2048-token control at the registered endpoints and classify token-ceiling
+failures separately from semantic and arithmetic failures.
+
 # 22. Accuracy metrics
 
 For all conditions:

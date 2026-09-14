@@ -1,0 +1,41 @@
+{
+  "schema_version": "ccpu.paper1.qwen4b_perturbation_schedule.v1",
+  "model_id": "Qwen/Qwen3-4B",
+  "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+  "perturbation_seed": 17011,
+  "decoding_seed": 44017,
+  "rows_per_cell": 100,
+  "shard_count": 10,
+  "execution_order": ["baseline", "magnitude", "operator", "jitter", "mixed", "complexity"],
+  "routes": [
+    "direct_4096",
+    "asl_base_zero_shot",
+    "asl_lora_u2000_e4500_r8"
+  ],
+  "token_budget_control": {
+    "route": "direct_2048",
+    "cells": ["original", "magnitude_x1000", "operator_o6", "mixed_x1000_o6", "complexity_c4"],
+    "selection": "same source identities and decoding seed as direct_4096"
+  },
+  "stages": {
+    "baseline": ["original"],
+    "magnitude": ["magnitude_x1", "magnitude_x100", "magnitude_x1000", "magnitude_x10000", "magnitude_x1000000"],
+    "operator": ["operator_o1", "operator_o3", "operator_o5", "operator_o6"],
+    "jitter": ["jitter_x1_o0", "jitter_x1000_o0"],
+    "mixed": [
+      "mixed_x1_o1",
+      "mixed_x1_o5",
+      "mixed_x1_o6",
+      "mixed_x1000_o1",
+      "mixed_x1000_o5",
+      "mixed_x1000_o6"
+    ],
+    "complexity": ["complexity_c1", "complexity_c2", "complexity_c3", "complexity_c4"]
+  },
+  "execution_policy": {
+    "early_read": "complete shard 0 of 10 for every cell before starting shard 1",
+    "confirmation": "complete shards 1 through 9 for all preregistered primary cells; do not select cells by observed direction",
+    "replication": "add perturbation seeds 17023 and 17037 only after the seed-17011 route interaction is known",
+    "reporting": "separate semantic compilation, runtime correctness, final answer, token-limit failures, generated tokens, wall time, and peak memory"
+  }
+}

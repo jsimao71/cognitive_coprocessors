@@ -42,6 +42,11 @@ def test_lora_training_config_parses_restart_and_truncation_guards():
                 "restore_best_dev": True,
                 "save_epoch_adapters": True,
                 "logical_epoch_field": "epoch_view",
+                "load_in_4bit": True,
+                "bnb_4bit_quant_type": "nf4",
+                "bnb_4bit_compute_dtype": "bfloat16",
+                "bnb_4bit_use_double_quant": False,
+                "device": "cuda",
             }
         }
     )
@@ -51,6 +56,10 @@ def test_lora_training_config_parses_restart_and_truncation_guards():
     assert config.restore_best_dev is True
     assert config.save_epoch_adapters is True
     assert config.logical_epoch_field == "epoch_view"
+    assert config.load_in_4bit is True
+    assert config.bnb_4bit_quant_type == "nf4"
+    assert config.bnb_4bit_compute_dtype == "bfloat16"
+    assert config.bnb_4bit_use_double_quant is False
 
 
 def test_best_dev_restoration_requires_epoch_evaluation():
@@ -58,6 +67,17 @@ def test_best_dev_restoration_requires_epoch_evaluation():
         LoRATrainingConfig(
             evaluate_each_epoch=False,
             restore_best_dev=True,
+        ).validate()
+
+
+def test_4bit_training_rejects_unsupported_device_and_quantization():
+    with pytest.raises(ValueError, match="requires device=cuda"):
+        LoRATrainingConfig(load_in_4bit=True, device="xpu").validate()
+    with pytest.raises(ValueError, match="must be nf4 or fp4"):
+        LoRATrainingConfig(
+            load_in_4bit=True,
+            device="cuda",
+            bnb_4bit_quant_type="int4",
         ).validate()
 
 

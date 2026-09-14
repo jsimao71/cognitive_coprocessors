@@ -57,6 +57,15 @@
     "purpose": "bounded inference and memory probe before any Qwen3-4B LoRA training",
     "expansion_gate": "expand matched cells or train QKVO-r8 only after viable memory and a scientifically material size-by-route interaction"
   },
+  "qwen3_4b_perturbation_schedule": {
+    "manifest": "configs/paper1/qwen4b_perturbation_schedule_v1.json",
+    "primary_direct_budget": 4096,
+    "paired_direct_budget_control": 2048,
+    "rows_per_cell": 100,
+    "shards_per_cell": 10,
+    "routes": ["direct_4096", "asl_base_zero_shot", "asl_lora_u2000_e4500_r8"],
+    "policy": "finish shard 0 across the schedule for an early read, then complete all preregistered shards without selecting favorable cells"
+  },
   "models": [
     {
       "id": "qwen3_0_6b",

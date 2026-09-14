@@ -42,6 +42,10 @@ class LoRATrainingConfig:
     semantic_token_weights: dict[str, float] | None = None
     pairwise_rank_weight: float = 0.0
     pairwise_temperature: float = 1.0
+    load_in_4bit: bool = False
+    bnb_4bit_quant_type: str = "nf4"
+    bnb_4bit_compute_dtype: str = "float16"
+    bnb_4bit_use_double_quant: bool = True
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> LoRATrainingConfig:
@@ -84,6 +88,14 @@ class LoRATrainingConfig:
             ),
             pairwise_rank_weight=float(data.get("pairwise_rank_weight", 0.0)),
             pairwise_temperature=float(data.get("pairwise_temperature", 1.0)),
+            load_in_4bit=bool(data.get("load_in_4bit", False)),
+            bnb_4bit_quant_type=str(data.get("bnb_4bit_quant_type", "nf4")),
+            bnb_4bit_compute_dtype=str(
+                data.get("bnb_4bit_compute_dtype", "float16")
+            ),
+            bnb_4bit_use_double_quant=bool(
+                data.get("bnb_4bit_use_double_quant", True)
+            ),
         )
 
     def validate(self) -> None:
@@ -99,6 +111,13 @@ class LoRATrainingConfig:
             raise ValueError("best-dev restoration requires evaluation after every epoch")
         if self.pairwise_rank_weight < 0 or self.pairwise_temperature <= 0:
             raise ValueError("pairwise rank weight must be non-negative and temperature positive")
+        if self.load_in_4bit:
+            if self.device != "cuda":
+                raise ValueError("4-bit LoRA training currently requires device=cuda")
+            if self.bnb_4bit_quant_type not in {"nf4", "fp4"}:
+                raise ValueError("4-bit quantization type must be nf4 or fp4")
+            if self.bnb_4bit_compute_dtype not in {"float16", "bfloat16", "float32"}:
+                raise ValueError("unsupported 4-bit compute dtype")
         if self.semantic_token_weights is not None:
             required = {"default", "path", "operator", "literal", "return"}
             if set(self.semantic_token_weights) != required:
@@ -444,9 +463,10 @@ def train_lora(
             PeftModel,
             get_peft_model,
             get_peft_model_state_dict,
+            prepare_model_for_kbit_training,
             set_peft_model_state_dict,
         )
-        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
     except ImportError as error:
         raise RuntimeError("LoRA training requires torch, transformers, and peft") from error
 
@@ -524,12 +544,25 @@ def train_lora(
     model_kwargs: dict[str, Any] = {"revision": revision, "dtype": dtype}
     if model.get("attn_implementation") is not None:
         model_kwargs["attn_implementation"] = str(model["attn_implementation"])
+    if training.load_in_4bit:
+        model_kwargs["quantization_config"] = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type=training.bnb_4bit_quant_type,
+            bnb_4bit_compute_dtype=getattr(torch, training.bnb_4bit_compute_dtype),
+            bnb_4bit_use_double_quant=training.bnb_4bit_use_double_quant,
+        )
+        model_kwargs["device_map"] = {"": device}
     base = AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
     base.config.use_cache = False
+    if training.load_in_4bit:
+        base = prepare_model_for_kbit_training(
+            base,
+            use_gradient_checkpointing=training.gradient_checkpointing,
+        )
     if initial_adapter is not None:
         model_instance = PeftModel.from_pretrained(
             base, initial_adapter["path"], is_trainable=True
-        ).to(device)
+        )
     else:
         peft_config = LoraConfig(
             r=training.rank,
@@ -539,7 +572,9 @@ def train_lora(
             bias="none",
             task_type="CAUSAL_LM",
         )
-        model_instance = get_peft_model(base, peft_config).to(device)
+        model_instance = get_peft_model(base, peft_config)
+    if not training.load_in_4bit:
+        model_instance = model_instance.to(device)
     if training.gradient_checkpointing:
         model_instance.enable_input_require_grads()
         model_instance.gradient_checkpointing_enable(
@@ -603,6 +638,8 @@ def train_lora(
         )
     if device == "xpu":
         torch.xpu.reset_peak_memory_stats()
+    elif device == "cuda":
+        torch.cuda.reset_peak_memory_stats()
     started = time.perf_counter()
 
     def save_resume(epoch: int, next_batch_index: int, losses: list[float]) -> None:
@@ -868,7 +905,11 @@ def train_lora(
         "trainable_fraction": trainable_parameters / total_parameters,
         "wall_time_seconds": wall_time_seconds,
         "peak_memory_bytes": (
-            int(torch.xpu.max_memory_allocated()) if device == "xpu" else None
+            int(torch.xpu.max_memory_allocated())
+            if device == "xpu"
+            else int(torch.cuda.max_memory_allocated())
+            if device == "cuda"
+            else None
         ),
         "history": history,
         "token_audit": {
@@ -884,7 +925,13 @@ def train_lora(
         "adapter_files": adapter_files,
         "packages": {
             name: importlib.metadata.version(name)
-            for name in ("torch", "transformers", "peft", "accelerate")
+            for name in (
+                "torch",
+                "transformers",
+                "peft",
+                "accelerate",
+                *(["bitsandbytes"] if training.load_in_4bit else []),
+            )
         },
     }
     write_json(output_dir / "training_report.json", report)

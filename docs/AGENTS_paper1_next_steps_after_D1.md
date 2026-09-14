@@ -922,6 +922,23 @@ memory. Therefore run a one-row XPU smoke before the ten-row cells. Treat FP16
 CUDA on an 8 GB device as conditional rather than assumed viable, and record an
 OOM as a hardware-gate result instead of silently changing precision.
 
+After that smoke, run the larger schedule in
+`configs/paper1/qwen4b_perturbation_schedule_v1.json`. The primary Direct arm
+uses a 4096-token ceiling. Preserve a paired 2048-token control on original,
+x1000, O6, mixed x1000/O6, and C4 rows so that correct-but-truncated reasoning
+is not mislabeled as arithmetic failure. The schedule contains 22 cells with
+100 frozen identities each: original, strict magnitude x1/x100/x1000/x10000/
+x1000000, O1/O3/O5/O6, independent +/-30% jitter at x1/x1000, six
+operator-by-jitter mixtures, and C1--C4 compositional depth.
+
+Execute each cell as ten disjoint ten-row shards. Complete shard 0 across the
+schedule first for a fast directional read, then complete shards 1--9 for every
+preregistered primary cell rather than expanding only cells that favor CogCop.
+Report Direct-4096, Direct-2048, base zero-shot ASL, and matched trained ASL
+separately. A 4B ASL LoRA comparison is valid only after a QKVO-r8 adapter is
+trained from the same U2000/E4500 parents and passes the registered 4-bit memory,
+no-truncation, and provenance gates.
+
 Complete the current magnitude, full-audit, and Qwen3-1.7B matched-control runs
 before interpreting augmentation. Select increments greedily with Qwen3-0.6B,
 then retrain and evaluate the frozen winning cumulative dataset independently at

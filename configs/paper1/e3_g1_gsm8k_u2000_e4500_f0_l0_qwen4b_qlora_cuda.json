@@ -1,0 +1,36 @@
+{
+  "schema_version": "ccpu.paper1.asl_matrix.qwen_qlora.v1",
+  "model": {
+    "model_id": "Qwen/Qwen3-4B",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "dtype": "float16"
+  },
+  "training": {
+    "epochs": 10,
+    "batch_size": 1,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 0.0002,
+    "max_length": 1152,
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "target_modules": ["q_proj", "k_proj", "v_proj", "o_proj"],
+    "seed": 99173,
+    "device": "cuda",
+    "dtype": "float16",
+    "gradient_checkpointing": true,
+    "evaluate_each_epoch": false,
+    "checkpoint_every_optimizer_steps": 25,
+    "reject_truncation": true,
+    "logical_epoch_field": "epoch_view",
+    "load_in_4bit": true,
+    "bnb_4bit_quant_type": "nf4",
+    "bnb_4bit_compute_dtype": "float16",
+    "bnb_4bit_use_double_quant": true
+  },
+  "models": [{
+    "model_id": "Qwen/Qwen3-4B",
+    "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+    "adapter_id": "Qwen3-4B-G1-GSM8K-U2000-E4500-F0-L0-QLoRA-r8-init99173-cuda"
+  }]
+}
