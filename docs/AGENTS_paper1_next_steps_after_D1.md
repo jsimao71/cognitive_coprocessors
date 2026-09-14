@@ -110,6 +110,15 @@ and 51-row balanced dev files are recorded under
 Train both the GSM-initialized and fresh-base r8 adapters on this identical
 corpus before evaluating retention, OOD transfer, and robustness panels.
 
+SVAMP annotation is also frozen for the later E3b gate, but remains excluded
+from E3a training until its OOD predictions are complete. Answer-blind primary
+annotation plus two provenance-marked repair rounds produced 499/500 accepted
+train programs (99.8%); the disjoint dev split produced 100/100 accepted
+programs after one repair round. The single unresolved training record remains
+rejected rather than being forced through validation. The matched SFT corpus is
+recorded under
+`artifacts/paper1/cross_dataset_transfer_v1/svamp/e1_e2_pilot500/sft_union2/`.
+
 Latest frozen evidence:
 
 ```text

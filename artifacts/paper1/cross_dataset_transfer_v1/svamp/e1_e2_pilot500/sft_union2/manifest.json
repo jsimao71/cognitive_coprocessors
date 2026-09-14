@@ -1,0 +1,45 @@
+{
+  "accepted_inputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\e1_e2_pilot500\\dev_validated_union1\\accepted.jsonl",
+      "sha256": "7cf49207a721b80190b92843849d435334c949f9c6d2d8d67937ee0ef944c18d"
+    },
+    "train": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\e1_e2_pilot500\\validated_union2\\accepted.jsonl",
+      "sha256": "3a2948c1098be77eb51e0309dd72d71adf92b6109284be76eb53992dfa3f71bf"
+    }
+  },
+  "condition_contract": {
+    "E1": "copy immutable GSM adapter and continue on this train/dev corpus",
+    "E2": "initialize fresh base-model adapter on this same train/dev corpus",
+    "matched_rows_and_order": true
+  },
+  "counts": {
+    "dev": 100,
+    "train": 499
+  },
+  "dataset": "svamp",
+  "frozen_diagnostic_sha256": "4dab3b3ed28412d4f34ddb836089c5214c2d54a35d924149c17c203daffa44b0",
+  "frozen_manifest": {
+    "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\manifest.json",
+    "sha256": "5b4044e8f0bfaf0841befe1b9a2fd79b9cb40290be2f480f81899d75b638d2fc"
+  },
+  "leakage_audit": {
+    "dev_diagnostic": [],
+    "passed": true,
+    "train_dev": [],
+    "train_diagnostic": []
+  },
+  "outputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\e1_e2_pilot500\\sft_union2\\dev.jsonl",
+      "sha256": "777f46f09e8dec852c0831fba1aa32da602fe3a0831fe568a95d0bc2487a77c1"
+    },
+    "train": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\svamp\\e1_e2_pilot500\\sft_union2\\train.jsonl",
+      "sha256": "ec2727f992623c835ad6dab1953043ecb8e22f9f5f932dd7d2a1e22e58a634da"
+    }
+  },
+  "schema_version": "ccpu.paper1.cross_dataset_sft_manifest.v1",
+  "selection_seed": 99173
+}

@@ -306,6 +306,13 @@ contains 17 examples per dataset (51 total). ASDiv contributes 496/500 accepted
 train and 96/100 accepted dev mappings after one repair round; the rejected
 remainders are excluded rather than weakening the execution-verification gate.
 
+SVAMP's later E3b reserve is independently frozen at 499/500 accepted train
+programs and 100/100 accepted dev programs after provenance-marked repair.
+It remains evaluation-only for E3a: the accepted programs are not exposed to a
+training process until the GSM/ASDiv/MAWPS adapters have produced immutable
+SVAMP OOD predictions. The matched corpus and checksums are in
+`artifacts/paper1/cross_dataset_transfer_v1/svamp/e1_e2_pilot500/sft_union2/`.
+
 The v1 sources are pinned in
 `configs/paper1/cross_dataset_transfer_v1.json`. GSM-Plus is split by seed-
 question family rather than perturbation row. Its answerless `critical
