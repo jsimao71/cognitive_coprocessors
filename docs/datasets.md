@@ -313,6 +313,13 @@ training process until the GSM/ASDiv/MAWPS adapters have produced immutable
 SVAMP OOD predictions. The matched corpus and checksums are in
 `artifacts/paper1/cross_dataset_transfer_v1/svamp/e1_e2_pilot500/sft_union2/`.
 
+GSM-Plus is also E3b-ready but remains untouched by E3a training. Its frozen
+reserve contains 497/500 accepted train programs and 96/100 accepted dev
+programs after provenance-marked repair. A final repair round produced no gain,
+so four dev and three train rows remain explicitly rejected. The accepted
+corpus and checksums are in
+`artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/e1_e2_pilot500/sft_union3/`.
+
 The v1 sources are pinned in
 `configs/paper1/cross_dataset_transfer_v1.json`. GSM-Plus is split by seed-
 question family rather than perturbation row. Its answerless `critical

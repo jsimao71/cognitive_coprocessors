@@ -1,0 +1,45 @@
+{
+  "accepted_inputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\e1_e2_pilot500\\dev100_validated_union2\\accepted.jsonl",
+      "sha256": "57467cbc37f682f92834bb7684f17577c78e643f9f32ea984d11d7ee5639cbe7"
+    },
+    "train": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\e1_e2_pilot500\\validated_union3\\accepted.jsonl",
+      "sha256": "c3954fc28c7d385bc8f6dbde70b6b8489267b54de68e33f31f03d0d2ee35d029"
+    }
+  },
+  "condition_contract": {
+    "E1": "copy immutable GSM adapter and continue on this train/dev corpus",
+    "E2": "initialize fresh base-model adapter on this same train/dev corpus",
+    "matched_rows_and_order": true
+  },
+  "counts": {
+    "dev": 96,
+    "train": 497
+  },
+  "dataset": "gsm_plus",
+  "frozen_diagnostic_sha256": "d6a380071c0577f4f50e714ae3a2dab92d5af974e4c2624adde32148a6ddafd9",
+  "frozen_manifest": {
+    "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\manifest.json",
+    "sha256": "052ba7201438c097a2f724b8b06ac2b377c9e82536dd568ea83915679ee126a2"
+  },
+  "leakage_audit": {
+    "dev_diagnostic": [],
+    "passed": true,
+    "train_dev": [],
+    "train_diagnostic": []
+  },
+  "outputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\e1_e2_pilot500\\sft_union3\\dev.jsonl",
+      "sha256": "5ad1cf742f34543479043d9108241bf8572191c89fe6bd148cfe91a0c37dd4c7"
+    },
+    "train": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\gsm_plus\\e1_e2_pilot500\\sft_union3\\train.jsonl",
+      "sha256": "777ecf59d7e81b6330b7c5e5682055e582c62a3743569ca2fe165da5ca1cefb1"
+    }
+  },
+  "schema_version": "ccpu.paper1.cross_dataset_sft_manifest.v1",
+  "selection_seed": 99173
+}

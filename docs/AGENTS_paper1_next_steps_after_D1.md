@@ -119,6 +119,13 @@ rejected rather than being forced through validation. The matched SFT corpus is
 recorded under
 `artifacts/paper1/cross_dataset_transfer_v1/svamp/e1_e2_pilot500/sft_union2/`.
 
+GSM-Plus is likewise frozen but held out from E3a. The answer-blind primary
+pass and three provenance-marked repair rounds stabilize at 497/500 accepted
+train programs (99.4%); the disjoint 100-row dev pilot stabilizes at 96/100.
+The final repair round did not improve either split, so the remaining ambiguous
+or invalid rows are excluded. Its E3b-ready SFT corpus is recorded under
+`artifacts/paper1/cross_dataset_transfer_v1/gsm_plus/e1_e2_pilot500/sft_union3/`.
+
 Latest frozen evidence:
 
 ```text
