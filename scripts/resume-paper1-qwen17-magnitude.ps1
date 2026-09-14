@@ -41,7 +41,7 @@ function Invoke-MagnitudeCondition {
             --eval $eval `
             --config $directConfig `
             --condition direct_reasoning `
-            --output-dir $conditionRoot `
+            --output-dir $shardRoot `
             --shard-index 0 `
             --shard-count 1 `
             --seed 44017 `
@@ -53,7 +53,7 @@ function Invoke-MagnitudeCondition {
             --config $aslConfig `
             --adapter-path $AdapterPath `
             --adapter-id Qwen3-1.7B-G1-GSM8K-U2000-E4500-F0-L0-r8-init99173-cuda `
-            --output-dir $conditionRoot `
+            --output-dir $shardRoot `
             --shard-index 0 `
             --shard-count 1 `
             --seed 44017 `
