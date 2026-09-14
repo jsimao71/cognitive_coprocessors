@@ -22,7 +22,6 @@ from ccpu.dsl import validate_asl
 from ccpu.dsl_dataset.chop import chop_example
 from ccpu.paper1.asl_pilot_data import asl_prompt
 
-
 DATASET_SOURCES = {
     "asdiv": {
         "hub_id": "EleutherAI/asdiv",
@@ -630,6 +629,113 @@ def build_cross_dataset_sft_data(
             "E1": "copy immutable GSM adapter and continue on this train/dev corpus",
             "E2": "initialize fresh base-model adapter on this same train/dev corpus",
             "matched_rows_and_order": True,
+        },
+    }
+    write_json(output / "manifest.json", report)
+    return report
+
+
+def build_balanced_cross_dataset_sft(
+    *,
+    train_paths: dict[str, str | Path],
+    dev_paths: dict[str, str | Path],
+    output_dir: str | Path,
+    seed: int = 93001,
+    train_per_dataset: int | None = None,
+    dev_per_dataset: int | None = None,
+) -> dict[str, Any]:
+    """Build a deterministic, source-deduplicated round-robin SFT mixture."""
+
+    if set(train_paths) != set(dev_paths) or len(train_paths) < 2:
+        raise ValueError("train and dev must name the same two or more datasets")
+
+    def unique_rows(dataset: str, path: str | Path, role: str) -> list[dict[str, Any]]:
+        rows = read_jsonl(path)
+        selected: dict[str, dict[str, Any]] = {}
+        for row in rows:
+            observed = str(row.get("dataset", ""))
+            if observed != dataset:
+                raise ValueError(
+                    f"{role} row dataset mismatch: expected {dataset}, observed {observed}"
+                )
+            source_id = str(row.get("parent_source_id") or row.get("parent_example_id"))
+            if not source_id or source_id == "None":
+                raise ValueError(f"{dataset} {role} row lacks a parent source ID")
+            current = selected.get(source_id)
+            if current is None or _rank(row, seed, f"mixed-{role}") < _rank(
+                current, seed, f"mixed-{role}"
+            ):
+                selected[source_id] = row
+        return sorted(
+            selected.values(), key=lambda row: _rank(row, seed, f"mixed-{role}")
+        )
+
+    datasets = sorted(train_paths)
+    unique = {
+        role: {
+            dataset: unique_rows(
+                dataset,
+                (train_paths if role == "train" else dev_paths)[dataset],
+                role,
+            )
+            for dataset in datasets
+        }
+        for role in ("train", "dev")
+    }
+    requested = {"train": train_per_dataset, "dev": dev_per_dataset}
+    limits = {}
+    for role in ("train", "dev"):
+        available = min(len(unique[role][dataset]) for dataset in datasets)
+        limit = requested[role] if requested[role] is not None else available
+        if limit < 1 or limit > available:
+            raise ValueError(
+                f"{role}_per_dataset={limit} exceeds balanced availability {available}"
+            )
+        limits[role] = limit
+
+    mixtures: dict[str, list[dict[str, Any]]] = {}
+    for role in ("train", "dev"):
+        mixtures[role] = []
+        for offset in range(limits[role]):
+            for dataset in datasets:
+                mixtures[role].append(unique[role][dataset][offset])
+
+    output = Path(output_dir)
+    output_paths = {
+        role: write_jsonl(output / f"{role}.jsonl", rows)
+        for role, rows in mixtures.items()
+    }
+    report = {
+        "schema_version": "ccpu.paper1.cross_dataset_balanced_sft.v1",
+        "selection_seed": seed,
+        "sampling": "dataset_balanced_round_robin",
+        "deduplicate_by": "parent_source_id",
+        "datasets": datasets,
+        "counts": {
+            role: {
+                "total": len(mixtures[role]),
+                "per_dataset": limits[role],
+                "unique_available": {
+                    dataset: len(unique[role][dataset]) for dataset in datasets
+                },
+            }
+            for role in ("train", "dev")
+        },
+        "inputs": {
+            role: {
+                dataset: {
+                    "path": str(path),
+                    "sha256": file_sha256(path),
+                }
+                for dataset, path in (
+                    train_paths if role == "train" else dev_paths
+                ).items()
+            }
+            for role in ("train", "dev")
+        },
+        "outputs": {
+            role: {"path": str(path), "sha256": file_sha256(path)}
+            for role, path in output_paths.items()
         },
     }
     write_json(output / "manifest.json", report)

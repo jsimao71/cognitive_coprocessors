@@ -1,0 +1,36 @@
+{
+  "dataset_targets": {
+    "asdiv": 500
+  },
+  "difficulty_counts": {
+    "high": 45,
+    "low": 261,
+    "medium": 194
+  },
+  "excluded_source_count": 0,
+  "exclusion_sha256": {},
+  "input_sha256": {
+    "artifacts\\paper1\\cross_dataset_transfer_v1\\asdiv\\teacher_seed.jsonl": "003073c64364a871a440466c42df6131d0cefa3adce9180a7124a1fe5c4f2ac1"
+  },
+  "ledger_sha256": "7722e4e7fc1b0b1ef84088093a592ead1e60152df6d27660d799834e5b94acbd",
+  "output_sha256": "970ce1832448856baa462ba783ef50d1e7861489f5b0cf03ec300e44a0892864",
+  "post_annotation_pattern_filter_required": true,
+  "record_count": 500,
+  "relation_class_counts": {
+    "aggregation": 150,
+    "chained_relations": 344,
+    "comparison": 151,
+    "equal_allocation": 189,
+    "multiple_entities": 302,
+    "nested_dependencies": 239,
+    "percentage": 10,
+    "rate_or_per_unit": 209,
+    "ratio_or_fraction": 100,
+    "relative_quantity": 55,
+    "remaining_or_difference": 159,
+    "single_relation": 51,
+    "temporal_or_duration": 155
+  },
+  "schema_version": "ccpu.dsl_dataset.diverse_seed_manifest.v1",
+  "seed": 93011
+}

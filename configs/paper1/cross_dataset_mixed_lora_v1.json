@@ -16,7 +16,10 @@
     {
       "id": "E3a_core",
       "datasets": ["gsm8k", "asdiv", "mawps"],
-      "ood_evaluation_only": ["svamp", "gsm_plus"]
+      "ood_evaluation_only": ["svamp", "gsm_plus"],
+      "balanced_corpus": "artifacts/paper1/cross_dataset_transfer_v1/mixed_lora/e3a_core_seed93001",
+      "train_per_dataset": 496,
+      "dev_per_dataset": 17
     },
     {
       "id": "E3b_all",
@@ -33,7 +36,7 @@
     "asdiv": {
       "train": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/e1_e2_pilot500/sft_union1/train.jsonl",
       "dev": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/e1_e2_pilot500/sft_union1/dev.jsonl",
-      "status": "annotations_pending_validation"
+      "status": "ready_496_train_96_dev"
     },
     "mawps": {
       "train": "artifacts/paper1/cross_dataset_transfer_v1/mawps/e1_e2_pilot500/sft_union1/train.jsonl",

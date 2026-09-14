@@ -298,6 +298,14 @@ catastrophic-forgetting control. Results are always reported per dataset and
 on the existing magnitude, operator, and jitter panels; a pooled score alone
 is not acceptable.
 
+The first E3a corpus is frozen at 1,488 training rows: 496 unique,
+execution-verified programs each from GSM8K, ASDiv, and MAWPS. The deterministic
+builder removes repeated GSM epoch views by parent source ID and emits a
+round-robin order plus input/output checksums. Its balanced development view
+contains 17 examples per dataset (51 total). ASDiv contributes 496/500 accepted
+train and 96/100 accepted dev mappings after one repair round; the rejected
+remainders are excluded rather than weakening the execution-verification gate.
+
 The v1 sources are pinned in
 `configs/paper1/cross_dataset_transfer_v1.json`. GSM-Plus is split by seed-
 question family rather than perturbation row. Its answerless `critical

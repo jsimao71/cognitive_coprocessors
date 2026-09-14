@@ -1,0 +1,71 @@
+{
+  "counts": {
+    "dev": {
+      "per_dataset": 17,
+      "total": 51,
+      "unique_available": {
+        "asdiv": 96,
+        "gsm8k": 17,
+        "mawps": 100
+      }
+    },
+    "train": {
+      "per_dataset": 496,
+      "total": 1488,
+      "unique_available": {
+        "asdiv": 496,
+        "gsm8k": 2000,
+        "mawps": 500
+      }
+    }
+  },
+  "datasets": [
+    "asdiv",
+    "gsm8k",
+    "mawps"
+  ],
+  "deduplicate_by": "parent_source_id",
+  "inputs": {
+    "dev": {
+      "asdiv": {
+        "path": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/e1_e2_pilot500/sft_union1/dev.jsonl",
+        "sha256": "d17bbf3c394b9a8a8c455488c19a01284b54fd5539e51fb2831f5ad40bda0211"
+      },
+      "gsm8k": {
+        "path": "artifacts/paper1/gsm8k_scale_v1/g1_f0_4500/eval/dev.jsonl",
+        "sha256": "724a2887ac818ae1d932f4889363788369689890c94bc953e10cb7b4b0ec22aa"
+      },
+      "mawps": {
+        "path": "artifacts/paper1/cross_dataset_transfer_v1/mawps/e1_e2_pilot500/sft_union1/dev.jsonl",
+        "sha256": "b41e1e2a1aa31f7e3319de4c76d7f54b884820c4909a9e84447b166d68468a31"
+      }
+    },
+    "train": {
+      "asdiv": {
+        "path": "artifacts/paper1/cross_dataset_transfer_v1/asdiv/e1_e2_pilot500/sft_union1/train.jsonl",
+        "sha256": "82442fd0cc9c74f90bc141b72920845e69d34fd0d3448b8034404c7be6f3d0d6"
+      },
+      "gsm8k": {
+        "path": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl",
+        "sha256": "3d823f3de4628b072185a8b2af9a7f8b335e841dfefd9ee90a90491bed1affe9"
+      },
+      "mawps": {
+        "path": "artifacts/paper1/cross_dataset_transfer_v1/mawps/e1_e2_pilot500/sft_union1/train.jsonl",
+        "sha256": "6d402efe9b72dd6c7612d2a95f03652300adcb2eb32e3bc8cad4336d6e2df3cf"
+      }
+    }
+  },
+  "outputs": {
+    "dev": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\mixed_lora\\e3a_core_seed93001\\dev.jsonl",
+      "sha256": "9dd2e9c475c1fba0c4d3eed360cc817245db37cea25717f57d1fd7610998ca0f"
+    },
+    "train": {
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\mixed_lora\\e3a_core_seed93001\\train.jsonl",
+      "sha256": "52875e7034b5883539c43d3b60a15c24b4c00252443c760de302eac796032057"
+    }
+  },
+  "sampling": "dataset_balanced_round_robin",
+  "schema_version": "ccpu.paper1.cross_dataset_balanced_sft.v1",
+  "selection_seed": 93001
+}

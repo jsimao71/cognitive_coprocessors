@@ -14,6 +14,7 @@ from .compositional_generator import (
 )
 from .contribution_analysis import analyze_gsm8k_contribution
 from .cross_dataset import (
+    build_balanced_cross_dataset_sft,
     build_cross_dataset_sft_data,
     build_cross_dataset_teacher_seed,
     freeze_cross_dataset_benchmark,
@@ -42,8 +43,8 @@ from .direct_answer_eval import (
 )
 from .direct_failure_audit import audit_direct_predictions
 from .direct_lora import build_direct_lora_data
-from .evaluation_matrix import build_evaluation_matrix
 from .eval import analyze_bottleneck_predictions, run_bottleneck_condition
+from .evaluation_matrix import build_evaluation_matrix
 from .gsm8k_confirmatory import (
     analyze_official_gsm8k_replications,
     freeze_official_gsm8k,
@@ -189,6 +190,13 @@ def build_parser() -> argparse.ArgumentParser:
     cross_sft.add_argument("--accepted-dev", required=True)
     cross_sft.add_argument("--output-dir", required=True)
     cross_sft.add_argument("--seed", type=int, default=93001)
+    mixed_sft = commands.add_parser("prepare-balanced-cross-dataset-sft")
+    mixed_sft.add_argument("--train", action="append", required=True)
+    mixed_sft.add_argument("--dev", action="append", required=True)
+    mixed_sft.add_argument("--output-dir", required=True)
+    mixed_sft.add_argument("--train-per-dataset", type=int)
+    mixed_sft.add_argument("--dev-per-dataset", type=int)
+    mixed_sft.add_argument("--seed", type=int, default=93001)
     cross_analysis = commands.add_parser("analyze-cross-dataset-transfer")
     cross_analysis.add_argument("--manifest", action="append", required=True)
     cross_analysis.add_argument("--prediction", action="append", required=True)
@@ -656,6 +664,31 @@ def main(argv: list[str] | None = None) -> int:
         print(
             f"{manifest['dataset']} SFT train={manifest['counts']['train']} "
             f"dev={manifest['counts']['dev']} -> {args.output_dir}"
+        )
+        return 0
+    if args.command == "prepare-balanced-cross-dataset-sft":
+        def named_paths(values: list[str]) -> dict[str, str]:
+            paths = {}
+            for value in values:
+                if "=" not in value:
+                    raise ValueError("dataset paths must use DATASET=PATH")
+                dataset, path = value.split("=", 1)
+                if not dataset or dataset in paths:
+                    raise ValueError(f"invalid or duplicate dataset path: {value}")
+                paths[dataset] = path
+            return paths
+
+        manifest = build_balanced_cross_dataset_sft(
+            train_paths=named_paths(args.train),
+            dev_paths=named_paths(args.dev),
+            output_dir=args.output_dir,
+            seed=args.seed,
+            train_per_dataset=args.train_per_dataset,
+            dev_per_dataset=args.dev_per_dataset,
+        )
+        print(
+            f"balanced SFT train={manifest['counts']['train']['total']} "
+            f"dev={manifest['counts']['dev']['total']} -> {args.output_dir}"
         )
         return 0
     if args.command == "analyze-cross-dataset-transfer":

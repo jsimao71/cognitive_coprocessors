@@ -6,6 +6,7 @@ import pyarrow.parquet as pq
 from ccpu.common.artifacts import file_sha256, read_json, read_jsonl, write_jsonl
 from ccpu.dsl_dataset.semantic import prepare_local_annotation_batches
 from ccpu.paper1.e3.cross_dataset import (
+    build_balanced_cross_dataset_sft,
     build_cross_dataset_sft_data,
     build_cross_dataset_teacher_seed,
     freeze_cross_dataset_benchmark,
@@ -224,3 +225,39 @@ def test_dev_teacher_seed_and_matched_sft_materialization(tmp_path):
     assert report["leakage_audit"]["passed"]
     train_rows = read_jsonl(tmp_path / "sft/train.jsonl")
     assert all(row["prompt"].endswith("ASL:") for row in train_rows)
+
+
+def test_balanced_cross_dataset_sft_deduplicates_and_interleaves(tmp_path):
+    train_paths = {}
+    dev_paths = {}
+    for dataset, count in (("gsm8k", 4), ("asdiv", 3), ("mawps", 5)):
+        train = [
+            {
+                "dataset": dataset,
+                "example_id": f"{dataset}-{index}",
+                "parent_source_id": f"{dataset}-source-{index}",
+                "prompt": f"Problem {index}",
+                "target": f"answer.value = {index}\nRETURN answer.value",
+            }
+            for index in range(count)
+        ]
+        if dataset == "gsm8k":
+            train.append(dict(train[0], example_id="gsm8k-repeat"))
+        train_paths[dataset] = write_jsonl(tmp_path / f"{dataset}-train.jsonl", train)
+        dev_paths[dataset] = write_jsonl(
+            tmp_path / f"{dataset}-dev.jsonl", train[:2]
+        )
+
+    report = build_balanced_cross_dataset_sft(
+        train_paths=train_paths,
+        dev_paths=dev_paths,
+        output_dir=tmp_path / "mixed",
+        seed=17,
+    )
+
+    assert report["counts"]["train"]["per_dataset"] == 3
+    assert report["counts"]["train"]["total"] == 9
+    assert report["counts"]["train"]["unique_available"]["gsm8k"] == 4
+    rows = read_jsonl(tmp_path / "mixed/train.jsonl")
+    assert [row["dataset"] for row in rows[:3]] == ["asdiv", "gsm8k", "mawps"]
+    assert len({row["parent_source_id"] for row in rows}) == 9

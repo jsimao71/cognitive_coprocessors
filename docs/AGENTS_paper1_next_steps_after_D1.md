@@ -99,6 +99,17 @@ train/dev/diagnostic identity overlap. E1 continues from a copied GSM adapter;
 E2 uses the same ordered corpus and optimizer budget from a fresh base-model
 adapter. The source GSM checkpoint remains immutable.
 
+ASDiv annotation and repair are also complete for the E3a gate. The
+answer-blind primary pass accepted 339/500 train and 60/100 dev programs; one
+provenance-marked repair pass raised this to 496/500 train (99.2%) and 96/100
+dev (96.0%), all execution- and answer-verified. The frozen E3a mixture uses
+496 unique rows from each of GSM8K, ASDiv, and MAWPS, deduplicates GSM epoch
+repeats by source ID, and interleaves datasets round-robin. Its 1,488-row train
+and 51-row balanced dev files are recorded under
+`artifacts/paper1/cross_dataset_transfer_v1/mixed_lora/e3a_core_seed93001/`.
+Train both the GSM-initialized and fresh-base r8 adapters on this identical
+corpus before evaluating retention, OOD transfer, and robustness panels.
+
 Latest frozen evidence:
 
 ```text
