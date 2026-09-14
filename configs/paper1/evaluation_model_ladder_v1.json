@@ -39,6 +39,24 @@
     "replication_seeds": [17023, 17037],
     "replication_gate": "complete seed 17011 first; run later seeds only for uncertainty/significance of preregistered material interactions"
   },
+  "qwen3_4b_preliminary_seed_17011": {
+    "order": [
+      "operator_o1",
+      "operator_o5",
+      "operator_o6",
+      "jitter_x1_o0",
+      "jitter_x1000_o0",
+      "mixed_x1000_o5",
+      "mixed_x1000_o6"
+    ],
+    "examples_per_cell": 10,
+    "selection": "source-row index modulo 10 equals 0",
+    "routes": ["direct_reasoning_long", "asl_base_zero_shot"],
+    "perturbation_seed": 17011,
+    "decoding_seed": 44017,
+    "purpose": "bounded inference and memory probe before any Qwen3-4B LoRA training",
+    "expansion_gate": "expand matched cells or train QKVO-r8 only after viable memory and a scientifically material size-by-route interaction"
+  },
   "models": [
     {
       "id": "qwen3_0_6b",
@@ -95,7 +113,7 @@
     "complete qwen3_1_7b anchor matrix",
     "run llama3_2_1b_instruct and gemma3_1b_it Direct/base-ASL anchors",
     "train and evaluate matched family LoRAs",
-    "run qwen3_4b anchor inference and memory gate",
+    "run qwen3_4b preliminary Direct/base-ASL inference and memory gate",
     "train qwen3_4b LoRA only if the gate is viable",
     "expand only scientifically informative models to the full matrix"
   ],

@@ -907,6 +907,21 @@ paraphrase/binding challenge descendants of test-only parents.
 
 ### Cross-size augmentation gate before 4B
 
+The bounded 4B inference probe may run in parallel with the remaining 1.7B
+matrix because it does not train on or select from evaluation records. Use
+Qwen3-4B revision `1cfa9a7208912126459214e8b04321603b3df60c`, decoding seed
+44017, and shard 0/10 of the same frozen seed-17011 panels. Probe O1, O5, O6,
+jittered O0 at x1 and x1000, and mixed x1000 O5/O6. Compare Direct-long with
+base-model zero-shot ASL first. This is a memory/behavior diagnostic, not an
+adapter efficacy result; do not compare zero-shot ASL as if it were the trained
+0.6B or 1.7B compiler. Expand only if memory is viable and the size-by-route
+interaction is scientifically material.
+
+The prior Qwen3-4B block-ICL smoke used FP16 XPU successfully at 8.21 GB peak
+memory. Therefore run a one-row XPU smoke before the ten-row cells. Treat FP16
+CUDA on an 8 GB device as conditional rather than assumed viable, and record an
+OOM as a hardware-gate result instead of silently changing precision.
+
 Complete the current magnitude, full-audit, and Qwen3-1.7B matched-control runs
 before interpreting augmentation. Select increments greedily with Qwen3-0.6B,
 then retrain and evaluate the frozen winning cumulative dataset independently at

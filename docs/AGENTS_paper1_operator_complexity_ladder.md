@@ -724,6 +724,13 @@ Run full 4B O0–O6 only if the interaction is important enough.
 
 ---
 
+A bounded 4B inference probe may begin earlier without changing this training
+gate. On shard 0/10 of perturbation seed 17011, compare Direct-long and
+base-model zero-shot ASL for O1/O5/O6, jittered O0 at x1/x1000, and mixed
+x1000 O5/O6. Start with one row to verify memory, then run ten rows per cell.
+These results diagnose 4B feasibility and zero-shot behavior only; the primary
+trained comparison still requires a matched QKVO-r8 4B adapter.
+
 # 22. Accuracy metrics
 
 For all conditions:
