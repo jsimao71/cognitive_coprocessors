@@ -65,9 +65,14 @@ function Remove-StaleLock([string]$LockPath) {
         return
     }
     $owner = Get-Content -LiteralPath $LockPath -Raw | ConvertFrom-Json
-    if (Get-Process -Id $owner.pid -ErrorAction SilentlyContinue) {
+    $process = Get-CimInstance Win32_Process -Filter "ProcessId=$($owner.pid)" `
+        -ErrorAction SilentlyContinue
+    $isExperimentOwner = $process -and $process.Name -match '^python(?:\.exe)?$' -and `
+        $process.CommandLine -match 'ccpu\.paper1\.e3'
+    if ($isExperimentOwner) {
         throw "refusing to remove live run lock owned by PID $($owner.pid): $LockPath"
     }
+    Write-Host "REMOVE stale lock PID=$($owner.pid) current_process=$($process.Name)"
     Remove-Item -LiteralPath $LockPath -Force
 }
 
