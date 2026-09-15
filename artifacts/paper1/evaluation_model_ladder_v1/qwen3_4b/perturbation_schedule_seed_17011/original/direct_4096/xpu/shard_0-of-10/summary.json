@@ -1,0 +1,53 @@
+{
+  "answer_wilson_95": [
+    0.7224672001371109,
+    1.0
+  ],
+  "by_difficulty": {
+    "high": {
+      "count": 5,
+      "final_answer_correct": 5
+    },
+    "medium": {
+      "count": 5,
+      "final_answer_correct": 5
+    }
+  },
+  "counts": {
+    "answer_scorable": 10,
+    "final_answer_correct": 10
+  },
+  "eval_sha256": "d337a0c008ba15d46aa2ce3ab7e24fd2a208eb7d18a6f642a9fcbb8bd056804a",
+  "prediction_count": 10,
+  "predictions_sha256": "90f1ef9ad0fc958634b1f8d537134445cf4be83c9246ac3ecaea30553cc844bb",
+  "rates": {
+    "answer_scorable": 1.0,
+    "final_answer_correct": 1.0
+  },
+  "run": {
+    "answers_visible_to_model": false,
+    "condition": "direct_reasoning",
+    "instruction": "Solve the arithmetic word problem carefully. You may reason step by step, but do not write ASL or use tools. End with one final line in the exact form `Answer: <number>`.",
+    "instruction_sha256": "5bfefeea98d07daa4f35ee06618106e156a07f3170d66cbb1f54e7fd15843ee4",
+    "model": {
+      "cached_generation": true,
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": true,
+      "max_new_tokens": 4096,
+      "model_id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "use_chat_template": true
+    },
+    "model_id": "Qwen/Qwen3-4B",
+    "prompt_fields": [
+      "question"
+    ],
+    "protocol_id": "paper1_gsm8k_matched_direct_v1",
+    "rationales_visible_to_model": false,
+    "seed": 44017,
+    "shard_count": 10
+  },
+  "schema_version": "ccpu.paper1.gsm8k_direct_summary.v1",
+  "shard_index": 0
+}

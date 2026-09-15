@@ -1,0 +1,50 @@
+{
+  "by_difficulty": {
+    "high": {
+      "count": 5,
+      "final_answer_correct": 1
+    },
+    "medium": {
+      "count": 5,
+      "final_answer_correct": 1
+    }
+  },
+  "counts": {
+    "executable": 7,
+    "final_answer_correct": 2,
+    "lowerable_to_ccir": 7,
+    "parse_valid": 7,
+    "type_valid": 7
+  },
+  "eval_sha256": "d337a0c008ba15d46aa2ce3ab7e24fd2a208eb7d18a6f642a9fcbb8bd056804a",
+  "prediction_count": 10,
+  "predictions_sha256": "0bc00331ec5d1b424bed0ba9fb2a577bc73a355d644a696c1b0a737fb5c3c318",
+  "rates": {
+    "executable": 0.7,
+    "final_answer_correct": 0.2,
+    "lowerable_to_ccir": 0.7,
+    "parse_valid": 0.7,
+    "type_valid": 0.7
+  },
+  "run": {
+    "adapter_id": "Qwen3-4B-base-zero-shot",
+    "model": {
+      "adapter_id": "Qwen3-4B-base-zero-shot",
+      "cached_generation": true,
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-4B",
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "use_chat_template": true
+    },
+    "prompt_fields": [
+      "question"
+    ],
+    "seed": 44017,
+    "shard_count": 10
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_evaluation.v1",
+  "shard_index": 0
+}
