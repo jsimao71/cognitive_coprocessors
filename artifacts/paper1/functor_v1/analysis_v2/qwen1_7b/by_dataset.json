@@ -1,0 +1,1346 @@
+{
+  "gsm8k": {
+    "F0": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 1,
+          "rate": 1.0,
+          "support": 1
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 7,
+          "rate": 0.4375,
+          "support": 16
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 1,
+          "rate": 1.0,
+          "support": 1
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 7,
+          "rate": 0.4375,
+          "support": 16
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 1,
+          "rate": 0.0625,
+          "support": 16
+        },
+        "semantic_structure_given_parse": {
+          "correct": 1,
+          "rate": 0.0625,
+          "support": 16
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.00408997955010225,
+        "generated_tokens_per_correct_answer": 244.5,
+        "mean_ast_nodes": 7.529411764705882,
+        "mean_generated_tokens": 115.05882352941177,
+        "mean_prompt_tokens": 133.23529411764707,
+        "mean_statement_count": 7.529411764705882,
+        "semantic_success_per_generated_token": 0.0005112474437627812
+      },
+      "count": 17,
+      "error_counts": {
+        "aggregation_cardinality": 11,
+        "attribute_grounding": 15,
+        "cardinality_qualifier": 10,
+        "dependency_incomplete": 16,
+        "entity_grounding": 9,
+        "hallucinated_or_mutated_number": 7,
+        "number_attached_to_wrong_path": 11,
+        "omitted_number": 5,
+        "operator_mapping": 13,
+        "qualifier_grounding": 12,
+        "relation_constant": 6,
+        "return_missing": 1,
+        "return_wrong_target": 9,
+        "source_fact_grounding": 15,
+        "surface_malformed_syntax": 1,
+        "temporal_qualifier": 6,
+        "temporal_semantics": 3,
+        "transitive_shortcut": 3,
+        "unresolved_symbol_equivalence": 6
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.09467787114845938,
+        "blackboard_precision": 0.09852941176470588,
+        "blackboard_recall": 0.0927170868347339,
+        "dependency_f1": 0.15478312537136066,
+        "spurious_state_rate": 0.9014705882352941
+      },
+      "mean_semantic": {
+        "attribute": 0.3085714212237456,
+        "dependency": 0.15478312537136066,
+        "entity": 0.6941176470588235,
+        "operator": 0.6847113670643082,
+        "qualifier": 0.495515073162132
+      },
+      "rates": {
+        "executable": {
+          "correct": 14,
+          "rate": 0.8235294117647058,
+          "support": 17,
+          "wilson95": [
+            0.5897054143116588,
+            0.9380887336237901
+          ]
+        },
+        "fail_closed": {
+          "correct": 3,
+          "rate": 0.17647058823529413,
+          "support": 17,
+          "wilson95": [
+            0.06191126637620997,
+            0.41029458568834126
+          ]
+        },
+        "final_answer": {
+          "correct": 8,
+          "rate": 0.47058823529411764,
+          "support": 17,
+          "wilson95": [
+            0.26165106442409436,
+            0.6903676493999558
+          ]
+        },
+        "lowerable": {
+          "correct": 16,
+          "rate": 0.9411764705882353,
+          "support": 17,
+          "wilson95": [
+            0.7301796936242461,
+            0.9895395990150025
+          ]
+        },
+        "parse": {
+          "correct": 16,
+          "rate": 0.9411764705882353,
+          "support": 17,
+          "wilson95": [
+            0.7301796936242461,
+            0.9895395990150025
+          ]
+        },
+        "semantic_state": {
+          "correct": 1,
+          "rate": 0.058823529411764705,
+          "support": 17,
+          "wilson95": [
+            0.010460400984997592,
+            0.26982030637575405
+          ]
+        },
+        "semantic_structure": {
+          "correct": 1,
+          "rate": 0.058823529411764705,
+          "support": 17,
+          "wilson95": [
+            0.010460400984997592,
+            0.26982030637575405
+          ]
+        },
+        "type_valid": {
+          "correct": 16,
+          "rate": 0.9411764705882353,
+          "support": 17,
+          "wilson95": [
+            0.7301796936242461,
+            0.9895395990150025
+          ]
+        }
+      }
+    },
+    "F1": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 8,
+          "rate": 0.47058823529411764,
+          "support": 17
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 8,
+          "rate": 0.47058823529411764,
+          "support": 17
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 17
+        },
+        "semantic_structure_given_parse": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 17
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.003401360544217687,
+        "generated_tokens_per_correct_answer": 294.0,
+        "mean_ast_nodes": 51.94117647058823,
+        "mean_generated_tokens": 138.35294117647058,
+        "mean_prompt_tokens": 135.23529411764707,
+        "mean_statement_count": 8.058823529411764,
+        "semantic_success_per_generated_token": 0.0
+      },
+      "count": 17,
+      "error_counts": {
+        "aggregation_cardinality": 11,
+        "ambiguous_symbol_alignment": 1,
+        "attribute_grounding": 14,
+        "cardinality_qualifier": 10,
+        "dependency_incomplete": 16,
+        "entity_grounding": 9,
+        "hallucinated_or_mutated_number": 9,
+        "number_attached_to_wrong_path": 10,
+        "omitted_number": 4,
+        "operator_mapping": 10,
+        "qualifier_grounding": 12,
+        "relation_constant": 5,
+        "return_wrong_target": 10,
+        "source_fact_grounding": 14,
+        "temporal_qualifier": 4,
+        "temporal_semantics": 3,
+        "transitive_shortcut": 3,
+        "unresolved_symbol_equivalence": 6
+      },
+      "f1_asl_isomorphic_accuracy": {
+        "correct": 1,
+        "rate": 0.058823529411764705,
+        "support": 17
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.1207596751075012,
+        "blackboard_precision": 0.1211484593837535,
+        "blackboard_recall": 0.1219319895790484,
+        "dependency_f1": 0.19268395305170216,
+        "spurious_state_rate": 0.8788515406162465
+      },
+      "mean_semantic": {
+        "attribute": 0.40794423218825204,
+        "dependency": 0.19268395305170216,
+        "entity": 0.7156862745098039,
+        "operator": 0.7726743328910511,
+        "qualifier": 0.5912151669937137
+      },
+      "rates": {
+        "executable": {
+          "correct": 15,
+          "rate": 0.8823529411764706,
+          "support": 17,
+          "wilson95": [
+            0.6566364940511412,
+            0.9671202262362074
+          ]
+        },
+        "fail_closed": {
+          "correct": 2,
+          "rate": 0.11764705882352941,
+          "support": 17,
+          "wilson95": [
+            0.03287977376379267,
+            0.3433635059488588
+          ]
+        },
+        "final_answer": {
+          "correct": 8,
+          "rate": 0.47058823529411764,
+          "support": 17,
+          "wilson95": [
+            0.26165106442409436,
+            0.6903676493999558
+          ]
+        },
+        "lowerable": {
+          "correct": 17,
+          "rate": 1.0,
+          "support": 17,
+          "wilson95": [
+            0.8156818649911483,
+            1.0
+          ]
+        },
+        "parse": {
+          "correct": 17,
+          "rate": 1.0,
+          "support": 17,
+          "wilson95": [
+            0.8156818649911483,
+            1.0
+          ]
+        },
+        "semantic_state": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 17,
+          "wilson95": [
+            0.0,
+            0.1843181350088518
+          ]
+        },
+        "semantic_structure": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 17,
+          "wilson95": [
+            0.0,
+            0.1843181350088518
+          ]
+        },
+        "type_valid": {
+          "correct": 17,
+          "rate": 1.0,
+          "support": 17,
+          "wilson95": [
+            0.8156818649911483,
+            1.0
+          ]
+        }
+      }
+    },
+    "F2": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 2,
+          "rate": 1.0,
+          "support": 2
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 6,
+          "rate": 0.4,
+          "support": 15
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 1,
+          "rate": 1.0,
+          "support": 1
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 7,
+          "rate": 0.4375,
+          "support": 16
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 1,
+          "rate": 0.08333333333333333,
+          "support": 12
+        },
+        "semantic_structure_given_parse": {
+          "correct": 1,
+          "rate": 0.07692307692307693,
+          "support": 13
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.0035195776506819184,
+        "generated_tokens_per_correct_answer": 284.125,
+        "mean_ast_nodes": 36.88235294117647,
+        "mean_generated_tokens": 133.7058823529412,
+        "mean_prompt_tokens": 136.23529411764707,
+        "mean_statement_count": 5.647058823529412,
+        "semantic_success_per_generated_token": 0.0004399472063352398
+      },
+      "count": 17,
+      "error_counts": {
+        "aggregation_cardinality": 10,
+        "attribute_grounding": 13,
+        "cardinality_qualifier": 7,
+        "dependency_incomplete": 15,
+        "entity_grounding": 9,
+        "hallucinated_or_mutated_number": 3,
+        "number_attached_to_wrong_path": 4,
+        "omitted_number": 6,
+        "operator_mapping": 12,
+        "qualifier_grounding": 9,
+        "relation_constant": 5,
+        "relation_direction": 1,
+        "return_missing": 4,
+        "return_wrong_target": 6,
+        "source_fact_grounding": 11,
+        "surface_no_asl": 4,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 1,
+        "unresolved_symbol_equivalence": 5
+      },
+      "f2_semantics": {
+        "argument_binding_exact": {
+          "correct": 27,
+          "rate": 0.23893805309734514,
+          "support": 113
+        },
+        "argument_role_accuracy": {
+          "correct": 88,
+          "rate": 0.29042904290429045,
+          "support": 303
+        },
+        "functor_class_macro_f1": 0.3068673205716395,
+        "functor_class_micro": {
+          "f1": 0.3505154639175258,
+          "overlap": 34,
+          "precision": 0.41975308641975306,
+          "predicted_count": 81,
+          "recall": 0.3008849557522124,
+          "reference_count": 113
+        },
+        "per_functor_class": {
+          "decrease_percent": {
+            "f1": 1.0,
+            "overlap": 1,
+            "precision": 1.0,
+            "predicted_count": 1,
+            "recall": 1.0,
+            "reference_count": 1
+          },
+          "difference": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 0
+          },
+          "fraction_of": {
+            "f1": 0.5714285714285715,
+            "overlap": 4,
+            "precision": 0.5,
+            "predicted_count": 8,
+            "recall": 0.6666666666666666,
+            "reference_count": 6
+          },
+          "given": {
+            "f1": 0.39534883720930236,
+            "overlap": 17,
+            "precision": 0.4722222222222222,
+            "predicted_count": 36,
+            "recall": 0.34,
+            "reference_count": 50
+          },
+          "mean_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "multiple": {
+            "f1": 0.75,
+            "overlap": 3,
+            "precision": 0.75,
+            "predicted_count": 4,
+            "recall": 0.75,
+            "reference_count": 4
+          },
+          "offset": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 5,
+            "recall": 0.0,
+            "reference_count": 4
+          },
+          "per_unit_total": {
+            "f1": 0.07142857142857142,
+            "overlap": 1,
+            "precision": 0.1,
+            "predicted_count": 10,
+            "recall": 0.05555555555555555,
+            "reference_count": 18
+          },
+          "percent_of": {
+            "f1": 0.6666666666666666,
+            "overlap": 1,
+            "precision": 1.0,
+            "predicted_count": 1,
+            "recall": 0.5,
+            "reference_count": 2
+          },
+          "product_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "quotient": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 2,
+            "recall": 0.0,
+            "reference_count": 5
+          },
+          "remaining": {
+            "f1": 0.5555555555555556,
+            "overlap": 5,
+            "precision": 0.7142857142857143,
+            "predicted_count": 7,
+            "recall": 0.45454545454545453,
+            "reference_count": 11
+          },
+          "same": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "sum_of": {
+            "f1": 0.2857142857142857,
+            "overlap": 2,
+            "precision": 0.4,
+            "predicted_count": 5,
+            "recall": 0.2222222222222222,
+            "reference_count": 9
+          }
+        },
+        "query_target_accuracy": {
+          "correct": 7,
+          "rate": 0.4117647058823529,
+          "support": 17
+        },
+        "relation_direction_accuracy": {
+          "correct": 9,
+          "rate": 0.2571428571428571,
+          "support": 35
+        }
+      },
+      "f2_semantics_given_parse": {
+        "argument_binding_exact": {
+          "correct": 27,
+          "rate": 0.3375,
+          "support": 80
+        },
+        "argument_role_accuracy": {
+          "correct": 88,
+          "rate": 0.40930232558139534,
+          "support": 215
+        },
+        "functor_class_macro_f1": 0.3753787648553002,
+        "functor_class_micro": {
+          "f1": 0.422360248447205,
+          "overlap": 34,
+          "precision": 0.41975308641975306,
+          "predicted_count": 81,
+          "recall": 0.425,
+          "reference_count": 80
+        },
+        "per_functor_class": {
+          "decrease_percent": {
+            "f1": 1.0,
+            "overlap": 1,
+            "precision": 1.0,
+            "predicted_count": 1,
+            "recall": 1.0,
+            "reference_count": 1
+          },
+          "difference": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 0
+          },
+          "fraction_of": {
+            "f1": 0.5714285714285715,
+            "overlap": 4,
+            "precision": 0.5,
+            "predicted_count": 8,
+            "recall": 0.6666666666666666,
+            "reference_count": 6
+          },
+          "given": {
+            "f1": 0.47887323943661975,
+            "overlap": 17,
+            "precision": 0.4722222222222222,
+            "predicted_count": 36,
+            "recall": 0.4857142857142857,
+            "reference_count": 35
+          },
+          "mean_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "multiple": {
+            "f1": 0.75,
+            "overlap": 3,
+            "precision": 0.75,
+            "predicted_count": 4,
+            "recall": 0.75,
+            "reference_count": 4
+          },
+          "offset": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 5,
+            "recall": 0.0,
+            "reference_count": 4
+          },
+          "per_unit_total": {
+            "f1": 0.10526315789473685,
+            "overlap": 1,
+            "precision": 0.1,
+            "predicted_count": 10,
+            "recall": 0.1111111111111111,
+            "reference_count": 9
+          },
+          "percent_of": {
+            "f1": 1.0,
+            "overlap": 1,
+            "precision": 1.0,
+            "predicted_count": 1,
+            "recall": 1.0,
+            "reference_count": 1
+          },
+          "quotient": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 2,
+            "recall": 0.0,
+            "reference_count": 2
+          },
+          "remaining": {
+            "f1": 0.6666666666666666,
+            "overlap": 5,
+            "precision": 0.7142857142857143,
+            "predicted_count": 7,
+            "recall": 0.625,
+            "reference_count": 8
+          },
+          "same": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 1
+          },
+          "sum_of": {
+            "f1": 0.3076923076923077,
+            "overlap": 2,
+            "precision": 0.4,
+            "predicted_count": 5,
+            "recall": 0.25,
+            "reference_count": 8
+          }
+        },
+        "query_target_accuracy": {
+          "correct": 7,
+          "rate": 0.5384615384615384,
+          "support": 13
+        },
+        "relation_direction_accuracy": {
+          "correct": 9,
+          "rate": 0.47368421052631576,
+          "support": 19
+        }
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.23111202522967228,
+        "blackboard_precision": 0.22892793481028775,
+        "blackboard_recall": 0.2336898395721925,
+        "dependency_f1": 0.1977124183006536,
+        "spurious_state_rate": 0.7710720651897123
+      },
+      "mean_semantic": {
+        "attribute": 0.4158195605564027,
+        "dependency": 0.1977124183006536,
+        "entity": 0.596078431372549,
+        "operator": 0.6163650075414782,
+        "qualifier": 0.6529411764705882
+      },
+      "rates": {
+        "executable": {
+          "correct": 12,
+          "rate": 0.7058823529411765,
+          "support": 17,
+          "wilson95": [
+            0.4686688993346016,
+            0.8672001038970478
+          ]
+        },
+        "fail_closed": {
+          "correct": 5,
+          "rate": 0.29411764705882354,
+          "support": 17,
+          "wilson95": [
+            0.1327998961029523,
+            0.5313311006653985
+          ]
+        },
+        "final_answer": {
+          "correct": 8,
+          "rate": 0.47058823529411764,
+          "support": 17,
+          "wilson95": [
+            0.26165106442409436,
+            0.6903676493999558
+          ]
+        },
+        "lowerable": {
+          "correct": 12,
+          "rate": 0.7058823529411765,
+          "support": 17,
+          "wilson95": [
+            0.4686688993346016,
+            0.8672001038970478
+          ]
+        },
+        "parse": {
+          "correct": 13,
+          "rate": 0.7647058823529411,
+          "support": 17,
+          "wilson95": [
+            0.5273820188043501,
+            0.9044495567791988
+          ]
+        },
+        "semantic_state": {
+          "correct": 2,
+          "rate": 0.11764705882352941,
+          "support": 17,
+          "wilson95": [
+            0.03287977376379267,
+            0.3433635059488588
+          ]
+        },
+        "semantic_structure": {
+          "correct": 1,
+          "rate": 0.058823529411764705,
+          "support": 17,
+          "wilson95": [
+            0.010460400984997592,
+            0.26982030637575405
+          ]
+        },
+        "type_valid": {
+          "correct": 12,
+          "rate": 0.7058823529411765,
+          "support": 17,
+          "wilson95": [
+            0.4686688993346016,
+            0.8672001038970478
+          ]
+        }
+      }
+    }
+  },
+  "tatqa": {
+    "F0": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 5,
+          "rate": 0.625,
+          "support": 8
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 5,
+          "rate": 0.625,
+          "support": 8
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 7
+        },
+        "semantic_structure_given_parse": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 8
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.004940711462450593,
+        "generated_tokens_per_correct_answer": 202.4,
+        "mean_ast_nodes": 4.625,
+        "mean_generated_tokens": 126.5,
+        "mean_prompt_tokens": 448.375,
+        "mean_statement_count": 4.625,
+        "semantic_success_per_generated_token": 0.0
+      },
+      "count": 8,
+      "error_counts": {
+        "aggregation_cardinality": 4,
+        "attribute_grounding": 8,
+        "cardinality_qualifier": 3,
+        "dependency_incomplete": 8,
+        "entity_grounding": 6,
+        "hallucinated_or_mutated_number": 2,
+        "lowering_unsupported_form": 1,
+        "number_attached_to_wrong_path": 4,
+        "omitted_number": 2,
+        "operator_mapping": 2,
+        "qualifier_grounding": 4,
+        "return_missing": 1,
+        "return_wrong_target": 7,
+        "source_fact_grounding": 6,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 2
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.125,
+        "blackboard_precision": 0.16666666666666666,
+        "blackboard_recall": 0.1,
+        "dependency_f1": 0.0,
+        "spurious_state_rate": 0.8333333333333334
+      },
+      "mean_semantic": {
+        "attribute": 0.125,
+        "dependency": 0.0,
+        "entity": 0.25,
+        "operator": 0.75,
+        "qualifier": 0.5595238095238095
+      },
+      "rates": {
+        "executable": {
+          "correct": 6,
+          "rate": 0.75,
+          "support": 8,
+          "wilson95": [
+            0.40927543031016883,
+            0.9285207872478909
+          ]
+        },
+        "fail_closed": {
+          "correct": 2,
+          "rate": 0.25,
+          "support": 8,
+          "wilson95": [
+            0.071479212752109,
+            0.5907245696898311
+          ]
+        },
+        "final_answer": {
+          "correct": 5,
+          "rate": 0.625,
+          "support": 8,
+          "wilson95": [
+            0.30574239460262737,
+            0.8631557141764026
+          ]
+        },
+        "lowerable": {
+          "correct": 7,
+          "rate": 0.875,
+          "support": 8,
+          "wilson95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "parse": {
+          "correct": 8,
+          "rate": 1.0,
+          "support": 8,
+          "wilson95": [
+            0.6755924351161198,
+            1.0
+          ]
+        },
+        "semantic_state": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 8,
+          "wilson95": [
+            0.0,
+            0.32440756488388023
+          ]
+        },
+        "semantic_structure": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 8,
+          "wilson95": [
+            0.0,
+            0.32440756488388023
+          ]
+        },
+        "type_valid": {
+          "correct": 7,
+          "rate": 0.875,
+          "support": 8,
+          "wilson95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        }
+      }
+    },
+    "F1": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 6,
+          "rate": 0.75,
+          "support": 8
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 1,
+          "rate": 1.0,
+          "support": 1
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 5,
+          "rate": 0.7142857142857143,
+          "support": 7
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 1,
+          "rate": 0.14285714285714285,
+          "support": 7
+        },
+        "semantic_structure_given_parse": {
+          "correct": 1,
+          "rate": 0.14285714285714285,
+          "support": 7
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.004484304932735426,
+        "generated_tokens_per_correct_answer": 223.0,
+        "mean_ast_nodes": 28.875,
+        "mean_generated_tokens": 167.25,
+        "mean_prompt_tokens": 396.125,
+        "mean_statement_count": 4.625,
+        "semantic_success_per_generated_token": 0.0007473841554559044
+      },
+      "count": 8,
+      "error_counts": {
+        "aggregation_cardinality": 4,
+        "attribute_grounding": 8,
+        "cardinality_qualifier": 4,
+        "dependency_incomplete": 7,
+        "entity_grounding": 6,
+        "hallucinated_or_mutated_number": 1,
+        "number_attached_to_wrong_path": 5,
+        "omitted_number": 2,
+        "operator_mapping": 1,
+        "qualifier_grounding": 4,
+        "return_missing": 1,
+        "return_wrong_target": 6,
+        "source_fact_grounding": 6,
+        "surface_no_asl": 1,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 2,
+        "unresolved_symbol_equivalence": 1
+      },
+      "f1_asl_isomorphic_accuracy": {
+        "correct": 0,
+        "rate": 0.0,
+        "support": 8
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.08333333333333333,
+        "blackboard_precision": 0.08333333333333333,
+        "blackboard_recall": 0.08333333333333333,
+        "dependency_f1": 0.125,
+        "spurious_state_rate": 0.9166666666666666
+      },
+      "mean_semantic": {
+        "attribute": 0.13333333333333333,
+        "dependency": 0.125,
+        "entity": 0.25,
+        "operator": 0.875,
+        "qualifier": 0.55
+      },
+      "rates": {
+        "executable": {
+          "correct": 7,
+          "rate": 0.875,
+          "support": 8,
+          "wilson95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "fail_closed": {
+          "correct": 1,
+          "rate": 0.125,
+          "support": 8,
+          "wilson95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "final_answer": {
+          "correct": 6,
+          "rate": 0.75,
+          "support": 8,
+          "wilson95": [
+            0.40927543031016883,
+            0.9285207872478909
+          ]
+        },
+        "lowerable": {
+          "correct": 7,
+          "rate": 0.875,
+          "support": 8,
+          "wilson95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "parse": {
+          "correct": 7,
+          "rate": 0.875,
+          "support": 8,
+          "wilson95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        },
+        "semantic_state": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 8,
+          "wilson95": [
+            0.0,
+            0.32440756488388023
+          ]
+        },
+        "semantic_structure": {
+          "correct": 1,
+          "rate": 0.125,
+          "support": 8,
+          "wilson95": [
+            0.02241749145005667,
+            0.4708881822128535
+          ]
+        },
+        "type_valid": {
+          "correct": 7,
+          "rate": 0.875,
+          "support": 8,
+          "wilson95": [
+            0.5291118177871464,
+            0.9775825085499433
+          ]
+        }
+      }
+    },
+    "F2": {
+      "conditional": {
+        "answer_given_runtime_state_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_runtime_state_incorrect": {
+          "correct": 3,
+          "rate": 0.375,
+          "support": 8
+        },
+        "answer_given_semantic_structure_correct": {
+          "correct": 0,
+          "rate": null,
+          "support": 0
+        },
+        "answer_given_semantic_structure_incorrect": {
+          "correct": 3,
+          "rate": 0.375,
+          "support": 8
+        },
+        "semantic_structure_given_lowerable": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 5
+        },
+        "semantic_structure_given_parse": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 5
+        }
+      },
+      "cost": {
+        "final_success_per_generated_token": 0.0024489795918367346,
+        "generated_tokens_per_correct_answer": 408.3333333333333,
+        "mean_ast_nodes": 17.625,
+        "mean_generated_tokens": 153.125,
+        "mean_prompt_tokens": 397.125,
+        "mean_statement_count": 2.875,
+        "semantic_success_per_generated_token": 0.0
+      },
+      "count": 8,
+      "error_counts": {
+        "aggregation_cardinality": 4,
+        "attribute_grounding": 8,
+        "cardinality_qualifier": 3,
+        "dependency_incomplete": 8,
+        "entity_grounding": 6,
+        "hallucinated_or_mutated_number": 2,
+        "number_attached_to_wrong_path": 3,
+        "omitted_number": 5,
+        "operator_mapping": 3,
+        "qualifier_grounding": 4,
+        "return_missing": 3,
+        "return_wrong_target": 4,
+        "source_fact_grounding": 6,
+        "surface_no_asl": 3,
+        "temporal_qualifier": 2,
+        "temporal_semantics": 2,
+        "transitive_shortcut": 1
+      },
+      "f2_semantics": {
+        "argument_binding_exact": {
+          "correct": 6,
+          "rate": 0.1935483870967742,
+          "support": 31
+        },
+        "argument_role_accuracy": {
+          "correct": 14,
+          "rate": 0.18421052631578946,
+          "support": 76
+        },
+        "functor_class_macro_f1": 0.15675971538040503,
+        "functor_class_micro": {
+          "f1": 0.24489795918367346,
+          "overlap": 6,
+          "precision": 0.3333333333333333,
+          "predicted_count": 18,
+          "recall": 0.1935483870967742,
+          "reference_count": 31
+        },
+        "per_functor_class": {
+          "difference": {
+            "f1": 0.28571428571428575,
+            "overlap": 1,
+            "precision": 0.5,
+            "predicted_count": 2,
+            "recall": 0.2,
+            "reference_count": 5
+          },
+          "given": {
+            "f1": 0.27586206896551724,
+            "overlap": 4,
+            "precision": 0.36363636363636365,
+            "predicted_count": 11,
+            "recall": 0.2222222222222222,
+            "reference_count": 18
+          },
+          "mean_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 0,
+            "recall": 0.0,
+            "reference_count": 2
+          },
+          "percentage_ratio": {
+            "f1": 0.22222222222222224,
+            "overlap": 1,
+            "precision": 0.25,
+            "predicted_count": 4,
+            "recall": 0.2,
+            "reference_count": 5
+          },
+          "sum_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 1
+          }
+        },
+        "query_target_accuracy": {
+          "correct": 1,
+          "rate": 0.125,
+          "support": 8
+        },
+        "relation_direction_accuracy": {
+          "correct": 2,
+          "rate": 0.3333333333333333,
+          "support": 6
+        }
+      },
+      "f2_semantics_given_parse": {
+        "argument_binding_exact": {
+          "correct": 6,
+          "rate": 0.3333333333333333,
+          "support": 18
+        },
+        "argument_role_accuracy": {
+          "correct": 14,
+          "rate": 0.3181818181818182,
+          "support": 44
+        },
+        "functor_class_macro_f1": 0.27840909090909094,
+        "functor_class_micro": {
+          "f1": 0.3333333333333333,
+          "overlap": 6,
+          "precision": 0.3333333333333333,
+          "predicted_count": 18,
+          "recall": 0.3333333333333333,
+          "reference_count": 18
+        },
+        "per_functor_class": {
+          "difference": {
+            "f1": 0.5,
+            "overlap": 1,
+            "precision": 0.5,
+            "predicted_count": 2,
+            "recall": 0.5,
+            "reference_count": 2
+          },
+          "given": {
+            "f1": 0.36363636363636365,
+            "overlap": 4,
+            "precision": 0.36363636363636365,
+            "predicted_count": 11,
+            "recall": 0.36363636363636365,
+            "reference_count": 11
+          },
+          "percentage_ratio": {
+            "f1": 0.25,
+            "overlap": 1,
+            "precision": 0.25,
+            "predicted_count": 4,
+            "recall": 0.25,
+            "reference_count": 4
+          },
+          "sum_of": {
+            "f1": 0.0,
+            "overlap": 0,
+            "precision": 0.0,
+            "predicted_count": 1,
+            "recall": 0.0,
+            "reference_count": 1
+          }
+        },
+        "query_target_accuracy": {
+          "correct": 1,
+          "rate": 0.2,
+          "support": 5
+        },
+        "relation_direction_accuracy": {
+          "correct": 2,
+          "rate": 1.0,
+          "support": 2
+        }
+      },
+      "mean_blackboard": {
+        "blackboard_f1": 0.08333333333333331,
+        "blackboard_precision": 0.09375,
+        "blackboard_recall": 0.075,
+        "dependency_f1": 0.05555555555555556,
+        "spurious_state_rate": 0.90625
+      },
+      "mean_semantic": {
+        "attribute": 0.08333333333333331,
+        "dependency": 0.05555555555555556,
+        "entity": 0.25,
+        "operator": 0.625,
+        "qualifier": 0.6125
+      },
+      "rates": {
+        "executable": {
+          "correct": 5,
+          "rate": 0.625,
+          "support": 8,
+          "wilson95": [
+            0.30574239460262737,
+            0.8631557141764026
+          ]
+        },
+        "fail_closed": {
+          "correct": 3,
+          "rate": 0.375,
+          "support": 8,
+          "wilson95": [
+            0.13684428582359742,
+            0.6942576053973727
+          ]
+        },
+        "final_answer": {
+          "correct": 3,
+          "rate": 0.375,
+          "support": 8,
+          "wilson95": [
+            0.13684428582359742,
+            0.6942576053973727
+          ]
+        },
+        "lowerable": {
+          "correct": 5,
+          "rate": 0.625,
+          "support": 8,
+          "wilson95": [
+            0.30574239460262737,
+            0.8631557141764026
+          ]
+        },
+        "parse": {
+          "correct": 5,
+          "rate": 0.625,
+          "support": 8,
+          "wilson95": [
+            0.30574239460262737,
+            0.8631557141764026
+          ]
+        },
+        "semantic_state": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 8,
+          "wilson95": [
+            0.0,
+            0.32440756488388023
+          ]
+        },
+        "semantic_structure": {
+          "correct": 0,
+          "rate": 0.0,
+          "support": 8,
+          "wilson95": [
+            0.0,
+            0.32440756488388023
+          ]
+        },
+        "type_valid": {
+          "correct": 5,
+          "rate": 0.625,
+          "support": 8,
+          "wilson95": [
+            0.30574239460262737,
+            0.8631557141764026
+          ]
+        }
+      }
+    }
+  }
+}

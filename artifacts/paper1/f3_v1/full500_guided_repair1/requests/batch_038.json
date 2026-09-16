@@ -1,0 +1,105 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Debra is the host of a country music radio show, and she broadcasts interviews with celebrity country music singers. Each week, she interviews three singers, one at a time.  The first interview segment is always twice as long as the other two segments combined, and the third interview segment is always half as long as the second. If the third segment is 10 minutes long, how many minutes long is the entire show?",
+      "repair": {
+        "failure_class": "answer_mismatch",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"debra.radio_show.interview_segment_durations\", \"duration\", \"debra.radio_show\", source(\"The first interview segment is always twice as long as the other two segments combined, and the third interview segment is always half as long as the second\"))",
+          "observe(at(\"debra.radio_show.singers_interviewed.count\", \"each_week\"), 3, \"count\", source(\"Each week, she interviews three singers\"))",
+          "member(\"debra.radio_show.interview_segment_durations\", \"debra.radio_show.first_interview_segment.duration\", source(\"The first interview segment\"))",
+          "member(\"debra.radio_show.interview_segment_durations\", \"debra.radio_show.second_interview_segment.duration\", source(\"the third interview segment is always half as long as the second\"))",
+          "member(\"debra.radio_show.interview_segment_durations\", \"debra.radio_show.third_interview_segment.duration\", source(\"the third interview segment\"))",
+          "sum_relation(at(\"debra.radio_show.other_two_interview_segments.duration\", \"current\"), at(\"debra.radio_show.second_interview_segment.duration\", \"current\"), at(\"debra.radio_show.third_interview_segment.duration\", \"current\"), source(\"the other two segments combined\"))",
+          "multiple(at(\"debra.radio_show.first_interview_segment.duration\", \"current\"), at(\"debra.radio_show.other_two_interview_segments.duration\", \"current\"), 2, source(\"The first interview segment is always twice as long as the other two segments combined\"))",
+          "fraction_of(at(\"debra.radio_show.third_interview_segment.duration\", \"current\"), at(\"debra.radio_show.second_interview_segment.duration\", \"current\"), 1, 2, source(\"the third interview segment is always half as long as the second\"))",
+          "observe(at(\"debra.radio_show.third_interview_segment.duration\", \"current\"), 10, \"minute\", source(\"the third segment is 10 minutes long\"))",
+          "query(\"sum\", \"debra.radio_show.interview_segment_durations\", \"current\")"
+        ]
+      },
+      "source_id": "1584"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Geric had twice as many bills as Kyla who has 2 fewer bills than Jessa.  After giving 3 bills to Geric, Jessa has 7 bills left. How many bills did Geric have at the beginning?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "multiple(at(\"geric.bills.count\", \"initial\"), at(\"kyla.bills.count\", \"initial\"), 2, source(\"Geric had twice as many bills as Kyla\"))",
+          "offset(at(\"kyla.bills.count\", \"initial\"), at(\"jessa.bills.count\", \"initial\"), -2, \"count\", source(\"Kyla who has 2 fewer bills than Jessa\"))",
+          "transfer(\"jessa_gives_bills_to_geric\", \"jessa\", at(\"jessa.bills.count\", \"current\"), at(\"geric.bills.count\", \"current\"), 3, source(\"After giving 3 bills to Geric, Jessa has 7 bills left\"))",
+          "observe(at(\"jessa.bills.count\", \"current\"), 7, \"count\", source(\"Jessa has 7 bills left\"))",
+          "query(\"value\", at(\"geric.bills.count\", \"initial\"))"
+        ]
+      },
+      "source_id": "5207"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Sue and her sister buy a $2,100 car.  They agree to split the cost based on the percentage of days use.  Sue's sister will drive the car 4 days a week and Sue will get the rest of the days.  How much does Sue have to pay?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "5263"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Nicole collected 400 Pokemon cards. Cindy collected twice as many, and Rex collected half of Nicole and Cindy's combined total. If Rex divided his card equally among himself and his three younger siblings, how many cards does Rex have left?",
+      "repair": {
+        "failure_class": "answer_mismatch",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"nicole.pokemon_cards\", \"pokemon_card\", \"nicole\", source(\"Nicole collected 400 Pokemon cards\"))",
+          "collection(\"cindy.pokemon_cards\", \"pokemon_card\", \"cindy\", source(\"Cindy collected twice as many\"))",
+          "collection(\"rex.pokemon_cards\", \"pokemon_card\", \"rex\", source(\"Rex collected half of Nicole and Cindy's combined total\"))",
+          "observe(at(\"nicole.pokemon_cards.count\", \"initial\"), 400, \"count\", source(\"Nicole collected 400 Pokemon cards\"))",
+          "multiple(at(\"cindy.pokemon_cards.count\", \"initial\"), at(\"nicole.pokemon_cards.count\", \"initial\"), 2, source(\"Cindy collected twice as many\"))",
+          "sum_relation(\"nicole_and_cindy.pokemon_cards.combined_count\", at(\"nicole.pokemon_cards.count\", \"initial\"), at(\"cindy.pokemon_cards.count\", \"initial\"), source(\"Nicole and Cindy's combined total\"))",
+          "fraction_of(at(\"rex.pokemon_cards.count\", \"initial\"), \"nicole_and_cindy.pokemon_cards.combined_count\", 1, 2, source(\"Rex collected half of Nicole and Cindy's combined total\"))",
+          "collection(\"rex.younger_siblings\", \"person\", \"rex.family\", source(\"his three younger siblings\"))",
+          "observe(at(\"rex.younger_siblings.count\", \"current\"), 3, \"count\", source(\"his three younger siblings\"))",
+          "collection(\"rex.card_division.recipients\", \"recipient\", \"rex.card_division\", source(\"himself and his three younger siblings\"))",
+          "member(\"rex.card_division.recipients\", \"rex\", source(\"himself\"))",
+          "member(\"rex.card_division.recipients\", \"rex.younger_siblings\", source(\"his three younger siblings\"))",
+          "collection(\"rex.card_division.card_shares\", \"card_share\", \"rex.card_division.recipients\", source(\"divided his card equally among himself and his three younger siblings\"))",
+          "partition(\"rex.card_division.card_shares\", at(\"rex.pokemon_cards.count\", \"initial\"), source(\"Rex divided his card equally among himself and his three younger siblings\"))",
+          "quotient_relation(at(\"rex.pokemon_cards.count\", \"current\"), at(\"rex.pokemon_cards.count\", \"initial\"), at(\"rex.card_division.recipients.count\", \"current\"), source(\"Rex divided his card equally among himself and his three younger siblings\"))",
+          "query(\"remaining_count\", \"rex.pokemon_cards\", \"current\")"
+        ]
+      },
+      "source_id": "3222"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Josh gets together with 7 friends.  Everyone including him puts 5 dollars into a pot.  First place gets 80% of the money.  Second and third place split the rest.  How much money does third place get?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"gathering.friends.count\", \"current\"), 7, \"count\", source(\"7 friends\"))",
+          "offset(at(\"gathering.participants.count\", \"current\"), at(\"gathering.friends.count\", \"current\"), 1, \"count\", source(\"Josh gets together with 7 friends\"))",
+          "observe(at(\"gathering.per_participant_contribution.amount\", \"current\"), 5, \"dollar\", source(\"Everyone including him puts 5 dollars into a pot\"))",
+          "product_relation(\"pot.money.amount\", at(\"gathering.participants.count\", \"current\"), at(\"gathering.per_participant_contribution.amount\", \"current\"), source(\"Everyone including him puts 5 dollars into a pot\"))",
+          "percent_of(\"prize.first_place.amount\", \"pot.money.amount\", 80, source(\"First place gets 80% of the money\"))",
+          "difference_relation(\"prize.remaining.amount\", \"pot.money.amount\", \"prize.first_place.amount\", source(\"Second and third place split the rest\"))",
+          "sum_relation(\"prize.remaining.amount\", \"prize.second_place.amount\", \"prize.third_place.amount\", source(\"Second and third place split the rest\"))",
+          "same(\"prize.second_place.amount\", \"prize.third_place.amount\", source(\"Second and third place split the rest\"))",
+          "query(\"value\", \"prize.third_place.amount\")"
+        ]
+      },
+      "source_id": "1936"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

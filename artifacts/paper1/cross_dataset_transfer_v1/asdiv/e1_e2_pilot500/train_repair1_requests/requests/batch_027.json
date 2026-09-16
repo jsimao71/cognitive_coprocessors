@@ -1,0 +1,446 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If a number is subtracted from 32, the digits of 32 are interchanged.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "Find the number.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "original.number = 32",
+              "digits_interchanged.number = 23",
+              "sought.number = original.number - digits_interchanged.number"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The digit interchange of 32 is represented explicitly as 23."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN sought.number"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1315"
+      },
+      "question": "If a number is subtracted from 32, the digits of 32 are interchanged. Find the number.",
+      "source_context": null,
+      "source_id": "asdiv-1315",
+      "validation_failure": "answer mismatch: actual=9, expected=55",
+      "validator_context": {
+        "correct_answer": "55",
+        "gold_reasoning": "x:The number; x-32=23"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 35,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There was 1,050 ml of tea in a pot.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 36,
+          "teacher_input_default": true,
+          "text": "Anna poured the tea into some cups.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 145,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "If there were 65 ml of tea in each cup, how much tea was left in the pot?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "pot.tea.initial_ml = 1050"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "Introduces the cups and the pouring event but supplies no numeric amount or cup count, so there is no arithmetic state assignment."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The amount in each cup is given, but neither the number of cups nor the total amount poured is specified, so the tea remaining in the pot is underdetermined."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0812"
+      },
+      "question": "There was 1,050 ml of tea in a pot. Anna poured the tea into some cups. If there were 65 ml of tea in each cup, how much tea was left in the pot?",
+      "source_context": null,
+      "source_id": "asdiv-0812",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "1050/65=16 r10"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Being a nature lover, she also gave some money to three forest reserves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 258,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "If she donated $570.00 to Treetown National Park and The Forest Reserve which is $140.00 more than what she gave to Animal Preservation Park, how much did she donate to all three parks?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "donor.donations.park_count = 3"
+            ],
+            "assumptions": [
+              "The pronoun 'she' is represented by the semantic role donor because no personal name is supplied."
+            ],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "donor.donations.treetown_national_park = 570",
+              "donor.donations.the_forest_reserve = 570",
+              "donor.donations.animal_preservation_park = donor.donations.the_forest_reserve - 140",
+              "donor.donations.all_three_parks = sum(donor.donations.treetown_national_park, donor.donations.the_forest_reserve, donor.donations.animal_preservation_park)",
+              "RETURN donor.donations.all_three_parks"
+            ],
+            "assumptions": [
+              "The $570 amount is read distributively as the donation to each of Treetown National Park and The Forest Reserve.",
+              "The relative clause 'which is $140.00 more' is read as comparing the donation to The Forest Reserve with the donation to Animal Preservation Park."
+            ],
+            "confidence": 0.76,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0368"
+      },
+      "question": "Being a nature lover, she also gave some money to three forest reserves. If she donated $570.00 to Treetown National Park and The Forest Reserve which is $140.00 more than what she gave to Animal Preservation Park, how much did she donate to all three parks?",
+      "source_context": null,
+      "source_id": "asdiv-0368",
+      "validation_failure": "answer mismatch: actual=1570, expected=1000",
+      "validator_context": {
+        "correct_answer": "1000",
+        "gold_reasoning": "(570-140)+570=1000"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If twice the son's age is added to the father's, the sum is 70.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "But if twice the father's age is added to the son's age, the sum is 95.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 168,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "Find the ages of father and son.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "family.father_plus_twice_son_age = 70"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The semantic path names the stated linear combination without replacing it with a solved age."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "family.twice_father_plus_son_age = 95",
+              "family.three_times_son_age = family.father_plus_twice_son_age * 2 - family.twice_father_plus_son_age",
+              "family.son.age = family.three_times_son_age / 3",
+              "family.father.age = family.father_plus_twice_son_age - family.son.age * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "The age fields are derived by eliminating the father's age from the two stated linear combinations."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN family.father.age",
+              "RETURN family.son.age"
+            ],
+            "assumptions": [
+              "The plural request is represented by returning the father's age and the son's age separately, in source order."
+            ],
+            "confidence": 0.95,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1414"
+      },
+      "question": "If twice the son's age is added to the father's, the sum is 70. But if twice the father's age is added to the son's age, the sum is 95. Find the ages of father and son.",
+      "source_context": null,
+      "source_id": "asdiv-1414",
+      "validation_failure": "answer mismatch: actual=15, expected=40",
+      "validator_context": {
+        "correct_answer": "40",
+        "gold_reasoning": "x:The father's age; y:The son's age; 2y+x=70; 2x+y=95"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mitch owns a business and assigns two of his employees their shifts.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "He assigns the first employee shifts in blocks of 2 hours, and he assigns the second worker shifts in blocks of 11 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 304,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 191,
+          "teacher_input_default": true,
+          "text": "If both workers must receive the same number of hours, what is the minimum number of hours each must be assigned?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mitch.business.employee_count_in_problem = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mitch.first_employee.shift_block_hours = 2",
+              "mitch.second_employee.shift_block_hours = 11"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires finding the least positive common multiple of the two shift-block durations, but the active operator registry provides neither an lcm operator nor divisibility/integer-constraint semantics. Encoding the solved constant would erase the requested minimum-common-multiple relation."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2057"
+      },
+      "question": "Mitch owns a business and assigns two of his employees their shifts. He assigns the first employee shifts in blocks of 2 hours, and he assigns the second worker shifts in blocks of 11 hours. If both workers must receive the same number of hours, what is the minimum number of hours each must be assigned?",
+      "source_context": null,
+      "source_id": "asdiv-2057",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "22",
+        "gold_reasoning": "LCM[2,11]=22"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

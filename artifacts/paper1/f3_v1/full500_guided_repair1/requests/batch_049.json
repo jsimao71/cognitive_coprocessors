@@ -1,0 +1,318 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "tatqa",
+      "question": "What was the absolute percentage change in risk-free interest rate between 2018 and 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"vmware.employee_stock_purchase_plan.risk_free_interest_rate\", \"2018\"), 1.2, \"percent\", cell(\"Risk-free interest rate\", \"February 2, 2018\"))",
+          "observe(at(\"vmware.employee_stock_purchase_plan.risk_free_interest_rate\", \"2019\"), 2.0, \"percent\", cell(\"Risk-free interest rate\", \"February 1, 2019\"))",
+          "query(\"percentage_change\", at(\"vmware.employee_stock_purchase_plan.risk_free_interest_rate\", \"2018\"), at(\"vmware.employee_stock_purchase_plan.risk_free_interest_rate\", \"2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "The weighted-average grant date fair value of VMware stock options can fluctuate from period to period primarily due to higher valued options assumed through business combinations with exercise prices lower than the fair market value of VMware\u2019s stock on the date of grant."
+          },
+          {
+            "order": 2,
+            "text": "For equity awards granted under the VMware equity plan, volatility was based on an analysis of historical stock prices and implied volatilities of VMware\u2019s Class A common stock. The expected term was based on historical exercise patterns and post-vesting termination behavior, the term of the option period for grants made under the ESPP, or the weighted-average remaining term for options assumed in acquisitions. VMware\u2019s expected dividend yield input was zero as the Company has not historically paid, nor expects in the future to pay, regular dividends on its common stock. The risk-free interest rate was based on a U.S. Treasury instrument whose term is consistent with the expected term of the stock options."
+          },
+          {
+            "order": 3,
+            "text": "For equity awards granted under the Pivotal equity plan, volatility was based on the volatility of a group of comparable public companies based on size, stage of life cycle, profitability, growth and other factors. The expected term was estimated using the simplified method and was determined based on the vesting terms, exercise terms and contractual lives of the options. Pivotal\u2019s expected dividend yield input was zero as the Company has not historically paid regular dividends on its common stock. The risk-free interest rate was based on a U.S. Treasury instrument whose term was consistent with the expected term of the stock options."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "",
+            "For the Year Ended",
+            ""
+          ],
+          [
+            "VMware Employee Stock Purchase Plan",
+            "January 31, 2020",
+            "February 1, 2019",
+            "February 2, 2018"
+          ],
+          [
+            "Dividend yield",
+            "None",
+            "None",
+            "None"
+          ],
+          [
+            "Expected volatility",
+            "27.4%",
+            "33.5%",
+            "22.6%"
+          ],
+          [
+            "Risk-free interest rate",
+            "1.7%",
+            "2.0%",
+            "1.2%"
+          ],
+          [
+            "Expected term (in years)",
+            "0.6",
+            "0.8",
+            "0.9"
+          ],
+          [
+            "Weighted-average fair value at grant date",
+            "$35.66",
+            "$34.72",
+            "$21.93"
+          ]
+        ]
+      },
+      "source_id": "f9364b6ad16b81dd128ab38a0b7fd86f"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the value of Finjan Blue future commitment that are due in less than one year as a percentage of the total contractual obligations?",
+      "repair": {
+        "failure_class": "answer_mismatch",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.contractual_obligations.finjan_blue_future_commitment.less_than_1_year\", \"2019-12-31\"), 2000, \"thousand_dollars\", cell(\"Finjan Blue future commitment\", \"Less Than 1 Year\"))",
+          "observe(at(\"company.contractual_obligations.total\", \"2019-12-31\"), 7478, \"thousand_dollars\", cell(\"Total\", \"Total\"))",
+          "query(\"percentage_ratio\", at(\"company.contractual_obligations.finjan_blue_future_commitment.less_than_1_year\", \"2019-12-31\"), at(\"company.contractual_obligations.total\", \"2019-12-31\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Contractual Obligations"
+          },
+          {
+            "order": 2,
+            "text": "The following table summarizes, as of December 31, 2019, our contractual obligations over the next five years for the property lease entered into during the year ended 2018, the VPN arrangement with Avira and the asset purchase from IBM:"
+          }
+        ],
+        "table": [
+          [
+            "",
+            "",
+            "Payments due by Period (In thousands)",
+            ""
+          ],
+          [
+            "Contractual Obligations",
+            "Less Than 1 Year",
+            "2-5 Years",
+            "Total"
+          ],
+          [
+            "Operating Lease Obligations:",
+            "$773",
+            "$2,055",
+            "$2,828"
+          ],
+          [
+            "Other Long-Term Liabilities:",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Finjan Mobile future commitment",
+            "650",
+            "\u2014",
+            "650"
+          ],
+          [
+            "Finjan Blue future commitment",
+            "2,000",
+            "2,000",
+            "4,000"
+          ],
+          [
+            "Total",
+            "$3,423",
+            "$4,055",
+            "$7,478"
+          ]
+        ]
+      },
+      "source_id": "dce3bdccbbce1f06cf028bd16563bc8b"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What was the change in the revenues from 2018 to 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.revenues\", \"2018\"), 1095.0, \"million_dollars\", cell(\"Revenues\", \"April 28, 2018\"))",
+          "observe(at(\"company.revenues\", \"2019\"), 1073.3, \"million_dollars\", cell(\"Revenues\", \"April 27, 2019\"))",
+          "query(\"difference\", at(\"company.revenues\", \"2018\"), at(\"company.revenues\", \"2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "The following table presents unaudited supplemental pro forma results for fiscal 2019 and 2018 as if both the Grakon acquisition had occurred as of the beginning of fiscal 2018 and the Pacific Insight acquisition had occurred as of the beginning of fiscal 2017. The unaudited pro forma information is presented for information purposes only and is not indicative of the results of operations that would have been achieved if the acquisitions had taken place at such times."
+          },
+          {
+            "order": 2,
+            "text": "The unaudited pro forma results presented below primarily include amortization charges for acquired intangible assets, depreciation adjustments for property, plant and equipment that has been revalued, interest expense adjustments due to an increased debt level, adjustments for certain acquisition-related charges and related tax effects."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "Fiscal Year Ended",
+            ""
+          ],
+          [
+            "(Dollars in Millions)",
+            "April 27, 2019",
+            "April 28, 2018"
+          ],
+          [
+            "Revenues",
+            "$1,073.3",
+            "$1,095.0"
+          ],
+          [
+            "Net Income",
+            "$106.4",
+            "$70.5"
+          ]
+        ]
+      },
+      "source_id": "a0bf7f7def3241aa8085ae288e7c05eb"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What was the change in the land value from 2018 to 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.property_plant_equipment.land_value\", \"April 28, 2018\"), 0.8, \"million_dollars\", cell(\"Land\", \"April 28, 2018\"))",
+          "observe(at(\"company.property_plant_equipment.land_value\", \"April 27, 2019\"), 3.7, \"million_dollars\", cell(\"Land\", \"April 27, 2019\"))",
+          "query(\"difference\", at(\"company.property_plant_equipment.land_value\", \"April 28, 2018\"), at(\"company.property_plant_equipment.land_value\", \"April 27, 2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Property, Plant and Equipment."
+          },
+          {
+            "order": 2,
+            "text": "Property, plant and equipment is stated at cost. Maintenance and repair costs are expensed as incurred. Depreciation is calculated using the straight-line method using estimated useful lives of 5 to 40 years for buildings and building improvements and 3 to 15 years for machinery and equipment. A summary of property, plant and equipment is shown below:"
+          },
+          {
+            "order": 3,
+            "text": "Depreciation expense was $27.2 million, $22.5 million and $22.0 million in fiscal 2019, fiscal 2018 and fiscal 2017, respectively. As of April 27, 2019 and April 28, 2018, capital expenditures recorded in accounts payable totaled $6.4 million and $9.0 million, respectively."
+          }
+        ],
+        "table": [
+          [
+            "(Dollars in Millions)",
+            "April 27, 2019",
+            "April 28, 2018"
+          ],
+          [
+            "Land",
+            "$3.7",
+            "$0.8"
+          ],
+          [
+            "Buildings and Building Improvements",
+            "81.2",
+            "69.2"
+          ],
+          [
+            "Machinery and Equipment",
+            "390.7",
+            "364.7"
+          ],
+          [
+            "Total Property, Plant and Equipment, Gross",
+            "475.6",
+            "434.7"
+          ],
+          [
+            "Less: Accumulated Depreciation",
+            "283.7",
+            "272.5"
+          ],
+          [
+            "Property, Plant and Equipment, Net",
+            "$191.9",
+            "$162.2"
+          ]
+        ]
+      },
+      "source_id": "39c874ac4d5b3dacd19ead0f593544eb"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the increase/ (decrease) in Trade accounts receivable from 2018 to 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.trade_accounts_receivable\", \"December 31, 2018\"), 1292, \"currency\", cell(\"Trade accounts receivable\", \"December 31, 2018\"))",
+          "observe(at(\"company.trade_accounts_receivable\", \"December 31, 2019\"), 1396, \"currency\", cell(\"Trade accounts receivable\", \"December 31, 2019\"))",
+          "query(\"difference\", at(\"company.trade_accounts_receivable\", \"December 31, 2018\"), at(\"company.trade_accounts_receivable\", \"December 31, 2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "There was no material bad debt expense in 2019, 2018 and 2017. In 2019, 2018 and 2017, the Company\u2019s largest customer, Apple represented 17.6%, 13.1% and 10.5% of consolidated net revenues, respectively, reported in the ADG, AMS and MDG segments."
+          },
+          {
+            "order": 2,
+            "text": "In 2019, $75 million of trade accounts receivable were sold without recourse (nil in 2018)."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "December 31, 2019",
+            "December 31, 2018"
+          ],
+          [
+            "Trade accounts receivable",
+            "1,396",
+            "1,292"
+          ],
+          [
+            "Allowance for doubtful accounts",
+            "(16)",
+            "(15)"
+          ],
+          [
+            "Total",
+            "1,380",
+            "1,277"
+          ]
+        ]
+      },
+      "source_id": "f43324f1b26231c628d75a59057cb42a"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

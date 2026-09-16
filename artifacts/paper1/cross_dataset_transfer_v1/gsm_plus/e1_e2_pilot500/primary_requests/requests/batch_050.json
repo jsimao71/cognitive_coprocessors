@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Becky, Jake, and Silvia shared 4 pizzas.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "Each pizza had 8 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "Jake ate 3 slices less than Becky did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "Silvia ate twice as many slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "If they ate a total of 31 slices, how many slices did Becky eat?",
+          "warnings": []
+        }
+      ],
+      "question": "Becky, Jake, and Silvia shared 4 pizzas. Each pizza had 8 slices. Jake ate 3 slices less than Becky did. Silvia ate twice as many slices than Jake did. If they ate a total of 31 slices, how many slices did Becky eat?",
+      "source_id": "gsm-plus-08484"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kim has started his own housekeeping business and is calculating how much profit he will make from his clients.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "He already has 3 clients but is talking to another 5 potential clients and feels confident enough to include them in his calculations.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 247,
+          "teacher_input_default": true,
+          "text": "Each client\u2019s home will need 2 bottles of bleach and a pack of clothes to clean.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 402,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 328,
+          "teacher_input_default": true,
+          "text": "Bottles of bleach will cost $2 each and packs of cloths will cost $5 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 431,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 403,
+          "teacher_input_default": true,
+          "text": "These are his only expenses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 517,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 432,
+          "teacher_input_default": true,
+          "text": "He also plans to give a discount of $1 to each of his clients as a promotional offer.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 576,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 518,
+          "teacher_input_default": true,
+          "text": "He calculates that his total income each week will be $92.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 701,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 577,
+          "teacher_input_default": true,
+          "text": "Profit is the difference between total income and total expenses, so how much profit, in dollars, will Lucas make each week?",
+          "warnings": []
+        }
+      ],
+      "question": "Kim has started his own housekeeping business and is calculating how much profit he will make from his clients. He already has 3 clients but is talking to another 5 potential clients and feels confident enough to include them in his calculations. Each client\u2019s home will need 2 bottles of bleach and a pack of clothes to clean. Bottles of bleach will cost $2 each and packs of cloths will cost $5 each. These are his only expenses. He also plans to give a discount of $1 to each of his clients as a promotional offer. He calculates that his total income each week will be $92. Profit is the difference between total income and total expenses, so how much profit, in dollars, will Lucas make each week?",
+      "source_id": "gsm-plus-01155"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Colby works for a manufacturing company in the packaging division.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "He gets paid $0.20 for every package he completes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 119,
+          "teacher_input_default": true,
+          "text": "If he completes half of 20 less than half of one hundred packages per hour, how much money, in dollars, does he earn in a typical eight-hour workday?",
+          "warnings": []
+        }
+      ],
+      "question": "Colby works for a manufacturing company in the packaging division.  He gets paid $0.20 for every package he completes. If he completes half of 20 less than half of one hundred packages per hour, how much money, in dollars, does he earn in a typical eight-hour workday?",
+      "source_id": "gsm-plus-07290"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "After ten rounds, Craig has spelled out 20 words with 15 letters each, which takes two hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 405,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 230,
+          "teacher_input_default": true,
+          "text": "If Craig's brother has spelled words with a total count of letters 50 more than Craig, calculate the total number of letters in the words they've spelled after the ten rounds.",
+          "warnings": []
+        }
+      ],
+      "question": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words. After ten rounds, Craig has spelled out 20 words with 15 letters each, which takes two hours. If Craig's brother has spelled words with a total count of letters 50 more than Craig, calculate the total number of letters in the words they've spelled after the ten rounds.",
+      "source_id": "gsm-plus-07518"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In one hour, Ezra read twice as many books as Ahmed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Ezra has read 200 books this hour and decided to read 100 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 158,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "How many books have they read altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "In one hour, Ezra read twice as many books as Ahmed. Ezra has read 200 books this hour and decided to read 100 more. How many books have they read altogether?",
+      "source_id": "gsm-plus-06144"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,575 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A sum of $1920 was split among three individuals.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "The second person received $80 more than the first person, and the third person received double the amount of the second person.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "How much did the first person receive?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "distribution.total_amount_usd = 1920",
+              "distribution.recipient_count = 3",
+              "first_person.received_amount_usd = distribution.total_amount_usd - second_person.received_amount_usd - third_person.received_amount_usd"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The residual relation preserves that the entire stated sum was split among the three individuals."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "second_person.received_amount_usd = first_person.received_amount_usd + 80",
+              "third_person.received_amount_usd = second_person.received_amount_usd * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN first_person.received_amount_usd"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08365"
+      },
+      "question": "A sum of $1920 was split among three individuals. The second person received $80 more than the first person, and the third person received double the amount of the second person. How much did the first person receive?",
+      "source_context": null,
+      "source_id": "gsm-plus-08365",
+      "validation_failure": "unresolved reference 'second_person.received_amount_usd' from scope 'global'; unresolved reference 'first_person.received_amount_usd' from scope 'global'; unresolved reference 'second_person.received_amount_usd' from scope 'global'; unresolved reference 'first_person.received_amount_usd' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "420",
+        "gold_reasoning": "Let X be the amount of what the first took.\nThe second took X+<<+80=80>>80.\nThe third took (X+80)*2.\nThe total amount X + (X+80) + (X+80)*2 = 1920.\nX + X + 80 + 2*X + 80*2 = 1920\nX*4 + 240 = 1920.\nX*4 = 1680.\nX = <<420=420>>420.\n#### 420"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Four pizzas, each divided into 8 pieces, were split among Becky, Jake, and Silvia.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "Becky consumed 3 slices more than Jake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "Silvia, on the other hand, consumed double the amount Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 282,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 187,
+          "teacher_input_default": true,
+          "text": "Given that Becky consumed 10 slices, can you determine the total number of slices they all ate?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "pizzas.count = 4",
+              "pizzas.slices_per_pizza = 8",
+              "pizzas.available_slices = pizzas.count * pizzas.slices_per_pizza"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Available slices are kept distinct from the number ultimately consumed."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "becky.consumed_slices = jake.consumed_slices + 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "silvia.consumed_slices = jake.consumed_slices * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "becky.consumed_slices = 10",
+              "group.total_consumed_slices = sum(becky.consumed_slices, jake.consumed_slices, silvia.consumed_slices)",
+              "RETURN group.total_consumed_slices"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08485"
+      },
+      "question": "Four pizzas, each divided into 8 pieces, were split among Becky, Jake, and Silvia. Becky consumed 3 slices more than Jake. Silvia, on the other hand, consumed double the amount Jake did. Given that Becky consumed 10 slices, can you determine the total number of slices they all ate?",
+      "source_context": null,
+      "source_id": "gsm-plus-08485",
+      "validation_failure": "unresolved reference 'jake.consumed_slices' from scope 'global'; unresolved reference 'jake.consumed_slices' from scope 'global'; unresolved reference 'jake.consumed_slices' from scope 'global'; unresolved reference 'group.total_consumed_slices' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "31",
+        "gold_reasoning": "Jake ate 10-3 = <<10-3=7>>7 slices of pizza.\nSilvia ate 7*2 = <<7*2=14>>14 slices of pizza.\nJake, Silvia, and Becky ate 10+7+14 = <<10+7+14=31>>31 slices all together.\n#### 31"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A wooden bridge can carry no more than 5000 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "A delivery truck filled with identical boxes, each weighing 150 pounds, will pass over the bridge.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "The combined weight of the driver and the empty truck is 3755 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 338,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 221,
+          "teacher_input_default": true,
+          "text": "What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bridge.weight_limit_pounds = 5000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "delivery_truck.box.weight_pounds = 150"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The boxes are identical, so one per-box weight applies to every loaded box."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "delivery_truck.empty_with_driver.weight_pounds = 3755"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested maximum whole-number box count requires integer flooring under a weight constraint, but no floor or equivalent integer operator is available in the supplied registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00457"
+      },
+      "question": "A wooden bridge can carry no more than 5000 pounds. A delivery truck filled with identical boxes, each weighing 150 pounds, will pass over the bridge. The combined weight of the driver and the empty truck is 3755 pounds. What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+      "source_context": null,
+      "source_id": "gsm-plus-00457",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "The boxes can weigh up to 5000 pounds - 3755 pounds = <<5000-3755=1245>>1245 pounds in total.\nThere can be 1245 / 150 = <<1245/15-=8.3>>8.3, so the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit is 8.\n#### 8"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nick had twice as many candies as George.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "Then George ate some candies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "Now George has 3 candies left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "If Nick has 16 candies, how many candies did George eat?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "nick.initial.candies = george.initial.candies * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "george.remaining.candies = george.initial.candies - george.eaten.candies"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "george.remaining.candies = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "nick.initial.candies = 16",
+              "RETURN george.eaten.candies"
+            ],
+            "assumptions": [
+              "Nick did not eat or otherwise lose candies, so his stated count refers to the same count compared with George's initial candies."
+            ],
+            "confidence": 0.95,
+            "part_id": 3,
+            "semantic_notes": [
+              "Nick's candy count grounds the earlier relation, while the requested quantity is George's eaten-candy count."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-04284"
+      },
+      "question": "Nick had twice as many candies as George. Then George ate some candies. Now George has 3 candies left. If Nick has 16 candies, how many candies did George eat?",
+      "source_context": null,
+      "source_id": "gsm-plus-04284",
+      "validation_failure": "unresolved reference 'george.initial.candies' from scope 'global'; unresolved reference 'george.initial.candies' from scope 'global'; unresolved reference 'george.eaten.candies' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "Nick had twice as many candies as George, so George had 16/2 = <<16/2=8>>8 candies originally.\nGeorge has 3 candies now, so he ate 8 - 3 = <<8-3=5>>5 candies.\n#### 5"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Abraham owns 80 square meters of unused land.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "He sold half of the land for $50, and after a month, he sold another 1/4 of his land for $30.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "He then sold the remaining land for some money per square meter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 334,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "If he earned a total of $170 after selling all his unused land, how much did he sell for each square meter of the remaining land?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "abraham.unused_land.initial_area_square_meters = 80"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "abraham.land_sales.first.area_square_meters = abraham.unused_land.initial_area_square_meters / 2",
+              "abraham.land_sales.first.proceeds_dollars = 50",
+              "abraham.land_sales.second.months_after_first = 1",
+              "abraham.land_sales.second.area_square_meters = abraham.unused_land.initial_area_square_meters / 4",
+              "abraham.land_sales.second.proceeds_dollars = 30"
+            ],
+            "assumptions": [
+              "\u201cAnother 1/4 of his land\u201d denotes one quarter of Abraham's original 80-square-meter parcel, rather than one quarter of the land remaining after the first sale."
+            ],
+            "confidence": 0.89,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "abraham.land_sales.remaining.area_square_meters = abraham.unused_land.initial_area_square_meters - abraham.land_sales.first.area_square_meters - abraham.land_sales.second.area_square_meters",
+              "abraham.land_sales.remaining.proceeds_dollars = abraham.land_sales.remaining.area_square_meters * abraham.land_sales.remaining.price_per_square_meter_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "abraham.land_sales.total_proceeds_dollars = 170",
+              "abraham.land_sales.remaining.price_per_square_meter_dollars = (abraham.land_sales.total_proceeds_dollars - abraham.land_sales.first.proceeds_dollars - abraham.land_sales.second.proceeds_dollars) / abraham.land_sales.remaining.area_square_meters",
+              "RETURN abraham.land_sales.remaining.price_per_square_meter_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09292"
+      },
+      "question": "Abraham owns 80 square meters of unused land. He sold half of the land for $50, and after a month, he sold another 1/4 of his land for $30. He then sold the remaining land for some money per square meter. If he earned a total of $170 after selling all his unused land, how much did he sell for each square meter of the remaining land?",
+      "source_context": null,
+      "source_id": "gsm-plus-09292",
+      "validation_failure": "answer mismatch: actual=4.5, expected=3",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "Abraham sold 1/2 x 80= <<1/2*80=40>>40 square meters of his unused land.\nAfter a month, he sold 1/4 x 40 = <<1/4*40=10>>10 square meters of his land.\nSo, the total land he already sold is 40+10= <<50=50>>50 square meters of his land.\nHe has 80-50=30 square meters left\nFor 30 square meters of his land, he can get 170-50-30=$90,\nso each square meter of the remaining can sell at the price of 90/30=$3\n#### 3"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

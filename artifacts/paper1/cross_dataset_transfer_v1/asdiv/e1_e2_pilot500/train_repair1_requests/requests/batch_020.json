@@ -1,0 +1,456 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Shannon is making identical balloon arrangements for a party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "She has 32 maroon balloons, 24 white balloons, and 16 orange balloons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 133,
+          "teacher_input_default": true,
+          "text": "She wants each arrangement to have the same number of each color.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 286,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 199,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of arrangements that she can make if every balloon is used?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The party-arrangement context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shannon.balloons.maroon = 32",
+              "shannon.balloons.white = 24",
+              "shannon.balloons.orange = 16"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause introduces a collection-wide constraint that every arrangement has an equal per-color composition; the active arithmetic profile has no constraint or quantification construct that can express this without inventing indexed arrangements."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest arrangement count that evenly divides every color total requires greatest-common-divisor or integer-divisibility semantics, which are absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1215"
+      },
+      "question": "Shannon is making identical balloon arrangements for a party. She has 32 maroon balloons, 24 white balloons, and 16 orange balloons. She wants each arrangement to have the same number of each color. What is the greatest number of arrangements that she can make if every balloon is used?",
+      "source_context": null,
+      "source_id": "asdiv-1215",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported, part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "GCD(32,24,16)=8"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "London is 11 years old and Blair is 16 years old.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Several years ago, Blair was twice as old as London.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "How old was London then?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "london.age_now_years = 11",
+              "blair.age_now_years = 16"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "time.years_since_then = london.age_now_years * 2 - blair.age_now_years",
+              "london.age_then_years = london.age_now_years - time.years_since_then",
+              "blair.age_then_years = london.age_then_years * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The elapsed time is shared by London and Blair, preserving their age difference across time while retaining the stated twice-as-old relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN london.age_then_years"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0890"
+      },
+      "question": "London is 11 years old and Blair is 16 years old. Several years ago, Blair was twice as old as London. How old was London then?",
+      "source_context": null,
+      "source_id": "asdiv-0890",
+      "validation_failure": "answer mismatch: actual=5, expected=6",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "y:The number of several years; (11-y)*2=(16-y)"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It takes 15 minutes for Michael to get to Edgewood.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "If Michael arrives at 8:30, what time did Michael leave to get there?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "michael.travel_to_edgewood.duration_minutes = 15"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "michael.arrival_time.minutes_after_midnight = 8 * 60 + 30",
+              "michael.departure_time.minutes_after_midnight = michael.arrival_time.minutes_after_midnight - michael.travel_to_edgewood.duration_minutes",
+              "RETURN michael.departure_time.minutes_after_midnight"
+            ],
+            "assumptions": [
+              "The stated arrival time 8:30 is interpreted as occurring within the same day as the departure."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The clock time is represented numerically as minutes after midnight so the active arithmetic profile can preserve and evaluate the time subtraction."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0198"
+      },
+      "question": "It takes 15 minutes for Michael to get to Edgewood. If Michael arrives at 8:30, what time did Michael leave to get there?",
+      "source_context": null,
+      "source_id": "asdiv-0198",
+      "validation_failure": "answer mismatch: actual=495, expected=8",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "((8 (hour)*60 (min/hour) + 30 (min)) - 15 (min))/60 (min/hour) = 8 r15; hh:mm=8:15"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A box of cupcakes cost $six.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "If you had eight hundred twenty-one dollars and bought as many boxes as you could, how much money would you have left?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "cupcakes.box.cost_dollars = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Buying the maximum number of whole boxes and returning the money left requires floor-division or remainder semantics, neither of which is available in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1534"
+      },
+      "question": "A box of cupcakes cost $six. If you had eight hundred twenty-one dollars and bought as many boxes as you could, how much money would you have left?",
+      "source_context": null,
+      "source_id": "asdiv-1534",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "821/6=136 r5"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are less than 6 dozen eggs in a basket.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "If the eggs are counted 2, 3, 4, or 5 at a time, there are none left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "How many eggs are there in the basket?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The strict less-than constraint cannot be represented with the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause states simultaneous divisibility constraints for 2, 3, 4, and 5, but modulo, divisibility predicates, and equivalent constraint operators are unavailable in the active registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "RETURN basket.eggs"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2064"
+      },
+      "question": "There are less than 6 dozen eggs in a basket. If the eggs are counted 2, 3, 4, or 5 at a time, there are none left over. How many eggs are there in the basket?",
+      "source_context": null,
+      "source_id": "asdiv-2064",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported, part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "60",
+        "gold_reasoning": "LCM[2,3,4,5]=60"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

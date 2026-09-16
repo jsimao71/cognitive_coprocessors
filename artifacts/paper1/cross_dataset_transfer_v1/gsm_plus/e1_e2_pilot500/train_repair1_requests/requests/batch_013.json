@@ -1,0 +1,572 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A bakery produces 60 loaves of bread each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Each loaf of bread sells for $5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 251,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 200,
+          "teacher_input_default": true,
+          "text": "How many loaves of bread are sold in the afternoon?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bakery.daily.loaves_produced = 60"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bakery.loaf.sale_price_dollars = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bakery.daily.morning.loaves_sold = bakery.daily.loaves_produced * 2 / 3",
+              "bakery.daily.after_morning.loaves_remaining = bakery.daily.loaves_produced - bakery.daily.morning.loaves_sold",
+              "bakery.daily.afternoon_and_evening.loaves_sold = bakery.daily.after_morning.loaves_remaining / 2",
+              "bakery.daily.afternoon.loaves_sold = bakery.daily.afternoon_and_evening.loaves_sold / 2",
+              "bakery.daily.evening.loaves_sold = bakery.daily.afternoon_and_evening.loaves_sold / 2"
+            ],
+            "assumptions": [
+              "The half of the remaining loaves sold after morning is divided equally between afternoon and evening."
+            ],
+            "confidence": 0.95,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN bakery.daily.afternoon.loaves_sold"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02454"
+      },
+      "question": "A bakery produces 60 loaves of bread each day. Each loaf of bread sells for $5. Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening. How many loaves of bread are sold in the afternoon?",
+      "source_context": null,
+      "source_id": "gsm-plus-02454",
+      "validation_failure": "answer mismatch: actual=5, expected=10",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "60 x 2/3 = <<60*2/3=40>>40 loaves of bread are sold in the morning.\n60 - 40 = <<60-40=20>>20 loaves of bread are sold in the afternoon and evening.\nTherefore, 20/2 = <<20/2=10>>10 loaves of bread are sold in the afternoon.\n#### 10"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Martha's cat is 4 times faster than her turtle.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "If the cat can run 20 feet/second, how many feet can her turtle crawl in 50 seconds?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "martha.cat.speed_feet_per_second = martha.turtle.speed_feet_per_second * 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "martha.cat.speed_feet_per_second = 20",
+              "martha.turtle.crawl_duration_seconds = 50",
+              "martha.turtle.distance_crawled_feet = rate_times_duration(martha.turtle.speed_feet_per_second, martha.turtle.crawl_duration_seconds)",
+              "RETURN martha.turtle.distance_crawled_feet"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05640"
+      },
+      "question": "Martha's cat is 4 times faster than her turtle. If the cat can run 20 feet/second, how many feet can her turtle crawl in 50 seconds?",
+      "source_context": null,
+      "source_id": "gsm-plus-05640",
+      "validation_failure": "unresolved reference 'martha.turtle.speed_feet_per_second' from scope 'global'; unresolved reference 'martha.turtle.speed_feet_per_second' from scope 'global'; unresolved reference 'martha.turtle.distance_crawled_feet' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "250",
+        "gold_reasoning": "The turtle's speed is 20 feet/second divided by 4, which is 5 feet/second. In 50 seconds, the turtle can crawl 5 feet/second * 50 seconds =  250 feet.\n#### 250"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nancy needs to return some late books to the library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "Each book has a fine of $0.50 and there are 8 such books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "Additionally, there is a standard fee of $2.00 for any book that is more than a week late.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 203,
+          "teacher_input_default": true,
+          "text": "What is the total amount Nancy needs to pay?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contextual clause introduces Nancy, the library, and late books but no numeric state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "nancy.late_books.fine_per_book = 0.50",
+              "nancy.late_books.count = 8",
+              "nancy.late_books.base_fines = nancy.late_books.fine_per_book * nancy.late_books.count"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "library.more_than_week_late_book.fee = 2.00"
+            ],
+            "assumptions": [
+              "Interpreted \"for any book\" as specifying the fee for each qualifying book."
+            ],
+            "confidence": 0.84,
+            "part_id": 2,
+            "semantic_notes": [
+              "The path preserves the stated lateness condition without asserting how many of Nancy's books satisfy it."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The number of Nancy's books that are more than a week late is not stated, so the applicable standard fees and total amount cannot be determined. It is also unclear whether the standard fee is per qualifying book or a single account-level fee."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02069"
+      },
+      "question": "Nancy needs to return some late books to the library. Each book has a fine of $0.50 and there are 8 such books. Additionally, there is a standard fee of $2.00 for any book that is more than a week late. What is the total amount Nancy needs to pay?",
+      "source_context": null,
+      "source_id": "gsm-plus-02069",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "First multiply the late fee per book by the number of books: $0.50/book * 8 books = $<<0.5*8=4.00>>4.00\nThen add the \"more than a week overdue\" fee to the answer from the previous step to find the total: $4.00 + $2.00 = $<<4+2=6.00>>6.00\n#### 6"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "\"April is donating plant pots to a local school for their new garden.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "They ask for 30 plant pots for the daisies, and twice as many for the roses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "If April had 10 plant left how many plant pots will April have in total?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contextual clause identifies April's plant-pot donation but introduces no numeric state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "school.garden.daisies.requested_plant_pots = 30",
+              "school.garden.roses.requested_plant_pots = school.garden.daisies.requested_plant_pots * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"10 plant left\" does not identify whether 10 measures plants or plant pots.",
+              "It is unclear whether the requested total means the school's requested pots, April's initial stock including pots left over, or April's remaining stock."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02812"
+      },
+      "question": "\"April is donating plant pots to a local school for their new garden.  They ask for 30 plant pots for the daisies, and twice as many for the roses. If April had 10 plant left how many plant pots will April have in total?",
+      "source_context": null,
+      "source_id": "gsm-plus-02812",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "100",
+        "gold_reasoning": "April needs 30 plant pots for the daisies and twice as many for the roses, which is 30*2 = 60 plant pots.\nSo, April needs a total of 30+60 = <<30+60=90>>90 plant pots for the school.\nSo, April has 90+10=100 plant pots in total.\n#### 100"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A nurses\u2019 station orders bandages in bulk packs of 50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "On the first day, the nurses used 38 bandages and ordered one bulk pack of bandages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "On the second day, they used ten fewer bandages and ordered another bulk pack of bandages and used up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "On the third day, they ordered two bulk packs of bandages and only used half a pack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 382,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 328,
+          "teacher_input_default": true,
+          "text": "They had 78 bandages left at the end of the third day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 438,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 383,
+          "teacher_input_default": true,
+          "text": "How many bandages did they start with on the first day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bulk_pack.bandages = 50"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "station.day1.used_bandages = 38",
+              "station.day1.ordered_packs = 1",
+              "station.day1.ordered_bandages = station.day1.ordered_packs * bulk_pack.bandages"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The trailing phrase \"and used up\" is incomplete, so the quantity or event it describes cannot be determined without inventing semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "station.day3.ordered_packs = 2",
+              "station.day3.ordered_bandages = station.day3.ordered_packs * bulk_pack.bandages",
+              "station.day3.used_bandages = bulk_pack.bandages / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "station.day3.ending_bandages = 78"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "station.day1.starting_bandages = station.day3.ending_bandages + sum(station.day1.used_bandages, station.day2.used_bandages, station.day3.used_bandages) - sum(station.day1.ordered_bandages, station.day2.ordered_bandages, station.day3.ordered_bandages)",
+              "RETURN station.day1.starting_bandages"
+            ],
+            "assumptions": [
+              "Ordered bandages are treated as additions to the station's inventory on the stated day, and used bandages as removals."
+            ],
+            "confidence": 0.86,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09523"
+      },
+      "question": "A nurses\u2019 station orders bandages in bulk packs of 50. On the first day, the nurses used 38 bandages and ordered one bulk pack of bandages. On the second day, they used ten fewer bandages and ordered another bulk pack of bandages and used up. On the third day, they ordered two bulk packs of bandages and only used half a pack. They had 78 bandages left at the end of the third day. How many bandages did they start with on the first day?",
+      "source_context": null,
+      "source_id": "gsm-plus-09523",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "19",
+        "gold_reasoning": "Let B be the number of bandages the nurses\u2019 station started with.\nOn the first day, they used 38 bandages and ordered 50, so they had B - 38 + 50 = B + 12 bandages left.\nOn the second day, they used 38 - 10 = <<38-10=28>>28 bandages.\nThus, at the end of the second day, they had B + 12 - 28 + 50 - 50 = B - 16 bandages left.\nOn the third day, they ordered 100 bandages and used half a pack, so they used 50 / 2 = 25.\nThus, on the third day, they had B - 16 + 100 - 25 = B + 59 bandages left.\nAt the end of the third day, they had 78 = B + 59 bandages left.\nThus, on the first day, they started with B = 78 - 59 = <<19=19>>19 bandages.\n#### 19"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

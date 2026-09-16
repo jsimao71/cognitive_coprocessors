@@ -1,0 +1,705 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nancy is returning her overdue books to the library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "She owes $0.50 cents each on 8 books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "However, the library has a policy that if more than half of the books returned are overdue, an additional $1.00 fee per book is added.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 314,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 226,
+          "teacher_input_default": true,
+          "text": "Plus, there is a flat $2.00 fee for having at least one book that's over a week overdue.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 391,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 315,
+          "teacher_input_default": true,
+          "text": "If 5 out of the 8 books are overdue, how much does she have to pay in total?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This introductory clause adds no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "nancy.books_with_base_overdue_charge = 8",
+              "library.base_overdue_charge_per_book = 0.50",
+              "nancy.base_overdue_charges = library.base_overdue_charge_per_book * nancy.books_with_base_overdue_charge"
+            ],
+            "assumptions": [
+              "The malformed phrase \"$0.50 cents\" means $0.50 rather than 0.50 cents."
+            ],
+            "confidence": 0.89,
+            "part_id": 1,
+            "semantic_notes": [
+              "The monetary literal is represented as 0.50 dollars per book."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "library.policy.half_returned_books = nancy.books_with_base_overdue_charge / 2",
+              "library.policy.over_half_overdue.additional_charge_per_book = 1.00"
+            ],
+            "assumptions": [
+              "The eight books charged in the preceding clause are the returned books referenced by this policy."
+            ],
+            "confidence": 0.84,
+            "part_id": 2,
+            "semantic_notes": [
+              "The policy condition is retained in the semantic path because the active registry has no conditional operator."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "library.policy.at_least_one_over_week_overdue.flat_charge = 2.00"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 3,
+            "semantic_notes": [
+              "The path preserves the condition attached to the flat charge."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause establishes that five books are overdue but does not state whether any book is more than a week overdue, so applicability of the $2 flat charge cannot be determined.",
+              "The policy does not clearly specify whether its additional $1 charge applies to every returned book or only each overdue book."
+            ],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02067"
+      },
+      "question": "Nancy is returning her overdue books to the library. She owes $0.50 cents each on 8 books. However, the library has a policy that if more than half of the books returned are overdue, an additional $1.00 fee per book is added. Plus, there is a flat $2.00 fee for having at least one book that's over a week overdue. If 5 out of the 8 books are overdue, how much does she have to pay in total?",
+      "source_context": null,
+      "source_id": "gsm-plus-02067",
+      "validation_failure": "non-ok semantic parts: part 4=ambiguous",
+      "validator_context": {
+        "correct_answer": "14",
+        "gold_reasoning": "Nancy owes $0.50 for each of the 8 books, which is 8 * $0.50 = $4.00.\n\nSince more than half of the books returned are overdue, an additional $1.00 fee per book is added. This is 8 * $1.00 = $8.00.\n\nPlus, there is a flat $2.00 fee for having at least one book that's over a week overdue.\n\nSo, in total, Nancy has to pay $4.00 + $8.00 + $2.00 =\n#### 14"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Harold sleeps for 600 minutes a night.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "He works 120 minutes less than he sleeps and he walks his dog for 60 minutes each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 128,
+          "teacher_input_default": true,
+          "text": "How much free time does Harold have left in his day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "harold.sleep.duration_minutes = 600"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "harold.work.duration_minutes = harold.sleep.duration_minutes - 120",
+              "harold.dog_walk.duration_minutes = 60"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "harold.day.duration_minutes = 24 * 60",
+              "harold.free_time.duration_minutes = harold.day.duration_minutes - harold.sleep.duration_minutes - harold.work.duration_minutes - harold.dog_walk.duration_minutes",
+              "RETURN harold.free_time.duration_minutes"
+            ],
+            "assumptions": [
+              "A day contains 24 hours, and time not assigned to sleeping, working, or walking the dog is free time."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07241"
+      },
+      "question": "Harold sleeps for 600 minutes a night.  He works 120 minutes less than he sleeps and he walks his dog for 60 minutes each day.  How much free time does Harold have left in his day?",
+      "source_context": null,
+      "source_id": "gsm-plus-07241",
+      "validation_failure": "answer mismatch: actual=300, expected=5",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "He works 120 minutes less than he sleeps and he sleeps for 600 minutes so he works 600-120 = <<600-120=480>>480 minutes\nHe sleeps for 600 minutes, works for 480 minutes and walks his dog for 60 minutes for a total of 600+480+60 = <<600+480+60=1140>>1140 minutes\nThere are 1440 minutes in a day and his busy for 1140 minutes so that leaves 1440-1140 = <<1440-1140=300>>300 minutes=5 hours left of free time\n#### 5"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 95,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A math teacher has a 5-inch piece of chalk to write equations on a chalkboard for his students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "The teacher is environmentally conscious and tries to only use 20% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 292,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 186,
+          "teacher_input_default": true,
+          "text": "However, on Monday, the teacher had to conduct an extra class for his students who needed additional help.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 394,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 293,
+          "teacher_input_default": true,
+          "text": "As a result, he ended up using 45% of the chalk, which was 1.5 times more than his usual consumption.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 479,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 395,
+          "teacher_input_default": true,
+          "text": "He also noticed that the chalk weighed 0.5 ounces, but this didn't affect his usage.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 689,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 480,
+          "teacher_input_default": true,
+          "text": "Given that the teacher cannot write with a piece of chalk smaller than 2 inches and he plans to return to his usual 20% usage per day, how many days does he have before he needs to recycle this piece of chalk?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "teacher.chalk.initial_length_inches = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "teacher.usual.daily_chalk_usage_percent = 20"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "teacher.monday.extra_classes = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The stated 45% usage conflicts with the claim that it was 1.5 times more than the stated usual 20% usage; the latter phrase is also ambiguous between 1.5 times as much and 150% more."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "teacher.chalk.weight_ounces = 0.5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [
+              "The source explicitly says this measurement does not affect chalk usage."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested day count depends on the unresolved Monday-usage inconsistency and does not specify whether each subsequent 20% is based on the original length or the remaining length, nor how a fractional final day should be counted."
+            ],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09414"
+      },
+      "question": "A math teacher has a 5-inch piece of chalk to write equations on a chalkboard for his students. The teacher is environmentally conscious and tries to only use 20% of the chalk each day. However, on Monday, the teacher had to conduct an extra class for his students who needed additional help. As a result, he ended up using 45% of the chalk, which was 1.5 times more than his usual consumption. He also noticed that the chalk weighed 0.5 ounces, but this didn't affect his usage. Given that the teacher cannot write with a piece of chalk smaller than 2 inches and he plans to return to his usual 20% usage per day, how many days does he have before he needs to recycle this piece of chalk?",
+      "source_context": null,
+      "source_id": "gsm-plus-09414",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous, part 5=ambiguous",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "The teacher uses 45% of his 5 inch stick of chalk on Monday, or 5 * .45 = <<5*.45=2.25>>2.25 inches.\nHe is left with 5 - 2.25 = <<5-2.25=2.75>>2.75 inches of chalk.\nThe next day he will use 20% of 2.75 inches, which is 2.75 * .2 = <<2.75*.2=.55>>.55 inches of chalk used.\nThat leaves him with 2.75 - .55 = <<2.75-.55=2.2>>2.2 inches of chalk.\nThe day after that, he will use 2.2 * .2 = <<2.2*.2=.44>>.44 inches of chalk.\nThat will leave him with 2.2 - .44 = <<2.2-.44=1.76>>1.76 inches of chalk.\nSince 1.76 is less than 2 inches, he will recycle this stick in 2 days.\n#### 2"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a mining community, there are dwarves who mine ore.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "One dwarf can mine 12 pounds of ore per day with his bare hands.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 183,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "However, if he uses an iron pickaxe, he can mine twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 184,
+          "teacher_input_default": true,
+          "text": "If he upgrades to a steel pickaxe, he can mine 50% more than with an iron pickaxe.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 376,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 267,
+          "teacher_input_default": true,
+          "text": "Now, consider a scenario where 40 dwarves, each equipped with a steel pickaxe, mine for a month with 30 days.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 377,
+          "teacher_input_default": true,
+          "text": "However, on every 5th day, they rest and do not mine.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 513,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 431,
+          "teacher_input_default": true,
+          "text": "Also, on every 10th day, they mine only half as much due to equipment maintenance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 579,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 514,
+          "teacher_input_default": true,
+          "text": "How many pounds of ore can these 40 dwarves mine in such a month?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "community.dwarf_activity = \"mine_ore\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dwarf.bare_hands.daily_ore_pounds = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dwarf.iron_pickaxe.daily_ore_pounds = dwarf.bare_hands.daily_ore_pounds * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dwarf.steel_pickaxe.daily_ore_pounds = inc_pct(dwarf.iron_pickaxe.daily_ore_pounds, 50)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mining_group.dwarf_count = 40",
+              "mining_month.calendar_days = 30",
+              "mining_group.daily_ore_pounds_with_steel_pickaxes = dwarf.steel_pickaxe.daily_ore_pounds * mining_group.dwarf_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mining_month.rest_interval_days = 5",
+              "mining_month.rest_day_count = mining_month.calendar_days / mining_month.rest_interval_days",
+              "mining_month.ore_pounds_per_rest_day = 0"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Every 10th day is also every 5th day, so the new half-production rule conflicts with the earlier zero-production rest rule; the source gives no precedence for overlapping days."
+            ],
+            "confidence": 0.99,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The monthly total is underdetermined because the treatment of days that are simultaneously 5th-day rests and 10th-day maintenance days is unspecified."
+            ],
+            "confidence": 0.99,
+            "part_id": 7,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08211"
+      },
+      "question": "In a mining community, there are dwarves who mine ore. One dwarf can mine 12 pounds of ore per day with his bare hands. However, if he uses an iron pickaxe, he can mine twice as much. If he upgrades to a steel pickaxe, he can mine 50% more than with an iron pickaxe. Now, consider a scenario where 40 dwarves, each equipped with a steel pickaxe, mine for a month with 30 days. However, on every 5th day, they rest and do not mine. Also, on every 10th day, they mine only half as much due to equipment maintenance. How many pounds of ore can these 40 dwarves mine in such a month?",
+      "source_context": null,
+      "source_id": "gsm-plus-08211",
+      "validation_failure": "non-ok semantic parts: part 6=ambiguous, part 7=ambiguous",
+      "validator_context": {
+        "correct_answer": "30240",
+        "gold_reasoning": "First, let's calculate how much a dwarf can mine with an iron pickaxe. Since an iron pickaxe allows a dwarf to mine twice as much as with his bare hands, a dwarf can mine 12 * 2 = 24 pounds of ore per day with an iron pickaxe.\n\nNext, let's calculate how much a dwarf can mine with a steel pickaxe. Since a steel pickaxe allows a dwarf to mine 50% more than with an iron pickaxe, a dwarf can mine 24 * 1.5 = 36 pounds of ore per day with a steel pickaxe.\n\nIn a month with 30 days, there are 30/5 = 6 rest days and 30/10 = 3 maintenance days. So, there are 30 - 6 - 3 = 21 full mining days and 3 half-mining days.\n\nOn a full mining day, 40 dwarves can mine 40 * 36 = 1440 pounds of ore.\n\nOn a half-mining day, 40 dwarves can mine 1440 / 2 = 720 pounds of ore.\n\nSo, in a month, these 40 dwarves can mine 21 * 1440 + 3 * 720 =  30240 pounds of ore.\n#### 30240"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A bakery produces 3/5 of one hundred loaves of bread each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "How many loaves of bread are sold in the afternoon?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bakery.daily.loaves_produced = (3 / 5) * 100"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bakery.daily.loaves_sold_morning = bakery.daily.loaves_produced * (2 / 3)",
+              "bakery.daily.loaves_left_after_morning = bakery.daily.loaves_produced - bakery.daily.loaves_sold_morning",
+              "bakery.daily.loaves_sold_afternoon_and_evening = bakery.daily.loaves_left_after_morning / 2",
+              "bakery.daily.loaves_sold_afternoon = bakery.daily.loaves_sold_afternoon_and_evening / 2",
+              "bakery.daily.loaves_sold_evening = bakery.daily.loaves_sold_afternoon_and_evening / 2"
+            ],
+            "assumptions": [
+              "Interpreted \"sold equally in the afternoon and evening\" as dividing the half of the remaining loaves equally between those two periods."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN bakery.daily.loaves_sold_afternoon"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02450"
+      },
+      "question": "A bakery produces 3/5 of one hundred loaves of bread each day. Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening. How many loaves of bread are sold in the afternoon?",
+      "source_context": null,
+      "source_id": "gsm-plus-02450",
+      "validation_failure": "answer mismatch: actual=5, expected=10",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "3/5*100 x 2/3 = <<3/5*100*2/3=40>>40 loaves of bread are sold in the morning.\n3/5*100 - 40 = <<3/5*100-40=20>>20 loaves of bread are sold in the afternoon and evening.\nTherefore, 20/2 = <<20/2=10>>10 loaves of bread are sold in the afternoon.\n#### 10"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

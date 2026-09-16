@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Miranda and Savannah are excited that a new store just opened in town!",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "They go together the first day it opens!",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "Each time Miranda goes to the store she plans to spend $7, and each time Savannah goes to the store she plans to spend $9.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 375,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 235,
+          "teacher_input_default": true,
+          "text": "A few weeks from now, Miranda and Savannah are surprised to find out that they have spent the exact same total amount of money at the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 454,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 376,
+          "teacher_input_default": true,
+          "text": "What is the least possible number of times that Miranda has been to the store?",
+          "warnings": []
+        }
+      ],
+      "question": "Miranda and Savannah are excited that a new store just opened in town! They go together the first day it opens! Each time Miranda goes to the store she plans to spend $7, and each time Savannah goes to the store she plans to spend $9. A few weeks from now, Miranda and Savannah are surprised to find out that they have spent the exact same total amount of money at the store. What is the least possible number of times that Miranda has been to the store?",
+      "source_id": "asdiv-2034"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The following week, they decided to go to Lake Huron and Lake Michigan.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "During their stay there, they caught a total of 30 pikes, 40 sturgeons and 75 herrings.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 160,
+          "teacher_input_default": true,
+          "text": "How many fishes did they catch from the two lakes?",
+          "warnings": []
+        }
+      ],
+      "question": "The following week, they decided to go to Lake Huron and Lake Michigan. During their stay there, they caught a total of 30 pikes, 40 sturgeons and 75 herrings. How many fishes did they catch from the two lakes?",
+      "source_id": "asdiv-0242"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 31,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Hilt saw an iPod for sale.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 32,
+          "teacher_input_default": true,
+          "text": "The price tag said the iPod cost $128, but a sign announced that it was on sale for \"35% off.\" How much would the iPod cost after the discount?",
+          "warnings": []
+        }
+      ],
+      "question": "Mrs. Hilt saw an iPod for sale. The price tag said the iPod cost $128, but a sign announced that it was on sale for \"35% off.\" How much would the iPod cost after the discount?",
+      "source_id": "asdiv-0679"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ethan has 31 presents.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "Alissa has 22 more than Ethan.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "How many presents does Alissa have?",
+          "warnings": []
+        }
+      ],
+      "question": "Ethan has 31 presents. Alissa has 22 more than Ethan. How many presents does Alissa have?",
+      "source_id": "asdiv-0116"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Hilt went to a concert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "A total of 65,899 people attended the concert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 161,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "The next week, she went to a second concert, which had 119 more people in attendance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 205,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 162,
+          "teacher_input_default": true,
+          "text": "How many people were at the second concert?",
+          "warnings": []
+        }
+      ],
+      "question": "Mrs. Hilt went to a concert. A total of 65,899 people attended the concert. The next week, she went to a second concert, which had 119 more people in attendance. How many people were at the second concert?",
+      "source_id": "asdiv-0625"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

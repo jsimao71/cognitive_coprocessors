@@ -1,0 +1,285 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jerry had 7 action figures and 2 books on a shelf in his room.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "Later he added 4 more books to the shelf.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "How many more action figures than books were on his shelf?",
+          "warnings": []
+        }
+      ],
+      "question": "Jerry had 7 action figures and 2 books on a shelf in his room. Later he added 4 more books to the shelf. How many more action figures than books were on his shelf?",
+      "source_id": "svamp-chal-336"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day Ryan spends 2 hours on learning english, 5 hours on learning chinese and 4 hours on learning spanish.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "How many more hours does he spend on learning chinese than he does on learning spanish?",
+          "warnings": []
+        }
+      ],
+      "question": "Every day Ryan spends 2 hours on learning english, 5 hours on learning chinese and 4 hours on learning spanish. How many more hours does he spend on learning chinese than he does on learning spanish?",
+      "source_id": "svamp-chal-208"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jesse's room is 11 feet long and 15 feet wide.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "If she already has 16 square feet of carpet How much more carpet does she need to cover the whole floor?",
+          "warnings": []
+        }
+      ],
+      "question": "Jesse's room is 11 feet long and 15 feet wide. If she already has 16 square feet of carpet How much more carpet does she need to cover the whole floor?",
+      "source_id": "svamp-chal-532"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were 13 roses and 84 orchids in the vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "Jessica cut some more roses and orchids from her flower garden.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "There are now 91 orchids and 14 roses in the vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "How many roses did she cut?",
+          "warnings": []
+        }
+      ],
+      "question": "There were 13 roses and 84 orchids in the vase. Jessica cut some more roses and orchids from her flower garden. There are now 91 orchids and 14 roses in the vase. How many roses did she cut?",
+      "source_id": "svamp-chal-894"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 24,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Matthew had 15 crackers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 25,
+          "teacher_input_default": true,
+          "text": "If Matthew gave equal numbers of crackers to his 5 friends and still had 10 crackers left How many crackers did each friend eat?",
+          "warnings": []
+        }
+      ],
+      "question": "Matthew had 15 crackers. If Matthew gave equal numbers of crackers to his 5 friends and still had 10 crackers left How many crackers did each friend eat?",
+      "source_id": "svamp-chal-187"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

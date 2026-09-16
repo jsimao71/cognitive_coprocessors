@@ -1,0 +1,675 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A small sunflower has 3 dozen seeds and a large sunflower has 50% more seeds than a small sunflower.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "The light absorption of large sunflowers is 30% more than that of small sunflowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 231,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "How many sunflower seeds are there altogether?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "small_sunflower.seed_count = 3 * 12",
+              "large_sunflower.seed_count = inc_pct(small_sunflower.seed_count, 50)"
+            ],
+            "assumptions": [
+              "One dozen equals 12 items."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The dozen-based source quantity and relative seed-count relation remain explicit."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "large_sunflower.light_absorption = inc_pct(small_sunflower.light_absorption, 30)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Light absorption is retained as a distinct measured quantity despite being unnecessary for the seed-count query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "all_sunflowers.seed_count = small_sunflower.seed_count + large_sunflower.seed_count",
+              "RETURN all_sunflowers.seed_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The requested aggregate includes the small and large sunflower introduced in the source."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-10326"
+      },
+      "question": "A small sunflower has 3 dozen seeds and a large sunflower has 50% more seeds than a small sunflower. The light absorption of large sunflowers is 30% more than that of small sunflowers. How many sunflower seeds are there altogether?",
+      "source_context": null,
+      "source_id": "gsm-plus-10326",
+      "validation_failure": "unresolved reference 'small_sunflower.light_absorption' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "90",
+        "gold_reasoning": "The small sunflower has 3 x 12 = <<3*12=36>>36 seeds.\nThe large sunflower has 36 x 50% = <<36*50*.01=18>>18 more seeds than the small sunflower.\nThe large sunflower has 36 + 18 = <<36+18=54>>54 seeds.\nTogether, the two sunflowers have a total of 36 + 54 = <<36+54=90>>90 seeds.\n#### 90"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rory is retrieving tennis balls from the field after a tennis match.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 158,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "In the first of three halves, he had to retrieve five more balls than in the second half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 159,
+          "teacher_input_default": true,
+          "text": "In the third half, he retrieved half as many balls as in the second.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 228,
+          "teacher_input_default": true,
+          "text": "He retrieved 24 tennis balls in all.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 334,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "How many tennis balls did he retrieve in the first half of the match?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rory.activity = \"retrieving_tennis_balls_after_match\""
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "Retains the activity and object being counted."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.first_half.tennis_balls = rory.second_half.tennis_balls + 5"
+            ],
+            "assumptions": [
+              "The source's nonstandard 'three halves' wording is treated as three labeled retrieval periods called the first, second, and third halves."
+            ],
+            "confidence": 0.93,
+            "part_id": 1,
+            "semantic_notes": [
+              "The comparative relation is preserved as stated, with the second-half count as a legitimate forward dependency."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.third_half.tennis_balls = rory.second_half.tennis_balls / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.all_halves.total_tennis_balls = 24"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The stated overall total remains distinct from the per-period counts."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.second_half.tennis_balls = (rory.all_halves.total_tennis_balls - 5) / (2 + 1 / 2)",
+              "RETURN rory.first_half.tennis_balls"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 4,
+            "semantic_notes": [
+              "The query grounds the shared second-half dependency by rearranging the previously stated first-, second-, and third-period relations."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08376"
+      },
+      "question": "Rory is retrieving tennis balls from the field after a tennis match. In the first of three halves, he had to retrieve five more balls than in the second half. In the third half, he retrieved half as many balls as in the second. He retrieved 24 tennis balls in all. How many tennis balls did he retrieve in the first half of the match?",
+      "source_context": null,
+      "source_id": "gsm-plus-08376",
+      "validation_failure": "answer mismatch: actual=12.6, expected=13",
+      "validator_context": {
+        "correct_answer": "13",
+        "gold_reasoning": "Let's denote the number of balls Rory retrieved in the second half as x. According to the problem, in the first half he retrieved x + 5 balls, and in the third half he retrieved x/2 balls. The total number of balls is 24. So, we can write the equation:\n\nx + (x + 5) + x/2 = 24\n\nMultiplying every term by 2 to get rid of the fraction, we get:\n\n2x + 2(x + 5) + x = 48\n\nSolving this equation, we get:\n\n2x + 2x + 10 + x = 48\n\n5x + 10 = 48\n\n5x = 38\n\nx = 38 / 5\n\nx = 7.6\n\nBut the number of balls can't be a fraction, so we round it to the nearest whole number, which is 8. So, Rory retrieved 8 balls in the second half. In the first half, he retrieved 8 + 5 = 13 balls.\n\nSo, Rory retrieved  13 tennis balls in the first half of the match.\n#### 13"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 4 toys on hand for 4 dogs, but there are 4/5 of ten more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 311,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 405,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 312,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, 3/10 of ten dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 445,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 406,
+          "teacher_input_default": true,
+          "text": "How many toys in total does James need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Establishes the shelter context and James's qualitative need; no new quantitative fact is stated."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.toys_per_dog = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "james.toys_on_hand = 4",
+              "shelter.initial_dogs = 4",
+              "shelter.first_arrival.additional_dogs = 10 * 4 / 5",
+              "shelter.after_first_arrival.dogs = shelter.initial_dogs + shelter.first_arrival.additional_dogs"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The four dogs are distinguished from the additional dogs now in the shelter."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "james.first_purchase.toys = shelter.first_arrival.additional_dogs * shelter.toys_per_dog",
+              "shelter.second_arrival.additional_dogs = shelter.first_arrival.additional_dogs * 2",
+              "james.second_purchase.toys = shelter.second_arrival.additional_dogs * shelter.toys_per_dog"
+            ],
+            "assumptions": [
+              "Interprets \"twice as many more dogs than when he left\" as a second group of additional dogs twice the size of the first additional group."
+            ],
+            "confidence": 0.72,
+            "part_id": 3,
+            "semantic_notes": [
+              "The two purchases remain separate so later departures can reduce the cumulative additional-toy requirement."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.third_visit.dogs_gone = 10 * 3 / 10",
+              "james.toys_no_longer_needed = shelter.third_visit.dogs_gone * shelter.toys_per_dog"
+            ],
+            "assumptions": [
+              "Each departing dog eliminates the need for one of the additional toys."
+            ],
+            "confidence": 0.94,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "james.total_additional_toys_needed = james.first_purchase.toys + james.second_purchase.toys - james.toys_no_longer_needed",
+              "RETURN james.total_additional_toys_needed"
+            ],
+            "assumptions": [
+              "The question inherits the opening goal of getting more toys, so \"toys in total\" refers to the net additional toys rather than all toys in the shelter."
+            ],
+            "confidence": 0.8,
+            "part_id": 5,
+            "semantic_notes": [
+              "The returned quantity is the net number of additional toys James needs to obtain, excluding the four already on hand."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05402"
+      },
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 4 toys on hand for 4 dogs, but there are 4/5 of ten more dogs in the shelter now. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, 3/10 of ten dogs were gone so he no longer needed those toys. How many toys in total does James need?",
+      "source_context": null,
+      "source_id": "gsm-plus-05402",
+      "validation_failure": "answer mismatch: actual=21, expected=33",
+      "validator_context": {
+        "correct_answer": "33",
+        "gold_reasoning": "James has 4+4/5*10=<<4+4/5*10=12>>12 toys.\nThere were 12*2=<<12*2=24>>24 dogs.\nJames needed to buy 24-12=<<24-12=12>>12 more toys.\nThere are 36 total toys.\n36-3/10*10=<<36-3/10*10=33>>33 toys are now needed.\n#### 33"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jana has a mix of puppies and kittens.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 39,
+          "teacher_input_default": true,
+          "text": "Two thirds of Jana's pets are puppies and the rest are kittens.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "Among the puppies, two thirds are Pomeranians and the rest are Labradors.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "One third of the Pomeranians are girls.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 332,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 217,
+          "teacher_input_default": true,
+          "text": "If there are 6 Pomeranian girls, how many puppies does Jana have, regardless of the number of kittens or Labradors?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Jana's pets and their two broad categories without giving a quantity."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jana.puppies.total = jana.pets.total * 2 / 3",
+              "jana.kittens.total = jana.pets.total - jana.puppies.total"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The ungrounded total number of pets is a legitimate dependency established by the clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jana.pomeranians.total = jana.puppies.total * 2 / 3",
+              "jana.labradors.total = jana.puppies.total - jana.pomeranians.total"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jana.pomeranians.girls = jana.pomeranians.total / 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jana.pomeranians.girls = 6",
+              "jana.pomeranians.total = jana.pomeranians.girls * 3",
+              "jana.puppies.total = jana.pomeranians.total * 3 / 2",
+              "RETURN jana.puppies.total"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [
+              "The inverse relations ground the requested puppy count from the stated number of Pomeranian girls."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06094"
+      },
+      "question": "Jana has a mix of puppies and kittens. Two thirds of Jana's pets are puppies and the rest are kittens. Among the puppies, two thirds are Pomeranians and the rest are Labradors. One third of the Pomeranians are girls. If there are 6 Pomeranian girls, how many puppies does Jana have, regardless of the number of kittens or Labradors?",
+      "source_context": null,
+      "source_id": "gsm-plus-06094",
+      "validation_failure": "unresolved reference 'jana.pets.total' from scope 'global'; unresolved reference 'jana.pets.total' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "27",
+        "gold_reasoning": "Jana has 6*3=<<6*3=18>>18 Pomeranians.\nJana has 18/2*3=<<18/2*3=27>>27 puppies.\n#### 27"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every week, Britany creates 18 TikTok videos, each lasting 4 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "Additionally, she dedicates 2 hours weekly to compose novice songs for her TikTok performances, and she spends a quarter of an hour getting her makeup done six days a week before she starts filming.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 389,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 269,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total amount of time Britany invests in her TikTok activities in a month consisting of four weeks?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "britany.weekly.videos.count = 18",
+              "britany.each_video.duration_minutes = 4",
+              "britany.weekly.filming_minutes = britany.weekly.videos.count * britany.each_video.duration_minutes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "britany.weekly.song_composition_hours = 2",
+              "britany.makeup.hours_per_day = 1 / 4",
+              "britany.makeup.days_per_week = 6",
+              "britany.weekly.makeup_hours = britany.makeup.hours_per_day * britany.makeup.days_per_week"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "month.weeks = 4",
+              "britany.weekly.filming_hours = britany.weekly.filming_minutes / 60",
+              "britany.monthly.filming_hours = britany.weekly.filming_hours * month.weeks",
+              "britany.monthly.song_composition_hours = britany.weekly.song_composition_hours * month.weeks",
+              "britany.monthly.makeup_hours = britany.weekly.makeup_hours * month.weeks",
+              "britany.monthly.tiktok_activity_hours = sum(britany.monthly.filming_hours, britany.monthly.song_composition_hours, britany.monthly.makeup_hours)",
+              "RETURN britany.monthly.tiktok_activity_hours"
+            ],
+            "assumptions": [
+              "TikTok activities include filming time, song-composition time, and pre-filming makeup time."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "The requested total is normalized to hours."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06645"
+      },
+      "question": "Every week, Britany creates 18 TikTok videos, each lasting 4 minutes. Additionally, she dedicates 2 hours weekly to compose novice songs for her TikTok performances, and she spends a quarter of an hour getting her makeup done six days a week before she starts filming. Can you calculate the total amount of time Britany invests in her TikTok activities in a month consisting of four weeks?",
+      "source_context": null,
+      "source_id": "gsm-plus-06645",
+      "validation_failure": "answer mismatch: actual=18.8, expected=1128",
+      "validator_context": {
+        "correct_answer": "1128",
+        "gold_reasoning": "First find how long Britany spends recording the videos: 18 videos * 4 minutes/video = <<18*4=72>>72 minutes\nThen find how long she spends writing songs in minutes: 2 hours * 60 minutes/hour = <<2*60=120>>120 minutes\nThen find how long Britany spending doing her makeup in a week: 15 minutes/day * 6 days/week = <<15*6=90>>90 minutes/week\nThen add the time she spends on videos and song-writing to find the total time she spends on TikTok in a week: 72 minutes/week + 90 minutes/week + 120 minutes/week = <<72+90+120=282>>282 minutes/week\nThen multiply the time spent per week by the number of weeks per month to find the total time spent per month: 282 minutes/week * 4 weeks/month = <<282*4=1128>>1128 minutes/month\n#### 1128"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

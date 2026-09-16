@@ -1,0 +1,307 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 26,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Hilt bought 15 books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 27,
+          "teacher_input_default": true,
+          "text": "She paid $11 for each book.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "She later sold all 15 books for $25 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 236,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "What is the difference between the total amount of money Mrs. Hilt sold the books for and the total amount of money she paid for the books?",
+          "warnings": []
+        }
+      ],
+      "question": "Mrs. Hilt bought 15 books. She paid $11 for each book. She later sold all 15 books for $25 each. What is the difference between the total amount of money Mrs. Hilt sold the books for and the total amount of money she paid for the books?",
+      "source_id": "asdiv-0677"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Alec has a garden and likes to put flowers from his garden into pretty vases.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "Alec put 5 flowers in the first vase, 7 flowers in the second vase, 10 flowers in the third vase, and 14 flowers in the fourth vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 287,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 211,
+          "teacher_input_default": true,
+          "text": "If this pattern continues, how many flowers will Alec put in the fifth vase?",
+          "warnings": []
+        }
+      ],
+      "question": "Alec has a garden and likes to put flowers from his garden into pretty vases. Alec put 5 flowers in the first vase, 7 flowers in the second vase, 10 flowers in the third vase, and 14 flowers in the fourth vase. If this pattern continues, how many flowers will Alec put in the fifth vase?",
+      "source_id": "asdiv-1186"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mei has 15 oranges, 9 peaches and 18 pears.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "She wants to put all of the fruit into baskets with each basket having the same number of pieces of fruit in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "Without mixing the fruit, what is the greatest number of pieces of fruit Mei can put in each basket?",
+          "warnings": []
+        }
+      ],
+      "question": "Mei has 15 oranges, 9 peaches and 18 pears. She wants to put all of the fruit into baskets with each basket having the same number of pieces of fruit in it. Without mixing the fruit, what is the greatest number of pieces of fruit Mei can put in each basket?",
+      "source_id": "asdiv-0869"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The ratio of boys to girls at the basketball game is 8:5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "There are 30 girls.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "How many more boys are there than girls?",
+          "warnings": []
+        }
+      ],
+      "question": "The ratio of boys to girls at the basketball game is 8:5. There are 30 girls. How many more boys are there than girls?",
+      "source_id": "asdiv-1113"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tiffany had six pages of math homework and four pages of reading homework.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "If each page had three problems on it, how many problems did she have to complete total?",
+          "warnings": []
+        }
+      ],
+      "question": "Tiffany had six pages of math homework and four pages of reading homework. If each page had three problems on it, how many problems did she have to complete total?",
+      "source_id": "asdiv-2213"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

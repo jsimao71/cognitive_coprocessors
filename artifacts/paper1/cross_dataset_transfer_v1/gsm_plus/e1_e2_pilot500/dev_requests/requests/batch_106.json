@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are two aircraft at an airport that operate several flights daily.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "The first aircraft flies to Greece for three-fourths of its total flights, and the rest of its flights are evenly divided between France and Germany.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 356,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "The second aircraft only flies to Poland, and its 44 flights represent half of the total flights made by the first aircraft each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 440,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 357,
+          "teacher_input_default": true,
+          "text": "Can you determine the number of daily flights made by the first aircraft to France?",
+          "warnings": []
+        }
+      ],
+      "question": "There are two aircraft at an airport that operate several flights daily. The first aircraft flies to Greece for three-fourths of its total flights, and the rest of its flights are evenly divided between France and Germany. The second aircraft only flies to Poland, and its 44 flights represent half of the total flights made by the first aircraft each day. Can you determine the number of daily flights made by the first aircraft to France?",
+      "source_id": "gsm-plus-07949"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "An airport has only 2 planes that fly multiple times a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "Each day, the first plane goes to Greece for three-quarters of its flights, and the remaining flights are split equally between flights to France and flights to Germany.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 374,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 230,
+          "teacher_input_default": true,
+          "text": "The other plane flies exclusively to Poland, and its 44 trips only amount to half the number of trips the first plane makes throughout each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 472,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 375,
+          "teacher_input_default": true,
+          "text": "Additionally, there is a third plane that is currently under maintenance and does not fly at all.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 547,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 473,
+          "teacher_input_default": true,
+          "text": "This plane used to make 60 trips to Spain each day before it was grounded.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 612,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 548,
+          "teacher_input_default": true,
+          "text": "How many flights to France does the first plane take in one day?",
+          "warnings": []
+        }
+      ],
+      "question": "An airport has only 2 planes that fly multiple times a day. Each day, the first plane goes to Greece for three-quarters of its flights, and the remaining flights are split equally between flights to France and flights to Germany. The other plane flies exclusively to Poland, and its 44 trips only amount to half the number of trips the first plane makes throughout each day. Additionally, there is a third plane that is currently under maintenance and does not fly at all. This plane used to make 60 trips to Spain each day before it was grounded. How many flights to France does the first plane take in one day?",
+      "source_id": "gsm-plus-07950"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam bought himself some new trousers for $50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "His mother gave him $8 for this purpose, and his father gave him twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "How much money did Adam have to contribute from his savings?",
+          "warnings": []
+        }
+      ],
+      "question": "Adam bought himself some new trousers for $50. His mother gave him $8 for this purpose, and his father gave him twice as much. How much money did Adam have to contribute from his savings?",
+      "source_id": "gsm-plus-07960"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam bought himself some new trousers for $300.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "His mother gave him $60 for this purpose, and his father gave him twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "How much money did Adam have to contribute from his savings?",
+          "warnings": []
+        }
+      ],
+      "question": "Adam bought himself some new trousers for $300. His mother gave him $60 for this purpose, and his father gave him twice as much. How much money did Adam have to contribute from his savings?",
+      "source_id": "gsm-plus-07961"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam bought himself some new trousers for $30.5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "His mother gave him $6.8 for this purpose, and his father gave him twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 131,
+          "teacher_input_default": true,
+          "text": "How much money did Adam have to contribute from his savings?",
+          "warnings": []
+        }
+      ],
+      "question": "Adam bought himself some new trousers for $30.5. His mother gave him $6.8 for this purpose, and his father gave him twice as much. How much money did Adam have to contribute from his savings?",
+      "source_id": "gsm-plus-07962"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

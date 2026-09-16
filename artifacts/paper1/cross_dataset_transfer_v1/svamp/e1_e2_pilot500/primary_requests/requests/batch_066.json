@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is baking a cake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "The recipe calls for 9 cups of flour and 5 cups of sugar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "She already put in 3 cups of flour and 62 cups of sugar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 138,
+          "teacher_input_default": true,
+          "text": "How many more cups of flour does she need to add?",
+          "warnings": []
+        }
+      ],
+      "question": "Mary is baking a cake. The recipe calls for 9 cups of flour and 5 cups of sugar. She already put in 3 cups of flour and 62 cups of sugar. How many more cups of flour does she need to add?",
+      "source_id": "svamp-chal-431"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tiffany was collecting cans for recycling.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "On monday she had 8 bags of cans.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "She found 10 bags of cans on the next day and 4 bags of cans the day after that.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "How many bags did she find after monday?",
+          "warnings": []
+        }
+      ],
+      "question": "Tiffany was collecting cans for recycling. On monday she had 8 bags of cans. She found 10 bags of cans on the next day and 4 bags of cans the day after that. How many bags did she find after monday?",
+      "source_id": "svamp-chal-515"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dave had 11 apps and 3 files on his phone.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "After deleting some apps and files he had 24 files and 2 apps left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 172,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "How many more files than apps does he have left on the phone?",
+          "warnings": []
+        }
+      ],
+      "question": "Dave had 11 apps and 3 files on his phone. After deleting some apps and files he had 24 files and 2 apps left. How many more files than apps does he have left on the phone?",
+      "source_id": "svamp-chal-696"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jake has 3 fewer peaches and 10 more apples than Steven.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "Steven has 12 peaches and 15 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 145,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "How many more apples than peaches does Steven have?",
+          "warnings": []
+        }
+      ],
+      "question": "Jake has 3 fewer peaches and 10 more apples than Steven. Steven has 12 peaches and 15 apples. How many more apples than peaches does Steven have?",
+      "source_id": "svamp-chal-379"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "He had a total of 40 saltwater animals in different aquariums.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 97,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "Each aquarium has 2 animals in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "How many aquariums did he have?",
+          "warnings": []
+        }
+      ],
+      "question": "He had a total of 40 saltwater animals in different aquariums. Each aquarium has 2 animals in it. How many aquariums did he have?",
+      "source_id": "svamp-chal-741"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

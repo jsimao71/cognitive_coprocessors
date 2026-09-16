@@ -1,0 +1,265 @@
+{
+  "acceptance_rate": 0.5166666666666667,
+  "accepted_count": 31,
+  "accepted_sha256": "0b3e6d3897dcb0f929c304465171650588433d3d04b15226ba1d90f798fabfcb",
+  "annotation_sha256": {
+    "artifacts\\paper1\\f3_v1\\full500_partial_annotations.jsonl": "d6738c61d4ac2d80597f6ba0995fd23536c4431e9904d998edc2029a57c7c987"
+  },
+  "answer_mismatch_feedback_hidden": true,
+  "attempted_count": 60,
+  "form_counts": {
+    "add": 2,
+    "collection": 15,
+    "consume": 2,
+    "difference_relation": 2,
+    "fraction_of": 3,
+    "member": 13,
+    "multiple": 8,
+    "observe": 61,
+    "offset": 4,
+    "older_than": 1,
+    "partition": 1,
+    "percent_more": 1,
+    "percent_of": 2,
+    "product_relation": 3,
+    "query": 31,
+    "quotient_relation": 2,
+    "rate_relation": 2,
+    "remove": 5,
+    "same": 2,
+    "sum_relation": 5,
+    "transfer": 5
+  },
+  "registry": {
+    "nested": {
+      "at": {
+        "category": "reference",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "cell": {
+        "category": "evidence",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "event_field": {
+        "category": "reference",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "fraction": {
+        "category": "quantity",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 0
+      },
+      "scale": {
+        "category": "quantity",
+        "maximum": 2,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "source": {
+        "category": "evidence",
+        "maximum": 1,
+        "minimum": 1,
+        "runtime_level": 0
+      }
+    },
+    "runtime_modes": {
+      "r0": 0,
+      "r1": 1,
+      "r2": 2
+    },
+    "schema_version": "ccpu.paper1.f3.registry.v1",
+    "top_level": {
+      "absolute_difference": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "add": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "collection": {
+        "category": "declaration",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 0
+      },
+      "consume": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "difference_relation": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "fraction_of": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "maximum_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "mean_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "member": {
+        "category": "declaration",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 0
+      },
+      "minimum_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "multiple": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "observe": {
+        "category": "observation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 0
+      },
+      "offset": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "older_than": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "partition": {
+        "category": "declaration",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 0
+      },
+      "percent_less": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "percent_more": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "percent_of": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "produce": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "product_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "query": {
+        "category": "query",
+        "maximum": null,
+        "minimum": 2,
+        "runtime_level": 0
+      },
+      "quotient_relation": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "rate_relation": {
+        "category": "relation",
+        "maximum": 4,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "remove": {
+        "category": "event",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      },
+      "same": {
+        "category": "relation",
+        "maximum": 3,
+        "minimum": 3,
+        "runtime_level": 1
+      },
+      "sum_relation": {
+        "category": "relation",
+        "maximum": null,
+        "minimum": 4,
+        "runtime_level": 1
+      },
+      "transfer": {
+        "category": "event",
+        "maximum": 6,
+        "minimum": 6,
+        "runtime_level": 1
+      },
+      "younger_than": {
+        "category": "relation",
+        "maximum": 5,
+        "minimum": 5,
+        "runtime_level": 1
+      }
+    }
+  },
+  "rejected_count": 29,
+  "rejected_sha256": "969682b43f66dd0299627761bb1d1523f9dc528d5fc22892ee9d7368901574b3",
+  "runtime_counts": {
+    "r0_executable": 11,
+    "r1_executable": 23,
+    "r2_executable": 31
+  },
+  "schema_version": "ccpu.paper1.f3.annotation_validation.v1",
+  "source_count": 500,
+  "source_coverage": 0.12,
+  "split_accepted": {
+    "train": 31
+  },
+  "unattempted_count": 440,
+  "unattempted_sha256": "5a813b810437d884d17e89debdb5376547daf274a40ff03b28eaf3b41e63dc94",
+  "unique_f3_patterns": 26
+}

@@ -1,0 +1,43 @@
+{
+  "accepted_by_model": {
+    "minimax/minimax-m2.7:free": 1789,
+    "minimax/minimax-m3:free": 336,
+    "nvidia/nemotron-3-super-120b-a12b:free": 4
+  },
+  "accepted_program_count": 2129,
+  "annotations_sha256": "7983ebbcb7e9deb62677b7410e44c9b86ec7e2e20614aeaefff86e251edd1846",
+  "attempt_count": 12501,
+  "attempt_error_counts": {
+    "invalid": 2172,
+    "provider_error": 359,
+    "rate_limited": 7841
+  },
+  "attempts_by_model": {
+    "dots-studio/dots-3-note-preview:free": 3215,
+    "minimax/minimax-m2.7:free": 3215,
+    "minimax/minimax-m3:free": 1426,
+    "nvidia/nemotron-3-super-120b-a12b:free": 3219,
+    "z-ai/glm-5.2:free": 1426
+  },
+  "attempts_sha256": "02c1d06647f451acba5156166646382da33870ad9b657e1242bd40361da3b1d2",
+  "conversion_rate_input": 0.622878876535986,
+  "conversion_rate_processed": 0.6617967050046627,
+  "failed_program_count": 1088,
+  "failures_sha256": "067fd55ecd58c08cbb2cb80df448354538f84d2de871aab92e8bb8e85cf5e7e3",
+  "input_program_count": 3418,
+  "input_sha256": "09c23eece77f35cccc29558b6e69c4ee7d63d90d40ad0e4d706e9f2c118db8f4",
+  "models": [
+    "nvidia/nemotron-3-super-120b-a12b:free",
+    "dots-studio/dots-3-note-preview:free",
+    "minimax/minimax-m2.7:free",
+    "z-ai/glm-5.2:free",
+    "minimax/minimax-m3:free"
+  ],
+  "processed_program_count": 3217,
+  "provider": "openrouter",
+  "remaining_program_count": 201,
+  "schema_version": "ccpu.dsl_dataset.remote_program_teacher_summary.v1",
+  "skill_sha256": "d797e1826d6f4c1499472cc401816cd28191ff36214f0929ebe84eaae90c06e6",
+  "status": "partial",
+  "stop_reason": "all configured models unavailable; leave current and later rows pending"
+}

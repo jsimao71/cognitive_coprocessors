@@ -1,0 +1,510 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Danny collects bottle caps and wrappers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "He found 10 bottle caps and 62 wrappers at the park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "Now he has 27 bottle caps and 43 wrappers in his collection.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "How many more wrappers than bottle caps does danny have now?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause describes Danny's collecting interests but introduces no quantitative arithmetic state delta."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "danny.park_found.bottle_caps = 10",
+              "danny.park_found.wrappers = 62"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "danny.collection_now.bottle_caps = 27",
+              "danny.collection_now.wrappers = 43"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The current collection counts are represented as a distinct state rather than inferred by adding the quantities found at the park."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "danny.collection_now.wrapper_over_bottle_cap_count = danny.collection_now.wrappers - danny.collection_now.bottle_caps",
+              "RETURN danny.collection_now.wrapper_over_bottle_cap_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-514"
+      },
+      "question": "Danny collects bottle caps and wrappers. He found 10 bottle caps and 62 wrappers at the park. Now he has 27 bottle caps and 43 wrappers in his collection. How many more wrappers than bottle caps does danny have now?",
+      "source_context": null,
+      "source_id": "svamp-chal-514",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "16",
+        "gold_reasoning": "( 43.0 - 27.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack received 4 emails and sent 2 letters in the morning.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "He then received 6 emails and sent 8 letters in the afternoon.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "How many emails did Jack send in the day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jack.morning.emails_received = 4",
+              "jack.morning.letters_sent = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jack.afternoon.emails_received = 6",
+              "jack.afternoon.letters_sent = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The question asks for emails Jack sent, but the preceding clauses provide only emails received and letters sent, so the requested quantity cannot be determined without changing an action or object."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-639"
+      },
+      "question": "Jack received 4 emails and sent 2 letters in the morning. He then received 6 emails and sent 8 letters in the afternoon. How many emails did Jack send in the day?",
+      "source_context": null,
+      "source_id": "svamp-chal-639",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "( 2.0 + 8.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The ring toss game at the carnival made the same amount of money each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "In total in 30 days they earned 420 dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "Together with game they earned 22 dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "How much did ring toss game make per day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "ASL-Arith v0 has no declaration-only or constancy predicate with which to encode an unknown amount that is equal across days."
+            ],
+            "confidence": 0.93,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "ring_toss.duration_days = 30",
+              "ring_toss.earnings_30_days = 420",
+              "ring_toss.daily_earnings = ring_toss.earnings_30_days / ring_toss.duration_days"
+            ],
+            "assumptions": [
+              "The pronoun \"they\" refers to the ring toss game at the carnival."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [
+              "The daily-earnings derivation uses the preceding statement that the game made the same amount each day."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"Together with game\" does not identify what was combined with which game, so the entity and measured total associated with 22 dollars cannot be resolved reliably."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "RETURN ring_toss.daily_earnings"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-403"
+      },
+      "question": "The ring toss game at the carnival made the same amount of money each day. In total in 30 days they earned 420 dollars. Together with game they earned 22 dollars. How much did ring toss game make per day?",
+      "source_context": null,
+      "source_id": "svamp-chal-403",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported, part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "14",
+        "gold_reasoning": "( 420.0 / 30.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 20,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Paul had some books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 21,
+          "teacher_input_default": true,
+          "text": "After selling 137 in a garage sale he had 105 left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "How many books did he have at the start?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "ASL-Arith v0 has no declaration-only construct for introducing Paul's unknown starting book count without inventing a value or a self-referential assignment."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "paul.books.sold_at_garage_sale = 137",
+              "paul.books.after_garage_sale = 105",
+              "paul.books.start = paul.books.after_garage_sale + paul.books.sold_at_garage_sale"
+            ],
+            "assumptions": [
+              "The 137 items sold were books from Paul's starting collection."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The starting count is retained as a derived state distinct from the count after the sale."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN paul.books.start"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-821"
+      },
+      "question": "Paul had some books. After selling 137 in a garage sale he had 105 left. How many books did he have at the start?",
+      "source_context": null,
+      "source_id": "svamp-chal-821",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "242",
+        "gold_reasoning": "( 137.0 + 105.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack received 6 emails in the morning, 3 emails in the afternoon and some more in the evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "If he received a total of 10 emails in the day How many emails did Jack receive in the afternoon?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jack.morning.emails = 6",
+              "jack.afternoon.emails = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "Evening emails are mentioned without an exact quantity, so no numeric assignment is introduced for them."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jack.day.total_emails = 10",
+              "RETURN jack.afternoon.emails"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The requested afternoon quantity was already stated directly."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-35"
+      },
+      "question": "Jack received 6 emails in the morning, 3 emails in the afternoon and some more in the evening. If he received a total of 10 emails in the day How many emails did Jack receive in the afternoon?",
+      "source_context": null,
+      "source_id": "svamp-chal-35",
+      "validation_failure": "answer mismatch: actual=3, expected=1",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "( 10.0 - ( 6.0 + 3.0 ) )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

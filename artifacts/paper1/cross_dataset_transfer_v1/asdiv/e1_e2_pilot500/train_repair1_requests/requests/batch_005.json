@@ -1,0 +1,515 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 58,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jerry was counting the money he received for his birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 59,
+          "teacher_input_default": true,
+          "text": "From his aunt he received $9.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "From his uncle he received $9.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "His best friends gave him $22, $23 and $22 and $22.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 172,
+          "teacher_input_default": true,
+          "text": "And his sister gave him $7.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 200,
+          "teacher_input_default": true,
+          "text": "What is the mean of the money he received?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jerry.birthday.money_activity = \"counting\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jerry.birthday.gifts.aunt.dollars = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jerry.birthday.gifts.uncle.dollars = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jerry.birthday.gifts.best_friend1.dollars = 22",
+              "jerry.birthday.gifts.best_friend2.dollars = 23",
+              "jerry.birthday.gifts.best_friend3.dollars = 22",
+              "jerry.birthday.gifts.best_friend4.dollars = 22"
+            ],
+            "assumptions": [
+              "The four listed amounts are contributions from four individual best friends in source order."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jerry.birthday.gifts.sister.dollars = 7"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jerry.birthday.gifts.mean_dollars = mean(jerry.birthday.gifts.aunt.dollars, jerry.birthday.gifts.uncle.dollars, jerry.birthday.gifts.best_friend1.dollars, jerry.birthday.gifts.best_friend2.dollars, jerry.birthday.gifts.best_friend3.dollars, jerry.birthday.gifts.best_friend4.dollars, jerry.birthday.gifts.sister.dollars)",
+              "RETURN jerry.birthday.gifts.mean_dollars"
+            ],
+            "assumptions": [
+              "The requested mean is taken across the seven individually stated gift amounts."
+            ],
+            "confidence": 0.96,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1979"
+      },
+      "question": "Jerry was counting the money he received for his birthday. From his aunt he received $9. From his uncle he received $9. His best friends gave him $22, $23 and $22 and $22. And his sister gave him $7. What is the mean of the money he received?",
+      "source_context": null,
+      "source_id": "asdiv-1979",
+      "validation_failure": "answer mismatch: actual=16.28571428571428571428571429, expected=16.3",
+      "validator_context": {
+        "correct_answer": "16.3",
+        "gold_reasoning": "(9+9+22+23+22+22+7)/7=16.3"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 35,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 650 students in a school.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 36,
+          "teacher_input_default": true,
+          "text": "If the number of girls is 106 more than the boys, how many boys are there in the school?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "school.students.total_count = 650"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "school.girls.count = school.boys.count + 106",
+              "school.students.total_count = school.girls.count + school.boys.count",
+              "RETURN school.boys.count"
+            ],
+            "assumptions": [
+              "The school's students are partitioned into the girls and boys described in the question."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The comparison between girls and boys is retained as a symbolic relation."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1392"
+      },
+      "question": "There are 650 students in a school. If the number of girls is 106 more than the boys, how many boys are there in the school?",
+      "source_context": null,
+      "source_id": "asdiv-1392",
+      "validation_failure": "unresolved reference 'school.boys.count' from scope 'global'; unresolved reference 'school.girls.count' from scope 'global'; unresolved reference 'school.boys.count' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "272",
+        "gold_reasoning": "x:The number of boys; y:The number of girls; x+y=650; y-x=106"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The second angle of a triangle is five times as large as the first.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "The measure of the third angle is 12 degrees greater than that of the first angle.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "How large are the angles?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "triangle.second_angle.degrees = triangle.first_angle.degrees * 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "triangle.third_angle.degrees = triangle.first_angle.degrees + 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "triangle.interior_angle_sum.degrees = 180",
+              "triangle.first_angle.degrees = (triangle.interior_angle_sum.degrees - 12) / (1 + 5 + 1)",
+              "RETURN triangle.first_angle.degrees",
+              "RETURN triangle.second_angle.degrees",
+              "RETURN triangle.third_angle.degrees"
+            ],
+            "assumptions": [
+              "The angles are the three interior angles of a Euclidean triangle and therefore sum to 180 degrees."
+            ],
+            "confidence": 0.93,
+            "part_id": 2,
+            "semantic_notes": [
+              "Each of the three requested angle measures is returned separately."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1471"
+      },
+      "question": "The second angle of a triangle is five times as large as the first. The measure of the third angle is 12 degrees greater than that of the first angle. How large are the angles?",
+      "source_context": null,
+      "source_id": "asdiv-1471",
+      "validation_failure": "answer mismatch: actual=36, expected=24",
+      "validator_context": {
+        "correct_answer": "24",
+        "gold_reasoning": "x:The first angle of a triangle; y:The second angle of a triangle; y=5x; 180-(x+y)=x+12"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The second angle of a triangle is double the first.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "The third angle is 40 less than the first.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "Find the three angles.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "triangle.second_angle.degrees = triangle.first_angle.degrees * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "triangle.third_angle.degrees = triangle.first_angle.degrees - 40"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "triangle.interior_angle_sum.degrees = 180",
+              "triangle.first_angle.degrees = (triangle.interior_angle_sum.degrees + 40) / (1 + 2 + 1)",
+              "RETURN triangle.first_angle.degrees",
+              "RETURN triangle.second_angle.degrees",
+              "RETURN triangle.third_angle.degrees"
+            ],
+            "assumptions": [
+              "The angles are the three interior angles of a Euclidean triangle and therefore sum to 180 degrees."
+            ],
+            "confidence": 0.93,
+            "part_id": 2,
+            "semantic_notes": [
+              "Each of the three requested angle measures is returned separately."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1457"
+      },
+      "question": "The second angle of a triangle is double the first. The third angle is 40 less than the first. Find the three angles.",
+      "source_context": null,
+      "source_id": "asdiv-1457",
+      "validation_failure": "answer mismatch: actual=15, expected=88",
+      "validator_context": {
+        "correct_answer": "88",
+        "gold_reasoning": "x:The second angle of a triangle; y:The first angle of a triangle; 2y=x; 180-(x+y)=x-40"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A box can hold seven brownies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "If a baker made three hundred forty-nine brownies, how many full boxes of brownies did he make?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "box.capacity.brownies = 7"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause asks for the number of full boxes, which requires an integer quotient or floor operation when 349 brownies are packed 7 per box; no such operator is available in the active registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1535"
+      },
+      "question": "A box can hold seven brownies. If a baker made three hundred forty-nine brownies, how many full boxes of brownies did he make?",
+      "source_context": null,
+      "source_id": "asdiv-1535",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "49",
+        "gold_reasoning": "349/7=49 r6"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

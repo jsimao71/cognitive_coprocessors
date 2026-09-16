@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is trying to buy books for her local library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "She had a budget of $16, and she has already spent $4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "She also bought 2 books today, and both books cost her the same amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 187,
+          "teacher_input_default": true,
+          "text": "If each of the books cost $5, how much money does Anna have left in her budget?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is trying to buy books for her local library. She had a budget of $16, and she has already spent $4. She also bought 2 books today, and both books cost her the same amount of money. If each of the books cost $5, how much money does Anna have left in her budget?",
+      "source_id": "gsm-plus-08924"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is in charge of purchasing books for her community library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "She started with a budget of $16 and has already used $4 of it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "Today, she purchased 2 books at an equal price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 252,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "If she now has $2 remaining in her budget, what was the price of each book?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is in charge of purchasing books for her community library. She started with a budget of $16 and has already used $4 of it. Today, she purchased 2 books at an equal price. If she now has $2 remaining in her budget, what was the price of each book?",
+      "source_id": "gsm-plus-08925"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is trying to buy books for her local library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "She had a budget of $16, and she has already spent $4 on some stationery.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 205,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "She also bought 2 books today, and both books cost her the same amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 206,
+          "teacher_input_default": true,
+          "text": "In addition, she bought a bookmark for $1, which she later returned and got a refund for, so it didn't affect her budget.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 429,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 328,
+          "teacher_input_default": true,
+          "text": "If after all these transactions, Anna has $2 left in her budget, how much did each of the books cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is trying to buy books for her local library. She had a budget of $16, and she has already spent $4 on some stationery. She also bought 2 books today, and both books cost her the same amount of money. In addition, she bought a bookmark for $1, which she later returned and got a refund for, so it didn't affect her budget. If after all these transactions, Anna has $2 left in her budget, how much did each of the books cost?",
+      "source_id": "gsm-plus-08926"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In the first half of a soccer match, team A scores 6 goals while team B scores 3 goals fewer than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 254,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "In the second half, team A scores 1/3 of the number of goals scored by team B, which scores 5 times the number of goals it scored in the first half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 308,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 255,
+          "teacher_input_default": true,
+          "text": "What's the total number of goals scored in the match?",
+          "warnings": []
+        }
+      ],
+      "question": "In the first half of a soccer match, team A scores 6 goals while team B scores 3 goals fewer than team A. In the second half, team A scores 1/3 of the number of goals scored by team B, which scores 5 times the number of goals it scored in the first half. What's the total number of goals scored in the match?",
+      "source_id": "gsm-plus-09400"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In the first half of a soccer match, team A scores 40 goals while team B scores 20 goals fewer than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 310,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 257,
+          "teacher_input_default": true,
+          "text": "What's the total number of goals scored in the match?",
+          "warnings": []
+        }
+      ],
+      "question": "In the first half of a soccer match, team A scores 40 goals while team B scores 20 goals fewer than team A. In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half. What's the total number of goals scored in the match?",
+      "source_id": "gsm-plus-09401"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

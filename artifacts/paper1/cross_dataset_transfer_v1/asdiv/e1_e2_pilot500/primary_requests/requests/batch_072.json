@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Three paper bags contain a total of 24 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "The first and second bags contain a total of 11 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 158,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "The second and third bags contain a total of 18 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 159,
+          "teacher_input_default": true,
+          "text": "How many apples are in the first and third bags together?",
+          "warnings": []
+        }
+      ],
+      "question": "Three paper bags contain a total of 24 apples. The first and second bags contain a total of 11 apples. The second and third bags contain a total of 18 apples. How many apples are in the first and third bags together?",
+      "source_id": "asdiv-0904"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 24,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Connie had some marbles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 25,
+          "teacher_input_default": true,
+          "text": "She gave 183 to Juan.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Now she has 593 marbles left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "How many did she have to start with?",
+          "warnings": []
+        }
+      ],
+      "question": "Connie had some marbles. She gave 183 to Juan. Now she has 593 marbles left. How many did she have to start with?",
+      "source_id": "asdiv-0597"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Bridget wants to win the giant stuffed panda bear.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "She needs a total of 75 points to get it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "Bridget already scored 35 points at the penny pitch booth.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 194,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "She scored 18 more points on her next try.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 195,
+          "teacher_input_default": true,
+          "text": "How many more points does Bridget need?",
+          "warnings": []
+        }
+      ],
+      "question": "Bridget wants to win the giant stuffed panda bear. She needs a total of 75 points to get it. Bridget already scored 35 points at the penny pitch booth. She scored 18 more points on her next try. How many more points does Bridget need?",
+      "source_id": "asdiv-0990"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rick and Todd have the same number of candy bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Rick ate 11 candy bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "Todd gave away 18 of his candy bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "How many more candy bars did Rick have than Todd then?",
+          "warnings": []
+        }
+      ],
+      "question": "Rick and Todd have the same number of candy bars. Rick ate 11 candy bars. Todd gave away 18 of his candy bars. How many more candy bars did Rick have than Todd then?",
+      "source_id": "asdiv-0893"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For dessert, Jane's mom prepared 12 pieces of bite-size cinnamon swirls.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "If the three of them ate an equal number of pieces of cinnamon swirls, how many pieces did Jane eat?",
+          "warnings": []
+        }
+      ],
+      "question": "For dessert, Jane's mom prepared 12 pieces of bite-size cinnamon swirls. If the three of them ate an equal number of pieces of cinnamon swirls, how many pieces did Jane eat?",
+      "source_id": "asdiv-0489"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

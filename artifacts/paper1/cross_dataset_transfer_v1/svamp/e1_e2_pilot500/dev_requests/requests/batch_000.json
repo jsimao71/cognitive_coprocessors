@@ -1,0 +1,263 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Edward spent $ 6 to buy 2 books each book costing him the same amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "Now he has $ 12.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "How much did each book cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Edward spent $ 6 to buy 2 books each book costing him the same amount of money. Now he has $ 12. How much did each book cost?",
+      "source_id": "svamp-chal-896"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "You have 104 dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "How many packs of dvds can you buy if each pack costs 26 dollars?",
+          "warnings": []
+        }
+      ],
+      "question": "You have 104 dollars. How many packs of dvds can you buy if each pack costs 26 dollars?",
+      "source_id": "svamp-chal-419"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Each basket of peaches has 19 red peaches and 4 green peaches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "If there are 15 such baskets How many peaches are in the baskets altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "Each basket of peaches has 19 red peaches and 4 green peaches. If there are 15 such baskets How many peaches are in the baskets altogether?",
+      "source_id": "svamp-chal-761"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 35,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 270 students in a school.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 36,
+          "teacher_input_default": true,
+          "text": "If the school has 5 students in each grades and each grade has the same number of students How many grades are there in total?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 270 students in a school. If the school has 5 students in each grades and each grade has the same number of students How many grades are there in total?",
+      "source_id": "svamp-chal-733"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lewis earns $ 2 every week during the harvest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "If he earns a total of $ 178 How many weeks did the harvest last?",
+          "warnings": []
+        }
+      ],
+      "question": "Lewis earns $ 2 every week during the harvest. If he earns a total of $ 178 How many weeks did the harvest last?",
+      "source_id": "svamp-chal-477"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

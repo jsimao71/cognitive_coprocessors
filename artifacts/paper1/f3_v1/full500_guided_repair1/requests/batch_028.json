@@ -1,0 +1,102 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "There were students from three different schools taking part in a debate organized by the town's mayor on a stage. The first school had twice as many students as the second school, and the second school had 40 more students than the third school. If the third school had 200 students, and after the debate was over, every student shook the mayor's hand, calculate the total number of students who shook the mayor's hand on the stage.",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"debate.students\", \"student\", \"stage\", source(\"students from three different schools taking part in a debate organized by the town's mayor on a stage\"))",
+          "observe(at(\"debate.schools.count\", \"debate\"), 3, \"count\", source(\"three different schools\"))",
+          "multiple(at(\"debate.students.first_school.count\", \"debate\"), at(\"debate.students.second_school.count\", \"debate\"), 2, source(\"The first school had twice as many students as the second school\"))",
+          "offset(at(\"debate.students.second_school.count\", \"debate\"), at(\"debate.students.third_school.count\", \"debate\"), 40, \"count\", source(\"the second school had 40 more students than the third school\"))",
+          "observe(at(\"debate.students.third_school.count\", \"debate\"), 200, \"count\", source(\"the third school had 200 students\"))",
+          "same(at(\"debate.mayor_handshake.students.count\", \"after_debate\"), at(\"debate.students.count\", \"debate\"), source(\"every student shook the mayor's hand\"))",
+          "query(\"value\", at(\"debate.mayor_handshake.students.count\", \"after_debate\"))"
+        ]
+      },
+      "source_id": "3112"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Tom decides to renovate a house.  There are 3 bedrooms and each bedroom takes 4 hours to renovate.  The kitchen takes 50% longer than each bedroom.  The living room took twice as much time as everything else combined.  How long did everything take?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"house.bedrooms\", \"bedroom\", \"house\", source(\"There are 3 bedrooms\"))",
+          "observe(at(\"house.bedrooms.count\", \"current\"), 3, \"count\", source(\"There are 3 bedrooms\"))",
+          "observe(at(\"house.bedrooms.each.renovation_duration\", \"current\"), 4, \"hour\", source(\"each bedroom takes 4 hours to renovate\"))",
+          "percent_more(at(\"house.kitchen.renovation_duration\", \"current\"), at(\"house.bedrooms.each.renovation_duration\", \"current\"), 50, source(\"The kitchen takes 50% longer than each bedroom\"))",
+          "sum_relation(at(\"house.non_living_rooms.renovation_duration.total\", \"current\"), at(\"house.bedrooms.renovation_duration.total\", \"current\"), at(\"house.kitchen.renovation_duration\", \"current\"), source(\"everything else combined\"))",
+          "multiple(at(\"house.living_room.renovation_duration\", \"current\"), at(\"house.non_living_rooms.renovation_duration.total\", \"current\"), 2, source(\"The living room took twice as much time as everything else combined\"))",
+          "query(\"value\", at(\"house.renovation_duration.total\", \"current\"))"
+        ]
+      },
+      "source_id": "547"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Mr. Rocky went to the market to sell his handmade crafts on a particular week. He was selling jewelry at $30 each and paintings at $100 each. However, he realized the income from the sales wasn't worth the labor and materials he had used, so he decided to increase the price of jewelry by $10 each and the cost of each painting by 20%. Calculate the total price a buyer who takes two pieces of jewelry and five paintings would pay",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"mr_rocky.jewelry.unit_price\", \"initial\"), 30, \"dollar_per_item\", source(\"jewelry at $30 each\"))",
+          "observe(at(\"mr_rocky.painting.unit_price\", \"initial\"), 100, \"dollar_per_item\", source(\"paintings at $100 each\"))",
+          "add(\"jewelry_price_increase\", \"mr_rocky\", at(\"mr_rocky.jewelry.unit_price\", \"current\"), 10, source(\"increase the price of jewelry by $10 each\"))",
+          "add(\"painting_price_increase\", \"mr_rocky\", at(\"mr_rocky.painting.unit_price\", \"current\"), fraction(at(\"mr_rocky.painting.unit_price\", \"initial\"), 20, 100), source(\"increase the price of jewelry by $10 each and the cost of each painting by 20%\"))",
+          "observe(at(\"buyer.purchase.jewelry.count\", \"current\"), 2, \"count\", source(\"takes two pieces of jewelry\"))",
+          "observe(at(\"buyer.purchase.painting.count\", \"current\"), 5, \"count\", source(\"five paintings\"))",
+          "query(\"value\", at(\"buyer.purchase.total_price\", \"current\"))"
+        ]
+      },
+      "source_id": "5327"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Robi and Rudy contributed money to start a business that could earn them profit. Robi contributed $4000, and Rudy contributed 1/4 more money than Robi. If they made a profit of 20 percent of the total amount and decided to share the profits equally, calculate the amount of money each got.",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"robi.business_contribution\", \"initial\"), 4000, \"dollar\", source(\"Robi contributed $4000\"))",
+          "offset(at(\"rudy.business_contribution\", \"initial\"), at(\"robi.business_contribution\", \"initial\"), fraction(at(\"robi.business_contribution\", \"initial\"), 1, 4), \"dollar\", source(\"Rudy contributed 1/4 more money than Robi\"))",
+          "sum_relation(at(\"business.contributions.total\", \"initial\"), at(\"robi.business_contribution\", \"initial\"), at(\"rudy.business_contribution\", \"initial\"), source(\"the total amount\"))",
+          "percent_of(at(\"business.profit\", \"current\"), at(\"business.contributions.total\", \"initial\"), 20, source(\"a profit of 20 percent of the total amount\"))",
+          "same(at(\"robi.profit_share\", \"current\"), at(\"rudy.profit_share\", \"current\"), source(\"share the profits equally\"))",
+          "sum_relation(at(\"business.profit\", \"current\"), at(\"robi.profit_share\", \"current\"), at(\"rudy.profit_share\", \"current\"), source(\"share the profits equally\"))",
+          "query(\"value\", at(\"robi.profit_share\", \"current\"))"
+        ]
+      },
+      "source_id": "3603"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Fiona completed 36 math questions in an hour. Shirley was able to complete twice as many math questions within that same time, and Kiana completed half of the sum of Fiona and Shirley's math questions. If they each did the same number of questions the following hour, how many math questions did all three girls complete in 2 hours?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"fiona.math_questions.completed_count\", \"first_hour\"), 36, \"count\", source(\"Fiona completed 36 math questions in an hour\"))",
+          "multiple(at(\"shirley.math_questions.completed_count\", \"first_hour\"), at(\"fiona.math_questions.completed_count\", \"first_hour\"), 2, source(\"Shirley was able to complete twice as many math questions within that same time\"))",
+          "sum_relation(at(\"fiona_and_shirley.math_questions.completed_count\", \"first_hour\"), at(\"fiona.math_questions.completed_count\", \"first_hour\"), at(\"shirley.math_questions.completed_count\", \"first_hour\"), source(\"the sum of Fiona and Shirley's math questions\"))",
+          "fraction_of(at(\"kiana.math_questions.completed_count\", \"first_hour\"), at(\"fiona_and_shirley.math_questions.completed_count\", \"first_hour\"), 1, 2, source(\"Kiana completed half of the sum of Fiona and Shirley's math questions\"))",
+          "same(at(\"fiona.math_questions.completed_count\", \"following_hour\"), at(\"fiona.math_questions.completed_count\", \"first_hour\"), source(\"they each did the same number of questions the following hour\"))",
+          "same(at(\"shirley.math_questions.completed_count\", \"following_hour\"), at(\"shirley.math_questions.completed_count\", \"first_hour\"), source(\"they each did the same number of questions the following hour\"))",
+          "same(at(\"kiana.math_questions.completed_count\", \"following_hour\"), at(\"kiana.math_questions.completed_count\", \"first_hour\"), source(\"they each did the same number of questions the following hour\"))",
+          "query(\"value\", at(\"fiona_shirley_kiana.math_questions.completed_count.total\", \"2_hours\"))"
+        ]
+      },
+      "source_id": "457"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

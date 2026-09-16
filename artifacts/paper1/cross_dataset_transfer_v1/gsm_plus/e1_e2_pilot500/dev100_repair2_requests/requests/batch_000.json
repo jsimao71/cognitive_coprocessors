@@ -1,0 +1,546 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Keegan and Tashay were running a car wash to raise money for a baseball camp.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "They needed to raise $200  for the two of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 126,
+          "teacher_input_default": true,
+          "text": "By 3 pm, Keegan had earned $83 and Tasha had earned $91.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 267,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "Later in the day, Keegan earned an additional $10 and Tasha earned an additional $5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 268,
+          "teacher_input_default": true,
+          "text": "How much more did they need to earn to reach their combined goal?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "fundraiser.activity = \"car wash\"",
+              "fundraiser.purpose = \"baseball camp\"",
+              "fundraiser.participants = \"Keegan and Tashay\""
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fundraiser.combined_goal_dollars = 200"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "keegan.by_3pm.earned_dollars = 83",
+              "tashay.by_3pm.earned_dollars = 91"
+            ],
+            "assumptions": [
+              "Resolved \"Tasha\" to Tashay because the opening clause identifies Keegan and Tashay as the two participants."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "keegan.later.additional_earned_dollars = 10",
+              "tashay.later.additional_earned_dollars = 5",
+              "keegan.end_of_day.earned_dollars = keegan.by_3pm.earned_dollars + keegan.later.additional_earned_dollars",
+              "tashay.end_of_day.earned_dollars = tashay.by_3pm.earned_dollars + tashay.later.additional_earned_dollars"
+            ],
+            "assumptions": [
+              "Resolved \"Tasha\" to Tashay consistently with the preceding clause."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fundraiser.end_of_day.combined_earned_dollars = sum(keegan.end_of_day.earned_dollars, tashay.end_of_day.earned_dollars)",
+              "fundraiser.amount_still_needed_dollars = fundraiser.combined_goal_dollars - fundraiser.end_of_day.combined_earned_dollars",
+              "RETURN fundraiser.amount_still_needed_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.45,
+            "part_id": 4,
+            "semantic_notes": [
+              "The grounded source calculation returns 11 dollars. The rationale-assisted expected answer of 1 is inconsistent with the stated goal and earnings, so it cannot be reached without inventing or altering a source value."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-03859"
+      },
+      "question": "Keegan and Tashay were running a car wash to raise money for a baseball camp. They needed to raise $200  for the two of them. By 3 pm, Keegan had earned $83 and Tasha had earned $91. Later in the day, Keegan earned an additional $10 and Tasha earned an additional $5. How much more did they need to earn to reach their combined goal?",
+      "source_context": null,
+      "source_id": "gsm-plus-03859",
+      "validation_failure": "answer mismatch: actual=11, expected=1",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The highest temperature ever recorded in Southland is -48 degrees Fahrenheit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "The highest temperature ever recorded in Northlandia is 21 degrees Fahrenheit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "The highest temperature recorded in Midlandia is -3 degrees Fahrenheit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 299,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 229,
+          "teacher_input_default": true,
+          "text": "The temperature in Central India was 6 degrees higher than in Midland.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 361,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 300,
+          "teacher_input_default": true,
+          "text": "What is the average highest temperature of these 4 countries?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "southland.highest_temperature_fahrenheit = -48"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "northlandia.highest_temperature_fahrenheit = 21"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "midlandia.highest_temperature_fahrenheit = -3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "central_india.highest_temperature_fahrenheit = midlandia.highest_temperature_fahrenheit + 6"
+            ],
+            "assumptions": [
+              "\u201cMidland\u201d refers to Midlandia."
+            ],
+            "confidence": 0.91,
+            "part_id": 3,
+            "semantic_notes": [
+              "The surrounding question establishes highest recorded temperature as the measured quantity."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "countries.average_highest_temperature_fahrenheit = mean(southland.highest_temperature_fahrenheit, northlandia.highest_temperature_fahrenheit, midlandia.highest_temperature_fahrenheit, central_india.highest_temperature_fahrenheit)",
+              "RETURN countries.average_highest_temperature_fahrenheit"
+            ],
+            "assumptions": [
+              "\u201cThese 4 countries\u201d refers to Southland, Northlandia, Midlandia, and Central India."
+            ],
+            "confidence": 0.45,
+            "part_id": 4,
+            "semantic_notes": [
+              "The four grounded temperatures are -48, 21, -3, and 3, whose mean is -6.75. The rationale-assisted expected answer of -9 is inconsistent with the stated four-country average."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-03915"
+      },
+      "question": "The highest temperature ever recorded in Southland is -48 degrees Fahrenheit. The highest temperature ever recorded in Northlandia is 21 degrees Fahrenheit. The highest temperature recorded in Midlandia is -3 degrees Fahrenheit. The temperature in Central India was 6 degrees higher than in Midland. What is the average highest temperature of these 4 countries?",
+      "source_context": null,
+      "source_id": "gsm-plus-03915",
+      "validation_failure": "answer mismatch: actual=-6.75, expected=-9",
+      "validator_context": {
+        "correct_answer": "-9",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom bought a CD for $4, a headphone set, and a poster for $6.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "In total, he paid $54.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "If Tom had decided not to buy the headphone set and the poster, how many more CDs would he have been able to buy with the money he spent?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tom.purchase.cd_count = 1",
+              "cd.unit_price_dollars = 4",
+              "tom.purchase.headphone_set_count = 1",
+              "tom.purchase.poster_count = 1",
+              "poster.unit_price_dollars = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The headphone-set price is not stated directly."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tom.purchase.total_spent_dollars = 54",
+              "headphone_set.unit_price_dollars = tom.purchase.total_spent_dollars - cd.unit_price_dollars - poster.unit_price_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The headphone-set price is derived from the stated purchase total and the other two prices."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "\u201cThe money he spent\u201d refers to the original total expenditure, and CDs must be purchased in whole units."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The money released by omitting the headphone set and poster is 50 dollars, which corresponds to 12.5 CD prices. The rationale-assisted expected answer of 12 requires counting only whole CDs, but the active ASL arithmetic profile has no floor or integer-division operator."
+            ],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-04235"
+      },
+      "question": "Tom bought a CD for $4, a headphone set, and a poster for $6. In total, he paid $54. If Tom had decided not to buy the headphone set and the poster, how many more CDs would he have been able to buy with the money he spent?",
+      "source_context": null,
+      "source_id": "gsm-plus-04235",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school auditorium has a certain number of rows of seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "There are 18 seats in each row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "One-fourth of the seats were occupied by the administrators.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "One-third of the remaining seats were occupied by the parents and the rest were occupied by the students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 363,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 260,
+          "teacher_input_default": true,
+          "text": "If there were 36 students in the school auditorium, how many rows of seats are there in the auditorium?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces an unknown auditorium row count but supplies no numeric fact."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "auditorium.seats_per_row = 18"
+            ],
+            "assumptions": [
+              "Every auditorium row has 18 seats."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "auditorium.administrator_occupied_fraction = 1 / 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "auditorium.parent_fraction_of_post_administrator_remainder = 1 / 3",
+              "auditorium.student_fraction_of_post_administrator_remainder = 1 - auditorium.parent_fraction_of_post_administrator_remainder",
+              "auditorium.student_fraction_of_total_seats = (1 - auditorium.administrator_occupied_fraction) * auditorium.student_fraction_of_post_administrator_remainder"
+            ],
+            "assumptions": [
+              "Administrators, parents, and students exhaustively partition the occupied seats described."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "Students occupy two-thirds of the seats remaining after administrators, equivalent to one-half of all auditorium seats."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "students.occupied_seats = 36",
+              "auditorium.total_seats = students.occupied_seats / auditorium.student_fraction_of_total_seats",
+              "auditorium.rows = auditorium.total_seats / auditorium.seats_per_row",
+              "RETURN auditorium.rows"
+            ],
+            "assumptions": [],
+            "confidence": 0.45,
+            "part_id": 4,
+            "semantic_notes": [
+              "The grounded source relations yield 72 total seats and 4 rows. The rationale-assisted expected answer of 18 equals the stated seats per row and is inconsistent with the requested row count."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-04948"
+      },
+      "question": "The school auditorium has a certain number of rows of seats. There are 18 seats in each row. One-fourth of the seats were occupied by the administrators. One-third of the remaining seats were occupied by the parents and the rest were occupied by the students. If there were 36 students in the school auditorium, how many rows of seats are there in the auditorium?",
+      "source_context": null,
+      "source_id": "gsm-plus-04948",
+      "validation_failure": "answer mismatch: actual=4, expected=18",
+      "validator_context": {
+        "correct_answer": "18",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 2,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

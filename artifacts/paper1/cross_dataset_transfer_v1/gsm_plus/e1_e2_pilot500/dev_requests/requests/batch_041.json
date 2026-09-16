@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Hallie had dance practice for 1.5 hour on Tuesdays and 2.5 hours on Thursdays.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 168,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "How many hours a week did she have dance practice?",
+          "warnings": []
+        }
+      ],
+      "question": "Hallie had dance practice for 1.5 hour on Tuesdays and 2.5 hours on Thursdays.  On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class.  How many hours a week did she have dance practice?",
+      "source_id": "gsm-plus-02978"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Hallie had dance practice for 1 hour on Tuesdays and 2 hours on Thursdays.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 315,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 164,
+          "teacher_input_default": true,
+          "text": "Additionally, she started attending a new dance class on Sundays that lasted half as long as the combined duration of Tuesday's and Thursday's classes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 374,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 316,
+          "teacher_input_default": true,
+          "text": "How many hours a week did she now spend on dance practice?",
+          "warnings": []
+        }
+      ],
+      "question": "Hallie had dance practice for 1 hour on Tuesdays and 2 hours on Thursdays. On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class. Additionally, she started attending a new dance class on Sundays that lasted half as long as the combined duration of Tuesday's and Thursday's classes. How many hours a week did she now spend on dance practice?",
+      "source_id": "gsm-plus-02979"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Hallie had dance practice for 1 hour on Tuesdays and some hours on Thursdays.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 169,
+          "teacher_input_default": true,
+          "text": "If she had dance practice for a total of 5 hours a week, how many hours does she have on Thursdays?",
+          "warnings": []
+        }
+      ],
+      "question": "Hallie had dance practice for 1 hour on Tuesdays and some hours on Thursdays.  On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class.  If she had dance practice for a total of 5 hours a week, how many hours does she have on Thursdays?",
+      "source_id": "gsm-plus-02980"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Hallie attended a dance class for 1 hour every Tuesday and for 2 hours every Thursday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 161,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "On Saturdays, her dance class was twice the duration of her Tuesday class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 244,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 162,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total number of hours she spent in dance practice each week?",
+          "warnings": []
+        }
+      ],
+      "question": "Hallie attended a dance class for 1 hour every Tuesday and for 2 hours every Thursday. On Saturdays, her dance class was twice the duration of her Tuesday class. Can you calculate the total number of hours she spent in dance practice each week?",
+      "source_id": "gsm-plus-02981"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Hallie had dance practice for 1 hour on Tuesdays and 2 hours on Thursdays.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 230,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "Additionally, he still needed to practice the piano for 3 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 281,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 231,
+          "teacher_input_default": true,
+          "text": "How many hours a week did she have dance practice?",
+          "warnings": []
+        }
+      ],
+      "question": "Hallie had dance practice for 1 hour on Tuesdays and 2 hours on Thursdays.  On Saturdays, she had dance practice that lasted twice as long as Tuesday's night class.  Additionally, he still needed to practice the piano for 3 hours. How many hours a week did she have dance practice?",
+      "source_id": "gsm-plus-02982"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Suzie is a big fan of fruit-flavored gum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "During her last visit to the store, she bought four packs of gum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 211,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "She picked up two packs of her favorite flavor, strawberry, and also bought a pack of grape gum for $2.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 323,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 212,
+          "teacher_input_default": true,
+          "text": "She also decided to try a new flavor, green apple, and paid half the price of the grape gum for a smaller pack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 427,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 324,
+          "teacher_input_default": true,
+          "text": "In the midst of her shopping, she also bought a bottle of water for $1, which she drank while shopping.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 558,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 428,
+          "teacher_input_default": true,
+          "text": "Despite the cost of the water, if she paid a total of $7 for the gum alone, how many dollars did each pack of strawberry gum cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Suzie is a big fan of fruit-flavored gum. During her last visit to the store, she bought four packs of gum. She picked up two packs of her favorite flavor, strawberry, and also bought a pack of grape gum for $2. She also decided to try a new flavor, green apple, and paid half the price of the grape gum for a smaller pack. In the midst of her shopping, she also bought a bottle of water for $1, which she drank while shopping. Despite the cost of the water, if she paid a total of $7 for the gum alone, how many dollars did each pack of strawberry gum cost?",
+      "source_id": "gsm-plus-04038"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "An instructor utilizes a chalk measuring 5 inches to jot down mathematical equations on a blackboard for his pupils.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 214,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "The instructor is keen on preserving chalk, hence he aims to use only a fifth of the chalk daily.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 324,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 215,
+          "teacher_input_default": true,
+          "text": "However, when the chalk's length falls below 2 inches, it becomes too small to write with and he recycles it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 400,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 325,
+          "teacher_input_default": true,
+          "text": "On a particular Monday, the instructor started with a fresh piece of chalk.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 540,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 401,
+          "teacher_input_default": true,
+          "text": "His pupils required additional assistance that day, leading him to write more than usual and he consumed 45% of the chalk by the day's end.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 683,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 541,
+          "teacher_input_default": true,
+          "text": "If the instructor reverts to using only a fifth of the chalk each day, how many days will pass before he needs to recycle this piece of chalk?",
+          "warnings": []
+        }
+      ],
+      "question": "An instructor utilizes a chalk measuring 5 inches to jot down mathematical equations on a blackboard for his pupils. The instructor is keen on preserving chalk, hence he aims to use only a fifth of the chalk daily. However, when the chalk's length falls below 2 inches, it becomes too small to write with and he recycles it. On a particular Monday, the instructor started with a fresh piece of chalk. His pupils required additional assistance that day, leading him to write more than usual and he consumed 45% of the chalk by the day's end. If the instructor reverts to using only a fifth of the chalk each day, how many days will pass before he needs to recycle this piece of chalk?",
+      "source_id": "gsm-plus-09413"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are three trees in Eddy's backyard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "The shortest tree has a height of 60 feet, and the second tree has a height of 50 feet more than the shortest tree.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 235,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "The height of the tallest tree is twice the height of the two trees combined.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 265,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 236,
+          "teacher_input_default": true,
+          "text": "How tall is the tallest tree?",
+          "warnings": []
+        }
+      ],
+      "question": "There are three trees in Eddy's backyard. The shortest tree has a height of 60 feet, and the second tree has a height of 50 feet more than the shortest tree. The height of the tallest tree is twice the height of the two trees combined. How tall is the tallest tree?",
+      "source_id": "gsm-plus-02841"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "A blog article takes an average of 4 hours to research and write about.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 438,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 191,
+          "teacher_input_default": true,
+          "text": "Last week, she wrote 5 articles on Monday and 2/5 times more articles on Tuesday than on Monday.If she spent a total of 104 hours writing articles in the three days, how many times as many articles did she write on Wednesday as she did on Tuesday?",
+          "warnings": []
+        }
+      ],
+      "question": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.  A blog article takes an average of 4 hours to research and write about.  Last week, she wrote 5 articles on Monday and 2/5 times more articles on Tuesday than on Monday.If she spent a total of 104 hours writing articles in the three days, how many times as many articles did she write on Wednesday as she did on Tuesday?",
+      "source_id": "gsm-plus-00364"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 19,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ellen is on a diet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 20,
+          "teacher_input_default": true,
+          "text": "She eats two carrots, a salad, and a yogurt every day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "The salad costs her $6.8, while the yogurt is half the price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 137,
+          "teacher_input_default": true,
+          "text": "How much does Ellen pay for one carrot every day when in total she pays $11.8 for her goods?",
+          "warnings": []
+        }
+      ],
+      "question": "Ellen is on a diet. She eats two carrots, a salad, and a yogurt every day. The salad costs her $6.8, while the yogurt is half the price. How much does Ellen pay for one carrot every day when in total she pays $11.8 for her goods?",
+      "source_id": "gsm-plus-07138"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

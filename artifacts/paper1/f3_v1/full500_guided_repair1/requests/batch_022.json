@@ -1,0 +1,93 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Jodi and Vance are researching on a deserted island and have to stay on the island for a certain number of weeks to carry out their research. On their first expedition, they stayed for three weeks on the island. They spent two weeks more on the second expedition than they spent on their first expedition. They spent twice as many weeks on their last expedition as they spent on their second expedition. Calculate the total number of days they spent on the island on all the trips.",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "4592"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "James decides to cut down some trees.  In the first 2 days, he cuts down 20 trees each day.  For the next 3 days his 2 brothers help him cut down trees.  They cut 20% fewer trees per day than James.  How many total trees were cut down?",
+      "repair": {
+        "failure_class": "teacher_ambiguous",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "4930"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Monica made cookies for herself and her family. Her father ate 10 cookies and her mother ate half as much as the father. Her brother ate 2 more than her mother. How many cookies are left for Monica if she made 30 cookies in total?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"monica.family.cookies\", \"cookie\", \"monica.family\", source(\"Monica made cookies for herself and her family\"))",
+          "produce(\"make_cookies\", \"monica\", at(\"monica.family.cookies.count\", \"current\"), 30, source(\"she made 30 cookies in total\"))",
+          "consume(\"father_eats\", \"monica.father\", at(\"monica.family.cookies.count\", \"current\"), 10, source(\"Her father ate 10 cookies\"))",
+          "consume(\"mother_eats\", \"monica.mother\", at(\"monica.family.cookies.count\", \"current\"), fraction(event_field(\"father_eats\", \"quantity\"), 1, 2), source(\"her mother ate half as much as the father\"))",
+          "offset(\"monica.brother.cookies_eaten.count\", event_field(\"mother_eats\", \"quantity\"), 2, \"count\", source(\"Her brother ate 2 more than her mother\"))",
+          "consume(\"brother_eats\", \"monica.brother\", at(\"monica.family.cookies.count\", \"current\"), \"monica.brother.cookies_eaten.count\", source(\"Her brother ate 2 more than her mother\"))",
+          "query(\"remaining_count\", \"monica.family.cookies\", \"current\")"
+        ]
+      },
+      "source_id": "1520"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Jenna is buying concert tickets for her group of five friends. She's able to get two of the tickets from the concert website for $50 each before they sell out. A scalper offers to sell her two more tickets for 240% of the normal price, but Jenna convinces him to give her $10 off that total payment. Finally, one of her friends gets a discounted ticket through her job for 60% of the normal price. How much do Jenna's friends pay for their tickets in total?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"jenna.friends\", \"friend\", \"jenna\", source(\"her group of five friends\"))",
+          "observe(at(\"jenna.friends.count\", \"current\"), 5, \"count\", source(\"five friends\"))",
+          "collection(\"jenna.friends.concert_tickets\", \"ticket\", \"jenna.friends\", source(\"concert tickets for her group of five friends\"))",
+          "collection(\"jenna.friends.ticket_payments\", \"payment\", \"jenna.friends\", source(\"buying concert tickets for her group of five friends\"))",
+          "observe(at(\"jenna.friends.concert_tickets.website.count\", \"current\"), 2, \"count\", source(\"two of the tickets from the concert website\"))",
+          "observe(at(\"concert.ticket.normal_price\", \"current\"), 50, \"dollar\", source(\"$50 each\"))",
+          "product_relation(\"jenna.friends.ticket_payments.website\", at(\"jenna.friends.concert_tickets.website.count\", \"current\"), at(\"concert.ticket.normal_price\", \"current\"), source(\"two of the tickets from the concert website for $50 each\"))",
+          "member(\"jenna.friends.ticket_payments\", \"jenna.friends.ticket_payments.website\", source(\"two of the tickets from the concert website for $50 each\"))",
+          "observe(at(\"jenna.friends.concert_tickets.scalper.count\", \"current\"), 2, \"count\", source(\"two more tickets\"))",
+          "percent_of(at(\"jenna.friends.concert_tickets.scalper.unit_price\", \"current\"), at(\"concert.ticket.normal_price\", \"current\"), 240, source(\"240% of the normal price\"))",
+          "product_relation(\"jenna.friends.ticket_payments.scalper.before_discount\", at(\"jenna.friends.concert_tickets.scalper.count\", \"current\"), at(\"jenna.friends.concert_tickets.scalper.unit_price\", \"current\"), source(\"two more tickets for 240% of the normal price\"))",
+          "offset(\"jenna.friends.ticket_payments.scalper\", \"jenna.friends.ticket_payments.scalper.before_discount\", -10, \"dollar\", source(\"$10 off that total payment\"))",
+          "member(\"jenna.friends.ticket_payments\", \"jenna.friends.ticket_payments.scalper\", source(\"two more tickets for 240% of the normal price, but Jenna convinces him to give her $10 off that total payment\"))",
+          "observe(at(\"jenna.friends.concert_tickets.job_discount.count\", \"current\"), 1, \"count\", source(\"one of her friends gets a discounted ticket\"))",
+          "percent_of(\"jenna.friends.ticket_payments.job_discount\", at(\"concert.ticket.normal_price\", \"current\"), 60, source(\"60% of the normal price\"))",
+          "member(\"jenna.friends.ticket_payments\", \"jenna.friends.ticket_payments.job_discount\", source(\"one of her friends gets a discounted ticket through her job for 60% of the normal price\"))",
+          "query(\"sum\", \"jenna.friends.ticket_payments\", \"current\")"
+        ]
+      },
+      "source_id": "4450"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Akeno spent $2985 to furnish his apartment. Lev spent one-third of that amount on his apartment and Ambrocio spent $177 less than Lev. How many dollars more did Akeno spend than the other 2 people combined?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"akeno.apartment.spending\", \"current\"), 2985, \"dollar\", source(\"Akeno spent $2985 to furnish his apartment\"))",
+          "fraction_of(at(\"lev.apartment.spending\", \"current\"), at(\"akeno.apartment.spending\", \"current\"), 1, 3, source(\"Lev spent one-third of that amount on his apartment\"))",
+          "offset(at(\"ambrocio.apartment.spending\", \"current\"), at(\"lev.apartment.spending\", \"current\"), -177, \"dollar\", source(\"Ambrocio spent $177 less than Lev\"))",
+          "sum_relation(\"lev_and_ambrocio.apartment_spending.combined\", at(\"lev.apartment.spending\", \"current\"), at(\"ambrocio.apartment.spending\", \"current\"), source(\"the other 2 people combined\"))",
+          "query(\"difference\", \"lev_and_ambrocio.apartment_spending.combined\", at(\"akeno.apartment.spending\", \"current\"))"
+        ]
+      },
+      "source_id": "4981"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

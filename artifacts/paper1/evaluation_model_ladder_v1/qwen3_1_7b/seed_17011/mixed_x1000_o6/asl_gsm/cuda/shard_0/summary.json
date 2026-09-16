@@ -1,0 +1,47 @@
+{
+  "by_difficulty": {
+    "high": {
+      "count": 100,
+      "final_answer_correct": 4
+    }
+  },
+  "counts": {
+    "executable": 62,
+    "final_answer_correct": 4,
+    "lowerable_to_ccir": 98,
+    "parse_valid": 99,
+    "type_valid": 94
+  },
+  "eval_sha256": "642d9d28d036af7babe18387ffd72a31bf1b9ab38845f131212c2d593d95dea3",
+  "prediction_count": 100,
+  "predictions_sha256": "2f3d7ca0f04e40701ef7f306c5841a499cd0e232f48869a5d0cde1e2098d1f39",
+  "rates": {
+    "executable": 0.62,
+    "final_answer_correct": 0.04,
+    "lowerable_to_ccir": 0.98,
+    "parse_valid": 0.99,
+    "type_valid": 0.94
+  },
+  "run": {
+    "adapter_id": "Qwen3-1.7B-G1-GSM8K-U2000-E4500-F0-L0-r8-init99173",
+    "model": {
+      "adapter_id": "Qwen3-1.7B-G1-GSM8K-U2000-E4500-F0-L0-r8-init99173",
+      "adapter_path": "C:\\Users\\opail\\git\\rd\\cognitive_coprocessors_matrix\\artifacts\\paper1\\gsm8k_scale_v1\\qwen1_7b_u2000_e4500\\seed99173_cuda\\qwen_run\\adapter",
+      "cached_generation": true,
+      "device": "cuda",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "use_chat_template": true
+    },
+    "prompt_fields": [
+      "question"
+    ],
+    "seed": 44017,
+    "shard_count": 1
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_evaluation.v1",
+  "shard_index": 0
+}

@@ -1,0 +1,58 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "dependency_correct": 0.058823529411764705,
+        "exact_asl": 0.0,
+        "executable": 0.5882352941176471,
+        "final_answer_correct": 0.17647058823529413,
+        "lowerable_to_ccir": 0.8235294117647058,
+        "parse_valid": 0.8235294117647058,
+        "semantic_lint_valid": 0.7647058823529411,
+        "semantic_return_equivalent": 0.058823529411764705,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.8235294117647058
+      }
+    },
+    "tatqa": {
+      "count": 8,
+      "rates": {
+        "dependency_correct": 0.5,
+        "exact_asl": 0.0,
+        "executable": 0.875,
+        "final_answer_correct": 0.375,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_lint_valid": 1.0,
+        "semantic_return_equivalent": 0.25,
+        "semantic_state_equivalent": 0.25,
+        "type_valid": 1.0
+      }
+    }
+  },
+  "component_mean_f1": {
+    "edges": 0.4705321274199993,
+    "operators": 0.6926966366966367,
+    "paths": 0.3312448662448662,
+    "semantic_state": 0.3434945120239238,
+    "source_facts": 0.48869841269841274
+  },
+  "eval_sha256": "422cc340e3ca92325eef8e09f4df374581e00bffedc41fe4623bbdadb969ce1f",
+  "prediction_count": 25,
+  "predictions_sha256": "509298c3973e91198841e5d13b1bcf91996faabafb09d424c8cd3276af124ea7",
+  "rates": {
+    "dependency_correct": 0.2,
+    "exact_asl": 0.0,
+    "executable": 0.68,
+    "final_answer_correct": 0.24,
+    "lowerable_to_ccir": 0.88,
+    "parse_valid": 0.88,
+    "semantic_lint_valid": 0.84,
+    "semantic_return_equivalent": 0.12,
+    "semantic_state_equivalent": 0.08,
+    "type_valid": 0.88
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v1",
+  "scored_predictions_sha256": "e8a596c58568a8baa05dfd64967a2ed3307814fec35a01454521017eff2a5d5d"
+}

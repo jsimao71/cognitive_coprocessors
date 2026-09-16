@@ -1,0 +1,511 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Emily is making bead necklaces for her friends.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "She had 2 beads and she was able to make 32 necklaces.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "How many beads did each necklace need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause supplies narrative context but no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "emily.beads.available = 2",
+              "emily.necklaces.made = 32"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The literal quantities are preserved despite their physically unusual ratio."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "emily.necklaces.beads_per_necklace = emily.beads.available / emily.necklaces.made",
+              "RETURN emily.necklaces.beads_per_necklace"
+            ],
+            "assumptions": [
+              "All 2 available beads are allocated uniformly across the 32 necklaces."
+            ],
+            "confidence": 0.94,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-161"
+      },
+      "question": "Emily is making bead necklaces for her friends. She had 2 beads and she was able to make 32 necklaces. How many beads did each necklace need?",
+      "source_context": null,
+      "source_id": "svamp-chal-161",
+      "validation_failure": "answer mismatch: actual=0.0625, expected=16",
+      "validator_context": {
+        "correct_answer": "16",
+        "gold_reasoning": "( 32.0 / 2.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "After eating a hearty meal they went to see the Buckingham palace.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "There, Rachel learned that 132 visitors came to the Buckingham palace that day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 284,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "If 406 people visited the Buckingham palace within the past 327 days How many visitors visited the Buckingham palace on the previous day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context introduces no quantitative arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "buckingham_palace.visitors.today = 132"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The previous-day count is underdetermined because visitor counts for the other days in the 327-day period are not provided, and it is also unclear whether that period includes today."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The clause states an aggregate of 406 visitors over the past 327 days but asks specifically for the previous day's visitors."
+            ],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-953"
+      },
+      "question": "After eating a hearty meal they went to see the Buckingham palace. There, Rachel learned that 132 visitors came to the Buckingham palace that day. If 406 people visited the Buckingham palace within the past 327 days How many visitors visited the Buckingham palace on the previous day?",
+      "source_context": null,
+      "source_id": "svamp-chal-953",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "274",
+        "gold_reasoning": "( 406.0 - 132.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "After eating a hearty meal they went to see the Buckingham palace.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "There, Rachel learned that 45 visitors came to the Buckingham palace on the previous day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 285,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "If 829 people visited the Buckingham palace within the past 85 days How many visitors visited the Buckingham palace on that day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contextual event only; no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "buckingham_palace.previous_day.visitors = 45"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The 829 visitors are aggregated across the past 85 days, which does not determine the visitor count for a single day.",
+              "The referent of \"that day\" is unclear; it may denote the previous day, another day, or the entire stated period."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-963"
+      },
+      "question": "After eating a hearty meal they went to see the Buckingham palace. There, Rachel learned that 45 visitors came to the Buckingham palace on the previous day. If 829 people visited the Buckingham palace within the past 85 days How many visitors visited the Buckingham palace on that day?",
+      "source_context": null,
+      "source_id": "svamp-chal-963",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "784",
+        "gold_reasoning": "( 829.0 - 45.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 20,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nell collects cards.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 21,
+          "teacher_input_default": true,
+          "text": "She had 309 baseball cards and 356 Ace cards.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 152,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "She gave some of her cards to Jeff and now has 415 baseball cards and Ace cards left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "How many more baseball cards than Ace cards does Nell have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "nell.collection.type = \"cards\""
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause introduces qualitative collection context rather than a quantity."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "nell.before_giving.baseball_cards = 309",
+              "nell.before_giving.ace_cards = 356"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "nell.before_giving.total_cards = nell.before_giving.baseball_cards + nell.before_giving.ace_cards",
+              "nell.after_giving.total_cards = 415",
+              "jeff.received.total_cards = nell.before_giving.total_cards - nell.after_giving.total_cards"
+            ],
+            "assumptions": [
+              "The phrase \"415 baseball cards and Ace cards left\" denotes 415 cards total across the two named types."
+            ],
+            "confidence": 0.88,
+            "part_id": 2,
+            "semantic_notes": [
+              "The remaining count is preserved as a combined total because the clause does not specify remaining counts by card type."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The numbers of baseball and Ace cards given to Jeff are unspecified, so Nell's current difference between those card types cannot be determined."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The query occurs after the transfer and asks for the difference between current subtype counts, but only their combined current total is stated."
+            ],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-50"
+      },
+      "question": "Nell collects cards. She had 309 baseball cards and 356 Ace cards. She gave some of her cards to Jeff and now has 415 baseball cards and Ace cards left. How many more baseball cards than Ace cards does Nell have?",
+      "source_context": null,
+      "source_id": "svamp-chal-50",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "266",
+        "gold_reasoning": "( 415.0 - 149.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "6 birds were sitting on the fence.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "4 more birds and 8 more storks came to join them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "How many birds are sitting on the fence?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "fence.initial.birds = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fence.arriving.other_birds = 4",
+              "fence.arriving.storks = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Storks are retained as a distinct arriving subgroup."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fence.current.birds = fence.initial.birds + fence.arriving.other_birds + fence.arriving.storks",
+              "RETURN fence.current.birds"
+            ],
+            "assumptions": [
+              "The arriving storks are included in the requested bird count because storks are birds and came to join those on the fence."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-15"
+      },
+      "question": "6 birds were sitting on the fence. 4 more birds and 8 more storks came to join them. How many birds are sitting on the fence?",
+      "source_context": null,
+      "source_id": "svamp-chal-15",
+      "validation_failure": "answer mismatch: actual=18, expected=10",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "( 6.0 + 4.0 )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

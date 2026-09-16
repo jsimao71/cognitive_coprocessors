@@ -1,0 +1,641 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day, Robyn dispatches sixteen emails.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "Out of these, seven are related to her job, and two-thirds of the remaining ones are sent to her family members.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "One-third of the other emails are directed to her boyfriend.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 293,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "Can you determine the number of emails she sends to her boyfriend each day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "robyn.daily.total_emails = 16"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "robyn.daily.job_emails = 7",
+              "robyn.daily.non_job_emails = robyn.daily.total_emails - robyn.daily.job_emails",
+              "robyn.daily.family_emails = robyn.daily.non_job_emails * 2 / 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "robyn.daily.boyfriend_emails = robyn.daily.non_job_emails / 3"
+            ],
+            "assumptions": [
+              "\u201cThe other emails\u201d refers to the same non-job remainder partitioned between family and boyfriend emails."
+            ],
+            "confidence": 0.94,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN robyn.daily.boyfriend_emails"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07653"
+      },
+      "question": "Every day, Robyn dispatches sixteen emails. Out of these, seven are related to her job, and two-thirds of the remaining ones are sent to her family members. One-third of the other emails are directed to her boyfriend. Can you determine the number of emails she sends to her boyfriend each day?",
+      "source_context": null,
+      "source_id": "gsm-plus-07653",
+      "validation_failure": "answer mismatch: actual=3, expected=1",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "Robyn sends 16 - 7 = <<16-7=9>>9 non-work emails.\nShe sends 9 * 2 / 3 = <<9*2/3=6>>6 emails to family.\nThere are 9 - 6 = <<9-6=3>>3 emails remaining.\nOf the remaining 3, 1/3 are to her boyfriend, so Robyn sends him 3 * 1 / 3 = <<3*1/3=1>>1 email a day.\n#### 1"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Billy is peeling and cutting potatoes in preparation for making potato salad for his big family reunion barbecue.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "It's a big event, so he has 60 potatoes to get through.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 277,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "The potatoes are roughly the same size, so it takes about the same amount of time to peel and cut each one.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 377,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 278,
+          "teacher_input_default": true,
+          "text": "It takes Billy about a minute and a half to peel a potato, but only about 5.5 seconds to cut it up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 438,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 378,
+          "teacher_input_default": true,
+          "text": "How long will it take Billy to finish prepping the potatoes?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contextual setup introduces no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "billy.total_potatoes = 60"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "This clause establishes that the following per-potato durations apply uniformly to all potatoes."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "billy.per_potato.peel_time_minutes = 1.5",
+              "billy.per_potato.cut_time_seconds = 5.5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "billy.per_potato.peel_time_seconds = billy.per_potato.peel_time_minutes * 60",
+              "billy.per_potato.prep_time_seconds = billy.per_potato.peel_time_seconds + billy.per_potato.cut_time_seconds",
+              "billy.total_prep_time_seconds = billy.per_potato.prep_time_seconds * billy.total_potatoes",
+              "RETURN billy.total_prep_time_seconds"
+            ],
+            "assumptions": [
+              "One minute is converted to 60 seconds, and the per-potato durations apply to all 60 potatoes."
+            ],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-01394"
+      },
+      "question": "Billy is peeling and cutting potatoes in preparation for making potato salad for his big family reunion barbecue. It's a big event, so he has 60 potatoes to get through. The potatoes are roughly the same size, so it takes about the same amount of time to peel and cut each one. It takes Billy about a minute and a half to peel a potato, but only about 5.5 seconds to cut it up. How long will it take Billy to finish prepping the potatoes?",
+      "source_context": null,
+      "source_id": "gsm-plus-01394",
+      "validation_failure": "answer mismatch: actual=5730, expected=95.5",
+      "validator_context": {
+        "correct_answer": "95.5",
+        "gold_reasoning": "There are 60 potatoes, and Billy takes a minute and a half to peel each one, or 60 potatoes * 1.5 minutes per potato = <<60*1.5=90>>90 minutes.\nBilly only takes 5.5 seconds to cut the potatoes, so it takes 5.5 seconds * 60 potatoes=330 seconds= 5.5 minutes to cut the potatoes.\nSo it will take him a total of 90 minutes peeling + 5.5 minutes cutting = <<90+5.5=95.5>>95.5 minutes total prepping the potatoes.\n#### 95.5"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Henry is making cookies for a local baking competition.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "He wants to make twice as many as he did last year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 196,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "When he finishes baking, he realizes he actually baked 18 more cookies than he meant to.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 293,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 197,
+          "teacher_input_default": true,
+          "text": "He drops 6 of his cookies as he is putting them out to cool, and now has a total of 120 cookies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 336,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 294,
+          "teacher_input_default": true,
+          "text": "How many cookies did Henry bake last year?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contextual setup introduces no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "henry.intended_cookies_this_year = henry.cookies_last_year * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "henry.actual_baked_cookies = henry.intended_cookies_this_year + 18"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "henry.dropped_cookies = 6",
+              "henry.cookies_after_dropping = henry.actual_baked_cookies - henry.dropped_cookies",
+              "henry.cookies_after_dropping = 120"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN henry.cookies_last_year"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00864"
+      },
+      "question": "Henry is making cookies for a local baking competition. He wants to make twice as many as he did last year. When he finishes baking, he realizes he actually baked 18 more cookies than he meant to. He drops 6 of his cookies as he is putting them out to cool, and now has a total of 120 cookies. How many cookies did Henry bake last year?",
+      "source_context": null,
+      "source_id": "gsm-plus-00864",
+      "validation_failure": "unresolved reference 'henry.cookies_last_year' from scope 'global'; unresolved reference 'henry.intended_cookies_this_year' from scope 'global'; unresolved reference 'henry.actual_baked_cookies' from scope 'global'; unresolved reference 'henry.cookies_last_year' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "54",
+        "gold_reasoning": "Adding the cookies Henry dropped shows he baked 120 + 6 = <<120+6=126>>126 cookies this year.\nHe had cooked too many, so he must have needed 126 \u2013 18 = <<126-18=108>>108 cookies to double last year\u2019s amount.\nTherefore, he must have cooked 108 / 2 = <<108/2=54>>54 cookies last year.\n#### 54"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Gloria is shoe shopping when she comes across a pair of boots that fit her shoe budget.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "However, she has to choose between the boots and two pairs of high heels that together cost five dollars less than the boots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 214,
+          "teacher_input_default": true,
+          "text": "One pair of heels costs some money and the other costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 353,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 284,
+          "teacher_input_default": true,
+          "text": "If the boots cost $104, how many dollars does one pair of heels cost?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause supplies shopping context but introduces no quantitative arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "heels.combined_price = boots.price - 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Prices are measured in dollars."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "heels.pair2.price = heels.pair1.price * 2"
+            ],
+            "assumptions": [
+              "pair1 denotes the first unspecified pair introduced by 'one pair,' and pair2 denotes 'the other' pair."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boots.price = 104",
+              "RETURN heels.pair1.price"
+            ],
+            "assumptions": [
+              "'one pair of heels' refers to pair1, whose price is the base amount rather than the pair costing twice as much."
+            ],
+            "confidence": 0.88,
+            "part_id": 3,
+            "semantic_notes": [
+              "The query is interpreted as asking for the base-priced pair from the preceding relation."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00236"
+      },
+      "question": "Gloria is shoe shopping when she comes across a pair of boots that fit her shoe budget. However, she has to choose between the boots and two pairs of high heels that together cost five dollars less than the boots. One pair of heels costs some money and the other costs twice as much. If the boots cost $104, how many dollars does one pair of heels cost?",
+      "source_context": null,
+      "source_id": "gsm-plus-00236",
+      "validation_failure": "unresolved reference 'heels.pair1.price' from scope 'global'; unresolved reference 'heels.pair1.price' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "33",
+        "gold_reasoning": "The two pairs of high heels together cost $104 - $5 = $<<104-5=99>>99.\nLet X be the cost of one pair of heels. We know that X + 2X = $<<X+2X=3X>>99.\nX=33\nSo, one pair of heels cost $33.\n#### 33"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Tatiana owns a bustling grocery store that sells a variety of fruits and vegetables, including carrots and apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 253,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "The price of apples remains constant, but the price of carrots in the grocery store increases by 5% of the original price every year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 386,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 254,
+          "teacher_input_default": true,
+          "text": "If the price of apples is $100, which doesn't change, what would be the price of carrots after three years if it was $120 initially?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 417,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 387,
+          "teacher_input_default": true,
+          "text": "(Round to the nearest integer)",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause introduces the store and products but no quantitative arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "apples.current_price = apples.initial_price",
+              "carrots.annual_price_increase = percent_of(carrots.initial_price, 5)"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "Because the annual carrot increase is explicitly based on the original price, it is a fixed additive increase rather than a compounded percentage increase."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "apples.initial_price = 100",
+              "apples.after_3_years.price = apples.initial_price",
+              "carrots.initial_price = 120",
+              "carrots.after_3_years.price = carrots.initial_price + rate_times_duration(carrots.annual_price_increase, 3)",
+              "RETURN carrots.after_3_years.price"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Prices are measured in dollars."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The active operator registry has no rounding operator with which to encode rounding to the nearest integer."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08134"
+      },
+      "question": "Mrs. Tatiana owns a bustling grocery store that sells a variety of fruits and vegetables, including carrots and apples. The price of apples remains constant, but the price of carrots in the grocery store increases by 5% of the original price every year. If the price of apples is $100, which doesn't change, what would be the price of carrots after three years if it was $120 initially? (Round to the nearest integer)",
+      "source_context": null,
+      "source_id": "gsm-plus-08134",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "138",
+        "gold_reasoning": "In the first year, the price of carrots increases by 5/100*120 = $<<5/100*120=6>>6\nAfter 3 years, the price of carrots will increase by $6*3 = $<<6*3=18>>18\nThe total price of carrots after three years will be 120+18 = $<<120+18=138>>138\n#### 138"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "\"Every month, Madeline has to buy food, treats, and medicine for her dog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "Food costs $25 per week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "Treats cost $20 per month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 126,
+          "teacher_input_default": true,
+          "text": "Medicine costs some money per month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 231,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "If Madeline spends 2640 per year, how much is the medince per month?",
+          "warnings": []
+        }
+      ],
+      "question": "\"Every month, Madeline has to buy food, treats, and medicine for her dog. Food costs $25 per week. Treats cost $20 per month. Medicine costs some money per month. If Madeline spends 2640 per year, how much is the medince per month?",
+      "source_id": "gsm-plus-02796"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 97,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Madeline has a dog for which she needs to purchase food, treats, and medicine on a regular basis.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "The food for her dog costs her $25 each week, while the treats and medicine cost her $20 and $100 respectively each month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 336,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 221,
+          "teacher_input_default": true,
+          "text": "If we consider a month to have 4 weeks, can you calculate the total annual expenditure Madeline incurs for her dog?",
+          "warnings": []
+        }
+      ],
+      "question": "Madeline has a dog for which she needs to purchase food, treats, and medicine on a regular basis. The food for her dog costs her $25 each week, while the treats and medicine cost her $20 and $100 respectively each month. If we consider a month to have 4 weeks, can you calculate the total annual expenditure Madeline incurs for her dog?",
+      "source_id": "gsm-plus-02797"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every month, Madeline has to buy food, treats, and medicine for her dog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 97,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "Food costs $25 per week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "Treats cost $20 per month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "Medicine costs $100 per month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 245,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "Madeline also buys toys for her dog, but she uses her reward points to get them for free.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 390,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 246,
+          "teacher_input_default": true,
+          "text": "If there are 4 weeks in a month and she gets a 10% discount on food that she never uses, how much money does Madeline spend on her dog per year?",
+          "warnings": []
+        }
+      ],
+      "question": "Every month, Madeline has to buy food, treats, and medicine for her dog. Food costs $25 per week. Treats cost $20 per month. Medicine costs $100 per month. Madeline also buys toys for her dog, but she uses her reward points to get them for free. If there are 4 weeks in a month and she gets a 10% discount on food that she never uses, how much money does Madeline spend on her dog per year?",
+      "source_id": "gsm-plus-02798"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dean's mother gave him $35 to go to the toy store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "Dean bought 7 toy cars and 6 teddy bears.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "Each toy car cost $3 and each teddy bear cost $2.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 211,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 143,
+          "teacher_input_default": true,
+          "text": "His mother then feels generous and decides to give him an extra $15.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 212,
+          "teacher_input_default": true,
+          "text": "How much money does Dean have left?",
+          "warnings": []
+        }
+      ],
+      "question": "Dean's mother gave him $35 to go to the toy store. Dean bought 7 toy cars and 6 teddy bears. Each toy car cost $3 and each teddy bear cost $2. His mother then feels generous and decides to give him an extra $15. How much money does Dean have left?",
+      "source_id": "gsm-plus-02848"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dean's mother gave him $2800 to go to the toy store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Dean bought 60 toy cars and 50 teddy bears.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "Each toy car cost $20 and each teddy bear cost $10.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 219,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 149,
+          "teacher_input_default": true,
+          "text": "His mother then feels generous and decides to give him an extra $1000.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 220,
+          "teacher_input_default": true,
+          "text": "How much money does Dean have left?",
+          "warnings": []
+        }
+      ],
+      "question": "Dean's mother gave him $2800 to go to the toy store. Dean bought 60 toy cars and 50 teddy bears. Each toy car cost $20 and each teddy bear cost $10. His mother then feels generous and decides to give him an extra $1000. How much money does Dean have left?",
+      "source_id": "gsm-plus-02849"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

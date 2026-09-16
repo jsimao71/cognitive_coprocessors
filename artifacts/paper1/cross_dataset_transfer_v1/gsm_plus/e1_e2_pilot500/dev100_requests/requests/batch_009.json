@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Shiloh is 44 years old today.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "In 7 years, he will be three times as old as his nephew, and Shiloh's cousin will be 4 years older than his nephew.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "How old is his cousin today?",
+          "warnings": []
+        }
+      ],
+      "question": "Shiloh is 44 years old today.  In 7 years, he will be three times as old as his nephew, and Shiloh's cousin will be 4 years older than his nephew. How old is his cousin today?",
+      "source_id": "gsm-plus-04531"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jamaal is at the gym.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "He has been using an 10-pound weight.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "He increases the weight that he uses by 50%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 183,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "It turns out to be too heavy, so he uses a weight 12 pounds lighter than that.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 184,
+          "teacher_input_default": true,
+          "text": "What is the weight, in pounds, that he now uses?",
+          "warnings": []
+        }
+      ],
+      "question": "Jamaal is at the gym. He has been using an 10-pound weight. He increases the weight that he uses by 50%. It turns out to be too heavy, so he uses a weight 12 pounds lighter than that. What is the weight, in pounds, that he now uses?",
+      "source_id": "gsm-plus-04801"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For every 2 miles journey, a car's tires complete 725 rotations.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "Jeremy covers a distance of 400 miles each month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "Given that each tire has a lifespan of 10,440,000 rotations, can you calculate how many years it will take before Jeremy needs to replace his tires?",
+          "warnings": []
+        }
+      ],
+      "question": "For every 2 miles journey, a car's tires complete 725 rotations. Jeremy covers a distance of 400 miles each month. Given that each tire has a lifespan of 10,440,000 rotations, can you calculate how many years it will take before Jeremy needs to replace his tires?",
+      "source_id": "gsm-plus-04853"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school auditorium has a certain number of rows of seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "There are 18 seats in each row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "One-fourth of the seats were occupied by the administrators.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "One-third of the remaining seats were occupied by the parents and the rest were occupied by the students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 363,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 260,
+          "teacher_input_default": true,
+          "text": "If there were 36 students in the school auditorium, how many rows of seats are there in the auditorium?",
+          "warnings": []
+        }
+      ],
+      "question": "The school auditorium has a certain number of rows of seats. There are 18 seats in each row. One-fourth of the seats were occupied by the administrators. One-third of the remaining seats were occupied by the parents and the rest were occupied by the students. If there were 36 students in the school auditorium, how many rows of seats are there in the auditorium?",
+      "source_id": "gsm-plus-04948"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a public library, there are two DVDs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "The first DVD, which has a picture of a cat on the cover,worth $20 can be played 1000 times before it breaks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "It has already been played 356 times during the library's movie nights.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "The second DVD, which has a picture of a dog on the cover, worth $30,can also be played 1000 times before it breaks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 415,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "It has been played 135 times during the library's afternoon movie sessions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 563,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 416,
+          "teacher_input_default": true,
+          "text": "Despite the different images on the covers and the different times they are played, how many total times can both DVDs be played before they break?",
+          "warnings": []
+        }
+      ],
+      "question": "In a public library, there are two DVDs. The first DVD, which has a picture of a cat on the cover,worth $20 can be played 1000 times before it breaks. It has already been played 356 times during the library's movie nights. The second DVD, which has a picture of a dog on the cover, worth $30,can also be played 1000 times before it breaks. It has been played 135 times during the library's afternoon movie sessions. Despite the different images on the covers and the different times they are played, how many total times can both DVDs be played before they break?",
+      "source_id": "gsm-plus-04966"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

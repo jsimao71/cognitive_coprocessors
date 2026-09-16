@@ -1,0 +1,114 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "A group of six friends planned to buy a car. The cost of the car is $1700 and they plan to share the cost equally. They had a car wash to help raise funds, which would be taken out of the total cost. The remaining cost would be split between the six friends. At the car wash, they earn $500. However, Brad decided not to join in the purchase of the car. How much more does each friend have to pay now that Brad isn't participating?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"car_buyers\", \"person\", \"group\", source(\"A group of six friends planned to buy a car\"))",
+          "observe(at(\"car_buyers.count\", \"initial\"), 6, \"count\", source(\"A group of six friends\"))",
+          "member(\"car_buyers\", \"brad\", source(\"Brad decided not to join in the purchase of the car\"))",
+          "observe(at(\"car_purchase.unpaid_cost\", \"initial\"), 1700, \"dollar\", source(\"The cost of the car is $1700\"))",
+          "add(\"car_wash_fundraiser\", \"car_buyers\", at(\"car_buyers.purchase_funds\", \"current\"), 500, source(\"At the car wash, they earn $500\"))",
+          "remove(\"apply_car_wash_funds\", \"car_buyers\", at(\"car_purchase.unpaid_cost\", \"current\"), event_field(\"car_wash_fundraiser\", \"quantity\"), source(\"which would be taken out of the total cost\"))",
+          "quotient_relation(at(\"car_purchase.per_friend_payment\", \"before_brad_withdrawal\"), at(\"car_purchase.unpaid_cost\", \"current\"), at(\"car_buyers.count\", \"initial\"), source(\"The remaining cost would be split between the six friends\"))",
+          "remove(\"brad_withdrawal\", \"brad\", at(\"car_buyers.count\", \"current\"), 1, source(\"Brad decided not to join in the purchase of the car\"))",
+          "quotient_relation(at(\"car_purchase.per_friend_payment\", \"now\"), at(\"car_purchase.unpaid_cost\", \"current\"), at(\"car_buyers.count\", \"current\"), source(\"they plan to share the cost equally\"))",
+          "query(\"difference\", at(\"car_purchase.per_friend_payment\", \"before_brad_withdrawal\"), at(\"car_purchase.per_friend_payment\", \"now\"))"
+        ]
+      },
+      "source_id": "2180"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "A roadwork company is paving a newly constructed 16-mile road. They use a mixture of pitch and gravel to make the asphalt to pave the road. Each truckloads of asphalt uses two bags of gravel and five times as many bags of gravel as it does barrels of pitch to make. It takes three truckloads of asphalt to pave each mile of road. The company paved 4 miles of road on one day, then one mile less than double that on the second day. How many barrels of pitch will the company need to finish the remaining road on the third day?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"road.unpaved_length\", \"initial\"), 16, \"mile\", source(\"a newly constructed 16-mile road\"))",
+          "observe(at(\"asphalt.gravel_bags_per_truckload\", \"current\"), 2, \"bag/truckload\", source(\"Each truckloads of asphalt uses two bags of gravel\"))",
+          "multiple(at(\"asphalt.gravel_bags_per_truckload\", \"current\"), at(\"asphalt.pitch_barrels_per_truckload\", \"current\"), 5, source(\"five times as many bags of gravel as it does barrels of pitch\"))",
+          "observe(at(\"road_paving.asphalt_truckloads_per_mile\", \"current\"), 3, \"truckload/mile\", source(\"It takes three truckloads of asphalt to pave each mile of road\"))",
+          "remove(\"pave_day_1\", \"roadwork_company\", at(\"road.unpaved_length\", \"current\"), 4, source(\"The company paved 4 miles of road on one day\"))",
+          "offset(\"roadwork_company.paving.day_2.length\", scale(event_field(\"pave_day_1\", \"quantity\"), 2), -1, \"mile\", source(\"one mile less than double that on the second day\"))",
+          "remove(\"pave_day_2\", \"roadwork_company\", at(\"road.unpaved_length\", \"current\"), \"roadwork_company.paving.day_2.length\", source(\"then one mile less than double that on the second day\"))",
+          "rate_relation(at(\"roadwork_company.asphalt_truckloads.required\", \"day_3\"), at(\"road_paving.asphalt_truckloads_per_mile\", \"current\"), at(\"road.unpaved_length\", \"current\"), source(\"It takes three truckloads of asphalt to pave each mile of road\"))",
+          "rate_relation(at(\"roadwork_company.pitch_barrels.required\", \"day_3\"), at(\"asphalt.pitch_barrels_per_truckload\", \"current\"), at(\"roadwork_company.asphalt_truckloads.required\", \"day_3\"), source(\"Each truckloads of asphalt uses two bags of gravel and five times as many bags of gravel as it does barrels of pitch to make\"))",
+          "query(\"value\", at(\"roadwork_company.pitch_barrels.required\", \"day_3\"))"
+        ]
+      },
+      "source_id": "331"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "At a CD store, 40% of the CDs cost $10 each, and the rest cost $5 each. Prince bought half the CDs sold at $10 each, and all of the CDs sold at $5 each. If the total number of CDs was 200, how much money did Prince spend on buying the CDs?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"cd_store.cds\", \"cd\", \"cd_store\", source(\"the total number of CDs was 200\"))",
+          "observe(at(\"cd_store.cds.count\", \"initial\"), 200, \"count\", source(\"the total number of CDs was 200\"))",
+          "percent_of(at(\"cd_store.cds.ten_dollar.count\", \"initial\"), at(\"cd_store.cds.count\", \"initial\"), 40, source(\"40% of the CDs cost $10 each\"))",
+          "sum_relation(at(\"cd_store.cds.count\", \"initial\"), at(\"cd_store.cds.ten_dollar.count\", \"initial\"), at(\"cd_store.cds.five_dollar.count\", \"initial\"), source(\"40% of the CDs cost $10 each, and the rest cost $5 each\"))",
+          "observe(at(\"cd_store.cds.ten_dollar.unit_price\", \"current\"), 10, \"dollar/cd\", source(\"$10 each\"))",
+          "observe(at(\"cd_store.cds.five_dollar.unit_price\", \"current\"), 5, \"dollar/cd\", source(\"$5 each\"))",
+          "collection(\"prince.purchased_cds\", \"cd\", \"prince\", source(\"Prince bought half the CDs sold at $10 each, and all of the CDs sold at $5 each\"))",
+          "transfer(\"prince_buys_ten_dollar_cds\", \"prince\", at(\"cd_store.cds.ten_dollar.count\", \"current\"), at(\"prince.purchased_cds.ten_dollar.count\", \"current\"), fraction(at(\"cd_store.cds.ten_dollar.count\", \"initial\"), 1, 2), source(\"Prince bought half the CDs sold at $10 each\"))",
+          "transfer(\"prince_buys_five_dollar_cds\", \"prince\", at(\"cd_store.cds.five_dollar.count\", \"current\"), at(\"prince.purchased_cds.five_dollar.count\", \"current\"), at(\"cd_store.cds.five_dollar.count\", \"initial\"), source(\"all of the CDs sold at $5 each\"))",
+          "same(at(\"prince.purchased_cds.ten_dollar.unit_price\", \"current\"), at(\"cd_store.cds.ten_dollar.unit_price\", \"current\"), source(\"CDs sold at $10 each\"))",
+          "same(at(\"prince.purchased_cds.five_dollar.unit_price\", \"current\"), at(\"cd_store.cds.five_dollar.unit_price\", \"current\"), source(\"CDs sold at $5 each\"))",
+          "query(\"sum\", \"prince.purchased_cds.unit_prices\", \"current\")"
+        ]
+      },
+      "source_id": "4293"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Mrs. Lim milks her cows twice a day. Yesterday morning, she got 68 gallons of milk and in the evening, she got 82 gallons. This morning, she got 18 gallons fewer than she had yesterday morning. After selling some gallons of milk in the afternoon, Mrs. Lim has only 24 gallons left. How much was her revenue for the milk if each gallon costs $3.50?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"mrs_lim.milking.frequency\", \"current\"), 2, \"times_per_day\", source(\"twice a day\"))",
+          "produce(\"yesterday_morning_milking\", \"mrs_lim\", at(\"mrs_lim.milk.volume\", \"current\"), 68, source(\"Yesterday morning, she got 68 gallons of milk\"))",
+          "produce(\"yesterday_evening_milking\", \"mrs_lim\", at(\"mrs_lim.milk.volume\", \"current\"), 82, source(\"in the evening, she got 82 gallons\"))",
+          "produce(\"this_morning_milking\", \"mrs_lim\", at(\"mrs_lim.milk.volume\", \"current\"), \"mrs_lim.milk.this_morning.volume\", source(\"This morning, she got 18 gallons fewer than she had yesterday morning\"))",
+          "offset(event_field(\"this_morning_milking\", \"quantity\"), event_field(\"yesterday_morning_milking\", \"quantity\"), -18, \"gallon\", source(\"18 gallons fewer than she had yesterday morning\"))",
+          "remove(\"afternoon_sale\", \"mrs_lim\", at(\"mrs_lim.milk.volume\", \"current\"), \"mrs_lim.milk.afternoon_sold.volume\", source(\"selling some gallons of milk in the afternoon\"))",
+          "observe(at(\"mrs_lim.milk.volume\", \"now\"), 24, \"gallon\", source(\"Mrs. Lim has only 24 gallons left\"))",
+          "observe(at(\"mrs_lim.milk.price_per_gallon\", \"current\"), 3.5, \"currency_per_gallon\", source(\"each gallon costs $3.50\"))",
+          "query(\"value\", \"mrs_lim.milk_sales.revenue\")"
+        ]
+      },
+      "source_id": "1396"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Sally, Sam, and Steve went to play with their marbles. In the beginning, Sam has twice as many marbles as Steve while Sally has 5 less than Sam. After Sam has given Sally and Steve 3 marbles each, Sam has 8 marbles left. How many marbles does Steve have now?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"players.marbles\", \"marble\", \"sally_sam_steve\", source(\"their marbles\"))",
+          "multiple(at(\"sam.marbles.count\", \"initial\"), at(\"steve.marbles.count\", \"initial\"), 2, source(\"Sam has twice as many marbles as Steve\"))",
+          "offset(at(\"sally.marbles.count\", \"initial\"), at(\"sam.marbles.count\", \"initial\"), -5, \"count\", source(\"Sally has 5 less than Sam\"))",
+          "transfer(\"sam_to_sally\", \"sam\", at(\"sam.marbles.count\", \"current\"), at(\"sally.marbles.count\", \"current\"), 3, source(\"Sam has given Sally and Steve 3 marbles each\"))",
+          "transfer(\"sam_to_steve\", \"sam\", at(\"sam.marbles.count\", \"current\"), at(\"steve.marbles.count\", \"current\"), 3, source(\"Sam has given Sally and Steve 3 marbles each\"))",
+          "observe(at(\"sam.marbles.count\", \"now\"), 8, \"count\", source(\"Sam has 8 marbles left\"))",
+          "query(\"value\", at(\"steve.marbles.count\", \"now\"))"
+        ]
+      },
+      "source_id": "6571"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

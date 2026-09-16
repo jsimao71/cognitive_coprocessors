@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a park, there are 50 porcupines and 100 squirrels.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 206,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "The number of female porcupines is 3/5 of the total porcupine population, while the number of female squirrels is half of the total squirrel population.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 207,
+          "teacher_input_default": true,
+          "text": "Each female porcupine gives birth to 4 babies every month, and each female squirrel gives birth to 2 babies every month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 412,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 328,
+          "teacher_input_default": true,
+          "text": "However, the park's capacity only allows for the growth of the porcupine population.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 516,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 413,
+          "teacher_input_default": true,
+          "text": "How many porcupines will be in the park after a year, considering only the porcupine population growth?",
+          "warnings": []
+        }
+      ],
+      "question": "In a park, there are 50 porcupines and 100 squirrels. The number of female porcupines is 3/5 of the total porcupine population, while the number of female squirrels is half of the total squirrel population. Each female porcupine gives birth to 4 babies every month, and each female squirrel gives birth to 2 babies every month. However, the park's capacity only allows for the growth of the porcupine population. How many porcupines will be in the park after a year, considering only the porcupine population growth?",
+      "source_id": "gsm-plus-08046"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It takes James 15 minutes to read 5 pages of his book before he goes to bed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "He reads 25 pages of his book and then decides to go to sleep.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "How long does James spend reading, in minutes?",
+          "warnings": []
+        }
+      ],
+      "question": "It takes James 15 minutes to read 5 pages of his book before he goes to bed. He reads 25 pages of his book and then decides to go to sleep. How long does James spend reading, in minutes?",
+      "source_id": "gsm-plus-08144"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It takes James 100 minutes to read 30 pages of his book before he goes to bed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "He reads 180 pages of his book and then decides to go to sleep.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 143,
+          "teacher_input_default": true,
+          "text": "How long does James spend reading, in minutes?",
+          "warnings": []
+        }
+      ],
+      "question": "It takes James 100 minutes to read 30 pages of his book before he goes to bed. He reads 180 pages of his book and then decides to go to sleep. How long does James spend reading, in minutes?",
+      "source_id": "gsm-plus-08145"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James spends 10/3 minutes to read a single page of his book before he goes to bed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 145,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "He reads 18 pages of his book and then decides to go to sleep.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 146,
+          "teacher_input_default": true,
+          "text": "How long does James spend reading, in minutes?",
+          "warnings": []
+        }
+      ],
+      "question": "James spends 10/3 minutes to read a single page of his book before he goes to bed. He reads 18 pages of his book and then decides to go to sleep. How long does James spend reading, in minutes?",
+      "source_id": "gsm-plus-08146"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It takes James 10 minutes to read 3 pages of his book before he goes to bed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "He reads 18 pages of his book and then decides to go to sleep.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 201,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "But he doesn't feel sleepy and plans to read another 6 pages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 202,
+          "teacher_input_default": true,
+          "text": "How long does James spend reading, in minutes?",
+          "warnings": []
+        }
+      ],
+      "question": "It takes James 10 minutes to read 3 pages of his book before he goes to bed. He reads 18 pages of his book and then decides to go to sleep. But he doesn't feel sleepy and plans to read another 6 pages. How long does James spend reading, in minutes?",
+      "source_id": "gsm-plus-08147"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

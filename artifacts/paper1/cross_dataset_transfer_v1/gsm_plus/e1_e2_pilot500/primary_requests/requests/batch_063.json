@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James loves to go swimming and has to swim across a 30-mile lake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "He can swim at a pace of 3 miles per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "He swims 70% of the distance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 224,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 142,
+          "teacher_input_default": true,
+          "text": "After that, he stops on an island and rests for half as long as the swimming time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 293,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 226,
+          "teacher_input_default": true,
+          "text": "He then finishes the remaining distance while going half the speed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 343,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 295,
+          "teacher_input_default": true,
+          "text": "How long did it take him to get across the lake?",
+          "warnings": []
+        }
+      ],
+      "question": "James loves to go swimming and has to swim across a 30-mile lake.  He can swim at a pace of 3 miles per hour.  He swims 70% of the distance.  After that, he stops on an island and rests for half as long as the swimming time.  He then finishes the remaining distance while going half the speed.  How long did it take him to get across the lake?",
+      "source_id": "gsm-plus-07560"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kris is working towards a video game accomplishment that requires her to play for a total of 30 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 297,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "If she spends half an hour each day playing for a fortnight and then increases her playtime to 2 hours daily for a week, how many more hours does she need to invest to secure the accomplishment?",
+          "warnings": []
+        }
+      ],
+      "question": "Kris is working towards a video game accomplishment that requires her to play for a total of 30 hours. If she spends half an hour each day playing for a fortnight and then increases her playtime to 2 hours daily for a week, how many more hours does she need to invest to secure the accomplishment?",
+      "source_id": "gsm-plus-06429"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Peter has $70 and wishes to spend an equal amount each day for one week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "From Sunday through Wednesday, he spent his money on wooden action figures which cost $5 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "For the rest of the week, he will buy plastic action figures which cost $2 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 370,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "However, on Friday, he decides to buy a special edition action figure that costs twice as much as a wooden action figure.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 437,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 371,
+          "teacher_input_default": true,
+          "text": "How many total action figures will he have by the end of the week?",
+          "warnings": []
+        }
+      ],
+      "question": "Peter has $70 and wishes to spend an equal amount each day for one week. From Sunday through Wednesday, he spent his money on wooden action figures which cost $5 each. For the rest of the week, he will buy plastic action figures which cost $2 each. However, on Friday, he decides to buy a special edition action figure that costs twice as much as a wooden action figure. How many total action figures will he have by the end of the week?",
+      "source_id": "gsm-plus-04563"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Becky, Jake, and Silvia shared 2/5 of ten pizzas.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Each pizza had 0.8 times of ten slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "Becky ate 3 more slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "Silvia ate twice as many slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 176,
+          "teacher_input_default": true,
+          "text": "If Becky ate 0.1 times of one hundred slices, how many total slices did they eat?",
+          "warnings": []
+        }
+      ],
+      "question": "Becky, Jake, and Silvia shared 2/5 of ten pizzas. Each pizza had 0.8 times of ten slices. Becky ate 3 more slices than Jake did. Silvia ate twice as many slices than Jake did. If Becky ate 0.1 times of one hundred slices, how many total slices did they eat?",
+      "source_id": "gsm-plus-08482"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 26,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Uncle Ben has four horses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 27,
+          "teacher_input_default": true,
+          "text": "Each horse can consume five pounds of oats per meal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "Later, for some reason, there was a 10% increase per horse per meal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 181,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 149,
+          "teacher_input_default": true,
+          "text": "He feeds his horses twice a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 290,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 182,
+          "teacher_input_default": true,
+          "text": "If one bag contains 50 pounds of oats,  how many bags of oats does he need to feed his horses for five days?",
+          "warnings": []
+        }
+      ],
+      "question": "Uncle Ben has four horses. Each horse can consume five pounds of oats per meal. Later, for some reason, there was a 10% increase per horse per meal. He feeds his horses twice a day. If one bag contains 50 pounds of oats,  how many bags of oats does he need to feed his horses for five days?",
+      "source_id": "gsm-plus-03899"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

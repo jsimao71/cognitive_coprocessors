@@ -1,0 +1,613 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tatiana runs a grocery shop where she sells a variety of fruits and vegetables, including carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "Each year, the cost of carrots in her shop rises by 5% compared to the previous year's price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 292,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 193,
+          "teacher_input_default": true,
+          "text": "If the initial price of the carrots was $120, what would be the cost after a period of three years?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 347,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 293,
+          "teacher_input_default": true,
+          "text": "(Please round your answer to the nearest whole number)",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause supplies narrative context but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tatiana.shop.carrots.year1.price = inc_pct(tatiana.shop.carrots.initial.price, 5)",
+              "tatiana.shop.carrots.year2.price = inc_pct(tatiana.shop.carrots.year1.price, 5)",
+              "tatiana.shop.carrots.year3.price = inc_pct(tatiana.shop.carrots.year2.price, 5)"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The three annual transitions are retained separately to represent yearly compounding over the period established by the full question."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tatiana.shop.carrots.initial.price = 120",
+              "tatiana.shop.carrots.after_3_years.unrounded_price = tatiana.shop.carrots.year3.price",
+              "RETURN tatiana.shop.carrots.after_3_years.unrounded_price"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The following clause adds a rounding requirement that cannot be expressed by the active operator registry."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Rounding to the nearest whole number requires a rounding operator, but no such operator is present in the active registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08133"
+      },
+      "question": "Tatiana runs a grocery shop where she sells a variety of fruits and vegetables, including carrots. Each year, the cost of carrots in her shop rises by 5% compared to the previous year's price. If the initial price of the carrots was $120, what would be the cost after a period of three years? (Please round your answer to the nearest whole number)",
+      "source_context": null,
+      "source_id": "gsm-plus-08133",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "138",
+        "gold_reasoning": "In the first year, the price of carrots increases by 5/100*120 = $<<5/100*120=6>>6\nAfter 3 years, the price of carrots will increase by $6*3 = $<<6*3=18>>18\nThe total price of carrots after three years will be 120+18 = $<<120+18=138>>138\n#### 138"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "A blog article takes an average of 3 hours to research and write about.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 286,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 190,
+          "teacher_input_default": true,
+          "text": "Last week, she wrote 4 articles on Monday and 3/4 times more articles on Tuesday than on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 367,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 287,
+          "teacher_input_default": true,
+          "text": "On Wednesday, she wrote three times the number of articles she wrote on Tuesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 449,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 368,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of hours she spent writing articles in the three days.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause provides occupational context but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "meredith.article.average_hours = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"3/4 times more articles\" is arithmetically ambiguous: it can mean three quarters as many as Monday or Monday's amount plus three quarters of Monday's amount. Although Monday's count is unambiguous, an ambiguous mapping must have an empty ASL list."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "meredith.wednesday.articles = meredith.tuesday.articles * 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "meredith.three_days.articles = sum(meredith.monday.articles, meredith.tuesday.articles, meredith.wednesday.articles)",
+              "meredith.three_days.writing_hours = meredith.three_days.articles * meredith.article.average_hours",
+              "RETURN meredith.three_days.writing_hours"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00360"
+      },
+      "question": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.  A blog article takes an average of 3 hours to research and write about. Last week, she wrote 4 articles on Monday and 3/4 times more articles on Tuesday than on Monday. On Wednesday, she wrote three times the number of articles she wrote on Tuesday. Calculate the total number of hours she spent writing articles in the three days.",
+      "source_context": null,
+      "source_id": "gsm-plus-00360",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "96",
+        "gold_reasoning": "On Monday, Meredith spent 4 articles * 3 hours/article = <<4*3=12>>12 hours writing articles.\n\nOn Tuesday, she wrote 3/4 * 4 articles = <<3/4*4=3>>3 more articles than she wrote on Monday.\n\nThe total number of articles she wrote on Tuesday is 4 articles + 3 articles = <<4+3=7>>7 articles.\n\nThe total number of hours she spent writing articles on Tuesday is 7 articles * 3 hours/article = <<7*3=21>>21 hours.\n\nOn Wednesday, she wrote 3 * 7 articles = <<3*7=21>>21 articles.\n\nThe total number of hours she spent writing articles on Wednesday is 21 articles * 3 hours/article = <<21*3=63>>63 hours.\n\nThe total number of hours she spent writing articles in the three days is 12 hours + 21 hours + 63 hours = <<12+21+63=96>>96 hours.\n#### 96"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A football team played some games.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "They won 8 more than they lost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "And they won 15 games.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "How many games do they play in total?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces the football team and an unspecified number of games; no numeric state is grounded."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "football_team.games_won = football_team.games_lost + 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "football_team.games_won = 15"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "football_team.total_games_played = football_team.games_won + football_team.games_lost",
+              "RETURN football_team.total_games_played"
+            ],
+            "assumptions": [
+              "The played games are partitioned into wins and losses, with no ties or other outcomes."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00676"
+      },
+      "question": "A football team played some games. They won 8 more than they lost. And they won 15 games. How many games do they play in total?",
+      "source_context": null,
+      "source_id": "gsm-plus-00676",
+      "validation_failure": "unresolved reference 'football_team.games_lost' from scope 'global'; unresolved reference 'football_team.games_lost' from scope 'global'; unresolved reference 'football_team.total_games_played' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "22",
+        "gold_reasoning": "They lost 15-8=7 games,\nPlus games they won, they play 7+15=22 games in total,\n#### 22"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Becky, Jake, and Silvia shared 8 pizzas.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "Each pizza had 6 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "Becky ate 4 more slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "Silvia ate twice as many slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 211,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "If Becky ate 12 slices, how many total slices did they eat?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "shared_pizzas.count = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shared_pizzas.slices_per_pizza = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "becky.slices_eaten = jake.slices_eaten + 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "silvia.slices_eaten = jake.slices_eaten * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "becky.slices_eaten = 12",
+              "friends.total_slices_eaten = becky.slices_eaten + jake.slices_eaten + silvia.slices_eaten",
+              "RETURN friends.total_slices_eaten"
+            ],
+            "assumptions": [
+              "The requested total covers Becky, Jake, and Silvia."
+            ],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08480"
+      },
+      "question": "Becky, Jake, and Silvia shared 8 pizzas. Each pizza had 6 slices. Becky ate 4 more slices than Jake did. Silvia ate twice as many slices than Jake did. If Becky ate 12 slices, how many total slices did they eat?",
+      "source_context": null,
+      "source_id": "gsm-plus-08480",
+      "validation_failure": "unresolved reference 'jake.slices_eaten' from scope 'global'; unresolved reference 'jake.slices_eaten' from scope 'global'; unresolved reference 'jake.slices_eaten' from scope 'global'; unresolved reference 'friends.total_slices_eaten' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "36",
+        "gold_reasoning": "Jake ate 12-4 = <<12-4=8>>8 slices of pizza.\nSilvia ate 8*2 = <<8*2=16>>16 slices of pizza.\nJake, Silvia, and Becky ate 12+8+16 = <<12+8+16=36>>36 slices all together.\n#### 36"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In one hour, Ezra read twice as many books as Ahmed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Ezra has read 3/10 of one thousand books this hour and decided to read 1.5 times of one hundred more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 196,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "How many books have they read altogether?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ezra.this_hour.books_read = ahmed.this_hour.books_read * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ezra.this_hour.books_read = 1000 * 3 / 10",
+              "ezra.planned.additional_books = 100 * 1.5"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 1,
+            "semantic_notes": [
+              "The planned additional books are kept distinct from books already read because the clause states an intention, not its completion."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ezra_and_ahmed.this_hour.total_books_read = ezra.this_hour.books_read + ahmed.this_hour.books_read",
+              "RETURN ezra_and_ahmed.this_hour.total_books_read"
+            ],
+            "assumptions": [
+              "\u201cThey\u201d refers to Ezra and Ahmed; Ezra's merely planned additional books are excluded from books they have read."
+            ],
+            "confidence": 0.94,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06146"
+      },
+      "question": "In one hour, Ezra read twice as many books as Ahmed. Ezra has read 3/10 of one thousand books this hour and decided to read 1.5 times of one hundred more. How many books have they read altogether?",
+      "source_context": null,
+      "source_id": "gsm-plus-06146",
+      "validation_failure": "unresolved reference 'ahmed.this_hour.books_read' from scope 'global'; unresolved reference 'ahmed.this_hour.books_read' from scope 'global'; unresolved reference 'ezra_and_ahmed.this_hour.total_books_read' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "675",
+        "gold_reasoning": "If Ezra has read 3/10 of one thousand books this hour and decided to read 1.5 times of one hundred more in the next hour, he has read a total of 3/10*1000+1.5*100=<<3/10*1000+1.5*100=450>>450\nSince Ezra reads twice as many books as Ahmed, Ahmed has read 450/2=<<450/2=225>>225 books.\nTogether, Ahmed and Ezra has read 225+450=<<225+450=675>>675 books\n#### 675"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

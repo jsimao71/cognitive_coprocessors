@@ -1,0 +1,318 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Joe has twice as many cars as Robert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "He sells 20% of them and gives away twice as many cars as the number he sold to his mother.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If Robert has 200 cars, how many cars does Joe remain with after selling and giving some to his mother?",
+          "warnings": []
+        }
+      ],
+      "question": "Joe has twice as many cars as Robert. He sells 20% of them and gives away twice as many cars as the number he sold to his mother. If Robert has 200 cars, how many cars does Joe remain with after selling and giving some to his mother?",
+      "source_id": "gsm-plus-06545"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tabitha decided to compensate John and Jill at a rate of $10 per hour for their assistance in tidying up her attic and basement.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 203,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "Jill dedicated 2 hours of her time on Saturday and another hour on Sunday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 305,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 204,
+          "teacher_input_default": true,
+          "text": "John, on the other hand, put in double the hours Jill did on Saturday and triple the hours on Sunday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 363,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 306,
+          "teacher_input_default": true,
+          "text": "What is the difference in earnings between John and Jill?",
+          "warnings": []
+        }
+      ],
+      "question": "Tabitha decided to compensate John and Jill at a rate of $10 per hour for their assistance in tidying up her attic and basement. Jill dedicated 2 hours of her time on Saturday and another hour on Sunday. John, on the other hand, put in double the hours Jill did on Saturday and triple the hours on Sunday. What is the difference in earnings between John and Jill?",
+      "source_id": "gsm-plus-04685"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John and Jack have half an hour to reach their school.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "They spend 6 minutes walking to the corner where the library stands.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "They then spend an additional 13 minutes walking to the fire station.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "How many more minutes do they have left to reach their school on time?",
+          "warnings": []
+        }
+      ],
+      "question": "John and Jack have half an hour to reach their school. They spend 6 minutes walking to the corner where the library stands. They then spend an additional 13 minutes walking to the fire station. How many more minutes do they have left to reach their school on time?",
+      "source_id": "gsm-plus-05477"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If one person can paint 0.5 of a house in 5 days, how many hours would it take for 5 people to paint a whole house?",
+          "warnings": []
+        }
+      ],
+      "question": "If one person can paint 0.5 of a house in 5 days, how many hours would it take for 5 people to paint a whole house?",
+      "source_id": "gsm-plus-04218"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Janet decides to purchase an extravagant brooch for her daughter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "She spends $5000 on the high-quality materials needed to create it and then pays an additional $8000 to a skilled jeweler for the construction of the brooch.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 347,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 224,
+          "teacher_input_default": true,
+          "text": "After these expenses, she decides to get the brooch insured, which costs her 10% of the total amount she has already spent.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 348,
+          "teacher_input_default": true,
+          "text": "How much did Janet end up paying in total for the brooch, including the insurance?",
+          "warnings": []
+        }
+      ],
+      "question": "Janet decides to purchase an extravagant brooch for her daughter. She spends $5000 on the high-quality materials needed to create it and then pays an additional $8000 to a skilled jeweler for the construction of the brooch. After these expenses, she decides to get the brooch insured, which costs her 10% of the total amount she has already spent. How much did Janet end up paying in total for the brooch, including the insurance?",
+      "source_id": "gsm-plus-00489"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,285 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a school there are 700 girls and the rest are boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "If there are 142 more boys than girls How many pupils are there in that school?",
+          "warnings": []
+        }
+      ],
+      "question": "In a school there are 700 girls and the rest are boys. If there are 142 more boys than girls How many pupils are there in that school?",
+      "source_id": "svamp-chal-255"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dave had 19 apps and 18 files on his phone.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "After deleting some apps and files he had 6 apps and 15 files left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "How many more files than apps does he have left on the phone?",
+          "warnings": []
+        }
+      ],
+      "question": "Dave had 19 apps and 18 files on his phone. After deleting some apps and files he had 6 apps and 15 files left. How many more files than apps does he have left on the phone?",
+      "source_id": "svamp-chal-321"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "During the Arkansas and Texas tech game the Razorback t-shirt shop made $ 215 by selling 5 t-shirts.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "What is the cost of each t-shirt?",
+          "warnings": []
+        }
+      ],
+      "question": "During the Arkansas and Texas tech game the Razorback t-shirt shop made $ 215 by selling 5 t-shirts. What is the cost of each t-shirt?",
+      "source_id": "svamp-chal-594"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 12,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dan has $ 4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 13,
+          "teacher_input_default": true,
+          "text": "He bought a chocolate for $ 7 and a candy bar for $ 2.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "How much money did he spend to buy chocolate than he did to buy candy bar?",
+          "warnings": []
+        }
+      ],
+      "question": "Dan has $ 4. He bought a chocolate for $ 7 and a candy bar for $ 2. How much money did he spend to buy chocolate than he did to buy candy bar?",
+      "source_id": "svamp-chal-841"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "During summer break 800059 kids from Lawrence county go to camp and the rest stay home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "Lawrence county has 828521 kids in all.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 160,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 128,
+          "teacher_input_default": true,
+          "text": "About how many kids stayed home?",
+          "warnings": []
+        }
+      ],
+      "question": "During summer break 800059 kids from Lawrence county go to camp and the rest stay home. Lawrence county has 828521 kids in all. About how many kids stayed home?",
+      "source_id": "svamp-chal-107"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

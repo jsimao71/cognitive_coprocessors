@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John buys twice as many red ties as blue ties.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "The red ties cost 50% more than blue ties.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "He spent $2000 on blue ties that cost $400 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 139,
+          "teacher_input_default": true,
+          "text": "How much did he spend on ties?",
+          "warnings": []
+        }
+      ],
+      "question": "John buys twice as many red ties as blue ties. The red ties cost 50% more than blue ties. He spent $2000 on blue ties that cost $400 each. How much did he spend on ties?",
+      "source_id": "gsm-plus-00377"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jessica is trying to figure out how much to pay on all her debts each month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 261,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Her student loans have a minimum payment of $300/month, her credit card's minimum is $200/month,  her mortgage's minimum is $500/month, and her Ant Check Later's minimum is $100/month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 345,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 262,
+          "teacher_input_default": true,
+          "text": "If Jessica wants to pay 50% more than the minimum, how much does she pay in a year?",
+          "warnings": []
+        }
+      ],
+      "question": "Jessica is trying to figure out how much to pay on all her debts each month. Her student loans have a minimum payment of $300/month, her credit card's minimum is $200/month,  her mortgage's minimum is $500/month, and her Ant Check Later's minimum is $100/month. If Jessica wants to pay 50% more than the minimum, how much does she pay in a year?",
+      "source_id": "gsm-plus-01387"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "While on vacation, John decides to engage in a variety of activities.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "He spends 6 hours boating and half that time swimming.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 183,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "He also watched 3 different shows which were 2 hours each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 218,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 184,
+          "teacher_input_default": true,
+          "text": "This was 30% of the time he spent.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 219,
+          "teacher_input_default": true,
+          "text": "He spent 40% of his time sightseeing.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 381,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 257,
+          "teacher_input_default": true,
+          "text": "In between these activities, he took 5 breaks of 15 minutes each to rest and hydrate, and he also spent 1 hour having lunch.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 478,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 382,
+          "teacher_input_default": true,
+          "text": "However, these breaks and lunch time do not count towards the total time he spent on activities.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 518,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 479,
+          "teacher_input_default": true,
+          "text": "How much time did he spend sightseeing?",
+          "warnings": []
+        }
+      ],
+      "question": "While on vacation, John decides to engage in a variety of activities. He spends 6 hours boating and half that time swimming. He also watched 3 different shows which were 2 hours each. This was 30% of the time he spent. He spent 40% of his time sightseeing. In between these activities, he took 5 breaks of 15 minutes each to rest and hydrate, and he also spent 1 hour having lunch. However, these breaks and lunch time do not count towards the total time he spent on activities. How much time did he spend sightseeing?",
+      "source_id": "gsm-plus-02830"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "$18 is shared among 3 boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 28,
+          "teacher_input_default": true,
+          "text": "The eldest, who had just celebrated his 15th birthday, added $5 from his birthday money to his share and added another $10 the following day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 272,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "He later needed some money for a school project that cost $20 but only spent $8 from his total so far.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 364,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 273,
+          "teacher_input_default": true,
+          "text": "After saving some more, he was able to triple the amount he had left after spending the $8.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 391,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 365,
+          "teacher_input_default": true,
+          "text": "How much does he have now?",
+          "warnings": []
+        }
+      ],
+      "question": "$18 is shared among 3 boys. The eldest, who had just celebrated his 15th birthday, added $5 from his birthday money to his share and added another $10 the following day. He later needed some money for a school project that cost $20 but only spent $8 from his total so far. After saving some more, he was able to triple the amount he had left after spending the $8. How much does he have now?",
+      "source_id": "gsm-plus-04326"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Robles buys 315 bananas, which is enough to feed his three monkeys for a week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "One monkey eats 10 bananas each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 243,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "The second monkey eats 10 more bananas than the first monkey and the third monkey eats the rest of the bananas for the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 297,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 245,
+          "teacher_input_default": true,
+          "text": "How many bananas does the third monkey eat each day?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Robles buys 315 bananas, which is enough to feed his three monkeys for a week. One monkey eats 10 bananas each day. The second monkey eats 10 more bananas than the first monkey and the third monkey eats the rest of the bananas for the day.  How many bananas does the third monkey eat each day?",
+      "source_id": "gsm-plus-08585"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

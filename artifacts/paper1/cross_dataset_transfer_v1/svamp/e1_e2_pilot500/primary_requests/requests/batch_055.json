@@ -1,0 +1,307 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam could fit 10 action figures on each shelf in his room.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "His room has could hold 8 action figures.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "How many total shelves did his room have?",
+          "warnings": []
+        }
+      ],
+      "question": "Adam could fit 10 action figures on each shelf in his room. His room has could hold 8 action figures. How many total shelves did his room have?",
+      "source_id": "svamp-chal-356"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Baker made 126 cakes and 48 pastries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "If he sold 115 cakes and 81 pastries How many more cakes than pastries did baker make?",
+          "warnings": []
+        }
+      ],
+      "question": "Baker made 126 cakes and 48 pastries. If he sold 115 cakes and 81 pastries How many more cakes than pastries did baker make?",
+      "source_id": "svamp-chal-608"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jake has 3 fewer peaches and 4 more apples than Steven.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "Steven has 19 apples and 15 peaches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "How many more apples than peaches does Steven have?",
+          "warnings": []
+        }
+      ],
+      "question": "Jake has 3 fewer peaches and 4 more apples than Steven. Steven has 19 apples and 15 peaches. How many more apples than peaches does Steven have?",
+      "source_id": "svamp-chal-454"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The grasshopper, the frog and the mouse had a jumping contest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "The grasshopper jumped 19 inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 203,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The grasshopper jumped 4 inches farther than the frog and the mouse jumped 44 inches lesser than the frog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 230,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 204,
+          "teacher_input_default": true,
+          "text": "How far did the frog jump?",
+          "warnings": []
+        }
+      ],
+      "question": "The grasshopper, the frog and the mouse had a jumping contest. The grasshopper jumped 19 inches. The grasshopper jumped 4 inches farther than the frog and the mouse jumped 44 inches lesser than the frog. How far did the frog jump?",
+      "source_id": "svamp-chal-677"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were 78 dollars in Olivia's wallet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "She spent 15 dollars at a supermarket.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "How much money does she have left?",
+          "warnings": []
+        }
+      ],
+      "question": "There were 78 dollars in Olivia's wallet. She spent 15 dollars at a supermarket. How much money does she have left?",
+      "source_id": "svamp-chal-34"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

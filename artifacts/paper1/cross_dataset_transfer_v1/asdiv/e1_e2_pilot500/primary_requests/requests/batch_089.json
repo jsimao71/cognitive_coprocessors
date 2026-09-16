@@ -1,0 +1,307 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The radio station gave away a $100 bill for every 100th caller.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "Every 30th caller received free concert tickets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 113,
+          "teacher_input_default": true,
+          "text": "How many callers must get through before one of them receives both a coupon and a concert ticket?",
+          "warnings": []
+        }
+      ],
+      "question": "The radio station gave away a $100 bill for every 100th caller. Every 30th caller received free concert tickets. How many callers must get through before one of them receives both a coupon and a concert ticket?",
+      "source_id": "asdiv-2027"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are fifty-eight students trying out for the school's trivia teams.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "If twenty-eight of them didn't get picked for the team and the rest were put into five groups, how many students would be in each group?",
+          "warnings": []
+        }
+      ],
+      "question": "There are fifty-eight students trying out for the school's trivia teams. If twenty-eight of them didn't get picked for the team and the rest were put into five groups, how many students would be in each group?",
+      "source_id": "asdiv-2241"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Three workers, A, B, and C are working in a bicycle factory.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "A finishes assembling a bike every 1 h 30 min.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "B finishes assembling a bike every 2 h.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "C finishes assembling a bike every 1 h.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "If they started assembling three bikes at the same time at 8:10, at what time would they start assembling at the same time again?",
+          "warnings": []
+        }
+      ],
+      "question": "Three workers, A, B, and C are working in a bicycle factory. A finishes assembling a bike every 1 h 30 min. B finishes assembling a bike every 2 h. C finishes assembling a bike every 1 h. If they started assembling three bikes at the same time at 8:10, at what time would they start assembling at the same time again?",
+      "source_id": "asdiv-0843"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If Lillian split 20 Skittles between 8 people in her class and kept the left overs, how many Skittles did each classmate get?",
+          "warnings": []
+        }
+      ],
+      "question": "If Lillian split 20 Skittles between 8 people in her class and kept the left overs, how many Skittles did each classmate get?",
+      "source_id": "asdiv-2270"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mikey had 356 leaves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Some of her leaves blew away.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "Now she has 112 leaves left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "How many of her leaves blew away?",
+          "warnings": []
+        }
+      ],
+      "question": "Mikey had 356 leaves. Some of her leaves blew away. Now she has 112 leaves left. How many of her leaves blew away?",
+      "source_id": "asdiv-0113"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

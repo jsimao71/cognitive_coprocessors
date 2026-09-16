@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Heather bought a jumbo bag of raisins with some cups of raisins in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "She wants to make oatmeal cookies, granola, and snack mix with the raisins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "A batch of oatmeal cookies takes 3/4 of a cup of raisins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 373,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "Heather makes 12 batches of oatmeal cookies when she divides the bag of raisins equally among the cookies, granola, and snack mix.How many cups of raisins are in a bag?",
+          "warnings": []
+        }
+      ],
+      "question": "Heather bought a jumbo bag of raisins with some cups of raisins in it. She wants to make oatmeal cookies, granola, and snack mix with the raisins. A batch of oatmeal cookies takes 3/4 of a cup of raisins. Heather makes 12 batches of oatmeal cookies when she divides the bag of raisins equally among the cookies, granola, and snack mix.How many cups of raisins are in a bag?",
+      "source_id": "gsm-plus-04204"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Heather has a large bag of raisins containing 27 cups.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "She plans to use these raisins equally for oatmeal cookies, granola, and snack mix.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 323,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 139,
+          "teacher_input_default": true,
+          "text": "If each batch of oatmeal cookies requires 3/4 cup of raisins, how many batches of oatmeal cookies can Heather prepare given that she splits the raisins equally among the three recipes?",
+          "warnings": []
+        }
+      ],
+      "question": "Heather has a large bag of raisins containing 27 cups. She plans to use these raisins equally for oatmeal cookies, granola, and snack mix. If each batch of oatmeal cookies requires 3/4 cup of raisins, how many batches of oatmeal cookies can Heather prepare given that she splits the raisins equally among the three recipes?",
+      "source_id": "gsm-plus-04205"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Heather bought a jumbo bag of raisins with 27 cups of raisins in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "She wants to make oatmeal cookies, granola, and a snack mix with the raisins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "A batch of oatmeal cookies takes 3/4 of a cup of raisins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 308,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "She also bought a jumbo bag of raisins to make small cakes, each of which required 2/5 cups of raisins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 446,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 309,
+          "teacher_input_default": true,
+          "text": "How many batches of oatmeal cookies can Heather make if she divides the bag of raisins equally among the cookies, granola, and snack mix?",
+          "warnings": []
+        }
+      ],
+      "question": "Heather bought a jumbo bag of raisins with 27 cups of raisins in it. She wants to make oatmeal cookies, granola, and a snack mix with the raisins. A batch of oatmeal cookies takes 3/4 of a cup of raisins. She also bought a jumbo bag of raisins to make small cakes, each of which required 2/5 cups of raisins. How many batches of oatmeal cookies can Heather make if she divides the bag of raisins equally among the cookies, granola, and snack mix?",
+      "source_id": "gsm-plus-04206"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom bought a CD for $5, and a headphone set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "In total, he paid $55.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "How many more CDs would Tom have been able to buy if he had decided not to buy the headphone set?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom bought a CD for $5, and a headphone set. In total, he paid $55. How many more CDs would Tom have been able to buy if he had decided not to buy the headphone set?",
+      "source_id": "gsm-plus-04232"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom bought a CD for $40, and a headphone set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "In total, he paid $480.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "How many more CDs would Tom have been able to buy if he had decided not to buy the headphone set?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom bought a CD for $40, and a headphone set. In total, he paid $480. How many more CDs would Tom have been able to buy if he had decided not to buy the headphone set?",
+      "source_id": "gsm-plus-04233"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

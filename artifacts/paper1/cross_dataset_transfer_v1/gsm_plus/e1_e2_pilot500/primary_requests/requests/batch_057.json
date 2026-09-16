@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Trinity sells magazines at 11/8 of the price she bought the magazines.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "If she bought the magazines at $73.6, what is her profit?",
+          "warnings": []
+        }
+      ],
+      "question": "Trinity sells magazines at 11/8 of the price she bought the magazines. If she bought the magazines at $73.6, what is her profit?",
+      "source_id": "gsm-plus-09666"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John drove for three hours at 60 miles per hour, then he realized he had left something very important at home and turned around and went back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "He tried to get home within four hours, but was stuck in traffic for the first two hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 372,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "For the next half hour, he drove at 30 miles per hour before being able to drive the rest of the time faster than he had ever done before.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 457,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 373,
+          "teacher_input_default": true,
+          "text": "If he's 45 miles from home in four hours, how fast is he going the rest of the time?",
+          "warnings": []
+        }
+      ],
+      "question": "John drove for three hours at 60 miles per hour, then he realized he had left something very important at home and turned around and went back. He tried to get home within four hours, but was stuck in traffic for the first two hours. For the next half hour, he drove at 30 miles per hour before being able to drive the rest of the time faster than he had ever done before. If he's 45 miles from home in four hours, how fast is he going the rest of the time?",
+      "source_id": "gsm-plus-00068"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mark's vehicle malfunctions and he requires a replacement radiator.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "The original price of a new radiator is $400, however, he manages to purchase it from a salvage yard with an 80% discount.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 292,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 191,
+          "teacher_input_default": true,
+          "text": "He then employs a mechanic to fit it, who charges $50 per hour and takes 3 hours to complete the job.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 293,
+          "teacher_input_default": true,
+          "text": "What is the total amount he spent?",
+          "warnings": []
+        }
+      ],
+      "question": "Mark's vehicle malfunctions and he requires a replacement radiator. The original price of a new radiator is $400, however, he manages to purchase it from a salvage yard with an 80% discount. He then employs a mechanic to fit it, who charges $50 per hour and takes 3 hours to complete the job. What is the total amount he spent?",
+      "source_id": "gsm-plus-10533"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lloyd has an egg farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "His chickens produce 252 eggs per day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "He sells them for $2 per dozen.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "However, on Sundays, his chickens produce 25% more eggs than usual, and he sells them for $2.5 per dozen.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 272,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 200,
+          "teacher_input_default": true,
+          "text": "Considering these conditions, how much does Lloyd make on eggs per week?",
+          "warnings": []
+        }
+      ],
+      "question": "Lloyd has an egg farm. His chickens produce 252 eggs per day. He sells them for $2 per dozen. However, on Sundays, his chickens produce 25% more eggs than usual, and he sells them for $2.5 per dozen. Considering these conditions, how much does Lloyd make on eggs per week?",
+      "source_id": "gsm-plus-00403"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Solomon bought 20 marbles from his friend Johanna and added them to a store that had 50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "His father also gave him 2/5 times as many marbles as he bought from Johanna.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 273,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 167,
+          "teacher_input_default": true,
+          "text": "Later, his sister gifted him 1/3 times the total number of marbles he had after receiving from his father.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 365,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 274,
+          "teacher_input_default": true,
+          "text": "If each marble weighs 2 kg, calculate the total weight of marbles Solomon has in the store.",
+          "warnings": []
+        }
+      ],
+      "question": "Solomon bought 20 marbles from his friend Johanna and added them to a store that had 50. His father also gave him 2/5 times as many marbles as he bought from Johanna. Later, his sister gifted him 1/3 times the total number of marbles he had after receiving from his father. If each marble weighs 2 kg, calculate the total weight of marbles Solomon has in the store.",
+      "source_id": "gsm-plus-02531"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

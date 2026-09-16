@@ -1,0 +1,296 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A lighthouse's light flashes 255 times over a span of 5 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "What is the duration required for the light to flash 459 times?",
+          "warnings": []
+        }
+      ],
+      "question": "A lighthouse's light flashes 255 times over a span of 5 minutes. What is the duration required for the light to flash 459 times?",
+      "source_id": "gsm-plus-08941"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "During the strawberry harvest at Grandma Concetta's orchard, Tony is able to gather 6 quarts of strawberries every hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "Bobby, on the other hand, collects one quart less every hour compared to Tony.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 200,
+          "teacher_input_default": true,
+          "text": "Kathy's picking speed is double that of Bobby's, while Ricky gathers two quarts less every hour than Kathy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 463,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 308,
+          "teacher_input_default": true,
+          "text": "What is the total quantity of strawberries, in quarts, that Tony, Bobby, Ricky, and Kathy can collectively gather in an hour at Grandma Concetta's orchard?",
+          "warnings": []
+        }
+      ],
+      "question": "During the strawberry harvest at Grandma Concetta's orchard, Tony is able to gather 6 quarts of strawberries every hour. Bobby, on the other hand, collects one quart less every hour compared to Tony. Kathy's picking speed is double that of Bobby's, while Ricky gathers two quarts less every hour than Kathy. What is the total quantity of strawberries, in quarts, that Tony, Bobby, Ricky, and Kathy can collectively gather in an hour at Grandma Concetta's orchard?",
+      "source_id": "gsm-plus-04181"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jaime is a computer programmer for a company that currently has employed 1000 people.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 86,
+          "teacher_input_default": true,
+          "text": "Senior programmers are paid $4000 more than junior programmers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 358,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "If the number of Junior programmers is 2/5 of the total number of employees, and they are each paid $20000 per month, calculate the total amount of money the corporation pays to all the programmers per month.",
+          "warnings": []
+        }
+      ],
+      "question": "Jaime is a computer programmer for a company that currently has employed 1000 people. Senior programmers are paid $4000 more than junior programmers. If the number of Junior programmers is 2/5 of the total number of employees, and they are each paid $20000 per month, calculate the total amount of money the corporation pays to all the programmers per month.",
+      "source_id": "gsm-plus-02601"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It is approximately 1955000 meters from San Diego, California to New York City, New York.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "If Bernice drove 325000 meters for 4 days, how many kilometers will she still need to drive?",
+          "warnings": []
+        }
+      ],
+      "question": "It is approximately 1955000 meters from San Diego, California to New York City, New York. If Bernice drove 325000 meters for 4 days, how many kilometers will she still need to drive?",
+      "source_id": "gsm-plus-08401"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 91,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carlos, Jim and Carrey were at the beach playing and they decided to gather some seashells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 200,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "They gathered all their seashells and divided them equally between themselves, each person got 20 seashells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 319,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 201,
+          "teacher_input_default": true,
+          "text": "If Carlos collected twice as many as Carrey, and Jim collected 5 more than Carlos, how many seashells did Jim collect?",
+          "warnings": []
+        }
+      ],
+      "question": "Carlos, Jim and Carrey were at the beach playing and they decided to gather some seashells. They gathered all their seashells and divided them equally between themselves, each person got 20 seashells. If Carlos collected twice as many as Carrey, and Jim collected 5 more than Carlos, how many seashells did Jim collect?",
+      "source_id": "gsm-plus-09228"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,362 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "She also has a hobby of painting, but this doesn't interfere with her writing schedule.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 276,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "A blog article takes an average of 4 hours to research and write about.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 373,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 277,
+          "teacher_input_default": true,
+          "text": "Last week, she wrote 5 articles on Monday and 2/5 times more articles on Tuesday than on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 448,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 374,
+          "teacher_input_default": true,
+          "text": "On Wednesday, she wrote twice the number of articles she wrote on Tuesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 594,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 449,
+          "teacher_input_default": true,
+          "text": "Despite spending 3 hours painting a landscape on Tuesday and 2 hours on a portrait on Wednesday, these activities didn't affect her writing time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 676,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 595,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of hours she spent writing articles in the three days.",
+          "warnings": []
+        }
+      ],
+      "question": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job. She also has a hobby of painting, but this doesn't interfere with her writing schedule. A blog article takes an average of 4 hours to research and write about. Last week, she wrote 5 articles on Monday and 2/5 times more articles on Tuesday than on Monday. On Wednesday, she wrote twice the number of articles she wrote on Tuesday. Despite spending 3 hours painting a landscape on Tuesday and 2 hours on a portrait on Wednesday, these activities didn't affect her writing time. Calculate the total number of hours she spent writing articles in the three days.",
+      "source_id": "gsm-plus-00366"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "$1800 is shared among 3 boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "The eldest added $500 to his share and added another $1000 the following day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 172,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "He later needed some money and spent $800 from his total so far.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 173,
+          "teacher_input_default": true,
+          "text": "After saving some more, he was able to triple the amount he had left after spending the $800.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 293,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 267,
+          "teacher_input_default": true,
+          "text": "How much does he have now?",
+          "warnings": []
+        }
+      ],
+      "question": "$1800 is shared among 3 boys. The eldest added $500 to his share and added another $1000 the following day. He later needed some money and spent $800 from his total so far. After saving some more, he was able to triple the amount he had left after spending the $800. How much does he have now?",
+      "source_id": "gsm-plus-04321"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Martha's cat is 5.5 times faster than her turtle.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "If the cat can run 16.5 feet/second, how many feet can her turtle crawl in 40 seconds?",
+          "warnings": []
+        }
+      ],
+      "question": "Martha's cat is 5.5 times faster than her turtle. If the cat can run 16.5 feet/second, how many feet can her turtle crawl in 40 seconds?",
+      "source_id": "gsm-plus-05642"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The glee club ordered 30 pizzas and ate 60% of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "The football team ordered twice as many pizzas and ate 75% of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "How many pizzas are left?",
+          "warnings": []
+        }
+      ],
+      "question": "The glee club ordered 30 pizzas and ate 60% of them. The football team ordered twice as many pizzas and ate 75% of them. How many pizzas are left?",
+      "source_id": "gsm-plus-08528"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Stephen borrowed $300 from his sister and promised to return it with an additional 2% of the money he owed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 251,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "For 11 months Stephen will give his sister $25.5 per month and the remaining amount, including the interest, will be paid on the twelfth month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 299,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 252,
+          "teacher_input_default": true,
+          "text": "How much will Stephen pay in the twelfth month?",
+          "warnings": []
+        }
+      ],
+      "question": "Stephen borrowed $300 from his sister and promised to return it with an additional 2% of the money he owed. For 11 months Stephen will give his sister $25.5 per month and the remaining amount, including the interest, will be paid on the twelfth month. How much will Stephen pay in the twelfth month?",
+      "source_id": "gsm-plus-09706"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

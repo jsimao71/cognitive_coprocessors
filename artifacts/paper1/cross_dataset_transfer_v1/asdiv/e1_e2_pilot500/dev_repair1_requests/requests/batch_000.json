@@ -1,0 +1,432 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "You want to share 34 pencils among 6 friends.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "How many would each friend get?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "pencils.shared_total = 34",
+              "friends.count = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pencils.per_friend = pencils.shared_total / friends.count",
+              "RETURN pencils.per_friend"
+            ],
+            "assumptions": [
+              "The question implies equal sharing among the six friends."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0562"
+      },
+      "question": "You want to share 34 pencils among 6 friends. How many would each friend get?",
+      "source_context": null,
+      "source_id": "asdiv-0562",
+      "validation_failure": "answer mismatch: actual=5.666666666666666666666666667, expected=5",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Walker will have 56 apples for bobbing for apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "Each bucket will hold 9 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "How many buckets will she need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mrs_walker.apples.total = 56"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bucket.capacity.apples = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The number of buckets needed requires ceiling division so that all 56 apples fit, but the active operator registry has no ceiling operator."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0583"
+      },
+      "question": "Mrs. Walker will have 56 apples for bobbing for apples. Each bucket will hold 9 apples. How many buckets will she need?",
+      "source_context": null,
+      "source_id": "asdiv-0583",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A bus can transport 48 passengers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "If a school of 1,230 students and teachers are going on a field trip, how many buses should be rented?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bus.capacity.passengers = 48"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Determining a whole number of buses requires rounding the passenger-to-capacity quotient upward, but no ceiling or equivalent rounding operator is present in the active registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0765"
+      },
+      "question": "A bus can transport 48 passengers. If a school of 1,230 students and teachers are going on a field trip, how many buses should be rented?",
+      "source_context": null,
+      "source_id": "asdiv-0765",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "26",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 35,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 32 students in the class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 36,
+          "teacher_input_default": true,
+          "text": "The teacher divided them into 5 equal groups.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "How many students are there in each group?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "class.students = 32"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "class.groups = 5",
+              "class.students_per_group = class.students / class.groups"
+            ],
+            "assumptions": [
+              "Interprets equal groups as exact division despite 32 students not forming 5 integral groups."
+            ],
+            "confidence": 0.76,
+            "part_id": 1,
+            "semantic_notes": [
+              "The equal-group relation is preserved as exact arithmetic division."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN class.students_per_group"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0791"
+      },
+      "question": "There are 32 students in the class. The teacher divided them into 5 equal groups. How many students are there in each group?",
+      "source_context": null,
+      "source_id": "asdiv-0791",
+      "validation_failure": "answer mismatch: actual=6.4, expected=6",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Lee wants to load 134 tons of his fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "A large truck can load 15 tons of fruits and small truck can load 7 tons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 237,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "In order to use the least number of trucks and have every truck fully occupied, how many large trucks should be used?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mr_lee.fruits.total_tons = 134"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "large_truck.fruit_capacity_tons = 15",
+              "small_truck.fruit_capacity_tons = 7"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Minimizing the number of fully occupied trucks requires nonnegative integer constraints and constrained optimization, which the active arithmetic operator registry cannot express."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0801"
+      },
+      "question": "Mr. Lee wants to load 134 tons of his fruits. A large truck can load 15 tons of fruits and small truck can load 7 tons. In order to use the least number of trucks and have every truck fully occupied, how many large trucks should be used?",
+      "source_context": null,
+      "source_id": "asdiv-0801",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

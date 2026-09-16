@@ -1,0 +1,307 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Allan brought 5 balloons and Jake brought 4 balloons to the park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "Allan then bought 3 more balloons at the park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 113,
+          "teacher_input_default": true,
+          "text": "How many balloons did Allan bring to the park?",
+          "warnings": []
+        }
+      ],
+      "question": "Allan brought 5 balloons and Jake brought 4 balloons to the park. Allan then bought 3 more balloons at the park. How many balloons did Allan bring to the park?",
+      "source_id": "svamp-chal-78"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The grasshopper, the frog and the mouse had a jumping contest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "The grasshopper jumped 21 inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The grasshopper jumped 25 inches farther than the frog and the mouse jumped 16 inches lesser than the frog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "How much farther did the grasshopper jump than the mouse?",
+          "warnings": []
+        }
+      ],
+      "question": "The grasshopper, the frog and the mouse had a jumping contest. The grasshopper jumped 21 inches. The grasshopper jumped 25 inches farther than the frog and the mouse jumped 16 inches lesser than the frog. How much farther did the grasshopper jump than the mouse?",
+      "source_id": "svamp-chal-928"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "He then went to see the oranges being harvested.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "He found out that the harvest will go on for 4 days.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "How many sacks do they harvest per day if they harvested a total of 56 sacks of oranges?",
+          "warnings": []
+        }
+      ],
+      "question": "He then went to see the oranges being harvested. He found out that the harvest will go on for 4 days. How many sacks do they harvest per day if they harvested a total of 56 sacks of oranges?",
+      "source_id": "svamp-chal-844"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "13 campers went rowing and 59 campers went hiking in the morning.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "21 campers went rowing in the afternoon.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 107,
+          "teacher_input_default": true,
+          "text": "How many campers went rowing in all?",
+          "warnings": []
+        }
+      ],
+      "question": "13 campers went rowing and 59 campers went hiking in the morning. 21 campers went rowing in the afternoon. How many campers went rowing in all?",
+      "source_id": "svamp-chal-283"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 10 different books and 11 different movies in the ' crazy silly school ' series.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 194,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "If you read 13 of the books and watched 12 of the movies How many more books than movies have you read?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 10 different books and 11 different movies in the ' crazy silly school ' series. If you read 13 of the books and watched 12 of the movies How many more books than movies have you read?",
+      "source_id": "svamp-chal-134"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

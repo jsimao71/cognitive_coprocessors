@@ -1,0 +1,373 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "After twelve rounds, Craig has spelled out 24 words with 18 letters each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 387,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 210,
+          "teacher_input_default": true,
+          "text": "If Craig's brother has spelled words with a total count of letters 60 more than Craig, calculate the total number of letters in the words they've spelled after the twelve rounds",
+          "warnings": []
+        }
+      ],
+      "question": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words. After twelve rounds, Craig has spelled out 24 words with 18 letters each. If Craig's brother has spelled words with a total count of letters 60 more than Craig, calculate the total number of letters in the words they've spelled after the twelve rounds",
+      "source_id": "gsm-plus-07512"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Peter has twice as many socks as Jack and half times as many dishes as Jack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Jack collected twice as many dishes as socks in the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 350,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "If Jack collected 60 dishes, and each of them bought 5 more pairs of socks and 3 more dishes from a nearby store, calculate the total number of socks and dishes they have together, excluding the newly bought items?",
+          "warnings": []
+        }
+      ],
+      "question": "Peter has twice as many socks as Jack and half times as many dishes as Jack. Jack collected twice as many dishes as socks in the store. If Jack collected 60 dishes, and each of them bought 5 more pairs of socks and 3 more dishes from a nearby store, calculate the total number of socks and dishes they have together, excluding the newly bought items?",
+      "source_id": "gsm-plus-06758"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are three trees in Eddy's backyard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "The shortest tree has a height of 8 feet, and the second tree has a height of 7 feet more than the shortest tree.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "The height of the tallest tree is twice the height of the two trees combined.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "How tall is the tallest tree?",
+          "warnings": []
+        }
+      ],
+      "question": "There are three trees in Eddy's backyard. The shortest tree has a height of 8 feet, and the second tree has a height of 7 feet more than the shortest tree. The height of the tallest tree is twice the height of the two trees combined. How tall is the tallest tree?",
+      "source_id": "gsm-plus-02840"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On a particular day, Sandy started her journey from Holloway Shores to Sun Valley Shores.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 179,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "She walked for 8 hours, stopping every 2 hours for a 15-minute break to hydrate and rest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 301,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 180,
+          "teacher_input_default": true,
+          "text": "The next day, she continued her journey to Hollock Valley Shores, walking half as many hours as she did on the first day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 385,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 302,
+          "teacher_input_default": true,
+          "text": "She also took breaks every 2 hours, but this time, her breaks were 10 minutes long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 476,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 386,
+          "teacher_input_default": true,
+          "text": "Despite these breaks, the total time Sandy spent walking does not include the break times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 550,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 477,
+          "teacher_input_default": true,
+          "text": "Calculate the total time Sandy spent walking in the two days, in minutes.",
+          "warnings": []
+        }
+      ],
+      "question": "On a particular day, Sandy started her journey from Holloway Shores to Sun Valley Shores. She walked for 8 hours, stopping every 2 hours for a 15-minute break to hydrate and rest. The next day, she continued her journey to Hollock Valley Shores, walking half as many hours as she did on the first day. She also took breaks every 2 hours, but this time, her breaks were 10 minutes long. Despite these breaks, the total time Sandy spent walking does not include the break times. Calculate the total time Sandy spent walking in the two days, in minutes.",
+      "source_id": "gsm-plus-06566"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Stephen borrowed $300 from his sister and promised to return it with an additional 2% of the money he owed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "For 11 months Stephen will give his sister $25 per month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 301,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "However, in the third month, he borrowed an additional $50 from his sister, which he promised to return with an additional 1% interest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 460,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 302,
+          "teacher_input_default": true,
+          "text": "The additional borrowed amount and its interest will also be paid on the twelfth month, along with the remaining amount of the original loan and its interest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 517,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 461,
+          "teacher_input_default": true,
+          "text": "How much will Stephen pay in total in the twelfth month?",
+          "warnings": []
+        }
+      ],
+      "question": "Stephen borrowed $300 from his sister and promised to return it with an additional 2% of the money he owed. For 11 months Stephen will give his sister $25 per month. However, in the third month, he borrowed an additional $50 from his sister, which he promised to return with an additional 1% interest. The additional borrowed amount and its interest will also be paid on the twelfth month, along with the remaining amount of the original loan and its interest. How much will Stephen pay in total in the twelfth month?",
+      "source_id": "gsm-plus-09707"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

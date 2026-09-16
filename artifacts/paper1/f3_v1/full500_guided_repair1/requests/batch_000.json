@@ -1,0 +1,72 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "A jar on the family's counter contains change they've been saving a trip to the ice cream shop. There are 123 pennies, 85 nickels, 35 dimes, and a number of quarters. All five family members get a double scoop, which costs $3 each. After the trip, they have 48 cents left over. How many quarters were in the jar?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "3344"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "There is a road stretching 3 miles from the base camp to the chain challenge. Every 20 minutes, a car comes down the road from the base camp towards the chain challenge. How many hours have passed once 30 cars have come down the road?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "7021"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "The price of a monster box of cereal is reduced by $24 after an oversupply in the market. If the initial price was $104, and Romina bought 20 of such boxes, calculate the total price she paid.",
+      "repair": {
+        "failure_class": "answer_mismatch",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"monster_cereal_box.price\", \"initial\"), 104, \"dollar\", source(\"initial price was $104\"))",
+          "offset(at(\"monster_cereal_box.price\", \"current\"), at(\"monster_cereal_box.price\", \"initial\"), -24, \"dollar\", source(\"price of a monster box of cereal is reduced by $24\"))",
+          "observe(at(\"romina.monster_cereal_boxes.count\", \"purchased\"), 20, \"count\", source(\"Romina bought 20 of such boxes\"))",
+          "product_relation(\"romina.monster_cereal_boxes.total_price\", at(\"monster_cereal_box.price\", \"current\"), at(\"romina.monster_cereal_boxes.count\", \"purchased\"), source(\"Romina bought 20 of such boxes, calculate the total price she paid\"))",
+          "query(\"value\", \"romina.monster_cereal_boxes.total_price\")"
+        ]
+      },
+      "source_id": "2661"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Lizette scored 92 on her third quiz giving her an average of 94. What is Lizette's average in her first two quizzes?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"lizette.quiz.3.score\", \"current\"), 92, \"score\", source(\"Lizette scored 92 on her third quiz\"))",
+          "observe(at(\"lizette.quiz_scores.mean\", \"after_third_quiz\"), 94, \"score\", source(\"giving her an average of 94\"))",
+          "mean_relation(at(\"lizette.quiz_scores.mean\", \"after_third_quiz\"), at(\"lizette.quiz.1.score\", \"current\"), at(\"lizette.quiz.2.score\", \"current\"), at(\"lizette.quiz.3.score\", \"current\"), source(\"Lizette scored 92 on her third quiz giving her an average of 94\"))",
+          "query(\"mean\", at(\"lizette.quiz.1.score\", \"current\"), at(\"lizette.quiz.2.score\", \"current\"))"
+        ]
+      },
+      "source_id": "4609"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "John goes to the bakery to buy rolls.  They sell them for 5 dollars for a dozen.  He spent 15 dollars.  How many rolls did he get?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "4308"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

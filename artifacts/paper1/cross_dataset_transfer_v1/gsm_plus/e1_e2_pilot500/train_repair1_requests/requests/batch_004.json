@@ -1,0 +1,704 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 7 toys on hand for 7 dogs, but there are 6 more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 302,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 386,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 303,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, 5 dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 426,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 387,
+          "teacher_input_default": true,
+          "text": "How many toys in total does James need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause states James's goal but introduces no quantity or arithmetic relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.toys_per_dog = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "james.toys_on_hand = 7",
+              "shelter.preexisting.dogs_count = 7",
+              "shelter.when_james_left.dogs_count = shelter.preexisting.dogs_count + 6"
+            ],
+            "assumptions": [
+              "The six more dogs are interpreted as additional to the seven dogs already mentioned."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "\u201cTwice as many more dogs than when he left\u201d does not uniquely specify whether the new count is twice the departure count, three times that count, or whether only an added group is doubled."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "shelter.final.dogs_count = shelter.before_five_left.dogs_count - 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 4,
+            "semantic_notes": [
+              "The count immediately before the five dogs left remains an unresolved semantic dependency because the preceding clause is ambiguous."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "james.total_toys_needed = shelter.final.dogs_count * shelter.toys_per_dog",
+              "RETURN james.total_toys_needed"
+            ],
+            "assumptions": [
+              "\u201cToys in total\u201d is interpreted as the total toys required for the dogs remaining, not the cumulative number of toy purchases."
+            ],
+            "confidence": 0.9,
+            "part_id": 5,
+            "semantic_notes": [
+              "The requested need is represented symbolically; its numeric grounding depends on resolution of the earlier ambiguous dog-count change."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05400"
+      },
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 7 toys on hand for 7 dogs, but there are 6 more dogs in the shelter now. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, 5 dogs were gone so he no longer needed those toys. How many toys in total does James need?",
+      "source_context": null,
+      "source_id": "gsm-plus-05400",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "34",
+        "gold_reasoning": "James has 7+6=<<7+6=13>>13 toys.\nThere were 13*2=<<13*2=26>>26 dogs.\nJames needed to buy 26-13=<<26-13=13>>13 more toys.\nThere are 39 total toys.\n39-5=<<39-5=34>>34 toys are now needed.\n#### 34"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Peter has twice as many socks as Jack and half times as many dishes as Jack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Jack collected twice as many dishes as socks in the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "Now, consider that Peter gave away 10 of his socks to charity.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 294,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 199,
+          "teacher_input_default": true,
+          "text": "If Jack collected 60 dishes, calculate the total number of socks and dishes they have together.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "peter.socks.before_charity = jack.socks * 2",
+              "peter.dishes = jack.dishes / 2"
+            ],
+            "assumptions": [
+              "Interprets \"half times as many dishes\" as half as many dishes."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "Peter's initial sock count is distinguished from his count after donating socks."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jack.dishes = jack.socks * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "peter.socks.given_to_charity = 10",
+              "peter.socks.after_charity = peter.socks.before_charity - peter.socks.given_to_charity"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Preserves Peter's sock counts before and after the donation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jack.dishes = 60",
+              "jack_and_peter.total_socks_and_dishes = sum(jack.socks, jack.dishes, peter.socks.after_charity, peter.dishes)",
+              "RETURN jack_and_peter.total_socks_and_dishes"
+            ],
+            "assumptions": [
+              "Assumes Jack's collected quantities are his current quantities and that Peter gave away socks only, leaving his dishes unchanged."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [
+              "The requested aggregate includes both people's current socks and dishes."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06755"
+      },
+      "question": "Peter has twice as many socks as Jack and half times as many dishes as Jack. Jack collected twice as many dishes as socks in the store. Now, consider that Peter gave away 10 of his socks to charity. If Jack collected 60 dishes, calculate the total number of socks and dishes they have together.",
+      "source_context": null,
+      "source_id": "gsm-plus-06755",
+      "validation_failure": "unresolved reference 'jack.socks' from scope 'global'; unresolved reference 'jack.socks' from scope 'global'; unresolved reference 'peter.socks.before_charity' from scope 'global'; unresolved reference 'jack.socks' from scope 'global'; unresolved reference 'jack_and_peter.total_socks_and_dishes' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "170",
+        "gold_reasoning": "Since Jack collected twice as many dishes as socks, he has 60/2 = <<60/2=30>>30 socks.\nIn total, he has 30+60 = <<30+60=90>>90 socks and dishes.\nPeter has twice as many socks as jack which totals 2*30 = <<2*30=60>>60 socks.\nAfter giving away some items, Peter has 60 socks - 10 = 50 socks.\nHe also has half times as many dishes as Jack which is 1/2*60 = 30 dishes.\nIn total, he has 50+30 = <<50+30=80>>80 socks and dishes.\nThe total number of socks and dishes they both have is 80+90 = <<80+90=170>>170\n#### 170"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In one hour, Ezra read twice as many books as Ahmed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Ezra has read 300 books this hour and decided to read some more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 152,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "They both read 675 books in total.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "How many books does Ezra decide to read more?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ezra.this_hour.books_before_more = ahmed.this_hour.books * 2"
+            ],
+            "assumptions": [
+              "The comparison describes the books Ezra had read before deciding to read more."
+            ],
+            "confidence": 0.88,
+            "part_id": 0,
+            "semantic_notes": [
+              "The temporal state before Ezra reads more is preserved separately."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ezra.this_hour.books_before_more = 300"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The additional books remain a forward dependency until the combined total is introduced."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ezra.this_hour.books_after_more = ezra.this_hour.books_before_more + ezra.this_hour.additional_books",
+              "both.this_hour.total_books = 675",
+              "both.this_hour.total_books = ezra.this_hour.books_after_more + ahmed.this_hour.books"
+            ],
+            "assumptions": [
+              "The stated combined total includes the additional books Ezra decides to read."
+            ],
+            "confidence": 0.91,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN ezra.this_hour.additional_books"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06148"
+      },
+      "question": "In one hour, Ezra read twice as many books as Ahmed. Ezra has read 300 books this hour and decided to read some more. They both read 675 books in total. How many books does Ezra decide to read more?",
+      "source_context": null,
+      "source_id": "gsm-plus-06148",
+      "validation_failure": "unresolved reference 'ahmed.this_hour.books' from scope 'global'; unresolved reference 'ezra.this_hour.additional_books' from scope 'global'; unresolved reference 'ezra.this_hour.books_after_more' from scope 'global'; unresolved reference 'ezra.this_hour.additional_books' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "150",
+        "gold_reasoning": "Supposing Ezra decided to read X books more.\nIf Ezra has read 300 books this hour, he has read a total of 300+X\nSince Ezra reads twice as many books as Ahmed, Ahmed has read (300+X)/2 books.\nTogether, Ahmed and Ezra has read (300+X)/2+300+X=675 books\nX=150\n#### 150"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Juan asked his neighbor, Herb, how much his house was worth.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "Herb answered that he paid some money for the house.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "If Juan's house is 30% less expensive than Herb's, calculate the value of the two houses combined is 129200.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "How much is Herb's house?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "RETURN herb.house.value"
+            ],
+            "assumptions": [
+              "The pronoun in 'his house' refers to Herb's house."
+            ],
+            "confidence": 0.93,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause introduces Juan's indirect query about Herb's house value."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The clause provides no numeric amount or arithmetic relation to assign."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "juan.house.value = dec_pct(herb.house.value, 30)",
+              "juan_and_herb.houses.combined_value = 129200",
+              "juan_and_herb.houses.combined_value = juan.house.value + herb.house.value"
+            ],
+            "assumptions": [
+              "The awkward phrase 'calculate the value of the two houses combined is 129200' is interpreted as stating that their combined value is 129200."
+            ],
+            "confidence": 0.93,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN herb.house.value"
+            ],
+            "assumptions": [],
+            "confidence": 1.0,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-04660"
+      },
+      "question": "Juan asked his neighbor, Herb, how much his house was worth. Herb answered that he paid some money for the house. If Juan's house is 30% less expensive than Herb's, calculate the value of the two houses combined is 129200. How much is Herb's house?",
+      "source_context": null,
+      "source_id": "gsm-plus-04660",
+      "validation_failure": "anonymous operation-ledger target: juan.house.value",
+      "validator_context": {
+        "correct_answer": "76000",
+        "gold_reasoning": "Set the price of Herb's house as X, then Juan's house is (1-30%)*X=0.7X,\n0.7X+X=129200\nX=76,000\nSo Herb's house is $76000\n#### 76000"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James is responsible for providing toys for a canine refuge.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "Each canine requires one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "At present, James has 4 toys for 4 canines, but there are an additional 8 canines in the refuge.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 343,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "After purchasing the necessary toys, he returned to find that there are twice as many more dogs than when he left, necessitating the purchase of more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 450,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 344,
+          "teacher_input_default": true,
+          "text": "However, when James returned once more, 3 canines had left the refuge, reducing the number of toys needed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 509,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 451,
+          "teacher_input_default": true,
+          "text": "What is the total number of toys that James needs to have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "refuge.toys.provider = \"james\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "refuge.toys_per_canine = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "refuge.before_first_purchase.toys_available = 4",
+              "refuge.before_first_purchase.canines_with_toys = 4",
+              "refuge.before_first_purchase.additional_canines = 8",
+              "refuge.before_first_purchase.canines_total = refuge.before_first_purchase.canines_with_toys + refuge.before_first_purchase.additional_canines"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"twice as many more dogs\" can mean twice as many dogs in total or an increase of twice the prior count, yielding incompatible multipliers."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "refuge.after_second_return.canines_left = 3",
+              "refuge.after_second_return.canines = refuge.after_first_return.canines - refuge.after_second_return.canines_left",
+              "refuge.after_second_return.toys_needed = refuge.after_second_return.canines * refuge.toys_per_canine"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "refuge.final.toys_needed = refuge.after_second_return.canines * refuge.toys_per_canine",
+              "RETURN refuge.final.toys_needed"
+            ],
+            "assumptions": [
+              "The requested total is the number needed after the latest described change at the refuge."
+            ],
+            "confidence": 0.97,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05405"
+      },
+      "question": "James is responsible for providing toys for a canine refuge. Each canine requires one toy. At present, James has 4 toys for 4 canines, but there are an additional 8 canines in the refuge. After purchasing the necessary toys, he returned to find that there are twice as many more dogs than when he left, necessitating the purchase of more toys. However, when James returned once more, 3 canines had left the refuge, reducing the number of toys needed. What is the total number of toys that James needs to have?",
+      "source_context": null,
+      "source_id": "gsm-plus-05405",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "33",
+        "gold_reasoning": "James has 4+8=<<4+8=12>>12 toys.\nThere were 12*2=<<12*2=24>>24 dogs.\nJames needed to buy 24-12=<<24-12=12>>12 more toys.\nThere are 36 total toys.\n36-3=<<36-3=33>>33 toys are now needed.\n#### 33"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

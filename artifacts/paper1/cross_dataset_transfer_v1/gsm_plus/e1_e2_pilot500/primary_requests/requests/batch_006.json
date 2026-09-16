@@ -1,0 +1,439 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James loves to go swimming and has to swim across a 20-mile lake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "He can swim at a pace of 2 miles per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "He swims 60% of the distance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 224,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 142,
+          "teacher_input_default": true,
+          "text": "After that, he stops on an island and rests for half as long as the swimming time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 293,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 226,
+          "teacher_input_default": true,
+          "text": "He then finishes the remaining distance while going half the speed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 357,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 295,
+          "teacher_input_default": true,
+          "text": "After across the lake, he did a 30-minute stretching exercise.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 406,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 358,
+          "teacher_input_default": true,
+          "text": "How long did it take him to get across the lake?",
+          "warnings": []
+        }
+      ],
+      "question": "James loves to go swimming and has to swim across a 20-mile lake.  He can swim at a pace of 2 miles per hour.  He swims 60% of the distance.  After that, he stops on an island and rests for half as long as the swimming time.  He then finishes the remaining distance while going half the speed.  After across the lake, he did a 30-minute stretching exercise. How long did it take him to get across the lake?",
+      "source_id": "gsm-plus-07566"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Grayson recycles cans and bottles for money each week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "An aluminum can is worth two cents and a plastic bottle is worth three cents.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 133,
+          "teacher_input_default": true,
+          "text": "She drinks three aluminum cans of soda and five plastic bottles of water a week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 329,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 214,
+          "teacher_input_default": true,
+          "text": "However, every third week, she hosts a party and consumes an additional four aluminum cans and two plastic bottles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 492,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 330,
+          "teacher_input_default": true,
+          "text": "How many cents does Grayson earn from recycling in a four-week month, considering her regular consumption and the additional cans and bottles from her party week?",
+          "warnings": []
+        }
+      ],
+      "question": "Grayson recycles cans and bottles for money each week. An aluminum can is worth two cents and a plastic bottle is worth three cents. She drinks three aluminum cans of soda and five plastic bottles of water a week. However, every third week, she hosts a party and consumes an additional four aluminum cans and two plastic bottles. How many cents does Grayson earn from recycling in a four-week month, considering her regular consumption and the additional cans and bottles from her party week?",
+      "source_id": "gsm-plus-03683"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tim decides to light off some fireworks for the fourth of July.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "He buys a package of fireworks worth $400 and another pack worth twice that much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 179,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "He gets a 20% discount on them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 181,
+          "teacher_input_default": true,
+          "text": "He also buys a finale firework.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 273,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 213,
+          "teacher_input_default": true,
+          "text": "If he spent $1110 in total, how much is the finale firework?",
+          "warnings": []
+        }
+      ],
+      "question": "Tim decides to light off some fireworks for the fourth of July.  He buys a package of fireworks worth $400 and another pack worth twice that much.  He gets a 20% discount on them.  He also buys a finale firework. If he spent $1110 in total, how much is the finale firework?",
+      "source_id": "gsm-plus-03292"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A nurses\u2019 station orders bandages in bulk packs of 60.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "On the first day, the nurses used 48 bandages and ordered one bulk pack of bandages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "On the second day, they used fifteen fewer bandages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 277,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 193,
+          "teacher_input_default": true,
+          "text": "On the third day, they ordered two bulk packs of bandages and only used half a pack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 332,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 278,
+          "teacher_input_default": true,
+          "text": "They had 98 bandages left at the end of the third day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 388,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 333,
+          "teacher_input_default": true,
+          "text": "How many bandages did they start with on the first day?",
+          "warnings": []
+        }
+      ],
+      "question": "A nurses\u2019 station orders bandages in bulk packs of 60. On the first day, the nurses used 48 bandages and ordered one bulk pack of bandages. On the second day, they used fifteen fewer bandages. On the third day, they ordered two bulk packs of bandages and only used half a pack. They had 98 bandages left at the end of the third day. How many bandages did they start with on the first day?",
+      "source_id": "gsm-plus-09520"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Shelly's 3 kids spent all day at the water park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Mitchel went down the water slide 3/10 of one hundred times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "Anne went down the slide 30% less than Mitchel and Robert went down 4 times as much as Anne.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 206,
+          "teacher_input_default": true,
+          "text": "How many times did Robert go down the water slide?",
+          "warnings": []
+        }
+      ],
+      "question": "Shelly's 3 kids spent all day at the water park.  Mitchel went down the water slide 3/10 of one hundred times.  Anne went down the slide 30% less than Mitchel and Robert went down 4 times as much as Anne.  How many times did Robert go down the water slide?",
+      "source_id": "gsm-plus-02034"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

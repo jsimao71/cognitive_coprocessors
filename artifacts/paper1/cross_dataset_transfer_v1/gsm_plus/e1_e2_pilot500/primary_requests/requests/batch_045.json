@@ -1,0 +1,450 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lorraine and Colleen are swapping stickers for buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "A large sticker can be exchanged for a large button or alternatively, for three small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "A small sticker can be traded for a single small button.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 261,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "A large button is equivalent to three small stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 326,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 262,
+          "teacher_input_default": true,
+          "text": "Initially, Lorraine has 30 small stickers and 40 large stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 395,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 327,
+          "teacher_input_default": true,
+          "text": "She decides to exchange 90% of her small stickers for large buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 498,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 396,
+          "teacher_input_default": true,
+          "text": "She also trades half of her large stickers for large buttons and the remaining half for small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 596,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 499,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total number of buttons she possesses at the end of all these transactions?",
+          "warnings": []
+        }
+      ],
+      "question": "Lorraine and Colleen are swapping stickers for buttons. A large sticker can be exchanged for a large button or alternatively, for three small buttons. A small sticker can be traded for a single small button. A large button is equivalent to three small stickers. Initially, Lorraine has 30 small stickers and 40 large stickers. She decides to exchange 90% of her small stickers for large buttons. She also trades half of her large stickers for large buttons and the remaining half for small buttons. Can you calculate the total number of buttons she possesses at the end of all these transactions?",
+      "source_id": "gsm-plus-06037"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 97,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Robles buys 315 bananas and 50 oranges, which is enough to feed his three monkeys for a week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "The oranges are not eaten by the monkeys but are used for juggling practice.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 211,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 175,
+          "teacher_input_default": true,
+          "text": "One monkey eats 10 bananas each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 334,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 212,
+          "teacher_input_default": true,
+          "text": "The second monkey eats 4 more bananas than the first monkey and the third monkey eats the rest of the bananas for the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 387,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 335,
+          "teacher_input_default": true,
+          "text": "How many bananas does the third monkey eat each day?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Robles buys 315 bananas and 50 oranges, which is enough to feed his three monkeys for a week. The oranges are not eaten by the monkeys but are used for juggling practice. One monkey eats 10 bananas each day. The second monkey eats 4 more bananas than the first monkey and the third monkey eats the rest of the bananas for the day. How many bananas does the third monkey eat each day?",
+      "source_id": "gsm-plus-08590"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 58,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It's strawberry-picking season on Grandma Concetta's farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 59,
+          "teacher_input_default": true,
+          "text": "Tony can pick 60 quarts of strawberries per hour, while Bobby picks ten less quarts of strawberries per hour than Tony.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks twenty fewer quarts of strawberries per hour than does Kathy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 435,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 318,
+          "teacher_input_default": true,
+          "text": "In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+          "warnings": []
+        }
+      ],
+      "question": "It's strawberry-picking season on Grandma Concetta's farm. Tony can pick 60 quarts of strawberries per hour, while Bobby picks ten less quarts of strawberries per hour than Tony. Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks twenty fewer quarts of strawberries per hour than does Kathy. In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+      "source_id": "gsm-plus-04177"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Farmer Brown has 60 animals on his farm, all either chickens or cows.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "He has twice as many chickens as cows.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 109,
+          "teacher_input_default": true,
+          "text": "Each chicken has two legs and each cow has four legs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "Additionally, Farmer Brown has decided to buy 5 more cows and 10 more chickens.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 328,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "After this purchase, how many legs do all the animals on his farm have, all together?",
+          "warnings": []
+        }
+      ],
+      "question": "Farmer Brown has 60 animals on his farm, all either chickens or cows. He has twice as many chickens as cows. Each chicken has two legs and each cow has four legs. Additionally, Farmer Brown has decided to buy 5 more cows and 10 more chickens. After this purchase, how many legs do all the animals on his farm have, all together?",
+      "source_id": "gsm-plus-02715"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom embarked on a journey across Europe that lasted for two weeks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "For the initial four days, he covered a distance of 200 kilometers each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "In the following two days, he managed to travel only 30% of the distance he had covered in the first four days.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 286,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 256,
+          "teacher_input_default": true,
+          "text": "He had a rest on the next day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 375,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 287,
+          "teacher_input_default": true,
+          "text": "During the second week of his journey, he covered a distance of 300 kilometers each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 478,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 376,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total distance that Tom covered during his fortnight-long journey across Europe?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom embarked on a journey across Europe that lasted for two weeks. For the initial four days, he covered a distance of 200 kilometers each day. In the following two days, he managed to travel only 30% of the distance he had covered in the first four days. He had a rest on the next day. During the second week of his journey, he covered a distance of 300 kilometers each day. Can you calculate the total distance that Tom covered during his fortnight-long journey across Europe?",
+      "source_id": "gsm-plus-03341"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

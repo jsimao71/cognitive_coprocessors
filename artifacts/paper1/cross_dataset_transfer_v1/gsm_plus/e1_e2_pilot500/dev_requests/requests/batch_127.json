@@ -1,0 +1,373 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Four years ago, Ara became a member of her school's basketball team.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "Each year, she participates in 40 matches and scores 21 points in each match.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 224,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "Can you determine the total points Ara has accumulated over these four years?",
+          "warnings": []
+        }
+      ],
+      "question": "Four years ago, Ara became a member of her school's basketball team. Each year, she participates in 40 matches and scores 21 points in each match. Can you determine the total points Ara has accumulated over these four years?",
+      "source_id": "gsm-plus-09973"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ara joined the school basketball team four years ago.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "She has been playing 40 games every year, each lasting two hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "If her score for every game is 21 points, calculate the total number of points she has scored in the four years.",
+          "warnings": []
+        }
+      ],
+      "question": "Ara joined the school basketball team four years ago. She has been playing 40 games every year, each lasting two hours. If her score for every game is 21 points, calculate the total number of points she has scored in the four years.",
+      "source_id": "gsm-plus-09974"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The power goes out in Brianna's house one night so she and her family gather all their candles and flashlights.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "There are 6 rooms in the house and 3 people living there, including Brianna.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "There is a flashlight for every person to carry and two for each room.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 400,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 260,
+          "teacher_input_default": true,
+          "text": "They have a variety of candles available; 4 small candles each for half the rooms and 5 medium candles each for the other half of the rooms.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 510,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 401,
+          "teacher_input_default": true,
+          "text": "With everything combined, how many candles and flashlights are Brianna's family using when the lights go out?",
+          "warnings": []
+        }
+      ],
+      "question": "The power goes out in Brianna's house one night so she and her family gather all their candles and flashlights. There are 6 rooms in the house and 3 people living there, including Brianna. There is a flashlight for every person to carry and two for each room. They have a variety of candles available; 4 small candles each for half the rooms and 5 medium candles each for the other half of the rooms. With everything combined, how many candles and flashlights are Brianna's family using when the lights go out?",
+      "source_id": "gsm-plus-09992"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The power goes out in Brianna's house one night so she and her family gather all their candles and flashlights.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "There are 10 rooms in the house and 4 people living there, including Brianna.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 260,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 190,
+          "teacher_input_default": true,
+          "text": "There is a flashlight for every person to carry and two for each room.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 403,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 261,
+          "teacher_input_default": true,
+          "text": "They have a variety of candles available; 12 small candles each for half the rooms and 10 medium candles each for the other half of the rooms.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 513,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 404,
+          "teacher_input_default": true,
+          "text": "With everything combined, how many candles and flashlights are Brianna's family using when the lights go out?",
+          "warnings": []
+        }
+      ],
+      "question": "The power goes out in Brianna's house one night so she and her family gather all their candles and flashlights. There are 10 rooms in the house and 4 people living there, including Brianna. There is a flashlight for every person to carry and two for each room. They have a variety of candles available; 12 small candles each for half the rooms and 10 medium candles each for the other half of the rooms. With everything combined, how many candles and flashlights are Brianna's family using when the lights go out?",
+      "source_id": "gsm-plus-09993"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The power goes out in Brianna's house one night so she and her family gather all their candles and flashlights.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 197,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "There are 4/5 of ten rooms in the house and 4 people living there, including Brianna.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 198,
+          "teacher_input_default": true,
+          "text": "There is a flashlight for every person to carry and two for each room.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 419,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 269,
+          "teacher_input_default": true,
+          "text": "They have a variety of candles available; 4 small candles each for half the rooms and half of ten medium candles each for the other half of the rooms.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 529,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 420,
+          "teacher_input_default": true,
+          "text": "With everything combined, how many candles and flashlights are Brianna's family using when the lights go out?",
+          "warnings": []
+        }
+      ],
+      "question": "The power goes out in Brianna's house one night so she and her family gather all their candles and flashlights. There are 4/5 of ten rooms in the house and 4 people living there, including Brianna. There is a flashlight for every person to carry and two for each room. They have a variety of candles available; 4 small candles each for half the rooms and half of ten medium candles each for the other half of the rooms. With everything combined, how many candles and flashlights are Brianna's family using when the lights go out?",
+      "source_id": "gsm-plus-09994"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

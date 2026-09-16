@@ -1,0 +1,31 @@
+{
+  "acceptance_rate": 0.00013381506757660912,
+  "accepted_count": 1,
+  "accepted_sha256": "2cbb221543340d7a225a0f096477dc01dfa7bcefb6ab562648614c5bbfa651ca",
+  "annotation_sha256": {
+    "artifacts\\paper1\\dsl\\openrouter_full_v1\\smoke_easy_gsm8k\\annotations.jsonl": "5e115ec5130b2a9b5c9c66417f9147928133ff0355f204b4e8e0f9fe02c02773"
+  },
+  "by_dataset": {
+    "gsm8k": {
+      "accepted": 1,
+      "rejected": 7472
+    }
+  },
+  "claim_boundary": "execution-verified semantic ASL with deterministic lint; not manual semantic gold",
+  "provenance_counts": {
+    "answer_blind_primary": 1,
+    "manually_reviewed": 0,
+    "rationale_assisted_repair": 0,
+    "repair_rounds": {
+      "0": 1
+    }
+  },
+  "quality_grade": "Q1_LOCAL_CODEX_EXEC_VERIFIED",
+  "rejected_count": 7472,
+  "rejected_sha256": "bbabe7794d4b251a89004033221890dbbf45075efc20273c02b41e4268b70329",
+  "schema_version": "ccpu.dsl_dataset.semantic_summary.v1",
+  "seed_sha256": {
+    "artifacts\\paper1\\dsl\\raw_v1\\gsm8k.jsonl": "85db87cc75c61f14504ab7acb2b1731c900705cc25318827f325390a2b783789"
+  },
+  "semantic_lint": "anonymous targets and expression/literal returns rejected"
+}

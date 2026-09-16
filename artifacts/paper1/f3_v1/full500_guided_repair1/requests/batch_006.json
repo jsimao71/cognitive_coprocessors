@@ -1,0 +1,127 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "tatqa",
+      "question": "What is the average total costs for 2017,2018 and 2019?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Restructuring costs \u2014 Restructuring charges include costs resulting from the exploration of strategic alternatives (the \u201cStrategic Alternatives Evaluation\u201d) in 2019, and a plan that management initiated to reduce our general and administrative costs. Restructuring charges in 2018 also include costs related to the evaluation of potential alternatives with respect to the Qdoba brand (the \u201cQdoba Evaluation\u201d), which resulted in the Qdoba Sale. Refer to Note 10, Discontinued Operations, for information regarding the Qdoba Sale."
+          },
+          {
+            "order": 2,
+            "text": "The following is a summary of the costs incurred in connection with these activities during each fiscal year ( in thousands):"
+          },
+          {
+            "order": 3,
+            "text": "(1) \u00a0Strategic Alternative Evaluation costs are primarily related to third party advisory services."
+          },
+          {
+            "order": 4,
+            "text": "(2) \u00a0Qdoba Evaluation consulting costs are primarily related to third party advisory services and retention compensation."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "2019",
+            "2018",
+            "2017"
+          ],
+          [
+            "Employee severance and related costs",
+            "$7,169",
+            "$7,845",
+            "$724"
+          ],
+          [
+            "Strategic Alternatives Evaluation (1)",
+            "1,286",
+            "\u2014",
+            "\u2014"
+          ],
+          [
+            "Qdoba Evaluation (2)",
+            "\u2014",
+            "2,211",
+            "2,592"
+          ],
+          [
+            "Other",
+            "\u2014",
+            "591",
+            "315"
+          ],
+          [
+            "",
+            "$8,455",
+            "$10,647",
+            "$3,631"
+          ]
+        ]
+      },
+      "source_id": "ef3dacca28070330672ab7480a666fd1"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Alton owns a business. He is currently renting a space that costs $20 per week. If Alton earns $8 per day, how much is his total profit every week?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "7026"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Janet takes two multivitamins and 3 calcium supplements every day for the first 2 weeks of the month. For the last two weeks of the month, she runs low on calcium supplements and only takes one per day. How many pills does Janet take in that month?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "6841"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Albert is wondering how much pizza he can eat in one day. He buys 2 large pizzas and 2 small pizzas. A large pizza has 16 slices and a small pizza has 8 slices. If he eats it all, how many pieces does he eat that day?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"albert.purchased_pizzas\", \"pizza\", \"albert\", source(\"He buys 2 large pizzas and 2 small pizzas\"))",
+          "add(\"buy_large_pizzas\", \"albert\", at(\"albert.purchased_pizzas.large.count\", \"current\"), 2, source(\"He buys 2 large pizzas and 2 small pizzas\"))",
+          "add(\"buy_small_pizzas\", \"albert\", at(\"albert.purchased_pizzas.small.count\", \"current\"), 2, source(\"He buys 2 large pizzas and 2 small pizzas\"))",
+          "observe(at(\"pizza.large.slices.count\", \"current\"), 16, \"count\", source(\"A large pizza has 16 slices\"))",
+          "observe(at(\"pizza.small.slices.count\", \"current\"), 8, \"count\", source(\"a small pizza has 8 slices\"))",
+          "consume(\"eat_all_pizza_pieces\", \"albert\", at(\"albert.purchased_pizzas.slices.count\", \"current\"), at(\"albert.purchased_pizzas.slices.count\", \"current\"), source(\"he eats it all\"))",
+          "query(\"value\", event_field(\"eat_all_pizza_pieces\", \"quantity\"))"
+        ]
+      },
+      "source_id": "6"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "While Paul watches movies, he runs on his treadmill. He can run a mile in 12 minutes. He watches two movies, which are an average length of 1.5 hours. How many miles does he run?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "942"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

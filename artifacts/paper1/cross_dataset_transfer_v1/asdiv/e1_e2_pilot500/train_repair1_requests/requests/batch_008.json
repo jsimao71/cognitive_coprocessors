@@ -1,0 +1,510 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Points A and B are 70 km apart on a highway.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "A car starts from A and another car starts from B at the same time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 113,
+          "teacher_input_default": true,
+          "text": "If they travel in the same direction, they meet in 7 hours, but if they travel towards each other they meet in one hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 267,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "What are their respective speeds?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "points.a_to_b.distance_km = 70"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "car_from_a.start_point = \"a\"",
+              "car_from_b.start_point = \"b\"",
+              "cars.start_time_relation = \"same_time\""
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "cars.same_direction.meeting_time_hours = 7",
+              "cars.speed_difference_km_per_hour = points.a_to_b.distance_km / cars.same_direction.meeting_time_hours",
+              "cars.toward_each_other.meeting_time_hours = 1",
+              "cars.speed_sum_km_per_hour = points.a_to_b.distance_km / cars.toward_each_other.meeting_time_hours",
+              "cars.faster.speed_km_per_hour = (cars.speed_sum_km_per_hour + cars.speed_difference_km_per_hour) / 2",
+              "cars.slower.speed_km_per_hour = (cars.speed_sum_km_per_hour - cars.speed_difference_km_per_hour) / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 2,
+            "semantic_notes": [
+              "The same-direction condition determines the magnitude of the speed difference but does not identify which starting car is faster."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The source determines faster and slower speeds, but it does not specify the common travel direction in the same-direction case, so the speeds cannot be assigned uniquely to the car from A and the car from B."
+            ],
+            "confidence": 0.91,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1429"
+      },
+      "question": "Points A and B are 70 km apart on a highway. A car starts from A and another car starts from B at the same time. If they travel in the same direction, they meet in 7 hours, but if they travel towards each other they meet in one hour. What are their respective speeds?",
+      "source_context": null,
+      "source_id": "asdiv-1429",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "40",
+        "gold_reasoning": "A:Car speed of point A; B:Car speed of point B; 7A-7B=70; A+B=70"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The roller coaster at the state fair costs six tickets per ride.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "If you had eight hundred sixty-eight tickets, how many tickets would you have left if you rode it as many times as you could?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "roller_coaster.tickets_per_ride = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Computing the tickets left after the maximum whole number of rides requires integer remainder or floor semantics, neither of which is available in the supplied operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1564"
+      },
+      "question": "The roller coaster at the state fair costs six tickets per ride. If you had eight hundred sixty-eight tickets, how many tickets would you have left if you rode it as many times as you could?",
+      "source_context": null,
+      "source_id": "asdiv-1564",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "868/6=144 r4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Because of an upcoming exam, Robyn will not be able to sell cookies on Tuesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "To make up for it, Lucy decided to do double the work to catch up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "She sold 34 cookies on her first round and 27 on her second round.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 214,
+          "teacher_input_default": true,
+          "text": "How many cookies were sold by Lucy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "robyn.tuesday.cookie_sales_ability = \"unable\"",
+              "robyn.tuesday.cookie_sales_unavailability_reason = \"upcoming exam\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause states inability rather than an observed numerical sales total."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lucy.catch_up_planned_work = lucy.usual_work * 2"
+            ],
+            "assumptions": [
+              "Interprets \"double the work\" as twice Lucy's usual work."
+            ],
+            "confidence": 0.82,
+            "part_id": 1,
+            "semantic_notes": [
+              "The plan is kept distinct from Lucy's subsequently reported actual cookie sales."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lucy.cookies_sold.round1 = 34",
+              "lucy.cookies_sold.round2 = 27"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lucy.cookies_sold.total = sum(lucy.cookies_sold.round1, lucy.cookies_sold.round2)",
+              "RETURN lucy.cookies_sold.total"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0231"
+      },
+      "question": "Because of an upcoming exam, Robyn will not be able to sell cookies on Tuesday. To make up for it, Lucy decided to do double the work to catch up. She sold 34 cookies on her first round and 27 on her second round. How many cookies were sold by Lucy?",
+      "source_context": null,
+      "source_id": "asdiv-0231",
+      "validation_failure": "unresolved reference 'lucy.usual_work' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "61",
+        "gold_reasoning": "34+27=61"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tayli wishes to advertise her business, so she gives packs of 13 red flyers to each restaurant owner and sets of 20 blue flyers to each clothing store owner.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 253,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "At the end of the day, Tayli realizes that she gave out the same number of red and blue flyers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 321,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 254,
+          "teacher_input_default": true,
+          "text": "What is the minimum number of flyers of each color she distributed?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tayli.red_flyers.per_restaurant_owner = 13",
+              "tayli.blue_flyers.per_clothing_store_owner = 20",
+              "tayli.red_flyers.total_distributed = tayli.red_flyers.per_restaurant_owner * tayli.restaurant_owners.served",
+              "tayli.blue_flyers.total_distributed = tayli.blue_flyers.per_clothing_store_owner * tayli.clothing_store_owners.served"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The unknown numbers of owners served are legitimate forward dependencies implied by the per-owner distribution relations."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tayli.red_flyers.total_distributed = tayli.blue_flyers.total_distributed"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The equality preserves the stated relation between the two color totals."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested least positive common multiple requires integer-constrained minimization or an LCM/GCD operator, none of which is available in the supplied operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2020"
+      },
+      "question": "Tayli wishes to advertise her business, so she gives packs of 13 red flyers to each restaurant owner and sets of 20 blue flyers to each clothing store owner. At the end of the day, Tayli realizes that she gave out the same number of red and blue flyers. What is the minimum number of flyers of each color she distributed?",
+      "source_context": null,
+      "source_id": "asdiv-2020",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "260",
+        "gold_reasoning": "LCM[13,20]=260"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jaden is putting together first-aid kits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "He has 39 large bandages and 26 small bandages, and he wants each kit to be identical, with no bandages left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of first-aid kits Jaden could put together?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces Jaden and the first-aid-kit context without an arithmetic state change."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause combines inventory facts with equal integer allocation and zero-remainder constraints; the active operator registry has no divisibility, remainder, or constraint operator capable of preserving the full clause."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible kit count requires greatest-common-divisor or quantified integer-divisibility semantics, which the active operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1192"
+      },
+      "question": "Jaden is putting together first-aid kits. He has 39 large bandages and 26 small bandages, and he wants each kit to be identical, with no bandages left over. What is the greatest number of first-aid kits Jaden could put together?",
+      "source_context": null,
+      "source_id": "asdiv-1192",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "13",
+        "gold_reasoning": "GCD(39,26)=13"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

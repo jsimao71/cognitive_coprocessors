@@ -1,0 +1,296 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Hilt saw 3 bugs eat two flowers each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "How many flowers total did the bugs eat?",
+          "warnings": []
+        }
+      ],
+      "question": "Mrs. Hilt saw 3 bugs eat two flowers each. How many flowers total did the bugs eat?",
+      "source_id": "asdiv-0039"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Tuesday, Mrs. Hilt saw 88 raisins on a tray in the cafeteria.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "That was 8 more raisins than she saw the day before.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "How many raisins were on the table on Monday?",
+          "warnings": []
+        }
+      ],
+      "question": "On Tuesday, Mrs. Hilt saw 88 raisins on a tray in the cafeteria. That was 8 more raisins than she saw the day before. How many raisins were on the table on Monday?",
+      "source_id": "asdiv-0156"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The twins Ellie and Amy were able to locate 10 eggs around the club house, 4 eggs in the town hall garden and 6 more around the park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "How many eggs do they have in total?",
+          "warnings": []
+        }
+      ],
+      "question": "The twins Ellie and Amy were able to locate 10 eggs around the club house, 4 eggs in the town hall garden and 6 more around the park. How many eggs do they have in total?",
+      "source_id": "asdiv-0217"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At the top of the Empire State Building, he saw the Madison Square Garden so he decided to go there as well.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 109,
+          "teacher_input_default": true,
+          "text": "It took him 676 steps to get down the building and 315 steps from the building to Madison Square Garden.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 214,
+          "teacher_input_default": true,
+          "text": "How many steps did he take to get to Madison Square?",
+          "warnings": []
+        }
+      ],
+      "question": "At the top of the Empire State Building, he saw the Madison Square Garden so he decided to go there as well. It took him 676 steps to get down the building and 315 steps from the building to Madison Square Garden. How many steps did he take to get to Madison Square?",
+      "source_id": "asdiv-0272"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Alvin is trying to build a small house in the forest so that he has a place to stay whenever he goes hunting.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "He started by gathering some wood.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 205,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 145,
+          "teacher_input_default": true,
+          "text": "According to his blueprint, he will need 376 pieces of wood.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 319,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 206,
+          "teacher_input_default": true,
+          "text": "If his friend gave him 123 pieces and his brother gave him 136 pieces, how many more wood does he need to gather?",
+          "warnings": []
+        }
+      ],
+      "question": "Alvin is trying to build a small house in the forest so that he has a place to stay whenever he goes hunting. He started by gathering some wood. According to his blueprint, he will need 376 pieces of wood. If his friend gave him 123 pieces and his brother gave him 136 pieces, how many more wood does he need to gather?",
+      "source_id": "asdiv-0345"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

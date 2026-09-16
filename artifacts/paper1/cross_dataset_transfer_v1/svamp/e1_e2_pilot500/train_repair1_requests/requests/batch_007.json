@@ -1,0 +1,532 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In Haley's class some boys love to play marbles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Haley gives 2 marbles to each boy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "If she had 28 marbles How many boys did she give the marbles to?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile cannot encode the nonquantitative preference that some boys love playing marbles."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies qualitative context but no arithmetic fact or relation."
+            ],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "haley.marbles_per_boy = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "haley.marbles_available = 28",
+              "haley.boys_given_marbles = haley.marbles_available / haley.marbles_per_boy",
+              "RETURN haley.boys_given_marbles"
+            ],
+            "assumptions": [
+              "Haley distributed all 28 available marbles, giving exactly two to each boy."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-227"
+      },
+      "question": "In Haley's class some boys love to play marbles. Haley gives 2 marbles to each boy. If she had 28 marbles How many boys did she give the marbles to?",
+      "source_context": null,
+      "source_id": "svamp-chal-227",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "14",
+        "gold_reasoning": "( 28.0 / 2.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is baking a cake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 97,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "The recipe calls for 9 cups of sugar 14 cups of flour and 40 cups of salt.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "She already put in 4 cups of flour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 206,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "How many more cups of flour than cups of sugar does she need to add now?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile does not encode the nonquantitative fact that Mary is baking a cake."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies qualitative activity context but no arithmetic fact or relation."
+            ],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "mary.cake.required.sugar_cups = 9",
+              "mary.cake.required.flour_cups = 14",
+              "mary.cake.required.salt_cups = 40"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mary.cake.added.flour_cups = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mary.cake.remaining.flour_cups = mary.cake.required.flour_cups - mary.cake.added.flour_cups",
+              "mary.cake.remaining.sugar_cups = mary.cake.required.sugar_cups",
+              "mary.cake.more_flour_than_sugar_cups = mary.cake.remaining.flour_cups - mary.cake.remaining.sugar_cups",
+              "RETURN mary.cake.more_flour_than_sugar_cups"
+            ],
+            "assumptions": [
+              "No sugar has yet been added because the only previously added ingredient amount stated is four cups of flour.",
+              "The question compares the remaining flour and sugar quantities that Mary needs to add."
+            ],
+            "confidence": 0.94,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-771"
+      },
+      "question": "Mary is baking a cake. The recipe calls for 9 cups of sugar 14 cups of flour and 40 cups of salt. She already put in 4 cups of flour. How many more cups of flour than cups of sugar does she need to add now?",
+      "source_context": null,
+      "source_id": "svamp-chal-771",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "( ( 14.0 - 4.0 ) - 9.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Allan brought 5 balloons and Jake brought 4 balloons to the park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "Allan then bought 3 more balloons at the park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 113,
+          "teacher_input_default": true,
+          "text": "How many balloons did Allan bring to the park?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "allan.balloons_brought_to_park = 5",
+              "jake.balloons_brought_to_park = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "allan.additional_balloons_bought_at_park = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The later purchase is kept distinct from the balloons Allan originally brought to the park."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN allan.balloons_brought_to_park"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-78"
+      },
+      "question": "Allan brought 5 balloons and Jake brought 4 balloons to the park. Allan then bought 3 more balloons at the park. How many balloons did Allan bring to the park?",
+      "source_context": null,
+      "source_id": "svamp-chal-78",
+      "validation_failure": "answer mismatch: actual=5, expected=8",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "( 5.0 + 3.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The grasshopper, the frog and the mouse had a jumping contest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "The grasshopper jumped 21 inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The grasshopper jumped 25 inches farther than the frog and the mouse jumped 16 inches lesser than the frog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "How much farther did the grasshopper jump than the mouse?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause supplies qualitative contest context but no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "grasshopper.jump_distance_inches = 21"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "grasshopper.jump_distance_inches = frog.jump_distance_inches + 25",
+              "mouse.jump_distance_inches = frog.jump_distance_inches - 16"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The stated comparative relations are preserved even though they imply an unusual distance when combined with the earlier literal."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "grasshopper.distance_farther_than_mouse_inches = grasshopper.jump_distance_inches - mouse.jump_distance_inches",
+              "RETURN grasshopper.distance_farther_than_mouse_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-928"
+      },
+      "question": "The grasshopper, the frog and the mouse had a jumping contest. The grasshopper jumped 21 inches. The grasshopper jumped 25 inches farther than the frog and the mouse jumped 16 inches lesser than the frog. How much farther did the grasshopper jump than the mouse?",
+      "source_context": null,
+      "source_id": "svamp-chal-928",
+      "validation_failure": "unresolved reference 'frog.jump_distance_inches' from scope 'global'; unresolved reference 'frog.jump_distance_inches' from scope 'global'; unresolved reference 'mouse.jump_distance_inches' from scope 'global'; unresolved reference 'grasshopper.distance_farther_than_mouse_inches' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "41",
+        "gold_reasoning": "( 25.0 + 16.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Steven has 12 peaches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "Jake has 4 fewer peaches than Steven who has 67 more peaches than Jill.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "How many peaches does Jake have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "steven.peaches = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jake.peaches = steven.peaches - 4",
+              "steven.peaches = jill.peaches + 67"
+            ],
+            "assumptions": [
+              "Resolved \"who\" as Steven."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN jake.peaches"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-177"
+      },
+      "question": "Steven has 12 peaches. Jake has 4 fewer peaches than Steven who has 67 more peaches than Jill. How many peaches does Jake have?",
+      "source_context": null,
+      "source_id": "svamp-chal-177",
+      "validation_failure": "unresolved reference 'jill.peaches' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "( 12.0 - 4.0 )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

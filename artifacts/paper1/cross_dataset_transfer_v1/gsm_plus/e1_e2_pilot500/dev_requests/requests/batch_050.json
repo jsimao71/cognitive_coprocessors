@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Aleksandra dined out at a restaurant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "She chose to have some soup, a bagel, and a slice of cake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The bagel was priced at $4, while the soup was 25% more expensive.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 164,
+          "teacher_input_default": true,
+          "text": "The cake's price was only half that of the bagel.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 214,
+          "teacher_input_default": true,
+          "text": "What was the total cost of Aleksandra's meal?",
+          "warnings": []
+        }
+      ],
+      "question": "Aleksandra dined out at a restaurant. She chose to have some soup, a bagel, and a slice of cake. The bagel was priced at $4, while the soup was 25% more expensive. The cake's price was only half that of the bagel. What was the total cost of Aleksandra's meal?",
+      "source_id": "gsm-plus-03413"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Aleksandra went to a restaurant for dinner during a special promotion.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "She ordered some soup, a bagel, and a piece of cake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "The bagel cost $4, and the soup was priced 25% more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 226,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "The cake was only half of the price of the bagel.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 336,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 227,
+          "teacher_input_default": true,
+          "text": "The restaurant was offering a 100% discount on the most expensive item, but Aleksandra decided not to use it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 432,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 337,
+          "teacher_input_default": true,
+          "text": "Additionally, she was given a coupon for a free drink worth $3, but she chose not to redeem it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 496,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 433,
+          "teacher_input_default": true,
+          "text": "How much did Aleksandra need to pay for the dinner she ordered?",
+          "warnings": []
+        }
+      ],
+      "question": "Aleksandra went to a restaurant for dinner during a special promotion. She ordered some soup, a bagel, and a piece of cake. The bagel cost $4, and the soup was priced 25% more. The cake was only half of the price of the bagel. The restaurant was offering a 100% discount on the most expensive item, but Aleksandra decided not to use it. Additionally, she was given a coupon for a free drink worth $3, but she chose not to redeem it. How much did Aleksandra need to pay for the dinner she ordered?",
+      "source_id": "gsm-plus-03414"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rozanne is making eggnog for her family.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "She uses 6 dozen eggs that were in cases and another 3 eggs that were loose in the cupboard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "She puts out  trays that each hold 4 glasses of eggnog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 190,
+          "teacher_input_default": true,
+          "text": "If each glass requires 6 eggs, how many trays can Rozanne arrange?",
+          "warnings": []
+        }
+      ],
+      "question": "Rozanne is making eggnog for her family. She uses 6 dozen eggs that were in cases and another 3 eggs that were loose in the cupboard. She puts out  trays that each hold 4 glasses of eggnog. If each glass requires 6 eggs, how many trays can Rozanne arrange?",
+      "source_id": "gsm-plus-03568"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rozanne is making eggnog for her family.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "She uses 10 dozen eggs that were in cases and another 20 eggs that were loose in the cupboard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "She puts out trays that each hold 14 glasses of eggnog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 192,
+          "teacher_input_default": true,
+          "text": "If each glass needs 5 eggs, how many trays can Rozanne put out?",
+          "warnings": []
+        }
+      ],
+      "question": "Rozanne is making eggnog for her family. She uses 10 dozen eggs that were in cases and another 20 eggs that were loose in the cupboard. She puts out trays that each hold 14 glasses of eggnog. If each glass needs 5 eggs, how many trays can Rozanne put out?",
+      "source_id": "gsm-plus-03569"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rozanne is making eggnog for her family.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "She uses 6 1/12 dozen eggs that were in cases and another 2 eggs that were loose in the cupboard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 139,
+          "teacher_input_default": true,
+          "text": "She puts out trays that each hold 5 glasses of eggnog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "If each glass needs 5 eggs, how many trays can Rozanne put out?",
+          "warnings": []
+        }
+      ],
+      "question": "Rozanne is making eggnog for her family. She uses 6 1/12 dozen eggs that were in cases and another 2 eggs that were loose in the cupboard. She puts out trays that each hold 5 glasses of eggnog. If each glass needs 5 eggs, how many trays can Rozanne put out?",
+      "source_id": "gsm-plus-03570"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

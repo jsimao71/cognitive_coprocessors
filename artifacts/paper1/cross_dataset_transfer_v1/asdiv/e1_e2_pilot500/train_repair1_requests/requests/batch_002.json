@@ -1,0 +1,533 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Radio station Z-100 was giving away a $100 bill to every 100th caller during a contest and gave Jingle Ball tickets to every 40th caller.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 138,
+          "teacher_input_default": true,
+          "text": "How many callers must call before someone wins both a $100 bill and a Jingle Ball ticket?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "z100.contest.cash_prize.amount_dollars = 100",
+              "z100.contest.cash_prize.caller_interval = 100",
+              "z100.contest.jingle_ball_ticket.caller_interval = 40"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Identifying the first caller position shared by both periodic award schedules requires least-common-multiple or equivalent integer divisibility semantics unavailable in the active operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2069"
+      },
+      "question": "Radio station Z-100 was giving away a $100 bill to every 100th caller during a contest and gave Jingle Ball tickets to every 40th caller. How many callers must call before someone wins both a $100 bill and a Jingle Ball ticket?",
+      "source_context": null,
+      "source_id": "asdiv-2069",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "200",
+        "gold_reasoning": "LCM[100,40]=200"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Miranda and Savannah are excited that a new store just opened in town!",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "They go together the first day it opens!",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "Each time Miranda goes to the store she plans to spend $7, and each time Savannah goes to the store she plans to spend $9.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 375,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 235,
+          "teacher_input_default": true,
+          "text": "A few weeks from now, Miranda and Savannah are surprised to find out that they have spent the exact same total amount of money at the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 454,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 376,
+          "teacher_input_default": true,
+          "text": "What is the least possible number of times that Miranda has been to the store?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "miranda.first_day.store_visits = 1",
+              "savannah.first_day.store_visits = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "Going together on opening day establishes one opening-day visit for each person."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "miranda.spend_per_visit = 7",
+              "savannah.spend_per_visit = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "Dollar amounts are modeled as spending rates per store visit."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "miranda.total_spent = miranda.spend_per_visit * miranda.store_visits",
+              "savannah.total_spent = miranda.total_spent",
+              "savannah.store_visits = savannah.total_spent / savannah.spend_per_visit"
+            ],
+            "assumptions": [
+              "The planned amount per visit is the amount actually spent on every visit."
+            ],
+            "confidence": 0.9,
+            "part_id": 3,
+            "semantic_notes": [
+              "The directional assignments preserve both equal total spending and each person's per-visit spending relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the least positive integer visit count satisfying the equal-spending relation requires integer-domain constraint minimization, which the active arithmetic operator registry cannot express."
+            ],
+            "confidence": 0.96,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2034"
+      },
+      "question": "Miranda and Savannah are excited that a new store just opened in town! They go together the first day it opens! Each time Miranda goes to the store she plans to spend $7, and each time Savannah goes to the store she plans to spend $9. A few weeks from now, Miranda and Savannah are surprised to find out that they have spent the exact same total amount of money at the store. What is the least possible number of times that Miranda has been to the store?",
+      "source_context": null,
+      "source_id": "asdiv-2034",
+      "validation_failure": "non-ok semantic parts: part 4=unsupported",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "LCM[7,9]=63; 63/7=9"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Aylin is making a scrapbook using 18 photos and 20 newspaper clippings.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 200,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "She wants all the pages to be set up in the same way, with the same combination of photos and newspaper clippings on every page.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 201,
+          "teacher_input_default": true,
+          "text": "She also wants to make sure that no items are left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 258,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of scrapbook pages that Aylin can create?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "aylin.scrapbook.photos = 18",
+              "aylin.scrapbook.newspaper_clippings = 20"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "aylin.scrapbook.photos_per_page = aylin.scrapbook.photos / aylin.scrapbook.pages",
+              "aylin.scrapbook.newspaper_clippings_per_page = aylin.scrapbook.newspaper_clippings / aylin.scrapbook.pages"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "A single per-page quantity for each item type represents the uniform page setup."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "aylin.scrapbook.photos_left_over = 0",
+              "aylin.scrapbook.newspaper_clippings_left_over = 0"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "The no-leftovers condition applies independently to both item types."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest page count satisfying both exact divisibility constraints requires a greatest-common-divisor or equivalent integer-divisibility operation, which is absent from the supplied operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2022"
+      },
+      "question": "Aylin is making a scrapbook using 18 photos and 20 newspaper clippings. She wants all the pages to be set up in the same way, with the same combination of photos and newspaper clippings on every page. She also wants to make sure that no items are left over. What is the greatest number of scrapbook pages that Aylin can create?",
+      "source_context": null,
+      "source_id": "asdiv-2022",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "GCD(18,20)=2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tim has a bag of 36 orange-flavoured sweets and Peter has a bag of 44 grape-flavoured sweets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 250,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "They have to divide up the sweets into small trays with equal number of sweets; each tray containing either orange-flavoured or grape-flavoured sweets only.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 336,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 251,
+          "teacher_input_default": true,
+          "text": "If there is no remainder, what is the largest possible number of sweets in each tray?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tim.orange_sweets.count = 36",
+              "peter.grape_sweets.count = 44"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tim.orange_trays.count = tim.orange_sweets.count / trays.sweets_per_tray",
+              "peter.grape_trays.count = peter.grape_sweets.count / trays.sweets_per_tray"
+            ],
+            "assumptions": [
+              "Orange and grape sweets are placed in separate trays, as required by the clause."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [
+              "The shared forward dependency trays.sweets_per_tray preserves the equal tray-size requirement, while separate tray counts preserve flavor separation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Selecting the largest common integer tray size that divides both sweet counts without remainder requires divisibility/integrality constraints or a greatest-common-divisor operator, none of which is available in the supplied operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2078"
+      },
+      "question": "Tim has a bag of 36 orange-flavoured sweets and Peter has a bag of 44 grape-flavoured sweets. They have to divide up the sweets into small trays with equal number of sweets; each tray containing either orange-flavoured or grape-flavoured sweets only. If there is no remainder, what is the largest possible number of sweets in each tray?",
+      "source_context": null,
+      "source_id": "asdiv-2078",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "GCD(36,44)=4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Fraction becomes 4/5 , if one is added to both numerator and denominator.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "If however, 5 is subtracted from both, the fraction becomes 1/2.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 139,
+          "teacher_input_default": true,
+          "text": "Find the fraction.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause asserts an equation constraining an unknown numerator and denominator; the active assignment-based arithmetic profile has no equality-constraint or equation-solving semantics."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause asserts a second equation constraining the same unknown numerator and denominator; the active assignment-based arithmetic profile cannot preserve simultaneous equations without overwriting or inventing solved values."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the original fraction requires solving the two preceding algebraic constraints, which is outside the active arithmetic profile."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1442"
+      },
+      "question": "Fraction becomes 4/5 , if one is added to both numerator and denominator. If however, 5 is subtracted from both, the fraction becomes 1/2. Find the fraction.",
+      "source_context": null,
+      "source_id": "asdiv-1442",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported, part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "7/9",
+        "gold_reasoning": "x:The number of numerator; y:The number of denominator; 5x-4y+1=0; 2x-y-5=0"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

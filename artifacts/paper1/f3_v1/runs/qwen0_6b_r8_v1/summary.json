@@ -1,0 +1,92 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "dependency_correct": 0.0,
+        "evidence_valid": 0.47058823529411764,
+        "exact_program": 0.0,
+        "executable": 0.17647058823529413,
+        "final_answer_correct": 0.0,
+        "lowerable_to_ccir": 0.29411764705882354,
+        "parse_valid": 0.47058823529411764,
+        "r0_final_answer_correct": 0.0,
+        "r1_final_answer_correct": 0.0,
+        "r2_final_answer_correct": 0.0,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.29411764705882354
+      }
+    },
+    "tatqa": {
+      "count": 8,
+      "rates": {
+        "dependency_correct": 0.0,
+        "evidence_valid": 0.75,
+        "exact_program": 0.0,
+        "executable": 0.625,
+        "final_answer_correct": 0.25,
+        "lowerable_to_ccir": 0.625,
+        "parse_valid": 1.0,
+        "r0_final_answer_correct": 0.25,
+        "r1_final_answer_correct": 0.25,
+        "r2_final_answer_correct": 0.25,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.625
+      }
+    }
+  },
+  "component_mean_f1": {
+    "edges": 0.060888888888888895,
+    "operators": 0.23666666666666664,
+    "paths": 0.11295238095238094,
+    "semantic_state": 0.08126984126984127,
+    "source_facts": 0.172
+  },
+  "eval_sha256": "f5d335e05707e71dfa91fe1b2aa1433f20fc87e6caf54c65a62d1e59dc3372f5",
+  "prediction_count": 25,
+  "predictions_sha256": "a9700bc4cd532eecf4900b829a5f1cbab41c427acfbd92e4ec42333f7f78ce9a",
+  "primary_mode": "r1",
+  "rates": {
+    "dependency_correct": 0.0,
+    "evidence_valid": 0.56,
+    "exact_program": 0.0,
+    "executable": 0.32,
+    "final_answer_correct": 0.08,
+    "lowerable_to_ccir": 0.4,
+    "parse_valid": 0.64,
+    "r0_final_answer_correct": 0.08,
+    "r1_final_answer_correct": 0.08,
+    "r2_final_answer_correct": 0.08,
+    "semantic_return_equivalent": 0.0,
+    "semantic_state_equivalent": 0.0,
+    "type_valid": 0.4
+  },
+  "reference_status_counts": {
+    "accepted": 17,
+    "rejected": 5,
+    "unsupported": 3
+  },
+  "run": {
+    "condition": "f3",
+    "eval_sha256": "f5d335e05707e71dfa91fe1b2aa1433f20fc87e6caf54c65a62d1e59dc3372f5",
+    "fixed_icl": true,
+    "fixed_prompt": true,
+    "model": {
+      "adapter_id": "Qwen3-0.6B-F3-LoRA-original-500-v1",
+      "adapter_path": "artifacts/paper1/f3_v1/adapters/qwen0_6b_r8_v1/adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "primary_mode": "r1",
+    "seed": 44017
+  },
+  "schema_version": "ccpu.paper1.f3.evaluation.v1",
+  "scored_predictions_sha256": "85d94752af9901373c75315ab77abe9d44e55adf51253b50fdda80f80f046439"
+}

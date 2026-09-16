@@ -1,0 +1,462 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Wilson, the math teacher, has 18 logic puzzles and 9 visual puzzles that she wants to group into sets for students who finish their tests early.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 289,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "Mrs. Wilson wants each set to be identical, containing the same combination of logic puzzles and visual puzzles, with no puzzles left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 341,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 290,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of sets she can create?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mrs_wilson.logic_puzzles.total = 18",
+              "mrs_wilson.visual_puzzles.total = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mrs_wilson.logic_puzzles.total = mrs_wilson.sets.count * mrs_wilson.set.logic_puzzles",
+              "mrs_wilson.visual_puzzles.total = mrs_wilson.sets.count * mrs_wilson.set.visual_puzzles"
+            ],
+            "assumptions": [
+              "Puzzle and set quantities are nonnegative integer counts."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "A single per-set quantity for each puzzle type represents the identical composition of every set; the equalities preserve the no-leftovers condition."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile has no greatest-common-divisor, divisibility, integer-domain, or constrained-optimization construct with which to express the greatest feasible number of identical sets."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0975"
+      },
+      "question": "Mrs. Wilson, the math teacher, has 18 logic puzzles and 9 visual puzzles that she wants to group into sets for students who finish their tests early. Mrs. Wilson wants each set to be identical, containing the same combination of logic puzzles and visual puzzles, with no puzzles left over. What is the greatest number of sets she can create?",
+      "source_context": null,
+      "source_id": "asdiv-0975",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "GCD(18,9)=9"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At present a father is three times as old as his son.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "After 12 years his age will be twice the age of his son.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "Find their present ages?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "father.age_present = son.age_present * 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "father.age_in_12y = father.age_present + 12",
+              "son.age_in_12y = son.age_present + 12",
+              "father.age_in_12y = son.age_in_12y * 2"
+            ],
+            "assumptions": [
+              "Interprets both occurrences of \"his\" in the comparison as referring respectively to the father and the same son introduced previously."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "Preserves present and twelve-years-later ages as distinct state quantities."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN father.age_present",
+              "RETURN son.age_present"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 2,
+            "semantic_notes": [
+              "Two return statements preserve the request for both present ages."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1445"
+      },
+      "question": "At present a father is three times as old as his son. After 12 years his age will be twice the age of his son. Find their present ages?",
+      "source_context": null,
+      "source_id": "asdiv-1445",
+      "validation_failure": "unresolved reference 'son.age_present' from scope 'global'; unresolved reference 'father.age_present' from scope 'global'; unresolved reference 'son.age_present' from scope 'global'; unresolved reference 'son.age_in_12y' from scope 'global'; unresolved reference 'father.age_present' from scope 'global'; unresolved reference 'son.age_present' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "36",
+        "gold_reasoning": "f:Father's age; s:Son's age; f=s*3; f+12=(s+12)*2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A chess player played 44 games total.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "If he won 16 of the games, what is the ratio of games he lost to games he won?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "chess_player.games.total = 44"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chess_player.games.won = 16",
+              "chess_player.games.lost = chess_player.games.total - chess_player.games.won",
+              "chess_player.games.lost_to_won_ratio = chess_player.games.lost / chess_player.games.won",
+              "RETURN chess_player.games.lost_to_won_ratio"
+            ],
+            "assumptions": [
+              "Assumes every game was either won or lost, with no draws or other outcomes."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The requested lost-to-won ratio is represented as lost games divided by won games."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1658"
+      },
+      "question": "A chess player played 44 games total. If he won 16 of the games, what is the ratio of games he lost to games he won?",
+      "source_context": null,
+      "source_id": "asdiv-1658",
+      "validation_failure": "answer mismatch: actual=1.75, expected=7",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": "44-16=28; 28:16=7:4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Five years ago, I was thrice as old as my son and ten years later I shall be twice as old as my son.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "How old are we now?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "speaker.age_5y_ago = speaker.age_now - 5",
+              "speaker.son.age_5y_ago = speaker.son.age_now - 5",
+              "speaker.age_5y_ago = speaker.son.age_5y_ago * 3",
+              "speaker.age_in_10y = speaker.age_now + 10",
+              "speaker.son.age_in_10y = speaker.son.age_now + 10",
+              "speaker.age_in_10y = speaker.son.age_in_10y * 2"
+            ],
+            "assumptions": [
+              "Interpreted \"ten years later\" with the future construction \"shall be\" as ten years from the present."
+            ],
+            "confidence": 0.93,
+            "part_id": 0,
+            "semantic_notes": [
+              "Preserves both stated age ratios and the distinct past, present, and future age states."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN speaker.age_now",
+              "RETURN speaker.son.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The plural query requests both present ages."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1407"
+      },
+      "question": "Five years ago, I was thrice as old as my son and ten years later I shall be twice as old as my son. How old are we now?",
+      "source_context": null,
+      "source_id": "asdiv-1407",
+      "validation_failure": "unresolved reference 'speaker.age_now' from scope 'global'; unresolved reference 'speaker.son.age_now' from scope 'global'; unresolved reference 'speaker.son.age_5y_ago' from scope 'global'; unresolved reference 'speaker.age_now' from scope 'global'; unresolved reference 'speaker.son.age_now' from scope 'global'; unresolved reference 'speaker.son.age_in_10y' from scope 'global'; unresolved reference 'speaker.age_now' from scope 'global'; unresolved reference 'speaker.son.age_now' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "50",
+        "gold_reasoning": "x:My age; y:The age of my son; x+5=3(y-5); x-5=2(y+10)"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dave spent 21 minutes completing a race.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "He walked 9 minutes and jogged the rest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "What is the ratio of time he jogged to time he walked?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "dave.race.total_time_minutes = 21"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dave.race.walk_time_minutes = 9",
+              "dave.race.jog_time_minutes = dave.race.total_time_minutes - dave.race.walk_time_minutes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The jogging duration is the remainder of the total race time."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dave.race.jog_to_walk_time_ratio = dave.race.jog_time_minutes / dave.race.walk_time_minutes",
+              "RETURN dave.race.jog_to_walk_time_ratio"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Encodes the requested ordered ratio as jogging time divided by walking time."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1655"
+      },
+      "question": "Dave spent 21 minutes completing a race. He walked 9 minutes and jogged the rest. What is the ratio of time he jogged to time he walked?",
+      "source_context": null,
+      "source_id": "asdiv-1655",
+      "validation_failure": "answer mismatch: actual=1.333333333333333333333333333, expected=4",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "21-9=12; 12:9=4:3"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

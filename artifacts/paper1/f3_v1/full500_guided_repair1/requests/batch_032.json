@@ -1,0 +1,107 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Steve wanted to make a total of $100 within four days, so he took on a berry-picking job in Sweden. The job paid $2 for every pound of lingonberries picked. On Monday he picked 8 pounds. Tuesday\u2019s harvest was triple what he had picked the previous day. On Wednesday he felt very tired and decided to rest. How many pounds of lingonberries did Steve have to pick on Thursday?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"steve.earnings.target\", \"four_days\"), 100, \"dollar\", source(\"make a total of $100 within four days\"))",
+          "observe(at(\"berry_picking_job.pay_rate\", \"current\"), 2, \"dollar_per_pound\", source(\"The job paid $2 for every pound of lingonberries picked\"))",
+          "rate_relation(at(\"steve.earnings.target\", \"four_days\"), at(\"berry_picking_job.pay_rate\", \"current\"), at(\"steve.lingonberries.picked.weight\", \"current\"), source(\"The job paid $2 for every pound of lingonberries picked\"))",
+          "produce(\"monday_harvest\", \"steve\", at(\"steve.lingonberries.picked.weight\", \"current\"), 8, source(\"On Monday he picked 8 pounds\"))",
+          "produce(\"tuesday_harvest\", \"steve\", at(\"steve.lingonberries.picked.weight\", \"current\"), scale(event_field(\"monday_harvest\", \"quantity\"), 3), source(\"Tuesday\u2019s harvest was triple what he had picked the previous day\"))",
+          "produce(\"thursday_harvest\", \"steve\", at(\"steve.lingonberries.picked.weight\", \"current\"), \"steve.lingonberries.thursday_harvest.weight\", source(\"pick on Thursday\"))",
+          "query(\"value\", event_field(\"thursday_harvest\", \"quantity\"))"
+        ]
+      },
+      "source_id": "572"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Anna wants to grow some lettuce in the garden and would like to grow enough to have at least 12 large salads. She estimates that, despite her best efforts, half of the lettuce will be lost to insects and rabbits. Each lettuce plant is estimated to provide 3 large salads. How many lettuce plants should Anna grow in the garden?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"anna.garden.lettuce_plants\", \"lettuce_plant\", \"garden\", source(\"Anna wants to grow some lettuce in the garden\"))",
+          "observe(at(\"anna.large_salads.minimum_required.count\", \"current\"), 12, \"count\", source(\"at least 12 large salads\"))",
+          "produce(\"grow_lettuce\", \"anna\", at(\"anna.garden.lettuce_plants.count\", \"current\"), \"anna.garden.lettuce_plants.grown.count\", source(\"grow some lettuce in the garden\"))",
+          "remove(\"lettuce_loss\", \"insects_and_rabbits\", at(\"anna.garden.lettuce_plants.count\", \"current\"), fraction(event_field(\"grow_lettuce\", \"quantity\"), 1, 2), source(\"half of the lettuce will be lost to insects and rabbits\"))",
+          "observe(at(\"lettuce_plant.large_salad_yield\", \"current\"), 3, \"large_salad_per_lettuce_plant\", source(\"Each lettuce plant is estimated to provide 3 large salads\"))",
+          "rate_relation(at(\"anna.large_salads.minimum_required.count\", \"current\"), at(\"lettuce_plant.large_salad_yield\", \"current\"), at(\"anna.garden.lettuce_plants.count\", \"current\"), source(\"Each lettuce plant is estimated to provide 3 large salads\"))",
+          "query(\"value\", event_field(\"grow_lettuce\", \"quantity\"))"
+        ]
+      },
+      "source_id": "3560"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Ethan makes beeswax candles.  For each candle, he uses 8 ounces of beeswax and 1 ounce of coconut oil.  If he makes three less than 10 candles, what will be the combined weight of the candles in ounces?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"ethan.candles\", \"candle\", \"ethan\", source(\"Ethan makes beeswax candles\"))",
+          "collection(\"ethan.candles.ingredient_total_weights\", \"ingredient_weight\", \"ethan.candles\", source(\"8 ounces of beeswax and 1 ounce of coconut oil\"))",
+          "observe(at(\"ethan.candles.beeswax.rate\", \"current\"), 8, \"ounce_per_candle\", source(\"For each candle, he uses 8 ounces of beeswax\"))",
+          "observe(at(\"ethan.candles.coconut_oil.rate\", \"current\"), 1, \"ounce_per_candle\", source(\"1 ounce of coconut oil\"))",
+          "produce(\"candle_making\", \"ethan\", at(\"ethan.candles.count\", \"current\"), \"ethan.candles.made.count\", source(\"he makes three less than 10 candles\"))",
+          "offset(event_field(\"candle_making\", \"quantity\"), 10, -3, \"count\", source(\"three less than 10 candles\"))",
+          "rate_relation(at(\"ethan.candles.beeswax.total_weight\", \"current\"), at(\"ethan.candles.beeswax.rate\", \"current\"), event_field(\"candle_making\", \"quantity\"), source(\"For each candle, he uses 8 ounces of beeswax\"))",
+          "rate_relation(at(\"ethan.candles.coconut_oil.total_weight\", \"current\"), at(\"ethan.candles.coconut_oil.rate\", \"current\"), event_field(\"candle_making\", \"quantity\"), source(\"For each candle, he uses 8 ounces of beeswax and 1 ounce of coconut oil\"))",
+          "member(\"ethan.candles.ingredient_total_weights\", \"ethan.candles.beeswax.total_weight\", source(\"8 ounces of beeswax\"))",
+          "member(\"ethan.candles.ingredient_total_weights\", \"ethan.candles.coconut_oil.total_weight\", source(\"1 ounce of coconut oil\"))",
+          "query(\"sum\", \"ethan.candles.ingredient_total_weights\", \"current\")"
+        ]
+      },
+      "source_id": "6739"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Tony, Moses and Esther are to share $50. Moses will take 40% of the total amount while Tony and Esther will split the remainder equally among themselves. How much more than Esther will Moses get?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"group.shared_money.amount\", \"initial\"), 50, \"dollar\", source(\"Tony, Moses and Esther are to share $50\"))",
+          "sum_relation(at(\"group.shared_money.amount\", \"initial\"), at(\"tony.money.share\", \"final\"), at(\"moses.money.share\", \"final\"), at(\"esther.money.share\", \"final\"), source(\"Tony, Moses and Esther are to share $50\"))",
+          "percent_of(at(\"moses.money.share\", \"final\"), at(\"group.shared_money.amount\", \"initial\"), 40, source(\"Moses will take 40% of the total amount\"))",
+          "same(at(\"tony.money.share\", \"final\"), at(\"esther.money.share\", \"final\"), source(\"Tony and Esther will split the remainder equally among themselves\"))",
+          "query(\"difference\", at(\"esther.money.share\", \"final\"), at(\"moses.money.share\", \"final\"))"
+        ]
+      },
+      "source_id": "5841"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "All 20 of Grant\u2019s baby teeth have fallen out and he has a total of $54 from the tooth fairy. Every time he lost a tooth, he put it under his pillow for the tooth fairy, except for one that he dropped on the way home from school and another he swallowed accidentally. The tooth fairy left Grant $20 when he lost his first tooth. How much did the tooth fairy leave him per tooth after his first tooth, assuming equal money exchanged for each tooth thereafter?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"grant.baby_teeth\", \"tooth\", \"grant\", source(\"All 20 of Grant\u2019s baby teeth\"))",
+          "observe(at(\"grant.baby_teeth.fallen.count\", \"current\"), 20, \"count\", source(\"All 20 of Grant\u2019s baby teeth have fallen out\"))",
+          "observe(at(\"grant.baby_teeth.dropped.count\", \"current\"), 1, \"count\", source(\"one that he dropped on the way home from school\"))",
+          "same(at(\"grant.baby_teeth.swallowed.count\", \"current\"), at(\"grant.baby_teeth.dropped.count\", \"current\"), source(\"one that he dropped on the way home from school and another he swallowed accidentally\"))",
+          "sum_relation(at(\"grant.baby_teeth.fallen.count\", \"current\"), at(\"grant.baby_teeth.placed_under_pillow.count\", \"current\"), at(\"grant.baby_teeth.dropped.count\", \"current\"), at(\"grant.baby_teeth.swallowed.count\", \"current\"), source(\"Every time he lost a tooth, he put it under his pillow for the tooth fairy, except for one that he dropped on the way home from school and another he swallowed accidentally\"))",
+          "offset(at(\"grant.baby_teeth.placed_under_pillow_after_first.count\", \"current\"), at(\"grant.baby_teeth.placed_under_pillow.count\", \"current\"), -1, \"count\", source(\"per tooth after his first tooth\"))",
+          "add(\"first_tooth_payment\", \"tooth_fairy\", at(\"grant.tooth_fairy.money_received\", \"current\"), 20, source(\"The tooth fairy left Grant $20 when he lost his first tooth\"))",
+          "add(\"later_tooth_payments\", \"tooth_fairy\", at(\"grant.tooth_fairy.money_received\", \"current\"), \"grant.tooth_fairy.money_received.after_first\", source(\"money exchanged for each tooth thereafter\"))",
+          "observe(at(\"grant.tooth_fairy.money_received\", \"now\"), 54, \"dollar\", source(\"a total of $54 from the tooth fairy\"))",
+          "rate_relation(event_field(\"later_tooth_payments\", \"quantity\"), at(\"grant.tooth_fairy.payment_per_tooth_after_first\", \"current\"), at(\"grant.baby_teeth.placed_under_pillow_after_first.count\", \"current\"), source(\"assuming equal money exchanged for each tooth thereafter\"))",
+          "query(\"value\", at(\"grant.tooth_fairy.payment_per_tooth_after_first\", \"current\"))"
+        ]
+      },
+      "source_id": "6378"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

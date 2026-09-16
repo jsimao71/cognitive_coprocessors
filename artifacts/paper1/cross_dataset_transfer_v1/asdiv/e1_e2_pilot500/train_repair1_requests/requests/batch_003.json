@@ -1,0 +1,486 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mona is having a party at her house to celebrate her birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 99,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "She invited some friends and family.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 100,
+          "teacher_input_default": true,
+          "text": "Mona prepared rainbow colored cupcakes for dessert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 284,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "If she made 7 sets for each of the 7 colors of the rainbow and each set has 6 cupcakes, how many cupcakes did Mona prepare in total?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Narrative context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The clause identifies cupcakes as the prepared item but introduces no quantitative fact."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rainbow.colors = 7",
+              "mona.sets_per_color = 7",
+              "mona.cupcakes_per_set = 6",
+              "mona.total_sets = rainbow.colors * mona.sets_per_color",
+              "mona.total_cupcakes = mona.total_sets * mona.cupcakes_per_set",
+              "RETURN mona.total_cupcakes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0375"
+      },
+      "question": "Mona is having a party at her house to celebrate her birthday. She invited some friends and family. Mona prepared rainbow colored cupcakes for dessert. If she made 7 sets for each of the 7 colors of the rainbow and each set has 6 cupcakes, how many cupcakes did Mona prepare in total?",
+      "source_context": null,
+      "source_id": "asdiv-0375",
+      "validation_failure": "answer mismatch: actual=294, expected=42",
+      "validator_context": {
+        "correct_answer": "42",
+        "gold_reasoning": "7*6=42"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Magellan has decided to make party baskets for the fund raiser.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "Balloons are sold in bags of 20, party horns are sold in bags of 10, and there are 8 candy bars in a package.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 174,
+          "teacher_input_default": true,
+          "text": "How many of each should he buy so there are an equal number of balloons, horns and candy bars in each basket?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "balloons.per_bag = 20",
+              "party_horns.per_bag = 10",
+              "candy_bars.per_package = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Determining the least purchase quantities that produce equal item counts requires least-common-multiple or divisibility/minimization semantics, which the active arithmetic operator registry cannot express without inventing solved purchase counts."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0866"
+      },
+      "question": "Magellan has decided to make party baskets for the fund raiser. Balloons are sold in bags of 20, party horns are sold in bags of 10, and there are 8 candy bars in a package. How many of each should he buy so there are an equal number of balloons, horns and candy bars in each basket?",
+      "source_context": null,
+      "source_id": "asdiv-0866",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "40",
+        "gold_reasoning": "LCM[20,10,8]=40"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Lee harvested 495 apples and he packed them evenly in some baskets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "If there are 25 apples in each basket, how many apples were left unpacked?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mr_lee.apples.harvested = 495",
+              "mr_lee.apples.packed = mr_lee.baskets.used * mr_lee.basket.apples"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The packing relation retains the unstated basket count and the later-grounded basket capacity as semantic dependencies."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested unpacked quantity is the remainder after filling baskets of 25 apples, but the active operator registry provides neither a remainder/modulo operator nor integer floor division."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0808"
+      },
+      "question": "Mr. Lee harvested 495 apples and he packed them evenly in some baskets. If there are 25 apples in each basket, how many apples were left unpacked?",
+      "source_context": null,
+      "source_id": "asdiv-0808",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "495/25=19 r20"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A club has 16 girls and 8 boys as members.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 160,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "The president wants to break the club into groups, with each group containing the same combination of girls and boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 161,
+          "teacher_input_default": true,
+          "text": "The president also wants to make sure that no one is left out.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 285,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 224,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of groups the president can make?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "club.members.girls = 16",
+              "club.members.boys = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "club.each_group.girls = club.members.girls / club.groups.count",
+              "club.each_group.boys = club.members.boys / club.groups.count"
+            ],
+            "assumptions": [
+              "\u201cThe same combination\u201d means every group receives equal numbers of girls and equal numbers of boys."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The group count is a legitimate forward dependency introduced by the requested grouping."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "club.members_left_out.girls = 0",
+              "club.members_left_out.boys = 0"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "Zero members left out is preserved separately for each member category."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest group count that divides both category totals requires a greatest-common-divisor or equivalent integer divisibility/optimization operation, which the active operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2016"
+      },
+      "question": "A club has 16 girls and 8 boys as members. The president wants to break the club into groups, with each group containing the same combination of girls and boys. The president also wants to make sure that no one is left out. What is the greatest number of groups the president can make?",
+      "source_context": null,
+      "source_id": "asdiv-2016",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "GCD(16,8)=8"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If five is subtracted from three times a certain number, the result is 10.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "What is the number?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "certain_number.three_times_minus_five = 10",
+              "certain_number.value = (certain_number.three_times_minus_five + 5) / 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The stated equation is represented by retaining its named left-hand expression and algebraically deriving the unknown."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN certain_number.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1464"
+      },
+      "question": "If five is subtracted from three times a certain number, the result is 10. What is the number?",
+      "source_context": null,
+      "source_id": "asdiv-1464",
+      "validation_failure": "anonymous operation-ledger target: certain_number.value",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "x:The certain number; 3x-5=10"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

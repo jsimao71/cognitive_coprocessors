@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For Gwen's birthday she received 2 dollars from her mom.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "Her dad gave her 4 more dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "If she spent 3 dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "How much money did she still have?",
+          "warnings": []
+        }
+      ],
+      "question": "For Gwen's birthday she received 2 dollars from her mom. Her dad gave her 4 more dollars. If she spent 3 dollars. How much money did she still have?",
+      "source_id": "svamp-chal-373"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is baking a cake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "The recipe calls for 5 cups of sugar and 14 cups of flour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "She already put in 11 cups of flour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 119,
+          "teacher_input_default": true,
+          "text": "How many more cups of sugar than cups of flour does she need to add now?",
+          "warnings": []
+        }
+      ],
+      "question": "Mary is baking a cake. The recipe calls for 5 cups of sugar and 14 cups of flour. She already put in 11 cups of flour. How many more cups of sugar than cups of flour does she need to add now?",
+      "source_id": "svamp-chal-386"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 26,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rachel has 52 apple trees.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 27,
+          "teacher_input_default": true,
+          "text": "She picked 2 apples from 1 of her trees.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "Now the tree has 7 apples still on it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 107,
+          "teacher_input_default": true,
+          "text": "How many apples did the tree have to begin with?",
+          "warnings": []
+        }
+      ],
+      "question": "Rachel has 52 apple trees. She picked 2 apples from 1 of her trees. Now the tree has 7 apples still on it. How many apples did the tree have to begin with?",
+      "source_id": "svamp-chal-709"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 35,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "22 children were riding on the bus.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 36,
+          "teacher_input_default": true,
+          "text": "At the bus stop 40 children got on the bus while some got off the bus.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 107,
+          "teacher_input_default": true,
+          "text": "Then there were 2 children altogether on the bus.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "How many children got off the bus at the bus stop?",
+          "warnings": []
+        }
+      ],
+      "question": "22 children were riding on the bus. At the bus stop 40 children got on the bus while some got off the bus. Then there were 2 children altogether on the bus. How many children got off the bus at the bus stop?",
+      "source_id": "svamp-chal-133"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "He then went to see the oranges being harvested.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "He found out that they harvest 76 sacks per day and discard 64 of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "How many oranges do they harvest per day if each sack contains 50 oranges?",
+          "warnings": []
+        }
+      ],
+      "question": "He then went to see the oranges being harvested. He found out that they harvest 76 sacks per day and discard 64 of them. How many oranges do they harvest per day if each sack contains 50 oranges?",
+      "source_id": "svamp-chal-596"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

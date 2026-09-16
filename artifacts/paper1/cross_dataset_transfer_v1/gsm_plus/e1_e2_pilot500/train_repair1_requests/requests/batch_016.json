@@ -1,0 +1,730 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adrianne is collecting different kinds of beads for making bracelets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "Her mother gave her 20 metallic beads and 15 pearls.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "Her sister gave her ten more beads than her mother, and her friend gave her twice as many as her mother gave.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 278,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "How many beads did Adrianne have altogether?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "adrianne.collection.item_type = \"beads\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The bracelet-making purpose is qualitative and does not introduce an arithmetic relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adrianne.mother.metallic_beads = 20",
+              "adrianne.mother.pearls = 15",
+              "adrianne.mother.total_beads = sum(adrianne.mother.metallic_beads, adrianne.mother.pearls)"
+            ],
+            "assumptions": [
+              "Pearls are counted among the beads contributed by Adrianne's mother."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adrianne.sister.total_beads = adrianne.mother.total_beads + 10",
+              "adrianne.friend.total_beads = adrianne.mother.total_beads * 2"
+            ],
+            "assumptions": [
+              "Both comparisons refer to the mother's total contribution of metallic beads and pearls."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adrianne.total_beads = sum(adrianne.mother.total_beads, adrianne.sister.total_beads, adrianne.friend.total_beads)",
+              "RETURN adrianne.total_beads"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07846"
+      },
+      "question": "Adrianne is collecting different kinds of beads for making bracelets. Her mother gave her 20 metallic beads and 15 pearls. Her sister gave her ten more beads than her mother, and her friend gave her twice as many as her mother gave.  How many beads did Adrianne have altogether?",
+      "source_context": null,
+      "source_id": "gsm-plus-07846",
+      "validation_failure": "answer mismatch: actual=150, expected=90",
+      "validator_context": {
+        "correct_answer": "90",
+        "gold_reasoning": "Adrianne received 20 +10 = <<20+10=30>>30 beads from her sister.\nAnd, she received 2 x 20 = <<2*20=40>>40 beads from her friend.\nTherefore, Adrianne had 20 + 30 + 40 = <<20+30+40=90>>90 beads altogether.\n#### 90"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A teacher uses a 5-inch piece of chalk to write math equations on a chalkboard for his students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 308,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than some inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 357,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 309,
+          "teacher_input_default": true,
+          "text": "On Monday the teacher used a new piece of chalk.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 436,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 358,
+          "teacher_input_default": true,
+          "text": "His students need extra help that day, so he ended up writing more than usual.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 487,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 437,
+          "teacher_input_default": true,
+          "text": "He used up 45% of the chalk by the end of the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 657,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 488,
+          "teacher_input_default": true,
+          "text": "If the teacher goes back to using only 20% of the chalk each day, it takes 1 more day to recycle the chalk, what's the length of the chack that the teacher will recycle?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "chalk.new_piece.length_inches = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "teacher.usual.daily_chalk_use_percent = 20"
+            ],
+            "assumptions": [
+              "The percentage describes the amount of the original piece used per day."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause defines recycling through a strict size comparison, but the active operator registry does not include a comparison operator."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "monday.chalk.start_length_inches = chalk.new_piece.length_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "monday.chalk_use_relative_to_usual = \"more\""
+            ],
+            "assumptions": [],
+            "confidence": 0.91,
+            "part_id": 4,
+            "semantic_notes": [
+              "This clause supplies only a qualitative comparison; the following clause quantifies Monday's use."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "monday.chalk.used_percent = 45",
+              "monday.chalk.end_length_inches = dec_pct(monday.chalk.start_length_inches, monday.chalk.used_percent)"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "recycling.days_after_monday = 1",
+              "recycling.daily_chalk_use_inches = percent_of(chalk.new_piece.length_inches, teacher.usual.daily_chalk_use_percent)",
+              "recycling.chalk_length_inches = monday.chalk.end_length_inches - recycling.daily_chalk_use_inches * recycling.days_after_monday",
+              "RETURN recycling.chalk_length_inches"
+            ],
+            "assumptions": [
+              "The daily 20% is interpreted as 20% of the original new piece rather than 20% of the amount remaining."
+            ],
+            "confidence": 0.88,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09412"
+      },
+      "question": "A teacher uses a 5-inch piece of chalk to write math equations on a chalkboard for his students. The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day. Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than some inches. On Monday the teacher used a new piece of chalk. His students need extra help that day, so he ended up writing more than usual. He used up 45% of the chalk by the end of the day. If the teacher goes back to using only 20% of the chalk each day, it takes 1 more day to recycle the chalk, what's the length of the chack that the teacher will recycle?",
+      "source_context": null,
+      "source_id": "gsm-plus-09412",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "1.75",
+        "gold_reasoning": "The teacher used 0.45 of the chalk on Monday, so he has 1 - 0.45 = 0.55 or 11/20 of the chalk left, which is 5*0.55=2.25 inches\nThe teacher uses 0.20 or 1/5 of the chalk each day, so he uses 20%*5=1 inch each day, \nso in two days, he used up 1+2.25=3.25 inches, \nhe recycles the chalk when it is smaller than 5-3.25=1.75 inches\n#### 1.75"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 19,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ellen is on a diet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 20,
+          "teacher_input_default": true,
+          "text": "She eats two carrots, a salad, and a yogurt every day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "The carrot costs her $1 each, while the yogurt is half the price of the salad.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 243,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "If Ellen pays $11 in total for her goods every day, how much does she pay for her yogurt?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 1.0,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies background context but no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ellen.daily.carrots.count = 2",
+              "ellen.daily.salads.count = 1",
+              "ellen.daily.yogurts.count = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ellen.carrot.unit_price = 1",
+              "ellen.yogurt.unit_price = ellen.salad.unit_price / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Prices are in dollars per item."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ellen.daily.goods.total_cost = 11",
+              "ellen.daily.carrots.total_cost = ellen.daily.carrots.count * ellen.carrot.unit_price",
+              "ellen.daily.salad_and_yogurt.total_cost = ellen.daily.goods.total_cost - ellen.daily.carrots.total_cost",
+              "ellen.yogurt.unit_price = ellen.daily.salad_and_yogurt.total_cost / (ellen.daily.salads.count * 2 + ellen.daily.yogurts.count)",
+              "RETURN ellen.yogurt.unit_price"
+            ],
+            "assumptions": [
+              "The listed carrots, salad, and yogurt constitute all goods included in the daily total."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [
+              "Because one salad costs twice one yogurt, the combined price of one salad and one yogurt is three yogurt-price units."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07140"
+      },
+      "question": "Ellen is on a diet. She eats two carrots, a salad, and a yogurt every day. The carrot costs her $1 each, while the yogurt is half the price of the salad. If Ellen pays $11 in total for her goods every day, how much does she pay for her yogurt?",
+      "source_context": null,
+      "source_id": "gsm-plus-07140",
+      "validation_failure": "unresolved reference 'ellen.salad.unit_price' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "Ellen pays for $1 *2 =$2 for her carrots and $11-$2=$9 for the salad and yogurt combined.\n\nLet the cost of yogurt=Y, then the cost of salad= 2Y (he yogurt is half the price of the salad); 2Y+ Y= $9, so Y=$3.\n\nAnswer:\n#### 3"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John buys 10 bottles of scotch for a total cost of $600.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "He also buys twice as many bottles of cognac that cost 50% more per bottle.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "The alcohol content of cognac is 15% stronger than scotch.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 195,
+          "teacher_input_default": true,
+          "text": "How much does he spend on everything?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "john.scotch.bottles.count = 10",
+              "john.scotch.total_cost = 600",
+              "john.scotch.bottle.unit_price = john.scotch.total_cost / john.scotch.bottles.count"
+            ],
+            "assumptions": [],
+            "confidence": 1.0,
+            "part_id": 0,
+            "semantic_notes": [
+              "Costs are in dollars."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.cognac.bottles.count = john.scotch.bottles.count * 2",
+              "john.cognac.bottle.unit_price = inc_pct(john.scotch.bottle.unit_price, 50)",
+              "john.cognac.total_cost = john.cognac.bottles.count * john.cognac.bottle.unit_price"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.cognac.alcohol_content = inc_pct(john.scotch.alcohol_content, 15)"
+            ],
+            "assumptions": [
+              "\u201c15% stronger\u201d means the cognac's alcohol content is 15% greater than the scotch's alcohol content."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The alcohol-content relation is retained despite not being needed by the spending query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.alcohol.total_spend = john.scotch.total_cost + john.cognac.total_cost",
+              "RETURN john.alcohol.total_spend"
+            ],
+            "assumptions": [],
+            "confidence": 1.0,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09582"
+      },
+      "question": "John buys 10 bottles of scotch for a total cost of $600.  He also buys twice as many bottles of cognac that cost 50% more per bottle.  The alcohol content of cognac is 15% stronger than scotch.  How much does he spend on everything?",
+      "source_context": null,
+      "source_id": "gsm-plus-09582",
+      "validation_failure": "unresolved reference 'john.scotch.alcohol_content' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "2400",
+        "gold_reasoning": "The scotch cost $600/10=$<<600/10=60>>60 each\nHe bought 10*2=<<10*2=20>>20 bottles of cognac\nEach bottle cost .5*60=$<<.5*60=30>>30 more than the scotch\nSo they cost $60+$30=$<<60+30=90>>90\nThat means he spent $90*20=$<<90*20=1800>>1800 on the cognac\nSo he spent a total of $600+$1800=$<<600+1800=2400>>2400\n#### 2400"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Tuesday, Clara bought 20 pomegranates at $20 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "At the till she got $2 off because she had a voucher.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "The next day, the price shot to $30 per fruit, but the store also offered a 10% discount on the total cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 216,
+          "teacher_input_default": true,
+          "text": "Sheila took advantage of the discount and bought some pomegranates.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 412,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 284,
+          "teacher_input_default": true,
+          "text": "The difference between the final prices paid for the pomegranates on the two days is $142 and on the second day Clara pays more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 469,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 414,
+          "teacher_input_default": true,
+          "text": "How many pomegranates does Clara buy on the second day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "clara.tuesday.pomegranates_bought = 20",
+              "store.tuesday.price_per_pomegranate = 20",
+              "clara.tuesday.pre_discount_cost = clara.tuesday.pomegranates_bought * store.tuesday.price_per_pomegranate"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "clara.tuesday.voucher_discount = 2",
+              "clara.tuesday.final_cost = clara.tuesday.pre_discount_cost - clara.tuesday.voucher_discount"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "store.wednesday.price_per_pomegranate = 30",
+              "store.wednesday.total_cost_discount_percentage = 10",
+              "store.wednesday.discounted_price_per_pomegranate = dec_pct(store.wednesday.price_per_pomegranate, store.wednesday.total_cost_discount_percentage)"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The discounted per-fruit price is equivalent to applying the stated percentage discount to the total when all fruits have the same price."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause names Sheila as the purchaser, while the surrounding clauses and final question identify Clara; the intended purchaser cannot be resolved from this clause without treating one name as a typo."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "clara.wednesday.final_cost = clara.tuesday.final_cost + 142"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [
+              "The direction of the difference is preserved by adding it to Tuesday's final cost because Clara pays more on the second day."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "clara.wednesday.pomegranates_bought = clara.wednesday.final_cost / store.wednesday.discounted_price_per_pomegranate",
+              "RETURN clara.wednesday.pomegranates_bought"
+            ],
+            "assumptions": [
+              "The question's reference to Clara is followed despite the conflicting Sheila reference in part 3."
+            ],
+            "confidence": 0.91,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05204"
+      },
+      "question": "On Tuesday, Clara bought 20 pomegranates at $20 each. At the till she got $2 off because she had a voucher. The next day, the price shot to $30 per fruit, but the store also offered a 10% discount on the total cost. Sheila took advantage of the discount and bought some pomegranates. The difference between the final prices paid for the pomegranates on the two days is $142 and on the second day Clara pays more.  How many pomegranates does Clara buy on the second day?",
+      "source_context": null,
+      "source_id": "gsm-plus-05204",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "On Tuesday, the pomegranates cost Clara 20 pomegranates * $20/pomegranates = $<<20*20=400>>400\nUsing the voucher, she paid $400 - $2 = $<<400-2=398>>398\n398+142= 540\n540/(1-0.1)=600\n600/30=20\n#### 20"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

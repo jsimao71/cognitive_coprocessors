@@ -1,0 +1,110 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Joseph had socks of many different colors. His dresser drawer was filled to overflowing with red, blue, black, and white socks. Uncertain of how many pairs he had of each color, he began to sort his socks. He discovered that he had three more pairs of blue socks than he had pairs of black socks.  He had one less pair of red socks than he had pairs of white socks. He had twice as many blue socks as he had of red socks. And he counted a total of 6 red socks.  What is the total number of Joseph's socks?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "3363"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "There are 6 forks in the cutlery drawer. There are 9 more knives than forks, and there are twice as many spoons as knives and half as many teaspoons as forks. After 2 of each cutlery is added to the drawer, how many pieces of cutlery are there in all?",
+      "repair": {
+        "failure_class": "answer_mismatch",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"drawer.cutlery\", \"piece_of_cutlery\", \"cutlery drawer\", source(\"There are 6 forks in the cutlery drawer\"))",
+          "member(\"drawer.cutlery\", \"drawer.cutlery.forks\", source(\"6 forks in the cutlery drawer\"))",
+          "member(\"drawer.cutlery\", \"drawer.cutlery.knives\", source(\"9 more knives than forks\"))",
+          "member(\"drawer.cutlery\", \"drawer.cutlery.spoons\", source(\"twice as many spoons as knives\"))",
+          "member(\"drawer.cutlery\", \"drawer.cutlery.teaspoons\", source(\"half as many teaspoons as forks\"))",
+          "partition(\"drawer.cutlery\", at(\"drawer.cutlery.count\", \"initial\"), source(\"There are 6 forks in the cutlery drawer. There are 9 more knives than forks, and there are twice as many spoons as knives and half as many teaspoons as forks.\"))",
+          "observe(at(\"drawer.cutlery.forks.count\", \"initial\"), 6, \"count\", source(\"There are 6 forks in the cutlery drawer\"))",
+          "offset(at(\"drawer.cutlery.knives.count\", \"initial\"), at(\"drawer.cutlery.forks.count\", \"initial\"), 9, \"count\", source(\"9 more knives than forks\"))",
+          "multiple(at(\"drawer.cutlery.spoons.count\", \"initial\"), at(\"drawer.cutlery.knives.count\", \"initial\"), 2, source(\"twice as many spoons as knives\"))",
+          "fraction_of(at(\"drawer.cutlery.teaspoons.count\", \"initial\"), at(\"drawer.cutlery.forks.count\", \"initial\"), 1, 2, source(\"half as many teaspoons as forks\"))",
+          "add(\"add_forks\", \"unspecified\", at(\"drawer.cutlery.forks.count\", \"current\"), 2, source(\"2 of each cutlery is added to the drawer\"))",
+          "add(\"add_knives\", \"unspecified\", at(\"drawer.cutlery.knives.count\", \"current\"), 2, source(\"2 of each cutlery is added to the drawer\"))",
+          "add(\"add_spoons\", \"unspecified\", at(\"drawer.cutlery.spoons.count\", \"current\"), 2, source(\"2 of each cutlery is added to the drawer\"))",
+          "add(\"add_teaspoons\", \"unspecified\", at(\"drawer.cutlery.teaspoons.count\", \"current\"), 2, source(\"2 of each cutlery is added to the drawer\"))",
+          "query(\"sum\", \"drawer.cutlery\", \"current\")"
+        ]
+      },
+      "source_id": "5155"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Timmy, Tommy and Tina are filling up a kiddie pool in their backyard.  Each has a pail they fill with water from a house before dumping it into the pool.  If Timmy's pail holds twice as much water as Tommy's, and Tommy's holds 2 gallons more than Tina's, and Tina's is 4 gallons, how much water do the three of them fill the pool with after 3 trips each?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"kiddie_pool.water_contributions\", \"water_volume\", \"kiddie pool\", source(\"Timmy, Tommy and Tina are filling up a kiddie pool in their backyard\"))",
+          "member(\"kiddie_pool.water_contributions\", \"kiddie_pool.water_contributions.timmy\", source(\"Timmy, Tommy and Tina are filling up a kiddie pool\"))",
+          "member(\"kiddie_pool.water_contributions\", \"kiddie_pool.water_contributions.tommy\", source(\"Timmy, Tommy and Tina are filling up a kiddie pool\"))",
+          "member(\"kiddie_pool.water_contributions\", \"kiddie_pool.water_contributions.tina\", source(\"Timmy, Tommy and Tina are filling up a kiddie pool\"))",
+          "multiple(at(\"timmy.pail.capacity\", \"current\"), at(\"tommy.pail.capacity\", \"current\"), 2, source(\"Timmy's pail holds twice as much water as Tommy's\"))",
+          "offset(at(\"tommy.pail.capacity\", \"current\"), at(\"tina.pail.capacity\", \"current\"), 2, \"gallon\", source(\"Tommy's holds 2 gallons more than Tina's\"))",
+          "observe(at(\"tina.pail.capacity\", \"current\"), 4, \"gallon\", source(\"Tina's is 4 gallons\"))",
+          "add(\"timmy_three_trips\", \"timmy\", at(\"kiddie_pool.water_contributions.timmy\", \"current\"), scale(at(\"timmy.pail.capacity\", \"current\"), 3), source(\"how much water do the three of them fill the pool with after 3 trips each\"))",
+          "add(\"tommy_three_trips\", \"tommy\", at(\"kiddie_pool.water_contributions.tommy\", \"current\"), scale(at(\"tommy.pail.capacity\", \"current\"), 3), source(\"how much water do the three of them fill the pool with after 3 trips each\"))",
+          "add(\"tina_three_trips\", \"tina\", at(\"kiddie_pool.water_contributions.tina\", \"current\"), scale(at(\"tina.pail.capacity\", \"current\"), 3), source(\"how much water do the three of them fill the pool with after 3 trips each\"))",
+          "query(\"sum\", \"kiddie_pool.water_contributions\", \"current\")"
+        ]
+      },
+      "source_id": "4124"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "A town council began the decade by planting cherry trees around the neighborhood to make the neighborhood look more welcoming. By the end of the decade, they have planted twice as many cherry trees as they originally planned and have now realized that falling cherry blossom leaves are causing a problem. Each tree drops 100 leaves each during the fall. If the town council originally intended to plant 7 cherry trees, how many leaves now fall from the trees?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"neighborhood.council_planted_cherry_trees\", \"cherry_tree\", \"neighborhood\", source(\"planting cherry trees around the neighborhood\"))",
+          "observe(at(\"town_council.cherry_trees.planned.count\", \"initial\"), 7, \"count\", source(\"originally intended to plant 7 cherry trees\"))",
+          "multiple(at(\"town_council.cherry_trees.planted.count\", \"end_of_decade\"), at(\"town_council.cherry_trees.planned.count\", \"initial\"), 2, source(\"By the end of the decade, they have planted twice as many cherry trees as they originally planned\"))",
+          "add(\"plant_cherry_trees\", \"town_council\", at(\"neighborhood.council_planted_cherry_trees.count\", \"current\"), at(\"town_council.cherry_trees.planted.count\", \"end_of_decade\"), source(\"they have planted twice as many cherry trees as they originally planned\"))",
+          "observe(at(\"cherry_tree.leaves_dropped.count\", \"fall\"), 100, \"count\", source(\"Each tree drops 100 leaves each during the fall\"))",
+          "product_relation(at(\"town_council.cherry_trees.leaves_dropped.count\", \"fall\"), at(\"town_council.cherry_trees.planted.count\", \"end_of_decade\"), at(\"cherry_tree.leaves_dropped.count\", \"fall\"), source(\"Each tree drops 100 leaves each during the fall\"))",
+          "produce(\"fall_leaf_drop\", \"neighborhood.council_planted_cherry_trees\", at(\"neighborhood.fallen_cherry_leaves.count\", \"current\"), at(\"town_council.cherry_trees.leaves_dropped.count\", \"fall\"), source(\"Each tree drops 100 leaves each during the fall\"))",
+          "query(\"value\", at(\"town_council.cherry_trees.leaves_dropped.count\", \"fall\"))"
+        ]
+      },
+      "source_id": "6105"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "June has $500 for buying school supplies for the new school year. She buys four maths books at $20 each, six more science books than maths books at $10 each, and twice as many art books as maths books at $20 each. If she also bought music books, how much money did she spend on music books?",
+      "repair": {
+        "failure_class": "teacher_ambiguous",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"june.school_supplies.available_funds\", \"initial\"), 500, \"currency\", source(\"June has $500 for buying school supplies for the new school year\"))",
+          "add(\"buy_maths_books\", \"june\", at(\"june.maths_books.count\", \"current\"), 4, source(\"She buys four maths books\"))",
+          "observe(at(\"maths_book.unit_price\", \"current\"), 20, \"currency\", source(\"four maths books at $20 each\"))",
+          "add(\"buy_science_books\", \"june\", at(\"june.science_books.count\", \"current\"), \"june.science_books.purchased.count\", source(\"six more science books than maths books\"))",
+          "offset(\"june.science_books.purchased.count\", event_field(\"buy_maths_books\", \"quantity\"), 6, \"count\", source(\"six more science books than maths books\"))",
+          "observe(at(\"science_book.unit_price\", \"current\"), 10, \"currency\", source(\"at $10 each\"))",
+          "add(\"buy_art_books\", \"june\", at(\"june.art_books.count\", \"current\"), \"june.art_books.purchased.count\", source(\"twice as many art books as maths books\"))",
+          "multiple(\"june.art_books.purchased.count\", event_field(\"buy_maths_books\", \"quantity\"), 2, source(\"twice as many art books as maths books\"))",
+          "observe(at(\"art_book.unit_price\", \"current\"), 20, \"currency\", source(\"twice as many art books as maths books at $20 each\"))",
+          "remove(\"buy_music_books\", \"june\", at(\"june.school_supplies.available_funds\", \"current\"), \"june.music_books.amount_spent\", source(\"she also bought music books\"))",
+          "query(\"value\", event_field(\"buy_music_books\", \"quantity\"))"
+        ]
+      },
+      "source_id": "4214"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

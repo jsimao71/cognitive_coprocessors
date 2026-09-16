@@ -1,0 +1,57 @@
+{
+  "answer_wilson_95": [
+    0.03674203301763675,
+    0.18351795267410276
+  ],
+  "by_difficulty": {
+    "high": {
+      "count": 11,
+      "final_answer_correct": 2
+    },
+    "low": {
+      "count": 26,
+      "final_answer_correct": 2
+    },
+    "medium": {
+      "count": 22,
+      "final_answer_correct": 1
+    }
+  },
+  "counts": {
+    "answer_scorable": 59,
+    "final_answer_correct": 5
+  },
+  "eval_sha256": "f99bb00f46d97c284b9f574d46672bf59b089a85d0f9ad80a0f04df0920480ba",
+  "prediction_count": 59,
+  "predictions_sha256": "202540fe2aa7530b71f366d45e2fa189257505772529ef31975fa2dcfad68818",
+  "rates": {
+    "answer_scorable": 1.0,
+    "final_answer_correct": 0.0847457627118644
+  },
+  "run": {
+    "answers_visible_to_model": false,
+    "condition": "direct_concise",
+    "instruction": "Solve the arithmetic word problem. Return only one final line in the exact form `Answer: <number>`. Do not write a program, ASL, or tool call.",
+    "instruction_sha256": "96b8a5c1061a71e6c33c502c84b16521e8eeb342976f5bd5c3414603511ab8c3",
+    "model": {
+      "cached_generation": true,
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 128,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "model_id": "Qwen/Qwen3-0.6B",
+    "prompt_fields": [
+      "question"
+    ],
+    "protocol_id": "paper1_gsm8k_matched_direct_v1",
+    "rationales_visible_to_model": false,
+    "seed": 44017,
+    "shard_count": 1
+  },
+  "schema_version": "ccpu.paper1.gsm8k_direct_summary.v1",
+  "shard_index": 0
+}

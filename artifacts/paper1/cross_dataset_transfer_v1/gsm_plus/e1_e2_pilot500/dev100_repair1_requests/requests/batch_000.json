@@ -1,0 +1,543 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jean is two years older than Mark.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 36,
+          "teacher_input_default": true,
+          "text": "Two years ago Mark was 5 years older than half Jan's age.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "If Jan is half of 60 how old is Jean?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jean.age_now = mark.age_now + 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mark.age_2y_ago = jan.age_now / 2 + 5",
+              "mark.age_now = mark.age_2y_ago + 2"
+            ],
+            "assumptions": [
+              "The unqualified phrase \"Jan's age\" refers to Jan's age at the time established elsewhere in the question."
+            ],
+            "confidence": 0.88,
+            "part_id": 1,
+            "semantic_notes": [
+              "Jean and Jan are treated as distinct named people."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jan.age_now = 60 / 2",
+              "RETURN jean.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-01458"
+      },
+      "question": "Jean is two years older than Mark.  Two years ago Mark was 5 years older than half Jan's age.  If Jan is half of 60 how old is Jean?",
+      "source_context": null,
+      "source_id": "gsm-plus-01458",
+      "validation_failure": "answer mismatch: actual=24, expected=23",
+      "validator_context": {
+        "correct_answer": "23",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Last night Rick killed ten wolves and 15 cougars while hunting.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "Twelve of the animals Rick hunted yesterday were juveniles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "Today Rick killed three times as many wolves as cougars and three fewer cougars than the previous night.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 260,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 229,
+          "teacher_input_default": true,
+          "text": "How many animals did Rick kill?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rick.last_night.wolves_killed.count = 10",
+              "rick.last_night.cougars_killed.count = 15"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rick.last_night.juvenile_animals_hunted.count = 12"
+            ],
+            "assumptions": [
+              "\u201cYesterday\u201d is treated as referring to the animals hunted last night."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rick.today.wolves_killed.count = rick.today.cougars_killed.count * 3",
+              "rick.today.cougars_killed.count = rick.last_night.cougars_killed.count - 3"
+            ],
+            "assumptions": [
+              "\u201cThree fewer cougars than the previous night\u201d compares today's cougar count with last night's cougar count."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rick.today.animals_killed.total_count = rick.today.wolves_killed.count + rick.today.cougars_killed.count",
+              "RETURN rick.today.animals_killed.total_count"
+            ],
+            "assumptions": [
+              "The unqualified final question is interpreted as asking for today's total because the immediately preceding clause describes today's kills."
+            ],
+            "confidence": 0.9,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02022"
+      },
+      "question": "Last night Rick killed ten wolves and 15 cougars while hunting. Twelve of the animals Rick hunted yesterday were juveniles. Today Rick killed three times as many wolves as cougars and three fewer cougars than the previous night. How many animals did Rick kill?",
+      "source_context": null,
+      "source_id": "gsm-plus-02022",
+      "validation_failure": "answer mismatch: actual=48, expected=73",
+      "validator_context": {
+        "correct_answer": "73",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A 115-star flag has three rows of 12 stars, two rows of 15 stars and the rest are 5-star rows.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "How many rows of 7 stars are there altogether on the flag?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "flag.total_stars = 115",
+              "flag.twelve_star_rows.count = 3",
+              "flag.twelve_star_rows.stars_per_row = 12",
+              "flag.fifteen_star_rows.count = 2",
+              "flag.fifteen_star_rows.stars_per_row = 15",
+              "flag.five_star_rows.stars_per_row = 5",
+              "flag.remaining_stars = flag.total_stars - flag.twelve_star_rows.count * flag.twelve_star_rows.stars_per_row - flag.fifteen_star_rows.count * flag.fifteen_star_rows.stars_per_row",
+              "flag.five_star_rows.count = flag.remaining_stars / flag.five_star_rows.stars_per_row"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The setup defines the remaining rows as 5-star rows, but the query asks for 7-star rows; no 7-star-row quantity or relation is established."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02297"
+      },
+      "question": "A 115-star flag has three rows of 12 stars, two rows of 15 stars and the rest are 5-star rows. How many rows of 7 stars are there altogether on the flag?",
+      "source_context": null,
+      "source_id": "gsm-plus-02297",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A herd consists of camels and dromedaries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "There are 1800 heads and 3040 humps.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "How many dromedaries are there if camels have two humps each and dromedaries have one hump each?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "herd.animal_count = herd.camel.count + herd.dromedary.count"
+            ],
+            "assumptions": [
+              "The two stated animal types are exhaustive and disjoint within the herd."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "herd.head_count = 1800",
+              "herd.hump_count = 3040",
+              "herd.animal_count = herd.head_count"
+            ],
+            "assumptions": [
+              "Each camel and dromedary has one head, so the herd's head count equals its animal count."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "herd.camel.humps_each = 2",
+              "herd.dromedary.humps_each = 1",
+              "herd.humps_if_all_camels = herd.animal_count * herd.camel.humps_each",
+              "herd.hump_reduction_per_dromedary = herd.camel.humps_each - herd.dromedary.humps_each",
+              "herd.dromedary.count = (herd.humps_if_all_camels - herd.hump_count) / herd.hump_reduction_per_dromedary",
+              "RETURN herd.dromedary.count"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-03329"
+      },
+      "question": "A herd consists of camels and dromedaries. There are 1800 heads and 3040 humps. How many dromedaries are there if camels have two humps each and dromedaries have one hump each?",
+      "source_context": null,
+      "source_id": "gsm-plus-03329",
+      "validation_failure": "unresolved reference 'herd.camel.count' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "560",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 50 students in Marissa\u2019s class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "Each student started the year with 15 pencils.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "After two months, 1/4 of the total pencils in class were used.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "At the end of the year, only 1/2 of the remaining pencils were left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 221,
+          "teacher_input_default": true,
+          "text": "How many pencils were left?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "marissa.class.students = 50"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marissa.class.start.pencils_per_student = 15",
+              "marissa.class.start.pencils_total = marissa.class.students * marissa.class.start.pencils_per_student"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marissa.class.after_two_months.pencils_used = marissa.class.start.pencils_total / 4",
+              "marissa.class.after_two_months.pencils_remaining = marissa.class.start.pencils_total - marissa.class.after_two_months.pencils_used"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marissa.class.end_of_year.pencils_left = marissa.class.after_two_months.pencils_remaining / 2"
+            ],
+            "assumptions": [
+              "Resolved \"the remaining pencils\" to the pencils remaining after the first two months."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN marissa.class.end_of_year.pencils_left"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-03768"
+      },
+      "question": "There are 50 students in Marissa\u2019s class. Each student started the year with 15 pencils. After two months, 1/4 of the total pencils in class were used. At the end of the year, only 1/2 of the remaining pencils were left. How many pencils were left?",
+      "source_context": null,
+      "source_id": "gsm-plus-03768",
+      "validation_failure": "answer mismatch: actual=281.25, expected=281",
+      "validator_context": {
+        "correct_answer": "281",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

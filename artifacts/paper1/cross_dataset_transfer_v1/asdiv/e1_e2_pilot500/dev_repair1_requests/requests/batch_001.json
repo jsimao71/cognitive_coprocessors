@@ -1,0 +1,455 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sam cut equal-length pieces of ribbon from a 3,730-cm long ribbon.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "If each piece was 73 cm long, how much of the original ribbon was left?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "sam.ribbon.original_length_cm = 3730"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause establishes equal-length pieces but does not yet specify their length or count."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Computing the ribbon left after cutting the maximum number of whole 73-cm pieces requires remainder or floor semantics, neither of which is available in the active operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0804"
+      },
+      "question": "Sam cut equal-length pieces of ribbon from a 3,730-cm long ribbon. If each piece was 73 cm long, how much of the original ribbon was left?",
+      "source_context": null,
+      "source_id": "asdiv-0804",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are three bosses in a computer game.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "Boss A appears every 1 hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "Boss B appears every 30 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "Boss C appears every 40 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 253,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 138,
+          "teacher_input_default": true,
+          "text": "If the three bosses appear together at 10:10, at what time will the three bosses appear together again in the game?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "game.boss_count = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boss_a.appearance_interval.hours = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boss_b.appearance_interval.minutes = 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boss_c.appearance_interval.minutes = 40"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Computing the next simultaneous appearance requires least-common-multiple recurrence semantics and clock-time addition, which are not available in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0842"
+      },
+      "question": "There are three bosses in a computer game. Boss A appears every 1 hour. Boss B appears every 30 minutes. Boss C appears every 40 minutes. If the three bosses appear together at 10:10, at what time will the three bosses appear together again in the game?",
+      "source_context": null,
+      "source_id": "asdiv-0842",
+      "validation_failure": "non-ok semantic parts: part 4=unsupported",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Three cleaners, A, B, and C are cleaning the windows of a building.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "Person A cleans a window every 8 min, person B every 12 min and person C every 14 min.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "If they start cleaning three windows at the same time at 14:15, at what time will start cleaning windows at the same time again?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "building.cleaner_count = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "cleaner_a.window_interval.minutes = 8",
+              "cleaner_b.window_interval.minutes = 12",
+              "cleaner_c.window_interval.minutes = 14"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Computing the next simultaneous window-cleaning start requires least-common-multiple recurrence semantics and clock-time addition, which are not available in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0844"
+      },
+      "question": "Three cleaners, A, B, and C are cleaning the windows of a building. Person A cleans a window every 8 min, person B every 12 min and person C every 14 min. If they start cleaning three windows at the same time at 14:15, at what time will start cleaning windows at the same time again?",
+      "source_context": null,
+      "source_id": "asdiv-0844",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "17",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Diana bought 12 guavas and 16 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "What is the ratio of guavas to apples?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "diana.guavas = 12",
+              "diana.apples = 16"
+            ],
+            "assumptions": [],
+            "confidence": 1,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "diana.guavas_to_apples_ratio = diana.guavas / diana.apples",
+              "RETURN diana.guavas_to_apples_ratio"
+            ],
+            "assumptions": [
+              "The requested ratio is represented numerically as guavas divided by apples."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0850"
+      },
+      "question": "Diana bought 12 guavas and 16 apples. What is the ratio of guavas to apples?",
+      "source_context": null,
+      "source_id": "asdiv-0850",
+      "validation_failure": "answer mismatch: actual=0.75, expected=3",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Elliott has 8 candies and Sabetha has 10 candies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Find the ratio of Elliott's candies to Sabetha's candies.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "elliott.candies = 8",
+              "sabetha.candies = 10"
+            ],
+            "assumptions": [],
+            "confidence": 1,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "elliott_to_sabetha.candy_ratio = elliott.candies / sabetha.candies",
+              "RETURN elliott_to_sabetha.candy_ratio"
+            ],
+            "assumptions": [
+              "The requested ratio is represented numerically as Elliott's candy count divided by Sabetha's candy count."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0851"
+      },
+      "question": "Elliott has 8 candies and Sabetha has 10 candies. Find the ratio of Elliott's candies to Sabetha's candies.",
+      "source_context": null,
+      "source_id": "asdiv-0851",
+      "validation_failure": "answer mismatch: actual=0.8, expected=4",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

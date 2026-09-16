@@ -1,0 +1,106 @@
+{
+  "adapter_files": {
+    "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+    "adapter_config.json": "bd69aad30b6ca27d15221b5a03f63415f7708ad13cbfc18ce2515732da13ce13",
+    "adapter_model.safetensors": "f5a9bdf189d78823e1a7d84fb764415b4416007eadeb676a806741857e1c30eb"
+  },
+  "adapter_id": "Qwen3-0.6B-greedy-plus-AUG2-entity-F0-L0-r8-init99173",
+  "dev_rows": 17,
+  "dev_sha256": "724a2887ac818ae1d932f4889363788369689890c94bc953e10cb7b4b0ec22aa",
+  "device": "xpu",
+  "dtype": "float16",
+  "epoch_adapters": {},
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dev_loss": 0.31356025925453973,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.19930007378520556,
+      "mean_unweighted_dev_loss": 0.31356027021127586,
+      "mean_unweighted_train_loss": 0.19930007340334324,
+      "pairwise_train_accuracy": null
+    }
+  ],
+  "initial_adapter": {
+    "adapter_config": {
+      "base_model_name_or_path": "Qwen/Qwen3-0.6B",
+      "lora_alpha": 16,
+      "lora_dropout": 0.05,
+      "r": 8,
+      "target_modules": [
+        "k_proj",
+        "o_proj",
+        "q_proj",
+        "v_proj"
+      ]
+    },
+    "files": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5f4fa901924c17a6b3bb7017c8b81425b8663a195e03c292dfb798acb03b71ca",
+      "adapter_model.safetensors": "cf8063841603023289d4b5074b8be2352aea3abebe3b0b8d28b0e62b96807621"
+    },
+    "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\qwen_run\\adapter"
+  },
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "optimizer_steps": 116,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "peak_memory_bytes": 4447103488,
+  "resumed_from_optimizer_step": 0,
+  "schema_version": "ccpu.paper1.lora_training.v1",
+  "selected_dev_loss": 0.31356025925453973,
+  "selected_epoch": 1,
+  "selection_policy": "final_epoch",
+  "token_audit": {
+    "dev_max_full_tokens": 528,
+    "dev_max_prefix_tokens": 218,
+    "dev_truncated_rows": 0,
+    "train_max_full_tokens": 594,
+    "train_max_prefix_tokens": 221,
+    "train_truncated_rows": 0
+  },
+  "total_parameters": 598343680,
+  "train_rows": 928,
+  "train_sha256": "df5724927e31369b91241a44de069e8eeefd65332f5c5fc30a2bacbee2fb6043",
+  "train_target_tokens_per_epoch": [
+    92289
+  ],
+  "trainable_fraction": 0.0038335158817086527,
+  "trainable_parameters": 2293760,
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "checkpoint_every_optimizer_steps": 25,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 1,
+    "evaluate_each_epoch": false,
+    "gradient_accumulation_steps": 8,
+    "gradient_checkpointing": false,
+    "learning_rate": 0.0001,
+    "logical_epoch_field": "epoch_view",
+    "max_length": 1152,
+    "pairwise_rank_weight": 0.0,
+    "pairwise_temperature": 1.0,
+    "rank": 8,
+    "reject_truncation": true,
+    "restore_best_dev": false,
+    "save_epoch_adapters": false,
+    "seed": 99173,
+    "semantic_token_weights": null,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 92289,
+  "wall_time_seconds": 1645.1140884000051
+}

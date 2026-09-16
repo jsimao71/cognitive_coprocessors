@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Andy works in the pro shop of a tennis resort.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "He has 12 racquets that need restringing.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 275,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "3 of them are to be strung with synthetic gut, 5 of them will be strung with polyester string, and 4 of them will be strung with a hybrid set (half synthetic gut, half polyester string).",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 350,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 276,
+          "teacher_input_default": true,
+          "text": "Andy also has 7 racquets that are already strung and do not need any work.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 453,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 351,
+          "teacher_input_default": true,
+          "text": "Additionally, there are 2 cans of tennis balls that he needs to open, but it takes him no time at all.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 687,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 454,
+          "teacher_input_default": true,
+          "text": "How long will it take Andy to string all of the racquets that need restringing if it takes him an average of 15 minutes for him to string with synthetic gut, 22 minutes to string with polyester string, and 18 minutes for hybrid sets?",
+          "warnings": []
+        }
+      ],
+      "question": "Andy works in the pro shop of a tennis resort. He has 12 racquets that need restringing. 3 of them are to be strung with synthetic gut, 5 of them will be strung with polyester string, and 4 of them will be strung with a hybrid set (half synthetic gut, half polyester string). Andy also has 7 racquets that are already strung and do not need any work. Additionally, there are 2 cans of tennis balls that he needs to open, but it takes him no time at all. How long will it take Andy to string all of the racquets that need restringing if it takes him an average of 15 minutes for him to string with synthetic gut, 22 minutes to string with polyester string, and 18 minutes for hybrid sets?",
+      "source_id": "gsm-plus-07750"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Pat has a flower bed that is 150 feet long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "Pat wants to fill her flower bed with plants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "Pat's flowers grow 18 inches wide so she needs to leave 1.5 feet between every plant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "Pat already owns 20 flowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 323,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 209,
+          "teacher_input_default": true,
+          "text": "Each flowering plant costs $8 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+          "warnings": []
+        }
+      ],
+      "question": "Pat has a flower bed that is 150 feet long.  Pat wants to fill her flower bed with plants.  Pat's flowers grow 18 inches wide so she needs to leave 1.5 feet between every plant.  Pat already owns 20 flowers.  Each flowering plant costs $8 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+      "source_id": "gsm-plus-07872"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Pat has a flower bed that is 1500 feet long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 91,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "Pat wants to fill her flower bed with plants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 180,
+          "teacher_input_default": true,
+          "text": "Pat already owns 180 flowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 326,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 211,
+          "teacher_input_default": true,
+          "text": "Each flowering plant costs $12 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+          "warnings": []
+        }
+      ],
+      "question": "Pat has a flower bed that is 1500 feet long.  Pat wants to fill her flower bed with plants.  Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.  Pat already owns 180 flowers.  Each flowering plant costs $12 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+      "source_id": "gsm-plus-07873"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Pat has a flower bed that is 1.11 times of one hundred feet long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "Pat wants to fill her flower bed with plants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 201,
+          "teacher_input_default": true,
+          "text": "Pat already owns 17 flowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 347,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 231,
+          "teacher_input_default": true,
+          "text": "Each flowering plant costs $6.5 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+          "warnings": []
+        }
+      ],
+      "question": "Pat has a flower bed that is 1.11 times of one hundred feet long.  Pat wants to fill her flower bed with plants.  Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.  Pat already owns 17 flowers.  Each flowering plant costs $6.5 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+      "source_id": "gsm-plus-07874"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Pat has a flower bed that is 111 feet long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "Pat wants to fill her flower bed with plants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 253,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "Pat already owns 17 flowers, and recently, her friends give her 3 flowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 369,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 255,
+          "teacher_input_default": true,
+          "text": "Each flowering plant costs $6 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+          "warnings": []
+        }
+      ],
+      "question": "Pat has a flower bed that is 111 feet long.  Pat wants to fill her flower bed with plants.  Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.  Pat already owns 17 flowers, and recently, her friends give her 3 flowers.  Each flowering plant costs $6 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+      "source_id": "gsm-plus-07875"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

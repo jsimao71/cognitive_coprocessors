@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack decides to visit a museum 150 miles from home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "He drives 75 mph there and back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "He spends 6 hours at the museum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "Then he goes to the supermarket for an hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "How long is he gone from home?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack decides to visit a museum 150 miles from home.  He drives 75 mph there and back.  He spends 6 hours at the museum. Then he goes to the supermarket for an hour. How long is he gone from home?",
+      "source_id": "gsm-plus-06195"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack decides to visit a museum 150 miles from home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "He drives 75 mph there and back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "He is gone from home for 10 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "How long does he spend at the museum?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack decides to visit a museum 150 miles from home. He drives 75 mph there and back. He is gone from home for 10 hours. How long does he spend at the museum?",
+      "source_id": "gsm-plus-06196"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack plans a trip to a museum that is 150 miles away from his house.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "He travels at a speed of 75 mph to and from the museum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "He stays at the museum for a duration of 6 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 175,
+          "teacher_input_default": true,
+          "text": "What is the total time that he is away from his house?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack plans a trip to a museum that is 150 miles away from his house. He travels at a speed of 75 mph to and from the museum. He stays at the museum for a duration of 6 hours. What is the total time that he is away from his house?",
+      "source_id": "gsm-plus-06197"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack decides to visit a museum 150 miles from home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 152,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "On his way, he passes through a town 50 miles from home where he spots a rare bird but doesn't stop.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "He continues driving at 75 mph until he reaches the museum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 337,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 213,
+          "teacher_input_default": true,
+          "text": "After spending 6 hours at the museum, he drives back home at the same speed, passing through the same town without stopping.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 368,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 338,
+          "teacher_input_default": true,
+          "text": "How long is he gone from home?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack decides to visit a museum 150 miles from home. On his way, he passes through a town 50 miles from home where he spots a rare bird but doesn't stop. He continues driving at 75 mph until he reaches the museum. After spending 6 hours at the museum, he drives back home at the same speed, passing through the same town without stopping. How long is he gone from home?",
+      "source_id": "gsm-plus-06198"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mike decides he wants to replace his movie collection with digital versions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "He has 900 movies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "A third of the movies are in various series and he knows he can get those for only $5 of the cost of a normal movie by just buying the series together.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 309,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 251,
+          "teacher_input_default": true,
+          "text": "50% of the remaining movies are older movies which are $4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 379,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 311,
+          "teacher_input_default": true,
+          "text": "How much does replacing the movies cost if a normal movie costs $12?",
+          "warnings": []
+        }
+      ],
+      "question": "Mike decides he wants to replace his movie collection with digital versions.  He has 900 movies.  A third of the movies are in various series and he knows he can get those for only $5 of the cost of a normal movie by just buying the series together.  50% of the remaining movies are older movies which are $4.  How much does replacing the movies cost if a normal movie costs $12?",
+      "source_id": "gsm-plus-06216"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

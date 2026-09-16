@@ -1,0 +1,285 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The ring toss game at the carnival made 382 dollars in the first 44 days and 374 dollars in the remaining 10 days.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 145,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "How much did they make in all?",
+          "warnings": []
+        }
+      ],
+      "question": "The ring toss game at the carnival made 382 dollars in the first 44 days and 374 dollars in the remaining 10 days. How much did they make in all?",
+      "source_id": "svamp-chal-467"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "After resting they decided to go for a swim.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "The depth of the water is 2 times Dean's height.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "Dean is 8 feet shorter than Ron.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "If Ron stands at 14 feet How deep was the water?",
+          "warnings": []
+        }
+      ],
+      "question": "After resting they decided to go for a swim. The depth of the water is 2 times Dean's height. Dean is 8 feet shorter than Ron. If Ron stands at 14 feet How deep was the water?",
+      "source_id": "svamp-chal-151"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day Ryan spends 6 hours on learning english and 7 hours on learning chinese.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "If he learns for 5 days How many hours does he spend on learning english and chinese in all?",
+          "warnings": []
+        }
+      ],
+      "question": "Every day Ryan spends 6 hours on learning english and 7 hours on learning chinese. If he learns for 5 days How many hours does he spend on learning english and chinese in all?",
+      "source_id": "svamp-chal-742"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack received 10 emails in the morning, 5 emails in the afternoon and 4 emails in the evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "How many more emails did Jack receive in the afternoon than in the evening?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack received 10 emails in the morning, 5 emails in the afternoon and 4 emails in the evening. How many more emails did Jack receive in the afternoon than in the evening?",
+      "source_id": "svamp-chal-114"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack received 5 emails and 6 letters in the morning.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "He then received 9 emails and 7 letters in the afternoon.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "How many letters did jack receive in the day?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack received 5 emails and 6 letters in the morning. He then received 9 emails and 7 letters in the afternoon. How many letters did jack receive in the day?",
+      "source_id": "svamp-chal-590"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

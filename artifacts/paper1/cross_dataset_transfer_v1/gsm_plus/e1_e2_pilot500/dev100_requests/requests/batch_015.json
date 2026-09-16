@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are two aircraft at an airport that operate several flights daily.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "The first aircraft flies to Greece for three-fourths of its total flights, and the rest of its flights are evenly divided between France and Germany.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 356,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "The second aircraft only flies to Poland, and its 44 flights represent half of the total flights made by the first aircraft each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 440,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 357,
+          "teacher_input_default": true,
+          "text": "Can you determine the number of daily flights made by the first aircraft to France?",
+          "warnings": []
+        }
+      ],
+      "question": "There are two aircraft at an airport that operate several flights daily. The first aircraft flies to Greece for three-fourths of its total flights, and the rest of its flights are evenly divided between France and Germany. The second aircraft only flies to Poland, and its 44 flights represent half of the total flights made by the first aircraft each day. Can you determine the number of daily flights made by the first aircraft to France?",
+      "source_id": "gsm-plus-07949"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam bought himself some new trousers for $50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "His mother gave him $8 for this purpose, and his father gave him twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "How much money did Adam have to contribute from his savings?",
+          "warnings": []
+        }
+      ],
+      "question": "Adam bought himself some new trousers for $50. His mother gave him $8 for this purpose, and his father gave him twice as much. How much money did Adam have to contribute from his savings?",
+      "source_id": "gsm-plus-07960"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The population of porcupines in a park is 50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "The number of female porcupines is 3/5 of the total population.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 168,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "Each female porcupine gives birth to 4 babies every month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 214,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 169,
+          "teacher_input_default": true,
+          "text": "Unluckily, 1/10 of the female porcupines die.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 215,
+          "teacher_input_default": true,
+          "text": "How many porcupines will be in the park after a year?",
+          "warnings": []
+        }
+      ],
+      "question": "The population of porcupines in a park is 50. The number of female porcupines is 3/5 of the total population. Each female porcupine gives birth to 4 babies every month. Unluckily, 1/10 of the female porcupines die. How many porcupines will be in the park after a year?",
+      "source_id": "gsm-plus-08043"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James spends 10/3 minutes to read a single page of his book before he goes to bed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 145,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "He reads 18 pages of his book and then decides to go to sleep.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 146,
+          "teacher_input_default": true,
+          "text": "How long does James spend reading, in minutes?",
+          "warnings": []
+        }
+      ],
+      "question": "James spends 10/3 minutes to read a single page of his book before he goes to bed. He reads 18 pages of his book and then decides to go to sleep. How long does James spend reading, in minutes?",
+      "source_id": "gsm-plus-08146"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Richard wants to make a video to share online of him doing a science experiment that creates a fountain of diet soda after placing a specific branded candy inside it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 167,
+          "teacher_input_default": true,
+          "text": "Richard's driveway is 24 feet wide and he wants to put a bottle of soda every 3 feet of the driveway.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 452,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 269,
+          "teacher_input_default": true,
+          "text": "After starting at the first bottle, it will take Richard 5 seconds to go from one soda bottle to the next, dropping the candy in. He drops 3 candies in each bottle of water at a time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 531,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 453,
+          "teacher_input_default": true,
+          "text": "How many seconds total will it take Richard to set off all the soda fountains?",
+          "warnings": []
+        }
+      ],
+      "question": "Richard wants to make a video to share online of him doing a science experiment that creates a fountain of diet soda after placing a specific branded candy inside it. Richard's driveway is 24 feet wide and he wants to put a bottle of soda every 3 feet of the driveway. After starting at the first bottle, it will take Richard 5 seconds to go from one soda bottle to the next, dropping the candy in. He drops 3 candies in each bottle of water at a time. How many seconds total will it take Richard to set off all the soda fountains?",
+      "source_id": "gsm-plus-08286"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A sum of $1920 was split among three individuals.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "The second person received $80 more than the first person, and the third person received double the amount of the second person.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "How much did the first person receive?",
+          "warnings": []
+        }
+      ],
+      "question": "A sum of $1920 was split among three individuals. The second person received $80 more than the first person, and the third person received double the amount of the second person. How much did the first person receive?",
+      "source_id": "gsm-plus-08365"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John goes to a liquor store and buys 10 bottles of scotch for a total cost of $600.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "He also decides to buy some bottles of cognac.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 206,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 131,
+          "teacher_input_default": true,
+          "text": "The number of cognac bottles he buys is twice the number of scotch bottles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 271,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 207,
+          "teacher_input_default": true,
+          "text": "Each bottle of cognac costs 50% more than each bottle of scotch.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 393,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 272,
+          "teacher_input_default": true,
+          "text": "After buying the scotch and cognac, John also purchases a bottle of wine that costs half the price of a bottle of scotch.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 454,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 394,
+          "teacher_input_default": true,
+          "text": "How much does he spend in total on scotch, cognac, and wine?",
+          "warnings": []
+        }
+      ],
+      "question": "John goes to a liquor store and buys 10 bottles of scotch for a total cost of $600. He also decides to buy some bottles of cognac. The number of cognac bottles he buys is twice the number of scotch bottles. Each bottle of cognac costs 50% more than each bottle of scotch. After buying the scotch and cognac, John also purchases a bottle of wine that costs half the price of a bottle of scotch. How much does he spend in total on scotch, cognac, and wine?",
+      "source_id": "gsm-plus-09579"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Debra is monitoring a hive to see how many bees come in and out in a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "She saw 30 bees leave the hive in the first six hours, and then she saw half of them return in the next six hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "During the third six hours, she saw some more bees leave the hive.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 411,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 256,
+          "teacher_input_default": true,
+          "text": "If in the last six hours of the day Debra saw 75 bees return to the hive, how many times as many bees left the hive in the third six hours as in the first?",
+          "warnings": []
+        }
+      ],
+      "question": "Debra is monitoring a hive to see how many bees come in and out in a day. She saw 30 bees leave the hive in the first six hours, and then she saw half of them return in the next six hours. During the third six hours, she saw some more bees leave the hive. If in the last six hours of the day Debra saw 75 bees return to the hive, how many times as many bees left the hive in the third six hours as in the first?",
+      "source_id": "gsm-plus-01180"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Tuesday, Clara bought 20 pomegranates at $20 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "At the till she got $2 off because she had a voucher.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "Clara then bought ten more oranges at $10 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "The next day, the price shot to $30 per fruit, but the store also offered a 10% discount on the total cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 329,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 264,
+          "teacher_input_default": true,
+          "text": "Sheila took advantage of the discount and bought 20 pomegranates.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 420,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 330,
+          "teacher_input_default": true,
+          "text": "What is the difference between the final prices paid for the pomegranates on the two days?",
+          "warnings": []
+        }
+      ],
+      "question": "On Tuesday, Clara bought 20 pomegranates at $20 each. At the till she got $2 off because she had a voucher. Clara then bought ten more oranges at $10 each. The next day, the price shot to $30 per fruit, but the store also offered a 10% discount on the total cost. Sheila took advantage of the discount and bought 20 pomegranates. What is the difference between the final prices paid for the pomegranates on the two days?",
+      "source_id": "gsm-plus-05206"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Four pizzas, each divided into 8 pieces, were split among Becky, Jake, and Silvia.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "Becky consumed 3 slices more than Jake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "Silvia, on the other hand, consumed double the amount Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 282,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 187,
+          "teacher_input_default": true,
+          "text": "Given that Becky consumed 10 slices, can you determine the total number of slices they all ate?",
+          "warnings": []
+        }
+      ],
+      "question": "Four pizzas, each divided into 8 pieces, were split among Becky, Jake, and Silvia. Becky consumed 3 slices more than Jake. Silvia, on the other hand, consumed double the amount Jake did. Given that Becky consumed 10 slices, can you determine the total number of slices they all ate?",
+      "source_id": "gsm-plus-08485"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

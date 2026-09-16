@@ -1,0 +1,67 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "alpha_return_equivalent": 0.29411764705882354,
+        "alpha_state_equivalent": 0.17647058823529413,
+        "dependency_correct": 0.17647058823529413,
+        "exact_asl": 0.0,
+        "executable": 0.7647058823529411,
+        "final_answer_correct": 0.47058823529411764,
+        "lowerable_to_ccir": 0.8235294117647058,
+        "parse_valid": 0.8235294117647058,
+        "semantic_lint_valid": 0.6470588235294118,
+        "semantic_return_equivalent": 0.17647058823529413,
+        "semantic_state_equivalent": 0.11764705882352941,
+        "type_valid": 0.8235294117647058
+      }
+    }
+  },
+  "component_mean_f1": {
+    "alpha_state": 0.49759025288437053,
+    "edges": 0.33158263305322133,
+    "operators": 0.6241108564637976,
+    "paths": 0.3645324796585301,
+    "semantic_state": 0.36593837535013995,
+    "source_facts": 0.5049019607843137
+  },
+  "eval_sha256": "2473d2b634d9572b36025029d15c632c27c2fce31d1d6abf82e9cf8018340d34",
+  "prediction_count": 17,
+  "predictions_sha256": "5bebc638692b2973bd8fc9c64119658a796ab7f7b4c97ab239fcc68b3e09412a",
+  "rates": {
+    "alpha_return_equivalent": 0.29411764705882354,
+    "alpha_state_equivalent": 0.17647058823529413,
+    "dependency_correct": 0.17647058823529413,
+    "exact_asl": 0.0,
+    "executable": 0.7647058823529411,
+    "final_answer_correct": 0.47058823529411764,
+    "lowerable_to_ccir": 0.8235294117647058,
+    "parse_valid": 0.8235294117647058,
+    "semantic_lint_valid": 0.6470588235294118,
+    "semantic_return_equivalent": 0.17647058823529413,
+    "semantic_state_equivalent": 0.11764705882352941,
+    "type_valid": 0.8235294117647058
+  },
+  "run": {
+    "condition": "lora",
+    "demo_source_ids": [],
+    "eval_sha256": "2473d2b634d9572b36025029d15c632c27c2fce31d1d6abf82e9cf8018340d34",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-U2000-plus-AUG1-relation-F0-L0-r8-init99173",
+      "adapter_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_semantic_augmentation_v1\\aug1_relation_paraphrase\\qwen_run\\adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "seed": 44017,
+    "shots": 0,
+    "train_split_sha256": "f27a904409dd2f5686f5004e4b2b85207f2201cc3712296d52aceaad31603c77"
+  },
+  "schema_version": "ccpu.paper1.asl_evaluation.v2",
+  "scored_predictions_sha256": "a90b79a2dbb4e8ac22189ae23938574d669f38a9704b7711cab27031aed7b266"
+}

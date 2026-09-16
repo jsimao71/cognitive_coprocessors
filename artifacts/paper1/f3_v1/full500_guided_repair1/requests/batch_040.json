@@ -1,0 +1,92 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "A small zoo houses a variety of 68 wild animals. After they send a gorilla family of six to a different zoo, they adopt a hippopotamus from another zoo. A while later, an animal rescue contacted them, and the zoo took in three endangered rhinos. Then one of their lionesses gave birth to cubs, and they opened a meerkat exhibit with twice as many meerkats as they had gained lion cubs. The zoo then had 90 animals in all. How many lion cubs were born at the zoo?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"small_zoo.animals\", \"animal\", \"small_zoo\", source(\"A small zoo houses a variety of 68 wild animals\"))",
+          "observe(at(\"small_zoo.animals.count\", \"initial\"), 68, \"count\", source(\"A small zoo houses a variety of 68 wild animals\"))",
+          "transfer(\"send_gorilla_family\", \"small_zoo\", at(\"small_zoo.animals.count\", \"current\"), at(\"different_zoo.animals.count\", \"current\"), 6, source(\"they send a gorilla family of six to a different zoo\"))",
+          "transfer(\"adopt_hippopotamus\", \"small_zoo\", at(\"another_zoo.animals.count\", \"current\"), at(\"small_zoo.animals.count\", \"current\"), 1, source(\"they adopt a hippopotamus from another zoo\"))",
+          "transfer(\"take_in_rhinos\", \"small_zoo\", at(\"animal_rescue.animals.count\", \"current\"), at(\"small_zoo.animals.count\", \"current\"), 3, source(\"an animal rescue contacted them, and the zoo took in three endangered rhinos\"))",
+          "produce(\"lion_cub_birth\", \"small_zoo.lioness\", at(\"small_zoo.animals.count\", \"current\"), \"small_zoo.lion_cubs.born.count\", source(\"one of their lionesses gave birth to cubs\"))",
+          "add(\"open_meerkat_exhibit\", \"small_zoo\", at(\"small_zoo.animals.count\", \"current\"), scale(event_field(\"lion_cub_birth\", \"quantity\"), 2), source(\"they opened a meerkat exhibit with twice as many meerkats as they had gained lion cubs\"))",
+          "observe(at(\"small_zoo.animals.count\", \"then\"), 90, \"count\", source(\"The zoo then had 90 animals in all\"))",
+          "query(\"value\", event_field(\"lion_cub_birth\", \"quantity\"))"
+        ]
+      },
+      "source_id": "1183"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Mary is writing a story, and wants her 60 characters to be split according to their initials. Half of her characters have the initial A, and half of this amount have the initial C. Mary wants the rest of her characters to have the initials D and E, but she wants there to be twice as many characters with the initial D as there are characters with the initial E. How many of Mary\u2019s characters have the initial D?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"mary.story.characters\", \"character\", \"mary.story\", source(\"her 60 characters\"))",
+          "observe(at(\"mary.story.characters.count\", \"current\"), 60, \"count\", source(\"60 characters\"))",
+          "fraction_of(at(\"mary.story.characters.initial_a.count\", \"current\"), at(\"mary.story.characters.count\", \"current\"), 1, 2, source(\"Half of her characters have the initial A\"))",
+          "fraction_of(at(\"mary.story.characters.initial_c.count\", \"current\"), at(\"mary.story.characters.initial_a.count\", \"current\"), 1, 2, source(\"half of this amount have the initial C\"))",
+          "sum_relation(at(\"mary.story.characters.count\", \"current\"), at(\"mary.story.characters.initial_a.count\", \"current\"), at(\"mary.story.characters.initial_c.count\", \"current\"), at(\"mary.story.characters.initial_d.count\", \"current\"), at(\"mary.story.characters.initial_e.count\", \"current\"), source(\"Half of her characters have the initial A, and half of this amount have the initial C. Mary wants the rest of her characters to have the initials D and E\"))",
+          "multiple(at(\"mary.story.characters.initial_d.count\", \"current\"), at(\"mary.story.characters.initial_e.count\", \"current\"), 2, source(\"twice as many characters with the initial D as there are characters with the initial E\"))",
+          "query(\"value\", at(\"mary.story.characters.initial_d.count\", \"current\"))"
+        ]
+      },
+      "source_id": "6154"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "If Pete read twice as many books as Matt did last year, and this year he doubles that number while Matt reads only 50% more, how many books does Pete read across both years if Matt read 75 books in his second year?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"pete.books_read\", \"book\", \"pete\", source(\"Pete read twice as many books as Matt did last year\"))",
+          "collection(\"matt.books_read\", \"book\", \"matt\", source(\"Matt read 75 books in his second year\"))",
+          "multiple(at(\"pete.books_read.count\", \"last_year\"), at(\"matt.books_read.count\", \"last_year\"), 2, source(\"Pete read twice as many books as Matt did last year\"))",
+          "multiple(at(\"pete.books_read.count\", \"this_year\"), at(\"pete.books_read.count\", \"last_year\"), 2, source(\"this year he doubles that number\"))",
+          "percent_more(at(\"matt.books_read.count\", \"this_year\"), at(\"matt.books_read.count\", \"last_year\"), 50, source(\"Matt reads only 50% more\"))",
+          "observe(at(\"matt.books_read.count\", \"this_year\"), 75, \"count\", source(\"Matt read 75 books in his second year\"))",
+          "query(\"sum\", \"pete.books_read\", \"both_years\")"
+        ]
+      },
+      "source_id": "7228"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Marianne was 20 years old when Bella was 8 years old. How old will Marianne be when Bella turns 18?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"marianne.age\", \"when_bella_was_8\"), 20, \"year\", source(\"Marianne was 20 years old\"))",
+          "observe(at(\"bella.age\", \"when_bella_was_8\"), 8, \"year\", source(\"Bella was 8 years old\"))",
+          "observe(at(\"bella.age\", \"when_bella_turns_18\"), 18, \"year\", source(\"Bella turns 18\"))",
+          "query(\"value\", at(\"marianne.age\", \"when_bella_turns_18\"))"
+        ]
+      },
+      "source_id": "3069"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Jake is watching a new show, and is worried about how much time he has spent watching it. He spent half the day on Monday watching his show, 4 hours on Tuesday watching his show, a quarter of the day on Wednesday watching his show, and he spent half as much time watching the show on Thursday as he had done in total throughout the previous few days. On Friday, he finally finished watching it. If the entire show is 52 hours long, how many hours did Jake watch on Friday?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "1308"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

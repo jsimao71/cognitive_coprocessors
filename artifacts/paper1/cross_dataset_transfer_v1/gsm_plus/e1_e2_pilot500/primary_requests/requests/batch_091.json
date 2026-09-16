@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A bakery produces 3/5 of one hundred loaves of bread each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "How many loaves of bread are sold in the afternoon?",
+          "warnings": []
+        }
+      ],
+      "question": "A bakery produces 3/5 of one hundred loaves of bread each day. Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening. How many loaves of bread are sold in the afternoon?",
+      "source_id": "gsm-plus-02450"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are three trees in Eddy's backyard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "The shortest tree has a height of 6.5 feet, and the second tree has a height of 5.5 feet more than the shortest tree.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 237,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 160,
+          "teacher_input_default": true,
+          "text": "The height of the tallest tree is twice the height of the two trees combined.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 267,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 238,
+          "teacher_input_default": true,
+          "text": "How tall is the tallest tree?",
+          "warnings": []
+        }
+      ],
+      "question": "There are three trees in Eddy's backyard. The shortest tree has a height of 6.5 feet, and the second tree has a height of 5.5 feet more than the shortest tree. The height of the tallest tree is twice the height of the two trees combined. How tall is the tallest tree?",
+      "source_id": "gsm-plus-02842"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James enjoys swimming and needs to traverse a lake that is 20 miles wide.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "His swimming speed is 2 miles per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 241,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "He covers 60% of the total distance, then takes a break on an island for a duration that is half of the time he spent swimming.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 321,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 242,
+          "teacher_input_default": true,
+          "text": "He completes the rest of the journey at a speed that is half his initial speed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 374,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 322,
+          "teacher_input_default": true,
+          "text": "How much time did he spend to cross the entire lake?",
+          "warnings": []
+        }
+      ],
+      "question": "James enjoys swimming and needs to traverse a lake that is 20 miles wide. His swimming speed is 2 miles per hour. He covers 60% of the total distance, then takes a break on an island for a duration that is half of the time he spent swimming. He completes the rest of the journey at a speed that is half his initial speed. How much time did he spend to cross the entire lake?",
+      "source_id": "gsm-plus-07565"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a 60-item quiz, 40% of the questions are easy, and the rest are equally divided as average and difficult questions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 119,
+          "teacher_input_default": true,
+          "text": "Aries is sure to get 75% of the easy questions, and half of the average and difficult questions correctly.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 437,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 226,
+          "teacher_input_default": true,
+          "text": "If the quiz is conducted in a noisy classroom with 30 students, and each question is worth 1 point, regardless of the noise level or the number of students in the classroom, how many points is Aries sure to get?",
+          "warnings": []
+        }
+      ],
+      "question": "In a 60-item quiz, 40% of the questions are easy, and the rest are equally divided as average and difficult questions. Aries is sure to get 75% of the easy questions, and half of the average and difficult questions correctly. If the quiz is conducted in a noisy classroom with 30 students, and each question is worth 1 point, regardless of the noise level or the number of students in the classroom, how many points is Aries sure to get?",
+      "source_id": "gsm-plus-08174"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John just started watching a new show.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "Each episode is 20 minutes long, and there are half as many episodes in total as there are minutes per episode.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "During watching the show, John eats two buckets of popcorn.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 292,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 213,
+          "teacher_input_default": true,
+          "text": "How many minutes will John spend watching the show if he watches every episode?",
+          "warnings": []
+        }
+      ],
+      "question": "John just started watching a new show.  Each episode is 20 minutes long, and there are half as many episodes in total as there are minutes per episode.  During watching the show, John eats two buckets of popcorn. How many minutes will John spend watching the show if he watches every episode?",
+      "source_id": "gsm-plus-07718"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

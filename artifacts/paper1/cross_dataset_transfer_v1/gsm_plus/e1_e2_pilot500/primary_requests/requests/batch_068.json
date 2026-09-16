@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a residential building where Richard resides, there are 15 levels.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "Each level is made up of 8 apartments, and 75% of these apartments are inhabited.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total number of vacant apartments in this building?",
+          "warnings": []
+        }
+      ],
+      "question": "In a residential building where Richard resides, there are 15 levels. Each level is made up of 8 apartments, and 75% of these apartments are inhabited. Can you calculate the total number of vacant apartments in this building?",
+      "source_id": "gsm-plus-00397"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A customs officer at the main port of SeaSide clearances counted 2 containers of imported vehicles, each having 5 vehicles inside.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 131,
+          "teacher_input_default": true,
+          "text": "The next day, more containers were brought in, and the total number of vehicles at the port became 30.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 361,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "However, on the third day, the officer noticed that the number of vehicles imported had increased by 50% from the previous day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 481,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 362,
+          "teacher_input_default": true,
+          "text": "Calculate the number of containers that were imported on the third day, assuming all the containers contain 5 vehicles.",
+          "warnings": []
+        }
+      ],
+      "question": "A customs officer at the main port of SeaSide clearances counted 2 containers of imported vehicles, each having 5 vehicles inside. The next day, more containers were brought in, and the total number of vehicles at the port became 30. However, on the third day, the officer noticed that the number of vehicles imported had increased by 50% from the previous day. Calculate the number of containers that were imported on the third day, assuming all the containers contain 5 vehicles.",
+      "source_id": "gsm-plus-00947"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kelian is preparing for a dinner party and has two recipes to follow.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "The first recipe is for a salad and has 20 instructions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 239,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "The second recipe is for a main dish and is more complex, having twice as many instructions as the salad recipe.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 318,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 240,
+          "teacher_input_default": true,
+          "text": "During his preparation, Kelian also has a dessert recipe with 15 instructions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 426,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 319,
+          "teacher_input_default": true,
+          "text": "How many instructions does Kelian have to read to prepare the salad and the main dish for his dinner party?",
+          "warnings": []
+        }
+      ],
+      "question": "Kelian is preparing for a dinner party and has two recipes to follow. The first recipe is for a salad and has 20 instructions. The second recipe is for a main dish and is more complex, having twice as many instructions as the salad recipe. During his preparation, Kelian also has a dessert recipe with 15 instructions. How many instructions does Kelian have to read to prepare the salad and the main dish for his dinner party?",
+      "source_id": "gsm-plus-00574"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Tuesday, Clara bought 20 pomegranates at $20 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "At the till she got $2 off because she had a voucher.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "The next day, the price shot to $30 per fruit, but the store also offered a 10% discount on the total cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 216,
+          "teacher_input_default": true,
+          "text": "Sheila took advantage of the discount and bought some pomegranates.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 412,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 284,
+          "teacher_input_default": true,
+          "text": "The difference between the final prices paid for the pomegranates on the two days is $142 and on the second day Clara pays more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 469,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 414,
+          "teacher_input_default": true,
+          "text": "How many pomegranates does Clara buy on the second day?",
+          "warnings": []
+        }
+      ],
+      "question": "On Tuesday, Clara bought 20 pomegranates at $20 each. At the till she got $2 off because she had a voucher. The next day, the price shot to $30 per fruit, but the store also offered a 10% discount on the total cost. Sheila took advantage of the discount and bought some pomegranates. The difference between the final prices paid for the pomegranates on the two days is $142 and on the second day Clara pays more.  How many pomegranates does Clara buy on the second day?",
+      "source_id": "gsm-plus-05204"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ronnie was given $5 while Rissa was given thrice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "After each of them had given an equal amount of money to their little sister, Rissa is left with some of her money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 174,
+          "teacher_input_default": true,
+          "text": "Ronnie has $2 left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 269,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "What's the fraction of the money Rissa left accounting for her total money?",
+          "warnings": []
+        }
+      ],
+      "question": "Ronnie was given $5 while Rissa was given thrice as much. After each of them had given an equal amount of money to their little sister, Rissa is left with some of her money. Ronnie has $2 left. What's the fraction of the money Rissa left accounting for her total money?",
+      "source_id": "gsm-plus-09356"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

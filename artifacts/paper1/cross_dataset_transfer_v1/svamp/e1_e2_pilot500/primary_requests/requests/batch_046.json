@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia played tag with 4 kids on wednesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "She had played with 6 kids on monday and 17 kids on tuesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "How many more kids did she play with on monday than on wednesday?",
+          "warnings": []
+        }
+      ],
+      "question": "Julia played tag with 4 kids on wednesday. She had played with 6 kids on monday and 17 kids on tuesday. How many more kids did she play with on monday than on wednesday?",
+      "source_id": "svamp-chal-155"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jake has 6 fewer peaches and 8 more apples than Steven.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "Steven has 17 peaches and 16 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "How many more peaches than apples does Steven have?",
+          "warnings": []
+        }
+      ],
+      "question": "Jake has 6 fewer peaches and 8 more apples than Steven. Steven has 17 peaches and 16 apples. How many more peaches than apples does Steven have?",
+      "source_id": "svamp-chal-533"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 20,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nell collects cards.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 21,
+          "teacher_input_default": true,
+          "text": "She had 309 baseball cards and 356 Ace cards.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 152,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "She gave some of her cards to Jeff and now has 415 baseball cards and Ace cards left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "How many more baseball cards than Ace cards does Nell have?",
+          "warnings": []
+        }
+      ],
+      "question": "Nell collects cards. She had 309 baseball cards and 356 Ace cards. She gave some of her cards to Jeff and now has 415 baseball cards and Ace cards left. How many more baseball cards than Ace cards does Nell have?",
+      "source_id": "svamp-chal-50"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 20,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Randy has 79 blocks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 21,
+          "teacher_input_default": true,
+          "text": "He uses 14 blocks to build a tower and 11 blocks to build a house.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "How many blocks are left?",
+          "warnings": []
+        }
+      ],
+      "question": "Randy has 79 blocks. He uses 14 blocks to build a tower and 11 blocks to build a house. How many blocks are left?",
+      "source_id": "svamp-chal-560"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Helen the hippo and her friends are preparing for thanksgiving at Helen's house.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "Helen baked 519 chocolate chip cookies and 300 raisin cookies yesterday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 231,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "And she baked 280 raisin cookies and 359 chocolate chip cookies this morning.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 304,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 232,
+          "teacher_input_default": true,
+          "text": "How many more raisin cookies did Helen bake yesterday compared to today?",
+          "warnings": []
+        }
+      ],
+      "question": "Helen the hippo and her friends are preparing for thanksgiving at Helen's house. Helen baked 519 chocolate chip cookies and 300 raisin cookies yesterday. And she baked 280 raisin cookies and 359 chocolate chip cookies this morning. How many more raisin cookies did Helen bake yesterday compared to today?",
+      "source_id": "svamp-chal-241"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

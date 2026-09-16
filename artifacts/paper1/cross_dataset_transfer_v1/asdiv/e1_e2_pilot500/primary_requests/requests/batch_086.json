@@ -1,0 +1,318 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 33,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were six roses in the vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 34,
+          "teacher_input_default": true,
+          "text": "Jessica cut some more roses from her flower garden.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 86,
+          "teacher_input_default": true,
+          "text": "There are now eighteen roses in the vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 128,
+          "teacher_input_default": true,
+          "text": "How many roses did she cut ?",
+          "warnings": []
+        }
+      ],
+      "question": "There were six roses in the vase. Jessica cut some more roses from her flower garden. There are now eighteen roses in the vase. How many roses did she cut ?",
+      "source_id": "asdiv-1367"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lisa invited the entire third grade to her party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "There are 48 students altogether.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "23 of the students are boys and 25 are girls.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "9 students will not be able to go to the party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 178,
+          "teacher_input_default": true,
+          "text": "How many students will be there?",
+          "warnings": []
+        }
+      ],
+      "question": "Lisa invited the entire third grade to her party. There are 48 students altogether. 23 of the students are boys and 25 are girls. 9 students will not be able to go to the party. How many students will be there?",
+      "source_id": "asdiv-0924"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The weight of 5 diamonds is 100 g.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "The total weight of 4 diamonds and 2 jades is 140 g.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "How much heavier is a jade than a diamond?",
+          "warnings": []
+        }
+      ],
+      "question": "The weight of 5 diamonds is 100 g. The total weight of 4 diamonds and 2 jades is 140 g. How much heavier is a jade than a diamond?",
+      "source_id": "asdiv-0832"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 25,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sum of two numbers is 52.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 26,
+          "teacher_input_default": true,
+          "text": "If one of the numbers is 10 more than the other, find the numbers.",
+          "warnings": []
+        }
+      ],
+      "question": "Sum of two numbers is 52. If one of the numbers is 10 more than the other, find the numbers.",
+      "source_id": "asdiv-1402"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ned mowed his lawn six times in the spring and five times in the summer.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "How many times did he mow total?",
+          "warnings": []
+        }
+      ],
+      "question": "Ned mowed his lawn six times in the spring and five times in the summer. How many times did he mow total?",
+      "source_id": "asdiv-1732"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

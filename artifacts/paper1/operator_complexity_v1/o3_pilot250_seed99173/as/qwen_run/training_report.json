@@ -1,0 +1,119 @@
+{
+  "adapter_files": {
+    "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+    "adapter_config.json": "5e76c1268b5a1c36e791d930d97b665ed6d3b1d241f372c5827cd63b09ca728c",
+    "adapter_model.safetensors": "79010f61fcc4a2e504bcf4fae9c57f482579ae576d4e4f0ec95333c453a41ad8"
+  },
+  "adapter_id": "Qwen3-0.6B-GSM8K-OC-O3-AS-pilot-r8-seed99173",
+  "dev_rows": 30,
+  "dev_sha256": "50fbba83ddcd83ee86144af5ef18db9f4ba1cc3a1ec999d429025f3249d798d1",
+  "device": "xpu",
+  "dtype": "float16",
+  "epoch_adapters": {
+    "epoch-1": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5e76c1268b5a1c36e791d930d97b665ed6d3b1d241f372c5827cd63b09ca728c",
+      "adapter_model.safetensors": "c0e1fda8b78976161e7ae74b864b768b5e3656f9705bf0b5f549c9c8664ec5f9"
+    },
+    "epoch-2": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5e76c1268b5a1c36e791d930d97b665ed6d3b1d241f372c5827cd63b09ca728c",
+      "adapter_model.safetensors": "83af8c5280e1996df6593ce6350cee4364cb694545564d2026cef6e5e84c93da"
+    },
+    "epoch-3": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5e76c1268b5a1c36e791d930d97b665ed6d3b1d241f372c5827cd63b09ca728c",
+      "adapter_model.safetensors": "79010f61fcc4a2e504bcf4fae9c57f482579ae576d4e4f0ec95333c453a41ad8"
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dev_loss": 5.9541441078181376e-05,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.18637139825875057,
+      "mean_unweighted_dev_loss": 5.954144265463886e-05,
+      "mean_unweighted_train_loss": 0.18637140199218266,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 2,
+      "mean_dev_loss": 2.5267406939140832e-05,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 4.107826117615332e-05,
+      "mean_unweighted_dev_loss": 2.5267407727369574e-05,
+      "mean_unweighted_train_loss": 4.107826161271078e-05,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 3,
+      "mean_dev_loss": 2.3160828762532524e-05,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 2.6997855416993844e-05,
+      "mean_unweighted_dev_loss": 2.3160829126330403e-05,
+      "mean_unweighted_train_loss": 2.699785610093386e-05,
+      "pairwise_train_accuracy": null
+    }
+  ],
+  "initial_adapter": null,
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "optimizer_steps": 96,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "peak_memory_bytes": 1759642112,
+  "resumed_from_optimizer_step": 0,
+  "schema_version": "ccpu.paper1.lora_training.v1",
+  "selected_dev_loss": 2.3160828762532524e-05,
+  "selected_epoch": 3,
+  "selection_policy": "minimum_weighted_dev_loss",
+  "token_audit": {
+    "dev_max_full_tokens": 115,
+    "dev_max_prefix_tokens": 93,
+    "dev_truncated_rows": 0,
+    "train_max_full_tokens": 117,
+    "train_max_prefix_tokens": 95,
+    "train_truncated_rows": 0
+  },
+  "total_parameters": 598343680,
+  "train_rows": 250,
+  "train_sha256": "90d100dbeb8b9261c82f19613740a28e1f8d8cf213282737c09541f771859161",
+  "train_target_tokens_per_epoch": 5232,
+  "trainable_fraction": 0.0038335158817086527,
+  "trainable_parameters": 2293760,
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "checkpoint_every_optimizer_steps": 25,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 3,
+    "evaluate_each_epoch": true,
+    "gradient_accumulation_steps": 8,
+    "gradient_checkpointing": false,
+    "learning_rate": 0.0002,
+    "logical_epoch_field": null,
+    "max_length": 384,
+    "pairwise_rank_weight": 0.0,
+    "pairwise_temperature": 1.0,
+    "rank": 8,
+    "reject_truncation": true,
+    "restore_best_dev": true,
+    "save_epoch_adapters": true,
+    "seed": 99173,
+    "semantic_token_weights": null,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 15696,
+  "wall_time_seconds": 966.348227999988
+}

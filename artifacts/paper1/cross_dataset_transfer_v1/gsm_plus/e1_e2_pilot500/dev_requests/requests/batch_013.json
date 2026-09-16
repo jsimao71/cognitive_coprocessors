@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Finn watches 1.1 times of ten tadpoles swimming in the pond.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 181,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "Suddenly he sees 3/5 of ten of them come out of hiding from under a lily pad ,then he sees 2 of them hide under a rock.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 230,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "How many tadpoles can Finn see in the pond now?",
+          "warnings": []
+        }
+      ],
+      "question": "Finn watches 1.1 times of ten tadpoles swimming in the pond.  Suddenly he sees 3/5 of ten of them come out of hiding from under a lily pad ,then he sees 2 of them hide under a rock.  How many tadpoles can Finn see in the pond now?",
+      "source_id": "gsm-plus-01274"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Finn watches 11 tadpoles swimming in the pond.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 158,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "Suddenly he sees 6 of them come out of hiding from under a lily pad, then he sees 2 of them hide under a rock.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 214,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 159,
+          "teacher_input_default": true,
+          "text": "After a while, 3 more tadpoles come out from the reeds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 215,
+          "teacher_input_default": true,
+          "text": "How many tadpoles can Finn see in the pond now?",
+          "warnings": []
+        }
+      ],
+      "question": "Finn watches 11 tadpoles swimming in the pond.  Suddenly he sees 6 of them come out of hiding from under a lily pad, then he sees 2 of them hide under a rock. After a while, 3 more tadpoles come out from the reeds. How many tadpoles can Finn see in the pond now?",
+      "source_id": "gsm-plus-01275"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Finn watched eleven tadpoles swimming in the pond.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "Suddenly, he saw six of them come out from under a patch of water lilies, and then he saw several of them hiding under a rock.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 178,
+          "teacher_input_default": true,
+          "text": "If Finn can see 15 tadpoles in the pond right now, how many are hiding?",
+          "warnings": []
+        }
+      ],
+      "question": "Finn watched eleven tadpoles swimming in the pond. Suddenly, he saw six of them come out from under a patch of water lilies, and then he saw several of them hiding under a rock. If Finn can see 15 tadpoles in the pond right now, how many are hiding?",
+      "source_id": "gsm-plus-01276"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Finn observes 11 tadpoles in the pond.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 39,
+          "teacher_input_default": true,
+          "text": "Suddenly, 6 more tadpoles emerge from beneath a lily pad, but then 2 of them conceal themselves under a rock.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 214,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 149,
+          "teacher_input_default": true,
+          "text": "How many tadpoles are visible to Finn in the pond at this moment?",
+          "warnings": []
+        }
+      ],
+      "question": "Finn observes 11 tadpoles in the pond. Suddenly, 6 more tadpoles emerge from beneath a lily pad, but then 2 of them conceal themselves under a rock. How many tadpoles are visible to Finn in the pond at this moment?",
+      "source_id": "gsm-plus-01277"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Finn is at a pond observing 11 tadpoles swimming.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Suddenly, he notices a dragonfly hovering above the pond, but it quickly flies away without disturbing the tadpoles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 167,
+          "teacher_input_default": true,
+          "text": "Then, he sees 6 more tadpoles emerge from under a lily pad, making him excited.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 346,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 247,
+          "teacher_input_default": true,
+          "text": "As he continues watching, he sees a leaf floating on the water, but it doesn't affect the tadpoles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 406,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 347,
+          "teacher_input_default": true,
+          "text": "Shortly after, he sees 2 of the tadpoles hide under a rock.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 499,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 407,
+          "teacher_input_default": true,
+          "text": "Despite the dragonfly and the floating leaf, how many tadpoles can Finn see in the pond now?",
+          "warnings": []
+        }
+      ],
+      "question": "Finn is at a pond observing 11 tadpoles swimming. Suddenly, he notices a dragonfly hovering above the pond, but it quickly flies away without disturbing the tadpoles. Then, he sees 6 more tadpoles emerge from under a lily pad, making him excited. As he continues watching, he sees a leaf floating on the water, but it doesn't affect the tadpoles. Shortly after, he sees 2 of the tadpoles hide under a rock. Despite the dragonfly and the floating leaf, how many tadpoles can Finn see in the pond now?",
+      "source_id": "gsm-plus-01278"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

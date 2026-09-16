@@ -1,0 +1,433 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 10 different books and 6 different movies in the ' crazy silly school ' series.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "If you read 14 of the movies and watched 19 of the books How many more books than movies have you read?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "crazy_silly_school_series.books = 10",
+              "crazy_silly_school_series.movies = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause says that movies were read and books were watched, but asks for a comparison between books and movies that were read. It does not establish how many books were read, and repairing the crossed media/action terms would require inventing the intended semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-307"
+      },
+      "question": "There are 10 different books and 6 different movies in the ' crazy silly school ' series. If you read 14 of the movies and watched 19 of the books How many more books than movies have you read?",
+      "source_context": null,
+      "source_id": "svamp-chal-307",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "( 19.0 - 14.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 8 different books and 5 different movies in the ' crazy silly school ' series.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "If you read 19 of the movies and watched 16 of the books How many more movies than books have you read?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "crazy_silly_school_series.distinct_books = 8",
+              "crazy_silly_school_series.distinct_movies = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause says movies were read and books were watched, but asks for the difference between movies and books that were read. No count of read books is established, and correcting the activity-object mismatch would invent semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-40"
+      },
+      "question": "There are 8 different books and 5 different movies in the ' crazy silly school ' series. If you read 19 of the movies and watched 16 of the books How many more movies than books have you read?",
+      "source_context": null,
+      "source_id": "svamp-chal-40",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "( 19.0 - 16.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 33,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ed had 19 more marbles than Doug.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 34,
+          "teacher_input_default": true,
+          "text": "Ed lost some of his marbles at the playground.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "Now Ed has 8 more marbles than doug.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "How many marbles did Ed lose?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ed.initial.marbles = doug.marbles + 19"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Doug's marble count is retained as the comparison baseline."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ed.current.marbles = ed.initial.marbles - ed.marbles_lost"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The unknown loss is retained as a forward dependency."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ed.current.marbles = doug.marbles + 8"
+            ],
+            "assumptions": [
+              "Doug's marble count is unchanged between the two comparisons because the source describes only Ed losing marbles."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN ed.marbles_lost"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-245"
+      },
+      "question": "Ed had 19 more marbles than Doug. Ed lost some of his marbles at the playground. Now Ed has 8 more marbles than doug. How many marbles did Ed lose?",
+      "source_context": null,
+      "source_id": "svamp-chal-245",
+      "validation_failure": "unresolved reference 'doug.marbles' from scope 'global'; unresolved reference 'ed.initial.marbles' from scope 'global'; unresolved reference 'doug.marbles' from scope 'global'; unresolved reference 'ed.marbles_lost' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "11",
+        "gold_reasoning": "( 19.0 - 8.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "They decided to hold the party in their backyard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "If they have 5 sets of tables and each set has 10 chairs How many more chairs than tables do they have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "party.location = \"backyard\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause gives 5 sets and 10 chairs per set but does not state how many tables are in each set. Therefore the total number of tables, and hence the requested difference between chairs and tables, is underdetermined without assuming one table per set."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-889"
+      },
+      "question": "They decided to hold the party in their backyard. If they have 5 sets of tables and each set has 10 chairs How many more chairs than tables do they have?",
+      "source_context": null,
+      "source_id": "svamp-chal-889",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "45",
+        "gold_reasoning": "( ( 5.0 * 10.0 ) - 5.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam could fit 10 action figures on each shelf in his room.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "His room has could hold 8 action figures.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "How many total shelves did his room have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "adam.room.shelf_capacity.action_figures = 10"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adam.room.total_capacity.action_figures = 8"
+            ],
+            "assumptions": [
+              "Interpreted the malformed phrase \"has could hold\" as stating the room's total action-figure capacity."
+            ],
+            "confidence": 0.66,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adam.room.total_shelves = adam.room.total_capacity.action_figures / adam.room.shelf_capacity.action_figures",
+              "RETURN adam.room.total_shelves"
+            ],
+            "assumptions": [],
+            "confidence": 0.89,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-356"
+      },
+      "question": "Adam could fit 10 action figures on each shelf in his room. His room has could hold 8 action figures. How many total shelves did his room have?",
+      "source_context": null,
+      "source_id": "svamp-chal-356",
+      "validation_failure": "answer mismatch: actual=0.8, expected=80",
+      "validator_context": {
+        "correct_answer": "80",
+        "gold_reasoning": "( 8.0 * 10.0 )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

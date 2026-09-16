@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day, Charisma wakes up at 6:30 am and meditates for 15 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "She then goes about her day, which includes a 30-minute breakfast at 7:00 am, a 45-minute commute to work at 8:00 am, and an 8-hour workday that starts at 9:00 am.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "Before she goes to sleep at 10:30 pm, she meditates again for 15 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 450,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 308,
+          "teacher_input_default": true,
+          "text": "Five days a week, she also practices 1 hour of yoga, which she does right after her work ends at 5:00 pm, before her 1-hour dinner at 6:30 pm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 593,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 451,
+          "teacher_input_default": true,
+          "text": "In 4 weeks, disregarding the time she spends on breakfast, work, commute, and dinner, how much time has she spent on meditation/yoga practice?",
+          "warnings": []
+        }
+      ],
+      "question": "Every day, Charisma wakes up at 6:30 am and meditates for 15 minutes. She then goes about her day, which includes a 30-minute breakfast at 7:00 am, a 45-minute commute to work at 8:00 am, and an 8-hour workday that starts at 9:00 am. Before she goes to sleep at 10:30 pm, she meditates again for 15 minutes. Five days a week, she also practices 1 hour of yoga, which she does right after her work ends at 5:00 pm, before her 1-hour dinner at 6:30 pm. In 4 weeks, disregarding the time she spends on breakfast, work, commute, and dinner, how much time has she spent on meditation/yoga practice?",
+      "source_id": "gsm-plus-10310"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company manufactures candy bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "In one day, it can produce 7000 bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "The company sells all the produced bars for $3 per bar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 230,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "How much money will the company receive for selling produced candy bars over a period of three weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "A company manufactures candy bars. In one day, it can produce 7000 bars. The company sells all the produced bars for $3 per bar. How much money will the company receive for selling produced candy bars over a period of three weeks?",
+      "source_id": "gsm-plus-10344"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company produces chocolate in bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "In one day, it can produce 50,000 bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "The company sells all the produced bars for $20 per bar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "How much money will the company receive for selling the produced chocolate bars during two weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "A company produces chocolate in bars. In one day, it can produce 50,000 bars. The company sells all the produced bars for $20 per bar. How much money will the company receive for selling the produced chocolate bars during two weeks?",
+      "source_id": "gsm-plus-10345"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company produces chocolate in bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "In one day, it can produce 5000 bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "The company sells all the produced bars for $2.5 per bar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "How much money will the company receive for selling produced chocolate bars during two weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "A company produces chocolate in bars. In one day, it can produce 5000 bars. The company sells all the produced bars for $2.5 per bar. How much money will the company receive for selling produced chocolate bars during two weeks?",
+      "source_id": "gsm-plus-10346"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company produces chocolate in bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "In one day, it can produce 5000 bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "The company sells all the produced bars for $2 per bar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 132,
+          "teacher_input_default": true,
+          "text": "Also, on weekends, the company sells the bars at a discounted price of $1.50 per bar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "How much money will the company receive for selling produced chocolate bars in two weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "A company produces chocolate in bars. In one day, it can produce 5000 bars. The company sells all the produced bars for $2 per bar. Also, on weekends, the company sells the bars at a discounted price of $1.50 per bar. How much money will the company receive for selling produced chocolate bars in two weeks?",
+      "source_id": "gsm-plus-10347"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

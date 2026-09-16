@@ -1,0 +1,487 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "After eating a hearty meal they went to see the Buckingham palace.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "There, Rachel learned that 512 visitors came to the Buckingham palace that day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 291,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "If there were 471 visitors the previous day and 808 visitors the day before that How many visited the Buckingham palace within the past 89 days?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause describes meal consumption and travel, which have no representable quantitative delta in the active arithmetic profile."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "buckingham_palace.visitors.today = 512"
+            ],
+            "assumptions": [
+              "Interpreted \"that day\" as the current day relative to the following clauses."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Visitor counts for the other 86 days are not specified, so the requested 89-day total cannot be determined without inventing data."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The clause supplies visitor counts for only three days but asks for an aggregate covering 89 days."
+            ],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-930"
+      },
+      "question": "After eating a hearty meal they went to see the Buckingham palace. There, Rachel learned that 512 visitors came to the Buckingham palace that day. If there were 471 visitors the previous day and 808 visitors the day before that How many visited the Buckingham palace within the past 89 days?",
+      "source_context": null,
+      "source_id": "svamp-chal-930",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported, part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "1791",
+        "gold_reasoning": "( ( 512.0 + 471.0 ) + 808.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Being his favorite, he saved checking on the grapevines for his last stop.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "He was told by 294 of the pickers that they fill 244 drums of grapes per day and 47 drums of raspberries per day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "How many drums of grapes would be filled in 146 days?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause expresses qualitative preference and visit-order information about an unnamed person, which is outside the active arithmetic profile."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "pickers.informing_count = 294",
+              "pickers.grape_drums_per_day = 244",
+              "pickers.raspberry_drums_per_day = 47"
+            ],
+            "assumptions": [
+              "Resolved \"they\" as the pickers."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The two production figures are collective daily rates attributed to the pickers."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "grape_production.duration_days = 146",
+              "grape_production.drums_in_duration = rate_times_duration(pickers.grape_drums_per_day, grape_production.duration_days)",
+              "RETURN grape_production.drums_in_duration"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-443"
+      },
+      "question": "Being his favorite, he saved checking on the grapevines for his last stop. He was told by 294 of the pickers that they fill 244 drums of grapes per day and 47 drums of raspberries per day. How many drums of grapes would be filled in 146 days?",
+      "source_context": null,
+      "source_id": "svamp-chal-443",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "35624",
+        "gold_reasoning": "( 244.0 * 146.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Paige was helping her mom plant flowers and together they planted 55 seeds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 168,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "They put 15 seeds in each flower bed and only 60 seeds grew into flowers in each flower bed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 200,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 169,
+          "teacher_input_default": true,
+          "text": "How many flowers did they grow?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "paige_and_mom.seeds.total_planted = 55"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "flower_beds.per_bed.seeds_planted = 15",
+              "flower_beds.per_bed.seeds_that_grew_into_flowers = 60"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The literals are preserved exactly even though 60 seeds growing in each bed conflicts with only 15 seeds being placed in each bed."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The source gives an internally inconsistent per-bed seed count and does not explicitly state the number of flower beds. Inferring a bed count from 55 total seeds and 15 seeds per bed would also produce a fractional count, so the total number of flowers is not reliably determined."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-998"
+      },
+      "question": "Paige was helping her mom plant flowers and together they planted 55 seeds. They put 15 seeds in each flower bed and only 60 seeds grew into flowers in each flower bed. How many flowers did they grow?",
+      "source_context": null,
+      "source_id": "svamp-chal-998",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "220",
+        "gold_reasoning": "( 60.0 * ( 55.0 / 15.0 ) )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jake has 7 fewer peaches than Steven who has 14 more peaches than Jill.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "Steven has 15 peaches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "How many peaches does Jake have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jake.peaches = steven.peaches - 7",
+              "steven.peaches = jill.peaches + 14"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "steven.peaches = 15"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN jake.peaches"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-492"
+      },
+      "question": "Jake has 7 fewer peaches than Steven who has 14 more peaches than Jill. Steven has 15 peaches. How many peaches does Jake have?",
+      "source_context": null,
+      "source_id": "svamp-chal-492",
+      "validation_failure": "unresolved reference 'jill.peaches' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "( 15.0 - 7.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Winter is almost here and most animals are migrating to warmer countries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "There are 85 bird families living near the mountain.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "If 23 bird families flew away to africa and 37 bird families flew away to asia How many bird families were left near the mountain?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause contains qualitative seasonal and migration background but no arithmetic state delta expressible by the active profile."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "mountain.before_departures.bird_families = 85"
+            ],
+            "assumptions": [
+              "The 85 families are the population present before the departures described next."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mountain.departures_to_africa.bird_families = 23",
+              "mountain.departures_to_asia.bird_families = 37",
+              "mountain.after_departures.bird_families = mountain.before_departures.bird_families - mountain.departures_to_africa.bird_families - mountain.departures_to_asia.bird_families",
+              "RETURN mountain.after_departures.bird_families"
+            ],
+            "assumptions": [
+              "The groups flying to Africa and Asia are distinct departures from the 85 families initially near the mountain."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-839"
+      },
+      "question": "Winter is almost here and most animals are migrating to warmer countries. There are 85 bird families living near the mountain. If 23 bird families flew away to africa and 37 bird families flew away to asia How many bird families were left near the mountain?",
+      "source_context": null,
+      "source_id": "svamp-chal-839",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "25",
+        "gold_reasoning": "( 85.0 - ( 23.0 + 37.0 ) )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

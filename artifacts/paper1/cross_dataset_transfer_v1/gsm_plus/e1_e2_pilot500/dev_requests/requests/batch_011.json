@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a neighborhood, the number of rabbits pets is twelve less than the combined number of pet dogs and cats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "If there are two cats for every dog, and the number of dogs is 60, how many pets in total are in the neighborhood?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 353,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "Now, consider that there are also 30 pet birds in the neighborhood, but they are not counted as pets for this particular question.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 482,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 354,
+          "teacher_input_default": true,
+          "text": "Also, each dog owner has 2 tennis balls for their dogs, but the number of tennis balls does not affect the total number of pets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 552,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 483,
+          "teacher_input_default": true,
+          "text": "Can you still determine the total number of pets in the neighborhood?",
+          "warnings": []
+        }
+      ],
+      "question": "In a neighborhood, the number of rabbits pets is twelve less than the combined number of pet dogs and cats. If there are two cats for every dog, and the number of dogs is 60, how many pets in total are in the neighborhood? Now, consider that there are also 30 pet birds in the neighborhood, but they are not counted as pets for this particular question. Also, each dog owner has 2 tennis balls for their dogs, but the number of tennis balls does not affect the total number of pets. Can you still determine the total number of pets in the neighborhood?",
+      "source_id": "gsm-plus-00758"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia\u2019s boat sprang a leak while she was out on the lake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "The boat was taking on three liters of water for every fifteen feet she rowed back towards shore.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "It took her twenty seconds to row thirty feet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 203,
+          "teacher_input_default": true,
+          "text": "The shore was 80 seconds away.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 303,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "How much water had the boat taken on by the time Julia reached shore?",
+          "warnings": []
+        }
+      ],
+      "question": "Julia\u2019s boat sprang a leak while she was out on the lake. The boat was taking on three liters of water for every fifteen feet she rowed back towards shore. It took her twenty seconds to row thirty feet. The shore was 80 seconds away. How much water had the boat taken on by the time Julia reached shore?",
+      "source_id": "gsm-plus-00888"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia\u2019s boat sprang a leak while she was out on the lake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "The boat was taking on 20 liters of water for every 100 feet she rowed back towards shore.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 149,
+          "teacher_input_default": true,
+          "text": "It took her 160 seconds to row 200 feet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 190,
+          "teacher_input_default": true,
+          "text": "The shore was 640 seconds away.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 291,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 222,
+          "teacher_input_default": true,
+          "text": "How much water had the boat taken on by the time Julia reached shore?",
+          "warnings": []
+        }
+      ],
+      "question": "Julia\u2019s boat sprang a leak while she was out on the lake. The boat was taking on 20 liters of water for every 100 feet she rowed back towards shore. It took her 160 seconds to row 200 feet. The shore was 640 seconds away. How much water had the boat taken on by the time Julia reached shore?",
+      "source_id": "gsm-plus-00889"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia\u2019s boat sprang a leak while she was out on the lake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "The boat was taking on 2.5 liters of water for every ten feet she rowed back towards shore.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "It took her sixteen seconds to row 22.5 feet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 226,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 196,
+          "teacher_input_default": true,
+          "text": "The shore was 64 seconds away.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 296,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 227,
+          "teacher_input_default": true,
+          "text": "How much water had the boat taken on by the time Julia reached shore?",
+          "warnings": []
+        }
+      ],
+      "question": "Julia\u2019s boat sprang a leak while she was out on the lake. The boat was taking on 2.5 liters of water for every ten feet she rowed back towards shore. It took her sixteen seconds to row 22.5 feet. The shore was 64 seconds away. How much water had the boat taken on by the time Julia reached shore?",
+      "source_id": "gsm-plus-00890"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia\u2019s boat sprang a leak while she was out on the lake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "The boat was taking on two liters of water for every ten feet she rowed back towards shore.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 197,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "It took her sixteen seconds to row twenty feet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 198,
+          "teacher_input_default": true,
+          "text": "The shore was 64 seconds away.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 374,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 229,
+          "teacher_input_default": true,
+          "text": "However, Julia realized that for every 32 seconds she rowed, her speed increased by 25%, reducing the time it took to row the remaining distance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 462,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 375,
+          "teacher_input_default": true,
+          "text": "Considering this, how much water had the boat taken on by the time Julia reached shore?",
+          "warnings": []
+        }
+      ],
+      "question": "Julia\u2019s boat sprang a leak while she was out on the lake. The boat was taking on two liters of water for every ten feet she rowed back towards shore. It took her sixteen seconds to row twenty feet. The shore was 64 seconds away. However, Julia realized that for every 32 seconds she rowed, her speed increased by 25%, reducing the time it took to row the remaining distance. Considering this, how much water had the boat taken on by the time Julia reached shore?",
+      "source_id": "gsm-plus-00891"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

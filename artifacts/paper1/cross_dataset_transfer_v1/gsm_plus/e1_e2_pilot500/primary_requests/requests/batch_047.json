@@ -1,0 +1,417 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 4 toys on hand for 4 dogs, but there are 12 more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 303,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 171,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 387,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 304,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, 3 dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 427,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 388,
+          "teacher_input_default": true,
+          "text": "How many toys in total does James need?",
+          "warnings": []
+        }
+      ],
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 4 toys on hand for 4 dogs, but there are 12 more dogs in the shelter now. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, 3 dogs were gone so he no longer needed those toys. How many toys in total does James need?",
+      "source_id": "gsm-plus-05401"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Shelly's 3 kids spent all day at the water park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Mitchel went down the water slide 120 times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "Anne went down the slide 30% less than Mitchel and Robert went down 4 times as much as Anne.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 190,
+          "teacher_input_default": true,
+          "text": "How many times did Robert go down the water slide?",
+          "warnings": []
+        }
+      ],
+      "question": "Shelly's 3 kids spent all day at the water park.  Mitchel went down the water slide 120 times.  Anne went down the slide 30% less than Mitchel and Robert went down 4 times as much as Anne.  How many times did Robert go down the water slide?",
+      "source_id": "gsm-plus-02033"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carlos, Jim, and Carrey were at the beach playing and they decided to gather some seashells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "Jim collected 27 seashells, which was 5 more than what Carlos collected.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "Carlos collected twice as many as Carrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 286,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "They gathered all their seashells and divided them equally between themselves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 394,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 287,
+          "teacher_input_default": true,
+          "text": "However, before they could do that, a seagull swooped down and took away 6 seashells from their collection.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 424,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 395,
+          "teacher_input_default": true,
+          "text": "How many did each person get?",
+          "warnings": []
+        }
+      ],
+      "question": "Carlos, Jim, and Carrey were at the beach playing and they decided to gather some seashells. Jim collected 27 seashells, which was 5 more than what Carlos collected. Carlos collected twice as many as Carrey. They gathered all their seashells and divided them equally between themselves. However, before they could do that, a seagull swooped down and took away 6 seashells from their collection. How many did each person get?",
+      "source_id": "gsm-plus-09227"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "During a peculiar event, twenty tourists discovered 700 shells in a strip mall parking lot that was 5000 square feet in size.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 126,
+          "teacher_input_default": true,
+          "text": "They had divided into three groups, Alphas, The finders, and Gogetters to find as many shells as possible.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 296,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 233,
+          "teacher_input_default": true,
+          "text": "The Alphas, who were wearing red hats, found 40% of the shells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 387,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 297,
+          "teacher_input_default": true,
+          "text": "The Finders, who had started searching two hours later, found 60% of the remaining shells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 546,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 388,
+          "teacher_input_default": true,
+          "text": "If a sudden rain shower started but quickly stopped, having no effect on the shell count, how many shells did the Gogetters, who were wearing blue hats, find?",
+          "warnings": []
+        }
+      ],
+      "question": "During a peculiar event, twenty tourists discovered 700 shells in a strip mall parking lot that was 5000 square feet in size. They had divided into three groups, Alphas, The finders, and Gogetters to find as many shells as possible. The Alphas, who were wearing red hats, found 40% of the shells. The Finders, who had started searching two hours later, found 60% of the remaining shells. If a sudden rain shower started but quickly stopped, having no effect on the shell count, how many shells did the Gogetters, who were wearing blue hats, find?",
+      "source_id": "gsm-plus-09638"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Conor lives near a beach and loves going there every day to have fun.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 158,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "On a particular week, he found half of one hundred people at the beach on the first day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 366,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 159,
+          "teacher_input_default": true,
+          "text": "The next day, 1/5 of one hundred more people were present at the beach than on the first day, and on the third day, the total number of people increased to twice the number that were there on the second day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 521,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 367,
+          "teacher_input_default": true,
+          "text": "If Conor saw an average of 3/5 of one hundred people each day the rest of the week, calculate the total number of people Conor saw at the beach that week.",
+          "warnings": []
+        }
+      ],
+      "question": "Conor lives near a beach and loves going there every day to have fun. On a particular week, he found half of one hundred people at the beach on the first day. The next day, 1/5 of one hundred more people were present at the beach than on the first day, and on the third day, the total number of people increased to twice the number that were there on the second day. If Conor saw an average of 3/5 of one hundred people each day the rest of the week, calculate the total number of people Conor saw at the beach that week.",
+      "source_id": "gsm-plus-10106"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

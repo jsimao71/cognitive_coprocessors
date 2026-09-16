@@ -1,0 +1,32 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,booktabs,hyperref}
+\title{Latent Cognitive Blocks:\\Parallel Causal Span Control for Just-in-Time Coprocessor Invocation}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+\begin{abstract}
+Explicit cognitive blocks serialize control through language tokens. We study a parallel causal control channel that marks the start, type, and end of cognitive-assistance spans while ordinary autoregressive generation continues. The controller predicts only COMPUTE, RETRIEVE, VERIFY, HELP, or NONE; runtime resolves deployment-specific capabilities. We compare explicit tags, fenced blocks, label-only control, CPU triggers, final-layer probes, and multi-layer aggregation, while separating control from result integration.
+\end{abstract}
+\section{Motivation}
+Paper 2 finds reliable deterministic parsing/execution once capability is known, but unsafe engine-specific learned routing. The next question is therefore not a larger engine classifier but whether coarse cognitive control should be serialized through the language bus at all.
+\section{Architecture}
+At token $t$ and selected layer $l$, probes map $h_t^{(l)}$ to control logits. Outside a block,
+\[
+p_{\rm start}^{(l)}=\mathrm{softmax}(W_{\rm start}^{(l)}h_t^{(l)})
+\]
+over NONE, COMPUTE, RETRIEVE, VERIFY, HELP. Inside a block a separate head predicts END. A constrained runtime state machine forbids nesting, extracts the generated span on END, invokes second-stage capability resolution, and resumes generation after execution.
+\section{Multi-Layer Control}
+We compare final-layer, best-single-layer, fixed averaging, voting, learned scalar layer weights, and a tiny MLP over per-layer logits. START and END may use different layer mixtures. Hidden-state fusion is gated on failure of logit aggregation.
+\section{Training}
+First freeze the base model and train linear probes. Add a small control LoRA only if necessary. The controller never learns concrete engine identity. A separate integration LoRA may later target INTERPRET/CONTINUE.
+\section{Baselines}
+Matched examples compare paired tags, fenced cognitive blocks, label-only intent, CPU triggers, latent control, and oracle span/type. This isolates language-bus versus parallel-control-bus transport.
+\section{Evaluation}
+Report START/END P/R/F1, exact span/IoU, type accuracy, FAR, parseable payload, runtime exactness, latency, controller parameters, explicit tokens avoided, layer-wise decodability, cross-layer agreement, and registry-change robustness.
+\section{Registry Invariance}
+Train with a small capability registry and add new computational/retrieval backends without retraining R1. Runtime or optional PRA performs second-stage resolution.
+\section{Falsification}
+Latent control is not justified if explicit generic blocks are equally reliable and cheap, END detection is brittle, multi-layer aggregation gives no gain, hidden-state coupling harms portability, or CPU triggers dominate.
+\section{Scope}
+No nested latent blocks, no general planner, no learned engine registry in the control head, and no early-exit headline claim without a separate gate. PRA is optional.
+\end{document}

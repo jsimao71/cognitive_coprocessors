@@ -1,0 +1,533 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "After resting they decided to go for a swim.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "The depth of the water is 2 times Dean's height.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "Dean is 8 feet shorter than Ron.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "If Ron stands at 14 feet How deep was the water?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause describes resting and deciding to swim, which has no quantitative state delta expressible in the active arithmetic profile."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "water.depth_feet = dean.height_feet * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dean.height_feet = ron.height_feet - 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ron.height_feet = 14",
+              "RETURN water.depth_feet"
+            ],
+            "assumptions": [
+              "Interpreted \"Ron stands at 14 feet\" as stating that Ron's height is 14 feet."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-151"
+      },
+      "question": "After resting they decided to go for a swim. The depth of the water is 2 times Dean's height. Dean is 8 feet shorter than Ron. If Ron stands at 14 feet How deep was the water?",
+      "source_context": null,
+      "source_id": "svamp-chal-151",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Robin has 28 packages of gum and 14 packages of candy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "There are 6 pieces in each package.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "How many pieces does Robin have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "robin.gum.packages = 28",
+              "robin.candy.packages = 14"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "robin.packages.pieces_per_package = 6"
+            ],
+            "assumptions": [
+              "Each gum package and each candy package contains 6 pieces."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The shared package rate applies to the gum and candy packages introduced previously."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "robin.total_packages = robin.gum.packages + robin.candy.packages",
+              "robin.total_pieces = robin.total_packages * robin.packages.pieces_per_package",
+              "RETURN robin.total_pieces"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-897"
+      },
+      "question": "Robin has 28 packages of gum and 14 packages of candy. There are 6 pieces in each package. How many pieces does Robin have?",
+      "source_context": null,
+      "source_id": "svamp-chal-897",
+      "validation_failure": "answer mismatch: actual=252, expected=7",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were 5 roses and 3 orchids in the vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "Jessica cut some more roses and orchids from her flower garden.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "There are now 12 roses and 2 orchids in the vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 219,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 160,
+          "teacher_input_default": true,
+          "text": "How many more roses than orchids are there in the vase now?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "vase.initial.roses = 5",
+              "vase.initial.orchids = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The quantities Jessica cut are unspecified, and the clause does not explicitly state that the cut flowers were placed in the vase."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "vase.now.roses = 12",
+              "vase.now.orchids = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "vase.now.rose_excess_over_orchids = vase.now.roses - vase.now.orchids",
+              "RETURN vase.now.rose_excess_over_orchids"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-940"
+      },
+      "question": "There were 5 roses and 3 orchids in the vase. Jessica cut some more roses and orchids from her flower garden. There are now 12 roses and 2 orchids in the vase. How many more roses than orchids are there in the vase now?",
+      "source_context": null,
+      "source_id": "svamp-chal-940",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "He then went to see the oranges being harvested.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "He found out that they harvest 76 sacks per day and discard 64 of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "How many oranges do they harvest per day if each sack contains 50 oranges?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "observer.activity = \"viewing orange harvest\""
+            ],
+            "assumptions": [
+              "The unnamed male observer is represented generically because the excerpt does not identify him."
+            ],
+            "confidence": 0.93,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "orange_harvest.sacks_harvested_per_day = 76",
+              "orange_harvest.sacks_discarded_per_day = 64"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Harvested and discarded sack counts are preserved separately."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "orange_harvest.oranges_per_sack = 50",
+              "orange_harvest.oranges_harvested_per_day = orange_harvest.sacks_harvested_per_day * orange_harvest.oranges_per_sack",
+              "RETURN orange_harvest.oranges_harvested_per_day"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The query asks for all oranges harvested, so the discarded-sack count does not reduce the requested harvested total."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-596"
+      },
+      "question": "He then went to see the oranges being harvested. He found out that they harvest 76 sacks per day and discard 64 of them. How many oranges do they harvest per day if each sack contains 50 oranges?",
+      "source_context": null,
+      "source_id": "svamp-chal-596",
+      "validation_failure": "answer mismatch: actual=3800, expected=600",
+      "validator_context": {
+        "correct_answer": "600",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Winter is almost here and most animals are migrating to warmer countries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "There are 38 bird families living near the mountain.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 288,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "If 47 bird families flew away to africa and 94 bird families flew away to asia How many more bird families flew away to asia than those that flew away to africa?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The qualitative statements about an approaching season and animal migration require non-arithmetic event and temporal semantics outside the active arithmetic profile."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "mountain_nearby.bird_families = 38"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "migration.africa.bird_families = 47",
+              "migration.asia.bird_families = 94",
+              "migration.asia_more_than_africa.bird_families = migration.asia.bird_families - migration.africa.bird_families",
+              "RETURN migration.asia_more_than_africa.bird_families"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The stated migration counts are preserved despite their apparent inconsistency with the earlier count of bird families living near the mountain."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-359"
+      },
+      "question": "Winter is almost here and most animals are migrating to warmer countries. There are 38 bird families living near the mountain. If 47 bird families flew away to africa and 94 bird families flew away to asia How many more bird families flew away to asia than those that flew away to africa?",
+      "source_context": null,
+      "source_id": "svamp-chal-359",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "47",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

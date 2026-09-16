@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The Llesis family, along with their pet dog, embarked on a journey to their vacation spot.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "The journey involved both driving and hiking.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 271,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 137,
+          "teacher_input_default": true,
+          "text": "They drove for a certain amount of time at an average speed of 50 miles per hour, with their dog comfortably sleeping in the backseat.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 353,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 272,
+          "teacher_input_default": true,
+          "text": "They also hiked for a while, during which their dog was playfully running around.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 427,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 354,
+          "teacher_input_default": true,
+          "text": "The hiking speed was 5 miles per hour less than half their driving speed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 592,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 428,
+          "teacher_input_default": true,
+          "text": "The total time spent on both driving and hiking was 6 hours, even though they took a 15-minute break to feed their dog, which doesn't count towards the travel time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 691,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 593,
+          "teacher_input_default": true,
+          "text": "If the hiking part of their journey took them 1.5 hours, how far was their vacation spot in total?",
+          "warnings": []
+        }
+      ],
+      "question": "The Llesis family, along with their pet dog, embarked on a journey to their vacation spot. The journey involved both driving and hiking. They drove for a certain amount of time at an average speed of 50 miles per hour, with their dog comfortably sleeping in the backseat. They also hiked for a while, during which their dog was playfully running around. The hiking speed was 5 miles per hour less than half their driving speed. The total time spent on both driving and hiking was 6 hours, even though they took a 15-minute break to feed their dog, which doesn't count towards the travel time. If the hiking part of their journey took them 1.5 hours, how far was their vacation spot in total?",
+      "source_id": "gsm-plus-06238"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 33,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Farmer Brown's farm is 200 acres.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 34,
+          "teacher_input_default": true,
+          "text": "Farmer Smith's farm is 100 acres more than twice the size of Farmer Brown's farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 116,
+          "teacher_input_default": true,
+          "text": "Farmer Smith decides to sell a portion of his farm that is equal to half the size of Farmer Brown's farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 284,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 222,
+          "teacher_input_default": true,
+          "text": "After the sale, how many acres do the two farms have together?",
+          "warnings": []
+        }
+      ],
+      "question": "Farmer Brown's farm is 200 acres. Farmer Smith's farm is 100 acres more than twice the size of Farmer Brown's farm. Farmer Smith decides to sell a portion of his farm that is equal to half the size of Farmer Brown's farm. After the sale, how many acres do the two farms have together?",
+      "source_id": "gsm-plus-07283"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Harold sleeps for 600 minutes a night.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "He works 120 minutes less than he sleeps and he walks his dog for 60 minutes each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 128,
+          "teacher_input_default": true,
+          "text": "How much free time does Harold have left in his day?",
+          "warnings": []
+        }
+      ],
+      "question": "Harold sleeps for 600 minutes a night.  He works 120 minutes less than he sleeps and he walks his dog for 60 minutes each day.  How much free time does Harold have left in his day?",
+      "source_id": "gsm-plus-07241"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For one medical dosage, Saanvi had to combine 1.4 deciliters of one medicine with 3 times that amount of the second medicine.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 126,
+          "teacher_input_default": true,
+          "text": "How many deciliters of medicine would be in 8 doses?",
+          "warnings": []
+        }
+      ],
+      "question": "For one medical dosage, Saanvi had to combine 1.4 deciliters of one medicine with 3 times that amount of the second medicine. How many deciliters of medicine would be in 8 doses?",
+      "source_id": "gsm-plus-09690"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia was preparing for a dinner party at her house, where she intended to serve stew and a dessert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "She noticed that she was out of plastic spoons, so she bought a new package of spoons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "Later, her husband also bought a package of 5 new spoons and gave them to Julia.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 350,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 269,
+          "teacher_input_default": true,
+          "text": "While Julia was making the stew, she used three of the spoons to sample her stew.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 458,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 351,
+          "teacher_input_default": true,
+          "text": "She also used two spoons to taste the dessert she was making, but she washed and returned them to the pile.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 527,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 459,
+          "teacher_input_default": true,
+          "text": "Later, when she went to set the table, she had a total of 12 spoons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 582,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 528,
+          "teacher_input_default": true,
+          "text": "How many spoons were in the package that Julia bought?",
+          "warnings": []
+        }
+      ],
+      "question": "Julia was preparing for a dinner party at her house, where she intended to serve stew and a dessert. She noticed that she was out of plastic spoons, so she bought a new package of spoons. Later, her husband also bought a package of 5 new spoons and gave them to Julia. While Julia was making the stew, she used three of the spoons to sample her stew. She also used two spoons to taste the dessert she was making, but she washed and returned them to the pile. Later, when she went to set the table, she had a total of 12 spoons. How many spoons were in the package that Julia bought?",
+      "source_id": "gsm-plus-01006"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

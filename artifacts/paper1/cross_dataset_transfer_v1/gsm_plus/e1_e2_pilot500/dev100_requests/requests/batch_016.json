@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 2.6 times of ten countries in South America and, in each country, there are half of ten cities with 1000 people living in each city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "If the whole population lives in these cities, how many people are there in South America?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 2.6 times of ten countries in South America and, in each country, there are half of ten cities with 1000 people living in each city.  If the whole population lives in these cities, how many people are there in South America?",
+      "source_id": "gsm-plus-08346"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In an aquarium, there is a collection of jellyfish.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "One out of every five jellyfish is of a larger size, and one out of every three of these larger jellyfish have the ability to shift their color from green to blue when exposed to UV light.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 314,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 241,
+          "teacher_input_default": true,
+          "text": "The remaining jellyfish are smaller in size and remain blue at all times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 408,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 315,
+          "teacher_input_default": true,
+          "text": "Upon the activation of a UV light, it was observed that 6 jellyfish underwent a color change.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 473,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 409,
+          "teacher_input_default": true,
+          "text": "Can you determine the total number of jellyfish in the aquarium?",
+          "warnings": []
+        }
+      ],
+      "question": "In an aquarium, there is a collection of jellyfish. One out of every five jellyfish is of a larger size, and one out of every three of these larger jellyfish have the ability to shift their color from green to blue when exposed to UV light. The remaining jellyfish are smaller in size and remain blue at all times. Upon the activation of a UV light, it was observed that 6 jellyfish underwent a color change. Can you determine the total number of jellyfish in the aquarium?",
+      "source_id": "gsm-plus-08829"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At a cocktail party, three of the women are wearing 4 inch heels and three are wearing 2 inch heels.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "Meanwhile, two men at the party are wearing 1 inch heel dress shoes and another two men are wearing 1.5 inch heel boots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 319,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 222,
+          "teacher_input_default": true,
+          "text": "Ignoring the men's footwear, what is the average height of heels worn by the women at this party?",
+          "warnings": []
+        }
+      ],
+      "question": "At a cocktail party, three of the women are wearing 4 inch heels and three are wearing 2 inch heels. Meanwhile, two men at the party are wearing 1 inch heel dress shoes and another two men are wearing 1.5 inch heel boots. Ignoring the men's footwear, what is the average height of heels worn by the women at this party?",
+      "source_id": "gsm-plus-08878"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is in charge of purchasing books for her community library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "She started with a budget of $16 and has already used $4 of it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "Today, she purchased 2 books at an equal price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 252,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "If she now has $2 remaining in her budget, what was the price of each book?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is in charge of purchasing books for her community library. She started with a budget of $16 and has already used $4 of it. Today, she purchased 2 books at an equal price. If she now has $2 remaining in her budget, what was the price of each book?",
+      "source_id": "gsm-plus-08925"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In the first half of a soccer match, team A scores 2/5 of ten goals while team B scores 2 goals fewer than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 264,
+          "teacher_input_default": true,
+          "text": "What's the total number of goals scored in the match?",
+          "warnings": []
+        }
+      ],
+      "question": "In the first half of a soccer match, team A scores 2/5 of ten goals while team B scores 2 goals fewer than team A. In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half. What's the total number of goals scored in the match?",
+      "source_id": "gsm-plus-09402"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

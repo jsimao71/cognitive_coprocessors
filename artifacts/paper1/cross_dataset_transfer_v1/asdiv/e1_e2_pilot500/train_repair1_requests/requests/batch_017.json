@@ -1,0 +1,438 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were forty-seven bales of hay in the barn and forty bales in the shed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Benny stacked more bales in the barn today.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "There are now eighty-two bales of hay in the barn.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 172,
+          "teacher_input_default": true,
+          "text": "How many bales did he store in the barn ?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "barn.before_today.hay_bales = 47",
+              "shed.before_today.hay_bales = 40"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "barn.after_today.hay_bales = barn.before_today.hay_bales + benny.today.hay_bales_stacked"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The amount Benny stacked is retained as a forward semantic dependency grounded by the later barn total."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "barn.after_today.hay_bales = 82"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN benny.today.hay_bales_stacked"
+            ],
+            "assumptions": [
+              "The pronoun \"he\" refers to Benny."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1376"
+      },
+      "question": "There were forty-seven bales of hay in the barn and forty bales in the shed. Benny stacked more bales in the barn today. There are now eighty-two bales of hay in the barn. How many bales did he store in the barn ?",
+      "source_context": null,
+      "source_id": "asdiv-1376",
+      "validation_failure": "unresolved reference 'benny.today.hay_bales_stacked' from scope 'global'; unresolved reference 'benny.today.hay_bales_stacked' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "35",
+        "gold_reasoning": "82-47=35"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ana is 5 years more than Jack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "The sum of their ages is 29.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "Find the ages of Ana and Jack.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ana.age_now = jack.age_now + 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ana_and_jack.total_age = 29"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The path identifies 29 as the combined age of Ana and Jack."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN ana.age_now",
+              "RETURN jack.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The query requests both people's ages."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1295"
+      },
+      "question": "Ana is 5 years more than Jack. The sum of their ages is 29. Find the ages of Ana and Jack.",
+      "source_context": null,
+      "source_id": "asdiv-1295",
+      "validation_failure": "unresolved reference 'jack.age_now' from scope 'global'; unresolved reference 'ana.age_now' from scope 'global'; unresolved reference 'jack.age_now' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "17",
+        "gold_reasoning": "j:Jack's age; (j+5)+j=29"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A ballet class wants to divide its 90 members into some large groups at 7 members each and some small groups at 3 members each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 128,
+          "teacher_input_default": true,
+          "text": "In order to make the least number of groups, how many large groups should be made?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ballet_class.members = 90",
+              "large_groups.members_per_group = 7",
+              "small_groups.members_per_group = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The numbers of large and small groups remain unknown quantities constrained by the grouping task."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires integer-constrained optimization: choose nonnegative whole numbers of 7-member and 3-member groups that cover exactly 90 members while minimizing the total number of groups. The active arithmetic operator registry cannot express integrality, constraints, or minimization over feasible assignments."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0809"
+      },
+      "question": "A ballet class wants to divide its 90 members into some large groups at 7 members each and some small groups at 3 members each. In order to make the least number of groups, how many large groups should be made?",
+      "source_context": null,
+      "source_id": "asdiv-0809",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": "90/7=12 r6"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Robin wanted to drink exactly nine bottles of water each day, so she bought six hundred seventeen bottles when they were on sale.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "How many more bottles will she need to buy on the last day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "robin.daily_water_target.bottles = 9",
+              "robin.bottles_bought = 617"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Determining the last-day shortfall requires a remainder or equivalent floor/integer-division operation, which is not available in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1539"
+      },
+      "question": "Robin wanted to drink exactly nine bottles of water each day, so she bought six hundred seventeen bottles when they were on sale. How many more bottles will she need to buy on the last day?",
+      "source_context": null,
+      "source_id": "asdiv-1539",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "617/9=68 r5; 9-5=4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Evans has 120 crayons and 30 pieces of paper to give to her students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "What is the largest number of students she can have in her class so that each student gets equal number of crayons and equal number of paper?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mrs_evans.crayons_available = 120",
+              "mrs_evans.paper_pieces_available = 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the largest class size that divides both item counts evenly requires greatest-common-divisor or divisibility semantics, which are not available in the supplied operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2028"
+      },
+      "question": "Mrs. Evans has 120 crayons and 30 pieces of paper to give to her students. What is the largest number of students she can have in her class so that each student gets equal number of crayons and equal number of paper?",
+      "source_context": null,
+      "source_id": "asdiv-2028",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "30",
+        "gold_reasoning": "GCD(120,30)=30"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

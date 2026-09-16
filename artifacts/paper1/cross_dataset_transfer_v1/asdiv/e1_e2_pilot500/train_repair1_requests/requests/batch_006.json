@@ -1,0 +1,457 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The Math Counts Club had a party at school.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "There were 20 cookies and 40 slices of pizza to be shared equally.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "Each student had the same number of whole cookies and the same number of slices of pizza with nothing left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 306,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 224,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of cookies and pizza slices the students can each get?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies narrative context but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "party.total.cookies = 20",
+              "party.total.pizza_slices = 40"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Equal whole-number sharing with nothing left over introduces integer-divisibility constraints that cannot be represented by the active arithmetic operator registry."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The wording does not determine whether the requested maximum is the number of students who can share both totals or the per-student quantities of cookies and pizza slices; the alternatives require different semantics."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2077"
+      },
+      "question": "The Math Counts Club had a party at school. There were 20 cookies and 40 slices of pizza to be shared equally. Each student had the same number of whole cookies and the same number of slices of pizza with nothing left over. What is the greatest number of cookies and pizza slices the students can each get?",
+      "source_context": null,
+      "source_id": "asdiv-2077",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported, part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "GCD(20,40)=20"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A merry-go-round has a circular platform with a diameter of 2 yards.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 97,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "What is the platform's area?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "merry_go_round.platform.diameter_yards = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The path preserves both the measured object and the length unit."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Computing the area of a circle requires the constant pi (or a registered circle-area operator), neither of which is available in the active arithmetic profile."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1515"
+      },
+      "question": "A merry-go-round has a circular platform with a diameter of 2 yards. What is the platform's area?",
+      "source_context": null,
+      "source_id": "asdiv-1515",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "3.14",
+        "gold_reasoning": "(2/2)^2*3.14=3.14"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Out of the 26 students in the gym, 4 are sitting on the bleachers and the rest are sitting on the floor.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "What is the ratio of the number of students sitting on the floor to the total number of students?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "gym.students.total_count = 26",
+              "gym.students.bleachers_count = 4",
+              "gym.students.floor_count = gym.students.total_count - gym.students.bleachers_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The floor count preserves the stated complement relation rather than collapsing it to a solved literal."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "gym.students.floor_to_total_ratio = gym.students.floor_count / gym.students.total_count",
+              "RETURN gym.students.floor_to_total_ratio"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The division preserves the requested ratio order: floor count to total count."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1143"
+      },
+      "question": "Out of the 26 students in the gym, 4 are sitting on the bleachers and the rest are sitting on the floor. What is the ratio of the number of students sitting on the floor to the total number of students?",
+      "source_context": null,
+      "source_id": "asdiv-1143",
+      "validation_failure": "answer mismatch: actual=0.8461538461538461538461538462, expected=11",
+      "validator_context": {
+        "correct_answer": "11",
+        "gold_reasoning": "26-4=22; 22:26=11:13"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 26,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ms. Baker has 17 cupcakes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 27,
+          "teacher_input_default": true,
+          "text": "She wants to share them equally among her 3 children so that no one gets more than anyone else.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "If she gives each child as many cupcakes as possible, how many cupcakes will be left over for Ms. Baker to eat?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ms_baker.cupcakes.initial_count = 17"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ms_baker.children.count = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The equal-sharing intention is contextual; an exact discrete allocation is not asserted in this clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested leftover after giving each child the maximum equal whole-number allocation requires integer division or a remainder/modulo operator, neither of which is present in the active registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0671"
+      },
+      "question": "Ms. Baker has 17 cupcakes. She wants to share them equally among her 3 children so that no one gets more than anyone else. If she gives each child as many cupcakes as possible, how many cupcakes will be left over for Ms. Baker to eat?",
+      "source_context": null,
+      "source_id": "asdiv-0671",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "17/3=5 r2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mei has 15 oranges, 9 peaches and 18 pears.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "She wants to put all of the fruit into baskets with each basket having the same number of pieces of fruit in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "Without mixing the fruit, what is the greatest number of pieces of fruit Mei can put in each basket?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mei.fruit.oranges.count = 15",
+              "mei.fruit.peaches.count = 9",
+              "mei.fruit.pears.count = 18"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause introduces an equal-size integer partition constraint, which cannot be fully represented by the active arithmetic operators."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested greatest non-mixing basket size requires greatest-common-divisor or divisibility semantics, which are absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0869"
+      },
+      "question": "Mei has 15 oranges, 9 peaches and 18 pears. She wants to put all of the fruit into baskets with each basket having the same number of pieces of fruit in it. Without mixing the fruit, what is the greatest number of pieces of fruit Mei can put in each basket?",
+      "source_context": null,
+      "source_id": "asdiv-0869",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "GCD(15,9,18)=3"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

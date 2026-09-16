@@ -1,0 +1,98 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "DeShaun always wins the award in English class for reading the most books over the summer. This year is no different. Summer break is 80 days long. When he arrives, he notifies the teacher that he read 60 books over the summer. Each book averaged 320 pages long. The person closest to him read 75% as much as he did. How many pages did the second person read on average each day of break?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"summer_break.duration\", \"this_year\"), 80, \"day\", source(\"Summer break is 80 days long\"))",
+          "collection(\"deshaun.summer_reading.books\", \"book\", \"deshaun\", source(\"he read 60 books over the summer\"))",
+          "observe(at(\"deshaun.summer_reading.books.count\", \"this_year\"), 60, \"count\", source(\"he read 60 books over the summer\"))",
+          "observe(at(\"summer_reading.book.pages.mean\", \"this_year\"), 320, \"page\", source(\"Each book averaged 320 pages long\"))",
+          "collection(\"english_class.second_reader.summer_reading.books\", \"book\", \"english_class.second_reader\", source(\"The person closest to him read 75% as much as he did\"))",
+          "percent_of(at(\"english_class.second_reader.summer_reading.books.count\", \"this_year\"), at(\"deshaun.summer_reading.books.count\", \"this_year\"), 75, source(\"The person closest to him read 75% as much as he did\"))",
+          "query(\"value\", at(\"english_class.second_reader.summer_reading.pages.mean_per_day\", \"this_year\"))"
+        ]
+      },
+      "source_id": "6498"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Hector purchased a container of gumballs.  He gave 4 to Todd, then he gave twice as many as he had given Todd to Alisha, and then he gave 5 less than four times as many to Bobby as he had given to Alisha.  If Hector had 6 gumballs remaining, what is the total number of gumballs that Hector purchased?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"hector.container.gumballs\", \"gumball\", \"hector.container\", source(\"a container of gumballs\"))",
+          "add(\"purchase_gumballs\", \"hector\", at(\"hector.container.gumballs.count\", \"current\"), \"hector.container.gumballs.purchased.count\", source(\"Hector purchased a container of gumballs\"))",
+          "transfer(\"give_todd\", \"hector\", at(\"hector.container.gumballs.count\", \"current\"), at(\"todd.gumballs.count\", \"current\"), 4, source(\"He gave 4 to Todd\"))",
+          "transfer(\"give_alisha\", \"hector\", at(\"hector.container.gumballs.count\", \"current\"), at(\"alisha.gumballs.count\", \"current\"), scale(event_field(\"give_todd\", \"quantity\"), 2), source(\"he gave twice as many as he had given Todd to Alisha\"))",
+          "offset(\"hector.container.gumballs.given_to_bobby.count\", scale(event_field(\"give_alisha\", \"quantity\"), 4), -5, \"count\", source(\"5 less than four times as many to Bobby as he had given to Alisha\"))",
+          "transfer(\"give_bobby\", \"hector\", at(\"hector.container.gumballs.count\", \"current\"), at(\"bobby.gumballs.count\", \"current\"), \"hector.container.gumballs.given_to_bobby.count\", source(\"he gave 5 less than four times as many to Bobby as he had given to Alisha\"))",
+          "observe(at(\"hector.container.gumballs.count\", \"current\"), 6, \"count\", source(\"Hector had 6 gumballs remaining\"))",
+          "query(\"value\", event_field(\"purchase_gumballs\", \"quantity\"))"
+        ]
+      },
+      "source_id": "98"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "At camp Wonka, there are 96 campers.  Two-thirds of the campers are boys, and the remaining one-third are girls.  50% of the boys want to toast marshmallows and 75% of the girls want to toast marshmallows.  If each camper gets one marshmallow to toast, how many marshmallows do they need?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"camp_wonka.campers\", \"camper\", \"camp_wonka\", source(\"At camp Wonka, there are 96 campers\"))",
+          "observe(at(\"camp_wonka.campers.count\", \"current\"), 96, \"count\", source(\"there are 96 campers\"))",
+          "fraction_of(at(\"camp_wonka.campers.boys.count\", \"current\"), at(\"camp_wonka.campers.count\", \"current\"), 2, 3, source(\"Two-thirds of the campers are boys\"))",
+          "fraction_of(at(\"camp_wonka.campers.girls.count\", \"current\"), at(\"camp_wonka.campers.count\", \"current\"), 1, 3, source(\"the remaining one-third are girls\"))",
+          "collection(\"camp_wonka.campers.want_to_toast_marshmallows\", \"camper\", \"camp_wonka\", source(\"50% of the boys want to toast marshmallows and 75% of the girls want to toast marshmallows\"))",
+          "percent_of(at(\"camp_wonka.campers.want_to_toast_marshmallows.boys.count\", \"current\"), at(\"camp_wonka.campers.boys.count\", \"current\"), 50, source(\"50% of the boys want to toast marshmallows\"))",
+          "percent_of(at(\"camp_wonka.campers.want_to_toast_marshmallows.girls.count\", \"current\"), at(\"camp_wonka.campers.girls.count\", \"current\"), 75, source(\"75% of the girls want to toast marshmallows\"))",
+          "observe(at(\"camp_wonka.marshmallow_allocation.per_camper\", \"current\"), 1, \"marshmallow_per_camper\", source(\"each camper gets one marshmallow to toast\"))",
+          "product_relation(at(\"camp_wonka.marshmallows.needed.count\", \"current\"), at(\"camp_wonka.campers.want_to_toast_marshmallows.count\", \"current\"), at(\"camp_wonka.marshmallow_allocation.per_camper\", \"current\"), source(\"each camper gets one marshmallow to toast\"))",
+          "query(\"value\", at(\"camp_wonka.marshmallows.needed.count\", \"current\"))"
+        ]
+      },
+      "source_id": "7450"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Mikaela earns $10 an hour  tutoring. For the first month, she tutored for 35 hours and in the second month, she tutored 5 hours more than the first month. She spent 4/5 of her total earnings on her personal needs and saved the rest of the money. How much did she save?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"mikaela.tutoring.pay_rate\", \"current\"), 10, \"dollar_per_hour\", source(\"$10 an hour\"))",
+          "rate_relation(\"mikaela.tutoring.total_earnings.amount\", at(\"mikaela.tutoring.pay_rate\", \"current\"), \"mikaela.tutoring.hours\", source(\"Mikaela earns $10 an hour\"))",
+          "observe(at(\"mikaela.tutoring.hours\", \"first_month\"), 35, \"hour\", source(\"the first month, she tutored for 35 hours\"))",
+          "offset(at(\"mikaela.tutoring.hours\", \"second_month\"), at(\"mikaela.tutoring.hours\", \"first_month\"), 5, \"hour\", source(\"in the second month, she tutored 5 hours more than the first month\"))",
+          "fraction_of(\"mikaela.personal_needs.spending.amount\", \"mikaela.tutoring.total_earnings.amount\", 4, 5, source(\"She spent 4/5 of her total earnings on her personal needs\"))",
+          "remove(\"personal_needs_spending\", \"mikaela\", at(\"mikaela.tutoring.total_earnings.amount\", \"current\"), \"mikaela.personal_needs.spending.amount\", source(\"She spent 4/5 of her total earnings on her personal needs\"))",
+          "sum_relation(\"mikaela.tutoring.total_earnings.amount\", \"mikaela.personal_needs.spending.amount\", \"mikaela.savings.amount\", source(\"She spent 4/5 of her total earnings on her personal needs and saved the rest of the money\"))",
+          "query(\"value\", \"mikaela.savings.amount\")"
+        ]
+      },
+      "source_id": "3061"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Billy has 8 hours of free time on each day of the weekend. He wants to spend 75% of his time playing video games and the rest of his time reading. He can read 60 pages an hour and his books all contain 80 pages. How many books does he read?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "6589"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

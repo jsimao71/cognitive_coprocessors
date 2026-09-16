@@ -1,0 +1,373 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A farmer has 900 eggs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "He placed them on a tray, which holds 30 eggs each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "The farmer also has 200 apples in his barn, but he decided not to sell them today.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "If he sells the egg trays for $2.5 per tray, how much will the farmer earn?",
+          "warnings": []
+        }
+      ],
+      "question": "A farmer has 900 eggs. He placed them on a tray, which holds 30 eggs each. The farmer also has 200 apples in his barn, but he decided not to sell them today. If he sells the egg trays for $2.5 per tray, how much will the farmer earn?",
+      "source_id": "gsm-plus-06798"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Smith has two farms, Farm A and Farm B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "He has 75 goats in Farm A and 65 goats in Farm B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "He sold 15 goats from Farm A and twice as many goats from Farm B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 160,
+          "teacher_input_default": true,
+          "text": "How many goats are left in the two farms altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Smith has two farms, Farm A and Farm B. He has 75 goats in Farm A and 65 goats in Farm B. He sold 15 goats from Farm A and twice as many goats from Farm B. How many goats are left in the two farms altogether?",
+      "source_id": "gsm-plus-06800"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Smith has two farms, Farm X and Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 95,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "He has 550 goats in Farm X and 450 goats in Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "He sold 100 goats from Farm X and twice as many goats from Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "How many goats are left in the two farms altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Smith has two farms, Farm X and Farm Y. He has 550 goats in Farm X and 450 goats in Farm Y. He sold 100 goats from Farm X and twice as many goats from Farm Y. How many goats are left in the two farms altogether?",
+      "source_id": "gsm-plus-06801"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Smith has two farms, Farm X and Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "He has 5.5 times of ten goats in Farm X and 4.5 times of ten goats in Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "He sold 10 goats from Farm X and twice as many goats from Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "How many goats are left in the two farms altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Smith has two farms, Farm X and Farm Y. He has 5.5 times of ten goats in Farm X and 4.5 times of ten goats in Farm Y. He sold 10 goats from Farm X and twice as many goats from Farm Y. How many goats are left in the two farms altogether?",
+      "source_id": "gsm-plus-06802"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Smith has two farms, Farm X and Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "He has 55 goats in Farm X and 45 goats in Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "He sold 10 goats from Farm X and twice as many goats from Farm Y.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 160,
+          "teacher_input_default": true,
+          "text": "After a few days, he bought 5 more goats for Farm X.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 265,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 213,
+          "teacher_input_default": true,
+          "text": "How many goats are left in the two farms altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Smith has two farms, Farm X and Farm Y. He has 55 goats in Farm X and 45 goats in Farm Y. He sold 10 goats from Farm X and twice as many goats from Farm Y. After a few days, he bought 5 more goats for Farm X. How many goats are left in the two farms altogether?",
+      "source_id": "gsm-plus-06803"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,375 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If Lillian split 20 Skittles between 8 people in her class and kept the left overs, how many Skittles did each classmate get?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "Because Skittles are discrete and Lillian keeps the leftovers, the requested amount per classmate requires integer-division or floor semantics; neither operation is available in the active registry. Ordinary division would not preserve the stated leftover semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2270"
+      },
+      "question": "If Lillian split 20 Skittles between 8 people in her class and kept the left overs, how many Skittles did each classmate get?",
+      "source_context": null,
+      "source_id": "asdiv-2270",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "20/8=2 r4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jason and Lexi are shelving books at a public library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "Jason shelves 6 books at a time, whereas Lexi shelves 17 at a time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "If they end up shelving the same number of books, what is the smallest number of books each could have shelved?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Qualitative library context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jason.books_per_batch = 6",
+              "lexi.books_per_batch = 17"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The phrase \"at a time\" is represented as a batch size."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires finding the least common multiple of the two batch sizes, but the active operator registry has no least-common-multiple or equivalent integer minimization operator."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2053"
+      },
+      "question": "Jason and Lexi are shelving books at a public library. Jason shelves 6 books at a time, whereas Lexi shelves 17 at a time. If they end up shelving the same number of books, what is the smallest number of books each could have shelved?",
+      "source_context": null,
+      "source_id": "asdiv-2053",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "102",
+        "gold_reasoning": "LCM[6,17]=102"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The length of the rectangular building is 7 ft more than its width.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "If the perimeter of the building wall is 98 ft, find its length and width.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "building.length_excess_over_width_ft = 7",
+              "building.length_ft = building.width_ft + building.length_excess_over_width_ft"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "building.perimeter_ft = 98",
+              "building.width_ft = (building.perimeter_ft / 2 - building.length_excess_over_width_ft) / 2",
+              "RETURN building.length_ft",
+              "RETURN building.width_ft"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The rectangle perimeter relation is used to derive the width; the previously stated length relation then determines the length."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1339"
+      },
+      "question": "The length of the rectangular building is 7 ft more than its width. If the perimeter of the building wall is 98 ft, find its length and width.",
+      "source_context": null,
+      "source_id": "asdiv-1339",
+      "validation_failure": "answer mismatch: actual=21, expected=28",
+      "validator_context": {
+        "correct_answer": "28",
+        "gold_reasoning": "(L+(L-7))*2=98"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A clown needed two hundred twenty-seven balloons for a party he was going to, but the balloons only came in packs of two.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "How many packs of balloons would he need to buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "clown.party.balloons_needed = 227",
+              "balloon_pack.balloons_per_pack = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The number of whole packs that must be bought requires ceiling division because 227 is not divisible by 2, but no ceiling or equivalent rounding operator is available in the supplied registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1556"
+      },
+      "question": "A clown needed two hundred twenty-seven balloons for a party he was going to, but the balloons only came in packs of two. How many packs of balloons would he need to buy?",
+      "source_context": null,
+      "source_id": "asdiv-1556",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "114",
+        "gold_reasoning": "227/2=113 r1"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Faye's team won their baseball game and scored sixty-eight points total.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "If Faye scored twenty-eight of the points and everyone else scored eight points each, how many players were on her team?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "faye.team.game.total_points = 68"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "faye.game.points = 28",
+              "faye.team.other_players.points_each = 8",
+              "faye.team.other_players.count = (faye.team.game.total_points - faye.game.points) / faye.team.other_players.points_each",
+              "faye.team.player_count = faye.team.other_players.count + 1",
+              "RETURN faye.team.player_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Faye is added to the count of all other players."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2236"
+      },
+      "question": "Faye's team won their baseball game and scored sixty-eight points total. If Faye scored twenty-eight of the points and everyone else scored eight points each, how many players were on her team?",
+      "source_context": null,
+      "source_id": "asdiv-2236",
+      "validation_failure": "answer mismatch: actual=6, expected=5",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "(68-28)/8=5"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

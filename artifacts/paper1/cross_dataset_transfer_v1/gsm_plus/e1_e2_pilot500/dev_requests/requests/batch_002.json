@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Eliza's rate per hour for the first 40 hours she works each week is $10.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "She also receives an overtime pay of 1.2 times her regular hourly rate.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 145,
+          "teacher_input_default": true,
+          "text": "In addition, she receives a weekly bonus of $50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 274,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "If Eliza worked for 45 hours this week, how much are her earnings for this week?",
+          "warnings": []
+        }
+      ],
+      "question": "Eliza's rate per hour for the first 40 hours she works each week is $10. She also receives an overtime pay of 1.2 times her regular hourly rate. In addition, she receives a weekly bonus of $50. If Eliza worked for 45 hours this week, how much are her earnings for this week?",
+      "source_id": "gsm-plus-00075"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Eliza earns $10 per hour for the first 40 hours she works each week and 1.2 times her regular hourly rate for any overtime.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "If Eliza earned $460 this week, how many hours did she work?",
+          "warnings": []
+        }
+      ],
+      "question": "Eliza earns $10 per hour for the first 40 hours she works each week and 1.2 times her regular hourly rate for any overtime. If Eliza earned $460 this week, how many hours did she work?",
+      "source_id": "gsm-plus-00076"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For the initial 40 hours of work each week, Eliza earns $10 per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "For any hours worked beyond that, she is paid 1.2 times her standard hourly wage.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 254,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "Given that Eliza has worked 45 hours this week, what is the total amount she has earned for this week?",
+          "warnings": []
+        }
+      ],
+      "question": "For the initial 40 hours of work each week, Eliza earns $10 per hour. For any hours worked beyond that, she is paid 1.2 times her standard hourly wage. Given that Eliza has worked 45 hours this week, what is the total amount she has earned for this week?",
+      "source_id": "gsm-plus-00077"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Eliza's rate per hour for the first 40 hours she works each week is $10.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "She also receives an overtime pay of 1.2 times her regular hourly rate for any hours worked beyond the initial 40.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "This week, Eliza worked for 45 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 338,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 226,
+          "teacher_input_default": true,
+          "text": "However, she also spent 2 hours attending a mandatory, unpaid training session and 1 hour on a paid lunch break.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 406,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 339,
+          "teacher_input_default": true,
+          "text": "Considering these factors, how much are her earnings for this week?",
+          "warnings": []
+        }
+      ],
+      "question": "Eliza's rate per hour for the first 40 hours she works each week is $10. She also receives an overtime pay of 1.2 times her regular hourly rate for any hours worked beyond the initial 40. This week, Eliza worked for 45 hours. However, she also spent 2 hours attending a mandatory, unpaid training session and 1 hour on a paid lunch break. Considering these factors, how much are her earnings for this week?",
+      "source_id": "gsm-plus-00078"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom's ship can travel at 15 miles per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "He is sailing from 2 to 5 PM.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "He then travels back at a rate of 9 mph.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "How long does it take him to get back?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom's ship can travel at 15 miles per hour. He is sailing from 2 to 5 PM. He then travels back at a rate of 9 mph. How long does it take him to get back?",
+      "source_id": "gsm-plus-00408"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

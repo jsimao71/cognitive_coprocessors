@@ -1,0 +1,492 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The ratio of the number correct answers to incorrect answers on Sam's math test is 7:3.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "The difference between correct and incorrect answers is 20.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "What was the total number of questions on the test?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "sam.math_test.correct_answers = sam.math_test.incorrect_answers * 7 / 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Preserves the stated 7:3 relation without solving either answer count."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sam.math_test.answer_count_difference = 20",
+              "sam.math_test.correct_answers = sam.math_test.incorrect_answers + sam.math_test.answer_count_difference"
+            ],
+            "assumptions": [
+              "The 7:3 ratio establishes that the correct-answer count is the larger count."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sam.math_test.total_questions = sam.math_test.correct_answers + sam.math_test.incorrect_answers",
+              "RETURN sam.math_test.total_questions"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1111"
+      },
+      "question": "The ratio of the number correct answers to incorrect answers on Sam's math test is 7:3. The difference between correct and incorrect answers is 20. What was the total number of questions on the test?",
+      "source_context": null,
+      "source_id": "asdiv-1111",
+      "validation_failure": "unresolved reference 'sam.math_test.incorrect_answers' from scope 'global'; unresolved reference 'sam.math_test.incorrect_answers' from scope 'global'; unresolved reference 'sam.math_test.correct_answers' from scope 'global'; unresolved reference 'sam.math_test.total_questions' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "50",
+        "gold_reasoning": "(7-3):10=20:50"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Having been to Paris, Rob also remembered the Eiffel Tower which was the tallest structure in the world at the time it was built.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 269,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If the height of Eiffel Tower is 324 m, how much lower is it compared to 830m height, today\u2019s tallest man-made structure, the Burj Khalifa?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "Remembering a landmark and its historical tallest-structure status require non-arithmetic event and temporal-predicate semantics outside the active operator registry."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "eiffel_tower.height_m = 324",
+              "burj_khalifa.height_m = 830",
+              "eiffel_tower.height_difference_from_burj_khalifa_m = burj_khalifa.height_m - eiffel_tower.height_m",
+              "RETURN eiffel_tower.height_difference_from_burj_khalifa_m"
+            ],
+            "assumptions": [
+              "The requested amount by which the Eiffel Tower is lower is the Burj Khalifa's height minus the Eiffel Tower's height."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0312"
+      },
+      "question": "Having been to Paris, Rob also remembered the Eiffel Tower which was the tallest structure in the world at the time it was built. If the height of Eiffel Tower is 324 m, how much lower is it compared to 830m height, today\u2019s tallest man-made structure, the Burj Khalifa?",
+      "source_context": null,
+      "source_id": "asdiv-0312",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "506",
+        "gold_reasoning": "830-324=506"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The second angle of a triangle is three times the first, and the third is 12 degrees less than twice the first.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "Find the measures of the angles.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "triangle.interior_angle_sum.degrees = 180",
+              "triangle.angle2.degrees = triangle.angle1.degrees * 3",
+              "triangle.angle3.degrees = triangle.angle1.degrees * 2 - 12"
+            ],
+            "assumptions": [
+              "The figure is a Euclidean triangle, so its interior angles total 180 degrees."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The angle relations remain explicit rather than being collapsed to solved constants."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "triangle.angle1.degrees = (triangle.interior_angle_sum.degrees + 12) / 6",
+              "RETURN triangle.angle1.degrees",
+              "RETURN triangle.angle2.degrees",
+              "RETURN triangle.angle3.degrees"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "Separate returns preserve the plural request for all three angle measures."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1472"
+      },
+      "question": "The second angle of a triangle is three times the first, and the third is 12 degrees less than twice the first. Find the measures of the angles.",
+      "source_context": null,
+      "source_id": "asdiv-1472",
+      "validation_failure": "answer mismatch: actual=52, expected=32",
+      "validator_context": {
+        "correct_answer": "32",
+        "gold_reasoning": "x:The first angle of a triangle; y:The second angle of a triangle; y=3x; 180-(x+y)=2x-12"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The radio station gave away a $100 bill for every 100th caller.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "Every 30th caller received free concert tickets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 113,
+          "teacher_input_default": true,
+          "text": "How many callers must get through before one of them receives both a coupon and a concert ticket?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "radio_station.cash_prize.amount_dollars = 100",
+              "radio_station.cash_prize.every_nth_caller = 100"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "radio_station.concert_tickets.every_nth_caller = 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested coupon has no established antecedent: the earlier prize is a $100 bill, not a coupon.",
+              "Finding the first caller position shared by two recurring intervals would also require least-common-multiple semantics, which are absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2027"
+      },
+      "question": "The radio station gave away a $100 bill for every 100th caller. Every 30th caller received free concert tickets. How many callers must get through before one of them receives both a coupon and a concert ticket?",
+      "source_context": null,
+      "source_id": "asdiv-2027",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "300",
+        "gold_reasoning": "LCM[100,30]=300"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Three workers, A, B, and C are working in a bicycle factory.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "A finishes assembling a bike every 1 h 30 min.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "B finishes assembling a bike every 2 h.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "C finishes assembling a bike every 1 h.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "If they started assembling three bikes at the same time at 8:10, at what time would they start assembling at the same time again?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bicycle_factory.workers.count = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "The named workers are represented by the worker_a, worker_b, and worker_c paths introduced by the following clauses."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "worker_a.bike_assembly_interval.hours_component = 1",
+              "worker_a.bike_assembly_interval.minutes_component = 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "worker_b.bike_assembly_interval.hours = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "worker_c.bike_assembly_interval.hours = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Determining when all three periodic assembly starts coincide again requires least-common-multiple semantics, which are absent from the active operator registry.",
+              "The resulting elapsed duration must then be applied to the 8:10 clock time, but the active arithmetic profile has no time-of-day operation."
+            ],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0843"
+      },
+      "question": "Three workers, A, B, and C are working in a bicycle factory. A finishes assembling a bike every 1 h 30 min. B finishes assembling a bike every 2 h. C finishes assembling a bike every 1 h. If they started assembling three bikes at the same time at 8:10, at what time would they start assembling at the same time again?",
+      "source_context": null,
+      "source_id": "asdiv-0843",
+      "validation_failure": "non-ok semantic parts: part 4=unsupported",
+      "validator_context": {
+        "correct_answer": "14",
+        "gold_reasoning": "(8*60 (min/hour) + 10) + LCM[90,120,60] + 0 = 850 (min); 850/60 (min/hour)=14 r10; hh:mm=14:10"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

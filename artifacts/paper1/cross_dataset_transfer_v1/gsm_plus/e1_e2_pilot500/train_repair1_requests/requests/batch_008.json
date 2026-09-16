@@ -1,0 +1,680 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A bakery produces 120 loaves of bread each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 219,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "How many loaves of bread are sold in the afternoon?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bakery.daily.loaves_produced = 120"
+            ],
+            "assumptions": [],
+            "confidence": 1,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bakery.morning.loaves_sold = bakery.daily.loaves_produced * 2 / 3",
+              "bakery.after_morning.loaves_remaining = bakery.daily.loaves_produced - bakery.morning.loaves_sold",
+              "bakery.afternoon_and_evening.loaves_sold = bakery.after_morning.loaves_remaining / 2",
+              "bakery.afternoon.loaves_sold = bakery.afternoon_and_evening.loaves_sold / 2",
+              "bakery.evening.loaves_sold = bakery.afternoon.loaves_sold"
+            ],
+            "assumptions": [
+              "The half of the remaining loaves is the combined amount sold across the afternoon and evening, divided equally between those periods."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN bakery.afternoon.loaves_sold"
+            ],
+            "assumptions": [],
+            "confidence": 1,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02449"
+      },
+      "question": "A bakery produces 120 loaves of bread each day. Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening. How many loaves of bread are sold in the afternoon?",
+      "source_context": null,
+      "source_id": "gsm-plus-02449",
+      "validation_failure": "answer mismatch: actual=10, expected=20",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "120 x 2/3 = <<120*2/3=80>>80 loaves of bread are sold in the morning.\n120 - 80 = <<120-80=40>>40 loaves of bread are sold in the afternoon and evening.\nTherefore, 40/2 = <<40/2=20>>20 loaves of bread are sold in the afternoon.\n#### 20"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It's strawberry-picking time on Grandma Concetta's farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "Tony can pick some strawberries per hour, while Bobby picks one less quart of strawberries per hour than Tony.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 303,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks two fewer quarts of strawberries per hour than does Kathy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 409,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 304,
+          "teacher_input_default": true,
+          "text": "If they picked 29 quarts of strawberries per hour, how many quarts of strawberries can Tonypick in total?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contextual setup introduces no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bobby.hourly_strawberries_quarts = tony.hourly_strawberries_quarts - 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "kathy.hourly_strawberries_quarts = bobby.hourly_strawberries_quarts * 2",
+              "ricky.hourly_strawberries_quarts = kathy.hourly_strawberries_quarts - 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pickers.combined_hourly_strawberries_quarts = 29",
+              "tony.hourly_strawberries_quarts = pickers.combined_hourly_strawberries_quarts - sum(bobby.hourly_strawberries_quarts, kathy.hourly_strawberries_quarts, ricky.hourly_strawberries_quarts)",
+              "RETURN tony.hourly_strawberries_quarts"
+            ],
+            "assumptions": [
+              "Interpreted \"they\" as Tony, Bobby, Kathy, and Ricky, and \"Tonypick\" as the typographical phrase \"Tony pick\"."
+            ],
+            "confidence": 0.92,
+            "part_id": 3,
+            "semantic_notes": [
+              "The requested Tony quantity is his strawberry-picking rate because no duration is supplied."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-04180"
+      },
+      "question": "It's strawberry-picking time on Grandma Concetta's farm. Tony can pick some strawberries per hour, while Bobby picks one less quart of strawberries per hour than Tony. Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks two fewer quarts of strawberries per hour than does Kathy. If they picked 29 quarts of strawberries per hour, how many quarts of strawberries can Tonypick in total?",
+      "source_context": null,
+      "source_id": "gsm-plus-04180",
+      "validation_failure": "unresolved reference 'tony.hourly_strawberries_quarts' from scope 'global'; unresolved reference 'bobby.hourly_strawberries_quarts' from scope 'global'; unresolved reference 'kathy.hourly_strawberries_quarts' from scope 'global'; unresolved reference 'bobby.hourly_strawberries_quarts' from scope 'global'; unresolved reference 'tony.hourly_strawberries_quarts' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "Let the number of strawberries Tony pick be X. Then:\nBobby: X-1\nKathy: 2(X-1)\nRicky:[2(X-1)-2]\nX+X-1+2(X-1)+[2(X-1)-2]=29\nX=\n#### 6"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lorraine and Colleen are trading stickers for buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "Each large sticker is worth a large button or three small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "A small sticker is worth one small button.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "A large button is worth three small stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 276,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 211,
+          "teacher_input_default": true,
+          "text": "Lorraine starts with 3000 small stickers and 4000 large stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 332,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 277,
+          "teacher_input_default": true,
+          "text": "She trades 90% of her small stickers for large buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 434,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 333,
+          "teacher_input_default": true,
+          "text": "She trades 50% of her large stickers for large buttons and trades the rest of them for small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 477,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 435,
+          "teacher_input_default": true,
+          "text": "How many buttons does she have by the end?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contextual trading setup introduces no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.large_sticker.large_buttons_per_sticker = 1",
+              "trade.large_sticker.small_buttons_per_sticker = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.small_sticker.small_buttons_per_sticker = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.large_button.small_stickers_per_button = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.start.small_stickers = 3000",
+              "lorraine.start.large_stickers = 4000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.traded.small_stickers_for_large_buttons = percent_of(lorraine.start.small_stickers, 90)",
+              "lorraine.remaining.small_stickers = lorraine.start.small_stickers - lorraine.traded.small_stickers_for_large_buttons",
+              "lorraine.received.large_buttons_from_small_stickers = lorraine.traded.small_stickers_for_large_buttons / trade.large_button.small_stickers_per_button"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.traded.large_stickers_for_large_buttons = percent_of(lorraine.start.large_stickers, 50)",
+              "lorraine.traded.large_stickers_for_small_buttons = lorraine.start.large_stickers - lorraine.traded.large_stickers_for_large_buttons",
+              "lorraine.received.large_buttons_from_large_stickers = lorraine.traded.large_stickers_for_large_buttons * trade.large_sticker.large_buttons_per_sticker",
+              "lorraine.received.small_buttons_from_large_stickers = lorraine.traded.large_stickers_for_small_buttons * trade.large_sticker.small_buttons_per_sticker"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.end.total_buttons = sum(lorraine.received.large_buttons_from_small_stickers, lorraine.received.large_buttons_from_large_stickers, lorraine.received.small_buttons_from_large_stickers)",
+              "RETURN lorraine.end.total_buttons"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 7,
+            "semantic_notes": [
+              "The total counts both large and small buttons received in the described trades."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06033"
+      },
+      "question": "Lorraine and Colleen are trading stickers for buttons. Each large sticker is worth a large button or three small buttons. A small sticker is worth one small button. A large button is worth three small stickers. Lorraine starts with 3000 small stickers and 4000 large stickers. She trades 90% of her small stickers for large buttons. She trades 50% of her large stickers for large buttons and trades the rest of them for small buttons. How many buttons does she have by the end?",
+      "source_context": null,
+      "source_id": "gsm-plus-06033",
+      "validation_failure": "answer mismatch: actual=8900, expected=10700",
+      "validator_context": {
+        "correct_answer": "10700",
+        "gold_reasoning": "Lorraine starts with 3000 small stickers and trades 90% of them for large buttons. This means she trades 0.90 * 3000 = 2700 small stickers for large buttons.\n\nSince a small sticker is worth one small button, she gets 2700 large buttons.\n\nShe has 3000 - 2700 = 300 small stickers left.\n\nShe also starts with 4000 large stickers and trades 50% of them for large buttons. This means she trades 0.50 * 4000 = 2000 large stickers for large buttons.\n\nSince each large sticker is worth a large button, she gets 2000 large buttons.\n\nShe has 4000 - 2000 = 2000 large stickers left.\n\nShe trades the rest of her large stickers for small buttons. Since each large sticker is worth three small buttons, she gets 2000 * 3 = 6000 small buttons.\n\nIn total, Lorraine has 2700 + 2000 = 4700 large buttons and 6000 small buttons.\n\nSo, she has 4700 + 6000 =  10700 buttons by the end.\n#### 10700"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Billy is peeling and cutting potatoes in preparation for making potato salad for his big family reunion barbecue.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "It's a big event, so he has many potatoes to get through.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 279,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 172,
+          "teacher_input_default": true,
+          "text": "The potatoes are roughly the same size, so it takes about the same amount of time to peel and cut each one.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 377,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 280,
+          "teacher_input_default": true,
+          "text": "It takes Billy about a minute and a half to peel a potato, but only about 5 seconds to cut it up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 473,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 378,
+          "teacher_input_default": true,
+          "text": "If Billy has already spent 95 minutes peeling potatoes, how many potatoes does he need to peel?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context introduces Billy's potato-preparation activity but no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The qualitative statement that there are many potatoes supplies no usable quantity."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.92,
+            "part_id": 2,
+            "semantic_notes": [
+              "This establishes approximate uniformity of per-potato processing times; the numeric durations are supplied in the next part."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "billy.peeling.minutes_per_potato = 1.5",
+              "billy.cutting.seconds_per_potato = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause describes 95 minutes as time already spent peeling, but the surrounding setup separately gives peeling and cutting times. It is underdetermined whether the 95 minutes covers peeling alone or the combined preparation cycle, and 'does he need to peel' also conflicts with the past-tense elapsed activity."
+            ],
+            "confidence": 0.58,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-01396"
+      },
+      "question": "Billy is peeling and cutting potatoes in preparation for making potato salad for his big family reunion barbecue. It's a big event, so he has many potatoes to get through. The potatoes are roughly the same size, so it takes about the same amount of time to peel and cut each one. It takes Billy about a minute and a half to peel a potato, but only about 5 seconds to cut it up. If Billy has already spent 95 minutes peeling potatoes, how many potatoes does he need to peel?",
+      "source_context": null,
+      "source_id": "gsm-plus-01396",
+      "validation_failure": "non-ok semantic parts: part 4=ambiguous",
+      "validator_context": {
+        "correct_answer": "60",
+        "gold_reasoning": "The time it takes to peel each potato is 1.5 minutes, and the time it takes to cut each potato is 0.0833 minutes. So, the total time to prepare each potato is 1.5 minutes + 0.0833 minutes = 1.5833 minutes.\n\nThen, we could get that the number of potatoes equals  to 95/1.5833=60.\n#### 60"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "The price of carrots in the grocery store increases by 7% of the original price every year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 271,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "What would be the price of carrots after four years if it was $150 initially?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 302,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 272,
+          "teacher_input_default": true,
+          "text": "(Round to the nearest integer)",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Ownership and product context introduce no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.annual_price_increase = percent_of(carrots.initial_price, 7)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The annual increase is based on the original price, so the relation is additive rather than compounded."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.initial_price = 150",
+              "carrots.price_after_4_years = carrots.initial_price + carrots.annual_price_increase * 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The active operator registry has no rounding operator, so the nearest-integer transformation and final return cannot be expressed faithfully."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08128"
+      },
+      "question": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots. The price of carrots in the grocery store increases by 7% of the original price every year. What would be the price of carrots after four years if it was $150 initially? (Round to the nearest integer)",
+      "source_context": null,
+      "source_id": "gsm-plus-08128",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "162",
+        "gold_reasoning": "In the first year, the price of carrots increases by 7/100*150 = $10.5\nAfter 4 years, the price of carrots will increase by $10.5*4 = $42\nThe total price of carrots after four years will be 120+42 = $162\n#### 162"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

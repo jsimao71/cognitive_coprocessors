@@ -1,0 +1,116 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Bill is trying to control the pests in his garden. Each spider he introduces eats 7 bugs, and each time he sprays the garden he reduces the total bug population to 80% of what it was previously. If the garden has 400 bugs to start, and Bill sprays once and introduces 12 spiders, how many bugs are left?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"garden.bugs\", \"bug\", \"garden\", source(\"the garden has 400 bugs to start\"))",
+          "collection(\"garden.spiders\", \"spider\", \"garden\", source(\"introduces 12 spiders\"))",
+          "observe(at(\"garden.bugs.count\", \"initial\"), 400, \"count\", source(\"the garden has 400 bugs to start\"))",
+          "observe(at(\"introduced_spider.bugs_eaten.count\", \"current\"), 7, \"count\", source(\"Each spider he introduces eats 7 bugs\"))",
+          "observe(at(\"bill.garden_sprays.count\", \"current\"), 1, \"count\", source(\"Bill sprays once\"))",
+          "remove(\"spray_once\", \"bill\", at(\"garden.bugs.count\", \"current\"), \"garden.bugs.removed_by_spray.count\", source(\"each time he sprays the garden he reduces the total bug population to 80% of what it was previously\"))",
+          "percent_of(at(\"garden.bugs.count\", \"after_spray\"), at(\"garden.bugs.count\", \"initial\"), 80, source(\"reduces the total bug population to 80% of what it was previously\"))",
+          "add(\"introduce_spiders\", \"bill\", at(\"garden.spiders.count\", \"current\"), 12, source(\"introduces 12 spiders\"))",
+          "product_relation(\"garden.bugs.eaten_by_introduced_spiders.count\", event_field(\"introduce_spiders\", \"quantity\"), at(\"introduced_spider.bugs_eaten.count\", \"current\"), source(\"Each spider he introduces eats 7 bugs\"))",
+          "consume(\"introduced_spiders_eat\", \"garden.spiders\", at(\"garden.bugs.count\", \"current\"), \"garden.bugs.eaten_by_introduced_spiders.count\", source(\"Each spider he introduces eats 7 bugs\"))",
+          "query(\"remaining_count\", \"garden.bugs\", \"current\")"
+        ]
+      },
+      "source_id": "1548"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Quinten sees three buildings downtown and decides to estimate their heights. He knows from a book on local buildings that the one in the middle is 100 feet tall. The one on the left looks like it is 80% of the height of the middle one. The one on the right looks 20 feet shorter than if the building on the left and middle were stacked on top of each other. How tall does Quinten estimate their total height to be?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"downtown.building_heights\", \"height\", \"downtown\", source(\"three buildings downtown and decides to estimate their heights\"))",
+          "member(\"downtown.building_heights\", \"downtown.buildings.middle.height\", source(\"the one in the middle is 100 feet tall\"))",
+          "member(\"downtown.building_heights\", \"downtown.buildings.left.height\", source(\"The one on the left looks like it is 80% of the height of the middle one\"))",
+          "member(\"downtown.building_heights\", \"downtown.buildings.right.height\", source(\"The one on the right looks 20 feet shorter\"))",
+          "observe(at(\"downtown.buildings.middle.height\", \"current\"), 100, \"foot\", source(\"the one in the middle is 100 feet tall\"))",
+          "percent_of(at(\"downtown.buildings.left.height\", \"current\"), at(\"downtown.buildings.middle.height\", \"current\"), 80, source(\"The one on the left looks like it is 80% of the height of the middle one\"))",
+          "sum_relation(at(\"downtown.buildings.left_middle.stacked_height\", \"current\"), at(\"downtown.buildings.left.height\", \"current\"), at(\"downtown.buildings.middle.height\", \"current\"), source(\"the building on the left and middle were stacked on top of each other\"))",
+          "offset(at(\"downtown.buildings.right.height\", \"current\"), at(\"downtown.buildings.left_middle.stacked_height\", \"current\"), -20, \"foot\", source(\"The one on the right looks 20 feet shorter than if the building on the left and middle were stacked on top of each other\"))",
+          "query(\"sum\", \"downtown.building_heights\", \"current\")"
+        ]
+      },
+      "source_id": "4142"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "A case of water contains 24 bottles. A children's camp comprising of 4 groups purchased 13 cases for a 3-day camp. The first group has 14 children, the second group has 16 children, the third group has 12 children, and the fourth group has half of the number of the first three groups combined. If each child consumes 3 bottles a day, how many more bottles of water does the camp organizer still need to buy?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"water_case.bottles\", \"bottle\", \"water_case\", source(\"A case of water contains 24 bottles\"))",
+          "observe(at(\"water_case.bottles.count\", \"current\"), 24, \"count\", source(\"A case of water contains 24 bottles\"))",
+          "collection(\"camp.groups\", \"group\", \"camp\", source(\"A children's camp comprising of 4 groups\"))",
+          "observe(at(\"camp.groups.count\", \"current\"), 4, \"count\", source(\"comprising of 4 groups\"))",
+          "collection(\"camp.water_cases\", \"case\", \"camp\", source(\"purchased 13 cases\"))",
+          "add(\"water_case_purchase\", \"camp\", at(\"camp.water_cases.count\", \"current\"), 13, source(\"purchased 13 cases\"))",
+          "observe(at(\"camp.duration\", \"current\"), 3, \"day\", source(\"a 3-day camp\"))",
+          "observe(at(\"camp.groups.first.children.count\", \"current\"), 14, \"count\", source(\"The first group has 14 children\"))",
+          "observe(at(\"camp.groups.second.children.count\", \"current\"), 16, \"count\", source(\"the second group has 16 children\"))",
+          "observe(at(\"camp.groups.third.children.count\", \"current\"), 12, \"count\", source(\"the third group has 12 children\"))",
+          "sum_relation(at(\"camp.groups.first_three.children.count\", \"current\"), at(\"camp.groups.first.children.count\", \"current\"), at(\"camp.groups.second.children.count\", \"current\"), at(\"camp.groups.third.children.count\", \"current\"), source(\"the number of the first three groups combined\"))",
+          "fraction_of(at(\"camp.groups.fourth.children.count\", \"current\"), at(\"camp.groups.first_three.children.count\", \"current\"), 1, 2, source(\"the fourth group has half of the number of the first three groups combined\"))",
+          "observe(at(\"camp.child.water_bottles.consumed.count\", \"per_day\"), 3, \"count\", source(\"each child consumes 3 bottles a day\"))",
+          "query(\"difference\", \"camp.water_bottles.available.count\", \"camp.water_bottles.required.count\")"
+        ]
+      },
+      "source_id": "6382"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Jenny likes to play board games with her friends.  She likes to play against her friend Mark the most, as she's played him 10 times and Mark has only won once.  She doesn't like playing Jill, as she's played her twice as many times as she's played Mark and Jill has won 75% of them.  How many times in total has Jenny won board games with her two friends?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"jenny.board_games.with_friends\", \"board_game\", \"jenny\", source(\"board games with her friends\"))",
+          "observe(at(\"jenny.board_games.with_mark.count\", \"current\"), 10, \"count\", source(\"she's played him 10 times\"))",
+          "observe(at(\"mark.board_game_wins.against_jenny.count\", \"current\"), 1, \"count\", source(\"Mark has only won once\"))",
+          "multiple(at(\"jenny.board_games.with_jill.count\", \"current\"), at(\"jenny.board_games.with_mark.count\", \"current\"), 2, source(\"she's played her twice as many times as she's played Mark\"))",
+          "percent_of(at(\"jill.board_game_wins.against_jenny.count\", \"current\"), at(\"jenny.board_games.with_jill.count\", \"current\"), 75, source(\"Jill has won 75% of them\"))",
+          "query(\"sum\", \"jenny.board_game_wins.by_friend\", \"current\")"
+        ]
+      },
+      "source_id": "6252"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Haleigh decides that instead of throwing away old candles, she can use the last bit of wax combined together to make new candles. Each candle has 10% of it's original wax left. How many 5 ounce candles can she make if she has five 20 oz candles, 5 five ounce candles, and twenty-five one ounce candles?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"haleigh.old_candles\", \"candle\", \"haleigh\", source(\"five 20 oz candles, 5 five ounce candles, and twenty-five one ounce candles\"))",
+          "percent_of(at(\"haleigh.old_candles.each.wax\", \"remaining\"), at(\"haleigh.old_candles.each.wax\", \"original\"), 10, source(\"Each candle has 10% of it's original wax left\"))",
+          "observe(at(\"haleigh.old_candles.twenty_ounce.count\", \"current\"), 5, \"count\", source(\"five 20 oz candles\"))",
+          "observe(at(\"haleigh.old_candles.twenty_ounce.each.wax\", \"original\"), 20, \"ounce\", source(\"five 20 oz candles\"))",
+          "observe(at(\"haleigh.old_candles.five_ounce.count\", \"current\"), 5, \"count\", source(\"5 five ounce candles\"))",
+          "observe(at(\"haleigh.old_candles.five_ounce.each.wax\", \"original\"), 5, \"ounce\", source(\"5 five ounce candles\"))",
+          "observe(at(\"haleigh.old_candles.one_ounce.count\", \"current\"), 25, \"count\", source(\"twenty-five one ounce candles\"))",
+          "observe(at(\"haleigh.old_candles.one_ounce.each.wax\", \"original\"), 1, \"ounce\", source(\"twenty-five one ounce candles\"))",
+          "observe(at(\"haleigh.new_candles.each.wax\", \"target\"), 5, \"ounce\", source(\"5 ounce candles\"))",
+          "query(\"value\", \"haleigh.new_candles.five_ounce.count\")"
+        ]
+      },
+      "source_id": "6953"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

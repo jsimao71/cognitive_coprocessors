@@ -1,0 +1,518 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Summer is almost here and most animals are migrating back to cooler countries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "There are 87 bird families living near a mountain.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If 18 new bird families joined them How many bird families live near the mountain now?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause expresses seasonal context and a generalized claim about most animals; the active arithmetic profile cannot represent the generalized quantifier or migration event faithfully."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "mountain.bird_families.before_joining = 87"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mountain.bird_families.newly_joined = 18",
+              "mountain.bird_families.now = mountain.bird_families.before_joining + mountain.bird_families.newly_joined",
+              "RETURN mountain.bird_families.now"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-681"
+      },
+      "question": "Summer is almost here and most animals are migrating back to cooler countries. There are 87 bird families living near a mountain. If 18 new bird families joined them How many bird families live near the mountain now?",
+      "source_context": null,
+      "source_id": "svamp-chal-681",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "105",
+        "gold_reasoning": "( 87.0 + 18.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is baking a cake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "The recipe calls for 6 cups of flour and 13 cups of sugar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "She already put in some cups of flour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "If she still needs 8 more cups of flour than sugar How many more cups of flour does she need to add?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause establishes the cake-baking context but introduces no quantitative fact."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "cake_recipe.flour_required_cups = 6",
+              "cake_recipe.sugar_required_cups = 13"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.92,
+            "part_id": 2,
+            "semantic_notes": [
+              "The clause introduces an unspecified amount of flour already added, so no numeric assignment is available."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The comparison target 'sugar' could mean the recipe's total sugar requirement or the amount of sugar still needed, but the latter is not established.",
+              "Interpreting the comparison against the 13-cup recipe requirement also conflicts with the earlier statement that the recipe requires only 6 cups of flour, because some flour has already been added."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-811"
+      },
+      "question": "Mary is baking a cake. The recipe calls for 6 cups of flour and 13 cups of sugar. She already put in some cups of flour. If she still needs 8 more cups of flour than sugar How many more cups of flour does she need to add?",
+      "source_context": null,
+      "source_id": "svamp-chal-811",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "21",
+        "gold_reasoning": "( 13.0 + 8.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "After eating a hearty meal they went to see the Buckingham palace.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "There were 71 paintings in the Buckingham palace.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 196,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "There, Rachel learned that 557 visitors came to the Buckingham palace that day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 295,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 197,
+          "teacher_input_default": true,
+          "text": "If there were 188 visitors the previous day How many visited the Buckingham palace within 57 days?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies narrative context but no quantitative arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "buckingham_palace.paintings.total = 71"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "buckingham_palace.visitors.today = 557"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "It is unclear whether \u201c57 days\u201d is literal or a corrupted duration; treating it as two days or extrapolating visitor counts would invent unsupported semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The clause states a previous-day visitor count, but its requested 57-day aggregate cannot be determined from the two daily counts supplied."
+            ],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-290"
+      },
+      "question": "After eating a hearty meal they went to see the Buckingham palace. There were 71 paintings in the Buckingham palace. There, Rachel learned that 557 visitors came to the Buckingham palace that day. If there were 188 visitors the previous day How many visited the Buckingham palace within 57 days?",
+      "source_context": null,
+      "source_id": "svamp-chal-290",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "745",
+        "gold_reasoning": "( 557.0 + 188.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 32,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ed had 5 more marbles than Doug.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 33,
+          "teacher_input_default": true,
+          "text": "Doug lost 3 of his marbles at the playground.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "If Ed had 27 marbles How many marbles did Doug have initially?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ed.initial.marbles = doug.initial.marbles + 5"
+            ],
+            "assumptions": [
+              "The comparison is interpreted as applying before Doug loses marbles."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "doug.playground.marbles_lost = 3",
+              "doug.after_playground.marbles = doug.initial.marbles - doug.playground.marbles_lost"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ed.initial.marbles = 27",
+              "RETURN doug.initial.marbles"
+            ],
+            "assumptions": [
+              "Ed's 27 marbles are interpreted at the initial comparison state."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-120"
+      },
+      "question": "Ed had 5 more marbles than Doug. Doug lost 3 of his marbles at the playground. If Ed had 27 marbles How many marbles did Doug have initially?",
+      "source_context": null,
+      "source_id": "svamp-chal-120",
+      "validation_failure": "unresolved reference 'doug.initial.marbles' from scope 'global'; unresolved reference 'doug.initial.marbles' from scope 'global'; unresolved reference 'doug.initial.marbles' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "22",
+        "gold_reasoning": "( 27.0 - 5.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 39,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Together Adam and Jackie have 6 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "He has 4 apples more than adam and jackie together do.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "How many apples does he have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "adam_and_jackie.total.apples = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The pronoun \"he\" has no unambiguous antecedent: Adam is the only named male, but the comparison treats \"he\" as distinct from Adam and Jackie together."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested person's identity depends on the unresolved pronoun \"he\" from the preceding clause."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-848"
+      },
+      "question": "Together Adam and Jackie have 6 apples. He has 4 apples more than adam and jackie together do. How many apples does he have?",
+      "source_context": null,
+      "source_id": "svamp-chal-848",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous, part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "( 6.0 + 4.0 )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

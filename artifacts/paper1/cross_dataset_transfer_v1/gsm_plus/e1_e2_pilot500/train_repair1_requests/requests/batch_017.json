@@ -1,0 +1,788 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ronnie was given $5 while Rissa was given thrice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "After each of them had given an equal amount of money to their little sister, Rissa is left with some of her money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 174,
+          "teacher_input_default": true,
+          "text": "Ronnie has $2 left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 269,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "What's the fraction of the money Rissa left accounting for her total money?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ronnie.initial_money = 5",
+              "rissa.initial_money = ronnie.initial_money * 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ronnie.money_given_to_sister = rissa.money_given_to_sister",
+              "rissa.remaining_money = rissa.initial_money - rissa.money_given_to_sister"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The shared amount remains symbolic until Ronnie's remaining money grounds it in the next clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ronnie.remaining_money = 2",
+              "ronnie.money_given_to_sister = ronnie.initial_money - ronnie.remaining_money"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rissa.remaining_fraction_of_initial_money = rissa.remaining_money / rissa.initial_money",
+              "RETURN rissa.remaining_fraction_of_initial_money"
+            ],
+            "assumptions": [
+              "\u201cTotal money\u201d refers to the amount Rissa was initially given."
+            ],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09356"
+      },
+      "question": "Ronnie was given $5 while Rissa was given thrice as much. After each of them had given an equal amount of money to their little sister, Rissa is left with some of her money. Ronnie has $2 left. What's the fraction of the money Rissa left accounting for her total money?",
+      "source_context": null,
+      "source_id": "gsm-plus-09356",
+      "validation_failure": "unresolved reference 'rissa.money_given_to_sister' from scope 'global'; unresolved reference 'rissa.money_given_to_sister' from scope 'global'; unresolved reference 'rissa.remaining_money' from scope 'global'; unresolved reference 'rissa.remaining_fraction_of_initial_money' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "4/5",
+        "gold_reasoning": "Rissa was given $5 x 3 = $<<5*3=15>>15.\nRonnie gave 5-2=3 to sister, so did Rissa.\nRissa has 15-3=12 left, accounting for 12/15=4/5 of her money.\n#### 4/5"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A teacher uses a 12-centimeter piece of chalk to write math equations on a chalkboard for his students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 192,
+          "teacher_input_default": true,
+          "text": "Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 5 centimeters.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 366,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 318,
+          "teacher_input_default": true,
+          "text": "On Monday the teacher used a new piece of chalk.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 445,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 367,
+          "teacher_input_default": true,
+          "text": "His students need extra help that day, so he ended up writing more than usual.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 496,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 446,
+          "teacher_input_default": true,
+          "text": "He used up 45% of the chalk by the end of the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 626,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 497,
+          "teacher_input_default": true,
+          "text": "If the teacher goes back to using only 20% of the chalk each day, how many days does he have before he has to recycle this piece?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "chalk.new.length_cm = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.normal_daily.used_percent = 20",
+              "chalk.normal_daily.used_length_cm = percent_of(chalk.new.length_cm, chalk.normal_daily.used_percent)"
+            ],
+            "assumptions": [
+              "The daily percentage is interpreted relative to the original new piece of chalk."
+            ],
+            "confidence": 0.88,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.recycle_below_length_cm = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The path name preserves that recycling occurs only when the remaining length is strictly below the threshold."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.start_length_cm = chalk.new.length_cm"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [
+              "This clause explains why Monday's usage differed but introduces no quantitative value or relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.used_percent = 45",
+              "chalk.monday.used_length_cm = percent_of(chalk.monday.start_length_cm, chalk.monday.used_percent)",
+              "chalk.monday.end_length_cm = chalk.monday.start_length_cm - chalk.monday.used_length_cm"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested whole-day count requires identifying the first daily decrement that makes the chalk shorter than the recycling threshold; the active operator registry provides no comparison-driven iteration or integer ceiling/floor operator."
+            ],
+            "confidence": 0.94,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09409"
+      },
+      "question": "A teacher uses a 12-centimeter piece of chalk to write math equations on a chalkboard for his students. The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day. Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 5 centimeters. On Monday the teacher used a new piece of chalk. His students need extra help that day, so he ended up writing more than usual. He used up 45% of the chalk by the end of the day. If the teacher goes back to using only 20% of the chalk each day, how many days does he have before he has to recycle this piece?",
+      "source_context": null,
+      "source_id": "gsm-plus-09409",
+      "validation_failure": "non-ok semantic parts: part 6=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "The teacher uses 45% of his 12 centimeters stick of chalk on Monday, or 12 * 0.45 = <<12*0.45=5.4>>5.4 centimeters.\nHe is left with 12 - 5.4 = <<12-5.4=6.6>>6.6 centimeters of chalk.\nThe next day he will use 20% of 6.6 centimeters, which is 6.6 * 0.2 = <<6.6*0.2=1.32>>1.32 centimeters of chalk used.\nThat leaves him with 6.6 - 1.32 = <<6.6-1.32=5.28>>5.28 centimeters of chalk.\nThe day after that, he will use 5.28 * 0.2 = <<5.28*0.2=1.056>>1.056 centimeters of chalk.\nThat will leave him with 5.28 - 1.056 = <<5.28-1.056=4.224>>4.224 centimeters of chalk.\nSince 4.224 is less than 5 centimeters, he will recycle this stick in 2 days.\n#### 2"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John decides to do several activities while out on vacation.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "He spends 6 hours boating and half that time swimming.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 116,
+          "teacher_input_default": true,
+          "text": "He also watched 3 different shows which were 2 hours each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 175,
+          "teacher_input_default": true,
+          "text": "This was 30% of the time he spent.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 210,
+          "teacher_input_default": true,
+          "text": "He spent 40% of his time sightseeing.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 248,
+          "teacher_input_default": true,
+          "text": "However, he also spent an additional 10% of the time he spent sightseeing on a guided tour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 446,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "If the guided tour time is included in the total sightseeing time, how much time did he spend sightseeing?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introductory vacation context with no quantitative state change."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.vacation.boating_duration_hours = 6",
+              "john.vacation.swimming_duration_hours = john.vacation.boating_duration_hours / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.vacation.shows.count = 3",
+              "john.vacation.shows.duration_per_show_hours = 2",
+              "john.vacation.shows.total_duration_hours = john.vacation.shows.count * john.vacation.shows.duration_per_show_hours"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.vacation.total_time_hours = john.vacation.shows.total_duration_hours / 0.3"
+            ],
+            "assumptions": [
+              "\u201cThis\u201d is resolved to the immediately preceding total time spent watching the three shows."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.vacation.sightseeing.base_duration_hours = percent_of(john.vacation.total_time_hours, 40)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.vacation.sightseeing.guided_tour_duration_hours = percent_of(john.vacation.sightseeing.base_duration_hours, 10)"
+            ],
+            "assumptions": [
+              "The guided tour is additional to the initially stated sightseeing time."
+            ],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.vacation.sightseeing.duration_including_guided_tour_hours = john.vacation.sightseeing.base_duration_hours + john.vacation.sightseeing.guided_tour_duration_hours",
+              "RETURN john.vacation.sightseeing.duration_including_guided_tour_hours"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02827"
+      },
+      "question": "John decides to do several activities while out on vacation. He spends 6 hours boating and half that time swimming. He also watched 3 different shows which were 2 hours each. This was 30% of the time he spent. He spent 40% of his time sightseeing. However, he also spent an additional 10% of the time he spent sightseeing on a guided tour. If the guided tour time is included in the total sightseeing time, how much time did he spend sightseeing?",
+      "source_context": null,
+      "source_id": "gsm-plus-02827",
+      "validation_failure": "answer mismatch: actual=8.8, expected=22",
+      "validator_context": {
+        "correct_answer": "22",
+        "gold_reasoning": "John spent 6 hours boating and half that time swimming, which is 3 hours. He also watched 3 shows which were 2 hours each, which is 6 hours. So far, he has spent 6 + 3 + 6 = 15 hours.\n\nThis 15 hours is 30% of the total time he spent. To find the total time, we can set up the equation 0.30T = 15, where T is the total time. Solving for T, we get T = 15 / 0.30 = 50 hours.\n\nHe spent 40% of his time sightseeing, which is 0.40 * 50 = 20 hours.\n\nHe also spent an additional 10% of the time he spent sightseeing on a guided tour. This is 0.10 * 20 = 2 hours.\n\nSince the guided tour time is included in the total sightseeing time, he spent 20 + 2 = 22 hours sightseeing.\n\nSo, John spent  22 hours sightseeing.\n#### 22"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "The price of carrots in the grocery store increases by 5% of the original price every year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 273,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "What would be the price of carrots after three years if it was $1000 initially?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 304,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 274,
+          "teacher_input_default": true,
+          "text": "(Round to the nearest integer)",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause establishes store and product context but introduces no quantitative arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.annual_price_increase = percent_of(carrots.initial_price, 5)"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The yearly increment is based on the original price, so it is represented as a fixed annual amount rather than a compounded percentage increase."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.initial_price = 1000",
+              "carrots.price_after_3_years = carrots.initial_price + carrots.annual_price_increase * 3",
+              "RETURN carrots.price_after_3_years"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Rounding to the nearest integer cannot be represented with any operator in the supplied registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08129"
+      },
+      "question": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots. The price of carrots in the grocery store increases by 5% of the original price every year. What would be the price of carrots after three years if it was $1000 initially? (Round to the nearest integer)",
+      "source_context": null,
+      "source_id": "gsm-plus-08129",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "1150",
+        "gold_reasoning": "In the first year, the price of carrots increases by 5/100*1000 = $<<5/100*1000=50>>50\nAfter 3 years, the price of carrots will increase by $50*3 = $<<50*3=150>>150\nThe total price of carrots after three years will be 1000+150 = $<<1000+150=1150>>1150\n#### 1150"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Marcel runs a bicycle store where he sells three types of bikes: MTB, BMX, and Trekking.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "The price of one MTB is $500, BMX is half the price of an MTB, and a Trekking bike is $450.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 251,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 181,
+          "teacher_input_default": true,
+          "text": "In one month, Marcel sold a total of 300 bikes among the types listed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 309,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 252,
+          "teacher_input_default": true,
+          "text": "Half of them were Trekking bikes, and 15% were BMX bikes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 351,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 310,
+          "teacher_input_default": true,
+          "text": "The rest of the sold bikes were MTB type.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 425,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 352,
+          "teacher_input_default": true,
+          "text": "Additionally, Marcel offers a 10% discount on every third bike purchased.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 606,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 426,
+          "teacher_input_default": true,
+          "text": "Considering this, how much did Marcel earn from selling bicycles during that month, assuming every customer who bought three or more bikes availed the discount on every third bike?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause establishes the store and bicycle types but introduces no quantitative arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bikes.mtb.unit_price = 500",
+              "bikes.bmx.unit_price = bikes.mtb.unit_price / 2",
+              "bikes.trekking.unit_price = 450"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marcel.month.bikes_sold.total = 300"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marcel.month.bikes_sold.trekking = marcel.month.bikes_sold.total / 2",
+              "marcel.month.bikes_sold.bmx = percent_of(marcel.month.bikes_sold.total, 15)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marcel.month.bikes_sold.mtb = marcel.month.bikes_sold.total - marcel.month.bikes_sold.trekking - marcel.month.bikes_sold.bmx"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The supplied arithmetic registry has no operator for selecting every third item in each customer's purchase sequence."
+            ],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The customer-level basket sizes, purchase ordering, and bicycle types occupying each discounted third position are not specified. Because unit prices differ by type, the month's discounted revenue is underdetermined."
+            ],
+            "confidence": 0.99,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08691"
+      },
+      "question": "Marcel runs a bicycle store where he sells three types of bikes: MTB, BMX, and Trekking. The price of one MTB is $500, BMX is half the price of an MTB, and a Trekking bike is $450. In one month, Marcel sold a total of 300 bikes among the types listed. Half of them were Trekking bikes, and 15% were BMX bikes. The rest of the sold bikes were MTB type. Additionally, Marcel offers a 10% discount on every third bike purchased. Considering this, how much did Marcel earn from selling bicycles during that month, assuming every customer who bought three or more bikes availed the discount on every third bike?",
+      "source_context": null,
+      "source_id": "gsm-plus-08691",
+      "validation_failure": "non-ok semantic parts: part 5=unsupported, part 6=ambiguous",
+      "validator_context": {
+        "correct_answer": "127250",
+        "gold_reasoning": "First, let's find out how many bikes of each type Marcel sold. \n\nHalf of the 300 bikes sold were Trekking bikes, so he sold 300 / 2 =  150 Trekking bikes.\n15% of the 300 bikes sold were BMX bikes, so he sold 300 * 0.15 =  45 BMX bikes.\n\nThe rest of the bikes sold were MTB type, so he sold 300 - 150 - 45 =  105 MTB bikes.\n\nNow, let's calculate how much Marcel earned from selling each type of bike. \n\nThe price of one MTB is $500, so from selling MTB bikes, Marcel earned 105 * $500 = $52,500.\n\nThe price of one BMX is half the price of an MTB, so it's $500 / 2 = $250. From selling BMX bikes, Marcel earned 45 * $250 = $11,250.\n\nFrom selling Trekking bikes, Marcel earned 150 * $450 = $67,500.\n\nSo, the total amount Marcel earned from selling bikes is $52,500 + $11,250 + $67,500 = $131,250.\n\nHowever, every third bike sold had a 10% discount. Since Marcel sold 300 bikes, the number of discounted bikes is 300 / 3 = 100 bikes.\n\nWe don't know the types of these 100 bikes, so let's assume that the discount was applied evenly across all types of bikes. \n\nThe total discount is 10% * 100 bikes * average price per bike. The average price per bike is ($500 + $250 + $450) / 3 = $400.\n\nSo, the total discount is 10% * 100 * $400 = $4,000.\n\nTherefore, the total amount Marcel earned from selling bikes, considering the discount, is $131,250 - $4,000 =\n#### 127250"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

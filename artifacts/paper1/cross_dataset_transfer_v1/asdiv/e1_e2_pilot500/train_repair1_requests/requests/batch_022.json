@@ -1,0 +1,455 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The ages of two friends Anna and Ben differ by 3 years.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 145,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "Anna's father Denver is twice as old as Anna and Ben is twice as old as his sister Cathy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 194,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 146,
+          "teacher_input_default": true,
+          "text": "The ages of Cathy and Denver differ by 30 years.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 195,
+          "teacher_input_default": true,
+          "text": "Find the ages of Anna and Ben.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "anna_ben.age_difference_years = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The stated difference is absolute; the clause does not identify which friend is older."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "denver.age_years = anna.age_years * 2",
+              "ben.age_years = cathy.age_years * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "cathy_denver.age_difference_years = 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 2,
+            "semantic_notes": [
+              "The stated difference is absolute; the clause does not identify which person is older."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The two unsigned age differences permit more than one positive-age solution, so Anna's and Ben's ages are not uniquely determined without an ordering assumption."
+            ],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1417"
+      },
+      "question": "The ages of two friends Anna and Ben differ by 3 years. Anna's father Denver is twice as old as Anna and Ben is twice as old as his sister Cathy. The ages of Cathy and Denver differ by 30 years. Find the ages of Anna and Ben.",
+      "source_context": null,
+      "source_id": "asdiv-1417",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "19",
+        "gold_reasoning": "A:Anna's age; C:Cathy's age; A-2C=3; 2A=C+30"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rita is buying flower bulbs for her garden.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "She wants to buy the same number of tulips and daffodils.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 245,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "If tulip bulbs come in packs of 15 and daffodil bulbs come in packs of 16, what is the least number of each type of bulb Rita will need to buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rita.flower_bulb_purchase.destination = \"garden\""
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rita.flower_bulb_purchase.tulip_count = rita.flower_bulb_purchase.daffodil_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause asks for the least common multiple of the two pack sizes, but no LCM, divisibility, integer-constraint, or constrained-minimization operator is available in the active registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0969"
+      },
+      "question": "Rita is buying flower bulbs for her garden. She wants to buy the same number of tulips and daffodils. If tulip bulbs come in packs of 15 and daffodil bulbs come in packs of 16, what is the least number of each type of bulb Rita will need to buy?",
+      "source_context": null,
+      "source_id": "asdiv-0969",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "240",
+        "gold_reasoning": "LCM[15,16]=240"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Fifteen more than three times a number is the same as ten less than six times the number.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "What is the number?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "number_equation.left = number * 3 + 15",
+              "number_equation.right = number * 6 - 10",
+              "number_equation.holds = number_equation.left = number_equation.right"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN number"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1455"
+      },
+      "question": "Fifteen more than three times a number is the same as ten less than six times the number. What is the number?",
+      "source_context": null,
+      "source_id": "asdiv-1455",
+      "validation_failure": "cannot lower ASL expression node: binary",
+      "validator_context": {
+        "correct_answer": "25/3",
+        "gold_reasoning": "x:The number; 3x+15=6x-10"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 33,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Two numbers are in the ratio 5:7.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 34,
+          "teacher_input_default": true,
+          "text": "The difference between the numbers is 12.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "What is the larger number?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "numbers.first_to_second_ratio = 5 / 7",
+              "numbers.ratio_holds = numbers.first.quantity / numbers.second.quantity = numbers.first_to_second_ratio"
+            ],
+            "assumptions": [
+              "The ordered ratio 5:7 refers to the first number divided by the second number."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "numbers.difference = 12",
+              "numbers.difference_holds = abs(numbers.first.quantity - numbers.second.quantity) = numbers.difference"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "numbers.larger = max(numbers.first.quantity, numbers.second.quantity)",
+              "RETURN numbers.larger"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1128"
+      },
+      "question": "Two numbers are in the ratio 5:7. The difference between the numbers is 12. What is the larger number?",
+      "source_context": null,
+      "source_id": "asdiv-1128",
+      "validation_failure": "cannot lower ASL expression node: binary",
+      "validator_context": {
+        "correct_answer": "42",
+        "gold_reasoning": "2:7=12:42"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "I have 28 cents in my pocket.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "How coins could I have on minimization?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "pocket.money_cents = 28"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The available coin denominations and currency system are not stated, so the minimum possible coin count is underdetermined; the active registry also has no integer-constrained coin-change minimization operator."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0161"
+      },
+      "question": "I have 28 cents in my pocket. How coins could I have on minimization?",
+      "source_context": null,
+      "source_id": "asdiv-0161",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "28/25=1 r3; 3/1=3; 1+3=4"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

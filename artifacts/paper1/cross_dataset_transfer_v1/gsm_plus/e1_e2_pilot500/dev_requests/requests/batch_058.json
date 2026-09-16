@@ -1,0 +1,461 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mark is trying to choose between two venues for a surprise party for his wife.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 161,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "The first venue charges a flat fee of $200, regardless of how many guests attend.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "While the second charges, $25 per person who attends.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 328,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "However, the first venue does not include food, which Mark estimates will cost $5 for each person who attends.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 404,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 330,
+          "teacher_input_default": true,
+          "text": "At the second venue, food for each guest is already included in the price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 503,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 405,
+          "teacher_input_default": true,
+          "text": "On top of that, Mark is considering hiring a DJ for the party, which will cost an additional $100.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 573,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 504,
+          "teacher_input_default": true,
+          "text": "How many guests are necessary for the two venues to be equal in cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Mark is trying to choose between two venues for a surprise party for his wife.  The first venue charges a flat fee of $200, regardless of how many guests attend.  While the second charges, $25 per person who attends.  However, the first venue does not include food, which Mark estimates will cost $5 for each person who attends.  At the second venue, food for each guest is already included in the price. On top of that, Mark is considering hiring a DJ for the party, which will cost an additional $100. How many guests are necessary for the two venues to be equal in cost?",
+      "source_id": "gsm-plus-03995"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mark is planning a surprise party for his wife and is considering two venues.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "The first venue charges a flat fee not including food, which Mark estimates will cost an additional $5 per person.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 193,
+          "teacher_input_default": true,
+          "text": "The second venue charges $25 per person, with food included in the price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 397,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 267,
+          "teacher_input_default": true,
+          "text": "If Mark has 10 guests to attend the party to make the cost equal to the first venue, how much is the flat fee for the first venue?",
+          "warnings": []
+        }
+      ],
+      "question": "Mark is planning a surprise party for his wife and is considering two venues. The first venue charges a flat fee not including food, which Mark estimates will cost an additional $5 per person. The second venue charges $25 per person, with food included in the price. If Mark has 10 guests to attend the party to make the cost equal to the first venue, how much is the flat fee for the first venue?",
+      "source_id": "gsm-plus-03996"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mark is in the process of selecting one of two locations for his wife's surprise party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 172,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "The initial location has a set fee of $200, irrespective of the number of attendees.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 173,
+          "teacher_input_default": true,
+          "text": "On the other hand, the second location charges $25 for each attendee.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 359,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "However, the cost of food, which Mark believes will be $5 per attendee, is not included in the first location's fee.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 451,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 360,
+          "teacher_input_default": true,
+          "text": "In contrast, the second location's fee already includes the cost of food for each attendee.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 553,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 452,
+          "teacher_input_default": true,
+          "text": "What is the minimum number of attendees required for the total cost of both locations to be the same?",
+          "warnings": []
+        }
+      ],
+      "question": "Mark is in the process of selecting one of two locations for his wife's surprise party. The initial location has a set fee of $200, irrespective of the number of attendees. On the other hand, the second location charges $25 for each attendee. However, the cost of food, which Mark believes will be $5 per attendee, is not included in the first location's fee. In contrast, the second location's fee already includes the cost of food for each attendee. What is the minimum number of attendees required for the total cost of both locations to be the same?",
+      "source_id": "gsm-plus-03997"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mark is planning a surprise party for his wife and is considering two venues.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "The first venue charges a flat fee of $200, regardless of the number of guests.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 260,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "However, this venue does not include food, which Mark estimates will cost an additional $5 per person.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 353,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 261,
+          "teacher_input_default": true,
+          "text": "On the other hand, the second venue charges $25 per person, with food included in the price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 500,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 354,
+          "teacher_input_default": true,
+          "text": "Mark also learns that the first venue offers a complimentary bottle of champagne worth $50, while the second venue provides a free cake worth $30.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 613,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 501,
+          "teacher_input_default": true,
+          "text": "However, Mark has already decided to bring his own champagne and cake, so these offers do not affect his budget.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 688,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 614,
+          "teacher_input_default": true,
+          "text": "How many guests need to attend for the cost of the two venues to be equal?",
+          "warnings": []
+        }
+      ],
+      "question": "Mark is planning a surprise party for his wife and is considering two venues. The first venue charges a flat fee of $200, regardless of the number of guests. However, this venue does not include food, which Mark estimates will cost an additional $5 per person. On the other hand, the second venue charges $25 per person, with food included in the price. Mark also learns that the first venue offers a complimentary bottle of champagne worth $50, while the second venue provides a free cake worth $30. However, Mark has already decided to bring his own champagne and cake, so these offers do not affect his budget. How many guests need to attend for the cost of the two venues to be equal?",
+      "source_id": "gsm-plus-03998"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Martha is knitting winter wear for her 5 grandchildren.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "They're quintuplets, so they're all the same size.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 107,
+          "teacher_input_default": true,
+          "text": "She wants to make a hat, scarf, sweater, mittens, and socks for each of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 310,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "It takes 3 skeins of wool to make a hat, 5 for a scarf, 15 for a sweater, 2 for a pair of mittens, and 3 for a pair of socks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 356,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 311,
+          "teacher_input_default": true,
+          "text": "How many skeins of wool will she need to buy?",
+          "warnings": []
+        }
+      ],
+      "question": "Martha is knitting winter wear for her 5 grandchildren. They're quintuplets, so they're all the same size. She wants to make a hat, scarf, sweater, mittens, and socks for each of them. It takes 3 skeins of wool to make a hat, 5 for a scarf, 15 for a sweater, 2 for a pair of mittens, and 3 for a pair of socks. How many skeins of wool will she need to buy?",
+      "source_id": "gsm-plus-04160"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

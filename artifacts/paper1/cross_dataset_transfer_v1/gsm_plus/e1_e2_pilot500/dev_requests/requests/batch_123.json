@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At a salon, a basic manicure starts at $35 and a pedicure starts at $40.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "The salon offers a 20% discount if you get both.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "Karen decides to get both, and she also wants to add nail art on each of her fingers, which costs $3 per nail.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 372,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 233,
+          "teacher_input_default": true,
+          "text": "However, the salon has a special promotion where if you get nail art on all your fingers, you get a 50% discount on nail art for your toes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 427,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 373,
+          "teacher_input_default": true,
+          "text": "But Karen decides not to get any nail art on her toes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 460,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 428,
+          "teacher_input_default": true,
+          "text": "How much would she pay in total?",
+          "warnings": []
+        }
+      ],
+      "question": "At a salon, a basic manicure starts at $35 and a pedicure starts at $40. The salon offers a 20% discount if you get both. Karen decides to get both, and she also wants to add nail art on each of her fingers, which costs $3 per nail. However, the salon has a special promotion where if you get nail art on all your fingers, you get a 50% discount on nail art for your toes. But Karen decides not to get any nail art on her toes. How much would she pay in total?",
+      "source_id": "gsm-plus-09814"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Audrey has to take two science tests to pass 5th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "She must correctly answer 80% of the total questions to move on to the 6th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 203,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 138,
+          "teacher_input_default": true,
+          "text": "The first test has 80 questions and she gets 70% of them correct.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 237,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 204,
+          "teacher_input_default": true,
+          "text": "The second test has 50 questions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 330,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 238,
+          "teacher_input_default": true,
+          "text": "How many questions does she need to get right on the second test to move onto the 6th grade?",
+          "warnings": []
+        }
+      ],
+      "question": "Audrey has to take two science tests to pass 5th grade. She must correctly answer 80% of the total questions to move on to the 6th grade. The first test has 80 questions and she gets 70% of them correct. The second test has 50 questions. How many questions does she need to get right on the second test to move onto the 6th grade?",
+      "source_id": "gsm-plus-09952"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Audrey has to take two math tests to pass 6th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "She must correctly answer 70% of the total questions to move on to the 7th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 201,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "The first test has 700 questions and she gets 60% of them correct.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 236,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 202,
+          "teacher_input_default": true,
+          "text": "The second test has 400 questions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 329,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 237,
+          "teacher_input_default": true,
+          "text": "How many questions does she need to get right on the second test to move onto the 7th grade?",
+          "warnings": []
+        }
+      ],
+      "question": "Audrey has to take two math tests to pass 6th grade. She must correctly answer 70% of the total questions to move on to the 7th grade. The first test has 700 questions and she gets 60% of them correct. The second test has 400 questions. How many questions does she need to get right on the second test to move onto the 7th grade?",
+      "source_id": "gsm-plus-09953"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Audrey has to take two math tests to pass 6th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "She must correctly answer 70% of the total questions to move on to the 7th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "The first test has 7/10 of one hundred questions and she gets 60% of them correct.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 267,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "The second test has 2/5 of one hundred questions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 360,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 268,
+          "teacher_input_default": true,
+          "text": "How many questions does she need to get right on the second test to move onto the 7th grade?",
+          "warnings": []
+        }
+      ],
+      "question": "Audrey has to take two math tests to pass 6th grade. She must correctly answer 70% of the total questions to move on to the 7th grade. The first test has 7/10 of one hundred questions and she gets 60% of them correct. The second test has 2/5 of one hundred questions. How many questions does she need to get right on the second test to move onto the 7th grade?",
+      "source_id": "gsm-plus-09954"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Audrey is in the 6th grade and has to take two math tests to pass.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "To move on to the 7th grade, she must correctly answer 70% of the total questions across both tests.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "The first test has 70 questions and she gets 60% of them correct.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 370,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "The second test has 40 questions, but this time, she also has to answer an additional 10 bonus questions correctly to earn extra credit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 496,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 371,
+          "teacher_input_default": true,
+          "text": "Considering the bonus questions, how many questions does she need to get right on the second test to move onto the 7th grade?",
+          "warnings": []
+        }
+      ],
+      "question": "Audrey is in the 6th grade and has to take two math tests to pass. To move on to the 7th grade, she must correctly answer 70% of the total questions across both tests. The first test has 70 questions and she gets 60% of them correct. The second test has 40 questions, but this time, she also has to answer an additional 10 bonus questions correctly to earn extra credit. Considering the bonus questions, how many questions does she need to get right on the second test to move onto the 7th grade?",
+      "source_id": "gsm-plus-09955"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

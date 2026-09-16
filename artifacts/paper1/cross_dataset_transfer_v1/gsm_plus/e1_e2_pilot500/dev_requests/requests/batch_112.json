@@ -1,0 +1,296 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 15 countries in South America and, in each country, there are 7 cities with 2000 people living in each city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 119,
+          "teacher_input_default": true,
+          "text": "If the whole population lives in these cities, how many people are there in South America?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 15 countries in South America and, in each country, there are 7 cities with 2000 people living in each city. If the whole population lives in these cities, how many people are there in South America?",
+      "source_id": "gsm-plus-08344"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 26 countries in South America and, in each country, there are 10 cities with 10000 people living in each city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "If the whole population lives in these cities, how many people are there in South America?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 26 countries in South America and, in each country, there are 10 cities with 10000 people living in each city.  If the whole population lives in these cities, how many people are there in South America?",
+      "source_id": "gsm-plus-08345"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 2.6 times of ten countries in South America and, in each country, there are half of ten cities with 1000 people living in each city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "If the whole population lives in these cities, how many people are there in South America?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 2.6 times of ten countries in South America and, in each country, there are half of ten cities with 1000 people living in each city.  If the whole population lives in these cities, how many people are there in South America?",
+      "source_id": "gsm-plus-08346"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In South America, there are 26 countries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "Each country has 5 cities, and each city has 1000 people living in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 219,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 113,
+          "teacher_input_default": true,
+          "text": "However, in one of the countries, due to a recent population boom, each city has an additional 500 people.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 362,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 220,
+          "teacher_input_default": true,
+          "text": "If the whole population lives in these cities, how many people are there in South America now, considering the population boom in one country?",
+          "warnings": []
+        }
+      ],
+      "question": "In South America, there are 26 countries. Each country has 5 cities, and each city has 1000 people living in it. However, in one of the countries, due to a recent population boom, each city has an additional 500 people. If the whole population lives in these cities, how many people are there in South America now, considering the population boom in one country?",
+      "source_id": "gsm-plus-08347"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are some countries in South America and, in each country, there are 5 cities with 1000 people living in each city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "The whole population lives in these cities.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "There are 130000 people in South America.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 254,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "How many countries are there in South America?",
+          "warnings": []
+        }
+      ],
+      "question": "There are some countries in South America and, in each country, there are 5 cities with 1000 people living in each city.  The whole population lives in these cities. There are 130000 people in South America. How many countries are there in South America?",
+      "source_id": "gsm-plus-08348"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

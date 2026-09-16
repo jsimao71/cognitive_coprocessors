@@ -1,0 +1,104 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Cole wants to fence his backyard on three sides. His backyard is 9 feet along the sides and 18 feet along the back. The neighbor behind him agreed to pay for half of their shared side of his fence, and the neighbor on his left agreed to pay for a third of their shared side. Fencing costs $3 per foot. How much does Cole have to pay for the fence?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"cole.backyard.fence.sides\", \"fence_side\", \"cole.backyard\", source(\"fence his backyard on three sides\"))",
+          "observe(at(\"cole.backyard.fence.sides.count\", \"planned\"), 3, \"count\", source(\"three sides\"))",
+          "observe(at(\"cole.backyard.left_side.length\", \"current\"), 9, \"foot\", source(\"9 feet along the sides\"))",
+          "observe(at(\"cole.backyard.right_side.length\", \"current\"), 9, \"foot\", source(\"9 feet along the sides\"))",
+          "observe(at(\"cole.backyard.back_side.length\", \"current\"), 18, \"foot\", source(\"18 feet along the back\"))",
+          "observe(at(\"fencing.cost_per_foot\", \"current\"), 3, \"dollar_per_foot\", source(\"Fencing costs $3 per foot\"))",
+          "rate_relation(at(\"cole.backyard.fence.left_side.cost\", \"planned\"), at(\"fencing.cost_per_foot\", \"current\"), at(\"cole.backyard.left_side.length\", \"current\"), source(\"Fencing costs $3 per foot\"))",
+          "rate_relation(at(\"cole.backyard.fence.right_side.cost\", \"planned\"), at(\"fencing.cost_per_foot\", \"current\"), at(\"cole.backyard.right_side.length\", \"current\"), source(\"Fencing costs $3 per foot\"))",
+          "rate_relation(at(\"cole.backyard.fence.back_side.cost\", \"planned\"), at(\"fencing.cost_per_foot\", \"current\"), at(\"cole.backyard.back_side.length\", \"current\"), source(\"Fencing costs $3 per foot\"))",
+          "fraction_of(at(\"cole.neighbor.behind.fence_payment\", \"planned\"), at(\"cole.backyard.fence.back_side.cost\", \"planned\"), 1, 2, source(\"The neighbor behind him agreed to pay for half of their shared side of his fence\"))",
+          "fraction_of(at(\"cole.neighbor.left.fence_payment\", \"planned\"), at(\"cole.backyard.fence.left_side.cost\", \"planned\"), 1, 3, source(\"the neighbor on his left agreed to pay for a third of their shared side\"))",
+          "query(\"value\", at(\"cole.backyard.fence.payment\", \"planned\"))"
+        ]
+      },
+      "source_id": "1385"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Lucille made an agreement with her mom that she would earn six cents for every weed she pulled in her mom's garden. There are eleven weeds in the flower bed, fourteen in the vegetable patch, and thirty-two in the grass around the fruit trees. Lucille weeded the flower bed, the vegetable patch, and half the grass before she took a break. She bought a soda for 99 cents on her break with some of her earnings. How many cents does Lucille have left?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"lucille.mother.garden.weeds\", \"weed\", \"lucille.mother.garden\", source(\"every weed she pulled in her mom's garden\"))",
+          "observe(at(\"lucille.weeding.earnings_rate\", \"current\"), 6, \"cent_per_weed\", source(\"six cents for every weed she pulled\"))",
+          "rate_relation(\"lucille.weeding.earnings.cents\", at(\"lucille.weeding.earnings_rate\", \"current\"), \"lucille.weeds_pulled.count\", source(\"she would earn six cents for every weed she pulled in her mom's garden\"))",
+          "observe(at(\"lucille.mother.garden.flower_bed.weeds.count\", \"initial\"), 11, \"count\", source(\"eleven weeds in the flower bed\"))",
+          "observe(at(\"lucille.mother.garden.vegetable_patch.weeds.count\", \"initial\"), 14, \"count\", source(\"fourteen in the vegetable patch\"))",
+          "observe(at(\"lucille.mother.garden.fruit_tree_grass.weeds.count\", \"initial\"), 32, \"count\", source(\"thirty-two in the grass around the fruit trees\"))",
+          "remove(\"weed_flower_bed\", \"lucille\", at(\"lucille.mother.garden.flower_bed.weeds.count\", \"current\"), at(\"lucille.mother.garden.flower_bed.weeds.count\", \"initial\"), source(\"Lucille weeded the flower bed, the vegetable patch, and half the grass\"))",
+          "remove(\"weed_vegetable_patch\", \"lucille\", at(\"lucille.mother.garden.vegetable_patch.weeds.count\", \"current\"), at(\"lucille.mother.garden.vegetable_patch.weeds.count\", \"initial\"), source(\"Lucille weeded the flower bed, the vegetable patch, and half the grass\"))",
+          "remove(\"weed_fruit_tree_grass\", \"lucille\", at(\"lucille.mother.garden.fruit_tree_grass.weeds.count\", \"current\"), fraction(at(\"lucille.mother.garden.fruit_tree_grass.weeds.count\", \"initial\"), 1, 2), source(\"Lucille weeded the flower bed, the vegetable patch, and half the grass\"))",
+          "produce(\"weeding_earnings\", \"lucille\", at(\"lucille.earnings.cents\", \"current\"), \"lucille.weeding.earnings.cents\", source(\"she would earn six cents for every weed she pulled in her mom's garden\"))",
+          "remove(\"soda_purchase\", \"lucille\", at(\"lucille.earnings.cents\", \"current\"), 99, source(\"She bought a soda for 99 cents on her break with some of her earnings\"))",
+          "query(\"value\", at(\"lucille.earnings.cents\", \"current\"))"
+        ]
+      },
+      "source_id": "4373"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Bob, Tom, Sally, and Jerry had dinner at their favorite pizzeria. They decide to share 2 pizzas. Bob ate half of a pizza on his own. Tom ate one-third of a pizza. Sally wasn't very hungry and only ate one-sixth of a pizza, and Jerry ate a quarter of a pizza. If each pizza is cut into 12 slices, how many slices were left over?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"dinner.pizzas\", \"pizza\", \"pizzeria\", source(\"share 2 pizzas\"))",
+          "observe(at(\"dinner.pizzas.count\", \"initial\"), 2, \"count\", source(\"2 pizzas\"))",
+          "consume(\"bob_eats_pizza\", \"bob\", at(\"dinner.pizzas.count\", \"current\"), fraction(\"dinner.pizza.unit\", 1, 2), source(\"Bob ate half of a pizza on his own\"))",
+          "consume(\"tom_eats_pizza\", \"tom\", at(\"dinner.pizzas.count\", \"current\"), fraction(\"dinner.pizza.unit\", 1, 3), source(\"Tom ate one-third of a pizza\"))",
+          "consume(\"sally_eats_pizza\", \"sally\", at(\"dinner.pizzas.count\", \"current\"), fraction(\"dinner.pizza.unit\", 1, 6), source(\"only ate one-sixth of a pizza\"))",
+          "consume(\"jerry_eats_pizza\", \"jerry\", at(\"dinner.pizzas.count\", \"current\"), fraction(\"dinner.pizza.unit\", 1, 4), source(\"Jerry ate a quarter of a pizza\"))",
+          "collection(\"dinner.pizza_slices\", \"slice\", \"dinner.pizzas\", source(\"each pizza is cut into 12 slices\"))",
+          "observe(at(\"dinner.pizza_slices.per_pizza.count\", \"current\"), 12, \"count\", source(\"12 slices\"))",
+          "rate_relation(at(\"dinner.pizza_slices.count\", \"current\"), at(\"dinner.pizza_slices.per_pizza.count\", \"current\"), at(\"dinner.pizzas.count\", \"current\"), source(\"each pizza is cut into 12 slices\"))",
+          "query(\"remaining_count\", \"dinner.pizza_slices\", \"current\")"
+        ]
+      },
+      "source_id": "6080"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Paul's grades last semester were very bad. To encourage him, Paul's dad promised him $5 for every B+ he gets in his next scorecard and twice that amount for every A. If Paul obtains at least two A+ he'll double the previous rewards and would receive a flat $15 for every A+ obtained (with no extra bonus). If there are 10 courses with grades in Paul's scorecard, what's the maximum amount he could receive from his dad?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "6714"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Lyanna set up a food bank to collect food to give to the homeless in her local town. In the first week, 40 pounds of food were donated to the food bank by the people of her local town. In the second week, donations were twice as high as the first week. If she gave out 70% of the donated food to the homeless in the third week, calculate the amount of food remaining in the food bank.",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"lyanna.food_bank.food\", \"food\", \"food bank\", source(\"food bank to collect food\"))",
+          "add(\"week_1_donation\", \"local_town.people\", at(\"lyanna.food_bank.food.amount\", \"current\"), 40, source(\"In the first week, 40 pounds of food were donated to the food bank by the people of her local town\"))",
+          "add(\"week_2_donation\", \"local_town.people\", at(\"lyanna.food_bank.food.amount\", \"current\"), scale(event_field(\"week_1_donation\", \"quantity\"), 2), source(\"In the second week, donations were twice as high as the first week\"))",
+          "transfer(\"week_3_distribution\", \"lyanna\", at(\"lyanna.food_bank.food.amount\", \"current\"), at(\"local_town.homeless_people.food.amount\", \"current\"), fraction(at(\"lyanna.food_bank.food.amount\", \"current\"), 70, 100), source(\"she gave out 70% of the donated food to the homeless in the third week\"))",
+          "query(\"value\", at(\"lyanna.food_bank.food.amount\", \"current\"))"
+        ]
+      },
+      "source_id": "3604"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

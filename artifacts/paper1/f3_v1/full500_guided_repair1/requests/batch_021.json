@@ -1,0 +1,114 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "While cultivating a small farm, a farmer spent $50 on corn seeds, $35 on fertilizers and pesticides, and $15 on labor. After a successful harvest, he was able to gather 10 bags of corn. How much should he sell each bag, if he wants to make a profit of 10%?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "remove(\"corn_seed_expense\", \"farmer\", at(\"farmer.money.dollars\", \"current\"), 50, source(\"spent $50 on corn seeds\"))",
+          "remove(\"fertilizer_and_pesticide_expense\", \"farmer\", at(\"farmer.money.dollars\", \"current\"), 35, source(\"$35 on fertilizers and pesticides\"))",
+          "remove(\"labor_expense\", \"farmer\", at(\"farmer.money.dollars\", \"current\"), 15, source(\"$15 on labor\"))",
+          "collection(\"farmer.corn_bags\", \"bag\", \"farm\", source(\"10 bags of corn\"))",
+          "produce(\"corn_harvest\", \"farmer\", at(\"farmer.corn_bags.count\", \"current\"), 10, source(\"gather 10 bags of corn\"))",
+          "percent_of(\"farmer.corn.target_profit.dollars\", \"farmer.corn.total_cost.dollars\", 10, source(\"make a profit of 10%\"))",
+          "query(\"value\", \"farmer.corn_bag.target_sale_price.dollars\")"
+        ]
+      },
+      "source_id": "847"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "It is recommended that men should consume no more than 150 calories of added sugar per day. Mark took a soft drink in the afternoon that contained 2500 calories, 5% of which was from added sugar. Then he bought some bars of candy which had 25 calories of added sugar each. If he eventually exceeded the recommended intake of added sugar by 100%, how many bars of candy did he take?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"men.added_sugar.recommended_maximum.calories\", \"per_day\"), 150, \"calorie\", source(\"men should consume no more than 150 calories of added sugar per day\"))",
+          "consume(\"soft_drink_intake\", \"mark\", at(\"mark.soft_drinks.count\", \"current\"), 1, source(\"Mark took a soft drink in the afternoon\"))",
+          "observe(at(\"mark.soft_drink.total.calories\", \"afternoon\"), 2500, \"calorie\", source(\"a soft drink in the afternoon that contained 2500 calories\"))",
+          "percent_of(at(\"mark.soft_drink.added_sugar.calories\", \"afternoon\"), at(\"mark.soft_drink.total.calories\", \"afternoon\"), 5, source(\"5% of which was from added sugar\"))",
+          "collection(\"mark.candy_bars\", \"candy_bar\", \"mark\", source(\"some bars of candy\"))",
+          "add(\"candy_bar_purchase\", \"mark\", at(\"mark.candy_bars.count\", \"current\"), \"mark.candy_bars.purchased.count\", source(\"he bought some bars of candy\"))",
+          "observe(at(\"mark.candy_bars.each.added_sugar.calories\", \"current\"), 25, \"calorie\", source(\"25 calories of added sugar each\"))",
+          "percent_more(at(\"mark.added_sugar.calories\", \"eventual\"), at(\"men.added_sugar.recommended_maximum.calories\", \"per_day\"), 100, source(\"exceeded the recommended intake of added sugar by 100%\"))",
+          "query(\"value\", event_field(\"candy_bar_purchase\", \"quantity\"))"
+        ]
+      },
+      "source_id": "858"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Paul earns $12.50 for each hour that he works. He then has to pay 20% for taxes and fees. After working 40 hours, Paul receives his paycheck. If he spends 15% of his paycheck on gummy bears, how much, in dollars, does he have left?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"paul.earnings.hourly_rate\", \"work_period\"), 12.50, \"dollar_per_hour\", source(\"$12.50 for each hour that he works\"))",
+          "observe(at(\"paul.work.duration\", \"work_period\"), 40, \"hour\", source(\"working 40 hours\"))",
+          "rate_relation(at(\"paul.earnings.balance\", \"initial\"), at(\"paul.earnings.hourly_rate\", \"work_period\"), at(\"paul.work.duration\", \"work_period\"), source(\"Paul earns $12.50 for each hour that he works\"))",
+          "percent_of(\"paul.taxes_and_fees.amount\", at(\"paul.earnings.balance\", \"current\"), 20, source(\"pay 20% for taxes and fees\"))",
+          "remove(\"taxes_and_fees_payment\", \"paul\", at(\"paul.earnings.balance\", \"current\"), \"paul.taxes_and_fees.amount\", source(\"pay 20% for taxes and fees\"))",
+          "transfer(\"paycheck_receipt\", \"paul\", at(\"paul.earnings.balance\", \"current\"), at(\"paul.paycheck.balance\", \"current\"), at(\"paul.earnings.balance\", \"current\"), source(\"After working 40 hours, Paul receives his paycheck\"))",
+          "percent_of(\"paul.gummy_bears.spending.amount\", at(\"paul.paycheck.balance\", \"current\"), 15, source(\"spends 15% of his paycheck on gummy bears\"))",
+          "remove(\"gummy_bears_purchase\", \"paul\", at(\"paul.paycheck.balance\", \"current\"), \"paul.gummy_bears.spending.amount\", source(\"spends 15% of his paycheck on gummy bears\"))",
+          "query(\"value\", at(\"paul.paycheck.balance\", \"current\"))"
+        ]
+      },
+      "source_id": "1612"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Tim decides to get animals for his zoo.  He buys 3 goats for $400 each.  He gets twice as many llamas which cost 50% more each.  How much did he spend?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"tim.zoo.animal_purchase_costs\", \"purchase_cost\", \"tim.zoo\", source(\"He buys 3 goats for $400 each.  He gets twice as many llamas which cost 50% more each\"))",
+          "add(\"goat_purchase\", \"tim\", at(\"tim.zoo.goats.count\", \"current\"), 3, source(\"He buys 3 goats\"))",
+          "observe(at(\"tim.zoo.goats.unit_price\", \"purchase\"), 400, \"dollar_per_goat\", source(\"$400 each\"))",
+          "rate_relation(\"tim.zoo.goats.purchase.cost\", at(\"tim.zoo.goats.unit_price\", \"purchase\"), event_field(\"goat_purchase\", \"quantity\"), source(\"buys 3 goats for $400 each\"))",
+          "member(\"tim.zoo.animal_purchase_costs\", \"tim.zoo.goats.purchase.cost\", source(\"buys 3 goats for $400 each\"))",
+          "add(\"llama_purchase\", \"tim\", at(\"tim.zoo.llamas.count\", \"current\"), scale(event_field(\"goat_purchase\", \"quantity\"), 2), source(\"He gets twice as many llamas\"))",
+          "percent_more(at(\"tim.zoo.llamas.unit_price\", \"purchase\"), at(\"tim.zoo.goats.unit_price\", \"purchase\"), 50, source(\"cost 50% more each\"))",
+          "rate_relation(\"tim.zoo.llamas.purchase.cost\", at(\"tim.zoo.llamas.unit_price\", \"purchase\"), event_field(\"llama_purchase\", \"quantity\"), source(\"gets twice as many llamas which cost 50% more each\"))",
+          "member(\"tim.zoo.animal_purchase_costs\", \"tim.zoo.llamas.purchase.cost\", source(\"gets twice as many llamas which cost 50% more each\"))",
+          "query(\"sum\", \"tim.zoo.animal_purchase_costs\", \"purchase\")"
+        ]
+      },
+      "source_id": "3998"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Ms. Estrella is an entrepreneur with a startup company having 10 employees. The company makes a revenue of $400000 a month, paying 10% in taxes, 5% of the remaining amount on marketing and ads, 20% of the remaining amount on operational costs, and 15% of the remaining amount on employee wages.  Assuming each employee receives the same wage, calculate the amount of money each employee is paid monthly.",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"ms_estrella.company.employees\", \"employee\", \"ms_estrella.company\", source(\"startup company having 10 employees\"))",
+          "observe(at(\"ms_estrella.company.employees.count\", \"current\"), 10, \"count\", source(\"10 employees\"))",
+          "observe(at(\"ms_estrella.company.monthly_funds.amount\", \"initial\"), 400000, \"dollar_per_month\", source(\"revenue of $400000 a month\"))",
+          "percent_of(\"ms_estrella.company.monthly_expenses.taxes.amount\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), 10, source(\"paying 10% in taxes\"))",
+          "remove(\"monthly_tax_payment\", \"ms_estrella.company\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), \"ms_estrella.company.monthly_expenses.taxes.amount\", source(\"paying 10% in taxes\"))",
+          "percent_of(\"ms_estrella.company.monthly_expenses.marketing_and_ads.amount\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), 5, source(\"5% of the remaining amount on marketing and ads\"))",
+          "remove(\"monthly_marketing_and_ads_payment\", \"ms_estrella.company\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), \"ms_estrella.company.monthly_expenses.marketing_and_ads.amount\", source(\"5% of the remaining amount on marketing and ads\"))",
+          "percent_of(\"ms_estrella.company.monthly_expenses.operational_costs.amount\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), 20, source(\"20% of the remaining amount on operational costs\"))",
+          "remove(\"monthly_operational_costs_payment\", \"ms_estrella.company\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), \"ms_estrella.company.monthly_expenses.operational_costs.amount\", source(\"20% of the remaining amount on operational costs\"))",
+          "percent_of(\"ms_estrella.company.monthly_expenses.employee_wages.amount\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), 15, source(\"15% of the remaining amount on employee wages\"))",
+          "transfer(\"monthly_employee_wages\", \"ms_estrella.company\", at(\"ms_estrella.company.monthly_funds.amount\", \"current\"), at(\"ms_estrella.company.employees.monthly_wages.amount\", \"current\"), \"ms_estrella.company.monthly_expenses.employee_wages.amount\", source(\"15% of the remaining amount on employee wages\"))",
+          "partition(\"ms_estrella.company.employees\", \"ms_estrella.company.monthly_expenses.employee_wages.amount\", source(\"each employee receives the same wage\"))",
+          "query(\"value\", \"ms_estrella.company.employees.member.monthly_wage.amount\")"
+        ]
+      },
+      "source_id": "1971"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

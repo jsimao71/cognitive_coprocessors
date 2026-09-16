@@ -1,0 +1,263 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A restaurant has 400 tables with 4 legs and 500 tables with 3 legs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of legs the restaurant's tables have.",
+          "warnings": []
+        }
+      ],
+      "question": "A restaurant has 400 tables with 4 legs and 500 tables with 3 legs. Calculate the total number of legs the restaurant's tables have.",
+      "source_id": "gsm-plus-02761"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A restaurant has 40 tables with 4 legs and 50 tables with 3/4 of the legs of each of those 40 tables.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of legs the restaurant's tables have.",
+          "warnings": []
+        }
+      ],
+      "question": "A restaurant has 40 tables with 4 legs and 50 tables with 3/4 of the legs of each of those 40 tables. Calculate the total number of legs the restaurant's tables have.",
+      "source_id": "gsm-plus-02762"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A restaurant has 40 tables with 4 legs and 50 tables with 3 legs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "In addition, the restaurant has newly purchased a batch of 20 four-legged tables.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of legs the restaurant's tables have.",
+          "warnings": []
+        }
+      ],
+      "question": "A restaurant has 40 tables with 4 legs and 50 tables with 3 legs. In addition, the restaurant has newly purchased a batch of 20 four-legged tables. Calculate the total number of legs the restaurant's tables have.",
+      "source_id": "gsm-plus-02763"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A restaurant has a total of 310 table legs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "If there are 50 tables with 3 legs each, how many tables with 4 legs does the restaurant have?",
+          "warnings": []
+        }
+      ],
+      "question": "A restaurant has a total of 310 table legs. If there are 50 tables with 3 legs each, how many tables with 4 legs does the restaurant have?",
+      "source_id": "gsm-plus-02764"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a dining establishment, there are 40 four-legged tables and 50 three-legged tables.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "What is the cumulative count of all the legs on these tables in the restaurant?",
+          "warnings": []
+        }
+      ],
+      "question": "In a dining establishment, there are 40 four-legged tables and 50 three-legged tables. What is the cumulative count of all the legs on these tables in the restaurant?",
+      "source_id": "gsm-plus-02765"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

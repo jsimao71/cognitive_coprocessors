@@ -1,0 +1,296 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Emily is making bead necklaces for her friends where each necklace takes 5 beads.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "She made 4 necklaces.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "How many beads did Emily have?",
+          "warnings": []
+        }
+      ],
+      "question": "Emily is making bead necklaces for her friends where each necklace takes 5 beads. She made 4 necklaces. How many beads did Emily have?",
+      "source_id": "svamp-chal-85"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Robin has 28 packages of gum and 13 packages of candy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "There are 4 pieces in each package.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "How many pieces of gum does Robin have?",
+          "warnings": []
+        }
+      ],
+      "question": "Robin has 28 packages of gum and 13 packages of candy. There are 4 pieces in each package. How many pieces of gum does Robin have?",
+      "source_id": "svamp-chal-911"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day Ryan spends 7 hours on learning english, 2 hours on learning chinese and 4 hours on learning spanish.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "How many more hours does he spend on learning english than he does on learning spanish?",
+          "warnings": []
+        }
+      ],
+      "question": "Every day Ryan spends 7 hours on learning english, 2 hours on learning chinese and 4 hours on learning spanish. How many more hours does he spend on learning english than he does on learning spanish?",
+      "source_id": "svamp-chal-265"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack received 6 emails in the morning, 3 emails in the afternoon and some more in the evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "If he received a total of 10 emails in the day How many emails did Jack receive in the afternoon?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack received 6 emails in the morning, 3 emails in the afternoon and some more in the evening. If he received a total of 10 emails in the day How many emails did Jack receive in the afternoon?",
+      "source_id": "svamp-chal-35"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 36,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school is planning a field trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 37,
+          "teacher_input_default": true,
+          "text": "The school has 84 classrooms.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "95 school buses are fully filled with 118 seats on each school bus.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "How many students are in the school?",
+          "warnings": []
+        }
+      ],
+      "question": "The school is planning a field trip. The school has 84 classrooms. 95 school buses are fully filled with 118 seats on each school bus. How many students are in the school?",
+      "source_id": "svamp-chal-574"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

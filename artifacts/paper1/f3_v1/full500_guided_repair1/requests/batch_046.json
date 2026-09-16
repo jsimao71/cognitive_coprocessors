@@ -1,0 +1,187 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Daphney buys 5 kg of potatoes at the supermarket. If 2 kg of potatoes costs $6, how much will she pay?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"daphney.potatoes.purchase.mass\", \"current\"), 5, \"kilogram\", source(\"5 kg of potatoes\"))",
+          "transfer(\"purchase\", \"daphney\", \"supermarket.potatoes\", \"daphney.potatoes\", at(\"daphney.potatoes.purchase.mass\", \"current\"), source(\"Daphney buys 5 kg of potatoes at the supermarket\"))",
+          "observe(at(\"supermarket.potatoes.priced_quantity.mass\", \"current\"), 2, \"kilogram\", source(\"2 kg of potatoes\"))",
+          "observe(at(\"supermarket.potatoes.priced_quantity.cost\", \"current\"), 6, \"dollar\", source(\"2 kg of potatoes costs $6\"))",
+          "rate_relation(at(\"supermarket.potatoes.priced_quantity.cost\", \"current\"), \"supermarket.potatoes.price_per_kilogram\", at(\"supermarket.potatoes.priced_quantity.mass\", \"current\"), source(\"2 kg of potatoes costs $6\"))",
+          "query(\"value\", \"daphney.potatoes.purchase.cost\")"
+        ]
+      },
+      "source_id": "1167"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the ratio of the weighted average exchange rate of Swedish Krona to Taiwan Dollar for the year ended December 31, 2019?",
+      "repair": {
+        "failure_class": "answer_mismatch",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"weighted_average_exchange_rate.swedish_krona\", \"2019\"), 9.46, \"exchange_rate\", cell(\"Swedish Krona\", \"2019\"))",
+          "observe(at(\"weighted_average_exchange_rate.taiwan_dollar\", \"2019\"), 30.90, \"exchange_rate\", cell(\"Taiwan Dollar\", \"2019\"))",
+          "query(\"percentage_ratio\", at(\"weighted_average_exchange_rate.swedish_krona\", \"2019\"), at(\"weighted_average_exchange_rate.taiwan_dollar\", \"2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Cash Flow Information"
+          },
+          {
+            "order": 2,
+            "text": "Cash\u00a0flows\u00a0in\u00a0foreign\u00a0currencies\u00a0have\u00a0been\u00a0converted\u00a0to\u00a0U.S.\u00a0Dollars\u00a0at\u00a0an\u00a0approximate\u00a0weighted-average\u00a0exchange\u00a0rate\u00a0for\u00a0the\u00a0respective\u00a0reporting periods.\u00a0The\u00a0weighted-average\u00a0exchange\u00a0rates\u00a0for\u00a0the\u00a0consolidated\u00a0statements\u00a0of\u00a0operations\u00a0were\u00a0as\u00a0follows:"
+          }
+        ],
+        "table": [
+          [
+            "",
+            "Years ended December 31,",
+            ""
+          ],
+          [
+            "",
+            "2019",
+            "2018"
+          ],
+          [
+            "Swedish Krona",
+            "9.46",
+            "8.70"
+          ],
+          [
+            "Japanese Yen",
+            "109.01",
+            "110.43"
+          ],
+          [
+            "South Korean Won",
+            "1,165.70",
+            "1,100.50"
+          ],
+          [
+            "Taiwan Dollar",
+            "30.90",
+            "30.15"
+          ]
+        ]
+      },
+      "source_id": "59442154f1c151fbdd0e373c240d57a7"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "A 10 meters yarn was cut into 5 equal parts. If 3 parts were used for crocheting, how long was used for crocheting?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"yarn.length\", \"initial\"), 10, \"meter\", source(\"A 10 meters yarn\"))",
+          "collection(\"yarn.parts\", \"yarn_part\", \"yarn\", source(\"cut into 5 equal parts\"))",
+          "observe(at(\"yarn.parts.count\", \"initial\"), 5, \"count\", source(\"5 equal parts\"))",
+          "partition(\"yarn.parts\", at(\"yarn.length\", \"initial\"), source(\"cut into 5 equal parts\"))",
+          "consume(\"crocheting_use\", \"crocheting\", at(\"yarn.length\", \"current\"), scale(\"yarn.parts.member.length\", 3), source(\"3 parts were used for crocheting\"))",
+          "query(\"value\", event_field(\"crocheting_use\", \"quantity\"))"
+        ]
+      },
+      "source_id": "3319"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "How many portions of 200 ml milk can Jasmine pour from a full 2-liter container of milk?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "4585"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What was the change in average price paid per share between the first to second month period?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.average_price_paid_per_share\", \"January 26, 2019 - February 22, 2019\"), 64.77, \"currency_per_share\", cell(\"January 26, 2019 - February 22, 2019\", \"Average Price Paid per Share\"))",
+          "observe(at(\"company.average_price_paid_per_share\", \"February 23, 2019 - March 22, 2019\"), 65.53, \"currency_per_share\", cell(\"February 23, 2019 - March 22, 2019\", \"Average Price Paid per Share\"))",
+          "query(\"difference\", at(\"company.average_price_paid_per_share\", \"January 26, 2019 - February 22, 2019\"), at(\"company.average_price_paid_per_share\", \"February 23, 2019 - March 22, 2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Purchases of Equity Securities by the Issuer and Affiliated Purchasers"
+          },
+          {
+            "order": 2,
+            "text": "The following table provides information with respect to the shares of common stock repurchased by us during the three months ended April 26, 2019:"
+          },
+          {
+            "order": 3,
+            "text": "In May 2003, our Board of Directors approved a stock repurchase program. As of April 26, 2019, our Board of Directors has authorized the repurchase of up to $13.6 billion of our common stock, including a $4.0 billion increase approved by our Board of Directors in April 2018. Since inception of the program through April 26, 2019, we repurchased a total of 313 million shares of our common stock for an aggregate purchase price of $11.7 billion. Under this program, we may purchase shares of our outstanding common stock through solicited or unsolicited transactions in the open market, in privately negotiated transactions, through accelerated share repurchase programs, pursuant to a Rule 10b5-1 plan or in such other manner as deemed appropriate by our management. The stock repurchase program may be suspended or discontinued at any time."
+          }
+        ],
+        "table": [
+          [
+            "Period",
+            "Total Number of Shares Purchased",
+            "Average Price Paid per Share",
+            "Total Number of Shares Purchased as Part of Publicly Announced Program",
+            "Approximate Dollar Value of Shares That May Yet Be Purchased Under The Repurchased Program"
+          ],
+          [
+            "",
+            "(Shares in thousands)",
+            "",
+            "(Shares in thousands)",
+            "(Dollars in millions)"
+          ],
+          [
+            "January 26, 2019 - February 22, 2019",
+            "262",
+            "$ 64.77",
+            "306,255",
+            "$ 2,372"
+          ],
+          [
+            "February 23, 2019 - March 22, 2019",
+            "3,380",
+            "$ 65.53",
+            "309,635",
+            "$ 2,150"
+          ],
+          [
+            "March 23, 2019 - April 26, 2019",
+            "3,608",
+            "$72.49",
+            "313,244",
+            "$ 1,889"
+          ],
+          [
+            "Total",
+            "7,250",
+            "$68.97",
+            "",
+            ""
+          ]
+        ]
+      },
+      "source_id": "80e5a8abc60a8b0546177121383aff03"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

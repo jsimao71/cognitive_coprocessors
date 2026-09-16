@@ -1,0 +1,373 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "The price of carrots in the grocery store increases by 5% of the original price every year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "In the fourth year, however, the price of carrots increased by 10% of the original price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 361,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 284,
+          "teacher_input_default": true,
+          "text": "What would be the price of carrots after four years if it was $120 initially?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 392,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 362,
+          "teacher_input_default": true,
+          "text": "(Round to the nearest integer)",
+          "warnings": []
+        }
+      ],
+      "question": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots. The price of carrots in the grocery store increases by 5% of the original price every year. In the fourth year, however, the price of carrots increased by 10% of the original price. What would be the price of carrots after four years if it was $120 initially? (Round to the nearest integer)",
+      "source_id": "gsm-plus-08131"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company spends $15000 on advertising for a year, and then spends a third of that amount on advertising for another year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "The profit of the company is twice the cost of advertising in a year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 193,
+          "teacher_input_default": true,
+          "text": "What's the total amount the company spent on advertising for the two years?",
+          "warnings": []
+        }
+      ],
+      "question": "A company spends $15000 on advertising for a year, and then spends a third of that amount on advertising for another year. The profit of the company is twice the cost of advertising in a year. What's the total amount the company spent on advertising for the two years?",
+      "source_id": "gsm-plus-01790"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carlos, Jim, and Carrey were at the beach playing and they decided to gather some seashells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "Jim collected 270 seashells, which was 50 more than what Carlos collected.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "Carlos collected twice as many as Carrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 288,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 210,
+          "teacher_input_default": true,
+          "text": "They gathered all their seashells and divided them equally between themselves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 318,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 289,
+          "teacher_input_default": true,
+          "text": "How many did each person get?",
+          "warnings": []
+        }
+      ],
+      "question": "Carlos, Jim, and Carrey were at the beach playing and they decided to gather some seashells. Jim collected 270 seashells, which was 50 more than what Carlos collected. Carlos collected twice as many as Carrey. They gathered all their seashells and divided them equally between themselves. How many did each person get?",
+      "source_id": "gsm-plus-09225"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 21,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dexter has five pigs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 22,
+          "teacher_input_default": true,
+          "text": "Each one eats 1800 grams of feed, twice a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "If Dexter ordered 135000 grams of feed, how many grams of feed is left after a week?",
+          "warnings": []
+        }
+      ],
+      "question": "Dexter has five pigs. Each one eats 1800 grams of feed, twice a day. If Dexter ordered 135000 grams of feed, how many grams of feed is left after a week?",
+      "source_id": "gsm-plus-10249"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are three trees in Eddy's backyard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "The second tree has a height of 5 feet more than the shortest tree.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "The height of the tallest tree is twice the height of the two trees combined.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 230,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "The height of the tallest tree is 34 feet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 261,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 231,
+          "teacher_input_default": true,
+          "text": "How tall is the shortest tree?",
+          "warnings": []
+        }
+      ],
+      "question": "There are three trees in Eddy's backyard. The second tree has a height of 5 feet more than the shortest tree. The height of the tallest tree is twice the height of the two trees combined. The height of the tallest tree is 34 feet. How tall is the shortest tree?",
+      "source_id": "gsm-plus-02844"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

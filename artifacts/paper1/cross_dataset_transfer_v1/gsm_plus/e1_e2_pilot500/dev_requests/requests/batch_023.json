@@ -1,0 +1,285 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a vase, there are 4 roses and 7 more dahlias than roses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "If you add 3 tulips to the vase and then remove 2 roses, how many flowers are there in the vase in total?",
+          "warnings": []
+        }
+      ],
+      "question": "In a vase, there are 4 roses and 7 more dahlias than roses. If you add 3 tulips to the vase and then remove 2 roses, how many flowers are there in the vase in total?",
+      "source_id": "gsm-plus-01739"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 15 flowers in the vase in total.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "If there are 7 more dahlias than roses, how many roses are there in the vase?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 15 flowers in the vase in total. If there are 7 more dahlias than roses, how many roses are there in the vase?",
+      "source_id": "gsm-plus-01740"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a vase, there are 4 roses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "If the number of dahlias in the vase exceeds the number of roses by 7, what is the total count of flowers in the vase?",
+          "warnings": []
+        }
+      ],
+      "question": "In a vase, there are 4 roses. If the number of dahlias in the vase exceeds the number of roses by 7, what is the total count of flowers in the vase?",
+      "source_id": "gsm-plus-01741"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a vase, there are 4 roses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "There are also 7 more dahlias than roses in the vase.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 241,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "If there are 3 tulips on the table next to the vase, and 5 lilies in a basket on the other side of the room, how many flowers are there in the vase in total?",
+          "warnings": []
+        }
+      ],
+      "question": "In a vase, there are 4 roses. There are also 7 more dahlias than roses in the vase. If there are 3 tulips on the table next to the vase, and 5 lilies in a basket on the other side of the room, how many flowers are there in the vase in total?",
+      "source_id": "gsm-plus-01742"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Five students scored a total of 350 points in a board game.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "Naomi scored 75 of the points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "Yuri scored 15 more than half as many points as Naomi and Brianna scored 20 points more than Naomi.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 191,
+          "teacher_input_default": true,
+          "text": "How many points did Jojo and Alex score together?",
+          "warnings": []
+        }
+      ],
+      "question": "Five students scored a total of 350 points in a board game. Naomi scored 75 of the points. Yuri scored 15 more than half as many points as Naomi and Brianna scored 20 points more than Naomi. How many points did Jojo and Alex score together?",
+      "source_id": "gsm-plus-01752"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

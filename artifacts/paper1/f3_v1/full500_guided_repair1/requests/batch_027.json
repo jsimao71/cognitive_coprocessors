@@ -1,0 +1,109 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "A citrus grove has laid out their plans for their sixteen orchards for the growing season. Lemons, their most popular citrus fruit, will take up eight orchards. Oranges are their second most popular fruit and will occupy half as many orchards as the lemons. Limes and grapefruits will split the remaining orchards. How many citrus orchards will be growing grapefruits?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"citrus_grove.orchards\", \"orchard\", \"citrus_grove\", source(\"their sixteen orchards\"))",
+          "collection(\"citrus_grove.orchards.remaining\", \"orchard\", \"citrus_grove\", source(\"remaining orchards\"))",
+          "observe(at(\"citrus_grove.orchards.count\", \"planned\"), 16, \"count\", source(\"their sixteen orchards\"))",
+          "observe(at(\"citrus_grove.orchards.lemons.count\", \"planned\"), 8, \"count\", source(\"Lemons, their most popular citrus fruit, will take up eight orchards\"))",
+          "fraction_of(at(\"citrus_grove.orchards.oranges.count\", \"planned\"), at(\"citrus_grove.orchards.lemons.count\", \"planned\"), 1, 2, source(\"Oranges are their second most popular fruit and will occupy half as many orchards as the lemons\"))",
+          "member(\"citrus_grove.orchards\", \"citrus_grove.orchards.lemons\", source(\"Lemons, their most popular citrus fruit, will take up eight orchards\"))",
+          "member(\"citrus_grove.orchards\", \"citrus_grove.orchards.oranges\", source(\"Oranges are their second most popular fruit and will occupy half as many orchards as the lemons\"))",
+          "member(\"citrus_grove.orchards\", \"citrus_grove.orchards.remaining\", source(\"remaining orchards\"))",
+          "partition(\"citrus_grove.orchards\", at(\"citrus_grove.orchards.count\", \"planned\"), source(\"Lemons, their most popular citrus fruit, will take up eight orchards. Oranges are their second most popular fruit and will occupy half as many orchards as the lemons. Limes and grapefruits will split the remaining orchards.\"))",
+          "member(\"citrus_grove.orchards.remaining\", \"citrus_grove.orchards.limes\", source(\"Limes and grapefruits will split the remaining orchards\"))",
+          "member(\"citrus_grove.orchards.remaining\", \"citrus_grove.orchards.grapefruits\", source(\"Limes and grapefruits will split the remaining orchards\"))",
+          "partition(\"citrus_grove.orchards.remaining\", at(\"citrus_grove.orchards.remaining.count\", \"planned\"), source(\"Limes and grapefruits will split the remaining orchards\"))",
+          "same(at(\"citrus_grove.orchards.limes.count\", \"planned\"), at(\"citrus_grove.orchards.grapefruits.count\", \"planned\"), source(\"Limes and grapefruits will split the remaining orchards\"))",
+          "query(\"value\", at(\"citrus_grove.orchards.grapefruits.count\", \"planned\"))"
+        ]
+      },
+      "source_id": "6678"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Florida is starting a promotion where every car that arrives gets one orange per passenger. A family of 4 arrives and gets their oranges. They had planned to stop for a snack later where they would spend $15 in total, but now that they have the oranges they don't have to buy them at the stop. When they get to the stop they see that the oranges would've cost $1.5 each. What percentage of the money they planned to spend did they save instead?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"family.oranges\", \"orange\", \"family\", source(\"gets their oranges\"))",
+          "observe(at(\"family.car.passengers.count\", \"arrival\"), 4, \"count\", source(\"A family of 4 arrives\"))",
+          "observe(at(\"florida.promotion.orange_rate\", \"arrival\"), 1, \"orange_per_passenger\", source(\"one orange per passenger\"))",
+          "rate_relation(at(\"family.oranges.received.count\", \"arrival\"), at(\"florida.promotion.orange_rate\", \"arrival\"), at(\"family.car.passengers.count\", \"arrival\"), source(\"every car that arrives gets one orange per passenger\"))",
+          "add(\"promotion_oranges\", \"family\", at(\"family.oranges.count\", \"current\"), at(\"family.oranges.received.count\", \"arrival\"), source(\"gets their oranges\"))",
+          "observe(at(\"family.stop.planned_spending.amount\", \"planned\"), 15, \"dollar\", source(\"they would spend $15 in total\"))",
+          "observe(at(\"stop.orange.unit_price\", \"stop\"), 1.5, \"dollar_per_orange\", source(\"the oranges would've cost $1.5 each\"))",
+          "rate_relation(at(\"family.stop.oranges.would_be_cost.amount\", \"stop\"), at(\"stop.orange.unit_price\", \"stop\"), at(\"family.oranges.received.count\", \"arrival\"), source(\"the oranges would've cost $1.5 each\"))",
+          "same(at(\"family.money_saved.amount\", \"stop\"), at(\"family.stop.oranges.would_be_cost.amount\", \"stop\"), source(\"they don't have to buy them at the stop\"))",
+          "query(\"percentage_ratio\", at(\"family.money_saved.amount\", \"stop\"), at(\"family.stop.planned_spending.amount\", \"planned\"))"
+        ]
+      },
+      "source_id": "2539"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "In a graveyard, there are 20 skeletons.  Half of these skeletons are adult women, and the remaining number are split evenly between adult men and children.  If an adult woman has 20 bones in their body, and a male has 5 more than this, and a child has half as many as an adult woman, how many bones are in the graveyard?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"graveyard.skeletons\", \"skeleton\", \"graveyard\", source(\"In a graveyard, there are 20 skeletons\"))",
+          "observe(at(\"graveyard.skeletons.count\", \"current\"), 20, \"count\", source(\"there are 20 skeletons\"))",
+          "fraction_of(at(\"graveyard.skeletons.adult_women.count\", \"current\"), at(\"graveyard.skeletons.count\", \"current\"), 1, 2, source(\"Half of these skeletons are adult women\"))",
+          "difference_relation(at(\"graveyard.skeletons.remaining.count\", \"current\"), at(\"graveyard.skeletons.count\", \"current\"), at(\"graveyard.skeletons.adult_women.count\", \"current\"), source(\"Half of these skeletons are adult women, and the remaining number are split evenly between adult men and children\"))",
+          "fraction_of(at(\"graveyard.skeletons.adult_men.count\", \"current\"), at(\"graveyard.skeletons.remaining.count\", \"current\"), 1, 2, source(\"the remaining number are split evenly between adult men and children\"))",
+          "fraction_of(at(\"graveyard.skeletons.children.count\", \"current\"), at(\"graveyard.skeletons.remaining.count\", \"current\"), 1, 2, source(\"the remaining number are split evenly between adult men and children\"))",
+          "observe(at(\"adult_woman.body.bones.count\", \"current\"), 20, \"count\", source(\"an adult woman has 20 bones in their body\"))",
+          "offset(at(\"adult_man.body.bones.count\", \"current\"), at(\"adult_woman.body.bones.count\", \"current\"), 5, \"count\", source(\"a male has 5 more than this\"))",
+          "fraction_of(at(\"child.body.bones.count\", \"current\"), at(\"adult_woman.body.bones.count\", \"current\"), 1, 2, source(\"a child has half as many as an adult woman\"))",
+          "query(\"value\", at(\"graveyard.skeletons.bones.count\", \"current\"))"
+        ]
+      },
+      "source_id": "1205"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Cowboy Mickey and cowgirl Minnie train horses for a living.  On average, Mickey mounts six less than twice as many horses per day as does Minnie,  while Minnie mounts three more horses per day than there are days in a week.  How many horses does Mickey Mount per week?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "4258"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Brendan makes $6/hour as a waiter. He's scheduled for 2 8-hour shifts and 1 12-hour shift this week. He also makes an average of $12 in tips each hour. Brendan is supposed to pay 20% of his income in taxes, but he only reports 1/3rd of his tips to the IRS. How much money does Brendan pay in taxes each week?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"brendan.waiter.wage_rate\", \"this_week\"), 6, \"dollar_per_hour\", source(\"Brendan makes $6/hour as a waiter\"))",
+          "collection(\"brendan.schedule.shifts\", \"shift\", \"brendan.schedule\", source(\"He's scheduled for 2 8-hour shifts and 1 12-hour shift this week\"))",
+          "observe(at(\"brendan.schedule.eight_hour_shifts.count\", \"this_week\"), 2, \"count\", source(\"2 8-hour shifts\"))",
+          "observe(at(\"brendan.schedule.eight_hour_shift.duration\", \"this_week\"), 8, \"hour\", source(\"8-hour shifts\"))",
+          "observe(at(\"brendan.schedule.twelve_hour_shifts.count\", \"this_week\"), 1, \"count\", source(\"1 12-hour shift\"))",
+          "observe(at(\"brendan.schedule.twelve_hour_shift.duration\", \"this_week\"), 12, \"hour\", source(\"12-hour shift\"))",
+          "observe(at(\"brendan.tips.mean_rate\", \"this_week\"), 12, \"dollar_per_hour\", source(\"an average of $12 in tips each hour\"))",
+          "percent_of(at(\"brendan.taxes.paid.amount\", \"this_week\"), at(\"brendan.income.reported.amount\", \"this_week\"), 20, source(\"Brendan is supposed to pay 20% of his income in taxes, but he only reports 1/3rd of his tips to the IRS\"))",
+          "fraction_of(at(\"brendan.tips.reported.amount\", \"this_week\"), at(\"brendan.tips.earned.amount\", \"this_week\"), 1, 3, source(\"he only reports 1/3rd of his tips to the IRS\"))",
+          "query(\"value\", at(\"brendan.taxes.paid.amount\", \"this_week\"))"
+        ]
+      },
+      "source_id": "6237"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

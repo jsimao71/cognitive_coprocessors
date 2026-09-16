@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sam ran 3 miles on Monday, Wednesday, and Friday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "On Tuesday and Thursday, Sam ran 5 miles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "On Saturday, Sam decided to run the same distance as he ran on Monday and Wednesday combined.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 188,
+          "teacher_input_default": true,
+          "text": "How many miles did Sam run this week?",
+          "warnings": []
+        }
+      ],
+      "question": "Sam ran 3 miles on Monday, Wednesday, and Friday.  On Tuesday and Thursday, Sam ran 5 miles. On Saturday, Sam decided to run the same distance as he ran on Monday and Wednesday combined.  How many miles did Sam run this week?",
+      "source_id": "gsm-plus-09491"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Bernie has 4 dogs and a cat.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "The cat, however, is quite independent and require walking 3 miles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The dogs each need a certain amount of exercise per day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "The first dog needs to walk 1 mile, while the second dog needs to walk 4 miles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 270,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 234,
+          "teacher_input_default": true,
+          "text": "The third dog needs to walk 3 miles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 361,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 271,
+          "teacher_input_default": true,
+          "text": "Despite the cat's exercise needs, on average, the dogs still need to walk 3 miles per day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 408,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 362,
+          "teacher_input_default": true,
+          "text": "How many miles does the last dog need to walk?",
+          "warnings": []
+        }
+      ],
+      "question": "Bernie has 4 dogs and a cat. The cat, however, is quite independent and require walking 3 miles. The dogs each need a certain amount of exercise per day. The first dog needs to walk 1 mile, while the second dog needs to walk 4 miles. The third dog needs to walk 3 miles. Despite the cat's exercise needs, on average, the dogs still need to walk 3 miles per day. How many miles does the last dog need to walk?",
+      "source_id": "gsm-plus-09646"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A basic manicure starts at $45 while a pedicure starts at $50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "A certain salon offers 25% off if you get both.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "Suppose Karen chooses to do both and would also like to add nail art on each of her fingers, which costs $4 per nail.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 229,
+          "teacher_input_default": true,
+          "text": "How much would she pay in all?",
+          "warnings": []
+        }
+      ],
+      "question": "A basic manicure starts at $45 while a pedicure starts at $50. A certain salon offers 25% off if you get both. Suppose Karen chooses to do both and would also like to add nail art on each of her fingers, which costs $4 per nail. How much would she pay in all?",
+      "source_id": "gsm-plus-09808"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Audrey has to take two math tests to pass 6th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "She must correctly answer 70% of the total questions to move on to the 7th grade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 201,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "The first test has 700 questions and she gets 60% of them correct.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 236,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 202,
+          "teacher_input_default": true,
+          "text": "The second test has 400 questions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 329,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 237,
+          "teacher_input_default": true,
+          "text": "How many questions does she need to get right on the second test to move onto the 7th grade?",
+          "warnings": []
+        }
+      ],
+      "question": "Audrey has to take two math tests to pass 6th grade. She must correctly answer 70% of the total questions to move on to the 7th grade. The first test has 700 questions and she gets 60% of them correct. The second test has 400 questions. How many questions does she need to get right on the second test to move onto the 7th grade?",
+      "source_id": "gsm-plus-09953"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For a cocktail party, Mary is preparing ice cubes that have fruits frozen inside them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "She creates a certain amount of strawberry cubes, and the quantity of blueberry cubes she makes is 5 times the strawberry cubes less 4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "If the total number of ice cubes she makes is 116, can you determine the number of blueberry cubes she has prepared?",
+          "warnings": []
+        }
+      ],
+      "question": "For a cocktail party, Mary is preparing ice cubes that have fruits frozen inside them. She creates a certain amount of strawberry cubes, and the quantity of blueberry cubes she makes is 5 times the strawberry cubes less 4. If the total number of ice cubes she makes is 116, can you determine the number of blueberry cubes she has prepared?",
+      "source_id": "gsm-plus-09965"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

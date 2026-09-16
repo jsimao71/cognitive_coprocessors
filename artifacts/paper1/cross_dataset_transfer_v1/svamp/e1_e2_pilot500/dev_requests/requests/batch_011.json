@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The grasshopper, the frog and the mouse had a jumping contest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "The grasshopper jumped 19 inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The frog jumped 39 inches farther than the grasshopper and the mouse jumped 94 inches lesser than the frog.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 231,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "How far did the frog jump?",
+          "warnings": []
+        }
+      ],
+      "question": "The grasshopper, the frog and the mouse had a jumping contest. The grasshopper jumped 19 inches. The frog jumped 39 inches farther than the grasshopper and the mouse jumped 94 inches lesser than the frog. How far did the frog jump?",
+      "source_id": "svamp-chal-951"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Edward spent $ 6 to buy books and $ 16 to buy pens.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "Now he has $ 19.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "How much did Edward have before he spent his money?",
+          "warnings": []
+        }
+      ],
+      "question": "Edward spent $ 6 to buy books and $ 16 to buy pens. Now he has $ 19. How much did Edward have before he spent his money?",
+      "source_id": "svamp-chal-325"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Bobby had 20 pieces of candy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "He ate 34 pieces of candy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "Then he ate 18 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "How many pieces of candy did Bobby eat?",
+          "warnings": []
+        }
+      ],
+      "question": "Bobby had 20 pieces of candy. He ate 34 pieces of candy. Then he ate 18 more. How many pieces of candy did Bobby eat?",
+      "source_id": "svamp-chal-505"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "2 birds and 6 storks were sitting on the fence.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "3 more birds came to join them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "How many more storks than birds are sitting on the fence?",
+          "warnings": []
+        }
+      ],
+      "question": "2 birds and 6 storks were sitting on the fence. 3 more birds came to join them. How many more storks than birds are sitting on the fence?",
+      "source_id": "svamp-chal-87"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rachel picked 3 ripe apples from her tree.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 95,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "Now the tree has 2 ripe apples and 27 unripe apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "How many ripe apples did the tree have to begin with?",
+          "warnings": []
+        }
+      ],
+      "question": "Rachel picked 3 ripe apples from her tree. Now the tree has 2 ripe apples and 27 unripe apples. How many ripe apples did the tree have to begin with?",
+      "source_id": "svamp-chal-988"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

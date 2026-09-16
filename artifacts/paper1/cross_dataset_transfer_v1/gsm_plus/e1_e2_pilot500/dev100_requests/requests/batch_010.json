@@ -1,0 +1,362 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James hires a horse-drawn carriage from 5 PM to 9 PM.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "He gets a certain hour free.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "The first paid hour is $15 and each hour after that is twice the cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "If James paid $75 in total, how many hours did he get for free?",
+          "warnings": []
+        }
+      ],
+      "question": "James hires a horse-drawn carriage from 5 PM to 9 PM. He gets a certain hour free. The first paid hour is $15 and each hour after that is twice the cost. If James paid $75 in total, how many hours did he get for free?",
+      "source_id": "gsm-plus-05220"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Gus spent $30.00 at the grocery store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "He bought 3 bag of chips for $3.00 each, a bucket of fried chicken for $6.00 and a bottle of soda for $2.00.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "How much did the apple pie cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Gus spent $30.00 at the grocery store.  He bought 3 bag of chips for $3.00 each, a bucket of fried chicken for $6.00 and a bottle of soda for $2.00.  How much did the apple pie cost?",
+      "source_id": "gsm-plus-05296"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Three people invested $1200 in a joint savings account.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "After Dylan's investment of 2/5 of the total amount, Frances invested a fraction of the remaining amount.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 288,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 164,
+          "teacher_input_default": true,
+          "text": "Skyler's investment accounted for the res and paid $240, what's the fraction of Frances' investment in the remaining amount?",
+          "warnings": []
+        }
+      ],
+      "question": "Three people invested $1200 in a joint savings account.  After Dylan's investment of 2/5 of the total amount, Frances invested a fraction of the remaining amount.  Skyler's investment accounted for the res and paid $240, what's the fraction of Frances' investment in the remaining amount?",
+      "source_id": "gsm-plus-05412"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A certain company is in the business of selling fresh fruit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "One crate of such fruit consists of 6 bananas, 15 apples, and 8 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "The price for such a crate depends on the price of its individual fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "One apple costs $0.6 and one banana costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 347,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "Oranges are the most expensive and cost three times as much as a banana per piece.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 398,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 348,
+          "teacher_input_default": true,
+          "text": "What would be the price for such a crate of fruit?",
+          "warnings": []
+        }
+      ],
+      "question": "A certain company is in the business of selling fresh fruit. One crate of such fruit consists of 6 bananas, 15 apples, and 8 oranges. The price for such a crate depends on the price of its individual fruits. One apple costs $0.6 and one banana costs twice as much. Oranges are the most expensive and cost three times as much as a banana per piece. What would be the price for such a crate of fruit?",
+      "source_id": "gsm-plus-05536"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Aiden and 0.12 of his hundred friends are going to see a film at the cinema, and meet up with 0.07 of his hundred friends there.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "They each save a seat and then buy enough drinks and snacks to fill the seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "Each seat has enough room to hold one person, two drinks, and three snacks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 396,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 284,
+          "teacher_input_default": true,
+          "text": "If drinks and snacks cost $2 each, how much money, in dollars, has the group spent overall on snacks and drinks?",
+          "warnings": []
+        }
+      ],
+      "question": "Aiden and 0.12 of his hundred friends are going to see a film at the cinema, and meet up with 0.07 of his hundred friends there. They each save a seat and then buy enough drinks and snacks to fill the seats. Each seat has enough room to hold one person, two drinks, and three snacks. If drinks and snacks cost $2 each, how much money, in dollars, has the group spent overall on snacks and drinks?",
+      "source_id": "gsm-plus-05610"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

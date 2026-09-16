@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom bought a CD for $4.5, and a headphone set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "In total, he paid $49.5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "How many more CDs would Tom have been able to buy if he had decided not to buy the headphone set?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom bought a CD for $4.5, and a headphone set. In total, he paid $49.5. How many more CDs would Tom have been able to buy if he had decided not to buy the headphone set?",
+      "source_id": "gsm-plus-04234"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom bought a CD for $4, a headphone set, and a poster for $6.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "In total, he paid $54.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "If Tom had decided not to buy the headphone set and the poster, how many more CDs would he have been able to buy with the money he spent?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom bought a CD for $4, a headphone set, and a poster for $6. In total, he paid $54. If Tom had decided not to buy the headphone set and the poster, how many more CDs would he have been able to buy with the money he spent?",
+      "source_id": "gsm-plus-04235"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom bought a CD and a headphone set for $44.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "In total, he paid $48.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "If Tom had decided not to buy the headphone set, he can buy 11 more CDs with the money he paid.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 164,
+          "teacher_input_default": true,
+          "text": "How much does each CD cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom bought a CD and a headphone set for $44. In total, he paid $48. If Tom had decided not to buy the headphone set, he can buy 11 more CDs with the money he paid. How much does each CD cost?",
+      "source_id": "gsm-plus-04236"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom purchased a music disc for $4 and also a set of headphones.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "His total expenditure was $48.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 200,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "If Tom had chosen not to purchase the headphones, how many additional music discs could he have afforded?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom purchased a music disc for $4 and also a set of headphones. His total expenditure was $48. If Tom had chosen not to purchase the headphones, how many additional music discs could he have afforded?",
+      "source_id": "gsm-plus-04237"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom went to a music store where he bought a CD for $4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "He also saw a limited edition poster of his favorite band priced at $10, but he decided not to buy it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "Instead, he bought a headphone set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 277,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "After paying for the CD and the headphone set, he realized he spent a total of $48.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 369,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 278,
+          "teacher_input_default": true,
+          "text": "If Tom had decided not to buy the headphone set, how many more CDs could he have purchased?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom went to a music store where he bought a CD for $4. He also saw a limited edition poster of his favorite band priced at $10, but he decided not to buy it. Instead, he bought a headphone set. After paying for the CD and the headphone set, he realized he spent a total of $48. If Tom had decided not to buy the headphone set, how many more CDs could he have purchased?",
+      "source_id": "gsm-plus-04238"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,436 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Melody made 26 cut-outs of Christmas trees with red shiny balls.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "If she planned to paste 4 of this to the front cover of a certain number of cards, how many cards will she be able to make?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "melody.christmas_tree_cutouts.count = 26"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "cards.christmas_tree_cutouts_per_card = 4",
+              "melody.cards_makeable = melody.christmas_tree_cutouts.count / cards.christmas_tree_cutouts_per_card",
+              "RETURN melody.cards_makeable"
+            ],
+            "assumptions": [
+              "Resolved \"this\" to the Christmas-tree cut-outs.",
+              "Interpreted the requested card count as the arithmetic quotient; the clause does not specify how leftover cut-outs or partial quotients should be handled."
+            ],
+            "confidence": 0.86,
+            "part_id": 1,
+            "semantic_notes": [
+              "The active arithmetic profile expresses the quotient but has no floor or remainder operator for enforcing whole-card counts."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0518"
+      },
+      "question": "Melody made 26 cut-outs of Christmas trees with red shiny balls. If she planned to paste 4 of this to the front cover of a certain number of cards, how many cards will she be able to make?",
+      "source_context": null,
+      "source_id": "asdiv-0518",
+      "validation_failure": "answer mismatch: actual=6.5, expected=6",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "26/4=6 r2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Amy travelled 300 km by train and 200 km by taxi, it took him 5 hours 30 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 161,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "But if he travels 260 km by train and 240 km by taxi he takes 6 minutes longer.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 162,
+          "teacher_input_default": true,
+          "text": "Find the speed of train and taxi.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "amy.trip1.train.distance_km = 300",
+              "amy.trip1.taxi.distance_km = 200",
+              "amy.trip1.total_duration_hours = 5 + 30 / 60"
+            ],
+            "assumptions": [
+              "Despite the inconsistent pronoun, \"him\" refers to Amy."
+            ],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies route-specific distances and the total duration of the first trip."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "amy.trip2.train.distance_km = 260",
+              "amy.trip2.taxi.distance_km = 240",
+              "amy.trip2.total_duration_hours = amy.trip1.total_duration_hours + 6 / 60"
+            ],
+            "assumptions": [
+              "The train and taxi have the same respective speeds in both trips.",
+              "Despite the inconsistent pronoun, \"he\" refers to Amy."
+            ],
+            "confidence": 0.93,
+            "part_id": 1,
+            "semantic_notes": [
+              "The six-minute increase is converted to hours to match the first trip's duration unit."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN train.speed_km_per_hour",
+              "RETURN taxi.speed_km_per_hour"
+            ],
+            "assumptions": [],
+            "confidence": 0.9,
+            "part_id": 2,
+            "semantic_notes": [
+              "The question requests two distinct mode-specific speeds."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1430"
+      },
+      "question": "Amy travelled 300 km by train and 200 km by taxi, it took him 5 hours 30 minutes. But if he travels 260 km by train and 240 km by taxi he takes 6 minutes longer. Find the speed of train and taxi.",
+      "source_context": null,
+      "source_id": "asdiv-1430",
+      "validation_failure": "unresolved reference 'train.speed_km_per_hour' from scope 'global'; unresolved reference 'taxi.speed_km_per_hour' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "100",
+        "gold_reasoning": "x:Speed of train; y:Speed of taxi; (300/x)+(200/y)=5.5; (260/x)+(240/y)=5.6"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 260,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Martin is pasting pieces of square colored paper of equal size onto a board measuring 72 cm by 90 cm. If only whole square pieces are used, and the board is to be completely covered, what is the largest possible length of the side of each square colored paper?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause requires maximizing an integer side length that exactly divides both board dimensions, but divisibility, integer constraints, and greatest-common-divisor semantics are absent from the active operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2079"
+      },
+      "question": "Martin is pasting pieces of square colored paper of equal size onto a board measuring 72 cm by 90 cm. If only whole square pieces are used, and the board is to be completely covered, what is the largest possible length of the side of each square colored paper?",
+      "source_context": null,
+      "source_id": "asdiv-2079",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "18",
+        "gold_reasoning": "GCD(72,90)=18"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Oscar needs to ship 14 rock CDs, 12 classical CDs, and 8 pop CDs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "He can pack only one type of CD in each box and he must pack the same number of CDs in each box.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of CDs Oscar can pack in each box?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "oscar.rock_cds.count = 14",
+              "oscar.classical_cds.count = 12",
+              "oscar.pop_cds.count = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Representing one CD type per box and requiring a common integral box capacity needs categorical packing, divisibility, and integer constraints not available in the active arithmetic profile."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest common integral box capacity requires greatest-common-divisor or equivalent divisibility and integer-maximization semantics, which are absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0871"
+      },
+      "question": "Oscar needs to ship 14 rock CDs, 12 classical CDs, and 8 pop CDs. He can pack only one type of CD in each box and he must pack the same number of CDs in each box. What is the greatest number of CDs Oscar can pack in each box?",
+      "source_context": null,
+      "source_id": "asdiv-0871",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "GCD(14,12,8)=2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The age of a father is equal to the sum of the ages of his 5 children.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "After 15 years sum of the ages of the children will be twice the age of the father.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "Find the age of the father.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "family.children.count = 5",
+              "family.children.total_age_now = father.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "family.elapsed_years = 15",
+              "family.children.collective_age_increase = family.children.count * family.elapsed_years",
+              "family.children.total_age_in_15y = family.children.total_age_now + family.children.collective_age_increase",
+              "father.age_in_15y = father.age_now + family.elapsed_years",
+              "family.children.stated_total_age_in_15y = father.age_in_15y * 2"
+            ],
+            "assumptions": [
+              "All five children and the father age by 15 years over the stated interval.",
+              "\u201cThe age of the father\u201d in the after-15-years relation means the father's age at that future time."
+            ],
+            "confidence": 0.95,
+            "part_id": 1,
+            "semantic_notes": [
+              "The age total obtained by aging the children and the total stated as twice the father's future age are kept as distinct semantic paths so neither source relation is overwritten."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN father.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1412"
+      },
+      "question": "The age of a father is equal to the sum of the ages of his 5 children. After 15 years sum of the ages of the children will be twice the age of the father. Find the age of the father.",
+      "source_context": null,
+      "source_id": "asdiv-1412",
+      "validation_failure": "unresolved reference 'father.age_now' from scope 'global'; unresolved reference 'family.children.total_age_now' from scope 'global'; unresolved reference 'father.age_now' from scope 'global'; unresolved reference 'father.age_in_15y' from scope 'global'; unresolved reference 'father.age_now' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "75",
+        "gold_reasoning": "x:The age of the father; y:The sum of the ages of five children; x=y; y+5*15=2x"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,673 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Keegan and Tashay were running a car wash to raise money for a baseball camp.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "They needed to raise $200  for the two of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 126,
+          "teacher_input_default": true,
+          "text": "By 3 pm, Keegan had earned $83 and Tasha had earned $91.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 267,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "Later in the day, Keegan earned an additional $10 and Tasha earned an additional $5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 268,
+          "teacher_input_default": true,
+          "text": "How much more did they need to earn to reach their combined goal?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "fundraiser.activity = \"car wash\"",
+              "fundraiser.purpose = \"baseball camp\"",
+              "fundraiser.participants = \"Keegan and Tashay\""
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fundraiser.combined_goal = 200"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "keegan.by_3pm.earned = 83",
+              "tashay.by_3pm.earned = 91"
+            ],
+            "assumptions": [
+              "Resolved \"Tasha\" to Tashay because the opening clause identifies Keegan and Tashay as the two participants."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "keegan.later.additional_earned = 10",
+              "tashay.later.additional_earned = 5",
+              "keegan.end_of_day.earned = keegan.by_3pm.earned + keegan.later.additional_earned",
+              "tashay.end_of_day.earned = tashay.by_3pm.earned + tashay.later.additional_earned"
+            ],
+            "assumptions": [
+              "Resolved \"Tasha\" to Tashay consistently with the preceding clause."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fundraiser.end_of_day.combined_earned = sum(keegan.end_of_day.earned, tashay.end_of_day.earned)",
+              "fundraiser.amount_still_needed = fundraiser.combined_goal - fundraiser.end_of_day.combined_earned",
+              "RETURN fundraiser.amount_still_needed"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-03859"
+      },
+      "question": "Keegan and Tashay were running a car wash to raise money for a baseball camp. They needed to raise $200  for the two of them. By 3 pm, Keegan had earned $83 and Tasha had earned $91. Later in the day, Keegan earned an additional $10 and Tasha earned an additional $5. How much more did they need to earn to reach their combined goal?",
+      "source_context": null,
+      "source_id": "gsm-plus-03859",
+      "validation_failure": "answer mismatch: actual=11, expected=1",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The highest temperature ever recorded in Southland is -48 degrees Fahrenheit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "The highest temperature ever recorded in Northlandia is 21 degrees Fahrenheit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "The highest temperature recorded in Midlandia is -3 degrees Fahrenheit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 299,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 229,
+          "teacher_input_default": true,
+          "text": "The temperature in Central India was 6 degrees higher than in Midland.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 361,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 300,
+          "teacher_input_default": true,
+          "text": "What is the average highest temperature of these 4 countries?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "southland.highest_temperature_fahrenheit = -48"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "northlandia.highest_temperature_fahrenheit = 21"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "midlandia.highest_temperature_fahrenheit = -3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "central_india.highest_temperature_fahrenheit = midlandia.highest_temperature_fahrenheit + 6"
+            ],
+            "assumptions": [
+              "\u201cMidland\u201d refers to Midlandia."
+            ],
+            "confidence": 0.91,
+            "part_id": 3,
+            "semantic_notes": [
+              "The surrounding question establishes highest recorded temperature as the measured quantity."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "countries.average_highest_temperature_fahrenheit = mean(southland.highest_temperature_fahrenheit, northlandia.highest_temperature_fahrenheit, midlandia.highest_temperature_fahrenheit, central_india.highest_temperature_fahrenheit)",
+              "RETURN countries.average_highest_temperature_fahrenheit"
+            ],
+            "assumptions": [
+              "\u201cThese 4 countries\u201d refers to Southland, Northlandia, Midlandia, and Central India."
+            ],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-03915"
+      },
+      "question": "The highest temperature ever recorded in Southland is -48 degrees Fahrenheit. The highest temperature ever recorded in Northlandia is 21 degrees Fahrenheit. The highest temperature recorded in Midlandia is -3 degrees Fahrenheit. The temperature in Central India was 6 degrees higher than in Midland. What is the average highest temperature of these 4 countries?",
+      "source_context": null,
+      "source_id": "gsm-plus-03915",
+      "validation_failure": "answer mismatch: actual=-6.75, expected=-9",
+      "validator_context": {
+        "correct_answer": "-9",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom bought a CD for $4, a headphone set, and a poster for $6.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "In total, he paid $54.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "If Tom had decided not to buy the headphone set and the poster, how many more CDs would he have been able to buy with the money he spent?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tom.purchase.cd_count = 1",
+              "cd.unit_price_dollars = 4",
+              "tom.purchase.headphone_set_count = 1",
+              "tom.purchase.poster_count = 1",
+              "poster.unit_price_dollars = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The headphone price is not stated in this clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tom.purchase.total_spent_dollars = 54"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tom.counterfactual.cd_count = tom.purchase.total_spent_dollars / cd.unit_price_dollars",
+              "tom.counterfactual.additional_cd_count = tom.counterfactual.cd_count - tom.purchase.cd_count",
+              "RETURN tom.counterfactual.additional_cd_count"
+            ],
+            "assumptions": [
+              "\u201cThe money he spent\u201d refers to the stated total purchase expenditure."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "The counterfactual spends the same total amount entirely on CDs and asks for the increase over the one CD originally purchased."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-04235"
+      },
+      "question": "Tom bought a CD for $4, a headphone set, and a poster for $6. In total, he paid $54. If Tom had decided not to buy the headphone set and the poster, how many more CDs would he have been able to buy with the money he spent?",
+      "source_context": null,
+      "source_id": "gsm-plus-04235",
+      "validation_failure": "answer mismatch: actual=12.5, expected=12",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school auditorium has a certain number of rows of seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "There are 18 seats in each row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "One-fourth of the seats were occupied by the administrators.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "One-third of the remaining seats were occupied by the parents and the rest were occupied by the students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 363,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 260,
+          "teacher_input_default": true,
+          "text": "If there were 36 students in the school auditorium, how many rows of seats are there in the auditorium?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces the auditorium and an unknown row count but supplies no assignable numeric fact."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "auditorium.seats_per_row = 18",
+              "auditorium.total_seats = auditorium.rows * auditorium.seats_per_row"
+            ],
+            "assumptions": [
+              "Every auditorium row has 18 seats."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The total-seat relation legitimately depends on the not-yet-grounded row count."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "administrators.occupied_seats = auditorium.total_seats / 4",
+              "auditorium.remaining_after_administrators_seats = auditorium.total_seats - administrators.occupied_seats"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "parents.occupied_seats = auditorium.remaining_after_administrators_seats / 3",
+              "students.occupied_seats = auditorium.remaining_after_administrators_seats - parents.occupied_seats"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The students occupy the seats remaining after the parents take one-third of the post-administrator remainder."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "students.occupied_seats = 36",
+              "auditorium.rows = students.occupied_seats / (auditorium.seats_per_row * (1 - 1 / 4) * (1 - 1 / 3))",
+              "RETURN auditorium.rows"
+            ],
+            "assumptions": [
+              "All seats are partitioned among administrators, parents, and students as described."
+            ],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [
+              "The requested row count is named explicitly and derived from the stated occupancy fractions."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-04948"
+      },
+      "question": "The school auditorium has a certain number of rows of seats. There are 18 seats in each row. One-fourth of the seats were occupied by the administrators. One-third of the remaining seats were occupied by the parents and the rest were occupied by the students. If there were 36 students in the school auditorium, how many rows of seats are there in the auditorium?",
+      "source_context": null,
+      "source_id": "gsm-plus-04948",
+      "validation_failure": "answer mismatch: actual=4, expected=18",
+      "validator_context": {
+        "correct_answer": "18",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ava and Emma want to know who is better at the new video game Ava got for her birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "They are each going to play one level and whoever has the highest score wins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "They receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 496,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 334,
+          "teacher_input_default": true,
+          "text": "If Ava jumps on 15 more enemies than Emma and collects 12 more berries, but finishes the level 10 seconds slower, what is the difference between their two scores?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces the players and comparison goal but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ava.levels_played = 1",
+              "emma.levels_played = 1",
+              "game.winning_score = max(ava.score, emma.score)"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "The winning-score relation preserves the highest-score rule; identifying the winning player is unnecessary for the later numeric query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "game.scoring.points_per_enemy = 10",
+              "game.scoring.points_per_berry = 5",
+              "game.scoring.points_per_timer_second = 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ava.enemies_jumped = emma.enemies_jumped + 15",
+              "ava.berries_collected = emma.berries_collected + 12",
+              "ava.timer_seconds_left = emma.timer_seconds_left - 10",
+              "game.enemy_score_advantage = 15 * game.scoring.points_per_enemy",
+              "game.berry_score_advantage = 12 * game.scoring.points_per_berry",
+              "game.timer_score_disadvantage = 10 * game.scoring.points_per_timer_second",
+              "game.ava_minus_emma_score = game.enemy_score_advantage + game.berry_score_advantage - game.timer_score_disadvantage",
+              "game.score_difference = abs(game.ava_minus_emma_score)",
+              "RETURN game.score_difference"
+            ],
+            "assumptions": [
+              "Finishing ten seconds slower is interpreted as having ten fewer seconds left on the same countdown timer."
+            ],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06241"
+      },
+      "question": "Ava and Emma want to know who is better at the new video game Ava got for her birthday. They are each going to play one level and whoever has the highest score wins. They receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level. If Ava jumps on 15 more enemies than Emma and collects 12 more berries, but finishes the level 10 seconds slower, what is the difference between their two scores?",
+      "source_context": null,
+      "source_id": "gsm-plus-06241",
+      "validation_failure": "unresolved reference 'ava.score' from scope 'global'; unresolved reference 'emma.enemies_jumped' from scope 'global'; unresolved reference 'emma.berries_collected' from scope 'global'; unresolved reference 'emma.timer_seconds_left' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "90",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

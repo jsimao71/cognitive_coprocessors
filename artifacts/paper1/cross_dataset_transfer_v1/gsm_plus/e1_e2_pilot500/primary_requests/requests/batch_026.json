@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A wooden bridge can carry no more than 5000 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "A delivery truck filled with identical boxes, each weighing 7.5 pounds, will pass over the bridge.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "The combined weight of the driver and the empty truck is 3755 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 338,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 221,
+          "teacher_input_default": true,
+          "text": "What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+          "warnings": []
+        }
+      ],
+      "question": "A wooden bridge can carry no more than 5000 pounds. A delivery truck filled with identical boxes, each weighing 7.5 pounds, will pass over the bridge. The combined weight of the driver and the empty truck is 3755 pounds. What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+      "source_id": "gsm-plus-00458"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tim gets a promotion that offers him a 5% raise on his $20000 a month salary.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "In addition to this, he also receives a bonus worth half a month's salary at the end of every quarter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 181,
+          "teacher_input_default": true,
+          "text": "However, he has to pay a 10% tax on his bonus.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 300,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 228,
+          "teacher_input_default": true,
+          "text": "How much money will he make in a year after tax deductions on his bonus?",
+          "warnings": []
+        }
+      ],
+      "question": "Tim gets a promotion that offers him a 5% raise on his $20000 a month salary. In addition to this, he also receives a bonus worth half a month's salary at the end of every quarter. However, he has to pay a 10% tax on his bonus. How much money will he make in a year after tax deductions on his bonus?",
+      "source_id": "gsm-plus-05131"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A nurses\u2019 station orders bandages in bulk packs of 50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "On the first day, the nurses used 138 bandages and ordered ten bulk packs of bandages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 142,
+          "teacher_input_default": true,
+          "text": "On the second day, they used one hundred fewer bandages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 199,
+          "teacher_input_default": true,
+          "text": "On the third day, they ordered two bulk packs of bandages and only used half a pack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 284,
+          "teacher_input_default": true,
+          "text": "They had 478 bandages left at the end of the third day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 395,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "How many bandages did they start with on the first day?",
+          "warnings": []
+        }
+      ],
+      "question": "A nurses\u2019 station orders bandages in bulk packs of 50. On the first day, the nurses used 138 bandages and ordered ten bulk packs of bandages. On the second day, they used one hundred fewer bandages. On the third day, they ordered two bulk packs of bandages and only used half a pack. They had 478 bandages left at the end of the third day. How many bandages did they start with on the first day?",
+      "source_id": "gsm-plus-09521"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A hotel in the Philippines charges 1000 pesos for a 12-hour stay or 1600 pesos for a 24-hour stay.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "After 12 hours, visitors have the option to add 70 pesos for every additional hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 265,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "Cameron arrives at 5 pm at the hotel and wants to leave at 10 am the next morning.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 390,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 266,
+          "teacher_input_default": true,
+          "text": "He decides to go with the option of adding on 70 pesos for every hour after the 12-hour mark instead of paying for 24 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 523,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 391,
+          "teacher_input_default": true,
+          "text": "However, the hotel has a special offer where if a visitor stays for more than 15 hours, they get a discount of 5% on the total cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 631,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 524,
+          "teacher_input_default": true,
+          "text": "If Cameron decides to avail this offer, how much money would he save compared to the original 24-hour rate?",
+          "warnings": []
+        }
+      ],
+      "question": "A hotel in the Philippines charges 1000 pesos for a 12-hour stay or 1600 pesos for a 24-hour stay. After 12 hours, visitors have the option to add 70 pesos for every additional hour. Cameron arrives at 5 pm at the hotel and wants to leave at 10 am the next morning. He decides to go with the option of adding on 70 pesos for every hour after the 12-hour mark instead of paying for 24 hours. However, the hotel has a special offer where if a visitor stays for more than 15 hours, they get a discount of 5% on the total cost. If Cameron decides to avail this offer, how much money would he save compared to the original 24-hour rate?",
+      "source_id": "gsm-plus-07491"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Hezekiah had a number of trucks from his store supplying fertiliser to different farmers in his hometown dispatched for delivery on a particular day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "Each truck was carrying 20 tons of fertiliser packed in bags.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 449,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 216,
+          "teacher_input_default": true,
+          "text": "Two hours after the trucks had departed for delivery, Mr. Hezekiah got the news that a quarter of the number of lorries dispatched for delivery had mechanical failures on the road and could not deliver the fertilisers to the farmers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 588,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 450,
+          "teacher_input_default": true,
+          "text": "If it is known that 300 tons of fertiliser reached the farmers that day, how many trucks did Mr. Hezekiah initially dispatch for delivery?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Hezekiah had a number of trucks from his store supplying fertiliser to different farmers in his hometown dispatched for delivery on a particular day. Each truck was carrying 20 tons of fertiliser packed in bags. Two hours after the trucks had departed for delivery, Mr. Hezekiah got the news that a quarter of the number of lorries dispatched for delivery had mechanical failures on the road and could not deliver the fertilisers to the farmers. If it is known that 300 tons of fertiliser reached the farmers that day, how many trucks did Mr. Hezekiah initially dispatch for delivery?",
+      "source_id": "gsm-plus-08556"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

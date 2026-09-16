@@ -1,0 +1,417 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If Mark weighs 150 pounds and Susan weighs 20 pounds less than Mark, and their friend Bob weighs twice as much as Susan.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "They each carry a backpack that weighs 10% of their own weight, what is the new average weight of the 3 friends including their backpacks?",
+          "warnings": []
+        }
+      ],
+      "question": "If Mark weighs 150 pounds and Susan weighs 20 pounds less than Mark, and their friend Bob weighs twice as much as Susan. They each carry a backpack that weighs 10% of their own weight, what is the new average weight of the 3 friends including their backpacks?",
+      "source_id": "gsm-plus-04491"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At the neighborhood shop, Well's mom sells a variety of fruits and vegetables including watermelons, peppers, and oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "The price of a watermelon is triple the price of a single pepper.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "The cost of an orange is $5 less than that of a watermelon.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 341,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "Dillon has been tasked to purchase 4 watermelons, 20 peppers, and 10 oranges from the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 427,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 342,
+          "teacher_input_default": true,
+          "text": "If the cost of each pepper is $15, how much money will Dillon have to spend in total?",
+          "warnings": []
+        }
+      ],
+      "question": "At the neighborhood shop, Well's mom sells a variety of fruits and vegetables including watermelons, peppers, and oranges. The price of a watermelon is triple the price of a single pepper. The cost of an orange is $5 less than that of a watermelon. Dillon has been tasked to purchase 4 watermelons, 20 peppers, and 10 oranges from the store. If the cost of each pepper is $15, how much money will Dillon have to spend in total?",
+      "source_id": "gsm-plus-01029"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Uncle Ben has four horses and two donkeys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "Each horse can consume five pounds of oats per meal, while the donkeys prefer carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "He feeds his horses twice a day and the donkeys once a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 398,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 190,
+          "teacher_input_default": true,
+          "text": "If one bag contains 50-pounds of oats and a sack of carrots weighs 20 pounds, how many bags of oats does he need to feed his horses for five days, assuming the donkeys' carrots do not come from the same bags?",
+          "warnings": []
+        }
+      ],
+      "question": "Uncle Ben has four horses and two donkeys. Each horse can consume five pounds of oats per meal, while the donkeys prefer carrots. He feeds his horses twice a day and the donkeys once a day. If one bag contains 50-pounds of oats and a sack of carrots weighs 20 pounds, how many bags of oats does he need to feed his horses for five days, assuming the donkeys' carrots do not come from the same bags?",
+      "source_id": "gsm-plus-03902"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John decides to do several activities while out on vacation.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "He spends 6 hours boating and half that time swimming.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 116,
+          "teacher_input_default": true,
+          "text": "He also watched 3 different shows which were 2 hours each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 175,
+          "teacher_input_default": true,
+          "text": "This was 30% of the time he spent.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 210,
+          "teacher_input_default": true,
+          "text": "He spent 40% of his time sightseeing.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 248,
+          "teacher_input_default": true,
+          "text": "However, he also spent an additional 10% of the time he spent sightseeing on a guided tour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 446,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "If the guided tour time is included in the total sightseeing time, how much time did he spend sightseeing?",
+          "warnings": []
+        }
+      ],
+      "question": "John decides to do several activities while out on vacation. He spends 6 hours boating and half that time swimming. He also watched 3 different shows which were 2 hours each. This was 30% of the time he spent. He spent 40% of his time sightseeing. However, he also spent an additional 10% of the time he spent sightseeing on a guided tour. If the guided tour time is included in the total sightseeing time, how much time did he spend sightseeing?",
+      "source_id": "gsm-plus-02827"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kim has recently launched a housekeeping business and is trying to figure out his weekly expenses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "He currently has 3 clients and is in talks with 5 more potential clients, whom he is confident enough to include in his calculations.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 319,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 233,
+          "teacher_input_default": true,
+          "text": "Each client's home will require 2 bottles of bleach and a pack of cloths for cleaning.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 351,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 320,
+          "teacher_input_default": true,
+          "text": "Each bottle of bleach costs $2.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 380,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 352,
+          "teacher_input_default": true,
+          "text": "These are his only expenses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 475,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 381,
+          "teacher_input_default": true,
+          "text": "He estimates that his total weekly income will be $92, and he makes a profit of $20 each week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 585,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 476,
+          "teacher_input_default": true,
+          "text": "If profit is the difference between total income and total expenses, how much does each pack of cloths costs?",
+          "warnings": []
+        }
+      ],
+      "question": "Kim has recently launched a housekeeping business and is trying to figure out his weekly expenses. He currently has 3 clients and is in talks with 5 more potential clients, whom he is confident enough to include in his calculations. Each client's home will require 2 bottles of bleach and a pack of cloths for cleaning. Each bottle of bleach costs $2. These are his only expenses. He estimates that his total weekly income will be $92, and he makes a profit of $20 each week. If profit is the difference between total income and total expenses, how much does each pack of cloths costs?",
+      "source_id": "gsm-plus-01156"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,267 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "tatqa",
+      "question": "What is the difference between total Balance payable as at June 30, 2019 as compared to total Balance payable as at June 30, 2017?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"fiscal_2017_restructuring_plan.balance_payable.total\", \"june_30_2019\"), 3995, \"currency\", cell(\"Balance payable as at June 30, 2019\", \"Total\"))",
+          "observe(at(\"fiscal_2017_restructuring_plan.balance_payable.total\", \"june_30_2017\"), 11414, \"currency\", cell(\"Balance payable as at June 30, 2017\", \"Total\"))",
+          "query(\"absolute_difference\", at(\"fiscal_2017_restructuring_plan.balance_payable.total\", \"june_30_2019\"), at(\"fiscal_2017_restructuring_plan.balance_payable.total\", \"june_30_2017\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Fiscal 2017 Restructuring Plan"
+          },
+          {
+            "order": 2,
+            "text": "During Fiscal 2017 and in the context of acquisitions made in Fiscal 2017, we began to implement restructuring activities to streamline our operations (collectively referred to as the Fiscal 2017 Restructuring Plan). The Fiscal 2017 Restructuring Plan charges relate to workforce reductions and facility consolidations. These charges require management to make certain judgments and estimates regarding the amount and timing of restructuring charges or recoveries. Our estimated liability could change subsequent to its recognition, requiring adjustments to the expense and the liability recorded. On a quarterly basis, we conduct an evaluation of the related liabilities and expenses and revise our assumptions and estimates as appropriate."
+          },
+          {
+            "order": 3,
+            "text": "Since the inception of the plan, $41.9 million has been recorded within \"Special charges (recoveries)\". We do not expect to incur any further significant charges relating to this plan."
+          },
+          {
+            "order": 4,
+            "text": "A reconciliation of the beginning and ending liability for the year ended June 30, 2019 and 2018 is shown below."
+          }
+        ],
+        "table": [
+          [
+            "Fiscal 2017 Restructuring Plan",
+            "Workforce reduction",
+            "Facility costs",
+            "Total"
+          ],
+          [
+            "Balance payable as at June 30, 2017",
+            "$10,045",
+            "$1,369",
+            "$11,414"
+          ],
+          [
+            "Accruals and adjustments",
+            "3,432",
+            "3,775",
+            "7,207"
+          ],
+          [
+            "Cash payments",
+            "(12,342)",
+            "(1,627)",
+            "(13,969)"
+          ],
+          [
+            "Foreign exchange and other non-cash adjustments",
+            "455",
+            "(86)",
+            "369"
+          ],
+          [
+            "Balance payable as at June 30, 2018",
+            "$1,590",
+            "$3,431",
+            "$5,021"
+          ],
+          [
+            "Accruals and adjustments",
+            "(254)",
+            "1,152",
+            "898"
+          ],
+          [
+            "Cash payments",
+            "(213)",
+            "(1,290)",
+            "(1,503)"
+          ],
+          [
+            "Foreign exchange and other non-cash adjustments",
+            "(77)",
+            "(344)",
+            "(421)"
+          ],
+          [
+            "Balance payable as at June 30, 2019",
+            "$1,046",
+            "$2,949",
+            "$3,995"
+          ]
+        ]
+      },
+      "source_id": "a4c126d150178adbf217045ac2d5bb44"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the average number of nonvested shares forfeited on January 1, 2017 and between December 30, 2018 and December 29, 2019?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "remove(\"forfeiture_2017\", \"company\", at(\"company.rsus_prsus_outstanding.nonvested_shares\", \"2017\"), 19, cell(\"Forfeited\", \"Number of Shares\"))",
+          "remove(\"forfeiture_2019\", \"company\", at(\"company.rsus_prsus_outstanding.nonvested_shares\", \"2019\"), 41, cell(\"Forfeited\", \"Number of Shares\"))",
+          "query(\"mean\", event_field(\"forfeiture_2017\", \"quantity\"), event_field(\"forfeiture_2019\", \"quantity\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Restricted Stock Units"
+          },
+          {
+            "order": 2,
+            "text": "The Company grants restricted stock units, or RSUs, to employees with various vesting terms. RSUs entitle the holder to receive, at no cost, one common share for each restricted stock unit on the vesting date as it vests. The Company withholds shares in settlement of employee tax withholding obligations upon the vesting of restricted stock units. Stock-based compensation related to grants of vested RSUs and PSUs was $3.0 million, $1.6, million and $1.0 million in 2019, 2018 and 2017, respectively."
+          },
+          {
+            "order": 3,
+            "text": "The following table summarizes RSU\u2019s activity under the 2019 Plan and 2009 Plan, and the related weighted average grant date fair value, for 2019, 2018 and 2017:"
+          }
+        ],
+        "table": [
+          [
+            "",
+            "",
+            "RSUs & PRSUs Outstanding"
+          ],
+          [
+            "",
+            "Number of Shares",
+            "Weighted Average Grant Date Fair Value"
+          ],
+          [
+            "",
+            "(in thousands)",
+            ""
+          ],
+          [
+            "Nonvested at January 1, 2017",
+            "98",
+            "$23.52"
+          ],
+          [
+            "Granted",
+            "132",
+            "19.74"
+          ],
+          [
+            "Vested",
+            "(43)",
+            "20.44"
+          ],
+          [
+            "Forfeited",
+            "(19)",
+            "\u2014"
+          ],
+          [
+            "Nonvested at January 1, 2018",
+            "168",
+            "21.56"
+          ],
+          [
+            "Granted",
+            "110",
+            "11.90"
+          ],
+          [
+            "Vested",
+            "(77)",
+            "19.18"
+          ],
+          [
+            "Forfeited",
+            "(18)",
+            "\u2014"
+          ],
+          [
+            "Nonvested at December 30, 2018",
+            "183",
+            "17.22"
+          ],
+          [
+            "Granted",
+            "353",
+            "10.77"
+          ],
+          [
+            "Vested",
+            "(118)",
+            "14.48"
+          ],
+          [
+            "Forfeited",
+            "(41)",
+            "\u2014"
+          ],
+          [
+            "Nonvested at December 29, 2019",
+            "377",
+            "$12.55"
+          ]
+        ]
+      },
+      "source_id": "0364f014a75c0374597390eeb92ab029"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "CJ, KJ, and AJ collect stamps.  CJ has 5 more than twice the number of stamps that KJ has, and KJ has half as many as AJ.  If the three boys have 930 stamps all together, how many stamps does AJ have?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"three_boys.stamps\", \"stamp\", \"three_boys\", source(\"CJ, KJ, and AJ collect stamps\"))",
+          "member(\"three_boys.stamps\", \"cj.stamps\", source(\"CJ, KJ, and AJ collect stamps\"))",
+          "member(\"three_boys.stamps\", \"kj.stamps\", source(\"CJ, KJ, and AJ collect stamps\"))",
+          "member(\"three_boys.stamps\", \"aj.stamps\", source(\"CJ, KJ, and AJ collect stamps\"))",
+          "offset(at(\"cj.stamps.count\", \"current\"), scale(at(\"kj.stamps.count\", \"current\"), 2), 5, \"count\", source(\"CJ has 5 more than twice the number of stamps that KJ has\"))",
+          "fraction_of(at(\"kj.stamps.count\", \"current\"), at(\"aj.stamps.count\", \"current\"), 1, 2, source(\"KJ has half as many as AJ\"))",
+          "observe(at(\"three_boys.stamps.count\", \"current\"), 930, \"count\", source(\"the three boys have 930 stamps all together\"))",
+          "sum_relation(at(\"three_boys.stamps.count\", \"current\"), at(\"cj.stamps.count\", \"current\"), at(\"kj.stamps.count\", \"current\"), at(\"aj.stamps.count\", \"current\"), source(\"the three boys have 930 stamps all together\"))",
+          "query(\"value\", at(\"aj.stamps.count\", \"current\"))"
+        ]
+      },
+      "source_id": "3562"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Magdalena has an apple tree on their farm, producing very few apples each year for a while now. However, this year, the apple tree yield was excellent, and it grew 200 apples. Magdalena picked 1/5 of the fruits on the first day, twice that number on the second day, and 20 more apples than he picked on the first day on the third day. Calculate the total number of apples remaining in the tree.",
+      "repair": {
+        "failure_class": "answer_mismatch",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"magdalena.apple_tree.apples\", \"apple\", \"magdalena.apple_tree\", source(\"it grew 200 apples\"))",
+          "observe(at(\"magdalena.apple_tree.apples.count\", \"initial\"), 200, \"count\", source(\"it grew 200 apples\"))",
+          "remove(\"first_day_pick\", \"magdalena\", at(\"magdalena.apple_tree.apples.count\", \"current\"), fraction(at(\"magdalena.apple_tree.apples.count\", \"initial\"), 1, 5), source(\"Magdalena picked 1/5 of the fruits on the first day\"))",
+          "remove(\"second_day_pick\", \"magdalena\", at(\"magdalena.apple_tree.apples.count\", \"current\"), scale(event_field(\"first_day_pick\", \"quantity\"), 2), source(\"twice that number on the second day\"))",
+          "offset(\"magdalena.apple_tree.apples.picked.third_day.count\", event_field(\"first_day_pick\", \"quantity\"), 20, \"count\", source(\"20 more apples than he picked on the first day on the third day\"))",
+          "remove(\"third_day_pick\", \"magdalena\", at(\"magdalena.apple_tree.apples.count\", \"current\"), \"magdalena.apple_tree.apples.picked.third_day.count\", source(\"20 more apples than he picked on the first day on the third day\"))",
+          "query(\"remaining_count\", \"magdalena.apple_tree.apples\", \"current\")"
+        ]
+      },
+      "source_id": "6377"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "James injured his ankle and decides to slowly start working back up to his previous running goals and then surpass them.  Before the injury, he was able to run 100 miles per week.  He wants to get up to 20% more than that total in 280 days and each week he will increase miles walked in the week by the same amount.  How many miles does he need to add per week?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "6555"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

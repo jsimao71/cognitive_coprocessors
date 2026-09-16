@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 4 toys on hand for 4 dogs, but there are 4/5 of ten more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 311,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 405,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 312,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, 3/10 of ten dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 445,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 406,
+          "teacher_input_default": true,
+          "text": "How many toys in total does James need?",
+          "warnings": []
+        }
+      ],
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 4 toys on hand for 4 dogs, but there are 4/5 of ten more dogs in the shelter now. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, 3/10 of ten dogs were gone so he no longer needed those toys. How many toys in total does James need?",
+      "source_id": "gsm-plus-05402"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were one-third of 150 cats on a rock.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "Four boats came and carried away 5 cats each, and later, 0.6 of the remaining cats ran after a mouse they'd seen.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 194,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "How many cats were left on the rock?",
+          "warnings": []
+        }
+      ],
+      "question": "There were one-third of 150 cats on a rock. Four boats came and carried away 5 cats each, and later, 0.6 of the remaining cats ran after a mouse they'd seen. How many cats were left on the rock?",
+      "source_id": "gsm-plus-03370"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Easter Sunday, Cindy went to the city park to participate in the Easter Egg Hunt.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "She ended up with a basket full of eggs and 5 chocolate bunnies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 294,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "She had 5 green eggs, twice as many blue eggs as green ones, one fewer pink eggs than blue eggs, and one-third as many yellow eggs as pink eggs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 335,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 295,
+          "teacher_input_default": true,
+          "text": "How many eggs did Cindy have altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "On Easter Sunday, Cindy went to the city park to participate in the Easter Egg Hunt. She ended up with a basket full of eggs and 5 chocolate bunnies. She had 5 green eggs, twice as many blue eggs as green ones, one fewer pink eggs than blue eggs, and one-third as many yellow eggs as pink eggs. How many eggs did Cindy have altogether?",
+      "source_id": "gsm-plus-06614"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jana has a mix of puppies and kittens.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 39,
+          "teacher_input_default": true,
+          "text": "Two thirds of Jana's pets are puppies and the rest are kittens.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "Among the puppies, two thirds are Pomeranians and the rest are Labradors.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "One third of the Pomeranians are girls.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 332,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 217,
+          "teacher_input_default": true,
+          "text": "If there are 6 Pomeranian girls, how many puppies does Jana have, regardless of the number of kittens or Labradors?",
+          "warnings": []
+        }
+      ],
+      "question": "Jana has a mix of puppies and kittens. Two thirds of Jana's pets are puppies and the rest are kittens. Among the puppies, two thirds are Pomeranians and the rest are Labradors. One third of the Pomeranians are girls. If there are 6 Pomeranian girls, how many puppies does Jana have, regardless of the number of kittens or Labradors?",
+      "source_id": "gsm-plus-06094"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Well's mother sells watermelons, peppers, and oranges at the local store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "A watermelon costs three times what each pepper costs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "An orange costs 5 less than a watermelon cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 253,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 176,
+          "teacher_input_default": true,
+          "text": "Dillon is sent to the store to buy 4 watermelons, 20 peppers, and 10 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 384,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 254,
+          "teacher_input_default": true,
+          "text": "However, there is a special offer today: if you buy more than 15 peppers, you get a 10% discount on the total cost of the peppers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 457,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 385,
+          "teacher_input_default": true,
+          "text": "What's the total amount of money he will spend if each pepper costs 15$?",
+          "warnings": []
+        }
+      ],
+      "question": "Well's mother sells watermelons, peppers, and oranges at the local store. A watermelon costs three times what each pepper costs. An orange costs 5 less than a watermelon cost. Dillon is sent to the store to buy 4 watermelons, 20 peppers, and 10 oranges. However, there is a special offer today: if you buy more than 15 peppers, you get a 10% discount on the total cost of the peppers. What's the total amount of money he will spend if each pepper costs 15$?",
+      "source_id": "gsm-plus-01027"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

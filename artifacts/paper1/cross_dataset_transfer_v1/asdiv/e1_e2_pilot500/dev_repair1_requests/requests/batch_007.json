@@ -1,0 +1,444 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Martha is buying 18 packs of pencils and 14 packs of pens from the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "If Martha wishes to purchase the same number of pencils as pens, what is the smallest number of pens that she can buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "martha.purchase.pencil_packs = 18",
+              "martha.purchase.pen_packs = 14"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The source gives numbers of packs but not the number of pencils or pens contained in each pack, so the smallest purchasable number of pens that would equal the number of pencils cannot be determined without inventing pack-size semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2060"
+      },
+      "question": "Martha is buying 18 packs of pencils and 14 packs of pens from the store. If Martha wishes to purchase the same number of pencils as pens, what is the smallest number of pens that she can buy?",
+      "source_context": null,
+      "source_id": "asdiv-2060",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "126",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "P and Q start at the same time in the same direction to run around a stadium.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "P completes a round in 252 seconds and Q in 198 seconds, both starting at the same point.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "After what time will they meet again at the starting point?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "p.start.time = q.start.time",
+              "p.running.direction = q.running.direction"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "The shared start time and running direction are preserved as symbolic relations."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "p.lap_duration_seconds = 252",
+              "q.lap_duration_seconds = 198",
+              "p.start.point = q.start.point"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the first subsequent time when both runners are at the starting point requires a least-common-multiple or equivalent integer-divisibility operation, which is unavailable in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2063"
+      },
+      "question": "P and Q start at the same time in the same direction to run around a stadium. P completes a round in 252 seconds and Q in 198 seconds, both starting at the same point. After what time will they meet again at the starting point?",
+      "source_context": null,
+      "source_id": "asdiv-2063",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "2772",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Three pieces of timber 42 m, 49 m and 63 m long have to be divided into planks of the same length.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "What is the greatest possible length of each plank?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "timber.piece_1.length_m = 42",
+              "timber.piece_2.length_m = 49",
+              "timber.piece_3.length_m = 63",
+              "timber.piece_1.plank_count = timber.piece_1.length_m / timber.plank.length_m",
+              "timber.piece_2.plank_count = timber.piece_2.length_m / timber.plank.length_m",
+              "timber.piece_3.plank_count = timber.piece_3.length_m / timber.plank.length_m"
+            ],
+            "assumptions": [
+              "Dividing each piece into planks implies that each plank count is a whole number."
+            ],
+            "confidence": 0.92,
+            "part_id": 0,
+            "semantic_notes": [
+              "The common plank length is retained as a forward dependency shared by all three pieces."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Selecting the greatest length that divides all three timber lengths requires a greatest-common-divisor or equivalent integer-divisibility operation, which is unavailable in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2086"
+      },
+      "question": "Three pieces of timber 42 m, 49 m and 63 m long have to be divided into planks of the same length. What is the greatest possible length of each plank?",
+      "source_context": null,
+      "source_id": "asdiv-2086",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A teacher is to arrange 60 boys and 72 girls in rows.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "He wishes to arrange them in such a way that only boys or girls will be there in a row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 211,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 142,
+          "teacher_input_default": true,
+          "text": "Find the greatest number of students that could be arranged in a row.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "students.boys.count = 60",
+              "students.girls.count = 72"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rows.boy_only.count = students.boys.count / rows.students_per_row",
+              "rows.girl_only.count = students.girls.count / rows.students_per_row"
+            ],
+            "assumptions": [
+              "The intended arrangement uses the same number of students in every row, as implied by the full question.",
+              "Each row count is a whole number."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [
+              "Separate boy-only and girl-only row counts preserve the homogeneous-row constraint."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Selecting the greatest common number of students per row requires a greatest-common-divisor or equivalent integer-divisibility operation, which is unavailable in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2092"
+      },
+      "question": "A teacher is to arrange 60 boys and 72 girls in rows. He wishes to arrange them in such a way that only boys or girls will be there in a row. Find the greatest number of students that could be arranged in a row.",
+      "source_context": null,
+      "source_id": "asdiv-2092",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 31,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Skittles come in packages of 6.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 53,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 32,
+          "teacher_input_default": true,
+          "text": "Juan ate 24 Skittles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 54,
+          "teacher_input_default": true,
+          "text": "How many Skittles does he have left?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "skittles.package.size_count = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "juan.skittles.eaten_count = 24"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The number of packages Juan had, or his initial Skittles count, is not stated, so the remaining count cannot be determined without inventing a fact."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2273"
+      },
+      "question": "Skittles come in packages of 6. Juan ate 24 Skittles. How many Skittles does he have left?",
+      "source_context": null,
+      "source_id": "asdiv-2273",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "0",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

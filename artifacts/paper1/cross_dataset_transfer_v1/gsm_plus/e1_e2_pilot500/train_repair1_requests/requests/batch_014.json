@@ -1,0 +1,939 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A math teacher has a 5-inch piece of chalk that he uses to write equations on the chalkboard for his students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "He is very conscious about conserving chalk and aims to use only 20% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 325,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 203,
+          "teacher_input_default": true,
+          "text": "However, he cannot write with a piece of chalk that is smaller than 2 inches, so he recycles it when it reaches this size.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 383,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 326,
+          "teacher_input_default": true,
+          "text": "On Monday, the teacher started with a new piece of chalk.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 485,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 384,
+          "teacher_input_default": true,
+          "text": "His students needed extra help that day, so he ended up using 45% of the chalk by the end of the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 592,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 486,
+          "teacher_input_default": true,
+          "text": "On Tuesday, he decided to use only 15% of the remaining chalk to compensate for the extra usage on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 694,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 593,
+          "teacher_input_default": true,
+          "text": "From Wednesday onwards, he plans to go back to his usual practice of using 20% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 792,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 695,
+          "teacher_input_default": true,
+          "text": "If he sticks to this plan, how many days will it be before he has to recycle this piece of chalk?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "chalk.new_piece_length_inches = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.usual_daily_usage_percent = 20"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "This records the teacher's intended conservation policy rather than an observed daily use."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.minimum_writable_length_inches = 2",
+              "chalk.recycle_length_inches = chalk.minimum_writable_length_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.start_length_inches = chalk.new_piece_length_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.used_length_inches = percent_of(chalk.monday.start_length_inches, 45)",
+              "chalk.monday.end_length_inches = dec_pct(chalk.monday.start_length_inches, 45)"
+            ],
+            "assumptions": [
+              "Interpreted Monday's 45% as a percentage of the chalk present at the start of Monday."
+            ],
+            "confidence": 0.96,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.tuesday.start_length_inches = chalk.monday.end_length_inches",
+              "chalk.tuesday.used_length_inches = percent_of(chalk.tuesday.start_length_inches, 15)",
+              "chalk.tuesday.end_length_inches = dec_pct(chalk.tuesday.start_length_inches, 15)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.wednesday_onward.daily_usage_percent_of_daily_start = chalk.usual_daily_usage_percent"
+            ],
+            "assumptions": [
+              "Interpreted each day's usage percentage as applying to the chalk remaining at the start of that day."
+            ],
+            "confidence": 0.86,
+            "part_id": 6,
+            "semantic_notes": [
+              "The policy applies from Wednesday onward."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN chalk.days_from_monday_until_recycle"
+            ],
+            "assumptions": [],
+            "confidence": 0.93,
+            "part_id": 7,
+            "semantic_notes": [
+              "The requested duration begins with Monday, when use of the new piece starts, and ends when the recycling threshold is reached."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09411"
+      },
+      "question": "A math teacher has a 5-inch piece of chalk that he uses to write equations on the chalkboard for his students. He is very conscious about conserving chalk and aims to use only 20% of the chalk each day. However, he cannot write with a piece of chalk that is smaller than 2 inches, so he recycles it when it reaches this size. On Monday, the teacher started with a new piece of chalk. His students needed extra help that day, so he ended up using 45% of the chalk by the end of the day. On Tuesday, he decided to use only 15% of the remaining chalk to compensate for the extra usage on Monday. From Wednesday onwards, he plans to go back to his usual practice of using 20% of the chalk each day. If he sticks to this plan, how many days will it be before he has to recycle this piece of chalk?",
+      "source_context": null,
+      "source_id": "gsm-plus-09411",
+      "validation_failure": "unresolved reference 'chalk.days_from_monday_until_recycle' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "On Monday, the teacher used 45% of the 5-inch chalk, which is 0.45 * 5 = 2.25 inches.\n\nSo, the remaining chalk after Monday is 5 - 2.25 = 2.75 inches.\n\nOn Tuesday, he used 15% of the remaining chalk, which is 0.15 * 2.75 = 0.4125 inches.\n\nSo, the remaining chalk after Tuesday is 2.75 - 0.4125 = 2.3375 inches.\n\nFrom Wednesday onwards, he used 20% of the chalk each day. \n\nLet's denote the number of days from Wednesday onwards as x. \n\nEach day, the chalk decreases by 20%, so the remaining chalk after x days is 2.3375 * (0.8)^x.\n\nThe teacher can use the chalk until it is 2 inches. So, we have the equation 2.3375 * (0.8)^x = 2.\n\nSolving this equation for x, we get x = log(2/2.3375) / log(0.8) \u2248 2.2.\n\nSince the teacher can't use a fraction of a day, we round 2.2 up to 3.\n\nSo, the teacher will have to recycle the chalk after Monday, Tuesday, and 3 more days, which is 2 (Monday and Tuesday) + 3 =  5 days.\n#### 5"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lloyd has an egg farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "His chickens produce 252 eggs per day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "He sells them for $2 per dozen.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "However, on Sundays, his chickens produce 25% more eggs than usual, and he sells them for $2.5 per dozen.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 272,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 200,
+          "teacher_input_default": true,
+          "text": "Considering these conditions, how much does Lloyd make on eggs per week?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "lloyd.business.type = \"egg_farm\""
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lloyd.usual_daily_production.eggs = 252"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lloyd.sales.eggs_per_dozen = 12",
+              "lloyd.usual_sales.price_per_dozen = 2"
+            ],
+            "assumptions": [
+              "A dozen denotes 12 eggs."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lloyd.sunday.production_increase_percent = 25",
+              "lloyd.sunday.production.eggs = inc_pct(lloyd.usual_daily_production.eggs, lloyd.sunday.production_increase_percent)",
+              "lloyd.sunday_sales.price_per_dozen = 2.5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lloyd.week.non_sunday_days = 6",
+              "lloyd.week.non_sunday_revenue = (lloyd.usual_daily_production.eggs / lloyd.sales.eggs_per_dozen) * lloyd.usual_sales.price_per_dozen * lloyd.week.non_sunday_days",
+              "lloyd.week.sunday_revenue = (lloyd.sunday.production.eggs / lloyd.sales.eggs_per_dozen) * lloyd.sunday_sales.price_per_dozen",
+              "lloyd.week.egg_revenue = lloyd.week.non_sunday_revenue + lloyd.week.sunday_revenue",
+              "RETURN lloyd.week.egg_revenue"
+            ],
+            "assumptions": [
+              "A week contains six non-Sunday days and one Sunday, and all produced eggs are sold."
+            ],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00403"
+      },
+      "question": "Lloyd has an egg farm. His chickens produce 252 eggs per day. He sells them for $2 per dozen. However, on Sundays, his chickens produce 25% more eggs than usual, and he sells them for $2.5 per dozen. Considering these conditions, how much does Lloyd make on eggs per week?",
+      "source_context": null,
+      "source_id": "gsm-plus-00403",
+      "validation_failure": "answer mismatch: actual=317.625, expected=314.92",
+      "validator_context": {
+        "correct_answer": "314.92",
+        "gold_reasoning": "Lloyd's chickens produce 252 eggs per day for 6 days, which is 252 * 6 = 1512 eggs.\nThese 1512 eggs are sold for $2 per dozen, so he makes 1512 / 12 * $2 = $252 on these days.\n\nOn Sundays, his chickens produce 20% more eggs than usual, which is 252 * 1.25 = 315 eggs. We can't have a fraction of an egg, so we'll round this down to 315 eggs.\nThese 315 eggs are sold for $2.5 per dozen, so he makes 315 / 12 * $2.5 = $65.625 on Sundays.\n\nSo in total, Lloyd makes $252 + $62.92 = $314.92 per week on eggs.\n#### 314.92"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 4 toys on hand for 4 dogs, but there are 8 more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "He also found that there were 5 new cats but they didn't need toys then.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 375,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 459,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 376,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, 3 dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 499,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 460,
+          "teacher_input_default": true,
+          "text": "How many toys in total does James need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Context establishes James and his dog shelter but introduces no exact quantitative fact."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.dog.toys_needed_each = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "james.toys_on_hand = 4",
+              "shelter.dogs_with_existing_toys = 4",
+              "shelter.additional_dogs_now = 8",
+              "shelter.dogs_when_james_left = shelter.dogs_with_existing_toys + shelter.additional_dogs_now"
+            ],
+            "assumptions": [
+              "The eight more dogs are additional to the four dogs already associated with the toys on hand."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The original and additional dog counts are retained separately."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.new_cats_then = 5",
+              "shelter.new_cat.toys_needed_each_then = 0"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.dogs_after_first_purchase = shelter.dogs_when_james_left * 2",
+              "shelter.additional_dogs_after_first_purchase = shelter.dogs_after_first_purchase - shelter.dogs_when_james_left",
+              "james.additional_toys_needed_after_first_purchase = shelter.additional_dogs_after_first_purchase * shelter.dog.toys_needed_each"
+            ],
+            "assumptions": [
+              "Interprets \u201ctwice as many more dogs than when he left\u201d as twice as many dogs in total as when he left."
+            ],
+            "confidence": 0.78,
+            "part_id": 4,
+            "semantic_notes": [
+              "The later dog population and the newly required toys are represented as distinct quantities."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.dogs_final = shelter.dogs_after_first_purchase - 3",
+              "james.toys_no_longer_needed = 3 * shelter.dog.toys_needed_each",
+              "james.toys_needed_final = shelter.dogs_final * shelter.dog.toys_needed_each"
+            ],
+            "assumptions": [
+              "Each departing dog eliminates the need for one toy under the established one-to-one requirement."
+            ],
+            "confidence": 0.97,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN james.toys_needed_final"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 6,
+            "semantic_notes": [
+              "The query asks for the final total need, not merely the number of additional toys purchased."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05406"
+      },
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 4 toys on hand for 4 dogs, but there are 8 more dogs in the shelter now. He also found that there were 5 new cats but they didn't need toys then. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, 3 dogs were gone so he no longer needed those toys. How many toys in total does James need?",
+      "source_context": null,
+      "source_id": "gsm-plus-05406",
+      "validation_failure": "answer mismatch: actual=21, expected=33",
+      "validator_context": {
+        "correct_answer": "33",
+        "gold_reasoning": "James has 4+8=<<4+8=12>>12 toys.\nThere were 12*2=<<12*2=24>>24 dogs.\nJames needed to buy 24-12=<<24-12=12>>12 more toys.\nThere are 36 total toys.\n36-3=<<36-3=33>>33 toys are now needed.\n#### 33"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lorraine and Colleen are trading stickers for buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "Each large sticker is worth a large button or three small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "A small sticker is worth one small button.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "A large button is worth three small stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 272,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 211,
+          "teacher_input_default": true,
+          "text": "Lorraine starts with 30 small stickers and 40 large stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 328,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 273,
+          "teacher_input_default": true,
+          "text": "She trades 90% of her small stickers for large buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 437,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 329,
+          "teacher_input_default": true,
+          "text": "She trades a fraction of her large stickers for large buttons and trades the rest of them for small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 468,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 438,
+          "teacher_input_default": true,
+          "text": "She has 89 buttons by the end.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 540,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 8,
+          "start": 469,
+          "teacher_input_default": true,
+          "text": "What's the fraction of her large stickers traded for for large buttons?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Trading context only; no exact quantitative fact is introduced."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.large_sticker.large_buttons = 1",
+              "trade.large_sticker.small_buttons = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The two alternative returns for one large sticker are retained separately."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.small_sticker.small_buttons = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.large_button.small_stickers = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.start.small_stickers = 30",
+              "lorraine.start.large_stickers = 40"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.small_stickers_traded = percent_of(lorraine.start.small_stickers, 90)",
+              "lorraine.buttons_from_small_stickers.large = lorraine.small_stickers_traded / trade.large_button.small_stickers"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 5,
+            "semantic_notes": [
+              "Small stickers are converted to large buttons using the stated three-small-stickers-per-large-button equivalence."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.large_stickers_to_large_buttons.count = lorraine.start.large_stickers * lorraine.large_stickers_to_large_buttons.fraction",
+              "lorraine.large_stickers_to_small_buttons.count = lorraine.start.large_stickers - lorraine.large_stickers_to_large_buttons.count",
+              "lorraine.buttons_from_large_stickers.large = lorraine.large_stickers_to_large_buttons.count * trade.large_sticker.large_buttons",
+              "lorraine.buttons_from_large_stickers.small = lorraine.large_stickers_to_small_buttons.count * trade.large_sticker.small_buttons",
+              "lorraine.buttons_from_large_stickers.total = lorraine.buttons_from_large_stickers.large + lorraine.buttons_from_large_stickers.small"
+            ],
+            "assumptions": [
+              "\u201cThe rest\u201d means all large stickers not traded for large buttons are traded for small buttons."
+            ],
+            "confidence": 0.97,
+            "part_id": 6,
+            "semantic_notes": [
+              "The unknown fraction is retained as a forward dependency while both trade branches are represented."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.end.total_buttons = 89"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 7,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.large_stickers_to_large_buttons.count = (lorraine.buttons_from_small_stickers.large + lorraine.start.large_stickers * trade.large_sticker.small_buttons - lorraine.end.total_buttons) / (trade.large_sticker.small_buttons - trade.large_sticker.large_buttons)",
+              "lorraine.large_stickers_to_large_buttons.fraction = lorraine.large_stickers_to_large_buttons.count / lorraine.start.large_stickers",
+              "RETURN lorraine.large_stickers_to_large_buttons.fraction"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 8,
+            "semantic_notes": [
+              "The requested fraction is derived from the stated final button total while preserving the alternative exchange rates."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06036"
+      },
+      "question": "Lorraine and Colleen are trading stickers for buttons. Each large sticker is worth a large button or three small buttons. A small sticker is worth one small button. A large button is worth three small stickers. Lorraine starts with 30 small stickers and 40 large stickers. She trades 90% of her small stickers for large buttons. She trades a fraction of her large stickers for large buttons and trades the rest of them for small buttons. She has 89 buttons by the end. What's the fraction of her large stickers traded for for large buttons?",
+      "source_context": null,
+      "source_id": "gsm-plus-06036",
+      "validation_failure": "answer mismatch: actual=0.5, expected=50",
+      "validator_context": {
+        "correct_answer": "50",
+        "gold_reasoning": "She trades 27 small stickers because 30 x .9 = <<27=27>>27\nShe gets 9 large buttons for these because 27 / 3 = <<27/3=9>>9\nShe trades 20 large stickers for large buttons because 40 x .5 = 20\nShe gets 20 large buttons for these because 20 / 1 = <<20/1=20>>20\nShe gets 89-20-9=60 small buttons,which is 60/3=20 large stickers .\nThe 20 large stickers account for 20/40=50% of large stickers .\n#### 50"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 313,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 247,
+          "teacher_input_default": true,
+          "text": "The three boys picked up and carried all of the balls in one trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 408,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 314,
+          "teacher_input_default": true,
+          "text": "Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 522,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 409,
+          "teacher_input_default": true,
+          "text": "If Jason had picked up and carried 4 balls, what is the total number of balls that the coach brought to practice?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "coach.bags_brought = 1",
+              "practice.before.basketballs_on_floor = coach.basketballs_brought"
+            ],
+            "assumptions": [],
+            "confidence": 0.91,
+            "part_id": 0,
+            "semantic_notes": [
+              "Preserves the single bag and the fact that every brought basketball was placed on the floor before practice."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pickup.assigned_boys = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "The count is grounded by the three named people: Jordan, Jason, and Jeffrey."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boys.basketballs_carried = sum(jordan.basketballs_carried, jason.basketballs_carried, jeffrey.basketballs_carried)",
+              "coach.basketballs_brought = boys.basketballs_carried"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "All brought basketballs were carried by the three boys in the single trip."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jordan.basketballs_carried = jason.basketballs_carried * 2",
+              "jason.basketballs_carried = jeffrey.basketballs_carried * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jason.basketballs_carried = 4",
+              "RETURN coach.basketballs_brought"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 4,
+            "semantic_notes": [
+              "The conditional supplies Jason's carried quantity and the query requests the coach's total brought quantity."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07672"
+      },
+      "question": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began. After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag. The three boys picked up and carried all of the balls in one trip. Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey. If Jason had picked up and carried 4 balls, what is the total number of balls that the coach brought to practice?",
+      "source_context": null,
+      "source_id": "gsm-plus-07672",
+      "validation_failure": "unresolved reference 'coach.basketballs_brought' from scope 'global'; unresolved reference 'jeffrey.basketballs_carried' from scope 'global'; unresolved reference 'boys.basketballs_carried' from scope 'global'; unresolved reference 'jeffrey.basketballs_carried' from scope 'global'; unresolved reference 'coach.basketballs_brought' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "14",
+        "gold_reasoning": "Jason carried 4 balls, Jeffrey carried half as many balls as Jason, so Jeffrey carried 2 balls. Jordan carried twice as many balls as Jason, so Jordan carried 8 balls. The total number of balls the coach brought to practice is 4 (Jason) + 2 (Jeffrey) + 8 (Jordan) = 14 balls.\n#### 14"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

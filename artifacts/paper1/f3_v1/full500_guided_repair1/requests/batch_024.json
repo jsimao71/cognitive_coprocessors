@@ -1,0 +1,101 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Keanu bought some fish from the store for his pets. He gave his cat half as many fish as he gave to his dog. If he gave his dog 40 fish, and each fish cost him $4, calculate the total amount of money he spent at the store to buy all the fish.",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"keanu.purchased_fish\", \"fish\", \"keanu\", source(\"Keanu bought some fish from the store for his pets\"))",
+          "transfer(\"fish_purchase\", \"keanu\", at(\"store.fish.count\", \"current\"), at(\"keanu.purchased_fish.count\", \"current\"), \"keanu.purchased_fish.count\", source(\"Keanu bought some fish from the store for his pets\"))",
+          "transfer(\"give_fish_to_dog\", \"keanu\", at(\"keanu.purchased_fish.count\", \"current\"), at(\"keanu.dog.fish.count\", \"current\"), 40, source(\"he gave his dog 40 fish\"))",
+          "transfer(\"give_fish_to_cat\", \"keanu\", at(\"keanu.purchased_fish.count\", \"current\"), at(\"keanu.cat.fish.count\", \"current\"), fraction(event_field(\"give_fish_to_dog\", \"quantity\"), 1, 2), source(\"He gave his cat half as many fish as he gave to his dog\"))",
+          "observe(at(\"store.fish.unit_cost\", \"current\"), 4, \"dollar_per_fish\", source(\"each fish cost him $4\"))",
+          "product_relation(\"keanu.fish_purchase.total_cost\", event_field(\"fish_purchase\", \"quantity\"), at(\"store.fish.unit_cost\", \"current\"), source(\"each fish cost him $4\"))",
+          "query(\"value\", \"keanu.fish_purchase.total_cost\")"
+        ]
+      },
+      "source_id": "6962"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "4/5 of the Easter eggs are blue and 1/5 are purple. Half the purple eggs have five pieces of candy each, and 1/4 of the blue eggs do. The rest of the eggs only have one piece of candy. If Jerry opens one egg at random, what is the percentage chance he'll get 5 pieces of candy?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"easter_eggs\", \"egg\", \"unspecified\", source(\"the Easter eggs\"))",
+          "fraction_of(at(\"easter_eggs.blue.count\", \"current\"), at(\"easter_eggs.count\", \"current\"), 4, 5, source(\"4/5 of the Easter eggs are blue\"))",
+          "fraction_of(at(\"easter_eggs.purple.count\", \"current\"), at(\"easter_eggs.count\", \"current\"), 1, 5, source(\"1/5 are purple\"))",
+          "collection(\"easter_eggs.five_candy_pieces\", \"egg\", \"easter_eggs\", source(\"Half the purple eggs have five pieces of candy each, and 1/4 of the blue eggs do\"))",
+          "fraction_of(at(\"easter_eggs.five_candy_pieces.purple.count\", \"current\"), at(\"easter_eggs.purple.count\", \"current\"), 1, 2, source(\"Half the purple eggs have five pieces of candy each\"))",
+          "fraction_of(at(\"easter_eggs.five_candy_pieces.blue.count\", \"current\"), at(\"easter_eggs.blue.count\", \"current\"), 1, 4, source(\"1/4 of the blue eggs do\"))",
+          "observe(at(\"easter_eggs.five_candy_pieces.candy_per_egg\", \"current\"), 5, \"candy_piece_per_egg\", source(\"Half the purple eggs have five pieces of candy each, and 1/4 of the blue eggs do\"))",
+          "collection(\"easter_eggs.one_candy_piece\", \"egg\", \"easter_eggs\", source(\"The rest of the eggs only have one piece of candy\"))",
+          "observe(at(\"easter_eggs.one_candy_piece.candy_per_egg\", \"current\"), 1, \"candy_piece_per_egg\", source(\"only have one piece of candy\"))",
+          "sum_relation(at(\"easter_eggs.count\", \"current\"), at(\"easter_eggs.five_candy_pieces.count\", \"current\"), at(\"easter_eggs.one_candy_piece.count\", \"current\"), source(\"The rest of the eggs only have one piece of candy\"))",
+          "query(\"percentage_ratio\", at(\"easter_eggs.five_candy_pieces.count\", \"current\"), at(\"easter_eggs.count\", \"current\"))"
+        ]
+      },
+      "source_id": "1786"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Bill is buying healthcare on an exchange. The normal monthly price of the plan he wants is $500. The government will pay for part of this cost depending on Bill's income: 90% if he makes less than $10,000, 50% if he makes between $10,001 and $40,000, and 20% if he makes more than $50,000. Bill earns $25/hour and works 30 hours per week, four weeks per month. How much will Bill spend for health insurance in a year?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "1279"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Four people lost a total of 103 kilograms of weight. The first person lost 27 kilograms. The second person lost 7 kilograms less than the first person. The two remaining people lost the same amount. How many kilograms did each of the last two people lose?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"weight_loss_group.people\", \"person\", \"weight_loss_group\", source(\"Four people\"))",
+          "observe(at(\"weight_loss_group.total_weight_loss\", \"current\"), 103, \"kilogram\", source(\"a total of 103 kilograms of weight\"))",
+          "remove(\"first_person_weight_loss\", \"weight_loss_group.people.first\", at(\"weight_loss_group.people.first.body_weight\", \"current\"), 27, source(\"The first person lost 27 kilograms\"))",
+          "remove(\"second_person_weight_loss\", \"weight_loss_group.people.second\", at(\"weight_loss_group.people.second.body_weight\", \"current\"), \"weight_loss_group.people.second.weight_loss\", source(\"The second person lost 7 kilograms less than the first person\"))",
+          "offset(event_field(\"second_person_weight_loss\", \"quantity\"), event_field(\"first_person_weight_loss\", \"quantity\"), -7, \"kilogram\", source(\"The second person lost 7 kilograms less than the first person\"))",
+          "remove(\"remaining_person_a_weight_loss\", \"weight_loss_group.people.remaining_a\", at(\"weight_loss_group.people.remaining_a.body_weight\", \"current\"), \"weight_loss_group.people.remaining_a.weight_loss\", source(\"The two remaining people lost the same amount\"))",
+          "remove(\"remaining_person_b_weight_loss\", \"weight_loss_group.people.remaining_b\", at(\"weight_loss_group.people.remaining_b.body_weight\", \"current\"), \"weight_loss_group.people.remaining_b.weight_loss\", source(\"The two remaining people lost the same amount\"))",
+          "same(event_field(\"remaining_person_a_weight_loss\", \"quantity\"), event_field(\"remaining_person_b_weight_loss\", \"quantity\"), source(\"The two remaining people lost the same amount\"))",
+          "sum_relation(at(\"weight_loss_group.total_weight_loss\", \"current\"), event_field(\"first_person_weight_loss\", \"quantity\"), event_field(\"second_person_weight_loss\", \"quantity\"), event_field(\"remaining_person_a_weight_loss\", \"quantity\"), event_field(\"remaining_person_b_weight_loss\", \"quantity\"), source(\"Four people lost a total of 103 kilograms of weight\"))",
+          "query(\"value\", event_field(\"remaining_person_a_weight_loss\", \"quantity\"))"
+        ]
+      },
+      "source_id": "74"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Jade had $38 and her sister Julia had half as much money she had. On New Year's eve, their aunt gave each of them an equal amount of money so that they had a total of $97. How much did their aunt give each of them?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"jade.money\", \"initial\"), 38, \"currency\", source(\"Jade had $38\"))",
+          "fraction_of(at(\"julia.money\", \"initial\"), at(\"jade.money\", \"initial\"), 1, 2, source(\"her sister Julia had half as much money she had\"))",
+          "add(\"aunt_gift_to_jade\", \"aunt\", at(\"jade.money\", \"current\"), \"aunt.gift_to_jade.amount\", source(\"their aunt gave each of them an equal amount of money\"))",
+          "add(\"aunt_gift_to_julia\", \"aunt\", at(\"julia.money\", \"current\"), \"aunt.gift_to_julia.amount\", source(\"their aunt gave each of them an equal amount of money\"))",
+          "same(event_field(\"aunt_gift_to_jade\", \"quantity\"), event_field(\"aunt_gift_to_julia\", \"quantity\"), source(\"each of them an equal amount of money\"))",
+          "observe(at(\"sisters.money.total\", \"current\"), 97, \"currency\", source(\"they had a total of $97\"))",
+          "sum_relation(at(\"sisters.money.total\", \"current\"), at(\"jade.money\", \"current\"), at(\"julia.money\", \"current\"), source(\"they had a total of $97\"))",
+          "query(\"value\", event_field(\"aunt_gift_to_jade\", \"quantity\"))"
+        ]
+      },
+      "source_id": "5575"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

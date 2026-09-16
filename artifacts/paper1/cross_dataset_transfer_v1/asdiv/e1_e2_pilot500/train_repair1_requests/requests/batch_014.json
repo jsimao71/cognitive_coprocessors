@@ -1,0 +1,495 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jordon put a new number into her machine.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "The machine doubled it then added 3 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "The number 27 came out of the machine.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "What number do you think Jordon put in her machine?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause identifies the machine input but supplies no assignable numeric value or arithmetic relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "machine.doubled_input = machine.input_number * 2",
+              "machine.output_number = machine.doubled_input + 3"
+            ],
+            "assumptions": [
+              "\"It\" refers to the number Jordon put into the machine."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "machine.output_number = 27"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN machine.input_number"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0878"
+      },
+      "question": "Jordon put a new number into her machine. The machine doubled it then added 3 more. The number 27 came out of the machine. What number do you think Jordon put in her machine?",
+      "source_context": null,
+      "source_id": "asdiv-0878",
+      "validation_failure": "unresolved reference 'machine.input_number' from scope 'global'; unresolved reference 'machine.doubled_input' from scope 'global'; unresolved reference 'machine.input_number' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": "(27-3)/2=12"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a morning walk, two persons start off together.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "Their steps measure 75 cm, and 90 cm respectively.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 206,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "What is the minimum distance each should walk so that all can cover the same distance in complete steps?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "walk.persons.count = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "Starting together establishes a shared starting point but introduces no additional arithmetic value."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "walk.person1.step_length_cm = 75",
+              "walk.person2.step_length_cm = 90"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The step lengths are assigned in the same respective order as the two persons."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires finding the least common multiple of the two step lengths, but the active operator registry has no least-common-multiple, divisibility, integer-constraint, or minimization operator with which to preserve that semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2061"
+      },
+      "question": "In a morning walk, two persons start off together. Their steps measure 75 cm, and 90 cm respectively. What is the minimum distance each should walk so that all can cover the same distance in complete steps?",
+      "source_context": null,
+      "source_id": "asdiv-2061",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "450",
+        "gold_reasoning": "LCM[75,90]=450"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 6,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A P.E.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 7,
+          "teacher_input_default": true,
+          "text": "teacher needs to divide 14 male students and 7 female students into teams, each with the same combination of male students and female students and nobody left out.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 171,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of teams that can be formed?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This punctuation-induced fragment contributes only the beginning of the teacher entity mention; the entity is completed in the next part."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause combines source counts with integer divisibility constraints requiring identical male/female composition in every team and no remainder; the active arithmetic profile cannot represent those constraints."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible team count under the preceding equal-composition and no-remainder constraints requires a greatest-common-divisor or equivalent integer-divisibility operator, which is absent from the supplied registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1200"
+      },
+      "question": "A P.E. teacher needs to divide 14 male students and 7 female students into teams, each with the same combination of male students and female students and nobody left out. What is the greatest number of teams that can be formed?",
+      "source_context": null,
+      "source_id": "asdiv-1200",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": "GCD(14,7)=7"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 39,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "An event has 12 adults and 20 children.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "The event planner wants to make each table identical, with the same combination of adults and children and no people left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of tables the planner can set up?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "event.adults = 12",
+              "event.children = 20"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Identical table composition with no people left over requires integer-divisibility constraints, which the active arithmetic operator registry cannot express."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible table count requires greatest-common-divisor or constrained integer-optimization semantics, which are unavailable in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0979"
+      },
+      "question": "An event has 12 adults and 20 children. The event planner wants to make each table identical, with the same combination of adults and children and no people left over. What is the greatest number of tables the planner can set up?",
+      "source_context": null,
+      "source_id": "asdiv-0979",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "GCD(12,20)=4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A tourist group has 26 people.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "At a hotel, they want to rent some large rooms for 3 people each and some small rooms for 2 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "In order to rent the least number of rooms and have every room fully occupied, how many small rooms should be rented?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tourist_group.people = 26"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "hotel.large_room.capacity_people = 3",
+              "hotel.small_room.capacity_people = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Minimizing the integer number of rooms while enforcing full occupancy requires constrained integer optimization, which the active arithmetic operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0806"
+      },
+      "question": "A tourist group has 26 people. At a hotel, they want to rent some large rooms for 3 people each and some small rooms for 2 each. In order to rent the least number of rooms and have every room fully occupied, how many small rooms should be rented?",
+      "source_context": null,
+      "source_id": "asdiv-0806",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "26/3=8 r2; 2/2=1"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

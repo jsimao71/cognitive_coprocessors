@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A nurses\u2019 station orders bandages in bulk packs of 50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "On the first day, the nurses started with 19 bandages and ordered one bulk pack of bandages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "On the second day, they used ten fewer bandages than the first day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 300,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 216,
+          "teacher_input_default": true,
+          "text": "On the third day, they ordered two bulk packs of bandages and only used half a pack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 355,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 301,
+          "teacher_input_default": true,
+          "text": "They had 78 bandages left at the end of the third day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 404,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 356,
+          "teacher_input_default": true,
+          "text": "How many bandages did they use on the first day?",
+          "warnings": []
+        }
+      ],
+      "question": "A nurses\u2019 station orders bandages in bulk packs of 50. On the first day, the nurses started with 19 bandages and ordered one bulk pack of bandages. On the second day, they used ten fewer bandages than the first day. On the third day, they ordered two bulk packs of bandages and only used half a pack. They had 78 bandages left at the end of the third day. How many bandages did they use on the first day?",
+      "source_id": "gsm-plus-09524"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Tuesday, Clara bought 15 apples at $15 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "At the checkout, she got $3 off because she had voucher.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "The next day, the price increased to $25 per fruit, but the store also offered a 15% discount on the total cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 277,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "Sheila took advantage of the discount and bought 15 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 362,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 278,
+          "teacher_input_default": true,
+          "text": "What is the difference between the final prices paid for the apples on the two days?",
+          "warnings": []
+        }
+      ],
+      "question": "On Tuesday, Clara bought 15 apples at $15 each. At the checkout, she got $3 off because she had voucher. The next day, the price increased to $25 per fruit, but the store also offered a 15% discount on the total cost. Sheila took advantage of the discount and bought 15 apples. What is the difference between the final prices paid for the apples on the two days?",
+      "source_id": "gsm-plus-05200"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Although Soledad works in a windowless office, she loves the outdoors.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "She will be on vacation for the entire month of June and cannot wait to hike 9.3 thousand miles within that month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 186,
+          "teacher_input_default": true,
+          "text": "She is thinking of walking twice a day, covering 1.25 hundred miles each time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 343,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "How many more miles per day must Soledad hike to complete her journey on time?",
+          "warnings": []
+        }
+      ],
+      "question": "Although Soledad works in a windowless office, she loves the outdoors. She will be on vacation for the entire month of June and cannot wait to hike 9.3 thousand miles within that month. She is thinking of walking twice a day, covering 1.25 hundred miles each time. How many more miles per day must Soledad hike to complete her journey on time?",
+      "source_id": "gsm-plus-08882"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mico and Marco wanted to get to know each other.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "They realized that the sum of their ages is 20.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "Mico had a two-year-old brother, Mike.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 183,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "What will be the sum of their ages in 10 years?",
+          "warnings": []
+        }
+      ],
+      "question": "Mico and Marco wanted to get to know each other. They realized that the sum of their ages is 20. Mico had a two-year-old brother, Mike. What will be the sum of their ages in 10 years?",
+      "source_id": "gsm-plus-02227"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "$18 is shared among 3 boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 28,
+          "teacher_input_default": true,
+          "text": "The eldest added $5.5 to his share and added another $10.5 the following day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "He later needed some money and spent $8.5 from his total so far.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 171,
+          "teacher_input_default": true,
+          "text": "After saving some more, he was able to triple the amount he had left after spending the $8.5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 291,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "How much does he have now?",
+          "warnings": []
+        }
+      ],
+      "question": "$18 is shared among 3 boys. The eldest added $5.5 to his share and added another $10.5 the following day. He later needed some money and spent $8.5 from his total so far. After saving some more, he was able to triple the amount he had left after spending the $8.5. How much does he have now?",
+      "source_id": "gsm-plus-04322"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

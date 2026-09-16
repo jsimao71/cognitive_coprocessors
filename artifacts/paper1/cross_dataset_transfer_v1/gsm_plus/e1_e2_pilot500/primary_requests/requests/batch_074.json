@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The Llesis family embarked on a journey to their vacation spot, which involved both driving and hiking.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "They spent a total of 6 hours on this journey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "For the driving part, they maintained an average speed of 50 miles per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 284,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 228,
+          "teacher_input_default": true,
+          "text": "After driving, they decided to hike the rest of the way.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 358,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 285,
+          "teacher_input_default": true,
+          "text": "The hiking speed was 5 miles per hour less than half their driving speed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 464,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 359,
+          "teacher_input_default": true,
+          "text": "They hiked for 1.5 hours, but then they realized they had forgotten their favorite picnic basket at home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 590,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 465,
+          "teacher_input_default": true,
+          "text": "So, they decided to drive back home at the same speed, pick up the basket, and return to the point where they stopped hiking.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 647,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 591,
+          "teacher_input_default": true,
+          "text": "This round trip added an extra 2 hours to their journey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 771,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 8,
+          "start": 648,
+          "teacher_input_default": true,
+          "text": "How far was their vacation spot from their home, considering the extra trip they had to make to retrieve the picnic basket?",
+          "warnings": []
+        }
+      ],
+      "question": "The Llesis family embarked on a journey to their vacation spot, which involved both driving and hiking. They spent a total of 6 hours on this journey. For the driving part, they maintained an average speed of 50 miles per hour. After driving, they decided to hike the rest of the way. The hiking speed was 5 miles per hour less than half their driving speed. They hiked for 1.5 hours, but then they realized they had forgotten their favorite picnic basket at home. So, they decided to drive back home at the same speed, pick up the basket, and return to the point where they stopped hiking. This round trip added an extra 2 hours to their journey. How far was their vacation spot from their home, considering the extra trip they had to make to retrieve the picnic basket?",
+      "source_id": "gsm-plus-06235"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sadie slept 8 hours on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "For the next two days, she slept 2 hours less, each, because she had to complete some assignments.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "The rest of the week she slept 1 hour more than those two days.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 275,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "But on Friday she had to stay up late for a movie, reducing her sleep by 2 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 334,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 276,
+          "teacher_input_default": true,
+          "text": "How many hours did she sleep in total throughout the week?",
+          "warnings": []
+        }
+      ],
+      "question": "Sadie slept 8 hours on Monday. For the next two days, she slept 2 hours less, each, because she had to complete some assignments. The rest of the week she slept 1 hour more than those two days. But on Friday she had to stay up late for a movie, reducing her sleep by 2 hours. How many hours did she sleep in total throughout the week?",
+      "source_id": "gsm-plus-00979"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Out of the 1500 teachers on the school basketball court, 60% are history teachers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "If the rest of the teachers on the court are math teachers, and each teacher sleeps for 6 hours a day, calculate the total time the math teachers collectively spend sleeping in one day.",
+          "warnings": []
+        }
+      ],
+      "question": "Out of the 1500 teachers on the school basketball court, 60% are history teachers. If the rest of the teachers on the court are math teachers, and each teacher sleeps for 6 hours a day, calculate the total time the math teachers collectively spend sleeping in one day.",
+      "source_id": "gsm-plus-05321"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 95,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "From her science class study, Brady learned that each whale in the sea has 40 gallons of blood.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "She also learned that a shark has three times as much blood as a whale.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 243,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "One day, she saw a group of sharks and whales swimming together in the sea.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 294,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 244,
+          "teacher_input_default": true,
+          "text": "The group consisted of ten sharks and five whales.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 404,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 295,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of gallons of blood that this group of sharks and whales swimming in the sea have.",
+          "warnings": []
+        }
+      ],
+      "question": "From her science class study, Brady learned that each whale in the sea has 40 gallons of blood. She also learned that a shark has three times as much blood as a whale. One day, she saw a group of sharks and whales swimming together in the sea. The group consisted of ten sharks and five whales. Calculate the total number of gallons of blood that this group of sharks and whales swimming in the sea have.",
+      "source_id": "gsm-plus-09555"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Becky, Jake, and Silvia shared 4 pizzas for their dinner and 2 pizzas for their lunch.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "Each pizza had 8 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "During dinner, Becky ate 3 more slices than Jake did, and Silvia ate twice as many slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 382,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "However,for lunch, Becky ate 2 slices less than what she ate at dinner, Jake ate the same amount as he did at dinner, and Silvia ate half of what she ate at dinner.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 467,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 383,
+          "teacher_input_default": true,
+          "text": "If Becky ate 10 slices at dinner, how many total slices did they eat for both meals?",
+          "warnings": []
+        }
+      ],
+      "question": "Becky, Jake, and Silvia shared 4 pizzas for their dinner and 2 pizzas for their lunch. Each pizza had 8 slices. During dinner, Becky ate 3 more slices than Jake did, and Silvia ate twice as many slices than Jake did.  However,for lunch, Becky ate 2 slices less than what she ate at dinner, Jake ate the same amount as he did at dinner, and Silvia ate half of what she ate at dinner. If Becky ate 10 slices at dinner, how many total slices did they eat for both meals?",
+      "source_id": "gsm-plus-08483"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

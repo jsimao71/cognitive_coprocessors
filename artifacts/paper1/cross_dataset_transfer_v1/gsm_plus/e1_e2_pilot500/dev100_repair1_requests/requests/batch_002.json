@@ -1,0 +1,670 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia and Nadine were given the same amount of allowance by their mother.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "The two girls decided to combine their allowance to surprise their father on his birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 200,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "They bought a cake which costs $15.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 275,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 201,
+          "teacher_input_default": true,
+          "text": "They also bought 1 dozen balloons which were sold for $0.8 for 3 balloons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 344,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 276,
+          "teacher_input_default": true,
+          "text": "The remaining money was used to buy 2 tubs of ice cream for $8 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 406,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 345,
+          "teacher_input_default": true,
+          "text": "How much did Julia and Nadine's mother give each one of them?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "julia.allowance = nadine.allowance"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The equality relation is preserved without inventing either allowance amount."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "girls.combined_allowance = julia.allowance + nadine.allowance"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "cake.cost_dollars = 15"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "balloons.count = 12",
+              "balloons.bundle_size = 3",
+              "balloons.cost_per_bundle_dollars = 0.8",
+              "balloons.total_cost_dollars = balloons.count / balloons.bundle_size * balloons.cost_per_bundle_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "One dozen is normalized to 12 balloons while retaining the stated three-balloon pricing unit."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ice_cream.tubs = 2",
+              "ice_cream.cost_per_tub_dollars = 8",
+              "ice_cream.total_cost_dollars = ice_cream.tubs * ice_cream.cost_per_tub_dollars",
+              "girls.combined_allowance = cake.cost_dollars + balloons.total_cost_dollars + ice_cream.total_cost_dollars"
+            ],
+            "assumptions": [
+              "\u201cThe remaining money was used to buy\u201d means the entire remainder was spent on the two tubs, with no money left over."
+            ],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [
+              "The combined allowance is related to all purchases because the ice cream consumed the remaining money."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "girls.allowance_each = girls.combined_allowance / 2",
+              "RETURN girls.allowance_each"
+            ],
+            "assumptions": [
+              "Because Julia and Nadine received equal allowances, each received half of their combined allowance."
+            ],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07328"
+      },
+      "question": "Julia and Nadine were given the same amount of allowance by their mother. The two girls decided to combine their allowance to surprise their father on his birthday. They bought a cake which costs $15. They also bought 1 dozen balloons which were sold for $0.8 for 3 balloons. The remaining money was used to buy 2 tubs of ice cream for $8 each. How much did Julia and Nadine's mother give each one of them?",
+      "source_context": null,
+      "source_id": "gsm-plus-07328",
+      "validation_failure": "unresolved reference 'nadine.allowance' from scope 'global'; unresolved reference 'julia.allowance' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "17.1",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Andy works in the pro shop of a tennis resort.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "He has 12 racquets that need restringing.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 275,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "3 of them are to be strung with synthetic gut, 5 of them will be strung with polyester string, and 4 of them will be strung with a hybrid set (half synthetic gut, half polyester string).",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 492,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 276,
+          "teacher_input_default": true,
+          "text": "How long will it take Andy to string all of those racquets if it takes him an average of 1/4 of an hour for him to string with synthetic gut, 22 minutes to string with polyester string, and 0.3 hours for hybrid sets?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "andy.workplace = \"tennis_resort_pro_shop\""
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "andy.racquets_needing_restringing.count = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "restringing.synthetic_gut.racquets = 3",
+              "restringing.polyester.racquets = 5",
+              "restringing.hybrid.racquets = 4",
+              "restringing.hybrid.synthetic_gut_fraction = 1 / 2",
+              "restringing.hybrid.polyester_fraction = 1 / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The hybrid composition is retained separately from the number of hybrid racquets."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "andy.restringing.synthetic_gut.average_hours_per_racquet = 1 / 4",
+              "andy.restringing.polyester.average_minutes_per_racquet = 22",
+              "andy.restringing.hybrid.average_hours_per_racquet = 0.3",
+              "andy.restringing.synthetic_gut.total_hours = restringing.synthetic_gut.racquets * andy.restringing.synthetic_gut.average_hours_per_racquet",
+              "andy.restringing.polyester.total_hours = restringing.polyester.racquets * andy.restringing.polyester.average_minutes_per_racquet / 60",
+              "andy.restringing.hybrid.total_hours = restringing.hybrid.racquets * andy.restringing.hybrid.average_hours_per_racquet",
+              "andy.restringing.all_racquets.total_hours = sum(andy.restringing.synthetic_gut.total_hours, andy.restringing.polyester.total_hours, andy.restringing.hybrid.total_hours)",
+              "RETURN andy.restringing.all_racquets.total_hours"
+            ],
+            "assumptions": [
+              "The listed average time for each string type applies independently to every racquet in that category."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [
+              "Polyester time is converted from minutes to hours so the requested aggregate has a consistent unit."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07746"
+      },
+      "question": "Andy works in the pro shop of a tennis resort. He has 12 racquets that need restringing. 3 of them are to be strung with synthetic gut, 5 of them will be strung with polyester string, and 4 of them will be strung with a hybrid set (half synthetic gut, half polyester string). How long will it take Andy to string all of those racquets if it takes him an average of 1/4 of an hour for him to string with synthetic gut, 22 minutes to string with polyester string, and 0.3 hours for hybrid sets?",
+      "source_context": null,
+      "source_id": "gsm-plus-07746",
+      "validation_failure": "answer mismatch: actual=3.783333333333333333333333333, expected=227",
+      "validator_context": {
+        "correct_answer": "227",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Pat has a flower bed that is 111 feet long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "Pat wants to fill her flower bed with plants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 239,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "Pat already owns 17 flowers, including 9 roses and 8 lilies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 355,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 241,
+          "teacher_input_default": true,
+          "text": "Each flowering plant costs $6 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "pat.flower_bed.length_feet = 111"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pat.flower_bed.goal = \"fill_with_plants\""
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "flower.width_inches = 12",
+              "flower.width_feet = flower.width_inches / 12",
+              "flower.spacing_between_plants_feet = 1.5"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The flower width is retained in its stated unit and also converted to feet for comparison with the bed length and spacing."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pat.owned_flowers.total = 17",
+              "pat.owned_flowers.roses = 9",
+              "pat.owned_flowers.lilies = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "store.flowering_plant.cost_dollars_each = 6",
+              "pat.flower_bed.capacity_plants = (pat.flower_bed.length_feet + flower.spacing_between_plants_feet) / (flower.width_feet + flower.spacing_between_plants_feet)",
+              "pat.flowers_to_buy.count = pat.flower_bed.capacity_plants - pat.owned_flowers.total",
+              "pat.store_spending.dollars = pat.flowers_to_buy.count * store.flowering_plant.cost_dollars_each",
+              "RETURN pat.store_spending.dollars"
+            ],
+            "assumptions": [
+              "There is no required margin at either end of the flower bed, and the 1.5-foot gap is required only between adjacent plants."
+            ],
+            "confidence": 0.91,
+            "part_id": 4,
+            "semantic_notes": [
+              "Adding one spacing length to the numerator encodes plant widths plus spacing only between adjacent plants."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07878"
+      },
+      "question": "Pat has a flower bed that is 111 feet long.  Pat wants to fill her flower bed with plants.  Pat's flowers grow 12 inches wide so she needs to leave 1.5 feet between every plant.  Pat already owns 17 flowers, including 9 roses and 8 lilies.  Each flowering plant costs $6 at the store,  how much money will Pat spend at the store to fill up her flower bed?",
+      "source_context": null,
+      "source_id": "gsm-plus-07878",
+      "validation_failure": "answer mismatch: actual=168, expected=342",
+      "validator_context": {
+        "correct_answer": "342",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The population of porcupines in a park is 50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "The number of female porcupines is 3/5 of the total population.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 168,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "Each female porcupine gives birth to 4 babies every month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 214,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 169,
+          "teacher_input_default": true,
+          "text": "Unluckily, 1/10 of the female porcupines die.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 215,
+          "teacher_input_default": true,
+          "text": "How many porcupines will be in the park after a year?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "park.porcupines.population_initial = 50"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "park.porcupines.female_population_initial = park.porcupines.population_initial * (3 / 5)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "park.porcupines.babies_per_female_per_month = 4",
+              "park.porcupines.babies_per_month = park.porcupines.female_population_initial * park.porcupines.babies_per_female_per_month"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "park.porcupines.female_deaths = park.porcupines.female_population_initial / 10"
+            ],
+            "assumptions": [
+              "The fraction refers to the initially established female porcupine population."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "park.porcupines.babies_over_year = rate_times_duration(park.porcupines.babies_per_month, 12)",
+              "park.porcupines.population_after_year = park.porcupines.population_initial + park.porcupines.babies_over_year - park.porcupines.female_deaths",
+              "RETURN park.porcupines.population_after_year"
+            ],
+            "assumptions": [
+              "A year contains 12 monthly birth periods.",
+              "The stated female deaths are the only population loss, all stated babies remain in the park, and the stated monthly birth rate applies throughout the year."
+            ],
+            "confidence": 0.85,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08043"
+      },
+      "question": "The population of porcupines in a park is 50. The number of female porcupines is 3/5 of the total population. Each female porcupine gives birth to 4 babies every month. Unluckily, 1/10 of the female porcupines die. How many porcupines will be in the park after a year?",
+      "source_context": null,
+      "source_id": "gsm-plus-08043",
+      "validation_failure": "answer mismatch: actual=1487, expected=1343",
+      "validator_context": {
+        "correct_answer": "1343",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dominick went to his team's changing room and saw 0.5 times as many robots as helmets and 0.5 times as many helmets as footballs kept there.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 141,
+          "teacher_input_default": true,
+          "text": "If there were 20 helmets, calculate the total number of items Dominick saw.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "team.changing_room.robots = team.changing_room.helmets * 0.5",
+              "team.changing_room.helmets = team.changing_room.footballs * 0.5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "team.changing_room.helmets = 20",
+              "dominick.items_seen.total = sum(team.changing_room.robots, team.changing_room.helmets, team.changing_room.footballs)",
+              "RETURN dominick.items_seen.total"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-10018"
+      },
+      "question": "Dominick went to his team's changing room and saw 0.5 times as many robots as helmets and 0.5 times as many helmets as footballs kept there. If there were 20 helmets, calculate the total number of items Dominick saw.",
+      "source_context": null,
+      "source_id": "gsm-plus-10018",
+      "validation_failure": "unresolved reference 'team.changing_room.footballs' from scope 'global'; unresolved reference 'team.changing_room.footballs' from scope 'global'; unresolved reference 'dominick.items_seen.total' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "70",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,488 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A store owner had two employees and bought nine hundred twenty-seven uniforms for them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "If he wanted to give each employee the same number of uniforms, how many more should he buy so he doesn't have any extra?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "store.employees.count = 2",
+              "store.uniforms.purchased = 927"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the smallest additional whole-number quantity that makes the uniform total evenly divisible by the employee count requires remainder, ceiling, or integer-divisibility semantics. None of those operators is available in the active registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1571"
+      },
+      "question": "A store owner had two employees and bought nine hundred twenty-seven uniforms for them. If he wanted to give each employee the same number of uniforms, how many more should he buy so he doesn't have any extra?",
+      "source_context": null,
+      "source_id": "asdiv-1571",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "927/2=463 r1"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack loves to collect and read books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "In fact, he has a mini-library in their house and he usually spends most of his time in it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 205,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "The library is divided into different sections for different type of books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 206,
+          "teacher_input_default": true,
+          "text": "The science fiction section has 8 books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 323,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 247,
+          "teacher_input_default": true,
+          "text": "If each book has 478 pages, how many pages do all the 8 books have in total?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause supplies only qualitative information about Jack's interests, which is outside the active arithmetic profile."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause supplies only qualitative context about Jack's mini-library and how he spends his time, which is outside the active arithmetic profile."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause describes the library's qualitative organization but introduces no arithmetic quantity or supported arithmetic relation."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "jack.library.science_fiction.book_count = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jack.library.science_fiction.pages_per_book = 478",
+              "jack.library.science_fiction.total_page_count = jack.library.science_fiction.book_count * jack.library.science_fiction.pages_per_book",
+              "RETURN jack.library.science_fiction.total_page_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0455"
+      },
+      "question": "Jack loves to collect and read books. In fact, he has a mini-library in their house and he usually spends most of his time in it. The library is divided into different sections for different type of books. The science fiction section has 8 books. If each book has 478 pages, how many pages do all the 8 books have in total?",
+      "source_context": null,
+      "source_id": "asdiv-0455",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported, part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "3824",
+        "gold_reasoning": "8*478=3824"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Linda buys strawberry gum in packs of 6 pieces and blueberry gum in packs of 5 pieces.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "If Linda wants to buy the same amount of each type of gum, what is the smallest number of pieces of each flavor that she must buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "linda.strawberry_gum.pack_size_pieces = 6",
+              "linda.blueberry_gum.pack_size_pieces = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the smallest positive common multiple requires integer-multiple constraints and minimization over feasible pack counts, which the active arithmetic profile cannot express."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1221"
+      },
+      "question": "Linda buys strawberry gum in packs of 6 pieces and blueberry gum in packs of 5 pieces. If Linda wants to buy the same amount of each type of gum, what is the smallest number of pieces of each flavor that she must buy?",
+      "source_context": null,
+      "source_id": "asdiv-1221",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "30",
+        "gold_reasoning": "LCM[6,5]=30"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A person invested some amount at 12% simple interest and some amount at 10% simple interest.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "He received an annual interest of $130.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 205,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 133,
+          "teacher_input_default": true,
+          "text": "But, if he had interchanged and invested he would have received $4 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 253,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 206,
+          "teacher_input_default": true,
+          "text": "How much amount did he invest at the two rates?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "investment.at_12_percent.annual_rate_percent = 12",
+              "investment.at_10_percent.annual_rate_percent = 10"
+            ],
+            "assumptions": [
+              "The stated simple-interest rates apply for one year because the subsequent interest is annual."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The two unknown principal amounts are retained as semantic forward dependencies for the later query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "investment.actual.total_annual_interest = 130"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "investment.swapped.additional_annual_interest = 4",
+              "investment.swapped.total_annual_interest = investment.actual.total_annual_interest + investment.swapped.additional_annual_interest"
+            ],
+            "assumptions": [
+              "Interchanged means the two original principal amounts exchange interest rates."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The swapped state preserves the distinction from the actual investment allocation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "investment.total_principal = (investment.actual.total_annual_interest + investment.swapped.total_annual_interest) / ((investment.at_12_percent.annual_rate_percent + investment.at_10_percent.annual_rate_percent) / 100)",
+              "investment.principal_difference_10_minus_12 = (investment.swapped.total_annual_interest - investment.actual.total_annual_interest) / ((investment.at_12_percent.annual_rate_percent - investment.at_10_percent.annual_rate_percent) / 100)",
+              "investment.at_10_percent.principal = (investment.total_principal + investment.principal_difference_10_minus_12) / 2",
+              "investment.at_12_percent.principal = investment.total_principal - investment.at_10_percent.principal",
+              "RETURN investment.at_12_percent.principal",
+              "RETURN investment.at_10_percent.principal"
+            ],
+            "assumptions": [
+              "The first requested amount is the principal originally invested at 12%, and the second is the principal originally invested at 10%.",
+              "Multiple RETURN statements represent the two separately requested principal amounts."
+            ],
+            "confidence": 0.91,
+            "part_id": 3,
+            "semantic_notes": [
+              "Adding the actual and swapped annual-interest relations yields the total principal times the sum of the two rates; subtracting them yields the principal difference times the rate difference."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1444"
+      },
+      "question": "A person invested some amount at 12% simple interest and some amount at 10% simple interest. He received an annual interest of $130. But, if he had interchanged and invested he would have received $4 more. How much amount did he invest at the two rates?",
+      "source_context": null,
+      "source_id": "asdiv-1444",
+      "validation_failure": "answer mismatch: actual=700, expected=500",
+      "validator_context": {
+        "correct_answer": "500",
+        "gold_reasoning": "x:Dollars at 12%; y:Dollars at 10%; 12%X+10%Y=130; 12%Y+10%X=134"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 91,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A two digit number is four times the sum of its digits and twice the product of the digits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "Find the number.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause imposes simultaneous digit-decomposition, digit-sum, and digit-product constraints. The active assignment-based arithmetic profile cannot preserve all of these equalities without destructively overwriting a path or inventing a constraint operator."
+            ],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "RETURN two_digit_number.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1420"
+      },
+      "question": "A two digit number is four times the sum of its digits and twice the product of the digits. Find the number.",
+      "source_context": null,
+      "source_id": "asdiv-1420",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "36",
+        "gold_reasoning": "x:The number of the tens digital; y:The number of the unit digital; 10x+y=4(x+y); 10x+y=2xy"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

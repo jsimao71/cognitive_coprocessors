@@ -1,0 +1,486 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rick and Todd have the same number of candy bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "Rick ate 11 candy bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "Todd gave away 18 of his candy bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "How many more candy bars did Rick have than Todd then?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rick.initial.candy_bars = todd.initial.candy_bars"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rick.eaten.candy_bars = 11",
+              "rick.then.candy_bars = rick.initial.candy_bars - rick.eaten.candy_bars"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "todd.given_away.candy_bars = 18",
+              "todd.then.candy_bars = todd.initial.candy_bars - todd.given_away.candy_bars"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rick.more_than_todd.then.candy_bars = todd.given_away.candy_bars - rick.eaten.candy_bars",
+              "RETURN rick.more_than_todd.then.candy_bars"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [
+              "Because their initial counts are equal, the requested remaining-count difference equals Todd's giveaway minus Rick's consumption."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0893"
+      },
+      "question": "Rick and Todd have the same number of candy bars. Rick ate 11 candy bars. Todd gave away 18 of his candy bars. How many more candy bars did Rick have than Todd then?",
+      "source_context": null,
+      "source_id": "asdiv-0893",
+      "validation_failure": "unresolved reference 'todd.initial.candy_bars' from scope 'global'; unresolved reference 'rick.initial.candy_bars' from scope 'global'; unresolved reference 'todd.initial.candy_bars' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": "18-11=7"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The sum of numerator and denominator of a fraction is 18.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "If the denominator is increased by 2 the fractions reduced to 1/3 .",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 126,
+          "teacher_input_default": true,
+          "text": "Find the fraction.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "fraction.numerator_denominator_sum = 18",
+              "fraction.numerator = fraction.numerator_denominator_sum - fraction.denominator"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The second statement preserves the stated sum as a relation with a forward dependency on the denominator."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fraction.denominator_after_increase = fraction.denominator + 2",
+              "fraction.value_after_denominator_increase = 1 / 3",
+              "fraction.numerator = fraction.value_after_denominator_increase * fraction.denominator_after_increase"
+            ],
+            "assumptions": [
+              "Interpreted the ungrammatical phrase \"the fractions reduced to 1/3\" as saying that the fraction becomes 1/3 after increasing its denominator by 2."
+            ],
+            "confidence": 0.93,
+            "part_id": 1,
+            "semantic_notes": [
+              "The final relation preserves that the unchanged numerator over the increased denominator equals one third."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fraction.value = fraction.numerator / fraction.denominator",
+              "RETURN fraction.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1443"
+      },
+      "question": "The sum of numerator and denominator of a fraction is 18. If the denominator is increased by 2 the fractions reduced to 1/3 . Find the fraction.",
+      "source_context": null,
+      "source_id": "asdiv-1443",
+      "validation_failure": "anonymous operation-ledger target: fraction.value",
+      "validator_context": {
+        "correct_answer": "5/13",
+        "gold_reasoning": "x:The number of numerator; y:The number of denominator; x+y=18; x/(y+2)=1/3"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Victor wanted to give each of his six friends an equal amount of candy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "At the store he bought three hundred seventy-nine pieces total to give to them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "How many more pieces should he have bought so he didn't have any extra?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "victor.friends.count = 6",
+              "victor.candy.target_total_pieces = victor.candy.target_pieces_per_friend * victor.friends.count"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The multiplication relation preserves the intent to distribute an equal whole-number amount to every friend."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "victor.candy.purchased_pieces = 379"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the minimum additional number of pieces that makes the total evenly divisible by six requires an integer remainder, divisibility, floor, or ceiling operation, none of which is available in the supplied operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1561"
+      },
+      "question": "Victor wanted to give each of his six friends an equal amount of candy. At the store he bought three hundred seventy-nine pieces total to give to them. How many more pieces should he have bought so he didn't have any extra?",
+      "source_context": null,
+      "source_id": "asdiv-1561",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "379/6=63 r1; 6-1=5"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "One of his favorites is a book called Encyclopedia of Life and Everything Else.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "The book has 7 large chapters, each having 566 pages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "How many pages does the encyclopedia have in total?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The possessive pronoun \"his\" has no supplied antecedent, so the favorite-of relation cannot be grounded without inventing an owner."
+            ],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "encyclopedia.large_chapters = 7",
+              "encyclopedia.pages_per_large_chapter = 566"
+            ],
+            "assumptions": [
+              "The book in this clause is the named encyclopedia referenced by the surrounding question."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "encyclopedia.total_pages = encyclopedia.large_chapters * encyclopedia.pages_per_large_chapter",
+              "RETURN encyclopedia.total_pages"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0457"
+      },
+      "question": "One of his favorites is a book called Encyclopedia of Life and Everything Else. The book has 7 large chapters, each having 566 pages. How many pages does the encyclopedia have in total?",
+      "source_context": null,
+      "source_id": "asdiv-0457",
+      "validation_failure": "non-ok semantic parts: part 0=ambiguous",
+      "validator_context": {
+        "correct_answer": "3962",
+        "gold_reasoning": "7*566=3962"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 31,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It takes 3 eggs to make a cake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 32,
+          "teacher_input_default": true,
+          "text": "How many cakes can you make with 37 eggs?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "cake.eggs_required = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The question asks for a count of complete cakes from 37 eggs, which requires floor or integer division; neither operation is present in the supplied registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0669"
+      },
+      "question": "It takes 3 eggs to make a cake. How many cakes can you make with 37 eggs?",
+      "source_context": null,
+      "source_id": "asdiv-0669",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": "37/3=12 r1"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

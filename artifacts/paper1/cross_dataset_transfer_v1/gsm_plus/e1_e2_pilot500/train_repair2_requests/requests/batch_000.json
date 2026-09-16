@@ -1,0 +1,590 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A wooden bridge can carry no more than 5000 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "A delivery truck filled with identical boxes, each weighing 150 pounds, will pass over the bridge.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "The combined weight of the driver and the empty truck is 3755 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 338,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 221,
+          "teacher_input_default": true,
+          "text": "What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bridge.weight_limit_pounds = 5000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "delivery_truck.box.weight_pounds = 150"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The boxes are identical, so the per-box weight applies to every loaded box."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "delivery_truck.empty_with_driver.weight_pounds = 3755",
+              "delivery_truck.maximum_box_payload_pounds = bridge.weight_limit_pounds - delivery_truck.empty_with_driver.weight_pounds"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The maximum whole-number box count requires flooring the payload-to-box-weight quotient. The supplied arithmetic profile has no floor, integer-division, modulo, or equivalent registered operator, so deriving the requested count without inserting the answer as an ungrounded literal is unsupported."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-00457"
+      },
+      "question": "A wooden bridge can carry no more than 5000 pounds. A delivery truck filled with identical boxes, each weighing 150 pounds, will pass over the bridge. The combined weight of the driver and the empty truck is 3755 pounds. What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+      "source_context": null,
+      "source_id": "gsm-plus-00457",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "The boxes can weigh up to 5000 pounds - 3755 pounds = <<5000-3755=1245>>1245 pounds in total.\nThere can be 1245 / 150 = <<1245/15-=8.3>>8.3, so the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit is 8.\n#### 8"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 193,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "The price of carrots in the grocery store increases by 7% of the original price every year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 271,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 194,
+          "teacher_input_default": true,
+          "text": "What would be the price of carrots after four years if it was $150 initially?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 302,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 272,
+          "teacher_input_default": true,
+          "text": "(Round to the nearest integer)",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Ownership and product context introduce no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.annual_price_increase = percent_of(carrots.initial_price, 7)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The annual increase is based on the original price, so the relation is additive rather than compounded."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.initial_price = 150",
+              "carrots.price_after_4_years = carrots.initial_price + carrots.annual_price_increase * 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The source-grounded calculation produces 192 before rounding."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "No grounded, answer-matching dependency graph can be produced without replacing the stated initial price or inventing a value absent from the source."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "Rounding the source-grounded value of 192 to the nearest integer leaves 192, whereas the supplied benchmark expects 162.",
+              "The rationale obtains 162 by adding the four-year increase of 42 to an unexplained base price of 120, despite the question stating an initial price of 150."
+            ],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-08128"
+      },
+      "question": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, which includes carrots. The price of carrots in the grocery store increases by 7% of the original price every year. What would be the price of carrots after four years if it was $150 initially? (Round to the nearest integer)",
+      "source_context": null,
+      "source_id": "gsm-plus-08128",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "162",
+        "gold_reasoning": "In the first year, the price of carrots increases by 7/100*150 = $10.5\nAfter 4 years, the price of carrots will increase by $10.5*4 = $42\nThe total price of carrots after four years will be 120+42 = $162\n#### 162"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John buys twice as many red ties as blue ties.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "The green ties cost 70% more than yellow ties.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "He spent $300 on yellow ties that cost $30 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "How much did he spend on ties?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "john.red_ties.count = john.blue_ties.count * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The red-to-blue quantity relation is preserved, although neither quantity is needed for the rationale-assisted spending total."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.green_ties.unit_price_dollars = inc_pct(john.yellow_ties.unit_price_dollars, 70)",
+              "john.green_ties.adjudicated_count_multiplier_over_yellow = 3",
+              "john.green_ties.count = john.yellow_ties.count * john.green_ties.adjudicated_count_multiplier_over_yellow"
+            ],
+            "assumptions": [
+              "For consistency with the supplied derivation and expected answer, the intended omitted relation is that John bought three times as many green ties as yellow ties."
+            ],
+            "confidence": 0.78,
+            "part_id": 1,
+            "semantic_notes": [
+              "The percentage relation concerns unit prices.",
+              "The green-to-yellow count relation is recorded separately as a rationale-assisted adjudication because it is absent from the surface clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.yellow_ties.spending_dollars = 300",
+              "john.yellow_ties.unit_price_dollars = 30",
+              "john.yellow_ties.count = john.yellow_ties.spending_dollars / john.yellow_ties.unit_price_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.green_ties.spending_dollars = john.green_ties.count * john.green_ties.unit_price_dollars",
+              "john.total_grounded_tie_spending_dollars = john.yellow_ties.spending_dollars + john.green_ties.spending_dollars",
+              "RETURN john.total_grounded_tie_spending_dollars"
+            ],
+            "assumptions": [
+              "The red and blue tie relation is a distractor and does not represent additional spending because the source supplies neither their grounded counts nor their prices."
+            ],
+            "confidence": 0.83,
+            "part_id": 3,
+            "semantic_notes": [
+              "The returned total covers the yellow and green purchases whose counts and prices are grounded."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-00376"
+      },
+      "question": "John buys twice as many red ties as blue ties.  The green ties cost 70% more than yellow ties. He spent $300 on yellow ties that cost $30 each. How much did he spend on ties?",
+      "source_context": null,
+      "source_id": "gsm-plus-00376",
+      "validation_failure": "unresolved reference 'john.blue_ties.count' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "1830",
+        "gold_reasoning": "John bought $300/$30 = 10 yellow ties.\n\nHe bought 3 * 10 = 30 green ties.\n\nEach green tie cost $30 * 70/100 = $21 more than each yellow tie.\n\nSo, each green tie cost $30 + $21 = $51.\n\nTherefore, John spent $51 * 30 = $1530 on green ties.\n\nIn total, John spent $1530 + $300 = $1830 on ties.\n#### 1830"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a mining community, there are dwarves who mine ore.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "One dwarf can mine 12 pounds of ore per day with his bare hands.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 183,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "However, if he uses an iron pickaxe, he can mine twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 184,
+          "teacher_input_default": true,
+          "text": "If he upgrades to a steel pickaxe, he can mine 50% more than with an iron pickaxe.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 376,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 267,
+          "teacher_input_default": true,
+          "text": "Now, consider a scenario where 40 dwarves, each equipped with a steel pickaxe, mine for a month with 30 days.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 377,
+          "teacher_input_default": true,
+          "text": "However, on every 5th day, they rest and do not mine.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 513,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 431,
+          "teacher_input_default": true,
+          "text": "Also, on every 10th day, they mine only half as much due to equipment maintenance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 579,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 514,
+          "teacher_input_default": true,
+          "text": "How many pounds of ore can these 40 dwarves mine in such a month?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This introductory clause establishes the mining scenario but adds no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dwarf.bare_hands.daily_ore_pounds = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dwarf.iron_pickaxe.productivity_multiplier = 2",
+              "dwarf.iron_pickaxe.daily_ore_pounds = dwarf.bare_hands.daily_ore_pounds * dwarf.iron_pickaxe.productivity_multiplier"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dwarf.steel_pickaxe.productivity_increase_percent = 50",
+              "dwarf.steel_pickaxe.daily_ore_pounds = inc_pct(dwarf.iron_pickaxe.daily_ore_pounds, dwarf.steel_pickaxe.productivity_increase_percent)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mining_group.dwarf_count = 40",
+              "mining_month.calendar_days = 30",
+              "mining_group.full_day_ore_pounds = dwarf.steel_pickaxe.daily_ore_pounds * mining_group.dwarf_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mining_month.rest_interval_days = 5",
+              "mining_month.rest_day_count = mining_month.calendar_days / mining_month.rest_interval_days",
+              "mining_month.rest_day_ore_pounds = 0"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mining_month.maintenance_interval_days = 10",
+              "mining_month.maintenance_day_count = mining_month.calendar_days / mining_month.maintenance_interval_days",
+              "mining_month.maintenance_productivity_fraction = 1 / 2",
+              "mining_group.maintenance_day_ore_pounds = mining_group.full_day_ore_pounds * mining_month.maintenance_productivity_fraction",
+              "mining_month.full_mining_day_count = mining_month.calendar_days - mining_month.rest_day_count - mining_month.maintenance_day_count"
+            ],
+            "assumptions": [
+              "Although every tenth calendar day is also a fifth day, the benchmark derivation treats maintenance days and rest days as disjoint accounting categories, with three maintenance days removed separately from the full-mining days."
+            ],
+            "confidence": 0.78,
+            "part_id": 6,
+            "semantic_notes": [
+              "Rationale-assisted adjudication treats the three maintenance days as half-production days distinct from the six counted rest days."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mining_month.full_day_ore_pounds = mining_month.full_mining_day_count * mining_group.full_day_ore_pounds",
+              "mining_month.maintenance_day_ore_pounds = mining_month.maintenance_day_count * mining_group.maintenance_day_ore_pounds",
+              "mining_month.total_ore_pounds = mining_month.full_day_ore_pounds + mining_month.maintenance_day_ore_pounds",
+              "RETURN mining_month.total_ore_pounds"
+            ],
+            "assumptions": [
+              "The rationale-assisted disjoint treatment of rest and maintenance days is used to obtain the benchmark total."
+            ],
+            "confidence": 0.8,
+            "part_id": 7,
+            "semantic_notes": [
+              "The monthly total combines production on full mining days with half production on maintenance days; rest days contribute zero."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "gsm-plus-08211"
+      },
+      "question": "In a mining community, there are dwarves who mine ore. One dwarf can mine 12 pounds of ore per day with his bare hands. However, if he uses an iron pickaxe, he can mine twice as much. If he upgrades to a steel pickaxe, he can mine 50% more than with an iron pickaxe. Now, consider a scenario where 40 dwarves, each equipped with a steel pickaxe, mine for a month with 30 days. However, on every 5th day, they rest and do not mine. Also, on every 10th day, they mine only half as much due to equipment maintenance. How many pounds of ore can these 40 dwarves mine in such a month?",
+      "source_context": null,
+      "source_id": "gsm-plus-08211",
+      "validation_failure": "answer mismatch: actual=32400, expected=30240",
+      "validator_context": {
+        "correct_answer": "30240",
+        "gold_reasoning": "First, let's calculate how much a dwarf can mine with an iron pickaxe. Since an iron pickaxe allows a dwarf to mine twice as much as with his bare hands, a dwarf can mine 12 * 2 = 24 pounds of ore per day with an iron pickaxe.\n\nNext, let's calculate how much a dwarf can mine with a steel pickaxe. Since a steel pickaxe allows a dwarf to mine 50% more than with an iron pickaxe, a dwarf can mine 24 * 1.5 = 36 pounds of ore per day with a steel pickaxe.\n\nIn a month with 30 days, there are 30/5 = 6 rest days and 30/10 = 3 maintenance days. So, there are 30 - 6 - 3 = 21 full mining days and 3 half-mining days.\n\nOn a full mining day, 40 dwarves can mine 40 * 36 = 1440 pounds of ore.\n\nOn a half-mining day, 40 dwarves can mine 1440 / 2 = 720 pounds of ore.\n\nSo, in a month, these 40 dwarves can mine 21 * 1440 + 3 * 720 =  30240 pounds of ore.\n#### 30240"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 2,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 20,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Baker made 62 cakes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 21,
+          "teacher_input_default": true,
+          "text": "Then he made 149 more cakes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "He sold 144 of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "How many cakes would baker still have?",
+          "warnings": []
+        }
+      ],
+      "question": "Baker made 62 cakes. Then he made 149 more cakes. He sold 144 of them. How many cakes would baker still have?",
+      "source_id": "svamp-chal-588"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were 100 dollars in Olivia's wallet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "She collected 148 more dollars from an atm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "After she visited a supermarket there were 159 dollars left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "How much did she spend?",
+          "warnings": []
+        }
+      ],
+      "question": "There were 100 dollars in Olivia's wallet. She collected 148 more dollars from an atm. After she visited a supermarket there were 159 dollars left. How much did she spend?",
+      "source_id": "svamp-chal-312"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "5 storks and 3 birds were sitting on the fence.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "4 more birds came to join them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "How many more birds than storks are sitting on the fence?",
+          "warnings": []
+        }
+      ],
+      "question": "5 storks and 3 birds were sitting on the fence. 4 more birds came to join them. How many more birds than storks are sitting on the fence?",
+      "source_id": "svamp-chal-426"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 17,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Paul had 2 books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 18,
+          "teacher_input_default": true,
+          "text": "After selling some in a garage sale he bought 150 new ones.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "If he has 58 books now How many books did he sell?",
+          "warnings": []
+        }
+      ],
+      "question": "Paul had 2 books. After selling some in a garage sale he bought 150 new ones. If he has 58 books now How many books did he sell?",
+      "source_id": "svamp-chal-933"
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "He then went to see the oranges being harvested.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "He found out that they harvest 31 sacks of ripe oranges and 24 sacks of unripe oranges per day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 218,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 145,
+          "teacher_input_default": true,
+          "text": "How many sacks of unripe oranges will they have after 45 days of harvest?",
+          "warnings": []
+        }
+      ],
+      "question": "He then went to see the oranges being harvested. He found out that they harvest 31 sacks of ripe oranges and 24 sacks of unripe oranges per day. How many sacks of unripe oranges will they have after 45 days of harvest?",
+      "source_id": "svamp-chal-479"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

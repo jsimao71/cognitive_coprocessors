@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Simon, Mark, Kevin, and Carl love collecting stamps.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "They meet up every month to compare and share their collections with each other.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 237,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "During the previous month, Kevin was able to collect 45 stamps while Simon was only able to collect 27.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 291,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 238,
+          "teacher_input_default": true,
+          "text": "How many more stamps does Kevin have more than Simon?",
+          "warnings": []
+        }
+      ],
+      "question": "Simon, Mark, Kevin, and Carl love collecting stamps. They meet up every month to compare and share their collections with each other. During the previous month, Kevin was able to collect 45 stamps while Simon was only able to collect 27. How many more stamps does Kevin have more than Simon?",
+      "source_id": "asdiv-0305"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 32,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Amelia works at the candy store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 33,
+          "teacher_input_default": true,
+          "text": "She has to sell 90 Jet Bars each week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "She sold 45 on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "She sold 16 fewer Jet Bars on Tuesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "How many more Jet Bars does Ameila have to sell?",
+          "warnings": []
+        }
+      ],
+      "question": "Amelia works at the candy store. She has to sell 90 Jet Bars each week. She sold 45 on Monday. She sold 16 fewer Jet Bars on Tuesday. How many more Jet Bars does Ameila have to sell?",
+      "source_id": "asdiv-1002"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Evans has 120 crayons and 30 pieces of paper to give to her students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "What is the largest number of students she can have in her class so that each student gets equal number of crayons and equal number of paper?",
+          "warnings": []
+        }
+      ],
+      "question": "Mrs. Evans has 120 crayons and 30 pieces of paper to give to her students. What is the largest number of students she can have in her class so that each student gets equal number of crayons and equal number of paper?",
+      "source_id": "asdiv-2028"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "94 students signed up for computer classes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "There were 24 second graders and 29 third graders.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "The rest of the students were fourth graders.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 141,
+          "teacher_input_default": true,
+          "text": "How many fourth graders took computer classes?",
+          "warnings": []
+        }
+      ],
+      "question": "94 students signed up for computer classes. There were 24 second graders and 29 third graders. The rest of the students were fourth graders. How many fourth graders took computer classes?",
+      "source_id": "asdiv-0947"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tess is writing a poem.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "She writes 23 words on the first line, 26 words on the second line, 29 words on the third line, 32 words on the fourth line, and 35 words on the fifth line.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 181,
+          "teacher_input_default": true,
+          "text": "If this pattern continues, how many words will Tess write on the sixth line?",
+          "warnings": []
+        }
+      ],
+      "question": "Tess is writing a poem. She writes 23 words on the first line, 26 words on the second line, 29 words on the third line, 32 words on the fourth line, and 35 words on the fifth line. If this pattern continues, how many words will Tess write on the sixth line?",
+      "source_id": "asdiv-1176"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

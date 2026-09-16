@@ -1,0 +1,38 @@
+{
+  "combined_strict_count": 6950,
+  "existing_strict_count": 6025,
+  "input_sha256": {
+    "remote": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\annotations.jsonl": "8376855a31a235af07bf888bf09c17466fbc0f754baa910cbf7547413fe9b7ad",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\attempts.jsonl": "70707f864e12edd9890da309bde1fd465d3c4b74f5b721c13e40dff906bc205f",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\gsm8k\\failures.jsonl": "c88730090318bf698993afa550227dd63c6a4628b3ef3868f150bc35e384a9e5",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run1\\annotations.jsonl": "7983ebbcb7e9deb62677b7410e44c9b86ec7e2e20614aeaefff86e251edd1846",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run1\\attempts.jsonl": "02c1d06647f451acba5156166646382da33870ad9b657e1242bd40361da3b1d2",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\recovery_v2\\retry_run1\\failures.jsonl": "067fd55ecd58c08cbb2cb80df448354538f84d2de871aab92e8bb8e85cf5e7e3",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\annotations.jsonl": "a3401c123e90c8ef923f73bb17894a3f675ec6ec0d11a83de82cb5094772fd83",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\attempts.jsonl": "a8e7af1eba66d5975ef5467810ee9d4f4a367ea2bdeacdf41e41372f54e31abc",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\tatqa\\failures.jsonl": "c1575f579fd3b0911b38a19153ccc8902830f7ea15755c4d79694bdb3bae4a7a"
+    },
+    "sources": {
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\gsm8k_full.jsonl": "85fb981b6fa0079b6f85bd866c807483aeaba7fa66b4e84ab8b0c17fcf58b650",
+      "artifacts\\paper1\\dsl\\openrouter_full_v1\\inputs\\tatqa_arithmetic_full.jsonl": "0391ea3362b58d95c6807a888533a4a5233d6cf2093a2ee15cbecf100a147468"
+    }
+  },
+  "normalization_policy": [
+    "restore dataset from trusted request envelope",
+    "restore source_id from trusted request envelope",
+    "do not alter generated ASL or part mappings",
+    "rerun syntax, lowering, type, execution, semantic lint, and answer checks"
+  ],
+  "output_sha256": {
+    "retry_input": "6e2fe384a7d95b79afb39ffa5645e666bf86654d91c559002d0a8ad5d8e8d071",
+    "salvaged_executable": "25e65bf6fde976307da8c900b7db23f94494e1c4108d9a7db5fc084085788ec0",
+    "salvaged_strict": "b52fe10fd265a50693425b6e08d8de9369e7aacf33b78ceacbb73be47c50ae11",
+    "strict_index": "625a96e3acefca3960118806f35c1aaac80e55f42b992f26bad3ca5f661008ca"
+  },
+  "retry_count": 1229,
+  "salvaged_executable_count": 1108,
+  "salvaged_strict_count": 925,
+  "schema_version": "ccpu.dsl_dataset.remote_program_recovery_summary.v1",
+  "source_count": 8179
+}

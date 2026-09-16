@@ -1,0 +1,82 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "There are 15 cats in a shelter. One-third were adopted, and were replaced with twice the amount that were adopted. Later on, twice as many dogs showed up as there are cats. How many total animals are there in the shelter?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"shelter.animals\", \"animal\", \"shelter\", source(\"total animals are there in the shelter\"))",
+          "observe(at(\"shelter.animals.cats.count\", \"initial\"), 15, \"count\", source(\"15 cats in a shelter\"))",
+          "remove(\"cat_adoption\", \"unspecified_adopter\", at(\"shelter.animals.cats.count\", \"current\"), fraction(at(\"shelter.animals.cats.count\", \"initial\"), 1, 3), source(\"One-third were adopted\"))",
+          "add(\"cat_replacement\", \"unspecified_replacer\", at(\"shelter.animals.cats.count\", \"current\"), scale(event_field(\"cat_adoption\", \"quantity\"), 2), source(\"were replaced with twice the amount that were adopted\"))",
+          "add(\"dog_arrival\", \"dogs\", at(\"shelter.animals.dogs.count\", \"current\"), scale(at(\"shelter.animals.cats.count\", \"current\"), 2), source(\"twice as many dogs showed up as there are cats\"))",
+          "query(\"sum\", \"shelter.animals\", \"current\")"
+        ]
+      },
+      "source_id": "7447"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Coleen loved sprinkles.  At the beginning of the day, she had twelve cans of sprinkles.  After applying sprinkles to her hair, her clothing and her pets, she had 3 less than half as many cans of sprinkles as she started out with.  How many cans of sprinkles remained?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"coleen.sprinkle_cans\", \"sprinkle_can\", \"coleen\", source(\"twelve cans of sprinkles\"))",
+          "observe(at(\"coleen.sprinkle_cans.count\", \"initial\"), 12, \"count\", source(\"At the beginning of the day, she had twelve cans of sprinkles\"))",
+          "consume(\"sprinkle_application\", \"coleen\", at(\"coleen.sprinkle_cans.count\", \"current\"), \"coleen.sprinkle_cans.applied.count\", source(\"applying sprinkles to her hair, her clothing and her pets\"))",
+          "offset(at(\"coleen.sprinkle_cans.count\", \"current\"), fraction(at(\"coleen.sprinkle_cans.count\", \"initial\"), 1, 2), -3, \"count\", source(\"she had 3 less than half as many cans of sprinkles as she started out with\"))",
+          "query(\"remaining_count\", \"coleen.sprinkle_cans\", \"current\")"
+        ]
+      },
+      "source_id": "1089"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "There were 50 candies left in a bowl after Shelly ate 20 candies the previous week. Her friend comes over, bringing twice as much candy as she originally had. Shelly adds this to the bowl and they decide to divide them equally. How much candy did her friend have after eating 10 of her candies?",
+      "repair": {
+        "failure_class": "teacher_ambiguous",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "3316"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Wendi brought home 4 chickens.  After a few days, she brought home enough additional chickens to double the number of chickens she owned.  Then, a neighbor's dog ate one of her chickens.  Finally, Wendi found an additional 4 less than ten chickens and brought them home too.  After this, how many chickens does Wendi have?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"wendi.chickens\", \"chicken\", \"wendi\", source(\"Wendi brought home 4 chickens\"))",
+          "add(\"initial_chicken_arrival\", \"wendi\", at(\"wendi.chickens.count\", \"current\"), 4, source(\"Wendi brought home 4 chickens\"))",
+          "add(\"additional_chickens_to_double\", \"wendi\", at(\"wendi.chickens.count\", \"current\"), at(\"wendi.chickens.count\", \"current\"), source(\"she brought home enough additional chickens to double the number of chickens she owned\"))",
+          "consume(\"dog_eats_chicken\", \"neighbor.dog\", at(\"wendi.chickens.count\", \"current\"), 1, source(\"a neighbor's dog ate one of her chickens\"))",
+          "add(\"final_chicken_arrival\", \"wendi\", at(\"wendi.chickens.count\", \"current\"), \"wendi.chickens.final_arrival.count\", source(\"Wendi found an additional 4 less than ten chickens and brought them home too\"))",
+          "offset(\"wendi.chickens.final_arrival.count\", 10, -4, \"count\", source(\"an additional 4 less than ten chickens\"))",
+          "query(\"remaining_count\", \"wendi.chickens\", \"current\")"
+        ]
+      },
+      "source_id": "953"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Mel is three years younger than Katherine.  When Katherine is two dozen years old, how old will Mel be in years?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "170"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Twenty dozen cups cost $1200 less than the total cost of half a dozen plates sold at $6000 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 197,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "Jerry had a coupon for $500 minus $50, but he got the date wrong and the coupon was no longer valid.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 198,
+          "teacher_input_default": true,
+          "text": "Calculate the total cost of buying each cup.",
+          "warnings": []
+        }
+      ],
+      "question": "Twenty dozen cups cost $1200 less than the total cost of half a dozen plates sold at $6000 each. Jerry had a coupon for $500 minus $50, but he got the date wrong and the coupon was no longer valid. Calculate the total cost of buying each cup.",
+      "source_id": "gsm-plus-01678"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Becky, Jake, and Silvia shared 40 pizzas.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "Each pizza had 80 slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "Becky ate 30 more slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "Silvia ate twice as many slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "If Becky ate 100 slices, how many total slices did they eat?",
+          "warnings": []
+        }
+      ],
+      "question": "Becky, Jake, and Silvia shared 40 pizzas. Each pizza had 80 slices. Becky ate 30 more slices than Jake did. Silvia ate twice as many slices than Jake did. If Becky ate 100 slices, how many total slices did they eat?",
+      "source_id": "gsm-plus-08481"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sadie slept 8 hours on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "On Tuesday, she had to complete an assignment that took 3 hours, so she slept 2 hours less than Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 253,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "On Wednesday, she had another assignment that took 4 hours, but she still managed to sleep the same amount as Tuesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 391,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 254,
+          "teacher_input_default": true,
+          "text": "For the rest of the week, even though she spent 2 hours each day on a hobby, she slept 1 hour more than she did on Tuesday and Wednesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 450,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 392,
+          "teacher_input_default": true,
+          "text": "How many hours did she sleep in total throughout the week?",
+          "warnings": []
+        }
+      ],
+      "question": "Sadie slept 8 hours on Monday. On Tuesday, she had to complete an assignment that took 3 hours, so she slept 2 hours less than Monday. On Wednesday, she had another assignment that took 4 hours, but she still managed to sleep the same amount as Tuesday. For the rest of the week, even though she spent 2 hours each day on a hobby, she slept 1 hour more than she did on Tuesday and Wednesday. How many hours did she sleep in total throughout the week?",
+      "source_id": "gsm-plus-00982"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Out of the 150 teachers on the school basketball court, 60% are history teachers and half of them are women.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 294,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 109,
+          "teacher_input_default": true,
+          "text": "If the rest of the teachers on the court are math teachers, and each teacher sleeps for 6 hours a day, calculate the total time the math teachers collectively spend sleeping in one day.",
+          "warnings": []
+        }
+      ],
+      "question": "Out of the 150 teachers on the school basketball court, 60% are history teachers and half of them are women. If the rest of the teachers on the court are math teachers, and each teacher sleeps for 6 hours a day, calculate the total time the math teachers collectively spend sleeping in one day.",
+      "source_id": "gsm-plus-05326"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company spends $15000 on advertising for a year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "The following year, they decide to spend a third of that amount on advertising.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 131,
+          "teacher_input_default": true,
+          "text": "However, halfway through the year, they decide to increase their advertising budget by 50%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "What's the total amount the company spent on advertising for the two years?",
+          "warnings": []
+        }
+      ],
+      "question": "A company spends $15000 on advertising for a year. The following year, they decide to spend a third of that amount on advertising. However, halfway through the year, they decide to increase their advertising budget by 50%. What's the total amount the company spent on advertising for the two years?",
+      "source_id": "gsm-plus-01787"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

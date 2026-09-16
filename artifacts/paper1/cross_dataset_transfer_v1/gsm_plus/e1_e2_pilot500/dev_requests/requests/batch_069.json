@@ -1,0 +1,362 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A DVD can be played 1000 times before it breaks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "There are two DVDs in the public library, one has been played 3.56 times of one hundred times and the other has been played half of 270 times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 192,
+          "teacher_input_default": true,
+          "text": "How many total times can both DVDs be played before they break?",
+          "warnings": []
+        }
+      ],
+      "question": "A DVD can be played 1000 times before it breaks. There are two DVDs in the public library, one has been played 3.56 times of one hundred times and the other has been played half of 270 times. How many total times can both DVDs be played before they break?",
+      "source_id": "gsm-plus-04962"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A DVD can be played 1000 times before it breaks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 161,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "There are two DVDs in the public library, one has been played 356 times and the other has been played 135 times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 162,
+          "teacher_input_default": true,
+          "text": "The first DVD is borrowed by a library member who plans to play it 3 times a day for a month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 319,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 256,
+          "teacher_input_default": true,
+          "text": "How many total times can both DVDs be played before they break?",
+          "warnings": []
+        }
+      ],
+      "question": "A DVD can be played 1000 times before it breaks. There are two DVDs in the public library, one has been played 356 times and the other has been played 135 times. The first DVD is borrowed by a library member who plans to play it 3 times a day for a month. How many total times can both DVDs be played before they break?",
+      "source_id": "gsm-plus-04963"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A DVD can be played 1000 times before it breaks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "There are two DVDs in the public library, one has been played 356 times and the other has been played some times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 216,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "Both DVDs can be played 1509 times before they break.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 217,
+          "teacher_input_default": true,
+          "text": "How many times does the other DVD have been played?",
+          "warnings": []
+        }
+      ],
+      "question": "A DVD can be played 1000 times before it breaks. There are two DVDs in the public library, one has been played 356 times and the other has been played some times. Both DVDs can be played 1509 times before they break. How many times does the other DVD have been played?",
+      "source_id": "gsm-plus-04964"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In the public library, there are two DVDs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "One DVD has been used 356 times and the other has been used 135 times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 281,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "Given that a DVD has a lifespan of 1000 plays before it becomes unusable, how many more times in total can these two DVDs be used before they are no longer functional?",
+          "warnings": []
+        }
+      ],
+      "question": "In the public library, there are two DVDs. One DVD has been used 356 times and the other has been used 135 times. Given that a DVD has a lifespan of 1000 plays before it becomes unusable, how many more times in total can these two DVDs be used before they are no longer functional?",
+      "source_id": "gsm-plus-04965"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a public library, there are two DVDs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "The first DVD, which has a picture of a cat on the cover,worth $20 can be played 1000 times before it breaks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "It has already been played 356 times during the library's movie nights.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "The second DVD, which has a picture of a dog on the cover, worth $30,can also be played 1000 times before it breaks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 415,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "It has been played 135 times during the library's afternoon movie sessions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 563,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 416,
+          "teacher_input_default": true,
+          "text": "Despite the different images on the covers and the different times they are played, how many total times can both DVDs be played before they break?",
+          "warnings": []
+        }
+      ],
+      "question": "In a public library, there are two DVDs. The first DVD, which has a picture of a cat on the cover,worth $20 can be played 1000 times before it breaks. It has already been played 356 times during the library's movie nights. The second DVD, which has a picture of a dog on the cover, worth $30,can also be played 1000 times before it breaks. It has been played 135 times during the library's afternoon movie sessions. Despite the different images on the covers and the different times they are played, how many total times can both DVDs be played before they break?",
+      "source_id": "gsm-plus-04966"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

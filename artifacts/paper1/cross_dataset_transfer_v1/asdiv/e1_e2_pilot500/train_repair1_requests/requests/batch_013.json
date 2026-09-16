@@ -1,0 +1,468 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Greg and Brad started reading their books at the same time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "Greg read 18 pages a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 86,
+          "teacher_input_default": true,
+          "text": "Brad read 26 pages a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "How many more pages did Brad read than Greg?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "greg.reading.start_time = brad.reading.start_time"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "Preserves the stated equality of their reading start times."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "greg.reading.pages_per_day = 18"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "brad.reading.pages_per_day = 26"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "reading_rate_difference.pages_per_day = brad.reading.pages_per_day - greg.reading.pages_per_day",
+              "RETURN reading_rate_difference.pages_per_day"
+            ],
+            "assumptions": [
+              "Interpreted the requested page difference as the difference in pages read per day."
+            ],
+            "confidence": 0.88,
+            "part_id": 3,
+            "semantic_notes": [
+              "The available comparable page quantities are daily reading rates."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0885"
+      },
+      "question": "Greg and Brad started reading their books at the same time. Greg read 18 pages a day. Brad read 26 pages a day. How many more pages did Brad read than Greg?",
+      "source_context": null,
+      "source_id": "asdiv-0885",
+      "validation_failure": "unresolved reference 'brad.reading.start_time' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "26-18=8"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Peter's Party Zone sells cups in packages of 6 and plates in packages of 8.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 181,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "Shaniya is hosting a birthday party for her little sister and wants to have the same number of each item.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 250,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 182,
+          "teacher_input_default": true,
+          "text": "What is the least number of packages of plates Shaniya needs to buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "cups.items_per_package = 6",
+              "plates.items_per_package = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shaniya.cups.total_items = shaniya.plates.total_items"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "Preserves Shaniya's desired equality between the numbers of cups and plates."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the least positive package count requires integer divisibility or least-common-multiple semantics, which the active arithmetic operator registry cannot express."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2037"
+      },
+      "question": "Peter's Party Zone sells cups in packages of 6 and plates in packages of 8. Shaniya is hosting a birthday party for her little sister and wants to have the same number of each item. What is the least number of packages of plates Shaniya needs to buy?",
+      "source_context": null,
+      "source_id": "asdiv-2037",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "24",
+        "gold_reasoning": "LCM(6,8)=24"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Length of a rectangle is 8 m less than twice its width.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "If the perimeter of the rectangle is 56 m, find its length and width.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rectangle.length_m = rectangle.width_m * 2 - 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rectangle.perimeter_m = 56",
+              "rectangle.width_m = (rectangle.perimeter_m / 2 + 8) / 3",
+              "RETURN rectangle.length_m",
+              "RETURN rectangle.width_m"
+            ],
+            "assumptions": [
+              "Multiple RETURN statements represent the request for both dimensions."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "The width expression combines the stated perimeter with the previously established length-width relation; the earlier length dependency becomes grounded when width is established."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1404"
+      },
+      "question": "Length of a rectangle is 8 m less than twice its width. If the perimeter of the rectangle is 56 m, find its length and width.",
+      "source_context": null,
+      "source_id": "asdiv-1404",
+      "validation_failure": "answer mismatch: actual=12, expected=16",
+      "validator_context": {
+        "correct_answer": "16",
+        "gold_reasoning": "L:Length of the rectangle; W:Width of the rectangle; L=W*2-8; 2L+2W=56"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 33,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anil is 9 years older than Ajith.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 99,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 34,
+          "teacher_input_default": true,
+          "text": "In 10 years, Anil will be twice as old as Ajith was 10 years ago.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 100,
+          "teacher_input_default": true,
+          "text": "Find their present ages.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "anil.age_difference_from_ajith_years = 9",
+              "anil.age_now = ajith.age_now + anil.age_difference_from_ajith_years"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "anil.age_in_10y = anil.age_now + 10",
+              "ajith.age_10y_ago = anil.age_in_10y / 2",
+              "ajith.age_now = ajith.age_10y_ago + 10"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The division by two is the inverse form of the stated relation that Anil's future age is twice Ajith's past age."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN anil.age_now",
+              "RETURN ajith.age_now"
+            ],
+            "assumptions": [
+              "Multiple RETURN statements represent the request for both present ages."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1453"
+      },
+      "question": "Anil is 9 years older than Ajith. In 10 years, Anil will be twice as old as Ajith was 10 years ago. Find their present ages.",
+      "source_context": null,
+      "source_id": "asdiv-1453",
+      "validation_failure": "unresolved reference 'ajith.age_now' from scope 'global'; unresolved reference 'anil.age_now' from scope 'global'; unresolved reference 'anil.age_in_10y' from scope 'global'; unresolved reference 'ajith.age_10y_ago' from scope 'global'; unresolved reference 'anil.age_now' from scope 'global'; unresolved reference 'ajith.age_now' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "48",
+        "gold_reasoning": "x:Ajith's present age; x+19=2(x-10)"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A truck can hold four boxes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "If you needed to move eight hundred seventy-one boxes across town, how many trips would you need to make?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "truck.boxes_per_trip = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The required number of trips is the ceiling of boxes divided by truck capacity, but the active arithmetic operator registry has no ceiling or equivalent integer-rounding operation."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1549"
+      },
+      "question": "A truck can hold four boxes. If you needed to move eight hundred seventy-one boxes across town, how many trips would you need to make?",
+      "source_context": null,
+      "source_id": "asdiv-1549",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "218",
+        "gold_reasoning": "871/4=217 r3"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

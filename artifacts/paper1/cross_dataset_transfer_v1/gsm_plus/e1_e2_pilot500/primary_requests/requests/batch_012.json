@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "$18 is shared among 3 boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 28,
+          "teacher_input_default": true,
+          "text": "The eldest added some money to his share and added another $10 the following day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 172,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "He later needed some money and spent $8 from his total so far.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 173,
+          "teacher_input_default": true,
+          "text": "After saving some more, he was able to triple the amount he had left after spending the $8.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 318,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "If he has $ 39 now, how much did he add to his share?",
+          "warnings": []
+        }
+      ],
+      "question": "$18 is shared among 3 boys. The eldest added some money to his share and added another $10 the following day. He later needed some money and spent $8 from his total so far. After saving some more, he was able to triple the amount he had left after spending the $8. If he has $ 39 now, how much did he add to his share?",
+      "source_id": "gsm-plus-04324"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sadie slept 8 hours on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "For the next two days, she slept 2 hours less, each, because she had to complete some assignments.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If the rest of the week she slept 10 hours more than those two days, how many hours did she sleep in total throughout the week?",
+          "warnings": []
+        }
+      ],
+      "question": "Sadie slept 8 hours on Monday. For the next two days, she slept 2 hours less, each, because she had to complete some assignments. If the rest of the week she slept 10 hours more than those two days, how many hours did she sleep in total throughout the week?",
+      "source_id": "gsm-plus-00977"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Melanie discovered a blueprint online for a toothpick sculpture she wanted to create, which requires 200 toothpicks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "Melanie's mom has a habit of using toothpicks to secure her sandwiches when she serves them for lunch, and she uses 5 toothpicks per sandwich.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 387,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 260,
+          "teacher_input_default": true,
+          "text": "However, she only makes sandwiches on weekends, so Melanie has been able to save 10 toothpicks each week for the past 12 weeks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 586,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 388,
+          "teacher_input_default": true,
+          "text": "If she continues saving toothpicks at the same rate, despite the number of sandwiches her mom makes, how many more weeks will it take her to collect the remaining toothpicks to reach a total of 200?",
+          "warnings": []
+        }
+      ],
+      "question": "Melanie discovered a blueprint online for a toothpick sculpture she wanted to create, which requires 200 toothpicks. Melanie's mom has a habit of using toothpicks to secure her sandwiches when she serves them for lunch, and she uses 5 toothpicks per sandwich. However, she only makes sandwiches on weekends, so Melanie has been able to save 10 toothpicks each week for the past 12 weeks. If she continues saving toothpicks at the same rate, despite the number of sandwiches her mom makes, how many more weeks will it take her to collect the remaining toothpicks to reach a total of 200?",
+      "source_id": "gsm-plus-08630"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 19,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ellen is on a diet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 20,
+          "teacher_input_default": true,
+          "text": "She eats twenty carrots, a salad, and a yogurt every day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "The salad costs her $60, while the yogurt is half the price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 230,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 139,
+          "teacher_input_default": true,
+          "text": "How much does Ellen pay for one carrot every day when in total she pays $110 for her goods?",
+          "warnings": []
+        }
+      ],
+      "question": "Ellen is on a diet. She eats twenty carrots, a salad, and a yogurt every day. The salad costs her $60, while the yogurt is half the price. How much does Ellen pay for one carrot every day when in total she pays $110 for her goods?",
+      "source_id": "gsm-plus-07137"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In class 3B, students are accumulating school points for their behavior.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "If they manage to gather a sufficient number of points collectively, they will be rewarded with a trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "The students in the class include Adam, Martha, Betty, and Tom.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 281,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 241,
+          "teacher_input_default": true,
+          "text": "Adam has been able to collect 50 points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 350,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 282,
+          "teacher_input_default": true,
+          "text": "Betty, being more diligent, has collected 30% more points than Adam.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 351,
+          "teacher_input_default": true,
+          "text": "Martha, on the other hand, has managed to collect 3 times more points than Tom.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 465,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 431,
+          "teacher_input_default": true,
+          "text": "Tom has 30 points less than Betty.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 492,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 466,
+          "teacher_input_default": true,
+          "text": "However, there is a twist.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 581,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 8,
+          "start": 493,
+          "teacher_input_default": true,
+          "text": "The school has decided to deduct 10% of each student's points due to a minor misconduct.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 714,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 9,
+          "start": 582,
+          "teacher_input_default": true,
+          "text": "After this deduction, how many more points does the class need to collect to reach the minimum threshold of 400 points for the trip?",
+          "warnings": []
+        }
+      ],
+      "question": "In class 3B, students are accumulating school points for their behavior. If they manage to gather a sufficient number of points collectively, they will be rewarded with a trip. The students in the class include Adam, Martha, Betty, and Tom. Adam has been able to collect 50 points. Betty, being more diligent, has collected 30% more points than Adam. Martha, on the other hand, has managed to collect 3 times more points than Tom. Tom has 30 points less than Betty. However, there is a twist. The school has decided to deduct 10% of each student's points due to a minor misconduct. After this deduction, how many more points does the class need to collect to reach the minimum threshold of 400 points for the trip?",
+      "source_id": "gsm-plus-05571"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

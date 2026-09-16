@@ -1,0 +1,373 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A nurses\u2019 station orders bandages in bulk packs of 50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "On the first day, the nurses used 38 bandages and ordered one bulk pack of bandages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "On the second day, they used ten fewer bandages and ordered another bulk pack of bandages and used up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "On the third day, they ordered two bulk packs of bandages and only used half a pack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 382,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 328,
+          "teacher_input_default": true,
+          "text": "They had 78 bandages left at the end of the third day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 438,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 383,
+          "teacher_input_default": true,
+          "text": "How many bandages did they start with on the first day?",
+          "warnings": []
+        }
+      ],
+      "question": "A nurses\u2019 station orders bandages in bulk packs of 50. On the first day, the nurses used 38 bandages and ordered one bulk pack of bandages. On the second day, they used ten fewer bandages and ordered another bulk pack of bandages and used up. On the third day, they ordered two bulk packs of bandages and only used half a pack. They had 78 bandages left at the end of the third day. How many bandages did they start with on the first day?",
+      "source_id": "gsm-plus-09523"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sadie slept 9 hours on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "For the next two days, she slept 3 hours less, each, because she had to complete some assignments.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If the rest of the week she slept 2 hour more than those two days, how many hours did she sleep in total throughout the week?",
+          "warnings": []
+        }
+      ],
+      "question": "Sadie slept 9 hours on Monday. For the next two days, she slept 3 hours less, each, because she had to complete some assignments. If the rest of the week she slept 2 hour more than those two days, how many hours did she sleep in total throughout the week?",
+      "source_id": "gsm-plus-00976"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Well's mother sells watermelons, peppers, and oranges at the local store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "A watermelon costs three times what each pepper costs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "An orange costs 5 less than what a watermelon cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 258,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 181,
+          "teacher_input_default": true,
+          "text": "Dillon is sent to the store to buy 4 watermelons, 20 peppers, and 10 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 323,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 259,
+          "teacher_input_default": true,
+          "text": "If Dillon spent a total of 880$, how much does each pepper cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Well's mother sells watermelons, peppers, and oranges at the local store. A watermelon costs three times what each pepper costs. An orange costs 5 less than what a watermelon cost. Dillon is sent to the store to buy 4 watermelons, 20 peppers, and 10 oranges. If Dillon spent a total of 880$, how much does each pepper cost?",
+      "source_id": "gsm-plus-01028"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A cobra, which has 70 spots, has twice as many spots as a mamba.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "There are 40 cobras and 60 mambas in a snake park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 201,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 116,
+          "teacher_input_default": true,
+          "text": "Additionally, there are 30 pythons, each with several spots equal to a mamba's spots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 258,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 202,
+          "teacher_input_default": true,
+          "text": "What is half the number of spots they all have combined?",
+          "warnings": []
+        }
+      ],
+      "question": "A cobra, which has 70 spots, has twice as many spots as a mamba. There are 40 cobras and 60 mambas in a snake park. Additionally, there are 30 pythons, each with several spots equal to a mamba's spots. What is half the number of spots they all have combined?",
+      "source_id": "gsm-plus-02251"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Madeline and her roommate, Keenan, share the cost of groceries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "In total, they spend about $500 per month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 206,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 107,
+          "teacher_input_default": true,
+          "text": "In a four-week month, how many dollars does Keenan spend per week if Madeline pays 70% of the cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Madeline and her roommate, Keenan, share the cost of groceries. In total, they spend about $500 per month. In a four-week month, how many dollars does Keenan spend per week if Madeline pays 70% of the cost?",
+      "source_id": "gsm-plus-06960"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

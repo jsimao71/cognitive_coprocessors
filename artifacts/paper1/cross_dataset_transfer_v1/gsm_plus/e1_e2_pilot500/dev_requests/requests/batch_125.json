@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is making ice cubes with fruit frozen in them for a cocktail party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 196,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "She makes some strawberry cubes, and a number of blueberry cubes equal to 6.5 times the number of strawberry cubes minus 4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 270,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 197,
+          "teacher_input_default": true,
+          "text": "If she makes 116 ice cubes total, how many blueberry cubes does she make?",
+          "warnings": []
+        }
+      ],
+      "question": "Mary is making ice cubes with fruit frozen in them for a cocktail party. She makes some strawberry cubes, and a number of blueberry cubes equal to 6.5 times the number of strawberry cubes minus 4. If she makes 116 ice cubes total, how many blueberry cubes does she make?",
+      "source_id": "gsm-plus-09962"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 95,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is preparing for a cocktail party and decides to make ice cubes with fruit frozen in them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "She makes some strawberry cubes, and a number of blueberry cubes equal to 5 times the number of strawberry cubes minus 4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 302,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "She also makes some raspberry cubes, which are twice the number of strawberry cubes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 379,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 303,
+          "teacher_input_default": true,
+          "text": "If she makes 116 ice cubes in total, how many blueberry cubes does she make?",
+          "warnings": []
+        }
+      ],
+      "question": "Mary is preparing for a cocktail party and decides to make ice cubes with fruit frozen in them. She makes some strawberry cubes, and a number of blueberry cubes equal to 5 times the number of strawberry cubes minus 4. She also makes some raspberry cubes, which are twice the number of strawberry cubes. If she makes 116 ice cubes in total, how many blueberry cubes does she make?",
+      "source_id": "gsm-plus-09963"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is making ice cubes with fruit frozen in them for a cocktail party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 194,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "She makes some strawberry cubes, and a number of blueberry cubes equal to 5 times the number of strawberry cubes minus 4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 268,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 195,
+          "teacher_input_default": true,
+          "text": "If she made 96 blueberry cubes, how many ice cubes did she make in total?",
+          "warnings": []
+        }
+      ],
+      "question": "Mary is making ice cubes with fruit frozen in them for a cocktail party. She makes some strawberry cubes, and a number of blueberry cubes equal to 5 times the number of strawberry cubes minus 4. If she made 96 blueberry cubes, how many ice cubes did she make in total?",
+      "source_id": "gsm-plus-09964"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For a cocktail party, Mary is preparing ice cubes that have fruits frozen inside them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "She creates a certain amount of strawberry cubes, and the quantity of blueberry cubes she makes is 5 times the strawberry cubes less 4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "If the total number of ice cubes she makes is 116, can you determine the number of blueberry cubes she has prepared?",
+          "warnings": []
+        }
+      ],
+      "question": "For a cocktail party, Mary is preparing ice cubes that have fruits frozen inside them. She creates a certain amount of strawberry cubes, and the quantity of blueberry cubes she makes is 5 times the strawberry cubes less 4. If the total number of ice cubes she makes is 116, can you determine the number of blueberry cubes she has prepared?",
+      "source_id": "gsm-plus-09965"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary is preparing for a cocktail party where she plans to serve drinks with fruit-infused ice cubes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "She decides to make two types of ice cubes: strawberry and blueberry.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 171,
+          "teacher_input_default": true,
+          "text": "She also considers making raspberry cubes but eventually decides against it.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 399,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 248,
+          "teacher_input_default": true,
+          "text": "She makes a certain number of strawberry cubes, and the number of blueberry cubes she makes is equal to 5 times the number of strawberry cubes minus 4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 541,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 400,
+          "teacher_input_default": true,
+          "text": "If she ends up making 116 ice cubes in total, despite considering making 10 raspberry cubes, how many blueberry cubes does she end up making?",
+          "warnings": []
+        }
+      ],
+      "question": "Mary is preparing for a cocktail party where she plans to serve drinks with fruit-infused ice cubes. She decides to make two types of ice cubes: strawberry and blueberry. She also considers making raspberry cubes but eventually decides against it. She makes a certain number of strawberry cubes, and the number of blueberry cubes she makes is equal to 5 times the number of strawberry cubes minus 4. If she ends up making 116 ice cubes in total, despite considering making 10 raspberry cubes, how many blueberry cubes does she end up making?",
+      "source_id": "gsm-plus-09966"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

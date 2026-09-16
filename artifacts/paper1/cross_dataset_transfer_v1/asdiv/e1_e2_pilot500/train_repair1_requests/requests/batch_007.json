@@ -1,0 +1,478 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 39,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There were 22 bales of hay in the barn.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "Keith stacked more bales in the barn today.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "There are now 89 bales of hay in the barn.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 168,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "How many bales did he store in the barn ?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "barn.bales_before_today = 22"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "barn.bales_now = barn.bales_before_today + keith.bales_stacked_today"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "barn.bales_now = 89"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN keith.bales_stacked_today"
+            ],
+            "assumptions": [
+              "Interpreted the bales Keith stored as the bales he stacked in the barn today."
+            ],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1363"
+      },
+      "question": "There were 22 bales of hay in the barn. Keith stacked more bales in the barn today. There are now 89 bales of hay in the barn. How many bales did he store in the barn ?",
+      "source_context": null,
+      "source_id": "asdiv-1363",
+      "validation_failure": "unresolved reference 'keith.bales_stacked_today' from scope 'global'; unresolved reference 'keith.bales_stacked_today' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "67",
+        "gold_reasoning": "89-22=67"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A lab technician cuts a 12 inch piece of tubing into two pieces in such a way that one piece is 2 times longer than the other.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "How long are the pieces?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tubing.original_length_inches = 12",
+              "tubing.pieces.count = 2",
+              "tubing.shorter_piece.length_inches = tubing.original_length_inches / (2 + 1)",
+              "tubing.longer_piece.length_inches = tubing.shorter_piece.length_inches * 2"
+            ],
+            "assumptions": [
+              "Interpreted \"2 times longer than\" in the elementary-problem sense of \"2 times as long as.\""
+            ],
+            "confidence": 0.9,
+            "part_id": 0,
+            "semantic_notes": [
+              "The derived piece lengths preserve both the partition of the original tubing and the stated multiplicative relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN tubing.shorter_piece.length_inches",
+              "RETURN tubing.longer_piece.length_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "Both requested piece lengths are returned."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1481"
+      },
+      "question": "A lab technician cuts a 12 inch piece of tubing into two pieces in such a way that one piece is 2 times longer than the other. How long are the pieces?",
+      "source_context": null,
+      "source_id": "asdiv-1481",
+      "validation_failure": "answer mismatch: actual=8, expected=4",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "x:The longer piece; y:The shorter piece; x+y=12; x=2y"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "An English teacher would like to divide 10 boys and 15 girls into groups, each with the same combination of boys and girls and nobody left out.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 201,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of groups that can be formed?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile cannot fully represent the equal-composition and no-remainder grouping constraints because it has no divisibility, remainder, or integer-constraint operator."
+            ],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible group count requires applying the unsupported divisibility constraints from the preceding clause; max alone cannot define the feasible candidate set."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2054"
+      },
+      "question": "An English teacher would like to divide 10 boys and 15 girls into groups, each with the same combination of boys and girls and nobody left out. What is the greatest number of groups that can be formed?",
+      "source_context": null,
+      "source_id": "asdiv-2054",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported, part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "GCD(10,15)=5"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Yadira's mom is buying hot dogs and hot dog buns for the family barbecue.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "Hot dogs come in packs of 12 and hot dog buns come in packs of 9.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "The store does not sell parts of a pack and Yadira's mom wants the same number of hot dogs as hot dog buns.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 325,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 248,
+          "teacher_input_default": true,
+          "text": "What is the smallest total number of hot dogs that Yadira's mom can purchase?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Background context introduces the purchase scenario but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "hot_dog_pack.hot_dogs_per_pack = 12",
+              "hot_dog_bun_pack.buns_per_pack = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile cannot represent the joint constraints that pack counts must be whole numbers and that the resulting hot-dog and bun totals must be equal."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested minimum over positive common multiples requires discrete divisibility or least-common-multiple semantics that are absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2033"
+      },
+      "question": "Yadira's mom is buying hot dogs and hot dog buns for the family barbecue. Hot dogs come in packs of 12 and hot dog buns come in packs of 9. The store does not sell parts of a pack and Yadira's mom wants the same number of hot dogs as hot dog buns. What is the smallest total number of hot dogs that Yadira's mom can purchase?",
+      "source_context": null,
+      "source_id": "asdiv-2033",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported, part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "36",
+        "gold_reasoning": "LCM[12,9]=36"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Joanne is campaigning for class president and plans to distribute some campaign materials: 20 flyers and 16 buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "She wants each classroom to receive an identical set of campaign materials, without having any materials left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 310,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 233,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of classrooms Joanne can distribute materials to?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "joanne.campaign_materials.flyers = 20",
+              "joanne.campaign_materials.buttons = 16"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile cannot express equal per-class allocations together with integer divisibility and zero-remainder constraints."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest classroom count that evenly divides both material counts requires greatest-common-divisor or equivalent integer constraint semantics absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2012"
+      },
+      "question": "Joanne is campaigning for class president and plans to distribute some campaign materials: 20 flyers and 16 buttons. She wants each classroom to receive an identical set of campaign materials, without having any materials left over. What is the greatest number of classrooms Joanne can distribute materials to?",
+      "source_context": null,
+      "source_id": "asdiv-2012",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "GCD(20,16)=4"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

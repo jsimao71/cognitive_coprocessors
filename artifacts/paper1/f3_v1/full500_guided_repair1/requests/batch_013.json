@@ -1,0 +1,103 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "A publishing house decides to create a contest for new writers and will award a total of $800 in prizes to the 18 novels with the most votes. First place will get $200, second place will get $150, third place $120 and the rest of the awards will be paid with the same amount of money. How much money will each writer earn from fourth place onwards?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"publishing_house.contest.prizes\", \"award\", \"publishing_house.contest\", source(\"award a total of $800 in prizes to the 18 novels with the most votes\"))",
+          "observe(at(\"publishing_house.contest.prizes.count\", \"future\"), 18, \"count\", source(\"the 18 novels with the most votes\"))",
+          "observe(at(\"publishing_house.contest.prizes.total.amount\", \"future\"), 800, \"currency\", source(\"a total of $800 in prizes\"))",
+          "partition(\"publishing_house.contest.prizes\", at(\"publishing_house.contest.prizes.total.amount\", \"future\"), source(\"award a total of $800 in prizes to the 18 novels with the most votes\"))",
+          "member(\"publishing_house.contest.prizes\", \"publishing_house.contest.prizes.first\", source(\"First place\"))",
+          "observe(at(\"publishing_house.contest.prizes.first.amount\", \"future\"), 200, \"currency\", source(\"First place will get $200\"))",
+          "member(\"publishing_house.contest.prizes\", \"publishing_house.contest.prizes.second\", source(\"second place\"))",
+          "observe(at(\"publishing_house.contest.prizes.second.amount\", \"future\"), 150, \"currency\", source(\"second place will get $150\"))",
+          "member(\"publishing_house.contest.prizes\", \"publishing_house.contest.prizes.third\", source(\"third place\"))",
+          "observe(at(\"publishing_house.contest.prizes.third.amount\", \"future\"), 120, \"currency\", source(\"third place $120\"))",
+          "collection(\"publishing_house.contest.prizes.fourth_onward\", \"award\", \"publishing_house.contest.prizes\", source(\"the rest of the awards\"))",
+          "same(at(\"publishing_house.contest.prizes.fourth_onward.member.amount\", \"future\"), at(\"publishing_house.contest.prizes.fourth_onward.common.amount\", \"future\"), source(\"the rest of the awards will be paid with the same amount of money\"))",
+          "query(\"value\", at(\"publishing_house.contest.prizes.fourth_onward.common.amount\", \"future\"))"
+        ]
+      },
+      "source_id": "602"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Thomas buys a weight vest.  It weighed 60 pounds and worked well for him in the beginning but after a bit of training he decides he wants to increase the weight by 60%.  The weights come in 2-pound steel ingots.  Each ingot cost $5 and if you buy more than 10 you get a 20% discount.  How much does it cost to get the weight he needs?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "4442"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Danai is decorating her house for Halloween. She puts 12 plastic skulls all around the house. She has 4 broomsticks, 1 for each side of the front and back doors to the house. She puts up 12 spiderwebs around various areas of the house. Danai puts twice as many pumpkins around the house as she put spiderwebs. She also places a large cauldron on the dining room table. If Danai has the budget left to buy 20 more decorations and has 10 left to put up, how many decorations will she put up in all?",
+      "repair": {
+        "failure_class": "teacher_ambiguous",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "1253"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "A farmer owns a hog that recently gave birth to 6 piglets.  If the farmer raises the piglets until they are fully grown, he can sell the fully grown pig for $300.  Each piglet must grow for at least 12 months before it is large enough to be sold. It costs the farmer $10 per month to feed each animal until it is sold.  If the farmer sells 3 pigs after 12 months, and the remaining 3 pigs after 16 months, how much profit did he earn in total (after deducting the cost of food)?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"farmer.hog.offspring\", \"piglet\", \"farmer\", source(\"a hog that recently gave birth to 6 piglets\"))",
+          "produce(\"piglet_birth\", \"farmer.hog\", at(\"farmer.hog.offspring.count\", \"current\"), 6, source(\"hog that recently gave birth to 6 piglets\"))",
+          "observe(at(\"farmer.hog.offspring.sale_price\", \"current\"), 300, \"currency_per_pig\", source(\"sell the fully grown pig for $300\"))",
+          "observe(at(\"farmer.hog.offspring.minimum_growth_duration\", \"current\"), 12, \"month\", source(\"Each piglet must grow for at least 12 months before it is large enough to be sold\"))",
+          "observe(at(\"farmer.hog.offspring.feed_cost_rate\", \"current\"), 10, \"currency_per_animal_month\", source(\"It costs the farmer $10 per month to feed each animal until it is sold\"))",
+          "remove(\"sale_after_12_months\", \"farmer\", at(\"farmer.hog.offspring.count\", \"current\"), 3, source(\"the farmer sells 3 pigs after 12 months\"))",
+          "observe(at(\"farmer.hog.offspring.sale_after_12_months.growth_duration\", \"after_12_months\"), 12, \"month\", source(\"sells 3 pigs after 12 months\"))",
+          "remove(\"sale_after_16_months\", \"farmer\", at(\"farmer.hog.offspring.count\", \"current\"), 3, source(\"the remaining 3 pigs after 16 months\"))",
+          "observe(at(\"farmer.hog.offspring.sale_after_16_months.growth_duration\", \"after_16_months\"), 16, \"month\", source(\"the remaining 3 pigs after 16 months\"))",
+          "product_relation(at(\"farmer.hog.offspring.sale_after_12_months.revenue.amount\", \"after_12_months\"), event_field(\"sale_after_12_months\", \"quantity\"), at(\"farmer.hog.offspring.sale_price\", \"current\"), source(\"he can sell the fully grown pig for $300.  Each piglet must grow for at least 12 months before it is large enough to be sold. It costs the farmer $10 per month to feed each animal until it is sold.  If the farmer sells 3 pigs after 12 months\"))",
+          "product_relation(at(\"farmer.hog.offspring.sale_after_16_months.revenue.amount\", \"after_16_months\"), event_field(\"sale_after_16_months\", \"quantity\"), at(\"farmer.hog.offspring.sale_price\", \"current\"), source(\"he can sell the fully grown pig for $300.  Each piglet must grow for at least 12 months before it is large enough to be sold. It costs the farmer $10 per month to feed each animal until it is sold.  If the farmer sells 3 pigs after 12 months, and the remaining 3 pigs after 16 months\"))",
+          "product_relation(at(\"farmer.hog.offspring.sale_after_12_months.food_cost.amount\", \"after_12_months\"), at(\"farmer.hog.offspring.feed_cost_rate\", \"current\"), at(\"farmer.hog.offspring.sale_after_12_months.growth_duration\", \"after_12_months\"), event_field(\"sale_after_12_months\", \"quantity\"), source(\"It costs the farmer $10 per month to feed each animal until it is sold.  If the farmer sells 3 pigs after 12 months\"))",
+          "product_relation(at(\"farmer.hog.offspring.sale_after_16_months.food_cost.amount\", \"after_16_months\"), at(\"farmer.hog.offspring.feed_cost_rate\", \"current\"), at(\"farmer.hog.offspring.sale_after_16_months.growth_duration\", \"after_16_months\"), event_field(\"sale_after_16_months\", \"quantity\"), source(\"It costs the farmer $10 per month to feed each animal until it is sold.  If the farmer sells 3 pigs after 12 months, and the remaining 3 pigs after 16 months\"))",
+          "sum_relation(at(\"farmer.hog.offspring.sales.revenue.total.amount\", \"after_16_months\"), at(\"farmer.hog.offspring.sale_after_12_months.revenue.amount\", \"after_12_months\"), at(\"farmer.hog.offspring.sale_after_16_months.revenue.amount\", \"after_16_months\"), source(\"If the farmer sells 3 pigs after 12 months, and the remaining 3 pigs after 16 months, how much profit did he earn in total\"))",
+          "sum_relation(at(\"farmer.hog.offspring.food_cost.total.amount\", \"after_16_months\"), at(\"farmer.hog.offspring.sale_after_12_months.food_cost.amount\", \"after_12_months\"), at(\"farmer.hog.offspring.sale_after_16_months.food_cost.amount\", \"after_16_months\"), source(\"the farmer sells 3 pigs after 12 months, and the remaining 3 pigs after 16 months, how much profit did he earn in total (after deducting the cost of food)\"))",
+          "query(\"difference\", at(\"farmer.hog.offspring.food_cost.total.amount\", \"after_16_months\"), at(\"farmer.hog.offspring.sales.revenue.total.amount\", \"after_16_months\"))"
+        ]
+      },
+      "source_id": "1375"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "A global gym decides to replace all of its cardio machines.  They have 20 gyms.  Each gym has 10 bikes, 5 treadmills, and 5 elliptical machines.  The bikes cost $700 each.  The treadmills cost 50% more than that.  The elliptical machines are twice as expensive as the treadmills.  How much does it cost to replace everything?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"global_gym.gyms\", \"gym\", \"global_gym\", source(\"They have 20 gyms\"))",
+          "observe(at(\"global_gym.gyms.count\", \"current\"), 20, \"count\", source(\"They have 20 gyms\"))",
+          "collection(\"global_gym.cardio_machines\", \"cardio_machine\", \"global_gym.gyms\", source(\"all of its cardio machines\"))",
+          "observe(at(\"global_gym.cardio_machines.bike.count_per_gym\", \"current\"), 10, \"count\", source(\"Each gym has 10 bikes, 5 treadmills, and 5 elliptical machines\"))",
+          "observe(at(\"global_gym.cardio_machines.treadmill.count_per_gym\", \"current\"), 5, \"count\", source(\"Each gym has 10 bikes, 5 treadmills, and 5 elliptical machines\"))",
+          "observe(at(\"global_gym.cardio_machines.elliptical_machine.count_per_gym\", \"current\"), 5, \"count\", source(\"Each gym has 10 bikes, 5 treadmills, and 5 elliptical machines\"))",
+          "observe(at(\"global_gym.cardio_machines.bike.unit_cost\", \"current\"), 700, \"dollar\", source(\"The bikes cost $700 each\"))",
+          "percent_more(at(\"global_gym.cardio_machines.treadmill.unit_cost\", \"current\"), at(\"global_gym.cardio_machines.bike.unit_cost\", \"current\"), 50, source(\"The treadmills cost 50% more than that\"))",
+          "multiple(at(\"global_gym.cardio_machines.elliptical_machine.unit_cost\", \"current\"), at(\"global_gym.cardio_machines.treadmill.unit_cost\", \"current\"), 2, source(\"The elliptical machines are twice as expensive as the treadmills\"))",
+          "query(\"value\", at(\"global_gym.cardio_machines.total_replacement_cost\", \"current\"))"
+        ]
+      },
+      "source_id": "6608"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

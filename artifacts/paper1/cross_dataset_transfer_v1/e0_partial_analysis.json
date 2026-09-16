@@ -1,0 +1,59 @@
+{
+  "condition_dataset_counts": {
+    "E0": 1
+  },
+  "datasets": {
+    "mawps": {
+      "E0": {
+        "answer_wilson_95": [
+          0.7546619985365359,
+          0.8520158889742702
+        ],
+        "by_difficulty": {
+          "low": {
+            "correct": 192,
+            "count": 239
+          },
+          "medium": {
+            "correct": 10,
+            "count": 11
+          }
+        },
+        "count": 250,
+        "counts": {
+          "executable": 236,
+          "final_answer_correct": 202,
+          "lowerable_to_ccir": 250,
+          "parse_valid": 250,
+          "type_valid": 250
+        },
+        "generated_tokens_mean": 42.8,
+        "rates": {
+          "executable": 0.944,
+          "final_answer_correct": 0.808,
+          "lowerable_to_ccir": 1.0,
+          "parse_valid": 1.0,
+          "type_valid": 1.0
+        }
+      }
+    }
+  },
+  "macro_answer_accuracy": {
+    "E0": 0.808
+  },
+  "manifests": {
+    "mawps": {
+      "path": "artifacts/paper1/cross_dataset_transfer_v1/mawps/manifest.json",
+      "sha256": "c33c5539d7f25109604bfc62a485a6ad5269e8510edc7d074863d12b37e8bec6"
+    }
+  },
+  "paired_comparisons": {},
+  "predictions": {
+    "mawps:E0": {
+      "diagnostic_sha256": "79426260e89a21214ab2c714c1d44aacc0fc0755d0600b339b9783bc9690e973",
+      "path": "artifacts\\paper1\\cross_dataset_transfer_v1\\mawps\\e0_gsm_lora\\cuda\\shard_0\\predictions.jsonl",
+      "sha256": "c281c52d1f88bfb538b994d244066aee8a1d5a02a39ee2cfd3b262753989caf3"
+    }
+  },
+  "schema_version": "ccpu.paper1.cross_dataset_transfer_analysis.v1"
+}

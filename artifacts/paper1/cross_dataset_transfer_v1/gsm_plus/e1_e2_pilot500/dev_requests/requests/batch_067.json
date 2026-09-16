@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every 2 miles a car drives the tires rotate 725 times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "Jeremy drives 400 miles a month, 300 of those miles are for work.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "If each tire can undergo 10,440,000 rotations how many years before the tire needs to be replaced?",
+          "warnings": []
+        }
+      ],
+      "question": "Every 2 miles a car drives the tires rotate 725 times.  Jeremy drives 400 miles a month, 300 of those miles are for work.  If each tire can undergo 10,440,000 rotations how many years before the tire needs to be replaced?",
+      "source_id": "gsm-plus-04854"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school auditorium has 6 rows of seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "There are 24 seats in each row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "One-third of the seats were occupied by the administrators.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 241,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "One-fourth of the remaining seats were occupied by the parents and the rest were occupied by the students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 296,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 242,
+          "teacher_input_default": true,
+          "text": "How many students were there in the school auditorium?",
+          "warnings": []
+        }
+      ],
+      "question": "The school auditorium has 6 rows of seats. There are 24 seats in each row. One-third of the seats were occupied by the administrators. One-fourth of the remaining seats were occupied by the parents and the rest were occupied by the students. How many students were there in the school auditorium?",
+      "source_id": "gsm-plus-04944"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school auditorium has 40 rows of seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "There are 180 seats in each row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 137,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "One-fourth of the seats were occupied by the administrators.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 243,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 138,
+          "teacher_input_default": true,
+          "text": "One-third of the remaining seats were occupied by the parents and the rest were occupied by the students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 244,
+          "teacher_input_default": true,
+          "text": "How many students were there in the school auditorium?",
+          "warnings": []
+        }
+      ],
+      "question": "The school auditorium has 40 rows of seats. There are 180 seats in each row. One-fourth of the seats were occupied by the administrators. One-third of the remaining seats were occupied by the parents and the rest were occupied by the students. How many students were there in the school auditorium?",
+      "source_id": "gsm-plus-04945"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school auditorium has half of 8 rows of seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "There are 1.8 times of ten seats in each row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "One-fourth of the seats were occupied by the administrators.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "One-third of the remaining seats were occupied by the parents and the rest were occupied by the students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 318,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 264,
+          "teacher_input_default": true,
+          "text": "How many students were there in the school auditorium?",
+          "warnings": []
+        }
+      ],
+      "question": "The school auditorium has half of 8 rows of seats. There are 1.8 times of ten seats in each row. One-fourth of the seats were occupied by the administrators. One-third of the remaining seats were occupied by the parents and the rest were occupied by the students. How many students were there in the school auditorium?",
+      "source_id": "gsm-plus-04946"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The school auditorium has 4 rows of seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "There are 18 seats in each row.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "One-fourth of the seats were occupied by the administrators.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "One-third of the remaining seats were occupied by the parents.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 251,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 199,
+          "teacher_input_default": true,
+          "text": "The rest of the seats were occupied by the students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 310,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 252,
+          "teacher_input_default": true,
+          "text": "However, 5 students had to leave early for a sports event.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 379,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 311,
+          "teacher_input_default": true,
+          "text": "After their departure, 2 more students came in to join the audience.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 454,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 380,
+          "teacher_input_default": true,
+          "text": "How many students were there in the school auditorium after these changes?",
+          "warnings": []
+        }
+      ],
+      "question": "The school auditorium has 4 rows of seats. There are 18 seats in each row. One-fourth of the seats were occupied by the administrators. One-third of the remaining seats were occupied by the parents. The rest of the seats were occupied by the students. However, 5 students had to leave early for a sports event. After their departure, 2 more students came in to join the audience. How many students were there in the school auditorium after these changes?",
+      "source_id": "gsm-plus-04947"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

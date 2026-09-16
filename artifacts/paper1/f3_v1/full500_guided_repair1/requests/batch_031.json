@@ -1,0 +1,101 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Cara has 60 marbles in a bag. 20 of them are yellow, half as many are green, and the remaining marbles are equally divided between red and blue. If Cara picks a marble at random, what are the odds it's blue (expressed as a percentage)?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"cara.bag.marbles\", \"marble\", \"bag\", source(\"Cara has 60 marbles in a bag\"))",
+          "observe(at(\"cara.bag.marbles.count\", \"current\"), 60, \"count\", source(\"Cara has 60 marbles in a bag\"))",
+          "member(\"cara.bag.marbles\", \"cara.bag.marbles.yellow\", source(\"20 of them are yellow\"))",
+          "member(\"cara.bag.marbles\", \"cara.bag.marbles.green\", source(\"half as many are green\"))",
+          "member(\"cara.bag.marbles\", \"cara.bag.marbles.red\", source(\"the remaining marbles are equally divided between red and blue\"))",
+          "member(\"cara.bag.marbles\", \"cara.bag.marbles.blue\", source(\"the remaining marbles are equally divided between red and blue\"))",
+          "partition(\"cara.bag.marbles\", at(\"cara.bag.marbles.count\", \"current\"), source(\"20 of them are yellow, half as many are green, and the remaining marbles are equally divided between red and blue\"))",
+          "observe(at(\"cara.bag.marbles.yellow.count\", \"current\"), 20, \"count\", source(\"20 of them are yellow\"))",
+          "fraction_of(at(\"cara.bag.marbles.green.count\", \"current\"), at(\"cara.bag.marbles.yellow.count\", \"current\"), 1, 2, source(\"half as many are green\"))",
+          "same(at(\"cara.bag.marbles.red.count\", \"current\"), at(\"cara.bag.marbles.blue.count\", \"current\"), source(\"equally divided between red and blue\"))",
+          "query(\"percentage_ratio\", at(\"cara.bag.marbles.blue.count\", \"current\"), at(\"cara.bag.marbles.count\", \"current\"))"
+        ]
+      },
+      "source_id": "4720"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Jenny lives 5000 feet from her school, and every day she walks home.  One day as she was walking home from school, she dropped 1 kernel of popcorn per 25 feet she walked.  Later that evening, a squirrel came and ate one-quarter of the popcorn Jenny had dropped on her way home.  If Jenny walks to school the following morning and counts the popcorn on the ground, what is the total number of popcorn kernels she will find remaining on the ground?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"school_home_route.ground.popcorn_kernels\", \"popcorn_kernel\", \"school_home_route.ground\", source(\"popcorn on the ground\"))",
+          "observe(at(\"jenny.home_school.distance\", \"current\"), 5000, \"foot\", source(\"Jenny lives 5000 feet from her school\"))",
+          "same(at(\"jenny.walked_distance\", \"walk_home_day\"), at(\"jenny.home_school.distance\", \"current\"), source(\"she was walking home from school\"))",
+          "observe(at(\"jenny.popcorn_drop.rate_kernel_count\", \"walk_home_day\"), 1, \"count\", source(\"1 kernel of popcorn per 25 feet she walked\"))",
+          "observe(at(\"jenny.popcorn_drop.rate_distance\", \"walk_home_day\"), 25, \"foot\", source(\"1 kernel of popcorn per 25 feet she walked\"))",
+          "quotient_relation(at(\"jenny.popcorn_drop.rate\", \"walk_home_day\"), at(\"jenny.popcorn_drop.rate_kernel_count\", \"walk_home_day\"), at(\"jenny.popcorn_drop.rate_distance\", \"walk_home_day\"), source(\"1 kernel of popcorn per 25 feet she walked\"))",
+          "rate_relation(\"jenny.popcorn.dropped.count\", at(\"jenny.popcorn_drop.rate\", \"walk_home_day\"), at(\"jenny.walked_distance\", \"walk_home_day\"), source(\"she dropped 1 kernel of popcorn per 25 feet she walked\"))",
+          "add(\"drop_popcorn\", \"jenny\", at(\"school_home_route.ground.popcorn_kernels.count\", \"current\"), \"jenny.popcorn.dropped.count\", source(\"she dropped 1 kernel of popcorn per 25 feet she walked\"))",
+          "consume(\"squirrel_eats_popcorn\", \"squirrel\", at(\"school_home_route.ground.popcorn_kernels.count\", \"current\"), fraction(event_field(\"drop_popcorn\", \"quantity\"), 1, 4), source(\"a squirrel came and ate one-quarter of the popcorn Jenny had dropped on her way home\"))",
+          "query(\"remaining_count\", \"school_home_route.ground.popcorn_kernels\", \"following_morning\")"
+        ]
+      },
+      "source_id": "3846"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Brendan works online and is paid every week. Once he gets the money, he recharges his debit card with half of his pay. In June, he earned $5000 and bought himself a used car worth $1500. What is his total amount of remaining money at the end of the month?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"brendan.earnings.amount\", \"june\"), 5000, \"currency\", source(\"In June, he earned $5000\"))",
+          "add(\"june_earnings\", \"brendan\", at(\"brendan.money.available.amount\", \"current\"), at(\"brendan.earnings.amount\", \"june\"), source(\"In June, he earned $5000\"))",
+          "transfer(\"debit_card_recharge\", \"brendan\", at(\"brendan.money.available.amount\", \"current\"), at(\"brendan.debit_card.balance\", \"current\"), fraction(event_field(\"june_earnings\", \"quantity\"), 1, 2), source(\"he recharges his debit card with half of his pay\"))",
+          "observe(at(\"brendan.used_car.value\", \"purchase\"), 1500, \"currency\", source(\"a used car worth $1500\"))",
+          "remove(\"buy_used_car\", \"brendan\", at(\"brendan.money.available.amount\", \"current\"), at(\"brendan.used_car.value\", \"purchase\"), source(\"bought himself a used car worth $1500\"))",
+          "query(\"value\", at(\"brendan.money.available.amount\", \"end_of_june\"))"
+        ]
+      },
+      "source_id": "6882"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "The rainy season is here, Jan collected 65 gallons of water in a barrel outside her home. She uses 7 gallons of water each to clean the two cars and uses 11 fewer gallons than the two cars to water the plants. Then, she uses half of the remaining gallons of water to wash the plates and clothes. How many gallons of water does Jan use to wash her plates and clothes?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"jan.barrel.water.volume\", \"initial\"), 65, \"gallon\", source(\"Jan collected 65 gallons of water in a barrel outside her home\"))",
+          "observe(at(\"jan.car_cleaning.car_count\", \"current\"), 2, \"count\", source(\"the two cars\"))",
+          "observe(at(\"jan.car_cleaning.water_per_car\", \"current\"), 7, \"gallon\", source(\"7 gallons of water each\"))",
+          "product_relation(\"jan.car_cleaning.water.total\", at(\"jan.car_cleaning.water_per_car\", \"current\"), at(\"jan.car_cleaning.car_count\", \"current\"), source(\"7 gallons of water each to clean the two cars\"))",
+          "consume(\"clean_two_cars\", \"jan\", at(\"jan.barrel.water.volume\", \"current\"), \"jan.car_cleaning.water.total\", source(\"uses 7 gallons of water each to clean the two cars\"))",
+          "offset(\"jan.plant_watering.water.amount\", \"jan.car_cleaning.water.total\", -11, \"gallon\", source(\"uses 11 fewer gallons than the two cars to water the plants\"))",
+          "consume(\"water_plants\", \"jan\", at(\"jan.barrel.water.volume\", \"current\"), \"jan.plant_watering.water.amount\", source(\"uses 11 fewer gallons than the two cars to water the plants\"))",
+          "consume(\"wash_plates_and_clothes\", \"jan\", at(\"jan.barrel.water.volume\", \"current\"), fraction(at(\"jan.barrel.water.volume\", \"current\"), 1, 2), source(\"uses half of the remaining gallons of water to wash the plates and clothes\"))",
+          "query(\"value\", event_field(\"wash_plates_and_clothes\", \"quantity\"))"
+        ]
+      },
+      "source_id": "7046"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "The running time of Beast of War: Armoured Command is 10 minutes longer than that of Alpha Epsilon, which is 30 minutes shorter than that of Millennium. If Millennium runs for 2 hours, what is the running time of Beast of War: Armoured Command in minutes?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "3772"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

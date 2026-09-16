@@ -1,0 +1,373 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Greta\u2019s paycheck is $3000.00.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "She puts 40% of her pay into her retirement account.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "She then uses 25% of her paycheck to make her monthly car payment.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "After funding her retirement and paying for her car, how much money does she have left to spend?",
+          "warnings": []
+        }
+      ],
+      "question": "Greta\u2019s paycheck is $3000.00. She puts 40% of her pay into her retirement account. She then uses 25% of her paycheck to make her monthly car payment. After funding her retirement and paying for her car, how much money does she have left to spend?",
+      "source_id": "gsm-plus-05584"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Brian's friend Bobby has 5 fewer than 3 times as many video games as Brian does.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "Then Bobby gave away a quarter of his video games to his younger brother.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "If Brian has 20 video games but lost 5 right before the comparison was made, how many does Bobby have?",
+          "warnings": []
+        }
+      ],
+      "question": "Brian's friend Bobby has 5 fewer than 3 times as many video games as Brian does. Then Bobby gave away a quarter of his video games to his younger brother. If Brian has 20 video games but lost 5 right before the comparison was made, how many does Bobby have?",
+      "source_id": "gsm-plus-01083"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It's strawberry-picking time on Grandma Concetta's farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "Tony can pick 6 quarts of strawberries per hour, while Bobby picks one less quart of strawberries per hour than Tony.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 312,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks two fewer quarts of strawberries per hour than does Kathy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 313,
+          "teacher_input_default": true,
+          "text": "While they are picking strawberries, they each drank 2 liters of water, but that does not affect their picking speed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 548,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 431,
+          "teacher_input_default": true,
+          "text": "In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+          "warnings": []
+        }
+      ],
+      "question": "It's strawberry-picking time on Grandma Concetta's farm.  Tony can pick 6 quarts of strawberries per hour, while Bobby picks one less quart of strawberries per hour than Tony.  Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks two fewer quarts of strawberries per hour than does Kathy. While they are picking strawberries, they each drank 2 liters of water, but that does not affect their picking speed. In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+      "source_id": "gsm-plus-04182"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 99,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dylan was preparing for a party and needed chicken sausages and fish sausages to make sausage buns.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 100,
+          "teacher_input_default": true,
+          "text": "He bought 38 chicken sausages and 6 more fish sausages than chicken sausages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 245,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 178,
+          "teacher_input_default": true,
+          "text": "However, he realized that he also needed to buy some beef sausages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 301,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 246,
+          "teacher_input_default": true,
+          "text": "He bought twice as many beef sausages as fish sausages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 341,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 302,
+          "teacher_input_default": true,
+          "text": "How many sausages did Dylan buy in all?",
+          "warnings": []
+        }
+      ],
+      "question": "Dylan was preparing for a party and needed chicken sausages and fish sausages to make sausage buns. He bought 38 chicken sausages and 6 more fish sausages than chicken sausages. However, he realized that he also needed to buy some beef sausages. He bought twice as many beef sausages as fish sausages. How many sausages did Dylan buy in all?",
+      "source_id": "gsm-plus-01011"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Betsy and Donovan collaborated on preparing a meal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "The time Betsy spent was 18 minutes more than the time Donovan spent.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "The total time spent on the meal was 98 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 237,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 171,
+          "teacher_input_default": true,
+          "text": "Can you determine the duration of Betsy's contribution in minutes?",
+          "warnings": []
+        }
+      ],
+      "question": "Betsy and Donovan collaborated on preparing a meal. The time Betsy spent was 18 minutes more than the time Donovan spent. The total time spent on the meal was 98 minutes. Can you determine the duration of Betsy's contribution in minutes?",
+      "source_id": "gsm-plus-08493"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

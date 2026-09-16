@@ -1,0 +1,740 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sadie slept 8 hours on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "For the next two days, she slept 2 hours less, each, because she had to complete some assignments.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If the rest of the week she slept 10 hours more than those two days, how many hours did she sleep in total throughout the week?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "sadie.monday.sleep_hours = 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sadie.tuesday.sleep_hours = sadie.monday.sleep_hours - 2",
+              "sadie.wednesday.sleep_hours = sadie.monday.sleep_hours - 2"
+            ],
+            "assumptions": [
+              "Interpreted the next two days after Monday as Tuesday and Wednesday, with each day's sleep two hours below Monday's."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "It is unclear whether 'the rest of the week she slept 10 hours more than those two days' compares the four-day aggregate with the combined sleep on Tuesday and Wednesday, or describes a per-day comparison. These readings produce different weekly totals."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00977"
+      },
+      "question": "Sadie slept 8 hours on Monday. For the next two days, she slept 2 hours less, each, because she had to complete some assignments. If the rest of the week she slept 10 hours more than those two days, how many hours did she sleep in total throughout the week?",
+      "source_context": null,
+      "source_id": "gsm-plus-00977",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "84",
+        "gold_reasoning": "Sadie slept 8 hours on Monday.\nFor the next two days, she slept 2 hours less each, which is 8 - 2 = 6 hours each day. So, for two days, she slept 6 * 2 = 12 hours.\nFor the rest of the week, she slept 10 hours more than those two days, which is 6 + 10 = 16 hours each day. So, for four days, she slept 16 * 4 = 64 hours.\nTherefore, Sadie slept 8 + 12 + 64 =  84 hours in total throughout the week.\n#### 84"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In class 3B, students are accumulating school points for their behavior.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "If they manage to gather a sufficient number of points collectively, they will be rewarded with a trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "The students in the class include Adam, Martha, Betty, and Tom.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 281,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 241,
+          "teacher_input_default": true,
+          "text": "Adam has been able to collect 50 points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 350,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 282,
+          "teacher_input_default": true,
+          "text": "Betty, being more diligent, has collected 30% more points than Adam.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 351,
+          "teacher_input_default": true,
+          "text": "Martha, on the other hand, has managed to collect 3 times more points than Tom.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 465,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 431,
+          "teacher_input_default": true,
+          "text": "Tom has 30 points less than Betty.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 492,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 466,
+          "teacher_input_default": true,
+          "text": "However, there is a twist.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 581,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 8,
+          "start": 493,
+          "teacher_input_default": true,
+          "text": "The school has decided to deduct 10% of each student's points due to a minor misconduct.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 714,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 9,
+          "start": 582,
+          "teacher_input_default": true,
+          "text": "After this deduction, how many more points does the class need to collect to reach the minimum threshold of 400 points for the trip?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause establishes context but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The reward condition is qualitative here; no point threshold is supplied in this clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The clause identifies the class members but supplies no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adam.points_before_deduction = 50"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "betty.points_before_deduction = inc_pct(adam.points_before_deduction, 30)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase '3 times more points than Tom' can mean three times Tom's points in common word-problem usage or Tom's points plus three times Tom's points under a literal 'times more' reading."
+            ],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "tom.points_before_deduction = betty.points_before_deduction - 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 7,
+            "semantic_notes": [
+              "This is a discourse transition and introduces no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adam.points_after_deduction = dec_pct(adam.points_before_deduction, 10)",
+              "martha.points_after_deduction = dec_pct(martha.points_before_deduction, 10)",
+              "betty.points_after_deduction = dec_pct(betty.points_before_deduction, 10)",
+              "tom.points_after_deduction = dec_pct(tom.points_before_deduction, 10)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 8,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "class_3b.trip_threshold_points = 400",
+              "class_3b.points_after_deduction = sum(adam.points_after_deduction, martha.points_after_deduction, betty.points_after_deduction, tom.points_after_deduction)",
+              "class_3b.additional_points_needed = class_3b.trip_threshold_points - class_3b.points_after_deduction",
+              "RETURN class_3b.additional_points_needed"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 9,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05571"
+      },
+      "question": "In class 3B, students are accumulating school points for their behavior. If they manage to gather a sufficient number of points collectively, they will be rewarded with a trip. The students in the class include Adam, Martha, Betty, and Tom. Adam has been able to collect 50 points. Betty, being more diligent, has collected 30% more points than Adam. Martha, on the other hand, has managed to collect 3 times more points than Tom. Tom has 30 points less than Betty. However, there is a twist. The school has decided to deduct 10% of each student's points due to a minor misconduct. After this deduction, how many more points does the class need to collect to reach the minimum threshold of 400 points for the trip?",
+      "source_context": null,
+      "source_id": "gsm-plus-05571",
+      "validation_failure": "non-ok semantic parts: part 5=ambiguous",
+      "validator_context": {
+        "correct_answer": "171",
+        "gold_reasoning": "First, let's find out how many points Betty has collected. She has collected 30% more points than Adam, who has 50 points. So, Betty has collected 50 + 50*30/100 = 65 points.\n\nTom has 30 points less than Betty, so Tom has 65 - 30 = 35 points.\n\nMartha has collected 3 times more points than Tom, so Martha has 3 * 35 = 105 points.\n\nSo, before the deduction, the class has collected a total of 50 (Adam) + 65 (Betty) + 35 (Tom) + 105 (Martha) = 255 points.\n\nThe school deducts 10% of each student's points, so the total points after deduction is 255 - 255*10/100 = 229.5 points.\n\nTo reach the minimum threshold of 400 points for the trip, the class needs to collect 400 - 229.5 = 170.5 points more.\n\nHowever, since points are usually whole numbers, we can round this up to the nearest whole number. So, the class needs to collect 171 more points.\n\nSo, the final answer is\n#### 171"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Peter has twice as many socks as Jack and half times as many dishes as Jack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Jack collected twice as many dishes as socks in the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 350,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "If Jack collected 60 dishes, and each of them bought 5 more pairs of socks and 3 more dishes from a nearby store, calculate the total number of socks and dishes they have together, excluding the newly bought items?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "peter.socks = jack.socks * 2",
+              "peter.dishes = jack.dishes / 2"
+            ],
+            "assumptions": [
+              "\u201cHalf times as many\u201d means half as many."
+            ],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jack.dishes = jack.socks * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jack.dishes = 60",
+              "peter.newly_bought.sock_pairs = 5",
+              "jack.newly_bought.sock_pairs = 5",
+              "peter.newly_bought.dishes = 3",
+              "jack.newly_bought.dishes = 3",
+              "peter_and_jack.before_new_purchases.total_socks_and_dishes = peter.socks + jack.socks + peter.dishes + jack.dishes",
+              "RETURN peter_and_jack.before_new_purchases.total_socks_and_dishes"
+            ],
+            "assumptions": [
+              "\u201cEach of them\u201d refers to Peter and Jack.",
+              "Because the query excludes newly bought items, sock pairs are recorded without converting them into individual socks."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "New purchases are retained as distinct state but excluded from the requested aggregate."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06758"
+      },
+      "question": "Peter has twice as many socks as Jack and half times as many dishes as Jack. Jack collected twice as many dishes as socks in the store. If Jack collected 60 dishes, and each of them bought 5 more pairs of socks and 3 more dishes from a nearby store, calculate the total number of socks and dishes they have together, excluding the newly bought items?",
+      "source_context": null,
+      "source_id": "gsm-plus-06758",
+      "validation_failure": "unresolved reference 'jack.socks' from scope 'global'; unresolved reference 'jack.socks' from scope 'global'; unresolved reference 'peter.socks' from scope 'global'; unresolved reference 'peter_and_jack.before_new_purchases.total_socks_and_dishes' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "180",
+        "gold_reasoning": "Since Jack collected twice as many dishes as socks, he has 60/2 = <<60/2=30>>30 socks.\nIn total, he has 30+60 = <<30+60=90>>90 socks and dishes.\nPeter has twice as many socks as jack which totals 2*30 = <<2*30=60>>60 socks.\nHe also has half times as many dishes as Jack which is 1/2*60 = 30 dishes.\nIn total, he has 60+30 = <<60+30=90>>90 socks and dishes.\nThe total number of socks and dishes they both have is 90+90 = <<90+90=180>>180\n#### 180"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Shelly's 3 kids spent all day at the water park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Mitchel, who had a blue swimsuit, went down the water slide 30 times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 119,
+          "teacher_input_default": true,
+          "text": "Anne, who was wearing a red swimsuit, went down the slide 30% less than Mitchel, even though she had 5 more chances to go down the slide.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 367,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 257,
+          "teacher_input_default": true,
+          "text": "Robert, who was wearing a green swimsuit and had 20 more chances than Anne, went down 4 times as much as Anne.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 458,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 368,
+          "teacher_input_default": true,
+          "text": "Despite the extra chances, the number of times they went down the slide remained the same.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 541,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 459,
+          "teacher_input_default": true,
+          "text": "How many times did Robert, the one in the green swimsuit, go down the water slide?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "shelly.kids.count = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mitchel.swimsuit.color = \"blue\"",
+              "mitchel.water_slide.descents = 30"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "anne.swimsuit.color = \"red\"",
+              "anne.water_slide.descents = dec_pct(mitchel.water_slide.descents, 30)",
+              "anne.water_slide.chances = mitchel.water_slide.chances + 5"
+            ],
+            "assumptions": [
+              "The five additional chances are relative to Mitchel's chances."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "Mitchel's chance count is a legitimate forward dependency introduced by the comparison."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "robert.swimsuit.color = \"green\"",
+              "robert.water_slide.chances = anne.water_slide.chances + 20",
+              "robert.water_slide.descents = anne.water_slide.descents * 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "It is unclear whose descent count remained the same and which earlier state supplies the comparison baseline."
+            ],
+            "confidence": 0.35,
+            "part_id": 4,
+            "semantic_notes": [
+              "The statement cannot be reconciled uniquely with the distinct descent counts already specified."
+            ],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "RETURN robert.water_slide.descents"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02038"
+      },
+      "question": "Shelly's 3 kids spent all day at the water park. Mitchel, who had a blue swimsuit, went down the water slide 30 times. Anne, who was wearing a red swimsuit, went down the slide 30% less than Mitchel, even though she had 5 more chances to go down the slide. Robert, who was wearing a green swimsuit and had 20 more chances than Anne, went down 4 times as much as Anne. Despite the extra chances, the number of times they went down the slide remained the same. How many times did Robert, the one in the green swimsuit, go down the water slide?",
+      "source_context": null,
+      "source_id": "gsm-plus-02038",
+      "validation_failure": "non-ok semantic parts: part 4=ambiguous",
+      "validator_context": {
+        "correct_answer": "84",
+        "gold_reasoning": "Anne went down the slide 30% less than Mitchel who went down 30 times so that's .30*30 = <<30*.01*30=9>>9 times less\nMitchel went down 30 times and Anne went down 9 times less than him for a total of 30-9 = <<30-9=21>>21 times\nRobert went down the slide 4 times as much as Anne, who went down 21 times so Robert went down the slide 4*21 = <<4*21=84>>84 times\n#### 84"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John just started watching a new show.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "Each episode is 20 minutes long, and there are half as many episodes in total as there are minutes per episode.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 218,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "There is a three-minute commercial in between every two episodes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 219,
+          "teacher_input_default": true,
+          "text": "How many minutes will John spend watching the show if he watches every episode?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "Context-only clause introducing John and the show."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "show.episode.duration_minutes = 20",
+              "show.episodes.total = show.episode.duration_minutes / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The unusual comparison between episode count and minutes per episode is preserved as stated."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "show.commercial.duration_minutes = 3",
+              "show.commercial.breaks = show.episodes.total / 2"
+            ],
+            "assumptions": [
+              "A commercial occurs once per completed group of two episodes."
+            ],
+            "confidence": 0.88,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.show_watching.episode_minutes = show.episode.duration_minutes * show.episodes.total",
+              "john.show_watching.commercial_minutes = show.commercial.duration_minutes * show.commercial.breaks",
+              "john.show_watching.total_minutes = john.show_watching.episode_minutes + john.show_watching.commercial_minutes",
+              "RETURN john.show_watching.total_minutes"
+            ],
+            "assumptions": [
+              "Watching every episode includes all interspersed commercial breaks described in the question."
+            ],
+            "confidence": 0.96,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07715"
+      },
+      "question": "John just started watching a new show.  Each episode is 20 minutes long, and there are half as many episodes in total as there are minutes per episode.  There is a three-minute commercial in between every two episodes. How many minutes will John spend watching the show if he watches every episode?",
+      "source_context": null,
+      "source_id": "gsm-plus-07715",
+      "validation_failure": "answer mismatch: actual=215, expected=227",
+      "validator_context": {
+        "correct_answer": "227",
+        "gold_reasoning": "Since there are half as many episodes as the number of minutes per episode, we perform 20/2=<<20/2=10>>10 episodes in total.\nSince each episode is 20 minutes long, to find the total run time we perform 10*20= <<10*20=200>>200 minutes of run time in total.\nThere is a three-minute commercial in between every two episodes.\nThus,(10-1)*3+200=227\n#### 227"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 39,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam had seventy-nine dollars saved up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "After doing some chores his mother gave him another thirteen dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "How much money does he have total?",
+          "warnings": []
+        }
+      ],
+      "question": "Adam had seventy-nine dollars saved up. After doing some chores his mother gave him another thirteen dollars. How much money does he have total?",
+      "source_id": "asdiv-2131"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ava bagged the plastic bottles after a recycling drive.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "She placed 45 bottles in the first bag, 53 bottles in the second bag, 61 bottles in the third bag, and 69 bottles in the fourth bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 271,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "If this pattern continues, how many plastic bottles will Ava put in the fifth bag?",
+          "warnings": []
+        }
+      ],
+      "question": "Ava bagged the plastic bottles after a recycling drive. She placed 45 bottles in the first bag, 53 bottles in the second bag, 61 bottles in the third bag, and 69 bottles in the fourth bag. If this pattern continues, how many plastic bottles will Ava put in the fifth bag?",
+      "source_id": "asdiv-1178"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Penny's class is going to Animaland, the largest zoo on earth, for their science field trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 144,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "The zoo has a variety of wild animals in captivity.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 145,
+          "teacher_input_default": true,
+          "text": "Their first destination was the aviary.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 237,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "The aviary has 3 species of eagles on show that day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 303,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 238,
+          "teacher_input_default": true,
+          "text": "They have 20 Bald Eagles, 15 Harpy Eagles, and 30 Crowned Eagles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 344,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 304,
+          "teacher_input_default": true,
+          "text": "How many eagles are on display that day?",
+          "warnings": []
+        }
+      ],
+      "question": "Penny's class is going to Animaland, the largest zoo on earth, for their science field trip. The zoo has a variety of wild animals in captivity. Their first destination was the aviary. The aviary has 3 species of eagles on show that day. They have 20 Bald Eagles, 15 Harpy Eagles, and 30 Crowned Eagles. How many eagles are on display that day?",
+      "source_id": "asdiv-0220"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 19,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adam had 5 dollars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 20,
+          "teacher_input_default": true,
+          "text": "At the store he spent $2 on a new game.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "If he got another 5 dollars for his allowance, how much money does he have now?",
+          "warnings": []
+        }
+      ],
+      "question": "Adam had 5 dollars. At the store he spent $2 on a new game. If he got another 5 dollars for his allowance, how much money does he have now?",
+      "source_id": "asdiv-2168"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Next food item she has to prepare is soup.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "She needs 280 cups of mushroom soup.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "If the first team made 90 cups, and the third team made 70 cups, how any cups should the second team prepare in order to meet the required amount of soup?",
+          "warnings": []
+        }
+      ],
+      "question": "Next food item she has to prepare is soup. She needs 280 cups of mushroom soup. If the first team made 90 cups, and the third team made 70 cups, how any cups should the second team prepare in order to meet the required amount of soup?",
+      "source_id": "asdiv-0341"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Stephen borrowed $3000 from his sister and promised to return it with an additional 20% of the money he owed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 252,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "For 11 months Stephen will give his sister $250 per month and the remaining amount, including the interest, will be paid on the twelfth month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 300,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 253,
+          "teacher_input_default": true,
+          "text": "How much will Stephen pay in the twelfth month?",
+          "warnings": []
+        }
+      ],
+      "question": "Stephen borrowed $3000 from his sister and promised to return it with an additional 20% of the money he owed. For 11 months Stephen will give his sister $250 per month and the remaining amount, including the interest, will be paid on the twelfth month. How much will Stephen pay in the twelfth month?",
+      "source_id": "gsm-plus-09705"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 36,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day, James receives 80 emails.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 91,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 37,
+          "teacher_input_default": true,
+          "text": "Out of these, he doesn't need to reply to 20% of them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "The remaining emails are the ones he responds to.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 142,
+          "teacher_input_default": true,
+          "text": "Can you calculate how many emails he replies to in a work week that lasts for 5 days?",
+          "warnings": []
+        }
+      ],
+      "question": "Every day, James receives 80 emails. Out of these, he doesn't need to reply to 20% of them. The remaining emails are the ones he responds to. Can you calculate how many emails he replies to in a work week that lasts for 5 days?",
+      "source_id": "gsm-plus-08509"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In one hour, Ezra read twice as many books as Ahmed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Ezra has read 300 books this hour and decided to read some more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 152,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "They both read 675 books in total.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "How many books does Ezra decide to read more?",
+          "warnings": []
+        }
+      ],
+      "question": "In one hour, Ezra read twice as many books as Ahmed. Ezra has read 300 books this hour and decided to read some more. They both read 675 books in total. How many books does Ezra decide to read more?",
+      "source_id": "gsm-plus-06148"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Juan asked his neighbor, Herb, how much his house was worth.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "Herb answered that he paid some money for the house.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "If Juan's house is 30% less expensive than Herb's, calculate the value of the two houses combined is 129200.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "How much is Herb's house?",
+          "warnings": []
+        }
+      ],
+      "question": "Juan asked his neighbor, Herb, how much his house was worth. Herb answered that he paid some money for the house. If Juan's house is 30% less expensive than Herb's, calculate the value of the two houses combined is 129200. How much is Herb's house?",
+      "source_id": "gsm-plus-04660"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John buys 12 bottles of scotch for a total cost of $300.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "He also buys twice as many bottles of cognac that cost 50% more per bottle.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 172,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "How much does he spend on everything?",
+          "warnings": []
+        }
+      ],
+      "question": "John buys 12 bottles of scotch for a total cost of $300.  He also buys twice as many bottles of cognac that cost 50% more per bottle.  How much does he spend on everything?",
+      "source_id": "gsm-plus-09576"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

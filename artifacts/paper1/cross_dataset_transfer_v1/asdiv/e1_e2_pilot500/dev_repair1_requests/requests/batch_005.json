@@ -1,0 +1,398 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "I am three times as old as my son.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "Five years later, I shall be two and a half times as old as my son.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "How old am I and how old is my son?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "speaker.age_now = speaker.son.age_now * 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "speaker.age_in_5_years = speaker.age_now + 5",
+              "speaker.son.age_in_5_years = speaker.son.age_now + 5",
+              "speaker.age_in_5_years = speaker.son.age_in_5_years * 2.5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN speaker.age_now",
+              "RETURN speaker.son.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1415"
+      },
+      "question": "I am three times as old as my son. Five years later, I shall be two and a half times as old as my son. How old am I and how old is my son?",
+      "source_context": null,
+      "source_id": "asdiv-1415",
+      "validation_failure": "unresolved reference 'speaker.son.age_now' from scope 'global'; unresolved reference 'speaker.age_now' from scope 'global'; unresolved reference 'speaker.son.age_now' from scope 'global'; unresolved reference 'speaker.son.age_in_5_years' from scope 'global'; unresolved reference 'speaker.age_now' from scope 'global'; unresolved reference 'speaker.son.age_now' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "45",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The numerator of a fraction is 3 less than its denominator.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 168,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "If the numerator is increased by 1 and the denominator is increased by 3, the fraction becomes equal to 1/2.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 196,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 169,
+          "teacher_input_default": true,
+          "text": "Find the original fraction.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "fraction.original.numerator = fraction.original.denominator - 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fraction.increased.numerator = fraction.original.numerator + 1",
+              "fraction.increased.denominator = fraction.original.denominator + 3",
+              "fraction.increased.numerator = fraction.increased.denominator / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fraction.original.value = fraction.original.numerator / fraction.original.denominator",
+              "RETURN fraction.original.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1449"
+      },
+      "question": "The numerator of a fraction is 3 less than its denominator. If the numerator is increased by 1 and the denominator is increased by 3, the fraction becomes equal to 1/2. Find the original fraction.",
+      "source_context": null,
+      "source_id": "asdiv-1449",
+      "validation_failure": "anonymous operation-ledger target: fraction.original.value",
+      "validator_context": {
+        "correct_answer": "4/7",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If 28 less than five times a certain number is 232.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "What is the number?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "equation.subtracted_amount = 28",
+              "equation.given_total = 232",
+              "certain_number.five_times = equation.given_total + equation.subtracted_amount",
+              "certain_number.value = certain_number.five_times / 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The stated equation is represented in an equivalent inverse form while retaining both source literals."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN certain_number.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1454"
+      },
+      "question": "If 28 less than five times a certain number is 232. What is the number?",
+      "source_context": null,
+      "source_id": "asdiv-1454",
+      "validation_failure": "anonymous operation-ledger target: certain_number.value",
+      "validator_context": {
+        "correct_answer": "52",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a room containing 45 students there were twice as many girls as boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "How many of each, were there?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "room.students.total = 45",
+              "room.girls.count = room.boys.count * 2",
+              "room.boys.count = room.students.total - room.girls.count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN room.girls.count",
+              "RETURN room.boys.count"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1461"
+      },
+      "question": "In a room containing 45 students there were twice as many girls as boys. How many of each, were there?",
+      "source_context": null,
+      "source_id": "asdiv-1461",
+      "validation_failure": "unresolved reference 'room.boys.count' from scope 'global'; unresolved reference 'room.girls.count' from scope 'global'; unresolved reference 'room.girls.count' from scope 'global'; unresolved reference 'room.boys.count' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "30",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If Mr. Brown and his son together had $220, and Mr. Brown had 10 times as much as his son, how much money had each?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "family.money.total = 220",
+              "mr_brown.money = son.money * 10",
+              "son.money = family.money.total - mr_brown.money",
+              "RETURN mr_brown.money",
+              "RETURN son.money"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1477"
+      },
+      "question": "If Mr. Brown and his son together had $220, and Mr. Brown had 10 times as much as his son, how much money had each?",
+      "source_context": null,
+      "source_id": "asdiv-1477",
+      "validation_failure": "unresolved reference 'son.money' from scope 'global'; unresolved reference 'mr_brown.money' from scope 'global'; unresolved reference 'mr_brown.money' from scope 'global'; unresolved reference 'son.money' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

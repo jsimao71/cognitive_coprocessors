@@ -1,0 +1,474 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jamal and Moshe began a business with a capital of $7500.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "If Jamal furnished half as much capital as Moshe, how much did each furnish?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "business.total_capital = 7500"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "moshe.furnished_capital = business.total_capital / (1 + 1 / 2)",
+              "jamal.furnished_capital = moshe.furnished_capital / 2",
+              "RETURN jamal.furnished_capital",
+              "RETURN moshe.furnished_capital"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1480"
+      },
+      "question": "Jamal and Moshe began a business with a capital of $7500. If Jamal furnished half as much capital as Moshe, how much did each furnish?",
+      "source_context": null,
+      "source_id": "asdiv-1480",
+      "validation_failure": "answer mismatch: actual=5000, expected=2500",
+      "validator_context": {
+        "correct_answer": "2500",
+        "gold_reasoning": "x:Jamal's capital; y:Moshe's capital; x+y=7500; x=(1/2)*y"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 29,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rosa had sixty-seven flowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 30,
+          "teacher_input_default": true,
+          "text": "Andre gave her some more flowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "Now, Rosa has ninety flowers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "How many flowers did Andre give to Rosa?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rosa.before_gift.flowers = 67"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rosa.after_gift.flowers = rosa.before_gift.flowers + andre.gift_to_rosa.flowers"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rosa.after_gift.flowers = 90"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN andre.gift_to_rosa.flowers"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0136"
+      },
+      "question": "Rosa had sixty-seven flowers. Andre gave her some more flowers. Now, Rosa has ninety flowers. How many flowers did Andre give to Rosa?",
+      "source_context": null,
+      "source_id": "asdiv-0136",
+      "validation_failure": "unresolved reference 'andre.gift_to_rosa.flowers' from scope 'global'; unresolved reference 'andre.gift_to_rosa.flowers' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "23",
+        "gold_reasoning": "90-67=23"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom had $19 and he wanted to buy as many folders as he could.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "If one folder costs $2, how many folders can Tom buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tom.available_money.dollars = 19"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause requires maximizing a discrete count of whole folders under a budget. The active arithmetic profile has division but no floor, integer-domain, or constrained-maximization operator."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0775"
+      },
+      "question": "Tom had $19 and he wanted to buy as many folders as he could. If one folder costs $2, how many folders can Tom buy?",
+      "source_context": null,
+      "source_id": "asdiv-0775",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "19/2=9 r1"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 42,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A transport company bought 95 tons of oil.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 43,
+          "teacher_input_default": true,
+          "text": "A large barrel can hold 6 tons of oil and a small barrel can hold 5 tons of oil.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 244,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "In order to use the least number of barrels and have every barrel fully occupied, how many small barrels should be used?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "transport_company.oil.tons = 95"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "large_barrel.capacity_oil_tons = 6",
+              "small_barrel.capacity_oil_tons = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires nonnegative integer barrel counts satisfying an exact-capacity constraint and minimizing their sum. The active arithmetic profile cannot express integer constraints or constrained optimization."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0794"
+      },
+      "question": "A transport company bought 95 tons of oil. A large barrel can hold 6 tons of oil and a small barrel can hold 5 tons of oil. In order to use the least number of barrels and have every barrel fully occupied, how many small barrels should be used?",
+      "source_context": null,
+      "source_id": "asdiv-0794",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "95/6=15 r5; 5/5=1"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Amanda and Sadie each have a band.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "Amanda's band plays songs in sets of 2 and Sadie's band plays songs in sets of 9.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "After performing together, both bands realize that they have played the same number of songs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 279,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 211,
+          "teacher_input_default": true,
+          "text": "What is the smallest number of songs each band could have performed?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "amanda.band.owner = \"amanda\"",
+              "sadie.band.owner = \"sadie\""
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "amanda.band.songs_per_set = 2",
+              "sadie.band.songs_per_set = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "amanda.band.total_songs = amanda.band.songs_per_set * amanda.band.set_count",
+              "sadie.band.total_songs = sadie.band.songs_per_set * sadie.band.set_count",
+              "amanda.band.total_songs = sadie.band.total_songs"
+            ],
+            "assumptions": [
+              "Each band performed a whole number of its stated sets."
+            ],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query asks for the smallest positive common multiple of the two set sizes. The active arithmetic profile has no integer-domain, divisibility, or least-common-multiple operator."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1218"
+      },
+      "question": "Amanda and Sadie each have a band. Amanda's band plays songs in sets of 2 and Sadie's band plays songs in sets of 9. After performing together, both bands realize that they have played the same number of songs. What is the smallest number of songs each band could have performed?",
+      "source_context": null,
+      "source_id": "asdiv-1218",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "18",
+        "gold_reasoning": "LCM[2,9]=18"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,653 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John just started watching a new show.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "There are half as many episodes in total as there are minutes per episode.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "John spent watching the show for 200 minites if he watches every episode, how many minutes is each episode?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause supplies narrative context but no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "show.episodes.total = show.episode.duration_minutes / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.show.total_watch_minutes = 200",
+              "john.show.total_watch_minutes = show.episodes.total * show.episode.duration_minutes",
+              "RETURN show.episode.duration_minutes"
+            ],
+            "assumptions": [
+              "John watches every episode exactly once."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The viewing-time relation preserves the dependency between episode count and episode duration."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07716"
+      },
+      "question": "John just started watching a new show.  There are half as many episodes in total as there are minutes per episode. John spent watching the show for 200 minites if he watches every episode, how many minutes is each episode?",
+      "source_context": null,
+      "source_id": "gsm-plus-07716",
+      "validation_failure": "unresolved reference 'show.episode.duration_minutes' from scope 'global'; unresolved reference 'show.episodes.total' from scope 'global'; unresolved reference 'show.episode.duration_minutes' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "Let the total number of episodes be x and the length of each episode be 2x, \nthen 2x*x=200,x=10,2x=20\nthus, each episode is 20 minutes\n#### 20"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mike, Jim, and Tony are three buddies who engaged in a friendly competition.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "After completing three rounds, Mike accumulated 21 points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 250,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "Jim, on the other hand, scored 3 points fewer than Mike, while Tony managed to score twice as many points as Mike.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 343,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 251,
+          "teacher_input_default": true,
+          "text": "In the subsequent round, any player with more than 20 points is awarded an additional point.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 444,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 344,
+          "teacher_input_default": true,
+          "text": "What is the total number of points that all three players have after the bonus points are given out?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces the three competitors but no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mike.after_three_rounds.points = 21"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jim.after_three_rounds.points = mike.after_three_rounds.points - 3",
+              "tony.after_three_rounds.points = mike.after_three_rounds.points * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause specifies a conditional threshold rule, but the active arithmetic profile has neither a registered comparison operator nor a conditional-selection operator with which to preserve that rule."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "all_players.after_bonus.total_points = sum(mike.after_bonus.points, jim.after_bonus.points, tony.after_bonus.points)",
+              "RETURN all_players.after_bonus.total_points"
+            ],
+            "assumptions": [],
+            "confidence": 0.9,
+            "part_id": 4,
+            "semantic_notes": [
+              "The component paths are legitimate forward semantic dependencies established by the preceding bonus rule, although that rule is unsupported by the active profile."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02349"
+      },
+      "question": "Mike, Jim, and Tony are three buddies who engaged in a friendly competition. After completing three rounds, Mike accumulated 21 points. Jim, on the other hand, scored 3 points fewer than Mike, while Tony managed to score twice as many points as Mike. In the subsequent round, any player with more than 20 points is awarded an additional point. What is the total number of points that all three players have after the bonus points are given out?",
+      "source_context": null,
+      "source_id": "gsm-plus-02349",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "83",
+        "gold_reasoning": "After 3 rounds Jim has 21 points - 3 points = <<21-3=18>>18 points.\nTony has 2 times more points than Mike, so he has 2 * 21 points = <<2*21=42>>42 points.\nIn total they have 42 points + 18 points + 21 points = <<42+18+21=81>>81 points.\nOnly two of them have over 20 points, so in total, all friends have 81 points + 2 points = <<2+81=83>>83 points.\n#### 83"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carly is preparing cupcakes and brownies for her art class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "She decides to make 2 less than three times as many brownies as cupcakes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "However, she also wants to keep some cupcakes for her family.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 196,
+          "teacher_input_default": true,
+          "text": "She keeps 4 cupcakes for her family and the rest are for her class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 472,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 264,
+          "teacher_input_default": true,
+          "text": "If Carly's class has five people and each person gets two treats, and considering that each person must get at least one brownie, how many cupcakes did Carly initially make before keeping some for her family?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "Non-quantitative setup introduces Carly's baking task but no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carly.brownies.to_cupcakes_multiplier = 3",
+              "carly.brownies.less_than_scaled_cupcakes = 2",
+              "carly.brownies.initial = carly.cupcakes.initial * carly.brownies.to_cupcakes_multiplier - carly.brownies.less_than_scaled_cupcakes"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "This clause states Carly's intention to reserve cupcakes; the reserved count is supplied in the next clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carly.family.cupcakes.kept = 4",
+              "carly.class.cupcakes = carly.cupcakes.initial - carly.family.cupcakes.kept"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carly.class.people = 5",
+              "carly.class.treats_per_person = 2",
+              "carly.class.total_treats = carly.class.people * carly.class.treats_per_person",
+              "carly.class.minimum_brownies_per_person = 1",
+              "carly.class.minimum_brownies = carly.class.people * carly.class.minimum_brownies_per_person",
+              "carly.cupcakes.initial = (carly.class.total_treats + carly.family.cupcakes.kept + carly.brownies.less_than_scaled_cupcakes) / (carly.brownies.to_cupcakes_multiplier + 1)",
+              "RETURN carly.cupcakes.initial"
+            ],
+            "assumptions": [
+              "All brownies Carly makes and all cupcakes not kept for her family constitute the treats distributed to the class."
+            ],
+            "confidence": 0.95,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09803"
+      },
+      "question": "Carly is preparing cupcakes and brownies for her art class. She decides to make 2 less than three times as many brownies as cupcakes. However, she also wants to keep some cupcakes for her family. She keeps 4 cupcakes for her family and the rest are for her class. If Carly's class has five people and each person gets two treats, and considering that each person must get at least one brownie, how many cupcakes did Carly initially make before keeping some for her family?",
+      "source_context": null,
+      "source_id": "gsm-plus-09803",
+      "validation_failure": "answer mismatch: actual=4, expected=9",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "Carly's class has five people and each person gets two treats, so she needs to prepare 5 * 2 = 10 treats in total.\n\nSince each person must get at least one brownie, Carly needs to prepare at least 5 brownies. Therefore, the number of cupcakes she prepared for the class is 10 - 5 = 5.\n\nHowever, Carly kept 4 cupcakes for her family, so the total number of cupcakes she initially made is 5 (for the class) + 4 (for her family) = 9.\n\nSo, Carly initially made 9 cupcakes before keeping some for her family.\n#### 9"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Fishio posted her selfie on Instagram.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 39,
+          "teacher_input_default": true,
+          "text": "She received 2000 likes on the photo after 1 week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 181,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "Three weeks later, the number of likes was 70 times as many as the initial number of likes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 324,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 182,
+          "teacher_input_default": true,
+          "text": "If she received 20000 more new likes recently but then lost 10% of the total likes due to a system glitch, how many Instagram likes are there?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative setup introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fishio.instagram.selfie.likes.after_1_week = 2000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fishio.instagram.selfie.likes.three_weeks_later = fishio.instagram.selfie.likes.after_1_week * 70"
+            ],
+            "assumptions": [
+              "The initial number of likes refers to the 2000 likes reported after one week."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "The stated multiplicative relation is preserved without collapsing it to a solved literal."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fishio.instagram.selfie.likes.before_glitch = fishio.instagram.selfie.likes.three_weeks_later + 20000",
+              "fishio.instagram.selfie.likes.after_glitch = dec_pct(fishio.instagram.selfie.likes.before_glitch, 10)",
+              "RETURN fishio.instagram.selfie.likes.after_glitch"
+            ],
+            "assumptions": [
+              "The requested number of likes is the total remaining after the recent additions and subsequent glitch."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The pre-glitch and post-glitch states are represented separately."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05195"
+      },
+      "question": "Fishio posted her selfie on Instagram. She received 2000 likes on the photo after 1 week. Three weeks later, the number of likes was 70 times as many as the initial number of likes. If she received 20000 more new likes recently but then lost 10% of the total likes due to a system glitch, how many Instagram likes are there?",
+      "source_context": null,
+      "source_id": "gsm-plus-05195",
+      "validation_failure": "answer mismatch: actual=144000, expected=145800",
+      "validator_context": {
+        "correct_answer": "145800",
+        "gold_reasoning": "After receiving 2000 likes on her photo on Instagram on the first week, Fishio received 70*2000 = <<70*2000=140000>>140000 new likes on the photo after three more weeks.\nThe total number of likes in the four weeks is 140000+2000 = <<140000+2000=142000>>142000\nIf Fishio received 20000 more likes recently, the number of likes on the photo is 142000+20000=<<142000+20000=162000>>162000\nHowever, she then lost 10% of the total likes due to a system glitch, which is 10/100 * 162000 = 16200 likes. So, the number of likes she had after the glitch is 162000 - 16200 = 145800 likes.\n#### 145800"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 315,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "The three boys picked up and carried all of the balls in one trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 411,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 317,
+          "teacher_input_default": true,
+          "text": "Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 548,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 412,
+          "teacher_input_default": true,
+          "text": "If Jason had picked up and carried 2 balls, one of which was blue, what is the total number of balls that the coach brought to practice?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative setup establishes the source of the balls but supplies no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The clause identifies the three carriers but introduces no arithmetic fact by itself."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "coach.practice.total_balls = jordan.balls_carried + jason.balls_carried + jeffrey.balls_carried"
+            ],
+            "assumptions": [
+              "No other person carried any of the balls in the one-trip collection."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The statement that the three boys carried all balls is encoded as an exhaustive aggregate relation with legitimate forward dependencies."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jordan.balls_carried = jason.balls_carried * 2",
+              "jason.balls_carried = jeffrey.balls_carried * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "Both multiplicative comparisons are preserved explicitly."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jason.balls_carried = 2",
+              "jason.blue_balls_carried = 1",
+              "RETURN coach.practice.total_balls"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [
+              "The blue-ball detail is retained as a measured subset even though it is not needed for the requested total."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07678"
+      },
+      "question": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.  After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.  The three boys picked up and carried all of the balls in one trip.  Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey. If Jason had picked up and carried 2 balls, one of which was blue, what is the total number of balls that the coach brought to practice?",
+      "source_context": null,
+      "source_id": "gsm-plus-07678",
+      "validation_failure": "unresolved reference 'jeffrey.balls_carried' from scope 'global'; unresolved reference 'jeffrey.balls_carried' from scope 'global'; unresolved reference 'coach.practice.total_balls' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": "Since Jordan carried twice as many balls as Jason, Jordan carried 2*2=<<2*2=4>>4 balls.\nSince Jason carried twice as many balls as Jeffrey, Jeffrey carried 2/2=<<2/2=1>>1 ball.\nIn total, the three boys carried 4+2+1=<<4+2+1=7>>7 balls, which were all the balls the coach brought to practice.\n#### 7"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,616 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rory is retrieving tennis balls from the court after a tennis match.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "In the first of three sets, he had to retrieve four more balls than in the second set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "In the third set, he retrieved half as many balls as in the second.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 260,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 224,
+          "teacher_input_default": true,
+          "text": "He retrieved 19 tennis balls in all.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 318,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 261,
+          "teacher_input_default": true,
+          "text": "After that, he found an additional 5 balls in the corner.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 387,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 319,
+          "teacher_input_default": true,
+          "text": "How many tennis balls did he retrieve in the first set of the match?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause supplies narrative context but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.first_set.retrieved_balls = rory.second_set.retrieved_balls + 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.third_set.retrieved_balls = rory.second_set.retrieved_balls / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.three_sets.total_retrieved_balls = 19",
+              "rory.second_set.retrieved_balls = (rory.three_sets.total_retrieved_balls - 4) / (1 + 1 + (1 / 2))"
+            ],
+            "assumptions": [
+              "\u201cIn all\u201d refers to the balls retrieved across the three sets."
+            ],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [
+              "The second-set count is grounded by rearranging the preserved first-, second-, and third-set relations against the stated three-set total."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.after_match.corner.additional_found_balls = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [
+              "The additionally found corner balls are kept distinct from the balls retrieved during the three sets."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN rory.first_set.retrieved_balls"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08379"
+      },
+      "question": "Rory is retrieving tennis balls from the court after a tennis match. In the first of three sets, he had to retrieve four more balls than in the second set. In the third set, he retrieved half as many balls as in the second. He retrieved 19 tennis balls in all. After that, he found an additional 5 balls in the corner. How many tennis balls did he retrieve in the first set of the match?",
+      "source_context": null,
+      "source_id": "gsm-plus-08379",
+      "validation_failure": "answer mismatch: actual=10, expected=12",
+      "validator_context": {
+        "correct_answer": "12",
+        "gold_reasoning": "Let B be the number of tennis balls Rory retrieved in the third set.\nIn the second set, he retrieved 2B balls.\nIn the first set, he retrieved 2B + 4 balls.\nIn total, he retrieved B + 2B + 2B + 4 = 5B + 4 = 19+5=24 balls.\nThus, 5B = 24 - 4 = 20 balls.\nTherefore, in the third set, Rory retrieved B = 20 / 5 = <<20/5=4>>4 balls.\nHence, in the second set, he retrieved 2B = 4 * 2 = 8 balls.\nIn the first set he retrieved 2(4) + 4 balls = 12\n#### 12"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 315,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "The three boys picked up and carried all of the balls in one trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 411,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 317,
+          "teacher_input_default": true,
+          "text": "Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 534,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 412,
+          "teacher_input_default": true,
+          "text": "If Jason had picked up and carried 1/5 of ten balls, what is the total number of balls that the coach brought to practice?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "coach.bags_brought = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.91,
+            "part_id": 1,
+            "semantic_notes": [
+              "The clause introduces the named ball carriers but no new arithmetic fact."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pickup_team.boys = 3",
+              "pickup_team.trips = 1",
+              "coach.basketballs_brought = sum(jordan.basketballs_carried, jason.basketballs_carried, jeffrey.basketballs_carried)"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "Carrying all the balls equates the coach's brought-ball total with the three boys' carried-ball total."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jordan.basketballs_carried = jason.basketballs_carried * 2",
+              "jason.basketballs_carried = jeffrey.basketballs_carried * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jason.basketballs_carried = 10 / 5",
+              "RETURN coach.basketballs_brought"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07674"
+      },
+      "question": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.  After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.  The three boys picked up and carried all of the balls in one trip.  Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey. If Jason had picked up and carried 1/5 of ten balls, what is the total number of balls that the coach brought to practice?",
+      "source_context": null,
+      "source_id": "gsm-plus-07674",
+      "validation_failure": "unresolved reference 'jeffrey.basketballs_carried' from scope 'global'; unresolved reference 'jeffrey.basketballs_carried' from scope 'global'; unresolved reference 'coach.basketballs_brought' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": "Since Jordan carried twice as many balls as Jason, Jordan carried 1/5*10*2=<<1/5*10*2=4>>4 balls.\nSince Jason carried twice as many balls as Jeffrey, Jeffrey carried 2/2=<<2/2=1>>1 ball.\nIn total, the three boys carried 4+2+1=<<4+2+1=7>>7 balls, which were all the balls the coach brought to practice.\n#### 7"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A bakery produces 90 loaves of bread each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 218,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 167,
+          "teacher_input_default": true,
+          "text": "How many loaves of bread are sold in the afternoon?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "bakery.daily.loaves_produced = 90"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bakery.morning.loaves_sold = bakery.daily.loaves_produced * 2 / 3",
+              "bakery.after_morning.loaves_remaining = bakery.daily.loaves_produced - bakery.morning.loaves_sold",
+              "bakery.afternoon_and_evening.loaves_sold = bakery.after_morning.loaves_remaining / 2",
+              "bakery.afternoon.loaves_sold = bakery.afternoon_and_evening.loaves_sold / 2",
+              "bakery.evening.loaves_sold = bakery.afternoon_and_evening.loaves_sold / 2"
+            ],
+            "assumptions": [
+              "Interpreted the clause as half of the post-morning remainder being sold in total across the afternoon and evening, divided equally between those periods."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN bakery.afternoon.loaves_sold"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02448"
+      },
+      "question": "A bakery produces 90 loaves of bread each day. Two-thirds of the loaves are sold in the morning and half of what is left is sold equally in the afternoon and evening. How many loaves of bread are sold in the afternoon?",
+      "source_context": null,
+      "source_id": "gsm-plus-02448",
+      "validation_failure": "answer mismatch: actual=7.5, expected=15",
+      "validator_context": {
+        "correct_answer": "15",
+        "gold_reasoning": "90 x 2/3 = <<90*2/3=60>>60 loaves of bread are sold in the morning.\n90 - 60 = <<90-60=30>>30 loaves of bread are sold in the afternoon and evening.\nTherefore, 30/2 = <<30/2=15>>15 loaves of bread are sold in the afternoon.\n#### 15"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Together Lily, David, and Bodhi collected 4300 insects.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "Lily found 700 more than David.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 125,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "David found half of what Bodhi found.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 126,
+          "teacher_input_default": true,
+          "text": "How many insects did Lily find?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "lily_david_bodhi.total.insects_collected = 4300"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The total is explicitly attributed to the named group of three collectors."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lily.insects_collected = david.insects_collected + 700"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "david.insects_collected = bodhi.insects_collected / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN lily.insects_collected"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-04001"
+      },
+      "question": "Together Lily, David, and Bodhi collected 4300 insects. Lily found 700 more than David. David found half of what Bodhi found. How many insects did Lily find?",
+      "source_context": null,
+      "source_id": "gsm-plus-04001",
+      "validation_failure": "unresolved reference 'david.insects_collected' from scope 'global'; unresolved reference 'bodhi.insects_collected' from scope 'global'; unresolved reference 'lily.insects_collected' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "1600",
+        "gold_reasoning": "Let B = the number of insects Bodhi collected\nDavid = B/2\nLily = B/2 + 700\nB + B + 700 = 4300\nB=1800\nDavid = 900 insects\nLily =1600 insects\n#### 1600"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Four years ago, Adrien was making a salary that was 30% more than Lylah's.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "Fast forward to the present, Adrien's salary has seen a 40% increase from what he was earning four years back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 391,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 186,
+          "teacher_input_default": true,
+          "text": "If we assume that both Adrien's and Lylah's salaries increased at the same rate, and Adrien's salary four years ago was $40000, can you determine the combined salary they are earning now, four years later?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "adrien.four_years_ago.salary = inc_pct(lylah.four_years_ago.salary, 30)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adrien.present.salary = inc_pct(adrien.four_years_ago.salary, 40)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lylah.present.salary = inc_pct(lylah.four_years_ago.salary, 40)",
+              "adrien.four_years_ago.salary = 40000",
+              "adrien_and_lylah.present.combined_salary = sum(adrien.present.salary, lylah.present.salary)",
+              "RETURN adrien_and_lylah.present.combined_salary"
+            ],
+            "assumptions": [
+              "Interpreted \"the same rate\" as the 40 percent four-year salary increase stated for Adrien."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00957"
+      },
+      "question": "Four years ago, Adrien was making a salary that was 30% more than Lylah's. Fast forward to the present, Adrien's salary has seen a 40% increase from what he was earning four years back. If we assume that both Adrien's and Lylah's salaries increased at the same rate, and Adrien's salary four years ago was $40000, can you determine the combined salary they are earning now, four years later?",
+      "source_context": null,
+      "source_id": "gsm-plus-00957",
+      "validation_failure": "unresolved reference 'lylah.four_years_ago.salary' from scope 'global'; unresolved reference 'lylah.four_years_ago.salary' from scope 'global'; unresolved reference 'lylah.present.salary' from scope 'global'; unresolved reference 'adrien_and_lylah.present.combined_salary' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "95200",
+        "gold_reasoning": "Since Adrien was earning $40000 four years ago and received a raise that makes him earn 40% more, he received a 40/100*$40000 = $<<40/100*40000=16000>>16000 raise.\nIn total, four years later, Adrien's salary is $40000+$16000 = $56000\nIf four years ago Adrien was earning $40000, and Lylah's salary was 30% less, then Lylah's salary was 30/100*$40000= $12000 less than Adrien's salary four years ago.\nFour years ago, Lylah was earning $40000-$12000 =$28000\nAfter receiving a 40% raise, Lylah earns 40/100*$28000 = $<<40/100*28000=11200>>11200\nIn total, four years later, Lylah earns $28000+$11200= $<<28000+11200=39200>>39200.\nThe total amount of salary the two earn four years later is $39200+$56000 = $<<39200+56000=95200>>95200\n#### 95200"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

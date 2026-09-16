@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A teacher uses a 12-centimeter piece of chalk to write math equations on a chalkboard for his students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 192,
+          "teacher_input_default": true,
+          "text": "Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 5 centimeters.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 366,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 318,
+          "teacher_input_default": true,
+          "text": "On Monday the teacher used a new piece of chalk.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 445,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 367,
+          "teacher_input_default": true,
+          "text": "His students need extra help that day, so he ended up writing more than usual.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 496,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 446,
+          "teacher_input_default": true,
+          "text": "He used up 45% of the chalk by the end of the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 626,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 497,
+          "teacher_input_default": true,
+          "text": "If the teacher goes back to using only 20% of the chalk each day, how many days does he have before he has to recycle this piece?",
+          "warnings": []
+        }
+      ],
+      "question": "A teacher uses a 12-centimeter piece of chalk to write math equations on a chalkboard for his students. The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day. Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 5 centimeters. On Monday the teacher used a new piece of chalk. His students need extra help that day, so he ended up writing more than usual. He used up 45% of the chalk by the end of the day. If the teacher goes back to using only 20% of the chalk each day, how many days does he have before he has to recycle this piece?",
+      "source_id": "gsm-plus-09409"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It's strawberry-picking time on Grandma Concetta's farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "Tony can pick 8 quarts of strawberries per hour, while Bobby picks one less quart of strawberries per hour than Tony.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 312,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 175,
+          "teacher_input_default": true,
+          "text": "Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks three fewer quarts of strawberries per hour than does Kathy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 313,
+          "teacher_input_default": true,
+          "text": "In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+          "warnings": []
+        }
+      ],
+      "question": "It's strawberry-picking time on Grandma Concetta's farm. Tony can pick 8 quarts of strawberries per hour, while Bobby picks one less quart of strawberries per hour than Tony. Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks three fewer quarts of strawberries per hour than does Kathy. In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+      "source_id": "gsm-plus-04176"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adrianne is gathering various types of beads to create bracelets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "She received 20 metallic beads from her mother.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "Her sister gifted her a quantity of beads that was ten more than what her mother gave, and a friend of hers provided double the amount her mother did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 321,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "What is the total count of beads Adrianne now possesses?",
+          "warnings": []
+        }
+      ],
+      "question": "Adrianne is gathering various types of beads to create bracelets. She received 20 metallic beads from her mother. Her sister gifted her a quantity of beads that was ten more than what her mother gave, and a friend of hers provided double the amount her mother did. What is the total count of beads Adrianne now possesses?",
+      "source_id": "gsm-plus-07845"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Marcell and Beatrice are having a contest to see who can eat the most fruit roll-ups, so they unroll as many as they can find.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 281,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "Unfortunately, someone makes a mistake and Beatrice's was two roll-ups wide and 24 rolls up long while Marcell's was 3 roll-ups wide and 14 roll-ups long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 366,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 282,
+          "teacher_input_default": true,
+          "text": "After eating their entire amount, they decided to continue the contest the next day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 504,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 367,
+          "teacher_input_default": true,
+          "text": "On the second day, Beatrice's roll-up was 3 roll-ups wide and 20 rolls up long, while Marcell's was 2 roll-ups wide and 18 roll-ups long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 619,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 505,
+          "teacher_input_default": true,
+          "text": "If they both ate their entire amount over the two days, what was the average number of roll-ups they ate each day?",
+          "warnings": []
+        }
+      ],
+      "question": "Marcell and Beatrice are having a contest to see who can eat the most fruit roll-ups, so they unroll as many as they can find. Unfortunately, someone makes a mistake and Beatrice's was two roll-ups wide and 24 rolls up long while Marcell's was 3 roll-ups wide and 14 roll-ups long. After eating their entire amount, they decided to continue the contest the next day. On the second day, Beatrice's roll-up was 3 roll-ups wide and 20 rolls up long, while Marcell's was 2 roll-ups wide and 18 roll-ups long. If they both ate their entire amount over the two days, what was the average number of roll-ups they ate each day?",
+      "source_id": "gsm-plus-00883"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In 3 years, Melanie will be 8 years old.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "How many years will her age be twenty-one times her present age?",
+          "warnings": []
+        }
+      ],
+      "question": "In 3 years, Melanie will be 8 years old. How many years will her age be twenty-one times her present age?",
+      "source_id": "gsm-plus-07049"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

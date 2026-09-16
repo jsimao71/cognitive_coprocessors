@@ -1,0 +1,4 @@
+﻿Set-Location 'C:\Users\killu\git\rd\cognitive_coprocessors_journal'
+$env:PYTHONPATH='src'
+& 'C:\Users\killu\.venvs\ccpu-cuda\Scripts\python.exe' -u -m ccpu.paper1.e3 run-gsm8k-official-shard --eval artifacts\paper1\operator_jitter_matrix_v1\gsm8k_matched_seed99173\seed_17011\x1000\o1\test.jsonl --config configs\paper1\operator_complexity\natural_v2_qwen06_cuda.json --adapter-path artifacts\paper1\operator_complexity_v2\gsm8k_matched_seed99173\runs\operator_adapter_r8_seed99173_cuda\adapter --adapter-id Qwen3-0.6B-GSM8K-OC-natural-v2-r8-seed99173 --output-dir artifacts\paper1\operator_jitter_matrix_v1\runs\seed_17011\asl\x1000\o1\cuda\shard_0 --shard-index 0 --shard-count 1 --checkpoint-every 1 *> artifacts\paper1\operator_jitter_matrix_v1\runs\seed_17011\asl\x1000\o1\cuda\shard_0\worker.log
+exit $LASTEXITCODE

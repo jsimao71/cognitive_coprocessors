@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At a cocktail party, three of the women are wearing 4 inch heels and three are wearing 2 inch heels.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "Meanwhile, two men at the party are wearing 1 inch heel dress shoes and another two men are wearing 1.5 inch heel boots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 319,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 222,
+          "teacher_input_default": true,
+          "text": "Ignoring the men's footwear, what is the average height of heels worn by the women at this party?",
+          "warnings": []
+        }
+      ],
+      "question": "At a cocktail party, three of the women are wearing 4 inch heels and three are wearing 2 inch heels. Meanwhile, two men at the party are wearing 1 inch heel dress shoes and another two men are wearing 1.5 inch heel boots. Ignoring the men's footwear, what is the average height of heels worn by the women at this party?",
+      "source_id": "gsm-plus-08878"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is trying to buy books for her local library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "She had a budget of $20, and she has already spent $5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "She also bought 3 books today, and all books cost her the same amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 186,
+          "teacher_input_default": true,
+          "text": "If Anna has $6 left in her budget, how much did each of the books cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is trying to buy books for her local library. She had a budget of $20, and she has already spent $5. She also bought 3 books today, and all books cost her the same amount of money. If Anna has $6 left in her budget, how much did each of the books cost?",
+      "source_id": "gsm-plus-08920"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is trying to buy books for her local library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "She had a budget of $1600, and she has already spent $400.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "She also bought 20 books today, and all books cost her the same amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 191,
+          "teacher_input_default": true,
+          "text": "If Anna has $200 left in her budget, how much did each of the books cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is trying to buy books for her local library. She had a budget of $1600, and she has already spent $400. She also bought 20 books today, and all books cost her the same amount of money. If Anna has $200 left in her budget, how much did each of the books cost?",
+      "source_id": "gsm-plus-08921"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is trying to buy books for her local library.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "She had a budget of $16.5, and she has already spent $4.5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "She also bought 2 books today, and both books cost her the same amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 191,
+          "teacher_input_default": true,
+          "text": "If Anna has $2.8 left in her budget, how much did each of the books cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is trying to buy books for her local library. She had a budget of $16.5, and she has already spent $4.5. She also bought 2 books today, and both books cost her the same amount of money. If Anna has $2.8 left in her budget, how much did each of the books cost?",
+      "source_id": "gsm-plus-08922"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Anna is managing the budget for her local library's book purchases.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "She initially had a budget of $16.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "She spent $4 on some library supplies and bought 2 books today.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 167,
+          "teacher_input_default": true,
+          "text": "Each of these books cost her the same amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 341,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 222,
+          "teacher_input_default": true,
+          "text": "After these purchases, she decided to buy another book that cost half the price of one of the books she bought earlier.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 378,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 342,
+          "teacher_input_default": true,
+          "text": "Now, Anna has $2 left in her budget.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 425,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 379,
+          "teacher_input_default": true,
+          "text": "How much did each of the first two books cost?",
+          "warnings": []
+        }
+      ],
+      "question": "Anna is managing the budget for her local library's book purchases. She initially had a budget of $16. She spent $4 on some library supplies and bought 2 books today. Each of these books cost her the same amount of money. After these purchases, she decided to buy another book that cost half the price of one of the books she bought earlier. Now, Anna has $2 left in her budget. How much did each of the first two books cost?",
+      "source_id": "gsm-plus-08923"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

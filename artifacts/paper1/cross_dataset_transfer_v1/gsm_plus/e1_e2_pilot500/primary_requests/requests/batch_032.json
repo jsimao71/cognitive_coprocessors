@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nick had twice as many candies as George.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "Then George ate 5 candies and 3 chocolates.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 86,
+          "teacher_input_default": true,
+          "text": "Now George has 3 candies left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "How many candies does Nick have?",
+          "warnings": []
+        }
+      ],
+      "question": "Nick had twice as many candies as George. Then George ate 5 candies and 3 chocolates. Now George has 3 candies left. How many candies does Nick have?",
+      "source_id": "gsm-plus-04286"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a friendly competition, Marcell and Beatrice decided to see who could consume the most fruit roll-ups.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "They unrolled as many as they could gather.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 330,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "However, someone made a mistake and Beatrice's pile was two roll-ups in width and 24 roll-ups in length, while Marcell's pile was three roll-ups in width and 14 roll-ups in length.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 431,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 331,
+          "teacher_input_default": true,
+          "text": "If they both finished their respective piles, what was the average number of roll-ups they consumed?",
+          "warnings": []
+        }
+      ],
+      "question": "In a friendly competition, Marcell and Beatrice decided to see who could consume the most fruit roll-ups. They unrolled as many as they could gather. However, someone made a mistake and Beatrice's pile was two roll-ups in width and 24 roll-ups in length, while Marcell's pile was three roll-ups in width and 14 roll-ups in length. If they both finished their respective piles, what was the average number of roll-ups they consumed?",
+      "source_id": "gsm-plus-00885"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James loves to go swimming and has to swim across a 20-mile lake.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "He can swim at a pace of 2 miles per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "He swims 60% of the distance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 224,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 142,
+          "teacher_input_default": true,
+          "text": "After that, he stops on an island and rests for half as long as the swimming time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 293,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 226,
+          "teacher_input_default": true,
+          "text": "He then finishes the remaining distance while going half the speed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 441,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 295,
+          "teacher_input_default": true,
+          "text": "After reaching the other side, he realizes he left something on the island and swims back to the island at his original speed, retrieves his item.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 495,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 442,
+          "teacher_input_default": true,
+          "text": "How long did it take him to complete all these tasks?",
+          "warnings": []
+        }
+      ],
+      "question": "James loves to go swimming and has to swim across a 20-mile lake.  He can swim at a pace of 2 miles per hour.  He swims 60% of the distance.  After that, he stops on an island and rests for half as long as the swimming time.  He then finishes the remaining distance while going half the speed.  After reaching the other side, he realizes he left something on the island and swims back to the island at his original speed, retrieves his item. How long did it take him to complete all these tasks?",
+      "source_id": "gsm-plus-07563"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Oscar has 24 lollipops and decides to eat 2 on his way to school, even though he also has 5 pieces of gum in his pocket.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 208,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "He then passes out 14 lollipops to his friends, while also giving them 7 stickers each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 342,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 209,
+          "teacher_input_default": true,
+          "text": "On his way home, he buys twice as many lollipops as he gave to his friends, even though the store also had 10 chocolate bars on sale.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 428,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 343,
+          "teacher_input_default": true,
+          "text": "That night, he eats 3 more lollipops while watching a movie that is 120 minutes long.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 548,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 429,
+          "teacher_input_default": true,
+          "text": "The next morning, he eats 2 more lollipops, even though he also has a bowl of cereal that contains 30 pieces of cereal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 588,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 549,
+          "teacher_input_default": true,
+          "text": "How many lollipops does Oscar have now?",
+          "warnings": []
+        }
+      ],
+      "question": "Oscar has 24 lollipops and decides to eat 2 on his way to school, even though he also has 5 pieces of gum in his pocket. He then passes out 14 lollipops to his friends, while also giving them 7 stickers each. On his way home, he buys twice as many lollipops as he gave to his friends, even though the store also had 10 chocolate bars on sale. That night, he eats 3 more lollipops while watching a movie that is 120 minutes long. The next morning, he eats 2 more lollipops, even though he also has a bowl of cereal that contains 30 pieces of cereal. How many lollipops does Oscar have now?",
+      "source_id": "gsm-plus-02622"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 58,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The light on a lighthouse blinks 2550 times in 50 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 59,
+          "teacher_input_default": true,
+          "text": "How long will it take the light to blink 4590 times?",
+          "warnings": []
+        }
+      ],
+      "question": "The light on a lighthouse blinks 2550 times in 50 minutes. How long will it take the light to blink 4590 times?",
+      "source_id": "gsm-plus-08937"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

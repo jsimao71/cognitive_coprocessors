@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Derrick has a bakery that makes 10 dozen doughnuts every day, selling at $2 per doughnut.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "Then he decided to give it a 20% discount.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 133,
+          "teacher_input_default": true,
+          "text": "How much money does Derrick make in June if he sells all the doughnuts?",
+          "warnings": []
+        }
+      ],
+      "question": "Derrick has a bakery that makes 10 dozen doughnuts every day, selling at $2 per doughnut. Then he decided to give it a 20% discount. How much money does Derrick make in June if he sells all the doughnuts?",
+      "source_id": "gsm-plus-10075"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Alicia's clothes have to be sent to the dry cleaners weekly.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "Her weekly drop-off includes 5 blouses, 2 pants, and 1 skirt.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "They charge her $5.00 per blouse, $6.00 per skirt, and $8.00 per pair of pants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "She has a $3 coupon but finds it expired.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 247,
+          "teacher_input_default": true,
+          "text": "How much does she spend on dry-cleaning in 5 weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "Alicia's clothes have to be sent to the dry cleaners weekly.  Her weekly drop-off includes 5 blouses, 2 pants, and 1 skirt.  They charge her $5.00 per blouse, $6.00 per skirt, and $8.00 per pair of pants. She has a $3 coupon but finds it expired. How much does she spend on dry-cleaning in 5 weeks?",
+      "source_id": "gsm-plus-10094"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day Charisma meditates for 0.25 hours when she first wakes up and again before she goes to sleep.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "5 days a week she practices 1/24 of a day of yoga.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "In 4 weeks, how much time in hours has she spent on meditation/yoga practice?",
+          "warnings": []
+        }
+      ],
+      "question": "Every day Charisma meditates for 0.25 hours when she first wakes up and again before she goes to sleep. 5 days a week she practices 1/24 of a day of yoga. In 4 weeks, how much time in hours has she spent on meditation/yoga practice?",
+      "source_id": "gsm-plus-10306"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company produces chocolate in bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "In one day, it can produce 5000 bars.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "The company sells all the produced bars for $2 per bar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 217,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 132,
+          "teacher_input_default": true,
+          "text": "Also, on weekends, the company sells the bars at a discounted price of $1.50 per bar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 218,
+          "teacher_input_default": true,
+          "text": "How much money will the company receive for selling produced chocolate bars in two weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "A company produces chocolate in bars. In one day, it can produce 5000 bars. The company sells all the produced bars for $2 per bar. Also, on weekends, the company sells the bars at a discounted price of $1.50 per bar. How much money will the company receive for selling produced chocolate bars in two weeks?",
+      "source_id": "gsm-plus-10347"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Janet visits a shopping center where she buys ice cream for $3.50, purchases two cinema tickets at $7.50 each for her and her sibling, and acquires a bracelet for $8.50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 270,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "If she initially had $40 given to her by her parents, what is the remaining amount of money she has?",
+          "warnings": []
+        }
+      ],
+      "question": "Janet visits a shopping center where she buys ice cream for $3.50, purchases two cinema tickets at $7.50 each for her and her sibling, and acquires a bracelet for $8.50. If she initially had $40 given to her by her parents, what is the remaining amount of money she has?",
+      "source_id": "gsm-plus-10397"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Billy is peeling and cutting potatoes in preparation for making potato salad for his big family reunion barbecue.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "It's a big event, so he has 80 potatoes to get through.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 277,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "The potatoes are roughly the same size, so it takes about the same amount of time to peel and cut each one.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 375,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 278,
+          "teacher_input_default": true,
+          "text": "It takes Billy about a minute and a half to peel a potato, but only about 6 seconds to cut it up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 436,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 376,
+          "teacher_input_default": true,
+          "text": "How long will it take Billy to finish prepping the potatoes?",
+          "warnings": []
+        }
+      ],
+      "question": "Billy is peeling and cutting potatoes in preparation for making potato salad for his big family reunion barbecue. It's a big event, so he has 80 potatoes to get through. The potatoes are roughly the same size, so it takes about the same amount of time to peel and cut each one. It takes Billy about a minute and a half to peel a potato, but only about 6 seconds to cut it up. How long will it take Billy to finish prepping the potatoes?",
+      "source_id": "gsm-plus-01392"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Marcel runs a large-scale bicycle store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "His main products are three types of bikes: MTB, BMX, and Trekking.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 109,
+          "teacher_input_default": true,
+          "text": "The price of one MTB is $5000, BMX is half the price of an MTB, and a Trekking bike is $4500.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 274,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 203,
+          "teacher_input_default": true,
+          "text": "In one month, Marcel sold a total of 3000 bikes among the types listed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 332,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 275,
+          "teacher_input_default": true,
+          "text": "Half of them were Trekking bikes, and 15% were BMX bikes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 374,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 333,
+          "teacher_input_default": true,
+          "text": "The rest of the sold bikes were MTB type.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 440,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 375,
+          "teacher_input_default": true,
+          "text": "How much did Marcel earn from selling bicycles during that month?",
+          "warnings": []
+        }
+      ],
+      "question": "Marcel runs a large-scale bicycle store. His main products are three types of bikes: MTB, BMX, and Trekking. The price of one MTB is $5000, BMX is half the price of an MTB, and a Trekking bike is $4500. In one month, Marcel sold a total of 3000 bikes among the types listed. Half of them were Trekking bikes, and 15% were BMX bikes. The rest of the sold bikes were MTB type. How much did Marcel earn from selling bicycles during that month?",
+      "source_id": "gsm-plus-08689"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ophelia and Jenna are living in the same apartment building.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "They each have 2 fewer sofas than chairs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "Jenna has 3.5 times as many chairs as Ophelia.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 245,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "If Ophelia has half of 40 sofas, calculate the total number of sofas and chairs that they have.",
+          "warnings": []
+        }
+      ],
+      "question": "Ophelia and Jenna are living in the same apartment building. They each have 2 fewer sofas than chairs. Jenna has 3.5 times as many chairs as Ophelia. If Ophelia has half of 40 sofas, calculate the total number of sofas and chairs that they have.",
+      "source_id": "gsm-plus-04226"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James has to buy insurance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "Since he had an accident it was 60% more than normal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "The normal cost is $120.5 a month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "How much does he pay a year?",
+          "warnings": []
+        }
+      ],
+      "question": "James has to buy insurance.  Since he had an accident it was 60% more than normal.  The normal cost is $120.5 a month.  How much does he pay a year?",
+      "source_id": "gsm-plus-08442"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rory is retrieving tennis balls from the court after a tennis match.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "In the first of three sets, he had to retrieve four more balls than in the second set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "In the third set, he retrieved half as many balls as in the second.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 329,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 224,
+          "teacher_input_default": true,
+          "text": "He retrieved 10 tennis balls in the first set of the match, how many tennis balls did he retrieve in all?",
+          "warnings": []
+        }
+      ],
+      "question": "Rory is retrieving tennis balls from the court after a tennis match. In the first of three sets, he had to retrieve four more balls than in the second set. In the third set, he retrieved half as many balls as in the second. He retrieved 10 tennis balls in the first set of the match, how many tennis balls did he retrieve in all?",
+      "source_id": "gsm-plus-08380"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

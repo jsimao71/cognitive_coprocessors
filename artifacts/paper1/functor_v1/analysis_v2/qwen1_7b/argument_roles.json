@@ -1,0 +1,167 @@
+{
+  "aggregate": {
+    "argument_binding_exact": {
+      "correct": 33,
+      "rate": 0.22916666666666666,
+      "support": 144
+    },
+    "argument_role_accuracy": {
+      "correct": 102,
+      "rate": 0.2691292875989446,
+      "support": 379
+    },
+    "functor_class_macro_f1": 0.3135012652403957,
+    "functor_class_micro": {
+      "f1": 0.3292181069958848,
+      "overlap": 40,
+      "precision": 0.40404040404040403,
+      "predicted_count": 99,
+      "recall": 0.2777777777777778,
+      "reference_count": 144
+    },
+    "per_functor_class": {
+      "decrease_percent": {
+        "f1": 1.0,
+        "overlap": 1,
+        "precision": 1.0,
+        "predicted_count": 1,
+        "recall": 1.0,
+        "reference_count": 1
+      },
+      "difference": {
+        "f1": 0.25,
+        "overlap": 1,
+        "precision": 0.3333333333333333,
+        "predicted_count": 3,
+        "recall": 0.2,
+        "reference_count": 5
+      },
+      "fraction_of": {
+        "f1": 0.5714285714285715,
+        "overlap": 4,
+        "precision": 0.5,
+        "predicted_count": 8,
+        "recall": 0.6666666666666666,
+        "reference_count": 6
+      },
+      "given": {
+        "f1": 0.3652173913043478,
+        "overlap": 21,
+        "precision": 0.44680851063829785,
+        "predicted_count": 47,
+        "recall": 0.3088235294117647,
+        "reference_count": 68
+      },
+      "mean_of": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 1,
+        "recall": 0.0,
+        "reference_count": 3
+      },
+      "multiple": {
+        "f1": 0.75,
+        "overlap": 3,
+        "precision": 0.75,
+        "predicted_count": 4,
+        "recall": 0.75,
+        "reference_count": 4
+      },
+      "offset": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 5,
+        "recall": 0.0,
+        "reference_count": 4
+      },
+      "per_unit_total": {
+        "f1": 0.07142857142857142,
+        "overlap": 1,
+        "precision": 0.1,
+        "predicted_count": 10,
+        "recall": 0.05555555555555555,
+        "reference_count": 18
+      },
+      "percent_of": {
+        "f1": 0.6666666666666666,
+        "overlap": 1,
+        "precision": 1.0,
+        "predicted_count": 1,
+        "recall": 0.5,
+        "reference_count": 2
+      },
+      "percentage_ratio": {
+        "f1": 0.22222222222222224,
+        "overlap": 1,
+        "precision": 0.25,
+        "predicted_count": 4,
+        "recall": 0.2,
+        "reference_count": 5
+      },
+      "product_of": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 0,
+        "recall": 0.0,
+        "reference_count": 1
+      },
+      "quotient": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 2,
+        "recall": 0.0,
+        "reference_count": 5
+      },
+      "remaining": {
+        "f1": 0.5555555555555556,
+        "overlap": 5,
+        "precision": 0.7142857142857143,
+        "predicted_count": 7,
+        "recall": 0.45454545454545453,
+        "reference_count": 11
+      },
+      "same": {
+        "f1": 0.0,
+        "overlap": 0,
+        "precision": 0.0,
+        "predicted_count": 0,
+        "recall": 0.0,
+        "reference_count": 1
+      },
+      "sum_of": {
+        "f1": 0.25,
+        "overlap": 2,
+        "precision": 0.3333333333333333,
+        "predicted_count": 6,
+        "recall": 0.2,
+        "reference_count": 10
+      }
+    },
+    "query_target_accuracy": {
+      "correct": 8,
+      "rate": 0.32,
+      "support": 25
+    },
+    "relation_direction_accuracy": {
+      "correct": 11,
+      "rate": 0.2682926829268293,
+      "support": 41
+    }
+  },
+  "confusion": {
+    "amount->missing": 4,
+    "base->missing": 3,
+    "count->missing": 1,
+    "extra->missing": 1,
+    "member->missing": 2,
+    "per_unit->missing": 1,
+    "source->missing": 2,
+    "used->missing": 4,
+    "whole->missing": 1,
+    "whole->source": 1
+  }
+}

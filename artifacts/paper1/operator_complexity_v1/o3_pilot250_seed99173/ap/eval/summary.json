@@ -1,0 +1,46 @@
+{
+  "by_difficulty": {
+    "low": {
+      "count": 100,
+      "final_answer_correct": 67
+    }
+  },
+  "counts": {
+    "executable": 67,
+    "final_answer_correct": 67,
+    "lowerable_to_ccir": 93,
+    "parse_valid": 100,
+    "type_valid": 93
+  },
+  "eval_sha256": "55db9fcbde048e210d1427a345ada00393d6fffba90ba5b9fb8f71e4cf6b968e",
+  "prediction_count": 100,
+  "predictions_sha256": "2bd22b5c8b3c83d35be04c07eda2664f98b95584e5063bb5badf6a55bd222327",
+  "rates": {
+    "executable": 0.67,
+    "final_answer_correct": 0.67,
+    "lowerable_to_ccir": 0.93,
+    "parse_valid": 1.0,
+    "type_valid": 0.93
+  },
+  "run": {
+    "adapter_id": "Qwen3-0.6B-GSM8K-OC-O3-AP-pilot-r8-seed99173",
+    "model": {
+      "adapter_id": "Qwen3-0.6B-GSM8K-OC-O3-AP-pilot-r8-seed99173",
+      "adapter_path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\operator_complexity_v1\\o3_pilot250_seed99173\\ap\\qwen_run\\adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 384,
+      "model_id": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "use_chat_template": true
+    },
+    "prompt_fields": [
+      "question"
+    ],
+    "seed": 44017,
+    "shard_count": 1
+  },
+  "schema_version": "ccpu.paper1.gsm8k_answer_evaluation.v1",
+  "shard_index": 0
+}

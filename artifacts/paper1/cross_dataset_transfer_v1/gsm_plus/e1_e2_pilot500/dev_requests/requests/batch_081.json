@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mike decides he wants to replace his movie collection with digital versions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 95,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "He has 600 movies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "A third of the movies are in various series and he knows he can get those for only $6 of the cost of a normal movie by just buying the series together.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 306,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 248,
+          "teacher_input_default": true,
+          "text": "40% of the remaining movies are older movies which are $5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 398,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 307,
+          "teacher_input_default": true,
+          "text": "He also has a collection of 200 music albums, but he decides not to replace them digitally.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 538,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 399,
+          "teacher_input_default": true,
+          "text": "How much does replacing the movies cost if a normal movie costs $10, and a music album costs $8, which he is not considering in his budget?",
+          "warnings": []
+        }
+      ],
+      "question": "Mike decides he wants to replace his movie collection with digital versions. He has 600 movies. A third of the movies are in various series and he knows he can get those for only $6 of the cost of a normal movie by just buying the series together. 40% of the remaining movies are older movies which are $5. He also has a collection of 200 music albums, but he decides not to replace them digitally. How much does replacing the movies cost if a normal movie costs $10, and a music album costs $8, which he is not considering in his budget?",
+      "source_id": "gsm-plus-06222"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ava and Emma want to know who is better at the new video game Ava got for her birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "They are each going to play one level and whoever has the highest score wins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "They receive 20 points for every enemy they jump on, 6 points for each berry they collect, and 50 points for every second left on the timer when they finish the level.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 493,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 334,
+          "teacher_input_default": true,
+          "text": "If Ava jumps on 9 more enemies than Emma and collects 4 more berries, but finishes the level 5 seconds slower, what is the difference between their two scores?",
+          "warnings": []
+        }
+      ],
+      "question": "Ava and Emma want to know who is better at the new video game Ava got for her birthday. They are each going to play one level and whoever has the highest score wins. They receive 20 points for every enemy they jump on, 6 points for each berry they collect, and 50 points for every second left on the timer when they finish the level. If Ava jumps on 9 more enemies than Emma and collects 4 more berries, but finishes the level 5 seconds slower, what is the difference between their two scores?",
+      "source_id": "gsm-plus-06240"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ava and Emma want to know who is better at the new video game Ava got for her birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "They are each going to play one level and whoever has the highest score wins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "They receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 496,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 334,
+          "teacher_input_default": true,
+          "text": "If Ava jumps on 15 more enemies than Emma and collects 12 more berries, but finishes the level 10 seconds slower, what is the difference between their two scores?",
+          "warnings": []
+        }
+      ],
+      "question": "Ava and Emma want to know who is better at the new video game Ava got for her birthday. They are each going to play one level and whoever has the highest score wins. They receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level. If Ava jumps on 15 more enemies than Emma and collects 12 more berries, but finishes the level 10 seconds slower, what is the difference between their two scores?",
+      "source_id": "gsm-plus-06241"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ava and Emma want to know who is better at the new video game Ava got for her birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "They are each going to play one level and whoever has the highest score wins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "They receive 10.5 points for every enemy they jump on, 5.5 points for each berry they collect, and 30.5 points for every second left on the timer when they finish the level.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 499,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "If Ava jumps on 8 more enemies than Emma and collects 3 more berries, but finishes the level 4 seconds slower, what is the difference between their two scores?",
+          "warnings": []
+        }
+      ],
+      "question": "Ava and Emma want to know who is better at the new video game Ava got for her birthday. They are each going to play one level and whoever has the highest score wins. They receive 10.5 points for every enemy they jump on, 5.5 points for each berry they collect, and 30.5 points for every second left on the timer when they finish the level. If Ava jumps on 8 more enemies than Emma and collects 3 more berries, but finishes the level 4 seconds slower, what is the difference between their two scores?",
+      "source_id": "gsm-plus-06242"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ava and Emma are having a friendly competition to see who is better at the new video game Ava got for her birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 214,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 116,
+          "teacher_input_default": true,
+          "text": "They decide to play one level each and the one with the highest score will be declared the winner.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 416,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 215,
+          "teacher_input_default": true,
+          "text": "The scoring system is as follows: they receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 515,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 417,
+          "teacher_input_default": true,
+          "text": "In their competition, Ava manages to jump on 8 more enemies than Emma and collects 3 more berries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 565,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 516,
+          "teacher_input_default": true,
+          "text": "However, she finishes the level 4 seconds slower.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 681,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 566,
+          "teacher_input_default": true,
+          "text": "Additionally, they discover a hidden bonus in the game where they get 50 points for every golden coin they collect.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 732,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 682,
+          "teacher_input_default": true,
+          "text": "Ava collects 2 golden coins while Emma collects 5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 785,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 733,
+          "teacher_input_default": true,
+          "text": "What is the difference between their two scores now?",
+          "warnings": []
+        }
+      ],
+      "question": "Ava and Emma are having a friendly competition to see who is better at the new video game Ava got for her birthday. They decide to play one level each and the one with the highest score will be declared the winner. The scoring system is as follows: they receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level. In their competition, Ava manages to jump on 8 more enemies than Emma and collects 3 more berries. However, she finishes the level 4 seconds slower. Additionally, they discover a hidden bonus in the game where they get 50 points for every golden coin they collect. Ava collects 2 golden coins while Emma collects 5. What is the difference between their two scores now?",
+      "source_id": "gsm-plus-06243"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

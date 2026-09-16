@@ -1,0 +1,318 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John and DeSean bought a bag of marshmallows to make s'mores together.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "The bag has 350 marshmallows.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "Each S'more uses one marshmallow.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "If John makes 90 S'mores, DeSean makes 90 S'mores, and they dropped 30 marshmallows on the ground, how many S'mores can each kid have with the marshmallows left in the bag?",
+          "warnings": []
+        }
+      ],
+      "question": "John and DeSean bought a bag of marshmallows to make s'mores together. The bag has 350 marshmallows. Each S'more uses one marshmallow. If John makes 90 S'mores, DeSean makes 90 S'mores, and they dropped 30 marshmallows on the ground, how many S'mores can each kid have with the marshmallows left in the bag?",
+      "source_id": "gsm-plus-06505"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jada, Rory, and Kora make clay dishes to present as art for their school project.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "Jada makes twice as many clay dishes as Rory, while Rory makes 200 more clay dishes than Kora.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "If Kora made 200 dishes, how many clay dishes do they all make together?",
+          "warnings": []
+        }
+      ],
+      "question": "Jada, Rory, and Kora make clay dishes to present as art for their school project. Jada makes twice as many clay dishes as Rory, while Rory makes 200 more clay dishes than Kora. If Kora made 200 dishes, how many clay dishes do they all make together?",
+      "source_id": "gsm-plus-06689"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 22,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A farmer has 900 eggs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 23,
+          "teacher_input_default": true,
+          "text": "He placed them on a tray, which holds 30 eggs each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 158,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "If he sells all the trays for a total of $75, how much is he selling each tray for?",
+          "warnings": []
+        }
+      ],
+      "question": "A farmer has 900 eggs. He placed them on a tray, which holds 30 eggs each. If he sells all the trays for a total of $75, how much is he selling each tray for?",
+      "source_id": "gsm-plus-06796"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Smith has two farms, Farm A and Farm B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "He has 75 goats in Farm A and 65 goats in Farm B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "He sold 15 goats from Farm A and twice as many goats from Farm B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 212,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 160,
+          "teacher_input_default": true,
+          "text": "How many goats are left in the two farms altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Smith has two farms, Farm A and Farm B. He has 75 goats in Farm A and 65 goats in Farm B. He sold 15 goats from Farm A and twice as many goats from Farm B. How many goats are left in the two farms altogether?",
+      "source_id": "gsm-plus-06800"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Together, Sofie, Anne, and Fawn have 85 books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 197,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "If Sofie has 25 more books than Anne, and Anne has 12 fewer books than Fawn does, then, Sofie gives five books to Fawn, how many books does Fawn have?",
+          "warnings": []
+        }
+      ],
+      "question": "Together, Sofie, Anne, and Fawn have 85 books. If Sofie has 25 more books than Anne, and Anne has 12 fewer books than Fawn does, then, Sofie gives five books to Fawn, how many books does Fawn have?",
+      "source_id": "gsm-plus-06931"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

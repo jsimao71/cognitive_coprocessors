@@ -1,0 +1,413 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "tatqa",
+      "question": "What is the total percentage of revenue from Apple and Huawei in 2017?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"company.significant_customer_revenue_percentages\", \"customer_revenue_percentage\", \"company\", source(\"Revenue from significant customers\"))",
+          "observe(at(\"company.revenue.apple.percentage\", \"2017\"), 34, \"percent\", cell(\"Apple Inc. (\u201cApple\u201d)\", \"2017\"))",
+          "member(\"company.significant_customer_revenue_percentages\", \"company.revenue.apple.percentage\", cell(\"Apple Inc. (\u201cApple\u201d)\", \"2017\"))",
+          "observe(at(\"company.revenue.huawei.percentage\", \"2017\"), 11, \"percent\", cell(\"Huawei Technologies Co., Ltd. (\u201cHuawei\u201d)\", \"2017\"))",
+          "member(\"company.significant_customer_revenue_percentages\", \"company.revenue.huawei.percentage\", cell(\"Huawei Technologies Co., Ltd. (\u201cHuawei\u201d)\", \"2017\"))",
+          "query(\"sum\", \"company.significant_customer_revenue_percentages\", \"2017\")"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "2. CONCENTRATIONS OF CREDIT RISK"
+          },
+          {
+            "order": 2,
+            "text": "The Company\u2019s principal financial instrument subject to potential concentration of credit risk is accounts receivable, which is unsecured. The Company provides an allowance for doubtful accounts equal to estimated losses expected to be incurred in the collection of accounts receivable. The Company has adopted credit policies and standards intended to accommodate industry growth and inherent risk and it believes that credit risks are moderated by the financial stability of its major customers, conservative payment terms and the Company\u2019s strict credit policies."
+          },
+          {
+            "order": 3,
+            "text": "Revenue from significant customers, those representing 10% or more of revenue for the respective periods, are summarized as follows:"
+          },
+          {
+            "order": 4,
+            "text": "The Company provided its products to Apple through sales to multiple contract manufacturers."
+          },
+          {
+            "order": 5,
+            "text": "These customers primarily purchase RF and Wi-Fi solutions for cellular base stations and a variety of mobile devices, including smartphones, wearables, laptops, tablets and cellular-based applications for the IoT."
+          },
+          {
+            "order": 6,
+            "text": "Accounts receivable related to these customers (which includes multiple contract manufacturers) accounted for 49%, 26%, and 40% of the Company\u2019s total net accounts receivable balance as of March 30, 2019, March 31, 2018 and April 1, 2017, respectively."
+          },
+          {
+            "order": 7,
+            "text": "On May 16, 2019, the Bureau of Industry and Security (BIS) of the U.S. Department of Commerce placed Huawei and 68 of its non-U.S. affiliates on the \u201centity list\u201d under Export Administration Regulations (EAR), which had the effect of prohibiting all future sales by the Company of any product to Huawei or its affiliates, absent obtaining a license from BIS. While BIS has broad authority to issue licenses, the rulemaking imposes a presumption that licenses will be denied."
+          },
+          {
+            "order": 8,
+            "text": "Although Huawei is not prohibited from paying (and the Company is not restricted from collecting) accounts receivable for products sold to Huawei prior to the BIS action, the credit risks associated with these accounts may have increased as a result of this development. As of the date of this report, the Company is unable to predict the scope or duration of the new EAR restrictions on Huawei or the impact to the Company\u2019s business or future results of operations."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "",
+            "Fiscal Year",
+            ""
+          ],
+          [
+            "",
+            "2019",
+            "2018",
+            "2017"
+          ],
+          [
+            "Apple Inc. (\u201cApple\u201d)",
+            "32%",
+            "36%",
+            "34%"
+          ],
+          [
+            "Huawei Technologies Co., Ltd. (\u201cHuawei\u201d)",
+            "13%",
+            "8%",
+            "11%"
+          ]
+        ]
+      },
+      "source_id": "c0548ddad7b69baaa43cdb758e169041"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What was the percentage change in the total net accounts receivable between 2018 and 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.accounts_receivable.net\", \"2018\"), 563.7, \"million_currency\", cell(\"Total accounts receivable, net\", \"2018\"))",
+          "observe(at(\"company.accounts_receivable.net\", \"2019\"), 880.6, \"million_currency\", cell(\"Total accounts receivable, net\", \"2019\"))",
+          "query(\"percentage_change\", at(\"company.accounts_receivable.net\", \"2018\"), at(\"company.accounts_receivable.net\", \"2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Note 8. Other Financial Statement Details"
+          },
+          {
+            "order": 2,
+            "text": "Accounts Receivable"
+          },
+          {
+            "order": 3,
+            "text": "Accounts receivable consists of the following (in millions):"
+          }
+        ],
+        "table": [
+          [
+            "",
+            "March 31,",
+            ""
+          ],
+          [
+            "",
+            "2019",
+            "2018"
+          ],
+          [
+            "Trade accounts receivable",
+            "$875.8",
+            "$557.8"
+          ],
+          [
+            "Other",
+            "6.8",
+            "8.1"
+          ],
+          [
+            "Total accounts receivable, gross",
+            "882.6",
+            "565.9"
+          ],
+          [
+            "Less allowance for doubtful accounts",
+            "2.0",
+            "2.2"
+          ],
+          [
+            "Total accounts receivable, net",
+            "$880.6",
+            "$563.7"
+          ]
+        ]
+      },
+      "source_id": "0393d89308d197fda3574392e7b458dc"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the difference in total costs incurred between 2018 and 2019?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Restructuring costs \u2014 Restructuring charges include costs resulting from the exploration of strategic alternatives (the \u201cStrategic Alternatives Evaluation\u201d) in 2019, and a plan that management initiated to reduce our general and administrative costs. Restructuring charges in 2018 also include costs related to the evaluation of potential alternatives with respect to the Qdoba brand (the \u201cQdoba Evaluation\u201d), which resulted in the Qdoba Sale. Refer to Note 10, Discontinued Operations, for information regarding the Qdoba Sale."
+          },
+          {
+            "order": 2,
+            "text": "The following is a summary of the costs incurred in connection with these activities during each fiscal year ( in thousands):"
+          },
+          {
+            "order": 3,
+            "text": "(1) \u00a0Strategic Alternative Evaluation costs are primarily related to third party advisory services."
+          },
+          {
+            "order": 4,
+            "text": "(2) \u00a0Qdoba Evaluation consulting costs are primarily related to third party advisory services and retention compensation."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "2019",
+            "2018",
+            "2017"
+          ],
+          [
+            "Employee severance and related costs",
+            "$7,169",
+            "$7,845",
+            "$724"
+          ],
+          [
+            "Strategic Alternatives Evaluation (1)",
+            "1,286",
+            "\u2014",
+            "\u2014"
+          ],
+          [
+            "Qdoba Evaluation (2)",
+            "\u2014",
+            "2,211",
+            "2,592"
+          ],
+          [
+            "Other",
+            "\u2014",
+            "591",
+            "315"
+          ],
+          [
+            "",
+            "$8,455",
+            "$10,647",
+            "$3,631"
+          ]
+        ]
+      },
+      "source_id": "40aeff619040683219ce6ab23ee9e55f"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What was the average difference between EBITDA and underlying EBITDA for both FYs?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Net profit/(loss) after tax was $(9.8) million (2018: $6.6 million). Non-statutory underlying earnings before interest, tax, depreciation and amortisation (EBITDA) improved from $62.6 million in FY18 to $85.1 million in FY19."
+          },
+          {
+            "order": 2,
+            "text": "Reconciliation of statutory profit to EBITDA and underlying EBITDA is as follows:"
+          }
+        ],
+        "table": [
+          [
+            "",
+            "30 June 2019",
+            "30 June 2018",
+            "Change"
+          ],
+          [
+            "",
+            "$\u2019000",
+            "$\u2019000",
+            "%"
+          ],
+          [
+            "Net profit/(loss) after tax",
+            "(9,819)",
+            "6,639",
+            "(248%)"
+          ],
+          [
+            "Add: finance costs",
+            "54,897",
+            "25,803",
+            "113%"
+          ],
+          [
+            "Less: interest income",
+            "(8,220)",
+            "(5,778)",
+            "42%"
+          ],
+          [
+            "Add/(less): income tax expense/(benefit)",
+            "(6,254)",
+            "4,252",
+            "(247%)"
+          ],
+          [
+            "Add: depreciation and amortisation",
+            "48,442",
+            "33,038",
+            "47%"
+          ],
+          [
+            "EBITDA",
+            "79,046",
+            "63,954",
+            "24%"
+          ],
+          [
+            "Less: gain on extinguishment of B1 lease",
+            "(1,068)",
+            "-",
+            ""
+          ],
+          [
+            "Less: gain on extinguishment of APDC leases",
+            "(1,291)",
+            "-",
+            ""
+          ],
+          [
+            "Less: distribution income",
+            "(1,344)",
+            "(3,191)",
+            "(58%)"
+          ],
+          [
+            "Add: APDC transaction costs",
+            "5,459",
+            "1,812",
+            "201%"
+          ],
+          [
+            "Add: landholder duty on acquisition of APDC properties",
+            "3,498",
+            "-",
+            ""
+          ],
+          [
+            "Add: Singapore and Japan costs",
+            "823",
+            "-",
+            ""
+          ],
+          [
+            "Underlying EBITDA",
+            "85,123",
+            "62,575",
+            "36%"
+          ]
+        ]
+      },
+      "source_id": "f1a44950bfcc901427e2e46217deeacf"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the difference between average salaries and fees and average incentive schemes from 2018 to 2019?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "22. Directors and key management compensation"
+          },
+          {
+            "order": 2,
+            "text": "This note details the total amounts earned by the Company\u2019s Directors and members of the Executive Committee."
+          },
+          {
+            "order": 3,
+            "text": "Directors"
+          },
+          {
+            "order": 4,
+            "text": "Aggregate emoluments of the Directors of the Company were as follows:"
+          },
+          {
+            "order": 5,
+            "text": "Notes: 1 Excludes gains from long-term incentive plans."
+          },
+          {
+            "order": 6,
+            "text": "2 Includes the value of the cash allowance taken by some individuals in lieu of pension contributions"
+          },
+          {
+            "order": 7,
+            "text": "No Directors serving during the year exercised share options in the year ended 31 March 2019 (2018: one Director, gain \u20ac0.1 million; gain 2017: one Director, \u20ac0.7 million"
+          }
+        ],
+        "table": [
+          [
+            "",
+            "2019 \u20acm",
+            "2018 \u20acm",
+            "2017 \u20acm"
+          ],
+          [
+            "Salaries and fees",
+            "4",
+            "4",
+            "4"
+          ],
+          [
+            "Incentive schemes1",
+            "2",
+            "3",
+            "2"
+          ],
+          [
+            "Other benefits2",
+            "\u2013",
+            "1",
+            "1"
+          ],
+          [
+            "",
+            "6",
+            "8",
+            "7"
+          ]
+        ]
+      },
+      "source_id": "e638b59fbc7dd89bb1594802f1c3a7c4"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

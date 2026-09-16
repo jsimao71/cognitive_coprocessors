@@ -1,0 +1,439 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A certain company is in the business of selling fresh fruit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "The price for such a crate depends on the price of its individual fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "One apple costs $0.5 and one banana costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 346,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "Oranges are the most expensive and cost some times as much as a banana per piece.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 438,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 347,
+          "teacher_input_default": true,
+          "text": "Such a crate of fruit costs $32, what's the times of oranges as much as a banana per piece?",
+          "warnings": []
+        }
+      ],
+      "question": "A certain company is in the business of selling fresh fruit. One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges. The price for such a crate depends on the price of its individual fruits. One apple costs $0.5 and one banana costs twice as much. Oranges are the most expensive and cost some times as much as a banana per piece. Such a crate of fruit costs $32, what's the times of oranges as much as a banana per piece?",
+      "source_id": "gsm-plus-05540"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There's a particular business that specializes in selling fresh produce.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "A single box of this produce contains 5 bananas, 12 apples, and 7 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 234,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "The cost of this box is determined by the individual prices of the fruits it contains.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 300,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 235,
+          "teacher_input_default": true,
+          "text": "An apple is priced at $0.5, while a banana is twice as expensive.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 379,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 301,
+          "teacher_input_default": true,
+          "text": "The costliest fruit is the orange, priced at three times the cost of a banana.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 438,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 380,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total cost of such a box of produce?",
+          "warnings": []
+        }
+      ],
+      "question": "There's a particular business that specializes in selling fresh produce. A single box of this produce contains 5 bananas, 12 apples, and 7 oranges. The cost of this box is determined by the individual prices of the fruits it contains. An apple is priced at $0.5, while a banana is twice as expensive. The costliest fruit is the orange, priced at three times the cost of a banana. Can you calculate the total cost of such a box of produce?",
+      "source_id": "gsm-plus-05541"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A certain company is in the business of selling fresh fruit and also offers a discount on a bundle of fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "The price for such a crate depends on the price of its individual fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 313,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 257,
+          "teacher_input_default": true,
+          "text": "One apple costs $0.5 and one banana costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 396,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 314,
+          "teacher_input_default": true,
+          "text": "Oranges are the most expensive and cost three times as much as a banana per piece.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 526,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 397,
+          "teacher_input_default": true,
+          "text": "The company also offers a discount of $2 on every crate, but due to a recent policy change, the discount is no longer applicable.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 610,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 527,
+          "teacher_input_default": true,
+          "text": "What would be the price for such a crate of fruit without considering the discount?",
+          "warnings": []
+        }
+      ],
+      "question": "A certain company is in the business of selling fresh fruit and also offers a discount on a bundle of fruits. One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges. The price for such a crate depends on the price of its individual fruits. One apple costs $0.5 and one banana costs twice as much. Oranges are the most expensive and cost three times as much as a banana per piece. The company also offers a discount of $2 on every crate, but due to a recent policy change, the discount is no longer applicable. What would be the price for such a crate of fruit without considering the discount?",
+      "source_id": "gsm-plus-05542"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Aiden and 15 of his friends are going to see a film at the cinema, and meet up with 6 more friends there.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "They each save a seat and then buy enough drinks and snacks to fill the seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 260,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "Each seat has enough room to hold one person, two drinks, and three snacks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 373,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 261,
+          "teacher_input_default": true,
+          "text": "If drinks and snacks cost $3 each, how much money, in dollars, has the group spent overall on snacks and drinks?",
+          "warnings": []
+        }
+      ],
+      "question": "Aiden and 15 of his friends are going to see a film at the cinema, and meet up with 6 more friends there. They each save a seat and then buy enough drinks and snacks to fill the seats. Each seat has enough room to hold one person, two drinks, and three snacks. If drinks and snacks cost $3 each, how much money, in dollars, has the group spent overall on snacks and drinks?",
+      "source_id": "gsm-plus-05608"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Aiden and 120 of his friends are going to see a film at the cinema, and meet up with 70 more friends there.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "They each save a seat and then buy enough drinks and snacks to fill the seats.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 187,
+          "teacher_input_default": true,
+          "text": "Each seat has enough room to hold one person, two drinks, and three snacks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 375,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 263,
+          "teacher_input_default": true,
+          "text": "If drinks and snacks cost $2 each, how much money, in dollars, has the group spent overall on snacks and drinks?",
+          "warnings": []
+        }
+      ],
+      "question": "Aiden and 120 of his friends are going to see a film at the cinema, and meet up with 70 more friends there. They each save a seat and then buy enough drinks and snacks to fill the seats. Each seat has enough room to hold one person, two drinks, and three snacks. If drinks and snacks cost $2 each, how much money, in dollars, has the group spent overall on snacks and drinks?",
+      "source_id": "gsm-plus-05609"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

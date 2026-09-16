@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Joe has twice as many cars as Robert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "He sells 20% of them and gives away twice as many cars as the number he sold to his mother.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 244,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If Joe remains with 16 cars after selling and giving some to his mother, how many cars did Robert originally have?",
+          "warnings": []
+        }
+      ],
+      "question": "Joe has twice as many cars as Robert. He sells 20% of them and gives away twice as many cars as the number he sold to his mother. If Joe remains with 16 cars after selling and giving some to his mother, how many cars did Robert originally have?",
+      "source_id": "gsm-plus-06548"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Before leaving for her barista job, Candice placed 80 sticky notes in her bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "She made a pit stop at a shop and bought an additional pack of sticky notes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "At her workplace, she used one sticky note for each of the 220 coffee cups she served.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 359,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "If she counted 23 sticky notes left in total, how many sticky notes were there in the pack she bought from the shop?",
+          "warnings": []
+        }
+      ],
+      "question": "Before leaving for her barista job, Candice placed 80 sticky notes in her bag. She made a pit stop at a shop and bought an additional pack of sticky notes. At her workplace, she used one sticky note for each of the 220 coffee cups she served. If she counted 23 sticky notes left in total, how many sticky notes were there in the pack she bought from the shop?",
+      "source_id": "gsm-plus-00373"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 206,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "After ten rounds, Craig has spelled out 20 words with 15 letters each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 290,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 207,
+          "teacher_input_default": true,
+          "text": "Craig's brother has spelled words with a total count of letters 50 more than Craig.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 360,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 291,
+          "teacher_input_default": true,
+          "text": "However, Craig's brother realizes he has miscounted two letters less.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 449,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 361,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of letters in the words they've spelled after the ten rounds.",
+          "warnings": []
+        }
+      ],
+      "question": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words. After ten rounds, Craig has spelled out 20 words with 15 letters each. Craig's brother has spelled words with a total count of letters 50 more than Craig. However, Craig's brother realizes he has miscounted two letters less. Calculate the total number of letters in the words they've spelled after the ten rounds.",
+      "source_id": "gsm-plus-07515"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rafaela was tipped $20 by each of the 40 patrons she served at the restaurant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "Julieta, on the other hand, received tips that were 10% less than what Rafaela got.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "What is the total amount of money that both Julieta and Rafaela earned in tips?",
+          "warnings": []
+        }
+      ],
+      "question": "Rafaela was tipped $20 by each of the 40 patrons she served at the restaurant. Julieta, on the other hand, received tips that were 10% less than what Rafaela got. What is the total amount of money that both Julieta and Rafaela earned in tips?",
+      "source_id": "gsm-plus-06877"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Twenty tourists discovered 700 shells in a strip mall parking lot.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "They had divided into three groups, Alphas, The finders, and Gogetters to find as many shells as possible.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 174,
+          "teacher_input_default": true,
+          "text": "If team Alphas found 40% of the shells, and team The finders found a fraction of the remaining shells, and the team Gogetters found 168 shells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 390,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 318,
+          "teacher_input_default": true,
+          "text": "What's the fraction of the remaining shells that team the finders found?",
+          "warnings": []
+        }
+      ],
+      "question": "Twenty tourists discovered 700 shells in a strip mall parking lot. They had divided into three groups, Alphas, The finders, and Gogetters to find as many shells as possible. If team Alphas found 40% of the shells, and team The finders found a fraction of the remaining shells, and the team Gogetters found 168 shells. What's the fraction of the remaining shells that team the finders found?",
+      "source_id": "gsm-plus-09636"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

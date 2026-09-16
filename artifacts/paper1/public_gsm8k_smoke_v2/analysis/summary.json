@@ -1,0 +1,286 @@
+{
+  "automatic_rescue": {
+    "definition": "runtime valid intervention plus correct answer among paired rows where voluntary __compute made no valid call",
+    "eligible_voluntary_misses": 1,
+    "rate": 0.0,
+    "rescued_correctly": 0
+  },
+  "base_question_count": 3,
+  "by_condition": [
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.5614970317550454
+      ],
+      "assistance_rate": 0.0,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "3_4_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "5plus_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        }
+      },
+      "condition": "calculator_block",
+      "count": 3,
+      "malformed_assistance_rate": 0.6666666666666666,
+      "mean_assistance_calls": 0.0,
+      "mean_generated_tokens": 135.0,
+      "mean_model_calls": 135.0,
+      "mean_wall_time_ms": 50681.4842,
+      "registered_operation_backend_coverage": 1.0,
+      "registered_operation_recall": 0.0
+    },
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.5614970317550454
+      ],
+      "assistance_rate": 0.6666666666666666,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "3_4_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 1.0,
+          "count": 1
+        },
+        "5plus_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 1.0,
+          "count": 1
+        }
+      },
+      "condition": "generic_compute",
+      "count": 3,
+      "malformed_assistance_rate": 0.3333333333333333,
+      "mean_assistance_calls": 2.3333333333333335,
+      "mean_generated_tokens": 98.0,
+      "mean_model_calls": 3.0,
+      "mean_wall_time_ms": 15454.4745,
+      "registered_operation_backend_coverage": 1.0,
+      "registered_operation_recall": 0.0
+    },
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.5614970317550454
+      ],
+      "assistance_rate": 0.0,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "3_4_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "5plus_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        }
+      },
+      "condition": "llm_only",
+      "count": 3,
+      "malformed_assistance_rate": 0.0,
+      "mean_assistance_calls": 0.0,
+      "mean_generated_tokens": 6.333333333333333,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 1645.501,
+      "registered_operation_backend_coverage": 1.0,
+      "registered_operation_recall": 0.0
+    },
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.5614970317550454
+      ],
+      "assistance_rate": 0.6666666666666666,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 1.0,
+          "count": 1
+        },
+        "3_4_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 1.0,
+          "count": 1
+        },
+        "5plus_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        }
+      },
+      "condition": "lora_calculator_block",
+      "count": 3,
+      "malformed_assistance_rate": 0.6666666666666666,
+      "mean_assistance_calls": 1.0,
+      "mean_generated_tokens": 52.666666666666664,
+      "mean_model_calls": 52.666666666666664,
+      "mean_wall_time_ms": 20491.68473333333,
+      "registered_operation_backend_coverage": 1.0,
+      "registered_operation_recall": 0.08333333333333333
+    },
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.5614970317550454
+      ],
+      "assistance_rate": 0.0,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "3_4_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "5plus_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        }
+      },
+      "condition": "matched_icl",
+      "count": 3,
+      "malformed_assistance_rate": 0.0,
+      "mean_assistance_calls": 0.0,
+      "mean_generated_tokens": 6.0,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 1583.7735,
+      "registered_operation_backend_coverage": 1.0,
+      "registered_operation_recall": 0.0
+    },
+    {
+      "accuracy": 1.0,
+      "accuracy_ci95": [
+        0.4385029682449546,
+        1.0
+      ],
+      "assistance_rate": 0.0,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 1.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "3_4_steps": {
+          "accuracy": 1.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "5plus_steps": {
+          "accuracy": 1.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        }
+      },
+      "condition": "oracle_calculator",
+      "count": 3,
+      "malformed_assistance_rate": 0.0,
+      "mean_assistance_calls": 0.0,
+      "mean_generated_tokens": 45.666666666666664,
+      "mean_model_calls": 1.0,
+      "mean_wall_time_ms": 7447.5997333333335,
+      "registered_operation_backend_coverage": 1.0,
+      "registered_operation_recall": 0.0
+    },
+    {
+      "accuracy": 0.0,
+      "accuracy_ci95": [
+        0.0,
+        0.5614970317550454
+      ],
+      "assistance_rate": 0.0,
+      "by_difficulty": {
+        "2_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "3_4_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        },
+        "5plus_steps": {
+          "accuracy": 0.0,
+          "assistance_rate": 0.0,
+          "count": 1
+        }
+      },
+      "condition": "runtime_trigger",
+      "count": 3,
+      "malformed_assistance_rate": 0.0,
+      "mean_assistance_calls": 0.0,
+      "mean_generated_tokens": 40.0,
+      "mean_model_calls": 40.0,
+      "mean_wall_time_ms": 12215.987133333334,
+      "registered_operation_backend_coverage": 1.0,
+      "registered_operation_recall": 0.0
+    }
+  ],
+  "claim_boundary": {
+    "false_activation_rate": null,
+    "first_wrong_token_prevention": null,
+    "reason": "GSM8K selection has no matched no-compute controls or token alignment"
+  },
+  "prediction_sources": [
+    {
+      "path": "artifacts/paper1/public_gsm8k_smoke_v2/llm_only/predictions.jsonl",
+      "sha256": "b9ff4bd5b560e896d90f91fb028161ac41d8a90d2dcf1abc227911cb2528ff60"
+    },
+    {
+      "path": "artifacts/paper1/public_gsm8k_smoke_v2/matched_icl/predictions.jsonl",
+      "sha256": "edbfdea0ffbe8768dde290bb1a913964cfbc7d63ae6cf451b3dd14de017de627"
+    },
+    {
+      "path": "artifacts/paper1/public_gsm8k_smoke_v2/generic_compute/predictions.jsonl",
+      "sha256": "ef3424c6e22f47c05b11a735b53b878aaee933a2d4d291cc126d45a819c4af6a"
+    },
+    {
+      "path": "artifacts/paper1/public_gsm8k_smoke_v2/calculator_block/predictions.jsonl",
+      "sha256": "376f7584d1ec71ae0f9b9aa5ef87a41409c87fc1e735009ee5fcbb52439567ea"
+    },
+    {
+      "path": "artifacts/paper1/public_gsm8k_smoke_v2/runtime_trigger/predictions.jsonl",
+      "sha256": "d97e640d491ca89a69b1d15c6b198292bc0f66904d2194fff2f9984b5eff919c"
+    },
+    {
+      "path": "artifacts/paper1/public_gsm8k_smoke_v2/oracle_calculator/predictions.jsonl",
+      "sha256": "ac2b536d9e3351b93dc08ba54232fb54c6b547f273a1c2e806255cc1c36b7565"
+    },
+    {
+      "path": "artifacts/paper1/public_gsm8k_smoke_v2/lora_calculator_block/predictions.jsonl",
+      "sha256": "a5098f8893f604d05c96e7e19ecb2e034ee2c2baca7cbb125777c88dd5e82958"
+    }
+  ],
+  "record_count": 21,
+  "schema_version": "ccpu.paper1.public_gsm8k_summary.v1"
+}

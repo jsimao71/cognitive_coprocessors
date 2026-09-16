@@ -1,0 +1,362 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At a school several teachers were holding a contest to see which class could earn the most trivia points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "Mrs.William's class scored 50 points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "Mr. Adams class earned 57 points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 178,
+          "teacher_input_default": true,
+          "text": "Mrs. Brown's class earned 49 and Mrs.Daniel's class earned 57.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 289,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 241,
+          "teacher_input_default": true,
+          "text": "What is the mean of the number of points scored?",
+          "warnings": []
+        }
+      ],
+      "question": "At a school several teachers were holding a contest to see which class could earn the most trivia points. Mrs.William's class scored 50 points. Mr. Adams class earned 57 points. Mrs. Brown's class earned 49 and Mrs.Daniel's class earned 57. What is the mean of the number of points scored?",
+      "source_id": "asdiv-1989"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom had $19 and he wanted to buy as many folders as he could.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "If one folder costs $2, how much is left after he bought the folders?",
+          "warnings": []
+        }
+      ],
+      "question": "Tom had $19 and he wanted to buy as many folders as he could. If one folder costs $2, how much is left after he bought the folders?",
+      "source_id": "asdiv-0776"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 36,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It is harvest season in the country.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 37,
+          "teacher_input_default": true,
+          "text": "Lewis, whose family owns a fruit farm, is busy overseeing their farmers while they are harvesting the fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "His day starts by going to the apple orchard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 300,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 193,
+          "teacher_input_default": true,
+          "text": "The farmers reported that they harvest 45 sacks of apples from each of the 8 sections of the orchard daily.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 341,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 301,
+          "teacher_input_default": true,
+          "text": "How many apples are harvested every day?",
+          "warnings": []
+        }
+      ],
+      "question": "It is harvest season in the country. Lewis, whose family owns a fruit farm, is busy overseeing their farmers while they are harvesting the fruits. His day starts by going to the apple orchard. The farmers reported that they harvest 45 sacks of apples from each of the 8 sections of the orchard daily. How many apples are harvested every day?",
+      "source_id": "asdiv-0435"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Shannon is making identical balloon arrangements for a party.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "She has 32 maroon balloons, 24 white balloons, and 16 orange balloons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 133,
+          "teacher_input_default": true,
+          "text": "She wants each arrangement to have the same number of each color.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 286,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 199,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of arrangements that she can make if every balloon is used?",
+          "warnings": []
+        }
+      ],
+      "question": "Shannon is making identical balloon arrangements for a party. She has 32 maroon balloons, 24 white balloons, and 16 orange balloons. She wants each arrangement to have the same number of each color. What is the greatest number of arrangements that she can make if every balloon is used?",
+      "source_id": "asdiv-1215"
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 38,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are sixty-four pigs in the barn.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 39,
+          "teacher_input_default": true,
+          "text": "Some more come to join them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "Now there are eighty-six pigs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "How many pigs came to join them?",
+          "warnings": []
+        }
+      ],
+      "question": "There are sixty-four pigs in the barn. Some more come to join them. Now there are eighty-six pigs. How many pigs came to join them?",
+      "source_id": "asdiv-0135"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

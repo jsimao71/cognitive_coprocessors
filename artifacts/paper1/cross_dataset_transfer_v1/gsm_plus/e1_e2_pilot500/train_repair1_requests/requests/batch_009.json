@@ -1,0 +1,664 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Marilyn wants to buy a pair of boots online.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "On Amazon.com, the boots cost $16 and shipping costs $4.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "On eBay, those same pair of shoes are only $13, but shipping costs twice as much as it does on Amazon.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 301,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "Additionally, Marilyn has a discount coupon for eBay that reduces the price of the boots by 10%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 391,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 302,
+          "teacher_input_default": true,
+          "text": "After applying the discount, how much more expensive do the boots work out to be on eBay?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Purchase-intent context introduces no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "amazon.boots.price_dollars = 16",
+              "amazon.shipping.cost_dollars = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ebay.boots.price_before_discount_dollars = 13",
+              "ebay.shipping.cost_dollars = amazon.shipping.cost_dollars * 2"
+            ],
+            "assumptions": [
+              "'Those same pair of shoes' refers to the boots Marilyn is comparing."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ebay.boots.price_after_discount_dollars = dec_pct(ebay.boots.price_before_discount_dollars, 10)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The coupon reduces the boots' item price, not the shipping charge."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "amazon.order.total_cost_dollars = amazon.boots.price_dollars + amazon.shipping.cost_dollars",
+              "ebay.order.total_cost_after_discount_dollars = ebay.boots.price_after_discount_dollars + ebay.shipping.cost_dollars",
+              "ebay.order.additional_cost_vs_amazon_dollars = ebay.order.total_cost_after_discount_dollars - amazon.order.total_cost_dollars",
+              "RETURN ebay.order.additional_cost_vs_amazon_dollars"
+            ],
+            "assumptions": [
+              "'Work out to be' is interpreted as comparing each site's item price plus shipping after applying the eBay item discount."
+            ],
+            "confidence": 0.96,
+            "part_id": 4,
+            "semantic_notes": [
+              "The directional subtraction preserves the wording 'more expensive ... on eBay'; a negative value would indicate that eBay is instead cheaper."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-04739"
+      },
+      "question": "Marilyn wants to buy a pair of boots online. On Amazon.com, the boots cost $16 and shipping costs $4. On eBay, those same pair of shoes are only $13, but shipping costs twice as much as it does on Amazon. Additionally, Marilyn has a discount coupon for eBay that reduces the price of the boots by 10%. After applying the discount, how much more expensive do the boots work out to be on eBay?",
+      "source_context": null,
+      "source_id": "gsm-plus-04739",
+      "validation_failure": "answer mismatch: actual=-0.3, expected=0.3",
+      "validator_context": {
+        "correct_answer": "0.3",
+        "gold_reasoning": "First, calculate the total cost of the boots on Amazon by adding the price of the boots to the shipping cost: $16 boots + $4 shipping = $<<16+4=20>>20\nThen calculate the cost of shipping on eBay by doubling the cost of shipping on Amazon: $4 shipping * 2 = $<<4*2=8>>8\nThen subtract the 10% discount from the cost of the boots on eBay: $13 boots - $1.30 discount = $<<13-1.3=11.7>>11.7\nThen add the cost of shipping on eBay to find the total cost: $11.7 boots + $8 shipping = $<<11.7+8=19.7>>19.7\nThen subtract the cost of the boots on eBay from the cost on Amazon to find the difference: $20 Amazon - $19.7 eBay = $<<20-19.7=0.3>>0.3. So the boots are $0.3 more expensive on Amazon.\n#### 0.3"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Although Soledad works in a windowless office, she loves the outdoors.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "She will be on vacation for the entire month of June and cannot wait to hike 9,300 miles within that month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "She is thinking of walking twice a day, covering 125 miles each time.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 332,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "However, on every 5th day, she plans to rest and only hike once, covering 75 miles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 457,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 333,
+          "teacher_input_default": true,
+          "text": "Considering this, how many more miles per day must Soledad hike on the days she walks twice to complete her journey on time?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies background context but no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "soledad.june.days_available = 30",
+              "soledad.june.target_hiking_miles = 9300"
+            ],
+            "assumptions": [
+              "June contains 30 days, and being on vacation for the entire month makes all 30 days available under the stated plan."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "soledad.twice_walk_day.walks = 2",
+              "soledad.twice_walk_day.planned_miles_per_walk = 125",
+              "soledad.twice_walk_day.planned_miles = soledad.twice_walk_day.walks * soledad.twice_walk_day.planned_miles_per_walk"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "soledad.rest_interval_days = 5",
+              "soledad.rest_day.walks = 1",
+              "soledad.rest_day.hiking_miles = 75",
+              "soledad.june.rest_days = soledad.june.days_available / soledad.rest_interval_days",
+              "soledad.june.twice_walk_days = soledad.june.days_available - soledad.june.rest_days"
+            ],
+            "assumptions": [
+              "Every fifth day is counted as a rest-pattern day, so the 30-day month contains 30 / 5 such days; all other days are twice-walk days."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "soledad.june.rest_day_hiking_miles = soledad.june.rest_days * soledad.rest_day.hiking_miles",
+              "soledad.twice_walk_day.required_miles = (soledad.june.target_hiking_miles - soledad.june.rest_day_hiking_miles) / soledad.june.twice_walk_days",
+              "soledad.twice_walk_day.additional_miles = soledad.twice_walk_day.required_miles - soledad.twice_walk_day.planned_miles",
+              "RETURN soledad.twice_walk_day.additional_miles"
+            ],
+            "assumptions": [
+              "'More miles per day' is relative to the currently planned 250 miles on each twice-walk day."
+            ],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08883"
+      },
+      "question": "Although Soledad works in a windowless office, she loves the outdoors. She will be on vacation for the entire month of June and cannot wait to hike 9,300 miles within that month. She is thinking of walking twice a day, covering 125 miles each time. However, on every 5th day, she plans to rest and only hike once, covering 75 miles. Considering this, how many more miles per day must Soledad hike on the days she walks twice to complete her journey on time?",
+      "source_context": null,
+      "source_id": "gsm-plus-08883",
+      "validation_failure": "answer mismatch: actual=118.75, expected=59.375",
+      "validator_context": {
+        "correct_answer": "59.375",
+        "gold_reasoning": "First, let's find out how many days Soledad will be hiking in June. June has 30 days.\n\nNext, let's find out how many days she will be hiking once. Since she plans to rest every 5th day, we divide 30 by 5 to get 6. So, she will be hiking once for 6 days.\n\nThis means she will be hiking twice for 24 days (30 days - 6 days).\n\nOn the days she hikes once, she will cover 75 miles. So, for 6 days, she will cover 6 * 75 = 450 miles.\n\nOn the days she hikes twice, she initially plans to cover 125 miles each time. So, for 24 days, she will cover 24 * 125 * 2 = 6000 miles.\n\nSo, in total, she will cover 450 + 6000 = 6450 miles.\n\nHowever, she wants to hike 9300 miles. So, she needs to cover an additional 9300 - 6450 = 2850 miles.\n\nShe has 24 days to cover these additional miles. So, she needs to hike an additional 2850 / 24 = 118.75 miles per day.\n\nSince she hikes twice a day, she needs to hike an additional 118.75 / 2 = 59.375 miles each time.\n\nSo, in addition to the 125 miles she initially planned to hike each time, she needs to hike an additional 59.375 miles. So, she needs to hike 125 + 59.375 = 184.375 miles each time.\n\nSo, Soledad must hike an additional 59.375 miles each time she hikes twice a day to complete her journey on time. \n\n59.375 miles.\n#### 59.375"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In one hour, Ezra read twice as many books as Ahmed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Ezra has read 300 books this hour and decided to read 150 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "Then Ahmed decided to read an additional 75 books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "How many books have they read altogether?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ezra.this_hour.books_read = ahmed.this_hour.books_read * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ezra.this_hour.books_read = 300",
+              "ezra.additional.books_to_read = 150",
+              "ezra.after_additional.books_read = ezra.this_hour.books_read + ezra.additional.books_to_read"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The already-read and additional planned quantities are kept as distinct states."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ahmed.additional.books_to_read = 75",
+              "ahmed.after_additional.books_read = ahmed.this_hour.books_read + ahmed.additional.books_to_read"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "Ahmed's existing hourly count is a legitimate forward dependency established by the earlier comparison."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ezra_and_ahmed.after_additional.books_read = ezra.after_additional.books_read + ahmed.after_additional.books_read",
+              "RETURN ezra_and_ahmed.after_additional.books_read"
+            ],
+            "assumptions": [
+              "The requested total includes the additional books that Ezra and Ahmed decided to read."
+            ],
+            "confidence": 0.93,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06147"
+      },
+      "question": "In one hour, Ezra read twice as many books as Ahmed. Ezra has read 300 books this hour and decided to read 150 more. Then Ahmed decided to read an additional 75 books. How many books have they read altogether?",
+      "source_context": null,
+      "source_id": "gsm-plus-06147",
+      "validation_failure": "unresolved reference 'ahmed.this_hour.books_read' from scope 'global'; unresolved reference 'ahmed.this_hour.books_read' from scope 'global'; unresolved reference 'ahmed.after_additional.books_read' from scope 'global'; unresolved reference 'ezra_and_ahmed.after_additional.books_read' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "750",
+        "gold_reasoning": "If Ezra has read 300 books this hour and decided to read 150 more in the next hour, he has read a total of 300+150=<<300+150=450>>450\nSince Ezra reads twice as many books as Ahmed, Ahmed has read 450/2=<<450/2=225>>225 books.\nAhmed decided to read an additional 75 books, so he read a total of 225 + 75 = <<225+75=300>>300 books.\nTogether, Ahmed and Ezra has read 300+450=<<300+450=750>>750 books\n#### 750"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Adrianne is collecting different kinds of beads for making bracelets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "She had a total of 90 beads.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 208,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "Her sister gave her ten more beads than her mother, and her friend gave her twice as many as her mother gave.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 209,
+          "teacher_input_default": true,
+          "text": "How many beads did Adrianne's mother gave her?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "Non-quantitative setup introduces Adrianne's bead-collecting context but no arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adrianne.gifts.total.beads = 90"
+            ],
+            "assumptions": [
+              "The total of 90 is interpreted as the total supplied by the mother, sister, and friend named in the full question."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "adrianne.sister_gift.beads = adrianne.mother_gift.beads + 10",
+              "adrianne.friend_gift.beads = adrianne.mother_gift.beads * 2",
+              "adrianne.gifts.total.beads = sum(adrianne.mother_gift.beads, adrianne.sister_gift.beads, adrianne.friend_gift.beads)"
+            ],
+            "assumptions": [
+              "The three named gifts exhaust the stated total."
+            ],
+            "confidence": 0.9,
+            "part_id": 2,
+            "semantic_notes": [
+              "The giver-specific quantities and their stated relations are preserved."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN adrianne.mother_gift.beads"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07844"
+      },
+      "question": "Adrianne is collecting different kinds of beads for making bracelets. She had a total of 90 beads. Her sister gave her ten more beads than her mother, and her friend gave her twice as many as her mother gave. How many beads did Adrianne's mother gave her?",
+      "source_context": null,
+      "source_id": "gsm-plus-07844",
+      "validation_failure": "unresolved reference 'adrianne.mother_gift.beads' from scope 'global'; unresolved reference 'adrianne.mother_gift.beads' from scope 'global'; unresolved reference 'adrianne.mother_gift.beads' from scope 'global'; unresolved reference 'adrianne.mother_gift.beads' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "Let the number of bead given by Adrianne's mother be X.\n\nHer sister gave her X+10 beads, and her friend gave her 2X beads.\n\nAdrianne has 90 beads in total, so X+2X+X+10=90, X=20.\n\nAnswer:\n#### 20"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 50,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company spends $15000 on advertising for a year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 51,
+          "teacher_input_default": true,
+          "text": "The following year, they decide to spend a third of that amount on advertising.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 131,
+          "teacher_input_default": true,
+          "text": "However, halfway through the year, they decide to increase their advertising budget by 50%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 223,
+          "teacher_input_default": true,
+          "text": "What's the total amount the company spent on advertising for the two years?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "company.year1.advertising_spent = 15000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "company.year2.initial_annual_advertising_budget = company.year1.advertising_spent / 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "company.year2.first_half.advertising_spent = company.year2.initial_annual_advertising_budget / 2",
+              "company.year2.second_half.baseline_advertising_spend = company.year2.initial_annual_advertising_budget / 2",
+              "company.year2.second_half.advertising_spent = inc_pct(company.year2.second_half.baseline_advertising_spend, 50)",
+              "company.year2.advertising_spent = company.year2.first_half.advertising_spent + company.year2.second_half.advertising_spent"
+            ],
+            "assumptions": [
+              "The initial annual budget is spent uniformly, and the 50% increase applies to advertising spending during the second half of the year."
+            ],
+            "confidence": 0.86,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "company.two_years.advertising_spent = company.year1.advertising_spent + company.year2.advertising_spent",
+              "RETURN company.two_years.advertising_spent"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-01787"
+      },
+      "question": "A company spends $15000 on advertising for a year. The following year, they decide to spend a third of that amount on advertising. However, halfway through the year, they decide to increase their advertising budget by 50%. What's the total amount the company spent on advertising for the two years?",
+      "source_context": null,
+      "source_id": "gsm-plus-01787",
+      "validation_failure": "answer mismatch: actual=21250, expected=22500",
+      "validator_context": {
+        "correct_answer": "22500",
+        "gold_reasoning": "In the first year, the company spends $15000 on advertising.\n\nIn the second year, they initially decide to spend a third of that amount, which is $15000 / 3 = $5000.\n\nHalfway through the year, they increase their advertising budget by 50%. So, the increase is $5000 * 50/100 = $2500.\n\nTherefore, the total amount they spend in the second year is $5000 + $2500 = $7500.\n\nSo, the total amount the company spent on advertising for the two years is $15000 (first year) + $7500 (second year) = $22500.\n#### 22500"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,101 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "There is a massive rainstorm lasting 4 days.  There is an area that collects water to prevent flooding in the area.  It ends up overflowing on the 4th day.  The area can hold the equivalent of 6 feet of rain.  It can also drain out the equivalent of 3 inches of rain per day to the nearby river without causing problems.  The first day it rained 10 inches.  The second day it rained twice that much.  On the third day, it rained 50% more than the second day.  It flooded the fourth day before getting a chance to do any of the draining.  What is the minimum amount it rained on the fourth day?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "6282"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Rodney is a door-to-door salesman trying to sell home security systems. He gets a commission of $25 for each system he sells. He is canvassing a neighborhood of four streets with eight houses each. The first street gave him half the sales that the second street did, while every house on the third street turned him away and the fourth street resulted in only one sale. His total commission was $175. How many security systems did he sell on the second street?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"rodney.commission_per_system\", \"current\"), 25, \"currency_per_system\", source(\"a commission of $25 for each system he sells\"))",
+          "collection(\"neighborhood.streets\", \"street\", \"neighborhood\", source(\"a neighborhood of four streets with eight houses each\"))",
+          "observe(at(\"neighborhood.streets.count\", \"current\"), 4, \"count\", source(\"four streets\"))",
+          "observe(at(\"neighborhood.houses_per_street.count\", \"current\"), 8, \"count\", source(\"eight houses each\"))",
+          "fraction_of(at(\"rodney.systems_sold.first_street.count\", \"current\"), at(\"rodney.systems_sold.second_street.count\", \"current\"), 1, 2, source(\"The first street gave him half the sales that the second street did\"))",
+          "observe(at(\"rodney.systems_sold.third_street.count\", \"current\"), 0, \"count\", source(\"every house on the third street turned him away\"))",
+          "observe(at(\"rodney.systems_sold.fourth_street.count\", \"current\"), 1, \"count\", source(\"the fourth street resulted in only one sale\"))",
+          "observe(at(\"rodney.total_commission\", \"current\"), 175, \"currency\", source(\"His total commission was $175\"))",
+          "query(\"value\", at(\"rodney.systems_sold.second_street.count\", \"current\"))"
+        ]
+      },
+      "source_id": "2116"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "There are four growing trees. The first tree grows 1 meter/day, the second grows the same amount in half the time, the third grows 2 meters/day, and the fourth tree grows a meter more than the third each day. How many meters did the trees grow in total in 4 days?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"trees.growth_amounts\", \"tree_growth_amount\", \"trees\", source(\"four growing trees\"))",
+          "observe(at(\"trees.count\", \"current\"), 4, \"count\", source(\"four growing trees\"))",
+          "member(\"trees.growth_amounts\", \"trees.first.growth.amount\", source(\"The first tree grows 1 meter/day\"))",
+          "member(\"trees.growth_amounts\", \"trees.second.growth.amount\", source(\"the second grows the same amount in half the time\"))",
+          "member(\"trees.growth_amounts\", \"trees.third.growth.amount\", source(\"the third grows 2 meters/day\"))",
+          "member(\"trees.growth_amounts\", \"trees.fourth.growth.amount\", source(\"the fourth tree grows a meter more than the third each day\"))",
+          "observe(at(\"trees.first.growth_rate\", \"current\"), 1, \"meter_per_day\", source(\"first tree grows 1 meter/day\"))",
+          "same(\"trees.second.growth.amount\", \"trees.first.growth.amount\", source(\"the second grows the same amount\"))",
+          "fraction_of(\"trees.second.growth.time\", \"trees.first.growth.time\", 1, 2, source(\"half the time\"))",
+          "observe(at(\"trees.third.growth_rate\", \"current\"), 2, \"meter_per_day\", source(\"the third grows 2 meters/day\"))",
+          "offset(at(\"trees.fourth.growth_rate\", \"current\"), at(\"trees.third.growth_rate\", \"current\"), 1, \"meter_per_day\", source(\"the fourth tree grows a meter more than the third each day\"))",
+          "query(\"sum\", \"trees.growth_amounts\", \"4_days\")"
+        ]
+      },
+      "source_id": "4793"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Ned opens a left-handed store.  He sells left-handed mice.  They cost 30% more than normal mice.  He sells 25 a day and his store is open every day except Sunday, Thursday, and Friday.  If normal mice cost $120 how much money does he make a week?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "1955"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Bucky earns money each weekend catching and selling fish. He wants to save up for a new video game, which costs $60. Last weekend he earned $35. He can earn $5 from trout and $4 from blue-gill. He caught five fish this Sunday. If 60% were trout, and the rest were blue-gill, how much more does he need to save before he can buy the game?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"new_video_game.cost\", \"current\"), 60, \"dollar\", source(\"costs $60\"))",
+          "collection(\"bucky.this_sunday.caught_fish\", \"fish\", \"bucky\", source(\"He caught five fish this Sunday\"))",
+          "observe(at(\"bucky.this_sunday.caught_fish.count\", \"this_sunday\"), 5, \"count\", source(\"He caught five fish this Sunday\"))",
+          "collection(\"bucky.this_sunday.caught_fish.species_groups\", \"fish_species_group\", \"bucky.this_sunday.caught_fish\", source(\"60% were trout, and the rest were blue-gill\"))",
+          "member(\"bucky.this_sunday.caught_fish.species_groups\", \"bucky.this_sunday.caught_fish.trout\", source(\"60% were trout\"))",
+          "member(\"bucky.this_sunday.caught_fish.species_groups\", \"bucky.this_sunday.caught_fish.blue_gill\", source(\"the rest were blue-gill\"))",
+          "partition(\"bucky.this_sunday.caught_fish.species_groups\", at(\"bucky.this_sunday.caught_fish.count\", \"this_sunday\"), source(\"60% were trout, and the rest were blue-gill\"))",
+          "percent_of(at(\"bucky.this_sunday.caught_fish.trout.count\", \"this_sunday\"), at(\"bucky.this_sunday.caught_fish.count\", \"this_sunday\"), 60, source(\"60% were trout\"))",
+          "observe(at(\"bucky.trout.earnings_per_fish\", \"current\"), 5, \"dollar_per_fish\", source(\"$5 from trout\"))",
+          "observe(at(\"bucky.blue_gill.earnings_per_fish\", \"current\"), 4, \"dollar_per_fish\", source(\"$4 from blue-gill\"))",
+          "rate_relation(at(\"bucky.this_sunday.caught_fish.trout.earnings\", \"this_sunday\"), at(\"bucky.trout.earnings_per_fish\", \"current\"), at(\"bucky.this_sunday.caught_fish.trout.count\", \"this_sunday\"), source(\"He can earn $5 from trout and $4 from blue-gill. He caught five fish this Sunday. If 60% were trout\"))",
+          "rate_relation(at(\"bucky.this_sunday.caught_fish.blue_gill.earnings\", \"this_sunday\"), at(\"bucky.blue_gill.earnings_per_fish\", \"current\"), at(\"bucky.this_sunday.caught_fish.blue_gill.count\", \"this_sunday\"), source(\"He can earn $5 from trout and $4 from blue-gill. He caught five fish this Sunday. If 60% were trout, and the rest were blue-gill\"))",
+          "produce(\"last_weekend_earnings\", \"bucky\", at(\"bucky.fish_sale_earnings.amount\", \"current\"), 35, source(\"Last weekend he earned $35\"))",
+          "produce(\"this_sunday_trout_earnings\", \"bucky\", at(\"bucky.fish_sale_earnings.amount\", \"current\"), at(\"bucky.this_sunday.caught_fish.trout.earnings\", \"this_sunday\"), source(\"He can earn $5 from trout and $4 from blue-gill. He caught five fish this Sunday. If 60% were trout\"))",
+          "produce(\"this_sunday_blue_gill_earnings\", \"bucky\", at(\"bucky.fish_sale_earnings.amount\", \"current\"), at(\"bucky.this_sunday.caught_fish.blue_gill.earnings\", \"this_sunday\"), source(\"He can earn $5 from trout and $4 from blue-gill. He caught five fish this Sunday. If 60% were trout, and the rest were blue-gill\"))",
+          "query(\"difference\", at(\"bucky.fish_sale_earnings.amount\", \"current\"), at(\"new_video_game.cost\", \"current\"))"
+        ]
+      },
+      "source_id": "578"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

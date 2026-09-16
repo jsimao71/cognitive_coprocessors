@@ -1,0 +1,28 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,booktabs,hyperref}
+\title{Latent Epistemic Blocks:\\Parallel Claim-Level Control for Retrieval and Verification}
+\author{Working Draft}\date{August 2026}
+\begin{document}\maketitle
+\begin{abstract}
+Retrieval need is not equivalent to model uncertainty, while source-specific learned routing is unnecessary when runtime heuristics close the routing gap. We study whether a parallel causal controller can mark RETRIEVE, VERIFY, or HELP spans early enough to obtain or validate evidence before unsupported factual commitment. Source selection, credentials, evidence status, and enforcement remain runtime responsibilities.
+\end{abstract}
+\section{Problem}
+For an emerging factual commitment, distinguish evidence requirement from evidence availability. Retrieval is needed only when required evidence is absent from active context, typed task state, or optional PRA-managed state.
+\section{Latent Epistemic Blocks}
+The controller reuses Paper 3's causal START/END state machine and predicts NONE, RETRIEVE, VERIFY, HELP, with COMPUTE as a cross-category negative. It never predicts DB, lexical, vector, or web identity.
+\section{Timing}
+Each opportunity records earliest safe START, latest acceptable START, canonical END, and first unsupported-value token. This supports Early Catch, Late Catch, missed-before-commitment, and lead-time metrics.
+\section{Independent Watchdog}
+Compare voluntary explicit retrieval intent, independent latent control, and a hybrid in which voluntary requests handle recognized needs while the watchdog catches omissions. Error correlation and Watchdog Rescue Rate determine whether independence adds value.
+\section{Multi-Layer Control}
+Compare final layer, best layer, fixed averaging, voting, learned layer weights, and a tiny logit aggregator. START and END may use different layer mixtures.
+\section{Runtime Resolution and Enforcement}
+After RETRIEVE or VERIFY, runtime first checks existing authoritative task/PRA state, then invokes Paper 2.5 source routing only if needed. Unsupported, conflicting, stale, or unavailable evidence may force abstention, qualification, conflict reporting, or further retrieval.
+\section{Baselines and Metrics}
+Baselines include Paper 1.5 semantic rules, FLARE-like confidence, paired/fenced/label-only voluntary intent, text sidecar, final-layer probe, multi-layer controller, hybrid watchdog, and oracle timing/type. Report span metrics, FAR, Early/Late Catch, Watchdog Rescue, UCR, Authorized Commitment Coverage, unnecessary retrieval, evidence override, abstention quality, latency/cost, and cross-model/OOD transfer.
+\section{Falsification}
+Latent epistemic control is not justified if transparent semantic rules match its UCR--cost frontier, voluntary control catches nearly all needs, watchdog errors correlate with generator misses, or hidden-state dependence is too model-specific.
+\section{Scope}
+No learned source-specific router without a new Paper 2.5 oracle gap; no transactional/backtracking contribution; PRA is optional; evidence-integration LoRA is a separate gated experiment.
+\end{document}

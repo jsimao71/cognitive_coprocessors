@@ -1,0 +1,362 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Chris possesses a lawn mower with two different speeds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "If he uses the slower \"turtle\" speed, it takes him 60 minutes to mow his entire lawn, but if he uses the faster \"rabbit\" speed, it only takes him 40 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 214,
+          "teacher_input_default": true,
+          "text": "Today, he decided to try something different and mowed half of his lawn in \"turtle\" mode and the other half in \"rabbit\" mode.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 415,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total time in minutes he spent mowing his lawn today?",
+          "warnings": []
+        }
+      ],
+      "question": "Chris possesses a lawn mower with two different speeds. If he uses the slower \"turtle\" speed, it takes him 60 minutes to mow his entire lawn, but if he uses the faster \"rabbit\" speed, it only takes him 40 minutes. Today, he decided to try something different and mowed half of his lawn in \"turtle\" mode and the other half in \"rabbit\" mode. Can you calculate the total time in minutes he spent mowing his lawn today?",
+      "source_id": "gsm-plus-05469"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Joe has twice as many cars as Robert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "He sells 1/5 of them and gives away twice as many cars as the number he sold to his mother.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 232,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If Robert has 20 cars, how many cars does joe remain with after selling and giving some to his mother?",
+          "warnings": []
+        }
+      ],
+      "question": "Joe has twice as many cars as Robert. He sells 1/5 of them and gives away twice as many cars as the number he sold to his mother. If Robert has 20 cars, how many cars does joe remain with after selling and giving some to his mother?",
+      "source_id": "gsm-plus-06546"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 58,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ellen is on a diet and she has a specific daily meal plan.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 59,
+          "teacher_input_default": true,
+          "text": "She eats two carrots, a salad, and a yogurt every day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "The salad costs her $6, while the yogurt is half the price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 174,
+          "teacher_input_default": true,
+          "text": "Additionally, she drinks a bottle of water that costs twice as much as one carrot.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 356,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 257,
+          "teacher_input_default": true,
+          "text": "If in total she pays $13 for her daily meal plan, how much does Ellen pay for one carrot every day?",
+          "warnings": []
+        }
+      ],
+      "question": "Ellen is on a diet and she has a specific daily meal plan. She eats two carrots, a salad, and a yogurt every day. The salad costs her $6, while the yogurt is half the price. Additionally, she drinks a bottle of water that costs twice as much as one carrot. If in total she pays $13 for her daily meal plan, how much does Ellen pay for one carrot every day?",
+      "source_id": "gsm-plus-07139"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carly is preparing cupcakes and brownies for her art class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 60,
+          "teacher_input_default": true,
+          "text": "She decides to make 2 less than three times as many brownies as cupcakes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "However, she also wants to keep some cupcakes for her family.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 196,
+          "teacher_input_default": true,
+          "text": "She keeps 4 cupcakes for her family and the rest are for her class.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 472,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 264,
+          "teacher_input_default": true,
+          "text": "If Carly's class has five people and each person gets two treats, and considering that each person must get at least one brownie, how many cupcakes did Carly initially make before keeping some for her family?",
+          "warnings": []
+        }
+      ],
+      "question": "Carly is preparing cupcakes and brownies for her art class. She decides to make 2 less than three times as many brownies as cupcakes. However, she also wants to keep some cupcakes for her family. She keeps 4 cupcakes for her family and the rest are for her class. If Carly's class has five people and each person gets two treats, and considering that each person must get at least one brownie, how many cupcakes did Carly initially make before keeping some for her family?",
+      "source_id": "gsm-plus-09803"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "One dwarf can mine 12.5 pounds of ore per day with his bare hands.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "He can mine twice as much with an iron pickaxe and 50% more with a steel pickaxe than with an iron pickaxe.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 175,
+          "teacher_input_default": true,
+          "text": "How many pounds of ore can 40 dwarves with steel pickaxes mine in a month with 30 days?",
+          "warnings": []
+        }
+      ],
+      "question": "One dwarf can mine 12.5 pounds of ore per day with his bare hands. He can mine twice as much with an iron pickaxe and 50% more with a steel pickaxe than with an iron pickaxe. How many pounds of ore can 40 dwarves with steel pickaxes mine in a month with 30 days?",
+      "source_id": "gsm-plus-08210"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

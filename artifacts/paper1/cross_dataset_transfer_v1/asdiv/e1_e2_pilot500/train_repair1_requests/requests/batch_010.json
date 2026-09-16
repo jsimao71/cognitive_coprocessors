@@ -1,0 +1,470 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The Khan Corporation would like to donate 48 computers and 32 printers to local schools.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 89,
+          "teacher_input_default": true,
+          "text": "The corporation would like to make sure that each school receives the same set of computers and printers, with none left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 295,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 216,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of schools that The Khan Corporation can donate to?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "khan_corporation.donation.computers = 48",
+              "khan_corporation.donation.printers = 32"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "khan_corporation.donation.computers = schools.count * each_school.computers",
+              "khan_corporation.donation.printers = schools.count * each_school.printers"
+            ],
+            "assumptions": [
+              "Each school receives identical integer counts of both item types."
+            ],
+            "confidence": 0.93,
+            "part_id": 1,
+            "semantic_notes": [
+              "The multiplicative relations preserve equal whole allocations with no donated items left over."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible school count requires greatest-common-divisor or constrained integer-optimization semantics, which the active operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2056"
+      },
+      "question": "The Khan Corporation would like to donate 48 computers and 32 printers to local schools. The corporation would like to make sure that each school receives the same set of computers and printers, with none left over. What is the greatest number of schools that The Khan Corporation can donate to?",
+      "source_context": null,
+      "source_id": "asdiv-2056",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "16",
+        "gold_reasoning": "GCD(48,32)=16"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A worker needs to cut a 27-yard long rope into some long pieces at 4 yard each and some short pieces at 1 yard each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "In order to make the least number of pieces, how many short pieces should be cut for?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rope.total_length_yards = 27",
+              "rope.long_piece.length_yards = 4",
+              "rope.short_piece.length_yards = 1",
+              "rope.long_pieces.count = (rope.total_length_yards - rope.short_pieces.count * rope.short_piece.length_yards) / rope.long_piece.length_yards"
+            ],
+            "assumptions": [
+              "Cutting consumes the full rope with no length lost to cutting."
+            ],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "The final relation preserves that the entire rope is partitioned into long and short pieces."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Minimizing the number of pieces while requiring nonnegative integer piece counts needs discrete constrained-optimization semantics not available in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0796"
+      },
+      "question": "A worker needs to cut a 27-yard long rope into some long pieces at 4 yard each and some short pieces at 1 yard each. In order to make the least number of pieces, how many short pieces should be cut for?",
+      "source_context": null,
+      "source_id": "asdiv-0796",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "27/4=6 r3; 3/1=3"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Cups are sold 5 to a package and plates are sold 10 to a package.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "If you want to have the same number of each item for a party, what is the least number of packages of each you need to buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "cups.items_per_package = 5",
+              "plates.items_per_package = 10"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the least positive package counts that yield equal item counts requires integer divisibility or a least-common-multiple operation, which the active arithmetic profile cannot express."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0868"
+      },
+      "question": "Cups are sold 5 to a package and plates are sold 10 to a package. If you want to have the same number of each item for a party, what is the least number of packages of each you need to buy?",
+      "source_context": null,
+      "source_id": "asdiv-0868",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "LCM[5,10]=10; (10/5)+(10/10)=3"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Enzo and Beatriz are playing games at their local arcade.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "Incredibly, Enzo wins 5 tickets from every game, and Beatriz wins 11 tickets from every game.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 243,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "When they stopped playing games, Enzo and Beatriz had won the same number of total tickets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 308,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 244,
+          "teacher_input_default": true,
+          "text": "What is the minimum number of games that Enzo could have played?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause establishes narrative context but introduces no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "enzo.tickets_per_game = 5",
+              "beatriz.tickets_per_game = 11"
+            ],
+            "assumptions": [],
+            "confidence": 1,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "enzo.total_tickets = enzo.games_played * enzo.tickets_per_game",
+              "beatriz.games_played = enzo.total_tickets / beatriz.tickets_per_game",
+              "beatriz.total_tickets = enzo.total_tickets"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The shared total is represented without collapsing either player's rate relationship."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the minimum positive integer number of Enzo's games compatible with both ticket rates requires integer divisibility or a least-common-multiple operation, which the active arithmetic profile cannot express."
+            ],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2031"
+      },
+      "question": "Enzo and Beatriz are playing games at their local arcade. Incredibly, Enzo wins 5 tickets from every game, and Beatriz wins 11 tickets from every game. When they stopped playing games, Enzo and Beatriz had won the same number of total tickets. What is the minimum number of games that Enzo could have played?",
+      "source_context": null,
+      "source_id": "asdiv-2031",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "11",
+        "gold_reasoning": "LCM[5,11]=55; 55/5=11"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Peter has 18 oranges, 27 pears and 12 bananas.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "He wants to make fruit baskets with the same number of each fruit in each basket.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of fruit baskets he can make?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "peter.oranges = 18",
+              "peter.pears = 27",
+              "peter.bananas = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "each_basket.oranges = peter.oranges / peter.fruit_baskets.count",
+              "each_basket.pears = peter.pears / peter.fruit_baskets.count",
+              "each_basket.bananas = peter.bananas / peter.fruit_baskets.count"
+            ],
+            "assumptions": [
+              "All available fruit is intended to be allocated among identically composed baskets without leftovers."
+            ],
+            "confidence": 0.89,
+            "part_id": 1,
+            "semantic_notes": [
+              "The basket count is a legitimate forward dependency introduced by the full question."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest basket count requires a greatest-common-divisor or equivalent integer-divisibility operation, which is absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1206"
+      },
+      "question": "Peter has 18 oranges, 27 pears and 12 bananas. He wants to make fruit baskets with the same number of each fruit in each basket. What is the greatest number of fruit baskets he can make?",
+      "source_context": null,
+      "source_id": "asdiv-1206",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "GCD(18,27,12)=3"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

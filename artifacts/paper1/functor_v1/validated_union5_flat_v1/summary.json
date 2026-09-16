@@ -1,0 +1,79 @@
+{
+  "accepted_sha256": "d778b9eb1f3c8ebe1e487561f8207c9c2fa0b093b9bd0de38700de13e95bba83",
+  "annotation_sha256": {
+    "artifacts\\paper1\\functor_v1\\primary_flat_v1\\annotations.jsonl": "3b8374eb27e7dde3c310bb2fbdb249fdb44b36b6d826cbd2b51b89984ea4c728",
+    "artifacts\\paper1\\functor_v1\\retry1_flat_v1\\annotations.jsonl": "2c085659fcb4d12d4c3607d6d6c76e927db7f304d81a6dfe8babb852121b985b",
+    "artifacts\\paper1\\functor_v1\\retry2_flat_v1\\annotations.jsonl": "001ff873f0806ea0b52d1904300268eec07496ef868d875c9f10128b76d4989b",
+    "artifacts\\paper1\\functor_v1\\retry3_flat_v1\\annotations.jsonl": "dd865647f96637169a38b4b829b19d0cf1d0a966bfe4fd2a250c1c5eeea6aec3",
+    "artifacts\\paper1\\functor_v1\\retry5_gpt56_v1\\annotations.jsonl": "c8e88588fe3fcd7083d3e6395d31188c373bedd6e163b637821b49cb448a31da"
+  },
+  "condition_execution_verified": {
+    "f1": 482,
+    "f2": 480
+  },
+  "f2_semantic_specific_program_fraction": 0.8208333333333333,
+  "paired_acceptance_rate": 0.96,
+  "paired_accepted_count": 480,
+  "primary_annotation_answer_blind": true,
+  "primary_annotation_prior_asl_blind": true,
+  "primary_annotation_rationale_blind": true,
+  "rejected_count": 20,
+  "rejected_sha256": "a235f129e789be0eb88614d8d4ed87bd8529a4aee03dfea71f519da6f41e4d4f",
+  "rejection_counts": {
+    "f1": 18,
+    "f2": 20
+  },
+  "representation_diagnostics": {
+    "f1": {
+      "functor_counts": {
+        "absolute": 11,
+        "add": 335,
+        "copy": 12,
+        "decrease_percent": 25,
+        "divide": 298,
+        "increase_percent": 30,
+        "maximum": 3,
+        "mean_values": 24,
+        "minimum": 1,
+        "multiply": 472,
+        "percent_of": 68,
+        "query": 480,
+        "rate_times_duration": 16,
+        "subtract": 344,
+        "sum_values": 1,
+        "value": 1160
+      },
+      "mean_calls": 6.833333333333333,
+      "mean_characters": 426.0
+    },
+    "f2": {
+      "functor_counts": {
+        "absolute_difference": 13,
+        "decrease_percent": 25,
+        "difference": 112,
+        "fraction_of": 145,
+        "given": 1156,
+        "increase_percent": 31,
+        "maximum_of": 3,
+        "mean_of": 28,
+        "minimum_of": 1,
+        "multiple": 153,
+        "offset": 131,
+        "per_unit_total": 220,
+        "percent_of": 69,
+        "percentage_ratio": 49,
+        "product_of": 9,
+        "query": 480,
+        "quotient": 94,
+        "rate_total": 49,
+        "remaining": 166,
+        "same": 11,
+        "sum_of": 247
+      },
+      "mean_calls": 6.65,
+      "mean_characters": 418.03333333333336
+    }
+  },
+  "schema_version": "ccpu.paper1.functor_annotation_validation.v1",
+  "source_count": 500
+}

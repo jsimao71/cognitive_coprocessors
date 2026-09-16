@@ -1,0 +1,506 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The following month, the four friends met again to share their collections.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "Carl, having the most number of stamps among all of them decided to give away some of his collections.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 274,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 179,
+          "teacher_input_default": true,
+          "text": "If he has 96 stamps during that month, and he gave away 48, how many stamps were left with him?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "friends.count = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The meeting and collection-sharing context introduces no additional quantitative relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The other three friends are unnamed, so Carl's maximum-stamp comparison cannot be grounded to stable entity paths without inventing entities."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "carl.following_month.stamps_before_giveaway = 96",
+              "carl.following_month.stamps_given_away = 48",
+              "carl.following_month.stamps_left = carl.following_month.stamps_before_giveaway - carl.following_month.stamps_given_away",
+              "RETURN carl.following_month.stamps_left"
+            ],
+            "assumptions": [
+              "The 96 stamps are interpreted as Carl's holdings before the stated giveaway."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0308"
+      },
+      "question": "The following month, the four friends met again to share their collections. Carl, having the most number of stamps among all of them decided to give away some of his collections. If he has 96 stamps during that month, and he gave away 48, how many stamps were left with him?",
+      "source_context": null,
+      "source_id": "asdiv-0308",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "48",
+        "gold_reasoning": "96-48=48"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 43 empty seats and 7 occupied seats on an airplane.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "What is the ratio of the number of occupied seats to the total number of seats?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "airplane.seats.empty = 43",
+              "airplane.seats.occupied = 7"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "airplane.seats.total = airplane.seats.empty + airplane.seats.occupied",
+              "airplane.seats.occupied_to_total_ratio = airplane.seats.occupied / airplane.seats.total",
+              "RETURN airplane.seats.occupied_to_total_ratio"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1141"
+      },
+      "question": "There are 43 empty seats and 7 occupied seats on an airplane. What is the ratio of the number of occupied seats to the total number of seats?",
+      "source_context": null,
+      "source_id": "asdiv-1141",
+      "validation_failure": "answer mismatch: actual=0.14, expected=7",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": "7+43=50; 7:50"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Gabe and Steven make money by walking neighborhood pets.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "During a conversation about their work, they realize that they are both walking the same total number of pets, even though Gabe walks pets in groups of 2 and Steven walks pets in groups of 10.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 314,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 250,
+          "teacher_input_default": true,
+          "text": "What is the smallest total number of pets each could be walking?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The work context introduces no quantitative state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "gabe.pet_group_size = 2",
+              "steven.pet_group_size = 10",
+              "gabe.total_pets = steven.total_pets"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The equal totals are preserved as a forward relation because neither total is yet grounded."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the smallest positive total divisible into both stated group sizes requires least-common-multiple or integer-divisibility semantics, which the active arithmetic operator registry does not provide."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1225"
+      },
+      "question": "Gabe and Steven make money by walking neighborhood pets. During a conversation about their work, they realize that they are both walking the same total number of pets, even though Gabe walks pets in groups of 2 and Steven walks pets in groups of 10. What is the smallest total number of pets each could be walking?",
+      "source_context": null,
+      "source_id": "asdiv-1225",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "LCM[2,10]=10"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sam and Carlos are bowling with plastic pins in Sam's living room.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 161,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "Remarkably, Sam knocks down 8 pins on every bowl, and Carlos knocks down 9 pins on every bowl.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 248,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 162,
+          "teacher_input_default": true,
+          "text": "At the end of the day, Sam and Carlos have knocked down the same total number of pins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 337,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "What is the least number of total pins that Sam and Carlos could have each knocked down?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause supplies setting and participants but no quantitative arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sam.pins_per_bowl = 8",
+              "carlos.pins_per_bowl = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sam.total.pins = carlos.total.pins"
+            ],
+            "assumptions": [
+              "The equality is represented by making Sam's total depend on Carlos's equal total; this direction is semantically arbitrary."
+            ],
+            "confidence": 0.94,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the least positive total divisible by both per-bowl counts requires a least-common-multiple operation or integer-domain minimization constraints, neither of which is available in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2040"
+      },
+      "question": "Sam and Carlos are bowling with plastic pins in Sam's living room. Remarkably, Sam knocks down 8 pins on every bowl, and Carlos knocks down 9 pins on every bowl. At the end of the day, Sam and Carlos have knocked down the same total number of pins. What is the least number of total pins that Sam and Carlos could have each knocked down?",
+      "source_context": null,
+      "source_id": "asdiv-2040",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "72",
+        "gold_reasoning": "LCM[8,9]=72"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mark had 24 marbles and Evan had 3 marbles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "Mark gave some of his marbles to Evan.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "Now Mark has exactly double the number of marbles that Evan has.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "How many marbles did Mark give to Evan?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mark.initial.marbles = 24",
+              "evan.initial.marbles = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mark.given_to_evan.marbles = mark.initial.marbles - mark.after_transfer.marbles",
+              "evan.after_transfer.marbles = evan.initial.marbles + mark.given_to_evan.marbles"
+            ],
+            "assumptions": [
+              "All marbles removed from Mark are transferred to Evan, with none added, lost, or transferred elsewhere."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mark.after_transfer.marbles = evan.after_transfer.marbles * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN mark.given_to_evan.marbles"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0901"
+      },
+      "question": "Mark had 24 marbles and Evan had 3 marbles. Mark gave some of his marbles to Evan. Now Mark has exactly double the number of marbles that Evan has. How many marbles did Mark give to Evan?",
+      "source_context": null,
+      "source_id": "asdiv-0901",
+      "validation_failure": "unresolved reference 'mark.after_transfer.marbles' from scope 'global'; unresolved reference 'mark.given_to_evan.marbles' from scope 'global'; unresolved reference 'evan.after_transfer.marbles' from scope 'global'; unresolved reference 'mark.given_to_evan.marbles' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "x:Marbles that Mark gave to Evan; 24-x=(3+x)*2"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,76 @@
+{
+  "accepted_sha256": "3619b9c2f0a68d72ec687667af9e63e0ee2635227a27cdaf9d3ed742a1222c43",
+  "annotation_sha256": {
+    "artifacts\\paper1\\functor_v1\\primary_flat_v1\\annotations.jsonl": "3b8374eb27e7dde3c310bb2fbdb249fdb44b36b6d826cbd2b51b89984ea4c728",
+    "artifacts\\paper1\\functor_v1\\retry1_flat_v1\\annotations.jsonl": "2c085659fcb4d12d4c3607d6d6c76e927db7f304d81a6dfe8babb852121b985b",
+    "artifacts\\paper1\\functor_v1\\retry2_flat_v1\\annotations.jsonl": "001ff873f0806ea0b52d1904300268eec07496ef868d875c9f10128b76d4989b"
+  },
+  "condition_execution_verified": {
+    "f1": 476,
+    "f2": 472
+  },
+  "f2_semantic_specific_program_fraction": 0.821656050955414,
+  "paired_acceptance_rate": 0.942,
+  "paired_accepted_count": 471,
+  "primary_annotation_answer_blind": true,
+  "primary_annotation_prior_asl_blind": true,
+  "primary_annotation_rationale_blind": true,
+  "rejected_count": 29,
+  "rejected_sha256": "7d196b206cb9efe38052ab5a5bc44b1d8c138037364a231bcea7855f9146d6b9",
+  "rejection_counts": {
+    "f1": 24,
+    "f2": 28
+  },
+  "representation_diagnostics": {
+    "f1": {
+      "functor_counts": {
+        "absolute": 11,
+        "add": 328,
+        "copy": 12,
+        "decrease_percent": 25,
+        "divide": 288,
+        "increase_percent": 30,
+        "maximum": 3,
+        "mean_values": 23,
+        "minimum": 1,
+        "multiply": 464,
+        "percent_of": 67,
+        "query": 471,
+        "rate_times_duration": 16,
+        "subtract": 337,
+        "value": 1142
+      },
+      "mean_calls": 6.832271762208068,
+      "mean_characters": 426.32908704883226
+    },
+    "f2": {
+      "functor_counts": {
+        "absolute_difference": 13,
+        "decrease_percent": 25,
+        "difference": 110,
+        "fraction_of": 139,
+        "given": 1143,
+        "increase_percent": 31,
+        "maximum_of": 3,
+        "mean_of": 27,
+        "minimum_of": 1,
+        "multiple": 147,
+        "offset": 125,
+        "per_unit_total": 220,
+        "percent_of": 68,
+        "percentage_ratio": 48,
+        "product_of": 7,
+        "query": 471,
+        "quotient": 91,
+        "rate_total": 49,
+        "remaining": 162,
+        "same": 11,
+        "sum_of": 243
+      },
+      "mean_calls": 6.653927813163482,
+      "mean_characters": 418.4437367303609
+    }
+  },
+  "schema_version": "ccpu.paper1.functor_annotation_validation.v1",
+  "source_count": 500
+}

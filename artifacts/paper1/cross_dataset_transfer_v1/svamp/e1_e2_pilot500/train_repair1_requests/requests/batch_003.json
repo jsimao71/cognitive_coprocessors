@@ -1,0 +1,457 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jake has 12 fewer peaches than Steven who has 11 more peaches than Jill.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "Steven has 4 peaches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "How many more peaches does Jill have than Jake?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jake.peaches = steven.peaches - 12",
+              "steven.peaches = jill.peaches + 11"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "steven.peaches = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jill.peaches_more_than_jake = jill.peaches - jake.peaches",
+              "RETURN jill.peaches_more_than_jake"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-304"
+      },
+      "question": "Jake has 12 fewer peaches than Steven who has 11 more peaches than Jill. Steven has 4 peaches. How many more peaches does Jill have than Jake?",
+      "source_context": null,
+      "source_id": "svamp-chal-304",
+      "validation_failure": "unresolved reference 'jill.peaches' from scope 'global'; unresolved reference 'jill.peaches' from scope 'global'; unresolved reference 'jill.peaches_more_than_jake' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "( 12.0 - 11.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jake has 18 fewer peaches than Steven who has 13 more peaches than Jill.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 95,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "Steven has 19 peaches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 96,
+          "teacher_input_default": true,
+          "text": "How many peaches does Jill have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jake.peaches = steven.peaches - 18",
+              "steven.peaches = jill.peaches + 13"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "steven.peaches = 19"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN jill.peaches"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-292"
+      },
+      "question": "Jake has 18 fewer peaches than Steven who has 13 more peaches than Jill. Steven has 19 peaches. How many peaches does Jill have?",
+      "source_context": null,
+      "source_id": "svamp-chal-292",
+      "validation_failure": "unresolved reference 'jill.peaches' from scope 'global'; unresolved reference 'jill.peaches' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "( 19.0 - 13.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Because of the decision Sofia asked the students to suggest specific types of food from a total of 66 choices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "If 450 students suggested adding mashed potatoes 38 suggested adding bacon to the menu and the rest did not participate How many students participated in the suggestion of new food items?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "food_suggestions.available_choices = 66"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "students.mashed_potatoes_suggesters = 450",
+              "students.bacon_suggesters = 38",
+              "students.participated = sum(students.mashed_potatoes_suggesters, students.bacon_suggesters)",
+              "students.did_not_participate = students.total - students.participated",
+              "RETURN students.participated"
+            ],
+            "assumptions": [
+              "The mashed-potato and bacon suggestion groups are disjoint categories of participating students.",
+              "\"the rest\" refers to the remaining students outside the two stated participant groups."
+            ],
+            "confidence": 0.88,
+            "part_id": 1,
+            "semantic_notes": [
+              "The nonparticipant relation remains symbolic because the total number of students is not quantified."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-27"
+      },
+      "question": "Because of the decision Sofia asked the students to suggest specific types of food from a total of 66 choices. If 450 students suggested adding mashed potatoes 38 suggested adding bacon to the menu and the rest did not participate How many students participated in the suggestion of new food items?",
+      "source_context": null,
+      "source_id": "svamp-chal-27",
+      "validation_failure": "unresolved reference 'students.total' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "488",
+        "gold_reasoning": "( 450.0 + 38.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jake has 3 fewer peaches than Steven who has 8 more peaches than Jill.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 92,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "Steven has 5 peaches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 93,
+          "teacher_input_default": true,
+          "text": "How many more peaches does Jake have than Jill?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jake.peaches = steven.peaches - 3",
+              "steven.peaches = jill.peaches + 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "steven.peaches = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jake.peaches_more_than_jill = jake.peaches - jill.peaches",
+              "RETURN jake.peaches_more_than_jill"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-175"
+      },
+      "question": "Jake has 3 fewer peaches than Steven who has 8 more peaches than Jill. Steven has 5 peaches. How many more peaches does Jake have than Jill?",
+      "source_context": null,
+      "source_id": "svamp-chal-175",
+      "validation_failure": "unresolved reference 'jill.peaches' from scope 'global'; unresolved reference 'jill.peaches' from scope 'global'; unresolved reference 'jake.peaches_more_than_jill' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "( 8.0 - 3.0 )"
+      }
+    },
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "After eating a hearty meal they went to see the Buckingham palace.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "There, Rachel learned that 703 visitors came to the Buckingham palace on the previous day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 251,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "If there were 246 visitors on that day How many visited the Buckingham palace within 25 days?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context only; no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "buckingham_palace.previous_day.visitors = 703"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause states a count of 246 visitors on one day but does not establish that count as a daily rate for all 25 days. It is therefore unclear whether the requested 25-day quantity should multiply 246, incorporate the previous day's 703 visitors, or use another aggregation."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "svamp-chal-37"
+      },
+      "question": "After eating a hearty meal they went to see the Buckingham palace. There, Rachel learned that 703 visitors came to the Buckingham palace on the previous day. If there were 246 visitors on that day How many visited the Buckingham palace within 25 days?",
+      "source_context": null,
+      "source_id": "svamp-chal-37",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "949",
+        "gold_reasoning": "( 246.0 + 703.0 )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

@@ -1,0 +1,690 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John buys twice as many red ties as blue ties.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "The green ties cost 70% more than yellow ties.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "He spent $300 on yellow ties that cost $30 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 174,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "How much did he spend on ties?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "john.red_ties.count = john.blue_ties.count * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.green_ties.unit_price_dollars = inc_pct(john.yellow_ties.unit_price_dollars, 70)"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The percentage relation concerns each tie's price, not the number of ties."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.yellow_ties.spending_dollars = 300",
+              "john.yellow_ties.unit_price_dollars = 30",
+              "john.yellow_ties.count = john.yellow_ties.spending_dollars / john.yellow_ties.unit_price_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Total tie spending is underdetermined: the source gives neither red and blue tie prices nor grounded red, blue, and green quantities."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00376"
+      },
+      "question": "John buys twice as many red ties as blue ties.  The green ties cost 70% more than yellow ties. He spent $300 on yellow ties that cost $30 each. How much did he spend on ties?",
+      "source_context": null,
+      "source_id": "gsm-plus-00376",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "1830",
+        "gold_reasoning": "John bought $300/$30 = 10 yellow ties.\n\nHe bought 3 * 10 = 30 green ties.\n\nEach green tie cost $30 * 70/100 = $21 more than each yellow tie.\n\nSo, each green tie cost $30 + $21 = $51.\n\nTherefore, John spent $51 * 30 = $1530 on green ties.\n\nIn total, John spent $1530 + $300 = $1830 on ties.\n#### 1830"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 26,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Uncle Ben has four horses.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 79,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 27,
+          "teacher_input_default": true,
+          "text": "Each horse can consume five pounds of oats per meal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 80,
+          "teacher_input_default": true,
+          "text": "Later, for some reason, there was a 10% increase per horse per meal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 181,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 149,
+          "teacher_input_default": true,
+          "text": "He feeds his horses twice a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 290,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 182,
+          "teacher_input_default": true,
+          "text": "If one bag contains 50 pounds of oats,  how many bags of oats does he need to feed his horses for five days?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "uncle_ben.horse_count = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "horse.base_oats_per_meal_pounds = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "horse.increased_oats_per_meal_pounds = inc_pct(horse.base_oats_per_meal_pounds, 10)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "uncle_ben.meals_per_horse_per_day = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "oats_bag.capacity_pounds = 50",
+              "feeding_period.duration_days = 5",
+              "uncle_ben.total_oats_needed_pounds = uncle_ben.horse_count * horse.increased_oats_per_meal_pounds * uncle_ben.meals_per_horse_per_day * feeding_period.duration_days",
+              "uncle_ben.oats_bags_needed = uncle_ben.total_oats_needed_pounds / oats_bag.capacity_pounds",
+              "RETURN uncle_ben.oats_bags_needed"
+            ],
+            "assumptions": [
+              "Assumed fractional bag-equivalents are allowed."
+            ],
+            "confidence": 0.9,
+            "part_id": 4,
+            "semantic_notes": [
+              "The requested quantity is represented as bag-equivalents because the active operator registry has no ceiling operator and the source does not specify rounding."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-03899"
+      },
+      "question": "Uncle Ben has four horses. Each horse can consume five pounds of oats per meal. Later, for some reason, there was a 10% increase per horse per meal. He feeds his horses twice a day. If one bag contains 50 pounds of oats,  how many bags of oats does he need to feed his horses for five days?",
+      "source_context": null,
+      "source_id": "gsm-plus-03899",
+      "validation_failure": "answer mismatch: actual=4.4, expected=5",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "The four horses can consume 4 x 5 pounds*(1+25%) = <<4*5*(1+25%)=25>>25 pounds of oats per meal.\nThus, they can consume 2 x 25 pounds = <<2*25=50>>50 pounds of oats a day.\nSo, uncle Ben needs 5 x 50 pounds = <<5*50=250>>250 pounds of oats to fed his horses for five days.\nTherefore, uncle Ben needs 250/50 = <<250/50=5>>5 bags of oats.\n#### 5"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Becky, Jake, and Silvia decided to have a pizza party while watching a 3-hour movie.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 181,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "They ordered 4 pizzas, each with 8 slices, from their favorite pizza place that is 5 miles away.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 258,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 182,
+          "teacher_input_default": true,
+          "text": "Becky, who was feeling particularly hungry, ate 3 more slices than Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 323,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 259,
+          "teacher_input_default": true,
+          "text": "Silvia, on the other hand, ate twice as many slices as Jake did.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 442,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 324,
+          "teacher_input_default": true,
+          "text": "If Becky ate 10 slices during the first hour of the movie, how many total slices did they eat by the end of the movie?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "movie.duration_hours = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "party.pizzas_ordered = 4",
+              "pizza.slices_per_pizza = 8",
+              "pizza_place.distance_miles = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "becky.slices_eaten = jake.slices_eaten + 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "silvia.slices_eaten = jake.slices_eaten * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "becky.first_hour.slices_eaten = 10",
+              "party.slices_eaten_by_movie_end = sum(becky.slices_eaten, jake.slices_eaten, silvia.slices_eaten)",
+              "RETURN party.slices_eaten_by_movie_end"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 4,
+            "semantic_notes": [
+              "The first-hour quantity is kept distinct from Becky's full-movie quantity; the source does not state that she ate no slices later."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08486"
+      },
+      "question": "Becky, Jake, and Silvia decided to have a pizza party while watching a 3-hour movie. They ordered 4 pizzas, each with 8 slices, from their favorite pizza place that is 5 miles away. Becky, who was feeling particularly hungry, ate 3 more slices than Jake did. Silvia, on the other hand, ate twice as many slices as Jake did. If Becky ate 10 slices during the first hour of the movie, how many total slices did they eat by the end of the movie?",
+      "source_context": null,
+      "source_id": "gsm-plus-08486",
+      "validation_failure": "unresolved reference 'jake.slices_eaten' from scope 'global'; unresolved reference 'jake.slices_eaten' from scope 'global'; unresolved reference 'becky.slices_eaten' from scope 'global'; unresolved reference 'party.slices_eaten_by_movie_end' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "31",
+        "gold_reasoning": "Jake ate 10-3 = <<10-3=7>>7 slices of pizza.\nSilvia ate 7*2 = <<7*2=14>>14 slices of pizza.\nJake, Silvia, and Becky ate 10+7+14 = <<10+7+14=31>>31 slices all together.\n#### 31"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 74,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James is managing a doggie shelter and needs to ensure each dog has a toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 75,
+          "teacher_input_default": true,
+          "text": "Initially, he has 4 toys for 4 dogs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "However, the shelter receives an additional 8 dogs, prompting James to purchase more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 310,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 203,
+          "teacher_input_default": true,
+          "text": "After this, the shelter unexpectedly receives twice as many dogs as there were when James left to buy toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 348,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 311,
+          "teacher_input_default": true,
+          "text": "James then has to buy even more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 475,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 349,
+          "teacher_input_default": true,
+          "text": "However, when James returns, he finds that 4 dogs have been adopted and left the shelter, so he no longer needs toys for them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 732,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 476,
+          "teacher_input_default": true,
+          "text": "Additionally, James decides to keep a reserve of toys equal to half the number of dogs currently in the shelter, just in case more dogs come in. How many toys in total does James need to have on hand, considering the current number of dogs and the reserve?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "shelter.toys_required_per_dog = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.initial.toys = 4",
+              "shelter.initial.dogs = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.first_arrival.additional_dogs = 8",
+              "shelter.when_james_left.dogs = shelter.initial.dogs + shelter.first_arrival.additional_dogs"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The unspecified number of toys purchased is not invented."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.unexpected_arrival.additional_dogs = shelter.when_james_left.dogs * 2",
+              "shelter.after_unexpected_arrival.dogs = shelter.when_james_left.dogs + shelter.unexpected_arrival.additional_dogs"
+            ],
+            "assumptions": [
+              "\u201cReceives twice as many dogs\u201d denotes the number of newly arriving dogs, relative to the number present when James left."
+            ],
+            "confidence": 0.95,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [
+              "The clause states a qualitative need to purchase more toys but supplies no new quantity."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.adopted_before_return.dogs = 4",
+              "shelter.current.dogs = shelter.after_unexpected_arrival.dogs - shelter.adopted_before_return.dogs"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "shelter.reserve.toys = shelter.current.dogs / 2",
+              "shelter.current_dogs.toys = shelter.current.dogs * shelter.toys_required_per_dog",
+              "shelter.total_toys_needed_on_hand = shelter.current_dogs.toys + shelter.reserve.toys",
+              "RETURN shelter.total_toys_needed_on_hand"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05403"
+      },
+      "question": "James is managing a doggie shelter and needs to ensure each dog has a toy. Initially, he has 4 toys for 4 dogs. However, the shelter receives an additional 8 dogs, prompting James to purchase more toys. After this, the shelter unexpectedly receives twice as many dogs as there were when James left to buy toys. James then has to buy even more toys. However, when James returns, he finds that 4 dogs have been adopted and left the shelter, so he no longer needs toys for them. Additionally, James decides to keep a reserve of toys equal to half the number of dogs currently in the shelter, just in case more dogs come in. How many toys in total does James need to have on hand, considering the current number of dogs and the reserve?",
+      "source_context": null,
+      "source_id": "gsm-plus-05403",
+      "validation_failure": "answer mismatch: actual=48, expected=49",
+      "validator_context": {
+        "correct_answer": "49",
+        "gold_reasoning": "Initially, James has 4 toys for 4 dogs. When the shelter receives an additional 8 dogs, James needs to buy 8 more toys, bringing the total to 12 toys for 12 dogs.\n\nThen, the shelter receives twice as many dogs as there were when James left to buy toys, which is 2 * 12 = 24 more dogs. So, James needs to buy 24 more toys, bringing the total to 36 toys for 36 dogs.\n\nHowever, 4 dogs have been adopted and left the shelter, so James no longer needs toys for them. This reduces the total to 32 toys for 32 dogs.\n\nFinally, James decides to keep a reserve of toys equal to half the number of dogs currently in the shelter, which is 0.5 * 32 = 16. \n\nSo, in total, James needs to have 33 + 16 =  49 toys on hand.\n#### 49"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 77,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Maggie spent a quarter of her money, while Riza spent one-third of her money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "They each had a same amount at the beginning and they left $85 in total after spending.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 211,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "How much money do each of them have at first?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "maggie.money_spent = maggie.initial_money / 4",
+              "maggie.money_remaining = maggie.initial_money - maggie.money_spent",
+              "riza.money_spent = riza.initial_money / 3",
+              "riza.money_remaining = riza.initial_money - riza.money_spent"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "riza.initial_money = maggie.initial_money",
+              "combined.money_remaining = 85",
+              "combined.money_remaining = maggie.money_remaining + riza.money_remaining"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "each_person.initial_money = maggie.initial_money",
+              "RETURN each_person.initial_money"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Because their initial amounts are equal, the requested amount for each person is represented by one common quantity."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08580"
+      },
+      "question": "Maggie spent a quarter of her money, while Riza spent one-third of her money. They each had a same amount at the beginning and they left $85 in total after spending. How much money do each of them have at first?",
+      "source_context": null,
+      "source_id": "gsm-plus-08580",
+      "validation_failure": "unresolved reference 'maggie.initial_money' from scope 'global'; unresolved reference 'maggie.initial_money' from scope 'global'; unresolved reference 'riza.initial_money' from scope 'global'; unresolved reference 'riza.initial_money' from scope 'global'; unresolved reference 'maggie.initial_money' from scope 'global'; unresolved reference 'maggie.money_remaining' from scope 'global'; unresolved reference 'maggie.initial_money' from scope 'global'; unresolved reference 'each_person.initial_money' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "60",
+        "gold_reasoning": "Let the amount be x.\nThey left 3/4 x and 2/3 x, which is 17/12x in total and equals to $85.\nSo 17/12 x = $85\nx = 60\nThey each have  $60 at first.\n#### 60"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

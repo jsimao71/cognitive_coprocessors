@@ -1,0 +1,472 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 4 toys on hand for 4 dogs, but there are 8 more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "He also found that there were 5 new cats but they didn't need toys then.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 375,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 459,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 376,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, 3 dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 499,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 460,
+          "teacher_input_default": true,
+          "text": "How many toys in total does James need?",
+          "warnings": []
+        }
+      ],
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 4 toys on hand for 4 dogs, but there are 8 more dogs in the shelter now. He also found that there were 5 new cats but they didn't need toys then. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, 3 dogs were gone so he no longer needed those toys. How many toys in total does James need?",
+      "source_id": "gsm-plus-05406"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a shared household, Amalia, Megan, and Dior each had a task to complete while the others were busy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "Amalia spent 4 hours mowing the lawn.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 141,
+          "teacher_input_default": true,
+          "text": "Megan's task was to walk the dog, which took her 2 hours more than the time Amalia spent on her task.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 341,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "Dior was responsible for doing the laundry, and her task took her 4 hours more than Amalia's task.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 399,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 342,
+          "teacher_input_default": true,
+          "text": "How much time did they all spend on their tasks in total?",
+          "warnings": []
+        }
+      ],
+      "question": "In a shared household, Amalia, Megan, and Dior each had a task to complete while the others were busy. Amalia spent 4 hours mowing the lawn. Megan's task was to walk the dog, which took her 2 hours more than the time Amalia spent on her task. Dior was responsible for doing the laundry, and her task took her 4 hours more than Amalia's task. How much time did they all spend on their tasks in total?",
+      "source_id": "gsm-plus-08957"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It's strawberry-picking time on Grandma Concetta's farm.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "Tony can pick 6 quarts of strawberries per hour, while Bobby picks 1.5 less quart of strawberries per hour than Tony.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 312,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks 2.5 fewer quarts of strawberries per hour than does Kathy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 431,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 314,
+          "teacher_input_default": true,
+          "text": "In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+          "warnings": []
+        }
+      ],
+      "question": "It's strawberry-picking time on Grandma Concetta's farm.  Tony can pick 6 quarts of strawberries per hour, while Bobby picks 1.5 less quart of strawberries per hour than Tony.  Kathy can pick twice as many strawberries per hour as Bobby, and Ricky picks 2.5 fewer quarts of strawberries per hour than does Kathy.  In total, how many quarts of strawberries can Tony, Bobby, Ricky, and Kathy pick per hour on Grandma Concetta's farm?",
+      "source_id": "gsm-plus-04178"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lorraine and Colleen are trading stickers for buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "Each large sticker is worth a large button or three small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "A small sticker is worth one small button.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "A large button is worth three small stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 272,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 211,
+          "teacher_input_default": true,
+          "text": "Lorraine starts with 30 small stickers and 40 large stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 328,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 273,
+          "teacher_input_default": true,
+          "text": "She trades 90% of her small stickers for large buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 437,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 329,
+          "teacher_input_default": true,
+          "text": "She trades a fraction of her large stickers for large buttons and trades the rest of them for small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 468,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 438,
+          "teacher_input_default": true,
+          "text": "She has 89 buttons by the end.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 540,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 8,
+          "start": 469,
+          "teacher_input_default": true,
+          "text": "What's the fraction of her large stickers traded for for large buttons?",
+          "warnings": []
+        }
+      ],
+      "question": "Lorraine and Colleen are trading stickers for buttons. Each large sticker is worth a large button or three small buttons. A small sticker is worth one small button. A large button is worth three small stickers. Lorraine starts with 30 small stickers and 40 large stickers. She trades 90% of her small stickers for large buttons. She trades a fraction of her large stickers for large buttons and trades the rest of them for small buttons. She has 89 buttons by the end. What's the fraction of her large stickers traded for for large buttons?",
+      "source_id": "gsm-plus-06036"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Robles buys 315 bananas, which is enough to feed his three monkeys for a week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 83,
+          "teacher_input_default": true,
+          "text": "One monkey eats 10 bananas each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "For some reason, the first monkey eats 3 more bananas every day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "The second monkey eats 4 more bananas than the first monkey and the third monkey eats the rest of the bananas for the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 361,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 309,
+          "teacher_input_default": true,
+          "text": "How many bananas does the third monkey eat each day?",
+          "warnings": []
+        }
+      ],
+      "question": "Mr. Robles buys 315 bananas, which is enough to feed his three monkeys for a week. One monkey eats 10 bananas each day. For some reason, the first monkey eats 3 more bananas every day. The second monkey eats 4 more bananas than the first monkey and the third monkey eats the rest of the bananas for the day.  How many bananas does the third monkey eat each day?",
+      "source_id": "gsm-plus-08587"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

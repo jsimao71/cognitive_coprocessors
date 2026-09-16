@@ -1,0 +1,451 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The parents are making sandwiches for the class picnic.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "They have 72 turkey slices, 48 cheese slices, and 96 tomato slices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 218,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of sandwiches they can make if each sandwich has the same filling?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "class_picnic.sandwiches.prepared_by = \"parents\""
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "class_picnic.turkey_slices = 72",
+              "class_picnic.cheese_slices = 48",
+              "class_picnic.tomato_slices = 96"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest sandwich count with identical filling and no fractional slices requires greatest-common-divisor or integer-divisibility semantics, which the active operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2088"
+      },
+      "question": "The parents are making sandwiches for the class picnic. They have 72 turkey slices, 48 cheese slices, and 96 tomato slices. What is the greatest number of sandwiches they can make if each sandwich has the same filling?",
+      "source_context": null,
+      "source_id": "asdiv-2088",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "24",
+        "gold_reasoning": "GCD(72,48)=24"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The angles of a triangle are in the ratio 1:2:3.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Find each angle of the triangle.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "triangle.angle_with_ratio_1.ratio = 1",
+              "triangle.angle_with_ratio_2.ratio = 2",
+              "triangle.angle_with_ratio_3.ratio = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The three angles are identified by their ratio values because the source provides no other labels."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "triangle.angle_ratio_total = sum(triangle.angle_with_ratio_1.ratio, triangle.angle_with_ratio_2.ratio, triangle.angle_with_ratio_3.ratio)",
+              "triangle.angle_unit_degrees = 180 / triangle.angle_ratio_total",
+              "triangle.angle_with_ratio_1.degrees = triangle.angle_with_ratio_1.ratio * triangle.angle_unit_degrees",
+              "triangle.angle_with_ratio_2.degrees = triangle.angle_with_ratio_2.ratio * triangle.angle_unit_degrees",
+              "triangle.angle_with_ratio_3.degrees = triangle.angle_with_ratio_3.ratio * triangle.angle_unit_degrees",
+              "RETURN triangle.angle_with_ratio_1.degrees",
+              "RETURN triangle.angle_with_ratio_2.degrees",
+              "RETURN triangle.angle_with_ratio_3.degrees"
+            ],
+            "assumptions": [
+              "Uses the standard geometric fact that the interior angles of a triangle sum to 180 degrees."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1346"
+      },
+      "question": "The angles of a triangle are in the ratio 1:2:3. Find each angle of the triangle.",
+      "source_context": null,
+      "source_id": "asdiv-1346",
+      "validation_failure": "answer mismatch: actual=90, expected=30",
+      "validator_context": {
+        "correct_answer": "30",
+        "gold_reasoning": "x+2x+3x=180"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jessica wants of make a garland out of 8 roses, 12 daisies and 48 marigolds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "How many arrangements can she make with those flowers so that, there is no flower left.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "jessica.flowers.roses = 8",
+              "jessica.flowers.daisies = 12",
+              "jessica.flowers.marigolds = 48"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Determining the maximum number of identical arrangements that use every flower requires a greatest-common-divisor or equivalent integer-divisibility operation, which is unavailable in the supplied operator registry."
+            ],
+            "confidence": 0.95,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2091"
+      },
+      "question": "Jessica wants of make a garland out of 8 roses, 12 daisies and 48 marigolds. How many arrangements can she make with those flowers so that, there is no flower left.",
+      "source_context": null,
+      "source_id": "asdiv-2091",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": "GCD(8,12,48)=4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Daniel has 44 commemorative plates and 33 commemorative spoons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 194,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "He wants to display them in groups throughout his house, each with the same combination of plates and spoons, with none left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 252,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 195,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of groups Daniel can display?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "daniel.commemorative_plates = 44",
+              "daniel.commemorative_spoons = 33"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "daniel.display.plates_per_group = daniel.commemorative_plates / daniel.display.number_of_groups",
+              "daniel.display.spoons_per_group = daniel.commemorative_spoons / daniel.display.number_of_groups"
+            ],
+            "assumptions": [
+              "Plate, spoon, and group counts are whole-number counts."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [
+              "The per-group quantities represent the common composition of every group; exact division represents leaving no items undistributed."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest whole-number group count that divides both item counts requires a greatest-common-divisor or integer optimization capability absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1195"
+      },
+      "question": "Daniel has 44 commemorative plates and 33 commemorative spoons. He wants to display them in groups throughout his house, each with the same combination of plates and spoons, with none left over. What is the greatest number of groups Daniel can display?",
+      "source_context": null,
+      "source_id": "asdiv-1195",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "11",
+        "gold_reasoning": "GCD(44,33)=11"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A choir teacher is dividing 10 sopranos and 15 altos into singing groups.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 172,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "He wants each group to have the same combination of sopranos and altos, with no singers left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 173,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of groups he can make?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "choir.sopranos = 10",
+              "choir.altos = 15"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "choir.sopranos_per_group = choir.sopranos / choir.number_of_groups",
+              "choir.altos_per_group = choir.altos / choir.number_of_groups"
+            ],
+            "assumptions": [
+              "Singer and group counts are whole-number counts."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [
+              "The per-group quantities represent the common composition of every singing group; exact division represents leaving no singers undistributed."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest whole-number group count that divides both singer counts requires a greatest-common-divisor or integer optimization capability absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2058"
+      },
+      "question": "A choir teacher is dividing 10 sopranos and 15 altos into singing groups. He wants each group to have the same combination of sopranos and altos, with no singers left over. What is the greatest number of groups he can make?",
+      "source_context": null,
+      "source_id": "asdiv-2058",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "GCD(10,15)=5"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

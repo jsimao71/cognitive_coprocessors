@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "While spending time at the beach, Carlos, Jim, and Carrey decided to collect seashells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "Jim managed to gather 27 seashells, which was 5 more than Carlos's collection.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 167,
+          "teacher_input_default": true,
+          "text": "The number of seashells Carlos collected was double the amount Carrey collected.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 338,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 248,
+          "teacher_input_default": true,
+          "text": "After their collection, they decided to distribute the seashells equally among themselves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 383,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 339,
+          "teacher_input_default": true,
+          "text": "How many seashells did each of them receive?",
+          "warnings": []
+        }
+      ],
+      "question": "While spending time at the beach, Carlos, Jim, and Carrey decided to collect seashells. Jim managed to gather 27 seashells, which was 5 more than Carlos's collection. The number of seashells Carlos collected was double the amount Carrey collected. After their collection, they decided to distribute the seashells equally among themselves. How many seashells did each of them receive?",
+      "source_id": "gsm-plus-09229"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 206,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "After ten rounds, Craig has spelled out 20 words with 15 letters each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 383,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 207,
+          "teacher_input_default": true,
+          "text": "If Craig's brother has spelled words with a total count of letters 100 more than Craig, calculate the total number of letters in the words they've spelled after the ten rounds.",
+          "warnings": []
+        }
+      ],
+      "question": "Craig and his brother take turns spelling out the longest letter words they know and counting the number of the letters in those words. After ten rounds, Craig has spelled out 20 words with 15 letters each. If Craig's brother has spelled words with a total count of letters 100 more than Craig, calculate the total number of letters in the words they've spelled after the ten rounds.",
+      "source_id": "gsm-plus-07513"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 19,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ellen is on a diet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 20,
+          "teacher_input_default": true,
+          "text": "She eats three carrots, a salad, and a yogurt every day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "The salad costs her $8, while the yogurt is half the price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 137,
+          "teacher_input_default": true,
+          "text": "How much does Ellen pay for one carrot every day when in total she pays $15 for her goods?",
+          "warnings": []
+        }
+      ],
+      "question": "Ellen is on a diet. She eats three carrots, a salad, and a yogurt every day. The salad costs her $8, while the yogurt is half the price. How much does Ellen pay for one carrot every day when in total she pays $15 for her goods?",
+      "source_id": "gsm-plus-07136"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 26,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A cup holds 9,300 pennies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 27,
+          "teacher_input_default": true,
+          "text": "How much in dollars would a pile consisting of two thirds of the cup's pennies be worth?",
+          "warnings": []
+        }
+      ],
+      "question": "A cup holds 9,300 pennies. How much in dollars would a pile consisting of two thirds of the cup's pennies be worth?",
+      "source_id": "gsm-plus-02093"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Terri is knitting a sweater with two sleeves, a collar, and a decorative rosette.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 241,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "The body of the sweater takes 800 stitches to complete, the collar takes a tenth of that number of stitches, and the rosette takes twice as many as the collar.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 286,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 242,
+          "teacher_input_default": true,
+          "text": "The whole sweater is an 2400-stitch project.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 287,
+          "teacher_input_default": true,
+          "text": "How many stitches does each sleeve take?",
+          "warnings": []
+        }
+      ],
+      "question": "Terri is knitting a sweater with two sleeves, a collar, and a decorative rosette. The body of the sweater takes 800 stitches to complete, the collar takes a tenth of that number of stitches, and the rosette takes twice as many as the collar. The whole sweater is an 2400-stitch project. How many stitches does each sleeve take?",
+      "source_id": "gsm-plus-02184"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

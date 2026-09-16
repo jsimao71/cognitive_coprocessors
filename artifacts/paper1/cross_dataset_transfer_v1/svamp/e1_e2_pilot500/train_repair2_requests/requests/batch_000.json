@@ -1,0 +1,129 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "svamp",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rachel's tree had 4 apples.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 28,
+          "teacher_input_default": true,
+          "text": "She picked 2 apples from her tree.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "Thereafter 3 new apples grew on the tree.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "How many apples are there on the tree now?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": false,
+        "dataset": "svamp",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rachel.tree.before_picking.apples = 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rachel.picked_from_tree.apples = 2",
+              "rachel.tree.after_picking.apples = rachel.tree.before_picking.apples - rachel.picked_from_tree.apples"
+            ],
+            "assumptions": [
+              "She refers to Rachel."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The picked quantity and resulting tree state are retained separately."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rachel.tree.newly_grown.apples = 3",
+              "rachel.tree.now.apples = rachel.tree.after_picking.apples + rachel.tree.newly_grown.apples"
+            ],
+            "assumptions": [],
+            "confidence": 0.82,
+            "part_id": 2,
+            "semantic_notes": [
+              "The source text and supplied gold derivation both make growth an addition; their grounded result conflicts with the supplied expected-answer field."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN rachel.tree.now.apples"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": true,
+        "rationale_hidden": false,
+        "repair_round": 1,
+        "source_id": "svamp-chal-680"
+      },
+      "question": "Rachel's tree had 4 apples. She picked 2 apples from her tree. Thereafter 3 new apples grew on the tree. How many apples are there on the tree now?",
+      "source_context": null,
+      "source_id": "svamp-chal-680",
+      "validation_failure": "answer mismatch: actual=5, expected=1",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "( ( 4.0 - 2.0 ) + 3.0 )"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 2,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

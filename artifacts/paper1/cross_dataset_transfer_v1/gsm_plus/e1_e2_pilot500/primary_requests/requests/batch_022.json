@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "On Tuesday, Clara bought 20 pomegranates at $20.5 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "At the till she got $2.5 off because she had a voucher.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "The next day, the price shot to $30.5 per fruit, but the store also offered a 10% discount on the total cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 287,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 222,
+          "teacher_input_default": true,
+          "text": "Sheila took advantage of the discount and bought 20 pomegranates.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 378,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 288,
+          "teacher_input_default": true,
+          "text": "What is the difference between the final prices paid for the pomegranates on the two days?",
+          "warnings": []
+        }
+      ],
+      "question": "On Tuesday, Clara bought 20 pomegranates at $20.5 each. At the till she got $2.5 off because she had a voucher. The next day, the price shot to $30.5 per fruit, but the store also offered a 10% discount on the total cost. Sheila took advantage of the discount and bought 20 pomegranates. What is the difference between the final prices paid for the pomegranates on the two days?",
+      "source_id": "gsm-plus-05202"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 117,
+          "teacher_input_default": true,
+          "text": "A blog article takes an average of 4 hours to research and write about.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 231,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "Last week, she wrote 5 articles on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 383,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 232,
+          "teacher_input_default": true,
+          "text": "On Tuesday, she wrote 2/5 times more articles than she did on Monday, but she also spent an additional 2 hours editing each article she wrote that day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 534,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 384,
+          "teacher_input_default": true,
+          "text": "On Wednesday, she wrote twice the number of articles she wrote on Tuesday, but she had to spend an extra hour on each article for additional research.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 628,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 535,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of hours she spent writing and editing articles in the three days.",
+          "warnings": []
+        }
+      ],
+      "question": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job. A blog article takes an average of 4 hours to research and write about. Last week, she wrote 5 articles on Monday. On Tuesday, she wrote 2/5 times more articles than she did on Monday, but she also spent an additional 2 hours editing each article she wrote that day. On Wednesday, she wrote twice the number of articles she wrote on Tuesday, but she had to spend an extra hour on each article for additional research. Calculate the total number of hours she spent writing and editing articles in the three days.",
+      "source_id": "gsm-plus-00363"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 7 toys on hand for 7 dogs, but there are 6 more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 302,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 386,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 303,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, 5 dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 426,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 387,
+          "teacher_input_default": true,
+          "text": "How many toys in total does James need?",
+          "warnings": []
+        }
+      ],
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 7 toys on hand for 7 dogs, but there are 6 more dogs in the shelter now. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, 5 dogs were gone so he no longer needed those toys. How many toys in total does James need?",
+      "source_id": "gsm-plus-05400"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 107,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Stephen borrowed $500 from his sister and promised to return it with an additional 3% of the money he owed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 250,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 108,
+          "teacher_input_default": true,
+          "text": "For 10 months Stephen will give his sister $40 per month and the remaining amount, including the interest, will be paid on the eleventh month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 299,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 251,
+          "teacher_input_default": true,
+          "text": "How much will Stephen pay in the eleventh month?",
+          "warnings": []
+        }
+      ],
+      "question": "Stephen borrowed $500 from his sister and promised to return it with an additional 3% of the money he owed. For 10 months Stephen will give his sister $40 per month and the remaining amount, including the interest, will be paid on the eleventh month. How much will Stephen pay in the eleventh month?",
+      "source_id": "gsm-plus-09704"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 111,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At a certain shop, a patron's fidelity card offers a $1 discount on their subsequent buy for each $20 expended.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 158,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 112,
+          "teacher_input_default": true,
+          "text": "On their previous visit, they shelled out $80.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 159,
+          "teacher_input_default": true,
+          "text": "On their current visit, they spent $43, utilized their earned discounts, and also used a voucher that deducted double the value of their earned discounts from the total cost.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 421,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 334,
+          "teacher_input_default": true,
+          "text": "What was the total amount in dollars that the patron had to pay on their current visit?",
+          "warnings": []
+        }
+      ],
+      "question": "At a certain shop, a patron's fidelity card offers a $1 discount on their subsequent buy for each $20 expended. On their previous visit, they shelled out $80. On their current visit, they spent $43, utilized their earned discounts, and also used a voucher that deducted double the value of their earned discounts from the total cost. What was the total amount in dollars that the patron had to pay on their current visit?",
+      "source_id": "gsm-plus-02645"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

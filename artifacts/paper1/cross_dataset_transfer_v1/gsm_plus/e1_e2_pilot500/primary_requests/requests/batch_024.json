@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jackie is deciding whether to do her own taxes or hire an accountant.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 183,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "Had she paid her own taxes, she would have spent three fewer hours freelancing and lost $35 in earnings per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 184,
+          "teacher_input_default": true,
+          "text": "If she had hired an accountant, she would have earned $15 more.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 293,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 248,
+          "teacher_input_default": true,
+          "text": "How much would it cost to hire an accountant?",
+          "warnings": []
+        }
+      ],
+      "question": "Jackie is deciding whether to do her own taxes or hire an accountant. Had she paid her own taxes, she would have spent three fewer hours freelancing and lost $35 in earnings per hour. If she had hired an accountant, she would have earned $15 more. How much would it cost to hire an accountant?",
+      "source_id": "gsm-plus-01316"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Peter has twice as many socks as Jack and half times as many dishes as Jack.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Jack collected twice as many dishes as socks in the store.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 198,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "Now, consider that Peter gave away 10 of his socks to charity.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 294,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 199,
+          "teacher_input_default": true,
+          "text": "If Jack collected 60 dishes, calculate the total number of socks and dishes they have together.",
+          "warnings": []
+        }
+      ],
+      "question": "Peter has twice as many socks as Jack and half times as many dishes as Jack. Jack collected twice as many dishes as socks in the store. Now, consider that Peter gave away 10 of his socks to charity. If Jack collected 60 dishes, calculate the total number of socks and dishes they have together.",
+      "source_id": "gsm-plus-06755"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 134,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In the midst of a chaotic day at the lab, Dr. Hugo Grumpus and his assistant, Igor, were preparing to perform a laboratory experiment.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 350,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 135,
+          "teacher_input_default": true,
+          "text": "Dr. Grumpus, while juggling a phone call with a fellow scientist and monitoring a bubbling concoction, instructed Igor to gather 16 test tubes, 7 beakers, and 14 Petri dishes, and to place them all on the lab bench.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 508,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 351,
+          "teacher_input_default": true,
+          "text": "Igor, distracted by the lab rat that had escaped its cage, gathered half as many test tubes as requested, two more than the number of Petri dishes requested.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 670,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 509,
+          "teacher_input_default": true,
+          "text": "He also picked up the correct number of beakers, but due to a sudden power outage that lasted for 5 seconds, he lost several beakers on the way to the lab bench.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 799,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 671,
+          "teacher_input_default": true,
+          "text": "When the lights came back on, Igor counted the items he had placed on the lab bench and found that there were 29 items in total.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 915,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 800,
+          "teacher_input_default": true,
+          "text": "Despite the escaped lab rat and the brief power outage, how many beakers did Igor lose on his way to the lab bench?",
+          "warnings": []
+        }
+      ],
+      "question": "In the midst of a chaotic day at the lab, Dr. Hugo Grumpus and his assistant, Igor, were preparing to perform a laboratory experiment. Dr. Grumpus, while juggling a phone call with a fellow scientist and monitoring a bubbling concoction, instructed Igor to gather 16 test tubes, 7 beakers, and 14 Petri dishes, and to place them all on the lab bench. Igor, distracted by the lab rat that had escaped its cage, gathered half as many test tubes as requested, two more than the number of Petri dishes requested. He also picked up the correct number of beakers, but due to a sudden power outage that lasted for 5 seconds, he lost several beakers on the way to the lab bench. When the lights came back on, Igor counted the items he had placed on the lab bench and found that there were 29 items in total. Despite the escaped lab rat and the brief power outage, how many beakers did Igor lose on his way to the lab bench?",
+      "source_id": "gsm-plus-10454"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 73,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Elly is organizing her books on the new bookcases her parents bought her.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "Each of the middle 2 shelves can hold 10 books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "The bottom shelf can hold twice as many books as a middle shelf.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 244,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 187,
+          "teacher_input_default": true,
+          "text": "The top shelf can hold fewer books than the bottom shelf.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 325,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 245,
+          "teacher_input_default": true,
+          "text": "If she has 110 books, and she needs 2 bookcases to hold all of them just enough.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 393,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 326,
+          "teacher_input_default": true,
+          "text": "How many fewer books does the top shelf hold than the bottom shelf?",
+          "warnings": []
+        }
+      ],
+      "question": "Elly is organizing her books on the new bookcases her parents bought her. Each of the middle 2 shelves can hold 10 books. The bottom shelf can hold twice as many books as a middle shelf. The top shelf can hold fewer books than the bottom shelf. If she has 110 books, and she needs 2 bookcases to hold all of them just enough. How many fewer books does the top shelf hold than the bottom shelf?",
+      "source_id": "gsm-plus-09924"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The Llesis family drove and hiked 10 hours to their vacation spot.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "They drove an average of 50 miles per hour and hiked an average of 10 miles per hour less than half their speed when they drive.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 196,
+          "teacher_input_default": true,
+          "text": "If it took them 1.5 hours to hike, how far was their vacation spot?",
+          "warnings": []
+        }
+      ],
+      "question": "The Llesis family drove and hiked 10 hours to their vacation spot. They drove an average of 50 miles per hour and hiked an average of 10 miles per hour less than half their speed when they drive. If it took them 1.5 hours to hike, how far was their vacation spot?",
+      "source_id": "gsm-plus-06233"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

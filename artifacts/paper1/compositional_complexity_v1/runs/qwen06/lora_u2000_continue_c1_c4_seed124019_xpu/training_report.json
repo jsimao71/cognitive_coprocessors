@@ -1,0 +1,131 @@
+{
+  "adapter_files": {
+    "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+    "adapter_config.json": "d179de27052c50129f774a758f03a48d1c18132cd52ce6d932c6c9271eae8815",
+    "adapter_model.safetensors": "e056dbb95aa2a2e947202124855e35ecb41cdc65023f5b269b8307759a1a1e4a"
+  },
+  "adapter_id": "Qwen3-0.6B-U2000-compositional-C1-C4-r8-seed124019",
+  "dev_rows": 120,
+  "dev_sha256": "615f83020799e1db6ecd516626059f313196cfe421de48d65d74d64972b35adc",
+  "device": "xpu",
+  "dtype": "float16",
+  "epoch_adapters": {},
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dev_loss": 0.001687305252319978,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.07583662925752287,
+      "mean_unweighted_dev_loss": 0.0016873052700248081,
+      "mean_unweighted_train_loss": 0.07583662941226794,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 2,
+      "mean_dev_loss": 0.0014145945706331986,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.0003354339087090921,
+      "mean_unweighted_dev_loss": 0.0014145945947044917,
+      "mean_unweighted_train_loss": 0.0003354339126890409,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 3,
+      "mean_dev_loss": 0.0014279834845486524,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.00025596920445241267,
+      "mean_unweighted_dev_loss": 0.00142798354105859,
+      "mean_unweighted_train_loss": 0.00025596920672251144,
+      "pairwise_train_accuracy": null
+    },
+    {
+      "epoch": 4,
+      "mean_dev_loss": 0.0013332312863591747,
+      "mean_pairwise_rank_loss": null,
+      "mean_train_loss": 0.0002271493944572285,
+      "mean_unweighted_dev_loss": 0.001333231327953399,
+      "mean_unweighted_train_loss": 0.0002271493972148164,
+      "pairwise_train_accuracy": null
+    }
+  ],
+  "initial_adapter": {
+    "adapter_config": {
+      "base_model_name_or_path": "Qwen/Qwen3-0.6B",
+      "lora_alpha": 16,
+      "lora_dropout": 0.05,
+      "r": 8,
+      "target_modules": [
+        "k_proj",
+        "o_proj",
+        "q_proj",
+        "v_proj"
+      ]
+    },
+    "files": {
+      "README.md": "9bd3cee25f0a5d53eb86d621dfb4c893f037bf340cee6c3f580a517bec928061",
+      "adapter_config.json": "5f4fa901924c17a6b3bb7017c8b81425b8663a195e03c292dfb798acb03b71ca",
+      "adapter_model.safetensors": "cf8063841603023289d4b5074b8be2352aea3abebe3b0b8d28b0e62b96807621"
+    },
+    "path": "C:\\Users\\j.simao\\zgit\\rd\\cognitive_coprocessors\\artifacts\\paper1\\gsm8k_scale_v1\\u2000_e4500\\qwen_run\\adapter"
+  },
+  "model_id": "Qwen/Qwen3-0.6B",
+  "model_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "optimizer_steps": 500,
+  "packages": {
+    "accelerate": "1.14.0",
+    "peft": "0.20.0",
+    "torch": "2.13.0+xpu",
+    "transformers": "4.57.6"
+  },
+  "peak_memory_bytes": 2813807616,
+  "resumed_from_optimizer_step": 0,
+  "schema_version": "ccpu.paper1.lora_training.v1",
+  "selected_dev_loss": 0.0013332312863591747,
+  "selected_epoch": 4,
+  "selection_policy": "minimum_weighted_dev_loss",
+  "token_audit": {
+    "dev_max_full_tokens": 319,
+    "dev_max_prefix_tokens": 216,
+    "dev_truncated_rows": 0,
+    "train_max_full_tokens": 319,
+    "train_max_prefix_tokens": 214,
+    "train_truncated_rows": 0
+  },
+  "total_parameters": 598343680,
+  "train_rows": 1000,
+  "train_sha256": "e09d10516f3e9889a957af31ddd7ff5835cc2641b6acd93ebe04c437f8b54a21",
+  "train_target_tokens_per_epoch": 67211,
+  "trainable_fraction": 0.0038335158817086527,
+  "trainable_parameters": 2293760,
+  "training": {
+    "alpha": 16,
+    "batch_size": 1,
+    "checkpoint_every_optimizer_steps": 25,
+    "device": "xpu",
+    "dropout": 0.05,
+    "dtype": "float16",
+    "epochs": 4,
+    "evaluate_each_epoch": true,
+    "gradient_accumulation_steps": 8,
+    "gradient_checkpointing": false,
+    "learning_rate": 0.0001,
+    "logical_epoch_field": null,
+    "max_length": 768,
+    "pairwise_rank_weight": 0.0,
+    "pairwise_temperature": 1.0,
+    "rank": 8,
+    "reject_truncation": true,
+    "restore_best_dev": true,
+    "save_epoch_adapters": false,
+    "seed": 124019,
+    "semantic_token_weights": null,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "training_target_tokens": 268844,
+  "wall_time_seconds": 4848.6729175999935
+}

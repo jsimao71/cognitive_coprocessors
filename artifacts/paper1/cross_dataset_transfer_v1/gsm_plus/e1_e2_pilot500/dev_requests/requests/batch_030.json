@@ -1,0 +1,329 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Maria buys 8 shares of a stock for $8 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "The stock price increases 50% the first year Maria holds it, then decreases 25% in the second year, and increases 30% in the third year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 181,
+          "teacher_input_default": true,
+          "text": "What is the final value of all Maria's shares?",
+          "warnings": []
+        }
+      ],
+      "question": "Maria buys 8 shares of a stock for $8 each. The stock price increases 50% the first year Maria holds it, then decreases 25% in the second year, and increases 30% in the third year. What is the final value of all Maria's shares?",
+      "source_id": "gsm-plus-02691"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Maria buys some shares of a stock for $8 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "The stock price increases 50% the first year Maria holds it, then decreases 25% in the second year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 227,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "If the final value of all Maria's shares is $72, how many shares does Maria buy?",
+          "warnings": []
+        }
+      ],
+      "question": "Maria buys some shares of a stock for $8 each. The stock price increases 50% the first year Maria holds it, then decreases 25% in the second year. If the final value of all Maria's shares is $72, how many shares does Maria buy?",
+      "source_id": "gsm-plus-02692"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 62,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Maria purchases 8 units of a certain stock, each priced at $8.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 63,
+          "teacher_input_default": true,
+          "text": "In the first year of her holding the stock, its price surges by 50%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 132,
+          "teacher_input_default": true,
+          "text": "However, in the second year, it drops by 25%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 261,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 178,
+          "teacher_input_default": true,
+          "text": "What is the total worth of all the stocks Maria owns at the end of the second year?",
+          "warnings": []
+        }
+      ],
+      "question": "Maria purchases 8 units of a certain stock, each priced at $8. In the first year of her holding the stock, its price surges by 50%. However, in the second year, it drops by 25%. What is the total worth of all the stocks Maria owns at the end of the second year?",
+      "source_id": "gsm-plus-02693"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Maria buys 8 shares of a stock for $8 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "The stock price increases 50% the first year Maria holds it, during which she also receives a dividend of $2 per share.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 277,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 164,
+          "teacher_input_default": true,
+          "text": "However, this dividend is reinvested into a different stock and does not affect the value of her original shares.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 428,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 278,
+          "teacher_input_default": true,
+          "text": "In the second year, the stock price decreases 25%, and she receives another dividend of $3 per share, which she also reinvests into a different stock.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 484,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 429,
+          "teacher_input_default": true,
+          "text": "What is the final value of all Maria's original shares?",
+          "warnings": []
+        }
+      ],
+      "question": "Maria buys 8 shares of a stock for $8 each. The stock price increases 50% the first year Maria holds it, during which she also receives a dividend of $2 per share. However, this dividend is reinvested into a different stock and does not affect the value of her original shares. In the second year, the stock price decreases 25%, and she receives another dividend of $3 per share, which she also reinvests into a different stock. What is the final value of all Maria's original shares?",
+      "source_id": "gsm-plus-02694"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A restaurant has 20 tables with 4 legs and 30 tables with 3 legs.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of legs the restaurant's tables have.",
+          "warnings": []
+        }
+      ],
+      "question": "A restaurant has 20 tables with 4 legs and 30 tables with 3 legs. Calculate the total number of legs the restaurant's tables have.",
+      "source_id": "gsm-plus-02760"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

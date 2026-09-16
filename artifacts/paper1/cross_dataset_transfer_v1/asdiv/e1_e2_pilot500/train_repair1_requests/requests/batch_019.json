@@ -1,0 +1,545 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For a dinner party, Abraham is creating individual servings of starters.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 73,
+          "teacher_input_default": true,
+          "text": "He has 9 carrot sticks and 18 celery sticks.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 243,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "If he wants each serving to be identical, with no food left over, what is the greatest number of servings Abraham can create?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context introduces the serving task but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "abraham.carrot_sticks = 9",
+              "abraham.celery_sticks = 18"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The greatest number of identical no-remainder servings requires greatest-common-divisor or equivalent divisibility/integer-optimization semantics, which the active operator registry does not provide."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1209"
+      },
+      "question": "For a dinner party, Abraham is creating individual servings of starters. He has 9 carrot sticks and 18 celery sticks. If he wants each serving to be identical, with no food left over, what is the greatest number of servings Abraham can create?",
+      "source_context": null,
+      "source_id": "asdiv-1209",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "GCD(9,18)=9"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 33,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Two numbers are in the ratio 1:3.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 91,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 34,
+          "teacher_input_default": true,
+          "text": "If I add 2 to each of the numbers, the ratio becomes 1:2.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "Find the original numbers.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "numbers.original.second = numbers.original.first * 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "The 1:3 ratio is preserved as a relation between the two original numbers."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "numbers.after_addition.first = numbers.original.first + 2",
+              "numbers.after_addition.second = numbers.original.second + 2",
+              "numbers.after_addition.second = numbers.after_addition.first * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The post-addition quantities remain distinct from the original numbers."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN numbers.original.first",
+              "RETURN numbers.original.second"
+            ],
+            "assumptions": [],
+            "confidence": 0.84,
+            "part_id": 2,
+            "semantic_notes": [
+              "Two returns preserve the request for both original numbers."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1329"
+      },
+      "question": "Two numbers are in the ratio 1:3. If I add 2 to each of the numbers, the ratio becomes 1:2. Find the original numbers.",
+      "source_context": null,
+      "source_id": "asdiv-1329",
+      "validation_failure": "unresolved reference 'numbers.original.first' from scope 'global'; unresolved reference 'numbers.original.first' from scope 'global'; unresolved reference 'numbers.original.second' from scope 'global'; unresolved reference 'numbers.after_addition.first' from scope 'global'; unresolved reference 'numbers.original.first' from scope 'global'; unresolved reference 'numbers.original.second' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "x:One of the numbers; y:The other number; x:y=1:3; x+2:y+2=1:2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At a school several teachers were holding a contest to see which class could earn the most trivia points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "Mrs.William's class scored 50 points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 177,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "Mr. Adams class earned 57 points.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 240,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 178,
+          "teacher_input_default": true,
+          "text": "Mrs. Brown's class earned 49 and Mrs.Daniel's class earned 57.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 289,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 241,
+          "teacher_input_default": true,
+          "text": "What is the mean of the number of points scored?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Contest-setting context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mrs_william.class.trivia_points = 50"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mr_adams.class.trivia_points = 57"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mrs_brown.class.trivia_points = 49",
+              "mrs_daniel.class.trivia_points = 57"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "classes.mean_trivia_points = mean(mrs_william.class.trivia_points, mr_adams.class.trivia_points, mrs_brown.class.trivia_points, mrs_daniel.class.trivia_points)",
+              "RETURN classes.mean_trivia_points"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1989"
+      },
+      "question": "At a school several teachers were holding a contest to see which class could earn the most trivia points. Mrs.William's class scored 50 points. Mr. Adams class earned 57 points. Mrs. Brown's class earned 49 and Mrs.Daniel's class earned 57. What is the mean of the number of points scored?",
+      "source_context": null,
+      "source_id": "asdiv-1989",
+      "validation_failure": "answer mismatch: actual=53.25, expected=53.3",
+      "validator_context": {
+        "correct_answer": "53.3",
+        "gold_reasoning": "(50+57+49+57)/4=53.3"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom had $19 and he wanted to buy as many folders as he could.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "If one folder costs $2, how much is left after he bought the folders?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tom.initial.money_dollars = 19"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The purchasing objective is retained by the subsequent question; this clause grounds Tom's available money."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Computing the money left after buying the greatest whole number of folders requires integer quotient or remainder semantics, but the active operator registry provides neither floor nor modulo."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0776"
+      },
+      "question": "Tom had $19 and he wanted to buy as many folders as he could. If one folder costs $2, how much is left after he bought the folders?",
+      "source_context": null,
+      "source_id": "asdiv-0776",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": "19/2=9 r1"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 36,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It is harvest season in the country.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 146,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 37,
+          "teacher_input_default": true,
+          "text": "Lewis, whose family owns a fruit farm, is busy overseeing their farmers while they are harvesting the fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 147,
+          "teacher_input_default": true,
+          "text": "His day starts by going to the apple orchard.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 300,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 193,
+          "teacher_input_default": true,
+          "text": "The farmers reported that they harvest 45 sacks of apples from each of the 8 sections of the orchard daily.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 341,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 301,
+          "teacher_input_default": true,
+          "text": "How many apples are harvested every day?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Seasonal context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "Farm and harvesting context introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The visit to the apple orchard introduces no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "orchard.daily.apple_sacks_per_section = 45",
+              "orchard.section_count = 8",
+              "orchard.daily.apple_sacks = orchard.daily.apple_sacks_per_section * orchard.section_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The stated measured quantity is sacks of apples, not individual apples."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The question asks for a number of individual apples, while the source provides only sacks of apples and no apples-per-sack conversion. It is unclear whether the intended result is sacks or individual apples."
+            ],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0435"
+      },
+      "question": "It is harvest season in the country. Lewis, whose family owns a fruit farm, is busy overseeing their farmers while they are harvesting the fruits. His day starts by going to the apple orchard. The farmers reported that they harvest 45 sacks of apples from each of the 8 sections of the orchard daily. How many apples are harvested every day?",
+      "source_context": null,
+      "source_id": "asdiv-0435",
+      "validation_failure": "non-ok semantic parts: part 4=ambiguous",
+      "validator_context": {
+        "correct_answer": "360",
+        "gold_reasoning": "45*8=360"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

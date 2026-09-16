@@ -1,0 +1,522 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The fraction whose numerator is 3 and the denominator is 1 more than twice the numerator.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "Find the fraction.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "fraction.numerator = 3",
+              "fraction.denominator = fraction.numerator * 2 + 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fraction.value = fraction.numerator / fraction.denominator",
+              "RETURN fraction.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1327"
+      },
+      "question": "The fraction whose numerator is 3 and the denominator is 1 more than twice the numerator. Find the fraction.",
+      "source_context": null,
+      "source_id": "asdiv-1327",
+      "validation_failure": "anonymous operation-ledger target: fraction.value",
+      "validator_context": {
+        "correct_answer": "3/7",
+        "gold_reasoning": "x:The denominator; y:The numerator; x=y*2+1; y=3"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kathleen is a dental sales representative who wants to distribute 18 brochures and 12 pamphlets to local dental offices.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 245,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "She wants to deliver the same combination of brochures and pamphlets to each office, without having any materials left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 329,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 246,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of dental offices Kathleen can distribute materials to?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "kathleen.materials.brochures = 18",
+              "kathleen.materials.pamphlets = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Equal integer allocation of both material types with no remainder requires divisibility or constraint semantics absent from the active operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible office count requires greatest-common-divisor or quantified integer-divisibility semantics, which the active operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0970"
+      },
+      "question": "Kathleen is a dental sales representative who wants to distribute 18 brochures and 12 pamphlets to local dental offices. She wants to deliver the same combination of brochures and pamphlets to each office, without having any materials left over. What is the greatest number of dental offices Kathleen can distribute materials to?",
+      "source_context": null,
+      "source_id": "asdiv-0970",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "GCD(18,12)=6"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A boat goes 30 km upstream and 44 km downstream in 10 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "In 13 hours, it can go 40 km upstream and 55 km downstream.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 187,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "Determine the speed of the stream and that of boat in still water.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "boat.trip1.upstream.distance_km = 30",
+              "boat.trip1.downstream.distance_km = 44",
+              "boat.trip1.total_duration_hours = 10"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The two directional legs share the stated trip-level duration."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boat.trip2.upstream.distance_km = 40",
+              "boat.trip2.downstream.distance_km = 55",
+              "boat.trip2.total_duration_hours = 13"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The two directional legs share the stated trip-level duration."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN stream.speed_kmh",
+              "RETURN boat.still_water.speed_kmh"
+            ],
+            "assumptions": [],
+            "confidence": 0.88,
+            "part_id": 2,
+            "semantic_notes": [
+              "The clause requests two distinct speeds in source order."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1426"
+      },
+      "question": "A boat goes 30 km upstream and 44 km downstream in 10 hours. In 13 hours, it can go 40 km upstream and 55 km downstream. Determine the speed of the stream and that of boat in still water.",
+      "source_context": null,
+      "source_id": "asdiv-1426",
+      "validation_failure": "unresolved reference 'stream.speed_kmh' from scope 'global'; unresolved reference 'boat.still_water.speed_kmh' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "x:Speed of boat in still water; y:Speed of stream; 30/(x-y)+44/(x+y)=10; 40/(x-y)+55/(x+y)=13"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Megan and her sister, Tara, wanted to buy a scooter for $26.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "Tara had $4 more than Megan.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "Together they had enough money to buy the scooter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 170,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 141,
+          "teacher_input_default": true,
+          "text": "How much money did Tara have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "scooter.price_dollars = 26"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tara.money_dollars = megan.money_dollars + 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The comparison is preserved without solving either person's amount."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "\u201cEnough money\u201d states that their combined money is at least the scooter price, but the active operator registry cannot express the required inequality."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Tara's exact amount is underdetermined because \u201cenough money\u201d does not state that their combined money equals the $26 price."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0911"
+      },
+      "question": "Megan and her sister, Tara, wanted to buy a scooter for $26. Tara had $4 more than Megan. Together they had enough money to buy the scooter. How much money did Tara have?",
+      "source_context": null,
+      "source_id": "asdiv-0911",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported, part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "15",
+        "gold_reasoning": "x:The number of Tara's dollars; x+(x-4)=26"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 55,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A man travels 600 km partly by train and partly by car.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 56,
+          "teacher_input_default": true,
+          "text": "If he covers 400 km by train and the rest by car, it takes him 6 hours and 30 minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 221,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 143,
+          "teacher_input_default": true,
+          "text": "But if he travels 200 km by train and rest by car, he takes 30 minutes longer.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 222,
+          "teacher_input_default": true,
+          "text": "Find the speed of train and that of car.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "trip.total_distance_km = 600"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The trip is partitioned between train and car in the later scenario clauses."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trip.scenario1.train_distance_km = 400",
+              "trip.scenario1.car_distance_km = trip.total_distance_km - trip.scenario1.train_distance_km",
+              "trip.scenario1.duration_hours_component = 6",
+              "trip.scenario1.duration_minutes_component = 30",
+              "trip.scenario1.total_duration_hours = trip.scenario1.duration_hours_component + trip.scenario1.duration_minutes_component / 60"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "Hours and minutes are retained separately before conversion to total hours."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trip.scenario2.train_distance_km = 200",
+              "trip.scenario2.car_distance_km = trip.total_distance_km - trip.scenario2.train_distance_km",
+              "trip.scenario2.additional_duration_minutes = 30",
+              "trip.scenario2.total_duration_hours = trip.scenario1.total_duration_hours + trip.scenario2.additional_duration_minutes / 60"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "The second duration preserves its comparative relation to the first scenario."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "train.speed_km_per_hour = (2 * trip.scenario1.train_distance_km - trip.scenario2.train_distance_km) / (2 * trip.scenario1.total_duration_hours - trip.scenario2.total_duration_hours)",
+              "car.speed_km_per_hour = (2 * trip.scenario2.car_distance_km - trip.scenario1.car_distance_km) / (2 * trip.scenario2.total_duration_hours - trip.scenario1.total_duration_hours)",
+              "RETURN train.speed_km_per_hour",
+              "RETURN car.speed_km_per_hour"
+            ],
+            "assumptions": [
+              "Train and car speeds are constant across both scenarios.",
+              "Each scenario's total duration is the sum of its train and car travel times."
+            ],
+            "confidence": 0.93,
+            "part_id": 3,
+            "semantic_notes": [
+              "The two speed expressions eliminate the other transport mode from the two distance-time scenarios."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1431"
+      },
+      "question": "A man travels 600 km partly by train and partly by car. If he covers 400 km by train and the rest by car, it takes him 6 hours and 30 minutes. But if he travels 200 km by train and rest by car, he takes 30 minutes longer. Find the speed of train and that of car.",
+      "source_context": null,
+      "source_id": "asdiv-1431",
+      "validation_failure": "answer mismatch: actual=80, expected=100",
+      "validator_context": {
+        "correct_answer": "100",
+        "gold_reasoning": "x:Speed of train; y:Speed of car; 400/x+200/y=6.5; 200/x+400/y=7"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

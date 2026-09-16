@@ -1,0 +1,119 @@
+{
+  "conditions": {
+    "F0": {
+      "blackboard_f1": {
+        "delta": 0.08438095238095238,
+        "large": 0.10438095238095238,
+        "small": 0.02
+      },
+      "dependency_f1": {
+        "delta": 0.004363636363636361,
+        "large": 0.10525252525252525,
+        "small": 0.10088888888888889
+      },
+      "final_answer": {
+        "delta": 0.08000000000000002,
+        "large": 0.52,
+        "small": 0.44
+      },
+      "parse": {
+        "delta": 0.07999999999999996,
+        "large": 0.96,
+        "small": 0.88
+      },
+      "semantic_structure": {
+        "delta": -0.04,
+        "large": 0.04,
+        "small": 0.08
+      }
+    },
+    "F1": {
+      "blackboard_f1": {
+        "delta": 0.022230321539784464,
+        "large": 0.10878324573976748,
+        "small": 0.08655292419998302
+      },
+      "dependency_f1": {
+        "delta": 0.08905106210113148,
+        "large": 0.17102508807515746,
+        "small": 0.08197402597402598
+      },
+      "final_answer": {
+        "delta": 0.32000000000000006,
+        "large": 0.56,
+        "small": 0.24
+      },
+      "parse": {
+        "delta": 0.2799999999999999,
+        "large": 0.96,
+        "small": 0.68
+      },
+      "semantic_structure": {
+        "delta": 0.04,
+        "large": 0.04,
+        "small": 0.0
+      }
+    },
+    "F2": {
+      "argument_binding_exact": {
+        "delta": 0.06944444444444445,
+        "large": 0.22916666666666666,
+        "small": 0.1597222222222222
+      },
+      "argument_role_accuracy": {
+        "delta": 0.06860158311345649,
+        "large": 0.2691292875989446,
+        "small": 0.20052770448548812
+      },
+      "blackboard_f1": {
+        "delta": 0.10318792318792318,
+        "large": 0.1838228438228438,
+        "small": 0.08063492063492063
+      },
+      "dependency_f1": {
+        "delta": 0.031085288980025827,
+        "large": 0.15222222222222223,
+        "small": 0.1211369332421964
+      },
+      "final_answer": {
+        "delta": 0.08000000000000002,
+        "large": 0.44,
+        "small": 0.36
+      },
+      "functor_class_micro_f1": {
+        "delta": 0.049938827716605516,
+        "large": 0.3292181069958848,
+        "small": 0.27927927927927926
+      },
+      "parse": {
+        "delta": 0.12,
+        "large": 0.72,
+        "small": 0.6
+      },
+      "relation_direction_accuracy": {
+        "delta": 0.05552672548002077,
+        "large": 0.2682926829268293,
+        "small": 0.2127659574468085
+      },
+      "semantic_structure": {
+        "delta": 0.0,
+        "large": 0.04,
+        "small": 0.04
+      }
+    }
+  },
+  "frozen_identity_count": 25,
+  "input_sha256": {
+    "large": "6992a546e8b5aaf8e6dd90b9f9a99eb98d994a71077b2b161aa7b0bf6dfe4714",
+    "small": "0a64043a5e164117a2026bab8bcf40346cab6a2a8c88001da6aa5945172b7e49"
+  },
+  "large_model": "Qwen3-1.7B",
+  "representation_by_capacity_interaction": {
+    "F2_minus_F0_final_delta": 0.0,
+    "F2_minus_F1_final_delta": -0.24000000000000005,
+    "capacity_bottleneck_supported": false,
+    "rule": "capacity explanation requires F2 to improve more than both F0 and F1"
+  },
+  "schema_version": "ccpu.paper1.functor_model_size.v1",
+  "small_model": "Qwen3-0.6B"
+}

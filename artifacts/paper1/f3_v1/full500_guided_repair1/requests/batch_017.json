@@ -1,0 +1,81 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "A shipping boat's crew consisted of 17 sailors, with five inexperienced sailors. Each experienced sailor was paid 1/5 times more than the inexperienced sailors. If the inexperienced sailors were paid $10 per hour for a 60-hour workweek, calculate the total combined monthly earnings of the experienced sailors.",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "537"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Emily is on a flight from New York to Hawaii that is 10 hours long. To kill time, she watches 3 TV episodes that are each 25 minutes long. Then she sleeps for 4 and a half hours. Then she watches 2 movies that are each an hour and 45 minutes long. After doing all these things, assuming there is no break time between activities, how many more minutes are left in the flight before Emily reaches Hawaii.",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "5382"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Angelo and Melanie want to plan how many hours over the next week they should study together for their test next week. They have 2 chapters of their textbook to study and 4 worksheets to memorize. They figure out that they should dedicate 3 hours to each chapter of their textbook and 1.5 hours for each worksheet. If they plan to study no more than 4 hours each day, how many days should they plan to study total over the next week if they take a 10-minute break every hour, include 3 10-minute snack breaks each day, and 30 minutes for lunch each day?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "7364"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "The number of soldiers on opposite sides of a war each needs 10 pounds of food every day to continue fighting effectively. However, soldiers in the second are each given 2 pounds less food than the first side.  If the first side has 4000 soldiers and the other side 500 soldiers fewer than the first side, what's the total amount of pounds of food both sides are eating altogether every day?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"war.sides.daily_food\", \"daily_food_amount\", \"war\", source(\"total amount of pounds of food both sides are eating altogether every day\"))",
+          "member(\"war.sides.daily_food\", \"war.first_side.daily_food\", source(\"the first side\"))",
+          "member(\"war.sides.daily_food\", \"war.second_side.daily_food\", source(\"soldiers in the second\"))",
+          "observe(at(\"war.first_side.soldiers.count\", \"current\"), 4000, \"count\", source(\"the first side has 4000 soldiers\"))",
+          "offset(at(\"war.second_side.soldiers.count\", \"current\"), at(\"war.first_side.soldiers.count\", \"current\"), -500, \"count\", source(\"the other side 500 soldiers fewer than the first side\"))",
+          "observe(at(\"war.first_side.food_per_soldier\", \"every_day\"), 10, \"pound\", source(\"each needs 10 pounds of food every day\"))",
+          "offset(at(\"war.second_side.food_per_soldier\", \"every_day\"), at(\"war.first_side.food_per_soldier\", \"every_day\"), -2, \"pound\", source(\"soldiers in the second are each given 2 pounds less food than the first side\"))",
+          "product_relation(at(\"war.first_side.daily_food\", \"every_day\"), at(\"war.first_side.soldiers.count\", \"current\"), at(\"war.first_side.food_per_soldier\", \"every_day\"), source(\"soldiers on opposite sides of a war each needs 10 pounds of food every day\"))",
+          "product_relation(at(\"war.second_side.daily_food\", \"every_day\"), at(\"war.second_side.soldiers.count\", \"current\"), at(\"war.second_side.food_per_soldier\", \"every_day\"), source(\"soldiers in the second are each given 2 pounds less food than the first side\"))",
+          "query(\"sum\", \"war.sides.daily_food\", \"every_day\")"
+        ]
+      },
+      "source_id": "6847"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "An employee makes 30 dollars an hour for the first 40 hours in the workweek and an additional 50% for every hour above 40 in the week.  If he works 6 hours for the first 3 days in the workweek and twice as many hours per day for the remaining 2 days, how much money did he make?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"employee.pay_rate\", \"first_40_hours\"), 30, \"dollar_per_hour\", source(\"30 dollars an hour for the first 40 hours in the workweek\"))",
+          "observe(at(\"employee.pay_threshold\", \"workweek\"), 40, \"hour\", source(\"the first 40 hours in the workweek\"))",
+          "percent_more(at(\"employee.pay_rate\", \"above_40_hours\"), at(\"employee.pay_rate\", \"first_40_hours\"), 50, source(\"an additional 50% for every hour above 40 in the week\"))",
+          "observe(at(\"employee.work.hours_per_day\", \"first_3_days\"), 6, \"hour\", source(\"works 6 hours for the first 3 days in the workweek\"))",
+          "observe(at(\"employee.work.days.count\", \"first_period\"), 3, \"day\", source(\"the first 3 days in the workweek\"))",
+          "multiple(at(\"employee.work.hours_per_day\", \"remaining_2_days\"), at(\"employee.work.hours_per_day\", \"first_3_days\"), 2, source(\"twice as many hours per day for the remaining 2 days\"))",
+          "observe(at(\"employee.work.days.count\", \"remaining_period\"), 2, \"day\", source(\"the remaining 2 days\"))",
+          "query(\"value\", at(\"employee.earnings\", \"workweek\"))"
+        ]
+      },
+      "source_id": "5894"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

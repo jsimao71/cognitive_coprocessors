@@ -1,0 +1,612 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 315,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "The three boys picked up and carried all of the balls in one trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 411,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 317,
+          "teacher_input_default": true,
+          "text": "Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 476,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 412,
+          "teacher_input_default": true,
+          "text": "Later, Jordan found another ball in the corner and picked it up.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 590,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 477,
+          "teacher_input_default": true,
+          "text": "If Jason had picked up and carried 2 balls, what is the total number of balls that the coach brought to practice?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "coach.practice.bags_brought = 1",
+              "coach.practice.balls_on_floor_before_practice = coach.practice.balls_brought"
+            ],
+            "assumptions": [
+              "Because all balls were dumped from the brought bag, the number on the floor is equated with the number brought."
+            ],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "This clause identifies the three collectors but introduces no arithmetic fact beyond the quantities established in later clauses."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "coach.practice.collectors_count = 3",
+              "coach.practice.collection_trips = 1",
+              "coach.practice.balls_carried_total = coach.practice.balls_brought"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jordan.practice.balls_carried = jason.practice.balls_carried * 2",
+              "jason.practice.balls_carried = jeffrey.practice.balls_carried * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "gym.corner.balls_found_later = 1",
+              "jordan.later.balls_picked_up = gym.corner.balls_found_later"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [
+              "The later corner ball is kept distinct from the balls the boys carried to the bag after practice."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jason.practice.balls_carried = 2",
+              "coach.practice.balls_brought = sum(jordan.practice.balls_carried, jason.practice.balls_carried, jeffrey.practice.balls_carried)",
+              "RETURN coach.practice.balls_brought"
+            ],
+            "assumptions": [
+              "The conditional supplies Jason's practice collection count for the requested scenario."
+            ],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07675"
+      },
+      "question": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.  After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.  The three boys picked up and carried all of the balls in one trip.  Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey. Later, Jordan found another ball in the corner and picked it up. If Jason had picked up and carried 2 balls, what is the total number of balls that the coach brought to practice?",
+      "source_context": null,
+      "source_id": "gsm-plus-07675",
+      "validation_failure": "unresolved reference 'coach.practice.balls_brought' from scope 'global'; unresolved reference 'coach.practice.balls_brought' from scope 'global'; unresolved reference 'jeffrey.practice.balls_carried' from scope 'global'; unresolved reference 'jeffrey.practice.balls_carried' from scope 'global'; unresolved reference 'coach.practice.balls_brought' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "Since Jordan carried twice as many balls as Jason, Jordan carried 2*2=<<2*2=4>>4 balls.\nSince Jason carried twice as many balls as Jeffrey, Jeffrey carried 2/2=<<2/2=1>>1 ball.\nIn total, the three boys carried 4+2+1+1=<<4+2+1+1=8>>8 balls, which were all the balls the coach brought to practice.\n#### 8"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 63,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Madeline and her roommate, Keenan, share the cost of groceries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 152,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 64,
+          "teacher_input_default": true,
+          "text": "For a four-week month, if Madeline pays 60% of the cost, it will cost Keenan $40 a week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 200,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 153,
+          "teacher_input_default": true,
+          "text": "So, in total, how much do they spend per month?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "groceries.payers_count = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "groceries.month.weeks = 4",
+              "madeline.groceries.share_percent = 60",
+              "keenan.groceries.share_percent = 100 - madeline.groceries.share_percent",
+              "keenan.groceries.weekly_cost_dollars = 40",
+              "keenan.groceries.weekly_cost_dollars = percent_of(groceries.weekly_total_cost_dollars, keenan.groceries.share_percent)"
+            ],
+            "assumptions": [
+              "Madeline and Keenan together cover the full grocery cost, so Keenan pays the percentage remaining after Madeline's 60% share."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "keenan.groceries.monthly_cost_dollars = rate_times_duration(keenan.groceries.weekly_cost_dollars, groceries.month.weeks)",
+              "groceries.monthly_total_cost_dollars = keenan.groceries.monthly_cost_dollars / (keenan.groceries.share_percent / 100)",
+              "RETURN groceries.monthly_total_cost_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06964"
+      },
+      "question": "Madeline and her roommate, Keenan, share the cost of groceries. For a four-week month, if Madeline pays 60% of the cost, it will cost Keenan $40 a week. So, in total, how much do they spend per month?",
+      "source_context": null,
+      "source_id": "gsm-plus-06964",
+      "validation_failure": "unresolved reference 'groceries.weekly_total_cost_dollars' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "400",
+        "gold_reasoning": "If Madeline pays 60% of the cost, it means Keenan pays 1-60%= 40% of the cost.\nAnd Keenan spends $40 a week, which means they spend $40/40%= $100 in total for each week.\nTherefore, they spend $100*4=$400 per month.\n#### 400"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Joe has twice as many cars as Robert.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "He sells 20% of them and gives away twice as many cars as the number he sold to his mother.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 244,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "If Joe remains with 16 cars after selling and giving some to his mother, how many cars did Robert originally have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "joe.cars.original = robert.cars.original * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "joe.cars.sold = percent_of(joe.cars.original, 20)",
+              "joe.cars.given_to_mother = joe.cars.sold * 2"
+            ],
+            "assumptions": [
+              "Resolved \"He\" and \"his\" as Joe, and \"them\" as Joe's original cars.",
+              "Interpreted the cars given to Joe's mother as twice the number sold, consistent with the following clause."
+            ],
+            "confidence": 0.9,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "joe.cars.remaining = 16",
+              "joe.cars.remaining = joe.cars.original - joe.cars.sold - joe.cars.given_to_mother",
+              "RETURN robert.cars.original"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06548"
+      },
+      "question": "Joe has twice as many cars as Robert. He sells 20% of them and gives away twice as many cars as the number he sold to his mother. If Joe remains with 16 cars after selling and giving some to his mother, how many cars did Robert originally have?",
+      "source_context": null,
+      "source_id": "gsm-plus-06548",
+      "validation_failure": "unresolved reference 'robert.cars.original' from scope 'global'; unresolved reference 'joe.cars.original' from scope 'global'; unresolved reference 'joe.cars.sold' from scope 'global'; unresolved reference 'joe.cars.original' from scope 'global'; unresolved reference 'robert.cars.original' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "Let's denote the number of cars Joe originally had as J and the number of cars Robert originally had as R. We know from the problem that:\n\nJ = 2R (Joe has twice as many cars as Robert)\n\nJoe sells 20% of his cars, which is 0.2J, and gives away twice as many cars as he sold, which is 2*0.2J = 0.4J. After these transactions, he remains with 16 cars. So we can write:\n\nJ - 0.2J - 0.4J = 16\n0.4J = 16\nJ = 16 / 0.4 = 40\n\nSubstituting J = 60 into the first equation, we get:\n\n40 = 2R\nR = 40 / 2 = 20\n\nSo, Robert originally had  20 cars.\n#### 20"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Before leaving for her barista job, Candice placed 80 sticky notes in her bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "She made a pit stop at a shop and bought an additional pack of sticky notes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "At her workplace, she used one sticky note for each of the 220 coffee cups she served.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 359,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 243,
+          "teacher_input_default": true,
+          "text": "If she counted 23 sticky notes left in total, how many sticky notes were there in the pack she bought from the shop?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "candice.sticky_notes.initial = 80"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "candice.sticky_notes.after_purchase = candice.sticky_notes.initial + shop_pack.sticky_notes"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "candice.coffee_cups.served = 220",
+              "candice.sticky_notes.used = candice.coffee_cups.served"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The equality preserves the stated one-sticky-note-per-served-cup correspondence."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "candice.sticky_notes.remaining = 23",
+              "candice.sticky_notes.remaining = candice.sticky_notes.after_purchase - candice.sticky_notes.used",
+              "RETURN shop_pack.sticky_notes"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-00373"
+      },
+      "question": "Before leaving for her barista job, Candice placed 80 sticky notes in her bag. She made a pit stop at a shop and bought an additional pack of sticky notes. At her workplace, she used one sticky note for each of the 220 coffee cups she served. If she counted 23 sticky notes left in total, how many sticky notes were there in the pack she bought from the shop?",
+      "source_context": null,
+      "source_id": "gsm-plus-00373",
+      "validation_failure": "unresolved reference 'shop_pack.sticky_notes' from scope 'global'; unresolved reference 'candice.sticky_notes.after_purchase' from scope 'global'; unresolved reference 'shop_pack.sticky_notes' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "163",
+        "gold_reasoning": "Let's let x be the number of post-it notes in the package that Candice purchased.\nThen, the total number of post-it notes she had when she left the store was 80+x.\nAnd if she used 220 Post-it notes at work and had 23 left, then 80+x=220+23\nSubtracting 80 from each side of the equation, we see that x=220+23-80=<<220+23-80=163>>163 Post-it notes.\n#### 163"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Twenty tourists discovered 700 shells in a strip mall parking lot.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 173,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "They had divided into three groups, Alphas, The finders, and Gogetters to find as many shells as possible.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 174,
+          "teacher_input_default": true,
+          "text": "If team Alphas found 40% of the shells, and team The finders found a fraction of the remaining shells, and the team Gogetters found 168 shells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 390,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 318,
+          "teacher_input_default": true,
+          "text": "What's the fraction of the remaining shells that team the finders found?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tourists.count = 20",
+              "shells.total = 700"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "tourist_groups.count = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The three named groups are Alphas, The Finders, and Gogetters."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "alphas.shells_found = percent_of(shells.total, 40)",
+              "shells.remaining_after_alphas = shells.total - alphas.shells_found",
+              "gogetters.shells_found = 168",
+              "finders.shells_found = shells.remaining_after_alphas - gogetters.shells_found"
+            ],
+            "assumptions": [
+              "Assumed The Finders and Gogetters exhaustively partition the shells remaining after the Alphas' share, as implied by the three-group setup."
+            ],
+            "confidence": 0.91,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "finders.fraction_of_remaining = finders.shells_found / shells.remaining_after_alphas",
+              "RETURN finders.fraction_of_remaining"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [
+              "The returned value is a unitless fraction of the shells remaining after the Alphas' share."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09636"
+      },
+      "question": "Twenty tourists discovered 700 shells in a strip mall parking lot. They had divided into three groups, Alphas, The finders, and Gogetters to find as many shells as possible. If team Alphas found 40% of the shells, and team The finders found a fraction of the remaining shells, and the team Gogetters found 168 shells. What's the fraction of the remaining shells that team the finders found?",
+      "source_context": null,
+      "source_id": "gsm-plus-09636",
+      "validation_failure": "answer mismatch: actual=0.6, expected=60",
+      "validator_context": {
+        "correct_answer": "60",
+        "gold_reasoning": "Team Alphas found 40/100*700 = <<40/100*700=280>>280 shells.\nIf team Alphas found 280 shells, the other teams found 700-280 = 420 shells.\nTeam The Finders found 420-168=252 shells.\nSo 252 shells are 252/420=60% of the remaining shells\n#### 60"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

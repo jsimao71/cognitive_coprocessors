@@ -1,0 +1,678 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 54,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Lorraine and Colleen are trading stickers for buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 121,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 55,
+          "teacher_input_default": true,
+          "text": "Each large sticker is worth a large button or three small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 122,
+          "teacher_input_default": true,
+          "text": "A small sticker is worth one small button.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "A large button is worth three small stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 272,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 211,
+          "teacher_input_default": true,
+          "text": "Lorraine starts with 60 small stickers and 80 large stickers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 328,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 273,
+          "teacher_input_default": true,
+          "text": "She trades 80% of her small stickers for large buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 329,
+          "teacher_input_default": true,
+          "text": "She trades 60% of her large stickers for large buttons and trades the rest of them for small buttons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 473,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 431,
+          "teacher_input_default": true,
+          "text": "How many buttons does she have by the end?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Introduces the participants and the sticker-for-button trading context without supplying a quantitative fact."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.each_large_sticker.large_buttons = 1",
+              "trade.each_large_sticker.small_buttons = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.each_small_sticker.small_buttons = 1"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trade.each_large_button.small_stickers = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.stickers.initial.small = 60",
+              "lorraine.stickers.initial.large = 80"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.stickers.traded.small = percent_of(lorraine.stickers.initial.small, 80)",
+              "lorraine.buttons.received_from_small_stickers.large = lorraine.stickers.traded.small / trade.each_large_button.small_stickers"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.stickers.traded_for_large_buttons.large = percent_of(lorraine.stickers.initial.large, 60)",
+              "lorraine.stickers.traded_for_small_buttons.large = lorraine.stickers.initial.large - lorraine.stickers.traded_for_large_buttons.large",
+              "lorraine.buttons.received_from_large_stickers.large = lorraine.stickers.traded_for_large_buttons.large * trade.each_large_sticker.large_buttons",
+              "lorraine.buttons.received_from_large_stickers.small = lorraine.stickers.traded_for_small_buttons.large * trade.each_large_sticker.small_buttons"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "lorraine.buttons.final.large = lorraine.buttons.received_from_small_stickers.large + lorraine.buttons.received_from_large_stickers.large",
+              "lorraine.buttons.final.small = lorraine.buttons.received_from_large_stickers.small",
+              "lorraine.buttons.final.total = lorraine.buttons.final.large + lorraine.buttons.final.small",
+              "RETURN lorraine.buttons.final.total"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 7,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-06032"
+      },
+      "question": "Lorraine and Colleen are trading stickers for buttons. Each large sticker is worth a large button or three small buttons. A small sticker is worth one small button. A large button is worth three small stickers. Lorraine starts with 60 small stickers and 80 large stickers. She trades 80% of her small stickers for large buttons. She trades 60% of her large stickers for large buttons and trades the rest of them for small buttons. How many buttons does she have by the end?",
+      "source_context": null,
+      "source_id": "gsm-plus-06032",
+      "validation_failure": "answer mismatch: actual=160, expected=192",
+      "validator_context": {
+        "correct_answer": "192",
+        "gold_reasoning": "Lorraine starts with 60 small stickers and trades 80% of them for large buttons. This means she trades 60 * 0.8 =  48 small stickers for large buttons.\nShe also starts with 80 large stickers and trades 60% of them for large buttons. This means she trades 80 * 0.6 = 48 large stickers for large buttons.\n\nThe rest of her large stickers are traded for small buttons. This means she trades 80 - 48 =  32 large stickers for small buttons.\n\nSince each large sticker is worth three small buttons, she gets 32 * 3 =  96 small buttons.\n\nSo in total, Lorraine has 48 large buttons + 48 large buttons + 96 small buttons =  192 buttons.\n#### 192"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 91,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carlos, Jim and Carrey were at the beach playing and they decided to gather some seashells.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 92,
+          "teacher_input_default": true,
+          "text": "Jim collected 2.7 times of ten seashells, which was half of ten more than what Carlos collected.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 230,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "Carlos collected twice as many as Carrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 309,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 231,
+          "teacher_input_default": true,
+          "text": "They gathered all their seashells and divided them equally between themselves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 310,
+          "teacher_input_default": true,
+          "text": "How many did each person get?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "group.person_count = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The three named participants are Carlos, Jim, and Carrey."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The phrase \"half of ten more than what Carlos collected\" does not uniquely determine whether Jim's amount is half of Carlos's amount plus ten, half of the quantity ten more than Carlos's amount, or another attachment; emitting a relation would invent the intended arithmetic."
+            ],
+            "confidence": 0.35,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "carlos.seashells_collected = carrey.seashells_collected * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "group.total_seashells = sum(carlos.seashells_collected, jim.seashells_collected, carrey.seashells_collected)",
+              "group.seashells_per_person = group.total_seashells / group.person_count"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN group.seashells_per_person"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09226"
+      },
+      "question": "Carlos, Jim and Carrey were at the beach playing and they decided to gather some seashells. Jim collected 2.7 times of ten seashells, which was half of ten more than what Carlos collected. Carlos collected twice as many as Carrey. They gathered all their seashells and divided them equally between themselves. How many did each person get?",
+      "source_context": null,
+      "source_id": "gsm-plus-09226",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "20",
+        "gold_reasoning": "Jim collected 2.7 times of ten seashells, half of ten more than what Carlos collected, which means Carlos collected 2.7*10-0.5*10 = <<2.7*10-0.5*10=22>>22 seashells\nCarlos collected twice as many as Carrey did, meaning Carrey collected 22/2 = <<22/2=11>>11 seashells\nIn total, they collected 2.7*10+22+11 = <<2.7*10+22+11=60>>60 seashells\nThey divided them into three equal group, getting 60/3 = <<60/3=20>>20 each\n#### 20"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 315,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 249,
+          "teacher_input_default": true,
+          "text": "The three boys picked up and carried all of the balls in one trip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 411,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 317,
+          "teacher_input_default": true,
+          "text": "Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 525,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 412,
+          "teacher_input_default": true,
+          "text": "If the total number of balls the coach brought to practice was 7, how many balls had Jason picked up and carried?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "coach.practice.bags_brought = 1",
+              "gym_floor.before_practice.balls = coach.practice.balls_brought"
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The second statement preserves that all basketballs brought by the coach were dumped onto the floor."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pickup_team.boys = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The pickup team consists of Jordan, Jason, and Jeffrey."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "pickup.trips = 1",
+              "pickup.total_balls_carried = coach.practice.balls_brought"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "All balls brought to practice were carried by the three boys."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jordan.balls_carried = jason.balls_carried * 2",
+              "jason.balls_carried = jeffrey.balls_carried * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "coach.practice.balls_brought = 7",
+              "jason.balls_carried = coach.practice.balls_brought / (2 + 1 + 1 / 2)",
+              "RETURN jason.balls_carried"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 4,
+            "semantic_notes": [
+              "The denominator expresses Jordan's, Jason's, and Jeffrey's shares relative to Jason."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-07676"
+      },
+      "question": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.  After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.  The three boys picked up and carried all of the balls in one trip.  Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey. If the total number of balls the coach brought to practice was 7, how many balls had Jason picked up and carried?",
+      "source_context": null,
+      "source_id": "gsm-plus-07676",
+      "validation_failure": "unresolved reference 'jeffrey.balls_carried' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "The number of Jordan is twice that of Jason, and the number of Jason is twice that of Jeffrey. Assume that the number of Jason's balls is x, then the formula is: x+2x+(1/2)x =7\nx=2.\n#### 2"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jaime is a computer programmer for a company that currently has employed 100 people.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 142,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "Senior programmers are paid more than junior programmers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 414,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 143,
+          "teacher_input_default": true,
+          "text": "If the number of Junior programmers is 2/5 of the total number of employees, and they are each paid $2000 per month,  the total amount of money the company pays to all the programmers per month is $224000.How much more are senior programmers paid than junior programmers?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "company.employee_count = 100"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Jaime's occupation is nonquantitative and contributes no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause asserts a greater-than comparison, but the active operator registry does not include comparison operators."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "company.junior_programmer_count = company.employee_count * 2 / 5",
+              "company.junior_programmers.monthly_pay_per_programmer = 2000",
+              "company.programmers.total_monthly_pay = 224000",
+              "company.senior_programmer_count = company.employee_count - company.junior_programmer_count",
+              "company.junior_programmers.total_monthly_pay = company.junior_programmer_count * company.junior_programmers.monthly_pay_per_programmer",
+              "company.senior_programmers.total_monthly_pay = company.programmers.total_monthly_pay - company.junior_programmers.total_monthly_pay",
+              "company.senior_programmers.monthly_pay_per_programmer = company.senior_programmers.total_monthly_pay / company.senior_programmer_count",
+              "company.programmers.monthly_pay_difference = company.senior_programmers.monthly_pay_per_programmer - company.junior_programmers.monthly_pay_per_programmer",
+              "RETURN company.programmers.monthly_pay_difference"
+            ],
+            "assumptions": [
+              "All employees not counted as junior programmers are senior programmers, and all employees are included among the programmers whose monthly pay totals $224000."
+            ],
+            "confidence": 0.84,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02604"
+      },
+      "question": "Jaime is a computer programmer for a company that currently has employed 100 people. Senior programmers are paid more than junior programmers. If the number of Junior programmers is 2/5 of the total number of employees, and they are each paid $2000 per month,  the total amount of money the company pays to all the programmers per month is $224000.How much more are senior programmers paid than junior programmers?",
+      "source_context": null,
+      "source_id": "gsm-plus-02604",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "400",
+        "gold_reasoning": "The number of junior programmers is 2/5 of the total number of employees, which is 2/5*100 = 40 junior programmers.\nIf each junior programmer is paid $2000, the total amount of money the company pays the junior programmers is 40*$2000 = $ 80000 per month.\nThe number of senior programmers in the company is 100-40 = 60\n224000-80000=144,400\n144,400/60=2400\n2400-2000=400\n#### 400"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Martha's cat is 5.5 times faster than her turtle.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "If the cat can run 16.5 feet/second, how many feet can her turtle crawl in 40 seconds?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "martha.cat.speed_feet_per_second = martha.turtle.speed_feet_per_second * 5.5"
+            ],
+            "assumptions": [
+              "Interpreted \"5.5 times faster\" as having 5.5 times the turtle's speed."
+            ],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "The comparative speed relation is retained as a forward dependency."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "martha.cat.speed_feet_per_second = 16.5",
+              "martha.turtle.crawl_duration_seconds = 40",
+              "martha.turtle.crawl_distance_feet = rate_times_duration(martha.turtle.speed_feet_per_second, martha.turtle.crawl_duration_seconds)",
+              "RETURN martha.turtle.crawl_distance_feet"
+            ],
+            "assumptions": [
+              "Assumed the turtle maintains the inferred crawl speed for all 40 seconds."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-05642"
+      },
+      "question": "Martha's cat is 5.5 times faster than her turtle. If the cat can run 16.5 feet/second, how many feet can her turtle crawl in 40 seconds?",
+      "source_context": null,
+      "source_id": "gsm-plus-05642",
+      "validation_failure": "unresolved reference 'martha.turtle.speed_feet_per_second' from scope 'global'; unresolved reference 'martha.turtle.speed_feet_per_second' from scope 'global'; unresolved reference 'martha.turtle.crawl_distance_feet' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "120",
+        "gold_reasoning": "First find the speed of the turtle by dividing the cat's speed by 5.5: 16.5 feet/second / 5.5 = <<16.5/5.5=3>>3 feet/second\nThen multiply the turtle's speed by the number of seconds it spends crawling to find how far it crawls: 40 seconds * 3 feet/second = <<40*3=120>>120 feet\n#### 120"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

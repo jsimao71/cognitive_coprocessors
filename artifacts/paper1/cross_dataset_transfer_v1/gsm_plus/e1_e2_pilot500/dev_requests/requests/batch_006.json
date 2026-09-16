@@ -1,0 +1,285 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 106,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A basket contains 25 oranges among which 1/25 is bad, 0.2 are unripe, 2/25 are sour and the rest are good.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 107,
+          "teacher_input_default": true,
+          "text": "How many oranges are good?",
+          "warnings": []
+        }
+      ],
+      "question": "A basket contains 25 oranges among which 1/25 is bad, 0.2 are unripe, 2/25 are sour and the rest are good. How many oranges are good?",
+      "source_id": "gsm-plus-00482"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A basket contains 25 oranges among which 1 is bad, 20% are unripe, 2 are sour, 2 are wormy and the rest are good.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 140,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "How many oranges are good?",
+          "warnings": []
+        }
+      ],
+      "question": "A basket contains 25 oranges among which 1 is bad, 20% are unripe, 2 are sour, 2 are wormy and the rest are good. How many oranges are good?",
+      "source_id": "gsm-plus-00483"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A basket contains some oranges among which 1 is bad, 20% are unripe, 2 are sour and the rest are good and are 17.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "How many oranges are there in the basket?",
+          "warnings": []
+        }
+      ],
+      "question": "A basket contains some oranges among which 1 is bad, 20% are unripe, 2 are sour and the rest are good and are 17. How many oranges are there in the basket?",
+      "source_id": "gsm-plus-00484"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a container, there are 25 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "One of these oranges is spoiled, 20% are not yet ripe, 2 are tart, and the remaining oranges are in good condition.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "Can you determine the number of good oranges?",
+          "warnings": []
+        }
+      ],
+      "question": "In a container, there are 25 oranges. One of these oranges is spoiled, 20% are not yet ripe, 2 are tart, and the remaining oranges are in good condition. Can you determine the number of good oranges?",
+      "source_id": "gsm-plus-00485"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 34,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a basket, there are 25 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 143,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 35,
+          "teacher_input_default": true,
+          "text": "Among these, 1 orange is bad, 20% are unripe, 2 are sour, and 5 are from a different variety but still good.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 144,
+          "teacher_input_default": true,
+          "text": "The rest of the oranges are also good.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 245,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 183,
+          "teacher_input_default": true,
+          "text": "If you ignore the variety, how many oranges in total are good?",
+          "warnings": []
+        }
+      ],
+      "question": "In a basket, there are 25 oranges. Among these, 1 orange is bad, 20% are unripe, 2 are sour, and 5 are from a different variety but still good. The rest of the oranges are also good. If you ignore the variety, how many oranges in total are good?",
+      "source_id": "gsm-plus-00486"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

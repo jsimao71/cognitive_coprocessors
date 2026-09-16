@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A train travels between 3 different cities.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 44,
+          "teacher_input_default": true,
+          "text": "It goes 75 miles from the first city to the second city, 100 miles from the second city to the third city, and 50 miles less than that combined distance to go from the third city back to the first city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 279,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 247,
+          "teacher_input_default": true,
+          "text": "This is the train's daily route.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 438,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 280,
+          "teacher_input_default": true,
+          "text": "However, every third day, the train makes an additional trip to a fourth city, which is 200 miles away from the first city and then returns to the first city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 482,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 439,
+          "teacher_input_default": true,
+          "text": "The train needs service every 18,000 miles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 550,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 483,
+          "teacher_input_default": true,
+          "text": "Considering this, how many days does the train go between services?",
+          "warnings": []
+        }
+      ],
+      "question": "A train travels between 3 different cities. It goes 75 miles from the first city to the second city, 100 miles from the second city to the third city, and 50 miles less than that combined distance to go from the third city back to the first city. This is the train's daily route. However, every third day, the train makes an additional trip to a fourth city, which is 200 miles away from the first city and then returns to the first city. The train needs service every 18,000 miles. Considering this, how many days does the train go between services?",
+      "source_id": "gsm-plus-02891"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A train travels between 3 different cities.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "It goes 75 miles from the first city to the second city, 100 miles from the second city to the third city, and 50 miles less than that combined distance to go from the third city to the first city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 276,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 244,
+          "teacher_input_default": true,
+          "text": "It does this trip 3 times a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 339,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 278,
+          "teacher_input_default": true,
+          "text": "The train needs service every 20 days to go between services.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 383,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 340,
+          "teacher_input_default": true,
+          "text": "How many miles does the train need service?",
+          "warnings": []
+        }
+      ],
+      "question": "A train travels between 3 different cities.  It goes 75 miles from the first city to the second city, 100 miles from the second city to the third city, and 50 miles less than that combined distance to go from the third city to the first city.  It does this trip 3 times a day.  The train needs service every 20 days to go between services. How many miles does the train need service?",
+      "source_id": "gsm-plus-02892"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A locomotive makes a journey among three distinct towns.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "The distance from the first to the second town is 75 miles, from the second to the third town is 100 miles, and from the third back to the first town is 50 miles less than the total of the first two distances.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 314,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 267,
+          "teacher_input_default": true,
+          "text": "This round trip is completed three times daily.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 376,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 315,
+          "teacher_input_default": true,
+          "text": "The locomotive requires maintenance after every 18,000 miles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 446,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 377,
+          "teacher_input_default": true,
+          "text": "How many days can the locomotive operate before it needs maintenance?",
+          "warnings": []
+        }
+      ],
+      "question": "A locomotive makes a journey among three distinct towns. The distance from the first to the second town is 75 miles, from the second to the third town is 100 miles, and from the third back to the first town is 50 miles less than the total of the first two distances. This round trip is completed three times daily. The locomotive requires maintenance after every 18,000 miles. How many days can the locomotive operate before it needs maintenance?",
+      "source_id": "gsm-plus-02893"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 43,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A train travels between 3 different cities.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 242,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "It goes 75 miles from the first city to the second city, 100 miles from the second city to the third city, and 50 miles less than that combined distance to go from the third city to the first city.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 276,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 244,
+          "teacher_input_default": true,
+          "text": "It does this trip 3 times a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 301,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 277,
+          "teacher_input_default": true,
+          "text": "Each trip takes 8 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 390,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 302,
+          "teacher_input_default": true,
+          "text": "The train needs service every 18,000 miles so how many days does it go between services?",
+          "warnings": []
+        }
+      ],
+      "question": "A train travels between 3 different cities.  It goes 75 miles from the first city to the second city, 100 miles from the second city to the third city, and 50 miles less than that combined distance to go from the third city to the first city.  It does this trip 3 times a day. Each trip takes 8 hours. The train needs service every 18,000 miles so how many days does it go between services?",
+      "source_id": "gsm-plus-02894"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "There are 8 girls in the park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "If there are twice the number of boys in the park, how many kids are in the park?",
+          "warnings": []
+        }
+      ],
+      "question": "There are 8 girls in the park. If there are twice the number of boys in the park, how many kids are in the park?",
+      "source_id": "gsm-plus-02920"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,489 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The sum of the first, two times the second, and three times the third is 70.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Find three consecutive odd integers.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "consecutive_odd_integers.weighted_sum = consecutive_odd_integers.first + 2 * consecutive_odd_integers.second + 3 * consecutive_odd_integers.third",
+              "consecutive_odd_integers.weighted_sum = 70"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The three integer paths are legitimate forward dependencies established by the following clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "consecutive_odd_integers.second = consecutive_odd_integers.first + 2",
+              "consecutive_odd_integers.third = consecutive_odd_integers.second + 2",
+              "RETURN consecutive_odd_integers.first",
+              "RETURN consecutive_odd_integers.second",
+              "RETURN consecutive_odd_integers.third"
+            ],
+            "assumptions": [],
+            "confidence": 0.92,
+            "part_id": 1,
+            "semantic_notes": [
+              "A step of two preserves the stated consecutive-odd relationship; the active arithmetic profile cannot encode parity independently."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1467"
+      },
+      "question": "The sum of the first, two times the second, and three times the third is 70. Find three consecutive odd integers.",
+      "source_context": null,
+      "source_id": "asdiv-1467",
+      "validation_failure": "unresolved reference 'consecutive_odd_integers.first' from scope 'global'; unresolved reference 'consecutive_odd_integers.first' from scope 'global'; unresolved reference 'consecutive_odd_integers.second' from scope 'global'; unresolved reference 'consecutive_odd_integers.first' from scope 'global'; unresolved reference 'consecutive_odd_integers.second' from scope 'global'; unresolved reference 'consecutive_odd_integers.third' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "x:The first number; x+2(x+2)+3(x+4)=70"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 66,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Vondra is putting together bags of groceries to donate to charity.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 67,
+          "teacher_input_default": true,
+          "text": "She has 7 boxes of macaroni and cheese and 14 cans of vegetables.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 238,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 133,
+          "teacher_input_default": true,
+          "text": "Vondra wants to divide them up evenly, so that each bag has the same contents and no items are left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 312,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 239,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of bags of groceries Vondra can put together?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause introduces the donation context but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "vondra.inventory.macaroni_and_cheese_boxes = 7",
+              "vondra.inventory.vegetable_cans = 14"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile cannot express the exact equal-partition and no-remainder constraints required by this clause."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible bag count requires greatest-common-divisor or equivalent integer divisibility semantics, which are absent from the operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1189"
+      },
+      "question": "Vondra is putting together bags of groceries to donate to charity. She has 7 boxes of macaroni and cheese and 14 cans of vegetables. Vondra wants to divide them up evenly, so that each bag has the same contents and no items are left over. What is the greatest number of bags of groceries Vondra can put together?",
+      "source_context": null,
+      "source_id": "asdiv-1189",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported, part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": "GCD(7,14)=7"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Smith is 8 years more than twice the age of her son.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 80,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "The ages of son is 12.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 81,
+          "teacher_input_default": true,
+          "text": "Find the age of mother and find the difference between their ages.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mrs_smith.age_years = mrs_smith.son.age_years * 2 + 8"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The son's age is a legitimate forward dependency grounded by the following clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mrs_smith.son.age_years = 12"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "mrs_smith.mother_son_age_difference_years = mrs_smith.age_years - mrs_smith.son.age_years",
+              "RETURN mrs_smith.age_years",
+              "RETURN mrs_smith.mother_son_age_difference_years"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "Two RETURN statements preserve the clause's two requested outputs."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1299"
+      },
+      "question": "Mrs. Smith is 8 years more than twice the age of her son. The ages of son is 12. Find the age of mother and find the difference between their ages.",
+      "source_context": null,
+      "source_id": "asdiv-1299",
+      "validation_failure": "answer mismatch: actual=20, expected=32",
+      "validator_context": {
+        "correct_answer": "32",
+        "gold_reasoning": "m:Mrs. Smith's age; 8+12*2=m"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Andy is buying AA batteries and D batteries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "The store sells AA batteries in packs of 38 and D batteries in packs of 44.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 247,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "If Andy wishes to buy the same number of AA and D batteries, what is the smallest number of each battery type that he can buy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative context introduces the purchaser and battery types but no quantitative state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "store.aa_batteries.per_pack = 38",
+              "store.d_batteries.per_pack = 44"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires the least positive common multiple of the two pack sizes, but the active operator registry provides neither least-common-multiple nor divisibility/integer-optimization semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1231"
+      },
+      "question": "Andy is buying AA batteries and D batteries. The store sells AA batteries in packs of 38 and D batteries in packs of 44. If Andy wishes to buy the same number of AA and D batteries, what is the smallest number of each battery type that he can buy?",
+      "source_context": null,
+      "source_id": "asdiv-1231",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "836",
+        "gold_reasoning": "LCM[38,44]=836"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 49,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The ages of Ashley and Mary are in the ratio 4:7.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 50,
+          "teacher_input_default": true,
+          "text": "The sum of their ages is 22.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 112,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "Find the ages of Ashley and Mary.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ashley.age_ratio_units = 4",
+              "mary.age_ratio_units = 7"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ashley_and_mary.total_age = 22",
+              "ashley_and_mary.total_ratio_units = ashley.age_ratio_units + mary.age_ratio_units",
+              "ashley_and_mary.age_per_ratio_unit = ashley_and_mary.total_age / ashley_and_mary.total_ratio_units",
+              "ashley.age = ashley.age_ratio_units * ashley_and_mary.age_per_ratio_unit",
+              "mary.age = mary.age_ratio_units * ashley_and_mary.age_per_ratio_unit"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN ashley.age",
+              "RETURN mary.age"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "Two returns preserve the request for both people's ages."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1303"
+      },
+      "question": "The ages of Ashley and Mary are in the ratio 4:7. The sum of their ages is 22. Find the ages of Ashley and Mary.",
+      "source_context": null,
+      "source_id": "asdiv-1303",
+      "validation_failure": "answer mismatch: actual=14, expected=8",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "m:Mary's age; 4m/7=22-m"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

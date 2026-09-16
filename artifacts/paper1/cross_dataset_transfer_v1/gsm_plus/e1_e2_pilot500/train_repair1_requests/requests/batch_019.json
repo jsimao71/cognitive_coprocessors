@@ -1,0 +1,713 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 58,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Marisa gets $5 as pocket money every day from her parents.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 59,
+          "teacher_input_default": true,
+          "text": "She buys 4 lollipops worth 25 cents each every day and saves the change in her piggy bank.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "After 5 days, she uses half of the money saved in her piggy bank to buy a toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 302,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 229,
+          "teacher_input_default": true,
+          "text": "How much money does she have left in her piggy bank after buying the toy?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "marisa.daily.pocket_money = 5"
+            ],
+            "assumptions": [
+              "Dollar units are inherited from the source text."
+            ],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marisa.daily.lollipops_bought = 4",
+              "marisa.lollipop.price = 0.25",
+              "marisa.daily.lollipop_spending = marisa.daily.lollipops_bought * marisa.lollipop.price",
+              "marisa.daily.piggy_bank_savings = marisa.daily.pocket_money - marisa.daily.lollipop_spending"
+            ],
+            "assumptions": [
+              "The 25-cent price is represented as 0.25 dollars so all monetary quantities use the same unit."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "marisa.saving_period.days = 5",
+              "marisa.piggy_bank.before_toy = marisa.daily.piggy_bank_savings * marisa.saving_period.days",
+              "marisa.toy.cost = marisa.piggy_bank.before_toy / 2",
+              "marisa.piggy_bank.after_toy = marisa.piggy_bank.before_toy - marisa.toy.cost"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN marisa.piggy_bank.after_toy"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02867"
+      },
+      "question": "Marisa gets $5 as pocket money every day from her parents. She buys 4 lollipops worth 25 cents each every day and saves the change in her piggy bank. After 5 days, she uses half of the money saved in her piggy bank to buy a toy. How much money does she have left in her piggy bank after buying the toy?",
+      "source_context": null,
+      "source_id": "gsm-plus-02867",
+      "validation_failure": "answer mismatch: actual=10, expected=8",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "Marisa spends 4 * 25 cents = $<<4*25=100>>1 on lollipops every day.\nSo, she saves $5 - $1 = $<<5-1=4>>4 in her piggy bank every day.\nIn 5 days, she saves $4 * 5 = $<<4*5=20>>20.\nThe toy costs as much as the total amount she saved in 3 days, which is $4 * 3 = $<<4*3=12>>12.\nSo, she has $20 - $12 = $<<20-12=8>>8 left in her piggy bank after buying the toy. Answer:\n#### 8"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Robert has 6 candies less than James.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "John's candy count is double that of Robert's.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 194,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "Given that John possesses 54 candies, what is the difference in the number of candies between John and James?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "robert.candies = james.candies - 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.candies = robert.candies * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "john.candies = 54",
+              "john_james.candy_difference = abs(john.candies - james.candies)",
+              "RETURN john_james.candy_difference"
+            ],
+            "assumptions": [
+              "The requested difference is interpreted as the absolute difference between the two candy counts."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-01925"
+      },
+      "question": "Robert has 6 candies less than James. John's candy count is double that of Robert's. Given that John possesses 54 candies, what is the difference in the number of candies between John and James?",
+      "source_context": null,
+      "source_id": "gsm-plus-01925",
+      "validation_failure": "unresolved reference 'james.candies' from scope 'global'; unresolved reference 'robert.candies' from scope 'global'; unresolved reference 'james.candies' from scope 'global'; unresolved reference 'john_james.candy_difference' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "21",
+        "gold_reasoning": "Robert has 54/2 = <<54/2=27>>27 candies.\nJames has 27+6 = <<27+6=33>>33 candies.\nJohn has 54-33= <<54-33=21>>21 more candies than James.\n#### 21"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A teacher uses a 5.2-inch piece of chalk to write math equations on a chalkboard for his students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 187,
+          "teacher_input_default": true,
+          "text": "Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 2 inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 356,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 308,
+          "teacher_input_default": true,
+          "text": "On Monday the teacher used a new piece of chalk.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 435,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 357,
+          "teacher_input_default": true,
+          "text": "His students need extra help that day, so he ended up writing more than usual.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 486,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 436,
+          "teacher_input_default": true,
+          "text": "He used up 45% of the chalk by the end of the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 616,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 487,
+          "teacher_input_default": true,
+          "text": "If the teacher goes back to using only 20% of the chalk each day, how many days does he have before he has to recycle this piece?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "chalk.new.length_inches = 5.2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "teacher.usual_daily.chalk_used.length_inches = percent_of(chalk.new.length_inches, 20)"
+            ],
+            "assumptions": [
+              "Each day's 20% refers to 20% of the original new-piece length rather than 20% of the remaining length."
+            ],
+            "confidence": 0.82,
+            "part_id": 1,
+            "semantic_notes": [
+              "The daily-use policy is represented as a fixed amount based on the full new piece."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.recycle_threshold.length_inches = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The semantic path records that recycling occurs below this threshold."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.start.length_inches = chalk.new.length_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "teacher.monday.chalk_use = \"more_than_usual\""
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 4,
+            "semantic_notes": [
+              "The clause supplies a qualitative comparison and causal context, not a numeric amount."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.used.length_inches = percent_of(chalk.monday.start.length_inches, 45)",
+              "chalk.monday.end.length_inches = chalk.monday.start.length_inches - chalk.monday.used.length_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The requested discrete day count is underdetermined: the wording does not specify whether to count the day on which the chalk first falls below the recycling threshold, and the active registry provides no floor or ceiling operator."
+            ],
+            "confidence": 0.86,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09410"
+      },
+      "question": "A teacher uses a 5.2-inch piece of chalk to write math equations on a chalkboard for his students. The teacher likes to conserve chalk, so he tries to only use 20% of the chalk each day. Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 2 inches. On Monday the teacher used a new piece of chalk. His students need extra help that day, so he ended up writing more than usual. He used up 45% of the chalk by the end of the day. If the teacher goes back to using only 20% of the chalk each day, how many days does he have before he has to recycle this piece?",
+      "source_context": null,
+      "source_id": "gsm-plus-09410",
+      "validation_failure": "non-ok semantic parts: part 6=ambiguous",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "The teacher uses 45% of his 5.2 inch stick of chalk on Monday, or 5.2 * 0.45 = <<5.2*0.45=2.34>>2.34 inches.\nHe is left with 5.2 - 2.34 = <<5.2-2.34=2.86>>2.86 inches of chalk.\nThe next day he will use 20% of 2.75 inches, which is 2.86 * 0.2 = <<2.86*0.2=0.572>>0.572 inches of chalk used.\nThat leaves him with 2.86 - 0.572 = <<2.86-0.572=2.288>>2.288 inches of chalk.\nThe day after that, he will use 2.288 * 0.2 = <<2.288*0.2=0.4576>>0.4576 inches of chalk.\nThat will leave him with 2.288 - 0.4576 = <<2.288-0.4576=1.8304>>1.8304 inches of chalk.\nSince 1.8304 is less than 2 inches, he will recycle this stick in 2 days.\n#### 2"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, including carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 188,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The price of carrots in the grocery store increases by 5% of the original price every year.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 282,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 189,
+          "teacher_input_default": true,
+          "text": "If the price of carrots after three years is $138, what was the initial price of the carrots?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 313,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 283,
+          "teacher_input_default": true,
+          "text": "(Round to the nearest integer)",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "grocery_store.owner = \"mrs_tatiana\"",
+              "grocery_store.carrots.status = \"sold\""
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.annual_price_increase.dollars = percent_of(carrots.initial.price_dollars, 5)"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [
+              "The annual increase is based on the original price, so it is additive rather than compounded."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carrots.y3.price_dollars = 138",
+              "carrots.initial.price_dollars = carrots.y3.price_dollars / (1 + 3 * 5 / 100)",
+              "RETURN carrots.initial.price_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Rounding to the nearest integer cannot be represented because no rounding operator is present in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08132"
+      },
+      "question": "Mrs. Tatiana owns a grocery store that sells different fruits and vegetables, including carrots. The price of carrots in the grocery store increases by 5% of the original price every year. If the price of carrots after three years is $138, what was the initial price of the carrots? (Round to the nearest integer)",
+      "source_context": null,
+      "source_id": "gsm-plus-08132",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "120",
+        "gold_reasoning": "First of all, suppose the price of carrots is x initially, then every year the price of carrots will go up by 5%*x=0.05x. \nAfter three years, the price of carrots becomes X+3*0.05x = 1.15x = 138. \nFrom this, we can solve for X= $120, which means that the price of the carrot started at $120.\n#### 120"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A teacher uses a 6-inch piece of chalk to write math equations on a chalkboard for his students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 97,
+          "teacher_input_default": true,
+          "text": "The teacher likes to conserve chalk, so he tries to only use 10% of the chalk each day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 305,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 3 inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 354,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 306,
+          "teacher_input_default": true,
+          "text": "On Monday the teacher used a new piece of chalk.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 433,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 355,
+          "teacher_input_default": true,
+          "text": "His students need extra help that day, so he ended up writing more than usual.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 484,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 434,
+          "teacher_input_default": true,
+          "text": "He used up 35% of the chalk by the end of the day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 614,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 485,
+          "teacher_input_default": true,
+          "text": "If the teacher goes back to using only 10% of the chalk each day, how many days does he have before he has to recycle this piece?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "chalk.new.length_inches = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.usual_daily.use_percent = 10",
+              "chalk.usual_daily.length_used_inches = percent_of(chalk.new.length_inches, chalk.usual_daily.use_percent)"
+            ],
+            "assumptions": [
+              "The daily 10% is interpreted as a percentage of the original new piece."
+            ],
+            "confidence": 0.91,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.recycle_threshold.length_inches = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.93,
+            "part_id": 2,
+            "semantic_notes": [
+              "The semantic path records that recycling begins below the stated length threshold."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.start.length_inches = chalk.new.length_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.9,
+            "part_id": 4,
+            "semantic_notes": [
+              "The qualitative comparison to usual usage is quantified by the following clause."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.monday.use_percent = 35",
+              "chalk.monday.length_used_inches = percent_of(chalk.monday.start.length_inches, chalk.monday.use_percent)",
+              "chalk.monday.end.length_inches = chalk.monday.start.length_inches - chalk.monday.length_used_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 5,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "chalk.remaining_usable.length_inches = chalk.monday.end.length_inches - chalk.recycle_threshold.length_inches",
+              "chalk.days_before_recycling = chalk.remaining_usable.length_inches / chalk.usual_daily.length_used_inches",
+              "RETURN chalk.days_before_recycling"
+            ],
+            "assumptions": [
+              "Daily chalk consumption returns to the fixed amount established by the usual 10% policy."
+            ],
+            "confidence": 0.91,
+            "part_id": 6,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09408"
+      },
+      "question": "A teacher uses a 6-inch piece of chalk to write math equations on a chalkboard for his students. The teacher likes to conserve chalk, so he tries to only use 10% of the chalk each day. Since the teacher cannot write with a very small piece of chalk, he recycles the chalk when it is smaller than 3 inches. On Monday the teacher used a new piece of chalk. His students need extra help that day, so he ended up writing more than usual. He used up 35% of the chalk by the end of the day. If the teacher goes back to using only 10% of the chalk each day, how many days does he have before he has to recycle this piece?",
+      "source_context": null,
+      "source_id": "gsm-plus-09408",
+      "validation_failure": "answer mismatch: actual=1.5, expected=3",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "The teacher uses 35% of his 6 inch stick of chalk on Monday, or 6 * 0.35 = <<6*0.35=2.1>>2.1 inches.\nHe is left with 6 - 2.1 = <<6-2.1=3.9>>3.9 inches of chalk.\nThe next day he will use 10% of 3.9 inches, which is 3.9 * 0.1 = <<3.9*0.1=0.39>>0.39 inches of chalk used.\nThat leaves him with 3.9 - 0.39 = <<3.9-0.39=3.51>>3.51 inches of chalk.\nThe day after that, he will use 3.51 * 0.1 = <<3.51*0.1=0.351>>0.351 inches of chalk.\nThat will leave him with 3.51 - 0.351 = <<3.51-0.351=3.159>>3.159 inches of chalk.\nThe day after that, he will use 3.159 * 0.1 = <<3.159*0.1=0.3159>>0.3159 inches of chalk.\nThat will leave him with 3.159 - 0.3159 = <<3.159-0.3159=2.8431>>2.8431 inches of chalk.\nSince 2.8431 is less than 3 inches, he will recycle this stick in 3 days.\n#### 3"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

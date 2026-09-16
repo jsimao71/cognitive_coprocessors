@@ -1,0 +1,441 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The area of square photo is 25 square inches.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "Angie decided to enlarge the photo by doubling the sides.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "What will the new area be?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "photo.original.area_square_inches = 25"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "photo.enlarged.side_length = photo.original.side_length * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "photo.enlarged.area_square_inches = photo.original.area_square_inches * 2 * 2",
+              "RETURN photo.enlarged.area_square_inches"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [
+              "Doubling both side dimensions of a square multiplies its area by two twice."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1491"
+      },
+      "question": "The area of square photo is 25 square inches. Angie decided to enlarge the photo by doubling the sides. What will the new area be?",
+      "source_context": null,
+      "source_id": "asdiv-1491",
+      "validation_failure": "unresolved reference 'photo.original.side_length' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "100",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A square piece of glass has an area of 64 square centimeters.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "How long is each side?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "glass.area_square_centimeters = 64"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "The stated area is attached to the square piece of glass."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Recovering a square's side length from its area requires a square-root operation, but the supplied operator registry does not include square root or an equivalent inverse-power operator."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1528"
+      },
+      "question": "A square piece of glass has an area of 64 square centimeters. How long is each side?",
+      "source_context": null,
+      "source_id": "asdiv-1528",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A movie store had nine hundred ninety-nine movies they were putting on five shelves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "If the owner wanted to make sure each shelf had the same number of movies, how many more movies would he need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "movie_store.movies_total = 999",
+              "movie_store.shelf_count = 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [
+              "The quantities describe movies being distributed across shelves."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the minimum additional whole-number quantity needed to make 999 divisible by 5 requires divisibility, remainder, ceiling, or equivalent integer constraints, none of which is available in the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1574"
+      },
+      "question": "A movie store had nine hundred ninety-nine movies they were putting on five shelves. If the owner wanted to make sure each shelf had the same number of movies, how many more movies would he need?",
+      "source_context": null,
+      "source_id": "asdiv-1574",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "1",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A company was buying new uniforms for its employees.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "They bought 121 uniforms total for their 32 stores.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "About how many uniforms should each store get?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "company.uniforms.status = \"being_purchased\"",
+              "company.uniforms.intended_for = \"employees\""
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "company.uniforms_total = 121",
+              "company.store_count = 32"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The word \"about\" requests an approximate whole-number allocation, but the active operator registry has no rounding operator or explicit approximation semantics."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1602"
+      },
+      "question": "A company was buying new uniforms for its employees. They bought 121 uniforms total for their 32 stores. About how many uniforms should each store get?",
+      "source_context": null,
+      "source_id": "asdiv-1602",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "4",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 97,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At an ice cream parlor, the owner was tracking the number of chocolate cones he sold over a week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "His results were: 100, 92, 109, 96, 103, 96 and 105.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 186,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "What is the mean of the cones sold?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause establishes the setting and tracked quantity but introduces no numeric fact or arithmetic relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ice_cream_parlor.week.day1.chocolate_cones_sold = 100",
+              "ice_cream_parlor.week.day2.chocolate_cones_sold = 92",
+              "ice_cream_parlor.week.day3.chocolate_cones_sold = 109",
+              "ice_cream_parlor.week.day4.chocolate_cones_sold = 96",
+              "ice_cream_parlor.week.day5.chocolate_cones_sold = 103",
+              "ice_cream_parlor.week.day6.chocolate_cones_sold = 96",
+              "ice_cream_parlor.week.day7.chocolate_cones_sold = 105"
+            ],
+            "assumptions": [
+              "The seven results are ordered daily observations across the stated week."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ice_cream_parlor.week.mean_chocolate_cones_sold = mean(ice_cream_parlor.week.day1.chocolate_cones_sold, ice_cream_parlor.week.day2.chocolate_cones_sold, ice_cream_parlor.week.day3.chocolate_cones_sold, ice_cream_parlor.week.day4.chocolate_cones_sold, ice_cream_parlor.week.day5.chocolate_cones_sold, ice_cream_parlor.week.day6.chocolate_cones_sold, ice_cream_parlor.week.day7.chocolate_cones_sold)",
+              "RETURN ice_cream_parlor.week.mean_chocolate_cones_sold"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1984"
+      },
+      "question": "At an ice cream parlor, the owner was tracking the number of chocolate cones he sold over a week. His results were: 100, 92, 109, 96, 103, 96 and 105. What is the mean of the cones sold?",
+      "source_context": null,
+      "source_id": "asdiv-1984",
+      "validation_failure": "answer mismatch: actual=100.1428571428571428571428571, expected=100.1",
+      "validator_context": {
+        "correct_answer": "100.1",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

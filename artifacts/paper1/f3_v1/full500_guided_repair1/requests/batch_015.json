@@ -1,0 +1,111 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Adam goes to school every day. On Monday he had 6 lessons of 30 minutes each, and on Tuesday he had 3 lessons of 1 hour each. On Wednesday, Adam spent twice as much time at school as on Tuesday. How much time in total did Adam spend at school during these 3 days, in hours?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "2232"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "A small pizza can gives 4 slices, and a large pizza gives 8 slices.  George purchased 3 small and 2 large pizzas.  George would like to eat 3 pieces.  His friend Bob would like to eat one more piece than George.  Susie will eat half as many as Bob.  Bill, Fred and Mark would each like 3 pieces.  How many slices of pizza will be left over?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"george.pizzas\", \"pizza\", \"george\", source(\"George purchased 3 small and 2 large pizzas\"))",
+          "collection(\"george.pizza_slices\", \"pizza_slice\", \"george\", source(\"A small pizza can gives 4 slices, and a large pizza gives 8 slices.  George purchased 3 small and 2 large pizzas\"))",
+          "observe(at(\"pizza.small.slice_yield\", \"per_pizza\"), 4, \"count\", source(\"A small pizza can gives 4 slices\"))",
+          "observe(at(\"pizza.large.slice_yield\", \"per_pizza\"), 8, \"count\", source(\"a large pizza gives 8 slices\"))",
+          "add(\"george_purchase_small_pizzas\", \"george\", at(\"george.pizzas.small.count\", \"current\"), 3, source(\"George purchased 3 small\"))",
+          "add(\"george_purchase_large_pizzas\", \"george\", at(\"george.pizzas.large.count\", \"current\"), 2, source(\"2 large pizzas\"))",
+          "rate_relation(at(\"george.pizza_slices.from_small.count\", \"initial\"), at(\"pizza.small.slice_yield\", \"per_pizza\"), event_field(\"george_purchase_small_pizzas\", \"quantity\"), source(\"A small pizza can gives 4 slices, and a large pizza gives 8 slices.  George purchased 3 small and 2 large pizzas\"))",
+          "rate_relation(at(\"george.pizza_slices.from_large.count\", \"initial\"), at(\"pizza.large.slice_yield\", \"per_pizza\"), event_field(\"george_purchase_large_pizzas\", \"quantity\"), source(\"A small pizza can gives 4 slices, and a large pizza gives 8 slices.  George purchased 3 small and 2 large pizzas\"))",
+          "consume(\"george_eat_pizza\", \"george\", at(\"george.pizza_slices.count\", \"current\"), 3, source(\"George would like to eat 3 pieces\"))",
+          "offset(\"bob.pizza_slices.consumption_quantity\", event_field(\"george_eat_pizza\", \"quantity\"), 1, \"count\", source(\"His friend Bob would like to eat one more piece than George\"))",
+          "consume(\"bob_eat_pizza\", \"bob\", at(\"george.pizza_slices.count\", \"current\"), \"bob.pizza_slices.consumption_quantity\", source(\"His friend Bob would like to eat one more piece than George\"))",
+          "fraction_of(\"susie.pizza_slices.consumption_quantity\", event_field(\"bob_eat_pizza\", \"quantity\"), 1, 2, source(\"Susie will eat half as many as Bob\"))",
+          "consume(\"susie_eat_pizza\", \"susie\", at(\"george.pizza_slices.count\", \"current\"), \"susie.pizza_slices.consumption_quantity\", source(\"Susie will eat half as many as Bob\"))",
+          "consume(\"bill_eat_pizza\", \"bill\", at(\"george.pizza_slices.count\", \"current\"), 3, source(\"Bill, Fred and Mark would each like 3 pieces\"))",
+          "consume(\"fred_eat_pizza\", \"fred\", at(\"george.pizza_slices.count\", \"current\"), 3, source(\"Bill, Fred and Mark would each like 3 pieces\"))",
+          "consume(\"mark_eat_pizza\", \"mark\", at(\"george.pizza_slices.count\", \"current\"), 3, source(\"Bill, Fred and Mark would each like 3 pieces\"))",
+          "query(\"remaining_count\", \"george.pizza_slices\", \"current\")"
+        ]
+      },
+      "source_id": "3639"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Isabela bought twice as many cucumbers as pencils, with both costing $20 each. If she got a 20% discount on the pencils and bought 100 cucumbers, calculate the total amount she spent to buy the items.",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"isabela.cucumbers\", \"cucumber\", \"isabela\", source(\"Isabela bought twice as many cucumbers as pencils\"))",
+          "collection(\"isabela.pencils\", \"pencil\", \"isabela\", source(\"Isabela bought twice as many cucumbers as pencils\"))",
+          "add(\"isabela_purchase_pencils\", \"isabela\", at(\"isabela.pencils.count\", \"current\"), \"isabela.pencils.purchased_count\", source(\"Isabela bought twice as many cucumbers as pencils\"))",
+          "add(\"isabela_purchase_cucumbers\", \"isabela\", at(\"isabela.cucumbers.count\", \"current\"), 100, source(\"bought 100 cucumbers\"))",
+          "multiple(event_field(\"isabela_purchase_cucumbers\", \"quantity\"), event_field(\"isabela_purchase_pencils\", \"quantity\"), 2, source(\"Isabela bought twice as many cucumbers as pencils\"))",
+          "observe(at(\"isabela.cucumbers.list_unit_price\", \"current\"), 20, \"dollar\", source(\"with both costing $20 each\"))",
+          "observe(at(\"isabela.pencils.list_unit_price\", \"current\"), 20, \"dollar\", source(\"with both costing $20 each\"))",
+          "percent_less(at(\"isabela.pencils.discounted_unit_price\", \"current\"), at(\"isabela.pencils.list_unit_price\", \"current\"), 20, source(\"got a 20% discount on the pencils\"))",
+          "query(\"value\", \"isabela.purchase.total_spent\")"
+        ]
+      },
+      "source_id": "4804"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "It\u2019s exam season and Tristan has several exams to prepare for. On Monday, he studies for 4 hours then studies for twice this long on Tuesday. On Wednesday, Thursday, and Friday he studies for 3 hours each day. He wants to study for a total of 25 hours over the week and divides the remaining amount of study time evenly between Saturday and Sunday. How many hours does Tristan spend studying on Saturday?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"tristan.study.duration\", \"monday\"), 4, \"hour\", source(\"On Monday, he studies for 4 hours\"))",
+          "multiple(at(\"tristan.study.duration\", \"tuesday\"), at(\"tristan.study.duration\", \"monday\"), 2, source(\"studies for twice this long on Tuesday\"))",
+          "observe(at(\"tristan.study.duration\", \"wednesday\"), 3, \"hour\", source(\"On Wednesday, Thursday, and Friday he studies for 3 hours each day\"))",
+          "observe(at(\"tristan.study.duration\", \"thursday\"), 3, \"hour\", source(\"On Wednesday, Thursday, and Friday he studies for 3 hours each day\"))",
+          "observe(at(\"tristan.study.duration\", \"friday\"), 3, \"hour\", source(\"On Wednesday, Thursday, and Friday he studies for 3 hours each day\"))",
+          "observe(at(\"tristan.study.target_duration\", \"week\"), 25, \"hour\", source(\"a total of 25 hours over the week\"))",
+          "sum_relation(at(\"tristan.study.target_duration\", \"week\"), at(\"tristan.study.duration\", \"monday\"), at(\"tristan.study.duration\", \"tuesday\"), at(\"tristan.study.duration\", \"wednesday\"), at(\"tristan.study.duration\", \"thursday\"), at(\"tristan.study.duration\", \"friday\"), at(\"tristan.study.duration\", \"saturday\"), at(\"tristan.study.duration\", \"sunday\"), source(\"He wants to study for a total of 25 hours over the week\"))",
+          "same(at(\"tristan.study.duration\", \"saturday\"), at(\"tristan.study.duration\", \"sunday\"), source(\"divides the remaining amount of study time evenly between Saturday and Sunday\"))",
+          "query(\"value\", at(\"tristan.study.duration\", \"saturday\"))"
+        ]
+      },
+      "source_id": "1616"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Barney can perform 45 sit-ups in one minute. Carrie can do twice as many sit-ups per minute as Barney can.  And Jerrie can do 5 more sit-ups per minute than Carrie can do.  If Barney does sit-ups for 1 minute, and Carrie does sit-ups for two minutes, and Jerrie does sit-ups for three minutes, what would be the combined total number of sit-ups performed?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"sit_ups.performed\", \"person_sit_up_total\", \"exercise\", source(\"Barney does sit-ups for 1 minute, and Carrie does sit-ups for two minutes, and Jerrie does sit-ups for three minutes\"))",
+          "observe(at(\"barney.sit_ups.rate\", \"current\"), 45, \"sit_up_per_minute\", source(\"Barney can perform 45 sit-ups in one minute\"))",
+          "multiple(at(\"carrie.sit_ups.rate\", \"current\"), at(\"barney.sit_ups.rate\", \"current\"), 2, source(\"Carrie can do twice as many sit-ups per minute as Barney can\"))",
+          "offset(at(\"jerrie.sit_ups.rate\", \"current\"), at(\"carrie.sit_ups.rate\", \"current\"), 5, \"sit_up_per_minute\", source(\"Jerrie can do 5 more sit-ups per minute than Carrie can do\"))",
+          "observe(at(\"barney.sit_ups.duration\", \"session\"), 1, \"minute\", source(\"Barney does sit-ups for 1 minute\"))",
+          "observe(at(\"carrie.sit_ups.duration\", \"session\"), 2, \"minute\", source(\"Carrie does sit-ups for two minutes\"))",
+          "observe(at(\"jerrie.sit_ups.duration\", \"session\"), 3, \"minute\", source(\"Jerrie does sit-ups for three minutes\"))",
+          "rate_relation(\"sit_ups.performed.barney.count\", at(\"barney.sit_ups.rate\", \"current\"), at(\"barney.sit_ups.duration\", \"session\"), source(\"Barney does sit-ups for 1 minute\"))",
+          "rate_relation(\"sit_ups.performed.carrie.count\", at(\"carrie.sit_ups.rate\", \"current\"), at(\"carrie.sit_ups.duration\", \"session\"), source(\"Carrie does sit-ups for two minutes\"))",
+          "rate_relation(\"sit_ups.performed.jerrie.count\", at(\"jerrie.sit_ups.rate\", \"current\"), at(\"jerrie.sit_ups.duration\", \"session\"), source(\"Jerrie does sit-ups for three minutes\"))",
+          "query(\"sum\", \"sit_ups.performed\", \"session\")"
+        ]
+      },
+      "source_id": "6797"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

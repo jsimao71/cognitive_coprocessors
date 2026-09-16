@@ -1,0 +1,93 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Ishmael was monitoring whales out at sea for conservation purposes. Each time he takes a trip to sea, he sees a different group of whales. On his first trip, he counts 28 male whales and twice as many female whales. On his second trip, he sees 8 baby whales, each travelling with their parents. On his third trip, he counts half as many male whales as the first trip and the same number of female whales as on the first trip. In total, how many whales were out at sea during Ishmael\u2019s monitoring?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "4868"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Adam goes to a small school, which teaches 80 students in three classes. 40% of the students are in class A, and class B has 21 students fewer than class A. The rest are in class C. How many students are in this class?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"adam.school.students\", \"student\", \"adam.school\", source(\"80 students in three classes\"))",
+          "collection(\"adam.school.classes\", \"class\", \"adam.school\", source(\"three classes\"))",
+          "observe(at(\"adam.school.students.count\", \"current\"), 80, \"count\", source(\"80 students in three classes\"))",
+          "observe(at(\"adam.school.classes.count\", \"current\"), 3, \"count\", source(\"three classes\"))",
+          "percent_of(at(\"adam.school.class_a.students.count\", \"current\"), at(\"adam.school.students.count\", \"current\"), 40, source(\"40% of the students are in class A\"))",
+          "offset(at(\"adam.school.class_b.students.count\", \"current\"), at(\"adam.school.class_a.students.count\", \"current\"), -21, \"count\", source(\"class B has 21 students fewer than class A\"))",
+          "sum_relation(at(\"adam.school.students.count\", \"current\"), at(\"adam.school.class_a.students.count\", \"current\"), at(\"adam.school.class_b.students.count\", \"current\"), at(\"adam.school.class_c.students.count\", \"current\"), source(\"40% of the students are in class A, and class B has 21 students fewer than class A. The rest are in class C\"))",
+          "query(\"value\", at(\"adam.school.class_c.students.count\", \"current\"))"
+        ]
+      },
+      "source_id": "259"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Louise is organizing her pencils, and decides she wants her boxes arranged by color. Each box holds 20 pencils each. She has 20 red pencils, twice as many blue pencils, 40 yellow pencils, and has as many green pencils as she has red and blue pencils combined. How many boxes does Louise need?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"louise.pencils\", \"pencil\", \"louise\", source(\"Louise is organizing her pencils\"))",
+          "collection(\"louise.boxes\", \"box\", \"louise\", source(\"her boxes arranged by color\"))",
+          "observe(at(\"louise.box.pencil_capacity.count\", \"current\"), 20, \"count\", source(\"Each box holds 20 pencils each\"))",
+          "observe(at(\"louise.pencils.red.count\", \"current\"), 20, \"count\", source(\"20 red pencils\"))",
+          "multiple(at(\"louise.pencils.blue.count\", \"current\"), at(\"louise.pencils.red.count\", \"current\"), 2, source(\"20 red pencils, twice as many blue pencils\"))",
+          "observe(at(\"louise.pencils.yellow.count\", \"current\"), 40, \"count\", source(\"40 yellow pencils\"))",
+          "sum_relation(at(\"louise.pencils.green.count\", \"current\"), at(\"louise.pencils.red.count\", \"current\"), at(\"louise.pencils.blue.count\", \"current\"), source(\"as many green pencils as she has red and blue pencils combined\"))",
+          "query(\"value\", at(\"louise.boxes.required.count\", \"current\"))"
+        ]
+      },
+      "source_id": "3889"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "While at Wizards Park, Kate buys 3 magic wands, one for herself and two for her friends. When she returns she sells the wands to her friends for $5 more than she paid. If she collected $130 after the sale, how much money did each wand cost?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"kate.magic_wands\", \"magic_wand\", \"kate\", source(\"Kate buys 3 magic wands\"))",
+          "add(\"kate_buys_wands\", \"kate\", at(\"kate.magic_wands.count\", \"current\"), 3, source(\"Kate buys 3 magic wands\"))",
+          "observe(at(\"kate.magic_wands.intended_for_self.count\", \"purchase\"), 1, \"count\", source(\"one for herself\"))",
+          "observe(at(\"kate.magic_wands.intended_for_friends.count\", \"purchase\"), 2, \"count\", source(\"two for her friends\"))",
+          "sum_relation(event_field(\"kate_buys_wands\", \"quantity\"), at(\"kate.magic_wands.intended_for_self.count\", \"purchase\"), at(\"kate.magic_wands.intended_for_friends.count\", \"purchase\"), source(\"3 magic wands, one for herself and two for her friends\"))",
+          "transfer(\"kate_sells_friend_wands\", \"kate\", at(\"kate.magic_wands.count\", \"current\"), at(\"kate.friends.magic_wands.count\", \"current\"), at(\"kate.magic_wands.intended_for_friends.count\", \"purchase\"), source(\"she sells the wands to her friends\"))",
+          "offset(at(\"kate.magic_wand.sale_price.each\", \"sale\"), at(\"kate.magic_wand.purchase_price.each\", \"purchase\"), 5, \"dollar\", source(\"for $5 more than she paid\"))",
+          "add(\"kate_collects_sale_proceeds\", \"kate\", at(\"kate.wand_sale.proceeds\", \"current\"), 130, source(\"she collected $130 after the sale\"))",
+          "query(\"value\", at(\"kate.magic_wand.purchase_price.each\", \"purchase\"))"
+        ]
+      },
+      "source_id": "5182"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Mark is 7 years older than Amy, who is 15. How old will Mark be in 5 years?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "older_than(at(\"mark.age\", \"now\"), at(\"amy.age\", \"now\"), 7, \"year\", source(\"Mark is 7 years older than Amy\"))",
+          "observe(at(\"amy.age\", \"now\"), 15, \"year\", source(\"Amy, who is 15\"))",
+          "query(\"value\", at(\"mark.age\", \"plus_5_year\"))"
+        ]
+      },
+      "source_id": "5042"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

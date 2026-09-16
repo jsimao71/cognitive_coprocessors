@@ -1,0 +1,362 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Alicia's clothes have to be sent to the dry cleaners weekly.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "Her weekly drop-off includes 5 blouses, 2 pants, and 1 skirt.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 203,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "They charge her $5.00 per blouse, $6.00 per skirt, and $8.00 per pair of pants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 275,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 204,
+          "teacher_input_default": true,
+          "text": "Additionally, Alicia decides to send an extra pair of pants every week.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 327,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 276,
+          "teacher_input_default": true,
+          "text": "How much does she spend on dry-cleaning in 5 weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "Alicia's clothes have to be sent to the dry cleaners weekly.  Her weekly drop-off includes 5 blouses, 2 pants, and 1 skirt. They charge her $5.00 per blouse, $6.00 per skirt, and $8.00 per pair of pants. Additionally, Alicia decides to send an extra pair of pants every week. How much does she spend on dry-cleaning in 5 weeks?",
+      "source_id": "gsm-plus-10091"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Alicia's clothes have to be sent to the dry cleaners weekly.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "Her weekly drop-off includes 5 blouses, 2 pants and 1 skirt.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 124,
+          "teacher_input_default": true,
+          "text": "If they charge her $5.00 per blouse, $6.00 per skirt and $8.00 per pair of pants, How many weeks can she spend $235 on dry-cleaning?",
+          "warnings": []
+        }
+      ],
+      "question": "Alicia's clothes have to be sent to the dry cleaners weekly.  Her weekly drop-off includes 5 blouses, 2 pants and 1 skirt.  If they charge her $5.00 per blouse, $6.00 per skirt and $8.00 per pair of pants, How many weeks can she spend $235 on dry-cleaning?",
+      "source_id": "gsm-plus-10092"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every week, Alicia needs to take her clothes to the dry cleaners.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 130,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "Her weekly bundle consists of 5 shirts, 2 trousers, and 1 skirt.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 239,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 131,
+          "teacher_input_default": true,
+          "text": "The dry cleaners charge her $5.00 for each shirt, $6.00 for each skirt, and $8.00 for each pair of trousers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 331,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 240,
+          "teacher_input_default": true,
+          "text": "Can you calculate how much she would have to pay for dry-cleaning over a period of 5 weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "Every week, Alicia needs to take her clothes to the dry cleaners. Her weekly bundle consists of 5 shirts, 2 trousers, and 1 skirt. The dry cleaners charge her $5.00 for each shirt, $6.00 for each skirt, and $8.00 for each pair of trousers. Can you calculate how much she would have to pay for dry-cleaning over a period of 5 weeks?",
+      "source_id": "gsm-plus-10093"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Alicia's clothes have to be sent to the dry cleaners weekly.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 123,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "Her weekly drop-off includes 5 blouses, 2 pants, and 1 skirt.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 125,
+          "teacher_input_default": true,
+          "text": "They charge her $5.00 per blouse, $6.00 per skirt, and $8.00 per pair of pants.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "She has a $3 coupon but finds it expired.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 247,
+          "teacher_input_default": true,
+          "text": "How much does she spend on dry-cleaning in 5 weeks?",
+          "warnings": []
+        }
+      ],
+      "question": "Alicia's clothes have to be sent to the dry cleaners weekly.  Her weekly drop-off includes 5 blouses, 2 pants, and 1 skirt.  They charge her $5.00 per blouse, $6.00 per skirt, and $8.00 per pair of pants. She has a $3 coupon but finds it expired. How much does she spend on dry-cleaning in 5 weeks?",
+      "source_id": "gsm-plus-10094"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Every day Charisma meditates for 30 minutes when she first wakes up and again before she goes to sleep.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "6 days a week she practices 2 hours of yoga.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 219,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "in 5 weeks, how much time has she spent on meditation/yoga practice?",
+          "warnings": []
+        }
+      ],
+      "question": "Every day Charisma meditates for 30 minutes when she first wakes up and again before she goes to sleep.  6 days a week she practices 2 hours of yoga.  in 5 weeks, how much time has she spent on meditation/yoga practice?",
+      "source_id": "gsm-plus-10304"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

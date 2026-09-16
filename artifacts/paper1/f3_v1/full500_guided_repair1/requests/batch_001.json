@@ -1,0 +1,147 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "tatqa",
+      "question": "What was the % change in gains recognized in other comprehensive income (loss), net of tax of $1, $11, and $4 from 2018 to 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.cash_flow_hedge_gains_recognized_in_other_comprehensive_income\", \"2019\"), 159, \"million_currency\", cell(\"Gains recognized in other comprehensive income (loss), net of tax of $1, $11, and $4\", \"2019\"))",
+          "observe(at(\"company.cash_flow_hedge_gains_recognized_in_other_comprehensive_income\", \"2018\"), 219, \"million_currency\", cell(\"Gains recognized in other comprehensive income (loss), net of tax of $1, $11, and $4\", \"2018\"))",
+          "query(\"percentage_change\", at(\"company.cash_flow_hedge_gains_recognized_in_other_comprehensive_income\", \"2018\"), at(\"company.cash_flow_hedge_gains_recognized_in_other_comprehensive_income\", \"2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Cash Flow Hedge Gains (Losses)"
+          },
+          {
+            "order": 2,
+            "text": "We recognized the following gains (losses) on foreign exchange contracts designated as cash flow hedges:"
+          },
+          {
+            "order": 3,
+            "text": "We do not have any net derivative gains included in AOCI as of June 30, 2019 that will be reclassified into earnings within the following 12 months. No significant amounts of gains (losses) were reclassified from AOCI into earnings as a result of forecasted transactions that failed to occur during fiscal year 2019."
+          }
+        ],
+        "table": [
+          [
+            "(In millions)",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Year Ended June 30,",
+            "2019",
+            "2018",
+            "2017"
+          ],
+          [
+            "Effective Portion",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Gains recognized in other comprehensive income (loss), net of tax of $1, $11, and $4",
+            "$  159",
+            "$  219",
+            "$  328"
+          ],
+          [
+            "Gains reclassified from accumulated other comprehensive income (loss) into revenue",
+            "341",
+            "185",
+            "555"
+          ],
+          [
+            "Amount Excluded from Effectiveness Assessment and Ineffective Portion",
+            "",
+            "",
+            ""
+          ],
+          [
+            "Losses recognized in other income (expense), net",
+            "(64)",
+            "(255)",
+            "(389)"
+          ]
+        ]
+      },
+      "source_id": "0587875087e03a6b85bbe9440c4c323e"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Joy can read 8 pages of a book in 20 minutes. How many hours will it take her to read 120 pages?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "14"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Kayden's business delivered an equal number of the 400 cartons of milk it had processed to four of its customers in different towns. However, each of the four customers returned 60 cartons damaged during delivery. What's the total number of cartons that were accepted by the customers?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"kayden_business.delivery_customers\", \"customer\", \"different_towns\", source(\"four of its customers in different towns\"))",
+          "collection(\"kayden_business.delivered_milk_cartons\", \"milk_carton\", \"delivery_customers\", source(\"delivered an equal number of the 400 cartons of milk it had processed to four of its customers in different towns\"))",
+          "observe(at(\"kayden_business.processed_milk_cartons.count\", \"initial\"), 400, \"count\", source(\"the 400 cartons of milk it had processed\"))",
+          "observe(at(\"kayden_business.delivery_customers.count\", \"delivery\"), 4, \"count\", source(\"four of its customers\"))",
+          "transfer(\"delivery\", \"kayden_business\", at(\"kayden_business.processed_milk_cartons.count\", \"current\"), at(\"kayden_business.delivered_milk_cartons.count\", \"current\"), 400, source(\"delivered an equal number of the 400 cartons of milk it had processed to four of its customers\"))",
+          "quotient_relation(\"kayden_business.delivered_milk_cartons.per_customer.count\", event_field(\"delivery\", \"quantity\"), at(\"kayden_business.delivery_customers.count\", \"delivery\"), source(\"delivered an equal number of the 400 cartons of milk it had processed to four of its customers\"))",
+          "observe(at(\"kayden_business.returned_milk_cartons.per_customer.count\", \"during_delivery\"), 60, \"count\", source(\"each of the four customers returned 60 cartons damaged during delivery\"))",
+          "remove(\"damaged_returns\", \"kayden_business.delivery_customers\", at(\"kayden_business.delivered_milk_cartons.count\", \"current\"), scale(at(\"kayden_business.returned_milk_cartons.per_customer.count\", \"during_delivery\"), 4), source(\"each of the four customers returned 60 cartons damaged during delivery\"))",
+          "query(\"remaining_count\", \"kayden_business.delivered_milk_cartons\", \"current\")"
+        ]
+      },
+      "source_id": "4938"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "One afternoon, Rachelle, Gretchen and Rocky threw pennies into the fountain and made wishes.  Rachelle threw 180 pennies into the fountain.  Gretchen threw half as many pennies into the fountain as Rachelle and Rocky threw in one-third as many pennies as Gretchen.  What was the total number of pennies thrown into the fountain by the three of them?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"afternoon.thrown_pennies\", \"penny\", \"fountain\", source(\"Rachelle, Gretchen and Rocky threw pennies into the fountain\"))",
+          "transfer(\"rachelle_throw\", \"rachelle\", at(\"rachelle.pennies.count\", \"current\"), at(\"afternoon.thrown_pennies.count\", \"current\"), 180, source(\"Rachelle threw 180 pennies into the fountain\"))",
+          "transfer(\"gretchen_throw\", \"gretchen\", at(\"gretchen.pennies.count\", \"current\"), at(\"afternoon.thrown_pennies.count\", \"current\"), fraction(event_field(\"rachelle_throw\", \"quantity\"), 1, 2), source(\"Gretchen threw half as many pennies into the fountain as Rachelle\"))",
+          "transfer(\"rocky_throw\", \"rocky\", at(\"rocky.pennies.count\", \"current\"), at(\"afternoon.thrown_pennies.count\", \"current\"), fraction(event_field(\"gretchen_throw\", \"quantity\"), 1, 3), source(\"Rocky threw in one-third as many pennies as Gretchen\"))",
+          "query(\"remaining_count\", \"afternoon.thrown_pennies\", \"current\")"
+        ]
+      },
+      "source_id": "5292"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Jim collects model cars, and he has 301 models total.  Jim has 4 times as many Buicks as Fords, and 3 more than twice the number of Fords than Chevys.  How many Buicks does Jim have?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"jim.model_cars\", \"model_car\", \"jim\", source(\"Jim collects model cars\"))",
+          "observe(at(\"jim.model_cars.count\", \"current\"), 301, \"count\", source(\"he has 301 models total\"))",
+          "multiple(\"jim.model_cars.buick.count\", \"jim.model_cars.ford.count\", 4, source(\"4 times as many Buicks as Fords\"))",
+          "offset(\"jim.model_cars.ford.count\", scale(\"jim.model_cars.chevy.count\", 2), 3, \"count\", source(\"3 more than twice the number of Fords than Chevys\"))",
+          "query(\"value\", \"jim.model_cars.buick.count\")"
+        ]
+      },
+      "source_id": "289"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

@@ -1,0 +1,83 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 197,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Monroe Vitamin Shop sold equal quantities of Vitamin A and Vitamin D supplements this morning, even though the Vitamin A supplements come in packs of 7 and the Vitamin D supplements in packs of 17.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 270,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 198,
+          "teacher_input_default": true,
+          "text": "What is the smallest number of each type that the store could have sold?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "vitamin_a.pack_size.supplements = 7",
+              "vitamin_d.pack_size.supplements = 17",
+              "store.morning.vitamin_a.supplements_sold = store.morning.vitamin_d.supplements_sold"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The equality preserves the stated relation between the quantities sold; pack-count integrality is implicit in the packaging statement."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the smallest positive quantity divisible into whole packs of both sizes requires least-common-multiple or integer divisibility semantics, which the active arithmetic operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1217"
+      },
+      "question": "Monroe Vitamin Shop sold equal quantities of Vitamin A and Vitamin D supplements this morning, even though the Vitamin A supplements come in packs of 7 and the Vitamin D supplements in packs of 17. What is the smallest number of each type that the store could have sold?",
+      "source_context": null,
+      "source_id": "asdiv-1217",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "119",
+        "gold_reasoning": "LCM[7,17]=119"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

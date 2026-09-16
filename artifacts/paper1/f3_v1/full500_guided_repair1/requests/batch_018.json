@@ -1,0 +1,192 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Victor, Austin, and Brian made traps to catch shrimp. Victor's trap caught 26 shrimp and Austin's trap caught 8 less than Victor's. Brian's trap caught half of Victor and Austin's total number of shrimp. If the boys then sold their shrimp for $7 for every 11 tails of shrimp and then divided their earnings equally amongst themselves, how much money does each boy make?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "3599"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Mrs. Young makes bonnets for kids in the orphanage. On Monday, she made 10 bonnets, on Tuesday and Wednesday combined she made twice more than on Monday, while on Thursday she made 5 more than on Monday, and on Friday she made 5 less than on Thursday. Then, she divided up the bonnets evenly and sent them to 5 orphanages. How many bonnets did Mrs. Young send to each orphanage?",
+      "repair": {
+        "failure_class": "teacher_ambiguous",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "5820"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the price of outstanding shares on September 30, 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.stock_options.outstanding.weighted_average_exercise_price_per_share\", \"September 30, 2019\"), 7.00, \"currency_per_share\", cell(\"Outstanding at September 30, 2019\", \"Weighted-Average Exercise Price Per Share\"))",
+          "query(\"value\", at(\"company.stock_options.outstanding.weighted_average_exercise_price_per_share\", \"September 30, 2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Stock Options"
+          },
+          {
+            "order": 2,
+            "text": "The following table summarizes stock option activity under the Company\u2019s stock option plans during the fiscal years ended September 30, 2019, 2018, and 2017:"
+          },
+          {
+            "order": 3,
+            "text": "The Company recognized $0.7 million, $1.4 million, and $1.0 million in stock-based compensation expense related to outstanding stock options in the fiscal years ended September 30, 2019, 2018, and 2017, respectively. As of September 30, 2019, the Company had $2.0 million of unrecognized compensation expense related to outstanding stock options expected to be recognized over a weighted-average period of approximately three years."
+          },
+          {
+            "order": 4,
+            "text": "Aggregate intrinsic value represents the value of the Company\u2019s closing stock price on the last trading day of the fiscal period in excess of the weighted-average exercise price, multiplied by the number of options outstanding and exercisable. The total intrinsic value of options exercised during the fiscal years ended September 30, 2019, 2018, and 2017 was $11.1 million, $1.4 million, and $1.4 million, respectively. The per-share weighted-average fair value of options granted during the fiscal years ended September 30, 2019, 2018, and 2017 was $5.07, $4.56, and $4.28, respectively. The aggregate intrinsic value of options outstanding as of September 30, 2019 and 2018, was $4.9 million and $8.7 million, respectively."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "Number of Shares",
+            "Weighted-Average Exercise Price Per Share",
+            "Weighted-Average Remaining Contractual Term (in Years)"
+          ],
+          [
+            "Outstanding at September 30, 2016",
+            "3,015,374",
+            "$3.95",
+            "6.4"
+          ],
+          [
+            "Granted",
+            "147,800",
+            "$7.06",
+            ""
+          ],
+          [
+            "Exercised",
+            "(235,514)",
+            "$2.92",
+            ""
+          ],
+          [
+            "Canceled",
+            "(81,794)",
+            "$3.59",
+            ""
+          ],
+          [
+            "Outstanding at September 30, 2017",
+            "2,845,866",
+            "$4.21",
+            "5.4"
+          ],
+          [
+            "Granted",
+            "299,397",
+            "$8.60",
+            ""
+          ],
+          [
+            "Exercised",
+            "(250,823)",
+            "$2.96",
+            ""
+          ],
+          [
+            "Canceled",
+            "(88,076)",
+            "$5.23",
+            ""
+          ],
+          [
+            "Outstanding at September 30, 2018",
+            "2,806,364",
+            "$4.75",
+            "4.6"
+          ],
+          [
+            "Granted",
+            "409,368",
+            "$9.59",
+            ""
+          ],
+          [
+            "Exercised",
+            "(1,384,647)",
+            "$3.25",
+            ""
+          ],
+          [
+            "Canceled",
+            "(144,183)",
+            "$6.62",
+            ""
+          ],
+          [
+            "Outstanding at September 30, 2019",
+            "1,686,902",
+            "7.00",
+            "5.4"
+          ]
+        ]
+      },
+      "source_id": "3c451ceddc432165a9878f7394fc762b"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Kimberly loves gumballs and will trade almost anything she owns for them. A friend knows that Kim has a bunch of shiny new earrings that she loves. She agrees to give Kim 9 gumballs for each pair of earrings. On the first day, Kim brings her 3 pairs of earrings. On the second she brings her twice as many. On the third day, she brings 1 less than she brought on the second day. If Kim eats 3 gumballs a day, how many days will the gumballs last?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"kim.earring_pairs\", \"earring_pair\", \"kim\", source(\"her 3 pairs of earrings\"))",
+          "collection(\"kim.gumballs\", \"gumball\", \"kim\", source(\"give Kim 9 gumballs for each pair of earrings\"))",
+          "transfer(\"day_1_earring_trade\", \"kim\", at(\"kim.earring_pairs.count\", \"current\"), at(\"friend.earring_pairs.received_from_kim.count\", \"current\"), 3, source(\"On the first day, Kim brings her 3 pairs of earrings\"))",
+          "transfer(\"day_2_earring_trade\", \"kim\", at(\"kim.earring_pairs.count\", \"current\"), at(\"friend.earring_pairs.received_from_kim.count\", \"current\"), scale(event_field(\"day_1_earring_trade\", \"quantity\"), 2), source(\"On the second she brings her twice as many\"))",
+          "transfer(\"day_3_earring_trade\", \"kim\", at(\"kim.earring_pairs.count\", \"current\"), at(\"friend.earring_pairs.received_from_kim.count\", \"current\"), \"kim.day_3_earring_pairs_traded.count\", source(\"On the third day, she brings 1 less than she brought on the second day\"))",
+          "offset(event_field(\"day_3_earring_trade\", \"quantity\"), event_field(\"day_2_earring_trade\", \"quantity\"), -1, \"pair\", source(\"On the third day, she brings 1 less than she brought on the second day\"))",
+          "transfer(\"gumball_trade\", \"friend\", at(\"friend.gumballs.count\", \"current\"), at(\"kim.gumballs.count\", \"current\"), \"kim.gumballs.received.count\", source(\"She agrees to give Kim 9 gumballs for each pair of earrings\"))",
+          "rate_relation(event_field(\"gumball_trade\", \"quantity\"), 9, at(\"friend.earring_pairs.received_from_kim.count\", \"current\"), source(\"give Kim 9 gumballs for each pair of earrings\"))",
+          "rate_relation(event_field(\"gumball_trade\", \"quantity\"), 3, \"kim.gumballs.last.day_count\", source(\"If Kim eats 3 gumballs a day, how many days will the gumballs last?\"))",
+          "query(\"value\", \"kim.gumballs.last.day_count\")"
+        ]
+      },
+      "source_id": "6913"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Pete has a bag with 10 marbles. 40% are blue and the rest are red. His friend will trade him two blue marbles for every red one. If Pete keeps 1 red marble, how many total marbles does he have after trading with his friend?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"pete.bag.marbles\", \"marble\", \"pete.bag\", source(\"a bag with 10 marbles\"))",
+          "member(\"pete.bag.marbles\", \"pete.bag.marbles.blue\", source(\"40% are blue\"))",
+          "member(\"pete.bag.marbles\", \"pete.bag.marbles.red\", source(\"the rest are red\"))",
+          "partition(\"pete.bag.marbles\", at(\"pete.bag.marbles.count\", \"initial\"), source(\"40% are blue and the rest are red\"))",
+          "observe(at(\"pete.bag.marbles.count\", \"initial\"), 10, \"count\", source(\"a bag with 10 marbles\"))",
+          "percent_of(at(\"pete.bag.marbles.blue.count\", \"initial\"), at(\"pete.bag.marbles.count\", \"initial\"), 40, source(\"40% are blue\"))",
+          "transfer(\"trade_red\", \"pete\", at(\"pete.bag.marbles.red.count\", \"current\"), at(\"friend.marbles.red.count\", \"current\"), \"trade.red_marbles.count\", source(\"His friend will trade him two blue marbles for every red one\"))",
+          "transfer(\"trade_blue\", \"friend\", at(\"friend.marbles.blue.count\", \"current\"), at(\"pete.bag.marbles.blue.count\", \"current\"), scale(event_field(\"trade_red\", \"quantity\"), 2), source(\"His friend will trade him two blue marbles for every red one\"))",
+          "observe(at(\"pete.bag.marbles.red.count\", \"current\"), 1, \"count\", source(\"Pete keeps 1 red marble\"))",
+          "query(\"sum\", \"pete.bag.marbles\", \"current\")"
+        ]
+      },
+      "source_id": "1475"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

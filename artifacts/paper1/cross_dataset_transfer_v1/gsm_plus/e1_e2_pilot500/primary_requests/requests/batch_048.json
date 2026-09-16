@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jaime is a computer programmer for a company that currently has employed 150 people.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "Senior programmers are paid $500 more than junior programmers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 351,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 148,
+          "teacher_input_default": true,
+          "text": "If the number of Junior programmers is 3/5 of the total number of employees, and they are each paid $2500 per month, calculate the total amount of money the company pays to all the programmers per month.",
+          "warnings": []
+        }
+      ],
+      "question": "Jaime is a computer programmer for a company that currently has employed 150 people. Senior programmers are paid $500 more than junior programmers. If the number of Junior programmers is 3/5 of the total number of employees, and they are each paid $2500 per month, calculate the total amount of money the company pays to all the programmers per month.",
+      "source_id": "gsm-plus-02600"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 103,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a world where only 27 unicorns exist, one third of them have made the Scottish Highlands their home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 104,
+          "teacher_input_default": true,
+          "text": "Among these Scottish unicorns, two thirds are female.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 315,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "However, a recent event caused a loss of 2 unicorns from the Scottish population, and this loss was equally distributed between the male and female unicorns.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 389,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 316,
+          "teacher_input_default": true,
+          "text": "After this unfortunate event, how many female Scottish unicorns are left?",
+          "warnings": []
+        }
+      ],
+      "question": "In a world where only 27 unicorns exist, one third of them have made the Scottish Highlands their home. Among these Scottish unicorns, two thirds are female. However, a recent event caused a loss of 2 unicorns from the Scottish population, and this loss was equally distributed between the male and female unicorns. After this unfortunate event, how many female Scottish unicorns are left?",
+      "source_id": "gsm-plus-01091"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James has to buy insurance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 82,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "Since he had an accident it was 60% more than normal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "The normal cost is $1200 a month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 147,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 119,
+          "teacher_input_default": true,
+          "text": "How much does he pay a year?",
+          "warnings": []
+        }
+      ],
+      "question": "James has to buy insurance.  Since he had an accident it was 60% more than normal.  The normal cost is $1200 a month.  How much does he pay a year?",
+      "source_id": "gsm-plus-08441"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Farmer Brown has 60 animals on his farm, all either chickens or cows.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 108,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "He has twice as many chickens as cows.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 141,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 109,
+          "teacher_input_default": true,
+          "text": "Each chicken lays 25 eggs a day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 190,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 142,
+          "teacher_input_default": true,
+          "text": "How many legs do the animals have, all together?",
+          "warnings": []
+        }
+      ],
+      "question": "Farmer Brown has 60 animals on his farm, all either chickens or cows. He has twice as many chickens as cows. Each chicken lays 25 eggs a day. How many legs do the animals have, all together?",
+      "source_id": "gsm-plus-02718"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Robert owns 20 vehicles, while Joe's collection is double that of Robert's.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 205,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "Joe decides to sell off 20% of his collection and then gifts his mother a quantity of cars that is twice the number he just sold.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 206,
+          "teacher_input_default": true,
+          "text": "How many cars does Joe have left after these transactions?",
+          "warnings": []
+        }
+      ],
+      "question": "Robert owns 20 vehicles, while Joe's collection is double that of Robert's. Joe decides to sell off 20% of his collection and then gifts his mother a quantity of cars that is twice the number he just sold. How many cars does Joe have left after these transactions?",
+      "source_id": "gsm-plus-06549"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

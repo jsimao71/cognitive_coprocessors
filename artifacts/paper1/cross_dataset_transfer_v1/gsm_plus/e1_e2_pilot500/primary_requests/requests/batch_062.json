@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rita hand-picks June worms from her plants every summer.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "On Monday, she removed 39 June worms.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 183,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "On both Tuesday and Wednesday, she removed twice as many June bugs as she did on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 228,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 184,
+          "teacher_input_default": true,
+          "text": "She removed 48 on Thursday and 57 on Friday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 290,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 229,
+          "teacher_input_default": true,
+          "text": "What is the average number of June bugs she removes each day?",
+          "warnings": []
+        }
+      ],
+      "question": "Rita hand-picks June worms from her plants every summer. On Monday, she removed 39 June worms. On both Tuesday and Wednesday, she removed twice as many June bugs as she did on Monday. She removed 48 on Thursday and 57 on Friday. What is the average number of June bugs she removes each day?",
+      "source_id": "gsm-plus-07429"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Alice has a peculiar habit of counting the puffs of clouds in the sky while she eats her lunch outside at school.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "On Monday, she counts just 3 puffs of clouds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 160,
+          "teacher_input_default": true,
+          "text": "Each day after that through Friday, she sees double the number of clouds in the sky as the day before.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 263,
+          "teacher_input_default": true,
+          "text": "Simultaneously, she also starts counting the number of birds she sees.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 423,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 334,
+          "teacher_input_default": true,
+          "text": "On Monday, she saw 10 birds, but she quickly loses interest and stops counting the birds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 569,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 424,
+          "teacher_input_default": true,
+          "text": "By the end of the week, disregarding the number of birds she saw, how many clouds will she have counted in the sky at lunch across all five days?",
+          "warnings": []
+        }
+      ],
+      "question": "Alice has a peculiar habit of counting the puffs of clouds in the sky while she eats her lunch outside at school. On Monday, she counts just 3 puffs of clouds. Each day after that through Friday, she sees double the number of clouds in the sky as the day before. Simultaneously, she also starts counting the number of birds she sees. On Monday, she saw 10 birds, but she quickly loses interest and stops counting the birds. By the end of the week, disregarding the number of birds she saw, how many clouds will she have counted in the sky at lunch across all five days?",
+      "source_id": "gsm-plus-09382"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At a funfair, Pam and Fred decided to have some fun.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Pam took 2 turns on the roller coaster and Fred took 4 turns.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 167,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "Later, they both chose to go on the luge twice each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 276,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 168,
+          "teacher_input_default": true,
+          "text": "Given that every ride required 6 tickets, can you calculate the total number of tickets they spent that day?",
+          "warnings": []
+        }
+      ],
+      "question": "At a funfair, Pam and Fred decided to have some fun. Pam took 2 turns on the roller coaster and Fred took 4 turns. Later, they both chose to go on the luge twice each. Given that every ride required 6 tickets, can you calculate the total number of tickets they spent that day?",
+      "source_id": "gsm-plus-01061"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 46,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Greta\u2019s paycheck is a certain amount of money.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 99,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 47,
+          "teacher_input_default": true,
+          "text": "She puts 50% of her pay into her retirement account.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 166,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 100,
+          "teacher_input_default": true,
+          "text": "She then uses 20% of her paycheck to make her monthly car payment.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 275,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 167,
+          "teacher_input_default": true,
+          "text": "After funding her retirement and paying for her car, she has $720 left to spend, how much is Greta's salary?",
+          "warnings": []
+        }
+      ],
+      "question": "Greta\u2019s paycheck is a certain amount of money. She puts 50% of her pay into her retirement account. She then uses 20% of her paycheck to make her monthly car payment. After funding her retirement and paying for her car, she has $720 left to spend, how much is Greta's salary?",
+      "source_id": "gsm-plus-05588"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 122,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "While working at the restaurant, each of the four thousand customers who came into the restaurant gave Rafaela a $200 tip.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 123,
+          "teacher_input_default": true,
+          "text": "Julieta received 10% less money in tips than Rafaela.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 243,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 177,
+          "teacher_input_default": true,
+          "text": "How much money did Julieta and Rafaela receive as tips altogether?",
+          "warnings": []
+        }
+      ],
+      "question": "While working at the restaurant, each of the four thousand customers who came into the restaurant gave Rafaela a $200 tip. Julieta received 10% less money in tips than Rafaela. How much money did Julieta and Rafaela receive as tips altogether?",
+      "source_id": "gsm-plus-06873"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

@@ -1,0 +1,384 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "An ice cream factory makes 100.5 quarts of chocolate ice cream in 2.5 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "It can make 58.5 quarts of vanilla ice cream in 4.5 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 138,
+          "teacher_input_default": true,
+          "text": "How many quarts in total would be made in 48 hours?",
+          "warnings": []
+        }
+      ],
+      "question": "An ice cream factory makes 100.5 quarts of chocolate ice cream in 2.5 hours.  It can make 58.5 quarts of vanilla ice cream in 4.5 hours.  How many quarts in total would be made in 48 hours?",
+      "source_id": "gsm-plus-05674"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack decides to visit a museum 150 miles from home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "He drives 75 mph there and back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "He is gone from home for 10 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "How long does he spend at the museum?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack decides to visit a museum 150 miles from home. He drives 75 mph there and back. He is gone from home for 10 hours. How long does he spend at the museum?",
+      "source_id": "gsm-plus-06196"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mike decides he wants to replace his movie collection with digital versions.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 96,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 78,
+          "teacher_input_default": true,
+          "text": "He has 600 movies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 98,
+          "teacher_input_default": true,
+          "text": "A third of the movies are in various series and he knows he can get those for only $6 of the cost of a normal movie by just buying the series together.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 307,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 250,
+          "teacher_input_default": true,
+          "text": "Half of the remaining movies are new movies which are $8.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 367,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 309,
+          "teacher_input_default": true,
+          "text": "40% of the remaining movies are older movies which are $5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 437,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 369,
+          "teacher_input_default": true,
+          "text": "How much does replacing the movies cost if a normal movie costs $10?",
+          "warnings": []
+        }
+      ],
+      "question": "Mike decides he wants to replace his movie collection with digital versions.  He has 600 movies.  A third of the movies are in various series and he knows he can get those for only $6 of the cost of a normal movie by just buying the series together. Half of the remaining movies are new movies which are $8.  40% of the remaining movies are older movies which are $5.  How much does replacing the movies cost if a normal movie costs $10?",
+      "source_id": "gsm-plus-06219"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ava and Emma want to know who is better at the new video game Ava got for her birthday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 165,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "They are each going to play one level and whoever has the highest score wins.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 333,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 166,
+          "teacher_input_default": true,
+          "text": "They receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 496,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 334,
+          "teacher_input_default": true,
+          "text": "If Ava jumps on 15 more enemies than Emma and collects 12 more berries, but finishes the level 10 seconds slower, what is the difference between their two scores?",
+          "warnings": []
+        }
+      ],
+      "question": "Ava and Emma want to know who is better at the new video game Ava got for her birthday. They are each going to play one level and whoever has the highest score wins. They receive 10 points for every enemy they jump on, 5 points for each berry they collect, and 30 points for every second left on the timer when they finish the level. If Ava jumps on 15 more enemies than Emma and collects 12 more berries, but finishes the level 10 seconds slower, what is the difference between their two scores?",
+      "source_id": "gsm-plus-06241"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Billy began his job with an hourly wage of $10.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "After a period of two months, his pay increased by $0.50 per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 214,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "On the completion of his first year at the job, he received another pay increase of $1.00 per hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 361,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 215,
+          "teacher_input_default": true,
+          "text": "Sally, on the other hand, has just started her job at another company, where her initial hourly wage is $0.50 higher than what Billy started with.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 462,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 362,
+          "teacher_input_default": true,
+          "text": "If both Sally and Billy work for 20 hours, by how many dollars will Billy's earnings exceed Sally's?",
+          "warnings": []
+        }
+      ],
+      "question": "Billy began his job with an hourly wage of $10. After a period of two months, his pay increased by $0.50 per hour. On the completion of his first year at the job, he received another pay increase of $1.00 per hour. Sally, on the other hand, has just started her job at another company, where her initial hourly wage is $0.50 higher than what Billy started with. If both Sally and Billy work for 20 hours, by how many dollars will Billy's earnings exceed Sally's?",
+      "source_id": "gsm-plus-06389"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

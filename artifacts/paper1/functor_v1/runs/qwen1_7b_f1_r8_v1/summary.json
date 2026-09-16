@@ -1,0 +1,74 @@
+{
+  "by_dataset": {
+    "gsm8k": {
+      "count": 17,
+      "rates": {
+        "dependency_correct": 0.0,
+        "exact_program": 0.0,
+        "executable": 0.8823529411764706,
+        "final_answer_correct": 0.47058823529411764,
+        "lowerable_to_ccir": 1.0,
+        "parse_valid": 1.0,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 1.0
+      }
+    },
+    "tatqa": {
+      "count": 8,
+      "rates": {
+        "dependency_correct": 0.0,
+        "exact_program": 0.0,
+        "executable": 0.875,
+        "final_answer_correct": 0.75,
+        "lowerable_to_ccir": 0.875,
+        "parse_valid": 0.875,
+        "semantic_return_equivalent": 0.0,
+        "semantic_state_equivalent": 0.0,
+        "type_valid": 0.875
+      }
+    }
+  },
+  "component_mean_f1": {
+    "edges": 0.3072691993914405,
+    "operators": 0.7408471177944862,
+    "paths": 0.35357487610428784,
+    "semantic_state": 0.32514480772065907,
+    "source_facts": 0.5525194805194805
+  },
+  "condition": "f1",
+  "eval_sha256": "a6299104021efbac35d50b6abea3738f12c2aa08c6a4c9f4cf52361fd168ce58",
+  "prediction_count": 25,
+  "predictions_sha256": "aca6798dd74543bf3d182ca6f2a84b7fe37826362ef77271ef8d2d232cc007f8",
+  "rates": {
+    "dependency_correct": 0.0,
+    "exact_program": 0.0,
+    "executable": 0.88,
+    "final_answer_correct": 0.56,
+    "lowerable_to_ccir": 0.96,
+    "parse_valid": 0.96,
+    "semantic_return_equivalent": 0.0,
+    "semantic_state_equivalent": 0.0,
+    "type_valid": 0.96
+  },
+  "run": {
+    "condition": "f1",
+    "eval_sha256": "a6299104021efbac35d50b6abea3738f12c2aa08c6a4c9f4cf52361fd168ce58",
+    "fixed_icl": true,
+    "fixed_prompt": true,
+    "model": {
+      "adapter_id": "Qwen3-1.7B-F1-LoRA-original-500-v1",
+      "adapter_path": "artifacts\\paper1\\functor_v1\\adapters\\qwen1_7b_f1_r8_v1\\adapter",
+      "device": "xpu",
+      "dtype": "float16",
+      "enable_thinking": false,
+      "max_new_tokens": 512,
+      "model_id": "Qwen/Qwen3-1.7B",
+      "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "use_chat_template": true
+    },
+    "seed": 44017
+  },
+  "schema_version": "ccpu.paper1.functor_evaluation.v1",
+  "scored_predictions_sha256": "43354a07d73a4eda291022ac865deb6a1c94b1dae0d5e6203ba288d1d87b80ce"
+}

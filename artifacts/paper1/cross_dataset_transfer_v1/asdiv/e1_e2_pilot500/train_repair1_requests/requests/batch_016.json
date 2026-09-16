@@ -1,0 +1,467 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 37,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Zack tutors students in groups of 14.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 38,
+          "teacher_input_default": true,
+          "text": "Meanwhile, Karen tutors students in groups of 10.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 195,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "While discussing their work, the tutors realize that they both work with the same total number of students.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 250,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 196,
+          "teacher_input_default": true,
+          "text": "What is the smallest number of students each can have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "zack.students_per_group = 14"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "karen.students_per_group = 10"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "zack.total_students = tutors.common_total_students",
+              "karen.total_students = tutors.common_total_students"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "A shared forward-dependent quantity preserves the stated equality without privileging either tutor's total."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the smallest positive whole-number total compatible with both group sizes requires least-common-multiple or integer optimization semantics absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1229"
+      },
+      "question": "Zack tutors students in groups of 14. Meanwhile, Karen tutors students in groups of 10. While discussing their work, the tutors realize that they both work with the same total number of students. What is the smallest number of students each can have?",
+      "source_context": null,
+      "source_id": "asdiv-1229",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "70",
+        "gold_reasoning": "LCM[14,10]=70"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 30,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A tourist group has 26 people.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 31,
+          "teacher_input_default": true,
+          "text": "At a hotel, they want to rent some large rooms for 3 people each and some small rooms for 2 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 246,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "In order to rent the least number of rooms and have every room fully occupied, how many large rooms should be rented?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tourist_group.people = 26"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "hotel.large_room.people_capacity = 3",
+              "hotel.small_room.people_capacity = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires integer-constrained optimization over the counts of large and small rooms while enforcing full occupancy; the active arithmetic profile has no integer, divisibility, constraint, or argmin operators."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0805"
+      },
+      "question": "A tourist group has 26 people. At a hotel, they want to rent some large rooms for 3 people each and some small rooms for 2 each. In order to rent the least number of rooms and have every room fully occupied, how many large rooms should be rented?",
+      "source_context": null,
+      "source_id": "asdiv-0805",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "26/3=8 r2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Ten years ago, the sum of the ages of two sons was one-third of their father's age.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 203,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "One son is two years older than the other and sum of their present ages is 14 years less than the father's present age.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 233,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 204,
+          "teacher_input_default": true,
+          "text": "Find the present ages of all.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "family.age_lookback_years = 10",
+              "family.father_to_sons_age_sum_ratio_then = 3"
+            ],
+            "assumptions": [
+              "All three people age by the same ten-year interval between the historical and present states."
+            ],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "The ratio path records that the father's age ten years ago was three times the sons' combined age then, equivalently that their sum was one-third of his age."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sons.present_age_gap_years = 2",
+              "family.father_age_lead_over_sons_sum_now = 14"
+            ],
+            "assumptions": [
+              "The otherwise unnamed sons are represented as an older son and a younger son."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The first path preserves the older-to-younger son's age difference; the second preserves the father's present-age excess over the sons' present-age sum."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "younger_son.age_now = ((2 * family.father_to_sons_age_sum_ratio_then - 1) * family.age_lookback_years + family.father_age_lead_over_sons_sum_now - (family.father_to_sons_age_sum_ratio_then - 1) * sons.present_age_gap_years) / (2 * (family.father_to_sons_age_sum_ratio_then - 1))",
+              "older_son.age_now = younger_son.age_now + sons.present_age_gap_years",
+              "father.age_now = younger_son.age_now + older_son.age_now + family.father_age_lead_over_sons_sum_now",
+              "RETURN younger_son.age_now",
+              "RETURN older_son.age_now",
+              "RETURN father.age_now"
+            ],
+            "assumptions": [
+              "Multiple RETURN statements represent the request for the present ages of all three people."
+            ],
+            "confidence": 0.92,
+            "part_id": 2,
+            "semantic_notes": [
+              "The requested present ages are derived from the preserved historical ratio, elapsed time, sons' age gap, and present father-to-sons-sum difference."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1413"
+      },
+      "question": "Ten years ago, the sum of the ages of two sons was one-third of their father's age. One son is two years older than the other and sum of their present ages is 14 years less than the father's present age. Find the present ages of all.",
+      "source_context": null,
+      "source_id": "asdiv-1413",
+      "validation_failure": "answer mismatch: actual=46, expected=21",
+      "validator_context": {
+        "correct_answer": "21",
+        "gold_reasoning": "x:A age of one of sons; y:The age of the father; x+(x+2)=y/3; x+(x+2)=y-14"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 31,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mary sold 9 boxes of Do-Si-Dos.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 32,
+          "teacher_input_default": true,
+          "text": "How many cases of 6 boxes, plus extra boxes does Mary need to deliver?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mary.dosidos.boxes_sold = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires an integer quotient and remainder for packing 9 boxes into cases of 6, but the active operator registry provides neither floor/integer division nor modulo/remainder semantics."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2268"
+      },
+      "question": "Mary sold 9 boxes of Do-Si-Dos. How many cases of 6 boxes, plus extra boxes does Mary need to deliver?",
+      "source_context": null,
+      "source_id": "asdiv-2268",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "9/6=1 r3"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 44,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Allie has 5 math books and 10 science books.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 45,
+          "teacher_input_default": true,
+          "text": "If she wants to distribute them evenly among some bookshelves so that each bookshelf has the same combination of math and science books, with no books left over, what is the greatest number of bookshelves Allie can use?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "allie.math_books = 5",
+              "allie.science_books = 10"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest number of shelves that evenly divides both book counts requires greatest-common-divisor or equivalent divisibility/integer-search semantics, which the active operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1202"
+      },
+      "question": "Allie has 5 math books and 10 science books. If she wants to distribute them evenly among some bookshelves so that each bookshelf has the same combination of math and science books, with no books left over, what is the greatest number of bookshelves Allie can use?",
+      "source_context": null,
+      "source_id": "asdiv-1202",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "GCD(5,10)=5"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

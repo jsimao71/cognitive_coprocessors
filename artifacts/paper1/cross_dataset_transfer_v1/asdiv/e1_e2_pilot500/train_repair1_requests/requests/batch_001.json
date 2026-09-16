@@ -1,0 +1,409 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 127,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A ballet class wants to divide its 90 members into some large groups at 7 members each and some small groups at 3 members each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 210,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 128,
+          "teacher_input_default": true,
+          "text": "In order to make the least number of groups, how many small groups should be made?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "ballet_class.members = 90",
+              "large_group.members_per_group = 7",
+              "small_group.members_per_group = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Minimizing the number of groups while enforcing an exact integer partition requires integer optimization or divisibility constraints that are not expressible with the active arithmetic operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0810"
+      },
+      "question": "A ballet class wants to divide its 90 members into some large groups at 7 members each and some small groups at 3 members each. In order to make the least number of groups, how many small groups should be made?",
+      "source_context": null,
+      "source_id": "asdiv-0810",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "90/7=12 r6; 6/3=2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 32,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A paper bag can hold 16 cookies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 33,
+          "teacher_input_default": true,
+          "text": "If Edgar buys 292 cookies, how many paper bags does he need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "paper_bag.capacity.cookies = 16"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause asks for a discrete number of bags sufficient to hold 292 cookies, which requires ceiling division; no ceiling or equivalent discrete-rounding operator is available in the supplied registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0763"
+      },
+      "question": "A paper bag can hold 16 cookies. If Edgar buys 292 cookies, how many paper bags does he need?",
+      "source_context": null,
+      "source_id": "asdiv-0763",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "19",
+        "gold_reasoning": "292/16=18 r4"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 57,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nathan is stocking bathrooms at the hotel where he works.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 109,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 58,
+          "teacher_input_default": true,
+          "text": "He has 18 rolls of toilet paper and 9 bars of soap.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 299,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 110,
+          "teacher_input_default": true,
+          "text": "If he wants all bathrooms to be stocked identically, with the same combination of supplies in each one and nothing left over, what is the greatest combination of bathrooms Nathan can stock?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "nathan.workplace = \"hotel\"",
+              "nathan.task = \"stocking bathrooms\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "nathan.inventory.toilet_paper_rolls = 18",
+              "nathan.inventory.soap_bars = 9"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest number of identically stocked bathrooms with no supplies left over requires a greatest-common-divisor or divisibility operation, neither of which is available in the supplied registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2019"
+      },
+      "question": "Nathan is stocking bathrooms at the hotel where he works. He has 18 rolls of toilet paper and 9 bars of soap. If he wants all bathrooms to be stocked identically, with the same combination of supplies in each one and nothing left over, what is the greatest combination of bathrooms Nathan can stock?",
+      "source_context": null,
+      "source_id": "asdiv-2019",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "GCD(18,9)=9"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 132,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If you were to travel by metro the fare for the first kilometer is different from the rate per kilometer for the remaining distance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 225,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 133,
+          "teacher_input_default": true,
+          "text": "The total fare for a distance of 20 km is $37.70 and that for a distance of 26 km is $48.50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 303,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 226,
+          "teacher_input_default": true,
+          "text": "Find the auto fare for the first kilometer and for each successive kilometer.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause states a qualitative inequality between two fare components, but the active operator registry does not provide an inequality operator."
+            ],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "metro.trip_20km.distance_km = 20",
+              "metro.trip_20km.total_fare_dollars = 37.70",
+              "metro.trip_26km.distance_km = 26",
+              "metro.trip_26km.total_fare_dollars = 48.50"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The preceding clauses describe a metro fare, but this clause asks for an auto fare. The source does not establish that the metro and auto fare schedules are identical."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1438"
+      },
+      "question": "If you were to travel by metro the fare for the first kilometer is different from the rate per kilometer for the remaining distance. The total fare for a distance of 20 km is $37.70 and that for a distance of 26 km is $48.50. Find the auto fare for the first kilometer and for each successive kilometer.",
+      "source_context": null,
+      "source_id": "asdiv-1438",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported, part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "3.5",
+        "gold_reasoning": "x:The fare for the first kilometer; y:The fare for remaining distance; x+(20-1)y=37.7; x+(26-1)y=48.5"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 69,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Betty has 367 beads and wants to use all the beads to make necklaces.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 181,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 70,
+          "teacher_input_default": true,
+          "text": "If she wants to make 15 necklaces with each having the same number of beads, how many more beads does she need?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "betty.beads.total = 367",
+              "betty.necklaces.beads_to_use = betty.beads.total"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the least additional whole-number bead count that makes the total evenly divisible among 15 necklaces requires integer remainder, divisibility, ceiling, or equivalent semantics unavailable in the active operator registry."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0819"
+      },
+      "question": "Betty has 367 beads and wants to use all the beads to make necklaces. If she wants to make 15 necklaces with each having the same number of beads, how many more beads does she need?",
+      "source_context": null,
+      "source_id": "asdiv-0819",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": "367/15=24 r7; 15-7=8"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

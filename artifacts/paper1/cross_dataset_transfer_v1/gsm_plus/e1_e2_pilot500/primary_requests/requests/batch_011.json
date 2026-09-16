@@ -1,0 +1,395 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A wooden bridge can carry no more than 5000 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 150,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "A delivery truck filled with identical boxes, each weighing 150 pounds, will pass over the bridge.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 151,
+          "teacher_input_default": true,
+          "text": "The combined weight of the driver and the empty truck is 3755 pounds.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 338,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 221,
+          "teacher_input_default": true,
+          "text": "What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+          "warnings": []
+        }
+      ],
+      "question": "A wooden bridge can carry no more than 5000 pounds. A delivery truck filled with identical boxes, each weighing 150 pounds, will pass over the bridge. The combined weight of the driver and the empty truck is 3755 pounds. What is the maximum number of boxes which can be loaded onto the truck while not exceeding the bridge's weight limit?",
+      "source_id": "gsm-plus-00457"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 41,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Nick had twice as many candies as George.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 42,
+          "teacher_input_default": true,
+          "text": "Then George ate some candies.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "Now George has 3 candies left.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 159,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "If Nick has 16 candies, how many candies did George eat?",
+          "warnings": []
+        }
+      ],
+      "question": "Nick had twice as many candies as George. Then George ate some candies. Now George has 3 candies left. If Nick has 16 candies, how many candies did George eat?",
+      "source_id": "gsm-plus-04284"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Doctor Jones is planning his Monday schedule.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "He has a total of nine hours to spend at the clinic where he works.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "He needs to do rounds to check on inpatients staying at the clinic, which takes twenty minutes per inpatient.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 281,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 224,
+          "teacher_input_default": true,
+          "text": "He also has ten appointments, each taking thirty minutes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 406,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 282,
+          "teacher_input_default": true,
+          "text": "Additionally, he has a one-hour lunch break and two fifteen-minute coffee breaks, which he spends at the clinic's cafeteria.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 512,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 407,
+          "teacher_input_default": true,
+          "text": "However, these breaks do not interfere with his work schedule as he uses this time to relax and recharge.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 671,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 513,
+          "teacher_input_default": true,
+          "text": "So those hours don't count as time spent in the clinic.If he has 9 inpatients at the clinic, how many hours will Doctor Jones have left to update his records?",
+          "warnings": []
+        }
+      ],
+      "question": "Doctor Jones is planning his Monday schedule. He has a total of nine hours to spend at the clinic where he works. He needs to do rounds to check on inpatients staying at the clinic, which takes twenty minutes per inpatient. He also has ten appointments, each taking thirty minutes. Additionally, he has a one-hour lunch break and two fifteen-minute coffee breaks, which he spends at the clinic's cafeteria. However, these breaks do not interfere with his work schedule as he uses this time to relax and recharge. So those hours don't count as time spent in the clinic.If he has 9 inpatients at the clinic, how many hours will Doctor Jones have left to update his records?",
+      "source_id": "gsm-plus-08006"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kelly is grocery shopping at a supermarket and is making sure she has enough in her budget for the items in her cart.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 239,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "Her 5 packs of bacon cost $10 in total and she has 6 packets of chicken which each cost twice as much as a pack of bacon.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 376,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 240,
+          "teacher_input_default": true,
+          "text": "She also has 3 packs of strawberries, priced at $4 each, and 7 packs of apples, each priced at half the price of a pack of strawberries.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 473,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 377,
+          "teacher_input_default": true,
+          "text": "If Kelly has $5 left in her budget after shopping, how much was her original budget, in dollars?",
+          "warnings": []
+        }
+      ],
+      "question": "Kelly is grocery shopping at a supermarket and is making sure she has enough in her budget for the items in her cart. Her 5 packs of bacon cost $10 in total and she has 6 packets of chicken which each cost twice as much as a pack of bacon. She also has 3 packs of strawberries, priced at $4 each, and 7 packs of apples, each priced at half the price of a pack of strawberries. If Kelly has $5 left in her budget after shopping, how much was her original budget, in dollars?",
+      "source_id": "gsm-plus-07060"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Abraham owns 80 square meters of unused land.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "He sold half of the land for $50, and after a month, he sold another 1/4 of his land for $30.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 204,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "He then sold the remaining land for some money per square meter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 334,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 205,
+          "teacher_input_default": true,
+          "text": "If he earned a total of $170 after selling all his unused land, how much did he sell for each square meter of the remaining land?",
+          "warnings": []
+        }
+      ],
+      "question": "Abraham owns 80 square meters of unused land. He sold half of the land for $50, and after a month, he sold another 1/4 of his land for $30. He then sold the remaining land for some money per square meter. If he earned a total of $170 after selling all his unused land, how much did he sell for each square meter of the remaining land?",
+      "source_id": "gsm-plus-09292"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

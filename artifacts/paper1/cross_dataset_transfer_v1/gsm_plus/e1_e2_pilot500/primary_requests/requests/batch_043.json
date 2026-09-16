@@ -1,0 +1,406 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 64,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Marcel runs a bicycle store and a small coffee shop on the side.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 153,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 65,
+          "teacher_input_default": true,
+          "text": "His main products in the bicycle store are three types of bikes: MTB, BMX, and Trekking.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 245,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 154,
+          "teacher_input_default": true,
+          "text": "The price of one MTB is $500, BMX is half the price of an MTB, and a Trekking bike is $450.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 316,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 246,
+          "teacher_input_default": true,
+          "text": "In one month, Marcel sold a total of 300 bikes among the types listed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 374,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 317,
+          "teacher_input_default": true,
+          "text": "Half of them were Trekking bikes, and 15% were BMX bikes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 416,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 375,
+          "teacher_input_default": true,
+          "text": "The rest of the sold bikes were MTB type.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 487,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 417,
+          "teacher_input_default": true,
+          "text": "Meanwhile, in his coffee shop, he sold 2000 cups of coffee at $2 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 601,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 488,
+          "teacher_input_default": true,
+          "text": "However, the coffee shop's earnings are managed separately and do not contribute to the bicycle store's earnings.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 667,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 8,
+          "start": 602,
+          "teacher_input_default": true,
+          "text": "How much did Marcel earn from selling bicycles during that month?",
+          "warnings": []
+        }
+      ],
+      "question": "Marcel runs a bicycle store and a small coffee shop on the side. His main products in the bicycle store are three types of bikes: MTB, BMX, and Trekking. The price of one MTB is $500, BMX is half the price of an MTB, and a Trekking bike is $450. In one month, Marcel sold a total of 300 bikes among the types listed. Half of them were Trekking bikes, and 15% were BMX bikes. The rest of the sold bikes were MTB type. Meanwhile, in his coffee shop, he sold 2000 cups of coffee at $2 each. However, the coffee shop's earnings are managed separately and do not contribute to the bicycle store's earnings. How much did Marcel earn from selling bicycles during that month?",
+      "source_id": "gsm-plus-08694"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "My wife and I went out for dinner at a restaurant that was offering a 10% discount on their meals.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 156,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "After applying the discount, our dinner bill came to $50.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 265,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 157,
+          "teacher_input_default": true,
+          "text": "We decided to evenly split the check, but she wanted me to pay an additional 20% tip on our discounted bill.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 295,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 266,
+          "teacher_input_default": true,
+          "text": "How much did I end up paying?",
+          "warnings": []
+        }
+      ],
+      "question": "My wife and I went out for dinner at a restaurant that was offering a 10% discount on their meals. After applying the discount, our dinner bill came to $50. We decided to evenly split the check, but she wanted me to pay an additional 20% tip on our discounted bill. How much did I end up paying?",
+      "source_id": "gsm-plus-04318"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "For one medical dosage, Saanvi had to combine 140 mL of one medicine with 3 times that amount of the second medicine.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 163,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "How many mL of medicine would be in 80 doses?",
+          "warnings": []
+        }
+      ],
+      "question": "For one medical dosage, Saanvi had to combine 140 mL of one medicine with 3 times that amount of the second medicine. How many mL of medicine would be in 80 doses?",
+      "source_id": "gsm-plus-09689"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 65,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Clara purchased 20 pomegranates on a Tuesday, each priced at $20.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 66,
+          "teacher_input_default": true,
+          "text": "She was able to use a voucher to get a $2 discount at the checkout.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 262,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "The following day, the cost per pomegranate increased to $30, however, the store was offering a 10% reduction on the total bill.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 335,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 263,
+          "teacher_input_default": true,
+          "text": "Sheila decided to buy 20 pomegranates taking advantage of this discount.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 433,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 336,
+          "teacher_input_default": true,
+          "text": "Can you calculate the difference in the total amount paid for the pomegranates on these two days?",
+          "warnings": []
+        }
+      ],
+      "question": "Clara purchased 20 pomegranates on a Tuesday, each priced at $20. She was able to use a voucher to get a $2 discount at the checkout. The following day, the cost per pomegranate increased to $30, however, the store was offering a 10% reduction on the total bill. Sheila decided to buy 20 pomegranates taking advantage of this discount. Can you calculate the difference in the total amount paid for the pomegranates on these two days?",
+      "source_id": "gsm-plus-05205"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "John purchases a number of blue ties and twice that number in red ties.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "The red ties are priced 50% higher than the blue ones.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 175,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 127,
+          "teacher_input_default": true,
+          "text": "He spends $200 on blue ties, each priced at $40.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 220,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 176,
+          "teacher_input_default": true,
+          "text": "What is the total amount John spent on ties?",
+          "warnings": []
+        }
+      ],
+      "question": "John purchases a number of blue ties and twice that number in red ties. The red ties are priced 50% higher than the blue ones. He spends $200 on blue ties, each priced at $40. What is the total amount John spent on ties?",
+      "source_id": "gsm-plus-00381"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

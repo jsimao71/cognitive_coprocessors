@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Bob can shuck 10 oysters in 5 minutes.  How many oysters can he shuck in 2 hours?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "2020"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What was the percentage change in the net Total other (expense) income between 2017 and 2018?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.total_other_expense_income_net\", \"2017\"), 1758, \"thousand_currency\", cell(\"Total other (expense) income, net\", \"2017\"))",
+          "observe(at(\"company.total_other_expense_income_net\", \"2018\"), -2935, \"thousand_currency\", cell(\"Total other (expense) income, net\", \"2018\"))",
+          "query(\"percentage_change\", at(\"company.total_other_expense_income_net\", \"2017\"), at(\"company.total_other_expense_income_net\", \"2018\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "Results of Operations: Years Ended December 31, 2018, versus Year Ended December 31, 2017 (Amounts in thousands, except percentages and per share amounts): Results of Operations: Years Ended December 31, 2018, versus Year Ended December 31, 2017 (Amounts in thousands, except percentages and per share amounts):"
+          },
+          {
+            "order": 2,
+            "text": "Other income and expense items are summarized in the following table:"
+          },
+          {
+            "order": 3,
+            "text": "Interest expense decreased in the year ended December 31, 2018, versus the same period in 2017 primarily due to lower debt balances, a reduction in interest related to interest rate swaps, and a one-time charge related to a liability that was settled in 2017. Interest income increased due to higher interest rates. Other expense in the year ended December 31, 2018, was driven by foreign currency translation losses mainly due to the appreciation of the U.S. Dollar compared to the Chinese Renminbi and the Euro. Other income in the year ended December 31, 2017 was driven mainly by foreign currency translation gains due to the depreciation of the U.S. Dollar compared to the Chinese Renminbi and the Euro."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "Years Ended December 31,",
+            ""
+          ],
+          [
+            "",
+            "2018",
+            "2017"
+          ],
+          [
+            "Interest expense",
+            "$(2,085)",
+            "$(3,343)"
+          ],
+          [
+            "Interest income",
+            "1,826",
+            "1,284"
+          ],
+          [
+            "Other (expense) income",
+            "(2,676)",
+            "3,817"
+          ],
+          [
+            "Total other (expense) income, net",
+            "$(2,935)",
+            "$1,758"
+          ]
+        ]
+      },
+      "source_id": "c3edcd223bccfaf6558446092a1475e3"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the percentage change in the total fair value of consideration transferred at June 30 and December 31, 2019?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"mgi.total_fair_value_of_consideration_transferred\", \"Estimated at June 30, 2019\"), 3757, \"thousand_currency\", cell(\"Total fair value of consideration transferred\", \"Estimated at June 30, 2019\"))",
+          "observe(at(\"mgi.total_fair_value_of_consideration_transferred\", \"Final as of December 31, 2019\"), 3777, \"thousand_currency\", cell(\"Total fair value of consideration transferred\", \"Final as of December 31, 2019\"))",
+          "query(\"percentage_change\", at(\"mgi.total_fair_value_of_consideration_transferred\", \"Estimated at June 30, 2019\"), at(\"mgi.total_fair_value_of_consideration_transferred\", \"Final as of December 31, 2019\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "NOTE 3. ACQUISITIONS"
+          },
+          {
+            "order": 2,
+            "text": "MGI"
+          },
+          {
+            "order": 3,
+            "text": "On April 4, 2019, we acquired substantially all of the assets comprising the business of MGI Grain Processing, LLC, a Minnesota limited liability company, now conducting business as MGI Grain Incorporated (MGI) for an aggregate purchase price of $3.8 million. The purchase price included $0.3 million deposited in an escrow account at closing which was subsequently released to the sellers in June 2019. MGI owns and operates a grain mill and processing facility in East Grand Forks, Minnesota. We acquired MGI as part of our strategy to expand our product portfolio. The acquisition has been accounted for as a business combination. The results of MGI\u2019s operations are included in our consolidated financial statements beginning April 4, 2019. In 2019, we incurred $0.1 million of MGI acquisition-related costs which are included in selling, general and administrative expenses."
+          },
+          {
+            "order": 4,
+            "text": "The purchase price for MGI was subject to adjustment if the estimated closing working capital with respect to the assets purchased and the liabilities assumed was different than the actual closing working capital, as defined in the purchase agreement. The seller of MGI paid a working capital adjustment of $18 thousand in 2019. The following table summarizes the purchase price allocation, the consideration transferred to acquire MGI and the amounts of identified assets acquired and liabilities assumed (in thousands)."
+          },
+          {
+            "order": 5,
+            "text": "In the fourth quarter of 2019, our appraiser finalized certain fair value calculations and we completed our review of the calculations. The fair value of MGI\u2019s trade receivables at acquisition, equaled the gross amount of trade receivables. The fair value of the customer relationship intangible at acquisition was estimated using an income approach based on expected future cash flows. As discussed in Note 9, we are amortizing the customer relationship intangible to expense over the 15-year period of expected future economic benefit, in proportion to the discounted expected future cash flows used to estimate the value of the intangible at acquisition. Goodwill primarily was attributed to intangible assets that do not qualify for separate recognition and synergies generated by MGI when combined with our existing operations. The $0.7 million allocated to goodwill is deductible for tax purposes over the next fifteen years."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "Estimated at June 30, 2019",
+            "Adjustments",
+            "Final as of December 31, 2019"
+          ],
+          [
+            "Cash",
+            "$3,795",
+            "$ -",
+            "$3,795"
+          ],
+          [
+            "Working capital adjustment to purchase price",
+            "(38)",
+            "20",
+            "(18)"
+          ],
+          [
+            "Total fair value of consideration transferred",
+            "3,757",
+            "20",
+            "3,777"
+          ],
+          [
+            "Accounts receivable",
+            "591",
+            "-",
+            "591"
+          ],
+          [
+            "Inventories",
+            "149",
+            "-",
+            "149"
+          ],
+          [
+            "Deposits and other current assets",
+            "4",
+            "8",
+            "12"
+          ],
+          [
+            "Property and equipment",
+            "1,560",
+            "-",
+            "1,560"
+          ],
+          [
+            "Customer relationship",
+            "930",
+            "-",
+            "930"
+          ],
+          [
+            "Other finite-lived intangible assets",
+            "35",
+            "-",
+            "35"
+          ],
+          [
+            "Accounts payable",
+            "(219)",
+            "-",
+            "(219)"
+          ],
+          [
+            "Finance lease liabilities",
+            "(18)",
+            "-",
+            "(18)"
+          ],
+          [
+            "Net recognized amounts of identifiable assets acquired and liabilities assumed",
+            "3,032",
+            "8",
+            "3,040"
+          ],
+          [
+            "Goodwill",
+            "$                          725",
+            "$                            12",
+            "$                          737"
+          ]
+        ]
+      },
+      "source_id": "6a6a71bd996ecdf07041af49a098d702"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the percentage of other foreign borrowings and other domestic borrowings as a percentage of Total debt as of December 31, 2019 in fair values?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"company.debt.other_borrowings.fair_values\", \"fair_value\", \"company\", source(\"other foreign borrowings and other domestic borrowings\"))",
+          "observe(at(\"company.debt.other_foreign_borrowings.fair_value\", \"2019-12-31\"), 12.4, \"million_currency\", cell(\"Other foreign borrowings(1)\", \"Fair Value\"))",
+          "member(\"company.debt.other_borrowings.fair_values\", \"company.debt.other_foreign_borrowings.fair_value\", cell(\"Other foreign borrowings(1)\", \"Fair Value\"))",
+          "observe(at(\"company.debt.other_domestic_borrowings.fair_value\", \"2019-12-31\"), 89.0, \"million_currency\", cell(\"Other domestic borrowings\", \"Fair Value\"))",
+          "member(\"company.debt.other_borrowings.fair_values\", \"company.debt.other_domestic_borrowings.fair_value\", cell(\"Other domestic borrowings\", \"Fair Value\"))",
+          "observe(at(\"company.debt.total.fair_value\", \"2019-12-31\"), 4073.9, \"million_currency\", cell(\"Total debt(2)\", \"Fair Value\"))",
+          "query(\"percentage_ratio\", at(\"company.debt.other_borrowings.fair_values\", \"2019-12-31\"), at(\"company.debt.total.fair_value\", \"2019-12-31\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "The table below shows the carrying amounts and estimated fair values of our debt, excluding lease liabilities:"
+          },
+          {
+            "order": 2,
+            "text": "(1) Includes borrowings denominated in currencies other than US Dollars."
+          },
+          {
+            "order": 3,
+            "text": "(2) At December 31, 2019, the carrying amount and estimated fair value of debt exclude lease liabilities."
+          },
+          {
+            "order": 4,
+            "text": "In addition to the table above, the Company remeasures amounts related to certain equity compensation that are carried at fair value on a recurring basis in the Consolidated Financial Statements or for which a fair value measurement was required. Refer to Note 21, \u201cStockholders\u2019 Deficit,\u201d of the Notes to Consolidated Financial Statements for share-based compensation in the Notes to Consolidated Financial Statements. Included among our non-financial assets and liabilities that are not required to be measured at fair value on a recurring basis are inventories, net property and equipment, goodwill, intangible assets and asset retirement obligations."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "December 31, 2019",
+            "",
+            "December 31, 2018",
+            ""
+          ],
+          [
+            "(In millions)",
+            "Carrying Amount",
+            "Fair Value",
+            "Carrying Amount",
+            "Fair Value"
+          ],
+          [
+            "Term Loan A Facility due July 2022",
+            "$ 474.6",
+            "$ 474.6",
+            "$ \u2014",
+            "$ \u2014"
+          ],
+          [
+            "Term Loan A Facility due July 2023(1)",
+            "223.8",
+            "223.8",
+            "222.2",
+            "222.2"
+          ],
+          [
+            "6.50% Senior Notes due December 2020",
+            "\u2014",
+            "\u2014",
+            "424.0",
+            "440.1"
+          ],
+          [
+            "4.875% Senior Notes due December 2022",
+            "421.9",
+            "450.1",
+            "421.1",
+            "421.2"
+          ],
+          [
+            "5.25% Senior Notes due April 2023",
+            "422.0",
+            "454.1",
+            "421.2",
+            "424.5"
+          ],
+          [
+            "4.50% Senior Notes due September 2023(1)",
+            "445.6",
+            "509.5",
+            "454.9",
+            "489.9"
+          ],
+          [
+            "5.125% Senior Notes due December 2024",
+            "421.9",
+            "458.9",
+            "421.3",
+            "419.8"
+          ],
+          [
+            "5.50% Senior Notes due September 2025",
+            "397.4",
+            "441.2",
+            "397.1",
+            "394.8"
+          ],
+          [
+            "4.00% Senior Notes due December 2027",
+            "420.4",
+            "431.5",
+            "\u2014",
+            "\u2014"
+          ],
+          [
+            "6.875% Senior Notes due July 2033",
+            "445.7",
+            "528.8",
+            "445.5",
+            "453.4"
+          ],
+          [
+            "Other foreign borrowings(1)",
+            "12.1",
+            "12.4",
+            "98.5",
+            "99.2"
+          ],
+          [
+            "Other domestic borrowings",
+            "89.0",
+            "89.0",
+            "168.4",
+            "170.0"
+          ],
+          [
+            "Total debt(2)",
+            "$ 3,774.4",
+            "$ 4,073.9",
+            "$ 3,474.2",
+            "$ 3,535.1"
+          ]
+        ]
+      },
+      "source_id": "853b276ba1ca523d8829802a14c1c5ad"
+    },
+    {
+      "dataset": "tatqa",
+      "question": "What is the average percentage of revenue from Apple and Huawei in 2017?",
+      "repair": {
+        "failure_class": "evidence_invalid",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "observe(at(\"company.revenue.apple.percentage\", \"2017\"), 34, \"percent\", cell(\"Apple Inc. (\u201cApple\u201d)\", \"2017\"))",
+          "observe(at(\"company.revenue.huawei.percentage\", \"2017\"), 11, \"percent\", cell(\"Huawei Technologies Co., Ltd. (\u201cHuawei\u201d)\", \"2017\"))",
+          "query(\"mean\", at(\"company.revenue.apple.percentage\", \"2017\"), at(\"company.revenue.huawei.percentage\", \"2017\"))"
+        ]
+      },
+      "source_context": {
+        "paragraphs": [
+          {
+            "order": 1,
+            "text": "2. CONCENTRATIONS OF CREDIT RISK"
+          },
+          {
+            "order": 2,
+            "text": "The Company\u2019s principal financial instrument subject to potential concentration of credit risk is accounts receivable, which is unsecured. The Company provides an allowance for doubtful accounts equal to estimated losses expected to be incurred in the collection of accounts receivable. The Company has adopted credit policies and standards intended to accommodate industry growth and inherent risk and it believes that credit risks are moderated by the financial stability of its major customers, conservative payment terms and the Company\u2019s strict credit policies."
+          },
+          {
+            "order": 3,
+            "text": "Revenue from significant customers, those representing 10% or more of revenue for the respective periods, are summarized as follows:"
+          },
+          {
+            "order": 4,
+            "text": "The Company provided its products to Apple through sales to multiple contract manufacturers."
+          },
+          {
+            "order": 5,
+            "text": "These customers primarily purchase RF and Wi-Fi solutions for cellular base stations and a variety of mobile devices, including smartphones, wearables, laptops, tablets and cellular-based applications for the IoT."
+          },
+          {
+            "order": 6,
+            "text": "Accounts receivable related to these customers (which includes multiple contract manufacturers) accounted for 49%, 26%, and 40% of the Company\u2019s total net accounts receivable balance as of March 30, 2019, March 31, 2018 and April 1, 2017, respectively."
+          },
+          {
+            "order": 7,
+            "text": "On May 16, 2019, the Bureau of Industry and Security (BIS) of the U.S. Department of Commerce placed Huawei and 68 of its non-U.S. affiliates on the \u201centity list\u201d under Export Administration Regulations (EAR), which had the effect of prohibiting all future sales by the Company of any product to Huawei or its affiliates, absent obtaining a license from BIS. While BIS has broad authority to issue licenses, the rulemaking imposes a presumption that licenses will be denied."
+          },
+          {
+            "order": 8,
+            "text": "Although Huawei is not prohibited from paying (and the Company is not restricted from collecting) accounts receivable for products sold to Huawei prior to the BIS action, the credit risks associated with these accounts may have increased as a result of this development. As of the date of this report, the Company is unable to predict the scope or duration of the new EAR restrictions on Huawei or the impact to the Company\u2019s business or future results of operations."
+          }
+        ],
+        "table": [
+          [
+            "",
+            "",
+            "Fiscal Year",
+            ""
+          ],
+          [
+            "",
+            "2019",
+            "2018",
+            "2017"
+          ],
+          [
+            "Apple Inc. (\u201cApple\u201d)",
+            "32%",
+            "36%",
+            "34%"
+          ],
+          [
+            "Huawei Technologies Co., Ltd. (\u201cHuawei\u201d)",
+            "13%",
+            "8%",
+            "11%"
+          ]
+        ]
+      },
+      "source_id": "3b10b9afd08c3a0a1f5149b6a1aff6ed"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

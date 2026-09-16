@@ -1,0 +1,485 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Dan's high school played eighteen baseball games this year and two were at night.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 115,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "The team won most of their games.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 116,
+          "teacher_input_default": true,
+          "text": "They were defeated during three games.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "How many games did they win ?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "dans_high_school.baseball_season.games_played = 18",
+              "dans_high_school.baseball_season.night_games = 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The qualitative claim that the team won most games is not representable by the active arithmetic operator profile."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "dans_high_school.baseball_season.games_lost = 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "Defeated games are represented as losses."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "dans_high_school.baseball_season.games_won = dans_high_school.baseball_season.games_played - dans_high_school.baseball_season.games_lost",
+              "RETURN dans_high_school.baseball_season.games_won"
+            ],
+            "assumptions": [
+              "All played games are treated as either wins or losses, with no ties or other outcomes."
+            ],
+            "confidence": 0.97,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1381"
+      },
+      "question": "Dan's high school played eighteen baseball games this year and two were at night. The team won most of their games. They were defeated during three games. How many games did they win ?",
+      "source_context": null,
+      "source_id": "asdiv-1381",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "15",
+        "gold_reasoning": "18-3=15"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "At Kentucky Fried Chicken, the kitchen staff baked 96 chicken legs, 144 thighs, and 224 wings.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 162,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "The staff had to prepare platters for a catered lunch at an office.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 163,
+          "teacher_input_default": true,
+          "text": "Each platter will have the same number of legs, thighs, and wings.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 334,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 230,
+          "teacher_input_default": true,
+          "text": "How many platters can the staff make if they want the greatest number of chicken pieces on each platter?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "kfc.kitchen.chicken_legs = 96",
+              "kfc.kitchen.chicken_thighs = 144",
+              "kfc.kitchen.chicken_wings = 224"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "This clause supplies catering context but no new arithmetic fact or relation."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "catered_lunch.legs_per_platter = kfc.kitchen.chicken_legs / catered_lunch.platter_count",
+              "catered_lunch.thighs_per_platter = kfc.kitchen.chicken_thighs / catered_lunch.platter_count",
+              "catered_lunch.wings_per_platter = kfc.kitchen.chicken_wings / catered_lunch.platter_count"
+            ],
+            "assumptions": [
+              "\u201cThe same number\u201d means that every platter receives an equal allocation of each chicken-piece type, not that legs, thighs, and wings have equal counts within a platter.",
+              "All baked pieces are allocated among the platters."
+            ],
+            "confidence": 0.86,
+            "part_id": 2,
+            "semantic_notes": [
+              "The platter count is a legitimate forward dependency introduced by the final question."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Maximizing pieces on each platter favors fewer platters, whereas this equal-distribution problem may instead intend the greatest possible number of identical platters. The stated objective does not resolve these opposing interpretations."
+            ],
+            "confidence": 0.95,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1207"
+      },
+      "question": "At Kentucky Fried Chicken, the kitchen staff baked 96 chicken legs, 144 thighs, and 224 wings. The staff had to prepare platters for a catered lunch at an office. Each platter will have the same number of legs, thighs, and wings. How many platters can the staff make if they want the greatest number of chicken pieces on each platter?",
+      "source_context": null,
+      "source_id": "asdiv-1207",
+      "validation_failure": "non-ok semantic parts: part 3=ambiguous",
+      "validator_context": {
+        "correct_answer": "16",
+        "gold_reasoning": "GCD(96,144,224)=16"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 90,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Vanessa had saved up eight hundred fifty-five quarters and decided to spend them on sodas.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 213,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 91,
+          "teacher_input_default": true,
+          "text": "If it costs seven quarters for each soda from a soda machine, how many more quarters would she need to buy the final soda?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "vanessa.saved_quarters = 855"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause combines the seven-quarter price fact with a request for the shortfall to the next complete purchase. Computing that shortfall requires integer remainder, floor, or ceiling semantics, none of which is available in the supplied operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1560"
+      },
+      "question": "Vanessa had saved up eight hundred fifty-five quarters and decided to spend them on sodas. If it costs seven quarters for each soda from a soda machine, how many more quarters would she need to buy the final soda?",
+      "source_context": null,
+      "source_id": "asdiv-1560",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": "855/7=122 r1; 7-1=6"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 45,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Mr. Lee wants to load 134 tons of his fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 46,
+          "teacher_input_default": true,
+          "text": "A large truck can load 15 tons of fruits and small truck can load 7 tons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 237,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "In order to use the least number of trucks and have every truck fully occupied, how many small trucks should be used?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "mr_lee.fruit_load.tons = 134"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "large_truck.fruit_capacity_tons = 15",
+              "small_truck.fruit_capacity_tons = 7"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Determining the small-truck count requires nonnegative integer-constrained optimization of truck counts under an exact-capacity equation. The supplied arithmetic profile has no integer, divisibility, or optimization operator for expressing that requirement."
+            ],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-0802"
+      },
+      "question": "Mr. Lee wants to load 134 tons of his fruits. A large truck can load 15 tons of fruits and small truck can load 7 tons. In order to use the least number of trucks and have every truck fully occupied, how many small trucks should be used?",
+      "source_context": null,
+      "source_id": "asdiv-0802",
+      "validation_failure": "non-ok semantic parts: part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "134/15=8 r14; 14/7=2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 93,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The sum of 7 more than 5 times a number is equal to sum of 6 more than twice the same number.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 176,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 94,
+          "teacher_input_default": true,
+          "text": "Write the statement into possible algebraic equations and find the unknown number.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [
+              "The active assignment-only ASL surface cannot retain both arithmetic sides and assert their equality without overwriting one side or introducing an unregistered assertion operator."
+            ],
+            "confidence": 0.91,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [
+              "unknown_number.value = (6 - 7) / (5 - 2)",
+              "RETURN unknown_number.value"
+            ],
+            "assumptions": [
+              "\u201cThe unknown number\u201d refers to the same number used on both sides of the preceding equality."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The assignment preserves the algebraic rearrangement of the equality rather than replacing it with a solved literal."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1330"
+      },
+      "question": "The sum of 7 more than 5 times a number is equal to sum of 6 more than twice the same number. Write the statement into possible algebraic equations and find the unknown number.",
+      "source_context": null,
+      "source_id": "asdiv-1330",
+      "validation_failure": "non-ok semantic parts: part 0=unsupported",
+      "validator_context": {
+        "correct_answer": "1/3",
+        "gold_reasoning": "n:The unknown number; 5n+7=2n+6"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

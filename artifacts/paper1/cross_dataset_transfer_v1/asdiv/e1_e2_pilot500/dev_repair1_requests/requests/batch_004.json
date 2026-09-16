@@ -1,0 +1,457 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A field is in the shape of an equilateral triangle attached to the width of the rectangular region where width of the rectangle and side of the triangle measures the same.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 296,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 172,
+          "teacher_input_default": true,
+          "text": "The length of rectangular region is 76 ft and the side of triangular region measures 42 ft. Find the perimeter of the field.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "rectangular_region.width.ft = triangular_region.side.ft",
+              "triangular_region.perimeter.ft = triangular_region.side.ft * 3",
+              "field.shared_edge.ft = rectangular_region.width.ft"
+            ],
+            "assumptions": [
+              "The equilateral triangle is attached along one complete width edge of the rectangle."
+            ],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rectangular_region.length.ft = 76",
+              "triangular_region.side.ft = 42",
+              "rectangular_region.perimeter.ft = rectangular_region.length.ft * 2 + rectangular_region.width.ft * 2",
+              "field.perimeter.ft = rectangular_region.perimeter.ft + triangular_region.perimeter.ft - field.shared_edge.ft * 2",
+              "RETURN field.perimeter.ft"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The shared edge is subtracted twice because it occurs once in each component perimeter but is internal to the combined field."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1349"
+      },
+      "question": "A field is in the shape of an equilateral triangle attached to the width of the rectangular region where width of the rectangle and side of the triangle measures the same. The length of rectangular region is 76 ft and the side of triangular region measures 42 ft. Find the perimeter of the field.",
+      "source_context": null,
+      "source_id": "asdiv-1349",
+      "validation_failure": "answer mismatch: actual=278, expected=90",
+      "validator_context": {
+        "correct_answer": "90",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 81,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Vidya's mother's age is 5 years more than the three times of Vidya's present age.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 82,
+          "teacher_input_default": true,
+          "text": "Find Vidya's present age, if her mother is 44 years old.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "vidya.mother.age_now = vidya.age_now * 3 + 5"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "vidya.mother.age_now = 44",
+              "RETURN vidya.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1394"
+      },
+      "question": "Vidya's mother's age is 5 years more than the three times of Vidya's present age. Find Vidya's present age, if her mother is 44 years old.",
+      "source_context": null,
+      "source_id": "asdiv-1394",
+      "validation_failure": "unresolved reference 'vidya.age_now' from scope 'global'; unresolved reference 'vidya.age_now' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "13",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 39,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Two boys have 480 marbles between them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 113,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 40,
+          "teacher_input_default": true,
+          "text": "One arranges them in heaps of 6 marbles and the other in heaps of 9 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 114,
+          "teacher_input_default": true,
+          "text": "If the total number of heaps is 72, how many marbles does each have?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "boys.total_marbles = 480",
+              "boy_with_heaps_of_9.marbles = boys.total_marbles - boy_with_heaps_of_6.marbles"
+            ],
+            "assumptions": [],
+            "confidence": 0.95,
+            "part_id": 0,
+            "semantic_notes": [
+              "The boys are identified in later parts by their respective heap sizes."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boy_with_heaps_of_6.marbles_per_heap = 6",
+              "boy_with_heaps_of_6.heap_count = boy_with_heaps_of_6.marbles / boy_with_heaps_of_6.marbles_per_heap",
+              "boy_with_heaps_of_9.marbles_per_heap = 9",
+              "boy_with_heaps_of_9.heap_count = boy_with_heaps_of_9.marbles / boy_with_heaps_of_9.marbles_per_heap"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "boys.total_heaps = 72",
+              "boy_with_heaps_of_9.heap_count = boys.total_heaps - boy_with_heaps_of_6.heap_count",
+              "RETURN boy_with_heaps_of_6.marbles",
+              "RETURN boy_with_heaps_of_9.marbles"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1401"
+      },
+      "question": "Two boys have 480 marbles between them. One arranges them in heaps of 6 marbles and the other in heaps of 9 each. If the total number of heaps is 72, how many marbles does each have?",
+      "source_context": null,
+      "source_id": "asdiv-1401",
+      "validation_failure": "unresolved reference 'boy_with_heaps_of_6.marbles' from scope 'global'; unresolved reference 'boy_with_heaps_of_6.marbles' from scope 'global'; unresolved reference 'boy_with_heaps_of_9.marbles' from scope 'global'; unresolved reference 'boy_with_heaps_of_6.heap_count' from scope 'global'; unresolved reference 'boy_with_heaps_of_6.marbles' from scope 'global'; unresolved reference 'boy_with_heaps_of_9.marbles' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "336",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 40,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sum of three consecutive integers is 24.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 59,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 41,
+          "teacher_input_default": true,
+          "text": "Find the integers.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "integers.second = integers.first + 1",
+              "integers.third = integers.second + 1",
+              "integers.total = 24",
+              "integers.first = integers.total - integers.second - integers.third"
+            ],
+            "assumptions": [
+              "The integers are ordered from least to greatest."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN integers.first",
+              "RETURN integers.second",
+              "RETURN integers.third"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1405"
+      },
+      "question": "Sum of three consecutive integers is 24. Find the integers.",
+      "source_context": null,
+      "source_id": "asdiv-1405",
+      "validation_failure": "unresolved reference 'integers.first' from scope 'global'; unresolved reference 'integers.second' from scope 'global'; unresolved reference 'integers.second' from scope 'global'; unresolved reference 'integers.first' from scope 'global'; unresolved reference 'integers.second' from scope 'global'; unresolved reference 'integers.third' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "7",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 28,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A is two years older than B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "A's father D is twice as old as A and B is twice old as his sister C.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 138,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "The ages of D and C differ by 40 years.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 139,
+          "teacher_input_default": true,
+          "text": "Find the ages of A and B.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "a.age_now = b.age_now + 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "d.age_now = a.age_now * 2",
+              "b.age_now = c.age_now * 2"
+            ],
+            "assumptions": [
+              "The phrase \"B is twice old as his sister C\" means B is twice as old as C."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "d.age_now = c.age_now + 40"
+            ],
+            "assumptions": [
+              "D is older than C, inferred from D being A's father while C is B's sister."
+            ],
+            "confidence": 0.9,
+            "part_id": 2,
+            "semantic_notes": [
+              "The directional relation encodes the stated 40-year age difference."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN a.age_now",
+              "RETURN b.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1408"
+      },
+      "question": "A is two years older than B. A's father D is twice as old as A and B is twice old as his sister C. The ages of D and C differ by 40 years. Find the ages of A and B.",
+      "source_context": null,
+      "source_id": "asdiv-1408",
+      "validation_failure": "unresolved reference 'b.age_now' from scope 'global'; unresolved reference 'a.age_now' from scope 'global'; unresolved reference 'c.age_now' from scope 'global'; unresolved reference 'c.age_now' from scope 'global'; unresolved reference 'a.age_now' from scope 'global'; unresolved reference 'b.age_now' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "26",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

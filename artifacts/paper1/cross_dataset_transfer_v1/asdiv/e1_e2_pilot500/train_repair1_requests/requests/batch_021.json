@@ -1,0 +1,462 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 70,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Collin baked 9 brownies with nuts on top and 34 brownies without nuts.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 71,
+          "teacher_input_default": true,
+          "text": "What is the ratio of the number of brownies with nuts on top to the total number of brownies?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "collin.brownies.with_nuts = 9",
+              "collin.brownies.without_nuts = 34"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "collin.brownies.total = collin.brownies.with_nuts + collin.brownies.without_nuts",
+              "collin.brownies.with_nuts_to_total_ratio = collin.brownies.with_nuts / collin.brownies.total",
+              "RETURN collin.brownies.with_nuts_to_total_ratio"
+            ],
+            "assumptions": [
+              "The requested ratio is represented as the quotient of brownies with nuts divided by all brownies."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1144"
+      },
+      "question": "Collin baked 9 brownies with nuts on top and 34 brownies without nuts. What is the ratio of the number of brownies with nuts on top to the total number of brownies?",
+      "source_context": null,
+      "source_id": "asdiv-1144",
+      "validation_failure": "answer mismatch: actual=0.2093023255813953488372093023, expected=9",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "9+34=43; 9:43"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 75,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Kiera is making trail mix out of 16 bags of nuts and 6 bags of dried fruit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 229,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 76,
+          "teacher_input_default": true,
+          "text": "She wants each new portion of trail mix to be identical, containing the same combination of bags of nuts and bags of dried fruit, with no bags left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 298,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 230,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of portions of trail mix Kiera can make?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "kiera.trail_mix.nut_bags = 16",
+              "kiera.trail_mix.dried_fruit_bags = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The equal-composition and no-leftover requirements impose integer divisibility constraints that cannot be expressed by the active arithmetic operator registry."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible number of identical portions requires a greatest-common-divisor or equivalent integer-divisibility operation, which is absent from the active operator registry."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1203"
+      },
+      "question": "Kiera is making trail mix out of 16 bags of nuts and 6 bags of dried fruit. She wants each new portion of trail mix to be identical, containing the same combination of bags of nuts and bags of dried fruit, with no bags left over. What is the greatest number of portions of trail mix Kiera can make?",
+      "source_context": null,
+      "source_id": "asdiv-1203",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "GCD(16,6)=2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A store owner had six employees and bought five hundred eighty-three uniforms for them.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "If he wanted to give each employee the same number of uniforms, how many more should he buy so he doesn't have any extra?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "store.employees.total = 6",
+              "store.uniforms.bought = 583"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Determining the smallest additional number of uniforms that makes the total evenly divisible by the employee count requires integer divisibility semantics such as modulo or ceiling, which are absent from the active operator registry."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1553"
+      },
+      "question": "A store owner had six employees and bought five hundred eighty-three uniforms for them. If he wanted to give each employee the same number of uniforms, how many more should he buy so he doesn't have any extra?",
+      "source_context": null,
+      "source_id": "asdiv-1553",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "5",
+        "gold_reasoning": "583/6=97 r1; 6-1=5"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Father's age is three times the sum of the ages of his two children.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "After 5 years his age will be twice the sum of age of two children.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 160,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 137,
+          "teacher_input_default": true,
+          "text": "Find the age of father.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "father.children.count = 2",
+              "father.age_to_children_age_sum_multiplier_now = 3",
+              "father.age_now = father.children.age_sum_now * father.age_to_children_age_sum_multiplier_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "future.after_years = 5",
+              "father.age_growth_to_future = future.after_years",
+              "father.children.age_sum_growth_to_future = father.children.count * future.after_years",
+              "father.age_to_children_age_sum_multiplier_in_5y = 2",
+              "father.children.age_sum_now = (father.age_to_children_age_sum_multiplier_in_5y * father.children.age_sum_growth_to_future - father.age_growth_to_future) / (father.age_to_children_age_sum_multiplier_now - father.age_to_children_age_sum_multiplier_in_5y)",
+              "father.children.age_sum_in_5y = father.children.age_sum_now + father.children.age_sum_growth_to_future",
+              "father.age_in_5y = father.children.age_sum_in_5y * father.age_to_children_age_sum_multiplier_in_5y"
+            ],
+            "assumptions": [
+              "Both children and the father age by five years during the stated interval."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "The present children-age sum is grounded by algebraically combining the stated present and future age relations while preserving both multipliers and the five-year age changes."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN father.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1410"
+      },
+      "question": "Father's age is three times the sum of the ages of his two children. After 5 years his age will be twice the sum of age of two children. Find the age of father.",
+      "source_context": null,
+      "source_id": "asdiv-1410",
+      "validation_failure": "answer mismatch: actual=45, expected=15",
+      "validator_context": {
+        "correct_answer": "15",
+        "gold_reasoning": "x:The age of the father; y:The sum of the ages of two children; x=3y; x+5=2(y+5)"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 61,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sarah's Shipping and Ryan's Mail Services both ship packages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 62,
+          "teacher_input_default": true,
+          "text": "Sarah's trucks will only carry loads of 18 packages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 179,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "In contrast, Ryan's trucks will only carry loads of 11 packages.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 321,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 180,
+          "teacher_input_default": true,
+          "text": "If both businesses ended up shipping the same number of packages this morning, what is the minimum number of packages each must have shipped?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The clause introduces the two shipping businesses but contains no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "sarah_shipping.truck_load.packages = 18"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "ryan_mail_services.truck_load.packages = 11"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The query requires finding the least positive common multiple of the two integral truck-load sizes, but the active operator registry has no least-common-multiple or bounded integer-search operation."
+            ],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2018"
+      },
+      "question": "Sarah's Shipping and Ryan's Mail Services both ship packages. Sarah's trucks will only carry loads of 18 packages. In contrast, Ryan's trucks will only carry loads of 11 packages. If both businesses ended up shipping the same number of packages this morning, what is the minimum number of packages each must have shipped?",
+      "source_context": null,
+      "source_id": "asdiv-2018",
+      "validation_failure": "non-ok semantic parts: part 3=unsupported",
+      "validator_context": {
+        "correct_answer": "198",
+        "gold_reasoning": "LCM[18,11]=198"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

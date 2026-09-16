@@ -1,0 +1,351 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 102,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A factory that produces ice cream can manufacture 100 quarts of chocolate flavor in a span of 2 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 191,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 103,
+          "teacher_input_default": true,
+          "text": "In the same factory, 50 quarts of vanilla flavor can be produced in a period of 4 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 295,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 192,
+          "teacher_input_default": true,
+          "text": "If the factory operates for 48 hours, what would be the total quantity of ice cream produced in quarts?",
+          "warnings": []
+        }
+      ],
+      "question": "A factory that produces ice cream can manufacture 100 quarts of chocolate flavor in a span of 2 hours. In the same factory, 50 quarts of vanilla flavor can be produced in a period of 4 hours. If the factory operates for 48 hours, what would be the total quantity of ice cream produced in quarts?",
+      "source_id": "gsm-plus-05677"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 72,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "An ice cream factory makes 100 quarts of chocolate ice cream in 2 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 128,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 74,
+          "teacher_input_default": true,
+          "text": "It can make 50 quarts of vanilla ice cream in 4 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 129,
+          "teacher_input_default": true,
+          "text": "Each quart of ice cream can hold 20 boxes.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 224,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 173,
+          "teacher_input_default": true,
+          "text": "How many quarts in total would be made in 48 hours?",
+          "warnings": []
+        }
+      ],
+      "question": "An ice cream factory makes 100 quarts of chocolate ice cream in 2 hours.  It can make 50 quarts of vanilla ice cream in 4 hours. Each quart of ice cream can hold 20 boxes.  How many quarts in total would be made in 48 hours?",
+      "source_id": "gsm-plus-05678"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack decides to visit a museum 200 miles from home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 84,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "He drives 80 mph there and back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 117,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 85,
+          "teacher_input_default": true,
+          "text": "He spends 5 hours at the museum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 148,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "How long is he gone from home?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack decides to visit a museum 200 miles from home. He drives 80 mph there and back. He spends 5 hours at the museum. How long is he gone from home?",
+      "source_id": "gsm-plus-06192"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack decides to visit a museum 1500 miles from home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 86,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "He drives 125 mph there and back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 87,
+          "teacher_input_default": true,
+          "text": "He spends 37 hours at the museum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "How long is he gone from home?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack decides to visit a museum 1500 miles from home. He drives 125 mph there and back. He spends 37 hours at the museum. How long is he gone from home?",
+      "source_id": "gsm-plus-06193"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 51,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jack decides to visit a museum 150 miles from home.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 100,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 52,
+          "teacher_input_default": true,
+          "text": "He drives at a speed of 37.5 mph there and back.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 101,
+          "teacher_input_default": true,
+          "text": "He spends 6.5 hours at the museum.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "How long, in decimal hours, is he gone from home?",
+          "warnings": []
+        }
+      ],
+      "question": "Jack decides to visit a museum 150 miles from home. He drives at a speed of 37.5 mph there and back. He spends 6.5 hours at the museum. How long, in decimal hours, is he gone from home?",
+      "source_id": "gsm-plus-06194"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

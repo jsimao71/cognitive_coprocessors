@@ -1,0 +1,340 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 114,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In the first half of a soccer match, team A scores 2/5 of ten goals while team B scores 2 goals fewer than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 115,
+          "teacher_input_default": true,
+          "text": "In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 317,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 264,
+          "teacher_input_default": true,
+          "text": "What's the total number of goals scored in the match?",
+          "warnings": []
+        }
+      ],
+      "question": "In the first half of a soccer match, team A scores 2/5 of ten goals while team B scores 2 goals fewer than team A. In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half. What's the total number of goals scored in the match?",
+      "source_id": "gsm-plus-09402"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a soccer match, team A scores 4 goals in the first half while team B scores 2 goals fewer than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 184,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "In the second half, team A scores 1/4 of the number of goals scored by team B.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 383,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 185,
+          "teacher_input_default": true,
+          "text": "However, team B's performance in the second half is influenced by a new strategy, which results in them scoring 4 times the number of goals they scored in the first half, plus an additional 4 goals.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 451,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 384,
+          "teacher_input_default": true,
+          "text": "What's the total number of goals scored in the match by both teams?",
+          "warnings": []
+        }
+      ],
+      "question": "In a soccer match, team A scores 4 goals in the first half while team B scores 2 goals fewer than team A. In the second half, team A scores 1/4 of the number of goals scored by team B. However, team B's performance in the second half is influenced by a new strategy, which results in them scoring 4 times the number of goals they scored in the first half, plus an additional 4 goals. What's the total number of goals scored in the match by both teams?",
+      "source_id": "gsm-plus-09403"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 105,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In the first half of a soccer match, team A scores 4 goals while team B scores 2 goals fewer than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 261,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 106,
+          "teacher_input_default": true,
+          "text": "In the second half, team A scores a fraction of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 403,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 262,
+          "teacher_input_default": true,
+          "text": "The total number of goals scored in the match is 16, calculate the percentage that the number of goals scored by A in goals scored by team B.",
+          "warnings": []
+        }
+      ],
+      "question": "In the first half of a soccer match, team A scores 4 goals while team B scores 2 goals fewer than team A. In the second half, team A scores a fraction of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half. The total number of goals scored in the match is 16, calculate the percentage that the number of goals scored by A in goals scored by team B.",
+      "source_id": "gsm-plus-09404"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 120,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "During the initial half of a football game, team A manages to score 4 goals, and team B scores 2 goals less than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 263,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 121,
+          "teacher_input_default": true,
+          "text": "In the subsequent half, the goals scored by team A are a quarter of what team B scores, with team B scoring four times its first half's goals.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 335,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 264,
+          "teacher_input_default": true,
+          "text": "Can you calculate the total number of goals scored throughout the game?",
+          "warnings": []
+        }
+      ],
+      "question": "During the initial half of a football game, team A manages to score 4 goals, and team B scores 2 goals less than team A. In the subsequent half, the goals scored by team A are a quarter of what team B scores, with team B scoring four times its first half's goals. Can you calculate the total number of goals scored throughout the game?",
+      "source_id": "gsm-plus-09405"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 110,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "During a soccer match, in the first half, team A scores 4 goals while team B scores 2 goals fewer than team A.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 111,
+          "teacher_input_default": true,
+          "text": "Simultaneously, a spectator in the stands is keeping track of the number of times the ball hits the crossbar, which happens to be 5 times.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 398,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 250,
+          "teacher_input_default": true,
+          "text": "In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 498,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 399,
+          "teacher_input_default": true,
+          "text": "Meanwhile, the spectator notes that the ball hits the crossbar 3 times more than in the first half.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 612,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 499,
+          "teacher_input_default": true,
+          "text": "What's the total number of goals scored in the match, disregarding the number of times the ball hit the crossbar?",
+          "warnings": []
+        }
+      ],
+      "question": "During a soccer match, in the first half, team A scores 4 goals while team B scores 2 goals fewer than team A. Simultaneously, a spectator in the stands is keeping track of the number of times the ball hits the crossbar, which happens to be 5 times. In the second half, team A scores 1/4 of the number of goals scored by team B, which scores 4 times the number of goals it scored in the first half. Meanwhile, the spectator notes that the ball hits the crossbar 3 times more than in the first half. What's the total number of goals scored in the match, disregarding the number of times the ball hit the crossbar?",
+      "source_id": "gsm-plus-09406"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

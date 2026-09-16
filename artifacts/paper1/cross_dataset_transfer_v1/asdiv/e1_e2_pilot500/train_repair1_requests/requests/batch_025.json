@@ -1,0 +1,447 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Five years ago, Nancy was thrice as old as Sam.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 99,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "Ten years later, Nancy will be twice as old as Sam.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 126,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 100,
+          "teacher_input_default": true,
+          "text": "How old are Nancy and Sam?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "past.years_before_now = 5",
+              "past.nancy_to_sam_age_ratio = 3",
+              "sam.age_5y_ago = sam.age_now - past.years_before_now",
+              "nancy.age_5y_ago = sam.age_5y_ago * past.nancy_to_sam_age_ratio",
+              "nancy.age_now = nancy.age_5y_ago + past.years_before_now"
+            ],
+            "assumptions": [
+              "Each person's age changes by one year per elapsed year."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "future.years_after_now = 10",
+              "future.nancy_to_sam_age_ratio = 2",
+              "sam.age_now = ((past.nancy_to_sam_age_ratio - 1) * past.years_before_now + (future.nancy_to_sam_age_ratio - 1) * future.years_after_now) / (past.nancy_to_sam_age_ratio - future.nancy_to_sam_age_ratio)",
+              "sam.age_in_10y = sam.age_now + future.years_after_now",
+              "nancy.age_in_10y = sam.age_in_10y * future.nancy_to_sam_age_ratio"
+            ],
+            "assumptions": [
+              "\"Ten years later\" means ten years after the present, rather than ten years after the earlier five-years-ago state.",
+              "Each person's age changes by one year per elapsed year."
+            ],
+            "confidence": 0.84,
+            "part_id": 1,
+            "semantic_notes": [
+              "Sam's present age is derived symbolically from the two stated temporal ratio relations."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN nancy.age_now",
+              "RETURN sam.age_now"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1418"
+      },
+      "question": "Five years ago, Nancy was thrice as old as Sam. Ten years later, Nancy will be twice as old as Sam. How old are Nancy and Sam?",
+      "source_context": null,
+      "source_id": "asdiv-1418",
+      "validation_failure": "answer mismatch: actual=20, expected=50",
+      "validator_context": {
+        "correct_answer": "50",
+        "gold_reasoning": "x:Sam's present age; y:Nancy's present age; y-5=3(x-5); y+10=2(x+10)"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carmen is creating lollipop bouquets using 4 cherry lollipops and 6 orange lollipops.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 86,
+          "teacher_input_default": true,
+          "text": "She wants each bouquet to be identical, with no lollipops left over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 222,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 155,
+          "teacher_input_default": true,
+          "text": "What is the greatest number of lollipop bouquets Carmen can create?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "carmen.cherry_lollipops = 4",
+              "carmen.orange_lollipops = 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The active arithmetic profile cannot express the requirement that the bouquet count divide both lollipop counts with no remainder while making every bouquet identical."
+            ],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "Finding the greatest feasible bouquet count requires a greatest-common-divisor or integer-divisibility construction, which the supplied operator registry cannot express."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1201"
+      },
+      "question": "Carmen is creating lollipop bouquets using 4 cherry lollipops and 6 orange lollipops. She wants each bouquet to be identical, with no lollipops left over. What is the greatest number of lollipop bouquets Carmen can create?",
+      "source_context": null,
+      "source_id": "asdiv-1201",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported, part 2=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "GCD(4,6)=2"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 47,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A restaurant offers diet soda and regular soda.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 78,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 48,
+          "teacher_input_default": true,
+          "text": "In one day they sold 64 sodas.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 178,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 79,
+          "teacher_input_default": true,
+          "text": "If 28 of the sodas they sold were diet, what is the ratio of regular sodas sold to diet sodas sold?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "restaurant.sodas.diet.availability = \"offered\"",
+              "restaurant.sodas.regular.availability = \"offered\""
+            ],
+            "assumptions": [],
+            "confidence": 0.94,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "restaurant.sodas.total_sold = 64"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "restaurant.sodas.diet_sold = 28",
+              "restaurant.sodas.regular_sold = restaurant.sodas.total_sold - restaurant.sodas.diet_sold",
+              "restaurant.sodas.regular_to_diet_ratio = restaurant.sodas.regular_sold / restaurant.sodas.diet_sold",
+              "RETURN restaurant.sodas.regular_to_diet_ratio"
+            ],
+            "assumptions": [
+              "All sodas counted in the daily total are either diet or regular, consistent with the two offered categories."
+            ],
+            "confidence": 0.97,
+            "part_id": 2,
+            "semantic_notes": [
+              "The requested regular-to-diet ratio is represented in the stated order."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1689"
+      },
+      "question": "A restaurant offers diet soda and regular soda. In one day they sold 64 sodas. If 28 of the sodas they sold were diet, what is the ratio of regular sodas sold to diet sodas sold?",
+      "source_context": null,
+      "source_id": "asdiv-1689",
+      "validation_failure": "answer mismatch: actual=1.285714285714285714285714286, expected=9",
+      "validator_context": {
+        "correct_answer": "9",
+        "gold_reasoning": "64-28=36; 36:28=9:7"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Sean had 45 Starbursts.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 154,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "If Sean gave equal numbers of Starbursts to his 18 friends and then he ate what was left, how many Starbursts did each person eat?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "sean.initial.starbursts = 45"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause requires integer equal-share and remainder semantics: 18 friends receive equal whole-number shares and Sean eats the remainder. The active operator registry has neither integer division nor remainder operators, so ordinary division would not preserve the stated semantics."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2266"
+      },
+      "question": "Sean had 45 Starbursts. If Sean gave equal numbers of Starbursts to his 18 friends and then he ate what was left, how many Starbursts did each person eat?",
+      "source_context": null,
+      "source_id": "asdiv-2266",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "2",
+        "gold_reasoning": "45/18=2 r9"
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 23,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Samuel had 14 Skittles.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 24,
+          "teacher_input_default": true,
+          "text": "If Samuel gave equal numbers of Skittles to his 4 friends and then he ate what was left, how many Skittles did each person eat?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "samuel.initial.skittles = 14"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The clause requires integer equal-share and remainder semantics: 4 friends receive equal whole-number shares and Samuel eats the remainder. The active operator registry has neither integer division nor remainder operators, so ordinary division would not preserve the stated semantics."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "unsupported"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-2269"
+      },
+      "question": "Samuel had 14 Skittles. If Samuel gave equal numbers of Skittles to his 4 friends and then he ate what was left, how many Skittles did each person eat?",
+      "source_context": null,
+      "source_id": "asdiv-2269",
+      "validation_failure": "non-ok semantic parts: part 1=unsupported",
+      "validator_context": {
+        "correct_answer": "3",
+        "gold_reasoning": "14/4=3 r2"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

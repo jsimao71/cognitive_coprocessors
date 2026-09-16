@@ -1,0 +1,439 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jessica is trying to figure out how much to pay on all her debts each month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 219,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "Her student loans have a minimum payment of $300.5/month, her credit card's minimum is $200.5/month, and her mortgage's minimum is $500/month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 309,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 220,
+          "teacher_input_default": true,
+          "text": "If Jessica wants to pay 0.5 times more than the minimum, how much does she pay in a year?",
+          "warnings": []
+        }
+      ],
+      "question": "Jessica is trying to figure out how much to pay on all her debts each month. Her student loans have a minimum payment of $300.5/month, her credit card's minimum is $200.5/month, and her mortgage's minimum is $500/month. If Jessica wants to pay 0.5 times more than the minimum, how much does she pay in a year?",
+      "source_id": "gsm-plus-01386"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James has to buy insurance.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 29,
+          "teacher_input_default": true,
+          "text": "Since he had an accident he has to pay more than normal.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 86,
+          "teacher_input_default": true,
+          "text": "If he pays $2304 annually, and the normal cost is $120 a month.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 202,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "What's the percentage that he pays more than normal?",
+          "warnings": []
+        }
+      ],
+      "question": "James has to buy insurance.  Since he had an accident he has to pay more than normal. If he pays $2304 annually, and the normal cost is $120 a month. What's the percentage that he pays more than normal?",
+      "source_id": "gsm-plus-08444"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 83,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Julia was getting ready for a dinner at her place, where she planned to serve soup.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 171,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 84,
+          "teacher_input_default": true,
+          "text": "She realized that she was out of plastic spoons, so she purchased a new pack of spoons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 249,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 172,
+          "teacher_input_default": true,
+          "text": "Later, her husband also bought a pack of 7 new spoons and gave them to Julia.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 332,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 250,
+          "teacher_input_default": true,
+          "text": "While Julia was preparing the soup, she used four of the spoons to taste her soup.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 401,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 333,
+          "teacher_input_default": true,
+          "text": "Later, when she went to lay the table, she had a total of 15 spoons.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 453,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 402,
+          "teacher_input_default": true,
+          "text": "How many spoons were in the pack that Julia bought?",
+          "warnings": []
+        }
+      ],
+      "question": "Julia was getting ready for a dinner at her place, where she planned to serve soup. She realized that she was out of plastic spoons, so she purchased a new pack of spoons. Later, her husband also bought a pack of 7 new spoons and gave them to Julia. While Julia was preparing the soup, she used four of the spoons to taste her soup. Later, when she went to lay the table, she had a total of 15 spoons. How many spoons were in the pack that Julia bought?",
+      "source_id": "gsm-plus-01000"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 136,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Maria was charging her power bank before going to the park when she disconnected it and noticed the power bank wasn\u2019t fully charged yet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 211,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 137,
+          "teacher_input_default": true,
+          "text": "Once at the park, her friends asked her if they could charge their phones.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 326,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 212,
+          "teacher_input_default": true,
+          "text": "While charging her friends\u2019 phones, she noticed that her power bank was losing 9% of the total capacity each hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 430,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 327,
+          "teacher_input_default": true,
+          "text": "5 hours later the battery started to lose instead 7% of the total capacity each hour for about 3 hours.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 531,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 431,
+          "teacher_input_default": true,
+          "text": "After that, the battery started to lose instead 2% of the total capacity each hour for about 1 hour.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 573,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 532,
+          "teacher_input_default": true,
+          "text": "In the end, the charge remaining was 28%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 644,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 574,
+          "teacher_input_default": true,
+          "text": "What was the charge of the power bank when Maria went out to the park?",
+          "warnings": []
+        }
+      ],
+      "question": "Maria was charging her power bank before going to the park when she disconnected it and noticed the power bank wasn\u2019t fully charged yet. Once at the park, her friends asked her if they could charge their phones. While charging her friends\u2019 phones, she noticed that her power bank was losing 9% of the total capacity each hour. 5 hours later the battery started to lose instead 7% of the total capacity each hour for about 3 hours. After that, the battery started to lose instead 2% of the total capacity each hour for about 1 hour. In the end, the charge remaining was 28%. What was the charge of the power bank when Maria went out to the park?",
+      "source_id": "gsm-plus-08099"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 52,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "James needs to get more toys for his doggie shelter.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 76,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 53,
+          "teacher_input_default": true,
+          "text": "Each dog needs one toy.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 169,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 77,
+          "teacher_input_default": true,
+          "text": "James currently has 4 toys on hand for 4 dogs, but there are 8 more dogs in the shelter now.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 302,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 170,
+          "teacher_input_default": true,
+          "text": "After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 389,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 303,
+          "teacher_input_default": true,
+          "text": "When James came back yet again, some dogs were gone so he no longer needed those toys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 427,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 390,
+          "teacher_input_default": true,
+          "text": "James needs 33 toys in total at last.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 451,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 428,
+          "teacher_input_default": true,
+          "text": "How many dogs are gone?",
+          "warnings": []
+        }
+      ],
+      "question": "James needs to get more toys for his doggie shelter. Each dog needs one toy. James currently has 4 toys on hand for 4 dogs, but there are 8 more dogs in the shelter now. After buying the toys, he went back to see that there are twice as many more dogs than when he left so he had to buy some more toys. When James came back yet again, some dogs were gone so he no longer needed those toys. James needs 33 toys in total at last. How many dogs are gone?",
+      "source_id": "gsm-plus-05404"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

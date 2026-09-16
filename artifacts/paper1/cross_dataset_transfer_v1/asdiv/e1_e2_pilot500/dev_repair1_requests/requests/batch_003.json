@@ -1,0 +1,443 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 48,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The difference of 5 times a number and 17 is 23.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 88,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 49,
+          "teacher_input_default": true,
+          "text": "Find the number and 5 times the number.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "number.five_times_minus_17 = 23",
+              "number.five_times = number.five_times_minus_17 + 17",
+              "number.original = number.five_times / 5"
+            ],
+            "assumptions": [
+              "Interprets \u201cthe difference of 5 times a number and 17\u201d as five times the number minus 17."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [
+              "The inverse relations preserve both the stated difference and its connection to the original number."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN number.original",
+              "RETURN number.five_times"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1316"
+      },
+      "question": "The difference of 5 times a number and 17 is 23. Find the number and 5 times the number.",
+      "source_context": null,
+      "source_id": "asdiv-1316",
+      "validation_failure": "answer mismatch: actual=40, expected=8",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 56,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a fraction, the denominator is 3 more than numerator.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 99,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 57,
+          "teacher_input_default": true,
+          "text": "The sum of numerator and denominator is 7.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 118,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 100,
+          "teacher_input_default": true,
+          "text": "Find the fraction.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "fraction.denominator = fraction.numerator + 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fraction.numerator_denominator_sum = 7",
+              "fraction.numerator = (fraction.numerator_denominator_sum - 3) / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.97,
+            "part_id": 1,
+            "semantic_notes": [
+              "The numerator derivation combines the stated sum with the denominator relation from the preceding part."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "fraction.value = fraction.numerator / fraction.denominator",
+              "RETURN fraction.value"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1332"
+      },
+      "question": "In a fraction, the denominator is 3 more than numerator. The sum of numerator and denominator is 7. Find the fraction.",
+      "source_context": null,
+      "source_id": "asdiv-1332",
+      "validation_failure": "anonymous operation-ledger target: fraction.value",
+      "validator_context": {
+        "correct_answer": "5/2",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 94,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "The area of trapezium is 84 Sq.cm and height is 8 cm. The parallel sides are in the ratio 2:5.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 124,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 95,
+          "teacher_input_default": true,
+          "text": "Find the length of the bases.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "trapezium.area_sq_cm = 84",
+              "trapezium.height_cm = 8",
+              "trapezium.base_2_parts.ratio_part = 2",
+              "trapezium.base_5_parts.ratio_part = 5"
+            ],
+            "assumptions": [
+              "Maps the first and second terms of the stated 2:5 ratio to semantic base identifiers based on their ratio parts."
+            ],
+            "confidence": 0.97,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "trapezium.bases.total_length_cm = trapezium.area_sq_cm * 2 / trapezium.height_cm",
+              "trapezium.base_2_parts.length_cm = trapezium.bases.total_length_cm * trapezium.base_2_parts.ratio_part / sum(trapezium.base_2_parts.ratio_part, trapezium.base_5_parts.ratio_part)",
+              "trapezium.base_5_parts.length_cm = trapezium.bases.total_length_cm * trapezium.base_5_parts.ratio_part / sum(trapezium.base_2_parts.ratio_part, trapezium.base_5_parts.ratio_part)",
+              "RETURN trapezium.base_2_parts.length_cm",
+              "RETURN trapezium.base_5_parts.length_cm"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [
+              "Uses the standard trapezium area relation: area equals one half of the height times the sum of the parallel bases."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1335"
+      },
+      "question": "The area of trapezium is 84 Sq.cm and height is 8 cm. The parallel sides are in the ratio 2:5. Find the length of the bases.",
+      "source_context": null,
+      "source_id": "asdiv-1335",
+      "validation_failure": "answer mismatch: actual=15, expected=6",
+      "validator_context": {
+        "correct_answer": "6",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 67,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A rectangular swimming pool was constructed for Kids at Hotel Park.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 119,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 68,
+          "teacher_input_default": true,
+          "text": "The length of the swimming pool is twice its width.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 180,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 120,
+          "teacher_input_default": true,
+          "text": "If the length is 16 ft, find the width and area of the pool.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "local_codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "hotel_park.kids_pool.shape = \"rectangular\""
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 0,
+            "semantic_notes": [
+              "The semantic path preserves the stated location and intended users."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "hotel_park.kids_pool.width_ft = hotel_park.kids_pool.length_ft / 2"
+            ],
+            "assumptions": [
+              "Uses feet for both dimensions because the subsequent clause supplies the pool length in feet."
+            ],
+            "confidence": 0.98,
+            "part_id": 1,
+            "semantic_notes": [
+              "The relation is oriented toward width so the later length fact can ground the forward dependency."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "hotel_park.kids_pool.length_ft = 16",
+              "hotel_park.kids_pool.area_sq_ft = hotel_park.kids_pool.length_ft * hotel_park.kids_pool.width_ft",
+              "RETURN hotel_park.kids_pool.width_ft",
+              "RETURN hotel_park.kids_pool.area_sq_ft"
+            ],
+            "assumptions": [
+              "Uses the standard area relation for a rectangle."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1344"
+      },
+      "question": "A rectangular swimming pool was constructed for Kids at Hotel Park. The length of the swimming pool is twice its width. If the length is 16 ft, find the width and area of the pool.",
+      "source_context": null,
+      "source_id": "asdiv-1344",
+      "validation_failure": "answer mismatch: actual=128, expected=8",
+      "validator_context": {
+        "correct_answer": "8",
+        "gold_reasoning": null
+      }
+    },
+    {
+      "dataset": "asdiv",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 131,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "If the second angle is 32 degree less than thrice the first angle and the third angle is 28 degree less than twice the first angle.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 132,
+          "teacher_input_default": true,
+          "text": "Find the angles of the triangle.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "asdiv",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "triangle.second_angle.degrees = triangle.first_angle.degrees * 3 - 32",
+              "triangle.third_angle.degrees = triangle.first_angle.degrees * 2 - 28"
+            ],
+            "assumptions": [],
+            "confidence": 0.98,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "triangle.angle_sum.degrees = 180",
+              "triangle.first_angle.degrees = (triangle.angle_sum.degrees + 32 + 28) / 6",
+              "RETURN triangle.first_angle.degrees",
+              "RETURN triangle.second_angle.degrees",
+              "RETURN triangle.third_angle.degrees"
+            ],
+            "assumptions": [
+              "Uses the Euclidean fact that a triangle's interior angles sum to 180 degrees."
+            ],
+            "confidence": 0.94,
+            "part_id": 1,
+            "semantic_notes": [
+              "The three return statements preserve the plural query intent."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "asdiv-1347"
+      },
+      "question": "If the second angle is 32 degree less than thrice the first angle and the third angle is 28 degree less than twice the first angle. Find the angles of the triangle.",
+      "source_context": null,
+      "source_id": "asdiv-1347",
+      "validation_failure": "answer mismatch: actual=52, expected=40",
+      "validator_context": {
+        "correct_answer": "40",
+        "gold_reasoning": null
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

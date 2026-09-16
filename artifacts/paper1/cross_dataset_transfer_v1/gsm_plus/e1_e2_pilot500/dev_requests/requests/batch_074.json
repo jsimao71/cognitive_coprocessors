@@ -1,0 +1,483 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 151,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Three people decided to invest in a joint savings account during a lunar eclipse, a time when they believed their investments would be most prosperous.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 185,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 152,
+          "teacher_input_default": true,
+          "text": "They collectively invested $1200.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 295,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 186,
+          "teacher_input_default": true,
+          "text": "Dylan, being superstitious, decided to invest exactly 2/5 of the total amount during the peak of the eclipse.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 416,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 296,
+          "teacher_input_default": true,
+          "text": "Frances, who was less superstitious, waited until the eclipse was 2/3 over before investing 2/3 of the remaining amount.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 543,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 417,
+          "teacher_input_default": true,
+          "text": "Skyler, who didn't believe in the superstitions at all, invested the rest of the money once the eclipse had completely passed.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 583,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 544,
+          "teacher_input_default": true,
+          "text": "How much money was Skyler's investment?",
+          "warnings": []
+        }
+      ],
+      "question": "Three people decided to invest in a joint savings account during a lunar eclipse, a time when they believed their investments would be most prosperous. They collectively invested $1200. Dylan, being superstitious, decided to invest exactly 2/5 of the total amount during the peak of the eclipse. Frances, who was less superstitious, waited until the eclipse was 2/3 over before investing 2/3 of the remaining amount. Skyler, who didn't believe in the superstitions at all, invested the rest of the money once the eclipse had completely passed. How much money was Skyler's investment?",
+      "source_id": "gsm-plus-05414"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A certain company is in the business of selling fresh fruit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "One crate of such fruit consists of 6 bananas, 15 apples, and 8 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "The price for such a crate depends on the price of its individual fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "One apple costs $0.6 and one banana costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 347,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "Oranges are the most expensive and cost three times as much as a banana per piece.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 398,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 348,
+          "teacher_input_default": true,
+          "text": "What would be the price for such a crate of fruit?",
+          "warnings": []
+        }
+      ],
+      "question": "A certain company is in the business of selling fresh fruit. One crate of such fruit consists of 6 bananas, 15 apples, and 8 oranges. The price for such a crate depends on the price of its individual fruits. One apple costs $0.6 and one banana costs twice as much. Oranges are the most expensive and cost three times as much as a banana per piece. What would be the price for such a crate of fruit?",
+      "source_id": "gsm-plus-05536"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A certain company is in the business of selling fresh fruit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 135,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "One crate of such fruit consists of 18 bananas, 12 apples, and 15 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 209,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 136,
+          "teacher_input_default": true,
+          "text": "The price for such a crate depends on the price of its individual fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 266,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 210,
+          "teacher_input_default": true,
+          "text": "One apple costs $0.5 and one banana costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 349,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 267,
+          "teacher_input_default": true,
+          "text": "Oranges are the most expensive and cost three times as much as a banana per piece.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 400,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 350,
+          "teacher_input_default": true,
+          "text": "What would be the price for such a crate of fruit?",
+          "warnings": []
+        }
+      ],
+      "question": "A certain company is in the business of selling fresh fruit. One crate of such fruit consists of 18 bananas, 12 apples, and 15 oranges. The price for such a crate depends on the price of its individual fruits. One apple costs $0.5 and one banana costs twice as much. Oranges are the most expensive and cost three times as much as a banana per piece. What would be the price for such a crate of fruit?",
+      "source_id": "gsm-plus-05537"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A certain company is in the business of selling fresh fruit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "The price for such a crate depends on the price of its individual fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "One apple costs $0.5 and one banana costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 345,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "Oranges are the most expensive and cost 3.5 times as much as a banana per piece.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 396,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 346,
+          "teacher_input_default": true,
+          "text": "What would be the price for such a crate of fruit?",
+          "warnings": []
+        }
+      ],
+      "question": "A certain company is in the business of selling fresh fruit. One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges. The price for such a crate depends on the price of its individual fruits. One apple costs $0.5 and one banana costs twice as much. Oranges are the most expensive and cost 3.5 times as much as a banana per piece. What would be the price for such a crate of fruit?",
+      "source_id": "gsm-plus-05538"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 60,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "A certain company is in the business of selling fresh fruit.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 133,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 61,
+          "teacher_input_default": true,
+          "text": "One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 207,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 134,
+          "teacher_input_default": true,
+          "text": "The price for such a crate depends on the price of its individual fruits.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 264,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 208,
+          "teacher_input_default": true,
+          "text": "One apple costs $0.5 and one banana costs twice as much.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 347,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 265,
+          "teacher_input_default": true,
+          "text": "Oranges are the most expensive and cost three times as much as a banana per piece.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 431,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 349,
+          "teacher_input_default": true,
+          "text": "If a customer buys a crate of fruit and gets a discount of 10% on the total price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 482,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 432,
+          "teacher_input_default": true,
+          "text": "What would be the price for such a crate of fruit?",
+          "warnings": []
+        }
+      ],
+      "question": "A certain company is in the business of selling fresh fruit. One crate of such fruit consists of 5 bananas, 12 apples, and 7 oranges. The price for such a crate depends on the price of its individual fruits. One apple costs $0.5 and one banana costs twice as much. Oranges are the most expensive and cost three times as much as a banana per piece.  If a customer buys a crate of fruit and gets a discount of 10% on the total price. What would be the price for such a crate of fruit?",
+      "source_id": "gsm-plus-05539"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}

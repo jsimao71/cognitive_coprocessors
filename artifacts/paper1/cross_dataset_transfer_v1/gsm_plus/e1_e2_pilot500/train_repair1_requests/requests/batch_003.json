@@ -1,0 +1,572 @@
+{
+  "answer_hidden": false,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 68,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Rory is retrieving tennis balls from the court after a tennis match.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 155,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 69,
+          "teacher_input_default": true,
+          "text": "In the first of three sets, he had to retrieve four more balls than in the second set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 223,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 156,
+          "teacher_input_default": true,
+          "text": "In the third set, he retrieved half as many balls as in the second.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 287,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 224,
+          "teacher_input_default": true,
+          "text": "He retrieved 19 tennis balls in all, seven of which were green.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 356,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 288,
+          "teacher_input_default": true,
+          "text": "How many tennis balls did he retrieve in the first set of the match?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "This clause supplies narrative context but introduces no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.first_set.tennis_balls = rory.second_set.tennis_balls + 4"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.third_set.tennis_balls = rory.second_set.tennis_balls / 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "rory.all_sets.tennis_balls = 19",
+              "rory.all_sets.green_tennis_balls = 7"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The green-ball count is retained even though it is not needed by the final query."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN rory.first_set.tennis_balls"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08382"
+      },
+      "question": "Rory is retrieving tennis balls from the court after a tennis match. In the first of three sets, he had to retrieve four more balls than in the second set. In the third set, he retrieved half as many balls as in the second. He retrieved 19 tennis balls in all, seven of which were green. How many tennis balls did he retrieve in the first set of the match?",
+      "source_context": null,
+      "source_id": "gsm-plus-08382",
+      "validation_failure": "unresolved reference 'rory.second_set.tennis_balls' from scope 'global'; unresolved reference 'rory.second_set.tennis_balls' from scope 'global'; unresolved reference 'rory.first_set.tennis_balls' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "10",
+        "gold_reasoning": "Let B be the number of tennis balls Rory retrieved in the third set.\nIn the second set, he retrieved 2B balls.\nIn the first set, he retrieved 2B + 4 balls.\nIn total, he retrieved B + 2B + 2B + 4 = 5B + 4 = 19 balls.\nThus, 5B = 19 - 4 = 15 balls.\nTherefore, in the third set, Rory retrieved B = 15 / 5 = <<15/5=3>>3 balls.\nHence, in the second set, he retrieved 2B = 3 * 2 = 6 balls.\nIn the first set he retrieved 2(3) + 4 balls = 10\n#### 10"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 87,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Carlos, Jim and Carrey were at the park playing and they decided to gather some leaves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 157,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 88,
+          "teacher_input_default": true,
+          "text": "Jim collected 36 leaves, which was 6 more than what Carlos collected.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 199,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 158,
+          "teacher_input_default": true,
+          "text": "Carlos collected twice as many as Carrey.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 273,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 200,
+          "teacher_input_default": true,
+          "text": "They gathered all their leaves and divided them equally among themselves.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 303,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 274,
+          "teacher_input_default": true,
+          "text": "How many did each person get?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Narrative setup introduces the participants and leaf-gathering activity but no arithmetic state delta."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "jim.leaves_collected = 36",
+              "jim.leaves_collected = carlos.leaves_collected + 6"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "carlos.leaves_collected = carrey.leaves_collected * 2"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "group.total_leaves = sum(carlos.leaves_collected, jim.leaves_collected, carrey.leaves_collected)",
+              "group.each_person_leaves = group.total_leaves / 3"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [
+              "The divisor preserves the three explicitly named participants."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN group.each_person_leaves"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 4,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-09224"
+      },
+      "question": "Carlos, Jim and Carrey were at the park playing and they decided to gather some leaves. Jim collected 36 leaves, which was 6 more than what Carlos collected. Carlos collected twice as many as Carrey. They gathered all their leaves and divided them equally among themselves. How many did each person get?",
+      "source_context": null,
+      "source_id": "gsm-plus-09224",
+      "validation_failure": "unresolved reference 'carlos.leaves_collected' from scope 'global'; unresolved reference 'carrey.leaves_collected' from scope 'global'; unresolved reference 'carlos.leaves_collected' from scope 'global'; unresolved reference 'group.total_leaves' from scope 'global'; unresolved reference 'group.each_person_leaves' from scope 'global'",
+      "validator_context": {
+        "correct_answer": "27",
+        "gold_reasoning": "Carlos collected 36 - 6 =  30 leaves.\nCarrey collected 30 / 2 =  15 leaves.\nTogether, they collected 36 + 30 + 15 =  81 leaves.\nEach person got 81 / 3 =  27 leaves.\n#### 27"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 33,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tom buys a bedroom set for $3000.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 139,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 34,
+          "teacher_input_default": true,
+          "text": "He manages to sell his old bedroom set for $10,000 and uses that amount to partially pay for the new set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 215,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 140,
+          "teacher_input_default": true,
+          "text": "He then has to pay 10% per month for the remaining cost of the bedroom set.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 255,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 216,
+          "teacher_input_default": true,
+          "text": "How much does he have to pay per month?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "tom.new_bedroom_set.price_dollars = 3000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The stated $10,000 sale proceeds exceed the new set's $3,000 price, contradicting the claim that the proceeds only partially pay for it; the intended remaining cost cannot be represented without inventing how much was actually applied."
+            ],
+            "confidence": 0.99,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ambiguous"
+          },
+          {
+            "asl": [
+              "tom.new_bedroom_set.monthly_payment_dollars = percent_of(tom.new_bedroom_set.remaining_cost_dollars, 10)"
+            ],
+            "assumptions": [],
+            "confidence": 0.96,
+            "part_id": 2,
+            "semantic_notes": [
+              "The remaining cost is retained as a legitimate forward semantic dependency because the source explicitly names it."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "RETURN tom.new_bedroom_set.monthly_payment_dollars"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 3,
+            "semantic_notes": [],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08225"
+      },
+      "question": "Tom buys a bedroom set for $3000. He manages to sell his old bedroom set for $10,000 and uses that amount to partially pay for the new set. He then has to pay 10% per month for the remaining cost of the bedroom set. How much does he have to pay per month?",
+      "source_context": null,
+      "source_id": "gsm-plus-08225",
+      "validation_failure": "non-ok semantic parts: part 1=ambiguous",
+      "validator_context": {
+        "correct_answer": "2000",
+        "gold_reasoning": "Tom's remaining cost for the bedroom set is $30,000 - $10,000 = $20,000. \n\nSo, he has to pay 10% of $20,000 per month, which is $20,000 * 10/100 = $2,000.\n\nTherefore, Tom has to pay  $2,000 per month.\n#### 2000"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 85,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Jaime is a computer programmer for a company that currently has employed 1000 people.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 149,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 86,
+          "teacher_input_default": true,
+          "text": "Senior programmers are paid $4000 more than junior programmers.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 358,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 150,
+          "teacher_input_default": true,
+          "text": "If the number of Junior programmers is 2/5 of the total number of employees, and they are each paid $20000 per month, calculate the total amount of money the corporation pays to all the programmers per month.",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "company.total_employees = 1000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [
+              "Jaime's occupation is non-quantitative context and introduces no additional arithmetic state."
+            ],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "company.senior_programmers.monthly_pay_dollars_per_person = company.junior_programmers.monthly_pay_dollars_per_person + 4000"
+            ],
+            "assumptions": [
+              "The later monthly-pay context supplies the time basis for the stated pay difference."
+            ],
+            "confidence": 0.96,
+            "part_id": 1,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [],
+            "assumptions": [
+              "The text does not establish that every non-junior employee is a senior programmer, nor otherwise state how many senior programmers the company employs, so total programmer payroll is underdetermined."
+            ],
+            "confidence": 0.99,
+            "part_id": 2,
+            "semantic_notes": [
+              "The clause states the junior-programmer count fraction and monthly pay, but its requested total also requires the number of senior programmers."
+            ],
+            "status": "ambiguous"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-02601"
+      },
+      "question": "Jaime is a computer programmer for a company that currently has employed 1000 people. Senior programmers are paid $4000 more than junior programmers. If the number of Junior programmers is 2/5 of the total number of employees, and they are each paid $20000 per month, calculate the total amount of money the corporation pays to all the programmers per month.",
+      "source_context": null,
+      "source_id": "gsm-plus-02601",
+      "validation_failure": "non-ok semantic parts: part 2=ambiguous",
+      "validator_context": {
+        "correct_answer": "22400000",
+        "gold_reasoning": "First, find the number of junior programmers: 1000 employees * 2/5 = 400 junior programmers\nThen find the salary of a senior programmer: $20000 + $4000 = $24000\nThe number of senior programmers is the total number of employees minus the number of junior programmers: 1000 employees - 400 junior programmers = 600 senior programmers\nThen find the total amount of money the corporation pays to the junior programmers: 400 junior programmers * $20000/month = $8000000/month\nThen find the total amount of money the corporation pays to the senior programmers: 600 senior programmers * $24000/month = $14400000/month\nThen add the amount of money the corporation pays to the junior and senior programmers to find the total amount of money it pays to all the programmers: $8000000/month + $14400000/month =\n#### 22400000"
+      }
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 89,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "It is approximately 1955000 meters from San Diego, California to New York City, New York.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 182,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 90,
+          "teacher_input_default": true,
+          "text": "If Bernice drove 325000 meters for 4 days, how many kilometers will she still need to drive?",
+          "warnings": []
+        }
+      ],
+      "previous_annotation": {
+        "annotator": "codex",
+        "answer_hidden": true,
+        "dataset": "gsm_plus",
+        "manually_reviewed": false,
+        "part_mappings": [
+          {
+            "asl": [
+              "trip.san_diego_to_new_york_distance_meters = 1955000"
+            ],
+            "assumptions": [],
+            "confidence": 0.99,
+            "part_id": 0,
+            "semantic_notes": [],
+            "status": "ok"
+          },
+          {
+            "asl": [
+              "bernice.daily_driving_distance_meters = 325000",
+              "bernice.driving_duration_days = 4",
+              "bernice.distance_driven_meters = rate_times_duration(bernice.daily_driving_distance_meters, bernice.driving_duration_days)",
+              "bernice.remaining_driving_distance_meters = trip.san_diego_to_new_york_distance_meters - bernice.distance_driven_meters",
+              "bernice.remaining_driving_distance_kilometers = bernice.remaining_driving_distance_meters / 1000",
+              "RETURN bernice.remaining_driving_distance_kilometers"
+            ],
+            "assumptions": [
+              "Interpreted \u201cdrove 325000 meters for 4 days\u201d as 325000 meters on each of the four days."
+            ],
+            "confidence": 0.84,
+            "part_id": 1,
+            "semantic_notes": [
+              "The remaining distance is converted from meters to the requested kilometers."
+            ],
+            "status": "ok"
+          }
+        ],
+        "rationale_assisted": false,
+        "rationale_hidden": true,
+        "repair_round": 0,
+        "source_id": "gsm-plus-08401"
+      },
+      "question": "It is approximately 1955000 meters from San Diego, California to New York City, New York. If Bernice drove 325000 meters for 4 days, how many kilometers will she still need to drive?",
+      "source_context": null,
+      "source_id": "gsm-plus-08401",
+      "validation_failure": "answer mismatch: actual=655, expected=655000",
+      "validator_context": {
+        "correct_answer": "655000",
+        "gold_reasoning": "325000 * 4 = <<325000*4=1300000>>1300000 m\n1955000 - 1300000 = <<1955000-1300000=655000>>655000 m\nBernice will still have 655000 meters to travel.\n#### 655000"
+      }
+    }
+  ],
+  "rationale_assisted": true,
+  "rationale_hidden": false,
+  "repair_round": 1,
+  "schema_version": "ccpu.dsl_dataset.local_codex_repair_batch.v1"
+}

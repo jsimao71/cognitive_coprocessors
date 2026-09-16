@@ -1,0 +1,91 @@
+{
+  "answer_hidden": true,
+  "categorical_failure_only": true,
+  "items": [
+    {
+      "dataset": "gsm8k",
+      "question": "Mark loves to see shows in theaters. He decided to visit the theater at least once a week. One performance lasts 3 hours. The price of the ticket depends on the time spent in the theater and stands at $5 for each hour. How much will Mark spend on visits to the theater in 6 weeks?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "881"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Haley is getting ready to watch a comet fly over her house. She spends two hours shopping for a telescope, half an hour getting everything set up in the backyard, three times the setup time making snacks, and 20 minutes watching the comet. What percentage of the total time she spent on all those activities was spent watching the comet, rounded to the nearest percent?",
+      "repair": {
+        "failure_class": "teacher_unsupported",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "3520"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Valerie needs to put stamps on the envelopes she is about to mail. She has thank you cards for each of her grandmother, uncle and aunt for the birthday presents they sent. She also has to pay the water bill and the electric bill separately. She wants to send three more mail-in rebates than she does bills and she has twice as many job applications as rebates to mail. How many stamps does she need if everything needs 1 stamp except the electric bill, which needs 2?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"valerie.mailings\", \"mailing\", \"valerie\", source(\"the envelopes she is about to mail\"))",
+          "collection(\"valerie.mailings.thank_you_cards\", \"thank_you_card\", \"valerie\", source(\"thank you cards for each of her grandmother, uncle and aunt\"))",
+          "member(\"valerie.mailings.thank_you_cards\", \"valerie.mailings.thank_you_cards.grandmother\", source(\"thank you cards for each of her grandmother, uncle and aunt\"))",
+          "member(\"valerie.mailings.thank_you_cards\", \"valerie.mailings.thank_you_cards.uncle\", source(\"thank you cards for each of her grandmother, uncle and aunt\"))",
+          "member(\"valerie.mailings.thank_you_cards\", \"valerie.mailings.thank_you_cards.aunt\", source(\"thank you cards for each of her grandmother, uncle and aunt\"))",
+          "collection(\"valerie.mailings.bills\", \"bill\", \"valerie\", source(\"the water bill and the electric bill separately\"))",
+          "member(\"valerie.mailings.bills\", \"valerie.mailings.bills.water\", source(\"the water bill and the electric bill separately\"))",
+          "member(\"valerie.mailings.bills\", \"valerie.mailings.bills.electric\", source(\"the water bill and the electric bill separately\"))",
+          "collection(\"valerie.mailings.mail_in_rebates\", \"mail_in_rebate\", \"valerie\", source(\"three more mail-in rebates than she does bills\"))",
+          "collection(\"valerie.mailings.job_applications\", \"job_application\", \"valerie\", source(\"twice as many job applications as rebates to mail\"))",
+          "offset(\"valerie.mailings.mail_in_rebates.count\", \"valerie.mailings.bills.count\", 3, \"count\", source(\"three more mail-in rebates than she does bills\"))",
+          "multiple(\"valerie.mailings.job_applications.count\", \"valerie.mailings.mail_in_rebates.count\", 2, source(\"twice as many job applications as rebates to mail\"))",
+          "observe(at(\"valerie.mailings.default.required_stamps_per_item\", \"current\"), 1, \"stamp_per_item\", source(\"everything needs 1 stamp except the electric bill\"))",
+          "observe(at(\"valerie.mailings.bills.electric.required_stamps\", \"current\"), 2, \"stamp\", source(\"the electric bill, which needs 2\"))",
+          "query(\"value\", \"valerie.mailings.required_stamps.total\")"
+        ]
+      },
+      "source_id": "116"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "The length of the straight part of a river is three times shorter than the crooked part. If the river is 80 miles long, how long is the straight part of the river?",
+      "repair": {
+        "failure_class": "teacher_ambiguous",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": []
+      },
+      "source_id": "2723"
+    },
+    {
+      "dataset": "gsm8k",
+      "question": "Freddie and his team are collecting blankets for three days to be donated to the Children Shelter Organization. There are 15 people on the team. On the first day, each of them gave 2 blankets. On the second day, they tripled the number they collected on the first day by asking door-to-door. On the last day, they set up boxes at schools and got a total of 22 blankets. How many blankets did they collect for the three days for donation?",
+      "repair": {
+        "failure_class": "not_lowerable",
+        "feedback_detail": "categorical_only",
+        "previous_f3_program": [
+          "collection(\"freddie_team.children_shelter_donation.daily_collections\", \"daily_blanket_count\", \"freddie_team\", source(\"collecting blankets for three days to be donated to the Children Shelter Organization\"))",
+          "member(\"freddie_team.children_shelter_donation.daily_collections\", \"freddie_team.children_shelter_donation.daily_collections.first_day.count\", source(\"On the first day, each of them gave 2 blankets\"))",
+          "member(\"freddie_team.children_shelter_donation.daily_collections\", \"freddie_team.children_shelter_donation.daily_collections.second_day.count\", source(\"On the second day, they tripled the number they collected on the first day by asking door-to-door\"))",
+          "member(\"freddie_team.children_shelter_donation.daily_collections\", \"freddie_team.children_shelter_donation.daily_collections.last_day.count\", source(\"On the last day, they set up boxes at schools and got a total of 22 blankets\"))",
+          "observe(at(\"freddie_team.people.count\", \"current\"), 15, \"person\", source(\"There are 15 people on the team\"))",
+          "observe(at(\"freddie_team.children_shelter_donation.first_day.blankets_per_person\", \"first_day\"), 2, \"blanket_per_person\", source(\"each of them gave 2 blankets\"))",
+          "product_relation(at(\"freddie_team.children_shelter_donation.daily_collections.first_day.count\", \"first_day\"), at(\"freddie_team.people.count\", \"current\"), at(\"freddie_team.children_shelter_donation.first_day.blankets_per_person\", \"first_day\"), source(\"There are 15 people on the team. On the first day, each of them gave 2 blankets\"))",
+          "add(\"first_day_collection\", \"freddie_team.members\", at(\"freddie_team.children_shelter_donation.blankets.count\", \"current\"), at(\"freddie_team.children_shelter_donation.daily_collections.first_day.count\", \"first_day\"), source(\"On the first day, each of them gave 2 blankets\"))",
+          "multiple(at(\"freddie_team.children_shelter_donation.daily_collections.second_day.count\", \"second_day\"), at(\"freddie_team.children_shelter_donation.daily_collections.first_day.count\", \"first_day\"), 3, source(\"On the second day, they tripled the number they collected on the first day\"))",
+          "add(\"second_day_collection\", \"freddie_team\", at(\"freddie_team.children_shelter_donation.blankets.count\", \"current\"), at(\"freddie_team.children_shelter_donation.daily_collections.second_day.count\", \"second_day\"), source(\"On the second day, they tripled the number they collected on the first day by asking door-to-door\"))",
+          "observe(at(\"freddie_team.children_shelter_donation.daily_collections.last_day.count\", \"last_day\"), 22, \"blanket\", source(\"got a total of 22 blankets\"))",
+          "add(\"last_day_collection\", \"freddie_team\", at(\"freddie_team.children_shelter_donation.blankets.count\", \"current\"), at(\"freddie_team.children_shelter_donation.daily_collections.last_day.count\", \"last_day\"), source(\"On the last day, they set up boxes at schools and got a total of 22 blankets\"))",
+          "query(\"sum\", \"freddie_team.children_shelter_donation.daily_collections\", \"three_days\")"
+        ]
+      },
+      "source_id": "6263"
+    }
+  ],
+  "prior_programs_hidden": false,
+  "rationale_hidden": true,
+  "runtime_state_hidden": true,
+  "schema_version": "ccpu.paper1.f3.guided_repair_batch.v1",
+  "validator_values_hidden": true
+}

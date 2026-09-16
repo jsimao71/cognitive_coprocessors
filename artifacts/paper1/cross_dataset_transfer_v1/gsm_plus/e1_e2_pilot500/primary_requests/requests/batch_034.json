@@ -1,0 +1,428 @@
+{
+  "answer_hidden": true,
+  "items": [
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 71,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "In a graduating class, there are 44 seniors who need to receive awards.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 129,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 72,
+          "teacher_input_default": true,
+          "text": "Each senior is to receive a picture frame that costs $20.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 257,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 130,
+          "teacher_input_default": true,
+          "text": "However, each picture frame needs to be etched with the school's logo, which increases the cost by an additional 20% per frame.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 355,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 258,
+          "teacher_input_default": true,
+          "text": "Among these seniors, 2 of them are also athletes and will receive special pins that cost $5 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 489,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 356,
+          "teacher_input_default": true,
+          "text": "Furthermore, 1/4 of the seniors hold officer positions in various clubs and they will need to receive honor cords that cost $12 each.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 599,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 5,
+          "start": 490,
+          "teacher_input_default": true,
+          "text": "In addition to this, the school has decided to give a special gift to the valedictorian and the salutatorian.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 722,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 6,
+          "start": 600,
+          "teacher_input_default": true,
+          "text": "The valedictorian's gift costs twice as much as the salutatorian's gift, which is 50% more expensive than a picture frame.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 783,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 7,
+          "start": 723,
+          "teacher_input_default": true,
+          "text": "How much will the school spend in total on the senior gifts?",
+          "warnings": []
+        }
+      ],
+      "question": "In a graduating class, there are 44 seniors who need to receive awards. Each senior is to receive a picture frame that costs $20. However, each picture frame needs to be etched with the school's logo, which increases the cost by an additional 20% per frame. Among these seniors, 2 of them are also athletes and will receive special pins that cost $5 each. Furthermore, 1/4 of the seniors hold officer positions in various clubs and they will need to receive honor cords that cost $12 each. In addition to this, the school has decided to give a special gift to the valedictorian and the salutatorian. The valedictorian's gift costs twice as much as the salutatorian's gift, which is 50% more expensive than a picture frame. How much will the school spend in total on the senior gifts?",
+      "source_id": "gsm-plus-02955"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 98,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tatiana runs a grocery shop where she sells a variety of fruits and vegetables, including carrots.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 192,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 99,
+          "teacher_input_default": true,
+          "text": "Each year, the cost of carrots in her shop rises by 5% compared to the previous year's price.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 292,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 193,
+          "teacher_input_default": true,
+          "text": "If the initial price of the carrots was $120, what would be the cost after a period of three years?",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 347,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 293,
+          "teacher_input_default": true,
+          "text": "(Please round your answer to the nearest whole number)",
+          "warnings": []
+        }
+      ],
+      "question": "Tatiana runs a grocery shop where she sells a variety of fruits and vegetables, including carrots. Each year, the cost of carrots in her shop rises by 5% compared to the previous year's price. If the initial price of the carrots was $120, what would be the cost after a period of three years? (Please round your answer to the nearest whole number)",
+      "source_id": "gsm-plus-08133"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 104,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Tiffany is observing the number of surfers who can successfully ride a large wave without toppling over.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 208,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 105,
+          "teacher_input_default": true,
+          "text": "She notices that only a quarter of the surfers manage to remain standing when the wave exceeds 30 feet.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 259,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 209,
+          "teacher_input_default": true,
+          "text": "Among these successful surfers, women make up 60%.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 368,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 260,
+          "teacher_input_default": true,
+          "text": "If the total number of surfers is 100, how many male surfers are able to maintain their balance on the wave?",
+          "warnings": []
+        }
+      ],
+      "question": "Tiffany is observing the number of surfers who can successfully ride a large wave without toppling over. She notices that only a quarter of the surfers manage to remain standing when the wave exceeds 30 feet. Among these successful surfers, women make up 60%. If the total number of surfers is 100, how many male surfers are able to maintain their balance on the wave?",
+      "source_id": "gsm-plus-05045"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 116,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 189,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 118,
+          "teacher_input_default": true,
+          "text": "A blog article takes an average of 3 hours to research and write about.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 286,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 190,
+          "teacher_input_default": true,
+          "text": "Last week, she wrote 4 articles on Monday and 3/4 times more articles on Tuesday than on Monday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 367,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 287,
+          "teacher_input_default": true,
+          "text": "On Wednesday, she wrote three times the number of articles she wrote on Tuesday.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 449,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 368,
+          "teacher_input_default": true,
+          "text": "Calculate the total number of hours she spent writing articles in the three days.",
+          "warnings": []
+        }
+      ],
+      "question": "Meredith is a freelance blogger who writes about health topics and submits to clients each day as her permanent job.  A blog article takes an average of 3 hours to research and write about. Last week, she wrote 4 articles on Monday and 3/4 times more articles on Tuesday than on Monday. On Wednesday, she wrote three times the number of articles she wrote on Tuesday. Calculate the total number of hours she spent writing articles in the three days.",
+      "source_id": "gsm-plus-00360"
+    },
+    {
+      "dataset": "gsm_plus",
+      "effective_scope": {
+        "id": "global"
+      },
+      "operator_registry": [
+        "=",
+        "RETURN",
+        "+",
+        "-",
+        "*",
+        "/",
+        "abs",
+        "dec_pct",
+        "inc_pct",
+        "mean",
+        "min",
+        "max",
+        "percent_of",
+        "rate_times_duration",
+        "sum"
+      ],
+      "parts": [
+        {
+          "confidence": 0.8,
+          "end": 27,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 0,
+          "start": 0,
+          "teacher_input_default": true,
+          "text": "$24 is shared among 4 boys.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 101,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 1,
+          "start": 28,
+          "teacher_input_default": true,
+          "text": "The eldest added $6 to his share and added another $12 the following day.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 164,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 2,
+          "start": 102,
+          "teacher_input_default": true,
+          "text": "He later needed some money and spent $6 from his total so far.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 256,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 3,
+          "start": 165,
+          "teacher_input_default": true,
+          "text": "After saving some more, he was able to triple the amount he had left after spending the $6.",
+          "warnings": []
+        },
+        {
+          "confidence": 0.8,
+          "end": 283,
+          "heuristic": "sentence_punctuation",
+          "kind": "question_clause",
+          "part_id": 4,
+          "start": 257,
+          "teacher_input_default": true,
+          "text": "How much does he have now?",
+          "warnings": []
+        }
+      ],
+      "question": "$24 is shared among 4 boys. The eldest added $6 to his share and added another $12 the following day. He later needed some money and spent $6 from his total so far. After saving some more, he was able to triple the amount he had left after spending the $6. How much does he have now?",
+      "source_id": "gsm-plus-04320"
+    }
+  ],
+  "rationale_hidden": true,
+  "schema_version": "ccpu.dsl_dataset.local_codex_batch.v1"
+}
