@@ -9,9 +9,26 @@
   "execution_order": ["baseline", "magnitude", "operator", "jitter", "mixed", "complexity"],
   "routes": [
     "direct_4096",
+    "direct_2048_control",
     "asl_base_zero_shot",
-    "asl_lora_u2000_e4500_r8"
+    "asl_qlora_u2000_e4500_qkvo_r8",
+    "direct_qlora_budget_matched"
   ],
+  "training": {
+    "asl_config": "configs/paper1/e3_g1_gsm8k_u2000_e4500_f0_l0_qwen4b_qlora_cuda.json",
+    "asl_smoke_config": "configs/paper1/e3_g1_gsm8k_u2000_e4500_f0_l0_qwen4b_qlora_smoke_cuda.json",
+    "source": "artifacts/paper1/gsm8k_scale_v1/u2000_e4500/train.jsonl",
+    "unique_semantic_programs": 2000,
+    "total_exposures": 4500,
+    "training_seed": 99173,
+    "forbidden_training_sources": [
+      "magnitude test transformations",
+      "uniform-jitter test transformations",
+      "operator-ladder test transformations",
+      "complexity test transformations",
+      "all descendants of frozen test parents"
+    ]
+  },
   "token_budget_control": {
     "route": "direct_2048",
     "cells": ["original", "magnitude_x1000", "operator_o6", "mixed_x1000_o6", "complexity_c4"],
@@ -34,8 +51,59 @@
   },
   "execution_policy": {
     "early_read": "complete shard 0 of 10 for every cell before starting shard 1",
-    "confirmation": "complete shards 1 through 9 for all preregistered primary cells; do not select cells by observed direction",
+    "stability_read": "complete shard 1 of 10 for every preregistered primary cell before interpreting route interactions",
+    "confirmation": "complete shards 2 through 9 for all preregistered primary cells; do not select cells by observed direction",
     "replication": "add perturbation seeds 17023 and 17037 only after the seed-17011 route interaction is known",
     "reporting": "separate semantic compilation, runtime correctness, final answer, token-limit failures, generated tokens, wall time, and peak memory"
+  },
+  "primary_confirmation_cells": [
+    "original",
+    "magnitude_x1",
+    "magnitude_x100",
+    "magnitude_x1000",
+    "magnitude_x10000",
+    "magnitude_x1000000",
+    "operator_o1",
+    "operator_o6",
+    "jitter_x1_o0",
+    "jitter_x1000_o0",
+    "mixed_x1_o1",
+    "mixed_x1000_o6",
+    "complexity_c1",
+    "complexity_c4"
+  ],
+  "secondary_diagnostic_cells": [
+    "operator_o3",
+    "operator_o5",
+    "mixed_x1_o5",
+    "mixed_x1_o6",
+    "mixed_x1000_o1",
+    "mixed_x1000_o5",
+    "complexity_c2",
+    "complexity_c3"
+  ],
+  "sample_ladder": {
+    "early_read": {"shards": [0], "rows_per_cell": 10},
+    "stability_read": {"shards": [0, 1], "rows_per_cell": 20},
+    "confirmation": {"shards": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], "rows_per_cell": 100}
+  },
+  "headline_comparison": {
+    "direct": "direct_4096 final-answer correctness",
+    "asl": "asl_qlora_u2000_e4500_qkvo_r8 runtime final-answer correctness",
+    "paired_keys": ["example_id", "question_sha256"],
+    "fairness_control": "direct_qlora_budget_matched",
+    "required_metrics": [
+      "final_answer_correct",
+      "parseable",
+      "lowerable",
+      "type_valid",
+      "executable",
+      "semantic_binding_error",
+      "literal_copy_error",
+      "token_ceiling_hit",
+      "generated_tokens",
+      "wall_time_ns",
+      "peak_memory_bytes"
+    ]
   }
 }

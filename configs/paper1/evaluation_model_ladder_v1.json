@@ -66,6 +66,17 @@
     "routes": ["direct_4096", "asl_base_zero_shot", "asl_lora_u2000_e4500_r8"],
     "policy": "finish shard 0 across the schedule for an early read, then complete all preregistered shards without selecting favorable cells"
   },
+  "qwen3_4b_qlora_matched_campaign": {
+    "roadmap": "docs/AGENTS_paper1_qwen4b_qlora_matched_perturbation_plan.md",
+    "training_config": "configs/paper1/e3_g1_gsm8k_u2000_e4500_f0_l0_qwen4b_qlora_cuda.json",
+    "smoke_config": "configs/paper1/e3_g1_gsm8k_u2000_e4500_f0_l0_qwen4b_qlora_smoke_cuda.json",
+    "primary_pair": ["direct_4096", "asl_qlora_u2000_e4500_qkvo_r8"],
+    "controls": ["direct_2048", "asl_base_zero_shot", "direct_qlora_budget_matched"],
+    "sample_ladder": [10, 20, 100],
+    "training_seed": 99173,
+    "adapter_replication_seeds": [99189, 99203],
+    "replication_gate": "replicate only preregistered material interactions after seed-99173 primary confirmation"
+  },
   "models": [
     {
       "id": "qwen3_0_6b",
@@ -92,7 +103,7 @@
       "parameter_count": 4022468096,
       "role": "gated_size_endpoint",
       "required_rows": "anchor_rows",
-      "adapter_policy": "train matched U2000/E4500 QKVO-r8 only after inference smoke"
+      "adapter_policy": "run NF4 QKVO-r8 smoke, train matched U2000/E4500 adapter, then compare Direct and trained ASL on the frozen 10-to-20-to-100 perturbation ladder"
     },
     {
       "id": "llama3_2_1b_instruct",

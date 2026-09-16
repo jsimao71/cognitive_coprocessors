@@ -963,6 +963,29 @@ full run. Compare 4B ASL against its own matched 4B direct control, not against 
 smaller model's direct result. Replicate or extend the magnitude ladder only if
 the one-seed gate is positive or resolves the registered scaling hypothesis.
 
+### Registered Qwen3-4B QLoRA matched perturbation campaign
+
+The concrete 4B training and comparison protocol is frozen in
+`docs/AGENTS_paper1_qwen4b_qlora_matched_perturbation_plan.md`. The primary
+within-size estimand is base Direct at a 4,096-token ceiling versus the
+U2000/E4500 QKVO-r8 QLoRA ASL compiler plus deterministic runtime on identical
+IDs and question hashes. Base zero-shot ASL is only an untrained representation
+control. A budget-matched Direct-answer QLoRA is the supervision fairness
+control required before the final architectural interpretation.
+
+Use a fixed `n=10 -> n=20 -> n=100` shard ladder. Shard 0 covers all 22 cells
+for the early read. The preregistered primary confirmation set contains
+ordinary, the complete magnitude curve, O1/O6, jitter x1/x1000, mixed x1/O1 and
+x1000/O6, and C1/C4. Do not select n=100 cells from the observed shard-0
+direction. Report Direct endpoint correctness and ASL runtime-answer correctness
+as the headline pair, with parse/lower/type/execute, binding, literal-copy,
+token-ceiling, latency, token, and memory metrics kept separate.
+
+The 2026-09-16 Direct-4096 shard-0 checkpoint is 10/10 on original values and
+7/10 at strict x1000, with mean generation increasing from 443.1 to 1295.9
+tokens. This is an inference checkpoint, not a trained-ASL comparison, and may
+not be used to choose or tune the A1 training data.
+
 ---
 
 ## 9.2 Additional training and inference approaches
