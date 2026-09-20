@@ -113,11 +113,11 @@ generated tokens. A more semantic ASL obtains only 66\% because every cube case
 contains the same unresolved argument binding. This supports an
 operator-delegation signal while identifying symbol grounding as its immediate
 limit; the synthetic pilot is not yet an operator-complexity curve. On the
-natural-parent panel, Qwen3-1.7B Direct obtains 89/100, 82/100, and 82/100 on
-O1, O3, and O5, whereas its trained ASL path obtains 48/100, 47/100, and
-36/100. A separate Qwen3-4B Direct pilot obtains 7/10 under the combined
-factor-1,000/O6 intervention; its registered expansion and trained-ASL arm are
-not yet complete.
+natural-parent panel, Qwen3-1.7B Direct obtains 89/100, 82/100, 82/100, and
+85/100 on O1, O3, O5, and O6, whereas its trained ASL path obtains 48/100,
+47/100, 36/100, and 13/100. A separate Qwen3-4B Direct pilot obtains 20/20 on
+O6, 15/20 under factor-1,000 jitter, and 13/20 when both interventions are
+combined; its trained-ASL arm is not yet complete.
 \end{abstract}
 
 \section{Status and Scope}
@@ -2197,9 +2197,11 @@ the registered cells or model checkpoints.
 Table~\ref{tab:natural-operator-capacity} reports the completed Qwen3-1.7B
 cells on identical frozen questions. Direct reasoning remains substantially
 more accurate than the trained U2000/E4500 ASL compiler at each completed
-operator level. Direct accuracy decreases from 89\% at O1 to 82\% at O3 and
-O5, while generated-ASL execution decreases from 48\% to 47\% and 36\%.
-The matched mixed cells show the same pattern at ordinary scale. These results
+operator level. Direct accuracy remains between 82\% and 89\% from O1 through
+O6, while generated-ASL execution decreases from 48\% to 13\%. The matched
+ordinary-scale mixed cells show the same pattern: Direct obtains 72/100,
+68/100, and 72/100 on O1/O5/O6, compared with 50/100, 38/100, and 14/100 for
+generated ASL. These results
 do not test a gold-program runtime ceiling: both ASL entries include autonomous
 NL-to-ASL generation, so their deficits measure the current semantic compiler.
 
@@ -2207,40 +2209,40 @@ NL-to-ASL generation, so their deficits measure the current semantic compiler.
 \centering
 \small
 \caption{One-seed Qwen3-1.7B natural-parent checkpoint. Entries are final
-answers correct out of 100 on identical frozen questions. O6 Direct and the
-factor-1,000 mixed Direct cells remain outside this completed checkpoint.}
+answers correct out of 100 on identical frozen questions. Factor-1,000 mixed
+Direct cells remain outside this completed checkpoint.}
 \label{tab:natural-operator-capacity}
-\begin{tabular}{@{}lccccc@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Condition & O1 & O3 & O5 & $\times1$/O1 & $\times1$/O5 \\
+Condition & O1 & O3 & O5 & O6 \\
 \midrule
-Direct reasoning & 89 & 82 & 82 & 72 & 68 \\
-Generated ASL + runtime & 48 & 47 & 36 & 50 & 38 \\
+Direct reasoning & 89 & 82 & 82 & 85 \\
+Generated ASL + runtime & 48 & 47 & 36 & 13 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-A preregistered Qwen3-4B Direct shard provides only an early capacity
-diagnostic (Table~\ref{tab:qwen4b-stress-pilot}). The model is perfect on the
-ten sampled original, O1, and O6 questions, but falls to 8/10 under independent
-factor-1,000 jitter and 7/10 when factor-1,000 jitter and O6 are combined. Two
-combined outputs are not answer-scorable, and long traces reach the 4,096-token
-budget. The direction is consistent with interacting computational stresses,
-but $n=10$ is too small for an inferential model-size claim; the frozen second
-shard and trained 4B ASL comparison remain in progress.
+A preregistered Qwen3-4B Direct pilot provides an early capacity diagnostic
+(Table~\ref{tab:qwen4b-stress-pilot}). The expanded matched cells are perfect
+on O6 alone (20/20), fall to 15/20 under independent factor-1,000 jitter, and
+fall further to 13/20 when factor-1,000 jitter and O6 are combined. Long traces
+reach the 4,096-token budget, and five combined outputs are not answer-scorable.
+This 10-point jitter-versus-combined difference is consistent with interacting
+computational stresses, but $n=20$ remains exploratory and no trained 4B ASL
+comparison is yet available.
 
 \begin{table}[t]
 \centering
 \small
 \caption{Exploratory Qwen3-4B Direct stress pilot at a 4,096-token budget.
-Each entry is final answers correct out of ten; no trained 4B ASL comparison is
-claimed here.}
+Entries are final answers correct/count. Expanded stress cells use two frozen
+ten-item shards; no trained 4B ASL comparison is claimed here.}
 \label{tab:qwen4b-stress-pilot}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 Original & Jitter $\times1$ & Jitter $\times1000$ & O1 & O6 & $\times1000$/O6 \\
 \midrule
-10 & 10 & 8 & 10 & 10 & 7 \\
+10/10 & 10/10 & 15/20 & 10/10 & 20/20 & 13/20 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2549,8 +2551,9 @@ a claim that generated ASL is always more accurate.  The first matched natural
 O1 cell reinforces that qualification: at $\times1$, Direct obtains 35/100 and
 ASL 31/100 (ASL-minus-Direct $-4.0$ points, exact McNemar $p=0.585$).
 The larger Qwen3-1.7B checkpoint strengthens the qualification rather than an
-ASL-dominance claim: Direct obtains 89/100, 82/100, and 82/100 on O1/O3/O5,
-compared with 48/100, 47/100, and 36/100 for generated ASL. Operator complexity,
+ASL-dominance claim: Direct obtains 89/100, 82/100, 82/100, and 85/100 on
+O1/O3/O5/O6, compared with 48/100, 47/100, 36/100, and 13/100 for generated
+ASL. Operator complexity,
 independent numeric jitter, and their interaction still require the remaining
 matrix cells, trained 4B ASL arm, and additional seeds before they can support
 the same robustness claim.
@@ -2608,10 +2611,10 @@ well-specified arithmetic after that mapping is available.  Under the proposed
 division of labor, model scaling targets the semantic compiler and router,
 while bounded CPU coprocessors provide exact arithmetic and, in later papers,
 logic, algebra, graphs, units, dates, retrieval, and simulation. The completed
-1.7B O1/O3/O5 cells show that greater capacity can improve Direct operator
+1.7B O1/O3/O5/O6 cells show that greater capacity can improve Direct operator
 reasoning faster than the present ASL compiler. The 4B Direct pilot is likewise
-perfect on its isolated O1/O6 samples but falls to 7/10 when O6 is combined
-with factor-1,000 jitter. The registered expansion and trained 4B ASL arm must
+perfect on its 20 O6 samples but falls to 13/20 when O6 is combined with
+factor-1,000 jitter, compared with 15/20 for jitter alone. The trained 4B ASL arm must
 determine whether greater capacity eliminates this interaction, merely moves
 the crossover, or preferentially improves ASL compilation after matched
 training.
@@ -2630,10 +2633,10 @@ a prerequisite for the present arithmetic claim.
 
 \paragraph{Scope of the evidence.}
 The strongest current evidence is the one-seed matched magnitude crossover and
-its outcome-blind common-support sensitivity. The completed 1.7B O1/O3/O5
+its outcome-blind common-support sensitivity. The completed 1.7B O1/O3/O5/O6
 checkpoint currently favors Direct accuracy and therefore localizes the open
 problem to semantic compilation rather than deterministic execution. The 4B
-combined pilot is suggestive but too small to reverse that conclusion. A
+combined 20-item pilot is suggestive but too small to reverse that conclusion. A
 journal-level claim about general computational robustness still requires the
 registered three-seed operator--magnitude--jitter matrix, a long-token control,
 a training-budget-matched Direct LoRA, trained 4B ASL, and untouched arithmetic
